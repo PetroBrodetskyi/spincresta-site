@@ -81,7 +81,7 @@ body {
   background: linear-gradient(180deg, #020617, #0f172a);
   position: relative;
   min-height: 100vh;
-  background-image: url("/images/hero-bg.webp");
+  background-image: url("images/hero-bg.webp");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
