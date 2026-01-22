@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="en-US">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>SpinCresta | Best Online Casinos in the USA</title>
+
+    <meta
+      name="description"
+      content="SpinCresta reviews the best online casinos in the United States. Compare bonuses, games, and trusted casino brands. Play responsibly."
+    />
+    <meta name="robots" content="index, follow" />
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="SpinCresta | US Online Casino Reviews" />
+    <meta
+      property="og:description"
+      content="Top-rated US online casinos, bonuses, and real-money games."
+    />
+    <meta property="og:type" content="website" />
+
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+
+  <body>
+    <header class="header">
+      <div class="container header-inner">
+        <div class="logo">SpinCresta</div>
+
+        <input type="checkbox" id="menu-toggle" />
+        <label for="menu-toggle" class="burger">
+          <span></span><span></span><span></span>
+        </label>
+
+        <nav class="nav">
+          <a href="#">Casinos</a>
+          <a href="#">Bonuses</a>
+          <a href="#">Reviews</a>
+          <a href="#">About</a>
+        </nav>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div class="container">
+          <h1>Best Online Casinos in the United States</h1>
+          <p>
+            Trusted US casino reviews, exclusive bonuses, and verified brands.
+          </p>
+
+          <div class="banner banner-main">Main Banner (728×90 / 320×100)</div>
+        </div>
+      </section>
+
+      <section class="content">
+        <div class="container">
+          <h2>Top US Casino Offers</h2>
+          <p class="intro">
+            We analyze licensed online casinos available for US players,
+            focusing on bonuses, payout speed, game selection, and
+            trustworthiness.
+          </p>
+
+          <!-- Динамічні бренди тут -->
+          <div class="casino-grid" id="brand-cards"></div>
+        </div>
+      </section>
+
+      <section class="disclaimer">
+        <div class="container">
+          <p>
+            18+ | Gambling can be addictive. Please play responsibly. Online
+            casino availability depends on your state laws.
+          </p>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="container">© 2026 SpinCresta.com — All rights reserved</div>
+    </footer>
+
+    <!-- JS для динамічних брендів -->
+    <script>
+      const BRANDS = [
+        {
+          name: "PHJ Casino",
+          bannerText: "PHJ 300×250 Banner",
+          bonus: "Up to $1,000 Welcome Bonus",
+          cta: "Play at PHJ Casino",
+          url: "/brands/phj.html",
+        },
+        {
+          name: "B Casino",
+          bannerText: "B 300×250 Banner",
+          bonus: "Exclusive bonus offers",
+          cta: "Visit B Casino",
+          url: "/brands/b.html",
+        },
+        {
+          name: "Top Slots Casino",
+          bannerText: "Top Slots Banner",
+          bonus: "Fast payouts for US players",
+          cta: "Play Now",
+          url: "/brands/top-slots.html",
+        },
+        // додавай сюди будь-які інші бренди
+      ];
+
+      const container = document.getElementById("brand-cards");
+
+      BRANDS.forEach((brand) => {
+        const card = document.createElement("article");
+        card.className = "casino-card";
+
+        card.innerHTML = `
+          <div class="banner banner-small">${brand.bannerText}</div>
+          <h3>${brand.name}</h3>
+          <p>${brand.bonus}</p>
+          <a href="${brand.url}" class="cta">${brand.cta}</a>
+        `;
+
+        container.appendChild(card);
+      });
+    </script>
+  </body>
+</html>
