@@ -79,6 +79,31 @@ body {
   text-align: center;
   padding: 50px 0;
   background: linear-gradient(180deg, #020617, #0f172a);
+  position: relative;
+  min-height: 100vh;
+  background-image: url("/images/hero-bg.webp");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.75);
+}
+
+.hero-content {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  color: #fff;
+  padding: 16px;
+  max-width: 720px;
 }
 
 .hero h1 {
