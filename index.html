@@ -82,7 +82,6 @@
       <div class="container">© 2026 SpinCresta.com — All rights reserved</div>
     </footer>
 
-    <!-- JS для динамічних брендів -->
     <script>
       const BRANDS = [
         {
@@ -90,23 +89,22 @@
           bannerText: "PHJ 300×250 Banner",
           bonus: "Up to $1,000 Welcome Bonus",
           cta: "Play at PHJ Casino",
-          url: "/brands/phj.html",
+          url: "brands/phj.html",
         },
         {
           name: "B Casino",
           bannerText: "B 300×250 Banner",
           bonus: "Exclusive bonus offers",
           cta: "Visit B Casino",
-          url: "/brands/b.html",
+          url: "brands/b.html",
         },
         {
           name: "Top Slots Casino",
           bannerText: "Top Slots Banner",
           bonus: "Fast payouts for US players",
           cta: "Play Now",
-          url: "/brands/top-slots.html",
+          url: "brands/top-slots.html",
         },
-        // додавай сюди будь-які інші бренди
       ];
 
       const container = document.getElementById("brand-cards");
@@ -116,11 +114,11 @@
         card.className = "casino-card";
 
         card.innerHTML = `
-          <div class="banner banner-small">${brand.bannerText}</div>
-          <h3>${brand.name}</h3>
-          <p>${brand.bonus}</p>
-          <a href="${brand.url}" class="cta">${brand.cta}</a>
-        `;
+      <div class="banner banner-small">${brand.bannerText}</div>
+      <h3>${brand.name}</h3>
+      <p>${brand.bonus}</p>
+      <a href="${brand.url}" class="cta">${brand.cta}</a>
+    `;
 
         container.appendChild(card);
       });
