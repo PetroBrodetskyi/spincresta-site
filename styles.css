@@ -137,7 +137,7 @@ body {
   inset: 0;
   background: linear-gradient(
     180deg,
-    rgba(2, 6, 23, 0.45),
+    rgba(2, 6, 23, 0.25),
     rgba(2, 6, 23, 0.99)
   );
 }
@@ -293,15 +293,6 @@ body {
   .hero p {
     font-size: 16px;
   }
-}
-
-.content-article {
-  max-width: 84%;
-}
-
-.content-article h2 {
-  font-size: 28px;
-  margin-bottom: 20px;
 }
 
 .content-article h3 {
