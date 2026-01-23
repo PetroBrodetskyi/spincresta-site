@@ -205,6 +205,9 @@ body {
 }
 
 .casino-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   background: var(--bg-card);
   backdrop-filter: var(--blur-glass);
   border: 1px solid var(--border-soft);
