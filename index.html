@@ -8,7 +8,7 @@
 
     <meta
       name="description"
-      content="SpinCresta reviews the best online casinos in the United States. Compare bonuses, games, and trusted casino brands. Play responsibly."
+      content="SpinCresta reviews the best online casinos in the United States. Compare bonuses, games, and trusted casino brands."
     />
     <meta name="robots" content="index, follow" />
 
@@ -28,13 +28,8 @@
       <div class="container header-inner">
         <div class="logo">SpinCresta</div>
 
-        <input type="checkbox" id="menu-toggle" />
-        <label for="menu-toggle" class="burger">
-          <span></span><span></span><span></span>
-        </label>
-
         <nav class="nav">
-          <a href="index.html">Casinos</a>
+          <a href="/">Casinos</a>
           <a href="#">Bonuses</a>
           <a href="#">Reviews</a>
           <a href="#">About</a>
@@ -43,86 +38,107 @@
     </header>
 
     <main>
-      <section class="hero">
+      <section class="hero bg-image-main">
         <div class="hero-overlay"></div>
+
         <div class="container hero-content">
           <h1>Best Online Casinos in the United States</h1>
           <p>
             Trusted US casino reviews, exclusive bonuses, and verified brands.
           </p>
 
-          <div class="banner banner-main">Main Banner (728×90 / 320×100)</div>
+          
         </div>
       </section>
-
+<div>
       <section class="content">
         <div class="container">
           <h2>Top US Casino Offers</h2>
           <p class="intro">
             We analyze licensed online casinos available for US players,
-            focusing on bonuses, payout speed, game selection, and
-            trustworthiness.
+            focusing on bonuses, payouts, and trustworthiness.
           </p>
 
-          <!-- Динамічні бренди тут -->
           <div class="casino-grid" id="brand-cards"></div>
         </div>
       </section>
 
+      <section class="content">
+  <div class="container content-article">
+    <h3>Online Casinos in the United States</h3>
+
+    <p>
+      Online casinos in the United States offer players a convenient and secure
+      way to enjoy real money casino games from home. With regulated markets in
+      several states and trusted international platforms accepting US players,
+      the industry continues to grow rapidly.
+    </p>
+
+    <p>
+      The best US online casinos focus on player safety, fair gameplay, and fast
+      payouts. Licensed platforms work with reputable software providers and
+      offer transparent bonus terms, reliable payment methods, and professional
+      customer support.
+    </p>
+
+    <h3>Is Online Gambling Legal in the USA</h3>
+
+    <p>
+      Online casino legality in the USA depends on state regulations. States such
+      as New Jersey, Pennsylvania, Michigan, and West Virginia have fully
+      regulated online casinos. In other states, international casinos may still
+      accept players under offshore licenses.
+    </p>
+
+    <h3>What Games Can US Players Expect</h3>
+
+    <p>
+      US online casinos typically offer a wide range of games, including online
+      slots, blackjack, roulette, poker, and live dealer games. These platforms
+      are designed to work smoothly on both desktop and mobile devices.
+    </p>
+
+    <h3>Bonuses and Promotions</h3>
+
+    <p>
+      Welcome bonuses, free spins, and ongoing promotions are common at US
+      online casinos. Players should always review wagering requirements and
+      bonus terms before claiming any offer.
+    </p>
+
+    <p>
+      Choosing a trusted online casino ensures a safe and enjoyable experience.
+      We regularly update our recommendations to highlight reliable platforms
+      available for players in the United States.
+    </p>
+  </div>
+</section>
+
+
       <section class="disclaimer">
         <div class="container">
           <p>
-            18+ | Gambling can be addictive. Please play responsibly. Online
-            casino availability depends on your state laws.
+            18+ | Gambling can be addictive. Please play responsibly.
+            Availability depends on your state laws.
           </p>
         </div>
       </section>
     </main>
 
     <footer class="footer">
-      <div class="container">© 2026 SpinCresta.com — All rights reserved</div>
+      <div class="container">© 2026 SpinCresta.com – All rights reserved</div>
     </footer>
 
-    <script>
-      const BRANDS = [
-        {
-          name: "PHJ Casino",
-          bannerText: "PHJ 300×250 Banner",
-          bonus: "Up to $1,000 Welcome Bonus",
-          cta: "Play at PHJ Casino",
-          url: "brands/phj.html",
-        },
-        {
-          name: "B Casino",
-          bannerText: "B 300×250 Banner",
-          bonus: "Exclusive bonus offers",
-          cta: "Visit B Casino",
-          url: "brands/b.html",
-        },
-        {
-          name: "Top Slots Casino",
-          bannerText: "Top Slots Banner",
-          bonus: "Fast payouts for US players",
-          cta: "Play Now",
-          url: "brands/top-slots.html",
-        },
-      ];
+    <!-- Card template -->
+    <template id="casino-card-template">
+      <article class="casino-card">
+        <img class="casino-image" alt="" loading="lazy" />
+        <h3 class="casino-name"></h3>
+        <p class="casino-bonus"></p>
+        <a class="cta" rel="noopener noreferrer"></a>
+      </article>
+    </template>
 
-      const container = document.getElementById("brand-cards");
-
-      BRANDS.forEach((brand) => {
-        const card = document.createElement("article");
-        card.className = "casino-card";
-
-        card.innerHTML = `
-      <div class="banner banner-small">${brand.bannerText}</div>
-      <h3>${brand.name}</h3>
-      <p>${brand.bonus}</p>
-      <a href="${brand.url}" class="cta">${brand.cta}</a>
-    `;
-
-        container.appendChild(card);
-      });
-    </script>
+    <script type="module" src="scripts/main.js"></script>
   </body>
 </html>
