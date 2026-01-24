@@ -62,6 +62,27 @@ const BRANDS = [
     url: "brands/top-slots.html",
     image: "images/richpalms.webp",
   },
+  {
+    name: "Lucky Red",
+    bonus: "Fast payouts for US players",
+    cta: "Play Now",
+    url: "brands/top-slots.html",
+    image: "images/luckyred.webp",
+  },
+  {
+    name: "Shazam",
+    bonus: "Up to $1,000 Welcome Bonus",
+    cta: "Play at PHJ Casino",
+    url: "brands/phj.html",
+    image: "images/shazam.webp",
+  },
+  {
+    name: "Lucky Tiger",
+    bonus: "Exclusive bonus offers",
+    cta: "Visit B Casino",
+    url: "brands/b.html",
+    image: "images/luckytiger.webp",
+  },
 ];
 
 const container = document.querySelector("#brand-cards");
