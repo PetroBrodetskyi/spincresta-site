@@ -212,6 +212,10 @@ body {
   background-image: url("images/us/avia-bg.webp");
 }
 
+.bg-image-ar-header {
+  background-image: url("images/ar/argentina-header.webp");
+}
+
 .bg-image-us-footer {
   position: relative;
   background-image: url("images/us/us-flag.webp");
