@@ -222,6 +222,20 @@ body {
   background-image: url("images/ar/argentina-header.webp");
 }
 
+.bg-image-ar-footer {
+  position: relative;
+  background-image: url("images/ar/footer-ar.webp");
+  background-size: cover;
+  background-position: center;
+}
+
+.bg-image-ua-footer {
+  position: relative;
+  /* background-image: url("images/ua/footer-ua.webp"); */
+  background-size: cover;
+  background-position: center;
+}
+
 .bg-image-us-footer {
   position: relative;
   background-image: url("images/us/us-flag.webp");
