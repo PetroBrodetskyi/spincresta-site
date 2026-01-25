@@ -1,10 +1,16 @@
-import { BRANDS } from './brands.js';
+import { BRANDS } from "./brands.js";
 
 const container = document.querySelector("#brand-cards");
 const template = document.querySelector("#casino-card-template");
 const fragment = document.createDocumentFragment();
 
-BRANDS.forEach(({ name, bonus, cta, urlDetail, urlCasino, image }) => {
+const pageCountry = document.body.dataset.country;
+
+const filteredBrands = BRANDS.filter(brand =>
+  brand.countries.includes(pageCountry)
+);
+
+filteredBrands.forEach(({ name, bonus, cta, urlDetail, urlCasino, image }) => {
   const card = template.content.cloneNode(true);
   const article = card.querySelector(".casino-card");
   const img = card.querySelector(".casino-image");

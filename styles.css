@@ -212,6 +212,10 @@ body {
   background-image: url("images/us/avia-bg.webp");
 }
 
+.bg-image-ua-header {
+  background-image: url("images/ua/bg-ukraine.webp");
+}
+
 .bg-image-ar-header {
   background-image: url("images/ar/argentina-header.webp");
 }
