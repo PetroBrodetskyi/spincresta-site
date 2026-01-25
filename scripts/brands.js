@@ -151,5 +151,40 @@ export const BRANDS = [
     urlCasino: "https://topslots.com",
     image: "images/ua/vbet.webp",
     countries: ["UA"],
+  },{
+    name: "Zarbet",
+    bonus: "Fast payouts for players",
+    cta: "Play Now",
+    urlDetail: "brands/top-slots.html",
+    urlCasino: "https://topslots.com",
+    image: "images/za/zarbet.webp",
+    countries: ["ZA"],
+  }
+  ,{
+    name: "Zarbet",
+    bonus: "Fast payouts for players",
+    cta: "Play Now",
+    urlDetail: "brands/top-slots.html",
+    urlCasino: "https://topslots.com",
+    image: "images/za/zarbet.webp",
+    countries: ["ZA"],
+  },
+  {
+    name: "Zarbet",
+    bonus: "Fast payouts for players",
+    cta: "Play Now",
+    urlDetail: "brands/top-slots.html",
+    urlCasino: "https://topslots.com",
+    image: "images/za/zarbet.webp",
+    countries: ["ZA"],
+  },
+  {
+    name: "Zarbet",
+    bonus: "Fast payouts for players",
+    cta: "Play Now",
+    urlDetail: "brands/top-slots.html",
+    urlCasino: "https://topslots.com",
+    image: "images/za/zarbet.webp",
+    countries: ["ZA"],
   }
 ];
