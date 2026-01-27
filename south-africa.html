@@ -13,14 +13,8 @@
     <meta name="robots" content="index, follow" />
 
     <!-- Open Graph -->
-    <meta
-      property="og:title"
-      content="SpinCresta | South Africa Online Casino Reviews"
-    />
-    <meta
-      property="og:description"
-      content="Top-rated online casinos in South Africa with real-money games, bonuses, and trusted platforms."
-    />
+    <meta property="og:title" content="SpinCresta | South Africa Online Casino Reviews" />
+    <meta property="og:description" content="Top-rated online casinos in South Africa with real-money games, bonuses, and trusted platforms." />
     <meta property="og:type" content="website" />
 
     <link rel="stylesheet" href="styles.css" />
@@ -29,20 +23,35 @@
   <body data-country="ZA">
     <header class="header">
       <div class="container header-inner">
-        <div class="logo">
+        <a href="index.html" class="logo">
           SpinCresta<span class="logo-com">.com</span>
-        </div>
+        </a>
 
-        <nav class="nav">
-          <a href="/">Casinos</a>
+        <!-- BURGER BUTTON (MOBILE) -->
+        <button
+          class="burger"
+          aria-label="Open countries menu"
+          aria-controls="mobileMenu"
+          aria-expanded="false"
+        >
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+
+        <!-- MAIN NAVIGATION -->
+        <nav class="nav" aria-label="Main navigation">
+          <a href="index.html">Casinos</a>
           <a href="#">Bonuses</a>
           <a href="#">Reviews</a>
           <a href="#">About</a>
 
           <div class="nav-dropdown">
-            <span class="nav-link">Countries</span>
-
+            <button class="nav-link" aria-haspopup="true" aria-expanded="false">
+              Countries
+            </button>
             <div class="nav-dropdown-menu">
+              <a href="argentina.html">Argentina</a>
               <a href="australia.html">Australia</a>
               <a href="brazil.html">Brazil</a>
               <a href="canada.html">Canada</a>
@@ -58,91 +67,91 @@
               <a href="usa.html">United States</a>
 
               <hr class="dropdown-separator" />
-
               <a href="countries.html">All Countries</a>
             </div>
           </div>
         </nav>
       </div>
+
+      <!-- MOBILE COUNTRIES MENU -->
+      <nav class="mobile-menu" id="mobileMenu" aria-hidden="true">
+        <div class="mobile-menu-inner">
+          <h2>Countries</h2>
+          <a href="argentina.html">Argentina</a>
+          <a href="australia.html">Australia</a>
+          <a href="brazil.html">Brazil</a>
+          <a href="canada.html">Canada</a>
+          <a href="finland.html">Finland</a>
+          <a href="germany.html">Germany</a>
+          <a href="india.html">India</a>
+          <a href="mexico.html">Mexico</a>
+          <a href="norway.html">Norway</a>
+          <a href="philippines.html">Philippines</a>
+          <a href="south-africa.html">South Africa</a>
+          <a href="sweden.html">Sweden</a>
+          <a href="uk.html">United Kingdom</a>
+          <a href="usa.html">United States</a>
+          <a href="countries.html" class="all-countries-link">All Countries</a>
+        </div>
+      </nav>
     </header>
 
     <main>
+      <!-- HERO -->
       <section class="hero bg-image-south-africa-header">
         <div class="hero-overlay"></div>
         <div class="container hero-content">
           <h1>Best Online Casinos in South Africa</h1>
-          <p>
-            Trusted casino reviews, local payment methods, and exclusive bonuses
-            for South African players.
-          </p>
+          <p>Trusted casino reviews, local payment methods, and exclusive bonuses for South African players.</p>
         </div>
       </section>
 
+      <!-- TOP CASINOS -->
       <section class="content">
         <div class="container">
-          <h2>Top South Africa Casino Offers</h2>
+          <header class="section-head">
+            <h2>Top South Africa Casino Offers</h2>
+          </header>
           <p class="intro">
-            We review online casinos available to South African players, focusing
-            on bonuses, fast payouts, game variety, and overall reliability.
+            We review online casinos available to South African players, focusing on bonuses, fast payouts, game variety, and overall reliability.
           </p>
-
           <div class="casino-grid" id="brand-cards"></div>
         </div>
       </section>
 
+      <!-- CONTENT ARTICLE -->
       <section class="content bg-image-south-africa-footer">
-        <div class="section-overlay"></div>
-
         <div class="container content-article">
-          <h3>Online Casinos in South Africa</h3>
+          <h2>Online Casinos in South Africa</h2>
           <p>
-            Online casinos in South Africa provide players with easy access to
-            real money casino games from desktop and mobile devices. While local
-            land-based gambling is regulated, many international online casinos
-            legally accept South African players under reputable offshore
-            licenses.
+            Online casinos in South Africa provide players with easy access to real money casino games from desktop and mobile devices. While local land-based gambling is regulated, many international online casinos legally accept South African players under reputable offshore licenses.
           </p>
           <p>
-            The best online casinos for South Africa prioritize security, fair
-            gameplay, and smooth payment processing. Trusted platforms partner
-            with leading software providers and offer clear bonus terms, modern
-            banking options, and responsive customer support.
+            The best online casinos for South Africa prioritize security, fair gameplay, and smooth payment processing. Trusted platforms partner with leading software providers and offer clear bonus terms, modern banking options, and responsive customer support.
           </p>
 
-          <h3>Is Online Gambling Legal in South Africa</h3>
+          <h2>Is Online Gambling Legal in South Africa?</h2>
           <p>
-            Online gambling in South Africa exists in a legal grey area. Local
-            legislation primarily regulates land-based casinos, while online
-            casinos licensed abroad are commonly used by South African players.
-            Choosing well-established international casinos helps ensure a safe
-            and fair gaming experience.
+            Online gambling in South Africa exists in a legal grey area. Local legislation primarily regulates land-based casinos, while online casinos licensed abroad are commonly used by South African players. Choosing well-established international casinos helps ensure a safe and fair gaming experience.
           </p>
 
-          <h3>Casino Games Available for South African Players</h3>
+          <h2>Casino Games Available for South African Players</h2>
           <p>
-            South African online casinos offer a wide selection of games,
-            including online slots, blackjack, roulette, baccarat, poker, and
-            live dealer games. Many casinos support mobile play, allowing players
-            to enjoy games anytime and anywhere.
+            South African online casinos offer a wide selection of games, including online slots, blackjack, roulette, baccarat, poker, and live dealer games. Many casinos support mobile play, allowing players to enjoy games anytime and anywhere.
           </p>
 
-          <h3>Bonuses and Payment Methods</h3>
+          <h2>Bonuses and Payment Methods</h2>
           <p>
-            Welcome bonuses, free spins, cashback offers, and loyalty rewards are
-            common at online casinos for South Africa. Players can often use
-            popular payment methods such as credit cards, bank transfers,
-            e-wallets, and cryptocurrencies.
+            Welcome bonuses, free spins, cashback offers, and loyalty rewards are common at online casinos for South Africa. Players can often use popular payment methods such as credit cards, bank transfers, e-wallets, and cryptocurrencies.
           </p>
 
           <p>
-            By choosing a trusted online casino, South African players can enjoy
-            secure gameplay, fast withdrawals, and a high-quality overall casino
-            experience. Our recommendations are updated regularly to highlight
-            the best options available.
+            By choosing a trusted online casino, South African players can enjoy secure gameplay, fast withdrawals, and a high-quality overall casino experience. Our recommendations are updated regularly to highlight the best options available.
           </p>
         </div>
       </section>
 
+      <!-- ALL COUNTRIES -->
       <section class="all-countries">
         <div class="container countries-cloud">
           <a href="argentina.html">Argentina</a>
@@ -189,20 +198,21 @@
     </main>
 
     <footer class="footer">
-      <div class="container">© 2026 SpinCresta.com All rights reserved</div>
-      <p>
-        18+ | Gambling can be addictive. Please play responsibly. Availability
-        depends on local laws.
-      </p>
+      <div class="container">
+        <p>© 2026 SpinCresta.com All rights reserved</p>
+        <p>
+          18+ | Gambling can be addictive. Please play responsibly. Availability depends on local laws.
+        </p>
+      </div>
     </footer>
 
-    <!-- Card template -->
+    <!-- CARD TEMPLATE -->
     <template id="casino-card-template">
       <article class="casino-card">
         <img class="casino-image" alt="" loading="lazy" />
         <h3 class="casino-name"></h3>
         <p class="casino-bonus"></p>
-        <a class="cta" rel="noopener noreferrer"></a>
+        <a class="cta" href="#" rel="noopener noreferrer">Play Now</a>
       </article>
     </template>
 

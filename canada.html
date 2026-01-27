@@ -30,14 +30,29 @@
           SpinCresta<span class="logo-com">.com</span>
         </a>
 
-        <nav class="nav">
+        <!-- BURGER BUTTON (MOBILE) -->
+        <button
+          class="burger"
+          aria-label="Open countries menu"
+          aria-controls="mobileMenu"
+          aria-expanded="false"
+        >
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+
+        <!-- MAIN NAVIGATION -->
+        <nav class="nav" aria-label="Main navigation">
           <a href="index.html">Top Casinos</a>
           <a href="#">Bonuses</a>
           <a href="#">Reviews</a>
           <a href="#">About</a>
 
           <div class="nav-dropdown">
-            <span class="nav-link">Countries</span>
+            <button class="nav-link" aria-haspopup="true" aria-expanded="false">
+              Countries
+            </button>
 
             <div class="nav-dropdown-menu">
               <a href="australia.html">Australia</a>
@@ -55,15 +70,36 @@
               <a href="usa.html">United States</a>
 
               <hr class="dropdown-separator" />
-
               <a href="countries.html">All Countries</a>
             </div>
           </div>
         </nav>
       </div>
+
+      <!-- MOBILE COUNTRIES MENU -->
+      <nav class="mobile-menu" id="mobileMenu" aria-hidden="true">
+        <div class="mobile-menu-inner">
+          <h2>Countries</h2>
+          <a href="australia.html">Australia</a>
+          <a href="brazil.html">Brazil</a>
+          <a href="canada.html">Canada</a>
+          <a href="finland.html">Finland</a>
+          <a href="germany.html">Germany</a>
+          <a href="india.html">India</a>
+          <a href="mexico.html">Mexico</a>
+          <a href="norway.html">Norway</a>
+          <a href="philippines.html">Philippines</a>
+          <a href="south-africa.html">South Africa</a>
+          <a href="sweden.html">Sweden</a>
+          <a href="uk.html">United Kingdom</a>
+          <a href="usa.html">United States</a>
+          <a href="countries.html" class="all-countries-link">All Countries</a>
+        </div>
+      </nav>
     </header>
 
     <main>
+      <!-- HERO -->
       <section class="hero bg-image-ca-header">
         <div class="hero-overlay"></div>
         <div class="container hero-content">
@@ -72,9 +108,13 @@
         </div>
       </section>
 
+      <!-- TOP CASINOS -->
       <section class="content">
         <div class="container">
-          <h2>Top Canadian Casino Offers</h2>
+          <header class="section-head">
+            <h2>Top Canadian Casino Offers</h2>
+          </header>
+
           <p class="intro">
             We review licensed online casinos available for Canadian players, focusing on bonuses,
             payouts, and reliability. Find the best platforms for slots, table games, and live dealers.
@@ -84,11 +124,10 @@
         </div>
       </section>
 
+      <!-- CONTENT ARTICLE -->
       <section class="content bg-image-ca-footer">
-        <div class=""></div>
-
         <div class="container content-article">
-          <h3>Online Casinos in Canada</h3>
+          <h2>Online Casinos in Canada</h2>
           <p>
             Online casinos in Canada provide players with a safe and convenient way to play real money games
             from home. Canadian players can access both domestic and international platforms licensed
@@ -99,23 +138,27 @@
             They collaborate with top software providers and offer transparent bonus terms, reliable
             payment methods, and professional customer support.
           </p>
-          <h3>Is Online Gambling Legal in Canada</h3>
+
+          <h2>Is Online Gambling Legal in Canada?</h2>
           <p>
             Online gambling is legal in Canada, but each province regulates its own market. For example,
             Ontario operates the regulated iGaming Ontario platform, while other provinces allow players
             to access licensed international casinos.
           </p>
-          <h3>What Games Can Canadian Players Expect</h3>
+
+          <h2>What Games Can Canadian Players Expect?</h2>
           <p>
             Canadian online casinos typically feature a wide variety of games, including slots, blackjack,
             roulette, poker, and live dealer options. Most platforms are optimized for desktop and mobile
             devices.
           </p>
-          <h3>Bonuses and Promotions</h3>
+
+          <h2>Bonuses and Promotions</h2>
           <p>
             Welcome bonuses, free spins, and ongoing promotions are common at Canadian online casinos.
             Players should review wagering requirements and bonus conditions before claiming any offer.
           </p>
+
           <p>
             Choosing a trusted online casino ensures a safe and enjoyable experience. We continuously
             update our recommendations to highlight platforms available for players in Canada.
@@ -123,6 +166,7 @@
         </div>
       </section>
 
+      <!-- ALL COUNTRIES -->
       <section class="all-countries">
         <div class="container countries-cloud">
           <a href="argentina.html">Argentina</a>
@@ -170,20 +214,22 @@
     </main>
 
     <footer class="footer">
-      <div class="container">© 2026 SpinCresta.com All rights reserved</div>
-      <p>
-        18+ | Gambling can be addictive. Please play responsibly. Availability depends on your
-        provincial laws.
-      </p>
+      <div class="container">
+        <p>© 2026 SpinCresta.com All rights reserved</p>
+        <p>
+          18+ | Gambling can be addictive. Please play responsibly. Availability depends on your
+          provincial laws.
+        </p>
+      </div>
     </footer>
 
-    <!-- Card template -->
+    <!-- CARD TEMPLATE -->
     <template id="casino-card-template">
       <article class="casino-card">
         <img class="casino-image" alt="" loading="lazy" />
         <h3 class="casino-name"></h3>
         <p class="casino-bonus"></p>
-        <a class="cta" rel="noopener noreferrer"></a>
+        <a class="cta" href="#" rel="noopener noreferrer">Play Now</a>
       </article>
     </template>
 

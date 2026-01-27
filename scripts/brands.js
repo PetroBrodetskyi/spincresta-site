@@ -95,7 +95,7 @@ export const BRANDS = [
     cta: "Play Now",
     urlDetail: "brands/top-slots.html",
     urlCasino: "https://topslots.com",
-    image: "images/ar/neospin.webp",
+    image: "images/au/neospin.webp",
     countries: ["AU", "CA", "CL", "NZ", "DK", "DE"],
   },
   {
@@ -123,7 +123,7 @@ export const BRANDS = [
     cta: "Play Now",
     urlDetail: "brands/top-slots.html",
     urlCasino: "https://topslots.com",
-    image: "images/ar/1red.webp",
+    image: "images/ca/1red.webp",
     countries: ["CA", "UK", "NL", "SA", "AE", "EG", "MA", "JO", "LB", "KW", "QA", "BH", "OM", "IQ", "YE", "DZ", "TN", "LY", "SD", "AT"],
   },
   {
@@ -132,7 +132,7 @@ export const BRANDS = [
     cta: "Play Now",
     urlDetail: "brands/top-slots.html",
     urlCasino: "https://topslots.com",
-    image: "images/ar/spinch.webp",
+    image: "images/ca/spinch.webp",
     countries: ["CA", "CH", "DK", "SK", "BG", "NO", "LT", "LV", "SI", "RO", "NZ"
 ],
   },

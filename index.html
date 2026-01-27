@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en-US">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -26,19 +26,54 @@
   <body>
     <!-- HEADER -->
     <header class="header">
+      <!-- BURGER BUTTON (MOBILE) -->
+      <button
+        class="burger"
+        aria-label="Open countries menu"
+        aria-controls="mobileMenu"
+        aria-expanded="false"
+      >
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+
+      <!-- MOBILE COUNTRIES MENU -->
+      <nav class="mobile-menu" id="mobileMenu" aria-hidden="true">
+        <div class="mobile-menu-inner">
+          <h2>Countries</h2>
+          <a href="australia.html">Australia</a>
+          <a href="brazil.html">Brazil</a>
+          <a href="canada.html">Canada</a>
+          <a href="finland.html">Finland</a>
+          <a href="germany.html">Germany</a>
+          <a href="india.html">India</a>
+          <a href="mexico.html">Mexico</a>
+          <a href="norway.html">Norway</a>
+          <a href="philippines.html">Philippines</a>
+          <a href="south-africa.html">South Africa</a>
+          <a href="sweden.html">Sweden</a>
+          <a href="uk.html">United Kingdom</a>
+          <a href="usa.html">United States</a>
+          <a href="countries.html" class="all-countries-link">All Countries</a>
+        </div>
+      </nav>
+
       <div class="container header-inner">
         <a href="index.html" class="logo">
-        SpinCresta<span class="logo-com">.com</span>
+          SpinCresta<span class="logo-com">.com</span>
         </a>
 
-        <nav class="nav">
+        <nav class="nav" aria-label="Main navigation">
           <a href="index.html">Top Casinos</a>
           <a href="#">Bonuses</a>
           <a href="#">Reviews</a>
           <a href="#">About</a>
 
           <div class="nav-dropdown">
-            <span class="nav-link">Countries</span>
+            <span class="nav-link" role="button" aria-haspopup="true">
+              Countries
+            </span>
 
             <div class="nav-dropdown-menu">
               <a href="australia.html">Australia</a>
@@ -54,9 +89,7 @@
               <a href="sweden.html">Sweden</a>
               <a href="uk.html">United Kingdom</a>
               <a href="usa.html">United States</a>
-
               <hr class="dropdown-separator" />
-
               <a href="countries.html">All Countries</a>
             </div>
           </div>
@@ -77,90 +110,104 @@
         </div>
       </section>
 
-      <!-- ===== US ===== -->
+      <!-- ===== UNITED STATES ===== -->
       <section class="content">
         <div class="container cards-main">
-          <div class="section-head">
+          <header class="section-head">
             <h2>Top United States Casinos</h2>
-            
-          </div>
+          </header>
 
           <div class="casino-grid">
-            <!-- CARD -->
             <article class="casino-card">
-              <img src="images/us/lasvegas.webp" alt="BetMGM Casino" loading="lazy" />
+              <img
+                src="images/us/lasvegas.webp"
+                alt="BetMGM online casino interface"
+                loading="lazy"
+              />
               <h3>BetMGM Casino</h3>
-              <p>100% bonus up to $1,000 + 100 Free Spins</p>
+              <p>100% bonus up to $1,000 + 100 free spins</p>
               <a class="cta" href="#">Play Now</a>
             </article>
 
             <article class="casino-card">
-              <img src="images/us/vegas.webp" alt="DraftKings Casino" loading="lazy" />
+              <img
+                src="images/us/vegas.webp"
+                alt="DraftKings online casino games"
+                loading="lazy"
+              />
               <h3>DraftKings Casino</h3>
-              <p>Bet $5 Get $200 in Casino Credits</p>
+              <p>Bet $5 get $200 in casino credits</p>
               <a class="cta" href="#">Play Now</a>
             </article>
 
             <article class="casino-card">
-              <img src="images/us/slotsandcasino.webp" alt="FanDuel Casino" loading="lazy" />
+              <img
+                src="images/us/slotsandcasino.webp"
+                alt="FanDuel casino slot games"
+                loading="lazy"
+              />
               <h3>FanDuel Casino</h3>
-              <p>Up to $1,000 Back if You Dont Win</p>
+              <p>Up to $1,000 back if you do not win</p>
               <a class="cta" href="#">Play Now</a>
             </article>
 
             <article class="casino-card">
-              <img src="images/us/voltagebet.webp" alt="Caesars Casino" loading="lazy" />
+              <img
+                src="images/us/voltagebet.webp"
+                alt="Caesars online casino platform"
+                loading="lazy"
+              />
               <h3>Caesars Casino</h3>
-              <p>First Bet Insurance up to $1,250</p>
+              <p>First bet insurance up to $1,250</p>
               <a class="cta" href="#">Play Now</a>
             </article>
           </div>
+
           <div class="view-all-wrapper">
             <a href="usa.html" class="view-all">View all</a>
           </div>
         </div>
-        
       </section>
 
-      <!-- ===== AU ===== -->
+      <!-- ===== AUSTRALIA ===== -->
       <section class="content">
         <div class="container cards-main">
-          <div class="section-head">
+          <header class="section-head">
             <h2>Top Australia Casinos</h2>
-            
-          </div>
+          </header>
 
           <div class="casino-grid">
             <article class="casino-card">
-              <img src="images/us/vegas.webp" alt="" loading="lazy" />
+              <img src="images/au/neospin.webp" alt="BetMGM casino Australia" loading="lazy" />
               <h3>BetMGM Casino</h3>
               <p>Welcome bonus available</p>
               <a class="cta" href="#">Play Now</a>
             </article>
 
             <article class="casino-card">
-              <img src="images/us/vegas.webp" alt="" loading="lazy" />
+              <img src="images/au/draftkings.webp" alt="DraftKings casino Australia" loading="lazy" />
               <h3>DraftKings Casino</h3>
               <p>Exclusive offer for players</p>
               <a class="cta" href="#">Play Now</a>
             </article>
 
             <article class="casino-card">
-              <img src="images/us/vegas.webp" alt="" loading="lazy" />
+              <img src="images/au/fanduel.webp" alt="FanDuel casino Australia" loading="lazy" />
               <h3>FanDuel Casino</h3>
-              <p>Popular slots & live games</p>
+              <p>Popular slots and live games</p>
               <a class="cta" href="#">Play Now</a>
             </article>
 
             <article class="casino-card">
-              <img src="images/us/vegas.webp" alt="" loading="lazy" />
+              <img src="images/au/caesars.webp" alt="Caesars casino Australia" loading="lazy" />
               <h3>Caesars Casino</h3>
               <p>Trusted international brand</p>
               <a class="cta" href="#">Play Now</a>
             </article>
           </div>
+
           <div class="view-all-wrapper">
-            <a href="usa.html" class="view-all">View all</a>
+            <a href="australia.html" class="view-all">View all</a>
           </div>
         </div>
       </section>
@@ -168,112 +215,83 @@
       <!-- ===== CANADA ===== -->
       <section class="content">
         <div class="container cards-main">
-          <div class="section-head">
+          <header class="section-head">
             <h2>Top Canada Casinos</h2>
-            
-          </div>
+          </header>
 
           <div class="casino-grid">
             <article class="casino-card">
-              <img src="images/us/vegas.webp" alt="" loading="lazy" />
+              <img src="images/ca/spinch.webp" alt="BetMGM casino Canada" loading="lazy" />
               <h3>BetMGM Casino</h3>
               <p>High RTP casino games</p>
               <a class="cta" href="#">Play Now</a>
             </article>
 
             <article class="casino-card">
-              <img src="images/us/vegas.webp" alt="" loading="lazy" />
+              <img src="images/ca/1red.webp" alt="DraftKings casino Canada" loading="lazy" />
               <h3>DraftKings Casino</h3>
-              <p>Fast payouts & bonuses</p>
+              <p>Fast payouts and bonuses</p>
               <a class="cta" href="#">Play Now</a>
             </article>
 
             <article class="casino-card">
-              <img src="images/us/vegas.webp" alt="" loading="lazy" />
+              <img src="images/ca/fanduel.webp" alt="FanDuel casino Canada" loading="lazy" />
               <h3>FanDuel Casino</h3>
               <p>Mobile-friendly casino</p>
               <a class="cta" href="#">Play Now</a>
             </article>
 
             <article class="casino-card">
-              <img src="images/us/vegas.webp" alt="" loading="lazy" />
+              <img src="images/ca/caesars.webp" alt="Caesars casino Canada" loading="lazy" />
               <h3>Caesars Casino</h3>
               <p>Secure and licensed</p>
               <a class="cta" href="#">Play Now</a>
-              
             </article>
           </div>
+
           <div class="view-all-wrapper">
-            <a href="usa.html" class="view-all">View all</a>
+            <a href="canada.html" class="view-all">View all</a>
           </div>
         </div>
       </section>
-      <section class="content">
-        <div class=""></div>
 
+      <!-- CONTENT ARTICLE -->
+      <section class="content">
         <div class="container content-article">
-          <h3>Online Casinos Around the World</h3>
+          <h2>Online Casinos Around the World</h2>
           <p>
             Online casinos have become one of the most popular forms of digital entertainment worldwide.
             Players from different countries can enjoy real money casino games online, accessing thousands
             of slots, table games, and live dealer experiences from licensed platforms.
           </p>
+
+          <h2>Online Gambling Laws by Country</h2>
           <p>
-            The global online gambling industry continues to grow rapidly, with regulated markets in
-            Europe, North America, Asia, and other regions. International casinos often operate under
-            trusted licenses and provide secure environments for players across multiple countries.
+            Online gambling laws vary significantly from country to country. Some regions have fully
+            regulated markets with strict licensing requirements, while others allow offshore operators.
           </p>
 
-          <h3>Online Gambling Laws by Country</h3>
+          <h2>Casino Games Available Worldwide</h2>
           <p>
-            Online gambling laws vary significantly from country to country. Some regions, such as the
-            United Kingdom, Canada, and parts of Europe, have fully regulated online casino markets with
-            strict licensing requirements. Other countries allow international casinos to accept players
-            under offshore licenses.
-          </p>
-          <p>
-            Understanding local gambling regulations is important for players. Trusted online casinos
-            clearly display their licenses, terms, and responsible gaming policies to ensure transparency
-            and compliance with international standards.
+            Most online casinos offer slots, blackjack, roulette, baccarat, poker, and live dealer games
+            optimized for desktop and mobile devices.
           </p>
 
-          <h3>Casino Games Available Worldwide</h3>
+          <h2>Bonuses and Promotions</h2>
           <p>
-            Online casinos across the world typically offer a wide selection of games, including online
-            slots, blackjack, roulette, baccarat, poker, and live dealer games. Many platforms partner
-            with leading software providers to deliver fair gameplay, high-quality graphics, and smooth
-            performance on both desktop and mobile devices.
-          </p>
-          <p>
-            Mobile casino gaming has seen significant growth, allowing players to enjoy their favorite
-            games anytime and anywhere using smartphones or tablets.
+            Welcome bonuses, free spins, cashback offers, and loyalty rewards are widely available.
+            Always review wagering requirements before claiming any bonus.
           </p>
 
-          <h3>Bonuses and Promotions at Online Casinos</h3>
+          <h2>Choosing a Trusted Online Casino</h2>
           <p>
-            Casino bonuses and promotions are a key feature of online gambling platforms worldwide.
-            Welcome bonuses, free spins, cashback offers, and loyalty rewards are commonly available to
-            both new and existing players.
-          </p>
-          <p>
-            Before claiming any bonus, players should carefully review wagering requirements, eligible
-            games, and withdrawal conditions. Reliable casinos provide clear and fair bonus terms to
-            protect players and ensure a positive gaming experience.
-          </p>
-
-          <h3>Choosing a Trusted Online Casino</h3>
-          <p>
-            Choosing a trusted online casino is essential for a safe and enjoyable experience. The best
-            international casinos prioritize player security, fair play, fast payouts, and professional
-            customer support.
-          </p>
-          <p>
-            At SpinCresta, we regularly review and update our casino rankings to highlight reliable online
-            casinos available in different countries, helping players make informed decisions wherever
-            they choose to play.
+            Trusted casinos prioritize player security, fair play, fast payouts, and responsive customer
+            support. SpinCresta regularly updates rankings to help players choose safely.
           </p>
         </div>
       </section>
+
+      <!-- ALL COUNTRIES -->
       <section class="all-countries">
         <div class="container countries-cloud">
           <a href="argentina.html">Argentina</a>
@@ -300,7 +318,6 @@
           <a href="norway.html">Norway</a>
           <a href="philippines.html">Philippines</a>
           <a href="poland.html">Poland</a>
-          <a href="russia.html">Russia</a>
           <a href="saudi-arabia.html">Saudi Arabia</a>
           <a href="singapore.html">Singapore</a>
           <a href="south-africa.html">South Africa</a>
@@ -323,14 +340,13 @@
     <!-- FOOTER -->
     <footer class="footer">
       <div class="container">
-        © 2026 SpinCresta.com All rights reserved
+        <p>© 2026 SpinCresta.com. All rights reserved.</p>
+        <p>
+          18+ | Gambling can be addictive. Please play responsibly.
+          Availability depends on your country laws.
+        </p>
       </div>
-      <p>
-        18+ | Gambling can be addictive. Please play responsibly.
-        Availability depends on your country laws.
-      </p>
     </footer>
-    
 
     <script type="module" src="scripts/main.js"></script>
   </body>

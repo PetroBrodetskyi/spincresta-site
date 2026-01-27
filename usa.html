@@ -27,44 +27,79 @@
     <header class="header">
       <div class="container header-inner">
         <a href="index.html" class="logo">
-        SpinCresta<span class="logo-com">.com</span>
+          SpinCresta<span class="logo-com">.com</span>
         </a>
 
-        <nav class="nav">
+        <!-- BURGER BUTTON (MOBILE) -->
+        <button
+          class="burger"
+          aria-label="Open countries menu"
+          aria-controls="mobileMenu"
+          aria-expanded="false"
+        >
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+
+        <!-- MAIN NAVIGATION -->
+        <nav class="nav" aria-label="Main navigation">
           <a href="index.html">Top Casinos</a>
           <a href="#">Bonuses</a>
           <a href="#">Reviews</a>
           <a href="#">About</a>
 
           <div class="nav-dropdown">
-            <span class="nav-link">Countries</span>
+            <button class="nav-link" aria-haspopup="true" aria-expanded="false">
+              Countries
+            </button>
 
             <div class="nav-dropdown-menu">
-                <a href="australia.html">Australia</a>
-                <a href="brazil.html">Brazil</a>
-                <a href="canada.html">Canada</a>
-                <a href="finland.html">Finland</a>
-                <a href="germany.html">Germany</a>
-                <a href="india.html">India</a>
-                <a href="mexico.html">Mexico</a>
-                <a href="norway.html">Norway</a>
-                <a href="philippines.html">Philippines</a>
-                <a href="south-africa.html">South Africa</a>
-                <a href="sweden.html">Sweden</a>
-                <a href="uk.html">United Kingdom</a>
-                <a href="usa.html">United States</a>
+              <a href="australia.html">Australia</a>
+              <a href="brazil.html">Brazil</a>
+              <a href="canada.html">Canada</a>
+              <a href="finland.html">Finland</a>
+              <a href="germany.html">Germany</a>
+              <a href="india.html">India</a>
+              <a href="mexico.html">Mexico</a>
+              <a href="norway.html">Norway</a>
+              <a href="philippines.html">Philippines</a>
+              <a href="south-africa.html">South Africa</a>
+              <a href="sweden.html">Sweden</a>
+              <a href="uk.html">United Kingdom</a>
+              <a href="usa.html">United States</a>
 
-                <hr class="dropdown-separator" />
-
-                <a href="countries.html">All Countries</a>
-            </div>
+              <hr class="dropdown-separator" />
+              <a href="countries.html">All Countries</a>
             </div>
           </div>
         </nav>
       </div>
+
+      <!-- MOBILE COUNTRIES MENU -->
+      <nav class="mobile-menu" id="mobileMenu" aria-hidden="true">
+        <div class="mobile-menu-inner">
+          <h2>Countries</h2>
+          <a href="australia.html">Australia</a>
+          <a href="brazil.html">Brazil</a>
+          <a href="canada.html">Canada</a>
+          <a href="finland.html">Finland</a>
+          <a href="germany.html">Germany</a>
+          <a href="india.html">India</a>
+          <a href="mexico.html">Mexico</a>
+          <a href="norway.html">Norway</a>
+          <a href="philippines.html">Philippines</a>
+          <a href="south-africa.html">South Africa</a>
+          <a href="sweden.html">Sweden</a>
+          <a href="uk.html">United Kingdom</a>
+          <a href="usa.html">United States</a>
+          <a href="countries.html" class="all-countries-link">All Countries</a>
+        </div>
+      </nav>
     </header>
 
     <main>
+      <!-- HERO -->
       <section class="hero bg-image-us-header">
         <div class="hero-overlay"></div>
         <div class="container hero-content">
@@ -73,9 +108,13 @@
         </div>
       </section>
 
+      <!-- TOP CASINOS -->
       <section class="content">
         <div class="container">
-          <h2>Top US Casino Offers</h2>
+          <header class="section-head">
+            <h2>Top US Casino Offers</h2>
+          </header>
+
           <p class="intro">
             We analyze licensed online casinos available for US players, focusing on bonuses,
             payouts, and trustworthiness.
@@ -85,11 +124,12 @@
         </div>
       </section>
 
+      <!-- CONTENT ARTICLE -->
       <section class="content bg-image-us-footer">
         <div class="section-overlay"></div>
 
         <div class="container content-article">
-          <h3>Online Casinos in the United States</h3>
+          <h2>Online Casinos in the United States</h2>
           <p>
             Online casinos in the United States offer players a convenient and secure way to enjoy
             real money casino games from home. With regulated markets in several states and trusted
@@ -100,24 +140,28 @@
             Licensed platforms work with reputable software providers and offer transparent bonus
             terms, reliable payment methods, and professional customer support.
           </p>
-          <h3>Is Online Gambling Legal in the USA</h3>
+
+          <h2>Is Online Gambling Legal in the USA?</h2>
           <p>
             Online casino legality in the USA depends on state regulations. States such as New
             Jersey, Pennsylvania, Michigan, and West Virginia have fully regulated online casinos.
             In other states, international casinos may still accept players under offshore licenses.
           </p>
-          <h3>What Games Can US Players Expect</h3>
+
+          <h2>What Games Can US Players Expect?</h2>
           <p>
             US online casinos typically offer a wide range of games, including online slots,
             blackjack, roulette, poker, and live dealer games. These platforms are designed to work
             smoothly on both desktop and mobile devices.
           </p>
-          <h3>Bonuses and Promotions</h3>
+
+          <h2>Bonuses and Promotions</h2>
           <p>
             Welcome bonuses, free spins, and ongoing promotions are common at US online casinos.
             Players should always review wagering requirements and bonus terms before claiming any
             offer.
           </p>
+
           <p>
             Choosing a trusted online casino ensures a safe and enjoyable experience. We regularly
             update our recommendations to highlight reliable platforms available for players in the
@@ -126,6 +170,7 @@
         </div>
       </section>
 
+      <!-- ALL COUNTRIES -->
       <section class="all-countries">
         <div class="container countries-cloud">
           <a href="argentina.html">Argentina</a>
@@ -170,25 +215,22 @@
           <a href="vietnam.html">Vietnam</a>
         </div>
       </section>
-
-        
     </main>
 
     <footer class="footer">
-      <div class="container">© 2026 SpinCresta.com All rights reserved</div>
-      <p>
-        18+ | Gambling can be addictive. Please play responsibly. Availability depends on your
-        state laws.
-      </p>
+      <div class="container">
+        <p>© 2026 SpinCresta.com All rights reserved</p>
+        <p>18+ | Gambling can be addictive. Please play responsibly. Availability depends on your state laws.</p>
+      </div>
     </footer>
 
-    <!-- Card template -->
+    <!-- CARD TEMPLATE -->
     <template id="casino-card-template">
       <article class="casino-card">
         <img class="casino-image" alt="" loading="lazy" />
         <h3 class="casino-name"></h3>
         <p class="casino-bonus"></p>
-        <a class="cta" rel="noopener noreferrer"></a>
+        <a class="cta" href="#" rel="noopener noreferrer">Play Now</a>
       </article>
     </template>
 
