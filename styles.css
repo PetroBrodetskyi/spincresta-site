@@ -186,7 +186,7 @@ body {
    HERO
 ===================== */
 .hero {
-  min-height: 74vh;
+  min-height: 24vh;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -289,7 +289,6 @@ body {
 
 .intro {
   color: var(--text-muted);
-  max-width: 720px;
   margin-bottom: 48px;
 }
 

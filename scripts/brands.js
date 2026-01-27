@@ -96,7 +96,7 @@ export const BRANDS = [
     urlDetail: "brands/top-slots.html",
     urlCasino: "https://topslots.com",
     image: "images/ar/neospin.webp",
-    countries: ["AR"],
+    countries: ["AU", "CA", "CL", "NZ", "DK", "DE"],
   },
   {
     name: "Onluck",
@@ -124,7 +124,7 @@ export const BRANDS = [
     urlDetail: "brands/top-slots.html",
     urlCasino: "https://topslots.com",
     image: "images/ar/1red.webp",
-    countries: ["AR"],
+    countries: ["CA", "UK", "NL", "SA", "AE", "EG", "MA", "JO", "LB", "KW", "QA", "BH", "OM", "IQ", "YE", "DZ", "TN", "LY", "SD", "AT"],
   },
   {
     name: "Spinch",
@@ -133,7 +133,8 @@ export const BRANDS = [
     urlDetail: "brands/top-slots.html",
     urlCasino: "https://topslots.com",
     image: "images/ar/spinch.webp",
-    countries: ["AR"],
+    countries: ["CA", "CH", "DK", "SK", "BG", "NO", "LT", "LV", "SI", "RO", "NZ"
+],
   },
   {
     name: "22Bet",
@@ -223,5 +224,14 @@ export const BRANDS = [
     urlCasino: "https://topslots.com",
     image: "images/za/zarbet.webp",
     countries: ["ZA"],
+  },
+  {
+    name: "Crownslots",
+    bonus: "Fast payouts for players",
+    cta: "Play Now",
+    urlDetail: "brands/top-slots.html",
+    urlCasino: "https://topslots.com",
+    image: "images/ar/crownslots.webp",
+    countries: ["AU", "CA", "NZ", "NO", "IE", "LT", "FR", "AT", "IT", "DE"],
   }
 ];
