@@ -319,7 +319,7 @@ body {
   backdrop-filter: var(--blur-glass);
   border-radius: var(--radius-lg);
   padding: 18px;
-
+  cursor: pointer;
   box-shadow: var(--shadow-soft);
 
   transition:
@@ -628,6 +628,17 @@ body {
   display: flex;
   flex-direction: column;
   gap: 4px;
+  /* max-height: 124vh;
+  overflow-y: auto;
+  contain: content;
+
+  scrollbar-width: thin;
+  scrollbar-color: transparent transparent; */
+}
+
+.sidebar-countries::-webkit-scrollbar {
+  width: 0px;
+  background: transparent;
 }
 
 .sidebar-countries a {

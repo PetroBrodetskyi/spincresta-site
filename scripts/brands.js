@@ -5,7 +5,7 @@ export const BRANDS = [
     cta: "Play at Las Vegas",
     urlDetail: "brands/phj.html",
     urlCasino: "https://phjcasino.com",
-    image: "images/us/lasvegas.webp",
+    image: "images/lasvegas.webp",
     countries: ["US"],
   },
   {
@@ -14,7 +14,7 @@ export const BRANDS = [
     cta: "Visit B Casino",
     urlDetail: "brands/b.html",
     urlCasino: "https://bcasino.com",
-    image: "images/us/vegas.webp",
+    image: "images/vegas.webp",
     countries: ["US"],
   },
   {
@@ -23,7 +23,7 @@ export const BRANDS = [
     cta: "Play Now",
     urlDetail: "brands/top-slots.html",
     urlCasino: "https://topslots.com",
-    image: "images/us/slotsandcasino.webp",
+    image: "images/slotsandcasino.webp",
     countries: ["US"],
   },
   {
@@ -32,7 +32,7 @@ export const BRANDS = [
     cta: "Play at PHJ Casino",
     urlDetail: "brands/phj.html",
     urlCasino: "https://phjcasino.com",
-    image: "images/us/duckyluck.webp",
+    image: "images/duckyluck.webp",
     countries: ["US"],
   },
   {
@@ -41,7 +41,7 @@ export const BRANDS = [
     cta: "Visit B Casino",
     urlDetail: "brands/b.html",
     urlCasino: "https://bcasino.com",
-    image: "images/us/voltagebet.webp",
+    image: "images/voltagebet.webp",
     countries: ["US"],
   },
   {
@@ -50,7 +50,7 @@ export const BRANDS = [
     cta: "Play Now",
     urlDetail: "brands/top-slots.html",
     urlCasino: "https://topslots.com",
-    image: "images/us/luckyred.webp",
+    image: "images/luckyred.webp",
     countries: ["US"],
   },
   {
@@ -59,7 +59,7 @@ export const BRANDS = [
     cta: "Play at PHJ Casino",
     urlDetail: "brands/phj.html",
     urlCasino: "https://phjcasino.com",
-    image: "images/us/shazam.webp",
+    image: "images/shazam.webp",
     countries: ["US"],
   },
   {
@@ -68,7 +68,7 @@ export const BRANDS = [
     cta: "Visit B Casino",
     urlDetail: "brands/b.html",
     urlCasino: "https://bcasino.com",
-    image: "images/us/luckytiger.webp",
+    image: "images/luckytiger.webp",
     countries: ["US"],
   },
   {
@@ -77,7 +77,7 @@ export const BRANDS = [
     cta: "Play Now",
     urlDetail: "brands/top-slots.html",
     urlCasino: "https://topslots.com",
-    image: "images/us/richpalms.webp",
+    image: "images/richpalms.webp",
     countries: ["US"],
   },
   {
@@ -86,7 +86,7 @@ export const BRANDS = [
     cta: "Play Now",
     urlDetail: "brands/top-slots.html",
     urlCasino: "https://topslots.com",
-    image: "images/ar/gunsbet.webp",
+    image: "images/gunsbet.webp",
     countries: ["AR"],
   },
   {
@@ -95,7 +95,7 @@ export const BRANDS = [
     cta: "Play Now",
     urlDetail: "brands/top-slots.html",
     urlCasino: "https://topslots.com",
-    image: "images/au/neospin.webp",
+    image: "images/neospin.webp",
     countries: ["AU", "CA", "CL", "NZ", "DK", "DE"],
   },
   {
@@ -104,7 +104,7 @@ export const BRANDS = [
     cta: "Play Now",
     urlDetail: "brands/top-slots.html",
     urlCasino: "https://topslots.com",
-    image: "images/ar/onluck.webp",
+    image: "images/onluck.webp",
     countries: ["AR"],
   },
   {
@@ -113,7 +113,7 @@ export const BRANDS = [
     cta: "Play Now",
     urlDetail: "brands/top-slots.html",
     urlCasino: "https://topslots.com",
-    image: "images/ar/evospin.webp",
+    image: "images/evospin.webp",
     countries: ["AR"],
   },
   
@@ -123,7 +123,7 @@ export const BRANDS = [
     cta: "Play Now",
     urlDetail: "brands/top-slots.html",
     urlCasino: "https://topslots.com",
-    image: "images/ca/1red.webp",
+    image: "images/1red.webp",
     countries: ["CA", "UK", "NL", "SA", "AE", "EG", "MA", "JO", "LB", "KW", "QA", "BH", "OM", "IQ", "YE", "DZ", "TN", "LY", "SD", "AT"],
   },
   {
@@ -132,7 +132,7 @@ export const BRANDS = [
     cta: "Play Now",
     urlDetail: "brands/top-slots.html",
     urlCasino: "https://topslots.com",
-    image: "images/ca/spinch.webp",
+    image: "images/spinch.webp",
     countries: ["CA", "CH", "DK", "SK", "BG", "NO", "LT", "LV", "SI", "RO", "NZ"
 ],
   },
@@ -142,7 +142,7 @@ export const BRANDS = [
     cta: "Play Now",
     urlDetail: "brands/top-slots.html",
     urlCasino: "https://topslots.com",
-    image: "images/ar/22bet.webp",
+    image: "images/22bet.webp",
     countries: ["AR", "CL", "ES", "IT"],
   },
   // {
@@ -160,7 +160,7 @@ export const BRANDS = [
     cta: "Play Now",
     urlDetail: "brands/top-slots.html",
     urlCasino: "https://topslots.com",
-    image: "images/ua/vbet.webp",
+    image: "images/vbet.webp",
     countries: ["UA"],
   },
   {
@@ -169,7 +169,7 @@ export const BRANDS = [
     cta: "Play Now",
     urlDetail: "brands/top-slots.html",
     urlCasino: "https://topslots.com",
-    image: "images/ua/vbet.webp",
+    image: "images/vbet.webp",
     countries: ["UA"],
   },
   {
@@ -178,7 +178,7 @@ export const BRANDS = [
     cta: "Play Now",
     urlDetail: "brands/top-slots.html",
     urlCasino: "https://topslots.com",
-    image: "images/ua/vbet.webp",
+    image: "images/vbet.webp",
     countries: ["UA"],
   },
   {
@@ -187,7 +187,7 @@ export const BRANDS = [
     cta: "Play Now",
     urlDetail: "brands/top-slots.html",
     urlCasino: "https://topslots.com",
-    image: "images/ua/vbet.webp",
+    image: "images/vbet.webp",
     countries: ["UA"],
   },{
     name: "Zarbet",
@@ -195,7 +195,7 @@ export const BRANDS = [
     cta: "Play Now",
     urlDetail: "brands/top-slots.html",
     urlCasino: "https://topslots.com",
-    image: "images/za/zarbet.webp",
+    image: "images/zarbet.webp",
     countries: ["ZA"],
   }
   ,{
@@ -204,7 +204,7 @@ export const BRANDS = [
     cta: "Play Now",
     urlDetail: "brands/top-slots.html",
     urlCasino: "https://topslots.com",
-    image: "images/za/zarbet.webp",
+    image: "images/zarbet.webp",
     countries: ["ZA"],
   },
   {
@@ -213,7 +213,7 @@ export const BRANDS = [
     cta: "Play Now",
     urlDetail: "brands/top-slots.html",
     urlCasino: "https://topslots.com",
-    image: "images/za/zarbet.webp",
+    image: "images/zarbet.webp",
     countries: ["ZA"],
   },
   {
@@ -222,7 +222,7 @@ export const BRANDS = [
     cta: "Play Now",
     urlDetail: "brands/top-slots.html",
     urlCasino: "https://topslots.com",
-    image: "images/za/zarbet.webp",
+    image: "images/zarbet.webp",
     countries: ["ZA"],
   },
   {
@@ -231,7 +231,32 @@ export const BRANDS = [
     cta: "Play Now",
     urlDetail: "brands/top-slots.html",
     urlCasino: "https://topslots.com",
-    image: "images/ar/crownslots.webp",
+    image: "images/crownslots.webp",
     countries: ["AU", "CA", "NZ", "NO", "IE", "LT", "FR", "AT", "IT", "DE"],
+  },
+  {
+    name: "Corgibet",
+    bonus: "Fast payouts for players",
+    cta: "Play Now",
+    urlDetail: "brands/top-slots.html",
+    urlCasino: "https://topslots.com",
+    image: "images/corgibet.webp",
+    countries: ["ES", "DE", "AT", "CH", "IT", "CZ", "GR", "BE", "PL", "FR", "AU", "SK", "SI", "HU", "PT", "CA", "DK", "IE", "NO", "AL", "ME", "RS"],
+  },{
+    name: "Coolzino",
+    bonus: "Fast payouts for players",
+    cta: "Play Now",
+    urlDetail: "brands/top-slots.html",
+    urlCasino: "https://topslots.com",
+    image: "images/coolzino.webp",
+    countries: ["IT", "GR", "BE", "PL", "AU", "CH", "AT", "NO", "DK", "PT", "IE", "CA", "NZ"],
+  },{
+    name: "Magnetic Slots",
+    bonus: "Fast payouts for players",
+    cta: "Play Now",
+    urlDetail: "brands/top-slots.html",
+    urlCasino: "https://topslots.com",
+    image: "images/magneticslots.webp",
+    countries: ["ES", "DE", "IT", "BE", "AT", "CZ", "LU", "PL", "GR", "DK", "HU", "SK", "SI", "FI", "CA", "AU"],
   }
 ];
