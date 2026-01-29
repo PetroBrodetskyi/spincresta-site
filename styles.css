@@ -2,14 +2,9 @@
    DESIGN TOKENS (2026)
 ===================== */
 :root {
-  --bg-main: #020617;
+  --bg-main: #02061788;
   --bg-surface: rgba(15, 23, 42, 0.75);
-  --bg-card: linear-gradient(
-    180deg,
-    #120a2a 0%,
-    #1a103f 55%,
-    #2b1a5c 100%
-  );
+  --bg-card:#17212B;
 
   --border-soft: rgba(148, 163, 184, 0.15);
   --border-glass: rgba(255, 255, 255, 0.08);
@@ -52,24 +47,25 @@ body {
     BlinkMacSystemFont,
     Arial,
     sans-serif;
-  background: radial-gradient(1200px 600px at top, #020617, #020617);
+  background: #000000;
   color: var(--text-main);
   line-height: 1.6;
 }
 
 .container {
-  max-width: 100%;
+  max-width: 98%;
   margin: 0 auto;
-  padding: 24px;
+  padding: 10px 24px;
 }
 
 /* =====================
    HEADER (GLASS)
 ===================== */
 .header {
-    /* position: sticky; */
+  position: sticky;
   top: 0;
   z-index: 50;
+  background-color: var(--bg-card);
 }
 
 .header-inner {
@@ -82,13 +78,17 @@ body {
   font-size: 26px;
   font-weight: 800;
   letter-spacing: -0.5px;
-  color: var(--accent);
+  color: var(--text-main);
   text-decoration: none;
   cursor: pointer;
 }
 
 .logo-com {
   color: var(--gold);
+}
+
+.dice {
+  width: 100px;
 }
 
 /* =====================
@@ -114,12 +114,12 @@ body {
   bottom: -6px;
   width: 0;
   height: 2px;
-  background: var(--accent);
+  background: var(--gold);
   transition: width 0.25s ease;
 }
 
 .nav a:hover {
-  color: var(--accent);
+  color: var(--text-main);
 }
 
 .nav a:hover::after {
@@ -307,18 +307,18 @@ body {
 .casino-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 32px;
+  gap: 10px;
 }
 
 .casino-card {
   display: flex;
+  height: 300px;
   flex-direction: column;
   justify-content: space-between;
   background: var(--bg-card);
   backdrop-filter: var(--blur-glass);
-  border: 1px solid var(--border-soft);
   border-radius: var(--radius-lg);
-  padding: 22px;
+  padding: 18px;
 
   box-shadow: var(--shadow-soft);
 
@@ -326,6 +326,15 @@ body {
     transform 0.35s ease,
     box-shadow 0.35s ease,
     border-color 0.35s ease;
+}
+
+.casino-card img {
+  width: 70%;
+}
+
+.card-img {
+  display: flex;
+  justify-content: center;
 }
 
 .casino-card:hover {
@@ -336,8 +345,6 @@ body {
 
 .casino-image {
   width: 100%;
-  border-radius: var(--radius-md);
-  margin-bottom: 16px;
 }
 
 .casino-card h3 {
@@ -354,17 +361,17 @@ body {
    CTA
 ===================== */
 .cta {
-  display: inline-flex;
+  display: flex;
   align-items: center;
   justify-content: center;
 
   margin-top: 18px;
-  padding: 14px 26px;
+  padding: 4px 6px;
 
-  background: linear-gradient(135deg, var(--accent), var(--accent-strong));
+  background: var(--gold);
   color: #020617;
   text-decoration: none;
-  font-weight: 800;
+  font-weight: 600;
 
   border-radius: 999px;
 
@@ -403,7 +410,11 @@ body {
 }
 
 .content-article {
+  margin-top: 32px;
   position: relative;
+  padding: 20px;
+  background-color: var(--bg-card);
+  border-radius: var(--radius-lg);
 }
 
 .content-article h3 {
@@ -460,30 +471,10 @@ body {
    VIEW ALL LINK - CARD STYLE
 ===================== */
 .view-all {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-
-  margin-top: 24px;
-  padding: 14px 26px;
-
   font-size: 16px;
   font-weight: 800;
   text-decoration: none;
-  text-transform: uppercase;
-  color: #020617;
-
-  background: var(--text-main);
-  border-radius: 999px;
-
-  transition:
-    transform 0.25s ease,
-    box-shadow 0.25s ease;
-}
-
-.view-all:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 12px 40px rgba(56, 189, 248, 0.45);
+  color: var(--text-main);
 }
 
 .cards-main {
@@ -494,7 +485,7 @@ body {
 
 .view-all-wrapper {
   display: flex;
-  justify-content: center;
+  justify-content: right;
 }
 
 /* =====================
@@ -614,24 +605,22 @@ body {
 .main-layout {
   display: grid;
   grid-template-columns: 260px 1fr;
-  gap: 32px;
+  gap: 12px;
   align-items: start;
 }
 
 /* =====================
    SIDEBAR
 ===================== */
-.sidebar {
+/* .sidebar {
   background: var(--bg-card);
   border: 1px solid var(--border-soft);
   border-radius: var(--radius-lg);
   padding: 20px;
-  /* position: sticky; */
   top: 110px;
-}
+} */
 
 .sidebar-title {
-  font-size: 18px;
   margin-bottom: 14px;
 }
 
@@ -647,11 +636,12 @@ body {
   text-decoration: none;
   color: var(--text-main);
   transition: all 0.25s ease;
+  background-color: var(--bg-card);
 }
 
 .sidebar-countries a:hover {
   background: rgba(56, 189, 248, 0.15);
-  color: var(--accent);
+  color: var(--gold);
 }
 
 /* =====================
@@ -674,76 +664,15 @@ body {
   }
 }
 
-.top-categories {
-  background-color: #0b0e27;
-  padding: 12px 0;
-}
-
-.categories-list {
-  display: flex;
-  justify-content: center;
-  gap: 32px;
-  list-style: none;
-  margin: 0;
-  padding: 0 16px;
-
-  overflow-x: auto;
-  -webkit-overflow-scrolling: touch;
-
-  /* hide scrollbar */
-  scrollbar-width: none; /* Firefox */
-}
-
-.categories-list::-webkit-scrollbar {
-  display: none; /* Chrome, Safari, Edge */
-}
-
-.categories-list li a {
-  color: #fff;
-  text-decoration: none;
-  font-weight: 600;
-  padding: 6px 14px;
-  border-radius: var(--radius-sm);
-  white-space: nowrap;
-  transition: all 0.25s ease;
-}
-
-.categories-list li a:hover {
-  background: rgba(255, 215, 0, 0.15);
-  color: var(--gold);
-}
-
-/* =====================
-   RESPONSIVE
-===================== */
-@media (max-width: 1024px) {
-  .categories-list {
-    gap: 24px;
-  }
-}
-
-@media (max-width: 768px) {
-  .categories-list {
-    gap: 16px;
-  }
-}
-
-@media (max-width: 480px) {
-  .categories-list {
-    gap: 12px;
-    padding: 0 12px;
-  }
-
-  .categories-list li a {
-    padding: 5px 10px;
-    font-size: 14px;
-  }
-}
-
 .country-link {
   display: flex;
   align-items: center;
   gap: 10px;
+  padding: 2px 12px;
+  border-radius: var(--radius-md);
+  text-decoration: none;
+  color: var(--text-main);
+  transition: all 0.25s ease;
 }
 
 .flag {
