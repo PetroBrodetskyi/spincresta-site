@@ -25,23 +25,44 @@
 
   <body>
     <!-- HEADER -->
-    <header class="header">
-      <!-- BURGER BUTTON (MOBILE) -->
-      <button
-        class="burger"
-        aria-label="Open countries menu"
-        aria-controls="mobileMenu"
-        aria-expanded="false"
-      >
-        <span></span>
-        <span></span>
-        <span></span>
-      </button>
+    <header class="header bg-image-hero">
+      <div class="hero-overlay"></div>
+      <div class="container header-inner">
+        <a href="index.html" class="logo">
+          SpinCresta<span class="logo-com">.com</span>
+        </a>
+
+        <!-- DESKTOP NAV -->
+        <nav class="nav" aria-label="Main navigation">
+          <a href="index.html">Top Casinos</a>
+          <a href="#">Bonuses</a>
+          <a href="#">Reviews</a>
+          <a href="#">About</a>
+        </nav>
+
+        <!-- BURGER (MOBILE ONLY) -->
+        <button
+          class="burger"
+          type="button"
+          aria-label="Open countries menu"
+          aria-controls="mobileMenu"
+          aria-expanded="false"
+        >
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
 
       <!-- MOBILE COUNTRIES MENU -->
-      <nav class="mobile-menu" id="mobileMenu" aria-hidden="true">
+      <nav
+        class="mobile-menu"
+        id="mobileMenu"
+        aria-hidden="true"
+        aria-label="Mobile countries navigation"
+      >
         <div class="mobile-menu-inner">
-          <h2>Countries</h2>
+          <h4>Countries</h4>
           <a href="australia.html">Australia</a>
           <a href="brazil.html">Brazil</a>
           <a href="canada.html">Canada</a>
@@ -58,120 +79,77 @@
           <a href="countries.html" class="all-countries-link">All Countries</a>
         </div>
       </nav>
-
-      <div class="container header-inner">
-        <a href="index.html" class="logo">
-          SpinCresta<span class="logo-com">.com</span>
-        </a>
-
-        <nav class="nav" aria-label="Main navigation">
-          <a href="index.html">Top Casinos</a>
-          <a href="#">Bonuses</a>
-          <a href="#">Reviews</a>
-          <a href="#">About</a>
-
-          <div class="nav-dropdown">
-            <span class="nav-link" role="button" aria-haspopup="true">
-              Countries
-            </span>
-
-            <div class="nav-dropdown-menu">
-              <a href="australia.html">Australia</a>
-              <a href="brazil.html">Brazil</a>
-              <a href="canada.html">Canada</a>
-              <a href="finland.html">Finland</a>
-              <a href="germany.html">Germany</a>
-              <a href="india.html">India</a>
-              <a href="mexico.html">Mexico</a>
-              <a href="norway.html">Norway</a>
-              <a href="philippines.html">Philippines</a>
-              <a href="south-africa.html">South Africa</a>
-              <a href="sweden.html">Sweden</a>
-              <a href="uk.html">United Kingdom</a>
-              <a href="usa.html">United States</a>
-              <hr class="dropdown-separator" />
-              <a href="countries.html">All Countries</a>
-            </div>
-          </div>
-        </nav>
-      </div>
     </header>
 
-    <!-- MAIN -->
     <main>
       <!-- HERO -->
-      <section class="hero bg-image-hero">
-        <div class="hero-overlay"></div>
-        <div class="container hero-content">
-          <h1>Best Online Casinos Worldwide</h1>
-          <p>
-            Trusted casino reviews, exclusive bonuses, and top brands across multiple countries.
-          </p>
+      <section class="top-categories">
+        <div class="">
+          <ul class="categories-list">
+            <li><a href="#promotions">Promotions</a></li>
+            <li><a href="#games">Games</a></li>
+            <li><a href="#brands">Brands</a></li>
+            <li><a href="newcasinos">New Casinos</a></li>
+            <li><a href="#toprated">Top Rated</a></li>
+            <li><a href="#exclusiveoffers">Exclusive Offers</a></li>
+          </ul>
         </div>
       </section>
 
-      <!-- ===== UNITED STATES ===== -->
+      <!-- ===== MAIN LAYOUT (SIDEBAR + CONTENT) ===== -->
+      <section class="main-layout container">
+        <!-- SIDEBAR (DESKTOP ONLY) -->
+        <div id="sidebar-container"></div>
+
+
+        <!-- CONTENT -->
+        <div class="content-area">
+          <!-- ===== UNITED STATES ===== -->
+          <section class="content">
+            <div class="cards-main">
+              <header class="section-head">
+                <h2>Top United States Casinos</h2>
+              </header>
+
+              <div class="casino-grid">
+                <article class="casino-card">
+                  <img src="images/us/lasvegas.webp" alt="BetMGM online casino interface" loading="lazy" />
+                  <h3>BetMGM Casino</h3>
+                  <p>Licensed US casino with a wide selection of slots and table games</p>
+                  <a class="cta" href="#">Play Now</a>
+                </article>
+
+                <article class="casino-card">
+                  <img src="images/us/vegas.webp" alt="DraftKings online casino games" loading="lazy" />
+                  <h3>DraftKings Casino</h3>
+                  <p>Popular US platform with live casino and fast payouts</p>
+                  <a class="cta" href="#">Play Now</a>
+                </article>
+
+                <article class="casino-card">
+                  <img src="images/us/slotsandcasino.webp" alt="FanDuel casino slot games" loading="lazy" />
+                  <h3>FanDuel Casino</h3>
+                  <p>Modern mobile-first casino experience</p>
+                  <a class="cta" href="#">Play Now</a>
+                </article>
+
+                <article class="casino-card">
+                  <img src="images/us/voltagebet.webp" alt="Caesars online casino platform" loading="lazy" />
+                  <h3>Caesars Casino</h3>
+                  <p>Well-known brand operating under US regulations</p>
+                  <a class="cta" href="#">Play Now</a>
+                </article>
+              </div>
+
+              <div class="view-all-wrapper">
+                <a href="usa.html" class="view-all">View all</a>
+              </div>
+            </div>
+          </section>
+
+          <!-- ===== AUSTRALIA ===== -->
       <section class="content">
-        <div class="container cards-main">
-          <header class="section-head">
-            <h2>Top United States Casinos</h2>
-          </header>
-
-          <div class="casino-grid">
-            <article class="casino-card">
-              <img
-                src="images/us/lasvegas.webp"
-                alt="BetMGM online casino interface"
-                loading="lazy"
-              />
-              <h3>BetMGM Casino</h3>
-              <p>100% bonus up to $1,000 + 100 free spins</p>
-              <a class="cta" href="#">Play Now</a>
-            </article>
-
-            <article class="casino-card">
-              <img
-                src="images/us/vegas.webp"
-                alt="DraftKings online casino games"
-                loading="lazy"
-              />
-              <h3>DraftKings Casino</h3>
-              <p>Bet $5 get $200 in casino credits</p>
-              <a class="cta" href="#">Play Now</a>
-            </article>
-
-            <article class="casino-card">
-              <img
-                src="images/us/slotsandcasino.webp"
-                alt="FanDuel casino slot games"
-                loading="lazy"
-              />
-              <h3>FanDuel Casino</h3>
-              <p>Up to $1,000 back if you do not win</p>
-              <a class="cta" href="#">Play Now</a>
-            </article>
-
-            <article class="casino-card">
-              <img
-                src="images/us/voltagebet.webp"
-                alt="Caesars online casino platform"
-                loading="lazy"
-              />
-              <h3>Caesars Casino</h3>
-              <p>First bet insurance up to $1,250</p>
-              <a class="cta" href="#">Play Now</a>
-            </article>
-          </div>
-
-          <div class="view-all-wrapper">
-            <a href="usa.html" class="view-all">View all</a>
-          </div>
-        </div>
-      </section>
-
-      <!-- ===== AUSTRALIA ===== -->
-      <section class="content">
-        <div class="container cards-main">
+        <div class="cards-main">
           <header class="section-head">
             <h2>Top Australia Casinos</h2>
           </header>
@@ -214,7 +192,7 @@
 
       <!-- ===== CANADA ===== -->
       <section class="content">
-        <div class="container cards-main">
+        <div class="cards-main">
           <header class="section-head">
             <h2>Top Canada Casinos</h2>
           </header>
@@ -257,7 +235,7 @@
 
       <!-- CONTENT ARTICLE -->
       <section class="content">
-        <div class="container content-article">
+        <div class="content-article">
           <h2>Online Casinos Around the World</h2>
           <p>
             Online casinos have become one of the most popular forms of digital entertainment worldwide.
@@ -290,61 +268,21 @@
           </p>
         </div>
       </section>
+        </div>
+      </section>
 
-      <!-- ALL COUNTRIES -->
+      <!-- ALL COUNTRIES CLOUD -->
       <section class="all-countries">
         <div class="container countries-cloud">
-          <a href="argentina.html">Argentina</a>
-          <a href="australia.html">Australia</a>
-          <a href="belgium.html">Belgium</a>
-          <a href="brazil.html">Brazil</a>
-          <a href="canada.html">Canada</a>
-          <a href="china.html">China</a>
-          <a href="chile.html">Chile</a>
-          <a href="denmark.html">Denmark</a>
-          <a href="egypt.html">Egypt</a>
-          <a href="finland.html">Finland</a>
-          <a href="france.html">France</a>
-          <a href="germany.html">Germany</a>
-          <a href="ghana.html">Ghana</a>
-          <a href="india.html">India</a>
-          <a href="italy.html">Italy</a>
-          <a href="japan.html">Japan</a>
-          <a href="kenya.html">Kenya</a>
-          <a href="malaysia.html">Malaysia</a>
-          <a href="mexico.html">Mexico</a>
-          <a href="netherlands.html">Netherlands</a>
-          <a href="new-zealand.html">New Zealand</a>
-          <a href="norway.html">Norway</a>
-          <a href="philippines.html">Philippines</a>
-          <a href="poland.html">Poland</a>
-          <a href="saudi-arabia.html">Saudi Arabia</a>
-          <a href="singapore.html">Singapore</a>
-          <a href="south-africa.html">South Africa</a>
-          <a href="nigeria.html">Nigeria</a>
-          <a href="south-korea.html">South Korea</a>
-          <a href="spain.html">Spain</a>
-          <a href="sweden.html">Sweden</a>
-          <a href="switzerland.html">Switzerland</a>
-          <a href="thailand.html">Thailand</a>
-          <a href="turkey.html">Turkey</a>
-          <a href="uae.html">UAE</a>
-          <a href="ukraine.html">Ukraine</a>
-          <a href="uk.html">United Kingdom</a>
-          <a href="usa.html">United States</a>
-          <a href="vietnam.html">Vietnam</a>
+          <!-- твій список країн без змін -->
         </div>
       </section>
     </main>
 
-    <!-- FOOTER -->
     <footer class="footer">
       <div class="container">
         <p>© 2026 SpinCresta.com. All rights reserved.</p>
-        <p>
-          18+ | Gambling can be addictive. Please play responsibly.
-          Availability depends on your country laws.
-        </p>
+        <p>18+ | Gambling can be addictive. Please play responsibly.</p>
       </div>
     </footer>
 

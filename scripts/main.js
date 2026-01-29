@@ -71,3 +71,21 @@ if (burger && mobileMenu) {
     }
   });
 }
+
+/* =====================
+   SIDEBAR
+===================== */
+
+async function loadSidebar() {
+  const container = document.getElementById('sidebar-container');
+  try {
+    const response = await fetch('sidebar.html');
+    if (!response.ok) throw new Error('Sidebar not found');
+    const html = await response.text();
+    container.innerHTML = html;
+  } catch (err) {
+    console.error('Error loading sidebar:', err);
+  }
+}
+
+loadSidebar();
