@@ -75,6 +75,7 @@ export const COUNTRIES = [
   { code: 'ua', slug: 'ukraine', name: 'Ukraine' },
   { code: 'uk', slug: 'united-kingdom', name: 'United Kingdom' },
   { code: 'us', slug: 'united-states', name: 'United States' },
+  { code: 'uz', slug: 'uzbekistan', name: 'Uzbekistan' },
 
-  { code: 'vn', slug: 'vietnam', name: 'Vietnam' }
+  { code: 'vn', slug: 'vietnam', name: 'Vietnam' },
 ];
