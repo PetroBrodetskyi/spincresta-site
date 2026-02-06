@@ -12,20 +12,21 @@ if (container && template) {
   const fragment = document.createDocumentFragment();
   const pageCountry = document.body.dataset.country?.toUpperCase();
 
-  const filteredBrands = BRANDS.filter(brand =>
-    brand.countries.map(c => c.toUpperCase()).includes(pageCountry)
-  );
+  const filteredBrands = BRANDS.filter(brand => brand.countries.some(c => c.toUpperCase() === pageCountry));
 
-  filteredBrands.forEach(({ name, bonus, cta, urlDetail, urlCasino, image }) => {
+  filteredBrands.forEach(({ name, bonus, cta, urlDetail, urlCasino, image, payments = [] }) => {
     const card = template.content.cloneNode(true);
+
     const article = card.querySelector('.casino-card');
     const img = card.querySelector('.casino-image');
     const title = card.querySelector('.casino-name');
     const bonusText = card.querySelector('.casino-bonus');
     const link = card.querySelector('.cta');
+    const paymentsContainer = card.querySelector('.payment-icons');
 
     img.src = image;
     img.alt = name;
+    img.loading = 'lazy';
 
     title.textContent = name;
     bonusText.textContent = bonus;
@@ -34,6 +35,29 @@ if (container && template) {
     link.href = urlCasino;
     link.target = '_blank';
     link.rel = 'noopener noreferrer';
+
+    if (paymentsContainer && payments.length) {
+      const MAX_VISIBLE = 4;
+
+      const visiblePayments = payments.slice(0, MAX_VISIBLE);
+      const hiddenCount = payments.length - MAX_VISIBLE;
+
+      paymentsContainer.innerHTML = `
+    ${visiblePayments
+      .map(
+        method => `
+          <img
+            src="icons/payments/${method}.svg"
+            alt="${method} payment"
+            loading="lazy"
+          />
+        `
+      )
+      .join('')}
+
+    ${hiddenCount > 0 ? `<span class="payments-more">+${hiddenCount}</span>` : ''}
+  `;
+    }
 
     article.addEventListener('click', () => {
       window.location.href = urlDetail;
@@ -166,7 +190,6 @@ renderHeroCountries();
 
 document.querySelectorAll('.casino-card').forEach(card => {
   card.addEventListener('click', e => {
-    // Якщо клік по кнопці, не переходити
     if (e.target.closest('.cta')) return;
     const page = card.dataset.page;
     if (page) window.location.href = page;

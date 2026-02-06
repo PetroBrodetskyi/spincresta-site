@@ -273,11 +273,11 @@ body {
   flex-direction: column;
   justify-content: space-between;
   background: var(--bg-card);
-  /* backdrop-filter: var(--blur-glass); */
   border-radius: var(--radius-lg);
   padding: 18px;
   cursor: pointer;
   box-shadow: var(--shadow-soft);
+  gap: 8px;
 
   transition:
     transform 0.35s ease,
@@ -286,34 +286,34 @@ body {
 }
 
 .casino-card img {
-  width: 80%;
+  max-width: 80%;
 }
 
 .card-img {
   display: flex;
   justify-content: center;
   align-items: center;
-  flex: 1;
+  height: 70px;
 }
 
 .casino-card:hover {
-  /* transform: translateY(-10px) scale(1.01); */
   box-shadow: var(--shadow-hover);
   border-color: var(--accent);
 }
 
 .casino-image {
-  width: 100%;
+  max-width: 100%;
+  max-height: 80px;
+  object-fit: contain;
 }
 
 .casino-card h3 {
   font-size: 20px;
-  margin-bottom: 8px;
 }
 
 .casino-card p {
   color: var(--text-muted);
-  font-size: 15px;
+  font-size: 16px;
 }
 
 /* =====================
@@ -323,15 +323,11 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-
-  margin-top: 18px;
   padding: 4px 6px;
-
   background: var(--gold);
   color: #020617;
   text-decoration: none;
-  font-weight: 600;
-
+  font-weight: 800;
   border-radius: 999px;
 
   transition:
@@ -827,4 +823,24 @@ body {
   100% {
     transform: rotate(360deg);
   }
+}
+
+.payment-icons {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  overflow: hidden;
+}
+
+.payment-icons img {
+  height: 14px;
+  width: auto;
+  flex-shrink: 0;
+}
+
+.payment-more {
+  font-weight: 600;
+  color: var(--text-muted);
+  white-space: nowrap;
+  flex-shrink: 0;
 }
