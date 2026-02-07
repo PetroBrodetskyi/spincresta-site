@@ -7,6 +7,7 @@ export const BRANDS = [
     urlCasino: 'https://armadaapp.media-412.com/click?pid=3862&offer_id=120812',
     image: 'images/fortunica.webp',
     countries: ['UK'],
+    top: ['UK'],
     payments: ['visa', 'mastercard', 'neteller', 'skrill', 'paysafecard'],
   },
   {
@@ -37,6 +38,7 @@ export const BRANDS = [
     urlCasino: 'https://armadaapp.media-412.com/click?pid=3862&offer_id=120933',
     image: 'images/qbet.webp',
     countries: ['DE', 'UK', 'NO', 'FI', 'SE', 'PL', 'IE', 'PT'],
+    top: ['UK'],
     payments: ['visa', 'mastercard', 'mifinity', 'googlepay', 'jeton'],
   },
   {
@@ -46,6 +48,7 @@ export const BRANDS = [
     urlDetail: 'brands/top-slots.html',
     urlCasino: 'https://topslots.com',
     image: 'images/slotsandcasino.webp',
+    top: ['US'],
     countries: ['US'],
   },
   {
@@ -55,6 +58,7 @@ export const BRANDS = [
     urlDetail: 'brands/phj.html',
     urlCasino: 'https://phjcasino.com',
     image: 'images/duckyluck.webp',
+    top: ['US'],
     countries: ['US'],
   },
   {
@@ -64,6 +68,7 @@ export const BRANDS = [
     urlDetail: 'brands/top-slots.html',
     urlCasino: 'https://topslots.com',
     image: 'images/luckyred.webp',
+    top: ['US'],
     countries: ['US'],
   },
   {
@@ -74,6 +79,7 @@ export const BRANDS = [
     urlCasino: 'https://armadaapp.media-412.com/click?pid=3862&offer_id=120997',
     image: 'images/cazino.webp',
     countries: ['US'],
+    top: ['US'],
     payments: ['visa', 'mastercard'],
   },
   {
@@ -139,6 +145,7 @@ export const BRANDS = [
     urlCasino: 'https://armadaapp.media-412.com/click?pid=3862&offer_id=120678',
     image: 'images/neospin.webp',
     countries: ['AU', 'CA', 'CL', 'NZ', 'DK', 'DE'],
+    top: ['CA'],
     payments: ['visa', 'ecopayz', 'neteller', 'skrill', 'mifinity'],
   },
   {
@@ -149,6 +156,7 @@ export const BRANDS = [
     urlDetail: 'brands/onluck.html',
     urlCasino: 'https://armadaapp.media-412.com/click?pid=3862&offer_id=120675',
     image: 'images/onluck.webp',
+    top: ['UK'],
     countries: ['IE', 'UK', 'NL', 'DE'],
   },
   {
@@ -190,6 +198,7 @@ export const BRANDS = [
       'SD',
       'AT',
     ],
+    top: ['UK'],
     payments: ['visa', 'mastercard', 'neteller', 'jeton', 'neosurf', 'skrill', 'maestro'],
   },
   {
@@ -246,6 +255,7 @@ export const BRANDS = [
     urlCasino: 'https://armadaapp.media-412.com/click?pid=3862&offer_id=120899',
     image: 'images/fugu.webp',
     countries: ['RU', 'KZ', 'UA'],
+    payments: ['visa', 'mastercard', 'mifinity', 'jeton', 'applepay'],
   },
   {
     name: 'VBet',
@@ -300,6 +310,7 @@ export const BRANDS = [
     urlCasino: 'https://armadaapp.media-412.com/click?pid=3862&offer_id=120673',
     image: 'images/crownslots.webp',
     countries: ['AU', 'CA', 'NZ', 'NO', 'IE', 'LT', 'FR', 'AT', 'IT', 'DE'],
+    top: ['AU', 'CA'],
     payments: ['visa', 'mastercard', 'ecopayz', 'bitcoin', 'ethereum', 'neteller', 'skrill', 'mifinity'],
   },
   {
@@ -333,6 +344,7 @@ export const BRANDS = [
       'ME',
       'RS',
     ],
+    top: ['AU', 'CA'],
     payments: ['visa', 'mastercard', 'googlepay', 'applepay', 'bitcoin', 'ethereum'],
   },
   {
@@ -343,6 +355,7 @@ export const BRANDS = [
     urlCasino: 'https://armadaapp.media-412.com/click?pid=3862&offer_id=120782',
     image: 'images/coolzino.webp',
     countries: ['IT', 'GR', 'BE', 'PL', 'AU', 'CH', 'AT', 'NO', 'DK', 'PT', 'IE', 'CA', 'NZ'],
+    top: ['AU', 'CA'],
     payments: ['visa', 'mastercard', 'googlepay', 'applepay', 'ethereum', 'bitcoin'],
   },
   {
@@ -370,6 +383,7 @@ export const BRANDS = [
       'CA',
       'AU',
     ],
+    top: ['AU'],
     payments: ['visa', 'mastercard', 'googlepay', 'applepay', 'bitcoin', 'ethereum'],
   },
   {
@@ -380,6 +394,7 @@ export const BRANDS = [
     urlCasino: 'https://armadaapp.media-412.com/click?pid=3862&offer_id=120895',
     image: 'images/beef.webp',
     countries: ['RU', 'KZ'],
+    payments: ['visa', 'mastercard', 'mifinity', 'jeton', 'applepay', 'googlepay'],
   },
   {
     name: 'Sol Casino',

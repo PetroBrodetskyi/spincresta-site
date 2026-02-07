@@ -70,23 +70,7 @@
 
       <!-- MOBILE MENU -->
       <nav class="mobile-menu" id="mobileMenu" aria-hidden="true" aria-label="Mobile countries navigation">
-        <div class="mobile-menu-inner">
-          <h4>Countries</h4>
-          <a href="australia.html">Australia</a>
-          <a href="brazil.html">Brazil</a>
-          <a href="canada.html">Canada</a>
-          <a href="finland.html">Finland</a>
-          <a href="germany.html">Germany</a>
-          <a href="india.html">India</a>
-          <a href="mexico.html">Mexico</a>
-          <a href="norway.html">Norway</a>
-          <a href="philippines.html">Philippines</a>
-          <a href="south-africa.html">South Africa</a>
-          <a href="sweden.html">Sweden</a>
-          <a href="uk.html">United Kingdom</a>
-          <a href="usa.html">United States</a>
-          <a href="countries.html" class="all-countries-link">All Countries</a>
-        </div>
+        <div class="mobile-menu-inner"></div>
       </nav>
     </header>
 
@@ -102,252 +86,42 @@
       </section>
 
       <div class="content-area container">
-        <!-- ===== UNITED STATES ===== -->
-        <section class="content">
+        <section class="content" data-country="US">
           <div class="cards-main">
-            <h2>Top United States Casinos</h2>
-
-            <div class="casino-grid-main">
-              <article class="casino-card">
-                <div class="card-img">
-                  <img src="images/lasvegas.webp" alt="Las Vegas online casino" loading="lazy" />
-                </div>
-                <div>
-                  <h3>Las Vegas</h3>
-                  <p>Licensed US casino with a wide selection of slots and table games</p>
-                  <a class="cta" href="#">Play Now</a>
-                </div>
-              </article>
-
-              <article class="casino-card">
-                <div class="card-img">
-                  <img src="images/vegas.webp" alt="Vegas casino online games" loading="lazy" />
-                </div>
-                <div>
-                  <h3>Vegas Casino online</h3>
-                  <p>Popular US platform with live casino and fast payouts</p>
-                  <a class="cta" href="#">Play Now</a>
-                </div>
-              </article>
-
-              <article class="casino-card">
-                <div class="card-img">
-                  <img src="images/slotsandcasino.webp" alt="Slots and casino slot games" loading="lazy" />
-                </div>
-                <div>
-                  <h3>Slots and Casino</h3>
-                  <p>Modern mobile-first casino experience</p>
-                  <a class="cta" href="#">Play Now</a>
-                </div>
-              </article>
-
-              <article class="casino-card">
-                <div class="card-img">
-                  <img src="images/voltagebet.webp" alt="VoltageBet online casino platform" loading="lazy" />
-                </div>
-                <div>
-                  <h3>VoltageBet Casino</h3>
-                  <p>Well-known brand operating under US regulations</p>
-                  <a class="cta" href="#">Play Now</a>
-                </div>
-              </article>
-            </div>
-
-            <div class="view-all-wrapper">
-              <a href="united-states.html" class="view-all">View all >></a>
-            </div>
-          </div>
-
-          <div class="main-banner">
-            <div class="title-banner">
-              <h2>Rich Palms</h2>
-              <img class="hero-flag" src="icons/united-states-flag-icon.svg" alt="United States flag" />
-              <h3>US Casino Online</h3>
-            </div>
-            <!-- <script
-              type="text/javascript"
-              src="https://js.superiorshare.com/javascript.php?prefix=gzA4QjFg4b2wX7GbPDPMGWNd7ZgqdRLk&amp;media=1495&amp;campaign=1"
-            ></script> -->
-          </div>
-        </section>
-
-        <!-- ===== UNITED KINGDOM ===== -->
-        <section class="content">
-          <div class="cards-main">
-            <h2>Top United Kingdom Casinos</h2>
-
-            <div class="casino-grid-main" data-page="brands/fortunica.html">
-              <article class="casino-card" data-page="brands/fortunica.html">
-                <div class="card-img">
-                  <img src="images/fortunica.webp" alt="Fortunica Casino" loading="lazy" />
-                </div>
-                <div>
-                  <h3>Fortunica Casino</h3>
-                  <p>
-                    Fortunica Casino features slots, table games, live dealers, fast payouts, and attractive
-                    bonuses
-                  </p>
-                  <a
-                    class="cta"
-                    href="https://armadaapp.media-412.com/click?pid=3862&offer_id=120812"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    Play Now
-                  </a>
-                </div>
-              </article>
-
-              <article class="casino-card" data-page="brands/crownslots.html">
-                <div class="card-img">
-                  <img src="images/fortunica.webp" alt=" casino" loading="lazy" />
-                </div>
-                <div>
-                  <h3>Crownslots</h3>
-                  <p>Exclusive offer for players</p>
-                  <a class="cta" href="#">Play Now</a>
-                </div>
-              </article>
-
-              <article class="casino-card">
-                <div class="card-img">
-                  <img src="images/fortunica.webp" alt=" casino " loading="lazy" />
-                </div>
-                <div>
-                  <h3>Corgibet</h3>
-                  <p>Popular slots and live games</p>
-                  <a class="cta" href="#">Play Now</a>
-                </div>
-              </article>
-
-              <article class="casino-card">
-                <div class="card-img">
-                  <img src="images/fortunica.webp" alt="casino" loading="lazy" />
-                </div>
-                <div>
-                  <h3>Coolzino</h3>
-                  <p>Trusted international brand</p>
-                  <a class="cta" href="#">Play Now</a>
-                </div>
-              </article>
-            </div>
-
-            <div class="view-all-wrapper">
-              <a href="united-kingdom.html" class="view-all">View all</a>
+            <h2 class="top-country-title"></h2>
+            <div class="casino-grid-main" data-limit="4"></div>
+            <div class="view-all-wrapper" hidden>
+              <a class="view-all">View all >></a>
             </div>
           </div>
         </section>
 
-        <!-- ===== AUSTRALIA ===== -->
-        <section class="content">
+        <section class="content" data-country="UK">
           <div class="cards-main">
-            <h2>Top Australia Casinos</h2>
-
-            <div class="casino-grid-main">
-              <article class="casino-card" data-page="brands/neospin.html">
-                <div class="card-img">
-                  <img src="images/neospin.webp" alt="Neospin Casino" loading="lazy" />
-                </div>
-                <div>
-                  <h3>Neospin Casino</h3>
-                  <p>Modern online casino with slots and live dealer games</p>
-                  <a class="cta" href="#">Play Now</a>
-                </div>
-              </article>
-
-              <article class="casino-card" data-page="brands/crownslots.html">
-                <div class="card-img">
-                  <img src="images/crownslots.webp" alt="Crownslots casino Australia" loading="lazy" />
-                </div>
-                <div>
-                  <h3>Crownslots</h3>
-                  <p>Exclusive offer for players</p>
-                  <a class="cta" href="#">Play Now</a>
-                </div>
-              </article>
-
-              <article class="casino-card">
-                <div class="card-img">
-                  <img src="images/corgibet.webp" alt="Corgibet casino Australia" loading="lazy" />
-                </div>
-                <div>
-                  <h3>Corgibet</h3>
-                  <p>Popular slots and live games</p>
-                  <a class="cta" href="#">Play Now</a>
-                </div>
-              </article>
-
-              <article class="casino-card">
-                <div class="card-img">
-                  <img src="images/coolzino.webp" alt="Coolzino casino Australia" loading="lazy" />
-                </div>
-                <div>
-                  <h3>Coolzino</h3>
-                  <p>Trusted international brand</p>
-                  <a class="cta" href="#">Play Now</a>
-                </div>
-              </article>
-            </div>
-
-            <div class="view-all-wrapper">
-              <a href="australia.html" class="view-all">View all</a>
+            <h2 class="top-country-title"></h2>
+            <div class="casino-grid-main" data-limit="4"></div>
+            <div class="view-all-wrapper" hidden>
+              <a class="view-all">View all >></a>
             </div>
           </div>
         </section>
 
-        <!-- ===== CANADA ===== -->
-        <section class="content">
+        <section class="content" data-country="AU">
           <div class="cards-main">
-            <h2>Top Canada Casinos</h2>
-
-            <div class="casino-grid-main">
-              <article class="casino-card">
-                <div class="card-img">
-                  <img src="images/spinch.webp" alt="Spinch casino" loading="lazy" />
-                </div>
-                <div>
-                  <h3>Spinch Casino</h3>
-                  <p>High RTP casino games</p>
-                  <a class="cta" href="#">Play Now</a>
-                </div>
-              </article>
-
-              <article class="casino-card">
-                <div class="card-img">
-                  <img src="images/1red.webp" alt="1red casino" loading="lazy" />
-                </div>
-                <div>
-                  <h3>1red Casino</h3>
-                  <p>Fast payouts and bonuses</p>
-                  <a class="cta" href="#">Play Now</a>
-                </div>
-              </article>
-
-              <article class="casino-card">
-                <div class="card-img">
-                  <img src="images/corgibet.webp" alt="Corgibet casino Canada" loading="lazy" />
-                </div>
-                <div>
-                  <h3>Corgibet</h3>
-                  <p>Mobile-friendly casino</p>
-                  <a class="cta" href="#">Play Now</a>
-                </div>
-              </article>
-
-              <article class="casino-card">
-                <div class="card-img">
-                  <img src="images/magneticslots.webp" alt="Magnetic Slots casino Canada" loading="lazy" />
-                </div>
-                <div>
-                  <h3>Magnetic Slots</h3>
-                  <p>Secure and licensed</p>
-                  <a class="cta" href="#">Play Now</a>
-                </div>
-              </article>
+            <h2 class="top-country-title"></h2>
+            <div class="casino-grid-main" data-limit="4"></div>
+            <div class="view-all-wrapper" hidden>
+              <a class="view-all">View all >></a>
             </div>
+          </div>
+        </section>
 
-            <div class="view-all-wrapper">
-              <a href="canada.html" class="view-all">View all</a>
+        <section class="content" data-country="CA">
+          <div class="cards-main">
+            <h2 class="top-country-title"></h2>
+            <div class="casino-grid-main" data-limit="4"></div>
+            <div class="view-all-wrapper" hidden>
+              <a class="view-all">View all >></a>
             </div>
           </div>
         </section>
