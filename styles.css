@@ -695,31 +695,17 @@ body {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 16px;
-  margin-bottom: 30px;
 }
 
 .player-review > div {
-  background: var(--bg-card);
-  backdrop-filter: var(--blur-glass);
-  padding: 1.8rem 2rem;
-  border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-soft);
-  transition:
-    transform 0.3s ease,
-    box-shadow 0.3s ease;
-  line-height: 1.6;
-}
-
-.player-review > div:hover {
-  transform: translateY(-6px);
-  box-shadow: var(--shadow-hover);
+  padding: 18px 0;
 }
 
 .player-review > div strong {
   display: block;
   font-size: 1.05rem;
   font-weight: 600;
-  color: var(--accent);
+  color: var(--gold);
   margin-bottom: 0.8rem;
 }
 
@@ -739,21 +725,7 @@ body {
 }
 
 .casino-card-review {
-  display: flex;
-  flex-direction: column;
-  background: var(--bg-card);
-  backdrop-filter: var(--blur-glass);
-  border-radius: var(--radius-lg);
-  padding: 18px;
-  box-shadow: var(--shadow-soft);
-  transition:
-    transform 0.3s ease,
-    box-shadow 0.3s ease;
-}
-
-.casino-card-review:hover {
-  transform: translateY(-6px);
-  box-shadow: var(--shadow-hover);
+  padding: 18px 0;
 }
 
 .casino-card-review .card-img {
@@ -761,16 +733,14 @@ body {
   justify-content: center;
   align-items: center;
   flex: 1;
-  margin-bottom: 12px;
 }
 
 .casino-card-review h3 {
   font-size: 20px;
-  margin-bottom: 8px;
 }
 
 .casino-card-review p {
-  font-size: 15px;
+  font-size: 16px;
   color: var(--text-muted);
 }
 
@@ -785,7 +755,7 @@ body {
 }
 
 .brand-logo {
-  width: 320px;
+  width: 200px;
 }
 
 /* =====================
@@ -843,4 +813,28 @@ body {
   color: var(--text-muted);
   white-space: nowrap;
   flex-shrink: 0;
+}
+
+.countries-container {
+  display: flex;
+  gap: 30px;
+  margin-top: 18px;
+}
+
+.flag-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 4px;
+}
+
+.payments-container {
+  display: flex;
+  gap: 20px;
+  margin-top: 18px;
+}
+
+.payments img {
+  height: 20px;
 }

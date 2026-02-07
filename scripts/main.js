@@ -195,3 +195,47 @@ document.querySelectorAll('.casino-card').forEach(card => {
     if (page) window.location.href = page;
   });
 });
+
+/* =====================
+   BRAND COUNTRIES & PAYMENTS RENDER
+===================== */
+
+function renderBrandCountriesAndPayments() {
+  const brandKey = document.body.dataset.brand?.toLowerCase();
+  if (!brandKey) return;
+
+  const brand = BRANDS.find(b => b.urlDetail.includes(brandKey));
+  if (!brand) return;
+
+  const countryContainer = document.getElementById('brand-countries');
+  const paymentsContainer = document.getElementById('brand-payments');
+
+  if (countryContainer && brand.countries?.length) {
+    countryContainer.innerHTML = brand.countries
+      .map(code => {
+        const country = COUNTRIES.find(c => c.code.toLowerCase() === code.toLowerCase());
+        if (!country) return '';
+        return `
+          <div class="flag-container">
+            <img class="hero-flag" src="../icons/${country.slug}-flag-icon.svg" alt="${country.name}" loading="lazy" />
+            <span>${country.name}</span>
+          </div>
+        `;
+      })
+      .join('');
+  }
+
+  if (paymentsContainer && brand.payments?.length) {
+    paymentsContainer.innerHTML = brand.payments
+      .map(
+        method => `
+        <div class="payments">
+          <img src="../icons/payments/${method}.svg" alt="${method}" loading="lazy" />
+        </div>
+      `
+      )
+      .join('');
+  }
+}
+
+renderBrandCountriesAndPayments();

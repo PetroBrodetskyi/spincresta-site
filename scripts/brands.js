@@ -139,6 +139,7 @@ export const BRANDS = [
     urlCasino: 'https://armadaapp.media-412.com/click?pid=3862&offer_id=120678',
     image: 'images/neospin.webp',
     countries: ['AU', 'CA', 'CL', 'NZ', 'DK', 'DE'],
+    payments: ['visa', 'ecopayz', 'neteller', 'skrill', 'mifinity'],
   },
   {
     name: 'Onluck',
@@ -342,6 +343,7 @@ export const BRANDS = [
     urlCasino: 'https://armadaapp.media-412.com/click?pid=3862&offer_id=120782',
     image: 'images/coolzino.webp',
     countries: ['IT', 'GR', 'BE', 'PL', 'AU', 'CH', 'AT', 'NO', 'DK', 'PT', 'IE', 'CA', 'NZ'],
+    payments: ['visa', 'mastercard', 'googlepay', 'applepay', 'ethereum', 'bitcoin'],
   },
   {
     name: 'Magnetic Slots',

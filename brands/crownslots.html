@@ -3,27 +3,33 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-
     <title>CrownSlots Review | Safe Online Casino for Players</title>
     <meta
       name="description"
-      content="CrownSlots review with real-money games, bonuses, and secure payments for global players. Detailed player insights."
+      content="CrownSlots review with real-money games, bonuses, live dealer experience, and secure payments for global players."
     />
     <meta name="robots" content="index, follow" />
-
     <link rel="stylesheet" href="../styles.css" />
   </head>
 
-  <body data-country="US" data-brand="Crownslots">
+  <body data-country="US" data-brand="CrownSlots">
     <!-- HEADER -->
     <header class="header">
       <div class="header-container header-inner">
-        <a href="../index.html" class="logo"> SpinCresta<span class="logo-com">.com</span> </a>
+        <a href="/index.html" class="logo"> SpinCresta<span class="logo-com">.com</span> </a>
 
         <!-- DESKTOP NAV -->
         <nav class="nav" aria-label="Main navigation">
-          <a href="../index.html">Top Casinos</a>
-          <a href="newcasinos">New Casinos</a>
+          <!-- COUNTRIES DROPDOWN -->
+          <div class="nav-dropdown">
+            <a href="countries.html" class="nav-dropdown-link" aria-haspopup="true" aria-expanded="false">
+              Countries
+            </a>
+
+            <div class="nav-dropdown-menu" id="countriesDropdown"></div>
+          </div>
+          <a href="/index.html">Top Casinos</a>
+          <a href="newcasinos.html">New Casinos</a>
           <a href="#toprated">Top Rated</a>
           <a href="#exclusiveoffers">Exclusive Offers</a>
           <a href="#">Bonuses</a>
@@ -67,68 +73,75 @@
         </div>
       </nav>
     </header>
-
-    <!-- HERO SECTION -->
-    <section class="container hero-review">
-      <div>
+    <!-- HERO -->
+    <section class="hero container">
+      <div class="hero-content">
         <h1>CrownSlots Casino Review</h1>
-        <p>Trusted online casino with a wide range of games, fast payouts, and secure payments.</p>
+        <p>
+          Licensed online casino offering thousands of slots, table games, live dealer tables, and
+          crypto-friendly payments.
+        </p>
+        <div class="hero-banner">
+          <div class="brand-logo-container">
+            <img class="brand-logo" src="../images/crownslots.webp" alt="CrownSlots Casino Logo" />
+          </div>
 
-        <div class="brand-logo-container">
-          <img class="brand-logo" src="../images/crownslots.webp" alt="CrownSlots Casino Interface" />
+          <a
+            href="https://armadaapp.media-412.com/click?pid=3862&offer_id=120673"
+            class="cta"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Visit CrownSlots
+          </a>
         </div>
 
-        <a href="#" class="cta">Visit CrownSlots</a>
+        <div class="hero-banner"></div>
       </div>
+    </section>
 
-      <div class="features-container">
-        <div>
-          <h2>Why Choose CrownSlots Casino?</h2>
+    <!-- FEATURES -->
+    <section class="container features-section">
+      <h2>Why Choose CrownSlots?</h2>
+      <div class="features-grid">
+        <div class="feature-card">
+          <strong>Trusted & Licensed</strong>
+          <span>
+            CrownSlots is fully licensed and secured with SSL encryption. Safe real-money gaming environment
+            for all players.
+          </span>
         </div>
-        <div class="features-grid">
-          <div class="feature-card">
-            <strong>Trusted & Licensed</strong>
-            <span
-              >CrownSlots is a licensed online casino offering thousands of slots, table games, and live
-              dealer experiences. Optimized for mobile and desktop, it provides smooth gameplay for all
-              players.</span
-            >
-          </div>
-          <div class="feature-card">
-            <strong>Thousands of Games</strong>
-            <span
-              >Thousands of online slots & table games from top providers, ensuring variety and entertainment
-              for every player.</span
-            >
-          </div>
-          <div class="feature-card">
-            <strong>Live Dealer Experience</strong>
-            <span
-              >Enjoy live blackjack, roulette, baccarat, and more with smooth real-time streaming for an
-              immersive experience.</span
-            >
-          </div>
-          <div class="feature-card">
-            <strong>Mobile-Friendly Design</strong>
-            <span
-              >The platform works seamlessly on smartphones and tablets, providing smooth gameplay anywhere,
-              anytime.</span
-            >
-          </div>
-          <div class="feature-card">
-            <strong>Secure Payments</strong>
-            <span
-              >Deposit and withdraw securely via cards, e-wallets, and cryptocurrencies with fast transaction
-              processing.</span
-            >
-          </div>
-          <div class="feature-card">
-            <strong>24/7 Support</strong>
-            <span
-              >Responsive customer service is available around the clock to assist players with any questions
-              or issues.</span
-            >
-          </div>
+        <div class="feature-card">
+          <strong>Thousands of Games</strong>
+          <span>
+            Slots, jackpots, table games, and live dealer games from top providers. Huge variety keeps
+            gameplay exciting.
+          </span>
+        </div>
+        <div class="feature-card">
+          <strong>Live Dealer Experience</strong>
+          <span>
+            Play blackjack, roulette, baccarat, and more with real-time streaming for immersive casino
+            experience.
+          </span>
+        </div>
+        <div class="feature-card">
+          <strong>Mobile & Desktop Friendly</strong>
+          <span> Optimized platform ensures smooth gameplay on smartphones, tablets, and desktops. </span>
+        </div>
+        <div class="feature-card">
+          <strong>Secure Payments</strong>
+          <span>
+            Multiple deposit and withdrawal options including credit cards, e-wallets, and cryptocurrencies.
+            Fast and safe transactions.
+          </span>
+        </div>
+        <div class="feature-card">
+          <strong>24/7 Support</strong>
+          <span>
+            Friendly customer service available around the clock via live chat and email:
+            <strong>support@crownslots.com</strong>
+          </span>
         </div>
       </div>
     </section>
@@ -137,122 +150,110 @@
     <section class="brand-countries">
       <div class="container">
         <h2>Available Countries</h2>
-        <div class="countries-grid" id="brand-countries"></div>
+        <div class="countries-container" id="brand-countries"></div>
+      </div>
+    </section>
+
+    <!-- PAYMENT METHODS -->
+    <section class="brand-payments">
+      <div class="container">
+        <h2>Payment Methods</h2>
+        <div class="payments-container" id="brand-payments"></div>
       </div>
     </section>
 
     <!-- MAIN CONTENT -->
     <main>
-      <section class="content-review">
-        <div class="container">
-          <!-- BONUS SECTION -->
-          <h2>Bonuses & Promotions</h2>
-          <div class="bonus-card">
-            <span
-              >New players can enjoy generous welcome bonuses, often including a 100% first deposit match and
-              free spins. Regular reload bonuses, tournaments, and loyalty rewards are available for ongoing
-              players. Always review wagering requirements before claiming.</span
-            >
+      <section class="content-review container">
+        <!-- BONUS SECTION -->
+        <h2>Bonuses & Promotions</h2>
+        <div class="bonus-card">
+          <span>
+            New players enjoy a welcome bonus with deposit match and free spins. Ongoing promotions include
+            reload bonuses, tournaments, and loyalty rewards. Always check wagering requirements.
+          </span>
+        </div>
+
+        <!-- PLAYER REVIEW -->
+        <h2>Player Experience</h2>
+        <div class="player-review">
+          <div>
+            <strong>Overall Experience</strong>
+            <span>
+              CrownSlots offers a secure, licensed platform with thousands of games and responsive customer
+              support.
+            </span>
           </div>
-
-          <!-- PLAYER REVIEW -->
-          <h2>Player Review</h2>
-          <div class="player-review">
-            <div>
-              <strong>CrownSlots Casino — Player Review (English)</strong>
-              <span
-                >CrownSlots Casino is a licensed platform with a large selection of games, generous bonuses,
-                and round‑the‑clock customer support.</span
-              >
-            </div>
-            <div>
-              <strong>Game Variety & Platform</strong>
-              <span
-                >Thousands of games including popular pokies, table games, and live dealer options.
-                Mobile-friendly and fast loading.</span
-              >
-            </div>
-            <div>
-              <strong>Bonuses & Promotions</strong>
-              <span
-                >Welcome bonuses, free spins, reload bonuses, tournaments, and loyalty rewards
-                available.</span
-              >
-            </div>
-            <div>
-              <strong>Payments & Transactions</strong>
-              <span
-                >Multiple payment methods including credit cards, e-wallets, and cryptocurrencies. Fast
-                deposits and withdrawals.</span
-              >
-            </div>
-            <div>
-              <strong>Customer Support & Experience</strong>
-              <span
-                >24/7 support via live chat and email. VIP account managers for fast, helpful responses.</span
-              >
-            </div>
-            <div>
-              <strong>What Players Say</strong>
-              <span
-                >Positive: easy navigation, fast payouts, good bonus offers, helpful VIP support. Negative:
-                some tough wagering requirements, occasional support delay.</span
-              >
-            </div>
-            <div>
-              <strong>Summary for Players</strong>
-              <span
-                >Pros: Huge game selection, generous bonuses, fast payments, 24/7 support. Cons: Wagering
-                terms challenging, mixed reviews on gameplay.</span
-              >
-            </div>
-            <div>
-              <strong>Tips Before Playing</strong>
-              <span
-                >Read wagering terms, use deposit limits, start with smaller bets to understand payout
-                patterns.</span
-              >
-            </div>
+          <div>
+            <strong>Game Variety & Platform</strong>
+            <span>
+              Slots, table games, jackpots, and live dealer options, optimized for both mobile and desktop.
+            </span>
           </div>
-
-          <!-- FEATURED GAMES -->
-          <h2>Featured Games</h2>
-          <div class="casino-grid-review">
-            <article class="casino-card-review">
-              <div class="card-img">
-                <img src="../images/crownslots.webp" alt="CrownSlots Slots" loading="lazy" />
-              </div>
-              <div>
-                <h3>Slots & Jackpots</h3>
-                <p>Thousands of slot games with progressive jackpots.</p>
-              </div>
-            </article>
-
-            <article class="casino-card-review">
-              <div class="card-img">
-                <img src="../images/crownslots-live.webp" alt="CrownSlots Live Casino" loading="lazy" />
-              </div>
-              <div>
-                <h3>Live Dealer Games</h3>
-                <p>Live blackjack, roulette, and baccarat streamed in real time.</p>
-              </div>
-            </article>
-
-            <article class="casino-card-review">
-              <div class="card-img">
-                <img src="../images/crownslots-mobile.webp" alt="CrownSlots Mobile" loading="lazy" />
-              </div>
-              <div>
-                <h3>Mobile Casino</h3>
-                <p>Fully optimized for mobile and tablet devices.</p>
-              </div>
-            </article>
+          <div>
+            <strong>Bonuses & Promotions</strong>
+            <span>
+              Welcome bonuses, free spins, reloads, tournaments, and loyalty programs available for players.
+            </span>
           </div>
-
-          <!-- CTA -->
-          <div class="view-all-wrapper">
-            <a href="#" class="cta">Play at CrownSlots Now</a>
+          <div>
+            <strong>Payments & Transactions</strong>
+            <span>
+              Supports credit cards, e-wallets, and cryptocurrencies. Fast deposits and withdrawals.
+            </span>
           </div>
+          <div>
+            <strong>Customer Support</strong>
+            <span>
+              24/7 live chat and email support at <strong>support@crownslots.com</strong> ensures quick and
+              helpful assistance.
+            </span>
+          </div>
+          <div>
+            <strong>Player Tips</strong>
+            <span>
+              Check country eligibility, read bonus terms, set deposit limits, and play responsibly.
+            </span>
+          </div>
+        </div>
+
+        <!-- FEATURED GAMES -->
+        <h2>Featured Games</h2>
+        <div class="casino-grid-review">
+          <article class="casino-card-review">
+            <div class="card-img">
+              <img src="../images/crownslots.webp" alt="CrownSlots Slots" loading="lazy" />
+            </div>
+            <div>
+              <h3>Slots & Jackpots</h3>
+              <p>Thousands of slots with progressive jackpots and engaging bonus features.</p>
+            </div>
+          </article>
+          <article class="casino-card-review">
+            <div class="card-img">
+              <img src="../images/crownslots-live.webp" alt="CrownSlots Live Dealer" loading="lazy" />
+            </div>
+            <div>
+              <h3>Live Dealer Games</h3>
+              <p>Blackjack, roulette, and baccarat streamed in real time.</p>
+            </div>
+          </article>
+          <article class="casino-card-review">
+            <div class="card-img">
+              <img src="../images/crownslots-mobile.webp" alt="CrownSlots Mobile" loading="lazy" />
+            </div>
+            <div>
+              <h3>Mobile Casino</h3>
+              <p>Optimized for smartphones and tablets, providing smooth gameplay anywhere.</p>
+            </div>
+          </article>
+        </div>
+
+        <!-- CTA -->
+        <div class="view-all-wrapper">
+          <a href="https://armadaapp.media-412.com/click?pid=3862&offer_id=120673" class="cta"
+            >Play at CrownSlots Now</a
+          >
         </div>
       </section>
     </main>
@@ -261,10 +262,10 @@
     <footer class="footer">
       <div class="container">
         <p>© 2026 SpinCresta.com All rights reserved</p>
-        <p>
-          18+ | Gambling can be addictive. Please play responsibly. Availability depends on your state laws.
-        </p>
+        <p>18+ | Gambling can be addictive. Please play responsibly. Check local laws before playing.</p>
       </div>
     </footer>
+
+    <script type="module" src="/scripts/main.js"></script>
   </body>
 </html>
