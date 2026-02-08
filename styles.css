@@ -179,7 +179,7 @@ body {
 .nav-dropdown:hover .nav-dropdown-menu {
   opacity: 1;
   visibility: visible;
-  transform: translateX(-30%) translateY(0); /* плавно спливає вниз */
+  transform: translateX(-30%) translateY(0);
 }
 
 /* =====================

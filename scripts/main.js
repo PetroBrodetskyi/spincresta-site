@@ -37,21 +37,19 @@ function renderCasinoCard({ name, bonus, cta, urlDetail, urlCasino, image, payme
         <img src="${image}" alt="${name}" loading="lazy" />
       </div>
 
-      <div class="card-content">
-        <h3>${name}</h3>
-        <p>${bonus}</p>
+      <h3 class="casino-name">${name}</h3>
+      <p class="casino-bonus">${bonus}</p>
 
-        ${renderPayments(payments)}
+      ${renderPayments(payments)}
 
-        <a
-          class="cta"
-          href="${urlCasino}"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          ${cta}
-        </a>
-      </div>
+      <a
+        class="cta"
+        href="${urlCasino}"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        ${cta}
+      </a>
     </article>
   `;
 }
@@ -242,21 +240,18 @@ function renderCasinoCard({ name, bonus, cta, urlDetail, urlCasino, image, payme
       return;
     }
 
-    // Створюємо DOM елементи замість innerHTML
     grid.innerHTML = '';
     topBrands.forEach(brand => {
       const wrapper = document.createElement('div');
       wrapper.innerHTML = renderCasinoCard(brand);
       const card = wrapper.firstElementChild;
 
-      // Клік по картці веде на деталі
       card.addEventListener('click', e => {
         if (!e.target.closest('.cta')) {
           window.location.href = brand.urlDetail;
         }
       });
 
-      // CTA відкриває зовнішнє посилання
       const link = card.querySelector('.cta');
       if (link) {
         link.addEventListener('click', e => {
@@ -268,7 +263,6 @@ function renderCasinoCard({ name, bonus, cta, urlDetail, urlCasino, image, payme
       grid.appendChild(card);
     });
 
-    // Посилання «View All»
     if (country && viewAllWrapper && viewAllLink) {
       viewAllWrapper.hidden = false;
       viewAllLink.href = `${country.slug}.html`;
@@ -327,7 +321,7 @@ function renderCasinoCard({ name, bonus, cta, urlDetail, urlCasino, image, payme
 })();
 
 /* =====================
-   MOBILE MENU COUNTRIES (Dynamic)
+   MOBILE MENU COUNTRIES
 ===================== */
 (function renderMobileMenuCountries() {
   const mobileMenuContainer = document.querySelector('#mobileMenu .mobile-menu-inner');

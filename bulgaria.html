@@ -1,0 +1,182 @@
+<!doctype html>
+<html lang="en-BG">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>SpinCresta | Best Online Casinos in Bulgaria</title>
+
+    <meta
+      name="description"
+      content="SpinCresta reviews the best licensed online casinos in Bulgaria. Compare bonuses, games, and trusted casino brands available for Bulgarian players."
+    />
+    <meta name="robots" content="index, follow" />
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="SpinCresta | Top Bulgarian Online Casinos" />
+    <meta
+      property="og:description"
+      content="Discover safe and licensed online casinos in Bulgaria. Compare real-money bonuses, games, and trusted brands."
+    />
+    <meta property="og:type" content="website" />
+
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+
+  <body data-country="BG">
+    <div id="globalLoader">
+      <div class="loader"></div>
+    </div>
+
+    <!-- HEADER -->
+    <header class="header">
+      <div class="header-container header-inner">
+        <a href="index.html" class="logo"> SpinCresta<span class="logo-com">.com</span> </a>
+
+        <nav class="nav" aria-label="Main navigation">
+          <div class="nav-dropdown">
+            <a href="countries.html" class="nav-dropdown-link" aria-haspopup="true" aria-expanded="false">
+              Countries
+            </a>
+            <div class="nav-dropdown-menu" id="countriesDropdown"></div>
+          </div>
+          <a href="index.html">Top Casinos</a>
+          <a href="newcasinos.html">New Casinos</a>
+          <a href="#toprated">Top Rated</a>
+          <a href="#exclusiveoffers">Exclusive Offers</a>
+          <a href="#">Bonuses</a>
+          <a href="#">Reviews</a>
+          <a href="#promotions">Promotions</a>
+          <a href="#">About</a>
+        </nav>
+
+        <button
+          class="burger"
+          type="button"
+          aria-label="Open countries menu"
+          aria-controls="mobileMenu"
+          aria-expanded="false"
+        >
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+
+      <nav class="mobile-menu" id="mobileMenu" aria-hidden="true" aria-label="Mobile countries navigation">
+        <div class="mobile-menu-inner"></div>
+      </nav>
+    </header>
+
+    <main>
+      <!-- HERO -->
+      <section class="hero container">
+        <div class="hero-content">
+          <h1>Best Online Casinos in Bulgaria</h1>
+          <p>Licensed Bulgarian casino reviews, trusted brands, and exclusive bonuses.</p>
+          <img class="hero-flag" src="icons/bulgaria-flag-icon.svg" alt="" />
+        </div>
+        <div class="hero-banner"></div>
+      </section>
+
+      <!-- TOP CASINOS -->
+      <section class="content">
+        <div class="container">
+          <header class="section-head">
+            <h2>Top Online Casino Offers in Bulgaria</h2>
+          </header>
+
+          <p class="intro">
+            We review licensed online casinos available to Bulgarian players, focusing on safety, bonuses,
+            payment methods, and overall reliability.
+          </p>
+
+          <div class="casino-grid" id="brand-cards"></div>
+        </div>
+      </section>
+
+      <!-- CONTENT ARTICLE -->
+      <section class="content bg-image-bg-footer">
+        <div class="section-overlay"></div>
+
+        <div class="container content-article">
+          <h2>Bulgarian Online Casinos: Legal and Regulated</h2>
+          <p>
+            Online gambling in Bulgaria is legal and strictly regulated. All licensed online casinos must be
+            approved by the Bulgarian National Revenue Agency (NRA), which oversees compliance, taxation, and
+            player protection. This regulatory framework ensures a secure environment for Bulgarian players.
+          </p>
+
+          <h2>Licensing and Player Safety</h2>
+          <p>
+            Casinos licensed in Bulgaria are required to meet strict technical and financial standards. These
+            include secure SSL encryption, verified payment systems, and certified random number generators
+            (RNGs). Regular audits help ensure fair play and transparent operations.
+          </p>
+
+          <h2>Casino Games Available in Bulgaria</h2>
+          <p>
+            Bulgarian online casinos offer a wide range of games, including online slots, roulette, blackjack,
+            baccarat, and live dealer games. Many platforms collaborate with top-tier providers such as
+            NetEnt, Playtech, Pragmatic Play, and Evolution Gaming, delivering high-quality gameplay across
+            all devices.
+          </p>
+
+          <h2>Bonuses and Promotions</h2>
+          <p>
+            Players in Bulgaria can access various casino bonuses, including welcome offers, free spins, and
+            cashback promotions. Licensed casinos are required to clearly display bonus terms and wagering
+            conditions, allowing players to make informed decisions before claiming an offer.
+          </p>
+
+          <h2>Mobile Casino Experience</h2>
+          <p>
+            Most Bulgarian online casinos are fully optimized for mobile play. Whether using a browser-based
+            platform or a dedicated app, players can enjoy smooth gameplay, fast loading times, and secure
+            transactions on both smartphones and tablets.
+          </p>
+
+          <h2>Responsible Gambling in Bulgaria</h2>
+          <p>
+            Responsible gambling is a key focus of the Bulgarian regulatory framework. Licensed casinos offer
+            tools such as deposit limits, session controls, and self-exclusion options. Players are encouraged
+            to gamble responsibly and seek help if gambling stops being a form of entertainment.
+          </p>
+
+          <p>
+            By choosing licensed online casinos in Bulgaria, players benefit from a safe gaming environment,
+            fair games, and reliable payouts, all backed by strong regulatory oversight.
+          </p>
+        </div>
+      </section>
+
+      <section class="all-countries">
+        <div class="container countries-cloud"></div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>© 2026 SpinCresta.com All rights reserved</p>
+        <p>
+          18+ | Gambling can be addictive. Please play responsibly. Availability depends on your local laws.
+        </p>
+      </div>
+    </footer>
+
+    <!-- CARD TEMPLATE -->
+    <template id="casino-card-template">
+      <article class="casino-card">
+        <div class="card-img">
+          <img class="casino-image" alt="" loading="lazy" />
+        </div>
+        <h3 class="casino-name"></h3>
+        <p class="casino-bonus"></p>
+        <div class="payment-icons"></div>
+        <a class="cta" href="#" rel="noopener noreferrer">Play Now</a>
+      </article>
+    </template>
+
+    <script type="module" src="scripts/main.js"></script>
+  </body>
+</html>

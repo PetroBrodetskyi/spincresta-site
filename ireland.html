@@ -1,0 +1,181 @@
+<!doctype html>
+<html lang="en-IE">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>SpinCresta | Best Online Casinos & Betting Sites in Ireland</title>
+
+    <meta
+      name="description"
+      content="SpinCresta reviews the best online casinos and betting sites in Ireland. Compare licensed platforms, bonuses, games, and trusted brands for Irish players."
+    />
+    <meta name="robots" content="index, follow" />
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="SpinCresta | Ireland Online Casino & Betting Reviews" />
+    <meta
+      property="og:description"
+      content="Top-rated online casinos and betting sites in Ireland. Licensed platforms, exclusive bonuses, and real-money games."
+    />
+    <meta property="og:type" content="website" />
+
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+
+  <body data-country="IE">
+    <div id="globalLoader">
+      <div class="loader"></div>
+    </div>
+
+    <!-- HEADER -->
+    <header class="header">
+      <div class="header-container header-inner">
+        <a href="index.html" class="logo"> SpinCresta<span class="logo-com">.com</span> </a>
+
+        <nav class="nav" aria-label="Main navigation">
+          <div class="nav-dropdown">
+            <a href="countries.html" class="nav-dropdown-link" aria-haspopup="true" aria-expanded="false">
+              Countries
+            </a>
+            <div class="nav-dropdown-menu" id="countriesDropdown"></div>
+          </div>
+          <a href="index.html">Top Platforms</a>
+          <a href="newcasinos.html">New Platforms</a>
+          <a href="#toprated">Top Rated</a>
+          <a href="#exclusiveoffers">Exclusive Offers</a>
+          <a href="#">Bonuses</a>
+          <a href="#">Reviews</a>
+          <a href="#promotions">Promotions</a>
+          <a href="#">About</a>
+        </nav>
+
+        <button
+          class="burger"
+          type="button"
+          aria-label="Open countries menu"
+          aria-controls="mobileMenu"
+          aria-expanded="false"
+        >
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+
+      <nav class="mobile-menu" id="mobileMenu" aria-hidden="true" aria-label="Mobile countries navigation">
+        <div class="mobile-menu-inner"></div>
+      </nav>
+    </header>
+
+    <main>
+      <!-- HERO -->
+      <section class="hero container">
+        <div class="hero-content">
+          <h1>Best Online Casinos & Betting Sites in Ireland</h1>
+          <p>Trusted reviews, licensed platforms, and exclusive offers for Irish players.</p>
+          <img class="hero-flag" src="icons/ireland-flag-icon.svg" alt="" />
+        </div>
+        <div class="hero-banner"></div>
+      </section>
+
+      <!-- TOP PLATFORMS -->
+      <section class="content">
+        <div class="container">
+          <header class="section-head">
+            <h2>Top Online Casino & Betting Offers for Ireland</h2>
+          </header>
+
+          <p class="intro">
+            We review licensed online casinos and betting sites available for Irish players, focusing on
+            security, bonuses, payment methods, and overall reliability.
+          </p>
+
+          <div class="casino-grid" id="brand-cards"></div>
+        </div>
+      </section>
+
+      <!-- CONTENT ARTICLE -->
+      <section class="content bg-image-ie-footer">
+        <div class="section-overlay"></div>
+
+        <div class="container content-article">
+          <h2>Online Gambling in Ireland</h2>
+          <p>
+            Online gambling in Ireland is legal and widely available. Irish players can access online casinos,
+            sports betting sites, poker rooms, and other real-money gambling platforms operated by licensed
+            providers.
+          </p>
+
+          <h2>Regulation and Licensing</h2>
+          <p>
+            The Irish gambling market is regulated by the Gambling Regulatory Authority of Ireland (GRAI).
+            Licensed operators must comply with strict requirements related to player protection, financial
+            transparency, and responsible gambling. Many trusted platforms also operate under recognized EU
+            licenses, such as those issued in Malta.
+          </p>
+
+          <h2>Casino Games and Betting Options</h2>
+          <p>
+            Irish players can enjoy a wide range of online casino games, including slots, roulette, blackjack,
+            live dealer games, and poker. Sports betting is particularly popular, with extensive markets
+            covering football, horse racing, rugby, golf, and more.
+          </p>
+
+          <h2>Bonuses and Promotions</h2>
+          <p>
+            Online casinos and betting sites in Ireland offer welcome bonuses, free bets, free spins, cashback
+            deals, and ongoing promotions. Bonus terms and wagering requirements are clearly stated to ensure
+            transparency.
+          </p>
+
+          <h2>Mobile Gambling in Ireland</h2>
+          <p>
+            Most licensed gambling platforms are fully optimized for mobile devices. Players can access casino
+            games and place bets via mobile browsers or dedicated apps on both iOS and Android.
+          </p>
+
+          <h2>Responsible Gambling</h2>
+          <p>
+            Responsible gambling is a key focus in Ireland. Licensed platforms provide tools such as deposit
+            limits, time-outs, self-exclusion options, and access to support organizations to help players
+            maintain control over their gambling activity.
+          </p>
+
+          <p>
+            By choosing licensed and trusted online casinos and betting sites in Ireland, players can enjoy a
+            safe, fair, and regulated gambling experience.
+          </p>
+        </div>
+      </section>
+
+      <section class="all-countries">
+        <div class="container countries-cloud"></div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>© 2026 SpinCresta.com All rights reserved</p>
+        <p>
+          18+ | Gambling can be addictive. Please play responsibly. Availability depends on your local laws.
+        </p>
+      </div>
+    </footer>
+
+    <!-- CARD TEMPLATE -->
+    <template id="casino-card-template">
+      <article class="casino-card">
+        <div class="card-img">
+          <img class="casino-image" alt="" loading="lazy" />
+        </div>
+        <h3 class="casino-name"></h3>
+        <p class="casino-bonus"></p>
+        <div class="payment-icons"></div>
+        <a class="cta" href="#" rel="noopener noreferrer">Play Now</a>
+      </article>
+    </template>
+
+    <script type="module" src="scripts/main.js"></script>
+  </body>
+</html>
