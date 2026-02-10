@@ -16,6 +16,7 @@ export const COUNTRIES = [
 
   { code: 'dk', slug: 'denmark', name: 'Denmark' },
 
+  { code: 'eg', slug: 'egypt', name: 'Egypt' },
   { code: 'ee', slug: 'estonia', name: 'Estonia' },
 
   { code: 'fi', slug: 'finland', name: 'Finland' },
