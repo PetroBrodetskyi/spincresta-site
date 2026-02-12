@@ -1,9 +1,6 @@
-/* =====================
-   DESIGN TOKENS (2026)
-===================== */
 :root {
-  /* --bg-main: #02061788; */
-  --bg-surface: rgba(15, 23, 42, 0.75);
+  --bg-main: #000000;
+  --bg-surface: #02061788;
   --bg-card: #17212b;
 
   --border-soft: rgba(148, 163, 184, 0.15);
@@ -47,7 +44,7 @@ body {
     BlinkMacSystemFont,
     Arial,
     sans-serif;
-  background: #000000;
+  background: var(--bg-main);
   color: var(--text-main);
   line-height: 1.6;
 }
@@ -55,24 +52,33 @@ body {
 .container {
   max-width: 1280px;
   margin: 0 auto;
-  padding: 22px 24px;
+  padding: 72px 24px 24px 12px;
 }
 
 /* =====================
    HEADER (GLASS)
 ===================== */
 .header {
-  position: sticky;
+  position: fixed;
   top: 0;
+  left: 0;
+  right: 0;
   z-index: 50;
-  background-color: var(--bg-main);
-  box-shadow: var(--shadow-hover);
+  transition:
+    transform 0.3s ease-in-out,
+    box-shadow 0.3s ease;
+  background-color: var(--bg-surface);
+}
+
+.header.hidden {
+  transform: translateY(-100%);
 }
 
 .header-container {
   max-width: 1280px;
   margin: 0 auto;
   padding: 10px 24px;
+  box-shadow: var(--shadow-hover);
 }
 
 .header-inner {
@@ -157,9 +163,9 @@ body {
   position: absolute;
   top: 100%;
   left: 50%;
-  transform: translateX(-50%) translateY(-10px); /* початково трохи вгору */
+  transform: translateX(-50%) translateY(-10px);
 
-  width: 1200px;
+  width: 1246px;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
   gap: 14px;
@@ -565,9 +571,9 @@ body {
    SIDEBAR NAV (CONTENT)
 ===================== */
 
-.sidebar-nav {
+/* .sidebar-nav {
   position: sticky;
-  top: 62px; /* під header */
+  top: 62px;
   align-self: start;
 
   background: var(--bg-card);
@@ -596,7 +602,7 @@ body {
 .sidebar-links a:hover {
   background: rgba(56, 189, 248, 0.15);
   color: var(--gold);
-}
+} */
 
 /* =====================
    CONTENT AREA
