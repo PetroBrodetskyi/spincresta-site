@@ -4,6 +4,7 @@ export const COUNTRIES = [
   { code: 'at', slug: 'austria', name: 'Austria' },
   { code: 'az', slug: 'azerbaijan', name: 'Azerbaijan' },
 
+  { code: 'bd', slug: 'bangladesh', name: 'Bangladesh' },
   { code: 'be', slug: 'belgium', name: 'Belgium' },
   { code: 'br', slug: 'brazil', name: 'Brazil' },
   { code: 'bg', slug: 'bulgaria', name: 'Bulgaria' },
