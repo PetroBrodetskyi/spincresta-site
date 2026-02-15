@@ -1,0 +1,184 @@
+<!doctype html>
+<html lang="en-AZ">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>SpinCresta | Best Online Casinos & Betting in Azerbaijan</title>
+
+    <meta
+      name="description"
+      content="SpinCresta reviews the best online casinos and sports betting platforms in Azerbaijan. Compare bonuses, games, and trusted brands for real money."
+    />
+    <meta name="robots" content="index, follow" />
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="SpinCresta | Azerbaijan Online Casino & Betting" />
+    <meta
+      property="og:description"
+      content="Top online casinos and sports betting platforms in Azerbaijan. Trusted brands, bonuses, and games for real money."
+    />
+    <meta property="og:type" content="website" />
+
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+
+  <body data-country="AZ">
+    <div id="globalLoader">
+      <div class="loader"></div>
+    </div>
+
+    <!-- HEADER -->
+    <header class="header">
+      <div class="header-container header-inner">
+        <a href="index.html" class="logo"> SpinCresta<span class="logo-com">.com</span> </a>
+
+        <!-- DESKTOP NAV -->
+        <nav class="nav" aria-label="Main navigation">
+          <div class="nav-dropdown">
+            <a href="countries.html" class="nav-dropdown-link" aria-haspopup="true" aria-expanded="false">
+              Countries
+            </a>
+            <div class="nav-dropdown-menu" id="countriesDropdown"></div>
+          </div>
+          <a href="index.html">Top Casinos</a>
+          <a href="newcasinos.html">New Casinos</a>
+          <a href="#toprated">Top Rated</a>
+          <a href="#exclusiveoffers">Exclusive Offers</a>
+          <a href="#">Bonuses</a>
+          <a href="#">Reviews</a>
+          <a href="#promotions">Promotions</a>
+          <a href="#">About</a>
+        </nav>
+
+        <!-- BURGER (MOBILE ONLY) -->
+        <button
+          class="burger"
+          type="button"
+          aria-label="Open countries menu"
+          aria-controls="mobileMenu"
+          aria-expanded="false"
+        >
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+
+      <!-- MOBILE MENU -->
+      <nav class="mobile-menu" id="mobileMenu" aria-hidden="true" aria-label="Mobile countries navigation">
+        <div class="mobile-menu-inner"></div>
+      </nav>
+    </header>
+
+    <main>
+      <!-- HERO -->
+      <section class="hero container">
+        <div class="hero-content">
+          <h1>Best Online Casinos & Betting Platforms in Azerbaijan</h1>
+          <p>
+            Trusted casino and sports betting reviews, exclusive bonuses, and verified brands for Azerbaijani
+            players.
+          </p>
+          <img class="hero-flag" src="icons/azerbaijan-flag-icon.svg" alt="Azerbaijan Flag" />
+        </div>
+        <div class="hero-banner">
+          <script
+            type="text/javascript"
+            src="https://js.superiorshare.com/javascript.php?prefix=AZ123&media=1494&campaign=1"
+          ></script>
+        </div>
+      </section>
+
+      <!-- TOP CASINOS & BETTING -->
+      <section class="content">
+        <div class="container">
+          <header class="section-head">
+            <h2>Top Online Casinos & Betting Platforms in Azerbaijan</h2>
+          </header>
+
+          <p class="intro">
+            We review licensed and trusted online casinos and sports betting platforms available for players
+            in Azerbaijan. Our focus is on secure payments, fair gameplay, exciting bonuses, and reliable
+            customer support.
+          </p>
+
+          <div class="casino-grid" id="brand-cards"></div>
+        </div>
+      </section>
+
+      <!-- CONTENT ARTICLE -->
+      <section class="content">
+        <div class="container content-article">
+          <h2>Online Casinos and Betting in Azerbaijan</h2>
+          <p>
+            Azerbaijan offers a growing market for online gambling, including both online casinos and sports
+            betting platforms. Players can enjoy a variety of real-money games such as online slots, poker,
+            blackjack, roulette, and live dealer experiences, as well as live betting on football, basketball,
+            tennis, and esports.
+          </p>
+
+          <p>
+            The best platforms prioritize player safety, fair gaming, and fast withdrawals. Trusted casinos
+            and betting sites work with leading software providers, offer transparent bonus conditions, and
+            provide professional support in Azerbaijani and English.
+          </p>
+
+          <h2>Is Online Gambling Legal in Azerbaijan?</h2>
+          <p>
+            Online gambling in Azerbaijan is regulated. While domestic licensing is limited, international
+            platforms accept Azerbaijani players under their offshore licenses. It is recommended to play only
+            on verified and secure websites to ensure a safe experience.
+          </p>
+
+          <h2>Games and Betting Options</h2>
+          <p>
+            Players in Azerbaijan can expect a diverse range of online casino games and betting opportunities.
+            Popular casino games include video slots, table games, and live dealer experiences. For sports
+            betting, football is the most popular market, along with basketball, tennis, and eSports. Many
+            platforms offer pre-match and live betting with competitive odds.
+          </p>
+
+          <h2>Bonuses and Promotions</h2>
+          <p>
+            Online casinos and betting platforms often offer welcome bonuses, free spins, deposit matches, and
+            loyalty rewards. Azerbaijani players should check wagering requirements, terms, and conditions
+            before claiming any promotion to maximize their benefits.
+          </p>
+
+          <p>
+            Choosing licensed and reliable platforms ensures an enjoyable and secure experience. We regularly
+            update our recommendations to highlight trusted casinos and sports betting brands for players in
+            Azerbaijan.
+          </p>
+        </div>
+      </section>
+
+      <section class="all-countries">
+        <div class="container countries-cloud"></div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>© 2026 SpinCresta.com All rights reserved</p>
+        <p>18+ | Gambling can be addictive. Please play responsibly. Availability depends on local laws.</p>
+      </div>
+    </footer>
+
+    <!-- CARD TEMPLATE -->
+    <template id="casino-card-template">
+      <article class="casino-card">
+        <div class="card-img">
+          <img class="casino-image" alt="" loading="lazy" />
+        </div>
+        <h3 class="casino-name"></h3>
+        <p class="casino-bonus"></p>
+        <div class="payment-icons"></div>
+        <a class="cta" href="#" rel="noopener noreferrer">Play Now</a>
+      </article>
+    </template>
+
+    <script type="module" src="scripts/main.js"></script>
+  </body>
+</html>
