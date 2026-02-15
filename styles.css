@@ -34,6 +34,13 @@
   box-sizing: border-box;
 }
 
+ul,
+li {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
 /* =====================
    BASE
 ===================== */
@@ -274,11 +281,12 @@ body {
 /* =====================
    CARDS (PREMIUM)
 ===================== */
-/* .casino-grid-main {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 10px;
-} */
+
+.cards-main {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
 
 .casino-grid {
   display: grid;
@@ -400,7 +408,6 @@ body {
 .content {
   display: flex;
   flex-direction: column;
-  gap: 20px;
 }
 
 .content-article {
@@ -430,6 +437,10 @@ body {
   color: var(--text-muted);
   margin-bottom: 16px;
   line-height: 1.7;
+}
+
+.about-list {
+  color: var(--text-muted);
 }
 
 /* ===================== ALL COUNTRIES CLOUD ===================== */
@@ -472,25 +483,61 @@ body {
 /* =====================
    VIEW ALL LINK - CARD STYLE
 ===================== */
-.view-all {
-  font-size: 16px;
-  font-weight: 800;
-  text-decoration: none;
-  color: var(--text-main);
-}
-
-.cards-main {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-}
 
 .view-all-wrapper {
-  flex: 1;
   display: flex;
-  align-items: center;
   justify-content: center;
+  align-items: center;
 }
+
+.view-all {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 28px;
+  border-radius: 999px;
+
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.3px;
+  text-decoration: none;
+
+  color: var(--text-main);
+  background: linear-gradient(135deg, rgba(56, 189, 248, 0.15), rgba(255, 223, 0, 0.08));
+
+  border: 1px solid var(--border-glass);
+
+  backdrop-filter: var(--blur-glass);
+  box-shadow: var(--shadow-soft);
+
+  transition:
+    transform 0.25s ease,
+    box-shadow 0.25s ease,
+    background 0.25s ease,
+    border-color 0.25s ease;
+}
+
+/* hover state */
+.view-all:hover {
+  transform: translateY(-2px);
+  border-color: var(--accent);
+  box-shadow: var(--shadow-hover);
+  background: linear-gradient(135deg, rgba(56, 189, 248, 0.25), rgba(255, 223, 0, 0.15));
+}
+
+.view-all:hover::after {
+  transform: translateX(4px);
+}
+
+/* mobile */
+@media (max-width: 768px) {
+  .view-all {
+    padding: 10px 22px;
+    font-size: 14px;
+  }
+}
+
 /* =====================
    BURGER MENU
 ===================== */
@@ -602,46 +649,13 @@ body {
 }
 
 /* =====================
-   SIDEBAR NAV (CONTENT)
-===================== */
-
-/* .sidebar-nav {
-  position: sticky;
-  top: 62px;
-  align-self: start;
-
-  background: var(--bg-card);
-  padding: 20px;
-  box-shadow: var(--shadow-soft);
-
-  max-height: 100vh;
-  overflow-y: auto;
-}
-
-.sidebar-links {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
-.sidebar-links a {
-  padding: 10px 0;
-  border-radius: var(--radius-md);
-  text-decoration: none;
-  color: var(--text-main);
-  font-weight: 500;
-  transition: all 0.25s ease;
-}
-
-.sidebar-links a:hover {
-  background: rgba(56, 189, 248, 0.15);
-  color: var(--gold);
-} */
-
-/* =====================
    CONTENT AREA
 ===================== */
-
+.content-area {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
 /* =====================
    RESPONSIVE
 ===================== */

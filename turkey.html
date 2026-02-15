@@ -1,0 +1,186 @@
+<!doctype html>
+<html lang="en-TR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>SpinCresta | Best Online Casinos & Sports Betting in Turkey</title>
+    <link rel="icon" type="image/png" sizes="64x64" href="favicon.png" />
+    <meta
+      name="description"
+      content="Compare the best online casinos and sports betting sites in Turkey. Discover secure platforms, welcome bonuses, live betting markets, and real-money games for Turkish players."
+    />
+    <meta name="robots" content="index, follow" />
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="SpinCresta | Turkey Casinos & Sports Betting Guide" />
+    <meta
+      property="og:description"
+      content="Top-rated online casinos and sports betting platforms in Turkey with bonuses, live betting, and secure payment options."
+    />
+    <meta property="og:type" content="website" />
+
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+
+  <body data-country="TR">
+    <div id="globalLoader">
+      <div class="loader"></div>
+    </div>
+
+    <!-- HEADER -->
+    <header class="header">
+      <div class="header-container header-inner">
+        <a href="index.html" class="logo"> SpinCresta<span class="logo-com">.com</span> </a>
+
+        <nav class="nav" aria-label="Main navigation">
+          <div class="nav-dropdown">
+            <a href="#" class="nav-dropdown-link" aria-haspopup="true" aria-expanded="false"> Countries </a>
+            <div class="nav-dropdown-menu" id="countriesDropdown"></div>
+          </div>
+          <a href="index.html">Top Casinos</a>
+          <a href="#">New Casinos</a>
+          <a href="#">Top Rated</a>
+          <a href="#">Exclusive Offers</a>
+          <a href="#">Bonuses</a>
+          <a href="#">Reviews</a>
+          <a href="#">Promotions</a>
+          <a href="about.html">About</a>
+        </nav>
+
+        <button
+          class="burger"
+          type="button"
+          aria-label="Open countries menu"
+          aria-controls="mobileMenu"
+          aria-expanded="false"
+        >
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+
+      <nav class="mobile-menu" id="mobileMenu" aria-hidden="true" aria-label="Mobile countries navigation">
+        <div class="mobile-menu-inner"></div>
+      </nav>
+    </header>
+
+    <main>
+      <!-- HERO -->
+      <section class="hero container">
+        <div class="hero-content">
+          <h1>Best Online Casinos & Sports Betting in Turkey</h1>
+          <p>
+            Trusted casino reviews, competitive sportsbook odds, secure payments, and exclusive bonuses for
+            Turkish players.
+          </p>
+          <img class="hero-flag" src="icons/turkey-flag-icon.svg" alt="Flag of Turkey" />
+        </div>
+        <div class="hero-banner"></div>
+      </section>
+
+      <!-- TOP CASINOS & BETTING -->
+      <section class="content">
+        <div class="container">
+          <header class="section-head">
+            <h2>Top Casino & Sports Betting Offers in Turkey</h2>
+          </header>
+
+          <p class="intro">
+            We review licensed online casinos and sports betting platforms available in Turkey, evaluating
+            bonuses, odds quality, payment methods, mobile experience, and player protection.
+          </p>
+
+          <div class="casino-grid" id="brand-cards"></div>
+        </div>
+      </section>
+
+      <!-- CONTENT ARTICLE -->
+      <section class="content bg-image-tr-footer">
+        <div class="section-overlay"></div>
+
+        <div class="container content-article">
+          <h2>Online Casinos in Turkey</h2>
+          <p>
+            The online casino industry in Turkey offers players access to a variety of real-money gaming
+            platforms. Most operators targeting Turkish players are licensed internationally and comply with
+            strict fairness and security standards.
+          </p>
+
+          <p>
+            Modern casino platforms provide secure payments, encrypted transactions, and mobile-optimized
+            websites and apps for smooth gameplay on all devices.
+          </p>
+
+          <h2>Sports Betting in Turkey</h2>
+          <p>
+            Sports betting is popular in Turkey, particularly for football, basketball, volleyball, and
+            international competitions. Leading sportsbooks provide competitive odds, live betting markets,
+            and cash-out options for Turkish players.
+          </p>
+
+          <p>
+            Mobile-friendly sportsbooks allow real-time betting, including accumulators, handicaps, and live
+            statistics for ongoing matches.
+          </p>
+
+          <h2>Is Online Gambling Legal in Turkey?</h2>
+          <p>
+            Online gambling is heavily regulated in Turkey, with strict restrictions on domestic platforms.
+            Many players access internationally licensed casinos and sportsbooks that comply with global
+            regulations. Always check the licensing status before registering.
+          </p>
+
+          <h2>Popular Casino Games & Betting Markets</h2>
+          <p>
+            Online casinos offer slots, blackjack, roulette, baccarat, poker, and live dealer games. Sports
+            bettors enjoy markets for local and international football, basketball, tennis, esports, and more.
+          </p>
+
+          <h2>Bonuses and Promotions</h2>
+          <p>
+            Welcome bonuses, deposit matches, free spins, cashback, and sports betting free bets are
+            frequently offered. Review wagering requirements, bonus limits, and withdrawal conditions before
+            claiming.
+          </p>
+
+          <p>
+            Whether you prefer online casino games or sports betting, choosing a reputable and licensed
+            operator ensures a secure and enjoyable experience. We regularly update our recommendations for
+            Turkish players.
+          </p>
+        </div>
+      </section>
+
+      <section class="all-countries">
+        <div class="container countries-cloud"></div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>© 2026 SpinCresta.com All rights reserved</p>
+        <p>
+          18+ | Gambling can be addictive. Please play responsibly. Availability depends on local Turkish
+          regulations.
+        </p>
+      </div>
+    </footer>
+
+    <!-- CARD TEMPLATE -->
+    <template id="casino-card-template">
+      <article class="casino-card">
+        <div class="card-img">
+          <img class="casino-image" alt="" loading="lazy" />
+        </div>
+        <h3 class="casino-name"></h3>
+        <p class="casino-bonus"></p>
+        <div class="payment-icons"></div>
+        <a class="cta" href="#" rel="noopener noreferrer"> Play Now </a>
+      </article>
+    </template>
+
+    <script type="module" src="scripts/main.js"></script>
+  </body>
+</html>
