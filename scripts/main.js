@@ -220,7 +220,7 @@ function renderCasinoCard({ name, bonus, cta, urlDetail, urlCasino, image, payme
     if (!countryCode) return;
 
     const title = section.querySelector('.top-country-title');
-    const grid = section.querySelector('.casino-grid-main');
+    const grid = section.querySelector('.casino-grid');
     const viewAllWrapper = section.querySelector('.view-all-wrapper');
     const viewAllLink = section.querySelector('.view-all');
 
