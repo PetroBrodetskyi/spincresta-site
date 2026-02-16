@@ -95,13 +95,15 @@ function renderCasinoCard({ name, bonus, cta, urlDetail, urlCasino, image, payme
       paymentsContainer.innerHTML = renderPayments(brand.payments);
     }
 
-    article.addEventListener('click', () => {
-      window.location.href = brand.urlDetail;
-    });
+    // Клік по картці → сторінка бренду
+    // article.addEventListener('click', e => {
+    //   if (!e.target.closest('.cta')) {
+    //     window.location.href = brand.urlDetail;
+    //   }
+    // });
 
     link.addEventListener('click', e => {
       e.stopPropagation();
-      window.open(brand.urlCasino, '_blank', 'noopener');
     });
 
     fragment.appendChild(card);
@@ -214,6 +216,7 @@ function renderCasinoCard({ name, bonus, cta, urlDetail, urlCasino, image, payme
 /* =====================
    TOP CASINOS (MULTI COUNTRY)
 ===================== */
+
 (function renderTopCasinos() {
   document.querySelectorAll('.content[data-country]').forEach(section => {
     const countryCode = section.dataset.country?.toUpperCase();
@@ -227,6 +230,7 @@ function renderCasinoCard({ name, bonus, cta, urlDetail, urlCasino, image, payme
     if (!title || !grid) return;
 
     const country = COUNTRIES.find(c => c.code.toUpperCase() === countryCode);
+
     const limit = Number(grid.dataset.limit) || 4;
 
     title.textContent = `Top ${country?.name || countryCode} Casinos`;
@@ -241,22 +245,25 @@ function renderCasinoCard({ name, bonus, cta, urlDetail, urlCasino, image, payme
     }
 
     grid.innerHTML = '';
+
     topBrands.forEach(brand => {
       const wrapper = document.createElement('div');
       wrapper.innerHTML = renderCasinoCard(brand);
+
       const card = wrapper.firstElementChild;
 
+      // Клік по картці → сторінка бренду
       card.addEventListener('click', e => {
         if (!e.target.closest('.cta')) {
           window.location.href = brand.urlDetail;
         }
       });
 
+      // Клік по кнопці → тільки зовнішній лінк (1 вкладка)
       const link = card.querySelector('.cta');
       if (link) {
         link.addEventListener('click', e => {
           e.stopPropagation();
-          window.open(link.href, '_blank', 'noopener');
         });
       }
 
