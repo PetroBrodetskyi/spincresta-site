@@ -95,12 +95,15 @@ function renderCasinoCard({ name, bonus, cta, urlDetail, urlCasino, image, payme
       paymentsContainer.innerHTML = renderPayments(brand.payments);
     }
 
-    // Клік по картці → сторінка бренду
-    // article.addEventListener('click', e => {
-    //   if (!e.target.closest('.cta')) {
-    //     window.location.href = brand.urlDetail;
-    //   }
-    // });
+    article.addEventListener('click', e => {
+      if (e.target.closest('.cta')) return;
+
+      if (brand.hasDetailPage) {
+        window.location.href = brand.urlDetail;
+      } else {
+        window.open(brand.urlCasino, '_blank', 'noopener');
+      }
+    });
 
     link.addEventListener('click', e => {
       e.stopPropagation();
@@ -252,10 +255,13 @@ function renderCasinoCard({ name, bonus, cta, urlDetail, urlCasino, image, payme
 
       const card = wrapper.firstElementChild;
 
-      // Клік по картці → сторінка бренду
       card.addEventListener('click', e => {
-        if (!e.target.closest('.cta')) {
+        if (e.target.closest('.cta')) return;
+
+        if (brand.hasDetailPage) {
           window.location.href = brand.urlDetail;
+        } else {
+          window.open(brand.urlCasino, '_blank', 'noopener');
         }
       });
 

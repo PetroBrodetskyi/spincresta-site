@@ -312,6 +312,7 @@ export const BRANDS = [
     countries: ['AU', 'CA', 'NZ', 'NO', 'IE', 'LT', 'FR', 'AT', 'IT', 'DE'],
     top: ['AU'],
     payments: ['visa', 'mastercard', 'ecopayz', 'bitcoin', 'ethereum', 'neteller', 'skrill', 'mifinity'],
+    hasDetailPage: true,
   },
   {
     name: 'Corgibet',
