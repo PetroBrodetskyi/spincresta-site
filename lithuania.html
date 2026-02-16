@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="en-LT">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>SpinCresta | Best Online Casinos & Sports Betting in Lithuania</title>
+    <link rel="icon" type="image/png" sizes="64x64" href="favicon.png" />
+    <meta
+      name="description"
+      content="Discover the top online casinos and sports betting sites in Lithuania. Secure platforms, exclusive bonuses, live betting, and mobile-friendly gaming for Lithuanian players."
+    />
+    <meta name="robots" content="index, follow" />
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="SpinCresta | Lithuania Casinos & Sports Betting Guide" />
+    <meta
+      property="og:description"
+      content="Top-rated online casinos and sports betting platforms in Lithuania with secure payments, great bonuses, and live betting options."
+    />
+    <meta property="og:type" content="website" />
+
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+
+  <body data-country="LT">
+    <div id="globalLoader">
+      <div class="loader"></div>
+    </div>
+
+    <!-- HEADER -->
+    <header class="header">
+      <div class="header-container header-inner">
+        <a href="index.html" class="logo"> SpinCresta<span class="logo-com">.com</span> </a>
+
+        <nav class="nav" aria-label="Main navigation">
+          <div class="nav-dropdown">
+            <a href="#" class="nav-dropdown-link" aria-haspopup="true" aria-expanded="false"> Countries </a>
+            <div class="nav-dropdown-menu" id="countriesDropdown"></div>
+          </div>
+          <a href="index.html">Top Casinos</a>
+          <a href="#">New Casinos</a>
+          <a href="#">Top Rated</a>
+          <a href="#">Exclusive Offers</a>
+          <a href="#">Bonuses</a>
+          <a href="#">Reviews</a>
+          <a href="#">Promotions</a>
+          <a href="about.html">About</a>
+        </nav>
+
+        <button
+          class="burger"
+          type="button"
+          aria-label="Open countries menu"
+          aria-controls="mobileMenu"
+          aria-expanded="false"
+        >
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+
+      <nav class="mobile-menu" id="mobileMenu" aria-hidden="true" aria-label="Mobile countries navigation">
+        <div class="mobile-menu-inner"></div>
+      </nav>
+    </header>
+
+    <main>
+      <!-- HERO -->
+      <section class="hero container">
+        <div class="hero-content">
+          <h1>Best Online Casinos & Sports Betting in Lithuania</h1>
+          <p>Trusted reviews, secure payments, and exclusive promotions for Lithuanian players.</p>
+          <img class="hero-flag" src="icons/lithuania-flag-icon.svg" alt="Flag of Lithuania" />
+        </div>
+        <div class="hero-banner"></div>
+      </section>
+
+      <!-- TOP CASINOS & BETTING -->
+      <section class="content">
+        <div class="container">
+          <header class="section-head">
+            <h2>Top Casino & Sports Betting Offers for Lithuanian Players</h2>
+          </header>
+
+          <p class="intro">
+            We review licensed online casinos and sports betting platforms available in Lithuania, focusing on
+            game variety, security, mobile compatibility, and rewarding promotions.
+          </p>
+
+          <div class="casino-grid" id="brand-cards"></div>
+        </div>
+      </section>
+
+      <!-- CONTENT ARTICLE -->
+      <section class="content bg-image-lt-footer">
+        <div class="section-overlay"></div>
+
+        <div class="container content-article">
+          <h2>Online Casinos in Lithuania</h2>
+          <p>
+            Lithuania has a regulated gambling market overseen by the Lithuanian Gaming Control Authority.
+            Licensed operators provide safe environments, secure transactions, and responsible gambling tools
+            for players.
+          </p>
+
+          <h2>Sports Betting in Lithuania</h2>
+          <p>
+            Sports betting is popular in Lithuania, particularly for basketball, football, and tennis.
+            Licensed sportsbooks offer competitive odds, live betting, and mobile-friendly platforms.
+          </p>
+
+          <h2>Licensing and Legal Framework</h2>
+          <p>
+            All gambling operators targeting Lithuanian players must obtain a license from the Lithuanian
+            Gaming Control Authority. This ensures fair play, secure payments, and player protection.
+          </p>
+
+          <h2>Casino Games & Betting Options</h2>
+          <p>
+            Lithuanian players can enjoy slots, roulette, blackjack, baccarat, poker, and live dealer games.
+            Sports bettors have access to both domestic and international events, covering major leagues and
+            tournaments.
+          </p>
+
+          <h2>Bonuses and Promotions</h2>
+          <p>
+            Welcome bonuses, free spins, deposit matches, and cashback promotions are offered by many licensed
+            platforms. Always review the terms and wagering requirements to maximize benefits.
+          </p>
+
+          <p>
+            Choosing licensed and reputable operators ensures a safe and engaging experience in both online
+            casinos and sports betting for Lithuanian players.
+          </p>
+        </div>
+      </section>
+
+      <section class="all-countries">
+        <div class="container countries-cloud"></div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>© 2026 SpinCresta.com All rights reserved</p>
+        <p>
+          18+ | Gambling can be addictive. Please play responsibly. Availability depends on Lithuanian
+          regulations.
+        </p>
+      </div>
+    </footer>
+
+    <!-- CARD TEMPLATE -->
+    <template id="casino-card-template">
+      <article class="casino-card">
+        <div class="card-img">
+          <img class="casino-image" alt="" loading="lazy" />
+        </div>
+        <h3 class="casino-name"></h3>
+        <p class="casino-bonus"></p>
+        <div class="payment-icons"></div>
+        <a class="cta" href="#" rel="noopener noreferrer"> Play Now </a>
+      </article>
+    </template>
+
+    <script type="module" src="scripts/main.js"></script>
+  </body>
+</html>

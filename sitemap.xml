@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+  <!-- Home page -->
+  <url>
+    <loc>https://spincresta.com/index.html</loc>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+
+  <!-- Country pages -->
+  <url><loc>https://spincresta.com/argentina.html</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://spincresta.com/australia.html</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://spincresta.com/austria.html</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://spincresta.com/azerbaijan.html</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://spincresta.com/bangladesh.html</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://spincresta.com/belgium.html</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://spincresta.com/brazil.html</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://spincresta.com/bulgaria.html</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://spincresta.com/canada.html</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://spincresta.com/chile.html</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://spincresta.com/colombia.html</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://spincresta.com/croatia.html</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://spincresta.com/czech-republic.html</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://spincresta.com/denmark.html</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://spincresta.com/egypt.html</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://spincresta.com/estonia.html</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://spincresta.com/finland.html</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://spincresta.com/france.html</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://spincresta.com/germany.html</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://spincresta.com/ghana.html</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://spincresta.com/greece.html</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://spincresta.com/hungary.html</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://spincresta.com/iceland.html</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://spincresta.com/india.html</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://spincresta.com/indonesia.html</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://spincresta.com/ireland.html</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://spincresta.com/italy.html</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://spincresta.com/japan.html</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://spincresta.com/kazakhstan.html</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://spincresta.com/kenya.html</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://spincresta.com/latvia.html</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://spincresta.com/lithuania.html</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://spincresta.com/luxembourg.html</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://spincresta.com/malaysia.html</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://spincresta.com/mexico.html</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://spincresta.com/netherlands.html</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://spincresta.com/new-zealand.html</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://spincresta.com/nigeria.html</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://spincresta.com/norway.html</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://spincresta.com/philippines.html</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://spincresta.com/poland.html</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://spincresta.com/portugal.html</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://spincresta.com/peru.html</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://spincresta.com/russia.html</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://spincresta.com/romania.html</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://spincresta.com/singapore.html</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://spincresta.com/slovakia.html</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://spincresta.com/slovenia.html</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://spincresta.com/south-africa.html</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://spincresta.com/south-korea.html</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://spincresta.com/spain.html</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://spincresta.com/sweden.html</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://spincresta.com/switzerland.html</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://spincresta.com/thailand.html</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://spincresta.com/turkey.html</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://spincresta.com/tanzania.html</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://spincresta.com/uganda.html</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://spincresta.com/ukraine.html</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://spincresta.com/united-kingdom.html</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://spincresta.com/united-states.html</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://spincresta.com/uzbekistan.html</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://spincresta.com/vietnam.html</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+
+</urlset>

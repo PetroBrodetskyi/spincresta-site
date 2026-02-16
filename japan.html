@@ -1,0 +1,187 @@
+<!doctype html>
+<html lang="en-JP">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>SpinCresta | Online Casinos & Sports Betting for Japan</title>
+    <link rel="icon" type="image/png" sizes="64x64" href="favicon.png" />
+    <meta
+      name="description"
+      content="Discover online casinos and sports betting platforms accessible in Japan. Compare bonuses, games, betting markets, and trusted international brands."
+    />
+    <meta
+      name="keywords"
+      content="online casinos Japan, sports betting Japan, Japan casino sites, crypto betting Japan, real money casino JP, best casino bonuses Japan"
+    />
+    <meta name="robots" content="index, follow" />
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="SpinCresta | Casinos and Betting for Players in Japan" />
+    <meta
+      property="og:description"
+      content="Trusted online casinos and sports betting platforms for Japanese players. Bonuses, crypto options, and real-money games."
+    />
+    <meta property="og:type" content="website" />
+
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+
+  <body data-country="JP">
+    <div id="globalLoader">
+      <div class="loader"></div>
+    </div>
+
+    <!-- HEADER -->
+    <header class="header">
+      <div class="header-container header-inner">
+        <a href="index.html" class="logo"> SpinCresta<span class="logo-com">.com</span> </a>
+
+        <nav class="nav" aria-label="Main navigation">
+          <div class="nav-dropdown">
+            <a href="#" class="nav-dropdown-link" aria-haspopup="true" aria-expanded="false"> Countries </a>
+            <div class="nav-dropdown-menu" id="countriesDropdown"></div>
+          </div>
+          <a href="index.html">Top Casinos</a>
+          <a href="#">New Casinos</a>
+          <a href="#">Top Rated</a>
+          <a href="#">Exclusive Offers</a>
+          <a href="#">Bonuses</a>
+          <a href="#">Reviews</a>
+          <a href="#">Promotions</a>
+          <a href="about.html">About</a>
+        </nav>
+
+        <button
+          class="burger"
+          type="button"
+          aria-label="Open countries menu"
+          aria-controls="mobileMenu"
+          aria-expanded="false"
+        >
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+
+      <nav class="mobile-menu" id="mobileMenu" aria-hidden="true" aria-label="Mobile countries navigation">
+        <div class="mobile-menu-inner"></div>
+      </nav>
+    </header>
+
+    <main>
+      <!-- HERO -->
+      <section class="hero container">
+        <div class="hero-content">
+          <h1>Online Casinos & Sports Betting in Japan</h1>
+          <p>Trusted platforms offering real-money casino games and sports betting for Japanese players.</p>
+          <img class="hero-flag" src="icons/japan-flag-icon.svg" alt="Japan Flag" />
+        </div>
+        <div class="hero-banner"></div>
+      </section>
+
+      <!-- TOP CASINOS & BETTING -->
+      <section class="content">
+        <div class="container">
+          <header class="section-head">
+            <h2>Top Casino & Betting Platforms for Japan</h2>
+          </header>
+
+          <p class="intro">
+            Explore international online casinos and sports betting sites that accept players from Japan. We
+            review bonuses, betting markets, game variety, and platform security.
+          </p>
+
+          <div class="casino-grid" id="brand-cards"></div>
+        </div>
+      </section>
+
+      <!-- CONTENT ARTICLE -->
+      <section class="content bg-image-jp-footer">
+        <div class="section-overlay"></div>
+
+        <div class="container content-article">
+          <h2>Legal Overview: Gambling in Japan</h2>
+          <p>
+            Japan has strict gambling laws. While most forms of gambling are prohibited, lottery (Takarakuji),
+            horse racing, bicycle racing, boat racing, and motorcycle racing are legally regulated. Integrated
+            Resort (IR) casinos are allowed under government regulations since 2018.
+          </p>
+
+          <h2>International Online Casinos & Betting Sites</h2>
+          <p>
+            Domestic online casinos are not licensed locally, but many international operators accept Japanese
+            players. These platforms are often licensed offshore (Curacao, Malta) and provide access to both
+            casino games and sports betting.
+          </p>
+
+          <h2>Popular Casino Games</h2>
+          <p>
+            Slots, blackjack, roulette, baccarat, and live dealer games are available for Japanese players.
+            Baccarat remains especially popular. International software providers ensure fair RNGs, smooth
+            gameplay, and professional graphics.
+          </p>
+
+          <h2>Sports Betting Markets</h2>
+          <p>
+            Japanese players can bet on football, baseball, basketball, tennis, MMA, esports, and virtual
+            sports. Many platforms offer live betting and competitive odds. In-play and pre-match options
+            allow flexible strategies for all levels of players.
+          </p>
+
+          <h2>Payment Options</h2>
+          <p>
+            Credit cards, e-wallets, and cryptocurrency payments (Bitcoin, Ethereum, and stablecoins) are
+            widely supported. Crypto payments are increasingly popular due to fast transactions and privacy.
+          </p>
+
+          <h2>Bonuses & Promotions</h2>
+          <p>
+            Both casino and sports betting platforms provide welcome packages, free spins, deposit bonuses,
+            and cashback promotions. Terms vary by platform, so always review wagering requirements before
+            claiming.
+          </p>
+
+          <h2>Responsible Gambling</h2>
+          <p>
+            International platforms provide deposit limits, self-exclusion tools, and session reminders.
+            Players should gamble responsibly and follow local legal guidelines.
+          </p>
+
+          <p>
+            By choosing trusted platforms with secure payments, diverse games, and sports betting options,
+            Japanese players can enjoy a full range of online gambling experiences safely and legally.
+          </p>
+        </div>
+      </section>
+
+      <section class="all-countries">
+        <div class="container countries-cloud"></div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>© 2026 SpinCresta.com All rights reserved</p>
+        <p>
+          18+ | Gambling can be addictive. Please play responsibly. Availability depends on your local laws.
+        </p>
+      </div>
+    </footer>
+
+    <template id="casino-card-template">
+      <article class="casino-card">
+        <div class="card-img">
+          <img class="casino-image" alt="" loading="lazy" />
+        </div>
+        <h3 class="casino-name"></h3>
+        <p class="casino-bonus"></p>
+        <div class="payment-icons"></div>
+        <a class="cta" href="#" rel="noopener noreferrer">Play Now</a>
+      </article>
+    </template>
+
+    <script type="module" src="scripts/main.js"></script>
+  </body>
+</html>
