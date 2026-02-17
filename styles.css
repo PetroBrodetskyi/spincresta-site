@@ -348,10 +348,11 @@ body {
   z-index: 10;
 }
 .new-badge {
-  background: linear-gradient(135deg, #ff0000, #ffcc00, #ff0000);
+  background: linear-gradient(135deg, #ff4e50, #ff9a00, #ff4e50);
 }
+
 .exclusive-badge {
-  background: linear-gradient(135deg, #b8860b, #ffd700, #b8860b);
+  background: linear-gradient(135deg, #d4af37, #ffd700, #d4af37);
 }
 
 .top-rated-badge {
