@@ -1,0 +1,184 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>SpinCresta | New Online Casinos & Betting Sites Worldwide - Bonuses & Games</title>
+    <link rel="icon" type="image/png" sizes="64x64" href="favicon.png" />
+    <meta
+      name="description"
+      content="Discover the newest online casinos and betting sites worldwide. Compare bonuses, games, payment methods, and trusted platforms for safe play."
+    />
+    <meta name="robots" content="index, follow" />
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="SpinCresta | New Online Casinos & Betting Sites" />
+    <meta
+      property="og:description"
+      content="Explore new online casinos and betting sites worldwide with exclusive bonuses, verified payment options, and trusted platforms."
+    />
+    <meta property="og:type" content="website" />
+
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+
+  <body data-page="new-casinos">
+    <div id="globalLoader">
+      <div class="loader"></div>
+    </div>
+
+    <!-- HEADER -->
+    <header class="header">
+      <div class="header-container header-inner">
+        <a href="index.html" class="logo"> SpinCresta<span class="logo-com">.com</span> </a>
+        <nav class="nav" aria-label="Main navigation">
+          <div class="nav-dropdown">
+            <a href="#" class="nav-dropdown-link" aria-haspopup="true" aria-expanded="false"> Countries </a>
+            <div class="nav-dropdown-menu" id="countriesDropdown"></div>
+          </div>
+          <a href="index.html">Top Casinos</a>
+          <a href="new-casinos.html">New Casinos</a>
+          <a href="#">Top Rated</a>
+          <a href="#">Exclusive Offers</a>
+          <a href="#">Bonuses</a>
+          <a href="#">Reviews</a>
+          <a href="#">Promotions</a>
+          <a href="about.html">About</a>
+        </nav>
+        <button
+          class="burger"
+          type="button"
+          aria-label="Open countries menu"
+          aria-controls="mobileMenu"
+          aria-expanded="false"
+        >
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+
+      <nav class="mobile-menu" id="mobileMenu" aria-hidden="true" aria-label="Mobile countries navigation">
+        <div class="mobile-menu-inner"></div>
+      </nav>
+    </header>
+
+    <main>
+      <!-- HERO -->
+      <section class="hero container">
+        <div class="hero-content">
+          <h1>Newest Online Casinos & Betting Sites Worldwide</h1>
+          <p>
+            Discover the latest casino brands and online betting platforms with top bonuses, games, and
+            payment options.
+          </p>
+        </div>
+        <div class="hero-banner">
+          <!-- Banner ad or promo script -->
+        </div>
+      </section>
+
+      <!-- NEW CASINOS & BETTING -->
+      <section class="content">
+        <div class="container">
+          <header class="section-head">
+            <h2>New Casino & Betting Brands</h2>
+          </header>
+          <p class="intro">
+            Explore the newest online casinos and betting sites around the world. Each listing includes
+            available country flags, bonuses, supported payment methods, and sports betting options.
+          </p>
+          <div class="casino-grid" id="brand-cards"></div>
+        </div>
+      </section>
+
+      <!-- SEO CONTENT -->
+      <section class="content">
+        <div class="container content-article">
+          <h2>About New Online Casinos</h2>
+          <p>
+            New online casinos provide exciting opportunities for players globally. They often feature
+            innovative games, competitive bonuses, and modern payment solutions. Platforms include slots,
+            table games, and live casino experiences.
+          </p>
+
+          <h2>About Online Betting Platforms</h2>
+          <p>
+            New betting sites offer a wide range of sports betting opportunities. Users can bet on football,
+            basketball, tennis, esports, and more. Trusted betting platforms provide live odds, in-play
+            betting, and secure payment methods for a seamless experience.
+          </p>
+
+          <h2>Bonuses, Promotions & Free Bets</h2>
+          <p>
+            Both casinos and betting sites frequently offer welcome bonuses, free spins, matched deposits, and
+            risk-free bets. Always review wagering requirements, bonus terms, and betting rules before
+            claiming offers.
+          </p>
+
+          <h2>Global Availability & Trusted Platforms</h2>
+          <p>
+            Each casino or betting card indicates countries where platforms accept players. Icons show
+            accepted payment methods. We prioritize licensed, regulated platforms with verified software
+            providers for safe and reliable play.
+          </p>
+
+          <h2>Why Choose New Casinos and Betting Sites?</h2>
+          <p>
+            New platforms often provide better bonuses, modern user interfaces, fast withdrawals, and unique
+            promotions. Sports bettors benefit from higher odds, live streaming, and innovative betting
+            markets.
+          </p>
+
+          <h2>FAQ: New Casinos & Betting Sites</h2>
+          <dl>
+            <dt>Are new casinos safe to play?</dt>
+            <dd>
+              Yes, we only list licensed and regulated casinos. Always check platform credentials and read
+              reviews.
+            </dd>
+
+            <dt>Can I place sports bets on new platforms?</dt>
+            <dd>Many new sites offer full sports betting markets, including live in-play betting.</dd>
+
+            <dt>Do bonuses apply to both casinos and betting?</dt>
+            <dd>Yes, some promotions cover both casino games and sports bets. Terms vary by platform.</dd>
+
+            <dt>Which payment methods are supported?</dt>
+            <dd>We list all verified payment options including cards, e-wallets, and crypto.</dd>
+          </dl>
+        </div>
+      </section>
+
+      <section class="all-countries">
+        <div class="container countries-cloud"></div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>© 2026 SpinCresta.com All rights reserved</p>
+        <p>
+          18+ | Gambling can be addictive. Please play responsibly. Availability depends on your local laws.
+        </p>
+      </div>
+    </footer>
+
+    <!-- CARD TEMPLATE FOR NEW CASINOS -->
+    <template id="casino-card-template">
+      <article class="casino-card">
+        <div class="new-badge">NEW</div>
+        <div class="card-img">
+          <img class="casino-image" alt="" loading="lazy" />
+        </div>
+        <h3 class="casino-name"></h3>
+        <p class="casino-bonus"></p>
+        <div class="payment-icons"></div>
+        <a class="cta" href="#" rel="noopener noreferrer">Play Now</a>
+      </article>
+    </template>
+
+    <script type="module" src="scripts/main.js"></script>
+  </body>
+</html>

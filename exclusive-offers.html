@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>SpinCresta | Exclusive Casino & Betting Offers Worldwide</title>
+    <link rel="icon" type="image/png" sizes="64x64" href="favicon.png" />
+    <meta
+      name="description"
+      content="Discover exclusive online casino and betting offers worldwide. Special bonuses, free spins, and top promotions just for you."
+    />
+    <meta name="robots" content="index, follow" />
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="SpinCresta | Exclusive Casino & Betting Offers" />
+    <meta
+      property="og:description"
+      content="Explore exclusive online casino and betting offers with top bonuses, verified payment options, and trusted platforms."
+    />
+    <meta property="og:type" content="website" />
+
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+
+  <body data-page="exclusive-offers">
+    <div id="globalLoader">
+      <div class="loader"></div>
+    </div>
+
+    <!-- HEADER -->
+    <header class="header">
+      <div class="header-container header-inner">
+        <a href="index.html" class="logo"> SpinCresta<span class="logo-com">.com</span> </a>
+        <nav class="nav" aria-label="Main navigation">
+          <div class="nav-dropdown">
+            <a href="#" class="nav-dropdown-link" aria-haspopup="true" aria-expanded="false"> Countries </a>
+            <div class="nav-dropdown-menu" id="countriesDropdown"></div>
+          </div>
+          <a href="index.html">Top Casinos</a>
+          <a href="new-casinos.html">New Casinos</a>
+          <a href="#">Top Rated</a>
+          <a href="exclusive-offers.html" class="active">Exclusive Offers</a>
+          <a href="#">Bonuses</a>
+          <a href="#">Reviews</a>
+          <a href="#">Promotions</a>
+          <a href="about.html">About</a>
+        </nav>
+        <button
+          class="burger"
+          type="button"
+          aria-label="Open countries menu"
+          aria-controls="mobileMenu"
+          aria-expanded="false"
+        >
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+
+      <nav class="mobile-menu" id="mobileMenu" aria-hidden="true" aria-label="Mobile countries navigation">
+        <div class="mobile-menu-inner"></div>
+      </nav>
+    </header>
+
+    <main>
+      <!-- HERO -->
+      <section class="hero container">
+        <div class="hero-content">
+          <h1>Exclusive Casino & Betting Offers</h1>
+          <p>
+            Access the best exclusive online casino and sports betting promotions worldwide, including special
+            bonuses and free spins.
+          </p>
+        </div>
+      </section>
+
+      <!-- EXCLUSIVE OFFERS -->
+      <section class="content">
+        <div class="container">
+          <header class="section-head">
+            <h2>Exclusive Offers</h2>
+          </header>
+          <p class="intro">
+            Explore our curated list of exclusive offers from casinos and betting sites. Only available here
+            for a limited time.
+          </p>
+          <div class="casino-grid" id="exclusive-cards"></div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <p>© 2026 SpinCresta.com All rights reserved</p>
+        <p>
+          18+ | Gambling can be addictive. Please play responsibly. Availability depends on your local laws.
+        </p>
+      </div>
+    </footer>
+
+    <!-- CARD TEMPLATE FOR EXCLUSIVE OFFERS -->
+    <template id="exclusive-card-template">
+      <article class="casino-card">
+        <div class="exclusive-badge">EXCLUSIVE</div>
+        <div class="card-img">
+          <img class="casino-image" alt="" loading="lazy" />
+        </div>
+        <h3 class="casino-name"></h3>
+        <p class="casino-bonus"></p>
+        <div class="payment-icons"></div>
+        <a class="cta" href="#" rel="noopener noreferrer">Play Now</a>
+      </article>
+    </template>
+
+    <script type="module" src="scripts/main.js"></script>
+  </body>
+</html>

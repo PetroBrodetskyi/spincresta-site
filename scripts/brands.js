@@ -9,6 +9,7 @@ export const BRANDS = [
     countries: ['UK'],
     top: ['UK'],
     payments: ['visa', 'mastercard', 'neteller', 'skrill', 'paysafecard'],
+    isNew: true,
   },
   {
     name: 'Fortunica',
@@ -40,17 +41,19 @@ export const BRANDS = [
     countries: ['DE', 'UK', 'NO', 'FI', 'SE', 'PL', 'IE', 'PT'],
     top: ['UK'],
     payments: ['visa', 'mastercard', 'mifinity', 'googlepay', 'jeton'],
+    isExclusive: true,
   },
-  // {
-  //   name: 'Slots and Casino',
-  //   bonus: 'Fast payouts for US players',
-  //   cta: 'Play Now',
-  //   urlDetail: 'brands/top-slots.html',
-  //   urlCasino: 'https://topslots.com',
-  //   image: 'images/slotsandcasino.webp',
-  //   top: ['US'],
-  //   countries: ['US'],
-  // },
+  {
+    name: 'Slots and Casino',
+    bonus: '300% Welcome Match up to $1500 + 100 Free Spins',
+    cta: 'Play Now',
+    urlDetail: 'brands/slotsandcasino.html',
+    urlCasino: 'https://armadaapp.media-412.com/click?pid=3862&offer_id=121376',
+    image: 'images/slotsandcasino.webp',
+    top: ['US'],
+    countries: ['US'],
+    payments: ['visa', 'mastercard', 'bitcoin', 'tether', 'litecoin', 'bitcoincash', 'ethereum'],
+  },
   {
     name: 'Chanced',
     bonus: 'Get 400% Extra Coins - Claim Welcome Offer',
@@ -59,7 +62,6 @@ export const BRANDS = [
     urlCasino: 'https://armadaapp.media-412.com/click?pid=3862&offer_id=121245',
     image: 'images/chanced.webp',
     countries: ['US'],
-    top: ['US'],
     payments: ['visa', 'mastercard', 'americanexpress'],
   },
   {
@@ -82,16 +84,17 @@ export const BRANDS = [
     countries: ['US'],
     payments: ['visa', 'mastercard', 'americanexpress'],
   },
-  // {
-  //   name: 'Ducky Luck',
-  //   bonus: 'Up to $1,000 Welcome Bonus',
-  //   cta: 'Play Now',
-  //   urlDetail: 'brands/phj.html',
-  //   urlCasino: 'https://phjcasino.com',
-  //   image: 'images/duckyluck.webp',
-  //   top: ['US'],
-  //   countries: ['US'],
-  // },
+  {
+    name: 'Ducky Luck',
+    bonus: 'Claim a 500% Welcome Bonus up to $2,500 + 150 Free Spins',
+    cta: 'Play Now',
+    urlDetail: 'brands/duckyluck.html',
+    urlCasino: 'https://armadaapp.media-412.com/click?pid=3862&offer_id=121377',
+    image: 'images/duckyluck.webp',
+    top: ['US'],
+    countries: ['US'],
+    payments: ['visa', 'mastercard', 'bitcoin', 'tether', 'litecoin', 'bitcoincash', 'ethereum'],
+  },
   {
     name: 'Lucky Red',
     bonus: 'Get up to $4,000 400% match +$75 free chip when using Crypto',
@@ -102,6 +105,7 @@ export const BRANDS = [
     top: ['US'],
     countries: ['US'],
     payments: ['visa', 'mastercard', 'americanexpress', 'bitcoin', 'etherium', 'litecoin', 'tether'],
+    isExclusive: true,
   },
   {
     name: 'Cazino',
@@ -111,7 +115,6 @@ export const BRANDS = [
     urlCasino: 'https://armadaapp.media-412.com/click?pid=3862&offer_id=120997',
     image: 'images/cazino.webp',
     countries: ['US'],
-    top: ['US'],
     payments: ['visa', 'mastercard'],
   },
   {
@@ -150,6 +153,7 @@ export const BRANDS = [
     urlCasino: 'https://armadaapp.media-412.com/click?pid=3862&offer_id=121272',
     image: 'images/vegas.webp',
     countries: ['US'],
+    isNew: true,
   },
   {
     name: 'Gunsbet',
@@ -669,6 +673,7 @@ export const BRANDS = [
     countries: ['AT', 'CH', 'CA', 'DE', 'IT', 'CZ', 'PL', 'HU'],
     top: ['CA'],
     payments: ['litecoin', 'ethereum', 'bitcoin', 'tron'],
+    isNew: true,
   },
   {
     name: 'Manga',
@@ -739,6 +744,7 @@ export const BRANDS = [
     image: 'images/letslucky.svg',
     countries: ['AU', 'CA', 'NZ', 'AT', 'CH', 'IE', 'NO', 'SE', 'FI', 'DK', 'IS'],
     payments: ['visa', 'mastercard', 'bitcoin', 'bitcoincash', 'tether'],
+    isNew: true,
   },
   {
     name: 'Lucky Dreams',
@@ -879,6 +885,7 @@ export const BRANDS = [
       'DE',
     ],
     payments: ['visa', 'mastercard', 'neteller', 'mifinity', 'skrill'],
+    isExclusive: true,
   },
   {
     name: 'Ripper Casino',
@@ -1108,7 +1115,7 @@ export const BRANDS = [
     urlDetail: 'brands/letsjackpot.html',
     urlCasino: 'https://armadaapp.media-412.com/click?pid=3862&offer_id=121222',
     image: 'images/letsjackpot.svg',
-    countries: ['UK', 'IE', 'NL', 'SE'],
+    countries: ['UK', 'IE', 'IT', 'NL', 'SE', 'BE', 'DK', 'ES', 'FI', 'MK', 'MT', 'NO', 'PT', 'SK'],
   },
   {
     name: "Let's Jackpot",
@@ -1255,6 +1262,7 @@ export const BRANDS = [
     urlCasino: 'https://armadaapp.media-412.com/click?pid=3862&offer_id=121244',
     image: 'images/slotsplus.png',
     countries: ['US'],
+    isExclusive: true,
   },
   {
     name: 'Sun Palace',

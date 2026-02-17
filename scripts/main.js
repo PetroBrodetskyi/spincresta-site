@@ -30,9 +30,10 @@ function renderPayments(payments = []) {
   `;
 }
 
-function renderCasinoCard({ name, bonus, cta, urlDetail, urlCasino, image, payments = [] }) {
+function renderCasinoCard({ name, bonus, cta, urlDetail, urlCasino, image, payments = [], isNew = false }) {
   return `
     <article class="casino-card" data-page="${urlDetail}">
+      ${isNew ? '<div class="new-badge">NEW</div>' : ''}
       <div class="card-img">
         <img src="${image}" alt="${name}" loading="lazy" />
       </div>
@@ -93,6 +94,13 @@ function renderCasinoCard({ name, bonus, cta, urlDetail, urlCasino, image, payme
 
     if (paymentsContainer) {
       paymentsContainer.innerHTML = renderPayments(brand.payments);
+    }
+
+    if (brand.isNew) {
+      const badge = document.createElement('div');
+      badge.className = 'new-badge';
+      badge.textContent = 'NEW';
+      article.appendChild(badge);
     }
 
     article.addEventListener('click', e => {
@@ -384,3 +392,79 @@ window.addEventListener('scroll', () => {
 
   lastScroll = currentScroll;
 });
+
+/* =====================
+   RENDER CARDS (NEW / EXCLUSIVE)
+===================== */
+function renderCards({ brands, containerId, templateId, isExclusive = false }) {
+  const container = document.querySelector(containerId);
+  const template = document.querySelector(templateId);
+  if (!container || !template) return;
+
+  if (!brands.length) {
+    container.innerHTML = `<p>No ${isExclusive ? 'exclusive offers' : 'new casinos'} available at the moment.</p>`;
+    return;
+  }
+
+  const fragment = document.createDocumentFragment();
+
+  brands.forEach(brand => {
+    const card = template.content.cloneNode(true);
+    const article = card.querySelector('.casino-card');
+    const img = card.querySelector('.casino-image');
+    const title = card.querySelector('.casino-name');
+    const bonusText = card.querySelector('.casino-bonus');
+    const link = card.querySelector('.cta');
+    const paymentsContainer = card.querySelector('.payment-icons');
+
+    img.src = brand.image;
+    img.alt = brand.name;
+    img.loading = 'lazy';
+    title.textContent = brand.name;
+    bonusText.textContent = brand.bonus;
+
+    link.textContent = brand.cta;
+    link.href = brand.urlCasino;
+    link.target = '_blank';
+    link.rel = 'noopener noreferrer';
+
+    if (paymentsContainer && brand.payments?.length) {
+      paymentsContainer.innerHTML = renderPayments(brand.payments);
+    }
+
+    article.addEventListener('click', e => {
+      if (e.target.closest('.cta')) return;
+      if (brand.hasDetailPage) {
+        window.location.href = brand.urlDetail;
+      } else {
+        window.open(brand.urlCasino, '_blank', 'noopener');
+      }
+    });
+
+    link.addEventListener('click', e => e.stopPropagation());
+
+    fragment.appendChild(card);
+  });
+
+  container.appendChild(fragment);
+}
+
+/* =====================
+   AUTO RENDER NEW / EXCLUSIVE
+===================== */
+if (document.body.dataset.page === 'exclusive-offers') {
+  renderCards({
+    brands: BRANDS.filter(b => b.isExclusive),
+    containerId: '#exclusive-cards',
+    templateId: '#exclusive-card-template',
+    isExclusive: true,
+  });
+}
+
+if (document.body.dataset.page === 'new-casinos') {
+  renderCards({
+    brands: BRANDS.filter(b => b.isNew),
+    containerId: '#brand-cards',
+    templateId: '#casino-card-template',
+  });
+}
