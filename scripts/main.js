@@ -237,12 +237,43 @@ export const initCasinoPage = () => {
   );
 
   // =====================
-  // BURGER MENU
+  // MOBILE MENU TOGGLE
   // =====================
   const burger = document.querySelector('.burger');
   const mobileMenu = document.getElementById('mobileMenu');
+  const mobileMenuInner = document.querySelector('.mobile-menu-inner');
 
-  if (burger && mobileMenu) {
+  if (burger && mobileMenu && mobileMenuInner) {
+    mobileMenuInner.innerHTML = `
+    <button class="submenu-toggle">Countries</button>
+    <a href="index.html">Top Casinos</a>
+    <a href="new-casinos.html">New Casinos</a>
+    <a href="top-rated.html">Top Rated</a>
+    <a href="exclusive-offers.html">Exclusive Offers</a>
+    <a href="#">Bonuses</a>
+    <a href="#">Reviews</a>
+    <a href="#">Promotions</a>
+    <a href="about.html">About</a>
+  `;
+
+    const countriesSubmenu = document.createElement('div');
+    countriesSubmenu.className = 'mobile-submenu';
+    countriesSubmenu.innerHTML = COUNTRIES.map(
+      c => `
+      <a href="${c.slug}.html">
+        <img class="flag" src="icons/${c.slug}-flag-icon.svg" alt="${c.name}" loading="lazy"/>
+        ${c.name}
+      </a>
+    `
+    ).join('');
+    mobileMenuInner.appendChild(countriesSubmenu);
+
+    const submenuToggle = mobileMenuInner.querySelector('.submenu-toggle');
+    submenuToggle.addEventListener('click', () => {
+      countriesSubmenu.classList.toggle('open');
+      submenuToggle.classList.toggle('active');
+    });
+
     burger.addEventListener('click', () => {
       burger.classList.toggle('active');
       mobileMenu.classList.toggle('open');
@@ -287,3 +318,30 @@ export const initCasinoPage = () => {
 // AUTO INIT
 // =====================
 document.addEventListener('DOMContentLoaded', initCasinoPage);
+
+/* ===================== HERO COUNTRIES ===================== */
+
+(function renderHeroCountries() {
+  const container = document.getElementById('heroCountries');
+  if (!container) return;
+
+  const TOP_COUNTRY_CODES = ['us', 'uk', 'ca', 'au', 'de', 'in', 'ar'];
+  const topCountries = TOP_COUNTRY_CODES.map(code =>
+    COUNTRIES.find(c => c.code.toLowerCase() === code)
+  ).filter(Boolean);
+
+  container.innerHTML = topCountries
+    .map(
+      country => `
+      <a href="${country.slug}.html" class="hero-flag-link" aria-label="${country.name} casinos">
+        <img
+          class="hero-flag"
+          src="icons/${country.slug}-flag-icon.svg"
+          alt="${country.name} flag"
+          loading="lazy"
+        />
+      </a>
+    `
+    )
+    .join('');
+})();
