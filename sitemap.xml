@@ -8,6 +8,12 @@
     <priority>1.0</priority>
   </url>
 
+  <!-- Munu page -->
+
+  <url><loc>https://spincresta.com/new-casinos.html</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://spincresta.com/top-rated.html</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+  <url><loc>https://spincresta.com/exclusive-offers.html</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
+
   <!-- Country pages -->
   <url><loc>https://spincresta.com/argentina.html</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
   <url><loc>https://spincresta.com/australia.html</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>

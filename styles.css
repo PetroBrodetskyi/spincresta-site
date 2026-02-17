@@ -322,34 +322,40 @@ body {
     border-color 0.35s ease;
 }
 
-.new-badge {
+.new-badge,
+.exclusive-badge,
+.top-rated-badge {
   position: absolute;
-  top: 10px;
-  left: -30px;
-  background: linear-gradient(45deg, rgba(255, 0, 0, 0.85), rgba(255, 204, 0, 0.85));
-  color: var(--text-main);
-  font-weight: bold;
-  padding: 5px 40px;
-  font-size: 12px;
+  top: 18px;
+  left: -45px;
+
+  width: 160px;
+  height: 28px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1px;
   text-transform: uppercase;
+
+  color: #fff;
+
   transform: rotate(-45deg);
   pointer-events: none;
   z-index: 10;
 }
-
+.new-badge {
+  background: linear-gradient(135deg, #ff0000, #ffcc00, #ff0000);
+}
 .exclusive-badge {
-  position: absolute;
-  top: 10px;
-  left: -30px;
-  background: linear-gradient(45deg, #ff0080, #ff80c0);
-  color: var(--text-main);
-  font-weight: bold;
-  padding: 5px 40px;
-  font-size: 12px;
-  text-transform: uppercase;
-  transform: rotate(-45deg);
-  pointer-events: none;
-  z-index: 10;
+  background: linear-gradient(135deg, #b8860b, #ffd700, #b8860b);
+}
+
+.top-rated-badge {
+  background: linear-gradient(135deg, #4b6cb7, #2e5094, #4b6cb7);
 }
 
 @media (max-width: 768px) {

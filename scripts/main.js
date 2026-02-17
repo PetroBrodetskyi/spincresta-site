@@ -1,470 +1,289 @@
+// =====================
+// IMPORTS
+// =====================
 import { BRANDS } from './brands.js';
 import { COUNTRIES } from './countries.js';
 
-/* =====================
-   HELPERS
-===================== */
+// =====================
+// HELPERS
+// =====================
+const MAX_PAYMENT_VISIBLE = 4;
 
-function renderPayments(payments = []) {
+const renderPayments = (payments = []) => {
   if (!payments.length) return '';
 
-  const MAX_VISIBLE = 4;
-  const visible = payments.slice(0, MAX_VISIBLE);
-  const hiddenCount = payments.length - MAX_VISIBLE;
+  const visible = payments.slice(0, MAX_PAYMENT_VISIBLE);
+  const hiddenCount = payments.length - MAX_PAYMENT_VISIBLE;
 
   return `
     <div class="payment-icons">
       ${visible
-        .map(
-          method => `
-            <img
-              src="icons/payments/${method}.svg"
-              alt="${method} payment"
-              loading="lazy"
-            />
-          `
-        )
+        .map(method => `<img src="icons/payments/${method}.svg" alt="${method} payment" loading="lazy"/>`)
         .join('')}
       ${hiddenCount > 0 ? `<span class="payments-more">+${hiddenCount}</span>` : ''}
     </div>
   `;
-}
+};
 
-function renderCasinoCard({ name, bonus, cta, urlDetail, urlCasino, image, payments = [], isNew = false }) {
-  return `
-    <article class="casino-card" data-page="${urlDetail}">
-      ${isNew ? '<div class="new-badge">NEW</div>' : ''}
-      <div class="card-img">
-        <img src="${image}" alt="${name}" loading="lazy" />
-      </div>
+const createBadge = ({ isTopRated, isExclusive, isNew }) => {
+  if (isTopRated) return `<div class="top-rated-badge">TOP RATED</div>`;
+  if (isExclusive) return `<div class="exclusive-badge">EXCLUSIVE</div>`;
+  if (isNew) return `<div class="new-badge">NEW</div>`;
+  return '';
+};
 
-      <h3 class="casino-name">${name}</h3>
-      <p class="casino-bonus">${bonus}</p>
+const createCasinoCard = ({
+  name,
+  bonus,
+  cta,
+  urlDetail,
+  urlCasino,
+  image,
+  payments = [],
+  isNew = false,
+  isExclusive = false,
+  isTopRated = false,
+  hasDetailPage = false,
+}) => {
+  const article = document.createElement('article');
+  article.className = 'casino-card';
+  article.dataset.page = urlDetail ?? '';
 
-      ${renderPayments(payments)}
-
-      <a
-        class="cta"
-        href="${urlCasino}"
-        target="_blank"
-        rel="noopener noreferrer"
-      >
-        ${cta}
-      </a>
-    </article>
+  article.innerHTML = `
+    ${createBadge({ isTopRated, isExclusive, isNew })}
+    <div class="card-img">
+      <img src="${image}" alt="${name}" loading="lazy" class="casino-image"/>
+    </div>
+    <h3 class="casino-name">${name}</h3>
+    <p class="casino-bonus">${bonus}</p>
+    ${renderPayments(payments)}
+    <a class="cta" href="${urlCasino}" target="_blank" rel="noopener noreferrer">${cta}</a>
   `;
-}
 
-/* =====================
-   BRANDS LIST (COUNTRY PAGE)
-===================== */
+  article.addEventListener('click', e => {
+    if (e.target.closest('.cta')) return;
+    if (hasDetailPage && urlDetail) window.location.href = urlDetail;
+    else window.open(urlCasino, '_blank', 'noopener');
+  });
 
-(function renderBrandCards() {
-  const container = document.querySelector('#brand-cards');
-  const template = document.querySelector('#casino-card-template');
-  const pageCountry = document.body.dataset.country?.toUpperCase();
+  article.querySelector('.cta')?.addEventListener('click', e => e.stopPropagation());
 
-  if (!container || !template || !pageCountry) return;
+  return article;
+};
 
-  const brands = BRANDS.filter(b => b.countries?.some(c => c.toUpperCase() === pageCountry));
+const renderBrandList = (brands, containerSelector, emptyText) => {
+  const container = document.querySelector(containerSelector);
+  if (!container) return;
+
+  if (!brands.length) {
+    container.innerHTML = `<p>${emptyText}</p>`;
+    return;
+  }
 
   const fragment = document.createDocumentFragment();
+  brands.forEach(brand => fragment.appendChild(createCasinoCard(brand)));
 
-  brands.forEach(brand => {
-    const card = template.content.cloneNode(true);
+  container.replaceChildren(fragment);
+};
 
-    const article = card.querySelector('.casino-card');
-    const img = card.querySelector('.casino-image');
-    const title = card.querySelector('.casino-name');
-    const bonusText = card.querySelector('.casino-bonus');
-    const link = card.querySelector('.cta');
-    const paymentsContainer = card.querySelector('.payment-icons');
+// =====================
+// INIT FUNCTION
+// =====================
+export const initCasinoPage = () => {
+  const pageType = document.body.dataset.page;
+  const pageCountry = document.body.dataset.country?.toUpperCase();
 
-    img.src = brand.image;
-    img.alt = brand.name;
-    img.loading = 'lazy';
+  // =====================
+  // COUNTRY PAGE
+  // =====================
+  if (pageCountry) {
+    const brands = BRANDS.filter(b => b.countries?.some(c => c.toUpperCase() === pageCountry));
 
-    title.textContent = brand.name;
-    bonusText.textContent = brand.bonus;
+    renderBrandList(brands, '#brand-cards', 'No casinos available for this country.');
+  }
 
-    link.textContent = brand.cta;
-    link.href = brand.urlCasino;
-    link.target = '_blank';
-    link.rel = 'noopener noreferrer';
+  // =====================
+  // NEW / EXCLUSIVE / TOP RATED PAGES
+  // =====================
+  if (pageType === 'exclusive-offers') {
+    renderBrandList(
+      BRANDS.filter(b => b.isExclusive),
+      '#exclusive-cards',
+      'No exclusive offers available at the moment.'
+    );
+  }
 
-    if (paymentsContainer) {
-      paymentsContainer.innerHTML = renderPayments(brand.payments);
-    }
+  if (pageType === 'new-casinos') {
+    renderBrandList(
+      BRANDS.filter(b => b.isNew),
+      '#brand-cards',
+      'No new casinos available at the moment.'
+    );
+  }
 
-    if (brand.isNew) {
-      const badge = document.createElement('div');
-      badge.className = 'new-badge';
-      badge.textContent = 'NEW';
-      article.appendChild(badge);
-    }
+  if (pageType === 'top-rated') {
+    renderBrandList(
+      BRANDS.filter(b => b.isTopRated),
+      '#top-rated-cards',
+      'No top rated casinos available at the moment.'
+    );
+  }
 
-    article.addEventListener('click', e => {
-      if (e.target.closest('.cta')) return;
-
-      if (brand.hasDetailPage) {
-        window.location.href = brand.urlDetail;
-      } else {
-        window.open(brand.urlCasino, '_blank', 'noopener');
-      }
-    });
-
-    link.addEventListener('click', e => {
-      e.stopPropagation();
-    });
-
-    fragment.appendChild(card);
-  });
-
-  container.append(fragment);
-})();
-
-/* =====================
-   BURGER MENU
-===================== */
-
-(function burgerMenu() {
-  const burger = document.querySelector('.burger');
-  const mobileMenu = document.getElementById('mobileMenu');
-
-  if (!burger || !mobileMenu) return;
-
-  burger.addEventListener('click', () => {
-    burger.classList.toggle('active');
-    mobileMenu.classList.toggle('open');
-  });
-
-  mobileMenu.addEventListener('click', e => {
-    if (e.target === mobileMenu) {
-      burger.classList.remove('active');
-      mobileMenu.classList.remove('open');
-    }
-  });
-})();
-
-/* =====================
-   COUNTRIES DROPDOWN
-===================== */
-
-(function renderCountriesDropdown() {
-  const container = document.getElementById('countriesDropdown');
-  if (!container) return;
-
-  container.innerHTML = COUNTRIES.map(
-    country => `
-      <a href="${country.slug}.html">
-        <img
-          class="flag"
-          src="icons/${country.slug}-flag-icon.svg"
-          alt="${country.name}"
-          loading="lazy"
-        />
-        ${country.name}
-      </a>
-    `
-  ).join('');
-})();
-
-/* =====================
-   ALL COUNTRIES CLOUD
-===================== */
-
-(function renderAllCountries() {
-  const container = document.querySelector('.all-countries .countries-cloud');
-  if (!container) return;
-
-  container.innerHTML = COUNTRIES.map(
-    country => `
-      <a href="${country.slug}.html" class="country-link">
-        <img
-          class="flag"
-          src="icons/${country.slug}-flag-icon.svg"
-          alt="${country.name}"
-          loading="lazy"
-        />
-        <span>${country.name}</span>
-      </a>
-    `
-  ).join('');
-})();
-
-/* =====================
-   HERO COUNTRIES
-===================== */
-
-(function renderHeroCountries() {
-  const container = document.getElementById('heroCountries');
-  if (!container) return;
-
-  const TOP_COUNTRY_CODES = ['us', 'uk', 'ca', 'au', 'de', 'in', 'ar'];
-
-  const topCountries = TOP_COUNTRY_CODES.map(code => COUNTRIES.find(c => c.code === code)).filter(Boolean);
-
-  container.innerHTML = topCountries
-    .map(
-      country => `
-        <a
-          href="${country.slug}.html"
-          class="hero-flag-link"
-          aria-label="${country.name} casinos"
-        >
-          <img
-            class="hero-flag"
-            src="icons/${country.slug}-flag-icon.svg"
-            alt="${country.name} flag"
-            loading="lazy"
-          />
-        </a>
-      `
-    )
-    .join('');
-})();
-
-/* =====================
-   TOP CASINOS (MULTI COUNTRY)
-===================== */
-
-(function renderTopCasinos() {
+  // =====================
+  // TOP CASINOS MULTI-COUNTRY
+  // =====================
   document.querySelectorAll('.content[data-country]').forEach(section => {
-    const countryCode = section.dataset.country?.toUpperCase();
-    if (!countryCode) return;
+    const code = section.dataset.country?.toUpperCase();
+    if (!code) return;
 
-    const title = section.querySelector('.top-country-title');
+    const titleEl = section.querySelector('.top-country-title');
     const grid = section.querySelector('.casino-grid');
     const viewAllWrapper = section.querySelector('.view-all-wrapper');
     const viewAllLink = section.querySelector('.view-all');
+    if (!titleEl || !grid) return;
 
-    if (!title || !grid) return;
-
-    const country = COUNTRIES.find(c => c.code.toUpperCase() === countryCode);
-
+    const country = COUNTRIES.find(c => c.code.toUpperCase() === code);
     const limit = Number(grid.dataset.limit) || 4;
 
-    title.textContent = `Top ${country?.name || countryCode} Casinos`;
+    titleEl.textContent = `Top ${country?.name || code} Casinos`;
 
-    const topBrands = BRANDS.filter(
-      b => b.top?.includes(countryCode) && b.countries?.includes(countryCode)
-    ).slice(0, limit);
+    const topBrands = BRANDS.filter(b => b.top?.includes(code) && b.countries?.includes(code)).slice(
+      0,
+      limit
+    );
 
     if (!topBrands.length) {
       grid.innerHTML = `<p>No top casinos available.</p>`;
-      return;
+    } else {
+      const fragment = document.createDocumentFragment();
+      topBrands.forEach(b => fragment.appendChild(createCasinoCard(b)));
+      grid.replaceChildren(fragment);
     }
-
-    grid.innerHTML = '';
-
-    topBrands.forEach(brand => {
-      const wrapper = document.createElement('div');
-      wrapper.innerHTML = renderCasinoCard(brand);
-
-      const card = wrapper.firstElementChild;
-
-      card.addEventListener('click', e => {
-        if (e.target.closest('.cta')) return;
-
-        if (brand.hasDetailPage) {
-          window.location.href = brand.urlDetail;
-        } else {
-          window.open(brand.urlCasino, '_blank', 'noopener');
-        }
-      });
-
-      // Клік по кнопці → тільки зовнішній лінк (1 вкладка)
-      const link = card.querySelector('.cta');
-      if (link) {
-        link.addEventListener('click', e => {
-          e.stopPropagation();
-        });
-      }
-
-      grid.appendChild(card);
-    });
 
     if (country && viewAllWrapper && viewAllLink) {
       viewAllWrapper.hidden = false;
       viewAllLink.href = `${country.slug}.html`;
     }
   });
-})();
 
-/* =====================
-   BRAND DETAILS PAGE
-===================== */
-
-(function renderBrandDetails() {
+  // =====================
+  // BRAND DETAILS PAGE
+  // =====================
   const brandKey = document.body.dataset.brand?.toLowerCase();
-  if (!brandKey) return;
+  if (brandKey) {
+    const brand = BRANDS.find(b => b.urlDetail?.toLowerCase().includes(brandKey));
 
-  const brand = BRANDS.find(b => b.urlDetail.includes(brandKey));
-  if (!brand) return;
+    if (brand) {
+      const countriesEl = document.getElementById('brand-countries');
+      const paymentsEl = document.getElementById('brand-payments');
 
-  const countriesEl = document.getElementById('brand-countries');
-  const paymentsEl = document.getElementById('brand-payments');
-
-  if (countriesEl && brand.countries?.length) {
-    countriesEl.innerHTML = brand.countries
-      .map(code => {
-        const country = COUNTRIES.find(c => c.code.toLowerCase() === code.toLowerCase());
-        if (!country) return '';
-        return `
-          <div class="flag-container">
-            <img class="hero-flag"
-              src="../icons/${country.slug}-flag-icon.svg"
-              alt="${country.name}"
-              loading="lazy"
-            />
-            <span>${country.name}</span>
-          </div>
-        `;
-      })
-      .join('');
-  }
-
-  if (paymentsEl && brand.payments?.length) {
-    paymentsEl.innerHTML = brand.payments
-      .map(
-        method => `
-          <div class="payments">
-            <img
-              src="../icons/payments/${method}.svg"
-              alt="${method}"
-              loading="lazy"
-            />
-          </div>
-        `
-      )
-      .join('');
-  }
-})();
-
-/* =====================
-   MOBILE MENU COUNTRIES
-===================== */
-(function renderMobileMenuCountries() {
-  const mobileMenuContainer = document.querySelector('#mobileMenu .mobile-menu-inner');
-  if (!mobileMenuContainer) return;
-
-  mobileMenuContainer.innerHTML = '<h4>Countries</h4>';
-
-  COUNTRIES.forEach(country => {
-    const link = document.createElement('a');
-    link.href = `${country.slug}.html`;
-    link.className = 'mobile-country-link';
-    link.innerHTML = `
-      <img class="flag" src="icons/${country.slug}-flag-icon.svg" alt="${country.name}" loading="lazy">
-      <span>${country.name}</span>
-    `;
-    mobileMenuContainer.appendChild(link);
-  });
-})();
-
-/* =====================
-   GLOBAL LOADER
-===================== */
-
-window.addEventListener('load', () => {
-  const loader = document.getElementById('globalLoader');
-  if (!loader) return;
-
-  loader.classList.add('hidden');
-  setTimeout(() => loader.remove(), 300);
-});
-
-/* =====================
-   HEADER SCROLL
-===================== */
-
-let lastScroll = 0;
-const header = document.querySelector('.header');
-
-window.addEventListener('scroll', () => {
-  const currentScroll = window.pageYOffset || document.documentElement.scrollTop;
-
-  if (currentScroll > lastScroll && currentScroll > 100) {
-    header.classList.add('hidden');
-  } else {
-    header.classList.remove('hidden');
-  }
-
-  lastScroll = currentScroll;
-});
-
-/* =====================
-   RENDER CARDS (NEW / EXCLUSIVE)
-===================== */
-function renderCards({ brands, containerId, templateId, isExclusive = false }) {
-  const container = document.querySelector(containerId);
-  const template = document.querySelector(templateId);
-  if (!container || !template) return;
-
-  if (!brands.length) {
-    container.innerHTML = `<p>No ${isExclusive ? 'exclusive offers' : 'new casinos'} available at the moment.</p>`;
-    return;
-  }
-
-  const fragment = document.createDocumentFragment();
-
-  brands.forEach(brand => {
-    const card = template.content.cloneNode(true);
-    const article = card.querySelector('.casino-card');
-    const img = card.querySelector('.casino-image');
-    const title = card.querySelector('.casino-name');
-    const bonusText = card.querySelector('.casino-bonus');
-    const link = card.querySelector('.cta');
-    const paymentsContainer = card.querySelector('.payment-icons');
-
-    img.src = brand.image;
-    img.alt = brand.name;
-    img.loading = 'lazy';
-    title.textContent = brand.name;
-    bonusText.textContent = brand.bonus;
-
-    link.textContent = brand.cta;
-    link.href = brand.urlCasino;
-    link.target = '_blank';
-    link.rel = 'noopener noreferrer';
-
-    if (paymentsContainer && brand.payments?.length) {
-      paymentsContainer.innerHTML = renderPayments(brand.payments);
-    }
-
-    article.addEventListener('click', e => {
-      if (e.target.closest('.cta')) return;
-      if (brand.hasDetailPage) {
-        window.location.href = brand.urlDetail;
-      } else {
-        window.open(brand.urlCasino, '_blank', 'noopener');
+      if (countriesEl && brand.countries?.length) {
+        countriesEl.innerHTML = brand.countries
+          .map(code => {
+            const c = COUNTRIES.find(x => x.code.toLowerCase() === code.toLowerCase());
+            if (!c) return '';
+            return `
+              <div class="flag-container">
+                <img class="hero-flag" src="../icons/${c.slug}-flag-icon.svg" alt="${c.name}" loading="lazy"/>
+                <span>${c.name}</span>
+              </div>
+            `;
+          })
+          .join('');
       }
+
+      if (paymentsEl && brand.payments?.length) {
+        paymentsEl.innerHTML = brand.payments
+          .map(
+            p =>
+              `<div class="payments">
+                <img src="../icons/payments/${p}.svg" alt="${p}" loading="lazy"/>
+              </div>`
+          )
+          .join('');
+      }
+    }
+  }
+
+  // =====================
+  // COUNTRIES DROPDOWN
+  // =====================
+  const countriesDropdown = document.getElementById('countriesDropdown');
+  if (countriesDropdown) {
+    countriesDropdown.innerHTML = COUNTRIES.map(
+      c => `
+        <a href="${c.slug}.html">
+          <img class="flag" src="icons/${c.slug}-flag-icon.svg" alt="${c.name}" loading="lazy"/>
+          ${c.name}
+        </a>
+      `
+    ).join('');
+  }
+
+  // =====================
+  // ALL COUNTRIES CLOUD
+  // =====================
+  document.querySelector('.all-countries .countries-cloud')?.replaceChildren(
+    ...COUNTRIES.map(c => {
+      const a = document.createElement('a');
+      a.href = `${c.slug}.html`;
+      a.className = 'country-link';
+      a.innerHTML = `
+        <img class="flag" src="icons/${c.slug}-flag-icon.svg" alt="${c.name}" loading="lazy">
+        <span>${c.name}</span>
+      `;
+      return a;
+    })
+  );
+
+  // =====================
+  // BURGER MENU
+  // =====================
+  const burger = document.querySelector('.burger');
+  const mobileMenu = document.getElementById('mobileMenu');
+
+  if (burger && mobileMenu) {
+    burger.addEventListener('click', () => {
+      burger.classList.toggle('active');
+      mobileMenu.classList.toggle('open');
     });
 
-    link.addEventListener('click', e => e.stopPropagation());
+    mobileMenu.addEventListener('click', e => {
+      if (e.target === mobileMenu) {
+        burger.classList.remove('active');
+        mobileMenu.classList.remove('open');
+      }
+    });
+  }
 
-    fragment.appendChild(card);
+  // =====================
+  // GLOBAL LOADER
+  // =====================
+  window.addEventListener('load', () => {
+    const loader = document.getElementById('globalLoader');
+    if (!loader) return;
+    loader.classList.add('hidden');
+    setTimeout(() => loader.remove(), 300);
   });
 
-  container.appendChild(fragment);
-}
+  // =====================
+  // HEADER SCROLL
+  // =====================
+  const header = document.querySelector('.header');
+  if (header) {
+    let lastScroll = 0;
 
-/* =====================
-   AUTO RENDER NEW / EXCLUSIVE
-===================== */
-if (document.body.dataset.page === 'exclusive-offers') {
-  renderCards({
-    brands: BRANDS.filter(b => b.isExclusive),
-    containerId: '#exclusive-cards',
-    templateId: '#exclusive-card-template',
-    isExclusive: true,
-  });
-}
+    window.addEventListener('scroll', () => {
+      const current = window.pageYOffset || document.documentElement.scrollTop;
 
-if (document.body.dataset.page === 'new-casinos') {
-  renderCards({
-    brands: BRANDS.filter(b => b.isNew),
-    containerId: '#brand-cards',
-    templateId: '#casino-card-template',
-  });
-}
+      header.classList.toggle('hidden', current > lastScroll && current > 100);
+
+      lastScroll = current;
+    });
+  }
+};
+
+// =====================
+// AUTO INIT
+// =====================
+document.addEventListener('DOMContentLoaded', initCasinoPage);

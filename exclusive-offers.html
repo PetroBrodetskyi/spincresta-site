@@ -4,19 +4,21 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <title>SpinCresta | Exclusive Casino & Betting Offers Worldwide</title>
+    <title>Exclusive Casino Offers 2026 | Private Bonuses & Limited Deals</title>
     <link rel="icon" type="image/png" sizes="64x64" href="favicon.png" />
+
     <meta
       name="description"
-      content="Discover exclusive online casino and betting offers worldwide. Special bonuses, free spins, and top promotions just for you."
+      content="Claim exclusive casino bonuses and private betting promotions not available elsewhere. Verified limited-time offers with higher value and better terms."
     />
+
     <meta name="robots" content="index, follow" />
 
     <!-- Open Graph -->
-    <meta property="og:title" content="SpinCresta | Exclusive Casino & Betting Offers" />
+    <meta property="og:title" content="Exclusive Casino Offers | Private Bonuses 2026" />
     <meta
       property="og:description"
-      content="Explore exclusive online casino and betting offers with top bonuses, verified payment options, and trusted platforms."
+      content="Access private casino and sportsbook deals negotiated directly with operators. Limited-time exclusive promotions."
     />
     <meta property="og:type" content="website" />
 
@@ -32,24 +34,27 @@
     <header class="header">
       <div class="header-container header-inner">
         <a href="index.html" class="logo"> SpinCresta<span class="logo-com">.com</span> </a>
+
         <nav class="nav" aria-label="Main navigation">
           <div class="nav-dropdown">
             <a href="#" class="nav-dropdown-link" aria-haspopup="true" aria-expanded="false"> Countries </a>
             <div class="nav-dropdown-menu" id="countriesDropdown"></div>
           </div>
+
           <a href="index.html">Top Casinos</a>
           <a href="new-casinos.html">New Casinos</a>
-          <a href="#">Top Rated</a>
-          <a href="exclusive-offers.html" class="active">Exclusive Offers</a>
+          <a href="top-rated.html">Top Rated</a>
+          <a href="exclusive-offers.html" aria-current="page">Exclusive Offers</a>
           <a href="#">Bonuses</a>
           <a href="#">Reviews</a>
           <a href="#">Promotions</a>
           <a href="about.html">About</a>
         </nav>
+
         <button
           class="burger"
           type="button"
-          aria-label="Open countries menu"
+          aria-label="Open mobile menu"
           aria-controls="mobileMenu"
           aria-expanded="false"
         >
@@ -59,7 +64,7 @@
         </button>
       </div>
 
-      <nav class="mobile-menu" id="mobileMenu" aria-hidden="true" aria-label="Mobile countries navigation">
+      <nav class="mobile-menu" id="mobileMenu" aria-hidden="true">
         <div class="mobile-menu-inner"></div>
       </nav>
     </header>
@@ -68,26 +73,92 @@
       <!-- HERO -->
       <section class="hero container">
         <div class="hero-content">
-          <h1>Exclusive Casino & Betting Offers</h1>
+          <h1>Exclusive Casino & Sportsbook Offers</h1>
           <p>
-            Access the best exclusive online casino and sports betting promotions worldwide, including special
-            bonuses and free spins.
+            Private promotions negotiated directly with operators. Higher bonuses, better terms, limited
+            availability.
           </p>
         </div>
+        <div class="hero-banner"></div>
       </section>
 
-      <!-- EXCLUSIVE OFFERS -->
+      <!-- EXCLUSIVE LIST -->
       <section class="content">
         <div class="container">
           <header class="section-head">
-            <h2>Exclusive Offers</h2>
+            <h2>Private & Limited-Time Deals</h2>
           </header>
+
           <p class="intro">
-            Explore our curated list of exclusive offers from casinos and betting sites. Only available here
-            for a limited time.
+            These exclusive offers are not publicly promoted on casino websites. They are available through
+            direct partnerships and may expire without notice.
           </p>
+
           <div class="casino-grid" id="exclusive-cards"></div>
         </div>
+      </section>
+
+      <!-- SEO CONTENT BLOCK -->
+      <section class="content">
+        <div class="container content-article">
+          <h2>What Makes an Offer “Exclusive”?</h2>
+          <p>
+            Exclusive offers are negotiated directly with casino and sportsbook operators. They often include
+            enhanced welcome bonuses, additional free spins, cashback improvements or reduced wagering
+            requirements compared to publicly listed promotions.
+          </p>
+
+          <h3>Higher Bonus Value</h3>
+          <p>
+            Many exclusive deals provide improved match percentages or additional bonus caps. This increases
+            total playable balance and long-term value.
+          </p>
+
+          <h3>Better Wagering Terms</h3>
+          <p>
+            Some private promotions include reduced rollover requirements or clearer withdrawal policies,
+            improving the overall player experience.
+          </p>
+
+          <h3>Limited Availability</h3>
+          <p>
+            Exclusive bonuses are often restricted by time or region. Once removed, they may not return in the
+            same format.
+          </p>
+
+          <h2>How We Select Exclusive Casinos</h2>
+          <p>
+            Every listed brand is evaluated for licensing, security, payout reliability, bonus transparency
+            and long-term reputation. Only verified and trusted operators qualify for exclusive placement.
+          </p>
+
+          <h2>Frequently Asked Questions About Exclusive Offers</h2>
+
+          <dl>
+            <dt>Are exclusive offers better than regular bonuses?</dt>
+            <dd>
+              Often yes. They may include higher value, extra spins or improved wagering terms compared to
+              public promotions.
+            </dd>
+
+            <dt>Do exclusive bonuses expire?</dt>
+            <dd>Yes. Many are limited-time agreements and may be removed or replaced.</dd>
+
+            <dt>Are exclusive casinos safe?</dt>
+            <dd>
+              All featured platforms operate under recognized licenses and pass strict internal evaluation
+              criteria.
+            </dd>
+
+            <dt>Can I claim multiple exclusive offers?</dt>
+            <dd>Eligibility depends on the operator’s terms and your registration status.</dd>
+          </dl>
+        </div>
+      </section>
+
+      <!-- COUNTRIES CLOUD -->
+      <section class="all-countries">
+        <div class="container countries-cloud"></div>
       </section>
     </main>
 
@@ -99,20 +170,6 @@
         </p>
       </div>
     </footer>
-
-    <!-- CARD TEMPLATE FOR EXCLUSIVE OFFERS -->
-    <template id="exclusive-card-template">
-      <article class="casino-card">
-        <div class="exclusive-badge">EXCLUSIVE</div>
-        <div class="card-img">
-          <img class="casino-image" alt="" loading="lazy" />
-        </div>
-        <h3 class="casino-name"></h3>
-        <p class="casino-bonus"></p>
-        <div class="payment-icons"></div>
-        <a class="cta" href="#" rel="noopener noreferrer">Play Now</a>
-      </article>
-    </template>
 
     <script type="module" src="scripts/main.js"></script>
   </body>

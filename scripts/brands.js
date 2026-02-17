@@ -9,7 +9,7 @@ export const BRANDS = [
     countries: ['UK'],
     top: ['UK'],
     payments: ['visa', 'mastercard', 'neteller', 'skrill', 'paysafecard'],
-    isNew: true,
+    isTopRated: true,
   },
   {
     name: 'Fortunica',
@@ -53,6 +53,7 @@ export const BRANDS = [
     top: ['US'],
     countries: ['US'],
     payments: ['visa', 'mastercard', 'bitcoin', 'tether', 'litecoin', 'bitcoincash', 'ethereum'],
+    isTopRated: true,
   },
   {
     name: 'Chanced',
@@ -94,6 +95,7 @@ export const BRANDS = [
     top: ['US'],
     countries: ['US'],
     payments: ['visa', 'mastercard', 'bitcoin', 'tether', 'litecoin', 'bitcoincash', 'ethereum'],
+    isTopRated: true,
   },
   {
     name: 'Lucky Red',
@@ -116,6 +118,7 @@ export const BRANDS = [
     image: 'images/cazino.webp',
     countries: ['US'],
     payments: ['visa', 'mastercard'],
+    isTopRated: true,
   },
   {
     name: 'Betlabel',
@@ -304,6 +307,7 @@ export const BRANDS = [
     image: 'images/beton.webp',
     countries: ['UA'],
     payments: ['visa', 'mastercard', 'applepay', 'googlepay'],
+    isTopRated: true,
   },
   {
     name: 'BetOn Sport',
@@ -426,6 +430,7 @@ export const BRANDS = [
       'PK',
       'BR',
     ],
+    top: ['BR'],
     payments: ['bitcoin', 'ethereum', 'bitcoincash', 'cardano', 'litecoin', 'tether', 'tron'],
   },
   {
@@ -673,7 +678,7 @@ export const BRANDS = [
     countries: ['AT', 'CH', 'CA', 'DE', 'IT', 'CZ', 'PL', 'HU'],
     top: ['CA'],
     payments: ['litecoin', 'ethereum', 'bitcoin', 'tron'],
-    isNew: true,
+    isTopRated: true,
   },
   {
     name: 'Manga',
@@ -823,6 +828,7 @@ export const BRANDS = [
     image: 'images/pantherbet.webp',
     countries: ['ZA'],
     payments: ['visa', 'mastercard', 'applepay'],
+    isTopRated: true,
   },
   {
     name: 'NV Casino',
@@ -966,6 +972,7 @@ export const BRANDS = [
       'UZ',
       'VN',
     ],
+    top: ['BR'],
     payments: [
       'visa',
       'mastercard',
@@ -977,6 +984,7 @@ export const BRANDS = [
       'ethereum',
       'litecoin',
     ],
+    isNew: true,
   },
   {
     name: 'Ozwin Casino',
@@ -1088,6 +1096,7 @@ export const BRANDS = [
       'UZ',
       'VN',
     ],
+    top: ['BR'],
     payments: ['visa', 'mastercard', 'skrill', 'neteller', 'bitcoin', 'tether', 'ethereum', 'litecoin'],
   },
   {
@@ -1252,7 +1261,9 @@ export const BRANDS = [
       'BR',
       'NO',
     ],
+    top: ['BR'],
     payments: ['visa', 'mastercard', 'applepay', 'googlepay', 'bitcoin', 'ethereum', 'litecoin'],
+    isNew: true,
   },
   {
     name: 'SlotsPlus',
