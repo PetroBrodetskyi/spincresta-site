@@ -58,8 +58,13 @@
       </div>
 
       <!-- MOBILE MENU -->
-      <nav class="mobile-menu" id="mobileMenu" aria-hidden="true" aria-label="Mobile countries navigation">
-        <div class="mobile-menu-inner"></div>
+      <nav class="mobile-menu" id="mobileMenu" aria-hidden="true">
+        <div class="mobile-overlay" data-action="close"></div>
+
+        <div class="mobile-menu-panel" role="dialog" aria-modal="true">
+          <button class="mobile-close-btn" aria-label="Close menu" data-action="close">×</button>
+          <div class="mobile-menu-inner"></div>
+        </div>
       </nav>
     </header>
 
