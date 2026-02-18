@@ -237,15 +237,19 @@ export const initCasinoPage = () => {
   );
 
   // =====================
-  // MOBILE MENU TOGGLE
+  // MOBILE MENU
   // =====================
   const burger = document.querySelector('.burger');
   const mobileMenu = document.getElementById('mobileMenu');
-  const mobileMenuInner = document.querySelector('.mobile-menu-inner');
+  const overlay = mobileMenu?.querySelector('.mobile-overlay');
+  const panel = mobileMenu?.querySelector('.mobile-menu-panel');
+  const closeButtons = mobileMenu?.querySelectorAll('[data-action="close"]');
+  const body = document.body;
 
-  if (burger && mobileMenu && mobileMenuInner) {
+  if (burger && mobileMenu) {
+    const mobileMenuInner = mobileMenu.querySelector('.mobile-menu-inner');
     mobileMenuInner.innerHTML = `
-    <button class="submenu-toggle">Countries</button>
+    <button class="submenu-toggle" aria-expanded="false">Countries</button>
     <a href="index.html">Top Casinos</a>
     <a href="new-casinos.html">New Casinos</a>
     <a href="top-rated.html">Top Rated</a>
@@ -256,33 +260,70 @@ export const initCasinoPage = () => {
     <a href="about.html">About</a>
   `;
 
+    const submenuToggle = mobileMenuInner.querySelector('.submenu-toggle');
     const countriesSubmenu = document.createElement('div');
     countriesSubmenu.className = 'mobile-submenu';
     countriesSubmenu.innerHTML = COUNTRIES.map(
       c => `
-      <a href="${c.slug}.html">
-        <img class="flag" src="icons/${c.slug}-flag-icon.svg" alt="${c.name}" loading="lazy"/>
-        ${c.name}
-      </a>
-    `
+    <a href="${c.slug}.html">
+      <img class="flag" src="icons/${c.slug}-flag-icon.svg" alt="${c.name}" loading="lazy"/>
+      ${c.name}
+    </a>
+  `
     ).join('');
-    mobileMenuInner.appendChild(countriesSubmenu);
 
-    const submenuToggle = mobileMenuInner.querySelector('.submenu-toggle');
+    mobileMenuInner.insertBefore(countriesSubmenu, submenuToggle.nextSibling);
+
     submenuToggle.addEventListener('click', () => {
-      countriesSubmenu.classList.toggle('open');
-      submenuToggle.classList.toggle('active');
+      const expanded = submenuToggle.getAttribute('aria-expanded') !== 'true';
+      submenuToggle.setAttribute('aria-expanded', expanded);
+      submenuToggle.classList.toggle('active', expanded);
+      countriesSubmenu.style.maxHeight = expanded ? `${countriesSubmenu.scrollHeight}px` : '0px';
     });
+
+    function openMenu() {
+      mobileMenu.classList.add('open');
+      burger.classList.add('active');
+      body.classList.add('menu-open');
+      burger.setAttribute('aria-expanded', 'true');
+      mobileMenu.setAttribute('aria-hidden', 'false');
+    }
+
+    function closeMenu() {
+      mobileMenu.classList.remove('open');
+      burger.classList.remove('active');
+      body.classList.remove('menu-open');
+      burger.setAttribute('aria-expanded', 'false');
+      mobileMenu.setAttribute('aria-hidden', 'true');
+
+      submenuToggle.classList.remove('active');
+      submenuToggle.setAttribute('aria-expanded', 'false');
+      countriesSubmenu.style.maxHeight = '0px';
+    }
 
     burger.addEventListener('click', () => {
-      burger.classList.toggle('active');
-      mobileMenu.classList.toggle('open');
+      if (window.innerWidth > 1024) return;
+      mobileMenu.classList.contains('open') ? closeMenu() : openMenu();
     });
 
-    mobileMenu.addEventListener('click', e => {
-      if (e.target === mobileMenu) {
-        burger.classList.remove('active');
-        mobileMenu.classList.remove('open');
+    overlay?.addEventListener('click', closeMenu);
+
+    closeButtons?.forEach(btn => btn.addEventListener('click', closeMenu));
+
+    mobileMenuInner.addEventListener('click', e => {
+      if (e.target.closest('.mobile-submenu')) return;
+      if (e.target.closest('a')) closeMenu();
+    });
+
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape' && mobileMenu.classList.contains('open')) {
+        closeMenu();
+      }
+    });
+
+    window.addEventListener('resize', () => {
+      if (window.innerWidth > 1024 && mobileMenu.classList.contains('open')) {
+        closeMenu();
       }
     });
   }
