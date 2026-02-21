@@ -321,7 +321,7 @@ export const BRANDS = [
     urlCasino: 'https://armadaapp.media-412.com/click?pid=3862&offer_id=121458',
     image: 'images/4rabet.svg',
     countries: ['IN'],
-    isExclusive: true,
+    isTopRated: true,
     payments: [
       'visa',
       'mastercard',
@@ -342,7 +342,7 @@ export const BRANDS = [
     urlCasino: 'https://armadaapp.media-412.com/click?pid=3862&offer_id=115537',
     image: 'images/rajabets.svg',
     countries: ['IN'],
-    isTopRated: true,
+    // isTopRated: true,
     payments: ['visa', 'mastercard', 'googlepay', 'bitcoin', 'tether'],
   },
   {
@@ -498,7 +498,6 @@ export const BRANDS = [
       'tether',
       'tron',
     ],
-    isTopRated: true,
   },
   {
     name: 'AmonBet',
