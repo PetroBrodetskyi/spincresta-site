@@ -78,4 +78,8 @@
   <url><loc>https://spincresta.com/uzbekistan.html</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
   <url><loc>https://spincresta.com/vietnam.html</loc><changefreq>weekly</changefreq><priority>0.8</priority></url>
 
+  <url><loc>https://spincresta.com/about.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://spincresta.com/responsible-gambling.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+  <url><loc>https://spincresta.com/privacy-policy.html</loc><changefreq>monthly</changefreq><priority>0.7</priority></url>
+
 </urlset>
