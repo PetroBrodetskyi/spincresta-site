@@ -227,7 +227,7 @@ export const BRANDS = [
     bonus: 'Casino Welcome Bonus - 100% up to €500 + 200 Free Spins',
     cta: 'Play Now',
     urlDetail: 'brands/robocat.html',
-    urlCasino: 'https://armadaapp.media-412.com/click?pid=3862&offer_id=121512',
+    urlCasino: 'https://armadaapp.media-412.com/click?pid=3862&offer_id=121513',
     image: 'images/robocat.png',
     countries: ['FR', 'CZ', 'DE', 'AT', 'LV', 'EE'],
     payments: [
@@ -314,9 +314,10 @@ export const BRANDS = [
     cta: 'Play Now',
     urlDetail: 'brands/neospin.html',
     urlCasino: 'https://armadaapp.media-412.com/click?pid=3862&offer_id=120678',
-    image: 'images/neospin.webp',
+    image: 'images/neospin.svg',
     countries: ['AU', 'CA', 'CL', 'NZ', 'DK', 'DE'],
-    payments: ['visa', 'ecopayz', 'neteller', 'skrill', 'mifinity'],
+    payments: ['visa', 'neteller', 'skrill', 'mifinity', 'banktransfer', 'ecopayz'],
+    isTopRated: true,
   },
   {
     name: 'Frumzi',
