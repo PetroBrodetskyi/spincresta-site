@@ -452,9 +452,6 @@ body {
 .content-article {
   margin-top: 32px;
   position: relative;
-  padding: 20px;
-  background-color: var(--bg-card);
-  border-radius: var(--radius-lg);
 }
 
 @media (max-width: 768px) {
@@ -466,8 +463,7 @@ body {
 }
 
 .content-article h3 {
-  margin-top: 32px;
-  margin-bottom: 10px;
+  margin-top: 12px;
   font-size: 20px;
   z-index: 100;
 }
@@ -475,7 +471,6 @@ body {
 .content-article p {
   color: var(--text-muted);
   margin-bottom: 16px;
-  line-height: 1.7;
 }
 
 .about-list {
@@ -483,39 +478,62 @@ body {
 }
 
 /* ===================== ALL COUNTRIES CLOUD ===================== */
-
 .all-countries {
   margin-top: 20px;
+}
+
+.title {
+  text-align: center;
 }
 
 .countries-cloud {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-around;
-  gap: 16px;
-  margin-top: 20px;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 32px;
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-soft);
 }
 
 .countries-cloud a {
-  font-size: clamp(12px, 1.2vw, 16px);
-  color: #e5e7eb;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px;
+  background-color: rgba(255, 255, 255, 0.05);
+  border-radius: 8px;
   text-decoration: none;
-  padding: 6px 10px;
-  border-radius: var(--radius-md);
+  color: #e5e7eb;
   transition: all 0.3s ease;
-  background: rgba(15, 23, 42, 0.5);
 }
 
 .countries-cloud a:hover {
   background: rgba(56, 189, 248, 0.15);
-  color: var(--accent);
+  color: var(--gold);
   transform: scale(1.1);
   box-shadow: var(--shadow-hover);
 }
 
+.countries-cloud a img.flag {
+  object-fit: contain;
+}
+
+.countries-cloud a span {
+  font-size: 0.85rem;
+  line-height: 1.2;
+  word-break: break-word;
+}
+
+/* ===================== MOBILE ===================== */
 @media (max-width: 768px) {
   .countries-cloud {
-    gap: 12px;
+    gap: 10px;
+    padding: 12px;
+  }
+
+  .countries-cloud a {
+    padding: 6px;
   }
 }
 
@@ -752,7 +770,7 @@ body {
 }
 
 .submenu-toggle.active + .mobile-submenu {
-  max-height: 600px; /* достаточно большой запас */
+  max-height: 600px;
   padding: 12px 0 16px 28px;
 }
 
@@ -767,7 +785,6 @@ body {
   transform: translateX(4px);
 }
 
-/* Иконки флагов в подменю */
 .mobile-submenu .flag {
   width: 24px;
   height: 24px;
@@ -775,7 +792,6 @@ body {
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
 }
 
-/* Анимация появления пунктов при открытии меню */
 .mobile-menu-inner > *:not(.mobile-menu-header) {
   opacity: 0;
   transform: translateY(16px);
@@ -1074,4 +1090,78 @@ body {
 
 .payments img {
   height: 20px;
+}
+
+/* =====================
+   TIMELINE
+===================== */
+.timeline {
+  position: relative;
+  padding-left: 28px;
+}
+
+.timeline::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 2px;
+  width: 2px;
+  background: var(--gold);
+  border-radius: 2px;
+}
+
+@media (max-width: 768px) {
+  .timeline {
+    padding-left: 36px;
+  }
+
+  .timeline::before {
+    left: 10px;
+  }
+}
+
+/* =====================
+   FAQ GRID
+===================== */
+.faq-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+  margin-top: 32px;
+}
+
+.faq-card {
+  border: 1px solid var(--border-glass);
+  border-radius: var(--radius-lg);
+  padding: 24px;
+  box-shadow: var(--shadow-hover);
+}
+
+.faq-card h3 {
+  margin-bottom: 16px;
+  color: var(--text-main);
+  line-height: 1.3;
+}
+
+.faq-card p {
+  color: var(--text-muted);
+  line-height: 1.7;
+  font-size: 16px;
+  margin: 0;
+}
+
+@media (max-width: 768px) {
+  .faq-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .faq-card {
+    padding: 24px 28px;
+  }
+
+  .faq-card h3 {
+    font-size: 20px;
+  }
 }
