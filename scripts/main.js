@@ -71,19 +71,44 @@ const createCasinoCard = ({
   return article;
 };
 
+const ITEMS_PER_BATCH = 16;
+
 const renderBrandList = (brands, containerSelector, emptyText) => {
   const container = document.querySelector(containerSelector);
+  const loadMoreBtn = document.getElementById('loadMoreBtn');
   if (!container) return;
 
   if (!brands.length) {
     container.innerHTML = `<p>${emptyText}</p>`;
+    loadMoreBtn?.remove();
     return;
   }
 
-  const fragment = document.createDocumentFragment();
-  brands.forEach(brand => fragment.appendChild(createCasinoCard(brand)));
+  let visibleCount = 0;
 
-  container.replaceChildren(fragment);
+  container.innerHTML = '';
+
+  const renderNextBatch = () => {
+    const nextItems = brands.slice(visibleCount, visibleCount + ITEMS_PER_BATCH);
+
+    const fragment = document.createDocumentFragment();
+    nextItems.forEach(brand => {
+      fragment.appendChild(createCasinoCard(brand));
+    });
+
+    container.appendChild(fragment);
+    visibleCount += ITEMS_PER_BATCH;
+
+    if (visibleCount >= brands.length) {
+      loadMoreBtn?.remove();
+    }
+  };
+
+  renderNextBatch();
+
+  if (loadMoreBtn) {
+    loadMoreBtn.onclick = renderNextBatch;
+  }
 };
 
 // =====================

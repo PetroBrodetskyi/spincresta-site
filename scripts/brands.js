@@ -220,7 +220,6 @@ export const BRANDS = [
       'cardano',
       'tron',
     ],
-    isTopRated: true,
   },
   {
     name: 'RoboCat',
