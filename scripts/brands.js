@@ -309,6 +309,17 @@ export const BRANDS = [
     ],
   },
   {
+    name: 'Spinarium',
+    bonus: 'Welcome Bonus 500% Up to €4.24K + 200 Free Spins!',
+    cta: 'Play Now',
+    urlDetail: 'brands/spinarium.html',
+    urlCasino: 'https://armadaapp.media-412.com/click?pid=3862&offer_id=121547',
+    image: 'images/spinarium.avif',
+    countries: ['MX', 'CL', 'CO', 'BR', 'AR'],
+    payments: ['visa', 'mastercard', 'applepay', 'googlepay', 'banktransfer'],
+    isTopRated: true,
+  },
+  {
     name: 'Neospin',
     bonus: 'Total Welcome Pack: 300% up to €7,000 + 300 FS. Get Bonus',
     cta: 'Play Now',
@@ -317,7 +328,6 @@ export const BRANDS = [
     image: 'images/neospin.svg',
     countries: ['AU', 'CA', 'CL', 'NZ', 'DK', 'DE'],
     payments: ['visa', 'neteller', 'skrill', 'mifinity', 'banktransfer', 'ecopayz'],
-    isTopRated: true,
   },
   {
     name: 'Frumzi',
