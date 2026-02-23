@@ -250,7 +250,7 @@ export const initCasinoPage = () => {
     const mobileMenuInner = mobileMenu.querySelector('.mobile-menu-inner');
     mobileMenuInner.innerHTML = `
     <button class="submenu-toggle" aria-expanded="false">Countries</button>
-    <a href="index.html">Top Casinos</a>
+    <a href="top-casinos.html">Top Casinos</a>
     <a href="new-casinos.html">New Casinos</a>
     <a href="top-rated.html">Top Rated</a>
     <a href="exclusive-offers.html">Exclusive Offers</a>
