@@ -960,77 +960,6 @@ body {
   color: var(--text-main);
   line-height: 1.6;
 }
-
-/* =====================
-   PLAYER REVIEW GRID
-===================== */
-.player-review {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 16px;
-}
-
-.player-review > div {
-  padding: 18px 0;
-}
-
-.player-review > div strong {
-  display: block;
-  font-size: 1.05rem;
-  font-weight: 600;
-  color: var(--gold);
-  margin-bottom: 0.8rem;
-}
-
-.player-review > div span {
-  font-size: 0.95rem;
-  color: var(--text-main);
-}
-
-/* =====================
-   FEATURED GAMES GRID
-===================== */
-.casino-grid-review {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 20px;
-  margin-bottom: 30px;
-}
-
-.casino-card-review {
-  padding: 18px 0;
-}
-
-.casino-card-review .card-img {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex: 1;
-}
-
-.casino-card-review h3 {
-  font-size: 20px;
-}
-
-.casino-card-review p {
-  font-size: 16px;
-  color: var(--text-muted);
-}
-
-.hero-review {
-  display: flex;
-  justify-content: center;
-  gap: 40px;
-}
-
-.brand-logo-container {
-  padding: 60px;
-}
-
-.brand-logo {
-  width: 200px;
-}
-
 /* =====================
    GLOBAL LOADER
 ===================== */
@@ -1190,4 +1119,78 @@ body {
   display: flex;
   justify-content: center;
   margin-top: 24px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 2rem 0;
+  font-size: 1.05rem;
+}
+
+th,
+td {
+  padding: 14px 16px;
+  text-align: left;
+  border: 1px solid var(--border-glass);
+  vertical-align: top;
+}
+
+thead tr {
+  background: rgba(255, 215, 0, 0.12);
+  color: var(--text-main);
+}
+
+tbody tr:nth-child(even) {
+  background: rgba(255, 255, 255, 0.03);
+}
+
+tbody tr:hover {
+  background: rgba(0, 212, 255, 0.08);
+  transition: background 0.3s ease;
+}
+
+.top-slots-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 32px;
+  margin-top: 2.5rem;
+}
+
+.top-slot-card {
+  background: var(--bg-card);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  border: 1px solid var(--border-glass);
+  transition: var(--transition);
+  backdrop-filter: var(--blur-glass);
+  text-align: center;
+  padding: 1.5rem;
+}
+
+.top-slot-card:hover {
+  transform: translateY(-16px) scale(1.03);
+  box-shadow: var(--shadow-hover);
+  border-color: var(--gold);
+}
+
+.top-slot-card h3 {
+  margin: 1rem 0 0.8rem;
+  color: var(--text-main);
+}
+
+.top-slot-card p {
+  color: var(--text-muted);
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+@media (max-width: 768px) {
+  .top-slots-grid {
+    grid-template-columns: 1fr;
+  }
+  th,
+  td {
+    padding: 10px 12px;
+  }
 }
