@@ -1194,3 +1194,48 @@ tbody tr:hover {
     padding: 10px 12px;
   }
 }
+
+/* =====================
+   FOOTER NAV + TELEGRAM
+===================== */
+
+.footer-nav {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
+  margin-top: 12px;
+}
+
+.footer-nav a {
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: all 0.25s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.footer-nav a:hover {
+  color: var(--text-main);
+}
+
+.footer-telegram {
+  padding: 6px 14px;
+  border-radius: 999px;
+  background: rgba(56, 189, 248, 0.08);
+  border: 1px solid var(--border-glass);
+  transition: all 0.3s ease;
+}
+
+.footer-telegram:hover {
+  background: rgba(56, 189, 248, 0.18);
+  border-color: var(--accent);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 30px rgba(56, 189, 248, 0.25);
+}
+
+.footer-telegram img {
+  display: block;
+}
