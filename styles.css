@@ -1230,7 +1230,7 @@ tbody tr:hover {
   color: var(--text-main);
 }
 
-.footer-telegram {
+.footer-social {
   padding: 6px 14px;
   border-radius: 999px;
   background: rgba(56, 189, 248, 0.08);
@@ -1238,13 +1238,13 @@ tbody tr:hover {
   transition: all 0.3s ease;
 }
 
-.footer-telegram:hover {
+.footer-social:hover {
   background: rgba(56, 189, 248, 0.18);
   border-color: var(--accent);
   transform: translateY(-2px);
   box-shadow: 0 8px 30px rgba(56, 189, 248, 0.25);
 }
 
-.footer-telegram img {
+.footer-social img {
   display: block;
 }
