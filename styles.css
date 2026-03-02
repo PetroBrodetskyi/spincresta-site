@@ -1102,6 +1102,7 @@ body {
   line-height: 1.3;
 }
 
+.expert-body,
 .faq-card p {
   color: var(--text-muted);
   line-height: 1.7;
@@ -1247,4 +1248,59 @@ tbody tr:hover {
 
 .footer-social img {
   display: block;
+}
+
+.expert-card {
+  border-radius: var(--radius-lg);
+  margin-top: 12px;
+  padding: 24px 28px;
+  box-shadow: var(--shadow-hover);
+}
+
+.expert-header {
+  display: flex;
+  gap: 24px;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+.expert-photo {
+  width: 110px;
+  height: 110px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.expert-role {
+  font-weight: 600;
+}
+
+.expert-body h3 {
+  margin-top: 30px;
+  color: var(--text-main);
+  line-height: 1.3;
+}
+
+.expert-criteria,
+.expert-platforms,
+.expert-methodology {
+  margin-top: 15px;
+}
+
+.expert-platforms li {
+  margin-bottom: 8px;
+}
+
+.expert-platforms a {
+  font-weight: 600;
+  text-decoration: none;
+  color: var(--gold);
+}
+
+.expert-platforms a:hover {
+  text-decoration: underline;
+}
+
+.expert-disclaimer {
+  margin-top: 20px;
 }
