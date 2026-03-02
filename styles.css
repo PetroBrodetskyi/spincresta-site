@@ -101,12 +101,21 @@ body {
 }
 
 .logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
   font-size: 26px;
   font-weight: 800;
   letter-spacing: -0.5px;
   color: var(--text-main);
   text-decoration: none;
   cursor: pointer;
+}
+
+.logo-icon {
+  width: 34px;
+  height: 34px;
+  object-fit: contain;
 }
 
 .logo-com {
