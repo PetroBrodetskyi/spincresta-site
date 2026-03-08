@@ -1,4 +1,4 @@
-﻿// =====================
+// =====================
 // IMPORTS
 // =====================
 import { BRANDS } from './brands.js';
@@ -10,13 +10,13 @@ import { COUNTRIES } from './countries.js';
 const MAX_PAYMENT_VISIBLE = 4;
 const PLACEHOLDER_LINK = '#';
 const MOJIBAKE_FIXES = [
-  ['В©', '©'],
-  ['вЂ”', '—'],
-  ['в†’', '→'],
-  ['Г—', '×'],
-  ['в‚¬', '€'],
-  ['в‚ґ', '₴'],
-  ['ВЈ', '£'],
+  ['Р’В©', 'В©'],
+  ['РІР‚вЂќ', 'вЂ”'],
+  ['РІвЂ вЂ™', 'в†’'],
+  ['Р“вЂ”', 'Г—'],
+  ['РІвЂљВ¬', 'в‚¬'],
+  ['РІвЂљТ‘', 'в‚ґ'],
+  ['Р’Р€', 'ВЈ'],
 ];
 
 const normalizeText = value => {
@@ -333,6 +333,7 @@ export const initCasinoPage = () => {
   if (burger && mobileMenu) {
     const mobileMenuInner = mobileMenu.querySelector('.mobile-menu-inner');
     if (!mobileMenuInner) return;
+    const reviewsHref = pageCountry ? '#expert-review' : pagePath('top-rated.html');
 
     mobileMenuInner.innerHTML = `
     <button class="submenu-toggle" aria-expanded="false">Countries</button>
@@ -341,7 +342,7 @@ export const initCasinoPage = () => {
     <a href="${pagePath('top-rated.html')}">Top Rated</a>
     <a href="${pagePath('exclusive-offers.html')}">Exclusive Offers</a>
     <a href="#">Bonuses</a>
-    <a href="#">Reviews</a>
+    <a href="${reviewsHref}">Reviews</a>
     <a href="#">Promotions</a>
     <a href="${pagePath('about.html')}">About</a>
   `;
@@ -429,6 +430,31 @@ export const initCasinoPage = () => {
     });
   }
 
+  const scrollToAnchor = hash => {
+    if (!hash || hash === '#') return;
+    const target = document.querySelector(hash);
+    if (!target) return;
+
+    const headerHeight = header?.offsetHeight ?? 0;
+    const targetY = target.getBoundingClientRect().top + window.scrollY - headerHeight - 12;
+    window.scrollTo({ top: Math.max(targetY, 0), behavior: 'smooth' });
+  };
+
+  document.querySelectorAll('a[href^="#"]:not([href="#"])').forEach(link => {
+    link.addEventListener('click', event => {
+      const hash = link.getAttribute('href');
+      if (!hash) return;
+      const target = document.querySelector(hash);
+      if (!target) return;
+      event.preventDefault();
+      scrollToAnchor(hash);
+      history.replaceState(null, '', hash);
+    });
+  });
+
+  if (window.location.hash) {
+    requestAnimationFrame(() => scrollToAnchor(window.location.hash));
+  }
   document.querySelectorAll('a[href="#"]').forEach(link => {
     link.setAttribute('aria-disabled', 'true');
     link.addEventListener('click', event => event.preventDefault());
