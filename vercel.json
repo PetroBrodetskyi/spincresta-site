@@ -1,0 +1,25 @@
+﻿{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "redirects": [
+    {
+      "source": "/index.html",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/online-casinos/:slug.html",
+      "destination": "/online-casinos/:slug/",
+      "permanent": true
+    },
+    {
+      "source": "/brands/:slug.html",
+      "destination": "/brands/:slug/",
+      "permanent": true
+    },
+    {
+      "source": "/:slug.html",
+      "destination": "/:slug/",
+      "permanent": true
+    }
+  ]
+}

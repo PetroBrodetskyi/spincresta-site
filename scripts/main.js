@@ -1,4 +1,4 @@
-// =====================
+﻿// =====================
 // IMPORTS
 // =====================
 import { BRANDS } from './brands.js';
@@ -8,6 +8,70 @@ import { COUNTRIES } from './countries.js';
 // HELPERS
 // =====================
 const MAX_PAYMENT_VISIBLE = 4;
+const PLACEHOLDER_LINK = '#';
+const MOJIBAKE_FIXES = [
+  ['В©', '©'],
+  ['вЂ”', '—'],
+  ['в†’', '→'],
+  ['Г—', '×'],
+  ['в‚¬', '€'],
+  ['в‚ґ', '₴'],
+  ['ВЈ', '£'],
+];
+
+const normalizeText = value => {
+  if (typeof value !== 'string') return value ?? '';
+  return MOJIBAKE_FIXES.reduce((text, [bad, good]) => text.split(bad).join(good), value);
+};
+
+const normalizeAssetPath = path => {
+  if (!path) return '';
+  if (
+    path.startsWith('http://') ||
+    path.startsWith('https://') ||
+    path.startsWith('mailto:') ||
+    path.startsWith('tel:') ||
+    path.startsWith('#')
+  ) {
+    return path;
+  }
+
+  if (path.startsWith('/')) return path;
+
+  return `/${path.replace(/^\.\//, '').replace(/^\.\.\//, '')}`;
+};
+
+const normalizePagePath = path => {
+  if (!path) return '';
+  if (
+    path.startsWith('http://') ||
+    path.startsWith('https://') ||
+    path.startsWith('mailto:') ||
+    path.startsWith('tel:') ||
+    path.startsWith('#')
+  ) {
+    return path;
+  }
+
+  const cleaned = path.replace(/^\/+/, '').replace(/^\.\//, '').replace(/^\.\.\//, '');
+
+  if (cleaned === '' || cleaned === 'index.html') return '/';
+
+  if (cleaned.endsWith('.html')) {
+    return `/${cleaned.replace(/\.html$/, '')}/`;
+  }
+
+  if (cleaned.endsWith('/')) {
+    return `/${cleaned}`;
+  }
+
+  return `/${cleaned}/`;
+};
+
+const countryPagePath = slug => `/online-casinos/${slug}/`;
+const iconPath = slug => `/icons/${slug}-flag-icon.svg`;
+const paymentPath = method => `/icons/payments/${method}.svg`;
+const pagePath = fileName => normalizePagePath(fileName);
 
 const renderPayments = (payments = []) => {
   if (!payments.length) return '';
@@ -18,9 +82,12 @@ const renderPayments = (payments = []) => {
   return `
     <div class="payment-icons">
       ${visible
-        .map(method => `<img src="icons/payments/${method}.svg" alt="${method} payment" loading="lazy"/>`)
+        .map(
+          method =>
+            `<img src="${paymentPath(method)}" alt="${normalizeText(method)} payment method" loading="lazy" decoding="async"/>`
+        )
         .join('')}
-      ${hiddenCount > 0 ? `<span class="payments-more">+${hiddenCount}</span>` : ''}
+      ${hiddenCount > 0 ? `<span class="payment-more">+${hiddenCount}</span>` : ''}
     </div>
   `;
 };
@@ -47,23 +114,38 @@ const createCasinoCard = ({
 }) => {
   const article = document.createElement('article');
   article.className = 'casino-card';
-  article.dataset.page = urlDetail ?? '';
+
+  const safeUrl = urlCasino || PLACEHOLDER_LINK;
+  const safeName = normalizeText(name);
+  const safeBonus = normalizeText(bonus);
+  const safeCta = normalizeText(cta);
+  const detailUrl = normalizePagePath(urlDetail ?? '');
+  const imageUrl = normalizeAssetPath(image ?? '');
+
+  article.dataset.page = detailUrl;
 
   article.innerHTML = `
     ${createBadge({ isTopRated, isExclusive, isNew })}
     <div class="card-img">
-      <img src="${image}" alt="${name}" loading="lazy" class="casino-image"/>
+      <img src="${imageUrl}" alt="${safeName}" loading="lazy" decoding="async" class="casino-image"/>
     </div>
-    <h3 class="casino-name">${name}</h3>
-    <p class="casino-bonus">${bonus}</p>
+    <h3 class="casino-name">${safeName}</h3>
+    <p class="casino-bonus">${safeBonus}</p>
     ${renderPayments(payments)}
-    <a class="cta" href="${urlCasino}" target="_blank" rel="noopener noreferrer">${cta}</a>
+    <a class="cta" href="${safeUrl}" target="_blank" rel="noopener noreferrer nofollow sponsored">${safeCta}</a>
   `;
 
   article.addEventListener('click', e => {
     if (e.target.closest('.cta')) return;
-    if (hasDetailPage && urlDetail) window.location.href = urlDetail;
-    else window.open(urlCasino, '_blank', 'noopener');
+
+    if (hasDetailPage && detailUrl) {
+      window.location.href = detailUrl;
+      return;
+    }
+
+    if (safeUrl !== PLACEHOLDER_LINK) {
+      window.open(safeUrl, '_blank', 'noopener');
+    }
   });
 
   article.querySelector('.cta')?.addEventListener('click', e => e.stopPropagation());
@@ -118,18 +200,11 @@ export const initCasinoPage = () => {
   const pageType = document.body.dataset.page;
   const pageCountry = document.body.dataset.country?.toUpperCase();
 
-  // =====================
-  // COUNTRY PAGE
-  // =====================
   if (pageCountry) {
     const brands = BRANDS.filter(b => b.countries?.some(c => c.toUpperCase() === pageCountry));
-
     renderBrandList(brands, '#brand-cards', 'No casinos available for this country.');
   }
 
-  // =====================
-  // NEW / EXCLUSIVE / TOP RATED PAGES
-  // =====================
   if (pageType === 'exclusive-offers') {
     renderBrandList(
       BRANDS.filter(b => b.isExclusive),
@@ -154,9 +229,6 @@ export const initCasinoPage = () => {
     );
   }
 
-  // =====================
-  // TOP CASINOS MULTI-COUNTRY
-  // =====================
   document.querySelectorAll('.content[data-country]').forEach(section => {
     const code = section.dataset.country?.toUpperCase();
     if (!code) return;
@@ -187,13 +259,10 @@ export const initCasinoPage = () => {
 
     if (country && viewAllWrapper && viewAllLink) {
       viewAllWrapper.hidden = false;
-      viewAllLink.href = `${country.slug}.html`;
+      viewAllLink.href = countryPagePath(country.slug);
     }
   });
 
-  // =====================
-  // BRAND DETAILS PAGE
-  // =====================
   const brandKey = document.body.dataset.brand?.toLowerCase();
   if (brandKey) {
     const brand = BRANDS.find(b => b.urlDetail?.toLowerCase().includes(brandKey));
@@ -209,8 +278,8 @@ export const initCasinoPage = () => {
             if (!c) return '';
             return `
               <div class="flag-container">
-                <img class="hero-flag" src="../icons/${c.slug}-flag-icon.svg" alt="${c.name}" loading="lazy"/>
-                <span>${c.name}</span>
+                <img class="hero-flag" src="${iconPath(c.slug)}" alt="${normalizeText(c.name)}" loading="lazy" decoding="async"/>
+                <span>${normalizeText(c.name)}</span>
               </div>
             `;
           })
@@ -222,7 +291,7 @@ export const initCasinoPage = () => {
           .map(
             p =>
               `<div class="payments">
-                <img src="../icons/payments/${p}.svg" alt="${p}" loading="lazy"/>
+                <img src="${paymentPath(p)}" alt="${normalizeText(p)}" loading="lazy" decoding="async"/>
               </div>`
           )
           .join('');
@@ -230,69 +299,63 @@ export const initCasinoPage = () => {
     }
   }
 
-  // =====================
-  // COUNTRIES DROPDOWN
-  // =====================
   const countriesDropdown = document.getElementById('countriesDropdown');
   if (countriesDropdown) {
     countriesDropdown.innerHTML = COUNTRIES.map(
       c => `
-        <a href="${c.slug}.html">
-          <img class="flag" src="icons/${c.slug}-flag-icon.svg" alt="${c.name}" loading="lazy"/>
-          ${c.name}
+        <a href="${countryPagePath(c.slug)}">
+          <img class="flag" src="${iconPath(c.slug)}" alt="${normalizeText(c.name)}" loading="lazy" decoding="async"/>
+          ${normalizeText(c.name)}
         </a>
       `
     ).join('');
   }
 
-  // =====================
-  // ALL COUNTRIES CLOUD
-  // =====================
   document.querySelector('.all-countries .countries-cloud')?.replaceChildren(
     ...COUNTRIES.map(c => {
       const a = document.createElement('a');
-      a.href = `${c.slug}.html`;
+      a.href = countryPagePath(c.slug);
       a.className = 'country-link';
       a.innerHTML = `
-        <img class="flag" src="icons/${c.slug}-flag-icon.svg" alt="${c.name}" loading="lazy">
-        <span>${c.name}</span>
+        <img class="flag" src="${iconPath(c.slug)}" alt="${normalizeText(c.name)}" loading="lazy" decoding="async">
+        <span>${normalizeText(c.name)}</span>
       `;
       return a;
     })
   );
 
-  // =====================
-  // MOBILE MENU
-  // =====================
   const burger = document.querySelector('.burger');
   const mobileMenu = document.getElementById('mobileMenu');
   const overlay = mobileMenu?.querySelector('.mobile-overlay');
-  const panel = mobileMenu?.querySelector('.mobile-menu-panel');
   const closeButtons = mobileMenu?.querySelectorAll('[data-action="close"]');
   const body = document.body;
 
   if (burger && mobileMenu) {
     const mobileMenuInner = mobileMenu.querySelector('.mobile-menu-inner');
+    if (!mobileMenuInner) return;
+
     mobileMenuInner.innerHTML = `
     <button class="submenu-toggle" aria-expanded="false">Countries</button>
-    <a href="top-casinos.html">Top Casinos</a>
-    <a href="new-casinos.html">New Casinos</a>
-    <a href="top-rated.html">Top Rated</a>
-    <a href="exclusive-offers.html">Exclusive Offers</a>
+    <a href="${pagePath('top-casinos.html')}">Top Casinos</a>
+    <a href="${pagePath('new-casinos.html')}">New Casinos</a>
+    <a href="${pagePath('top-rated.html')}">Top Rated</a>
+    <a href="${pagePath('exclusive-offers.html')}">Exclusive Offers</a>
     <a href="#">Bonuses</a>
     <a href="#">Reviews</a>
     <a href="#">Promotions</a>
-    <a href="about.html">About</a>
+    <a href="${pagePath('about.html')}">About</a>
   `;
 
     const submenuToggle = mobileMenuInner.querySelector('.submenu-toggle');
+    if (!submenuToggle) return;
+
     const countriesSubmenu = document.createElement('div');
     countriesSubmenu.className = 'mobile-submenu';
     countriesSubmenu.innerHTML = COUNTRIES.map(
       c => `
-    <a href="${c.slug}.html">
-      <img class="flag" src="icons/${c.slug}-flag-icon.svg" alt="${c.name}" loading="lazy"/>
-      ${c.name}
+    <a href="${countryPagePath(c.slug)}">
+      <img class="flag" src="${iconPath(c.slug)}" alt="${normalizeText(c.name)}" loading="lazy" decoding="async"/>
+      ${normalizeText(c.name)}
     </a>
   `
     ).join('');
@@ -301,7 +364,7 @@ export const initCasinoPage = () => {
 
     submenuToggle.addEventListener('click', () => {
       const expanded = submenuToggle.getAttribute('aria-expanded') !== 'true';
-      submenuToggle.setAttribute('aria-expanded', expanded);
+      submenuToggle.setAttribute('aria-expanded', String(expanded));
       submenuToggle.classList.toggle('active', expanded);
       countriesSubmenu.style.maxHeight = expanded ? `${countriesSubmenu.scrollHeight}px` : '0px';
     });
@@ -332,7 +395,6 @@ export const initCasinoPage = () => {
     });
 
     overlay?.addEventListener('click', closeMenu);
-
     closeButtons?.forEach(btn => btn.addEventListener('click', closeMenu));
 
     mobileMenuInner.addEventListener('click', e => {
@@ -341,21 +403,14 @@ export const initCasinoPage = () => {
     });
 
     document.addEventListener('keydown', e => {
-      if (e.key === 'Escape' && mobileMenu.classList.contains('open')) {
-        closeMenu();
-      }
+      if (e.key === 'Escape' && mobileMenu.classList.contains('open')) closeMenu();
     });
 
     window.addEventListener('resize', () => {
-      if (window.innerWidth > 1024 && mobileMenu.classList.contains('open')) {
-        closeMenu();
-      }
+      if (window.innerWidth > 1024 && mobileMenu.classList.contains('open')) closeMenu();
     });
   }
 
-  // =====================
-  // GLOBAL LOADER
-  // =====================
   window.addEventListener('load', () => {
     const loader = document.getElementById('globalLoader');
     if (!loader) return;
@@ -363,29 +418,24 @@ export const initCasinoPage = () => {
     setTimeout(() => loader.remove(), 300);
   });
 
-  // =====================
-  // HEADER SCROLL
-  // =====================
   const header = document.querySelector('.header');
   if (header) {
     let lastScroll = 0;
 
     window.addEventListener('scroll', () => {
       const current = window.pageYOffset || document.documentElement.scrollTop;
-
       header.classList.toggle('hidden', current > lastScroll && current > 100);
-
       lastScroll = current;
     });
   }
+
+  document.querySelectorAll('a[href="#"]').forEach(link => {
+    link.setAttribute('aria-disabled', 'true');
+    link.addEventListener('click', event => event.preventDefault());
+  });
 };
 
-// =====================
-// AUTO INIT
-// =====================
 document.addEventListener('DOMContentLoaded', initCasinoPage);
-
-/* ===================== HERO COUNTRIES ===================== */
 
 (function renderHeroCountries() {
   const container = document.getElementById('heroCountries');
@@ -399,12 +449,13 @@ document.addEventListener('DOMContentLoaded', initCasinoPage);
   container.innerHTML = topCountries
     .map(
       country => `
-      <a href="${country.slug}.html" class="hero-flag-link" aria-label="${country.name} casinos">
+      <a href="${countryPagePath(country.slug)}" class="hero-flag-link" aria-label="${country.name} casinos">
         <img
           class="hero-flag"
-          src="icons/${country.slug}-flag-icon.svg"
+          src="${iconPath(country.slug)}"
           alt="${country.name} flag"
           loading="lazy"
+          decoding="async"
         />
       </a>
     `

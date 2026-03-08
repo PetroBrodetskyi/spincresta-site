@@ -1,4 +1,4 @@
-export const BRANDS = [
+﻿export const BRANDS = [
   {
     name: 'Fortunica',
     bonus: 'Fortunica Casino features slots, fast payouts, and attractive bonuses',
