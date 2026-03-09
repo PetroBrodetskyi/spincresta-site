@@ -1,4 +1,4 @@
-// =====================
+﻿// =====================
 // IMPORTS
 // =====================
 import { BRANDS } from './brands.js';
@@ -9,15 +9,7 @@ import { COUNTRIES } from './countries.js';
 // =====================
 const MAX_PAYMENT_VISIBLE = 4;
 const PLACEHOLDER_LINK = '#';
-const MOJIBAKE_FIXES = [
-  ['Р’В©', 'В©'],
-  ['РІР‚вЂќ', 'вЂ”'],
-  ['РІвЂ вЂ™', 'в†’'],
-  ['Р“вЂ”', 'Г—'],
-  ['РІвЂљВ¬', 'в‚¬'],
-  ['РІвЂљТ‘', 'в‚ґ'],
-  ['Р’Р€', 'ВЈ'],
-];
+const MOJIBAKE_FIXES = [];
 
 const normalizeText = value => {
   if (typeof value !== 'string') return value ?? '';
@@ -488,3 +480,4 @@ document.addEventListener('DOMContentLoaded', initCasinoPage);
     )
     .join('');
 })();
+
