@@ -1,0 +1,27 @@
+﻿# OS artifacts
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editor/IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Logs and temp
+*.log
+*.tmp
+*.bak
+
+# Build/cache outputs
+node_modules/
+dist/
+build/
+.cache/
+.vercel/
+
+# Local env files
+.env
+.env.*
+!.env.example

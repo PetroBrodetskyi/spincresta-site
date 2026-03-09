@@ -1,5 +1,15 @@
-{
+﻿{
   "redirects": [
+    {
+      "source": "/casinos",
+      "destination": "/casinos-and-betting/",
+      "permanent": true
+    },
+    {
+      "source": "/casinos/",
+      "destination": "/casinos-and-betting/",
+      "permanent": true
+    },
     {
       "source": "/:country(argentina|australia|austria|azerbaijan|bangladesh|belgium|brazil|bulgaria|canada|chile|colombia|croatia|czech-republic|denmark|egypt|estonia|finland|france|germany|ghana|greece|hungary|iceland|india|indonesia|ireland|italy|japan|kazakhstan|kenya|latvia|lithuania|luxembourg|malaysia|mexico|netherlands|new-zealand|nigeria|norway|philippines|poland|portugal|peru|russia|romania|singapore|slovakia|slovenia|south-africa|south-korea|spain|sweden|switzerland|thailand|turkey|tanzania|uganda|ukraine|united-kingdom|united-states|uzbekistan|vietnam).html",
       "destination": "/online-casinos/:country/",
@@ -37,3 +47,4 @@
     }
   ]
 }
+

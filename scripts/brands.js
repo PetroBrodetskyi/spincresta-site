@@ -10,6 +10,7 @@
     top: ['UK'],
     payments: ['visa', 'mastercard', 'neteller', 'skrill', 'paysafecard'],
     isTopRated: true,
+    hasDetailPage: true,
   },
   {
     name: 'Fortunica',
@@ -20,6 +21,7 @@
     image: 'images/fortunica.webp',
     countries: ['NL'],
     payments: ['visa', 'mastercard', 'neteller', 'skrill', 'paysafecard'],
+    hasDetailPage: true,
   },
   {
     name: 'Fortunica',
@@ -30,6 +32,7 @@
     image: 'images/fortunica.webp',
     countries: ['ES'],
     payments: ['visa', 'mastercard', 'neteller', 'skrill', 'paysafecard'],
+    hasDetailPage: true,
   },
   {
     name: 'DudeSpin',
@@ -40,6 +43,7 @@
     image: 'images/dudespin.png',
     countries: ['IE', 'NO', 'SK', 'SI', 'CZ'],
     payments: ['visa', 'mastercard', 'bitcoin', 'tether', 'litecoin', 'bitcoincash', 'ethereum', 'cardano'],
+    hasDetailPage: true,
   },
   {
     name: 'DudeSpin',
@@ -50,6 +54,7 @@
     image: 'images/dudespin.png',
     countries: ['BE', 'LU', 'CH', 'FR', 'GR', 'ES', 'IT', 'LV', 'AT', 'DE', 'HR', 'IS', 'EE'],
     payments: ['visa', 'mastercard', 'bitcoin', 'tether', 'litecoin', 'bitcoincash', 'ethereum', 'cardano'],
+    hasDetailPage: true,
   },
   {
     name: '1RedBet',
@@ -62,6 +67,7 @@
     top: ['CA'],
     payments: ['litecoin', 'ethereum', 'bitcoin', 'tron'],
     isTopRated: true,
+    hasDetailPage: true,
   },
   {
     name: 'Qbet',
@@ -74,6 +80,7 @@
     top: ['UK'],
     payments: ['visa', 'mastercard', 'mifinity', 'googlepay', 'jeton'],
     isExclusive: true,
+    hasDetailPage: true,
   },
   {
     name: 'Dragonia',
@@ -94,6 +101,7 @@
       'cardano',
       'tron',
     ],
+    hasDetailPage: true,
   },
   {
     name: 'Dragonia',
@@ -114,6 +122,7 @@
       'cardano',
       'tron',
     ],
+    hasDetailPage: true,
   },
   {
     name: 'Slots and Casino',
@@ -126,6 +135,7 @@
     countries: ['US'],
     payments: ['visa', 'mastercard', 'bitcoin', 'tether', 'litecoin', 'bitcoincash', 'ethereum'],
     isTopRated: true,
+    hasDetailPage: true,
   },
   {
     name: 'Las Vegas USA',
@@ -136,6 +146,7 @@
     image: 'images/lasvegas.webp',
     top: ['US'],
     countries: ['US'],
+    hasDetailPage: true,
   },
   {
     name: 'Ducky Luck',
@@ -148,6 +159,7 @@
     countries: ['US'],
     payments: ['visa', 'mastercard', 'bitcoin', 'tether', 'litecoin', 'bitcoincash', 'ethereum'],
     isTopRated: true,
+    hasDetailPage: true,
   },
   // {
   //   name: 'Lucky Red',
@@ -171,6 +183,7 @@
     countries: ['US'],
     payments: ['visa', 'mastercard'],
     isTopRated: true,
+    hasDetailPage: true,
   },
   {
     name: 'Betlabel',
@@ -199,6 +212,7 @@
       'DK',
     ],
     payments: ['visa', 'mastercard', 'bitcoin', 'ethereum', 'litecoin', 'tether', 'tron'],
+    hasDetailPage: true,
   },
   {
     name: 'RoboCat',
@@ -220,6 +234,7 @@
       'cardano',
       'tron',
     ],
+    hasDetailPage: true,
   },
   {
     name: 'RoboCat',
@@ -242,6 +257,7 @@
       'tron',
     ],
     isTopRated: true,
+    hasDetailPage: true,
   },
   {
     name: 'Vegas Casino Online',
@@ -252,6 +268,7 @@
     image: 'images/vegas.webp',
     countries: ['US'],
     isNew: true,
+    hasDetailPage: true,
   },
   {
     name: 'Gunsbet',
@@ -262,6 +279,7 @@
     image: 'images/gunsbet.webp',
     countries: ['FI', 'EE'],
     payments: ['visa', 'mastercard', 'neteller', 'skrill', 'paysafecard', 'wirecard', 'bitcoin'],
+    hasDetailPage: true,
   },
   {
     name: 'AmunRa',
@@ -284,6 +302,7 @@
       'cardano',
       'tron',
     ],
+    hasDetailPage: true,
   },
   {
     name: 'AmunRa',
@@ -306,6 +325,7 @@
       'cardano',
       'tron',
     ],
+    hasDetailPage: true,
   },
   {
     name: 'Spinarium',
@@ -317,6 +337,7 @@
     countries: ['MX', 'CL', 'CO', 'BR', 'AR'],
     payments: ['visa', 'mastercard', 'applepay', 'googlepay', 'banktransfer'],
     isTopRated: true,
+    hasDetailPage: true,
   },
   {
     name: 'Leon',
@@ -339,6 +360,7 @@
     image: 'images/neospin.svg',
     countries: ['AU', 'CA', 'CL', 'NZ', 'DK', 'DE'],
     payments: ['visa', 'neteller', 'skrill', 'mifinity', 'banktransfer', 'ecopayz'],
+    hasDetailPage: true,
   },
   {
     name: 'Frumzi',
@@ -362,6 +384,7 @@
       'cardano',
       'tron',
     ],
+    hasDetailPage: true,
   },
   {
     name: 'Frumzi',
@@ -402,6 +425,7 @@
       'cardano',
       'tron',
     ],
+    hasDetailPage: true,
   },
   {
     name: 'Betory',
@@ -412,6 +436,7 @@
     image: 'images/betory.png',
     countries: ['NL'],
     payments: ['visa', 'mastercard', 'applepay', 'neteller', 'banktransfer', 'skrill'],
+    hasDetailPage: true,
   },
   {
     name: 'Onluck',
@@ -422,6 +447,7 @@
     image: 'images/onluck.webp',
     top: ['UK'],
     countries: ['IE', 'UK', 'NL', 'DE'],
+    hasDetailPage: true,
   },
   {
     name: 'Posido',
@@ -463,6 +489,7 @@
       'cardano',
       'tron',
     ],
+    hasDetailPage: true,
   },
   {
     name: 'Posido',
@@ -486,6 +513,7 @@
       'cardano',
       'tron',
     ],
+    hasDetailPage: true,
   },
   {
     name: 'Twin',
@@ -496,6 +524,7 @@
     image: 'images/twin.svg',
     countries: ['SE', 'FR', 'DE', 'IT', 'PL', 'TR', 'GR', 'PT', 'TZ', 'KZ', 'RU', 'AU', 'NZ'],
     payments: ['visa', 'mastercard', 'skrill', 'neteller'],
+    hasDetailPage: true,
   },
   {
     name: 'Evospin',
@@ -505,6 +534,7 @@
     urlCasino: 'https://armadaapp.media-412.com/click?pid=3862&offer_id=120677',
     image: 'images/evospin.webp',
     countries: ['IE', 'SI', 'SK', 'AT', 'NL', 'DE'],
+    hasDetailPage: true,
   },
 
   {
@@ -538,6 +568,7 @@
     ],
     top: ['UK'],
     payments: ['visa', 'mastercard', 'neteller', 'jeton', 'neosurf', 'skrill', 'maestro'],
+    hasDetailPage: true,
   },
   {
     name: 'Spinch',
@@ -548,6 +579,7 @@
     image: 'images/spinch.webp',
     countries: ['CA', 'CH', 'DK', 'SK', 'BG', 'NO', 'LT', 'LV', 'SI', 'RO', 'NZ'],
     payments: ['visa', 'ecopayz', 'neteller', 'skrill', 'mifinity'],
+    hasDetailPage: true,
   },
   {
     name: 'SlotLAir',
@@ -558,6 +590,7 @@
     image: 'images/slotlair.svg',
     countries: ['NL', 'PT', 'BE', 'UK', 'ES', 'DE', 'FR'],
     payments: ['visa', 'mastercard', 'banktransfer'],
+    hasDetailPage: true,
   },
   {
     name: 'Loki',
@@ -567,6 +600,7 @@
     urlCasino: 'https://armadaapp.media-412.com/click?pid=3862&offer_id=120674',
     image: 'images/loki.webp',
     countries: ['NU', 'HO', 'SI', 'HR', 'AT', 'UK'],
+    hasDetailPage: true,
   },
   // {
   //   name: 'VBet',
@@ -588,6 +622,7 @@
     countries: ['UA'],
     payments: ['visa', 'mastercard', 'applepay', 'googlepay'],
     isTopRated: true,
+    hasDetailPage: true,
   },
   {
     name: 'BetOn Sport',
@@ -598,6 +633,7 @@
     image: 'images/beton.webp',
     countries: ['UA'],
     payments: ['visa', 'mastercard', 'applepay', 'googlepay'],
+    hasDetailPage: true,
   },
   {
     name: 'Slott',
@@ -608,6 +644,7 @@
     image: 'images/slott.svg',
     countries: ['SE', 'FR', 'DE', 'IT', 'PL', 'TR', 'GR', 'PT', 'TZ', 'KZ', 'RU', 'AU', 'NZ'],
     payments: ['visa', 'mastercard', 'skrill', 'neteller', 'bitcoin', 'tether'],
+    hasDetailPage: true,
   },
   {
     name: 'Fugu Casino',
@@ -618,6 +655,7 @@
     image: 'images/fugu.webp',
     countries: ['RU', 'KZ', 'UA'],
     payments: ['visa', 'mastercard', 'mifinity', 'jeton', 'applepay'],
+    hasDetailPage: true,
   },
   {
     name: 'Zarbet',
@@ -629,6 +667,7 @@
     countries: ['ZA'],
     isExclusive: true,
     payments: ['visa', 'mastercard', 'applepay', 'bitcoin', 'litecoin'],
+    hasDetailPage: true,
   },
   {
     name: 'Pantherbet',
@@ -640,6 +679,7 @@
     countries: ['ZA'],
     payments: ['visa', 'mastercard', 'applepay'],
     isTopRated: true,
+    hasDetailPage: true,
   },
   {
     name: '4Rabet',
@@ -661,6 +701,7 @@
       'tether',
       'tron',
     ],
+    hasDetailPage: true,
   },
   {
     name: 'RajaBets',
@@ -672,6 +713,7 @@
     countries: ['IN'],
     // isTopRated: true,
     payments: ['visa', 'mastercard', 'googlepay', 'bitcoin', 'tether'],
+    hasDetailPage: true,
   },
   {
     name: 'LuckyWave',
@@ -682,6 +724,7 @@
     image: 'images/luckywave.svg',
     countries: ['NL', 'FR', 'BE', 'UK', 'DE'],
     payments: ['visa', 'mastercard', 'banktransfer'],
+    hasDetailPage: true,
   },
   {
     name: '22Bet',
@@ -721,6 +764,7 @@
       'ES',
     ],
     payments: ['visa', 'mastercard'],
+    hasDetailPage: true,
   },
   {
     name: 'Crownslots',
@@ -767,6 +811,7 @@
     ],
     top: ['AU'],
     payments: ['visa', 'mastercard', 'googlepay', 'applepay', 'bitcoin', 'ethereum'],
+    hasDetailPage: true,
   },
   {
     name: 'Crorewin',
@@ -790,6 +835,7 @@
       'tron',
     ],
     isTopRated: true,
+    hasDetailPage: true,
   },
   {
     name: 'Spinbetter',
@@ -839,6 +885,7 @@
     ],
     top: ['BR'],
     payments: ['bitcoin', 'ethereum', 'bitcoincash', 'cardano', 'litecoin', 'tether', 'tron'],
+    hasDetailPage: true,
   },
   {
     name: 'Crorebet',
@@ -859,6 +906,7 @@
       'tether',
       'tron',
     ],
+    hasDetailPage: true,
   },
   {
     name: 'AmonBet',
@@ -869,6 +917,7 @@
     image: 'images/amonbet.svg',
     countries: ['UK', 'NL', 'DE', 'IT', 'ES', 'FR', 'BE', 'HU', 'AT'],
     payments: ['visa', 'mastercard', 'banktransfer'],
+    hasDetailPage: true,
   },
   {
     name: 'Coolzino',
@@ -880,6 +929,7 @@
     countries: ['IT', 'GR', 'BE', 'PL', 'AU', 'CH', 'AT', 'NO', 'DK', 'PT', 'IE', 'CA', 'NZ'],
     top: ['AU'],
     payments: ['visa', 'mastercard', 'googlepay', 'applepay', 'ethereum', 'bitcoin'],
+    hasDetailPage: true,
   },
   {
     name: 'Magnetic Slots',
@@ -908,6 +958,7 @@
     ],
     top: ['AU'],
     payments: ['visa', 'mastercard', 'googlepay', 'applepay', 'bitcoin', 'ethereum'],
+    hasDetailPage: true,
   },
   {
     name: 'Beef Casino',
@@ -918,6 +969,7 @@
     image: 'images/beef.webp',
     countries: ['RU', 'KZ'],
     payments: ['visa', 'mastercard', 'mifinity', 'jeton', 'applepay', 'googlepay'],
+    hasDetailPage: true,
   },
   {
     name: 'Sol Casino',
@@ -927,6 +979,7 @@
     urlCasino: 'https://armadaapp.media-412.com/click?pid=3862&offer_id=120892',
     image: 'images/sol.webp',
     countries: ['RU', 'KZ'],
+    hasDetailPage: true,
   },
   {
     name: 'Lex Casino',
@@ -936,6 +989,7 @@
     urlCasino: 'https://armadaapp.media-412.com/click?pid=3862&offer_id=120888',
     image: 'images/lex.webp',
     countries: ['RU', 'KZ'],
+    hasDetailPage: true,
   },
   {
     name: 'Legzo Casino',
@@ -945,6 +999,7 @@
     urlCasino: 'https://armadaapp.media-412.com/click?pid=3862&offer_id=120894',
     image: 'images/legzo.webp',
     countries: ['RU', 'KZ'],
+    hasDetailPage: true,
   },
   {
     name: 'Izzi Casino',
@@ -954,6 +1009,7 @@
     urlCasino: 'https://armadaapp.media-412.com/click?pid=3862&offer_id=120890',
     image: 'images/izzi.webp',
     countries: ['RU', 'KZ'],
+    hasDetailPage: true,
   },
   {
     name: 'Irwin Casino',
@@ -963,6 +1019,7 @@
     urlCasino: 'https://armadaapp.media-412.com/click?pid=3862&offer_id=120897',
     image: 'images/irwin.webp',
     countries: ['RU', 'KZ'],
+    hasDetailPage: true,
   },
   {
     name: 'Gizbo Casino',
@@ -972,6 +1029,7 @@
     urlCasino: 'https://armadaapp.media-412.com/click?pid=3862&offer_id=120893',
     image: 'images/gizbo.webp',
     countries: ['RU', 'KZ'],
+    hasDetailPage: true,
   },
   {
     name: 'Fresh Casino',
@@ -981,6 +1039,7 @@
     urlCasino: 'https://armadaapp.media-412.com/click?pid=3862&offer_id=120889',
     image: 'images/fresh.webp',
     countries: ['RU', 'KZ'],
+    hasDetailPage: true,
   },
   {
     name: 'Martin Casino',
@@ -990,6 +1049,7 @@
     urlCasino: 'https://armadaapp.media-412.com/click?pid=3862&offer_id=120896',
     image: 'images/martin.webp',
     countries: ['RU', 'KZ'],
+    hasDetailPage: true,
   },
   {
     name: 'Drip Casino',
@@ -999,6 +1059,7 @@
     urlCasino: 'https://armadaapp.media-412.com/click?pid=3862&offer_id=120891',
     image: 'images/drip.webp',
     countries: ['RU', 'KZ'],
+    hasDetailPage: true,
   },
   {
     name: 'Flagman',
@@ -1008,6 +1069,7 @@
     urlCasino: 'https://armadaapp.media-412.com/click?pid=3862&offer_id=120898',
     image: 'images/flagman.webp',
     countries: ['UZ'],
+    hasDetailPage: true,
   },
   {
     name: 'Betwinner',
@@ -1074,6 +1136,7 @@
       'ZM',
     ],
     payments: ['visa', 'mastercard', 'applepay', 'googlepay', 'bci', 'ecopayz', 'webmoney'],
+    hasDetailPage: true,
   },
   {
     name: '30Bet',
@@ -1084,6 +1147,7 @@
     image: 'images/30bet.webp',
     countries: ['DE', 'UK', 'NO', 'FI', 'SE'],
     payments: ['visa', 'mastercard', 'neteller', 'jeton', 'mifinity', 'skrill'],
+    hasDetailPage: true,
   },
   {
     name: '55Bet',
@@ -1094,6 +1158,7 @@
     image: 'images/55bet.webp',
     countries: ['DE', 'NO', 'FI', 'SE'],
     payments: ['visa', 'mastercard', 'neteller', 'jeton', 'mifinity', 'googlepay', 'flexepin', 'skrill'],
+    hasDetailPage: true,
   },
   {
     name: 'GQbet',
@@ -1104,6 +1169,7 @@
     image: 'images/gqbet.webp',
     countries: ['UK', 'FR'],
     payments: ['visa', 'mastercard', 'neteller', 'skrill'],
+    hasDetailPage: true,
   },
   {
     name: 'Manga',
@@ -1113,6 +1179,7 @@
     urlCasino: 'https://armadaapp.media-412.com/click?pid=3862&offer_id=120932',
     image: 'images/manga.webp',
     countries: ['DE', 'NO', 'FI', 'SE'],
+    hasDetailPage: true,
   },
   {
     name: 'ViciBet',
@@ -1123,6 +1190,7 @@
     image: 'images/vicibet.webp',
     countries: ['PL', 'NO', 'FI', 'BE', 'HU', 'AT', 'CH', 'CZ', 'IT', 'DE', 'CA'],
     payments: ['visa', 'mastercard', 'jeton', 'bitcoin', 'litecoin', 'bitcoincash', 'cordano'],
+    hasDetailPage: true,
   },
   {
     name: 'Casino Infinity',
@@ -1133,6 +1201,7 @@
     image: 'images/casinoinfinity.png',
     countries: ['PL', 'NO', 'FI', 'BE', 'HU', 'AT', 'CH', 'CZ', 'IT', 'DE', 'CA'],
     payments: ['mastercard', 'jeton', 'mifinity', 'ethereum', 'bitcoin', 'bitcoincash', 'litecoin', 'tether'],
+    hasDetailPage: true,
   },
   {
     name: 'Roletto',
@@ -1144,6 +1213,7 @@
     countries: ['UK', 'DE', 'SE', 'NO', 'IT', 'FR', 'CA', 'AT', 'CH', 'FI', 'BR', 'PT', 'DK', 'ES'],
     top: ['CA'],
     payments: ['visa', 'mastercard', 'jeton', 'mifinity', 'ethereum', 'bitcoin', 'litecoin', 'tether'],
+    hasDetailPage: true,
   },
   {
     name: 'Vegas Now',
@@ -1154,6 +1224,7 @@
     image: 'images/vegasnow.webp',
     countries: ['AU', 'CA', 'NZ', 'AT', 'CH', 'IE', 'NO', 'SE', 'FI', 'DK', 'IS'],
     payments: ['visa', 'mastercard', 'bitcoin', 'neteller', 'skrill'],
+    hasDetailPage: true,
   },
   {
     name: 'Lukki',
@@ -1164,6 +1235,7 @@
     image: 'images/lukki.webp',
     countries: ['AU', 'CA', 'NZ', 'AT', 'CH', 'IE', 'NO', 'SE', 'FI', 'DK', 'IS'],
     payments: ['visa', 'mastercard', 'bitcoin'],
+    hasDetailPage: true,
   },
   {
     name: 'Lets Lucky',
@@ -1175,6 +1247,7 @@
     countries: ['AU', 'CA', 'NZ', 'AT', 'CH', 'IE', 'NO', 'SE', 'FI', 'DK', 'IS'],
     payments: ['visa', 'mastercard', 'bitcoin', 'bitcoincash', 'tether'],
     isNew: true,
+    hasDetailPage: true,
   },
   {
     name: 'Lucky Dreams',
@@ -1185,6 +1258,7 @@
     image: 'images/luckydreams.webp',
     countries: ['AU', 'CA', 'NZ', 'AT', 'CH', 'IE', 'NO', 'SE', 'FI', 'DK', 'IS'],
     payments: ['visa', 'mastercard', 'neteller', 'mifinity', 'bitcoin', 'bitcoincash', 'skrill', 'tether'],
+    hasDetailPage: true,
   },
   {
     name: 'Lucky Ones',
@@ -1195,6 +1269,7 @@
     image: 'images/luckyones.webp',
     countries: ['AU', 'CA', 'NZ', 'AT', 'CH', 'IE', 'NO', 'SE', 'FI', 'DK', 'IS'],
     payments: ['visa', 'mastercard', 'neteller', 'bitcoin'],
+    hasDetailPage: true,
   },
   {
     name: 'Just Casino',
@@ -1206,6 +1281,7 @@
     countries: ['AU', 'CA', 'NZ', 'AT', 'CH', 'IE', 'NO', 'SE', 'FI', 'DK', 'IS'],
     top: ['CA'],
     payments: ['visa', 'mastercard', 'bitcoin'],
+    hasDetailPage: true,
   },
   {
     name: 'BetPari',
@@ -1243,6 +1319,7 @@
       'BF',
     ],
     payments: ['cardano', 'ethereum', 'bitcoin', 'tron'],
+    hasDetailPage: true,
   },
   {
     name: 'NV Casino',
@@ -1274,6 +1351,7 @@
       'DE',
     ],
     payments: ['visa', 'mastercard', 'neteller', 'mifinity', 'skrill'],
+    hasDetailPage: true,
   },
   {
     name: 'Yep Casino',
@@ -1306,6 +1384,7 @@
     ],
     payments: ['visa', 'mastercard', 'neteller', 'mifinity', 'skrill'],
     isExclusive: true,
+    hasDetailPage: true,
   },
   {
     name: 'Ripper Casino',
@@ -1315,6 +1394,7 @@
     urlCasino: 'https://armadaapp.media-412.com/click?pid=3862&offer_id=121279',
     image: 'images/ripper.png',
     countries: ['US'],
+    hasDetailPage: true,
   },
   {
     name: 'Zizobet',
@@ -1399,6 +1479,7 @@
       'litecoin',
     ],
     isNew: true,
+    hasDetailPage: true,
   },
   {
     name: 'Ozwin Casino',
@@ -1409,6 +1490,7 @@
     image: 'images/ozwin.png',
     countries: ['US'],
     payments: ['visa', 'mastercard', 'applepay', 'googlepay', 'bitcoin', 'tether'],
+    hasDetailPage: true,
   },
   {
     name: 'Wonaco',
@@ -1419,6 +1501,7 @@
     image: 'images/wonaco.webp',
     countries: ['AU', 'IT', 'DE', 'CZ', 'IE', 'CH', 'CA', 'SK', 'AT', 'PL', 'FI', 'NO', 'HU'],
     payments: ['mastercard', 'applepay', 'googlepay', 'jeton', 'bitcoin', 'mifinity', 'ethereum', 'litecoin'],
+    hasDetailPage: true,
   },
   {
     name: 'Dolly Casino',
@@ -1439,6 +1522,7 @@
       'ethereum',
       'litecoin',
     ],
+    hasDetailPage: true,
   },
   {
     name: 'Velobet',
@@ -1512,6 +1596,7 @@
     ],
     top: ['BR'],
     payments: ['visa', 'mastercard', 'skrill', 'neteller', 'bitcoin', 'tether', 'ethereum', 'litecoin'],
+    hasDetailPage: true,
   },
   {
     name: 'Casino Peaches',
@@ -1521,6 +1606,7 @@
     urlCasino: 'https://armadaapp.media-412.com/click?pid=3862&offer_id=121220',
     image: 'images/casinopeaches.png',
     countries: ['UK', 'IE', 'NL', 'SE', 'ES', 'IT', 'DE'],
+    hasDetailPage: true,
   },
   {
     name: 'Casino Peaches',
@@ -1530,6 +1616,7 @@
     urlCasino: 'https://armadaapp.media-412.com/click?pid=3862&offer_id=121221',
     image: 'images/casinopeaches.png',
     countries: ['FR'],
+    hasDetailPage: true,
   },
   {
     name: "Let's Jackpot",
@@ -1539,6 +1626,7 @@
     urlCasino: 'https://armadaapp.media-412.com/click?pid=3862&offer_id=121222',
     image: 'images/letsjackpot.svg',
     countries: ['UK', 'IE', 'IT', 'NL', 'SE', 'BE', 'DK', 'ES', 'FI', 'MK', 'MT', 'NO', 'PT', 'SK'],
+    hasDetailPage: true,
   },
   {
     name: "Let's Jackpot",
@@ -1548,6 +1636,7 @@
     urlCasino: 'https://armadaapp.media-412.com/click?pid=3862&offer_id=121223',
     image: 'images/letsjackpot.svg',
     countries: ['FR'],
+    hasDetailPage: true,
   },
   {
     name: 'Uspin',
@@ -1557,6 +1646,7 @@
     urlCasino: 'https://armadaapp.media-412.com/click?pid=3862&offer_id=121224',
     image: 'images/uspin.png',
     countries: ['UK', 'NL', 'DE', 'AT', 'CH'],
+    hasDetailPage: true,
   },
   {
     name: 'Uspin',
@@ -1566,6 +1656,7 @@
     urlCasino: 'https://armadaapp.media-412.com/click?pid=3862&offer_id=121225',
     image: 'images/uspin.png',
     countries: ['FR'],
+    hasDetailPage: true,
   },
   {
     name: 'Zumibet',
@@ -1575,6 +1666,7 @@
     urlCasino: 'https://armadaapp.media-412.com/click?pid=3862&offer_id=121227',
     image: 'images/zumibet.png',
     countries: ['AU'],
+    hasDetailPage: true,
   },
   {
     name: 'Amon Casino',
@@ -1584,6 +1676,7 @@
     urlCasino: 'https://armadaapp.media-412.com/click?pid=3862&offer_id=121228',
     image: 'images/amon.png',
     countries: ['FR'],
+    hasDetailPage: true,
   },
   {
     name: 'Betzino',
@@ -1593,6 +1686,7 @@
     urlCasino: 'https://armadaapp.media-412.com/click?pid=3862&offer_id=121229',
     image: 'images/betzino.png',
     countries: ['UK', 'IE'],
+    hasDetailPage: true,
   },
   {
     name: 'Betzino',
@@ -1602,6 +1696,7 @@
     urlCasino: 'https://armadaapp.media-412.com/click?pid=3862&offer_id=121230',
     image: 'images/betzino.png',
     countries: ['FR'],
+    hasDetailPage: true,
   },
   {
     name: 'BOF Casino',
@@ -1611,6 +1706,7 @@
     urlCasino: 'https://armadaapp.media-412.com/click?pid=3862&offer_id=121231',
     image: 'images/bof.svg',
     countries: ['UK', 'IE'],
+    hasDetailPage: true,
   },
   {
     name: 'Azurslot',
@@ -1637,6 +1733,7 @@
       'CH',
       'PT',
     ],
+    hasDetailPage: true,
   },
   {
     name: 'Winairlines',
@@ -1678,6 +1775,7 @@
     top: ['BR'],
     payments: ['visa', 'mastercard', 'applepay', 'googlepay', 'bitcoin', 'ethereum', 'litecoin'],
     isNew: true,
+    hasDetailPage: true,
   },
   {
     name: 'SlotsPlus',
@@ -1688,6 +1786,7 @@
     image: 'images/slotsplus.png',
     countries: ['US'],
     isExclusive: true,
+    hasDetailPage: true,
   },
   {
     name: 'Sun Palace',
@@ -1697,6 +1796,7 @@
     urlCasino: 'https://armadaapp.media-412.com/click?pid=3862&offer_id=121278',
     image: 'images/sunpalace.png',
     countries: ['US'],
+    hasDetailPage: true,
   },
   {
     name: 'Fair Go',
@@ -1707,6 +1807,7 @@
     image: 'images/fairgo.png',
     countries: ['US'],
     payments: ['visa', 'mastercard', 'applepay', 'googlepay', 'bitcoin', 'tether', 'litecoin', 'bitcoincash'],
+    hasDetailPage: true,
   },
   {
     name: 'Red Stag',
@@ -1716,6 +1817,7 @@
     urlCasino: 'https://armadaapp.media-412.com/click?pid=3862&offer_id=121282',
     image: 'images/redstag.png',
     countries: ['US'],
+    hasDetailPage: true,
   },
   {
     name: 'Slots Capital',
@@ -1726,6 +1828,7 @@
     image: 'images/slotscapital.png',
     countries: ['US'],
     payments: ['visa', 'mastercard', 'bitcoin', 'litecoin', 'bitcoincash'],
+    hasDetailPage: true,
   },
   {
     name: 'Punt',
@@ -1736,6 +1839,7 @@
     image: 'images/punt.webp',
     countries: ['US'],
     payments: ['visa', 'mastercard', 'americanexpress'],
+    hasDetailPage: true,
   },
   {
     name: 'Uptown Aces',
@@ -1746,6 +1850,7 @@
     image: 'images/uptownaces.png',
     countries: ['US'],
     payments: ['visa', 'mastercard', 'bitcoin', 'litecoin', 'bitcoincash', 'tether'],
+    hasDetailPage: true,
   },
   {
     name: 'Safe Casino',
@@ -1756,6 +1861,7 @@
     image: 'images/safecasino.png',
     countries: ['AU', 'CA', 'NZ', 'DE', 'AT', 'ES', 'PL', 'CZ', 'PT', 'IT', 'GR', 'HU'],
     payments: ['visa', 'mastercard'],
+    hasDetailPage: true,
   },
   {
     name: 'Chanced',
@@ -1767,6 +1873,7 @@
     countries: ['US'],
     top: ['US'],
     payments: ['visa', 'mastercard', 'americanexpress'],
+    hasDetailPage: true,
   },
   {
     name: '22bit',
@@ -1799,6 +1906,7 @@
       'IE',
       'HR',
     ],
+    hasDetailPage: true,
   },
   {
     name: 'KoiFortune',
@@ -1820,6 +1928,7 @@
       'tron',
       'ethereum',
     ],
+    hasDetailPage: true,
   },
   {
     name: '22Casino',
@@ -1829,5 +1938,6 @@
     urlCasino: 'https://armadaapp.media-412.com/click?pid=3862&offer_id=121334',
     image: 'images/22casino.svg',
     countries: ['AU', 'CZ', 'FI', 'GR', 'HU', 'IT', 'PT', 'ES', 'CH'],
+    hasDetailPage: true,
   },
 ];
