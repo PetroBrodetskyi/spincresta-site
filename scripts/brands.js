@@ -177,7 +177,7 @@
     name: 'Cazino',
     bonus: 'Welcome offer get an Extra 100% in Coins',
     cta: 'Play Now',
-    urlDetail: 'brands/phj.html',
+    urlDetail: 'brands/cazino.html',
     urlCasino: 'https://armadaapp.media-412.com/click?pid=3862&offer_id=120997',
     image: 'images/cazino.webp',
     countries: ['US'],
