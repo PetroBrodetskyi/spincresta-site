@@ -1325,9 +1325,9 @@
     name: 'NV Casino',
     bonus: 'Welcome Package - Up to €2,000 + 225 Free Spins',
     cta: 'Play Now',
-    urlDetail: 'brands/nvcasono.html',
+    urlDetail: 'brands/nvcasino.html',
     urlCasino: 'https://armadaapp.media-412.com/click?pid=3862&offer_id=121162',
-    image: 'images/nvcasono.webp',
+    image: 'images/nvcasino.webp',
     countries: [
       'PL',
       'EE',

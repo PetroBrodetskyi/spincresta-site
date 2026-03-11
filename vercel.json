@@ -36,6 +36,16 @@
       "permanent": true
     },
     {
+      "source": "/brands/nvcasono/",
+      "destination": "/brands/nvcasino/",
+      "permanent": true
+    },
+    {
+      "source": "/brands/nvcasono.html",
+      "destination": "/brands/nvcasino/",
+      "permanent": true
+    },
+    {
       "source": "/index.html",
       "destination": "/",
       "permanent": true
