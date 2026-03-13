@@ -1,7 +1,7 @@
 ﻿:root {
   --bg-main: #000000;
   --bg-surface: #02061788;
-  --bg-card: #17212b;
+  --bg-card: #2b437749;
 
   --border-soft: rgba(148, 163, 184, 0.15);
   --border-glass: rgba(255, 255, 255, 0.08);
@@ -952,9 +952,10 @@ body {
   gap: 10px;
   color: var(--text-main);
   line-height: 1.6;
-  border: 1px solid var(--border-glass);
+  background-color: var(--bg-card);
   padding: 24px;
   border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-soft);
 }
 
 .feature-card strong {
