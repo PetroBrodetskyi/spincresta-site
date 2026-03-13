@@ -1,4 +1,4 @@
-﻿/* =====================
+/* =====================
    CASINOS PAGE
 ===================== */
 
@@ -192,6 +192,7 @@ body[data-brand] .hero-content.glass-card {
   border-radius: var(--radius-lg);
   border: 1px solid var(--border-glass);
   box-shadow: var(--shadow-soft);
+  box-shadow: var(--shadow-hover);
 }
 
 body[data-brand] .hero-subtitle {
@@ -219,11 +220,15 @@ body[data-brand] .brand-logo {
 }
 
 body[data-brand] .content-review > section {
-  margin-top: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
 }
 
-body[data-brand] .content-review .title {
-  margin-bottom: 12px;
+@media (max-width: 768px) {
+  body[data-brand] .content-review > section {
+    gap: 20px;
+  }
 }
 
 body[data-brand] .icon-placeholder {
@@ -287,6 +292,58 @@ body[data-brand] .timeline p {
 
   body[data-brand] .brand-logo {
     max-height: 112px;
+  }
+
+  body[data-brand] .features-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 14px;
+  }
+
+  body[data-brand] .feature-card {
+    padding: 16px;
+  }
+
+  body[data-brand] .feature-card strong {
+    font-size: 0.98rem;
+    margin-bottom: 0.55rem;
+  }
+
+  body[data-brand] .feature-card span {
+    font-size: 0.9rem;
+  }
+
+  body[data-brand] .icon-placeholder {
+    width: 38px;
+    height: 38px;
+    border-radius: 10px;
+    margin-bottom: 6px;
+    font-size: 13px;
+  }
+}
+
+@media (max-width: 520px) {
+  body[data-brand] .features-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+  }
+
+  body[data-brand] .feature-card {
+    padding: 14px;
+  }
+
+  body[data-brand] .feature-card strong {
+    font-size: 0.92rem;
+  }
+
+  body[data-brand] .feature-card span {
+    font-size: 0.84rem;
+    line-height: 1.45;
+  }
+}
+
+@media (max-width: 380px) {
+  body[data-brand] .features-grid {
+    grid-template-columns: 1fr;
   }
 }
 
@@ -412,6 +469,18 @@ body[data-brand='Leon'] .timeline p {
   }
 }
 
+.final-cta-glass {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+@media (max-width: 768px) {
+  .final-cta-glass {
+    gap: 20px;
+  }
+}
+
 /* chips for generated brand pages */
 .country-chip,
 .payment-chip {
@@ -520,4 +589,3 @@ body.casinos-page .alpha-nav .view-all {
     width: 100%;
   }
 }
-
