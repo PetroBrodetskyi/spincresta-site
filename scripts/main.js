@@ -447,6 +447,7 @@ export const initCasinoPage = () => {
   if (window.location.hash) {
     requestAnimationFrame(() => scrollToAnchor(window.location.hash));
   }
+
   document.querySelectorAll('a[href="#"]').forEach(link => {
     link.setAttribute('aria-disabled', 'true');
     link.addEventListener('click', event => event.preventDefault());

@@ -191,7 +191,6 @@ body[data-brand] .hero-content.glass-card {
   padding: 28px;
   border-radius: var(--radius-lg);
   border: 1px solid var(--border-glass);
-  box-shadow: var(--shadow-soft);
   box-shadow: var(--shadow-hover);
 }
 
