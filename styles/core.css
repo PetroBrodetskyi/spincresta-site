@@ -532,6 +532,7 @@ body {
   margin-top: 32px;
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-soft);
+  width: 100%;
 }
 
 .countries-cloud a {
