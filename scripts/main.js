@@ -291,6 +291,64 @@ export const initCasinoPage = () => {
     }
   }
 
+  const promoCopyBoxes = document.querySelectorAll('[data-copy-code]');
+  if (promoCopyBoxes.length) {
+    const fallbackCopy = code => {
+      const textarea = document.createElement('textarea');
+      textarea.value = code;
+      textarea.setAttribute('readonly', '');
+      textarea.style.position = 'absolute';
+      textarea.style.left = '-9999px';
+      document.body.appendChild(textarea);
+      textarea.select();
+      document.execCommand('copy');
+      textarea.remove();
+    };
+
+    promoCopyBoxes.forEach(trigger => {
+      const code = trigger.dataset.copyCode?.trim();
+      const promoBox = trigger.closest('.promo-copy-box');
+      const title = promoBox?.querySelector('.promo-copy-title');
+      const feedback = promoBox?.querySelector('.promo-copy-feedback');
+      let resetTimer;
+
+      const setCopiedState = copied => {
+        trigger.classList.toggle('copied', copied);
+        if (title) title.classList.toggle('copied', copied);
+        if (feedback) feedback.classList.toggle('visible', copied);
+      };
+
+      const triggerCopy = async () => {
+        if (!code) return;
+
+        try {
+          if (navigator.clipboard?.writeText) {
+            await navigator.clipboard.writeText(code);
+          } else {
+            fallbackCopy(code);
+          }
+        } catch {
+          fallbackCopy(code);
+        }
+
+        window.clearTimeout(resetTimer);
+        setCopiedState(true);
+        resetTimer = window.setTimeout(() => setCopiedState(false), 1600);
+      };
+
+      trigger.addEventListener('click', event => {
+        triggerCopy();
+      });
+
+      trigger.addEventListener('keydown', event => {
+        if (event.key === 'Enter' || event.key === ' ') {
+          event.preventDefault();
+          triggerCopy();
+        }
+      });
+    });
+  }
+
   const countriesDropdown = document.getElementById('countriesDropdown');
   if (countriesDropdown) {
     countriesDropdown.innerHTML = COUNTRIES.map(

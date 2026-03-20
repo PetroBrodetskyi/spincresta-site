@@ -819,6 +819,18 @@
     isTopRated: true,
     hasDetailPage: true,
   },
+  {
+    name: 'AllWin',
+    bonus: 'Welcome Bonus: Casino up to ₴390,000 + 600 Free Spins | Sports up to ₴50,000',
+    cta: 'Play Now',
+    urlDetail: 'brands/allwin.html',
+    urlCasino: 'https://armadaapp.media-412.com/click?pid=3862&offer_id=122211',
+    image: 'images/allwin.svg',
+    countries: ['UA'],
+    payments: ['visa', 'mastercard', 'banktransfer'],
+    isNew: true,
+    hasDetailPage: true,
+  },
   // {
   //   name: 'VBet',
   //   bonus: 'No deposit: 25 free spins, no wagering, for verification',

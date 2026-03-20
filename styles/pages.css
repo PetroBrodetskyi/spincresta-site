@@ -549,6 +549,155 @@ body[data-brand='Leon'] .timeline p {
   }
 }
 
+.promo-copy-box {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  box-shadow: none;
+  align-items: center;
+  text-align: center;
+}
+
+.promo-copy-head {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  width: 100%;
+  text-align: center;
+}
+
+.promo-copy-head > div {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: center;
+}
+
+.promo-copy-eyebrow {
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.promo-copy-title {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 62px;
+  margin: 0;
+  padding: 12px 20px;
+  font-size: 28px;
+  line-height: 1;
+  border-radius: 18px;
+  border: 2px solid rgba(255, 215, 106, 0.22);
+  background: linear-gradient(180deg, rgba(49, 63, 89, 0.98), rgba(16, 23, 40, 0.99));
+  box-shadow:
+    inset 0 2px 0 rgba(255, 255, 255, 0.05),
+    inset 0 -4px 10px rgba(0, 0, 0, 0.36),
+    0 10px 22px rgba(0, 0, 0, 0.18);
+  cursor: pointer;
+  user-select: none;
+  transition:
+    transform 0.18s ease,
+    border-color 0.18s ease,
+    box-shadow 0.18s ease,
+    color 0.18s ease;
+}
+
+.promo-copy-title:hover,
+.promo-copy-title:focus-visible {
+  transform: translateY(-1px);
+  color: var(--gold);
+  border-color: rgba(255, 215, 106, 0.34);
+  box-shadow:
+    inset 0 2px 0 rgba(255, 255, 255, 0.05),
+    inset 0 -4px 10px rgba(0, 0, 0, 0.36),
+    0 14px 28px rgba(0, 0, 0, 0.22);
+}
+
+.promo-copy-title:active {
+  transform: translateY(1px);
+  box-shadow:
+    inset 0 3px 8px rgba(0, 0, 0, 0.44),
+    inset 0 1px 0 rgba(255, 255, 255, 0.03),
+    0 6px 14px rgba(0, 0, 0, 0.14);
+}
+
+.promo-copy-title.copied {
+  color: #86e8ff;
+  border-color: rgba(56, 189, 248, 0.38);
+  box-shadow:
+    inset 0 2px 8px rgba(0, 0, 0, 0.42),
+    inset 0 1px 0 rgba(255, 255, 255, 0.04),
+    0 14px 28px rgba(56, 189, 248, 0.14);
+}
+
+.promo-copy-feedback {
+  margin-top: 8px;
+  min-height: 20px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  opacity: 0;
+  transform: translateY(-4px);
+  transition:
+    opacity 0.18s ease,
+    transform 0.18s ease;
+}
+
+.promo-copy-feedback.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.promo-copy-description,
+.promo-copy-note {
+  margin: 0;
+  color: var(--text-main);
+}
+
+.promo-copy-note {
+  font-size: 0.95rem;
+  color: var(--text-muted);
+}
+
+.promo-copy-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+}
+
+.promo-copy-meta span {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 36px;
+  padding: 8px 12px;
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--border-glass);
+  color: var(--text-main);
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+
+@media (max-width: 768px) {
+  .promo-copy-box {
+    gap: 14px;
+  }
+
+  .promo-copy-head {
+    align-items: center;
+  }
+}
+
 .final-cta-glass {
   display: flex;
   flex-direction: column;
