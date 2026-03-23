@@ -1428,7 +1428,7 @@
     urlDetail: 'brands/gqbet.html',
     urlCasino: 'https://armadaapp.media-412.com/click?pid=3862&offer_id=120931',
     image: 'images/gqbet.webp',
-    countries: ['FR'],
+    countries: ['UK', 'FR'],
     payments: ['visa', 'mastercard', 'neteller', 'skrill'],
     hasDetailPage: true,
   },
