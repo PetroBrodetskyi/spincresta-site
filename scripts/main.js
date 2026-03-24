@@ -191,6 +191,19 @@ const renderBrandList = (brands, containerSelector, emptyText) => {
 export const initCasinoPage = () => {
   const pageType = document.body.dataset.page;
   const pageCountry = document.body.dataset.country?.toUpperCase();
+  const siteCountryCountEl = document.getElementById('siteCountryCount');
+  const siteBrandCountEl = document.getElementById('siteBrandCount');
+
+  if (siteCountryCountEl) {
+    siteCountryCountEl.textContent = COUNTRIES.length.toString();
+  }
+
+  if (siteBrandCountEl) {
+    const uniqueBrandCount = new Set(
+      BRANDS.map(brand => normalizeText(brand.name).trim()).filter(Boolean)
+    ).size;
+    siteBrandCountEl.textContent = uniqueBrandCount.toString();
+  }
 
   if (pageCountry) {
     const brands = BRANDS.filter(b => b.countries?.some(c => c.toUpperCase() === pageCountry));
