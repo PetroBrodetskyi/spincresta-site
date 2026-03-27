@@ -2205,7 +2205,7 @@
   },
   {
     name: 'Punt',
-    bonus: '400% boost on your first purchase',
+    bonus: 'Up to 260k Gold Coins + 100 Free Spins',
     cta: 'Play Now',
     urlDetail: 'brands/punt.html',
     urlCasino: 'https://armadaapp.media-412.com/click?pid=3862&offer_id=121246',
@@ -2239,7 +2239,7 @@
   },
   {
     name: 'Chanced',
-    bonus: 'Get 400% Extra Coins - Claim Welcome Offer',
+    bonus: 'Up to 130 Free Sweep Coins + 100 Free Spins',
     cta: 'Play Now',
     urlDetail: 'brands/chanced.html',
     urlCasino: 'https://armadaapp.media-412.com/click?pid=3862&offer_id=121245',
