@@ -670,7 +670,7 @@
     urlCasino: 'https://armadaapp.media-412.com/click?pid=3862&offer_id=121510',
     image: 'images/betory.png',
     countries: ['NL'],
-    payments: ['visa', 'mastercard', 'applepay', 'neteller', 'banktransfer', 'skrill'],
+    payments: ['visa', 'mastercard', 'applepay', 'googlepay', 'banktransfer', 'bitcoin', 'ethereum'],
     hasDetailPage: true,
   },
   {
@@ -975,7 +975,7 @@
     urlCasino: 'https://armadaapp.media-412.com/click?pid=3862&offer_id=120899',
     image: 'images/fugu.webp',
     countries: ['RU', 'KZ', 'UA'],
-    payments: ['visa', 'mastercard', 'mifinity', 'jeton', 'applepay'],
+    payments: ['visa', 'mastercard', 'googlepay', 'applepay', 'mifinity', 'jeton'],
     hasDetailPage: true,
   },
   {
@@ -987,7 +987,7 @@
     image: 'images/zarbet.webp',
     countries: ['ZA'],
     isExclusive: true,
-    payments: ['visa', 'mastercard', 'applepay', 'bitcoin', 'litecoin'],
+    payments: ['visa', 'mastercard', 'applepay', 'banktransfer'],
     hasDetailPage: true,
   },
   {
@@ -1044,7 +1044,7 @@
     urlCasino: 'https://armadaapp.media-412.com/click?pid=3862&offer_id=121460',
     image: 'images/luckywave.svg',
     countries: ['NL', 'FR', 'BE', 'UK', 'DE'],
-    payments: ['visa', 'mastercard', 'banktransfer'],
+    payments: ['visa', 'mastercard', 'banktransfer', 'bitcoin', 'tether', 'ethereum'],
     hasDetailPage: true,
   },
   {

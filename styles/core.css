@@ -1329,6 +1329,41 @@ tbody tr:hover {
   display: block;
 }
 
+.footer-brand-directory {
+  margin-top: 40px;
+  padding-top: 32px;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.footer-brand-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 28px 40px;
+  align-items: start;
+  justify-items: start;
+}
+
+.footer-brand-column {
+  min-width: 0;
+  width: 100%;
+  text-align: left;
+}
+
+.footer-brand-column a {
+  display: block;
+  padding: 7px 0;
+  color: var(--text-muted);
+  text-decoration: none;
+  transition:
+    color 0.25s ease,
+    transform 0.25s ease;
+}
+
+.footer-brand-column a:hover {
+  color: var(--text-main);
+  transform: translateX(3px);
+}
+
 .expert-card {
   border-radius: var(--radius-lg);
   margin-top: 12px;
@@ -1682,5 +1717,20 @@ tbody tr:hover {
   .home-link-grid::-webkit-scrollbar-thumb {
     background: rgba(255, 255, 255, 0.12);
     border-radius: 999px;
+  }
+
+  .footer-brand-directory {
+    margin-top: 28px;
+    padding-top: 24px;
+  }
+
+  .footer-brand-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 20px 22px;
+  }
+
+  .footer-brand-column a {
+    padding: 6px 0;
+    font-size: 14px;
   }
 }
