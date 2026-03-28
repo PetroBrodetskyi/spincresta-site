@@ -1419,6 +1419,142 @@ tbody tr:hover {
   margin-top: 20px;
 }
 
+body[data-country] .expert-review .title {
+  margin-bottom: 14px;
+}
+
+body[data-country] .expert-card {
+  padding: 26px 28px;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0.012)),
+    var(--bg-card);
+  border: 1px solid var(--border-glass);
+  box-shadow: var(--shadow-soft);
+}
+
+body[data-country] .expert-header {
+  align-items: flex-start;
+  gap: 20px;
+  margin-bottom: 24px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+body[data-country] .expert-photo {
+  flex: 0 0 auto;
+  width: 96px;
+  height: 96px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.22);
+}
+
+body[data-country] .expert-info h3 {
+  margin: 0 0 6px;
+  line-height: 1.15;
+}
+
+body[data-country] .expert-role {
+  margin: 0 0 6px;
+  color: var(--text-main);
+}
+
+body[data-country] .expert-meta {
+  margin: 0;
+}
+
+body[data-country] .expert-body {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+body[data-country] .expert-body p {
+  margin: 0;
+  max-width: 100%;
+}
+
+body[data-country] .expert-body h3 {
+  margin-top: 8px;
+  margin-bottom: 0;
+}
+
+body[data-country] .expert-criteria,
+body[data-country] .expert-methodology {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 14px;
+  margin-top: 10px;
+  padding-left: 0;
+  list-style: none;
+}
+
+body[data-country] .expert-criteria li,
+body[data-country] .expert-methodology li {
+  padding: 14px 16px;
+  border-radius: var(--radius-lg);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.022), rgba(255, 255, 255, 0.008)),
+    rgba(255, 255, 255, 0.01);
+  border: 1px solid var(--border-glass);
+  color: var(--text-muted);
+}
+
+body[data-country] .expert-platforms {
+  margin-top: 10px;
+  padding-left: 20px;
+}
+
+body[data-country] .expert-platforms li {
+  margin-bottom: 10px;
+}
+
+body[data-country] .expert-disclaimer {
+  margin-top: 6px;
+  padding: 14px 16px;
+  border-radius: var(--radius-lg);
+  border-left: 3px solid rgba(245, 158, 11, 0.8);
+  background: rgba(255, 255, 255, 0.03);
+}
+
+body[data-country] .content-article .title {
+  margin-bottom: 26px;
+}
+
+body[data-country] .content-article .timeline {
+  padding-left: 0;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 20px;
+  align-items: stretch;
+}
+
+body[data-country] .content-article .timeline::before,
+body[data-country] .content-article .timeline::after {
+  content: none;
+  display: none;
+}
+
+body[data-country] .content-article .timeline > div {
+  position: relative;
+  min-height: 100%;
+  padding: 22px 24px 22px 20px;
+  border-radius: var(--radius-lg);
+  background: #1a2031;
+  border: 1px solid rgba(255, 215, 0, 0.18);
+  overflow: hidden;
+}
+
+body[data-country] .content-article .timeline a[href*='/responsible-gambling/'] {
+  color: var(--text-main);
+  text-decoration: none;
+}
+
+@media (max-width: 1120px) {
+  body[data-country] .content-article .timeline {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
 .home-insight {
   margin: 4px 0 2px;
 }
@@ -1434,6 +1570,66 @@ tbody tr:hover {
   flex-wrap: wrap;
   gap: 10px;
   margin: 4px 0 14px;
+}
+
+.page-responsible .content-article .title,
+.page-privacy .content-article .title,
+.page-about .content-article .title {
+  margin-bottom: 26px;
+}
+
+.page-responsible .content-article .timeline,
+.page-privacy .content-article .timeline,
+.page-about .content-article .timeline {
+  padding-left: 0;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 20px;
+  align-items: stretch;
+}
+
+.page-responsible .content-article .timeline::before,
+.page-responsible .content-article .timeline::after,
+.page-privacy .content-article .timeline::before,
+.page-privacy .content-article .timeline::after,
+.page-about .content-article .timeline::before,
+.page-about .content-article .timeline::after {
+  content: none;
+  display: none;
+}
+
+.page-responsible .content-article .timeline > div,
+.page-privacy .content-article .timeline > div,
+.page-about .content-article .timeline > div {
+  min-height: 100%;
+  padding: 22px 24px;
+  border-radius: var(--radius-lg);
+  background: #1a2031;
+  border: 1px solid rgba(255, 215, 0, 0.18);
+  box-shadow: var(--shadow-soft);
+}
+
+.page-responsible .content-article .timeline > div h3,
+.page-privacy .content-article .timeline > div h3,
+.page-about .content-article .timeline > div h3 {
+  margin-top: 0;
+}
+
+.page-responsible .content-article .timeline a,
+.page-responsible .content-article .timeline a:visited,
+.page-privacy .content-article .timeline a,
+.page-privacy .content-article .timeline a:visited,
+.page-about .content-article .timeline a,
+.page-about .content-article .timeline a:visited {
+  color: var(--text-main);
+}
+
+@media (max-width: 1120px) {
+  .page-responsible .content-article .timeline,
+  .page-privacy .content-article .timeline,
+  .page-about .content-article .timeline {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
 }
 
 .home-country-jump {
@@ -1732,5 +1928,68 @@ tbody tr:hover {
   .footer-brand-column a {
     padding: 6px 0;
     font-size: 14px;
+  }
+
+  body[data-country] .expert-review .title {
+    text-align: center;
+  }
+
+  body[data-country] .expert-card {
+    padding: 20px 16px;
+  }
+
+  body[data-country] .expert-header {
+    flex-direction: column;
+    gap: 16px;
+    margin-bottom: 18px;
+    padding-bottom: 18px;
+  }
+
+  body[data-country] .expert-photo {
+    width: 82px;
+    height: 82px;
+  }
+
+  body[data-country] .expert-body {
+    gap: 14px;
+  }
+
+  body[data-country] .expert-criteria,
+  body[data-country] .expert-methodology {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  body[data-country] .content-article .timeline {
+    padding-left: 0;
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+
+  body[data-country] .content-article .title {
+    margin-bottom: 20px;
+  }
+
+  body[data-country] .content-article .timeline > div {
+    padding: 16px 16px 16px 18px;
+  }
+
+  .page-responsible .content-article .title,
+  .page-privacy .content-article .title,
+  .page-about .content-article .title {
+    margin-bottom: 20px;
+  }
+
+  .page-responsible .content-article .timeline,
+  .page-privacy .content-article .timeline,
+  .page-about .content-article .timeline {
+    grid-template-columns: 1fr;
+    gap: 14px;
+  }
+
+  .page-responsible .content-article .timeline > div,
+  .page-privacy .content-article .timeline > div,
+  .page-about .content-article .timeline > div {
+    padding: 16px 16px 18px;
   }
 }
