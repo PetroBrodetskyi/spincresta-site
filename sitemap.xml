@@ -792,6 +792,11 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://spincresta.com/brands/spellwin/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://spincresta.com/brands/spinarium/</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -808,6 +813,11 @@
   </url>
   <url>
     <loc>https://spincresta.com/brands/sunpalace/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://spincresta.com/brands/trino/</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
