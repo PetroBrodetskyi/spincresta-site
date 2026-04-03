@@ -606,10 +606,15 @@
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
-  <url>
-    <loc>https://spincresta.com/brands/iwild/</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <url>
+      <loc>https://spincresta.com/brands/immerion/</loc>
+      <changefreq>monthly</changefreq>
+      <priority>0.7</priority>
+    </url>
+    <url>
+      <loc>https://spincresta.com/brands/iwild/</loc>
+      <changefreq>monthly</changefreq>
+      <priority>0.7</priority>
   </url>
   <url>
     <loc>https://spincresta.com/brands/izzi/</loc>

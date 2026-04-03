@@ -172,64 +172,128 @@
         </div>
       </section> -->
       <div class="content-area container">
-        <section class="home-stats" aria-label="SpinCresta coverage">
-          <div class="home-stats-card">
-            <div class="home-insight-head">
-              <h2>What You Can Explore on SpinCresta</h2>
-              <p>
-                We keep growing the site by country and by brand, so players can compare more markets,
-                offers, and real-money options in one place.
-              </p>
-            </div>
-            <div class="home-stats-grid">
-              <a class="home-stat-tile home-stat-link" href="/online-casinos/">
-                <span class="home-stat-number" id="siteCountryCount">0</span>
-                <strong>Country Pages</strong>
-                <span>Market-specific guides with local payment angles, bonus focus, and country-matched picks.</span>
+        <div class="home-top-insights">
+          <div class="home-top-main">
+            <section class="home-stats" aria-label="SpinCresta coverage">
+              <div class="home-stats-card">
+                <div class="home-insight-head">
+                  <h2>What You Can Explore on SpinCresta</h2>
+                  <p>
+                    We keep growing the site by country and by brand, so players can compare more markets,
+                    offers, and real-money options in one place.
+                  </p>
+                </div>
+                <div class="home-stats-grid">
+                  <a class="home-stat-tile home-stat-link" href="/online-casinos/">
+                    <span class="home-stat-number" id="siteCountryCount">0</span>
+                    <strong>Country Pages</strong>
+                    <span>Market-specific guides with local payment angles, bonus focus, and country-matched picks.</span>
+                  </a>
+                  <a class="home-stat-tile home-stat-link" href="#footer-brand-directory">
+                    <span class="home-stat-number" id="siteBrandCount">0</span>
+                    <strong>Casino & Betting Brands Reviewed</strong>
+                    <span>Brand pages built around bonuses, payments, trust checks, and what real players usually want to know.</span>
+                  </a>
+                </div>
+              </div>
+            </section>
+
+            <nav class="home-country-jumps" aria-label="Jump to homepage country sections">
+              <a class="home-country-jump" href="#home-united-states">
+                <img class="flag" src="/icons/united-states-flag-icon.svg" alt="United States" loading="lazy" decoding="async" />
+                <span>United States</span>
               </a>
-                            <a class="home-stat-tile home-stat-link" href="#footer-brand-directory">
-                <span class="home-stat-number" id="siteBrandCount">0</span>
-                <strong>Casino & Betting Brands Reviewed</strong>
-                <span>Brand pages built around bonuses, payments, trust checks, and what real players usually want to know.</span>
+              <a class="home-country-jump" href="#home-united-kingdom">
+                <img class="flag" src="/icons/united-kingdom-flag-icon.svg" alt="United Kingdom" loading="lazy" decoding="async" />
+                <span>United Kingdom</span>
               </a>
-            </div>
+              <a class="home-country-jump" href="#home-australia">
+                <img class="flag" src="/icons/australia-flag-icon.svg" alt="Australia" loading="lazy" decoding="async" />
+                <span>Australia</span>
+              </a>
+              <a class="home-country-jump" href="#home-canada">
+                <img class="flag" src="/icons/canada-flag-icon.svg" alt="Canada" loading="lazy" decoding="async" />
+                <span>Canada</span>
+              </a>
+              <a class="home-country-jump" href="#home-brazil">
+                <img class="flag" src="/icons/brazil-flag-icon.svg" alt="Brazil" loading="lazy" decoding="async" />
+                <span>Brazil</span>
+              </a>
+              <a class="home-country-jump home-country-more" href="/top-casinos/">
+                <span>and others</span>
+              </a>
+            </nav>
+
+            <!-- US -->
+            <section class="content" data-country="US" id="home-united-states">
+              <div class="cards-main">
+                <h2 class="top-country-title"></h2>
+                <div class="casino-grid" data-limit="4"></div>
+                <div class="view-all-wrapper" hidden>
+                  <a class="view-all" href="/online-casinos/united-states/">View all US casinos</a>
+                </div>
+              </div>
+            </section>
           </div>
-        </section>
-        <nav class="home-country-jumps" aria-label="Jump to homepage country sections">
-          <a class="home-country-jump" href="#home-united-states">
-            <img class="flag" src="/icons/united-states-flag-icon.svg" alt="United States" loading="lazy" decoding="async" />
-            <span>United States</span>
-          </a>
-          <a class="home-country-jump" href="#home-united-kingdom">
-            <img class="flag" src="/icons/united-kingdom-flag-icon.svg" alt="United Kingdom" loading="lazy" decoding="async" />
-            <span>United Kingdom</span>
-          </a>
-          <a class="home-country-jump" href="#home-australia">
-            <img class="flag" src="/icons/australia-flag-icon.svg" alt="Australia" loading="lazy" decoding="async" />
-            <span>Australia</span>
-          </a>
-          <a class="home-country-jump" href="#home-canada">
-            <img class="flag" src="/icons/canada-flag-icon.svg" alt="Canada" loading="lazy" decoding="async" />
-            <span>Canada</span>
-          </a>
-          <a class="home-country-jump" href="#home-brazil">
-            <img class="flag" src="/icons/brazil-flag-icon.svg" alt="Brazil" loading="lazy" decoding="async" />
-            <span>Brazil</span>
-          </a>
-          <a class="home-country-jump home-country-more" href="/top-casinos/">
-            <span>and others</span>
-          </a>
-        </nav>
-        <!-- US -->
-        <section class="content" data-country="US" id="home-united-states">
-          <div class="cards-main">
-            <h2 class="top-country-title"></h2>
-            <div class="casino-grid" data-limit="4"></div>
-            <div class="view-all-wrapper" hidden>
-              <a class="view-all" href="/online-casinos/united-states/">View all US casinos</a>
+
+          <section class="home-insight home-insight-side home-insight-new-brands">
+            <div class="home-insight-card">
+              <div class="home-insight-head">
+                <h2>New Reviews</h2>
+                <p>
+                  Here you can find our latest brand reviews, with fresh bonus pages, updated payment
+                  options, and useful account details in one place.
+                </p>
+              </div>
+              <div class="home-new-brands-carousel" data-visible-count="4" data-rotate-ms="3800">
+                <div class="home-link-grid home-link-grid-vertical home-new-brands-track">
+                  <a class="home-link-card" href="/brands/immerion/">
+                    <span class="home-link-brand">
+                      <img class="home-link-logo" src="/images/immerion.svg" alt="Immerion logo" loading="lazy" decoding="async" />
+                      <strong>Immerion</strong>
+                    </span>
+                    <span>10,000+ games, Fortune Engine, cashback, jackpots, and a mixed casino-plus-sport account.</span>
+                  </a>
+                  <a class="home-link-card" href="/brands/ybets/">
+                    <span class="home-link-brand">
+                      <img class="home-link-logo" src="/images/ybets.svg" alt="Ybets logo" loading="lazy" decoding="async" />
+                      <strong>Ybets</strong>
+                    </span>
+                    <span>Fortune Engine, cashback, jackpots, sportsbook access, and a broad lobby with strong filters.</span>
+                  </a>
+                  <a class="home-link-card" href="/brands/snatch/">
+                    <span class="home-link-brand">
+                      <img class="home-link-logo" src="/images/snatch.svg" alt="Snatch logo" loading="lazy" decoding="async" />
+                      <strong>Snatch</strong>
+                    </span>
+                    <span>Cashback, VIP live casino, jackpot lanes, and a well-organized casino lobby beyond basic slots.</span>
+                  </a>
+                  <a class="home-link-card" href="/brands/iwild/">
+                    <span class="home-link-brand">
+                      <img class="home-link-logo" src="/images/iwild.svg" alt="iWild logo" loading="lazy" decoding="async" />
+                      <strong>iWild</strong>
+                    </span>
+                    <span>Big welcome pack, cashback, VIP live tables, providers hub, and wide fiat-plus-crypto cashier.</span>
+                  </a>
+                  <a class="home-link-card" href="/brands/spellwin/">
+                    <span class="home-link-brand">
+                      <img class="home-link-logo" src="/images/spellwin.webp" alt="Spellwin logo" loading="lazy" decoding="async" />
+                      <strong>Spellwin</strong>
+                    </span>
+                    <span>Shop rewards, achievements, VIP perks, and a strong casino-first account with sportsbook depth.</span>
+                  </a>
+                  <a class="home-link-card" href="/brands/trino/">
+                    <span class="home-link-brand">
+                      <img class="home-link-logo" src="/images/trino.webp" alt="Trino logo" loading="lazy" decoding="async" />
+                      <strong>Trino</strong>
+                    </span>
+                    <span>VIP, buy-feature routes, jackpots, themed slot categories, and broad esports-friendly sportsbook coverage.</span>
+                  </a>
+                </div>
+              </div>
             </div>
-          </div>
-        </section>
+          </section>
+        </div>
 
         <section class="home-insight">
 
@@ -391,36 +455,6 @@
             <div class="casino-grid" data-limit="4"></div>
             <div class="view-all-wrapper" hidden>
               <a class="view-all" href="/online-casinos/brazil/">View all Brazilian casinos</a>
-            </div>
-          </div>
-        </section>
-
-        <section class="home-insight">
-          <div class="home-insight-card">
-            <div class="home-insight-head">
-              <h2>New Brands Added</h2>
-              <p>
-                We keep adding fresh brand-pages as soon as they are ready, so players can check new sites,
-                offers, and payment options without waiting for a giant sitewide update.
-              </p>
-            </div>
-            <div class="home-link-grid">
-              <a class="home-link-card" href="/brands/allwin/">
-                <strong>AllWin</strong>
-                <span>UA-facing sportsbook and casino brand with a promo-box and detailed bonus conditions.</span>
-              </a>
-              <a class="home-link-card" href="/brands/first/">
-                <strong>First</strong>
-                <span>Ukrainian-facing review with local payments, licensing context, and welcome package details.</span>
-              </a>
-              <a class="home-link-card" href="/brands/betking/">
-                <strong>Betking</strong>
-                <span>Casino and sportsbook mix with promos, cashout visibility, and responsible-play information.</span>
-              </a>
-              <a class="home-link-card" href="/brands/777-ua/">
-                <strong>777</strong>
-                <span>Slots, live casino, jackpots, tournaments, and a deeper look at bonus and policy pages.</span>
-              </a>
             </div>
           </div>
         </section>
@@ -647,6 +681,7 @@
             <a href="/brands/gizbo/">Gizbo Casino</a>
             <a href="/brands/gqbet/">GQbet</a>
             <a href="/brands/gunsbet/">Gunsbet</a>
+            <a href="/brands/immerion/">Immerion</a>
             <a href="/brands/irwin/">Irwin Casino</a>
             <a href="/brands/iwild/">iWild</a>
             <a href="/brands/izzi/">Izzi Casino</a>
@@ -725,6 +760,7 @@
     <script type="module" src="/scripts/main.js"></script>
   </body>
 </html>
+
 
 
 

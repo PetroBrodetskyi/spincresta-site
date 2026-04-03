@@ -1563,6 +1563,249 @@ body[data-country] .content-article .timeline a[href*='/responsible-gambling/'] 
   margin: 4px 0 2px;
 }
 
+.home-top-insights {
+  display: grid;
+  grid-template-columns: minmax(0, 1.72fr) minmax(244px, 0.68fr);
+  gap: 24px;
+  align-items: start;
+  margin: 4px 0 12px;
+}
+
+.home-top-main {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.home-top-main > .home-stats,
+.home-top-main > .home-country-jumps,
+.home-top-main > .content {
+  margin: 0;
+}
+
+.home-top-main > .content {
+  min-width: 0;
+}
+
+.home-top-main > .content .cards-main {
+  gap: 14px;
+}
+
+.home-top-insights .home-stats,
+.home-top-insights .home-insight {
+  margin: 0;
+}
+
+.home-insight-side .home-insight-card {
+  height: auto;
+}
+
+.home-insight-new-brands {
+  width: 100%;
+  max-width: 340px;
+  justify-self: end;
+}
+
+.home-insight-new-brands .home-insight-card {
+  gap: 18px;
+  padding-bottom: 38px;
+}
+
+.home-new-brands-carousel {
+  position: relative;
+  overflow: hidden;
+}
+
+.home-link-grid-vertical {
+  grid-template-columns: 1fr;
+  gap: 14px;
+}
+
+.home-new-brands-track {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  will-change: transform;
+  transition: transform 0.56s ease;
+}
+
+.home-link-grid-vertical .home-link-card {
+  min-height: 0;
+  padding: 16px 18px;
+  gap: 10px;
+}
+
+.home-link-grid-vertical .home-link-card strong {
+  font-size: 1rem;
+}
+
+.home-link-grid-vertical .home-link-card > span:not(.home-link-brand) {
+  font-size: 0.98rem;
+  line-height: 1.55;
+}
+
+.home-link-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+  line-height: 1.2;
+}
+
+.home-link-logo {
+  width: 26px;
+  height: 26px;
+  flex: 0 0 26px;
+  object-fit: contain;
+}
+
+.country-brand-stage {
+  display: grid;
+  grid-template-columns: minmax(260px, 320px) minmax(0, 1fr);
+  gap: 24px;
+  align-items: start;
+}
+
+.country-brand-side {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  min-width: 0;
+}
+
+.country-brand-main {
+  min-width: 0;
+}
+
+.country-brand-summary {
+  margin-top: 0;
+}
+
+.country-brand-summary-card {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+  padding: 22px 26px;
+  border-radius: var(--radius-lg);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0.01)),
+    rgba(255, 255, 255, 0.015);
+  border: 1px solid var(--border-glass);
+  box-shadow: var(--shadow-soft);
+}
+
+.country-brand-summary-number {
+  font-size: clamp(48px, 5vw, 72px);
+  line-height: 0.95;
+  font-weight: 800;
+  color: var(--text-main);
+  text-shadow: 0 0 18px rgba(255, 215, 0, 0.12);
+  flex: 0 0 auto;
+}
+
+.country-brand-summary-copy {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-width: 0;
+}
+
+.country-brand-summary-copy strong {
+  font-size: 1.18rem;
+  color: var(--text-main);
+}
+
+.country-brand-summary-copy span {
+  color: var(--text-muted);
+  font-size: 15px;
+  line-height: 1.58;
+}
+
+.country-new-reviews {
+  margin: 0;
+}
+
+.country-new-reviews .home-insight-card {
+  gap: 18px;
+}
+
+.country-new-reviews-carousel {
+  position: relative;
+  overflow: hidden;
+}
+
+.country-new-reviews-track {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  will-change: transform;
+  transition: transform 0.56s ease;
+}
+
+@media (max-width: 1120px) {
+  .home-top-insights {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  .home-top-main {
+    gap: 12px;
+  }
+
+  .home-insight-new-brands {
+    max-width: none;
+    justify-self: stretch;
+  }
+
+  .country-brand-stage {
+    grid-template-columns: 1fr;
+  }
+
+  .country-brand-side {
+    gap: 16px;
+  }
+
+  .country-brand-summary {
+    margin-top: 18px;
+  }
+
+  .country-brand-summary-card {
+    gap: 16px;
+    padding: 18px 20px;
+  }
+
+  .country-new-reviews {
+    display: none;
+  }
+
+  .home-new-brands-carousel {
+    overflow: visible;
+    height: auto !important;
+  }
+
+  .home-new-brands-track {
+    transform: none !important;
+    transition: none !important;
+  }
+
+  .country-new-reviews-carousel {
+    overflow: visible;
+    height: auto !important;
+  }
+
+  .country-new-reviews-track {
+    transform: none !important;
+    transition: none !important;
+  }
+}
+
+@media (max-width: 768px) {
+  .country-brand-summary {
+    display: none;
+  }
+}
+
 .home-country-jumps {
   display: flex;
   align-items: center;
@@ -1755,13 +1998,14 @@ body[data-country] .content-article .timeline a[href*='/responsible-gambling/'] 
 }
 
 .home-insight-head h2 {
-  font-size: clamp(28px, 4vw, 38px);
-  line-height: 1.1;
+  font-size: clamp(22px, 2.6vw, 30px);
+  line-height: 1.16;
 }
 
 .home-insight-head p {
   color: var(--text-muted);
-  font-size: 18px;
+  font-size: 16px;
+  line-height: 1.55;
 }
 
 .home-insight .feature-card {
@@ -1848,6 +2092,16 @@ body[data-country] .content-article .timeline a[href*='/responsible-gambling/'] 
     gap: 18px;
   }
 
+  .home-top-insights {
+    grid-template-columns: 1fr;
+    gap: 14px;
+    margin: 4px 0 12px;
+  }
+
+  .home-top-main {
+    gap: 10px;
+  }
+
   .home-stats-card .home-insight-head,
   .home-insight-card .home-insight-head {
     align-items: center;
@@ -1881,7 +2135,7 @@ body[data-country] .content-article .timeline a[href*='/responsible-gambling/'] 
   }
 
   .home-insight-head p {
-    font-size: 16px;
+    font-size: 14px;
   }
 
   .home-insight .features-grid,
@@ -1896,6 +2150,22 @@ body[data-country] .content-article .timeline a[href*='/responsible-gambling/'] 
 
   .home-insight .feature-card,
   .home-link-card {
+    flex: 0 0 78%;
+    min-height: auto;
+    padding: 16px;
+    scroll-snap-align: start;
+  }
+
+  .home-link-grid-vertical {
+    display: flex;
+    gap: 14px;
+    overflow-x: auto;
+    padding-bottom: 6px;
+    scroll-snap-type: x proximity;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .home-link-grid-vertical .home-link-card {
     flex: 0 0 78%;
     min-height: auto;
     padding: 16px;

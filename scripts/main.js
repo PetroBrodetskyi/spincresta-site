@@ -185,6 +185,301 @@ const renderBrandList = (brands, containerSelector, emptyText) => {
   }
 };
 
+const initVerticalLinkCarousel = ({
+  carouselSelector,
+  trackSelector,
+  desktopMinWidth = 1121,
+}) => {
+  const carousel = document.querySelector(carouselSelector);
+  const track = carousel?.querySelector(trackSelector);
+  if (!carousel || !track) return;
+
+  const visibleCount = Number(carousel.dataset.visibleCount) || 4;
+  const rotateMs = Number(carousel.dataset.rotateMs) || 3800;
+  const originalMarkup = track.innerHTML;
+  const originalCount = track.querySelectorAll('.home-link-card').length;
+
+  if (originalCount <= visibleCount) return;
+
+  const desktopMedia =
+    typeof window.matchMedia === 'function'
+      ? window.matchMedia(`(min-width: ${desktopMinWidth}px)`)
+      : { matches: window.innerWidth >= desktopMinWidth };
+  const reducedMotionMedia =
+    typeof window.matchMedia === 'function'
+      ? window.matchMedia('(prefers-reduced-motion: reduce)')
+      : { matches: false };
+
+  let items = [];
+  let index = 0;
+  let intervalId = null;
+  let resetTimerId = null;
+
+  const refreshItems = () => {
+    items = Array.from(track.querySelectorAll('.home-link-card'));
+  };
+
+  const buildDesktopTrack = () => {
+    if (track.dataset.desktopBuilt === 'true') return;
+
+    refreshItems();
+
+    items.slice(0, visibleCount).forEach(item => {
+      const clone = item.cloneNode(true);
+      clone.setAttribute('aria-hidden', 'true');
+      clone.tabIndex = -1;
+      track.appendChild(clone);
+    });
+
+    track.dataset.desktopBuilt = 'true';
+    refreshItems();
+  };
+
+  const restoreOriginalTrack = () => {
+    if (track.dataset.desktopBuilt !== 'true') {
+      refreshItems();
+      carousel.style.height = '';
+      track.style.transform = '';
+      track.style.transition = '';
+      return;
+    }
+
+    track.innerHTML = originalMarkup;
+    track.dataset.desktopBuilt = 'false';
+    carousel.style.height = '';
+    track.style.transform = '';
+    track.style.transition = '';
+    index = 0;
+    refreshItems();
+  };
+
+  const setViewportHeight = () => {
+    if (!items.length) return;
+
+    const firstItem = items[0];
+    const lastVisibleItem = items[Math.min(visibleCount - 1, items.length - 1)];
+    const height =
+      lastVisibleItem.offsetTop + lastVisibleItem.offsetHeight - firstItem.offsetTop;
+
+    carousel.style.height = `${height}px`;
+  };
+
+  const setPosition = (nextIndex, animated) => {
+    if (!items.length || !items[nextIndex]) return;
+
+    const baseTop = items[0].offsetTop;
+    const targetTop = items[nextIndex].offsetTop;
+
+    track.style.transition = animated ? 'transform 0.56s ease' : 'none';
+    track.style.transform = `translateY(-${targetTop - baseTop}px)`;
+  };
+
+  const clearTimers = () => {
+    if (intervalId) {
+      window.clearInterval(intervalId);
+      intervalId = null;
+    }
+
+    if (resetTimerId) {
+      window.clearTimeout(resetTimerId);
+      resetTimerId = null;
+    }
+  };
+
+  const rotate = () => {
+    if (!desktopMedia.matches || reducedMotionMedia.matches) return;
+
+    index += 1;
+    setPosition(index, true);
+
+    if (index === originalCount) {
+      resetTimerId = window.setTimeout(() => {
+        index = 0;
+        setPosition(0, false);
+        resetTimerId = null;
+      }, 600);
+    }
+  };
+
+  const start = () => {
+    clearTimers();
+
+    if (!desktopMedia.matches || reducedMotionMedia.matches) {
+      restoreOriginalTrack();
+      return;
+    }
+
+    buildDesktopTrack();
+    if (index >= originalCount) {
+      index = 0;
+    }
+    setViewportHeight();
+    setPosition(index, false);
+    intervalId = window.setInterval(rotate, rotateMs);
+  };
+
+  const stop = () => {
+    clearTimers();
+  };
+
+  const handleModeChange = () => {
+    if (!desktopMedia.matches) {
+      index = 0;
+      restoreOriginalTrack();
+      return;
+    }
+
+    if (index > originalCount) {
+      index = 0;
+    }
+
+    start();
+  };
+
+  carousel.addEventListener('mouseenter', stop);
+  carousel.addEventListener('mouseleave', start);
+  carousel.addEventListener('focusin', stop);
+  carousel.addEventListener('focusout', start);
+
+  window.addEventListener('resize', () => {
+    if (!desktopMedia.matches || track.dataset.desktopBuilt !== 'true') return;
+
+    window.requestAnimationFrame(() => {
+      refreshItems();
+      setViewportHeight();
+      setPosition(index, false);
+    });
+  });
+
+  if (typeof desktopMedia.addEventListener === 'function') {
+    desktopMedia.addEventListener('change', handleModeChange);
+    reducedMotionMedia.addEventListener('change', handleModeChange);
+  } else if (typeof desktopMedia.addListener === 'function') {
+    desktopMedia.addListener(handleModeChange);
+    reducedMotionMedia.addListener(handleModeChange);
+  }
+
+  refreshItems();
+  start();
+};
+
+const initHomeNewBrandsCarousel = () => {
+  initVerticalLinkCarousel({
+    carouselSelector: '.home-new-brands-carousel',
+    trackSelector: '.home-new-brands-track',
+    desktopMinWidth: 1121,
+  });
+};
+
+const initCountryNewReviewsCarousel = () => {
+  initVerticalLinkCarousel({
+    carouselSelector: '.country-new-reviews-carousel',
+    trackSelector: '.country-new-reviews-track',
+    desktopMinWidth: 1121,
+  });
+};
+
+const ensureCountryBrandStage = pageCountry => {
+  const brandCards = document.getElementById('brand-cards');
+  if (!brandCards) return;
+
+  const existingStage = document.querySelector('.country-brand-stage');
+  if (existingStage) return;
+
+  const container = brandCards.closest('.container');
+  if (!container) return;
+
+  const country = COUNTRIES.find(c => c.code.toUpperCase() === pageCountry);
+  const countryName = normalizeText(country?.name || pageCountry);
+  const sectionHead = container.querySelector('.section-head');
+  const intro = container.querySelector('.intro');
+  const loadMoreWrapper = container.querySelector('.load-more-wrapper');
+
+  const stage = document.createElement('div');
+  stage.className = 'country-brand-stage';
+  stage.innerHTML = `
+    <div class="country-brand-side">
+      <aside class="home-insight country-new-reviews" aria-label="New reviews for ${countryName} players">
+        <div class="home-insight-card">
+          <div class="home-insight-head">
+            <h2>New Reviews</h2>
+            <p>
+              Here you can find fresh brand reviews for ${countryName}, along with new bonus pages,
+              updated payment options, and useful account details in one place.
+            </p>
+          </div>
+          <div class="country-new-reviews-carousel" data-visible-count="4" data-rotate-ms="4000">
+            <div class="home-link-grid home-link-grid-vertical country-new-reviews-track" id="country-new-reviews"></div>
+          </div>
+        </div>
+      </aside>
+      <div class="country-brand-summary" aria-label="${countryName} brand coverage">
+        <div class="country-brand-summary-card">
+          <span class="country-brand-summary-number" id="countryBrandCount">0</span>
+          <div class="country-brand-summary-copy">
+            <strong id="countryBrandCountLabel">${countryName} Brands Reviewed</strong>
+            <span>
+              Casino and betting brands currently reviewed for this market, with bonus details,
+              payment methods, trust checks, and practical notes for real players.
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="country-brand-main"></div>
+  `;
+
+  const main = stage.querySelector('.country-brand-main');
+  const insertionPoint = sectionHead || intro || brandCards;
+  container.insertBefore(stage, insertionPoint ?? null);
+
+  [sectionHead, intro, brandCards, loadMoreWrapper].forEach(node => {
+    if (node) {
+      main.appendChild(node);
+    }
+  });
+};
+
+const renderCountryNewReviews = pageCountry => {
+  const container = document.getElementById('country-new-reviews');
+  if (!container || !pageCountry) return;
+
+  const sidebar = container.closest('.country-new-reviews');
+  const matchingBrands = BRANDS.filter(
+    brand =>
+      brand.hasDetailPage &&
+      brand.urlDetail &&
+      brand.image &&
+      brand.countries?.some(code => code.toUpperCase() === pageCountry)
+  );
+
+  const reviewBrands = [...matchingBrands].reverse();
+
+  if (!reviewBrands.length) {
+    sidebar?.remove();
+    return;
+  }
+
+  container.innerHTML = reviewBrands
+    .map(brand => {
+      const detailUrl = normalizePagePath(brand.urlDetail);
+      const imageUrl = normalizeAssetPath(brand.image);
+      const bonus = normalizeText(brand.bonus || 'Fresh review with updated bonus and payment details.');
+      const compactBonus = bonus.replace(/\s+/g, ' ').trim();
+
+      return `
+        <a class="home-link-card" href="${detailUrl}">
+          <span class="home-link-brand">
+            <img class="home-link-logo" src="${imageUrl}" alt="${normalizeText(brand.name)} logo" loading="lazy" decoding="async" />
+            <strong>${normalizeText(brand.name)}</strong>
+          </span>
+          <span>${compactBonus}</span>
+        </a>
+      `;
+    })
+    .join('');
+};
+
 // =====================
 // INIT FUNCTION
 // =====================
@@ -205,9 +500,26 @@ export const initCasinoPage = () => {
     siteBrandCountEl.textContent = uniqueBrandCount.toString();
   }
 
+  initHomeNewBrandsCarousel();
+
   if (pageCountry) {
+    ensureCountryBrandStage(pageCountry);
     const brands = BRANDS.filter(b => b.countries?.some(c => c.toUpperCase() === pageCountry));
+    const country = COUNTRIES.find(c => c.code.toUpperCase() === pageCountry);
+    const countryBrandCountEl = document.getElementById('countryBrandCount');
+    const countryBrandCountLabelEl = document.getElementById('countryBrandCountLabel');
+
     renderBrandList(brands, '#brand-cards', 'No casinos available for this country.');
+    renderCountryNewReviews(pageCountry);
+    initCountryNewReviewsCarousel();
+
+    if (countryBrandCountEl) {
+      countryBrandCountEl.textContent = brands.length.toString();
+    }
+
+    if (countryBrandCountLabelEl) {
+      countryBrandCountLabelEl.textContent = `${normalizeText(country?.name || pageCountry)} Brands Reviewed`;
+    }
   }
 
   if (pageType === 'exclusive-offers') {
