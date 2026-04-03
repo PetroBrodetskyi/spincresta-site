@@ -607,6 +607,11 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://spincresta.com/brands/iwild/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://spincresta.com/brands/izzi/</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -787,6 +792,11 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://spincresta.com/brands/snatch/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://spincresta.com/brands/sol/</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -873,6 +883,11 @@
   </url>
   <url>
     <loc>https://spincresta.com/brands/yepcasino/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://spincresta.com/brands/ybets/</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
