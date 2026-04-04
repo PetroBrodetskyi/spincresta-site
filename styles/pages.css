@@ -11,7 +11,7 @@ body.casinos-page main {
 }
 
 body.casinos-page .hero-content {
-  max-width: 980px;
+  max-width: var(--hero-panel-max);
   margin: 0 auto;
   border: 1px solid var(--border-glass);
   box-shadow: var(--shadow-soft);
@@ -267,7 +267,7 @@ body.casinos-page .casino-list-row:nth-child(6n) .casino-bonus:nth-of-type(3) {
    BRAND REVIEW PAGES
 ===================== */
 body[data-brand] .hero-content.glass-card {
-  max-width: 980px;
+  max-width: var(--hero-panel-max);
   margin: 0 auto;
   padding: 28px;
   border-radius: var(--radius-lg);
@@ -276,7 +276,7 @@ body[data-brand] .hero-content.glass-card {
 }
 
 body[data-brand] .hero-subtitle {
-  max-width: 820px;
+  max-width: var(--hero-copy-max);
   margin: 0 auto;
 }
 
@@ -318,13 +318,16 @@ body[data-brand] .icon-placeholder {
   align-items: center;
   justify-content: center;
   border-radius: 12px;
-  background: rgba(56, 189, 248, 0.12);
-  border: 1px solid var(--border-glass);
+  background: rgba(196, 129, 255, 0.12);
+  border: 1px solid rgba(196, 129, 255, 0.24);
   margin-bottom: 8px;
   font-size: 14px;
   font-weight: 800;
   line-height: 1;
-  color: var(--accent);
+  color: var(--neo-accent);
+  box-shadow:
+    0 0 0 1px rgba(196, 129, 255, 0.05),
+    0 0 16px rgba(196, 129, 255, 0.08);
 }
 
 body[data-brand] table {
@@ -344,7 +347,8 @@ body[data-brand] .timeline {
 body[data-brand] .timeline h3 {
   margin-top: 14px;
   margin-bottom: 6px;
-  color: var(--accent);
+  color: var(--neo-accent);
+  text-shadow: 0 0 12px rgba(196, 129, 255, 0.12);
   font-size: 1.02rem;
 }
 
@@ -431,7 +435,7 @@ body[data-brand] .timeline p {
    LEON BRAND PAGE
 ===================== */
 body[data-brand='Leon'] .hero-content.glass-card {
-  max-width: 980px;
+  max-width: var(--hero-panel-max);
   margin: 0 auto;
   padding: 28px;
   border-radius: var(--radius-lg);
@@ -440,7 +444,7 @@ body[data-brand='Leon'] .hero-content.glass-card {
 }
 
 body[data-brand='Leon'] .hero-subtitle {
-  max-width: 820px;
+  max-width: var(--hero-copy-max);
   margin: 0 auto;
 }
 
@@ -459,11 +463,15 @@ body[data-brand='Leon'] .icon-placeholder {
   align-items: center;
   justify-content: center;
   border-radius: 12px;
-  background: rgba(56, 189, 248, 0.12);
-  border: 1px solid var(--border-glass);
+  background: rgba(196, 129, 255, 0.12);
+  border: 1px solid rgba(196, 129, 255, 0.24);
   margin-bottom: 8px;
   font-size: 22px;
   line-height: 1;
+  color: var(--neo-accent);
+  box-shadow:
+    0 0 0 1px rgba(196, 129, 255, 0.05),
+    0 0 16px rgba(196, 129, 255, 0.08);
 }
 
 body[data-brand='Leon'] table {
@@ -483,7 +491,8 @@ body[data-brand='Leon'] .timeline {
 body[data-brand='Leon'] .timeline h3 {
   margin-top: 14px;
   margin-bottom: 6px;
-  color: var(--accent);
+  color: var(--neo-accent);
+  text-shadow: 0 0 12px rgba(196, 129, 255, 0.12);
   font-size: 1.02rem;
 }
 

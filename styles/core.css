@@ -3,6 +3,10 @@
   --bg-surface: #02061788;
   --bg-card: #2b437749;
 
+  --site-max-width: 1280px;
+  --hero-panel-max: 980px;
+  --hero-copy-max: 820px;
+
   --border-soft: rgba(148, 163, 184, 0.15);
   --border-glass: rgba(255, 255, 255, 0.08);
 
@@ -11,6 +15,8 @@
 
   --accent: #38bdf8;
   --accent-strong: #0ea5e9;
+  --neo-accent: #c481ff;
+  --neo-accent-soft: rgba(196, 129, 255, 0.18);
   --gold: #ffdf00;
 
   --radius-lg: 20px;
@@ -21,6 +27,22 @@
   --shadow-hover: 0 30px 80px rgba(56, 189, 248, 0.25);
 
   --blur-glass: blur(14px);
+}
+
+@media (min-width: 1500px) {
+  :root {
+    --site-max-width: 1420px;
+    --hero-panel-max: 1040px;
+    --hero-copy-max: 880px;
+  }
+}
+
+@media (min-width: 1800px) {
+  :root {
+    --site-max-width: 1540px;
+    --hero-panel-max: 1120px;
+    --hero-copy-max: 940px;
+  }
 }
 
 /* =====================
@@ -57,7 +79,7 @@ body {
 }
 
 .container {
-  max-width: 1280px;
+  max-width: var(--site-max-width);
   margin: 0 auto;
   padding: 24px;
 }
@@ -88,7 +110,7 @@ body {
 }
 
 .header-container {
-  max-width: 1280px;
+  max-width: var(--site-max-width);
   margin: 0 auto;
   padding: 10px 24px;
   box-shadow: var(--shadow-hover);
@@ -110,6 +132,13 @@ body {
   color: var(--text-main);
   text-decoration: none;
   cursor: pointer;
+}
+
+.logo > div {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0;
+  white-space: nowrap;
 }
 
 .logo-icon {
@@ -187,7 +216,7 @@ body {
   left: 50%;
   transform: translateX(-50%) translateY(-10px);
 
-  width: 1246px;
+  width: min(calc(var(--site-max-width) - 34px), calc(100vw - 64px));
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
   gap: 14px;
@@ -977,7 +1006,8 @@ body {
 .feature-card strong {
   display: block;
   font-weight: 600;
-  color: var(--accent);
+  color: var(--neo-accent);
+  text-shadow: 0 0 12px rgba(196, 129, 255, 0.14);
 }
 
 .feature-card span {
@@ -1226,8 +1256,15 @@ td {
 }
 
 thead tr {
-  background: rgba(255, 215, 0, 0.12);
+  background:
+    linear-gradient(135deg, rgba(88, 68, 0, 0.94), rgba(36, 28, 0, 0.98));
   color: var(--text-main);
+}
+
+thead th {
+  color: #f8fbff;
+  border-color: rgba(255, 223, 0, 0.2);
+  text-shadow: 0 0 12px rgba(255, 223, 0, 0.14);
 }
 
 tbody tr:nth-child(even) {
@@ -1565,8 +1602,8 @@ body[data-country] .content-article .timeline a[href*='/responsible-gambling/'] 
 
 .home-top-insights {
   display: grid;
-  grid-template-columns: minmax(0, 1.72fr) minmax(244px, 0.68fr);
-  gap: 24px;
+  grid-template-columns: minmax(0, 1fr) minmax(300px, 340px);
+  gap: 18px;
   align-items: start;
   margin: 4px 0 12px;
 }
@@ -1590,6 +1627,113 @@ body[data-country] .content-article .timeline a[href*='/responsible-gambling/'] 
 
 .home-top-main > .content .cards-main {
   gap: 14px;
+}
+
+.home-editorial-layout {
+  display: grid;
+  grid-template-columns: minmax(300px, 340px) minmax(0, 1fr);
+  gap: 22px;
+  align-items: start;
+  margin: 8px 0 12px;
+}
+
+.home-editorial-sidebar {
+  min-width: 0;
+  width: 100%;
+  max-width: 340px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.home-editorial-sidebar > .home-insight {
+  margin: 0;
+}
+
+.home-editorial-sidebar .home-insight-card {
+  height: auto;
+}
+
+.home-editorial-main {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.home-editorial-main > .content {
+  margin: 0;
+}
+
+.home-country-editorial {
+  display: grid;
+  grid-template-columns: minmax(300px, 360px) minmax(0, 1fr);
+  gap: 22px;
+  align-items: start;
+  margin: 8px 0 12px;
+}
+
+.home-country-editorial > .home-insight,
+.home-country-editorial > .home-country-editorial-main {
+  margin: 0;
+}
+
+.home-country-editorial > .home-insight {
+  grid-column: 1;
+}
+
+.home-country-editorial-side .home-insight-card {
+  height: auto;
+}
+
+.home-country-editorial-main {
+  grid-column: 2;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.home-country-editorial-main > .content {
+  margin: 0;
+}
+
+.home-secondary-editorial {
+  display: grid;
+  grid-template-columns: minmax(300px, 340px) minmax(0, 1fr);
+  gap: 22px;
+  align-items: start;
+  margin: 8px 0 12px;
+}
+
+.home-secondary-editorial-side {
+  grid-column: 1;
+  min-width: 0;
+  width: 100%;
+  max-width: 340px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.home-secondary-editorial-side > .home-insight {
+  margin: 0;
+}
+
+.home-secondary-editorial-side .home-insight-card {
+  height: auto;
+}
+
+.home-secondary-editorial-main {
+  grid-column: 2;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.home-secondary-editorial-main > .content {
+  margin: 0;
 }
 
 .home-top-insights .home-stats,
@@ -1743,6 +1887,12 @@ body[data-country] .content-article .timeline a[href*='/responsible-gambling/'] 
   transition: transform 0.56s ease;
 }
 
+@media (min-width: 1121px) {
+  body[data-country] .country-brand-main .casino-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
 @media (max-width: 1120px) {
   .home-top-insights {
     grid-template-columns: 1fr;
@@ -1756,6 +1906,53 @@ body[data-country] .content-article .timeline a[href*='/responsible-gambling/'] 
   .home-insight-new-brands {
     max-width: none;
     justify-self: stretch;
+  }
+
+  .home-editorial-layout {
+    grid-template-columns: 1fr;
+    gap: 16px;
+    margin: 6px 0 10px;
+  }
+
+  .home-editorial-sidebar {
+    max-width: none;
+    gap: 16px;
+  }
+
+  .home-editorial-main {
+    gap: 16px;
+  }
+
+  .home-country-editorial {
+    grid-template-columns: 1fr;
+    gap: 16px;
+    margin: 6px 0 10px;
+  }
+
+  .home-country-editorial > .home-insight,
+  .home-country-editorial-main {
+    grid-column: 1;
+  }
+
+  .home-country-editorial-main {
+    gap: 16px;
+  }
+
+  .home-secondary-editorial {
+    grid-template-columns: 1fr;
+    gap: 16px;
+    margin: 6px 0 10px;
+  }
+
+  .home-secondary-editorial-side {
+    grid-column: 1;
+    max-width: none;
+    gap: 16px;
+  }
+
+  .home-secondary-editorial-main {
+    grid-column: 1;
+    gap: 16px;
   }
 
   .country-brand-stage {
@@ -1941,8 +2138,11 @@ body[data-country] .content-article .timeline a[href*='/responsible-gambling/'] 
   background:
     linear-gradient(180deg, rgba(255, 255, 255, 0.028), rgba(255, 255, 255, 0.01)),
     var(--bg-card);
-  border: 1px solid var(--border-glass);
-  box-shadow: var(--shadow-soft);
+  border: 1px solid rgba(173, 102, 255, 0.28);
+  box-shadow:
+    0 0 0 1px rgba(173, 102, 255, 0.06),
+    0 0 22px rgba(173, 102, 255, 0.12),
+    var(--shadow-soft);
 }
 
 .home-stat-link {
@@ -1956,8 +2156,11 @@ body[data-country] .content-article .timeline a[href*='/responsible-gambling/'] 
 
 .home-stat-link:hover {
   transform: translateY(-4px);
-  border-color: rgba(56, 189, 248, 0.28);
-  box-shadow: var(--shadow-hover);
+  border-color: rgba(214, 136, 255, 0.42);
+  box-shadow:
+    0 0 0 1px rgba(214, 136, 255, 0.08),
+    0 0 28px rgba(214, 136, 255, 0.18),
+    0 22px 56px rgba(76, 22, 124, 0.28);
 }
 
 .home-stat-number {
@@ -1965,7 +2168,7 @@ body[data-country] .content-article .timeline a[href*='/responsible-gambling/'] 
   line-height: 0.95;
   font-weight: 700;
   color: var(--text-main);
-  text-shadow: 0 0 18px rgba(56, 189, 248, 0.12);
+  text-shadow: 0 0 18px rgba(196, 129, 255, 0.18);
 }
 
 .home-stat-tile strong {
@@ -2011,9 +2214,12 @@ body[data-country] .content-article .timeline a[href*='/responsible-gambling/'] 
 .home-insight .feature-card {
   min-height: 180px;
   padding: 22px;
-  border: 1px solid var(--border-glass);
+  border: 1px solid rgba(173, 102, 255, 0.22);
   border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-soft);
+  box-shadow:
+    0 0 0 1px rgba(173, 102, 255, 0.05),
+    0 0 18px rgba(173, 102, 255, 0.09),
+    var(--shadow-soft);
 }
 
 .home-insight .feature-card strong {
@@ -2042,9 +2248,12 @@ body[data-country] .content-article .timeline a[href*='/responsible-gambling/'] 
   background:
     linear-gradient(180deg, rgba(255, 255, 255, 0.025), rgba(255, 255, 255, 0.01)),
     var(--bg-card);
-  border: 1px solid var(--border-glass);
+  border: 1px solid rgba(173, 102, 255, 0.24);
   border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-soft);
+  box-shadow:
+    0 0 0 1px rgba(173, 102, 255, 0.05),
+    0 0 20px rgba(173, 102, 255, 0.1),
+    var(--shadow-soft);
   transition:
     transform 0.22s ease,
     box-shadow 0.22s ease,
@@ -2053,8 +2262,11 @@ body[data-country] .content-article .timeline a[href*='/responsible-gambling/'] 
 
 .home-link-card:hover {
   transform: translateY(-4px);
-  border-color: rgba(56, 189, 248, 0.28);
-  box-shadow: var(--shadow-hover);
+  border-color: rgba(214, 136, 255, 0.4);
+  box-shadow:
+    0 0 0 1px rgba(214, 136, 255, 0.08),
+    0 0 28px rgba(214, 136, 255, 0.18),
+    0 22px 56px rgba(76, 22, 124, 0.26);
 }
 
 .home-link-card strong {

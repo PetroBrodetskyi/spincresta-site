@@ -145,7 +145,7 @@ const createCasinoCard = ({
   return article;
 };
 
-const ITEMS_PER_BATCH = 16;
+const ITEMS_PER_BATCH = 12;
 
 const renderBrandList = (brands, containerSelector, emptyText) => {
   const container = document.querySelector(containerSelector);
