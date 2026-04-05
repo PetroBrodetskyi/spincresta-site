@@ -1166,27 +1166,17 @@ body {
 ===================== */
 .timeline {
   position: relative;
-  padding-left: 28px;
+  padding-left: 0;
 }
 
 .timeline::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 2px;
-  width: 2px;
-  background: var(--gold);
-  border-radius: 2px;
+  content: none;
+  display: none;
 }
 
 @media (max-width: 768px) {
   .timeline {
-    padding-left: 36px;
-  }
-
-  .timeline::before {
-    left: 10px;
+    padding-left: 0;
   }
 }
 
@@ -1549,7 +1539,7 @@ body[data-country] .expert-disclaimer {
   margin-top: 6px;
   padding: 14px 16px;
   border-radius: var(--radius-lg);
-  border-left: 3px solid rgba(245, 158, 11, 0.8);
+  border: 1px solid var(--border-glass);
   background: rgba(255, 255, 255, 0.03);
 }
 
@@ -1608,6 +1598,10 @@ body[data-country] .content-article .timeline a[href*='/responsible-gambling/'] 
   margin: 4px 0 12px;
 }
 
+.home-top-insights-single {
+  grid-template-columns: minmax(0, 1fr);
+}
+
 .home-top-main {
   min-width: 0;
   display: flex;
@@ -1652,6 +1646,11 @@ body[data-country] .content-article .timeline a[href*='/responsible-gambling/'] 
 
 .home-editorial-sidebar .home-insight-card {
   height: auto;
+}
+
+.home-editorial-sidebar .home-insight-new-brands {
+  width: 100%;
+  max-width: 340px;
 }
 
 .home-editorial-main {
@@ -1919,6 +1918,11 @@ body[data-country] .content-article .timeline a[href*='/responsible-gambling/'] 
     gap: 16px;
   }
 
+  .home-editorial-sidebar .home-insight-new-brands {
+    max-width: none;
+    width: 100%;
+  }
+
   .home-editorial-main {
     gap: 16px;
   }
@@ -1977,13 +1981,7 @@ body[data-country] .content-article .timeline a[href*='/responsible-gambling/'] 
   }
 
   .home-new-brands-carousel {
-    overflow: visible;
-    height: auto !important;
-  }
-
-  .home-new-brands-track {
-    transform: none !important;
-    transition: none !important;
+    overflow: hidden;
   }
 
   .country-new-reviews-carousel {
@@ -2231,6 +2229,53 @@ body[data-country] .content-article .timeline a[href*='/responsible-gambling/'] 
   color: var(--text-muted);
 }
 
+.home-global-guide {
+  margin: 18px 0 8px;
+}
+
+.home-global-guide .home-insight-card {
+  gap: 22px;
+}
+
+.home-global-guide .features-grid {
+  margin-top: 0;
+}
+
+.home-global-guide-grid {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+.home-global-guide .feature-card {
+  min-height: 0;
+}
+
+.home-global-guide .feature-card span + span {
+  margin-top: 6px;
+}
+
+.home-global-guide a,
+.home-global-guide a:visited {
+  color: var(--text-main);
+  text-decoration: none;
+  font-weight: 700;
+}
+
+.home-global-guide a:hover {
+  color: var(--gold);
+}
+
+@media (max-width: 1280px) {
+  .home-global-guide-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 768px) {
+  .home-global-guide-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
 .home-link-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
@@ -2322,23 +2367,35 @@ body[data-country] .content-article .timeline a[href*='/responsible-gambling/'] 
   }
 
   .home-stats-grid {
-    display: flex;
-    gap: 14px;
-    overflow-x: auto;
-    padding-bottom: 6px;
-    scroll-snap-type: x proximity;
-    -webkit-overflow-scrolling: touch;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+    overflow: visible;
+    padding-bottom: 0;
+    scroll-snap-type: none;
   }
 
   .home-stat-tile {
-    flex: 0 0 78%;
+    flex: none;
+    min-width: 0;
     min-height: auto;
-    padding: 16px;
-    scroll-snap-align: start;
+    padding: 14px 12px;
+    gap: 8px;
+    scroll-snap-align: none;
   }
 
   .home-stat-number {
-    font-size: 48px;
+    font-size: clamp(34px, 11vw, 44px);
+  }
+
+  .home-stat-tile strong {
+    font-size: 0.98rem;
+    line-height: 1.25;
+  }
+
+  .home-stat-tile span:last-child {
+    font-size: 14px;
+    line-height: 1.45;
   }
 
   .home-insight-card {
@@ -2382,6 +2439,21 @@ body[data-country] .content-article .timeline a[href*='/responsible-gambling/'] 
     min-height: auto;
     padding: 16px;
     scroll-snap-align: start;
+  }
+
+  .home-new-brands-track.home-link-grid-vertical {
+    flex-direction: column;
+    overflow: visible;
+    padding-bottom: 0;
+    scroll-snap-type: none;
+    -webkit-overflow-scrolling: auto;
+  }
+
+  .home-new-brands-track.home-link-grid-vertical .home-link-card {
+    flex: none;
+    min-width: 0;
+    padding: 14px 16px;
+    scroll-snap-align: none;
   }
 
   .home-stats-grid::-webkit-scrollbar,

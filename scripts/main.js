@@ -194,12 +194,11 @@ const initVerticalLinkCarousel = ({
   const track = carousel?.querySelector(trackSelector);
   if (!carousel || !track) return;
 
-  const visibleCount = Number(carousel.dataset.visibleCount) || 4;
+  const desktopVisibleCount = Number(carousel.dataset.visibleCount) || 4;
+  const mobileVisibleCount = Number(carousel.dataset.mobileVisibleCount) || 2;
   const rotateMs = Number(carousel.dataset.rotateMs) || 3800;
   const originalMarkup = track.innerHTML;
   const originalCount = track.querySelectorAll('.home-link-card').length;
-
-  if (originalCount <= visibleCount) return;
 
   const desktopMedia =
     typeof window.matchMedia === 'function'
@@ -215,28 +214,38 @@ const initVerticalLinkCarousel = ({
   let intervalId = null;
   let resetTimerId = null;
 
+  const getVisibleCount = () => (desktopMedia.matches ? desktopVisibleCount : mobileVisibleCount);
+
   const refreshItems = () => {
     items = Array.from(track.querySelectorAll('.home-link-card'));
   };
 
-  const buildDesktopTrack = () => {
-    if (track.dataset.desktopBuilt === 'true') return;
+  const buildTrack = () => {
+    const activeVisibleCount = getVisibleCount();
+
+    if (
+      track.dataset.carouselBuilt === 'true' &&
+      Number(track.dataset.activeVisibleCount) === activeVisibleCount
+    ) {
+      return;
+    }
 
     refreshItems();
 
-    items.slice(0, visibleCount).forEach(item => {
+    items.slice(0, activeVisibleCount).forEach(item => {
       const clone = item.cloneNode(true);
       clone.setAttribute('aria-hidden', 'true');
       clone.tabIndex = -1;
       track.appendChild(clone);
     });
 
-    track.dataset.desktopBuilt = 'true';
+    track.dataset.carouselBuilt = 'true';
+    track.dataset.activeVisibleCount = String(activeVisibleCount);
     refreshItems();
   };
 
   const restoreOriginalTrack = () => {
-    if (track.dataset.desktopBuilt !== 'true') {
+    if (track.dataset.carouselBuilt !== 'true') {
       refreshItems();
       carousel.style.height = '';
       track.style.transform = '';
@@ -245,7 +254,8 @@ const initVerticalLinkCarousel = ({
     }
 
     track.innerHTML = originalMarkup;
-    track.dataset.desktopBuilt = 'false';
+    track.dataset.carouselBuilt = 'false';
+    delete track.dataset.activeVisibleCount;
     carousel.style.height = '';
     track.style.transform = '';
     track.style.transition = '';
@@ -256,6 +266,7 @@ const initVerticalLinkCarousel = ({
   const setViewportHeight = () => {
     if (!items.length) return;
 
+    const visibleCount = getVisibleCount();
     const firstItem = items[0];
     const lastVisibleItem = items[Math.min(visibleCount - 1, items.length - 1)];
     const height =
@@ -287,7 +298,7 @@ const initVerticalLinkCarousel = ({
   };
 
   const rotate = () => {
-    if (!desktopMedia.matches || reducedMotionMedia.matches) return;
+    if (reducedMotionMedia.matches) return;
 
     index += 1;
     setPosition(index, true);
@@ -304,12 +315,14 @@ const initVerticalLinkCarousel = ({
   const start = () => {
     clearTimers();
 
-    if (!desktopMedia.matches || reducedMotionMedia.matches) {
+    const visibleCount = getVisibleCount();
+
+    if (reducedMotionMedia.matches || originalCount <= visibleCount) {
       restoreOriginalTrack();
       return;
     }
 
-    buildDesktopTrack();
+    buildTrack();
     if (index >= originalCount) {
       index = 0;
     }
@@ -323,16 +336,8 @@ const initVerticalLinkCarousel = ({
   };
 
   const handleModeChange = () => {
-    if (!desktopMedia.matches) {
-      index = 0;
-      restoreOriginalTrack();
-      return;
-    }
-
-    if (index > originalCount) {
-      index = 0;
-    }
-
+    index = 0;
+    restoreOriginalTrack();
     start();
   };
 
@@ -342,7 +347,7 @@ const initVerticalLinkCarousel = ({
   carousel.addEventListener('focusout', start);
 
   window.addEventListener('resize', () => {
-    if (!desktopMedia.matches || track.dataset.desktopBuilt !== 'true') return;
+    if (track.dataset.carouselBuilt !== 'true') return;
 
     window.requestAnimationFrame(() => {
       refreshItems();
