@@ -184,7 +184,7 @@
   },
   {
     name: 'Fraga',
-    bonus: 'Welcome Bonus €25,000 + 500 Free Spins',
+    bonus: 'Welcome Bonus 25,000 TRY + 500 Free Spins',
     cta: 'Play Now',
     urlDetail: 'brands/fraga-tr.html',
     urlCasino: 'https://armadaapp.media-412.com/click?pid=3862&offer_id=122568',
@@ -195,7 +195,7 @@
   },
   {
     name: 'Fraga',
-    bonus: 'Welcome Bonus €25,000 + 500 Free Spins',
+    bonus: 'Welcome Bonus 3,000 AZN + 500 Free Spins',
     cta: 'Play Now',
     urlDetail: 'brands/fraga-az.html',
     urlCasino: 'https://armadaapp.media-412.com/click?pid=3862&offer_id=122569',
@@ -206,7 +206,7 @@
   },
   {
     name: 'Fraga',
-    bonus: 'Welcome Bonus €25,000 + 500 Free Spins',
+    bonus: 'Welcome Bonus 860,000 ARS + 500 Free Spins',
     cta: 'Play Now',
     urlDetail: 'brands/fraga-ar.html',
     urlCasino: 'https://armadaapp.media-412.com/click?pid=3862&offer_id=122570',
@@ -217,7 +217,7 @@
   },
   {
     name: 'Fraga',
-    bonus: 'Welcome Bonus €25,000 + 500 Free Spins',
+    bonus: 'Welcome Bonus 500,000 CLP + 500 Free Spins',
     cta: 'Play Now',
     urlDetail: 'brands/fraga-cl.html',
     urlCasino: 'https://armadaapp.media-412.com/click?pid=3862&offer_id=122571',
