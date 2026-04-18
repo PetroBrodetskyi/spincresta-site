@@ -395,7 +395,7 @@
   },
   {
     name: 'Spellwin',
-    bonus: 'Welcome Bonus Pack • Huge Wins • 350% + 500 FS',
+    bonus: 'Welcome Bonus Pack 555% Up To €5,555 + 555 Free Spins',
     cta: 'Play Now',
     urlDetail: 'brands/spellwin.html',
     urlCasino: 'https://armadaapp.media-412.com/click?pid=3862&offer_id=122436',
