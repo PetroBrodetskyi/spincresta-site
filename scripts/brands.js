@@ -132,7 +132,7 @@
   },
   {
     name: 'Trino',
-    bonus: 'Welcome Bonus Pack 350% + 400 FS',
+    bonus: 'Welcome Bonus Pack 350% Up To €2,900 + 400 Free Spins',
     cta: 'Play Now',
     urlDetail: 'brands/trino.html',
     urlCasino: 'https://armadaapp.media-412.com/click?pid=3862&offer_id=122435',
