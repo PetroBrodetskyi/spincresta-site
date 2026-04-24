@@ -120,6 +120,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  position: relative;
 }
 
 .logo {
@@ -191,7 +192,7 @@ body {
 }
 
 .nav-dropdown {
-  position: relative;
+  position: static;
 }
 
 .nav-dropdown-btn {
@@ -211,15 +212,15 @@ body {
 }
 
 .nav-dropdown-menu {
-  position: absolute;
-  top: 100%;
-  left: 50%;
-  transform: translateX(-50%) translateY(-10px);
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-10px);
 
   width: min(calc(var(--site-max-width) - 34px), calc(100vw - 64px));
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-  gap: 14px;
+  display: block;
+  columns: 150px 8;
+  column-gap: 24px;
 
   backdrop-filter: blur(50px);
   box-shadow: var(--shadow-soft);
@@ -233,10 +234,31 @@ body {
   z-index: 100;
 }
 
-.nav-dropdown:hover .nav-dropdown-menu {
+.nav-dropdown-menu::before {
+  content: '';
+  position: absolute;
+  top: -18px;
+  left: 0;
+  right: 0;
+  height: 18px;
+}
+
+.nav-dropdown-menu a {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0 0 14px;
+  break-inside: avoid;
+  text-decoration: none;
+  color: var(--text-main);
+}
+
+.nav-dropdown:hover .nav-dropdown-menu,
+.nav-dropdown-menu:hover,
+.nav-dropdown-menu:focus-within {
   opacity: 1;
   visibility: visible;
-  transform: translateX(-30%) translateY(0);
+  transform: translateX(-50%) translateY(0);
 }
 
 /* =====================
@@ -1246,8 +1268,7 @@ td {
 }
 
 thead tr {
-  background:
-    linear-gradient(135deg, rgba(88, 68, 0, 0.94), rgba(36, 28, 0, 0.98));
+  background: linear-gradient(135deg, rgba(88, 68, 0, 0.94), rgba(36, 28, 0, 0.98));
   color: var(--text-main);
 }
 
@@ -1452,9 +1473,7 @@ body[data-country] .expert-review .title {
 
 body[data-country] .expert-card {
   padding: 26px 28px;
-  background:
-    linear-gradient(180deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0.012)),
-    var(--bg-card);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0.012)), var(--bg-card);
   border: 1px solid var(--border-glass);
   box-shadow: var(--shadow-soft);
 }
@@ -1520,8 +1539,7 @@ body[data-country] .expert-methodology li {
   padding: 14px 16px;
   border-radius: var(--radius-lg);
   background:
-    linear-gradient(180deg, rgba(255, 255, 255, 0.022), rgba(255, 255, 255, 0.008)),
-    rgba(255, 255, 255, 0.01);
+    linear-gradient(180deg, rgba(255, 255, 255, 0.022), rgba(255, 255, 255, 0.008)), rgba(255, 255, 255, 0.01);
   border: 1px solid var(--border-glass);
   color: var(--text-muted);
 }
@@ -1832,8 +1850,7 @@ body[data-country] .content-article .timeline a[href*='/responsible-gambling/'] 
   padding: 22px 26px;
   border-radius: var(--radius-lg);
   background:
-    linear-gradient(180deg, rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0.01)),
-    rgba(255, 255, 255, 0.015);
+    linear-gradient(180deg, rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0.01)), rgba(255, 255, 255, 0.015);
   border: 1px solid var(--border-glass);
   box-shadow: var(--shadow-soft);
 }
@@ -2114,8 +2131,7 @@ body[data-country] .content-article .timeline a[href*='/responsible-gambling/'] 
   padding: 28px;
   border-radius: var(--radius-lg);
   background:
-    linear-gradient(180deg, rgba(255, 255, 255, 0.025), rgba(255, 255, 255, 0.01)),
-    rgba(255, 255, 255, 0.015);
+    linear-gradient(180deg, rgba(255, 255, 255, 0.025), rgba(255, 255, 255, 0.01)), rgba(255, 255, 255, 0.015);
   border: 1px solid var(--border-glass);
   box-shadow: var(--shadow-soft);
 }
@@ -2133,9 +2149,7 @@ body[data-country] .content-article .timeline a[href*='/responsible-gambling/'] 
   min-height: 220px;
   padding: 24px;
   border-radius: var(--radius-lg);
-  background:
-    linear-gradient(180deg, rgba(255, 255, 255, 0.028), rgba(255, 255, 255, 0.01)),
-    var(--bg-card);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.028), rgba(255, 255, 255, 0.01)), var(--bg-card);
   border: 1px solid rgba(173, 102, 255, 0.28);
   box-shadow:
     0 0 0 1px rgba(173, 102, 255, 0.06),
@@ -2185,8 +2199,7 @@ body[data-country] .content-article .timeline a[href*='/responsible-gambling/'] 
   padding: 28px;
   border-radius: var(--radius-lg);
   background:
-    linear-gradient(180deg, rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0.01)),
-    rgba(255, 255, 255, 0.015);
+    linear-gradient(180deg, rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0.01)), rgba(255, 255, 255, 0.015);
   border: 1px solid var(--border-glass);
   box-shadow: var(--shadow-soft);
 }
@@ -2290,9 +2303,7 @@ body[data-country] .content-article .timeline a[href*='/responsible-gambling/'] 
   padding: 22px;
   text-decoration: none;
   color: var(--text-main);
-  background:
-    linear-gradient(180deg, rgba(255, 255, 255, 0.025), rgba(255, 255, 255, 0.01)),
-    var(--bg-card);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.025), rgba(255, 255, 255, 0.01)), var(--bg-card);
   border: 1px solid rgba(173, 102, 255, 0.24);
   border-radius: var(--radius-lg);
   box-shadow:
