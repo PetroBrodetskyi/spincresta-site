@@ -2,6 +2,7 @@
 // IMPORTS
 // =====================
 import { BRANDS } from './brands.js';
+import { BRAND_SNAPSHOT_CONFIGS } from './brand-snapshot-configs.js';
 import { COUNTRIES } from './countries.js';
 
 // =====================
@@ -485,6 +486,238 @@ const renderCountryNewReviews = pageCountry => {
     .join('');
 };
 
+const getBrandSnapshotName = () => {
+  const heading = document.querySelector('.hero h1, .hero-content h1, h1');
+  if (!heading) return 'This brand';
+  return normalizeText(heading.textContent).replace(/\s+Review$/i, '').trim() || 'This brand';
+};
+
+const initStickyBrandTitle = () => {
+  const brandKey = document.body.dataset.brand?.toLowerCase();
+  if (!brandKey) return;
+
+  const hero = document.querySelector('.hero');
+  const heading = hero?.querySelector('h1');
+  const header = document.querySelector('.header');
+  if (!hero || !heading || !header) return;
+  if (document.querySelector('.brand-sticky-title')) return;
+
+  const titleText = normalizeText(heading.textContent).trim();
+  if (!titleText) return;
+
+  const stickyTitle = document.createElement('button');
+  stickyTitle.className = 'brand-sticky-title';
+  stickyTitle.type = 'button';
+  stickyTitle.setAttribute('aria-label', `Back to the top of ${titleText}`);
+  stickyTitle.innerHTML = `
+    <div class="brand-sticky-title__inner">
+      <span class="brand-sticky-title__text">${titleText}</span>
+      <img
+        class="brand-sticky-title__icon"
+        src="/icons/ui/top-chevron-arrow-round-outline-icon.svg"
+        alt=""
+        aria-hidden="true"
+      />
+    </div>
+  `;
+
+  document.body.appendChild(stickyTitle);
+
+  const updateStickyVisibility = () => {
+    const headerHeight = header.offsetHeight || 0;
+    const headingBottom = heading.getBoundingClientRect().bottom;
+    const shouldShow = headingBottom <= headerHeight + 16;
+    stickyTitle.classList.toggle('is-visible', shouldShow);
+  };
+
+  updateStickyVisibility();
+
+  stickyTitle.addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+
+  window.addEventListener('scroll', updateStickyVisibility, { passive: true });
+  window.addEventListener('resize', updateStickyVisibility);
+};
+
+const renderSnapshotItems = (items, isAvailable) =>
+  items
+    .map(
+      item => `
+        <div class="availability-item ${isAvailable ? 'is-available' : 'is-unavailable'}">
+          <img
+            src="${isAvailable ? '/icons/ui/confirm-icon.svg' : '/icons/ui/remove-close-round-grey-icon.svg'}"
+            alt=""
+            aria-hidden="true"
+          />
+          <span>${normalizeText(item)}</span>
+        </div>
+      `
+    )
+    .join('');
+
+const renderBrandAvailabilityWidget = brandKey => {
+  const normalizedKey = brandKey?.toLowerCase();
+  const config = normalizedKey ? BRAND_SNAPSHOT_CONFIGS[normalizedKey] : null;
+  if (!config || document.querySelector('.brand-availability-widget')) return;
+
+  const paymentSection = document.querySelector('.brand-payments')?.closest('section');
+  const reviewRoot = document.querySelector('main.content-review');
+  if (!paymentSection || !reviewRoot) return;
+
+  const brandName = getBrandSnapshotName();
+  const snapshotIntro =
+    document
+      .querySelector('meta[name="brand-snapshot-intro"]')
+      ?.getAttribute('content')
+      ?.trim() || '';
+  const section = document.createElement('section');
+  section.className = 'container';
+
+  const tabsMarkup = config.tabs
+    .map((tab, index) => {
+      const tabId = `${normalizedKey}-snapshot-tab-${index + 1}`;
+      const panelId = `${normalizedKey}-snapshot-panel-${index + 1}`;
+      const availableCount = tab.available.length;
+      const unavailableCount = tab.unavailable.length;
+
+      return {
+        button: `
+          <button
+            class="availability-tab ${index === 0 ? 'is-active' : ''}"
+            type="button"
+            role="tab"
+            id="${tabId}"
+            aria-selected="${index === 0 ? 'true' : 'false'}"
+            aria-controls="${panelId}"
+            data-tab-target="${panelId}"
+            ${index === 0 ? '' : 'tabindex="-1"'}
+          >
+            ${normalizeText(tab.label)}
+          </button>
+        `,
+        panel: `
+          <div
+            class="availability-panel ${index === 0 ? 'is-active' : ''}"
+            id="${panelId}"
+            role="tabpanel"
+            aria-labelledby="${tabId}"
+            ${index === 0 ? '' : 'hidden'}
+          >
+            <div class="availability-grid">
+              ${renderSnapshotItems(tab.available, true)}
+              ${renderSnapshotItems(tab.unavailable, false)}
+            </div>
+
+            <div class="availability-summary">
+              <div class="availability-counts">
+                <span class="is-available">
+                  <img src="/icons/ui/confirm-icon.svg" alt="" aria-hidden="true" />
+                  Visible now: ${availableCount}
+                </span>
+                <span class="is-unavailable">
+                  <img src="/icons/ui/remove-close-round-grey-icon.svg" alt="" aria-hidden="true" />
+                  Not surfaced: ${unavailableCount}
+                </span>
+              </div>
+              <p>${normalizeText(tab.note || `These are the main ${tab.label.toLowerCase()} sections currently visible on the account.`)}</p>
+            </div>
+          </div>
+        `,
+      };
+    })
+    .reduce(
+      (acc, item) => {
+        acc.buttons.push(item.button);
+        acc.panels.push(item.panel);
+        return acc;
+      },
+      { buttons: [], panels: [] }
+    );
+
+  section.innerHTML = `
+    <div class="brand-availability-widget glass-section">
+      <h2 class="title">Games &amp; Betting Snapshot</h2>
+      <p class="brand-availability-intro">
+        ${normalizeText(
+          snapshotIntro ||
+            `This section shows which game, live-casino, and betting categories ${brandName} currently highlights, so you can quickly check whether it covers the types of games and betting options you want before you deposit.`
+        )}
+      </p>
+
+      <div class="availability-tabs" data-tabs>
+        <div class="availability-tab-list" role="tablist" aria-label="${normalizeText(brandName)} product snapshot">
+          ${tabsMarkup.buttons.join('')}
+        </div>
+        ${tabsMarkup.panels.join('')}
+      </div>
+    </div>
+  `;
+
+  paymentSection.insertAdjacentElement('afterend', section);
+};
+
+const enhanceBrandProsCons = () => {
+  document.querySelectorAll('body[data-brand] .feature-card > strong').forEach(heading => {
+    const label = normalizeText(heading.textContent).trim().toLowerCase();
+    if (label !== 'pros' && label !== 'cons') return;
+    if (heading.querySelector('.pros-cons-icon')) return;
+
+    const card = heading.closest('.feature-card');
+    if (card) {
+      card.classList.add(label === 'pros' ? 'is-pros-card' : 'is-cons-card');
+    }
+
+    heading.classList.add('pros-cons-heading', label === 'pros' ? 'is-pros' : 'is-cons');
+
+    const icon = document.createElement('img');
+    icon.className = 'pros-cons-icon';
+    icon.src =
+      label === 'pros' ? '/icons/ui/addition-color-icon.svg' : '/icons/ui/subtract-color-icon.svg';
+    icon.alt = '';
+    icon.setAttribute('aria-hidden', 'true');
+
+    heading.prepend(icon);
+  });
+};
+
+const enhanceFaqBlocks = () => {
+  document.querySelectorAll('section.container').forEach(section => {
+    const title = section.querySelector('h2.title');
+    const timeline = section.querySelector('.timeline');
+    if (!title || !timeline) return;
+
+    const titleText = normalizeText(title.textContent).trim().toLowerCase();
+    if (!titleText.includes('faq')) return;
+
+    timeline.querySelectorAll(':scope > h3').forEach(question => {
+      if (question.querySelector('.faq-question-icon')) return;
+
+      question.classList.add('faq-question');
+
+      const icon = document.createElement('img');
+      icon.className = 'faq-question-icon';
+      icon.src = '/icons/ui/question-mark-circle-icon.svg';
+      icon.alt = '';
+      icon.setAttribute('aria-hidden', 'true');
+      question.prepend(icon);
+    });
+
+    timeline.querySelectorAll(':scope > p').forEach(answer => {
+      if (answer.querySelector('.faq-answer-icon')) return;
+
+      answer.classList.add('faq-answer');
+
+      const icon = document.createElement('img');
+      icon.className = 'faq-answer-icon';
+      icon.src = '/icons/ui/answer-correct-icon.svg';
+      icon.alt = '';
+      icon.setAttribute('aria-hidden', 'true');
+      answer.prepend(icon);
+    });
+  });
+};
+
 // =====================
 // INIT FUNCTION
 // =====================
@@ -551,6 +784,8 @@ export const initCasinoPage = () => {
     );
   }
 
+  enhanceFaqBlocks();
+
   document.querySelectorAll('.content[data-country]').forEach(section => {
     const code = section.dataset.country?.toUpperCase();
     if (!code) return;
@@ -587,6 +822,10 @@ export const initCasinoPage = () => {
 
   const brandKey = document.body.dataset.brand?.toLowerCase();
   if (brandKey) {
+    initStickyBrandTitle();
+    enhanceBrandProsCons();
+    renderBrandAvailabilityWidget(brandKey);
+
     const brand = BRANDS.find(b => b.urlDetail?.toLowerCase().includes(brandKey));
 
     if (brand) {
@@ -599,10 +838,10 @@ export const initCasinoPage = () => {
             const c = COUNTRIES.find(x => x.code.toLowerCase() === code.toLowerCase());
             if (!c) return '';
             return `
-              <div class="flag-container">
+              <a class="flag-container" href="${countryPagePath(c.slug)}" aria-label="${normalizeText(c.name)} casino guide">
                 <img class="hero-flag" src="${iconPath(c.slug)}" alt="${normalizeText(c.name)}" loading="lazy" decoding="async"/>
                 <span>${normalizeText(c.name)}</span>
-              </div>
+              </a>
             `;
           })
           .join('');
@@ -689,6 +928,80 @@ export const initCasinoPage = () => {
         </a>
       `
     ).join('');
+  }
+
+  const navDropdown = document.querySelector('.nav-dropdown');
+  const navDropdownLink = navDropdown?.querySelector('.nav-dropdown-link');
+  const navDropdownMenu = navDropdown?.querySelector('.nav-dropdown-menu');
+
+  if (navDropdownLink && !navDropdownLink.querySelector('.nav-dropdown-icon')) {
+    const dropdownIcon = document.createElement('img');
+    dropdownIcon.className = 'nav-dropdown-icon';
+    dropdownIcon.src = '/icons/ui/angle-bottom-icon.svg';
+    dropdownIcon.alt = '';
+    dropdownIcon.setAttribute('aria-hidden', 'true');
+    navDropdownLink.append(dropdownIcon);
+  }
+
+  if (navDropdown && navDropdownLink && navDropdownMenu && typeof window.matchMedia === 'function') {
+    const desktopDropdownMedia = window.matchMedia('(min-width: 1025px)');
+    let closeTimerId = null;
+
+    const syncDropdownState = isOpen => {
+      navDropdown.classList.toggle('is-open', isOpen);
+      navDropdownLink.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+    };
+
+    const clearDropdownTimer = () => {
+      if (!closeTimerId) return;
+      window.clearTimeout(closeTimerId);
+      closeTimerId = null;
+    };
+
+    const openDropdown = () => {
+      if (!desktopDropdownMedia.matches) {
+        syncDropdownState(false);
+        return;
+      }
+
+      clearDropdownTimer();
+      syncDropdownState(true);
+    };
+
+    const closeDropdown = () => {
+      clearDropdownTimer();
+      syncDropdownState(false);
+    };
+
+    const scheduleDropdownClose = () => {
+      if (!desktopDropdownMedia.matches) {
+        closeDropdown();
+        return;
+      }
+
+      clearDropdownTimer();
+      closeTimerId = window.setTimeout(closeDropdown, 180);
+    };
+
+    navDropdown.addEventListener('mouseenter', openDropdown);
+    navDropdown.addEventListener('mouseleave', scheduleDropdownClose);
+    navDropdown.addEventListener('focusin', openDropdown);
+    navDropdown.addEventListener('focusout', event => {
+      if (event.relatedTarget instanceof Node && navDropdown.contains(event.relatedTarget)) return;
+      scheduleDropdownClose();
+    });
+
+    if (typeof desktopDropdownMedia.addEventListener === 'function') {
+      desktopDropdownMedia.addEventListener('change', () => {
+        clearDropdownTimer();
+        syncDropdownState(false);
+      });
+    } else if (typeof desktopDropdownMedia.addListener === 'function') {
+      desktopDropdownMedia.addListener(() => {
+        clearDropdownTimer();
+        syncDropdownState(false);
+      });
+    }
   }
 
   document.querySelector('.all-countries .countries-cloud')?.replaceChildren(
@@ -805,9 +1118,11 @@ export const initCasinoPage = () => {
 
     window.addEventListener('scroll', () => {
       const current = window.pageYOffset || document.documentElement.scrollTop;
-      header.classList.toggle('hidden', current > lastScroll && current > 100);
+      const shouldHide = current > lastScroll && current > 100;
+      header.classList.toggle('hidden', shouldHide);
+      document.body.classList.toggle('header-is-hidden', shouldHide);
       lastScroll = current;
-    });
+    }, { passive: true });
   }
 
   const scrollToAnchor = hash => {
@@ -839,6 +1154,34 @@ export const initCasinoPage = () => {
   document.querySelectorAll('a[href="#"]').forEach(link => {
     link.setAttribute('aria-disabled', 'true');
     link.addEventListener('click', event => event.preventDefault());
+  });
+
+  document.querySelectorAll('[data-tabs]').forEach(tabWidget => {
+    const tabs = Array.from(tabWidget.querySelectorAll('[role="tab"]'));
+    const panels = Array.from(tabWidget.querySelectorAll('[role="tabpanel"]'));
+    if (!tabs.length || !panels.length) return;
+
+    const activateTab = tab => {
+      const targetId = tab.dataset.tabTarget;
+      if (!targetId) return;
+
+      tabs.forEach(button => {
+        const isActive = button === tab;
+        button.classList.toggle('is-active', isActive);
+        button.setAttribute('aria-selected', isActive ? 'true' : 'false');
+        button.tabIndex = isActive ? 0 : -1;
+      });
+
+      panels.forEach(panel => {
+        const isActive = panel.id === targetId;
+        panel.classList.toggle('is-active', isActive);
+        panel.hidden = !isActive;
+      });
+    };
+
+    tabs.forEach(tab => {
+      tab.addEventListener('click', () => activateTab(tab));
+    });
   });
 };
 

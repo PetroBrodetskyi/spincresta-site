@@ -195,6 +195,32 @@ body {
   position: static;
 }
 
+.nav-dropdown-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.nav-dropdown-icon {
+  width: 14px;
+  height: 14px;
+  flex: 0 0 14px;
+  object-fit: contain;
+  opacity: 0.82;
+  transform: translateY(1px);
+  transition:
+    transform 0.22s ease,
+    opacity 0.22s ease;
+}
+
+.nav-dropdown:hover .nav-dropdown-icon,
+.nav-dropdown.is-open .nav-dropdown-icon,
+.nav-dropdown-link:hover .nav-dropdown-icon,
+.nav-dropdown-link:focus-visible .nav-dropdown-icon {
+  opacity: 1;
+  transform: translateY(1px) rotate(180deg);
+}
+
 .nav-dropdown-btn {
   background: none;
   border: none;
@@ -254,6 +280,7 @@ body {
 }
 
 .nav-dropdown:hover .nav-dropdown-menu,
+.nav-dropdown.is-open .nav-dropdown-menu,
 .nav-dropdown-menu:hover,
 .nav-dropdown-menu:focus-within {
   opacity: 1;
@@ -1036,6 +1063,34 @@ body {
   color: var(--text-main);
 }
 
+.faq-question {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.faq-question-icon {
+  width: 18px;
+  height: 18px;
+  flex: 0 0 18px;
+  margin-top: 2px;
+  object-fit: contain;
+}
+
+.faq-answer {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.faq-answer-icon {
+  width: 18px;
+  height: 18px;
+  flex: 0 0 18px;
+  margin-top: 3px;
+  object-fit: contain;
+}
+
 /* =====================
    BONUS CARD
 ===================== */
@@ -1152,6 +1207,20 @@ body {
   min-width: 0;
   max-width: 92px;
   text-align: center;
+  color: var(--text-main);
+  text-decoration: none;
+  transition:
+    transform 0.18s ease,
+    color 0.18s ease,
+    opacity 0.18s ease;
+}
+
+.brand-countries .flag-container:hover,
+.brand-countries .flag-container:focus-visible {
+  color: var(--text-main);
+  transform: translateY(-2px);
+  opacity: 0.96;
+  outline: none;
 }
 
 .brand-countries .hero-flag {
