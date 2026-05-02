@@ -659,12 +659,16 @@ const initStickyBrandTitle = () => {
   const hero = document.querySelector('.hero');
   const heading = hero?.querySelector('h1');
   const brandLogo = hero?.querySelector('.brand-logo');
+  const heroCta = hero?.querySelector('a.cta-brands[href]');
   const header = document.querySelector('.header');
   if (!hero || !heading || !header) return;
   if (document.querySelector('.brand-sticky-title')) return;
 
   const titleText = normalizeText(heading.textContent).trim();
   if (!titleText) return;
+
+  const casinoHref = heroCta?.getAttribute('href')?.trim() || '';
+  if (!casinoHref) return;
 
   const brandLogoSrc = brandLogo?.getAttribute('src') || '';
   const brandLogoMarkup = brandLogoSrc
@@ -679,20 +683,17 @@ const initStickyBrandTitle = () => {
     `
     : '';
 
-  const stickyTitle = document.createElement('button');
+  const stickyTitle = document.createElement('a');
   stickyTitle.className = 'brand-sticky-title';
-  stickyTitle.type = 'button';
-  stickyTitle.setAttribute('aria-label', `Back to the top of ${titleText}`);
+  stickyTitle.href = casinoHref;
+  stickyTitle.target = heroCta?.getAttribute('target') || '_blank';
+  stickyTitle.rel = heroCta?.getAttribute('rel') || 'noopener noreferrer nofollow sponsored';
+  stickyTitle.setAttribute('aria-label', `Visit ${titleText}`);
   stickyTitle.innerHTML = `
     <div class="brand-sticky-title__inner">
       ${brandLogoMarkup}
       <span class="brand-sticky-title__text">${titleText}</span>
-      <img
-        class="brand-sticky-title__icon"
-        src="/icons/ui/top-chevron-arrow-round-outline-icon.svg"
-        alt=""
-        aria-hidden="true"
-      />
+      <span class="brand-sticky-title__cta">Visit Casino</span>
     </div>
   `;
 
@@ -706,10 +707,6 @@ const initStickyBrandTitle = () => {
   };
 
   updateStickyVisibility();
-
-  stickyTitle.addEventListener('click', () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  });
 
   window.addEventListener('scroll', updateStickyVisibility, { passive: true });
   window.addEventListener('resize', updateStickyVisibility);
