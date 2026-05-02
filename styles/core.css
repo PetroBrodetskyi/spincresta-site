@@ -45,6 +45,36 @@
   }
 }
 
+:root[data-theme='light'] {
+  color-scheme: light;
+  --bg-main: #f4f7fb;
+  --bg-surface: rgba(255, 255, 255, 0.82);
+  --bg-card: rgba(255, 255, 255, 0.92);
+  --border-soft: rgba(15, 23, 42, 0.1);
+  --border-glass: rgba(15, 23, 42, 0.08);
+  --text-main: #0f172a;
+  --text-muted: #475569;
+  --neo-accent-soft: rgba(173, 102, 255, 0.12);
+  --shadow-soft: 0 18px 46px rgba(15, 23, 42, 0.08);
+  --shadow-hover: 0 24px 54px rgba(56, 189, 248, 0.14);
+}
+
+@media (prefers-color-scheme: light) {
+  :root:not([data-theme='dark']) {
+    color-scheme: light;
+    --bg-main: #f4f7fb;
+    --bg-surface: rgba(255, 255, 255, 0.82);
+    --bg-card: rgba(255, 255, 255, 0.92);
+    --border-soft: rgba(15, 23, 42, 0.1);
+    --border-glass: rgba(15, 23, 42, 0.08);
+    --text-main: #0f172a;
+    --text-muted: #475569;
+    --neo-accent-soft: rgba(173, 102, 255, 0.12);
+    --shadow-soft: 0 18px 46px rgba(15, 23, 42, 0.08);
+    --shadow-hover: 0 24px 54px rgba(56, 189, 248, 0.14);
+  }
+}
+
 /* =====================
    RESET
 ===================== */
@@ -425,18 +455,19 @@ body {
 }
 
 .casino-card {
+  --casino-card-pad: 18px;
   position: relative;
   overflow: hidden;
   display: flex;
-  height: 300px;
+  height: 330px;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: flex-start;
   background: var(--bg-card);
   border-radius: var(--radius-lg);
-  padding: 18px;
+  padding: var(--casino-card-pad);
   cursor: pointer;
   box-shadow: var(--shadow-soft);
-  gap: 8px;
+  gap: 6px;
 
   transition:
     transform 0.35s ease,
@@ -483,7 +514,9 @@ body {
 
 @media (max-width: 768px) {
   .casino-card {
-    padding: 10px;
+    --casino-card-pad: 10px;
+    height: 320px;
+    padding: var(--casino-card-pad);
   }
 }
 
@@ -496,6 +529,8 @@ body {
   justify-content: center;
   align-items: center;
   height: 70px;
+  flex: 0 0 70px;
+  min-height: 70px;
 }
 
 .casino-card:hover {
@@ -511,11 +546,19 @@ body {
 
 .casino-card h3 {
   font-size: 20px;
+  line-height: 1.1;
 }
 
 .casino-card p {
   color: var(--text-muted);
   font-size: 16px;
+}
+
+.casino-card .casino-bonus {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  overflow: hidden;
 }
 
 /* =====================
@@ -623,6 +666,7 @@ body {
   justify-content: center;
   gap: 12px;
   margin-top: 32px;
+  padding: 18px 20px;
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-soft);
   width: 100%;
@@ -1146,6 +1190,7 @@ body {
   align-items: center;
   gap: 8px;
   overflow: hidden;
+  min-height: 22px;
 }
 
 .payment-icons img {
@@ -1159,6 +1204,52 @@ body {
   color: var(--text-muted);
   white-space: nowrap;
   flex-shrink: 0;
+}
+
+.casino-footer {
+  margin-top: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.casino-actions {
+  display: grid;
+  gap: 8px;
+}
+
+.casino-actions.has-two-actions {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.casino-actions.has-single-action {
+  grid-template-columns: 1fr;
+}
+
+.casino-actions .cta {
+  min-height: 42px;
+  width: 100%;
+  padding: 8px 14px;
+  font-size: 15px;
+  line-height: 1;
+}
+
+.casino-actions .cta-secondary {
+  background: rgba(56, 189, 248, 0.1);
+  color: var(--text-main);
+  border: 1px solid var(--border-glass);
+  box-shadow: none;
+}
+
+.casino-actions .cta-secondary:hover {
+  background: rgba(56, 189, 248, 0.18);
+  box-shadow: 0 12px 34px rgba(56, 189, 248, 0.16);
+}
+
+@media (max-width: 768px) {
+  .casino-actions.has-two-actions {
+    grid-template-columns: 1fr;
+  }
 }
 
 .brand-countries,
@@ -1414,16 +1505,22 @@ tbody tr:hover {
   margin-top: 12px;
 }
 
-.footer-nav a {
+.footer-nav a,
+.footer-settings-trigger {
   color: var(--text-muted);
   text-decoration: none;
   transition: all 0.25s ease;
   display: inline-flex;
   align-items: center;
   gap: 6px;
+  font: inherit;
+  background: none;
+  border: 0;
+  cursor: pointer;
 }
 
-.footer-nav a:hover {
+.footer-nav a:hover,
+.footer-settings-trigger:hover {
   color: var(--text-main);
 }
 
@@ -1444,6 +1541,127 @@ tbody tr:hover {
 
 .footer-social img {
   display: block;
+}
+
+body.theme-settings-open {
+  overflow: hidden;
+}
+
+.theme-settings-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 140;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+  background: rgba(2, 6, 23, 0.54);
+  backdrop-filter: blur(10px);
+}
+
+.theme-settings-backdrop[hidden] {
+  display: none;
+}
+
+.theme-settings-modal {
+  width: min(420px, 100%);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  padding: 24px;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border-glass);
+  background:
+    radial-gradient(circle at top right, rgba(56, 189, 248, 0.08), transparent 34%),
+    linear-gradient(180deg, rgba(10, 15, 30, 0.98), rgba(20, 30, 52, 0.94));
+  box-shadow: 0 28px 60px rgba(0, 0, 0, 0.38);
+}
+
+.theme-settings-modal h3 {
+  margin: 0;
+  font-size: 1.5rem;
+  color: var(--text-main);
+}
+
+.theme-settings-modal p {
+  margin: 0;
+  color: var(--text-muted);
+}
+
+.theme-settings-close {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  width: 36px;
+  height: 36px;
+  border-radius: 999px;
+  border: 1px solid var(--border-glass);
+  background: rgba(255, 255, 255, 0.04);
+  color: var(--text-muted);
+  font-size: 1.2rem;
+  line-height: 1;
+  cursor: pointer;
+  transition:
+    background 0.2s ease,
+    color 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.theme-settings-close:hover {
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--text-main);
+  border-color: rgba(255, 255, 255, 0.14);
+}
+
+.theme-settings-options {
+  display: grid;
+  gap: 12px;
+}
+
+.theme-settings-option {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  min-height: 54px;
+  padding: 12px 14px;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-glass);
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--text-main);
+  font: inherit;
+  cursor: pointer;
+  transition:
+    transform 0.2s ease,
+    border-color 0.2s ease,
+    background 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.theme-settings-option:hover {
+  transform: translateY(-1px);
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.14);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.16);
+}
+
+.theme-settings-option.is-active {
+  border-color: rgba(255, 223, 0, 0.4);
+  background: rgba(255, 223, 0, 0.08);
+  box-shadow: 0 14px 32px rgba(255, 223, 0, 0.1);
+}
+
+.theme-settings-option img {
+  width: 20px;
+  height: 20px;
+  flex: 0 0 20px;
+  object-fit: contain;
+}
+
+.theme-settings-option span {
+  font-size: 1rem;
+  color: inherit;
 }
 
 .footer-brand-directory {
@@ -2625,5 +2843,559 @@ body[data-country] .content-article .timeline a[href*='/responsible-gambling/'] 
   .page-privacy .content-article .timeline > div,
   .page-about .content-article .timeline > div {
     padding: 16px 16px 18px;
+  }
+}
+
+html[data-theme='light'] body {
+  background:
+    radial-gradient(circle at top left, rgba(56, 189, 248, 0.08), transparent 34%),
+    radial-gradient(circle at top right, rgba(255, 223, 0, 0.07), transparent 30%),
+    linear-gradient(180deg, #fbfdff 0%, #f4f7fb 58%, #eef3f9 100%);
+}
+
+html[data-theme='light'] .header {
+  background-color: rgba(2, 6, 23, 0.96);
+  border-bottom: none;
+}
+
+html[data-theme='light'] .header-container {
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.35);
+}
+
+html[data-theme='light'] .logo {
+  color: #e5e7eb;
+}
+
+html[data-theme='light'] .logo-com {
+  color: var(--gold);
+}
+
+html[data-theme='light'] .nav a,
+html[data-theme='light'] .nav-dropdown-btn,
+html[data-theme='light'] .nav-dropdown-link {
+  color: #94a3b8;
+}
+
+html[data-theme='light'] .nav a:hover,
+html[data-theme='light'] .nav-dropdown-btn:hover,
+html[data-theme='light'] .nav-dropdown-link:hover,
+html[data-theme='light'] .nav-dropdown-link:focus-visible {
+  color: #e5e7eb;
+}
+
+html[data-theme='light'] .burger span {
+  background: #e5e7eb;
+}
+
+html[data-theme='light'] .nav-dropdown-menu {
+  background: linear-gradient(135deg, rgba(15, 23, 42, 0.96), rgba(30, 41, 59, 0.9));
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+html[data-theme='light'] .nav-dropdown-menu a {
+  color: #e5e7eb;
+}
+
+html[data-theme='light'] .countries-cloud a,
+html[data-theme='light'] .home-country-jump,
+html[data-theme='light'] .country-chip,
+html[data-theme='light'] .payment-chip {
+  background: rgba(255, 255, 255, 0.88);
+  border-color: rgba(15, 23, 42, 0.08);
+  color: var(--text-main);
+}
+
+html[data-theme='light'] .countries-cloud a:hover,
+html[data-theme='light'] .home-country-jump:hover {
+  background: rgba(255, 255, 255, 0.98);
+}
+
+html[data-theme='light'] .footer {
+  background: #020617;
+  border-top: none;
+  color: #94a3b8;
+}
+
+html[data-theme='light'] .footer-nav a,
+html[data-theme='light'] .footer-settings-trigger {
+  color: #94a3b8;
+}
+
+html[data-theme='light'] .footer-nav a:hover,
+html[data-theme='light'] .footer-settings-trigger:hover {
+  color: #e5e7eb;
+}
+
+html[data-theme='light'] .footer-social {
+  background: rgba(15, 23, 42, 0.72);
+  border-color: rgba(255, 255, 255, 0.08);
+}
+
+html[data-theme='light'] .footer-brand-directory {
+  border-top-color: rgba(255, 255, 255, 0.08);
+}
+
+html[data-theme='light'] .footer-brand-column a {
+  color: #94a3b8;
+}
+
+html[data-theme='light'] .footer-brand-column a:hover {
+  color: #e5e7eb;
+}
+
+html[data-theme='light'] .mobile-overlay {
+  background: rgba(241, 245, 249, 0.36);
+}
+
+html[data-theme='light'] .mobile-menu-panel {
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.98), rgba(244, 247, 251, 0.96));
+  box-shadow:
+    -10px 0 40px rgba(15, 23, 42, 0.12),
+    inset 1px 0 0 rgba(255, 255, 255, 0.5);
+}
+
+html[data-theme='light'] .mobile-menu-inner a,
+html[data-theme='light'] .submenu-toggle,
+html[data-theme='light'] .mobile-submenu a {
+  background: rgba(255, 255, 255, 0.9);
+  border: 1px solid rgba(15, 23, 42, 0.08);
+}
+
+html[data-theme='light'] .mobile-menu-inner a:hover,
+html[data-theme='light'] .submenu-toggle:hover {
+  background: rgba(255, 255, 255, 0.98);
+}
+
+html[data-theme='light'] .mobile-submenu a:hover {
+  background: rgba(56, 189, 248, 0.1);
+}
+
+html[data-theme='light'] .mobile-submenu .flag {
+  box-shadow: 0 2px 6px rgba(15, 23, 42, 0.12);
+}
+
+html[data-theme='light'] #globalLoader {
+  background: rgba(248, 250, 252, 0.9);
+}
+
+html[data-theme='light'] .loader {
+  border-color: rgba(15, 23, 42, 0.12);
+  border-top-color: var(--accent);
+}
+
+html[data-theme='light'] .casino-card,
+html[data-theme='light'] .bonus-card,
+html[data-theme='light'] .top-slot-card,
+html[data-theme='light'] .payment-methods-page .payment-method-card,
+html[data-theme='light'] .faq-card,
+html[data-theme='light'] .country-brand-summary-card,
+html[data-theme='light'] .page-responsible .content-article .timeline > div,
+html[data-theme='light'] .page-privacy .content-article .timeline > div,
+html[data-theme='light'] .page-about .content-article .timeline > div,
+html[data-theme='light'] body[data-country] .expert-card,
+html[data-theme='light'] body[data-country] .content-article .timeline > div,
+html[data-theme='light'] .home-stats-card,
+html[data-theme='light'] .home-insight-card {
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.98), rgba(248, 250, 252, 0.96));
+  border-color: rgba(15, 23, 42, 0.08);
+  box-shadow: var(--shadow-soft);
+}
+
+html[data-theme='light'] .casino-card .card-img {
+  height: 108px;
+  flex: 0 0 108px;
+  min-height: 108px;
+  margin:
+    calc(-1 * var(--casino-card-pad))
+    calc(-1 * var(--casino-card-pad))
+    6px;
+  padding: 18px 16px 14px;
+  border-radius: var(--radius-lg) var(--radius-lg) 20px 20px;
+  background:
+    radial-gradient(circle at top right, rgba(56, 189, 248, 0.16), transparent 34%),
+    radial-gradient(circle at top left, rgba(255, 223, 0, 0.12), transparent 28%),
+    linear-gradient(180deg, rgba(10, 15, 30, 0.98), rgba(20, 30, 52, 0.94));
+  box-shadow:
+    inset 0 -1px 0 rgba(255, 255, 255, 0.06),
+    0 12px 28px rgba(15, 23, 42, 0.12);
+}
+
+html[data-theme='light'] .casino-card .card-img img,
+html[data-theme='light'] .casino-card .card-img .casino-image {
+  filter: drop-shadow(0 8px 18px rgba(0, 0, 0, 0.22));
+}
+
+html[data-theme='light'] body.casinos-page .casino-list-row,
+html[data-theme='light'] body.casinos-page .casino-list-logo {
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.98), rgba(248, 250, 252, 0.96));
+  border-color: rgba(15, 23, 42, 0.08);
+}
+
+html[data-theme='light'] body.casinos-page .casino-list-logo {
+  background:
+    radial-gradient(circle at top right, rgba(56, 189, 248, 0.16), transparent 34%),
+    radial-gradient(circle at top left, rgba(255, 223, 0, 0.12), transparent 28%),
+    linear-gradient(180deg, rgba(10, 15, 30, 0.98), rgba(20, 30, 52, 0.94));
+  box-shadow:
+    inset 0 -1px 0 rgba(255, 255, 255, 0.06),
+    0 12px 28px rgba(15, 23, 42, 0.12);
+}
+
+html[data-theme='light'] tbody tr:nth-child(even) {
+  background: rgba(15, 23, 42, 0.025);
+}
+
+html[data-theme='light'] tbody tr:hover {
+  background: rgba(56, 189, 248, 0.08);
+}
+
+html[data-theme='light'] .home-stat-tile,
+html[data-theme='light'] .home-link-card,
+html[data-theme='light'] .home-insight .feature-card {
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.98), rgba(250, 246, 255, 0.95));
+  border-color: rgba(173, 102, 255, 0.18);
+  box-shadow:
+    0 0 0 1px rgba(173, 102, 255, 0.04),
+    0 0 18px rgba(173, 102, 255, 0.06),
+    var(--shadow-soft);
+}
+
+html[data-theme='light'] .home-stat-link:hover,
+html[data-theme='light'] .home-link-card:hover,
+html[data-theme='light'] .home-insight .feature-card:hover {
+  box-shadow:
+    0 0 0 1px rgba(214, 136, 255, 0.06),
+    0 0 22px rgba(214, 136, 255, 0.1),
+    0 18px 42px rgba(76, 22, 124, 0.12);
+}
+
+html[data-theme='light'] .home-stat-number {
+  text-shadow: none;
+}
+
+html[data-theme='light'] .casino-actions .cta-secondary {
+  background: linear-gradient(135deg, rgba(15, 23, 42, 0.9), rgba(30, 41, 59, 0.96));
+  color: #e5e7eb;
+  border-color: rgba(15, 23, 42, 0.12);
+  box-shadow: 0 14px 30px rgba(15, 23, 42, 0.12);
+}
+
+html[data-theme='light'] .casino-actions .cta-secondary:hover {
+  background: linear-gradient(135deg, rgba(30, 41, 59, 0.96), rgba(51, 65, 85, 0.98));
+  box-shadow: 0 18px 36px rgba(15, 23, 42, 0.16);
+}
+
+html[data-theme='light'] .view-all {
+  background: linear-gradient(135deg, rgba(56, 189, 248, 0.1), rgba(255, 223, 0, 0.1));
+}
+
+html[data-theme='light'] .view-all:hover {
+  background: linear-gradient(135deg, rgba(56, 189, 248, 0.16), rgba(255, 223, 0, 0.16));
+}
+
+html[data-theme='light'] .theme-settings-backdrop {
+  background: rgba(241, 245, 249, 0.5);
+}
+
+html[data-theme='light'] .theme-settings-modal {
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.98), rgba(244, 247, 251, 0.96));
+  border-color: rgba(15, 23, 42, 0.08);
+  box-shadow: 0 24px 54px rgba(15, 23, 42, 0.16);
+}
+
+html[data-theme='light'] .theme-settings-close {
+  background: rgba(15, 23, 42, 0.04);
+  border-color: rgba(15, 23, 42, 0.08);
+}
+
+html[data-theme='light'] .theme-settings-close:hover {
+  background: rgba(15, 23, 42, 0.08);
+  border-color: rgba(15, 23, 42, 0.12);
+}
+
+html[data-theme='light'] .theme-settings-option {
+  background: rgba(255, 255, 255, 0.88);
+  border-color: rgba(15, 23, 42, 0.08);
+}
+
+html[data-theme='light'] .theme-settings-option:hover {
+  background: rgba(255, 255, 255, 0.96);
+}
+
+@media (prefers-color-scheme: light) {
+  html:not([data-theme='dark']) body {
+    background:
+      radial-gradient(circle at top left, rgba(56, 189, 248, 0.08), transparent 34%),
+      radial-gradient(circle at top right, rgba(255, 223, 0, 0.07), transparent 30%),
+      linear-gradient(180deg, #fbfdff 0%, #f4f7fb 58%, #eef3f9 100%);
+  }
+
+  html:not([data-theme='dark']) .header {
+    background-color: rgba(2, 6, 23, 0.96);
+    border-bottom: none;
+  }
+
+  html:not([data-theme='dark']) .header-container {
+    box-shadow: 0 30px 80px rgba(0, 0, 0, 0.35);
+  }
+
+  html:not([data-theme='dark']) .logo {
+    color: #e5e7eb;
+  }
+
+  html:not([data-theme='dark']) .logo-com {
+    color: var(--gold);
+  }
+
+  html:not([data-theme='dark']) .nav a,
+  html:not([data-theme='dark']) .nav-dropdown-btn,
+  html:not([data-theme='dark']) .nav-dropdown-link {
+    color: #94a3b8;
+  }
+
+  html:not([data-theme='dark']) .nav a:hover,
+  html:not([data-theme='dark']) .nav-dropdown-btn:hover,
+  html:not([data-theme='dark']) .nav-dropdown-link:hover,
+  html:not([data-theme='dark']) .nav-dropdown-link:focus-visible {
+    color: #e5e7eb;
+  }
+
+  html:not([data-theme='dark']) .burger span {
+    background: #e5e7eb;
+  }
+
+  html:not([data-theme='dark']) .nav-dropdown-menu {
+    background: linear-gradient(135deg, rgba(15, 23, 42, 0.96), rgba(30, 41, 59, 0.9));
+    border: 1px solid rgba(255, 255, 255, 0.08);
+  }
+
+  html:not([data-theme='dark']) .nav-dropdown-menu a {
+    color: #e5e7eb;
+  }
+
+  html:not([data-theme='dark']) .countries-cloud a,
+  html:not([data-theme='dark']) .home-country-jump,
+  html:not([data-theme='dark']) .country-chip,
+  html:not([data-theme='dark']) .payment-chip {
+    background: rgba(255, 255, 255, 0.88);
+    border-color: rgba(15, 23, 42, 0.08);
+    color: var(--text-main);
+  }
+
+  html:not([data-theme='dark']) .countries-cloud a:hover,
+  html:not([data-theme='dark']) .home-country-jump:hover {
+    background: rgba(255, 255, 255, 0.98);
+  }
+
+  html:not([data-theme='dark']) .footer {
+    background: #020617;
+    border-top: none;
+    color: #94a3b8;
+  }
+
+  html:not([data-theme='dark']) .footer-nav a,
+  html:not([data-theme='dark']) .footer-settings-trigger {
+    color: #94a3b8;
+  }
+
+  html:not([data-theme='dark']) .footer-nav a:hover,
+  html:not([data-theme='dark']) .footer-settings-trigger:hover {
+    color: #e5e7eb;
+  }
+
+  html:not([data-theme='dark']) .footer-social {
+    background: rgba(15, 23, 42, 0.72);
+    border-color: rgba(255, 255, 255, 0.08);
+  }
+
+  html:not([data-theme='dark']) .footer-brand-directory {
+    border-top-color: rgba(255, 255, 255, 0.08);
+  }
+
+  html:not([data-theme='dark']) .footer-brand-column a {
+    color: #94a3b8;
+  }
+
+  html:not([data-theme='dark']) .footer-brand-column a:hover {
+    color: #e5e7eb;
+  }
+
+  html:not([data-theme='dark']) .mobile-overlay {
+    background: rgba(241, 245, 249, 0.36);
+  }
+
+  html:not([data-theme='dark']) .mobile-menu-panel {
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.98), rgba(244, 247, 251, 0.96));
+    box-shadow:
+      -10px 0 40px rgba(15, 23, 42, 0.12),
+      inset 1px 0 0 rgba(255, 255, 255, 0.5);
+  }
+
+  html:not([data-theme='dark']) .mobile-menu-inner a,
+  html:not([data-theme='dark']) .submenu-toggle,
+  html:not([data-theme='dark']) .mobile-submenu a {
+    background: rgba(255, 255, 255, 0.9);
+    border: 1px solid rgba(15, 23, 42, 0.08);
+  }
+
+  html:not([data-theme='dark']) .mobile-menu-inner a:hover,
+  html:not([data-theme='dark']) .submenu-toggle:hover {
+    background: rgba(255, 255, 255, 0.98);
+  }
+
+  html:not([data-theme='dark']) .mobile-submenu a:hover {
+    background: rgba(56, 189, 248, 0.1);
+  }
+
+  html:not([data-theme='dark']) .mobile-submenu .flag {
+    box-shadow: 0 2px 6px rgba(15, 23, 42, 0.12);
+  }
+
+  html:not([data-theme='dark']) #globalLoader {
+    background: rgba(248, 250, 252, 0.9);
+  }
+
+  html:not([data-theme='dark']) .loader {
+    border-color: rgba(15, 23, 42, 0.12);
+    border-top-color: var(--accent);
+  }
+
+  html:not([data-theme='dark']) .casino-card,
+  html:not([data-theme='dark']) .bonus-card,
+  html:not([data-theme='dark']) .top-slot-card,
+  html:not([data-theme='dark']) .payment-methods-page .payment-method-card,
+  html:not([data-theme='dark']) .faq-card,
+  html:not([data-theme='dark']) .country-brand-summary-card,
+  html:not([data-theme='dark']) .page-responsible .content-article .timeline > div,
+  html:not([data-theme='dark']) .page-privacy .content-article .timeline > div,
+  html:not([data-theme='dark']) .page-about .content-article .timeline > div,
+  html:not([data-theme='dark']) body[data-country] .expert-card,
+  html:not([data-theme='dark']) body[data-country] .content-article .timeline > div,
+  html:not([data-theme='dark']) .home-stats-card,
+  html:not([data-theme='dark']) .home-insight-card {
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.98), rgba(248, 250, 252, 0.96));
+    border-color: rgba(15, 23, 42, 0.08);
+    box-shadow: var(--shadow-soft);
+  }
+
+  html:not([data-theme='dark']) .casino-card .card-img {
+    height: 108px;
+    flex: 0 0 108px;
+    min-height: 108px;
+    margin:
+      calc(-1 * var(--casino-card-pad))
+      calc(-1 * var(--casino-card-pad))
+      6px;
+    padding: 18px 16px 14px;
+    border-radius: var(--radius-lg) var(--radius-lg) 20px 20px;
+    background:
+      radial-gradient(circle at top right, rgba(56, 189, 248, 0.16), transparent 34%),
+      radial-gradient(circle at top left, rgba(255, 223, 0, 0.12), transparent 28%),
+      linear-gradient(180deg, rgba(10, 15, 30, 0.98), rgba(20, 30, 52, 0.94));
+    box-shadow:
+      inset 0 -1px 0 rgba(255, 255, 255, 0.06),
+      0 12px 28px rgba(15, 23, 42, 0.12);
+  }
+
+  html:not([data-theme='dark']) .casino-card .card-img img,
+  html:not([data-theme='dark']) .casino-card .card-img .casino-image {
+    filter: drop-shadow(0 8px 18px rgba(0, 0, 0, 0.22));
+  }
+
+  html:not([data-theme='dark']) body.casinos-page .casino-list-row,
+  html:not([data-theme='dark']) body.casinos-page .casino-list-logo {
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.98), rgba(248, 250, 252, 0.96));
+    border-color: rgba(15, 23, 42, 0.08);
+  }
+
+  html:not([data-theme='dark']) body.casinos-page .casino-list-logo {
+    background:
+      radial-gradient(circle at top right, rgba(56, 189, 248, 0.16), transparent 34%),
+      radial-gradient(circle at top left, rgba(255, 223, 0, 0.12), transparent 28%),
+      linear-gradient(180deg, rgba(10, 15, 30, 0.98), rgba(20, 30, 52, 0.94));
+    box-shadow:
+      inset 0 -1px 0 rgba(255, 255, 255, 0.06),
+      0 12px 28px rgba(15, 23, 42, 0.12);
+  }
+
+  html:not([data-theme='dark']) tbody tr:nth-child(even) {
+    background: rgba(15, 23, 42, 0.025);
+  }
+
+  html:not([data-theme='dark']) tbody tr:hover {
+    background: rgba(56, 189, 248, 0.08);
+  }
+
+  html:not([data-theme='dark']) .home-stat-tile,
+  html:not([data-theme='dark']) .home-link-card,
+  html:not([data-theme='dark']) .home-insight .feature-card {
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.98), rgba(250, 246, 255, 0.95));
+    border-color: rgba(173, 102, 255, 0.18);
+    box-shadow:
+      0 0 0 1px rgba(173, 102, 255, 0.04),
+      0 0 18px rgba(173, 102, 255, 0.06),
+      var(--shadow-soft);
+  }
+
+  html:not([data-theme='dark']) .home-stat-link:hover,
+  html:not([data-theme='dark']) .home-link-card:hover,
+  html:not([data-theme='dark']) .home-insight .feature-card:hover {
+    box-shadow:
+      0 0 0 1px rgba(214, 136, 255, 0.06),
+      0 0 22px rgba(214, 136, 255, 0.1),
+      0 18px 42px rgba(76, 22, 124, 0.12);
+  }
+
+  html:not([data-theme='dark']) .home-stat-number {
+    text-shadow: none;
+  }
+
+  html:not([data-theme='dark']) .casino-actions .cta-secondary {
+    background: linear-gradient(135deg, rgba(15, 23, 42, 0.9), rgba(30, 41, 59, 0.96));
+    color: #e5e7eb;
+    border-color: rgba(15, 23, 42, 0.12);
+    box-shadow: 0 14px 30px rgba(15, 23, 42, 0.12);
+  }
+
+  html:not([data-theme='dark']) .casino-actions .cta-secondary:hover {
+    background: linear-gradient(135deg, rgba(30, 41, 59, 0.96), rgba(51, 65, 85, 0.98));
+    box-shadow: 0 18px 36px rgba(15, 23, 42, 0.16);
+  }
+
+  html:not([data-theme='dark']) .view-all {
+    background: linear-gradient(135deg, rgba(56, 189, 248, 0.1), rgba(255, 223, 0, 0.1));
+  }
+
+  html:not([data-theme='dark']) .view-all:hover {
+    background: linear-gradient(135deg, rgba(56, 189, 248, 0.16), rgba(255, 223, 0, 0.16));
+  }
+
+  html:not([data-theme='dark']) .theme-settings-backdrop {
+    background: rgba(241, 245, 249, 0.5);
+  }
+
+  html:not([data-theme='dark']) .theme-settings-modal {
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.98), rgba(244, 247, 251, 0.96));
+    border-color: rgba(15, 23, 42, 0.08);
+    box-shadow: 0 24px 54px rgba(15, 23, 42, 0.16);
+  }
+
+  html:not([data-theme='dark']) .theme-settings-close {
+    background: rgba(15, 23, 42, 0.04);
+    border-color: rgba(15, 23, 42, 0.08);
+  }
+
+  html:not([data-theme='dark']) .theme-settings-close:hover {
+    background: rgba(15, 23, 42, 0.08);
+    border-color: rgba(15, 23, 42, 0.12);
+  }
+
+  html:not([data-theme='dark']) .theme-settings-option {
+    background: rgba(255, 255, 255, 0.88);
+    border-color: rgba(15, 23, 42, 0.08);
+  }
+
+  html:not([data-theme='dark']) .theme-settings-option:hover {
+    background: rgba(255, 255, 255, 0.96);
   }
 }

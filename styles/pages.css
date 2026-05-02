@@ -344,6 +344,26 @@ body[data-brand] .brand-sticky-title__inner {
     box-shadow 0.2s ease;
 }
 
+body[data-brand] .brand-sticky-title__brand {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex: 0 0 auto;
+  min-width: 44px;
+  height: 32px;
+  padding: 4px 8px;
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+body[data-brand] .brand-sticky-title__brand-logo {
+  display: block;
+  width: auto;
+  height: 100%;
+  max-width: 76px;
+  object-fit: contain;
+}
+
 body[data-brand] .brand-sticky-title:hover .brand-sticky-title__inner,
 body[data-brand] .brand-sticky-title:focus-visible .brand-sticky-title__inner {
   transform: translateY(-2px);
@@ -1120,5 +1140,259 @@ body.casinos-page .alpha-nav .view-all {
 @media (max-width: 798px) {
   body.casinos-page .casino-list-cta .cta {
     width: 100%;
+  }
+}
+
+html[data-theme='light'] body[data-brand] .hero-content.glass-card,
+html[data-theme='light'] body[data-brand='Leon'] .hero-content.glass-card {
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.96), rgba(248, 250, 252, 0.94));
+  border-color: rgba(15, 23, 42, 0.08);
+  box-shadow: var(--shadow-soft);
+  overflow: hidden;
+}
+
+html[data-theme='light'] body[data-brand] .brand-logo-container.hero-logo,
+html[data-theme='light'] body[data-brand='Leon'] .brand-logo-container.hero-logo {
+  width: calc(100% + 56px);
+  max-width: none;
+  margin: -28px -28px 10px;
+  padding: 28px 24px 22px;
+  background:
+    radial-gradient(circle at top right, rgba(56, 189, 248, 0.16), transparent 34%),
+    radial-gradient(circle at top left, rgba(255, 223, 0, 0.12), transparent 28%),
+    linear-gradient(180deg, rgba(10, 15, 30, 0.98), rgba(20, 30, 52, 0.94));
+  border-radius: var(--radius-lg) var(--radius-lg) 26px 26px;
+  box-shadow:
+    inset 0 -1px 0 rgba(255, 255, 255, 0.06),
+    0 14px 34px rgba(15, 23, 42, 0.12);
+}
+
+html[data-theme='light'] body[data-brand] .brand-logo,
+html[data-theme='light'] body[data-brand='Leon'] .brand-logo {
+  filter: drop-shadow(0 10px 22px rgba(0, 0, 0, 0.22));
+}
+
+html[data-theme='light'] body[data-brand] .icon-placeholder,
+html[data-theme='light'] body[data-brand='Leon'] .icon-placeholder {
+  background: rgba(196, 129, 255, 0.08);
+  border-color: rgba(173, 102, 255, 0.16);
+  box-shadow:
+    0 0 0 1px rgba(196, 129, 255, 0.04),
+    0 0 14px rgba(196, 129, 255, 0.05);
+}
+
+html[data-theme='light'] body[data-brand] .timeline,
+html[data-theme='light'] body[data-brand='Leon'] .timeline {
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.98), rgba(248, 250, 252, 0.96));
+  border-color: rgba(15, 23, 42, 0.08);
+  box-shadow: var(--shadow-soft);
+}
+
+html[data-theme='light'] body[data-brand] .timeline p,
+html[data-theme='light'] body[data-brand='Leon'] .timeline p {
+  color: var(--text-muted);
+}
+
+html[data-theme='light'] body[data-brand] .brand-availability-widget {
+  background: transparent;
+}
+
+html[data-theme='light'] body[data-brand] .availability-tabs {
+  border-color: rgba(15, 23, 42, 0.08);
+  background: rgba(255, 255, 255, 0.94);
+  box-shadow: var(--shadow-soft);
+}
+
+html[data-theme='light'] body[data-brand] .availability-tab-list {
+  border-bottom-color: rgba(15, 23, 42, 0.08);
+  background: rgba(248, 250, 252, 0.9);
+}
+
+html[data-theme='light'] body[data-brand] .availability-tab:hover,
+html[data-theme='light'] body[data-brand] .availability-tab:focus-visible {
+  background: rgba(15, 23, 42, 0.04);
+}
+
+html[data-theme='light'] body[data-brand] .availability-summary {
+  border-top-color: rgba(15, 23, 42, 0.08);
+}
+
+html[data-theme='light'] body[data-brand] .brand-sticky-title__inner {
+  border-color: rgba(15, 23, 42, 0.08);
+  box-shadow: var(--shadow-soft);
+}
+
+html[data-theme='light'] body[data-brand] .brand-sticky-title__brand {
+  background:
+    radial-gradient(circle at top right, rgba(56, 189, 248, 0.14), transparent 42%),
+    linear-gradient(180deg, rgba(10, 15, 30, 0.98), rgba(20, 30, 52, 0.94));
+  box-shadow:
+    inset 0 -1px 0 rgba(255, 255, 255, 0.05),
+    0 8px 18px rgba(15, 23, 42, 0.12);
+}
+
+html[data-theme='light'] .promo-copy-title {
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.98), rgba(241, 245, 249, 0.96));
+  color: var(--text-main);
+  border-color: rgba(255, 215, 106, 0.3);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.9),
+    inset 0 -2px 6px rgba(15, 23, 42, 0.06),
+    0 10px 22px rgba(15, 23, 42, 0.12);
+}
+
+html[data-theme='light'] .promo-copy-title:hover,
+html[data-theme='light'] .promo-copy-title:focus-visible {
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.95),
+    inset 0 -2px 6px rgba(15, 23, 42, 0.06),
+    0 14px 28px rgba(15, 23, 42, 0.14);
+}
+
+html[data-theme='light'] .promo-copy-meta span {
+  background: rgba(255, 255, 255, 0.84);
+  border-color: rgba(15, 23, 42, 0.08);
+}
+
+html[data-theme='light'] .country-chip,
+html[data-theme='light'] .payment-chip {
+  background: rgba(255, 255, 255, 0.84);
+  border-color: rgba(15, 23, 42, 0.08);
+}
+
+@media (prefers-color-scheme: light) {
+  html:not([data-theme='dark']) body[data-brand] .hero-content.glass-card,
+  html:not([data-theme='dark']) body[data-brand='Leon'] .hero-content.glass-card {
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.96), rgba(248, 250, 252, 0.94));
+    border-color: rgba(15, 23, 42, 0.08);
+    box-shadow: var(--shadow-soft);
+    overflow: hidden;
+  }
+
+  html:not([data-theme='dark']) body[data-brand] .brand-logo-container.hero-logo,
+  html:not([data-theme='dark']) body[data-brand='Leon'] .brand-logo-container.hero-logo {
+    width: calc(100% + 56px);
+    max-width: none;
+    margin: -28px -28px 10px;
+    padding: 28px 24px 22px;
+    background:
+      radial-gradient(circle at top right, rgba(56, 189, 248, 0.16), transparent 34%),
+      radial-gradient(circle at top left, rgba(255, 223, 0, 0.12), transparent 28%),
+      linear-gradient(180deg, rgba(10, 15, 30, 0.98), rgba(20, 30, 52, 0.94));
+    border-radius: var(--radius-lg) var(--radius-lg) 26px 26px;
+    box-shadow:
+      inset 0 -1px 0 rgba(255, 255, 255, 0.06),
+      0 14px 34px rgba(15, 23, 42, 0.12);
+  }
+
+  html:not([data-theme='dark']) body[data-brand] .brand-logo,
+  html:not([data-theme='dark']) body[data-brand='Leon'] .brand-logo {
+    filter: drop-shadow(0 10px 22px rgba(0, 0, 0, 0.22));
+  }
+
+  html:not([data-theme='dark']) body[data-brand] .icon-placeholder,
+  html:not([data-theme='dark']) body[data-brand='Leon'] .icon-placeholder {
+    background: rgba(196, 129, 255, 0.08);
+    border-color: rgba(173, 102, 255, 0.16);
+    box-shadow:
+      0 0 0 1px rgba(196, 129, 255, 0.04),
+      0 0 14px rgba(196, 129, 255, 0.05);
+  }
+
+  html:not([data-theme='dark']) body[data-brand] .timeline,
+  html:not([data-theme='dark']) body[data-brand='Leon'] .timeline {
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.98), rgba(248, 250, 252, 0.96));
+    border-color: rgba(15, 23, 42, 0.08);
+    box-shadow: var(--shadow-soft);
+  }
+
+  html:not([data-theme='dark']) body[data-brand] .timeline p,
+  html:not([data-theme='dark']) body[data-brand='Leon'] .timeline p {
+    color: var(--text-muted);
+  }
+
+  html:not([data-theme='dark']) body[data-brand] .brand-availability-widget {
+    background: transparent;
+  }
+
+  html:not([data-theme='dark']) body[data-brand] .availability-tabs {
+    border-color: rgba(15, 23, 42, 0.08);
+    background: rgba(255, 255, 255, 0.94);
+    box-shadow: var(--shadow-soft);
+  }
+
+  html:not([data-theme='dark']) body[data-brand] .availability-tab-list {
+    border-bottom-color: rgba(15, 23, 42, 0.08);
+    background: rgba(248, 250, 252, 0.9);
+  }
+
+  html:not([data-theme='dark']) body[data-brand] .availability-tab:hover,
+  html:not([data-theme='dark']) body[data-brand] .availability-tab:focus-visible {
+    background: rgba(15, 23, 42, 0.04);
+  }
+
+  html:not([data-theme='dark']) body[data-brand] .availability-summary {
+    border-top-color: rgba(15, 23, 42, 0.08);
+  }
+
+  html:not([data-theme='dark']) body[data-brand] .brand-sticky-title__inner {
+    border-color: rgba(15, 23, 42, 0.08);
+    box-shadow: var(--shadow-soft);
+  }
+
+  html:not([data-theme='dark']) body[data-brand] .brand-sticky-title__brand {
+    background:
+      radial-gradient(circle at top right, rgba(56, 189, 248, 0.14), transparent 42%),
+      linear-gradient(180deg, rgba(10, 15, 30, 0.98), rgba(20, 30, 52, 0.94));
+    box-shadow:
+      inset 0 -1px 0 rgba(255, 255, 255, 0.05),
+      0 8px 18px rgba(15, 23, 42, 0.12);
+  }
+
+  html:not([data-theme='dark']) .promo-copy-title {
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.98), rgba(241, 245, 249, 0.96));
+    color: var(--text-main);
+    border-color: rgba(255, 215, 106, 0.3);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.9),
+      inset 0 -2px 6px rgba(15, 23, 42, 0.06),
+      0 10px 22px rgba(15, 23, 42, 0.12);
+  }
+
+  html:not([data-theme='dark']) .promo-copy-title:hover,
+  html:not([data-theme='dark']) .promo-copy-title:focus-visible {
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.95),
+      inset 0 -2px 6px rgba(15, 23, 42, 0.06),
+      0 14px 28px rgba(15, 23, 42, 0.14);
+  }
+
+  html:not([data-theme='dark']) .promo-copy-meta span {
+    background: rgba(255, 255, 255, 0.84);
+    border-color: rgba(15, 23, 42, 0.08);
+  }
+
+  html:not([data-theme='dark']) .country-chip,
+  html:not([data-theme='dark']) .payment-chip {
+    background: rgba(255, 255, 255, 0.84);
+    border-color: rgba(15, 23, 42, 0.08);
+  }
+}
+
+@media (max-width: 900px) {
+  html[data-theme='light'] body[data-brand] .brand-logo-container.hero-logo,
+  html[data-theme='light'] body[data-brand='Leon'] .brand-logo-container.hero-logo {
+    width: calc(100% + 40px);
+    margin: -20px -20px 8px;
+    padding: 22px 18px 18px;
+  }
+}
+
+@media (prefers-color-scheme: light) and (max-width: 900px) {
+  html:not([data-theme='dark']) body[data-brand] .brand-logo-container.hero-logo,
+  html:not([data-theme='dark']) body[data-brand='Leon'] .brand-logo-container.hero-logo {
+    width: calc(100% + 40px);
+    margin: -20px -20px 8px;
+    padding: 22px 18px 18px;
   }
 }

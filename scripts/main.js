@@ -11,6 +11,8 @@ import { COUNTRIES } from './countries.js';
 const MAX_PAYMENT_VISIBLE = 4;
 const PLACEHOLDER_LINK = '#';
 const MOJIBAKE_FIXES = [];
+const THEME_STORAGE_KEY = 'spincresta-theme';
+const THEME_OPTIONS = ['dark', 'light'];
 
 const normalizeText = value => {
   if (typeof value !== 'string') return value ?? '';
@@ -66,9 +68,54 @@ const iconPath = slug => `/icons/${slug}-flag-icon.svg`;
 const paymentPath = method => `/icons/payments/${method}.svg`;
 const pagePath = fileName => normalizePagePath(fileName);
 
-const renderPayments = (payments = []) => {
-  if (!payments.length) return '';
+const getSystemTheme = () => {
+  if (typeof window === 'undefined' || typeof window.matchMedia !== 'function') {
+    return 'dark';
+  }
 
+  return window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+};
+
+const getStoredTheme = () => {
+  try {
+    const stored = window.localStorage.getItem(THEME_STORAGE_KEY);
+    return THEME_OPTIONS.includes(stored) ? stored : null;
+  } catch {
+    return null;
+  }
+};
+
+const applyTheme = theme => {
+  const root = document.documentElement;
+  if (!root) return;
+
+  if (THEME_OPTIONS.includes(theme)) {
+    root.dataset.theme = theme;
+    root.style.colorScheme = theme;
+    return;
+  }
+
+  delete root.dataset.theme;
+  root.style.colorScheme = getSystemTheme();
+};
+
+const persistTheme = theme => {
+  try {
+    if (THEME_OPTIONS.includes(theme)) {
+      window.localStorage.setItem(THEME_STORAGE_KEY, theme);
+    } else {
+      window.localStorage.removeItem(THEME_STORAGE_KEY);
+    }
+  } catch {
+    // ignore storage errors
+  }
+};
+
+const getActiveTheme = () => getStoredTheme() || getSystemTheme();
+
+applyTheme(getStoredTheme());
+
+const renderPayments = (payments = []) => {
   const visible = payments.slice(0, MAX_PAYMENT_VISIBLE);
   const hiddenCount = payments.length - MAX_PAYMENT_VISIBLE;
 
@@ -90,6 +137,102 @@ const createBadge = ({ isTopRated, isExclusive, isNew }) => {
   if (isExclusive) return `<div class="exclusive-badge">EXCLUSIVE</div>`;
   if (isNew) return `<div class="new-badge">NEW</div>`;
   return '';
+};
+
+const initFooterThemeSettings = () => {
+  const footerNavs = Array.from(document.querySelectorAll('.footer-nav'));
+  if (!footerNavs.length) return;
+
+  footerNavs.forEach(nav => {
+    if (nav.querySelector('.footer-settings-trigger')) return;
+
+    const button = document.createElement('button');
+    button.type = 'button';
+    button.className = 'footer-settings-trigger';
+    button.setAttribute('aria-haspopup', 'dialog');
+    button.textContent = 'Settings';
+
+    const firstSocial = nav.querySelector('.footer-social');
+    if (firstSocial) {
+      nav.insertBefore(button, firstSocial);
+    } else {
+      nav.appendChild(button);
+    }
+  });
+
+  if (document.querySelector('.theme-settings-backdrop')) return;
+
+  const backdrop = document.createElement('div');
+  backdrop.className = 'theme-settings-backdrop';
+  backdrop.hidden = true;
+  backdrop.innerHTML = `
+    <div class="theme-settings-modal" role="dialog" aria-modal="true" aria-labelledby="themeSettingsTitle">
+      <button type="button" class="theme-settings-close" aria-label="Close settings">×</button>
+      <h3 id="themeSettingsTitle">Theme</h3>
+      <p>Choose the theme you want to use on SpinCresta.</p>
+      <div class="theme-settings-options" role="group" aria-label="Theme options">
+        <button type="button" class="theme-settings-option" data-theme-choice="dark">
+          <img src="/icons/ui/moon-icon.svg" alt="" aria-hidden="true" loading="lazy" decoding="async" />
+          <span>Dark</span>
+        </button>
+        <button type="button" class="theme-settings-option" data-theme-choice="light">
+          <img src="/icons/ui/day-sunny-icon.svg" alt="" aria-hidden="true" loading="lazy" decoding="async" />
+          <span>Light</span>
+        </button>
+      </div>
+    </div>
+  `;
+
+  document.body.appendChild(backdrop);
+
+  const closeButton = backdrop.querySelector('.theme-settings-close');
+  const optionButtons = Array.from(backdrop.querySelectorAll('[data-theme-choice]'));
+  const triggers = Array.from(document.querySelectorAll('.footer-settings-trigger'));
+
+  const syncThemeState = () => {
+    const activeTheme = getActiveTheme();
+
+    optionButtons.forEach(button => {
+      const isActive = button.dataset.themeChoice === activeTheme;
+      button.classList.toggle('is-active', isActive);
+      button.setAttribute('aria-pressed', isActive ? 'true' : 'false');
+    });
+  };
+
+  const openModal = () => {
+    syncThemeState();
+    backdrop.hidden = false;
+    document.body.classList.add('theme-settings-open');
+  };
+
+  const closeModal = () => {
+    backdrop.hidden = true;
+    document.body.classList.remove('theme-settings-open');
+  };
+
+  triggers.forEach(trigger => trigger.addEventListener('click', openModal));
+  closeButton?.addEventListener('click', closeModal);
+
+  backdrop.addEventListener('click', event => {
+    if (event.target === backdrop) closeModal();
+  });
+
+  document.addEventListener('keydown', event => {
+    if (event.key === 'Escape' && !backdrop.hidden) {
+      closeModal();
+    }
+  });
+
+  optionButtons.forEach(button => {
+    button.addEventListener('click', () => {
+      const theme = button.dataset.themeChoice;
+      if (!THEME_OPTIONS.includes(theme)) return;
+      persistTheme(theme);
+      applyTheme(theme);
+      syncThemeState();
+      closeModal();
+    });
+  });
 };
 
 const createCasinoCard = ({
@@ -114,6 +257,8 @@ const createCasinoCard = ({
   const safeCta = normalizeText(cta);
   const detailUrl = normalizePagePath(urlDetail ?? '');
   const imageUrl = normalizeAssetPath(image ?? '');
+  const showReviewAction = Boolean(hasDetailPage && detailUrl);
+  const showPlayAction = safeUrl !== PLACEHOLDER_LINK;
 
   article.dataset.page = detailUrl;
 
@@ -124,8 +269,21 @@ const createCasinoCard = ({
     </div>
     <h3 class="casino-name">${safeName}</h3>
     <p class="casino-bonus">${safeBonus}</p>
-    ${renderPayments(payments)}
-    <a class="cta" href="${safeUrl}" target="_blank" rel="noopener noreferrer nofollow sponsored">${safeCta}</a>
+    <div class="casino-footer">
+      ${renderPayments(payments)}
+      <div class="casino-actions ${showReviewAction && showPlayAction ? 'has-two-actions' : 'has-single-action'}">
+        ${
+          showReviewAction
+            ? `<a class="cta cta-secondary" href="${detailUrl}">Review</a>`
+            : ''
+        }
+        ${
+          showPlayAction
+            ? `<a class="cta cta-primary" href="${safeUrl}" target="_blank" rel="noopener noreferrer nofollow sponsored">${safeCta}</a>`
+            : ''
+        }
+      </div>
+    </div>
   `;
 
   article.addEventListener('click', e => {
@@ -141,7 +299,9 @@ const createCasinoCard = ({
     }
   });
 
-  article.querySelector('.cta')?.addEventListener('click', e => e.stopPropagation());
+  article.querySelectorAll('.cta').forEach(link => {
+    link.addEventListener('click', e => e.stopPropagation());
+  });
 
   return article;
 };
@@ -498,6 +658,7 @@ const initStickyBrandTitle = () => {
 
   const hero = document.querySelector('.hero');
   const heading = hero?.querySelector('h1');
+  const brandLogo = hero?.querySelector('.brand-logo');
   const header = document.querySelector('.header');
   if (!hero || !heading || !header) return;
   if (document.querySelector('.brand-sticky-title')) return;
@@ -505,12 +666,26 @@ const initStickyBrandTitle = () => {
   const titleText = normalizeText(heading.textContent).trim();
   if (!titleText) return;
 
+  const brandLogoSrc = brandLogo?.getAttribute('src') || '';
+  const brandLogoMarkup = brandLogoSrc
+    ? `
+      <span class="brand-sticky-title__brand" aria-hidden="true">
+        <img
+          class="brand-sticky-title__brand-logo"
+          src="${brandLogoSrc}"
+          alt=""
+        />
+      </span>
+    `
+    : '';
+
   const stickyTitle = document.createElement('button');
   stickyTitle.className = 'brand-sticky-title';
   stickyTitle.type = 'button';
   stickyTitle.setAttribute('aria-label', `Back to the top of ${titleText}`);
   stickyTitle.innerHTML = `
     <div class="brand-sticky-title__inner">
+      ${brandLogoMarkup}
       <span class="brand-sticky-title__text">${titleText}</span>
       <img
         class="brand-sticky-title__icon"
@@ -682,15 +857,16 @@ const enhanceBrandProsCons = () => {
 };
 
 const enhanceFaqBlocks = () => {
-  document.querySelectorAll('section.container').forEach(section => {
+  document.querySelectorAll('section.container, .content-article').forEach(section => {
     const title = section.querySelector('h2.title');
     const timeline = section.querySelector('.timeline');
-    if (!title || !timeline) return;
+    const faqGrid = section.querySelector('.faq-grid');
+    if (!title || (!timeline && !faqGrid)) return;
 
     const titleText = normalizeText(title.textContent).trim().toLowerCase();
     if (!titleText.includes('faq')) return;
 
-    timeline.querySelectorAll(':scope > h3').forEach(question => {
+    const addQuestionIcon = question => {
       if (question.querySelector('.faq-question-icon')) return;
 
       question.classList.add('faq-question');
@@ -701,9 +877,9 @@ const enhanceFaqBlocks = () => {
       icon.alt = '';
       icon.setAttribute('aria-hidden', 'true');
       question.prepend(icon);
-    });
+    };
 
-    timeline.querySelectorAll(':scope > p').forEach(answer => {
+    const addAnswerIcon = answer => {
       if (answer.querySelector('.faq-answer-icon')) return;
 
       answer.classList.add('faq-answer');
@@ -714,6 +890,16 @@ const enhanceFaqBlocks = () => {
       icon.alt = '';
       icon.setAttribute('aria-hidden', 'true');
       answer.prepend(icon);
+    };
+
+    timeline?.querySelectorAll(':scope > h3').forEach(addQuestionIcon);
+    timeline?.querySelectorAll(':scope > p').forEach(addAnswerIcon);
+
+    faqGrid?.querySelectorAll('.faq-card').forEach(card => {
+      const question = card.querySelector(':scope > h3');
+      const answer = card.querySelector(':scope > p');
+      if (question) addQuestionIcon(question);
+      if (answer) addAnswerIcon(answer);
     });
   });
 };
@@ -726,6 +912,8 @@ export const initCasinoPage = () => {
   const pageCountry = document.body.dataset.country?.toUpperCase();
   const siteCountryCountEl = document.getElementById('siteCountryCount');
   const siteBrandCountEl = document.getElementById('siteBrandCount');
+
+  initFooterThemeSettings();
 
   if (siteCountryCountEl) {
     siteCountryCountEl.textContent = COUNTRIES.length.toString();
