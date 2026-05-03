@@ -173,11 +173,11 @@ const initFooterThemeSettings = () => {
       <p>Choose the theme you want to use on SpinCresta.</p>
       <div class="theme-settings-options" role="group" aria-label="Theme options">
         <button type="button" class="theme-settings-option" data-theme-choice="dark">
-          <img src="/icons/ui/moon-icon.svg" alt="" aria-hidden="true" loading="lazy" decoding="async" />
+          <img src="/icons/ui/moon-icon.svg" alt="Dark theme icon" aria-hidden="true" loading="lazy" decoding="async" />
           <span>Dark</span>
         </button>
         <button type="button" class="theme-settings-option" data-theme-choice="light">
-          <img src="/icons/ui/day-sunny-icon.svg" alt="" aria-hidden="true" loading="lazy" decoding="async" />
+          <img src="/icons/ui/day-sunny-icon.svg" alt="Light theme icon" aria-hidden="true" loading="lazy" decoding="async" />
           <span>Light</span>
         </button>
       </div>
@@ -683,7 +683,7 @@ const initStickyBrandTitle = () => {
         <img
           class="brand-sticky-title__brand-logo"
           src="${brandLogoSrc}"
-          alt=""
+          alt="${titleText} logo"
         />
       </span>
     `
@@ -725,7 +725,7 @@ const renderSnapshotItems = (items, isAvailable) =>
         <div class="availability-item ${isAvailable ? 'is-available' : 'is-unavailable'}">
           <img
             src="${isAvailable ? '/icons/ui/confirm-icon.svg' : '/icons/ui/remove-close-round-grey-icon.svg'}"
-            alt=""
+            alt="${isAvailable ? 'Available section' : 'Unavailable section'}"
             aria-hidden="true"
           />
           <span>${normalizeText(item)}</span>
@@ -790,11 +790,11 @@ const renderBrandAvailabilityWidget = brandKey => {
             <div class="availability-summary">
               <div class="availability-counts">
                 <span class="is-available">
-                  <img src="/icons/ui/confirm-icon.svg" alt="" aria-hidden="true" />
+                  <img src="/icons/ui/confirm-icon.svg" alt="Available sections" aria-hidden="true" />
                   Visible now: ${availableCount}
                 </span>
                 <span class="is-unavailable">
-                  <img src="/icons/ui/remove-close-round-grey-icon.svg" alt="" aria-hidden="true" />
+                  <img src="/icons/ui/remove-close-round-grey-icon.svg" alt="Unavailable sections" aria-hidden="true" />
                   Not surfaced: ${unavailableCount}
                 </span>
               </div>
