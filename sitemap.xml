@@ -742,6 +742,11 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://spincresta.com/brands/pin-up/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://spincresta.com/brands/cazino/</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>

@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64" aria-labelledby="dogecoin-title" role="img">
+  <title id="dogecoin-title">dogecoin</title>
+  <circle cx="32" cy="32" r="30" fill="#c2a633"/>
+  <circle cx="32" cy="32" r="24" fill="#d9bd4d"/>
+  <path fill="#fff" d="M20 29h4V16h11c9.4 0 15.4 5.9 15.4 16s-6 16-15.4 16H24V35h-4v-6Zm11 0h7v6h-7v6h3.7c5.5 0 8.7-3.2 8.7-9s-3.2-9-8.7-9H31v6Z"/>
+</svg>

@@ -131,6 +131,18 @@
     hasDetailPage: true,
   },
   {
+    name: 'Pin-Up',
+    bonus: 'Casino Welcome Bonus 120% + 250 FS; local max varies by country',
+    cta: 'Play Now',
+    urlDetail: 'brands/pin-up.html',
+    urlCasino: 'https://armadaapp.media-412.com/click?pid=3862&offer_id=123112',
+    image: 'images/pin-up.svg',
+    countries: ['AZ', 'BD', 'BO', 'CD', 'CL', 'EC', 'GT', 'HN', 'IN', 'KZ', 'KE', 'MX', 'NG', 'NI', 'UZ'],
+    payments: ['visa', 'mastercard', 'banktransfer', 'bitcoin', 'tether', 'ethereum', 'dogecoin', 'litecoin', 'tron'],
+    isExclusive: true,
+    hasDetailPage: true,
+  },
+  {
     name: 'Trino',
     bonus: 'Welcome Bonus Pack 350% Up To €2,900 + 400 Free Spins',
     cta: 'Play Now',
@@ -377,7 +389,6 @@
       'bitcoincash',
       'tron',
     ],
-    isExclusive: true,
     hasDetailPage: true,
   },
   {

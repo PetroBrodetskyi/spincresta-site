@@ -149,6 +149,7 @@ const initFooterThemeSettings = () => {
     const button = document.createElement('button');
     button.type = 'button';
     button.className = 'footer-settings-trigger';
+    button.setAttribute('data-theme-settings-trigger', '');
     button.setAttribute('aria-haspopup', 'dialog');
     button.textContent = 'Settings';
 
@@ -187,7 +188,6 @@ const initFooterThemeSettings = () => {
 
   const closeButton = backdrop.querySelector('.theme-settings-close');
   const optionButtons = Array.from(backdrop.querySelectorAll('[data-theme-choice]'));
-  const triggers = Array.from(document.querySelectorAll('.footer-settings-trigger'));
 
   const syncThemeState = () => {
     const activeTheme = getActiveTheme();
@@ -210,8 +210,14 @@ const initFooterThemeSettings = () => {
     document.body.classList.remove('theme-settings-open');
   };
 
-  triggers.forEach(trigger => trigger.addEventListener('click', openModal));
   closeButton?.addEventListener('click', closeModal);
+
+  document.addEventListener('click', event => {
+    const trigger = event.target.closest('[data-theme-settings-trigger]');
+    if (!trigger) return;
+    event.preventDefault();
+    openModal();
+  });
 
   backdrop.addEventListener('click', event => {
     if (event.target === backdrop) closeModal();
@@ -854,6 +860,32 @@ const enhanceBrandProsCons = () => {
 };
 
 const enhanceFaqBlocks = () => {
+  const addQuestionIcon = question => {
+    if (question.querySelector('.faq-question-icon')) return;
+
+    question.classList.add('faq-question');
+
+    const icon = document.createElement('img');
+    icon.className = 'faq-question-icon';
+    icon.src = '/icons/ui/question-mark-circle-icon.svg';
+    icon.alt = '';
+    icon.setAttribute('aria-hidden', 'true');
+    question.prepend(icon);
+  };
+
+  const addAnswerIcon = answer => {
+    if (answer.querySelector('.faq-answer-icon')) return;
+
+    answer.classList.add('faq-answer');
+
+    const icon = document.createElement('img');
+    icon.className = 'faq-answer-icon';
+    icon.src = '/icons/ui/answer-correct-icon.svg';
+    icon.alt = '';
+    icon.setAttribute('aria-hidden', 'true');
+    answer.prepend(icon);
+  };
+
   document.querySelectorAll('section.container, .content-article').forEach(section => {
     const title = section.querySelector('h2.title');
     const timeline = section.querySelector('.timeline');
@@ -863,40 +895,14 @@ const enhanceFaqBlocks = () => {
     const titleText = normalizeText(title.textContent).trim().toLowerCase();
     if (!titleText.includes('faq')) return;
 
-    const addQuestionIcon = question => {
-      if (question.querySelector('.faq-question-icon')) return;
-
-      question.classList.add('faq-question');
-
-      const icon = document.createElement('img');
-      icon.className = 'faq-question-icon';
-      icon.src = '/icons/ui/question-mark-circle-icon.svg';
-      icon.alt = '';
-      icon.setAttribute('aria-hidden', 'true');
-      question.prepend(icon);
-    };
-
-    const addAnswerIcon = answer => {
-      if (answer.querySelector('.faq-answer-icon')) return;
-
-      answer.classList.add('faq-answer');
-
-      const icon = document.createElement('img');
-      icon.className = 'faq-answer-icon';
-      icon.src = '/icons/ui/answer-correct-icon.svg';
-      icon.alt = '';
-      icon.setAttribute('aria-hidden', 'true');
-      answer.prepend(icon);
-    };
-
     timeline?.querySelectorAll(':scope > h3').forEach(addQuestionIcon);
     timeline?.querySelectorAll(':scope > p').forEach(addAnswerIcon);
 
     faqGrid?.querySelectorAll('.faq-card').forEach(card => {
       const question = card.querySelector(':scope > h3');
-      const answer = card.querySelector(':scope > p');
+      const answers = card.querySelectorAll(':scope > p');
       if (question) addQuestionIcon(question);
-      if (answer) addAnswerIcon(answer);
+      answers.forEach(addAnswerIcon);
     });
   });
 };
@@ -1223,6 +1229,7 @@ export const initCasinoPage = () => {
     <a href="${reviewsHref}">Reviews</a>
     <a href="#">Promotions</a>
     <a href="${pagePath('about.html')}">About</a>
+    <button type="button" class="mobile-theme-settings" data-theme-settings-trigger aria-haspopup="dialog">Settings</button>
   `;
 
     const submenuToggle = mobileMenuInner.querySelector('.submenu-toggle');
@@ -1279,6 +1286,7 @@ export const initCasinoPage = () => {
     mobileMenuInner.addEventListener('click', e => {
       if (e.target.closest('.mobile-submenu')) return;
       if (e.target.closest('a')) closeMenu();
+      if (e.target.closest('[data-theme-settings-trigger]')) closeMenu();
     });
 
     document.addEventListener('keydown', e => {
