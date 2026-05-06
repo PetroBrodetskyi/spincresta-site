@@ -136,7 +136,7 @@
     cta: 'Play Now',
     urlDetail: 'brands/pin-up.html',
     urlCasino: 'https://armadaapp.media-412.com/click?pid=3862&offer_id=123112',
-    image: 'images/pin-up.svg',
+    image: 'images/pin-up.webp',
     countries: ['AZ', 'BD', 'BO', 'CD', 'CL', 'EC', 'GT', 'HN', 'IN', 'KZ', 'KE', 'MX', 'NG', 'NI', 'UZ'],
     payments: [
       'visa',
