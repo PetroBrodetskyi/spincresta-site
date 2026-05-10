@@ -152,6 +152,11 @@ const pincoConfig = createGamesLiveBettingConfig(
   ['Football', 'Basketball', 'Tennis', 'Table tennis', 'Volleyball', 'Ice hockey', 'Cricket', 'Baseball', 'Handball', 'eSports', 'Virtual sports', 'Combat sports', 'Motorsport']
 );
 
+const gamblezenConfig = createGamesLiveConfig(
+  ['Slots', 'Roulette', 'Blackjack', 'Baccarat', 'Jackpot games', 'Live games'],
+  ['Live shows', 'Live baccarat', 'Live blackjack', 'Other live games', 'Live roulette']
+);
+
 const fortunicaConfig = createGamesLiveConfig(
   ['Slots', 'Roulette', 'Blackjack', 'Baccarat', 'Jackpot games', 'Live games', 'Crash games'],
   ['Live baccarat', 'Live blackjack', 'Other live games', 'Live roulette']
@@ -250,6 +255,7 @@ export const BRAND_SNAPSHOT_CONFIGS = {
   ...mapSnapshotConfig(['fraga-tr', 'fraga-az', 'fraga-ar', 'fraga-cl'], fragaConfig),
   'pin-up': pinUpConfig,
   pinco: pincoConfig,
+  gamblezen: gamblezenConfig,
   ...mapSnapshotConfig(['fortunica-es', 'fortunica-nl', 'fortunica-uk'], fortunicaConfig),
   ...mapSnapshotConfig(['justcasino', 'letslucky', 'luckydreams', 'luckyones', 'lukki'], clubCasinoSportsConfig),
   duckyluck: duckyluckConfig,

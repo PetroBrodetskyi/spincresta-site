@@ -41,3 +41,16 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
+      - name: Setup Node for IndexNow
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Submit URLs to IndexNow
+        continue-on-error: true
+        env:
+          INDEXNOW_HOST: spincresta.com
+          INDEXNOW_KEY: 4f6c73cc63b84633ad627127be893da7
+          INDEXNOW_KEY_LOCATION: https://spincresta.com/4f6c73cc63b84633ad627127be893da7.txt
+        run: |
+          sleep 60
+          node scripts/submit-indexnow.mjs
