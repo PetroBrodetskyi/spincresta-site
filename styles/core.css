@@ -38,13 +38,13 @@
   --ui-shadow-dialog: 0 24px 54px rgba(0, 0, 0, 0.24);
   --ui-shadow-neo-outline: 0 0 0 1px rgba(173, 102, 255, 0.04);
   --ui-shadow-neo-glow: 0 0 18px rgba(173, 102, 255, 0.06);
-  --sticker-bg: linear-gradient(180deg, rgba(255, 255, 255, 0.055), rgba(255, 255, 255, 0.018));
-  --sticker-bg-hover: linear-gradient(180deg, rgba(255, 255, 255, 0.105), rgba(255, 255, 255, 0.038));
-  --sticker-color: #dbeafe;
-  --sticker-border: rgba(226, 232, 240, 0.72);
-  --sticker-border-hover: rgba(255, 255, 255, 0.92);
-  --sticker-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.16), 0 12px 24px rgba(0, 0, 0, 0.2);
-  --sticker-shadow-hover: inset 0 1px 0 rgba(255, 255, 255, 0.24), 0 16px 30px rgba(0, 0, 0, 0.28);
+  --sticker-bg: linear-gradient(180deg, rgba(255, 255, 255, 0.115) 0%, rgba(2, 6, 23, 0.2) 52%, rgba(2, 6, 23, 0.08) 100%);
+  --sticker-bg-hover: linear-gradient(180deg, rgba(255, 255, 255, 0.145) 0%, rgba(15, 23, 42, 0.46) 54%, rgba(8, 13, 31, 0.2) 100%);
+  --sticker-color: #c9ddff;
+  --sticker-border: rgba(226, 232, 240, 0.74);
+  --sticker-border-hover: rgba(255, 255, 255, 0.94);
+  --sticker-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.48), inset 0 -1px 0 rgba(2, 6, 23, 0.38);
+  --sticker-shadow-hover: inset 0 1px 0 rgba(255, 255, 255, 0.56), inset 0 -1px 0 rgba(2, 6, 23, 0.42), 0 8px 18px rgba(0, 0, 0, 0.22);
   --sticker-primary-bg: linear-gradient(135deg, #ffe45c, #ffd000);
   --sticker-primary-border: rgba(255, 223, 0, 0.64);
   --sticker-primary-shadow: 0 14px 30px rgba(245, 196, 0, 0.28), inset 0 1px 0 rgba(255, 255, 255, 0.66);
@@ -769,39 +769,83 @@ body {
 }
 
 .countries-cloud a {
-  display: flex;
+  position: relative;
+  display: inline-flex;
   align-items: center;
-  gap: 8px;
-  min-height: 42px;
-  padding: 9px 14px;
+  gap: 6px;
+  min-height: 38px;
+  padding: 8px 14px;
   background: var(--sticker-bg);
-  border: 1px solid var(--sticker-border);
+  border: 1px solid transparent;
   border-radius: 999px;
   box-shadow: var(--sticker-shadow);
   text-decoration: none;
   color: var(--sticker-color);
-  transition:
-    transform 0.22s ease,
-    border-color 0.22s ease,
-    box-shadow 0.22s ease,
-    background 0.22s ease;
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1;
+  letter-spacing: 0;
+  transition: all 0.3s ease;
+}
+
+.countries-cloud a::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  padding: 1px;
+  pointer-events: none;
+  background:
+    linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0.9) 0%,
+      rgba(226, 232, 240, 0.68) 32%,
+      rgba(148, 163, 184, 0.14) 54%,
+      rgba(15, 23, 42, 0) 76%
+    );
+  -webkit-mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask:
+    linear-gradient(#000 0 0) content-box,
+    linear-gradient(#000 0 0);
+  mask-composite: exclude;
 }
 
 .countries-cloud a:hover {
   background: var(--sticker-bg-hover);
   color: var(--sticker-color);
-  border-color: var(--sticker-border-hover);
-  transform: translateY(-2px) rotate(-0.6deg);
+  transform: translateY(-2px) rotate(-0.4deg);
   box-shadow: var(--sticker-shadow-hover);
 }
 
+.countries-cloud a:hover::before {
+  background:
+    linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0.98) 0%,
+      rgba(226, 232, 240, 0.78) 34%,
+      rgba(148, 163, 184, 0.18) 56%,
+      rgba(15, 23, 42, 0) 78%
+    );
+}
+
 .countries-cloud a img.flag {
+  position: relative;
+  z-index: 1;
+  display: block;
+  width: 18px;
+  height: 18px;
   object-fit: contain;
 }
 
 .countries-cloud a span {
-  font-size: 0.85rem;
-  line-height: 1.2;
+  position: relative;
+  z-index: 1;
+  font-size: inherit;
+  font-weight: inherit;
+  line-height: inherit;
   word-break: break-word;
 }
 
@@ -813,7 +857,8 @@ body {
   }
 
   .countries-cloud a {
-    padding: 6px;
+    min-height: 38px;
+    padding: 8px 14px;
   }
 }
 
@@ -843,10 +888,15 @@ body {
   text-decoration: none;
 
   color: var(--sticker-color);
-  background: var(--sticker-bg);
-  border: 1px solid var(--sticker-border);
+  background: linear-gradient(180deg, rgba(30, 41, 59, 0.98) 0%, rgba(15, 23, 42, 0.97) 58%, rgba(7, 12, 26, 0.98) 100%);
+  border: 1px solid rgba(148, 163, 184, 0.16);
   backdrop-filter: var(--blur-glass);
-  box-shadow: var(--sticker-shadow);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.18),
+    inset 0 -1px 0 rgba(2, 6, 23, 0.46),
+    0 8px 18px rgba(0, 0, 0, 0.14);
+  overflow: hidden;
+  isolation: isolate;
 
   transition:
     transform 0.25s ease,
@@ -855,12 +905,45 @@ body {
     border-color 0.25s ease;
 }
 
+.view-all::before,
+.casino-actions .cta-secondary::before,
+.home-country-jump::before {
+  content: '';
+  position: absolute;
+  inset: 1px 1px auto;
+  height: 54%;
+  border-radius: inherit;
+  pointer-events: none;
+  background:
+    linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0.18) 0%,
+      rgba(255, 255, 255, 0.07) 46%,
+      rgba(255, 255, 255, 0) 100%
+    );
+}
+
 /* hover state */
 .view-all:hover {
-  transform: translateY(-2px) rotate(-0.4deg);
-  border-color: var(--sticker-border-hover);
-  box-shadow: var(--sticker-shadow-hover);
-  background: var(--sticker-bg-hover);
+  transform: translateY(-2px);
+  background: linear-gradient(180deg, rgba(42, 55, 82, 0.98) 0%, rgba(18, 29, 51, 0.98) 58%, rgba(9, 16, 34, 0.98) 100%);
+  border-color: rgba(191, 219, 254, 0.24);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.23),
+    inset 0 -1px 0 rgba(2, 6, 23, 0.5),
+    0 12px 24px rgba(0, 0, 0, 0.2);
+}
+
+.view-all:hover::before,
+.casino-actions .cta-secondary:hover::before,
+.home-country-jump:hover::before {
+  background:
+    linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0.24) 0%,
+      rgba(255, 255, 255, 0.08) 48%,
+      rgba(255, 255, 255, 0) 100%
+    );
 }
 
 .view-all:hover::after {
@@ -1359,16 +1442,25 @@ body {
 }
 
 .casino-actions .cta-secondary {
-  background: var(--sticker-bg);
+  position: relative;
+  background: linear-gradient(180deg, rgba(30, 41, 59, 0.98) 0%, rgba(15, 23, 42, 0.97) 58%, rgba(7, 12, 26, 0.98) 100%);
   color: var(--sticker-color);
-  border: 1px solid var(--sticker-border);
-  box-shadow: var(--sticker-shadow);
+  border: 1px solid rgba(148, 163, 184, 0.16);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.18),
+    inset 0 -1px 0 rgba(2, 6, 23, 0.46),
+    0 8px 18px rgba(0, 0, 0, 0.14);
+  overflow: hidden;
+  isolation: isolate;
 }
 
 .casino-actions .cta-secondary:hover {
-  background: var(--sticker-bg-hover);
-  border-color: var(--sticker-border-hover);
-  box-shadow: var(--sticker-shadow-hover);
+  background: linear-gradient(180deg, rgba(42, 55, 82, 0.98) 0%, rgba(18, 29, 51, 0.98) 58%, rgba(9, 16, 34, 0.98) 100%);
+  border-color: rgba(191, 219, 254, 0.24);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.23),
+    inset 0 -1px 0 rgba(2, 6, 23, 0.5),
+    0 12px 24px rgba(0, 0, 0, 0.2);
 }
 
 @media (max-width: 768px) {
@@ -1668,7 +1760,8 @@ tbody tr:hover {
 }
 
 .footer-social {
-  padding: 7px 14px;
+  min-height: 38px;
+  padding: 8px 14px;
   border-radius: 999px;
   color: var(--sticker-color);
   background: var(--sticker-bg);
@@ -1678,6 +1771,7 @@ tbody tr:hover {
 }
 
 .footer-social:hover {
+  color: var(--sticker-color);
   background: var(--sticker-bg-hover);
   border-color: var(--sticker-border-hover);
   transform: translateY(-2px) rotate(-0.4deg);
@@ -2531,6 +2625,7 @@ body[data-country] .content-article .timeline a[href*='/responsible-gambling/'] 
 }
 
 .home-country-jump {
+  position: relative;
   display: inline-flex;
   align-items: center;
   gap: 8px;
@@ -2538,9 +2633,14 @@ body[data-country] .content-article .timeline a[href*='/responsible-gambling/'] 
   border-radius: 999px;
   text-decoration: none;
   color: var(--sticker-color);
-  background: var(--sticker-bg);
-  border: 1px solid var(--sticker-border);
-  box-shadow: var(--sticker-shadow);
+  background: linear-gradient(180deg, rgba(30, 41, 59, 0.98) 0%, rgba(15, 23, 42, 0.97) 58%, rgba(7, 12, 26, 0.98) 100%);
+  border: 1px solid rgba(148, 163, 184, 0.16);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.18),
+    inset 0 -1px 0 rgba(2, 6, 23, 0.46),
+    0 8px 18px rgba(0, 0, 0, 0.14);
+  overflow: hidden;
+  isolation: isolate;
   transition:
     transform 0.22s ease,
     border-color 0.22s ease,
@@ -2549,10 +2649,13 @@ body[data-country] .content-article .timeline a[href*='/responsible-gambling/'] 
 }
 
 .home-country-jump:hover {
-  transform: translateY(-2px) rotate(-0.4deg);
-  border-color: var(--sticker-border-hover);
-  background: var(--sticker-bg-hover);
-  box-shadow: var(--sticker-shadow-hover);
+  transform: translateY(-2px);
+  background: linear-gradient(180deg, rgba(42, 55, 82, 0.98) 0%, rgba(18, 29, 51, 0.98) 58%, rgba(9, 16, 34, 0.98) 100%);
+  border-color: rgba(191, 219, 254, 0.24);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.23),
+    inset 0 -1px 0 rgba(2, 6, 23, 0.5),
+    0 12px 24px rgba(0, 0, 0, 0.2);
 }
 
 .home-country-jump span {
@@ -3066,6 +3169,34 @@ html[data-theme='light'] .payment-chip {
     inset 0 1px 0 rgba(255, 255, 255, 0.9);
 }
 
+html[data-theme='light'] .countries-cloud a::before {
+  content: none;
+}
+
+html[data-theme='light'] .home-country-jump,
+html[data-theme='light'] .casino-actions .cta-secondary,
+html[data-theme='light'] .view-all {
+  background: linear-gradient(180deg, #ffffff 0%, #f5f8fc 54%, #edf2f8 100%);
+  border-color: rgba(15, 23, 42, 0.08);
+  color: #172033;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.92),
+    inset 0 -1px 0 rgba(15, 23, 42, 0.05),
+    0 10px 22px rgba(15, 23, 42, 0.08);
+}
+
+html[data-theme='light'] .home-country-jump::before,
+html[data-theme='light'] .casino-actions .cta-secondary::before,
+html[data-theme='light'] .view-all::before {
+  background:
+    linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0.92) 0%,
+      rgba(255, 255, 255, 0.35) 48%,
+      rgba(255, 255, 255, 0) 100%
+    );
+}
+
 html[data-theme='light'] .countries-cloud a:hover,
 html[data-theme='light'] .home-country-jump:hover {
   background: #ffffff;
@@ -3074,6 +3205,15 @@ html[data-theme='light'] .home-country-jump:hover {
   box-shadow:
     0 14px 28px rgba(15, 23, 42, 0.11),
     inset 0 1px 0 rgba(255, 255, 255, 0.96);
+}
+
+html[data-theme='light'] .home-country-jump:hover {
+  background: linear-gradient(180deg, #ffffff 0%, #f8fbff 54%, #f0f5fb 100%);
+  border-color: rgba(15, 23, 42, 0.12);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.96),
+    inset 0 -1px 0 rgba(15, 23, 42, 0.06),
+    0 14px 28px rgba(15, 23, 42, 0.11);
 }
 
 html[data-theme='light'] .footer {
@@ -3099,10 +3239,22 @@ html[data-theme='light'] .footer-settings-trigger:hover {
 }
 
 html[data-theme='light'] .footer-social {
-  color: var(--sticker-color);
-  background: var(--sticker-bg);
-  border-color: var(--sticker-border);
-  box-shadow: var(--sticker-shadow);
+  color: #c9ddff;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.115) 0%, rgba(2, 6, 23, 0.2) 52%, rgba(2, 6, 23, 0.08) 100%);
+  border-color: rgba(226, 232, 240, 0.74);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.48),
+    inset 0 -1px 0 rgba(2, 6, 23, 0.38);
+}
+
+html[data-theme='light'] .footer-social:hover {
+  color: #c9ddff;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.145) 0%, rgba(15, 23, 42, 0.46) 54%, rgba(8, 13, 31, 0.2) 100%);
+  border-color: rgba(255, 255, 255, 0.94);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.56),
+    inset 0 -1px 0 rgba(2, 6, 23, 0.42),
+    0 8px 18px rgba(0, 0, 0, 0.22);
 }
 
 html[data-theme='light'] .footer-brand-directory {
@@ -3265,30 +3417,42 @@ html[data-theme='light'] .home-stat-number {
 }
 
 html[data-theme='light'] .casino-actions .cta-secondary {
-  background: var(--sticker-bg);
-  color: var(--sticker-color);
-  border-color: var(--sticker-border);
-  box-shadow: var(--sticker-shadow);
+  background: linear-gradient(180deg, #ffffff 0%, #f5f8fc 54%, #edf2f8 100%);
+  color: #172033;
+  border-color: rgba(15, 23, 42, 0.08);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.92),
+    inset 0 -1px 0 rgba(15, 23, 42, 0.05),
+    0 10px 22px rgba(15, 23, 42, 0.08);
 }
 
 html[data-theme='light'] .casino-actions .cta-secondary:hover {
-  background: var(--sticker-bg-hover);
-  border-color: var(--sticker-border-hover);
-  box-shadow: var(--sticker-shadow-hover);
+  background: linear-gradient(180deg, #ffffff 0%, #f8fbff 54%, #f0f5fb 100%);
+  border-color: rgba(15, 23, 42, 0.12);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.96),
+    inset 0 -1px 0 rgba(15, 23, 42, 0.06),
+    0 14px 28px rgba(15, 23, 42, 0.11);
 }
 
 html[data-theme='light'] .view-all {
-  color: var(--sticker-color);
-  background: var(--sticker-bg);
-  border-color: var(--sticker-border);
-  box-shadow: var(--sticker-shadow);
+  color: #172033;
+  background: linear-gradient(180deg, #ffffff 0%, #f5f8fc 54%, #edf2f8 100%);
+  border-color: rgba(15, 23, 42, 0.08);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.92),
+    inset 0 -1px 0 rgba(15, 23, 42, 0.05),
+    0 10px 22px rgba(15, 23, 42, 0.08);
 }
 
 html[data-theme='light'] .view-all:hover {
-  color: var(--sticker-color);
-  background: var(--sticker-bg-hover);
-  border-color: var(--sticker-border-hover);
-  box-shadow: var(--sticker-shadow-hover);
+  color: #172033;
+  background: linear-gradient(180deg, #ffffff 0%, #f8fbff 54%, #f0f5fb 100%);
+  border-color: rgba(15, 23, 42, 0.12);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.96),
+    inset 0 -1px 0 rgba(15, 23, 42, 0.06),
+    0 14px 28px rgba(15, 23, 42, 0.11);
 }
 
 html[data-theme='light'] .theme-settings-backdrop {
@@ -3388,6 +3552,34 @@ html[data-theme='light'] .theme-settings-option:hover {
       inset 0 1px 0 rgba(255, 255, 255, 0.9);
   }
 
+  html:not([data-theme='dark']) .countries-cloud a::before {
+    content: none;
+  }
+
+  html:not([data-theme='dark']) .home-country-jump,
+  html:not([data-theme='dark']) .casino-actions .cta-secondary,
+  html:not([data-theme='dark']) .view-all {
+    background: linear-gradient(180deg, #ffffff 0%, #f5f8fc 54%, #edf2f8 100%);
+    border-color: rgba(15, 23, 42, 0.08);
+    color: #172033;
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.92),
+      inset 0 -1px 0 rgba(15, 23, 42, 0.05),
+      0 10px 22px rgba(15, 23, 42, 0.08);
+  }
+
+  html:not([data-theme='dark']) .home-country-jump::before,
+  html:not([data-theme='dark']) .casino-actions .cta-secondary::before,
+  html:not([data-theme='dark']) .view-all::before {
+    background:
+      linear-gradient(
+        180deg,
+        rgba(255, 255, 255, 0.92) 0%,
+        rgba(255, 255, 255, 0.35) 48%,
+        rgba(255, 255, 255, 0) 100%
+      );
+  }
+
   html:not([data-theme='dark']) .countries-cloud a:hover,
   html:not([data-theme='dark']) .home-country-jump:hover {
     background: #ffffff;
@@ -3396,6 +3588,15 @@ html[data-theme='light'] .theme-settings-option:hover {
     box-shadow:
       0 14px 28px rgba(15, 23, 42, 0.11),
       inset 0 1px 0 rgba(255, 255, 255, 0.96);
+  }
+
+  html:not([data-theme='dark']) .home-country-jump:hover {
+    background: linear-gradient(180deg, #ffffff 0%, #f8fbff 54%, #f0f5fb 100%);
+    border-color: rgba(15, 23, 42, 0.12);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.96),
+      inset 0 -1px 0 rgba(15, 23, 42, 0.06),
+      0 14px 28px rgba(15, 23, 42, 0.11);
   }
 
   html:not([data-theme='dark']) .footer {
@@ -3421,10 +3622,22 @@ html[data-theme='light'] .theme-settings-option:hover {
   }
 
   html:not([data-theme='dark']) .footer-social {
-    color: var(--sticker-color);
-    background: var(--sticker-bg);
-    border-color: var(--sticker-border);
-    box-shadow: var(--sticker-shadow);
+    color: #c9ddff;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.115) 0%, rgba(2, 6, 23, 0.2) 52%, rgba(2, 6, 23, 0.08) 100%);
+    border-color: rgba(226, 232, 240, 0.74);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.48),
+      inset 0 -1px 0 rgba(2, 6, 23, 0.38);
+  }
+
+  html:not([data-theme='dark']) .footer-social:hover {
+    color: #c9ddff;
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.145) 0%, rgba(15, 23, 42, 0.46) 54%, rgba(8, 13, 31, 0.2) 100%);
+    border-color: rgba(255, 255, 255, 0.94);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.56),
+      inset 0 -1px 0 rgba(2, 6, 23, 0.42),
+      0 8px 18px rgba(0, 0, 0, 0.22);
   }
 
   html:not([data-theme='dark']) .footer-brand-directory {
@@ -3587,30 +3800,42 @@ html[data-theme='light'] .theme-settings-option:hover {
   }
 
   html:not([data-theme='dark']) .casino-actions .cta-secondary {
-    background: var(--sticker-bg);
-    color: var(--sticker-color);
-    border-color: var(--sticker-border);
-    box-shadow: var(--sticker-shadow);
+    background: linear-gradient(180deg, #ffffff 0%, #f5f8fc 54%, #edf2f8 100%);
+    color: #172033;
+    border-color: rgba(15, 23, 42, 0.08);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.92),
+      inset 0 -1px 0 rgba(15, 23, 42, 0.05),
+      0 10px 22px rgba(15, 23, 42, 0.08);
   }
 
   html:not([data-theme='dark']) .casino-actions .cta-secondary:hover {
-    background: var(--sticker-bg-hover);
-    border-color: var(--sticker-border-hover);
-    box-shadow: var(--sticker-shadow-hover);
+    background: linear-gradient(180deg, #ffffff 0%, #f8fbff 54%, #f0f5fb 100%);
+    border-color: rgba(15, 23, 42, 0.12);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.96),
+      inset 0 -1px 0 rgba(15, 23, 42, 0.06),
+      0 14px 28px rgba(15, 23, 42, 0.11);
   }
 
   html:not([data-theme='dark']) .view-all {
-    color: var(--sticker-color);
-    background: var(--sticker-bg);
-    border-color: var(--sticker-border);
-    box-shadow: var(--sticker-shadow);
+    color: #172033;
+    background: linear-gradient(180deg, #ffffff 0%, #f5f8fc 54%, #edf2f8 100%);
+    border-color: rgba(15, 23, 42, 0.08);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.92),
+      inset 0 -1px 0 rgba(15, 23, 42, 0.05),
+      0 10px 22px rgba(15, 23, 42, 0.08);
   }
 
   html:not([data-theme='dark']) .view-all:hover {
-    color: var(--sticker-color);
-    background: var(--sticker-bg-hover);
-    border-color: var(--sticker-border-hover);
-    box-shadow: var(--sticker-shadow-hover);
+    color: #172033;
+    background: linear-gradient(180deg, #ffffff 0%, #f8fbff 54%, #f0f5fb 100%);
+    border-color: rgba(15, 23, 42, 0.12);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.96),
+      inset 0 -1px 0 rgba(15, 23, 42, 0.06),
+      0 14px 28px rgba(15, 23, 42, 0.11);
   }
 
   html:not([data-theme='dark']) .theme-settings-backdrop {

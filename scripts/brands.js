@@ -1,4 +1,4 @@
-﻿export const BRANDS = [
+export const BRANDS = [
   {
     name: 'Fortunica',
     bonus: 'Fortunica Casino features slots, fast payouts, and attractive bonuses',
@@ -255,7 +255,7 @@
     hasDetailPage: true,
   },
   {
-    name: '10Bet',
+    name: '10bet',
     bonus: 'R15 Free Bet + 15 FS + 150% up to R5,000',
     cta: 'Play Now',
     urlDetail: 'brands/10bet.html',

@@ -57,10 +57,10 @@ body.casinos-page .filter-btn:hover {
 }
 
 body.casinos-page .filter-btn.active {
-  background: var(--sticker-primary-bg);
-  border-color: var(--sticker-primary-border);
-  color: #020617;
-  box-shadow: var(--sticker-primary-shadow);
+  background: var(--sticker-bg-hover);
+  border-color: var(--sticker-border-hover);
+  color: var(--sticker-color);
+  box-shadow: var(--sticker-shadow-hover);
 }
 
 /* alphabet */
@@ -512,54 +512,72 @@ body[data-brand] .availability-tabs {
 
 body[data-brand] .availability-tab-list {
   display: flex;
-  gap: 8px;
-  padding: 8px;
+  justify-content: center;
+  gap: 28px;
+  padding: 0 22px;
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-  background: rgba(12, 18, 34, 0.42);
+  background: transparent;
 }
 
 body[data-brand] .availability-tab {
   appearance: none;
-  border: 1px solid var(--sticker-border);
-  border-radius: 999px;
-  background: var(--sticker-bg);
-  color: var(--sticker-color);
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  color: var(--text-muted);
   font: inherit;
   font-weight: 700;
-  padding: 12px 20px;
+  padding: 16px 2px 14px;
   cursor: pointer;
   position: relative;
-  box-shadow: var(--sticker-shadow);
+  box-shadow: none;
   transition:
-    transform 0.2s ease,
-    border-color 0.2s ease,
-    box-shadow 0.2s ease,
-    background 0.2s ease;
+    color 0.2s ease,
+    opacity 0.2s ease;
 }
 
 body[data-brand] .availability-tab::after {
-  content: none;
+  content: '';
+  position: absolute;
+  right: 0;
+  bottom: -1px;
+  left: 0;
+  height: 2px;
+  border-radius: 999px;
+  background: rgba(226, 232, 240, 0.38);
+  opacity: 0;
+  transform: scaleX(0.35);
+  transition:
+    opacity 0.2s ease,
+    transform 0.2s ease,
+    background 0.2s ease;
 }
 
 body[data-brand] .availability-tab:hover,
 body[data-brand] .availability-tab:focus-visible {
-  color: var(--sticker-color);
-  background: var(--sticker-bg-hover);
-  border-color: var(--sticker-border-hover);
-  box-shadow: var(--sticker-shadow-hover);
-  transform: translateY(-1px) rotate(-0.4deg);
+  color: var(--text-main);
+  background: transparent;
+  box-shadow: none;
+  transform: none;
   outline: none;
 }
 
+body[data-brand] .availability-tab:hover::after,
+body[data-brand] .availability-tab:focus-visible::after {
+  opacity: 0.65;
+  transform: scaleX(0.72);
+}
+
 body[data-brand] .availability-tab.is-active {
-  color: #020617;
-  background: var(--sticker-primary-bg);
-  border-color: var(--sticker-primary-border);
-  box-shadow: var(--sticker-primary-shadow);
+  color: var(--text-main);
+  background: transparent;
+  box-shadow: none;
 }
 
 body[data-brand] .availability-tab.is-active::after {
-  content: none;
+  opacity: 1;
+  transform: scaleX(1);
+  background: linear-gradient(90deg, var(--gold), rgba(255, 223, 0, 0.35));
 }
 
 body[data-brand] .availability-panel {
@@ -1380,14 +1398,14 @@ html[data-theme='light'] body[data-brand] .availability-tabs {
 
 html[data-theme='light'] body[data-brand] .availability-tab-list {
   border-bottom-color: var(--ui-border-subtle);
-  background: rgba(248, 250, 252, 0.58);
+  background: transparent;
 }
 
 html[data-theme='light'] body[data-brand] .availability-tab:hover,
 html[data-theme='light'] body[data-brand] .availability-tab:focus-visible {
-  background: var(--sticker-bg-hover);
-  border-color: var(--sticker-border-hover);
-  box-shadow: var(--sticker-shadow-hover);
+  color: var(--text-main);
+  background: transparent;
+  box-shadow: none;
 }
 
 html[data-theme='light'] body[data-brand] .availability-summary {
@@ -1496,14 +1514,14 @@ html[data-theme='light'] .payment-chip {
 
   html:not([data-theme='dark']) body[data-brand] .availability-tab-list {
     border-bottom-color: var(--ui-border-subtle);
-    background: rgba(248, 250, 252, 0.58);
+    background: transparent;
   }
 
   html:not([data-theme='dark']) body[data-brand] .availability-tab:hover,
   html:not([data-theme='dark']) body[data-brand] .availability-tab:focus-visible {
-    background: var(--sticker-bg-hover);
-    border-color: var(--sticker-border-hover);
-    box-shadow: var(--sticker-shadow-hover);
+    color: var(--text-main);
+    background: transparent;
+    box-shadow: none;
   }
 
   html:not([data-theme='dark']) body[data-brand] .availability-summary {
