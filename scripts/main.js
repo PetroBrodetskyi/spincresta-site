@@ -8,7 +8,6 @@ import { COUNTRIES } from './countries.js';
 // =====================
 // HELPERS
 // =====================
-const MAX_PAYMENT_VISIBLE = 4;
 const PLACEHOLDER_LINK = '#';
 const MOJIBAKE_FIXES = [];
 const THEME_STORAGE_KEY = 'spincresta-theme';
@@ -116,27 +115,137 @@ const getActiveTheme = () => getStoredTheme() || getSystemTheme();
 applyTheme(getStoredTheme());
 
 const renderPayments = (payments = []) => {
-  const visible = payments.slice(0, MAX_PAYMENT_VISIBLE);
-  const hiddenCount = payments.length - MAX_PAYMENT_VISIBLE;
+  if (!payments.length) return '';
 
   return `
-    <div class="payment-icons">
-      ${visible
+    <div class="payment-icons" data-payment-count="${payments.length}">
+      ${payments
         .map(
           method =>
             `<img src="${paymentPath(method)}" alt="${normalizeText(method)} payment method" loading="lazy" decoding="async"/>`
         )
         .join('')}
-      ${hiddenCount > 0 ? `<span class="payment-more">+${hiddenCount}</span>` : ''}
+      <span class="payment-more" hidden aria-hidden="true"></span>
     </div>
   `;
 };
 
+const normalizeBrandKey = value =>
+  normalizeText(value)
+    .toLowerCase()
+    .replace(/&/g, 'and')
+    .replace(/[^a-z0-9]+/g, '');
+
+const normalizeBrandColor = color => {
+  const value = typeof color === 'string' ? color.trim() : '';
+  if (!value) return '';
+  if (typeof CSS !== 'undefined' && typeof CSS.supports === 'function') {
+    return CSS.supports('color', value) ? value : '';
+  }
+  return /^#[0-9a-f]{3,8}$/i.test(value) ? value : '';
+};
+
+const setBrandBackground = (element, color) => {
+  const normalizedColor = normalizeBrandColor(color);
+  if (!element || !normalizedColor) return;
+  element.style.setProperty('--brand-bg-color', normalizedColor);
+};
+
+const getBrandBackgroundStyle = brand => {
+  const color = normalizeBrandColor(brand?.bgColor);
+  return color ? ` style="--brand-bg-color: ${color};"` : '';
+};
+
 const createBadge = ({ isTopRated, isExclusive, isNew }) => {
-  if (isTopRated) return `<div class="top-rated-badge">TOP RATED</div>`;
-  if (isExclusive) return `<div class="exclusive-badge">EXCLUSIVE</div>`;
-  if (isNew) return `<div class="new-badge">NEW</div>`;
+  if (isTopRated) return `<span class="casino-status-badge top-rated-badge">Top Rated</span>`;
+  if (isExclusive) return `<span class="casino-status-badge exclusive-badge">Exclusive</span>`;
+  if (isNew) return `<span class="casino-status-badge new-badge">New</span>`;
   return '';
+};
+
+let paymentSyncFrame = null;
+
+const setPaymentIconVisibility = (icon, isHidden) => {
+  icon.hidden = isHidden;
+  icon.classList.toggle('is-payment-hidden', isHidden);
+};
+
+const syncPaymentIcons = (root = document) => {
+  const rows = Array.from(root.querySelectorAll?.('.payment-icons[data-payment-count]') ?? []);
+
+  rows.forEach(row => {
+    const icons = Array.from(row.querySelectorAll('img'));
+    const more = row.querySelector('.payment-more');
+    if (!icons.length || !more) return;
+
+    icons.forEach(icon => setPaymentIconVisibility(icon, false));
+    more.hidden = true;
+    more.style.visibility = '';
+    more.setAttribute('aria-hidden', 'true');
+
+    const availableWidth = Math.floor(row.getBoundingClientRect().width);
+    if (!availableWidth) return;
+
+    const styles = window.getComputedStyle(row);
+    const gap = parseFloat(styles.columnGap || styles.gap) || 0;
+    const iconWidths = icons.map(icon => Math.ceil(icon.getBoundingClientRect().width) || 24);
+    const sumIconWidths = count => iconWidths.slice(0, count).reduce((total, width) => total + width, 0);
+
+    let visibleCount = icons.length;
+
+    for (let count = icons.length; count >= 0; count -= 1) {
+      const hiddenCount = icons.length - count;
+      let itemCount = count;
+      let moreWidth = 0;
+
+      if (hiddenCount > 0) {
+        more.textContent = `+${hiddenCount}`;
+        more.hidden = false;
+        more.style.visibility = 'hidden';
+        moreWidth = Math.ceil(more.getBoundingClientRect().width) || 24;
+        itemCount += 1;
+      } else {
+        more.hidden = true;
+      }
+
+      const totalWidth =
+        sumIconWidths(count) + moreWidth + gap * Math.max(0, itemCount - 1);
+
+      if (totalWidth <= availableWidth || count === 0) {
+        visibleCount = count;
+        break;
+      }
+    }
+
+    const hiddenCount = icons.length - visibleCount;
+    icons.forEach((icon, index) => setPaymentIconVisibility(icon, index >= visibleCount));
+
+    if (hiddenCount > 0) {
+      more.textContent = `+${hiddenCount}`;
+      more.hidden = false;
+      more.style.visibility = '';
+      more.removeAttribute('aria-hidden');
+      more.setAttribute('aria-label', `${hiddenCount} more payment methods`);
+    } else {
+      more.hidden = true;
+      more.style.visibility = '';
+      more.setAttribute('aria-hidden', 'true');
+      more.removeAttribute('aria-label');
+    }
+
+    row.dataset.visiblePayments = String(visibleCount);
+  });
+};
+
+const requestPaymentIconSync = () => {
+  if (paymentSyncFrame) {
+    window.cancelAnimationFrame(paymentSyncFrame);
+  }
+
+  paymentSyncFrame = window.requestAnimationFrame(() => {
+    paymentSyncFrame = null;
+    syncPaymentIcons();
+  });
 };
 
 const initFooterThemeSettings = () => {
@@ -244,11 +353,11 @@ const initFooterThemeSettings = () => {
 const createCasinoCard = ({
   name,
   bonus,
-  cta,
   urlDetail,
   urlCasino,
   image,
   payments = [],
+  bgColor,
   isNew = false,
   isExclusive = false,
   isTopRated = false,
@@ -260,23 +369,26 @@ const createCasinoCard = ({
   const safeUrl = urlCasino || PLACEHOLDER_LINK;
   const safeName = normalizeText(name);
   const safeBonus = normalizeText(bonus);
-  const safeCta = normalizeText(cta);
+  const primaryCtaText = 'Visit Casino';
   const detailUrl = normalizePagePath(urlDetail ?? '');
   const imageUrl = normalizeAssetPath(image ?? '');
   const showReviewAction = Boolean(hasDetailPage && detailUrl);
   const showPlayAction = safeUrl !== PLACEHOLDER_LINK;
 
   article.dataset.page = detailUrl;
+  setBrandBackground(article, bgColor);
 
   article.innerHTML = `
-    ${createBadge({ isTopRated, isExclusive, isNew })}
     <div class="card-img">
       <img src="${imageUrl}" alt="${safeName}" loading="lazy" decoding="async" class="casino-image"/>
     </div>
-    <h3 class="casino-name">${safeName}</h3>
+    <div class="casino-card-heading">
+      <h3 class="casino-name">${safeName}</h3>
+      ${createBadge({ isTopRated, isExclusive, isNew })}
+    </div>
     <p class="casino-bonus">${safeBonus}</p>
+    ${renderPayments(payments)}
     <div class="casino-footer">
-      ${renderPayments(payments)}
       <div class="casino-actions ${showReviewAction && showPlayAction ? 'has-two-actions' : 'has-single-action'}">
         ${
           showReviewAction
@@ -285,7 +397,7 @@ const createCasinoCard = ({
         }
         ${
           showPlayAction
-            ? `<a class="cta cta-primary" href="${safeUrl}" target="_blank" rel="noopener noreferrer nofollow sponsored">${safeCta}</a>`
+            ? `<a class="cta cta-primary" href="${safeUrl}" target="_blank" rel="noopener noreferrer nofollow sponsored">${primaryCtaText}</a>`
             : ''
         }
       </div>
@@ -338,6 +450,8 @@ const renderBrandList = (brands, containerSelector, emptyText) => {
     });
 
     container.appendChild(fragment);
+    requestPaymentIconSync();
+    requestAnimationFrame(syncCountryStickyReviewsLayout);
     visibleCount += ITEMS_PER_BATCH;
 
     if (visibleCount >= brands.length) {
@@ -350,6 +464,104 @@ const renderBrandList = (brands, containerSelector, emptyText) => {
   if (loadMoreBtn) {
     loadMoreBtn.onclick = renderNextBatch;
   }
+};
+
+const syncCountryStickyReviewsLayout = () => {
+  const rail = document.querySelector('body[data-country] .country-hero-rail');
+  const cards = document.querySelector('body[data-country] .country-hero-cards');
+  const reviews = document.querySelector('body[data-country] .country-new-reviews');
+  const side = document.querySelector('body[data-country] .country-hero-side');
+  if (!rail || !cards || !reviews || !side) return;
+
+  const isDesktop = window.matchMedia('(min-width: 1121px)').matches;
+  if (!isDesktop) {
+    rail.style.minHeight = '';
+    side.style.minHeight = '';
+    return;
+  }
+
+  rail.style.minHeight = `${Math.max(cards.offsetHeight, rail.offsetHeight)}px`;
+  side.style.minHeight = `${reviews.offsetHeight}px`;
+};
+
+const resetCountryStickyReviews = reviews => {
+  reviews.classList.remove('is-fixed', 'is-bottom');
+  reviews.style.position = '';
+  reviews.style.top = '';
+  reviews.style.left = '';
+  reviews.style.width = '';
+};
+
+const updateCountryStickyReviews = () => {
+  const reviews = document.querySelector('body[data-country] .country-new-reviews');
+  const side = document.querySelector('body[data-country] .country-hero-side');
+  const rail = document.querySelector('body[data-country] .country-hero-rail');
+  const cards = document.querySelector('body[data-country] .country-hero-cards');
+  const header = document.querySelector('.header');
+  if (!reviews || !side || !rail || !cards) return;
+
+  const isDesktop = window.matchMedia('(min-width: 1121px)').matches;
+  if (!isDesktop) {
+    resetCountryStickyReviews(reviews);
+    rail.style.minHeight = '';
+    side.style.minHeight = '';
+    return;
+  }
+
+  syncCountryStickyReviewsLayout();
+
+  const scrollY = window.scrollY || document.documentElement.scrollTop || 0;
+  const topOffset = (header?.offsetHeight || 74) + 18;
+  const sideRect = side.getBoundingClientRect();
+  const cardsRect = cards.getBoundingClientRect();
+  const reviewsHeight = reviews.offsetHeight;
+  const sideTop = sideRect.top + scrollY;
+  const cardsBottom = cardsRect.bottom + scrollY;
+  const startAt = sideTop - topOffset;
+  const endAt = cardsBottom - reviewsHeight - topOffset - 24;
+
+  if (scrollY < startAt || endAt <= startAt) {
+    resetCountryStickyReviews(reviews);
+    return;
+  }
+
+  if (scrollY >= endAt) {
+    const absoluteTop = Math.max(0, cardsBottom - reviewsHeight - sideTop - 24);
+    reviews.classList.remove('is-fixed');
+    reviews.classList.add('is-bottom');
+    reviews.style.position = 'absolute';
+    reviews.style.top = `${absoluteTop}px`;
+    reviews.style.left = '0';
+    reviews.style.width = `${sideRect.width}px`;
+    side.style.minHeight = `${absoluteTop + reviewsHeight}px`;
+    return;
+  }
+
+  reviews.classList.remove('is-bottom');
+  reviews.classList.add('is-fixed');
+  reviews.style.position = 'fixed';
+  reviews.style.top = `${topOffset}px`;
+  reviews.style.left = `${sideRect.left}px`;
+  reviews.style.width = `${sideRect.width}px`;
+};
+
+const initCountryStickyReviews = () => {
+  if (!document.body.dataset.country) return;
+
+  let ticking = false;
+  const scheduleUpdate = () => {
+    if (ticking) return;
+    ticking = true;
+    requestAnimationFrame(() => {
+      ticking = false;
+      updateCountryStickyReviews();
+    });
+  };
+
+  updateCountryStickyReviews();
+  window.addEventListener('load', scheduleUpdate);
+  window.addEventListener('resize', scheduleUpdate);
+  window.addEventListener('scroll', scheduleUpdate, { passive: true });
 };
 
 const initVerticalLinkCarousel = ({
@@ -380,6 +592,7 @@ const initVerticalLinkCarousel = ({
   let index = 0;
   let intervalId = null;
   let resetTimerId = null;
+  let controls = null;
 
   const getVisibleCount = () => (desktopMedia.matches ? desktopVisibleCount : mobileVisibleCount);
 
@@ -387,8 +600,88 @@ const initVerticalLinkCarousel = ({
     items = Array.from(track.querySelectorAll('.home-link-card'));
   };
 
+  const createClone = item => {
+    const clone = item.cloneNode(true);
+    clone.setAttribute('aria-hidden', 'true');
+    clone.tabIndex = -1;
+
+    clone.querySelectorAll('a, button, input, select, textarea, [tabindex]').forEach(element => {
+      element.tabIndex = -1;
+    });
+
+    return clone;
+  };
+
+  const getCycleIndex = () => {
+    if (!originalCount) return 0;
+    const offset = track.dataset.carouselBuilt === 'true' ? getVisibleCount() : 0;
+    return ((index - offset) % originalCount + originalCount) % originalCount;
+  };
+
+  const syncItemState = () => {
+    if (!items.length) return;
+
+    const visibleCount = getVisibleCount();
+    const activeCycleIndex = getCycleIndex();
+
+    items.forEach((item, itemIndex) => {
+      const relativeIndex = itemIndex - index;
+
+      item.classList.toggle('is-current', relativeIndex === 0);
+      item.classList.toggle('is-next', relativeIndex > 0 && relativeIndex < visibleCount);
+      item.classList.toggle('is-tail', relativeIndex === visibleCount - 1);
+      item.style.setProperty('--carousel-row', String(relativeIndex));
+    });
+
+    carousel.style.setProperty(
+      '--carousel-progress',
+      `${((activeCycleIndex + 1) / originalCount) * 100}%`
+    );
+    carousel.dataset.activeIndex = String(activeCycleIndex + 1);
+  };
+
+  const ensureControls = () => {
+    if (controls) return controls;
+
+    const existingControls = carousel.nextElementSibling?.classList.contains('link-carousel-controls')
+      ? carousel.nextElementSibling
+      : null;
+    if (existingControls) {
+      controls = existingControls;
+      return controls;
+    }
+
+    controls = document.createElement('div');
+    controls.className = 'link-carousel-controls';
+    controls.innerHTML = `
+      <div class="link-carousel-progress" aria-hidden="true"><span></span></div>
+      <div class="link-carousel-buttons">
+        <button class="link-carousel-button" type="button" data-carousel-direction="-1" aria-label="Previous review">
+          <span aria-hidden="true"></span>
+        </button>
+        <button class="link-carousel-button" type="button" data-carousel-direction="1" aria-label="Next review">
+          <span aria-hidden="true"></span>
+        </button>
+      </div>
+    `;
+    controls.hidden = true;
+
+    carousel.insertAdjacentElement('afterend', controls);
+
+    controls.querySelectorAll('[data-carousel-direction]').forEach(button => {
+      button.addEventListener('click', () => {
+        const direction = Number(button.dataset.carouselDirection) || 1;
+        move(direction, true);
+        restartTimer();
+      });
+    });
+
+    return controls;
+  };
+
   const buildTrack = () => {
     const activeVisibleCount = getVisibleCount();
+    const currentCycleIndex = getCycleIndex();
 
     if (
       track.dataset.carouselBuilt === 'true' &&
@@ -397,18 +690,19 @@ const initVerticalLinkCarousel = ({
       return;
     }
 
+    track.innerHTML = originalMarkup;
     refreshItems();
 
-    items.slice(0, activeVisibleCount).forEach(item => {
-      const clone = item.cloneNode(true);
-      clone.setAttribute('aria-hidden', 'true');
-      clone.tabIndex = -1;
-      track.appendChild(clone);
-    });
+    const beforeClones = items.slice(-activeVisibleCount).map(createClone);
+    const afterClones = items.slice(0, activeVisibleCount).map(createClone);
+
+    beforeClones.forEach(clone => track.insertBefore(clone, track.firstChild));
+    afterClones.forEach(clone => track.appendChild(clone));
 
     track.dataset.carouselBuilt = 'true';
     track.dataset.activeVisibleCount = String(activeVisibleCount);
     refreshItems();
+    index = activeVisibleCount + currentCycleIndex;
   };
 
   const restoreOriginalTrack = () => {
@@ -417,6 +711,9 @@ const initVerticalLinkCarousel = ({
       carousel.style.height = '';
       track.style.transform = '';
       track.style.transition = '';
+      carousel.classList.remove('is-carousel-active');
+      if (controls) controls.hidden = true;
+      syncItemState();
       return;
     }
 
@@ -428,6 +725,9 @@ const initVerticalLinkCarousel = ({
     track.style.transition = '';
     index = 0;
     refreshItems();
+    carousel.classList.remove('is-carousel-active');
+    if (controls) controls.hidden = true;
+    syncItemState();
   };
 
   const setViewportHeight = () => {
@@ -448,8 +748,9 @@ const initVerticalLinkCarousel = ({
     const baseTop = items[0].offsetTop;
     const targetTop = items[nextIndex].offsetTop;
 
-    track.style.transition = animated ? 'transform 0.56s ease' : 'none';
+    track.style.transition = animated ? 'transform 0.68s cubic-bezier(0.22, 1, 0.36, 1)' : 'none';
     track.style.transform = `translateY(-${targetTop - baseTop}px)`;
+    syncItemState();
   };
 
   const clearTimers = () => {
@@ -464,18 +765,50 @@ const initVerticalLinkCarousel = ({
     }
   };
 
-  const rotate = () => {
-    if (reducedMotionMedia.matches) return;
+  const scheduleEdgeReset = () => {
+    const visibleCount = getVisibleCount();
 
-    index += 1;
-    setPosition(index, true);
-
-    if (index === originalCount) {
+    if (index >= originalCount + visibleCount) {
       resetTimerId = window.setTimeout(() => {
-        index = 0;
-        setPosition(0, false);
+        index = visibleCount;
+        setPosition(index, false);
         resetTimerId = null;
-      }, 600);
+      }, 720);
+      return;
+    }
+
+    if (index < visibleCount) {
+      resetTimerId = window.setTimeout(() => {
+        index = visibleCount + originalCount - 1;
+        setPosition(index, false);
+        resetTimerId = null;
+      }, 720);
+    }
+  };
+
+  const move = (direction = 1, animated = true) => {
+    if (reducedMotionMedia.matches || track.dataset.carouselBuilt !== 'true') return;
+
+    if (resetTimerId) {
+      window.clearTimeout(resetTimerId);
+      resetTimerId = null;
+    }
+
+    index += direction;
+    setPosition(index, animated);
+    scheduleEdgeReset();
+  };
+
+  const rotate = () => move(1, true);
+
+  const restartTimer = () => {
+    if (intervalId) {
+      window.clearInterval(intervalId);
+      intervalId = null;
+    }
+
+    if (!reducedMotionMedia.matches && originalCount > getVisibleCount()) {
+      intervalId = window.setInterval(rotate, rotateMs);
     }
   };
 
@@ -489,10 +822,15 @@ const initVerticalLinkCarousel = ({
       return;
     }
 
+    ensureControls();
     buildTrack();
-    if (index >= originalCount) {
-      index = 0;
+    carousel.classList.add('is-carousel-active');
+    if (controls) controls.hidden = false;
+
+    if (index < visibleCount || index >= originalCount + visibleCount) {
+      index = visibleCount;
     }
+
     setViewportHeight();
     setPosition(index, false);
     intervalId = window.setInterval(rotate, rotateMs);
@@ -585,18 +923,6 @@ const ensureCountryBrandStage = pageCountry => {
           </div>
         </div>
       </aside>
-      <div class="country-brand-summary" aria-label="${countryName} brand coverage">
-        <div class="country-brand-summary-card">
-          <span class="country-brand-summary-number" id="countryBrandCount">0</span>
-          <div class="country-brand-summary-copy">
-            <strong id="countryBrandCountLabel">${countryName} Brands Reviewed</strong>
-            <span>
-              Casino and betting brands currently reviewed for this market, with bonus details,
-              payment methods, trust checks, and practical notes for real players.
-            </span>
-          </div>
-        </div>
-      </div>
     </div>
     <div class="country-brand-main"></div>
   `;
@@ -610,6 +936,57 @@ const ensureCountryBrandStage = pageCountry => {
       main.appendChild(node);
     }
   });
+};
+
+const applyCountryHeroConcept = () => {
+  const hero = document.querySelector('body[data-country] .hero');
+  const heroContent = hero?.querySelector(':scope > .hero-content');
+  const stage = document.querySelector('.country-brand-stage');
+  const brandMain = stage?.querySelector('.country-brand-main');
+  const brandSide = stage?.querySelector('.country-brand-side');
+  if (!hero || !heroContent || !stage || !brandMain) return;
+
+  const inlineFlag = heroContent.querySelector('.hero-flag');
+  document.querySelectorAll('.country-brand-summary').forEach(summary => summary.remove());
+
+  let rail = hero.querySelector(':scope > .country-hero-rail');
+  if (!rail) {
+    rail = document.createElement('div');
+    rail.className = 'country-hero-rail';
+    hero.prepend(rail);
+  }
+
+  hero.classList.add('country-hero-with-cards');
+  brandMain.classList.add('country-hero-cards');
+  brandMain.querySelector('.country-card-flag')?.remove();
+
+  if (inlineFlag) {
+    const cardFlag = inlineFlag.cloneNode(true);
+    cardFlag.classList.remove('hero-flag');
+    cardFlag.classList.add('country-card-flag');
+    cardFlag.setAttribute('aria-hidden', 'true');
+    cardFlag.alt = '';
+    brandMain.prepend(cardFlag);
+  }
+
+  rail.appendChild(heroContent);
+
+  if (brandSide) {
+    brandSide.classList.add('country-hero-side');
+    rail.appendChild(brandSide);
+  }
+
+  hero.appendChild(brandMain);
+
+  const contentSection = stage.closest('section.content');
+  const contentContainer = contentSection?.querySelector(':scope > .container');
+  stage.remove();
+
+  if (contentSection && (!contentContainer || !contentContainer.children.length)) {
+    contentSection.remove();
+  } else {
+    contentSection?.classList.add('country-brand-content-empty');
+  }
 };
 
 const renderCountryNewReviews = pageCountry => {
@@ -642,7 +1019,7 @@ const renderCountryNewReviews = pageCountry => {
       return `
         <a class="home-link-card" href="${detailUrl}">
           <span class="home-link-brand">
-            <img class="home-link-logo" src="${imageUrl}" alt="${normalizeText(brand.name)} logo" loading="lazy" decoding="async" />
+            <img class="home-link-logo" src="${imageUrl}" alt="${normalizeText(brand.name)} logo" loading="lazy" decoding="async"${getBrandBackgroundStyle(brand)} />
             <strong>${normalizeText(brand.name)}</strong>
           </span>
           <span>${compactBonus}</span>
@@ -835,6 +1212,167 @@ const renderBrandAvailabilityWidget = brandKey => {
   paymentSection.insertAdjacentElement('afterend', section);
 };
 
+const applyBrandInfoPairLayout = () => {
+  const countriesBlock = document.querySelector('body[data-brand] .brand-countries');
+  const paymentsBlock = document.querySelector('body[data-brand] .brand-payments');
+  if (!countriesBlock || !paymentsBlock) return;
+
+  if (
+    countriesBlock.closest('.brand-info-pair') &&
+    paymentsBlock.closest('.brand-info-pair')
+  ) {
+    return;
+  }
+
+  const countriesSection = countriesBlock.closest('section.container');
+  const paymentsSection = paymentsBlock.closest('section.container');
+  if (!countriesSection || !paymentsSection) return;
+
+  const pairSection = document.createElement('section');
+  pairSection.className = 'container brand-info-pair';
+
+  countriesSection.insertAdjacentElement('beforebegin', pairSection);
+  pairSection.append(countriesBlock, paymentsBlock);
+
+  if (countriesSection !== pairSection && !countriesSection.children.length) {
+    countriesSection.remove();
+  }
+
+  if (
+    paymentsSection !== countriesSection &&
+    paymentsSection !== pairSection &&
+    !paymentsSection.children.length
+  ) {
+    paymentsSection.remove();
+  }
+};
+
+const initBrandCountryCollapse = () => {
+  const block = document.querySelector('body[data-brand] .brand-countries');
+  const countriesEl = document.getElementById('brand-countries');
+  if (!block || !countriesEl) return;
+
+  const rowsToShow = 3;
+  let toggle = block.querySelector('.brand-country-toggle');
+
+  const syncToggleReference = () => {
+    const toggles = Array.from(block.querySelectorAll('.brand-country-toggle'));
+    toggle = toggles[0] || null;
+    toggles.slice(1).forEach(extraToggle => extraToggle.remove());
+    return toggle;
+  };
+
+  const updateToggleLabel = () => {
+    syncToggleReference();
+    if (!toggle) return;
+    const isExpanded = block.classList.contains('is-country-expanded');
+    toggle.setAttribute('aria-expanded', isExpanded ? 'true' : 'false');
+    const label = toggle.querySelector('.brand-country-toggle__text');
+    if (label) {
+      label.textContent = isExpanded ? 'Show fewer countries' : 'Show all countries';
+    }
+  };
+
+  const ensureToggle = () => {
+    syncToggleReference();
+    if (toggle) return toggle;
+
+    toggle = document.createElement('button');
+    toggle.type = 'button';
+    toggle.className = 'brand-country-toggle';
+    toggle.setAttribute('aria-controls', 'brand-countries');
+    toggle.innerHTML = `
+      <span class="brand-country-toggle__text">Show all countries</span>
+      <span class="brand-country-toggle__icon" aria-hidden="true"></span>
+    `;
+
+    toggle.addEventListener('click', () => {
+      block.classList.toggle('is-country-expanded');
+      updateToggleLabel();
+    });
+
+    countriesEl.insertAdjacentElement('afterend', toggle);
+    return toggle;
+  };
+
+  const reset = () => {
+    block.classList.remove('is-country-collapsible', 'is-country-expanded');
+    countriesEl.style.removeProperty('--brand-countries-collapsed-height');
+    countriesEl.style.removeProperty('--brand-countries-expanded-height');
+    block.querySelectorAll('.brand-country-toggle').forEach(countryToggle => countryToggle.remove());
+    toggle = null;
+  };
+
+  const sync = () => {
+    const countryItems = Array.from(countriesEl.querySelectorAll('.flag-container')).filter(
+      item => item.offsetParent !== null
+    );
+
+    if (!countryItems.length) {
+      reset();
+      return;
+    }
+
+    const rowTops = countryItems
+      .map(item => Math.round(item.offsetTop))
+      .reduce((tops, top) => {
+        if (!tops.some(existingTop => Math.abs(existingTop - top) <= 1)) {
+          tops.push(top);
+        }
+        return tops;
+      }, [])
+      .sort((a, b) => a - b);
+
+    const expandedHeight = Math.ceil(countriesEl.scrollHeight);
+    let collapsedHeight = 0;
+
+    if (rowTops.length > rowsToShow) {
+      const visibleRows = rowTops.slice(0, rowsToShow);
+      const visibleBottom = countryItems
+        .filter(item => visibleRows.some(top => Math.abs(top - Math.round(item.offsetTop)) <= 1))
+        .reduce((bottom, item) => Math.max(bottom, item.offsetTop + item.offsetHeight), 0);
+
+      collapsedHeight = Math.ceil(visibleBottom - rowTops[0] + 2);
+    } else if (countryItems.length > rowsToShow * 6) {
+      const itemHeight = countryItems
+        .slice(0, Math.min(countryItems.length, 6))
+        .reduce((height, item) => Math.max(height, item.offsetHeight), 0);
+      const rowGap = Number.parseFloat(window.getComputedStyle(countriesEl).rowGap) || 12;
+      collapsedHeight = Math.ceil(itemHeight * rowsToShow + rowGap * (rowsToShow - 1) + 2);
+    } else {
+      reset();
+      return;
+    }
+
+    if (collapsedHeight <= 0 || expandedHeight <= collapsedHeight + 8) {
+      reset();
+      return;
+    }
+
+    countriesEl.style.setProperty('--brand-countries-collapsed-height', `${collapsedHeight}px`);
+    countriesEl.style.setProperty('--brand-countries-expanded-height', `${expandedHeight}px`);
+    block.classList.add('is-country-collapsible');
+    ensureToggle();
+    updateToggleLabel();
+  };
+
+  const scheduleSync = () => window.requestAnimationFrame(sync);
+
+  scheduleSync();
+  window.setTimeout(scheduleSync, 250);
+
+  if (block.dataset.countryCollapseBound === 'true') return;
+  block.dataset.countryCollapseBound = 'true';
+
+  if ('ResizeObserver' in window) {
+    const observer = new ResizeObserver(scheduleSync);
+    observer.observe(block);
+    observer.observe(countriesEl);
+  }
+
+  window.addEventListener('resize', scheduleSync, { passive: true });
+};
+
 const enhanceBrandProsCons = () => {
   document.querySelectorAll('body[data-brand] .feature-card > strong').forEach(heading => {
     const label = normalizeText(heading.textContent).trim().toLowerCase();
@@ -907,6 +1445,112 @@ const enhanceFaqBlocks = () => {
   });
 };
 
+const initCasinosScrollNav = () => {
+  if (!document.body.classList.contains('casinos-page')) return null;
+
+  const alphaNav = document.querySelector('.hero .alpha-nav');
+  if (!alphaNav) return null;
+
+  const existingNav = document.querySelector('.casino-scroll-nav');
+  if (existingNav) return existingNav;
+
+  const scrollNav = document.createElement('nav');
+  scrollNav.className = 'casino-scroll-nav';
+  scrollNav.setAttribute('aria-label', 'Casino brand letter navigation');
+
+  const alphaClone = alphaNav.cloneNode(true);
+  alphaClone.classList.add('alpha-nav--floating');
+
+  const inner = document.createElement('div');
+  inner.className = 'casino-scroll-nav__inner';
+  inner.appendChild(alphaClone);
+
+  scrollNav.appendChild(inner);
+  document.body.appendChild(scrollNav);
+
+  return scrollNav;
+};
+
+const applyBrandHeroConcept = () => {
+  const hero = document.querySelector('body[data-brand] .hero');
+  const heroContent = hero?.querySelector(':scope > .hero-content');
+  if (!hero || !heroContent) return;
+
+  const existingWhy = hero.querySelector(':scope > .brand-hero-why');
+  if (existingWhy) {
+    hero.classList.add('brand-hero-with-why');
+    return;
+  }
+
+  const whySection = Array.from(
+    document.querySelectorAll('body[data-brand] section.features-section')
+  ).find(section => {
+    const title = section.querySelector(':scope > .title, :scope > h2');
+    return /why\s+players\s+choose/i.test(normalizeText(title?.textContent || ''));
+  });
+
+  if (!whySection) return;
+
+  whySection.classList.add('brand-hero-why');
+  hero.classList.add('brand-hero-with-why');
+  hero.appendChild(whySection);
+};
+
+const applyBrandLogoBackgrounds = () => {
+  const byDetailPath = new Map();
+  const byName = new Map();
+
+  BRANDS.forEach(brand => {
+    const color = normalizeBrandColor(brand.bgColor);
+    if (!color) return;
+
+    const detailPath = normalizePagePath(brand.urlDetail || '');
+    if (detailPath) byDetailPath.set(detailPath, brand);
+
+    const nameKey = normalizeBrandKey(brand.name);
+    if (nameKey && !byName.has(nameKey)) byName.set(nameKey, brand);
+  });
+
+  const findBrandByLinkOrName = (link, name) => {
+    const href = link?.getAttribute('href') || '';
+    const path = href ? normalizePagePath(href) : '';
+    return byDetailPath.get(path) || byName.get(normalizeBrandKey(name));
+  };
+
+  document.querySelectorAll('.casino-card').forEach(card => {
+    const detailLink = card.querySelector('.cta-secondary[href]');
+    const name = card.querySelector('.casino-name')?.textContent || '';
+    const brand = findBrandByLinkOrName(detailLink, name);
+    setBrandBackground(card, brand?.bgColor);
+  });
+
+  document.querySelectorAll('body.casinos-page .casino-list-row').forEach(row => {
+    const detailLink = row.querySelector('.casino-name a[href], .casino-list-logo a[href]');
+    const name = row.querySelector('.casino-name')?.textContent || '';
+    const brand = findBrandByLinkOrName(detailLink, name);
+    setBrandBackground(row, brand?.bgColor);
+    setBrandBackground(row.querySelector('.casino-list-logo'), brand?.bgColor);
+  });
+
+  document.querySelectorAll('.home-link-card').forEach(card => {
+    const detailLink = card.matches('a[href]') ? card : card.querySelector('a[href]');
+    const name = card.querySelector('.home-link-brand strong')?.textContent || '';
+    const brand = findBrandByLinkOrName(detailLink, name);
+    setBrandBackground(card, brand?.bgColor);
+    setBrandBackground(card.querySelector('.home-link-logo'), brand?.bgColor);
+  });
+
+  const brandLogoContainer = document.querySelector('body[data-brand] .brand-logo-container.hero-logo');
+  if (brandLogoContainer) {
+    const brandName =
+      document.body.dataset.brand ||
+      document.querySelector('body[data-brand] .hero h1, body[data-brand] .hero-content h1, body[data-brand] h1')?.textContent ||
+      '';
+    const brand = byName.get(normalizeBrandKey(brandName.replace(/\s+Review$/i, '')));
+    setBrandBackground(brandLogoContainer, brand?.bgColor);
+  }
+};
+
 // =====================
 // INIT FUNCTION
 // =====================
@@ -917,6 +1561,16 @@ export const initCasinoPage = () => {
   const siteBrandCountEl = document.getElementById('siteBrandCount');
 
   initFooterThemeSettings();
+  window.addEventListener('resize', requestPaymentIconSync, { passive: true });
+  document.addEventListener(
+    'load',
+    event => {
+      if (event.target instanceof HTMLImageElement && event.target.closest('.payment-icons')) {
+        requestPaymentIconSync();
+      }
+    },
+    true
+  );
 
   if (siteCountryCountEl) {
     siteCountryCountEl.textContent = COUNTRIES.length.toString();
@@ -930,25 +1584,19 @@ export const initCasinoPage = () => {
   }
 
   initHomeNewBrandsCarousel();
+  applyBrandLogoBackgrounds();
+  applyBrandHeroConcept();
 
   if (pageCountry) {
     ensureCountryBrandStage(pageCountry);
+    applyCountryHeroConcept();
     const brands = BRANDS.filter(b => b.countries?.some(c => c.toUpperCase() === pageCountry));
-    const country = COUNTRIES.find(c => c.code.toUpperCase() === pageCountry);
-    const countryBrandCountEl = document.getElementById('countryBrandCount');
-    const countryBrandCountLabelEl = document.getElementById('countryBrandCountLabel');
 
     renderBrandList(brands, '#brand-cards', 'No casinos available for this country.');
     renderCountryNewReviews(pageCountry);
     initCountryNewReviewsCarousel();
-
-    if (countryBrandCountEl) {
-      countryBrandCountEl.textContent = brands.length.toString();
-    }
-
-    if (countryBrandCountLabelEl) {
-      countryBrandCountLabelEl.textContent = `${normalizeText(country?.name || pageCountry)} Brands Reviewed`;
-    }
+    initCountryStickyReviews();
+    applyBrandLogoBackgrounds();
   }
 
   if (pageType === 'exclusive-offers') {
@@ -1003,6 +1651,7 @@ export const initCasinoPage = () => {
       const fragment = document.createDocumentFragment();
       topBrands.forEach(b => fragment.appendChild(createCasinoCard(b)));
       grid.replaceChildren(fragment);
+      requestPaymentIconSync();
     }
 
     if (country && viewAllWrapper && viewAllLink) {
@@ -1015,6 +1664,7 @@ export const initCasinoPage = () => {
   if (brandKey) {
     initStickyBrandTitle();
     enhanceBrandProsCons();
+    applyBrandInfoPairLayout();
     renderBrandAvailabilityWidget(brandKey);
 
     const brand = BRANDS.find(b => b.urlDetail?.toLowerCase().includes(brandKey));
@@ -1036,6 +1686,7 @@ export const initCasinoPage = () => {
             `;
           })
           .join('');
+        initBrandCountryCollapse();
       }
 
       if (paymentsEl && brand.payments?.length) {
@@ -1306,16 +1957,38 @@ export const initCasinoPage = () => {
   });
 
   const header = document.querySelector('.header');
-  if (header) {
-    let lastScroll = 0;
+  const casinosScrollNav = initCasinosScrollNav();
+  const syncHeaderHeight = () => {
+    if (!header) return;
+    document.documentElement.style.setProperty('--header-height', `${header.offsetHeight || 0}px`);
+  };
 
-    window.addEventListener('scroll', () => {
+  syncHeaderHeight();
+
+  if (header) {
+    let lastScroll = window.pageYOffset || document.documentElement.scrollTop || 0;
+
+    const updateScrollChrome = () => {
       const current = window.pageYOffset || document.documentElement.scrollTop;
-      const shouldHide = current > lastScroll && current > 100;
+      const isScrollingDown = current > lastScroll;
+      const shouldHide = isScrollingDown && current > 100;
+      const shouldShowScrollNav = Boolean(casinosScrollNav) && !shouldHide && current > 280;
+
       header.classList.toggle('hidden', shouldHide);
       document.body.classList.toggle('header-is-hidden', shouldHide);
-      lastScroll = current;
-    }, { passive: true });
+      document.body.classList.toggle('scroll-controls-visible', shouldShowScrollNav);
+      casinosScrollNav?.classList.toggle('is-visible', shouldShowScrollNav);
+
+      lastScroll = Math.max(current, 0);
+    };
+
+    updateScrollChrome();
+
+    window.addEventListener('scroll', updateScrollChrome, { passive: true });
+    window.addEventListener('resize', () => {
+      syncHeaderHeight();
+      updateScrollChrome();
+    });
   }
 
   const scrollToAnchor = hash => {
@@ -1324,7 +1997,10 @@ export const initCasinoPage = () => {
     if (!target) return;
 
     const headerHeight = header?.offsetHeight ?? 0;
-    const targetY = target.getBoundingClientRect().top + window.scrollY - headerHeight - 12;
+    const scrollNavHeight = casinosScrollNav?.classList.contains('is-visible')
+      ? casinosScrollNav.offsetHeight
+      : 0;
+    const targetY = target.getBoundingClientRect().top + window.scrollY - headerHeight - scrollNavHeight - 12;
     window.scrollTo({ top: Math.max(targetY, 0), behavior: 'smooth' });
   };
 
@@ -1376,6 +2052,13 @@ export const initCasinoPage = () => {
       tab.addEventListener('click', () => activateTab(tab));
     });
   });
+
+  applyBrandLogoBackgrounds();
+  if (brandKey) {
+    window.requestAnimationFrame(initBrandCountryCollapse);
+    window.addEventListener('load', initBrandCountryCollapse, { once: true });
+  }
+  requestPaymentIconSync();
 };
 
 document.addEventListener('DOMContentLoaded', initCasinoPage);

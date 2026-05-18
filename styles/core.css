@@ -1,4 +1,11 @@
 ﻿:root {
+  --font-main:
+    system-ui,
+    -apple-system,
+    "Segoe UI",
+    Roboto,
+    Arial,
+    sans-serif;
   --bg-main: #000000;
   --bg-surface: #02061788;
   --bg-card: #2b437749;
@@ -184,19 +191,26 @@ li {
   padding: 0;
 }
 
+html {
+  overflow-x: hidden;
+}
+
 /* =====================
    BASE
 ===================== */
 body {
-  font-family:
-    system-ui,
-    -apple-system,
-    BlinkMacSystemFont,
-    Arial,
-    sans-serif;
+  font-family: var(--font-main);
   background: var(--bg-main);
   color: var(--text-main);
   line-height: 1.6;
+  overflow-x: hidden;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
 }
 
 .container {
@@ -223,7 +237,7 @@ body {
   transition:
     transform 0.3s ease-in-out,
     box-shadow 0.3s ease;
-  background-color: var(--bg-surface);
+  background-color: #05070d;
 }
 
 .header.hidden {
@@ -247,10 +261,10 @@ body {
 .logo {
   display: flex;
   align-items: center;
-  gap: 10px;
-  font-size: 26px;
+  gap: 9px;
+  font-size: 20px;
   font-weight: 800;
-  letter-spacing: -0.5px;
+  letter-spacing: 0;
   color: var(--text-main);
   text-decoration: none;
   cursor: pointer;
@@ -264,8 +278,8 @@ body {
 }
 
 .logo-icon {
-  width: 34px;
-  height: 34px;
+  width: 28px;
+  height: 28px;
   object-fit: contain;
 }
 
@@ -359,10 +373,10 @@ body {
 }
 
 .nav-dropdown-menu {
-    position: absolute;
-    top: 100%;
-    left: 50%;
-    transform: translateX(-50%) translateY(-10px);
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-10px);
 
   width: min(calc(var(--site-max-width) - 34px), calc(100vw - 64px));
   display: block;
@@ -455,7 +469,7 @@ body {
 .hero h1 {
   font-size: clamp(32px, 5vw, 52px);
   font-weight: 800;
-  letter-spacing: -0.6px;
+  letter-spacing: 0;
 }
 
 .hero p {
@@ -1061,7 +1075,7 @@ body {
 .mobile-menu-logo {
   font-size: 28px;
   font-weight: 800;
-  letter-spacing: -1px;
+  letter-spacing: 0;
   color: var(--text-main);
 }
 
@@ -3113,7 +3127,7 @@ html[data-theme='light'] body {
 }
 
 html[data-theme='light'] .header {
-  background-color: rgba(2, 6, 23, 0.96);
+  background-color: #05070d;
   border-bottom: none;
 }
 
@@ -3496,7 +3510,7 @@ html[data-theme='light'] .theme-settings-option:hover {
   }
 
   html:not([data-theme='dark']) .header {
-    background-color: rgba(2, 6, 23, 0.96);
+    background-color: #05070d;
     border-bottom: none;
   }
 
