@@ -5222,9 +5222,10 @@ body.casinos-page .hero .alpha-nav {
   }
 
   body[data-country] .hero h1 {
-    max-width: 11.5ch !important;
-    font-size: clamp(30px, 8.3vw, 38px) !important;
-    line-height: 1.04 !important;
+    max-width: 23ch !important;
+    font-size: clamp(27px, 7vw, 34px) !important;
+    line-height: 1.02 !important;
+    text-wrap: balance;
   }
 
   body[data-country] .hero p {
@@ -5250,23 +5251,26 @@ body.casinos-page .hero .alpha-nav {
   }
 
   body[data-country] .hero + .content .section-head {
-    margin-bottom: 12px !important;
+    margin-bottom: 10px !important;
   }
 
   body[data-country] .hero + .content .section-head h2 {
-    max-width: 14ch !important;
-    margin-bottom: 12px !important;
-    padding-bottom: 12px !important;
-    font-size: clamp(23px, 6.4vw, 30px) !important;
-    line-height: 1.08 !important;
+    max-width: 30ch !important;
+    margin-bottom: 10px !important;
+    padding-bottom: 10px !important;
+    font-size: clamp(19px, 5.2vw, 24px) !important;
+    line-height: 1.02 !important;
     overflow-wrap: normal;
+    text-wrap: balance;
   }
 
   body[data-country] .hero + .content .intro {
-    max-width: 32ch !important;
+    max-width: 34ch !important;
     margin-top: 0 !important;
-    margin-bottom: 18px !important;
+    margin-bottom: 14px !important;
     overflow-wrap: break-word;
+    font-size: 13px !important;
+    line-height: 1.45 !important;
     text-align: center !important;
     text-wrap: auto;
   }
