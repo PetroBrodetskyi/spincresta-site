@@ -18,6 +18,21 @@ const normalizeText = value => {
   return MOJIBAKE_FIXES.reduce((text, [bad, good]) => text.split(bad).join(good), value);
 };
 
+const escapeHtml = value =>
+  normalizeText(value)
+    .toString()
+    .replace(
+      /[&<>"']/g,
+      char =>
+        ({
+          '&': '&amp;',
+          '<': '&lt;',
+          '>': '&gt;',
+          '"': '&quot;',
+          "'": '&#39;',
+        })[char]
+    );
+
 const normalizeAssetPath = path => {
   if (!path) return '';
   if (
@@ -66,6 +81,222 @@ const countryPagePath = slug => `/online-casinos/${slug}/`;
 const iconPath = slug => `/icons/${slug}-flag-icon.svg`;
 const paymentPath = method => `/icons/payments/${method}.svg`;
 const pagePath = fileName => normalizePagePath(fileName);
+
+const STATIC_SEARCH_ITEMS = [
+  {
+    label: 'Top Casinos',
+    type: 'Page',
+    href: '/top-casinos/',
+    keywords: 'best casinos top casino reviews worldwide',
+  },
+  {
+    label: 'New Casinos',
+    type: 'Page',
+    href: '/new-casinos/',
+    keywords: 'new casino reviews fresh brands latest',
+  },
+  {
+    label: 'Top Rated',
+    type: 'Page',
+    href: '/top-rated/',
+    keywords: 'top rated trusted casino reviews rating',
+  },
+  {
+    label: 'Exclusive',
+    type: 'Page',
+    href: '/exclusive-offers/',
+    keywords: 'exclusive offers private bonuses promotions deals',
+  },
+  {
+    label: 'Casinos & Betting',
+    type: 'Page',
+    href: '/casinos-and-betting/',
+    keywords: 'all brands casinos betting sportsbooks a to z',
+  },
+  {
+    label: 'Payment Methods',
+    type: 'Page',
+    href: '/payment-methods/',
+    keywords: 'payments visa mastercard crypto bank transfer ewallets',
+  },
+  {
+    label: 'Responsible Gambling',
+    type: 'Page',
+    href: '/responsible-gambling/',
+    keywords: 'responsible gambling safer play limits help',
+  },
+  {
+    label: 'About SpinCresta',
+    type: 'Page',
+    href: '/about/',
+    keywords: 'about spincresta team reviews mission',
+  },
+];
+
+const normalizeSearchValue = value =>
+  normalizeText(value)
+    .toString()
+    .toLowerCase()
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .replace(/[^a-z0-9]+/g, ' ')
+    .trim();
+
+const getSiteSearchItems = () => {
+  const countryByCode = new Map(COUNTRIES.map(country => [country.code.toUpperCase(), country]));
+  const items = new Map();
+
+  const addItem = item => {
+    if (!item?.href || items.has(item.href)) return;
+    const haystack = normalizeSearchValue(
+      [item.label, item.type, item.summary, item.keywords].filter(Boolean).join(' ')
+    );
+    items.set(item.href, { ...item, haystack });
+  };
+
+  STATIC_SEARCH_ITEMS.forEach(addItem);
+
+  COUNTRIES.forEach(country => {
+    addItem({
+      label: `${country.name} casinos`,
+      type: 'Country guide',
+      href: countryPagePath(country.slug),
+      summary: `Online casinos and betting in ${country.name}`,
+      keywords: `${country.code} ${country.slug}`,
+    });
+  });
+
+  BRANDS.filter(brand => brand.hasDetailPage && brand.urlDetail).forEach(brand => {
+    const brandCountries = (brand.countries || [])
+      .map(code => countryByCode.get(code.toUpperCase()))
+      .filter(Boolean);
+    const countries = (brand.countries || [])
+      .map(code => countryByCode.get(code.toUpperCase())?.name || code)
+      .join(' ');
+
+    addItem({
+      label: brand.name,
+      type: 'Brand review',
+      href: normalizePagePath(brand.urlDetail),
+      summary: brand.bonus || 'Casino review and player checks',
+      keywords: [countries, brand.payments?.join(' ')].filter(Boolean).join(' '),
+      flags: brandCountries.map(country => ({
+        name: country.name,
+        slug: country.slug,
+      })),
+    });
+  });
+
+  return Array.from(items.values());
+};
+
+const createSiteSearch = variant => {
+  const searchItems = getSiteSearchItems();
+  const form = document.createElement('form');
+  const id = `site-search-${variant}`;
+  form.className = `site-search site-search--${variant}`;
+  form.setAttribute('role', 'search');
+  form.setAttribute('aria-label', 'Search SpinCresta');
+  form.innerHTML = `
+    <label class="site-search-label" for="${id}">Search SpinCresta</label>
+    <div class="site-search-shell">
+      <img class="site-search-icon" src="/icons/ui/search-icon.svg" alt="" aria-hidden="true" loading="lazy" decoding="async" />
+      <input id="${id}" class="site-search-input" type="search" placeholder="Search" autocomplete="off" spellcheck="false" />
+    </div>
+    <div class="site-search-results" hidden></div>
+  `;
+
+  const input = form.querySelector('.site-search-input');
+  const resultsEl = form.querySelector('.site-search-results');
+  let activeResults = [];
+
+  const closeResults = () => {
+    resultsEl.hidden = true;
+    resultsEl.innerHTML = '';
+    activeResults = [];
+  };
+
+  const renderResults = () => {
+    const query = normalizeSearchValue(input.value);
+    if (!query) {
+      closeResults();
+      return;
+    }
+
+    const terms = query.split(/\s+/).filter(Boolean);
+    activeResults = searchItems
+      .filter(item => terms.every(term => item.haystack.includes(term)))
+      .slice(0, 8);
+
+    resultsEl.hidden = false;
+    resultsEl.innerHTML = activeResults.length
+      ? activeResults
+          .map(item => {
+            const flagsHtml = item.flags?.length
+              ? `
+                <span class="site-search-flags" aria-label="Available countries">
+                  ${item.flags
+                    .map(
+                      flag => `
+                        <img
+                          class="site-search-flag"
+                          src="${iconPath(flag.slug)}"
+                          alt="${escapeHtml(flag.name)}"
+                          loading="lazy"
+                          decoding="async"
+                        />
+                      `
+                    )
+                    .join('')}
+                </span>
+              `
+              : '';
+
+            return `
+              <a class="site-search-result" href="${escapeHtml(item.href)}">
+                <span class="site-search-result-type">${escapeHtml(item.type)}</span>
+                <span class="site-search-result-title">
+                  <strong>${escapeHtml(item.label)}</strong>
+                  ${flagsHtml}
+                </span>
+                <span>${escapeHtml(item.summary || '')}</span>
+              </a>
+            `;
+          })
+          .join('')
+      : '<div class="site-search-empty">No matches found</div>';
+  };
+
+  form.addEventListener('submit', event => {
+    event.preventDefault();
+    if (activeResults[0]?.href) {
+      window.location.href = activeResults[0].href;
+    }
+  });
+
+  input.addEventListener('input', renderResults);
+  input.addEventListener('focus', renderResults);
+  input.addEventListener('keydown', event => {
+    if (event.key === 'Escape') {
+      input.blur();
+      closeResults();
+    }
+  });
+
+  document.addEventListener('click', event => {
+    if (!form.contains(event.target)) closeResults();
+  });
+
+  return form;
+};
+
+const initDesktopSiteSearch = () => {
+  const headerInner = document.querySelector('.header-inner');
+  const nav = headerInner?.querySelector('.nav');
+  if (!headerInner || !nav || headerInner.querySelector('.site-search--desktop')) return;
+
+  headerInner.insertBefore(createSiteSearch('desktop'), nav);
+};
 
 const getSystemTheme = () => {
   if (typeof window === 'undefined' || typeof window.matchMedia !== 'function') {
@@ -277,7 +508,7 @@ const initFooterThemeSettings = () => {
   backdrop.hidden = true;
   backdrop.innerHTML = `
     <div class="theme-settings-modal" role="dialog" aria-modal="true" aria-labelledby="themeSettingsTitle">
-      <button type="button" class="theme-settings-close" aria-label="Close settings">×</button>
+      <button type="button" class="theme-settings-close" aria-label="Close settings"></button>
       <h3 id="themeSettingsTitle">Theme</h3>
       <p>Choose the theme you want to use on SpinCresta.</p>
       <div class="theme-settings-options" role="group" aria-label="Theme options">
@@ -633,10 +864,9 @@ const initVerticalLinkCarousel = ({
       item.style.setProperty('--carousel-row', String(relativeIndex));
     });
 
-    carousel.style.setProperty(
-      '--carousel-progress',
-      `${((activeCycleIndex + 1) / originalCount) * 100}%`
-    );
+    const progressValue = `${((activeCycleIndex + 1) / originalCount) * 100}%`;
+    carousel.style.setProperty('--carousel-progress', progressValue);
+    controls?.style.setProperty('--carousel-progress', progressValue);
     carousel.dataset.activeIndex = String(activeCycleIndex + 1);
   };
 
@@ -734,8 +964,8 @@ const initVerticalLinkCarousel = ({
     if (!items.length) return;
 
     const visibleCount = getVisibleCount();
-    const firstItem = items[0];
-    const lastVisibleItem = items[Math.min(visibleCount - 1, items.length - 1)];
+    const firstItem = items[index] || items[0];
+    const lastVisibleItem = items[Math.min(index + visibleCount - 1, items.length - 1)];
     const height =
       lastVisibleItem.offsetTop + lastVisibleItem.offsetHeight - firstItem.offsetTop;
 
@@ -751,6 +981,7 @@ const initVerticalLinkCarousel = ({
     track.style.transition = animated ? 'transform 0.68s cubic-bezier(0.22, 1, 0.36, 1)' : 'none';
     track.style.transform = `translateY(-${targetTop - baseTop}px)`;
     syncItemState();
+    setViewportHeight();
   };
 
   const clearTimers = () => {
@@ -1039,12 +1270,12 @@ const initStickyBrandTitle = () => {
   const brandKey = document.body.dataset.brand?.toLowerCase();
   if (!brandKey) return;
 
-  const hero = document.querySelector('.hero');
-  const heading = hero?.querySelector('h1');
-  const brandLogo = hero?.querySelector('.brand-logo');
-  const heroCta = hero?.querySelector('a.cta-brands[href]');
+  const source = document.querySelector('.brand-sticky-aside') || document.querySelector('.hero');
+  const heading = source?.querySelector('h1');
+  const brandLogo = source?.querySelector('.brand-logo');
+  const heroCta = source?.querySelector('a.cta-brands[href]');
   const header = document.querySelector('.header');
-  if (!hero || !heading || !header) return;
+  if (!source || !heading || !header) return;
   if (document.querySelector('.brand-sticky-title')) return;
 
   const titleText = normalizeText(heading.textContent).trim();
@@ -1496,6 +1727,43 @@ const applyBrandHeroConcept = () => {
   hero.appendChild(whySection);
 };
 
+const applyBrandStickyReviewLayout = () => {
+  const hero = document.querySelector('body[data-brand] .hero');
+  const heroContent = hero?.querySelector(':scope > .hero-content');
+  const allCountries = document.querySelector('body[data-brand] .all-countries');
+  if (!hero || !heroContent || !allCountries || document.querySelector('.brand-sticky-review-layout')) {
+    return;
+  }
+
+  const layout = document.createElement('section');
+  layout.className = 'container brand-sticky-review-layout';
+
+  const aside = document.createElement('aside');
+  aside.className = 'brand-sticky-aside';
+
+  const main = document.createElement('div');
+  main.className = 'brand-sticky-main';
+
+  hero.insertAdjacentElement('beforebegin', layout);
+  aside.appendChild(heroContent);
+
+  Array.from(hero.children).forEach(child => {
+    main.appendChild(child);
+  });
+
+  let sibling = hero.nextElementSibling;
+  while (sibling && sibling !== allCountries) {
+    const nextSibling = sibling.nextElementSibling;
+    main.appendChild(sibling);
+    sibling = nextSibling;
+  }
+
+  layout.append(aside, main);
+  hero.remove();
+  document.body.classList.add('has-brand-sticky-layout');
+  document.documentElement.classList.add('has-brand-sticky-layout');
+};
+
 const applyBrandLogoBackgrounds = () => {
   const byDetailPath = new Map();
   const byName = new Map();
@@ -1586,6 +1854,7 @@ export const initCasinoPage = () => {
   initHomeNewBrandsCarousel();
   applyBrandLogoBackgrounds();
   applyBrandHeroConcept();
+  applyBrandStickyReviewLayout();
 
   if (pageCountry) {
     ensureCountryBrandStage(pageCountry);
@@ -1700,6 +1969,9 @@ export const initCasinoPage = () => {
           .join('');
       }
     }
+
+    applyBrandStickyReviewLayout();
+    initBrandCountryCollapse();
   }
 
   const promoCopyBoxes = document.querySelectorAll('[data-copy-code]');
@@ -1785,6 +2057,8 @@ export const initCasinoPage = () => {
     navDropdownLink.append(dropdownIcon);
   }
 
+  initDesktopSiteSearch();
+
   if (navDropdown && navDropdownLink && navDropdownMenu && typeof window.matchMedia === 'function') {
     const desktopDropdownMedia = window.matchMedia('(min-width: 1025px)');
     let closeTimerId = null;
@@ -1868,23 +2142,22 @@ export const initCasinoPage = () => {
   if (burger && mobileMenu) {
     const mobileMenuInner = mobileMenu.querySelector('.mobile-menu-inner');
     if (!mobileMenuInner) return;
-    const reviewsHref = pageCountry ? '#expert-review' : pagePath('top-rated.html');
 
     mobileMenuInner.innerHTML = `
     <button class="submenu-toggle" aria-expanded="false">Countries</button>
     <a href="${pagePath('top-casinos.html')}">Top Casinos</a>
     <a href="${pagePath('new-casinos.html')}">New Casinos</a>
     <a href="${pagePath('top-rated.html')}">Top Rated</a>
-    <a href="${pagePath('exclusive-offers.html')}">Exclusive Offers</a>
-    <a href="#">Bonuses</a>
-    <a href="${reviewsHref}">Reviews</a>
-    <a href="#">Promotions</a>
-    <a href="${pagePath('about.html')}">About</a>
+    <a href="${pagePath('exclusive-offers.html')}">Exclusive</a>
     <button type="button" class="mobile-theme-settings" data-theme-settings-trigger aria-haspopup="dialog">Settings</button>
   `;
 
     const submenuToggle = mobileMenuInner.querySelector('.submenu-toggle');
     if (!submenuToggle) return;
+
+    if (!mobileMenuInner.querySelector('.site-search')) {
+      mobileMenuInner.prepend(createSiteSearch('mobile'));
+    }
 
     const countriesSubmenu = document.createElement('div');
     countriesSubmenu.className = 'mobile-submenu';
