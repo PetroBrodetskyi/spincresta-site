@@ -2537,47 +2537,6 @@ body[data-country] .content-article .timeline a[href*='/responsible-gambling/'] 
   gap: 14px;
 }
 
-.home-editorial-layout {
-  display: grid;
-  grid-template-columns: var(--split-side-column) minmax(0, 1fr);
-  gap: var(--split-gap);
-  align-items: start;
-  margin: 8px 0 12px;
-}
-
-.home-editorial-sidebar {
-  min-width: 0;
-  width: 100%;
-  max-width: var(--split-side-max);
-  display: flex;
-  flex-direction: column;
-  gap: 18px;
-}
-
-.home-editorial-sidebar > .home-insight {
-  margin: 0;
-}
-
-.home-editorial-sidebar .home-insight-card {
-  height: auto;
-}
-
-.home-editorial-sidebar .home-insight-new-brands {
-  width: 100%;
-  max-width: var(--split-side-max);
-}
-
-.home-editorial-main {
-  min-width: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 18px;
-}
-
-.home-editorial-main > .content {
-  margin: 0;
-}
-
 .home-country-editorial {
   display: grid;
   grid-template-columns: var(--split-side-column) minmax(0, 1fr);
@@ -2647,6 +2606,37 @@ body[data-country] .content-article .timeline a[href*='/responsible-gambling/'] 
 
 .home-secondary-editorial-main > .content {
   margin: 0;
+}
+
+.home-uk-review-layout {
+  display: grid;
+  grid-template-columns: var(--split-side-column) minmax(0, 1fr);
+  gap: var(--split-gap);
+  align-items: start;
+  margin: 8px 0 12px;
+}
+
+.home-uk-review-sidebar {
+  min-width: 0;
+  width: 100%;
+  max-width: var(--split-side-max);
+}
+
+.home-uk-review-sidebar > .home-insight,
+.home-uk-review-main {
+  margin: 0;
+}
+
+.home-uk-review-sidebar .home-insight-card {
+  height: auto;
+}
+
+.home-uk-review-main {
+  min-width: 0;
+}
+
+.home-uk-review-main .cards-main {
+  gap: 18px;
 }
 
 .home-top-insights .home-stats,
@@ -2829,26 +2819,6 @@ body[data-country] .content-article .timeline a[href*='/responsible-gambling/'] 
     justify-self: stretch;
   }
 
-  .home-editorial-layout {
-    grid-template-columns: 1fr;
-    gap: 16px;
-    margin: 6px 0 10px;
-  }
-
-  .home-editorial-sidebar {
-    max-width: none;
-    gap: 16px;
-  }
-
-  .home-editorial-sidebar .home-insight-new-brands {
-    max-width: none;
-    width: 100%;
-  }
-
-  .home-editorial-main {
-    gap: 16px;
-  }
-
   .home-country-editorial {
     grid-template-columns: 1fr;
     gap: 16px;
@@ -2879,6 +2849,16 @@ body[data-country] .content-article .timeline a[href*='/responsible-gambling/'] 
   .home-secondary-editorial-main {
     grid-column: 1;
     gap: 16px;
+  }
+
+  .home-uk-review-layout {
+    grid-template-columns: 1fr;
+    gap: 16px;
+    margin: 6px 0 10px;
+  }
+
+  .home-uk-review-sidebar {
+    max-width: none;
   }
 
   .country-brand-stage {

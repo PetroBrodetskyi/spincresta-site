@@ -581,6 +581,41 @@ const initFooterThemeSettings = () => {
   });
 };
 
+const syncFooterBrandDirectory = () => {
+  const grids = Array.from(document.querySelectorAll('.footer-brand-grid'));
+  if (!grids.length) return;
+
+  const brandLinks = BRANDS.filter(brand => brand.hasDetailPage && brand.urlDetail)
+    .map(brand => ({
+      href: normalizePagePath(brand.urlDetail),
+      label: normalizeText(brand.name),
+    }))
+    .filter(item => item.href && item.label)
+    .sort((a, b) => a.label.localeCompare(b.label, undefined, { numeric: true, sensitivity: 'base' }));
+
+  const uniqueLinks = Array.from(new Map(brandLinks.map(item => [item.href, item])).values());
+  const columnCount = 5;
+  const columnSize = Math.ceil(uniqueLinks.length / columnCount);
+
+  grids.forEach(grid => {
+    grid.replaceChildren(
+      ...Array.from({ length: columnCount }, (_, columnIndex) => {
+        const column = document.createElement('div');
+        column.className = 'footer-brand-column';
+
+        uniqueLinks.slice(columnIndex * columnSize, (columnIndex + 1) * columnSize).forEach(item => {
+          const link = document.createElement('a');
+          link.href = item.href;
+          link.textContent = item.label;
+          column.appendChild(link);
+        });
+
+        return column;
+      })
+    );
+  });
+};
+
 const createCasinoCard = ({
   name,
   bonus,
@@ -2058,6 +2093,7 @@ export const initCasinoPage = () => {
   }
 
   initDesktopSiteSearch();
+  syncFooterBrandDirectory();
 
   if (navDropdown && navDropdownLink && navDropdownMenu && typeof window.matchMedia === 'function') {
     const desktopDropdownMedia = window.matchMedia('(min-width: 1025px)');
