@@ -841,6 +841,9 @@ const initVerticalLinkCarousel = ({
 
   const desktopVisibleCount = Number(carousel.dataset.visibleCount) || 4;
   const mobileVisibleCount = Number(carousel.dataset.mobileVisibleCount) || 2;
+  const isCountryReviewsCarousel = carousel.classList.contains('country-new-reviews-carousel');
+  const compactDesktopVisibleCount =
+    Number(carousel.dataset.compactVisibleCount) || (isCountryReviewsCarousel ? 3 : desktopVisibleCount);
   const rotateMs = Number(carousel.dataset.rotateMs) || 3800;
   const originalMarkup = track.innerHTML;
   const originalCount = track.querySelectorAll('.home-link-card').length;
@@ -853,6 +856,10 @@ const initVerticalLinkCarousel = ({
     typeof window.matchMedia === 'function'
       ? window.matchMedia('(prefers-reduced-motion: reduce)')
       : { matches: false };
+  const compactHeightMedia =
+    typeof window.matchMedia === 'function'
+      ? window.matchMedia('(max-height: 980px)')
+      : { matches: window.innerHeight <= 980 };
 
   let items = [];
   let index = 0;
@@ -860,7 +867,15 @@ const initVerticalLinkCarousel = ({
   let resetTimerId = null;
   let controls = null;
 
-  const getVisibleCount = () => (desktopMedia.matches ? desktopVisibleCount : mobileVisibleCount);
+  const getVisibleCount = () => {
+    if (!desktopMedia.matches) return mobileVisibleCount;
+
+    if (isCountryReviewsCarousel && compactHeightMedia.matches) {
+      return Math.min(desktopVisibleCount, compactDesktopVisibleCount);
+    }
+
+    return desktopVisibleCount;
+  };
 
   const refreshItems = () => {
     items = Array.from(track.querySelectorAll('.home-link-card'));
@@ -1121,6 +1136,11 @@ const initVerticalLinkCarousel = ({
     if (track.dataset.carouselBuilt !== 'true') return;
 
     window.requestAnimationFrame(() => {
+      if (Number(track.dataset.activeVisibleCount) !== getVisibleCount()) {
+        handleModeChange();
+        return;
+      }
+
       refreshItems();
       setViewportHeight();
       setPosition(index, false);
@@ -1130,9 +1150,11 @@ const initVerticalLinkCarousel = ({
   if (typeof desktopMedia.addEventListener === 'function') {
     desktopMedia.addEventListener('change', handleModeChange);
     reducedMotionMedia.addEventListener('change', handleModeChange);
+    compactHeightMedia.addEventListener('change', handleModeChange);
   } else if (typeof desktopMedia.addListener === 'function') {
     desktopMedia.addListener(handleModeChange);
     reducedMotionMedia.addListener(handleModeChange);
+    compactHeightMedia.addListener(handleModeChange);
   }
 
   refreshItems();
