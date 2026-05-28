@@ -1207,8 +1207,6 @@ const ensureCountryBrandStage = pageCountry => {
   const container = brandCards.closest('.container');
   if (!container) return;
 
-  const country = COUNTRIES.find(c => c.code.toUpperCase() === pageCountry);
-  const countryName = normalizeText(country?.name || pageCountry);
   const sectionHead = container.querySelector('.section-head');
   const intro = container.querySelector('.intro');
   const loadMoreWrapper = container.querySelector('.load-more-wrapper');
@@ -1216,22 +1214,6 @@ const ensureCountryBrandStage = pageCountry => {
   const stage = document.createElement('div');
   stage.className = 'country-brand-stage';
   stage.innerHTML = `
-    <div class="country-brand-side">
-      <aside class="home-insight country-new-reviews" aria-label="New reviews for ${countryName} players">
-        <div class="home-insight-card">
-          <div class="home-insight-head">
-            <h2>New Reviews</h2>
-            <p>
-              Here you can find fresh brand reviews for ${countryName}, along with new bonus pages,
-              updated payment options, and useful account details in one place.
-            </p>
-          </div>
-          <div class="country-new-reviews-carousel" data-visible-count="4" data-rotate-ms="4000">
-            <div class="home-link-grid home-link-grid-vertical country-new-reviews-track" id="country-new-reviews"></div>
-          </div>
-        </div>
-      </aside>
-    </div>
     <div class="country-brand-main"></div>
   `;
 
@@ -1939,9 +1921,6 @@ export const initCasinoPage = () => {
     const brands = BRANDS.filter(b => b.countries?.some(c => c.toUpperCase() === pageCountry));
 
     renderBrandList(brands, '#brand-cards', 'No casinos available for this country.');
-    renderCountryNewReviews(pageCountry);
-    initCountryNewReviewsCarousel();
-    initCountryStickyReviews();
     applyBrandLogoBackgrounds();
   }
 
@@ -1986,16 +1965,18 @@ export const initCasinoPage = () => {
 
     titleEl.textContent = `Top ${country?.name || code} Casinos`;
 
-    const topBrands = BRANDS.filter(b => b.top?.includes(code) && b.countries?.includes(code)).slice(
-      0,
-      limit
-    );
+    const topBrands = BRANDS.filter(b => b.top?.includes(code) && b.countries?.includes(code));
+    const needsTopCasinosFill = document.body.dataset.page === 'top-casinos' && topBrands.length < limit;
+    const countryFillBrands = needsTopCasinosFill
+      ? BRANDS.filter(b => b.countries?.includes(code) && !topBrands.includes(b))
+      : [];
+    const renderedBrands = [...topBrands, ...countryFillBrands].slice(0, limit);
 
-    if (!topBrands.length) {
+    if (!renderedBrands.length) {
       grid.innerHTML = `<p>No top casinos available.</p>`;
     } else {
       const fragment = document.createDocumentFragment();
-      topBrands.forEach(b => fragment.appendChild(createCasinoCard(b)));
+      renderedBrands.forEach(b => fragment.appendChild(createCasinoCard(b)));
       grid.replaceChildren(fragment);
       requestPaymentIconSync();
     }
