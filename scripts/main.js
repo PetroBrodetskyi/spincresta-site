@@ -293,9 +293,29 @@ const createSiteSearch = variant => {
 const initDesktopSiteSearch = () => {
   const headerInner = document.querySelector('.header-inner');
   const nav = headerInner?.querySelector('.nav');
-  if (!headerInner || !nav || headerInner.querySelector('.site-search--desktop')) return;
+  if (!headerInner || !nav) return null;
 
-  headerInner.insertBefore(createSiteSearch('desktop'), nav);
+  let search = headerInner.querySelector('.site-search--desktop');
+  if (!search) {
+    search = createSiteSearch('desktop');
+    search.id = 'site-search-desktop-panel';
+    headerInner.append(search);
+  }
+
+  if (!headerInner.querySelector('.site-search-trigger--desktop')) {
+    const trigger = document.createElement('button');
+    trigger.type = 'button';
+    trigger.className = 'site-search-trigger site-search-trigger--desktop';
+    trigger.setAttribute('aria-label', 'Open search');
+    trigger.setAttribute('aria-controls', search.id);
+    trigger.setAttribute('aria-expanded', 'false');
+    trigger.innerHTML = `
+      <img class="site-search-trigger-icon" src="/icons/ui/search-icon.svg" alt="" aria-hidden="true" loading="lazy" decoding="async" />
+    `;
+    headerInner.insertBefore(trigger, nav);
+  }
+
+  return search;
 };
 
 const getSystemTheme = () => {
@@ -2104,75 +2124,208 @@ export const initCasinoPage = () => {
   const navDropdown = document.querySelector('.nav-dropdown');
   const navDropdownLink = navDropdown?.querySelector('.nav-dropdown-link');
   const navDropdownMenu = navDropdown?.querySelector('.nav-dropdown-menu');
+  const desktopNavHeader = document.querySelector('.header');
+  const desktopNavHeaderInner = document.querySelector('.header-inner');
 
-  if (navDropdownLink && !navDropdownLink.querySelector('.nav-dropdown-icon')) {
-    const dropdownIcon = document.createElement('img');
-    dropdownIcon.className = 'nav-dropdown-icon';
-    dropdownIcon.src = '/icons/ui/angle-bottom-icon.svg';
-    dropdownIcon.alt = '';
-    dropdownIcon.setAttribute('aria-hidden', 'true');
-    navDropdownLink.append(dropdownIcon);
-  }
+  navDropdownLink?.querySelector('.nav-dropdown-icon')?.remove();
 
   initDesktopSiteSearch();
+  const desktopSearch = desktopNavHeaderInner?.querySelector('.site-search--desktop');
+  const desktopSearchTrigger = desktopNavHeaderInner?.querySelector('.site-search-trigger--desktop');
+  const desktopSearchInput = desktopSearch?.querySelector('.site-search-input');
   syncFooterBrandDirectory();
 
-  if (navDropdown && navDropdownLink && navDropdownMenu && typeof window.matchMedia === 'function') {
-    const desktopDropdownMedia = window.matchMedia('(min-width: 1025px)');
-    let closeTimerId = null;
+  let closeDesktopCountries = () => {};
+  let closeDesktopSearch = () => {};
 
-    const syncDropdownState = isOpen => {
-      navDropdown.classList.toggle('is-open', isOpen);
-      navDropdownLink.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+  if (
+    desktopSearch &&
+    desktopSearchTrigger &&
+    desktopSearchInput &&
+    desktopNavHeader &&
+    desktopNavHeaderInner &&
+    typeof window.matchMedia === 'function'
+  ) {
+    const desktopSearchMedia = window.matchMedia('(min-width: 1025px)');
+    let searchHeightTimerId = null;
+    let searchFocusTimerId = null;
+
+    const syncSearchHeaderHeight = () => {
+      window.clearTimeout(searchHeightTimerId);
+      window.requestAnimationFrame(() => {
+        document.documentElement.style.setProperty('--header-height', `${desktopNavHeader.offsetHeight || 0}px`);
+      });
+      searchHeightTimerId = window.setTimeout(() => {
+        document.documentElement.style.setProperty('--header-height', `${desktopNavHeader.offsetHeight || 0}px`);
+      }, 320);
     };
 
-    const clearDropdownTimer = () => {
-      if (!closeTimerId) return;
-      window.clearTimeout(closeTimerId);
-      closeTimerId = null;
-    };
+    const syncSearchState = isOpen => {
+      const nextOpen = Boolean(isOpen && desktopSearchMedia.matches);
+      window.clearTimeout(searchFocusTimerId);
+      if (nextOpen) closeDesktopCountries();
+      desktopNavHeader.classList.toggle('search-expanded', nextOpen);
+      desktopNavHeaderInner.classList.toggle('search-expanded', nextOpen);
+      desktopSearchTrigger.classList.toggle('is-active', nextOpen);
+      desktopSearchTrigger.setAttribute('aria-expanded', nextOpen ? 'true' : 'false');
+      desktopSearchTrigger.setAttribute('aria-label', nextOpen ? 'Close search' : 'Open search');
+      desktopSearch.setAttribute('aria-hidden', nextOpen ? 'false' : 'true');
 
-    const openDropdown = () => {
-      if (!desktopDropdownMedia.matches) {
-        syncDropdownState(false);
-        return;
+      if (nextOpen) {
+        searchFocusTimerId = window.setTimeout(() => {
+          desktopSearchInput.focus({ preventScroll: true });
+        }, 220);
+      } else {
+        desktopSearchInput.blur();
       }
 
-      clearDropdownTimer();
-      syncDropdownState(true);
+      syncSearchHeaderHeight();
+    };
+
+    closeDesktopSearch = () => syncSearchState(false);
+    syncSearchState(false);
+
+    desktopSearchTrigger.addEventListener('click', () => {
+      syncSearchState(!desktopNavHeader.classList.contains('search-expanded'));
+    });
+
+    desktopSearch.addEventListener('transitionend', syncSearchHeaderHeight);
+
+    document.addEventListener('click', event => {
+      if (!desktopNavHeader.classList.contains('search-expanded')) return;
+      if (event.target instanceof Node && desktopNavHeader.contains(event.target)) return;
+      closeDesktopSearch();
+    });
+
+    document.addEventListener('keydown', event => {
+      if (event.key === 'Escape') closeDesktopSearch();
+    });
+
+    window.addEventListener('scroll', () => {
+      if (desktopNavHeader.classList.contains('search-expanded')) closeDesktopSearch();
+    }, { passive: true });
+
+    window.addEventListener('resize', syncSearchHeaderHeight);
+
+    if (typeof desktopSearchMedia.addEventListener === 'function') {
+      desktopSearchMedia.addEventListener('change', () => {
+        syncSearchState(false);
+      });
+    } else if (typeof desktopSearchMedia.addListener === 'function') {
+      desktopSearchMedia.addListener(() => {
+        syncSearchState(false);
+      });
+    }
+  }
+
+  if (
+    navDropdown &&
+    navDropdownLink &&
+    navDropdownMenu &&
+    desktopNavHeader &&
+    desktopNavHeaderInner &&
+    typeof window.matchMedia === 'function'
+  ) {
+    const desktopDropdownMedia = window.matchMedia('(min-width: 1025px)');
+    let headerHeightTimerId = null;
+    let expandedSettleTimerId = null;
+
+    navDropdownLink.removeAttribute('href');
+    navDropdownLink.setAttribute('role', 'button');
+    navDropdownLink.setAttribute('tabindex', '0');
+    navDropdownLink.setAttribute('aria-controls', navDropdownMenu.id || 'countriesDropdown');
+    navDropdownMenu.classList.add('nav-dropdown-menu--expanded-header');
+
+    if (navDropdownMenu.parentElement !== desktopNavHeaderInner) {
+      desktopNavHeaderInner.append(navDropdownMenu);
+    }
+
+    const syncExpandedHeaderHeight = () => {
+      window.clearTimeout(headerHeightTimerId);
+      window.requestAnimationFrame(() => {
+        document.documentElement.style.setProperty('--header-height', `${desktopNavHeader.offsetHeight || 0}px`);
+      });
+      headerHeightTimerId = window.setTimeout(() => {
+        document.documentElement.style.setProperty('--header-height', `${desktopNavHeader.offsetHeight || 0}px`);
+      }, 320);
+    };
+
+    const syncDropdownState = isOpen => {
+      const nextOpen = Boolean(isOpen && desktopDropdownMedia.matches);
+      window.clearTimeout(expandedSettleTimerId);
+      if (nextOpen) closeDesktopSearch();
+      navDropdown.classList.toggle('is-open', nextOpen);
+      desktopNavHeader.classList.toggle('countries-expanded', nextOpen);
+      desktopNavHeader.classList.remove('countries-expanded-settled');
+      desktopNavHeaderInner.classList.toggle('countries-expanded', nextOpen);
+      navDropdownLink.setAttribute('aria-expanded', nextOpen ? 'true' : 'false');
+      navDropdownMenu.setAttribute('aria-hidden', nextOpen ? 'false' : 'true');
+      if (nextOpen) {
+        expandedSettleTimerId = window.setTimeout(() => {
+          desktopNavHeader.classList.add('countries-expanded-settled');
+        }, 380);
+      }
+      syncExpandedHeaderHeight();
+    };
+
+    const toggleDropdown = () => {
+      syncDropdownState(!desktopNavHeader.classList.contains('countries-expanded'));
     };
 
     const closeDropdown = () => {
-      clearDropdownTimer();
       syncDropdownState(false);
     };
 
-    const scheduleDropdownClose = () => {
-      if (!desktopDropdownMedia.matches) {
-        closeDropdown();
-        return;
-      }
+    closeDesktopCountries = closeDropdown;
+    syncDropdownState(false);
 
-      clearDropdownTimer();
-      closeTimerId = window.setTimeout(closeDropdown, 180);
-    };
-
-    navDropdown.addEventListener('mouseenter', openDropdown);
-    navDropdown.addEventListener('mouseleave', scheduleDropdownClose);
-    navDropdown.addEventListener('focusin', openDropdown);
-    navDropdown.addEventListener('focusout', event => {
-      if (event.relatedTarget instanceof Node && navDropdown.contains(event.relatedTarget)) return;
-      scheduleDropdownClose();
+    navDropdownLink.addEventListener('click', event => {
+      event.preventDefault();
+      if (!desktopDropdownMedia.matches) return;
+      toggleDropdown();
     });
+
+    navDropdownLink.addEventListener('keydown', event => {
+      if (event.key !== 'Enter' && event.key !== ' ') return;
+      event.preventDefault();
+      if (!desktopDropdownMedia.matches) return;
+      toggleDropdown();
+    });
+
+    document.addEventListener('click', event => {
+      if (!desktopNavHeader.classList.contains('countries-expanded')) return;
+      if (event.target instanceof Node && desktopNavHeader.contains(event.target)) return;
+      closeDropdown();
+    });
+
+    document.addEventListener('keydown', event => {
+      if (event.key === 'Escape') closeDropdown();
+    });
+
+    navDropdownMenu.addEventListener('click', event => {
+      if (event.target instanceof Element && event.target.closest('a')) closeDropdown();
+    });
+
+    navDropdownMenu.addEventListener('transitionend', syncExpandedHeaderHeight);
+
+    window.addEventListener('scroll', () => {
+      if (desktopNavHeader.classList.contains('countries-expanded')) closeDropdown();
+    }, { passive: true });
+
+    window.addEventListener('resize', syncExpandedHeaderHeight);
+
+    window.addEventListener('load', syncExpandedHeaderHeight, { once: true });
+
+    if (document.fonts?.ready) {
+      document.fonts.ready.then(syncExpandedHeaderHeight).catch(() => {});
+    }
 
     if (typeof desktopDropdownMedia.addEventListener === 'function') {
       desktopDropdownMedia.addEventListener('change', () => {
-        clearDropdownTimer();
         syncDropdownState(false);
       });
     } else if (typeof desktopDropdownMedia.addListener === 'function') {
       desktopDropdownMedia.addListener(() => {
-        clearDropdownTimer();
         syncDropdownState(false);
       });
     }

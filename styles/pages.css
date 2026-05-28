@@ -6371,7 +6371,6 @@ body.casinos-page .alpha-nav .view-all:hover,
 .site-search-results,
 .site-search--desktop .site-search-results,
 .site-search--mobile .site-search-results,
-.nav-dropdown-menu,
 .mobile-menu-panel,
 body[data-brand] .brand-sticky-title__inner,
 .casino-scroll-nav {
@@ -6455,10 +6454,10 @@ body:not(.home-page) .promo-copy-title:hover {
   .casino-card:hover,
   body.casinos-page .casino-list-row:hover {
     position: relative;
-    z-index: 2;
-    border-radius: 12px !important;
-    background: rgba(255, 255, 255, 0.045) !important;
-    box-shadow: var(--shadow-card) !important;
+    z-index: auto;
+    border-radius: 0 !important;
+    background: rgba(255, 255, 255, 0.024) !important;
+    box-shadow: none !important;
     transform: none !important;
   }
 
@@ -6466,7 +6465,7 @@ body:not(.home-page) .promo-copy-title:hover {
   html:not([data-theme='dark']) .casino-card:hover,
   html[data-theme='light'] body.casinos-page .casino-list-row:hover,
   html:not([data-theme='dark']) body.casinos-page .casino-list-row:hover {
-    background: rgba(255, 255, 255, 0.88) !important;
+    background: rgba(15, 23, 42, 0.026) !important;
   }
 }
 
