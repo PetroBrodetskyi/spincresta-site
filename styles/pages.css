@@ -1618,12 +1618,23 @@ body[data-page='top-rated'] .content > .container:has(> .casino-grid) {
   padding-left: 0 !important;
 }
 
-body[data-page='top-casinos'] .content-area.container,
-body[data-page='top-casinos'] .content[data-country] .cards-main {
-  width: min(100% - 48px, 1306px) !important;
-  max-width: 1306px !important;
+body[data-page='top-casinos'] .content-area.container {
+  width: 100% !important;
+  max-width: var(--site-max-width) !important;
   margin-right: auto !important;
   margin-left: auto !important;
+}
+
+body[data-page='top-casinos'] .content[data-country] {
+  padding-right: 0 !important;
+  padding-left: 0 !important;
+}
+
+body[data-page='top-casinos'] .content[data-country] .cards-main {
+  width: 100% !important;
+  max-width: none !important;
+  margin-right: 0 !important;
+  margin-left: 0 !important;
   padding-right: 0 !important;
   padding-left: 0 !important;
 }
@@ -7168,4 +7179,332 @@ body[data-brand] .payment-method-card:hover,
 body[data-brand] .country-brand-summary-card:hover,
 body[data-brand] .brand-sticky-title:hover .brand-sticky-title__inner {
   transform: none !important;
+}
+
+/* UX polish: filters and page-local navigation */
+
+.country-filter-bar {
+  margin: 2px 0 20px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+.country-filter-bar__controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.country-filter-chip,
+.country-filter-chip.filter-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 36px !important;
+  padding: 9px 16px !important;
+  border: 1px solid var(--border-soft) !important;
+  border-radius: 4px !important;
+  color: var(--text-main) !important;
+  background: transparent !important;
+  box-shadow: var(--shadow-control) !important;
+  cursor: pointer;
+  font: inherit;
+  font-size: 12.5px !important;
+  font-weight: 600 !important;
+  line-height: 1.1;
+  letter-spacing: 0 !important;
+  text-align: center;
+  text-transform: uppercase !important;
+  transition:
+    background 0.18s ease,
+    border-color 0.18s ease,
+    color 0.18s ease,
+    box-shadow 0.18s ease,
+    transform 0.18s ease;
+}
+
+.country-filter-chip:hover,
+.country-filter-chip.filter-btn:hover,
+.country-filter-chip:focus-visible {
+  border-color: var(--gold, #ffdf00) !important;
+  color: var(--gold, #ffdf00) !important;
+  background: rgba(255, 255, 255, 0.035) !important;
+  box-shadow: var(--shadow-control) !important;
+  transform: translateY(-1px) !important;
+  outline: none;
+}
+
+.country-filter-chip.is-active,
+.country-filter-chip.active,
+.country-filter-chip.filter-btn.active {
+  border-color: var(--gold, #ffdf00) !important;
+  background: var(--gold, #ffdf00) !important;
+  color: #1a1300 !important;
+  box-shadow: var(--shadow-action) !important;
+}
+
+.country-filter-chip.is-active:hover,
+.country-filter-chip.active:hover,
+.country-filter-chip.filter-btn.active:hover {
+  border-color: #ffe45c !important;
+  background: #ffe45c !important;
+  color: #1a1300 !important;
+  box-shadow: var(--shadow-action-hover) !important;
+}
+
+.top-casino-jump-nav {
+  position: sticky;
+  top: var(--header-height, 64px);
+  z-index: 18;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 6px;
+  width: min(100% - 48px, calc(var(--site-max-width) - 48px));
+  margin: -12px auto 28px;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+  overflow: visible;
+}
+
+.top-casino-jump-nav__links {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 6px;
+  width: 100%;
+  overflow: visible;
+  scrollbar-width: none;
+}
+
+.top-casino-jump-nav__links::-webkit-scrollbar {
+  display: none;
+}
+
+.top-casino-jump-nav a {
+  position: relative;
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  flex: 0 0 auto;
+  min-height: 0 !important;
+  padding: 8px 14px !important;
+  border: 1px solid rgba(255, 255, 255, 0.1) !important;
+  border-radius: 4px !important;
+  color: var(--text-main) !important;
+  background: transparent !important;
+  box-shadow: none !important;
+  text-decoration: none;
+  font-size: 13px !important;
+  font-weight: 500 !important;
+  line-height: 1.2;
+  letter-spacing: 0;
+  transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+}
+
+.top-casino-jump-nav a:hover,
+.top-casino-jump-nav a:focus-visible {
+  border-color: var(--gold, #ffdf00) !important;
+  color: var(--gold, #ffdf00) !important;
+  background: rgba(255, 255, 255, 0.04) !important;
+  outline: none;
+}
+
+.top-casino-jump-nav .flag {
+  width: 18px;
+  height: 13px;
+  object-fit: cover;
+  border-radius: 2px;
+  flex: 0 0 auto;
+}
+
+.top-casino-jump-nav a span {
+  line-height: 1.2;
+}
+
+body[data-page='top-casinos'] .content[data-country],
+body[data-brand] :where(.brand-hero-why > .title, .brand-countries > .title, .brand-payments > .title, .brand-availability-widget .title, .content-review > section > .title, .content-review > section > h2, .content-article > section > .title, .content-article > section > h2, .final-cta-glass .title) {
+  scroll-margin-top: calc(var(--header-height, 64px) + 18px);
+}
+
+.brand-section-nav a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 28px;
+  padding: 6px 10px;
+  border: 1px solid var(--border-soft);
+  border-radius: 999px;
+  color: var(--text-muted);
+  background: rgba(255, 255, 255, 0.04);
+  box-shadow: var(--shadow-control);
+  font-size: 11.5px;
+  font-weight: 750;
+  line-height: 1;
+  text-decoration: none;
+}
+
+.brand-section-nav {
+  display: grid;
+  gap: 10px;
+  width: 100%;
+  margin-top: 2px;
+  padding-top: 14px;
+  border-top: 1px solid var(--border-soft);
+}
+
+.brand-section-nav__links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+}
+
+.brand-section-nav a:hover,
+.brand-section-nav a:focus-visible {
+  border-color: rgba(255, 223, 0, 0.48);
+  color: var(--text-main);
+  background: rgba(255, 223, 0, 0.09);
+  outline: none;
+}
+
+html[data-theme='light'] .top-casino-jump-nav,
+html:not([data-theme='dark']) .top-casino-jump-nav {
+  background: transparent;
+}
+
+html[data-theme='light'] .top-casino-jump-nav a,
+html:not([data-theme='dark']) .top-casino-jump-nav a {
+  border-color: rgba(15, 23, 42, 0.12) !important;
+  color: var(--text-main) !important;
+  background: transparent !important;
+}
+
+html[data-theme='light'] .top-casino-jump-nav a:hover,
+html:not([data-theme='dark']) .top-casino-jump-nav a:hover,
+html[data-theme='light'] .top-casino-jump-nav a:focus-visible,
+html:not([data-theme='dark']) .top-casino-jump-nav a:focus-visible {
+  border-color: var(--gold, #ffdf00) !important;
+  color: #8a5e1f !important;
+  background: rgba(15, 23, 42, 0.03) !important;
+}
+
+@media (max-width: 768px) {
+  .country-filter-bar {
+    margin-bottom: 16px;
+  }
+
+  .country-filter-bar__controls,
+  .brand-section-nav__links {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    padding-bottom: 2px;
+    scrollbar-width: none;
+  }
+
+  .country-filter-bar__controls::-webkit-scrollbar,
+  .brand-section-nav__links::-webkit-scrollbar {
+    display: none;
+  }
+
+  .country-filter-chip {
+    flex: 0 0 auto;
+    min-height: 36px;
+    padding: 9px 14px !important;
+  }
+
+  .top-casino-jump-nav {
+    width: min(100% - 24px, calc(var(--site-max-width) - 24px));
+    margin: -12px auto 22px;
+  }
+
+  body[data-brand] .hero .brand-hero-why .features-grid,
+  body[data-brand] .hero .brand-hero-why .premium-grid,
+  body[data-brand='Leon'] .hero .brand-hero-why .features-grid,
+  body[data-brand].has-brand-sticky-layout .brand-sticky-main .brand-hero-why .features-grid,
+  body[data-brand].has-brand-sticky-layout .brand-sticky-main .brand-hero-why .premium-grid {
+    grid-template-columns: minmax(0, 1fr) !important;
+  }
+
+  .brand-section-nav {
+    margin-top: 8px;
+  }
+
+  .brand-section-nav a {
+    flex: 0 0 auto;
+  }
+}
+
+@media (min-width: 901px) {
+  body[data-brand].has-brand-sticky-layout {
+    --brand-sticky-top: calc(var(--header-height, 64px) + clamp(18px, 2.8vh, 36px));
+  }
+
+  body[data-brand].has-brand-sticky-layout .brand-sticky-aside .hero-content.glass-card {
+    max-height: calc(100vh - var(--brand-sticky-top) - 14px);
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    scrollbar-gutter: stable;
+    scrollbar-width: thin;
+  }
+
+  body[data-brand].has-brand-sticky-layout .brand-sticky-aside .hero-content.glass-card::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  body[data-brand].has-brand-sticky-layout .brand-sticky-aside .hero-content.glass-card::-webkit-scrollbar-thumb {
+    border-radius: 999px;
+    background: rgba(148, 163, 184, 0.34);
+  }
+}
+
+@media (min-width: 901px) and (max-height: 980px) {
+  body[data-brand].has-brand-sticky-layout .hero-content.glass-card {
+    gap: 12px !important;
+    padding: 18px !important;
+  }
+
+  body[data-brand].has-brand-sticky-layout .brand-logo-container.hero-logo,
+  body[data-brand='Leon'].has-brand-sticky-layout .brand-logo-container.hero-logo {
+    width: min(100%, 280px) !important;
+    max-width: 280px !important;
+    min-height: 116px !important;
+    padding: 12px 16px !important;
+  }
+
+  body[data-brand].has-brand-sticky-layout .brand-logo,
+  body[data-brand='Leon'].has-brand-sticky-layout .brand-logo {
+    max-height: 70px !important;
+  }
+
+  body[data-brand].has-brand-sticky-layout .brand-sticky-aside h1 {
+    font-size: clamp(30px, 2.35vw, 38px) !important;
+    line-height: 1.02 !important;
+  }
+
+  body[data-brand].has-brand-sticky-layout .brand-sticky-aside .hero-subtitle {
+    font-size: 14.5px !important;
+    line-height: 1.42 !important;
+  }
+
+  body[data-brand].has-brand-sticky-layout .brand-section-nav a {
+    min-height: 25px;
+    padding: 5px 8px;
+    font-size: 10.8px;
+  }
+
+  body[data-brand].has-brand-sticky-layout .brand-section-nav {
+    gap: 8px;
+    padding-top: 11px;
+  }
+
+  body[data-brand].has-brand-sticky-layout .brand-section-nav__links {
+    gap: 6px;
+  }
 }

@@ -158,6 +158,21 @@ const normalizeSearchValue = value =>
     .replace(/[^a-z0-9]+/g, ' ')
     .trim();
 
+const slugifyText = value =>
+  normalizeSearchValue(value)
+    .replace(/\s+/g, '-')
+    .replace(/^-+|-+$/g, '');
+
+const isCryptoPayment = method =>
+  /bitcoin|crypto|ethereum|tether|litecoin|tron|cardano|usdt|btc|eth|bitcoincash/i.test(
+    normalizeText(method)
+  );
+
+const isFastPayment = method =>
+  /skrill|neteller|ecopayz|jeton|mifinity|muchbetter|astropay|payz|bitcoin|ethereum|tether|litecoin|tron/i.test(
+    normalizeText(method)
+  );
+
 const getSiteSearchItems = () => {
   const countryByCode = new Map(COUNTRIES.map(country => [country.code.toUpperCase(), country]));
   const items = new Map();
@@ -232,6 +247,39 @@ const createSiteSearch = variant => {
     activeResults = [];
   };
 
+  const renderResultLink = item => {
+    const flagsHtml = item.flags?.length
+      ? `
+        <span class="site-search-flags" aria-label="Available countries">
+          ${item.flags
+            .map(
+              flag => `
+                <img
+                  class="site-search-flag"
+                  src="${iconPath(flag.slug)}"
+                  alt="${escapeHtml(flag.name)}"
+                  loading="lazy"
+                  decoding="async"
+                />
+              `
+            )
+            .join('')}
+        </span>
+      `
+      : '';
+
+    return `
+      <a class="site-search-result" href="${escapeHtml(item.href)}">
+        <span class="site-search-result-type">${escapeHtml(item.type)}</span>
+        <span class="site-search-result-title">
+          <strong>${escapeHtml(item.label)}</strong>
+          ${flagsHtml}
+        </span>
+        <span>${escapeHtml(item.summary || '')}</span>
+      </a>
+    `;
+  };
+
   const renderResults = () => {
     const query = normalizeSearchValue(input.value);
     if (!query) {
@@ -246,40 +294,7 @@ const createSiteSearch = variant => {
 
     resultsEl.hidden = false;
     resultsEl.innerHTML = activeResults.length
-      ? activeResults
-          .map(item => {
-            const flagsHtml = item.flags?.length
-              ? `
-                <span class="site-search-flags" aria-label="Available countries">
-                  ${item.flags
-                    .map(
-                      flag => `
-                        <img
-                          class="site-search-flag"
-                          src="${iconPath(flag.slug)}"
-                          alt="${escapeHtml(flag.name)}"
-                          loading="lazy"
-                          decoding="async"
-                        />
-                      `
-                    )
-                    .join('')}
-                </span>
-              `
-              : '';
-
-            return `
-              <a class="site-search-result" href="${escapeHtml(item.href)}">
-                <span class="site-search-result-type">${escapeHtml(item.type)}</span>
-                <span class="site-search-result-title">
-                  <strong>${escapeHtml(item.label)}</strong>
-                  ${flagsHtml}
-                </span>
-                <span>${escapeHtml(item.summary || '')}</span>
-              </a>
-            `;
-          })
-          .join('')
+      ? activeResults.map(renderResultLink).join('')
       : '<div class="site-search-empty">No matches found</div>';
   };
 
@@ -731,17 +746,19 @@ const ITEMS_PER_BATCH = 12;
 const renderBrandList = (brands, containerSelector, emptyText) => {
   const container = document.querySelector(containerSelector);
   const loadMoreBtn = document.getElementById('loadMoreBtn');
+  const loadMoreWrapper = loadMoreBtn?.closest('.load-more-wrapper');
   if (!container) return;
 
   if (!brands.length) {
     container.innerHTML = `<p>${emptyText}</p>`;
-    loadMoreBtn?.remove();
+    if (loadMoreWrapper) loadMoreWrapper.hidden = true;
     return;
   }
 
   let visibleCount = 0;
 
   container.innerHTML = '';
+  if (loadMoreWrapper) loadMoreWrapper.hidden = brands.length <= ITEMS_PER_BATCH;
 
   const renderNextBatch = () => {
     const nextItems = brands.slice(visibleCount, visibleCount + ITEMS_PER_BATCH);
@@ -757,7 +774,9 @@ const renderBrandList = (brands, containerSelector, emptyText) => {
     visibleCount += ITEMS_PER_BATCH;
 
     if (visibleCount >= brands.length) {
-      loadMoreBtn?.remove();
+      if (loadMoreWrapper) loadMoreWrapper.hidden = true;
+    } else if (loadMoreWrapper) {
+      loadMoreWrapper.hidden = false;
     }
   };
 
@@ -766,6 +785,107 @@ const renderBrandList = (brands, containerSelector, emptyText) => {
   if (loadMoreBtn) {
     loadMoreBtn.onclick = renderNextBatch;
   }
+};
+
+const getCountryFilterDefinitions = () => [
+  {
+    id: 'all',
+    label: 'All',
+    matches: () => true,
+  },
+  {
+    id: 'top-rated',
+    label: 'Top Rated',
+    matches: brand => Boolean(brand.isTopRated || brand.top?.length),
+  },
+  {
+    id: 'new',
+    label: 'New',
+    matches: brand => Boolean(brand.isNew),
+  },
+  {
+    id: 'crypto',
+    label: 'Crypto',
+    matches: brand => (brand.payments || []).some(isCryptoPayment),
+  },
+  {
+    id: 'fast-payout',
+    label: 'Fast Payout',
+    matches: brand =>
+      /fast|payout|withdraw/i.test(normalizeText(brand.bonus)) ||
+      (brand.payments || []).some(isFastPayment),
+  },
+  {
+    id: 'sportsbook',
+    label: 'Sportsbook',
+    matches: brand =>
+      /sport|sportsbook|betting|free bets/i.test(
+        [brand.name, brand.bonus, brand.urlDetail].map(normalizeText).join(' ')
+      ),
+  },
+  {
+    id: 'sweepstakes',
+    label: 'Sweepstakes',
+    matches: brand => /sweep|sweeps|social casino/i.test(normalizeText(brand.bonus)),
+  },
+];
+
+const initCountryBrandFilters = (pageCountry, brands, onChange) => {
+  const brandCards = document.getElementById('brand-cards');
+  if (!brandCards || !pageCountry || !brands.length || document.querySelector('.country-filter-bar')) {
+    return;
+  }
+
+  const filterDefinitions = getCountryFilterDefinitions()
+    .map(filter => ({
+      ...filter,
+      count: filter.id === 'all' ? brands.length : brands.filter(filter.matches).length,
+    }))
+    .filter(filter => filter.id === 'all' || filter.count > 0);
+
+  if (filterDefinitions.length <= 1) return;
+
+  const filterBar = document.createElement('div');
+  filterBar.className = 'country-filter-bar';
+  filterBar.setAttribute('aria-label', 'Filter casino brands');
+  filterBar.innerHTML = `
+    <div class="country-filter-bar__controls">
+      ${filterDefinitions
+        .map(
+          (filter, index) => `
+            <button
+              type="button"
+              class="country-filter-chip filter-btn${index === 0 ? ' active is-active' : ''}"
+              data-country-filter="${filter.id}"
+              aria-pressed="${index === 0 ? 'true' : 'false'}"
+            >
+              ${filter.label}
+            </button>
+          `
+        )
+        .join('')}
+    </div>
+  `;
+
+  brandCards.insertAdjacentElement('beforebegin', filterBar);
+
+  const buttons = Array.from(filterBar.querySelectorAll('.country-filter-chip'));
+  buttons.forEach(button => {
+    button.addEventListener('click', () => {
+      const filterId = button.dataset.countryFilter || 'all';
+      const filter = filterDefinitions.find(item => item.id === filterId) || filterDefinitions[0];
+      const filteredBrands = filter.id === 'all' ? brands : brands.filter(filter.matches);
+
+      buttons.forEach(item => {
+        const isActive = item === button;
+        item.classList.toggle('is-active', isActive);
+        item.classList.toggle('active', isActive);
+        item.setAttribute('aria-pressed', isActive ? 'true' : 'false');
+      });
+
+      onChange(filteredBrands, filter);
+    });
+  });
 };
 
 const syncCountryStickyReviewsLayout = () => {
@@ -1401,6 +1521,99 @@ const initStickyBrandTitle = () => {
   window.addEventListener('resize', updateStickyVisibility);
 };
 
+const getShortBrandSectionLabel = title => {
+  const normalizedTitle = normalizeText(title);
+  const lowerTitle = normalizedTitle.toLowerCase();
+
+  if (lowerTitle.includes('why players choose')) return 'Highlights';
+  if (lowerTitle.includes('available countries')) return 'Countries';
+  if (lowerTitle.includes('payment')) return 'Payments';
+  if (
+    lowerTitle.includes('games') ||
+    lowerTitle.includes('slots') ||
+    lowerTitle.includes('live betting') ||
+    lowerTitle.includes('betting snapshot')
+  ) return 'Games';
+  if (lowerTitle.includes('bonus') || lowerTitle.includes('promotion')) return 'Bonuses';
+  if (lowerTitle.includes('checklist')) return 'Checklist';
+  if (lowerTitle.includes('licensing') || lowerTitle.includes('trust')) return 'Trust';
+  if (lowerTitle.includes('faq')) return 'FAQ';
+  if (lowerTitle.includes('pros') && lowerTitle.includes('cons')) return 'Pros & Cons';
+  if (lowerTitle.includes('suits')) return 'Best For';
+
+  return normalizedTitle.replace(/\s+Review$/i, '').split(/[,&:|]/)[0].trim().slice(0, 18);
+};
+
+const initBrandSectionNav = () => {
+  const heroContent =
+    document.querySelector('body[data-brand] .brand-sticky-aside .hero-content') ||
+    document.querySelector('body[data-brand] .hero-content');
+  const reviewRoot =
+    document.querySelector('body[data-brand] .brand-sticky-main') ||
+    document.querySelector('body[data-brand] main.content-review') ||
+    document.querySelector('body[data-brand]');
+  if (!heroContent || !reviewRoot || heroContent.querySelector('.brand-section-nav')) return;
+
+  const titleSelector = [
+    '.brand-hero-why > .title',
+    '.brand-countries > .title',
+    '.brand-payments > .title',
+    '.brand-availability-widget .title',
+    '.content-review > section > .title',
+    '.content-review > section > h2',
+    '.content-article > section > .title',
+    '.content-article > section > h2',
+    '.final-cta-glass .title',
+  ].join(', ');
+
+  const seenLabels = new Set();
+  const headings = Array.from(reviewRoot.querySelectorAll(titleSelector))
+    .map(heading => {
+      const text = normalizeText(heading.textContent).trim();
+      const label = getShortBrandSectionLabel(text);
+      return { heading, text, label };
+    })
+    .filter(item => item.text && item.label && !seenLabels.has(item.label) && seenLabels.add(item.label))
+    .slice(0, 9);
+
+  if (headings.length < 2) return;
+
+  headings.forEach(({ heading, label }, index) => {
+    if (!heading.id) {
+      const baseId = slugifyText(label || heading.textContent) || `brand-section-${index + 1}`;
+      let nextId = baseId;
+      let suffix = 2;
+      while (document.getElementById(nextId)) {
+        nextId = `${baseId}-${suffix}`;
+        suffix += 1;
+      }
+      heading.id = nextId;
+    }
+  });
+
+  const nav = document.createElement('nav');
+  nav.className = 'brand-section-nav';
+  nav.setAttribute('aria-label', 'On this page');
+  nav.innerHTML = `
+    <div class="brand-section-nav__links">
+      ${headings
+        .map(
+          ({ heading, label }) => `
+            <a href="#${escapeHtml(heading.id)}">${escapeHtml(label)}</a>
+          `
+        )
+        .join('')}
+    </div>
+  `;
+
+  const ctaWrapper = heroContent.querySelector('.hero-cta-wrapper');
+  if (ctaWrapper) {
+    ctaWrapper.insertAdjacentElement('afterend', nav);
+  } else {
+    heroContent.appendChild(nav);
+  }
+};
+
 const renderSnapshotItems = (items, isAvailable) =>
   items
     .map(
@@ -1777,6 +1990,53 @@ const initCasinosScrollNav = () => {
   return scrollNav;
 };
 
+const initTopCasinosJumpNav = () => {
+  if (document.body.dataset.page !== 'top-casinos' || document.querySelector('.top-casino-jump-nav')) {
+    return;
+  }
+
+  const contentArea = document.querySelector('.content-area');
+  const sections = Array.from(document.querySelectorAll('.content[data-country]'));
+  if (!contentArea || sections.length < 2) return;
+
+  const links = sections
+    .map(section => {
+      const code = section.dataset.country?.toUpperCase();
+      const country = COUNTRIES.find(item => item.code.toUpperCase() === code);
+      const title = country?.name || section.querySelector('.top-country-title')?.textContent.trim() || code;
+      const id = `top-${slugifyText(title || code)}`;
+      section.id = section.id || id;
+
+      return { country, id: section.id, title };
+    })
+    .filter(item => item.id && item.title);
+
+  if (links.length < 2) return;
+
+  const nav = document.createElement('nav');
+  nav.className = 'top-casino-jump-nav';
+  nav.setAttribute('aria-label', 'Jump to country casino lists');
+  nav.innerHTML = `
+    <div class="top-casino-jump-nav__links">
+      ${links
+        .map(link => {
+          const flag = link.country?.slug
+            ? `<img class="flag" src="${iconPath(link.country.slug)}" alt="${escapeHtml(link.title)}" loading="lazy" decoding="async" />`
+            : '';
+          return `
+            <a class="top-casino-jump-link" href="#${escapeHtml(link.id)}">
+              ${flag}
+              <span>${escapeHtml(link.title)}</span>
+            </a>
+          `;
+        })
+        .join('')}
+    </div>
+  `;
+
+  contentArea.insertAdjacentElement('beforebegin', nav);
+};
+
 const applyBrandHeroConcept = () => {
   const hero = document.querySelector('body[data-brand] .hero');
   const heroContent = hero?.querySelector(':scope > .hero-content');
@@ -1936,6 +2196,11 @@ export const initCasinoPage = () => {
     applyCountryHeroConcept();
     const brands = BRANDS.filter(b => b.countries?.some(c => c.toUpperCase() === pageCountry));
 
+    initCountryBrandFilters(pageCountry, brands, filteredBrands => {
+      renderBrandList(filteredBrands, '#brand-cards', 'No casinos match this filter yet.');
+      applyBrandLogoBackgrounds();
+      requestPaymentIconSync();
+    });
     renderBrandList(brands, '#brand-cards', 'No casinos available for this country.');
     applyBrandLogoBackgrounds();
   }
@@ -2003,6 +2268,8 @@ export const initCasinoPage = () => {
     }
   });
 
+  initTopCasinosJumpNav();
+
   const brandKey = document.body.dataset.brand?.toLowerCase();
   if (brandKey) {
     initStickyBrandTitle();
@@ -2042,8 +2309,10 @@ export const initCasinoPage = () => {
           )
           .join('');
       }
+
     }
 
+    initBrandSectionNav();
     applyBrandStickyReviewLayout();
     initBrandCountryCollapse();
   }

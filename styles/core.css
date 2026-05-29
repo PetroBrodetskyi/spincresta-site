@@ -324,6 +324,7 @@ textarea {
   display: flex;
   align-items: center;
   gap: 9px;
+  min-height: 44px;
   font-size: 20px;
   font-weight: 600;
   line-height: 1.04;
@@ -363,6 +364,8 @@ textarea {
 .nav a {
   display: inline-flex;
   align-items: center;
+  min-height: 44px;
+  padding: 0 2px;
   color: var(--text-muted);
   text-decoration: none;
   font-size: 15.5px;
@@ -378,7 +381,7 @@ textarea {
   content: '';
   position: absolute;
   left: 0;
-  bottom: -6px;
+  bottom: 8px;
   width: 0;
   height: 2px;
   background: var(--gold);
@@ -423,9 +426,9 @@ textarea {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 40px;
-  height: 38px;
-  flex: 0 0 40px;
+  width: 44px;
+  height: 44px;
+  flex: 0 0 44px;
   border: 1px solid rgba(255, 255, 255, 0.16);
   border-radius: 4px;
   background: rgba(255, 255, 255, 0.035);
@@ -454,9 +457,9 @@ textarea {
 }
 
 .site-search-trigger-icon {
-  width: 15px;
-  height: 15px;
-  flex: 0 0 15px;
+  width: 16px;
+  height: 16px;
+  flex: 0 0 16px;
   opacity: 0.82;
   filter: invert(81%) sepia(17%) saturate(342%) hue-rotate(176deg) brightness(95%) contrast(87%);
 }
@@ -632,6 +635,26 @@ textarea {
     transform 0.2s ease;
 }
 
+.site-search-suggestions,
+.site-search-group {
+  display: grid;
+  gap: 8px;
+}
+
+.site-search-suggestions {
+  gap: 14px;
+}
+
+.site-search-group-label {
+  padding: 0 4px;
+  color: var(--gold);
+  font-size: 10px;
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: 0;
+  text-transform: uppercase;
+}
+
 .site-search-result::after {
   content: none !important;
 }
@@ -712,6 +735,7 @@ textarea {
   display: inline-flex;
   align-items: center;
   gap: 8px;
+  min-height: 44px;
   line-height: 1;
   cursor: pointer;
 }
@@ -1386,8 +1410,13 @@ textarea {
 
 .burger {
   display: none;
+  align-items: center;
+  justify-content: center;
   flex-direction: column;
   gap: 6px;
+  width: 44px;
+  height: 44px;
+  padding: 0;
   background: none;
   border: none;
   cursor: pointer;
