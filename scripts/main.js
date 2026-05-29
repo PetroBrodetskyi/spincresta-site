@@ -79,6 +79,22 @@ const normalizePagePath = path => {
 
 const countryPagePath = slug => `/online-casinos/${slug}/`;
 const iconPath = slug => `/icons/${slug}-flag-icon.svg`;
+
+const syncHeaderFlowMetrics = header => {
+  if (!header) return;
+
+  const height = Math.ceil(header.offsetHeight || 0);
+  const isExpanded =
+    header.classList.contains('search-expanded') || header.classList.contains('countries-expanded');
+
+  document.documentElement.style.setProperty('--header-height', `${height}px`);
+
+  if (!isExpanded) {
+    document.documentElement.style.setProperty('--header-collapsed-height', `${height}px`);
+  }
+
+  document.body.classList.toggle('header-is-expanded', isExpanded);
+};
 const paymentPath = method => `/icons/payments/${method}.svg`;
 const pagePath = fileName => normalizePagePath(fileName);
 
@@ -2134,10 +2150,10 @@ export const initCasinoPage = () => {
     const syncSearchHeaderHeight = () => {
       window.clearTimeout(searchHeightTimerId);
       window.requestAnimationFrame(() => {
-        document.documentElement.style.setProperty('--header-height', `${desktopNavHeader.offsetHeight || 0}px`);
+        syncHeaderFlowMetrics(desktopNavHeader);
       });
       searchHeightTimerId = window.setTimeout(() => {
-        document.documentElement.style.setProperty('--header-height', `${desktopNavHeader.offsetHeight || 0}px`);
+        syncHeaderFlowMetrics(desktopNavHeader);
       }, 320);
     };
 
@@ -2224,10 +2240,10 @@ export const initCasinoPage = () => {
     const syncExpandedHeaderHeight = () => {
       window.clearTimeout(headerHeightTimerId);
       window.requestAnimationFrame(() => {
-        document.documentElement.style.setProperty('--header-height', `${desktopNavHeader.offsetHeight || 0}px`);
+        syncHeaderFlowMetrics(desktopNavHeader);
       });
       headerHeightTimerId = window.setTimeout(() => {
-        document.documentElement.style.setProperty('--header-height', `${desktopNavHeader.offsetHeight || 0}px`);
+        syncHeaderFlowMetrics(desktopNavHeader);
       }, 320);
     };
 
@@ -2424,14 +2440,17 @@ export const initCasinoPage = () => {
   const header = document.querySelector('.header');
   const casinosScrollNav = initCasinosScrollNav();
   const syncHeaderHeight = () => {
-    if (!header) return;
-    document.documentElement.style.setProperty('--header-height', `${header.offsetHeight || 0}px`);
+    syncHeaderFlowMetrics(header);
   };
 
   syncHeaderHeight();
 
   if (header) {
     let lastScroll = window.pageYOffset || document.documentElement.scrollTop || 0;
+
+    if ('ResizeObserver' in window) {
+      new ResizeObserver(syncHeaderHeight).observe(header);
+    }
 
     const updateScrollChrome = () => {
       const current = window.pageYOffset || document.documentElement.scrollTop;

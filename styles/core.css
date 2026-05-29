@@ -240,6 +240,16 @@ body {
   overflow-x: hidden;
 }
 
+@media (min-width: 1025px) {
+  body > main {
+    transition: padding-top 0.34s ease;
+  }
+
+  body.header-is-expanded > main {
+    padding-top: max(0px, calc(var(--header-height, 64px) - var(--header-collapsed-height, 64px)));
+  }
+}
+
 button,
 input,
 select,

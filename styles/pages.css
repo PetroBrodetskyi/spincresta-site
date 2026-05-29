@@ -5909,15 +5909,30 @@ body.casinos-page .hero .alpha-nav {
 /* Mobile country hero and home stats compaction */
 @media (max-width: 768px) {
   body.home-page main,
+  body[data-page='top-casinos'] main,
   body[data-country] main {
     max-width: 100%;
     overflow-x: hidden;
   }
 
   body.home-page .hero.container,
-  body.home-page .content-area.container {
+  body.home-page .content-area.container,
+  body[data-page='top-casinos'] .content-area.container {
     width: 100% !important;
     max-width: 100% !important;
+    padding-right: 12px !important;
+    padding-left: 12px !important;
+  }
+
+  body[data-page='top-casinos'] .content[data-country] {
+    width: 100% !important;
+  }
+
+  body[data-page='top-casinos'] .content[data-country] .cards-main {
+    width: 100% !important;
+    max-width: none !important;
+    margin-right: 0 !important;
+    margin-left: 0 !important;
   }
 
   body.home-page .hero-content {
