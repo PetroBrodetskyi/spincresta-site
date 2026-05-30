@@ -6260,15 +6260,19 @@ body[data-country] .country-hero-cards .view-all {
   }
 
   body[data-country] .hero.country-hero-with-cards {
-    grid-template-columns: var(--split-side-column) minmax(0, 1fr) !important;
-    gap: var(--split-gap) !important;
+    grid-template-columns: minmax(320px, 380px) minmax(0, 1fr) !important;
+    gap: clamp(28px, 2.5vw, 46px) !important;
     padding-bottom: clamp(52px, 6vw, 86px) !important;
   }
 
+  body[data-country] .hero.country-hero-with-cards .hero-content {
+    max-width: 380px !important;
+  }
+
   body[data-country] .hero.country-hero-with-cards h1 {
-    max-width: 12ch !important;
-    font-size: clamp(42px, 4.25vw, 62px) !important;
-    line-height: 1 !important;
+    max-width: 100% !important;
+    font-size: clamp(38px, 3.25vw, 54px) !important;
+    line-height: 1.03 !important;
   }
 
   body[data-country] .hero.country-hero-with-cards .hero-content .hero-flag {
