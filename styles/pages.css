@@ -1860,9 +1860,15 @@ body.casinos-page .hero p {
   z-index: 2;
 }
 
-.casino-card .top-rated-badge { color: #ffdf00; }
-.casino-card .new-badge       { color: #4ade80; }
-.casino-card .exclusive-badge { color: #c084fc; }
+.casino-card .top-rated-badge {
+  color: #ffdf00;
+}
+.casino-card .new-badge {
+  color: #4ade80;
+}
+.casino-card .exclusive-badge {
+  color: #c084fc;
+}
 
 /* Light theme parity */
 html[data-theme='light'] .casino-card:hover {
@@ -2283,7 +2289,10 @@ body[data-page='top-casinos'] .content[data-country] .view-all-wrapper {
   color: var(--text-muted);
   opacity: 0;
   transform: translateX(-6px);
-  transition: opacity 0.25s ease, transform 0.25s ease, color 0.25s ease;
+  transition:
+    opacity 0.25s ease,
+    transform 0.25s ease,
+    color 0.25s ease;
 }
 
 .home-stat-link:hover::after {
@@ -2583,8 +2592,7 @@ body[data-country] .country-new-reviews .home-insight-card {
   border: 1px solid rgba(148, 163, 184, 0.22);
   border-radius: 999px;
   background:
-    linear-gradient(180deg, rgba(255, 255, 255, 0.055), rgba(255, 255, 255, 0.012)),
-    rgba(2, 6, 23, 0.16);
+    linear-gradient(180deg, rgba(255, 255, 255, 0.055), rgba(255, 255, 255, 0.012)), rgba(2, 6, 23, 0.16);
   color: var(--text-main);
   box-shadow:
     inset 0 1px 0 rgba(255, 255, 255, 0.14),
@@ -2617,8 +2625,7 @@ body[data-country] .country-new-reviews .home-insight-card {
 .link-carousel-button:hover {
   border-color: rgba(226, 232, 240, 0.44);
   background:
-    linear-gradient(180deg, rgba(255, 255, 255, 0.085), rgba(255, 255, 255, 0.02)),
-    rgba(15, 23, 42, 0.24);
+    linear-gradient(180deg, rgba(255, 255, 255, 0.085), rgba(255, 255, 255, 0.02)), rgba(15, 23, 42, 0.24);
   color: var(--text-main);
   transform: translateY(-1px);
 }
@@ -2681,7 +2688,7 @@ html[data-theme='light'] .home-link-logo {
     radial-gradient(circle at top right, rgba(56, 189, 248, 0.14), transparent 40%),
     linear-gradient(180deg, rgba(10, 15, 30, 0.98), rgba(20, 30, 52, 0.96));
   border-color: rgba(15, 23, 42, 0.18);
-    box-shadow: inset 0 -1px 0 rgba(255, 255, 255, 0.06);
+  box-shadow: inset 0 -1px 0 rgba(255, 255, 255, 0.06);
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -2807,7 +2814,7 @@ html[data-theme='light'] .home-link-logo {
   transition: background 0.25s ease;
 }
 
-.home-global-guide-grid > .feature-card:nth-child(-n+2) {
+.home-global-guide-grid > .feature-card:nth-child(-n + 2) {
   border-top: none;
 }
 
@@ -2911,7 +2918,11 @@ html[data-theme='light'] .home-global-guide .feature-card:hover {
   text-decoration: none !important;
   box-shadow: none !important;
   filter: none !important;
-  transition: background 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+  transition:
+    background 0.2s ease,
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    border-color 0.2s ease;
   cursor: pointer;
   white-space: nowrap;
 }
@@ -2951,7 +2962,10 @@ html[data-theme='light'] .home-global-guide .feature-card:hover {
   text-decoration: none !important;
   box-shadow: none !important;
   filter: none !important;
-  transition: border-color 0.2s ease, background 0.2s ease, color 0.2s ease;
+  transition:
+    border-color 0.2s ease,
+    background 0.2s ease,
+    color 0.2s ease;
 }
 
 .cta-secondary:hover,
@@ -2984,7 +2998,9 @@ html[data-theme='light'] .casino-actions .cta-secondary:hover {
   font-size: 12px;
   letter-spacing: 0;
   cursor: pointer;
-  transition: border-color 0.2s ease, color 0.2s ease;
+  transition:
+    border-color 0.2s ease,
+    color 0.2s ease;
 }
 
 .footer-settings-trigger:hover {
@@ -3022,7 +3038,10 @@ html[data-theme='light'] .footer-settings-trigger {
   text-transform: uppercase !important;
   text-decoration: none !important;
   box-shadow: none !important;
-  transition: border-color 0.2s ease, background 0.2s ease, color 0.2s ease;
+  transition:
+    border-color 0.2s ease,
+    background 0.2s ease,
+    color 0.2s ease;
 }
 
 .view-all::after {
@@ -3085,7 +3104,10 @@ html[data-theme='light'] .view-all:hover {
   font-weight: 500 !important;
   letter-spacing: 0;
   text-decoration: none;
-  transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+  transition:
+    background 0.2s ease,
+    color 0.2s ease,
+    border-color 0.2s ease;
 }
 
 /* kill the sticker gloss inherited from core.css */
@@ -3217,7 +3239,10 @@ html[data-theme='light'] .home-country-more {
   letter-spacing: 0;
   line-height: 1.2;
   text-decoration: none;
-  transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+  transition:
+    background 0.2s ease,
+    color 0.2s ease,
+    border-color 0.2s ease;
 }
 
 .countries-cloud a::before,
@@ -3279,10 +3304,18 @@ html[data-theme='light'] .countries-cloud .country-link:hover {
 }
 
 /* Reorder: nav (1) -> brand directory (2) -> copyright (3) -> 18+ (4) */
-.footer .footer-nav { order: 1; }
-.footer .footer-brand-directory { order: 2; }
-.footer p:first-of-type { order: 3; }
-.footer p:nth-of-type(2) { order: 4; }
+.footer .footer-nav {
+  order: 1;
+}
+.footer .footer-brand-directory {
+  order: 2;
+}
+.footer p:first-of-type {
+  order: 3;
+}
+.footer p:nth-of-type(2) {
+  order: 4;
+}
 
 /* Top nav row */
 .footer .footer-nav {
@@ -3375,7 +3408,9 @@ html[data-theme='light'] .countries-cloud .country-link:hover {
   font-weight: 500 !important;
   color: var(--text-muted) !important;
   letter-spacing: 0;
-  transition: color 0.2s ease, transform 0.2s ease;
+  transition:
+    color 0.2s ease,
+    transform 0.2s ease;
 }
 
 .footer-brand-column a:hover {
@@ -3546,52 +3581,89 @@ body[data-brand] .brand-logo-container.hero-logo {
   min-height: 124px;
   border: 1px solid var(--border-soft);
   border-radius: 8px;
-  background:
-    linear-gradient(180deg, rgba(255, 255, 255, 0.055), rgba(255, 255, 255, 0.015)),
-    #0b1220;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.055), rgba(255, 255, 255, 0.015)), #0b1220;
 }
 
 body[data-brand] .brand-logo {
   max-height: 120px;
 }
 
-body:not(.home-page) :where(.glass-card, .glass-section, .expert-card, .faq-card, .timeline, .brand-countries, .brand-payments, .final-cta-glass, .country-brand-summary-card, .payment-method-card) {
+body:not(.home-page)
+  :where(
+    .glass-card,
+    .glass-section,
+    .expert-card,
+    .faq-card,
+    .timeline,
+    .brand-countries,
+    .brand-payments,
+    .final-cta-glass,
+    .country-brand-summary-card,
+    .payment-method-card
+  ) {
   background: transparent !important;
   border-radius: 0 !important;
   box-shadow: none !important;
   backdrop-filter: none !important;
 }
 
-body:not(.home-page) :where(.features-section, .content-review > section, .content-article > section, .expert-review, .brand-countries, .brand-payments, .final-cta-glass, .country-brand-main, .country-brand-side, .payment-methods-page .payment-methods-grid) {
+body:not(.home-page)
+  :where(
+    .features-section,
+    .content-review > section,
+    .content-article > section,
+    .expert-review,
+    .brand-countries,
+    .brand-payments,
+    .final-cta-glass,
+    .country-brand-main,
+    .country-brand-side,
+    .payment-methods-page .payment-methods-grid
+  ) {
   padding-top: 38px !important;
   padding-bottom: 38px !important;
-  background:
-    linear-gradient(180deg, var(--section-band), rgba(255, 255, 255, 0)) !important;
+  background: linear-gradient(180deg, var(--section-band), rgba(255, 255, 255, 0)) !important;
   border-top: 1px solid var(--border-soft) !important;
   border-bottom: 1px solid var(--border-soft) !important;
 }
 
-body:not(.home-page) :where(
-  .content-review > section:nth-of-type(even),
-  .content-article > section:nth-of-type(even),
-  .expert-review,
-  .brand-payments,
-  .final-cta-glass,
-  .country-brand-side
-) {
-  background:
-    linear-gradient(180deg, var(--section-band-alt), rgba(255, 255, 255, 0)) !important;
+body:not(.home-page)
+  :where(
+    .content-review > section:nth-of-type(even),
+    .content-article > section:nth-of-type(even),
+    .expert-review,
+    .brand-payments,
+    .final-cta-glass,
+    .country-brand-side
+  ) {
+  background: linear-gradient(180deg, var(--section-band-alt), rgba(255, 255, 255, 0)) !important;
 }
 
-body:not(.home-page) :where(.content-review > section, .content-article > section, .expert-review, .final-cta-glass) + :where(section, .expert-review, .final-cta-glass) {
+body:not(.home-page)
+  :where(.content-review > section, .content-article > section, .expert-review, .final-cta-glass)
+  + :where(section, .expert-review, .final-cta-glass) {
   margin-top: -1px;
 }
 
-body:not(.home-page) :where(.section-head, .content-review > section > h2, .content-article > section > h2, .brand-countries > h2, .brand-payments > h2) {
+body:not(.home-page)
+  :where(
+    .section-head,
+    .content-review > section > h2,
+    .content-article > section > h2,
+    .brand-countries > h2,
+    .brand-payments > h2
+  ) {
   text-align: left !important;
 }
 
-body:not(.home-page) :where(.section-head h2, .content-review > section > h2, .content-article > section > h2, .brand-countries > h2, .brand-payments > h2) {
+body:not(.home-page)
+  :where(
+    .section-head h2,
+    .content-review > section > h2,
+    .content-article > section > h2,
+    .brand-countries > h2,
+    .brand-payments > h2
+  ) {
   max-width: 760px;
   margin-right: auto;
   margin-left: 0;
@@ -3704,25 +3776,36 @@ body[data-brand] .availability-summary {
   background: transparent !important;
 }
 
-body[data-brand] :where(.features-section > .title, .brand-countries > .title, .brand-payments > .title, .brand-availability-widget .title, .content-review > section > .title, .content-review > section > h2, .content-article > section > .title, .content-article > section > h2) {
+body[data-brand]
+  :where(
+    .features-section > .title,
+    .brand-countries > .title,
+    .brand-payments > .title,
+    .brand-availability-widget .title,
+    .content-review > section > .title,
+    .content-review > section > h2,
+    .content-article > section > .title,
+    .content-article > section > h2
+  ) {
   font-size: clamp(24px, 2vw, 30px) !important;
   line-height: 1.15;
   font-weight: 650;
 }
 
 /* Editorial section titles now follow the Online Casinos by Country rhythm */
-body:not(.home-page):not(.casinos-page) :where(
-  .section-head,
-  .expert-review .container,
-  .features-section,
-  .brand-countries,
-  .brand-payments,
-  .brand-availability-widget,
-  .content-review > section,
-  .content-article,
-  .content-article > section,
-  .final-cta-glass
-) {
+body:not(.home-page):not(.casinos-page)
+  :where(
+    .section-head,
+    .expert-review .container,
+    .features-section,
+    .brand-countries,
+    .brand-payments,
+    .brand-availability-widget,
+    .content-review > section,
+    .content-article,
+    .content-article > section,
+    .final-cta-glass
+  ) {
   --section-eyebrow: 'SPINCRESTA GUIDE';
 }
 
@@ -3730,20 +3813,21 @@ body:not(.home-page):not(.casinos-page) :where(.section-head, .expert-review .co
   text-align: center !important;
 }
 
-body:not(.home-page):not(.casinos-page) :where(
-  .section-head h2,
-  .expert-review .title,
-  .features-section > .title,
-  .brand-countries > .title,
-  .brand-payments > .title,
-  .brand-availability-widget .title,
-  .content-review > section > .title,
-  .content-review > section > h2,
-  .content-article > .title,
-  .content-article > section > .title,
-  .content-article > section > h2,
-  .final-cta-glass .title
-) {
+body:not(.home-page):not(.casinos-page)
+  :where(
+    .section-head h2,
+    .expert-review .title,
+    .features-section > .title,
+    .brand-countries > .title,
+    .brand-payments > .title,
+    .brand-availability-widget .title,
+    .content-review > section > .title,
+    .content-review > section > h2,
+    .content-article > .title,
+    .content-article > section > .title,
+    .content-article > section > h2,
+    .final-cta-glass .title
+  ) {
   position: relative;
   max-width: 900px !important;
   margin-right: auto !important;
@@ -3760,20 +3844,21 @@ body:not(.home-page):not(.casinos-page) :where(
   text-shadow: none !important;
 }
 
-body:not(.home-page):not(.casinos-page) :where(
-  .section-head h2,
-  .expert-review .title,
-  .features-section > .title,
-  .brand-countries > .title,
-  .brand-payments > .title,
-  .brand-availability-widget .title,
-  .content-review > section > .title,
-  .content-review > section > h2,
-  .content-article > .title,
-  .content-article > section > .title,
-  .content-article > section > h2,
-  .final-cta-glass .title
-)::before {
+body:not(.home-page):not(.casinos-page)
+  :where(
+    .section-head h2,
+    .expert-review .title,
+    .features-section > .title,
+    .brand-countries > .title,
+    .brand-payments > .title,
+    .brand-availability-widget .title,
+    .content-review > section > .title,
+    .content-review > section > h2,
+    .content-article > .title,
+    .content-article > section > .title,
+    .content-article > section > h2,
+    .final-cta-glass .title
+  )::before {
   content: var(--section-eyebrow);
   display: block;
   margin-bottom: 12px;
@@ -3868,7 +3953,9 @@ body[data-brand] .brand-countries.is-country-collapsible.is-country-expanded .co
   max-height: var(--brand-countries-expanded-height, 900px);
 }
 
-body[data-brand] .brand-countries.is-country-collapsible:not(.is-country-expanded) .countries-container::after {
+body[data-brand]
+  .brand-countries.is-country-collapsible:not(.is-country-expanded)
+  .countries-container::after {
   content: '';
   position: absolute;
   right: 0;
@@ -3996,15 +4083,16 @@ body:not(.home-page) .content-article > section:has(> .timeline) {
   --section-eyebrow: 'Player Guide';
 }
 
-body:not(.home-page):not(.casinos-page) :where(
-  .section-head p,
-  .section-head .intro,
-  .expert-review .intro,
-  .brand-availability-intro,
-  .content-review > section > p,
-  .content-article > p,
-  .content-article > section > p
-) {
+body:not(.home-page):not(.casinos-page)
+  :where(
+    .section-head p,
+    .section-head .intro,
+    .expert-review .intro,
+    .brand-availability-intro,
+    .content-review > section > p,
+    .content-article > p,
+    .content-article > section > p
+  ) {
   max-width: 72ch;
   margin-right: auto !important;
   margin-left: auto !important;
@@ -4012,7 +4100,13 @@ body:not(.home-page):not(.casinos-page) :where(
   text-align: center !important;
 }
 
-body:not(.home-page):not(.casinos-page) :where(.section-head p, .content-review > section > p, .content-article > p, .content-article > section > p) {
+body:not(.home-page):not(.casinos-page)
+  :where(
+    .section-head p,
+    .content-review > section > p,
+    .content-article > p,
+    .content-article > section > p
+  ) {
   max-width: 72ch;
   margin-right: auto;
   margin-left: auto;
@@ -4034,21 +4128,28 @@ body:not(.home-page) :where(.feature-card, .payment-method-card, .country-brand-
   background: transparent !important;
   box-shadow: none !important;
   transform: none !important;
-  transition: background 0.18s ease, border-color 0.18s ease, color 0.18s ease;
+  transition:
+    background 0.18s ease,
+    border-color 0.18s ease,
+    color 0.18s ease;
 }
 
-body:not(.home-page) :where(.feature-card, .payment-method-card, .country-brand-summary-card, .bonus-card):hover {
+body:not(.home-page)
+  :where(.feature-card, .payment-method-card, .country-brand-summary-card, .bonus-card):hover {
   background: rgba(255, 255, 255, 0.025) !important;
   border-color: rgba(255, 223, 0, 0.2) !important;
   box-shadow: none !important;
   transform: none !important;
 }
 
-html[data-theme='light'] body:not(.home-page) :where(.feature-card, .payment-method-card, .country-brand-summary-card, .bonus-card):hover {
+html[data-theme='light']
+  body:not(.home-page)
+  :where(.feature-card, .payment-method-card, .country-brand-summary-card, .bonus-card):hover {
   background: rgba(15, 23, 42, 0.025) !important;
 }
 
-body:not(.home-page) :where(.feature-card strong, .payment-method-card h3, .country-brand-summary-card h3, .bonus-card h3) {
+body:not(.home-page)
+  :where(.feature-card strong, .payment-method-card h3, .country-brand-summary-card h3, .bonus-card h3) {
   color: var(--text-main) !important;
   text-shadow: none !important;
   font-size: 18px;
@@ -4056,7 +4157,14 @@ body:not(.home-page) :where(.feature-card strong, .payment-method-card h3, .coun
   letter-spacing: 0;
 }
 
-body:not(.home-page) :where(.feature-card span, .feature-card p, .payment-method-card p, .country-brand-summary-card p, .bonus-card p) {
+body:not(.home-page)
+  :where(
+    .feature-card span,
+    .feature-card p,
+    .payment-method-card p,
+    .country-brand-summary-card p,
+    .bonus-card p
+  ) {
   color: var(--text-muted) !important;
 }
 
@@ -4150,7 +4258,8 @@ body:not(.home-page) :where(.brand-countries .countries-container, .brand-paymen
   gap: 10px;
 }
 
-body:not(.home-page) :where(.brand-countries .flag-container, .country-chip, .payment-chip, .promo-copy-meta span) {
+body:not(.home-page)
+  :where(.brand-countries .flag-container, .country-chip, .payment-chip, .promo-copy-meta span) {
   min-height: 36px;
   padding: 8px 12px;
   border: 1px solid var(--border-soft) !important;
@@ -4161,13 +4270,16 @@ body:not(.home-page) :where(.brand-countries .flag-container, .country-chip, .pa
   transform: none !important;
 }
 
-body:not(.home-page) :where(.brand-countries .flag-container:hover, .country-chip:hover, .payment-chip:hover) {
+body:not(.home-page)
+  :where(.brand-countries .flag-container:hover, .country-chip:hover, .payment-chip:hover) {
   border-color: var(--gold, #ffdf00) !important;
   color: var(--gold, #ffdf00) !important;
   background: rgba(255, 255, 255, 0.025) !important;
 }
 
-html[data-theme='light'] body:not(.home-page) :where(.brand-countries .flag-container:hover, .country-chip:hover, .payment-chip:hover) {
+html[data-theme='light']
+  body:not(.home-page)
+  :where(.brand-countries .flag-container:hover, .country-chip:hover, .payment-chip:hover) {
   background: rgba(15, 23, 42, 0.025) !important;
   color: #8a5e1f !important;
 }
@@ -4277,7 +4389,14 @@ body.casinos-page .alpha-nav .view-all:hover {
   transform: translateY(-1px) !important;
 }
 
-html[data-theme='light'] :where(.cta-secondary, .casino-actions .cta-secondary, .view-all, body.casinos-page .filter-btn, body.casinos-page .alpha-nav .view-all):hover {
+html[data-theme='light']
+  :where(
+    .cta-secondary,
+    .casino-actions .cta-secondary,
+    .view-all,
+    body.casinos-page .filter-btn,
+    body.casinos-page .alpha-nav .view-all
+  ):hover {
   background: rgba(15, 23, 42, 0.025) !important;
   color: #8a5e1f !important;
 }
@@ -4324,7 +4443,12 @@ html[data-theme='light'] .footer-settings-trigger:hover {
 
 .theme-settings-option {
   border-radius: 999px !important;
-  background: linear-gradient(180deg, rgba(30, 41, 59, 0.98) 0%, rgba(15, 23, 42, 0.97) 58%, rgba(7, 12, 26, 0.98) 100%) !important;
+  background: linear-gradient(
+    180deg,
+    rgba(30, 41, 59, 0.98) 0%,
+    rgba(15, 23, 42, 0.97) 58%,
+    rgba(7, 12, 26, 0.98) 100%
+  ) !important;
   border-color: rgba(148, 163, 184, 0.16) !important;
   box-shadow:
     inset 0 1px 0 rgba(255, 255, 255, 0.18),
@@ -4333,7 +4457,12 @@ html[data-theme='light'] .footer-settings-trigger:hover {
 }
 
 .theme-settings-option:hover {
-  background: linear-gradient(180deg, rgba(42, 55, 82, 0.98) 0%, rgba(18, 29, 51, 0.98) 58%, rgba(9, 16, 34, 0.98) 100%) !important;
+  background: linear-gradient(
+    180deg,
+    rgba(42, 55, 82, 0.98) 0%,
+    rgba(18, 29, 51, 0.98) 58%,
+    rgba(9, 16, 34, 0.98) 100%
+  ) !important;
   border-color: rgba(191, 219, 254, 0.24) !important;
   box-shadow:
     inset 0 1px 0 rgba(255, 255, 255, 0.23),
@@ -4391,7 +4520,19 @@ html[data-theme='light'] .theme-settings-option.is-active {
     padding: 12px !important;
   }
 
-  body:not(.home-page) :where(.features-section, .content-review > section, .content-article > section, .expert-review, .brand-countries, .brand-payments, .final-cta-glass, .country-brand-main, .country-brand-side, .payment-methods-page .payment-methods-grid) {
+  body:not(.home-page)
+    :where(
+      .features-section,
+      .content-review > section,
+      .content-article > section,
+      .expert-review,
+      .brand-countries,
+      .brand-payments,
+      .final-cta-glass,
+      .country-brand-main,
+      .country-brand-side,
+      .payment-methods-page .payment-methods-grid
+    ) {
     padding-top: 28px !important;
     padding-bottom: 28px !important;
   }
@@ -4409,7 +4550,6 @@ html[data-theme='light'] .theme-settings-option.is-active {
   .footer-nav .footer-settings-trigger {
     padding: 8px 12px !important;
   }
-
 }
 
 /* =============================================================
@@ -5290,7 +5430,6 @@ body[data-brand] .availability-tab-list {
     padding: 3px 6px;
     font-size: 7.5px;
   }
-
 }
 
 @media (max-width: 380px) {
@@ -6391,7 +6530,7 @@ body[data-country] .country-hero-cards .view-all {
 
 @media (max-width: 768px) {
   body[data-country] .hero.country-hero-with-cards {
-    padding-top: 58px !important;
+    padding-top: 78px !important;
     padding-bottom: 22px !important;
   }
 
@@ -6531,8 +6670,7 @@ body[data-country] .expert-card {
   border: 1px solid var(--border-soft) !important;
   border-radius: 20px !important;
   background:
-    linear-gradient(180deg, rgba(255, 255, 255, 0.045), rgba(255, 255, 255, 0.018)),
-    var(--bg-surface) !important;
+    linear-gradient(180deg, rgba(255, 255, 255, 0.045), rgba(255, 255, 255, 0.018)), var(--bg-surface) !important;
   box-shadow: var(--shadow-card) !important;
   backdrop-filter: var(--blur-glass) !important;
   overflow: hidden;
@@ -6563,8 +6701,7 @@ body[data-country] .expert-photo {
   padding: 8px;
   border: 1px solid var(--border-soft) !important;
   border-radius: 18px !important;
-  background:
-    linear-gradient(145deg, rgba(2, 6, 23, 0.96), rgba(15, 23, 42, 0.9));
+  background: linear-gradient(145deg, rgba(2, 6, 23, 0.96), rgba(15, 23, 42, 0.9));
   box-shadow: var(--shadow-logo-surface) !important;
   object-fit: contain;
 }
@@ -6714,8 +6851,7 @@ body[data-country] .expert-disclaimer {
 html[data-theme='light'] body[data-country] .expert-card,
 html:not([data-theme='dark']) body[data-country] .expert-card {
   background:
-    linear-gradient(180deg, rgba(255, 255, 255, 0.98), rgba(248, 250, 252, 0.94)),
-    rgba(255, 255, 255, 0.94) !important;
+    linear-gradient(180deg, rgba(255, 255, 255, 0.98), rgba(248, 250, 252, 0.94)), rgba(255, 255, 255, 0.94) !important;
 }
 
 html[data-theme='light'] body[data-country] .expert-body > p:first-of-type,
@@ -7098,7 +7234,8 @@ body.casinos-page .casino-list-row::before,
   background: rgba(255, 255, 255, 0.035);
 }
 
-body:not(.home-page) :where(.brand-countries .flag-container, .country-chip, .payment-chip, .promo-copy-meta span),
+body:not(.home-page)
+  :where(.brand-countries .flag-container, .country-chip, .payment-chip, .promo-copy-meta span),
 body:not(.home-page) .promo-copy-title {
   box-shadow: var(--shadow-control) !important;
 }
@@ -7311,7 +7448,10 @@ body[data-brand] .brand-sticky-title:hover .brand-sticky-title__inner {
   font-weight: 500 !important;
   line-height: 1.2;
   letter-spacing: 0;
-  transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+  transition:
+    background 0.2s ease,
+    color 0.2s ease,
+    border-color 0.2s ease;
 }
 
 .top-casino-jump-nav a:hover,
@@ -7335,7 +7475,18 @@ body[data-brand] .brand-sticky-title:hover .brand-sticky-title__inner {
 }
 
 body[data-page='top-casinos'] .content[data-country],
-body[data-brand] :where(.brand-hero-why > .title, .brand-countries > .title, .brand-payments > .title, .brand-availability-widget .title, .content-review > section > .title, .content-review > section > h2, .content-article > section > .title, .content-article > section > h2, .final-cta-glass .title) {
+body[data-brand]
+  :where(
+    .brand-hero-why > .title,
+    .brand-countries > .title,
+    .brand-payments > .title,
+    .brand-availability-widget .title,
+    .content-review > section > .title,
+    .content-review > section > h2,
+    .content-article > section > .title,
+    .content-article > section > h2,
+    .final-cta-glass .title
+  ) {
   scroll-margin-top: calc(var(--header-height, 64px) + 18px);
 }
 
@@ -7462,7 +7613,9 @@ html:not([data-theme='dark']) .top-casino-jump-nav a:focus-visible {
     width: 6px;
   }
 
-  body[data-brand].has-brand-sticky-layout .brand-sticky-aside .hero-content.glass-card::-webkit-scrollbar-thumb {
+  body[data-brand].has-brand-sticky-layout
+    .brand-sticky-aside
+    .hero-content.glass-card::-webkit-scrollbar-thumb {
     border-radius: 999px;
     background: rgba(148, 163, 184, 0.34);
   }
