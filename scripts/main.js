@@ -12,6 +12,11 @@ const PLACEHOLDER_LINK = '#';
 const MOJIBAKE_FIXES = [];
 const THEME_STORAGE_KEY = 'spincresta-theme';
 const THEME_OPTIONS = ['dark', 'light'];
+const BLOCKED_BRAND_ICON = '/icons/ui/stop-blocked-icon.svg';
+const CLOSE_ICON = '/icons/ui/close-line-icon.svg';
+const BLOCKED_BRAND_NOTICE =
+  'According to verified information from our analysts, this casino has issues with law enforcement authorities of the Republic of Belarus.';
+const BLOCKED_BRAND_CTA = 'Not recommended';
 
 const normalizeText = value => {
   if (typeof value !== 'string') return value ?? '';
@@ -418,6 +423,236 @@ const normalizeBrandKey = value =>
     .replace(/&/g, 'and')
     .replace(/[^a-z0-9]+/g, '');
 
+const getBrandDetailPath = brand => normalizePagePath(brand?.urlDetail || '');
+
+const findBrandByPageKey = brandKey => {
+  const normalizedPageKey = normalizeBrandKey(brandKey || '');
+  if (!normalizedPageKey) return null;
+
+  return (
+    BRANDS.find(brand => {
+      const detailSlug = getBrandDetailPath(brand).split('/').filter(Boolean).pop();
+      return normalizeBrandKey(detailSlug) === normalizedPageKey;
+    }) ||
+    BRANDS.find(brand => normalizeBrandKey(brand.name).includes(normalizedPageKey)) ||
+    null
+  );
+};
+
+const getBrandAlternatives = brand => {
+  const countryCodes = new Set((brand?.countries || []).map(code => code.toUpperCase()));
+  const usedKeys = new Set([getBrandDetailPath(brand), normalizeBrandKey(brand?.name)]);
+  const alternatives = [];
+
+  const addCandidate = candidate => {
+    const detailPath = getBrandDetailPath(candidate);
+    const nameKey = normalizeBrandKey(candidate?.name);
+    if (!candidate || candidate.notRecommended || !candidate.hasDetailPage || !detailPath || !candidate.image) return;
+    if (usedKeys.has(detailPath) || usedKeys.has(nameKey)) return;
+    usedKeys.add(detailPath);
+    usedKeys.add(nameKey);
+    alternatives.push(candidate);
+  };
+
+  BRANDS.filter(candidate =>
+    (candidate.countries || []).some(code => countryCodes.has(code.toUpperCase()))
+  ).forEach(addCandidate);
+
+  if (alternatives.length < 4) {
+    BRANDS.forEach(addCandidate);
+  }
+
+  return alternatives.slice(0, 4);
+};
+
+const getBlockedCtaMarkup = () => `
+  <span>Visit Casino</span>
+`;
+
+const disableCasinoCta = element => {
+  if (!element || element.dataset.blockedCta === 'true') return;
+
+  element.dataset.blockedCta = 'true';
+  element.classList.add('cta-blocked');
+  element.setAttribute('aria-disabled', 'true');
+  element.setAttribute('role', 'button');
+  element.setAttribute('tabindex', '-1');
+  element.removeAttribute('href');
+  element.removeAttribute('target');
+  element.removeAttribute('rel');
+  element.innerHTML = getBlockedCtaMarkup();
+
+  element.addEventListener('click', event => {
+    event.preventDefault();
+    event.stopPropagation();
+  });
+};
+
+const createBlockedBrandIcon = className => {
+  const icon = document.createElement('img');
+  icon.className = className;
+  icon.src = BLOCKED_BRAND_ICON;
+  icon.alt = '';
+  icon.loading = 'lazy';
+  icon.decoding = 'async';
+  icon.setAttribute('aria-hidden', 'true');
+  return icon;
+};
+
+const insertBrandRiskInlineNotice = brand => {
+  if (document.querySelector('body[data-brand] .brand-risk-inline')) return;
+
+  const alternatives = getBrandAlternatives(brand);
+  const notice = document.createElement('aside');
+  notice.className = 'brand-risk-inline';
+  notice.setAttribute('role', 'note');
+  notice.innerHTML = `
+    <div class="brand-risk-inline__notice">
+      <img class="brand-risk-inline__icon" src="${BLOCKED_BRAND_ICON}" alt="" aria-hidden="true" loading="lazy" decoding="async" />
+      <div class="brand-risk-inline__copy">
+        <strong>${escapeHtml(BLOCKED_BRAND_CTA)}</strong>
+        <p>${escapeHtml(BLOCKED_BRAND_NOTICE)}</p>
+      </div>
+    </div>
+    ${
+      alternatives.length
+        ? `<div class="brand-risk-inline__alternatives">
+            <h3>We recommend these casinos instead</h3>
+            <div class="brand-risk-inline-grid"></div>
+          </div>`
+        : ''
+    }
+  `;
+
+  const grid = notice.querySelector('.brand-risk-inline-grid');
+  alternatives.forEach(candidate => {
+    grid?.appendChild(createCasinoCard(candidate));
+  });
+
+  const whySection =
+    document.querySelector('body[data-brand] .brand-hero-why') ||
+    Array.from(document.querySelectorAll('body[data-brand] section.features-section')).find(section => {
+      const title = section.querySelector(':scope > .title, :scope > h2');
+      return /why\s+players\s+choose/i.test(normalizeText(title?.textContent || ''));
+    });
+
+  if (whySection) {
+    whySection.insertAdjacentElement('beforebegin', notice);
+    return;
+  }
+
+  const main =
+    document.querySelector('body[data-brand] .brand-sticky-main') ||
+    document.querySelector('body[data-brand] main.content-review') ||
+    document.querySelector('body[data-brand] .hero');
+  main?.insertAdjacentElement('afterbegin', notice);
+};
+
+const renderBrandRiskOverlay = brand => {
+  if (!brand?.notRecommended || document.querySelector('.brand-risk-overlay')) return;
+
+  const safeName = escapeHtml(normalizeText(brand.name));
+  const alternatives = getBrandAlternatives(brand);
+  const overlay = document.createElement('section');
+  overlay.className = 'brand-risk-overlay';
+  overlay.setAttribute('role', 'dialog');
+  overlay.setAttribute('aria-modal', 'true');
+  overlay.setAttribute('aria-labelledby', 'brand-risk-title');
+  overlay.innerHTML = `
+    <div class="brand-risk-dialog">
+      <button class="brand-risk-close" type="button" data-risk-close aria-label="Close warning">
+        <img src="${CLOSE_ICON}" alt="" aria-hidden="true" loading="lazy" decoding="async" />
+      </button>
+      <div class="brand-risk-alert">
+        <img src="${BLOCKED_BRAND_ICON}" alt="" aria-hidden="true" loading="lazy" decoding="async" />
+        <div>
+          <span class="brand-risk-kicker">${escapeHtml(BLOCKED_BRAND_CTA)}</span>
+          <h2 id="brand-risk-title">${safeName}</h2>
+          <p>${escapeHtml(BLOCKED_BRAND_NOTICE)}</p>
+        </div>
+      </div>
+      <div class="brand-risk-actions">
+        <button class="cta cta-secondary brand-risk-dismiss" type="button" data-risk-close>Close warning</button>
+        <a class="cta cta-primary brand-risk-home" href="/">Go to homepage</a>
+      </div>
+      ${
+        alternatives.length
+          ? `<div class="brand-risk-alternatives">
+              <h3>We recommend these casinos instead</h3>
+              <div class="brand-risk-grid"></div>
+            </div>`
+          : ''
+      }
+    </div>
+  `;
+
+  const grid = overlay.querySelector('.brand-risk-grid');
+  alternatives.forEach(candidate => {
+    grid?.appendChild(createCasinoCard(candidate));
+  });
+
+  const closeOverlay = () => {
+    document.body.classList.remove('not-recommended-overlay-active');
+    overlay.remove();
+  };
+
+  overlay.querySelectorAll('[data-risk-close]').forEach(button => {
+    button.addEventListener('click', closeOverlay);
+  });
+
+  document.body.appendChild(overlay);
+  document.body.classList.add('not-recommended-brand', 'not-recommended-overlay-active');
+  requestPaymentIconSync();
+};
+
+const applyNotRecommendedBrandPage = brand => {
+  if (!brand?.notRecommended) return;
+
+  document.body.classList.add('not-recommended-brand');
+  document.querySelectorAll('body[data-brand] a.cta-brands').forEach(disableCasinoCta);
+
+  document.querySelectorAll('body[data-brand] .brand-sticky-title[href]').forEach(stickyTitle => {
+    stickyTitle.removeAttribute('href');
+    stickyTitle.removeAttribute('target');
+    stickyTitle.removeAttribute('rel');
+    stickyTitle.setAttribute('role', 'status');
+    stickyTitle.setAttribute('aria-label', `${normalizeText(brand.name)} is not recommended`);
+    stickyTitle.classList.add('is-not-recommended');
+  });
+
+  document.querySelectorAll('body[data-brand] .brand-sticky-title__cta').forEach(cta => {
+    cta.classList.add('cta-blocked');
+    cta.innerHTML = getBlockedCtaMarkup();
+  });
+
+  insertBrandRiskInlineNotice(brand);
+  renderBrandRiskOverlay(brand);
+};
+
+const applyNotRecommendedCasinoRows = () => {
+  const blockedByPath = new Map(
+    BRANDS.filter(brand => brand.notRecommended && brand.urlDetail).map(brand => [
+      getBrandDetailPath(brand),
+      brand,
+    ])
+  );
+
+  document.querySelectorAll('body.casinos-page .casino-list-row').forEach(row => {
+    const detailLink = row.querySelector('.casino-name a[href], .casino-list-logo a[href]');
+    const brand = blockedByPath.get(normalizePagePath(detailLink?.getAttribute('href') || ''));
+    if (!brand) return;
+
+    row.classList.add('is-not-recommended');
+    row.dataset.notRecommended = 'true';
+    row.querySelectorAll('.casino-list-cta .cta[href]').forEach(disableCasinoCta);
+
+    const name = row.querySelector('.casino-name');
+    if (name && !name.querySelector('.casino-list-risk-icon')) {
+      name.appendChild(createBlockedBrandIcon('casino-list-risk-icon'));
+    }
+  });
+};
+
 const normalizeBrandColor = color => {
   const value = typeof color === 'string' ? color.trim() : '';
   if (!value) return '';
@@ -678,6 +913,7 @@ const createCasinoCard = ({
   isNew = false,
   isExclusive = false,
   isTopRated = false,
+  notRecommended = false,
   hasDetailPage = false,
 }) => {
   const article = document.createElement('article');
@@ -689,10 +925,13 @@ const createCasinoCard = ({
   const primaryCtaText = 'Visit Casino';
   const detailUrl = normalizePagePath(urlDetail ?? '');
   const imageUrl = normalizeAssetPath(image ?? '');
+  const isBlocked = Boolean(notRecommended);
   const showReviewAction = Boolean(hasDetailPage && detailUrl);
-  const showPlayAction = safeUrl !== PLACEHOLDER_LINK;
+  const showPlayAction = safeUrl !== PLACEHOLDER_LINK || isBlocked;
 
   article.dataset.page = detailUrl;
+  article.classList.toggle('is-not-recommended', isBlocked);
+  if (isBlocked) article.dataset.notRecommended = 'true';
   setBrandBackground(article, bgColor);
 
   article.innerHTML = `
@@ -701,6 +940,11 @@ const createCasinoCard = ({
     </div>
     <div class="casino-card-heading">
       <h3 class="casino-name">${safeName}</h3>
+      ${
+        isBlocked
+          ? `<img class="casino-card-risk-icon" src="${BLOCKED_BRAND_ICON}" alt="" aria-hidden="true" loading="lazy" decoding="async" />`
+          : ''
+      }
       ${createBadge({ isTopRated, isExclusive, isNew })}
     </div>
     <p class="casino-bonus">${safeBonus}</p>
@@ -713,7 +957,11 @@ const createCasinoCard = ({
             : ''
         }
         ${
-          showPlayAction
+          isBlocked
+            ? `<button class="cta cta-primary cta-blocked" type="button" disabled aria-disabled="true">
+                ${getBlockedCtaMarkup()}
+              </button>`
+            : showPlayAction
             ? `<a class="cta cta-primary" href="${safeUrl}" target="_blank" rel="noopener noreferrer nofollow sponsored">${primaryCtaText}</a>`
             : ''
         }
@@ -730,6 +978,7 @@ const createCasinoCard = ({
     }
 
     if (safeUrl !== PLACEHOLDER_LINK) {
+      if (isBlocked) return;
       window.open(safeUrl, '_blank', 'noopener');
     }
   });
@@ -743,25 +992,66 @@ const createCasinoCard = ({
 
 const ITEMS_PER_BATCH = 12;
 
+const getLoadMoreControls = container => {
+  const loadMoreWrapper =
+    container.parentElement?.querySelector(':scope > .load-more-wrapper') ||
+    container.closest('.country-brand-main, .container, .content')?.querySelector('.load-more-wrapper') ||
+    document.getElementById('loadMoreBtn')?.closest('.load-more-wrapper') ||
+    null;
+
+  const loadMoreBtn = loadMoreWrapper?.querySelector('button') || document.getElementById('loadMoreBtn');
+
+  return { loadMoreBtn, loadMoreWrapper };
+};
+
+const setLoadMoreVisible = (wrapper, button, isVisible) => {
+  if (!wrapper) return;
+
+  wrapper.hidden = !isVisible;
+  wrapper.classList.toggle('is-visible', isVisible);
+  wrapper.classList.toggle('is-hidden', !isVisible);
+  wrapper.setAttribute('aria-hidden', isVisible ? 'false' : 'true');
+
+  if (button) {
+    button.disabled = !isVisible;
+    button.tabIndex = isVisible ? 0 : -1;
+  }
+};
+
 const renderBrandList = (brands, containerSelector, emptyText) => {
   const container = document.querySelector(containerSelector);
-  const loadMoreBtn = document.getElementById('loadMoreBtn');
-  const loadMoreWrapper = loadMoreBtn?.closest('.load-more-wrapper');
   if (!container) return;
+  const { loadMoreBtn, loadMoreWrapper } = getLoadMoreControls(container);
 
   if (!brands.length) {
     container.innerHTML = `<p>${emptyText}</p>`;
-    if (loadMoreWrapper) loadMoreWrapper.hidden = true;
+    setLoadMoreVisible(loadMoreWrapper, loadMoreBtn, false);
+    if (loadMoreBtn) loadMoreBtn.onclick = null;
     return;
   }
 
   let visibleCount = 0;
 
   container.innerHTML = '';
-  if (loadMoreWrapper) loadMoreWrapper.hidden = brands.length <= ITEMS_PER_BATCH;
+  setLoadMoreVisible(loadMoreWrapper, loadMoreBtn, false);
 
-  const renderNextBatch = () => {
+  const syncLoadMoreState = () => {
+    setLoadMoreVisible(loadMoreWrapper, loadMoreBtn, visibleCount < brands.length);
+  };
+
+  const renderNextBatch = event => {
+    event?.preventDefault();
+
+    if (visibleCount >= brands.length) {
+      syncLoadMoreState();
+      return;
+    }
+
     const nextItems = brands.slice(visibleCount, visibleCount + ITEMS_PER_BATCH);
+    if (!nextItems.length) {
+      syncLoadMoreState();
+      return;
+    }
 
     const fragment = document.createDocumentFragment();
     nextItems.forEach(brand => {
@@ -771,20 +1061,15 @@ const renderBrandList = (brands, containerSelector, emptyText) => {
     container.appendChild(fragment);
     requestPaymentIconSync();
     requestAnimationFrame(syncCountryStickyReviewsLayout);
-    visibleCount += ITEMS_PER_BATCH;
-
-    if (visibleCount >= brands.length) {
-      if (loadMoreWrapper) loadMoreWrapper.hidden = true;
-    } else if (loadMoreWrapper) {
-      loadMoreWrapper.hidden = false;
-    }
+    visibleCount += nextItems.length;
+    syncLoadMoreState();
   };
-
-  renderNextBatch();
 
   if (loadMoreBtn) {
     loadMoreBtn.onclick = renderNextBatch;
   }
+
+  renderNextBatch();
 };
 
 const getCountryFilterDefinitions = () => [
@@ -1464,6 +1749,8 @@ const getBrandSnapshotName = () => {
 const initStickyBrandTitle = () => {
   const brandKey = document.body.dataset.brand?.toLowerCase();
   if (!brandKey) return;
+  const brand = findBrandByPageKey(brandKey);
+  const isBlocked = Boolean(brand?.notRecommended);
 
   const source = document.querySelector('.brand-sticky-aside') || document.querySelector('.hero');
   const heading = source?.querySelector('h1');
@@ -1477,7 +1764,7 @@ const initStickyBrandTitle = () => {
   if (!titleText) return;
 
   const casinoHref = heroCta?.getAttribute('href')?.trim() || '';
-  if (!casinoHref) return;
+  if (!casinoHref && !isBlocked) return;
 
   const brandLogoSrc = brandLogo?.getAttribute('src') || '';
   const brandLogoMarkup = brandLogoSrc
@@ -1492,17 +1779,25 @@ const initStickyBrandTitle = () => {
     `
     : '';
 
-  const stickyTitle = document.createElement('a');
+  const stickyTitle = document.createElement(isBlocked ? 'div' : 'a');
   stickyTitle.className = 'brand-sticky-title';
-  stickyTitle.href = casinoHref;
-  stickyTitle.target = heroCta?.getAttribute('target') || '_blank';
-  stickyTitle.rel = heroCta?.getAttribute('rel') || 'noopener noreferrer nofollow sponsored';
-  stickyTitle.setAttribute('aria-label', `Visit ${titleText}`);
+  if (isBlocked) {
+    stickyTitle.classList.add('is-not-recommended');
+    stickyTitle.setAttribute('role', 'status');
+    stickyTitle.setAttribute('aria-label', `${titleText} is not recommended`);
+  } else {
+    stickyTitle.href = casinoHref;
+    stickyTitle.target = heroCta?.getAttribute('target') || '_blank';
+    stickyTitle.rel = heroCta?.getAttribute('rel') || 'noopener noreferrer nofollow sponsored';
+    stickyTitle.setAttribute('aria-label', `Visit ${titleText}`);
+  }
   stickyTitle.innerHTML = `
     <div class="brand-sticky-title__inner">
       ${brandLogoMarkup}
       <span class="brand-sticky-title__text">${titleText}</span>
-      <span class="brand-sticky-title__cta">Visit Casino</span>
+      <span class="brand-sticky-title__cta${isBlocked ? ' cta-blocked' : ''}">
+        Visit Casino
+      </span>
     </div>
   `;
 
@@ -1901,6 +2196,7 @@ const enhanceBrandProsCons = () => {
     const card = heading.closest('.feature-card');
     if (card) {
       card.classList.add(label === 'pros' ? 'is-pros-card' : 'is-cons-card');
+      card.closest('.features-grid')?.classList.add('pros-cons-grid');
     }
 
     heading.classList.add('pros-cons-heading', label === 'pros' ? 'is-pros' : 'is-cons');
@@ -2188,6 +2484,7 @@ export const initCasinoPage = () => {
 
   initHomeNewBrandsCarousel();
   applyBrandLogoBackgrounds();
+  applyNotRecommendedCasinoRows();
   applyBrandHeroConcept();
   applyBrandStickyReviewLayout();
 
@@ -2277,7 +2574,7 @@ export const initCasinoPage = () => {
     applyBrandInfoPairLayout();
     renderBrandAvailabilityWidget(brandKey);
 
-    const brand = BRANDS.find(b => b.urlDetail?.toLowerCase().includes(brandKey));
+    const brand = findBrandByPageKey(brandKey);
 
     if (brand) {
       const countriesEl = document.getElementById('brand-countries');
@@ -2310,6 +2607,7 @@ export const initCasinoPage = () => {
           .join('');
       }
 
+      applyNotRecommendedBrandPage(brand);
     }
 
     initBrandSectionNav();

@@ -2137,9 +2137,18 @@ textarea {
 }
 
 .load-more-wrapper {
-  display: flex;
+  display: none;
   justify-content: center;
   margin-top: 24px;
+}
+
+.load-more-wrapper.is-visible {
+  display: flex;
+}
+
+.load-more-wrapper[hidden],
+.load-more-wrapper.is-hidden {
+  display: none !important;
 }
 
 table {
