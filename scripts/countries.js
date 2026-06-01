@@ -48,6 +48,7 @@ export const COUNTRIES = [
   { code: 'mx', slug: 'mexico', name: 'Mexico' },
 
   { code: 'nl', slug: 'netherlands', name: 'Netherlands' },
+  { code: 'np', slug: 'nepal', name: 'Nepal' },
   { code: 'nz', slug: 'new-zealand', name: 'New Zealand' },
   { code: 'ng', slug: 'nigeria', name: 'Nigeria' },
   { code: 'no', slug: 'norway', name: 'Norway' },

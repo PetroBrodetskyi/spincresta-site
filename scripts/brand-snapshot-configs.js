@@ -264,6 +264,18 @@ const fuguConfig = createGamesLiveBettingConfig(
   ['Football', 'Basketball', 'Tennis', 'eSports']
 );
 
+const pampasConfig = createGamesLiveBettingConfig(
+  ['Slots', 'Jackpot games', 'Live games', 'Crash games'],
+  ['Other live games'],
+  ['Football']
+);
+
+const babu88Config = createGamesLiveBettingConfig(
+  ['Slots', 'Roulette', 'Blackjack', 'Baccarat', 'Jackpot games', 'Live games', 'Poker', 'Crash games'],
+  ['Live baccarat', 'Live blackjack', 'Other live games', 'Live roulette'],
+  ['Football', 'Basketball', 'Tennis', 'Cricket', 'eSports']
+);
+
 export const BRAND_SNAPSHOT_CONFIGS = {
   ...mapSnapshotConfig(['trino', 'spellwin'], mixedCasinoSportsConfig),
   ...mapSnapshotConfig(['amonbet', 'luckywave', 'slotlair'], sportsPromoCasinoConfig),
@@ -293,4 +305,6 @@ export const BRAND_SNAPSHOT_CONFIGS = {
   spinarium: spinariumConfig,
   leon: leonConfig,
   fugu: fuguConfig,
+  pampas: pampasConfig,
+  babu88: babu88Config,
 };
