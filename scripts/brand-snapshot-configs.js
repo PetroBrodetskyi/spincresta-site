@@ -276,6 +276,28 @@ const babu88Config = createGamesLiveBettingConfig(
   ['Football', 'Basketball', 'Tennis', 'Cricket', 'eSports']
 );
 
+const kaasinoConfig = createGamesLiveConfig(
+  ['Slots', 'Roulette', 'Blackjack', 'Video poker', 'Baccarat', 'Jackpot games', 'Live games', 'Poker'],
+  ['Live baccarat', 'Live blackjack', 'Other live games', 'Live roulette']
+);
+
+const goldenstarConfig = createGamesLiveBettingConfig(
+  ['Slots', 'Roulette', 'Blackjack', 'Baccarat', 'Jackpot games', 'Live games', 'Crash games'],
+  ['Live shows', 'Live baccarat', 'Live blackjack', 'Other live games', 'Live roulette'],
+  ['Football', 'Basketball', 'Tennis', 'Table tennis', 'Volleyball', 'Ice hockey', 'Cricket', 'Baseball', 'eSports', 'Virtual sports']
+);
+
+const goldencrownConfig = createGamesLiveConfig(
+  ['Slots', 'Roulette', 'Blackjack', 'Baccarat', 'Jackpot games', 'Live games', 'Crash games'],
+  ['Live shows', 'Live baccarat', 'Live blackjack', 'Other live games', 'Live roulette']
+);
+
+const mrpunterConfig = createGamesLiveBettingConfig(
+  ['Slots', 'Roulette', 'Blackjack', 'Baccarat', 'Jackpot games', 'Live games', 'Poker', 'Crash games'],
+  ['Live shows', 'Live baccarat', 'Live blackjack', 'Other live games', 'Live poker', 'Live roulette'],
+  ['Football', 'Basketball', 'Tennis', 'Table tennis', 'Volleyball', 'Ice hockey', 'eSports', 'Virtual sports']
+);
+
 export const BRAND_SNAPSHOT_CONFIGS = {
   ...mapSnapshotConfig(['trino', 'spellwin'], mixedCasinoSportsConfig),
   ...mapSnapshotConfig(['amonbet', 'luckywave', 'slotlair'], sportsPromoCasinoConfig),
@@ -307,4 +329,8 @@ export const BRAND_SNAPSHOT_CONFIGS = {
   fugu: fuguConfig,
   pampas: pampasConfig,
   babu88: babu88Config,
+  kaasino: kaasinoConfig,
+  goldenstar: goldenstarConfig,
+  goldencrown: goldencrownConfig,
+  mrpunter: mrpunterConfig,
 };

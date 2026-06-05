@@ -4947,6 +4947,10 @@ html.has-brand-sticky-layout body {
     line-height: 1 !important;
   }
 
+  body[data-brand='goldencrown'].has-brand-sticky-layout .brand-sticky-aside h1 {
+    max-width: 14ch !important;
+  }
+
   body[data-brand].has-brand-sticky-layout .brand-sticky-aside .hero-subtitle {
     max-width: 32ch !important;
     margin: 0 !important;
