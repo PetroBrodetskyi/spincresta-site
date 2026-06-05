@@ -298,6 +298,12 @@ const mrpunterConfig = createGamesLiveBettingConfig(
   ['Football', 'Basketball', 'Tennis', 'Table tennis', 'Volleyball', 'Ice hockey', 'eSports', 'Virtual sports']
 );
 
+const spininioConfig = createGamesLiveBettingConfig(
+  ['Slots', 'Roulette', 'Blackjack', 'Baccarat', 'Jackpot games', 'Live games', 'Poker'],
+  ['Live shows', 'Live baccarat', 'Live blackjack', 'Live poker', 'Other live games', 'Live roulette'],
+  ['Football', 'Basketball', 'Ice hockey', 'Cricket', 'Baseball', 'eSports', 'Virtual sports', 'Combat sports']
+);
+
 export const BRAND_SNAPSHOT_CONFIGS = {
   ...mapSnapshotConfig(['trino', 'spellwin'], mixedCasinoSportsConfig),
   ...mapSnapshotConfig(['amonbet', 'luckywave', 'slotlair'], sportsPromoCasinoConfig),
@@ -333,4 +339,5 @@ export const BRAND_SNAPSHOT_CONFIGS = {
   goldenstar: goldenstarConfig,
   goldencrown: goldencrownConfig,
   mrpunter: mrpunterConfig,
+  spininio: spininioConfig,
 };
