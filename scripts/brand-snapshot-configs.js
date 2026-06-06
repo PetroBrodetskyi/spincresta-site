@@ -99,6 +99,17 @@ const createGamesLiveBettingConfig = (gamesAvailable, liveAvailable, bettingAvai
   ],
 });
 
+const createBettingConfig = bettingAvailable => ({
+  tabs: [
+    createCategoryTab(
+      'Betting',
+      BETTING_CATEGORIES,
+      bettingAvailable,
+      'These are the main betting categories currently visible in the account.'
+    ),
+  ],
+});
+
 const mapSnapshotConfig = (keys, config) =>
   Object.fromEntries(keys.map(key => [key.toLowerCase(), config]));
 
@@ -252,6 +263,12 @@ const spinariumConfig = createGamesLiveBettingConfig(
   ['Football', 'Basketball', 'Tennis', 'Table tennis', 'Volleyball', 'Ice hockey', 'eSports', 'Virtual sports', 'Motorsport']
 );
 
+const spinbetterConfig = createGamesLiveBettingConfig(
+  ['Slots', 'Blackjack', 'Bingo', 'Live games', 'Poker', 'Crash games'],
+  ['Other live games'],
+  ['Football', 'Basketball', 'Tennis', 'Ice hockey', 'eSports', 'Virtual sports', 'Combat sports']
+);
+
 const leonConfig = createGamesLiveBettingConfig(
   ['Slots', 'Roulette', 'Blackjack', 'Bingo', 'Baccarat', 'Jackpot games', 'Live games', 'Poker', 'Crash games'],
   ['Live shows', 'Live baccarat', 'Live blackjack', 'Live poker', 'Other live games', 'Live roulette'],
@@ -304,6 +321,20 @@ const spininioConfig = createGamesLiveBettingConfig(
   ['Football', 'Basketball', 'Ice hockey', 'Cricket', 'Baseball', 'eSports', 'Virtual sports', 'Combat sports']
 );
 
+const betonCasinoConfig = createGamesLiveConfig(
+  ['Slots', 'Roulette', 'Blackjack', 'Baccarat', 'Jackpot games', 'Live games'],
+  ['Live shows', 'Live baccarat', 'Live blackjack', 'Other live games', 'Live roulette']
+);
+
+const betonSportConfig = createBettingConfig([
+  'Football',
+  'Basketball',
+  'Tennis',
+  'Ice hockey',
+  'eSports',
+  'Combat sports',
+]);
+
 export const BRAND_SNAPSHOT_CONFIGS = {
   ...mapSnapshotConfig(['trino', 'spellwin'], mixedCasinoSportsConfig),
   ...mapSnapshotConfig(['amonbet', 'luckywave', 'slotlair'], sportsPromoCasinoConfig),
@@ -331,6 +362,7 @@ export const BRAND_SNAPSHOT_CONFIGS = {
   zarbet: zarbetConfig,
   zizobet: zizobetConfig,
   spinarium: spinariumConfig,
+  spinbetter: spinbetterConfig,
   leon: leonConfig,
   fugu: fuguConfig,
   pampas: pampasConfig,
@@ -340,4 +372,6 @@ export const BRAND_SNAPSHOT_CONFIGS = {
   goldencrown: goldencrownConfig,
   mrpunter: mrpunterConfig,
   spininio: spininioConfig,
+  beton: betonCasinoConfig,
+  'beton-sport': betonSportConfig,
 };
