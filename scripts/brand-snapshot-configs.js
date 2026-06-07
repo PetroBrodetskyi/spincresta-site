@@ -270,9 +270,9 @@ const spinbetterConfig = createGamesLiveBettingConfig(
 );
 
 const leonConfig = createGamesLiveBettingConfig(
-  ['Slots', 'Roulette', 'Blackjack', 'Bingo', 'Baccarat', 'Jackpot games', 'Live games', 'Poker', 'Crash games'],
-  ['Live shows', 'Live baccarat', 'Live blackjack', 'Live poker', 'Other live games', 'Live roulette'],
-  ['Football', 'Basketball', 'Tennis', 'Table tennis', 'Volleyball', 'Ice hockey', 'eSports', 'Virtual sports', 'Motorsport']
+  ['Slots', 'Roulette', 'Blackjack', 'Video poker', 'Bingo', 'Baccarat', 'Jackpot games', 'Live games', 'Poker', 'Craps and dice', 'Keno', 'Scratch cards', 'Crash games'],
+  ['Live shows', 'Live baccarat', 'Live blackjack', 'Live dice games', 'Other live games', 'Live poker', 'Live roulette'],
+  ['Football', 'Basketball', 'Tennis', 'Table tennis', 'Volleyball', 'Ice hockey', 'Cricket', 'Baseball', 'Handball', 'eSports', 'Virtual sports', 'Combat sports', 'Motorsport']
 );
 
 const fuguConfig = createGamesLiveBettingConfig(
