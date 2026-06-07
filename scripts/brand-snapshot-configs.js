@@ -335,6 +335,30 @@ const betonSportConfig = createBettingConfig([
   'Combat sports',
 ]);
 
+const slottConfig = createGamesLiveBettingConfig(
+  ['Slots', 'Roulette', 'Blackjack', 'Video poker', 'Bingo', 'Baccarat', 'Jackpot games', 'Live games', 'Poker', 'Scratch cards', 'Crash games'],
+  ['Live shows', 'Live baccarat', 'Live blackjack', 'Live dice games', 'Other live games', 'Live poker', 'Live roulette'],
+  ['Football', 'Basketball', 'Tennis', 'Table tennis', 'Volleyball', 'Ice hockey', 'Cricket', 'Baseball', 'Handball', 'eSports', 'Virtual sports', 'Combat sports', 'Motorsport']
+);
+
+const twinConfig = createGamesLiveBettingConfig(
+  ['Slots', 'Roulette', 'Blackjack', 'Video poker', 'Baccarat', 'Jackpot games', 'Live games', 'Scratch cards', 'Crash games'],
+  ['Live shows', 'Live baccarat', 'Live blackjack', 'Live dice games', 'Other live games', 'Live roulette'],
+  ['Football', 'Basketball', 'Tennis', 'Table tennis', 'Volleyball', 'Ice hockey', 'Cricket', 'Baseball', 'Handball', 'eSports', 'Virtual sports', 'Combat sports', 'Motorsport']
+);
+
+const winairlinesConfig = createGamesLiveBettingConfig(
+  ['Slots', 'Roulette', 'Blackjack', 'Baccarat', 'Jackpot games', 'Live games', 'Poker', 'Keno', 'Scratch cards', 'Crash games'],
+  ['Live shows', 'Live baccarat', 'Live blackjack', 'Other live games', 'Live roulette'],
+  ['Football', 'Basketball', 'Tennis', 'Table tennis', 'Volleyball', 'Ice hockey', 'Cricket', 'Baseball', 'eSports', 'Virtual sports', 'Combat sports']
+);
+
+const velobetConfig = createGamesLiveBettingConfig(
+  ['Slots', 'Roulette', 'Blackjack', 'Video poker', 'Bingo', 'Baccarat', 'Jackpot games', 'Live games', 'Poker', 'Craps and dice', 'Keno', 'Scratch cards', 'Crash games'],
+  ['Live shows', 'Live baccarat', 'Live bingo', 'Live blackjack', 'Live dice games', 'Other live games', 'Live poker', 'Live roulette'],
+  ['Football', 'Basketball', 'Tennis', 'Table tennis', 'Volleyball', 'Ice hockey', 'Cricket', 'Baseball', 'Handball', 'eSports', 'Virtual sports', 'Combat sports', 'Motorsport']
+);
+
 export const BRAND_SNAPSHOT_CONFIGS = {
   ...mapSnapshotConfig(['trino', 'spellwin'], mixedCasinoSportsConfig),
   ...mapSnapshotConfig(['amonbet', 'luckywave', 'slotlair'], sportsPromoCasinoConfig),
@@ -374,4 +398,8 @@ export const BRAND_SNAPSHOT_CONFIGS = {
   spininio: spininioConfig,
   beton: betonCasinoConfig,
   'beton-sport': betonSportConfig,
+  slott: slottConfig,
+  twin: twinConfig,
+  winairlines: winairlinesConfig,
+  velobet: velobetConfig,
 };
