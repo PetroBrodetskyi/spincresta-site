@@ -1589,7 +1589,7 @@ html[data-theme='light'] .payment-chip {
 body[data-brand='10bet'] .brand-logo,
 html[data-theme='light'] body[data-brand='10bet'] .brand-logo,
 html:not([data-theme='dark']) body[data-brand='10bet'] .brand-logo {
-  filter: brightness(0) invert(1) drop-shadow(0 10px 22px rgba(0, 0, 0, 0.22));
+  filter: drop-shadow(0 10px 22px rgba(0, 0, 0, 0.22));
 }
 
 /* =============================================================
