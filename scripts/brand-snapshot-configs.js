@@ -245,6 +245,12 @@ const betoryConfig = createGamesLiveBettingConfig(
   ['Football', 'Basketball', 'Tennis', 'Table tennis', 'Volleyball', 'Ice hockey', 'Baseball', 'Cricket', 'eSports', 'Virtual sports', 'Combat sports', 'Motorsport']
 );
 
+const betfmConfig = createGamesLiveBettingConfig(
+  ['Slots', 'Roulette', 'Blackjack', 'Video poker', 'Baccarat', 'Jackpot games', 'Live games', 'Poker', 'Crash games'],
+  ['Live shows', 'Live baccarat', 'Live blackjack', 'Other live games', 'Live poker', 'Live roulette'],
+  ['Football', 'Basketball', 'Tennis', 'Volleyball', 'Ice hockey', 'Cricket', 'Baseball', 'Handball', 'eSports', 'Virtual sports']
+);
+
 const zarbetConfig = createGamesLiveBettingConfig(
   ['Slots', 'Roulette', 'Blackjack', 'Video poker', 'Baccarat', 'Keno'],
   [],
@@ -272,6 +278,12 @@ const spinbetterConfig = createGamesLiveBettingConfig(
 const leonConfig = createGamesLiveBettingConfig(
   ['Slots', 'Roulette', 'Blackjack', 'Video poker', 'Bingo', 'Baccarat', 'Jackpot games', 'Live games', 'Poker', 'Craps and dice', 'Keno', 'Scratch cards', 'Crash games'],
   ['Live shows', 'Live baccarat', 'Live blackjack', 'Live dice games', 'Other live games', 'Live poker', 'Live roulette'],
+  ['Football', 'Basketball', 'Tennis', 'Table tennis', 'Volleyball', 'Ice hockey', 'Cricket', 'Baseball', 'Handball', 'eSports', 'Virtual sports', 'Combat sports', 'Motorsport']
+);
+
+const ggbetConfig = createGamesLiveBettingConfig(
+  ['Slots', 'Roulette', 'Blackjack', 'Jackpot games', 'Live games', 'Poker', 'Crash games'],
+  ['Live shows', 'Live baccarat', 'Live blackjack', 'Other live games', 'Live poker', 'Live roulette'],
   ['Football', 'Basketball', 'Tennis', 'Table tennis', 'Volleyball', 'Ice hockey', 'Cricket', 'Baseball', 'Handball', 'eSports', 'Virtual sports', 'Combat sports', 'Motorsport']
 );
 
@@ -383,11 +395,13 @@ export const BRAND_SNAPSHOT_CONFIGS = {
   '4rabet': fourRabetConfig,
   betwinner: betwinnerConfig,
   betory: betoryConfig,
+  ...mapSnapshotConfig(['betfm-ke', 'betfm-ng'], betfmConfig),
   zarbet: zarbetConfig,
   zizobet: zizobetConfig,
   spinarium: spinariumConfig,
   spinbetter: spinbetterConfig,
   leon: leonConfig,
+  ggbet: ggbetConfig,
   fugu: fuguConfig,
   pampas: pampasConfig,
   babu88: babu88Config,

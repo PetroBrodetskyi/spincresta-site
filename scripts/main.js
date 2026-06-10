@@ -2445,7 +2445,9 @@ const applyBrandLogoBackgrounds = () => {
       document.body.dataset.brand ||
       document.querySelector('body[data-brand] .hero h1, body[data-brand] .hero-content h1, body[data-brand] h1')?.textContent ||
       '';
-    const brand = byName.get(normalizeBrandKey(brandName.replace(/\s+Review$/i, '')));
+    const brand =
+      findBrandByPageKey(document.body.dataset.brand) ||
+      byName.get(normalizeBrandKey(brandName.replace(/\s+Review$/i, '')));
     setBrandBackground(brandLogoContainer, brand?.bgColor);
   }
 };
