@@ -287,6 +287,33 @@ const ggbetConfig = createGamesLiveBettingConfig(
   ['Football', 'Basketball', 'Tennis', 'Table tennis', 'Volleyball', 'Ice hockey', 'Cricket', 'Baseball', 'Handball', 'eSports', 'Virtual sports', 'Combat sports', 'Motorsport']
 );
 
+const longfu88Config = createGamesLiveBettingConfig(
+  ['Slots', 'Roulette', 'Blackjack', 'Bingo', 'Baccarat', 'Jackpot games', 'Live games', 'Poker', 'Craps and dice', 'Keno', 'Scratch cards', 'Crash games'],
+  ['Live shows', 'Live baccarat', 'Live blackjack', 'Live dice games', 'Other live games', 'Live poker', 'Live roulette'],
+  ['Football', 'eSports']
+);
+
+const retrobetConfig = createGamesLiveConfig(
+  ['Slots', 'Roulette', 'Blackjack', 'Baccarat', 'Jackpot games', 'Live games', 'Poker', 'Crash games'],
+  ['Live shows', 'Live baccarat', 'Live blackjack', 'Other live games', 'Live poker', 'Live roulette']
+);
+
+const luckyHunterConfig = createGamesLiveBettingConfig(
+  ['Slots', 'Roulette', 'Blackjack', 'Bingo', 'Baccarat', 'Jackpot games', 'Live games', 'Poker', 'Craps and dice', 'Crash games'],
+  ['Live shows', 'Live baccarat', 'Live bingo', 'Live blackjack', 'Live dice games', 'Other live games', 'Live poker', 'Live roulette'],
+  ['Football', 'Basketball', 'Tennis', 'Table tennis', 'Volleyball', 'Ice hockey', 'Cricket', 'Baseball', 'Handball', 'eSports', 'Combat sports', 'Motorsport']
+);
+
+const hollyWinConfig = createGamesLiveConfig(
+  ['Slots', 'Roulette', 'Blackjack', 'Bingo', 'Baccarat', 'Jackpot games', 'Live games', 'Poker', 'Craps and dice', 'Scratch cards', 'Crash games'],
+  ['Live shows', 'Live baccarat', 'Live bingo', 'Live blackjack', 'Live dice games', 'Other live games', 'Live poker', 'Live roulette']
+);
+
+const slotMafiaConfig = createGamesLiveConfig(
+  ['Slots', 'Roulette', 'Blackjack', 'Baccarat', 'Jackpot games', 'Live games', 'Poker', 'Crash games'],
+  ['Live shows', 'Live baccarat', 'Live blackjack', 'Other live games', 'Live poker', 'Live roulette']
+);
+
 const fuguConfig = createGamesLiveBettingConfig(
   ['Slots', 'Roulette', 'Blackjack', 'Baccarat', 'Live games', 'Crash games'],
   ['Live shows', 'Live blackjack', 'Live poker', 'Other live games', 'Live roulette'],
@@ -402,6 +429,11 @@ export const BRAND_SNAPSHOT_CONFIGS = {
   spinbetter: spinbetterConfig,
   leon: leonConfig,
   ggbet: ggbetConfig,
+  longfu88: longfu88Config,
+  retrobet: retrobetConfig,
+  luckyhunter: luckyHunterConfig,
+  hollywin: hollyWinConfig,
+  slotmafia: slotMafiaConfig,
   fugu: fuguConfig,
   pampas: pampasConfig,
   babu88: babu88Config,

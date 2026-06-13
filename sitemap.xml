@@ -672,6 +672,11 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://spincresta.com/brands/hollywin/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://spincresta.com/brands/irwin/</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -738,6 +743,16 @@
   </url>
   <url>
     <loc>https://spincresta.com/brands/loki/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://spincresta.com/brands/longfu88/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://spincresta.com/brands/luckyhunter/</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
@@ -852,6 +867,11 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://spincresta.com/brands/retrobet/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://spincresta.com/brands/ripper/</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -873,6 +893,11 @@
   </url>
   <url>
     <loc>https://spincresta.com/brands/slotlair/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://spincresta.com/brands/slotsmafia/</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
