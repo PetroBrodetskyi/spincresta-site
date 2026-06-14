@@ -314,6 +314,11 @@ const slotMafiaConfig = createGamesLiveConfig(
   ['Live shows', 'Live baccarat', 'Live blackjack', 'Other live games', 'Live poker', 'Live roulette']
 );
 
+const aureonConfig = createGamesLiveConfig(
+  ['Slots', 'Roulette', 'Blackjack', 'Baccarat', 'Jackpot games', 'Live games', 'Poker', 'Craps and dice'],
+  ['Live shows', 'Live baccarat', 'Live blackjack', 'Live dice games', 'Other live games', 'Live roulette']
+);
+
 const fuguConfig = createGamesLiveBettingConfig(
   ['Slots', 'Roulette', 'Blackjack', 'Baccarat', 'Live games', 'Crash games'],
   ['Live shows', 'Live blackjack', 'Live poker', 'Other live games', 'Live roulette'],
@@ -434,6 +439,7 @@ export const BRAND_SNAPSHOT_CONFIGS = {
   luckyhunter: luckyHunterConfig,
   hollywin: hollyWinConfig,
   slotmafia: slotMafiaConfig,
+  aureon: aureonConfig,
   fugu: fuguConfig,
   pampas: pampasConfig,
   babu88: babu88Config,

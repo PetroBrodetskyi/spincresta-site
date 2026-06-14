@@ -498,6 +498,18 @@ export const BRANDS = [
     hasDetailPage: true,
   },
   {
+    name: 'Aureon',
+    bonus: 'Welcome Bonus 300% up to €2,250 + 325 Free Spins',
+    cta: 'Play Now',
+    urlDetail: 'brands/aureon.html',
+    urlCasino: 'https://armadaapp.media-412.com/click?pid=3862&offer_id=124106',
+    image: 'images/aureon.svg',
+    bgColor: '#12151C',
+    countries: ['FR', 'BE', 'NL'],
+    payments: ['visa', 'mastercard', 'banktransfer', 'applepay', 'googlepay'],
+    hasDetailPage: true,
+  },
+  {
     name: 'Golden Crown',
     bonus: '100% Bonus up to $1,000 + 300 Free Spins',
     cta: 'Play Now',
