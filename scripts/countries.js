@@ -39,6 +39,7 @@ export const COUNTRIES = [
 
   { code: 'kz', slug: 'kazakhstan', name: 'Kazakhstan' },
   { code: 'ke', slug: 'kenya', name: 'Kenya' },
+  { code: 'kg', slug: 'kyrgyzstan', name: 'Kyrgyzstan' },
 
   { code: 'lv', slug: 'latvia', name: 'Latvia' },
   { code: 'lt', slug: 'lithuania', name: 'Lithuania' },

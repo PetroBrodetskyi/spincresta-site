@@ -287,6 +287,18 @@ const ggbetConfig = createGamesLiveBettingConfig(
   ['Football', 'Basketball', 'Tennis', 'Table tennis', 'Volleyball', 'Ice hockey', 'Cricket', 'Baseball', 'Handball', 'eSports', 'Virtual sports', 'Combat sports', 'Motorsport']
 );
 
+const getxConfig = createGamesLiveBettingConfig(
+  ['Slots', 'Roulette', 'Blackjack', 'Baccarat', 'Jackpot games', 'Live games', 'Poker', 'Craps and dice', 'Keno', 'Scratch cards', 'Crash games'],
+  ['Live shows', 'Live baccarat', 'Live blackjack', 'Other live games', 'Live poker', 'Live roulette'],
+  ['Football', 'Basketball', 'Tennis', 'Volleyball', 'Ice hockey', 'eSports', 'Virtual sports', 'Motorsport']
+);
+
+const westaceConfig = createGamesLiveBettingConfig(
+  ['Slots', 'Roulette', 'Blackjack', 'Baccarat', 'Jackpot games', 'Live games', 'Poker', 'Craps and dice', 'Crash games'],
+  ['Live shows', 'Live baccarat', 'Live blackjack', 'Live dice games', 'Other live games', 'Live poker', 'Live roulette'],
+  ['Football', 'Basketball', 'Tennis', 'Table tennis', 'Volleyball', 'Ice hockey', 'Cricket', 'Baseball', 'eSports', 'Virtual sports', 'Combat sports', 'Motorsport']
+);
+
 const longfu88Config = createGamesLiveBettingConfig(
   ['Slots', 'Roulette', 'Blackjack', 'Bingo', 'Baccarat', 'Jackpot games', 'Live games', 'Poker', 'Craps and dice', 'Keno', 'Scratch cards', 'Crash games'],
   ['Live shows', 'Live baccarat', 'Live blackjack', 'Live dice games', 'Other live games', 'Live poker', 'Live roulette'],
@@ -434,6 +446,8 @@ export const BRAND_SNAPSHOT_CONFIGS = {
   spinbetter: spinbetterConfig,
   leon: leonConfig,
   ggbet: ggbetConfig,
+  getx: getxConfig,
+  westace: westaceConfig,
   longfu88: longfu88Config,
   retrobet: retrobetConfig,
   luckyhunter: luckyHunterConfig,

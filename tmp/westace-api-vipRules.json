@@ -1,0 +1,1 @@
+{"code":"OPERATION_SUCCESS","httpCode":200,"message":"OPERATION_SUCCESS","result":{"deposit":{},"sport":{"amount":2,"currency":"EUR"},"casino":{"amount":2,"currency":"EUR"},"liveCasino":{"amount":4,"currency":"EUR"},"p2p":{"amount":2,"currency":"EUR"},"lottery":{"amount":2,"currency":"EUR"}}}

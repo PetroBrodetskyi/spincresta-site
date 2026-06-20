@@ -783,6 +783,8 @@ textarea {
   max-height: 0;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(136px, 1fr));
+  grid-template-rows: repeat(var(--countries-dropdown-rows, 8), minmax(32px, auto));
+  grid-auto-flow: column;
   gap: 8px 16px;
   overflow: hidden;
   padding: 0;

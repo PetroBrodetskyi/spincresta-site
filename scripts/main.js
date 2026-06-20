@@ -2685,6 +2685,23 @@ export const initCasinoPage = () => {
         </a>
       `
     ).join('');
+
+    const syncCountriesDropdownFlow = () => {
+      const columnGap = Number.parseFloat(getComputedStyle(countriesDropdown).columnGap) || 0;
+      const minimumColumnWidth = 136;
+      const columnCount = Math.max(
+        1,
+        Math.floor(
+          (countriesDropdown.clientWidth + columnGap) / (minimumColumnWidth + columnGap)
+        )
+      );
+      const rowCount = Math.ceil(COUNTRIES.length / Math.max(columnCount, 1));
+
+      countriesDropdown.style.setProperty('--countries-dropdown-rows', rowCount);
+    };
+
+    requestAnimationFrame(syncCountriesDropdownFlow);
+    window.addEventListener('resize', syncCountriesDropdownFlow, { passive: true });
   }
 
   const navDropdown = document.querySelector('.nav-dropdown');
