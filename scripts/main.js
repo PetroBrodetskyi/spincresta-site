@@ -1816,6 +1816,14 @@ const initStickyBrandTitle = () => {
   window.addEventListener('resize', updateStickyVisibility);
 };
 
+const normalizeFinalBrandCtaLabels = () => {
+  document
+    .querySelectorAll('body[data-brand] .final-cta-glass a.cta-brands')
+    .forEach(link => {
+      link.textContent = 'Claim Bonus & Play';
+    });
+};
+
 const getShortBrandSectionLabel = title => {
   const normalizedTitle = normalizeText(title);
   const lowerTitle = normalizedTitle.toLowerCase();
@@ -2571,6 +2579,7 @@ export const initCasinoPage = () => {
 
   const brandKey = document.body.dataset.brand?.toLowerCase();
   if (brandKey) {
+    normalizeFinalBrandCtaLabels();
     initStickyBrandTitle();
     enhanceBrandProsCons();
     applyBrandInfoPairLayout();

@@ -286,6 +286,11 @@ const jeetcityConfig = createGamesLiveConfig(
   ['Live shows', 'Live baccarat', 'Live blackjack', 'Live dice games', 'Other live games', 'Live poker', 'Live roulette']
 );
 
+const moonwinConfig = createGamesLiveConfig(
+  ['Slots', 'Roulette', 'Blackjack', 'Baccarat', 'Jackpot games', 'Live games', 'Poker', 'Craps and dice', 'Keno', 'Lottery', 'Crash games'],
+  ['Live shows', 'Live baccarat', 'Live blackjack', 'Live dice games', 'Other live games', 'Live poker', 'Live roulette']
+);
+
 const leonConfig = createGamesLiveBettingConfig(
   ['Slots', 'Roulette', 'Blackjack', 'Video poker', 'Bingo', 'Baccarat', 'Jackpot games', 'Live games', 'Poker', 'Craps and dice', 'Keno', 'Scratch cards', 'Crash games'],
   ['Live shows', 'Live baccarat', 'Live blackjack', 'Live dice games', 'Other live games', 'Live poker', 'Live roulette'],
@@ -457,6 +462,7 @@ export const BRAND_SNAPSHOT_CONFIGS = {
   spinbetter: spinbetterConfig,
   spinboss: spinbossConfig,
   jeetcity: jeetcityConfig,
+  moonwin: moonwinConfig,
   leon: leonConfig,
   ggbet: ggbetConfig,
   getx: getxConfig,
