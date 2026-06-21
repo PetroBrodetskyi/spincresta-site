@@ -712,6 +712,11 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://spincresta.com/brands/jeetcity/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://spincresta.com/brands/justcasino/</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -958,6 +963,11 @@
   </url>
   <url>
     <loc>https://spincresta.com/brands/spinbetter/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://spincresta.com/brands/spinboss/</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>

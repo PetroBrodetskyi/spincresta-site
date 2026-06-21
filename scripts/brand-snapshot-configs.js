@@ -275,6 +275,17 @@ const spinbetterConfig = createGamesLiveBettingConfig(
   ['Football', 'Basketball', 'Tennis', 'Ice hockey', 'eSports', 'Virtual sports', 'Combat sports']
 );
 
+const spinbossConfig = createGamesLiveBettingConfig(
+  ['Slots', 'Roulette', 'Blackjack', 'Baccarat', 'Jackpot games', 'Live games', 'Poker', 'Craps and dice', 'Crash games'],
+  ['Live shows', 'Live baccarat', 'Live blackjack', 'Live dice games', 'Other live games', 'Live poker', 'Live roulette'],
+  ['Football', 'Basketball', 'Tennis', 'Table tennis', 'Volleyball', 'Ice hockey', 'Baseball']
+);
+
+const jeetcityConfig = createGamesLiveConfig(
+  ['Slots', 'Roulette', 'Blackjack', 'Baccarat', 'Jackpot games', 'Live games', 'Poker', 'Craps and dice', 'Keno', 'Scratch cards', 'Crash games'],
+  ['Live shows', 'Live baccarat', 'Live blackjack', 'Live dice games', 'Other live games', 'Live poker', 'Live roulette']
+);
+
 const leonConfig = createGamesLiveBettingConfig(
   ['Slots', 'Roulette', 'Blackjack', 'Video poker', 'Bingo', 'Baccarat', 'Jackpot games', 'Live games', 'Poker', 'Craps and dice', 'Keno', 'Scratch cards', 'Crash games'],
   ['Live shows', 'Live baccarat', 'Live blackjack', 'Live dice games', 'Other live games', 'Live poker', 'Live roulette'],
@@ -444,6 +455,8 @@ export const BRAND_SNAPSHOT_CONFIGS = {
   zizobet: zizobetConfig,
   spinarium: spinariumConfig,
   spinbetter: spinbetterConfig,
+  spinboss: spinbossConfig,
+  jeetcity: jeetcityConfig,
   leon: leonConfig,
   ggbet: ggbetConfig,
   getx: getxConfig,

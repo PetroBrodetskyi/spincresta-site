@@ -6404,8 +6404,18 @@ body[data-country] .country-hero-cards .view-all {
 
   body[data-country] .hero.country-hero-with-cards {
     grid-template-columns: minmax(320px, 380px) minmax(0, 1fr) !important;
-    gap: clamp(28px, 2.5vw, 46px) !important;
+    column-gap: clamp(28px, 2.5vw, 46px) !important;
+    row-gap: 18px !important;
     padding-bottom: clamp(52px, 6vw, 86px) !important;
+  }
+
+  body[data-country] .hero.country-hero-with-cards .country-hero-rail {
+    grid-column: 1;
+    grid-row: 1 / span 2;
+  }
+
+  body[data-country] .hero.country-hero-with-cards .country-hero-cards {
+    display: contents;
   }
 
   body[data-country] .hero.country-hero-with-cards .hero-content {
@@ -6431,9 +6441,11 @@ body[data-country] .country-hero-cards .view-all {
   }
 
   body[data-country] .country-card-flag {
-    position: absolute;
-    top: -18px;
-    right: 0;
+    position: static;
+    grid-column: 2;
+    grid-row: 1;
+    align-self: start;
+    justify-self: end;
     z-index: 4;
     display: block;
     width: 82px;
@@ -6447,6 +6459,35 @@ body[data-country] .country-hero-cards .view-all {
       0 0 0 1px rgba(255, 255, 255, 0.15);
     object-fit: contain;
     pointer-events: none;
+  }
+
+  body[data-country] .country-hero-cards .section-head {
+    grid-column: 2;
+    grid-row: 1;
+    align-self: start;
+  }
+
+  body[data-country] .country-hero-cards > .intro {
+    grid-column: 2;
+    grid-row: 2;
+    align-self: start;
+  }
+
+  body[data-country] .country-hero-cards > .country-filter-bar {
+    grid-column: 1 / -1;
+    grid-row: 3;
+    width: 100%;
+    margin-top: clamp(16px, 2vw, 28px);
+  }
+
+  body[data-country] .country-hero-cards > .casino-grid {
+    grid-column: 1 / -1;
+    grid-row: 4;
+  }
+
+  body[data-country] .country-hero-cards > .load-more-wrapper {
+    grid-column: 1 / -1;
+    grid-row: 5;
   }
 
   html[data-theme='light'] body[data-country] .country-card-flag,
@@ -6929,7 +6970,7 @@ html:not([data-theme='dark']) body[data-country] .expert-methodology li {
 /* Country casino lists use compact vertical cards instead of horizontal rows. */
 body[data-country] .country-hero-cards .casino-grid {
   display: grid !important;
-  grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+  grid-template-columns: repeat(6, minmax(0, 1fr)) !important;
   gap: 14px !important;
   width: 100%;
   max-width: 100%;
