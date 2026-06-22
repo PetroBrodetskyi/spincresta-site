@@ -291,6 +291,16 @@ const moonwinConfig = createGamesLiveConfig(
   ['Live shows', 'Live baccarat', 'Live blackjack', 'Live dice games', 'Other live games', 'Live poker', 'Live roulette']
 );
 
+const spinriseConfig = createGamesLiveConfig(
+  ['Slots', 'Roulette', 'Blackjack', 'Video poker', 'Baccarat', 'Jackpot games', 'Live games', 'Poker', 'Craps and dice', 'Keno', 'Lottery', 'Crash games'],
+  ['Live shows', 'Live baccarat', 'Live blackjack', 'Live dice games', 'Other live games', 'Live poker', 'Live roulette']
+);
+
+const crowngreenConfig = createGamesLiveConfig(
+  ['Slots', 'Roulette', 'Blackjack', 'Video poker', 'Baccarat', 'Jackpot games', 'Live games', 'Poker', 'Craps and dice', 'Crash games'],
+  ['Live shows', 'Live baccarat', 'Live blackjack', 'Live dice games', 'Other live games', 'Live poker', 'Live roulette']
+);
+
 const leonConfig = createGamesLiveBettingConfig(
   ['Slots', 'Roulette', 'Blackjack', 'Video poker', 'Bingo', 'Baccarat', 'Jackpot games', 'Live games', 'Poker', 'Craps and dice', 'Keno', 'Scratch cards', 'Crash games'],
   ['Live shows', 'Live baccarat', 'Live blackjack', 'Live dice games', 'Other live games', 'Live poker', 'Live roulette'],
@@ -313,6 +323,12 @@ const westaceConfig = createGamesLiveBettingConfig(
   ['Slots', 'Roulette', 'Blackjack', 'Baccarat', 'Jackpot games', 'Live games', 'Poker', 'Craps and dice', 'Crash games'],
   ['Live shows', 'Live baccarat', 'Live blackjack', 'Live dice games', 'Other live games', 'Live poker', 'Live roulette'],
   ['Football', 'Basketball', 'Tennis', 'Table tennis', 'Volleyball', 'Ice hockey', 'Cricket', 'Baseball', 'eSports', 'Virtual sports', 'Combat sports', 'Motorsport']
+);
+
+const wildsinoConfig = createGamesLiveBettingConfig(
+  ['Slots', 'Roulette', 'Blackjack', 'Baccarat', 'Jackpot games', 'Live games', 'Poker', 'Craps and dice', 'Keno', 'Bingo', 'Crash games'],
+  ['Live shows', 'Live baccarat', 'Live blackjack', 'Live dice games', 'Other live games', 'Live poker', 'Live roulette'],
+  ['Football', 'Basketball', 'Tennis', 'Table tennis', 'Volleyball', 'Ice hockey', 'Baseball', 'Handball', 'eSports', 'Virtual sports', 'Combat sports', 'Motorsport']
 );
 
 const longfu88Config = createGamesLiveBettingConfig(
@@ -463,10 +479,13 @@ export const BRAND_SNAPSHOT_CONFIGS = {
   spinboss: spinbossConfig,
   jeetcity: jeetcityConfig,
   moonwin: moonwinConfig,
+  spinrise: spinriseConfig,
+  crowngreen: crowngreenConfig,
   leon: leonConfig,
   ggbet: ggbetConfig,
   getx: getxConfig,
   westace: westaceConfig,
+  wildsino: wildsinoConfig,
   longfu88: longfu88Config,
   retrobet: retrobetConfig,
   luckyhunter: luckyHunterConfig,

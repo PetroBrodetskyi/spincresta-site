@@ -562,6 +562,11 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://spincresta.com/brands/crowngreen/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://spincresta.com/brands/dollycasino/</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -987,6 +992,11 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://spincresta.com/brands/spinrise/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://spincresta.com/brands/sunpalace/</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -1038,6 +1048,11 @@
   </url>
   <url>
     <loc>https://spincresta.com/brands/westace/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://spincresta.com/brands/wildsino/</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
