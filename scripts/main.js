@@ -991,6 +991,56 @@ const createCasinoCard = ({
 };
 
 const ITEMS_PER_BATCH = 12;
+const COUNTRY_GRID_ROWS_PER_BATCH = 5;
+const COUNTRY_GRID_ROW_BATCH_MIN_WIDTH = 1024;
+
+const getGridColumnCount = container => {
+  if (typeof window === 'undefined' || !container) return 1;
+
+  const template = window.getComputedStyle(container).gridTemplateColumns.trim();
+  if (!template || template === 'none') return 1;
+
+  const repeatMatch = template.match(/^repeat\(\s*(\d+)\s*,/i);
+  if (repeatMatch) return Math.max(1, Number(repeatMatch[1]) || 1);
+
+  let columns = 0;
+  let token = '';
+  let depth = 0;
+
+  Array.from(template).forEach(char => {
+    if (char === '(') depth += 1;
+    if (char === ')') depth = Math.max(0, depth - 1);
+
+    if (/\s/.test(char) && depth === 0) {
+      if (token.trim()) columns += 1;
+      token = '';
+      return;
+    }
+
+    token += char;
+  });
+
+  if (token.trim()) columns += 1;
+
+  return Math.max(1, columns);
+};
+
+const getBrandListBatchSize = container => {
+  const isCountryHeroGrid = Boolean(
+    document.body.dataset.country && container?.closest('.country-hero-cards')
+  );
+
+  if (
+    !isCountryHeroGrid ||
+    typeof window === 'undefined' ||
+    typeof window.matchMedia !== 'function' ||
+    !window.matchMedia(`(min-width: ${COUNTRY_GRID_ROW_BATCH_MIN_WIDTH}px)`).matches
+  ) {
+    return ITEMS_PER_BATCH;
+  }
+
+  return getGridColumnCount(container) * COUNTRY_GRID_ROWS_PER_BATCH;
+};
 
 const getLoadMoreControls = container => {
   const loadMoreWrapper =
@@ -1047,7 +1097,8 @@ const renderBrandList = (brands, containerSelector, emptyText) => {
       return;
     }
 
-    const nextItems = brands.slice(visibleCount, visibleCount + ITEMS_PER_BATCH);
+    const batchSize = getBrandListBatchSize(container);
+    const nextItems = brands.slice(visibleCount, visibleCount + batchSize);
     if (!nextItems.length) {
       syncLoadMoreState();
       return;
