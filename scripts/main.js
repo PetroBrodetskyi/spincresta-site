@@ -354,13 +354,7 @@ const initDesktopSiteSearch = () => {
   return search;
 };
 
-const getSystemTheme = () => {
-  if (typeof window === 'undefined' || typeof window.matchMedia !== 'function') {
-    return 'dark';
-  }
-
-  return window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
-};
+const getDefaultTheme = () => 'dark';
 
 const getStoredTheme = () => {
   try {
@@ -381,8 +375,9 @@ const applyTheme = theme => {
     return;
   }
 
-  delete root.dataset.theme;
-  root.style.colorScheme = getSystemTheme();
+  const defaultTheme = getDefaultTheme();
+  root.dataset.theme = defaultTheme;
+  root.style.colorScheme = defaultTheme;
 };
 
 const persistTheme = theme => {
@@ -397,9 +392,9 @@ const persistTheme = theme => {
   }
 };
 
-const getActiveTheme = () => getStoredTheme() || getSystemTheme();
+const getActiveTheme = () => getStoredTheme() || getDefaultTheme();
 
-applyTheme(getStoredTheme());
+applyTheme(getActiveTheme());
 
 const renderPayments = (payments = []) => {
   if (!payments.length) return '';
@@ -3218,4 +3213,3 @@ document.addEventListener('DOMContentLoaded', initCasinoPage);
     )
     .join('');
 })();
-
