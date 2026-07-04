@@ -7,8 +7,8 @@
     Arial,
     sans-serif;
   --bg-main: #000000;
-  --bg-surface: #02061788;
-  --bg-card: #2b437749;
+  --bg-surface: #0d0f12;
+  --bg-card: #0d0f12;
   --section-band: rgba(255, 255, 255, 0.018);
   --section-band-alt: rgba(56, 189, 248, 0.026);
 
@@ -51,8 +51,10 @@
   --ui-shadow-dialog: 0 24px 54px rgba(0, 0, 0, 0.24);
   --ui-shadow-neo-outline: 0 0 0 1px rgba(173, 102, 255, 0.04);
   --ui-shadow-neo-glow: 0 0 18px rgba(173, 102, 255, 0.06);
+  --surface-graphite-gradient: linear-gradient(180deg, rgba(255, 255, 255, 0.055) 0%, rgba(13, 15, 18, 0.98) 58%, rgba(8, 9, 11, 0.98) 100%);
+  --surface-graphite-gradient-hover: linear-gradient(180deg, rgba(255, 255, 255, 0.075) 0%, rgba(18, 20, 24, 0.98) 58%, rgba(10, 11, 13, 0.98) 100%);
   --sticker-bg: linear-gradient(180deg, rgba(255, 255, 255, 0.115) 0%, rgba(2, 6, 23, 0.2) 52%, rgba(2, 6, 23, 0.08) 100%);
-  --sticker-bg-hover: linear-gradient(180deg, rgba(255, 255, 255, 0.145) 0%, rgba(15, 23, 42, 0.46) 54%, rgba(8, 13, 31, 0.2) 100%);
+  --sticker-bg-hover: linear-gradient(180deg, rgba(255, 255, 255, 0.145) 0%, rgba(13, 15, 18, 0.46) 54%, rgba(8, 9, 11, 0.2) 100%);
   --sticker-color: #c9ddff;
   --sticker-border: rgba(226, 232, 240, 0.74);
   --sticker-border-hover: rgba(255, 255, 255, 0.94);
@@ -599,8 +601,8 @@ textarea {
   border: 1px solid rgba(226, 232, 240, 0.16);
   border-radius: 18px;
   background:
-    radial-gradient(circle at top right, rgba(56, 189, 248, 0.12), transparent 34%),
-    linear-gradient(180deg, rgba(15, 23, 42, 0.98), rgba(2, 6, 23, 0.98));
+    radial-gradient(circle at top right, rgba(255, 255, 255, 0.055), transparent 34%),
+    linear-gradient(180deg, rgba(13, 15, 18, 0.98), rgba(8, 9, 11, 0.98));
   box-shadow:
     0 22px 60px rgba(0, 0, 0, 0.42),
     inset 0 1px 0 rgba(255, 255, 255, 0.08);
@@ -1336,7 +1338,7 @@ textarea {
   text-decoration: none;
 
   color: var(--sticker-color);
-  background: linear-gradient(180deg, rgba(30, 41, 59, 0.98) 0%, rgba(15, 23, 42, 0.97) 58%, rgba(7, 12, 26, 0.98) 100%);
+  background: var(--surface-graphite-gradient);
   border: 1px solid rgba(148, 163, 184, 0.16);
   backdrop-filter: var(--blur-glass);
   box-shadow:
@@ -1374,7 +1376,7 @@ textarea {
 /* hover state */
 .view-all:hover {
   transform: translateY(-2px);
-  background: linear-gradient(180deg, rgba(42, 55, 82, 0.98) 0%, rgba(18, 29, 51, 0.98) 58%, rgba(9, 16, 34, 0.98) 100%);
+  background: var(--surface-graphite-gradient-hover);
   border-color: rgba(191, 219, 254, 0.24);
   box-shadow:
     inset 0 1px 0 rgba(255, 255, 255, 0.23),
@@ -1956,7 +1958,7 @@ textarea {
 
 .casino-actions .cta-secondary {
   position: relative;
-  background: linear-gradient(180deg, rgba(30, 41, 59, 0.98) 0%, rgba(15, 23, 42, 0.97) 58%, rgba(7, 12, 26, 0.98) 100%);
+  background: var(--surface-graphite-gradient);
   color: var(--sticker-color);
   border: 1px solid rgba(148, 163, 184, 0.16);
   box-shadow:
@@ -1968,7 +1970,7 @@ textarea {
 }
 
 .casino-actions .cta-secondary:hover {
-  background: linear-gradient(180deg, rgba(42, 55, 82, 0.98) 0%, rgba(18, 29, 51, 0.98) 58%, rgba(9, 16, 34, 0.98) 100%);
+  background: var(--surface-graphite-gradient-hover);
   border-color: rgba(191, 219, 254, 0.24);
   box-shadow:
     inset 0 1px 0 rgba(255, 255, 255, 0.23),
@@ -2411,7 +2413,7 @@ body.theme-settings-open {
   padding: 11px 16px;
   border-radius: 999px;
   border: 1px solid rgba(148, 163, 184, 0.16);
-  background: linear-gradient(180deg, rgba(30, 41, 59, 0.98) 0%, rgba(15, 23, 42, 0.97) 58%, rgba(7, 12, 26, 0.98) 100%);
+  background: var(--surface-graphite-gradient);
   color: var(--sticker-color);
   box-shadow:
     inset 0 1px 0 rgba(255, 255, 255, 0.18),
@@ -2449,7 +2451,7 @@ body.theme-settings-open {
 
 .theme-settings-option:hover {
   transform: translateY(-1px);
-  background: linear-gradient(180deg, rgba(42, 55, 82, 0.98) 0%, rgba(18, 29, 51, 0.98) 58%, rgba(9, 16, 34, 0.98) 100%);
+  background: var(--surface-graphite-gradient-hover);
   border-color: rgba(191, 219, 254, 0.24);
   box-shadow:
     inset 0 1px 0 rgba(255, 255, 255, 0.23),
@@ -2687,7 +2689,7 @@ body[data-country] .content-article .timeline > div {
   min-height: 100%;
   padding: 22px 24px 22px 20px;
   border-radius: var(--radius-lg);
-  background: #1a2031;
+  background: #0d0f12;
   border: 1px solid rgba(255, 215, 0, 0.18);
   overflow: hidden;
 }
@@ -3151,7 +3153,7 @@ body[data-country] .content-article .timeline a[href*='/responsible-gambling/'] 
   min-height: 100%;
   padding: 22px 24px;
   border-radius: var(--radius-lg);
-  background: #1a2031;
+  background: #0d0f12;
   border: 1px solid rgba(255, 215, 0, 0.18);
   box-shadow: var(--shadow-soft);
 }
@@ -3188,7 +3190,7 @@ body[data-country] .content-article .timeline a[href*='/responsible-gambling/'] 
   border-radius: 999px;
   text-decoration: none;
   color: var(--sticker-color);
-  background: linear-gradient(180deg, rgba(30, 41, 59, 0.98) 0%, rgba(15, 23, 42, 0.97) 58%, rgba(7, 12, 26, 0.98) 100%);
+  background: var(--surface-graphite-gradient);
   border: 1px solid rgba(148, 163, 184, 0.16);
   box-shadow:
     inset 0 1px 0 rgba(255, 255, 255, 0.18),
@@ -3205,7 +3207,7 @@ body[data-country] .content-article .timeline a[href*='/responsible-gambling/'] 
 
 .home-country-jump:hover {
   transform: translateY(-2px);
-  background: linear-gradient(180deg, rgba(42, 55, 82, 0.98) 0%, rgba(18, 29, 51, 0.98) 58%, rgba(9, 16, 34, 0.98) 100%);
+  background: var(--surface-graphite-gradient-hover);
   border-color: rgba(191, 219, 254, 0.24);
   box-shadow:
     inset 0 1px 0 rgba(255, 255, 255, 0.23),
