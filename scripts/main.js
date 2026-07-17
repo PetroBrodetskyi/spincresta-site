@@ -1,7 +1,7 @@
 ﻿// =====================
 // IMPORTS
 // =====================
-import { BRANDS } from './brands.js';
+import { BRANDS } from './brands.js?v=20260712-brands';
 import { BRAND_SNAPSHOT_CONFIGS } from './brand-snapshot-configs.js';
 import { COUNTRIES } from './countries.js';
 

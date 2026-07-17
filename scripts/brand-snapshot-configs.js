@@ -358,6 +358,44 @@ const slotMafiaConfig = createGamesLiveConfig(
   ['Live shows', 'Live baccarat', 'Live blackjack', 'Other live games', 'Live poker', 'Live roulette']
 );
 
+const nvcasinoConfig = {
+  tabs: [
+    createSnapshotTab(
+      'Games',
+      ['Slots', 'Roulette', 'Blackjack', 'Baccarat', 'Jackpot games', 'Live games', 'Poker', 'Mines'],
+      ['Video poker', 'Bingo', 'Craps and dice', 'Keno', 'Scratch cards', 'Crash games'],
+      'The NV Casino lobby currently exposes slots, table games, live casino, poker, mines, jackpots, and specialty game categories.'
+    ),
+    createSnapshotTab(
+      'Live games',
+      ['Live roulette', 'Live blackjack', 'Live baccarat', 'Live poker'],
+      ['Live shows', 'Live bingo', 'Live dice games', 'Other live games'],
+      'Live casino availability can change by region, account, studio, and current lobby configuration.'
+    ),
+    createSnapshotTab(
+      'Betting',
+      [
+        'Football',
+        'Basketball',
+        'Tennis',
+        'Table tennis',
+        'Volleyball',
+        'Ice hockey',
+        'Cricket',
+        'Handball',
+        'Darts',
+        'Beach volleyball',
+        'Cycling',
+        'Futsal',
+        'Field hockey',
+        'eSports',
+      ],
+      [],
+      'The supplied NV Casino routes cover pre-match, live sports, football tournaments, outrights, and esports markets.'
+    ),
+  ],
+};
+
 const aureonConfig = createGamesLiveConfig(
   ['Slots', 'Roulette', 'Blackjack', 'Baccarat', 'Jackpot games', 'Live games', 'Poker', 'Craps and dice'],
   ['Live shows', 'Live baccarat', 'Live blackjack', 'Live dice games', 'Other live games', 'Live roulette']
@@ -491,6 +529,7 @@ export const BRAND_SNAPSHOT_CONFIGS = {
   luckyhunter: luckyHunterConfig,
   hollywin: hollyWinConfig,
   slotmafia: slotMafiaConfig,
+  nvcasino: nvcasinoConfig,
   aureon: aureonConfig,
   fugu: fuguConfig,
   pampas: pampasConfig,

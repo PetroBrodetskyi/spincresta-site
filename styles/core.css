@@ -6,30 +6,54 @@
     Roboto,
     Arial,
     sans-serif;
-  --bg-main: #000000;
-  --bg-surface: #0d0f12;
-  --bg-card: #0d0f12;
-  --section-band: rgba(255, 255, 255, 0.018);
-  --section-band-alt: rgba(56, 189, 248, 0.026);
+  --bg-main: #050505;
+  --bg-surface: #111111;
+  --bg-card: #191919;
+  --chrome-bg: #050505;
+  --section-band: #101010;
+  --section-band-alt: #151515;
+  --surface-section: #101010;
+  --surface-section-alt: #151515;
+  --surface-panel: #1b1b1b;
+  --surface-card: #1e1e1e;
+  --surface-card-soft: #171717;
+  --surface-card-hover: #262626;
+  --surface-contrast: #1f1f1f;
+  --surface-contrast-text: #f5f5f5;
+  --surface-contrast-muted: rgba(255, 255, 255, 0.72);
+  --surface-border: rgba(255, 255, 255, 0.12);
+  --surface-border-strong: rgba(255, 255, 255, 0.22);
+  --surface-accent: rgba(255, 223, 0, 0.1);
+  --section-accent: #9bbfa9;
 
   --site-max-width: 1280px;
   --hero-panel-max: 980px;
   --hero-copy-max: 820px;
+  --page-gutter: clamp(24px, 2.6vw, 40px);
+  --page-gutter-mobile: 14px;
+  --section-padding-y: clamp(48px, 5vw, 72px);
+  --section-padding-y-tight: clamp(34px, 3.6vw, 52px);
+  --section-padding-y-compact: clamp(24px, 2.8vw, 38px);
+  --section-padding-x: var(--page-gutter);
+  --section-inner-padding-x: clamp(20px, 2vw, 24px);
+  --section-gap: clamp(22px, 2.8vw, 36px);
+  --section-gap-tight: clamp(16px, 2vw, 24px);
+  --panel-padding: clamp(24px, 2.6vw, 40px);
+  --panel-padding-tight: clamp(20px, 2vw, 30px);
+  --card-padding: clamp(22px, 2.3vw, 32px);
+  --grid-gap: clamp(20px, 2.5vw, 32px);
   --split-side-min: 230px;
-  --split-side-max: 320px;
+  --split-side-max: 360px;
   --split-side-column: minmax(var(--split-side-min), var(--split-side-max));
   --split-gap: clamp(18px, 2vw, 32px);
 
-  --border-soft: rgba(148, 163, 184, 0.15);
-  --border-glass: rgba(255, 255, 255, 0.08);
+  --border-soft: rgba(255, 255, 255, 0.16);
+  --border-glass: rgba(255, 255, 255, 0.12);
 
   --text-main: #e5e7eb;
   --text-muted: #94a3b8;
 
-  --accent: #38bdf8;
-  --accent-strong: #0ea5e9;
-  --neo-accent: #c481ff;
-  --neo-accent-soft: rgba(196, 129, 255, 0.18);
+  --accent: #f4c400;
   --gold: #ffdf00;
 
   --ui-border-subtle: var(--border-glass);
@@ -43,14 +67,14 @@
   --ui-surface-chip: rgba(255, 255, 255, 0.08);
   --ui-surface-tabbar: rgba(255, 255, 255, 0.06);
   --ui-surface-elevated: rgba(255, 255, 255, 0.98);
-  --ui-surface-elevated-alt: rgba(248, 250, 252, 0.96);
-  --ui-surface-elevated-soft-alt: rgba(241, 245, 249, 0.96);
-  --ui-surface-elevated-neo-alt: rgba(250, 246, 255, 0.95);
+  --ui-surface-elevated-alt: rgba(255, 254, 248, 0.98);
+  --ui-surface-elevated-soft-alt: rgba(255, 249, 223, 0.96);
+  --ui-surface-elevated-neo-alt: rgba(255, 254, 248, 0.98);
   --ui-surface-accent: rgba(255, 223, 0, 0.08);
-  --ui-border-neo: rgba(173, 102, 255, 0.18);
+  --ui-border-neo: rgba(15, 23, 42, 0.08);
   --ui-shadow-dialog: 0 24px 54px rgba(0, 0, 0, 0.24);
-  --ui-shadow-neo-outline: 0 0 0 1px rgba(173, 102, 255, 0.04);
-  --ui-shadow-neo-glow: 0 0 18px rgba(173, 102, 255, 0.06);
+  --ui-shadow-neo-outline: 0 0 0 1px rgba(15, 23, 42, 0.03);
+  --ui-shadow-neo-glow: 0 0 18px rgba(15, 23, 42, 0.04);
   --surface-graphite-gradient: linear-gradient(180deg, rgba(255, 255, 255, 0.055) 0%, rgba(13, 15, 18, 0.98) 58%, rgba(8, 9, 11, 0.98) 100%);
   --surface-graphite-gradient-hover: linear-gradient(180deg, rgba(255, 255, 255, 0.075) 0%, rgba(18, 20, 24, 0.98) 58%, rgba(10, 11, 13, 0.98) 100%);
   --sticker-bg: linear-gradient(180deg, rgba(255, 255, 255, 0.115) 0%, rgba(2, 6, 23, 0.2) 52%, rgba(2, 6, 23, 0.08) 100%);
@@ -65,12 +89,11 @@
   --sticker-primary-shadow: 0 14px 30px rgba(245, 196, 0, 0.28), inset 0 1px 0 rgba(255, 255, 255, 0.66);
   --sticker-primary-shadow-hover: 0 18px 36px rgba(245, 196, 0, 0.38), inset 0 1px 0 rgba(255, 255, 255, 0.76);
 
-  --radius-lg: 20px;
-  --radius-md: 14px;
-  --radius-sm: 10px;
+  --radius-lg: 14px;
+  --radius-md: 10px;
 
-  --shadow-soft: 0 20px 60px rgba(0, 0, 0, 0.35);
-  --shadow-hover: 0 30px 80px rgba(56, 189, 248, 0.25);
+  --shadow-soft: 0 14px 34px rgba(0, 0, 0, 0.28);
+  --shadow-hover: 0 18px 38px rgba(0, 0, 0, 0.34);
   --shadow-card: 0 26px 64px rgba(0, 0, 0, 0.34), 0 10px 26px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.1);
   --shadow-card-hover: 0 34px 82px rgba(0, 0, 0, 0.4), 0 14px 32px rgba(0, 0, 0, 0.24), inset 0 1px 0 rgba(255, 255, 255, 0.13);
   --shadow-floating: 0 34px 88px rgba(0, 0, 0, 0.48), 0 14px 34px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.1);
@@ -99,18 +122,46 @@
   }
 }
 
+@media (max-width: 768px) {
+  :root {
+    --section-padding-y: 34px;
+    --section-padding-y-tight: 28px;
+    --section-padding-y-compact: 22px;
+    --section-inner-padding-x: 14px;
+    --panel-padding: 18px;
+    --panel-padding-tight: 16px;
+    --section-padding-x: var(--panel-padding);
+    --section-gap: 20px;
+    --section-gap-tight: 16px;
+    --card-padding: 16px;
+    --grid-gap: 16px;
+  }
+}
+
 :root[data-theme='light'] {
   color-scheme: light;
-  --bg-main: #f5f6f8;
-  --bg-surface: rgba(255, 255, 255, 0.86);
-  --bg-card: rgba(255, 255, 255, 0.94);
-  --section-band: rgba(255, 255, 255, 0.74);
-  --section-band-alt: rgba(241, 245, 249, 0.72);
-  --border-soft: rgba(15, 23, 42, 0.1);
-  --border-glass: rgba(15, 23, 42, 0.08);
+  --bg-main: #ffffff;
+  --bg-surface: #ffffff;
+  --bg-card: #ffffff;
+  --section-band: #ffffff;
+  --section-band-alt: #ffffff;
+  --surface-section: #ffffff;
+  --surface-section-alt: #ffffff;
+  --surface-panel: #ffffff;
+  --surface-card: #ffffff;
+  --surface-card-soft: #ffffff;
+  --surface-card-hover: #f7f7f7;
+  --surface-contrast: #111111;
+  --surface-contrast-text: #ffffff;
+  --surface-contrast-muted: rgba(255, 255, 255, 0.72);
+  --surface-border: rgba(15, 23, 42, 0.12);
+  --surface-border-strong: rgba(15, 23, 42, 0.18);
+  --surface-accent: rgba(15, 23, 42, 0.04);
+  --section-accent: #3f6b59;
+  --border-soft: rgba(15, 23, 42, 0.12);
+  --border-glass: rgba(15, 23, 42, 0.1);
   --text-main: #0f172a;
   --text-muted: #475569;
-  --neo-accent-soft: rgba(173, 102, 255, 0.12);
   --ui-border-subtle: rgba(15, 23, 42, 0.08);
   --ui-border-strong: rgba(15, 23, 42, 0.12);
   --ui-border-accent: rgba(255, 223, 0, 0.3);
@@ -122,14 +173,14 @@
   --ui-surface-chip: rgba(255, 255, 255, 0.84);
   --ui-surface-tabbar: rgba(248, 250, 252, 0.9);
   --ui-surface-elevated: rgba(255, 255, 255, 0.98);
-  --ui-surface-elevated-alt: rgba(248, 250, 252, 0.96);
-  --ui-surface-elevated-soft-alt: rgba(241, 245, 249, 0.96);
-  --ui-surface-elevated-neo-alt: rgba(250, 246, 255, 0.95);
+  --ui-surface-elevated-alt: rgba(255, 255, 255, 0.98);
+  --ui-surface-elevated-soft-alt: rgba(247, 247, 247, 0.96);
+  --ui-surface-elevated-neo-alt: rgba(255, 255, 255, 0.98);
   --ui-surface-accent: rgba(255, 223, 0, 0.08);
-  --ui-border-neo: rgba(173, 102, 255, 0.18);
+  --ui-border-neo: rgba(15, 23, 42, 0.08);
   --ui-shadow-dialog: 0 24px 54px rgba(15, 23, 42, 0.16);
-  --ui-shadow-neo-outline: 0 0 0 1px rgba(173, 102, 255, 0.04);
-  --ui-shadow-neo-glow: 0 0 18px rgba(173, 102, 255, 0.06);
+  --ui-shadow-neo-outline: 0 0 0 1px rgba(15, 23, 42, 0.03);
+  --ui-shadow-neo-glow: 0 0 18px rgba(15, 23, 42, 0.04);
   --sticker-bg: rgba(255, 255, 255, 0.95);
   --sticker-bg-hover: #ffffff;
   --sticker-color: #0f172a;
@@ -141,8 +192,8 @@
   --sticker-primary-border: rgba(184, 134, 11, 0.18);
   --sticker-primary-shadow: 0 12px 28px rgba(184, 134, 11, 0.18), inset 0 1px 0 rgba(255, 255, 255, 0.72);
   --sticker-primary-shadow-hover: 0 16px 32px rgba(184, 134, 11, 0.24), inset 0 1px 0 rgba(255, 255, 255, 0.84);
-  --shadow-soft: 0 18px 46px rgba(15, 23, 42, 0.08);
-  --shadow-hover: 0 24px 54px rgba(15, 23, 42, 0.13);
+  --shadow-soft: 0 14px 32px rgba(15, 23, 42, 0.08);
+  --shadow-hover: 0 18px 38px rgba(15, 23, 42, 0.12);
   --shadow-card: 0 28px 70px rgba(15, 23, 42, 0.13), 0 10px 26px rgba(15, 23, 42, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.78);
   --shadow-card-hover: 0 34px 82px rgba(15, 23, 42, 0.18), 0 14px 32px rgba(15, 23, 42, 0.11), inset 0 1px 0 rgba(255, 255, 255, 0.86);
   --shadow-floating: 0 32px 84px rgba(15, 23, 42, 0.2), 0 12px 32px rgba(15, 23, 42, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.9);
@@ -151,62 +202,6 @@
   --shadow-action-hover: 0 16px 34px rgba(184, 134, 11, 0.28), inset 0 1px 0 rgba(255, 255, 255, 0.84);
   --shadow-logo-surface: inset 0 1px 0 rgba(255, 255, 255, 0.18), inset 0 -1px 0 rgba(2, 6, 23, 0.36), 0 12px 28px rgba(15, 23, 42, 0.12);
   --shadow-chip: 0 6px 14px rgba(15, 23, 42, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.9);
-}
-
-@media (prefers-color-scheme: light) {
-  :root[data-theme='light'] {
-    color-scheme: light;
-    --bg-main: #f5f6f8;
-    --bg-surface: rgba(255, 255, 255, 0.86);
-    --bg-card: rgba(255, 255, 255, 0.94);
-    --section-band: rgba(255, 255, 255, 0.74);
-    --section-band-alt: rgba(241, 245, 249, 0.72);
-    --border-soft: rgba(15, 23, 42, 0.1);
-    --border-glass: rgba(15, 23, 42, 0.08);
-    --text-main: #0f172a;
-    --text-muted: #475569;
-    --neo-accent-soft: rgba(173, 102, 255, 0.12);
-    --ui-border-subtle: rgba(15, 23, 42, 0.08);
-    --ui-border-strong: rgba(15, 23, 42, 0.12);
-    --ui-border-accent: rgba(255, 223, 0, 0.3);
-    --ui-surface-icon-button: rgba(15, 23, 42, 0.04);
-    --ui-surface-icon-button-hover: rgba(15, 23, 42, 0.08);
-    --ui-surface-control: rgba(255, 255, 255, 0.88);
-    --ui-surface-control-strong: rgba(255, 255, 255, 0.9);
-    --ui-surface-control-hover: rgba(255, 255, 255, 0.96);
-    --ui-surface-chip: rgba(255, 255, 255, 0.84);
-    --ui-surface-tabbar: rgba(248, 250, 252, 0.9);
-    --ui-surface-elevated: rgba(255, 255, 255, 0.98);
-    --ui-surface-elevated-alt: rgba(248, 250, 252, 0.96);
-    --ui-surface-elevated-soft-alt: rgba(241, 245, 249, 0.96);
-    --ui-surface-elevated-neo-alt: rgba(250, 246, 255, 0.95);
-    --ui-surface-accent: rgba(255, 223, 0, 0.08);
-    --ui-border-neo: rgba(173, 102, 255, 0.18);
-    --ui-shadow-dialog: 0 24px 54px rgba(15, 23, 42, 0.16);
-    --ui-shadow-neo-outline: 0 0 0 1px rgba(173, 102, 255, 0.04);
-    --ui-shadow-neo-glow: 0 0 18px rgba(173, 102, 255, 0.06);
-    --sticker-bg: rgba(255, 255, 255, 0.95);
-    --sticker-bg-hover: #ffffff;
-    --sticker-color: #0f172a;
-    --sticker-border: rgba(15, 23, 42, 0.07);
-    --sticker-border-hover: rgba(15, 23, 42, 0.12);
-    --sticker-shadow: 0 10px 24px rgba(15, 23, 42, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.92);
-    --sticker-shadow-hover: 0 14px 28px rgba(15, 23, 42, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.96);
-    --sticker-primary-bg: linear-gradient(135deg, #ffe45c, #ffd000);
-    --sticker-primary-border: rgba(184, 134, 11, 0.18);
-    --sticker-primary-shadow: 0 12px 28px rgba(184, 134, 11, 0.18), inset 0 1px 0 rgba(255, 255, 255, 0.72);
-    --sticker-primary-shadow-hover: 0 16px 32px rgba(184, 134, 11, 0.24), inset 0 1px 0 rgba(255, 255, 255, 0.84);
-    --shadow-soft: 0 18px 46px rgba(15, 23, 42, 0.08);
-    --shadow-hover: 0 24px 54px rgba(15, 23, 42, 0.13);
-    --shadow-card: 0 28px 70px rgba(15, 23, 42, 0.13), 0 10px 26px rgba(15, 23, 42, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.78);
-    --shadow-card-hover: 0 34px 82px rgba(15, 23, 42, 0.18), 0 14px 32px rgba(15, 23, 42, 0.11), inset 0 1px 0 rgba(255, 255, 255, 0.86);
-    --shadow-floating: 0 32px 84px rgba(15, 23, 42, 0.2), 0 12px 32px rgba(15, 23, 42, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.9);
-    --shadow-control: 0 10px 24px rgba(15, 23, 42, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.84);
-    --shadow-action: 0 12px 28px rgba(184, 134, 11, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.74);
-    --shadow-action-hover: 0 16px 34px rgba(184, 134, 11, 0.28), inset 0 1px 0 rgba(255, 255, 255, 0.84);
-    --shadow-logo-surface: inset 0 1px 0 rgba(255, 255, 255, 0.18), inset 0 -1px 0 rgba(2, 6, 23, 0.36), 0 12px 28px rgba(15, 23, 42, 0.12);
-    --shadow-chip: 0 6px 14px rgba(15, 23, 42, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.9);
-  }
 }
 
 /* =====================
@@ -262,12 +257,12 @@ textarea {
 .container {
   max-width: var(--site-max-width);
   margin: 0 auto;
-  padding: 24px;
+  padding: var(--page-gutter);
 }
 
 @media (max-width: 1024px) {
   .container {
-    padding: 12px;
+    padding: var(--page-gutter-mobile);
   }
 }
 
@@ -285,7 +280,7 @@ textarea {
   transition:
     transform 0.3s ease-in-out,
     box-shadow 0.3s ease;
-  background: #05070d;
+  background: var(--chrome-bg);
   overflow: visible;
 }
 
@@ -298,8 +293,9 @@ textarea {
   max-width: none;
   margin: 0;
   padding: 10px max(24px, calc((100vw - var(--site-max-width)) / 2 + 24px));
-  background: #05070d;
-  box-shadow: var(--shadow-hover);
+  background: var(--chrome-bg);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 12px 26px rgba(0, 0, 0, 0.18);
   transition:
     padding 0.28s ease,
     box-shadow 0.28s ease,
@@ -327,8 +323,8 @@ textarea {
   align-items: center;
   gap: 9px;
   min-height: 44px;
-  font-size: 20px;
-  font-weight: 600;
+  font-size: 19px;
+  font-weight: 700;
   line-height: 1.04;
   letter-spacing: 0;
   color: var(--text-main);
@@ -360,7 +356,7 @@ textarea {
 .nav {
   display: flex;
   align-items: center;
-  gap: 24px;
+  gap: 28px;
 }
 
 .nav a {
@@ -370,8 +366,10 @@ textarea {
   padding: 0 2px;
   color: var(--text-muted);
   text-decoration: none;
-  font-size: 15.5px;
-  font-weight: 500;
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
   line-height: 1;
   letter-spacing: 0;
   position: relative;
@@ -1003,7 +1001,8 @@ textarea {
   height: 330px;
   flex-direction: column;
   justify-content: flex-start;
-  background: var(--bg-card);
+  background: var(--surface-card);
+  border: 1px solid var(--surface-border);
   border-radius: var(--radius-lg);
   padding: var(--casino-card-pad);
   cursor: pointer;
@@ -1115,7 +1114,7 @@ textarea {
   color: #020617;
   text-decoration: none;
   font-weight: 800;
-  border-radius: 999px;
+  border-radius: 8px;
   border: 1px solid var(--sticker-primary-border);
   box-shadow: var(--sticker-primary-shadow);
 
@@ -1139,7 +1138,7 @@ textarea {
   font-size: 14px;
   color: var(--text-muted);
   padding: 34px 24px 42px;
-  background: rgba(2, 6, 23, 0.6);
+  background: var(--chrome-bg);
 }
 
 .footer p {
@@ -1760,7 +1759,7 @@ textarea {
 .content-area {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: var(--section-gap-tight);
 }
 /* =====================
    RESPONSIVE
@@ -1797,13 +1796,13 @@ textarea {
 .features-container {
   display: flex;
   flex-direction: column;
-  gap: 20px;
+  gap: var(--section-gap-tight);
 }
 
 .features-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 24px;
+  gap: var(--grid-gap);
 }
 
 .feature-card {
@@ -1812,8 +1811,9 @@ textarea {
   gap: 10px;
   color: var(--text-main);
   line-height: 1.6;
-  background-color: var(--bg-card);
-  padding: 24px;
+  background-color: var(--surface-card);
+  border: 1px solid var(--surface-border);
+  padding: var(--card-padding);
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-soft);
 }
@@ -1821,8 +1821,8 @@ textarea {
 .feature-card strong {
   display: block;
   font-weight: 600;
-  color: var(--neo-accent);
-  text-shadow: 0 0 12px rgba(196, 129, 255, 0.14);
+  color: var(--text-main);
+  text-shadow: none;
 }
 
 .feature-card span {
@@ -1861,7 +1861,7 @@ textarea {
    BONUS CARD
 ===================== */
 .bonus-card {
-  background: var(--bg-card);
+  background: var(--surface-card);
   backdrop-filter: var(--blur-glass);
   padding: 1.8rem 2rem;
   border-radius: var(--radius-lg);
@@ -1988,25 +1988,25 @@ textarea {
 .brand-payments {
   display: flex;
   flex-direction: column;
-  gap: 30px;
+  gap: var(--section-gap);
 }
 
 @media (max-width: 768px) {
   .brand-countries,
   .brand-payments {
-    gap: 20px;
+    gap: var(--section-gap-tight);
   }
 }
 
 .features-section {
   display: flex;
   flex-direction: column;
-  gap: 30px;
+  gap: var(--section-gap);
 }
 
 @media (max-width: 768px) {
   .features-section {
-    gap: 20px;
+    gap: var(--section-gap-tight);
   }
 }
 
@@ -2105,9 +2105,10 @@ textarea {
 }
 
 .faq-card {
-  border: 1px solid var(--border-glass);
+  border: 1px solid var(--surface-border);
   border-radius: var(--radius-lg);
   padding: 24px;
+  background: var(--surface-card);
   box-shadow: var(--shadow-hover);
 }
 
@@ -2196,11 +2197,14 @@ tbody tr:hover {
 }
 
 .top-slot-card {
-  background: var(--bg-card);
+  background: var(--surface-card);
   border-radius: var(--radius-lg);
   overflow: hidden;
-  border: 1px solid var(--border-glass);
-  transition: var(--transition);
+  border: 1px solid var(--surface-border);
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease,
+    border-color 0.3s ease;
   backdrop-filter: var(--blur-glass);
   text-align: center;
   padding: 1.5rem;
@@ -2718,7 +2722,7 @@ body[data-country] .content-article .timeline a[href*='/responsible-gambling/'] 
   grid-template-columns: minmax(0, 1fr) var(--split-side-column);
   gap: var(--split-gap);
   align-items: start;
-  margin: 4px 0 12px;
+  margin: var(--section-gap-tight) 0 0;
 }
 
 .home-top-insights-single {
@@ -2751,7 +2755,7 @@ body[data-country] .content-article .timeline a[href*='/responsible-gambling/'] 
   grid-template-columns: var(--split-side-column) minmax(0, 1fr);
   gap: var(--split-gap);
   align-items: start;
-  margin: 8px 0 12px;
+  margin: var(--section-gap-tight) 0 0;
 }
 
 .home-country-editorial > .home-insight,
@@ -2784,7 +2788,7 @@ body[data-country] .content-article .timeline a[href*='/responsible-gambling/'] 
   grid-template-columns: var(--split-side-column) minmax(0, 1fr);
   gap: var(--split-gap);
   align-items: start;
-  margin: 8px 0 12px;
+  margin: var(--section-gap-tight) 0 0;
 }
 
 .home-secondary-editorial-side {
@@ -2822,7 +2826,7 @@ body[data-country] .content-article .timeline a[href*='/responsible-gambling/'] 
   grid-template-columns: var(--split-side-column) minmax(0, 1fr);
   gap: var(--split-gap);
   align-items: start;
-  margin: 8px 0 12px;
+  margin: var(--section-gap-tight) 0 0;
 }
 
 .home-uk-review-sidebar {
@@ -3230,19 +3234,18 @@ body[data-country] .content-article .timeline a[href*='/responsible-gambling/'] 
 .home-stats-card {
   display: flex;
   flex-direction: column;
-  gap: 24px;
-  padding: 28px;
+  gap: var(--section-gap-tight);
+  padding: var(--panel-padding);
   border-radius: var(--radius-lg);
-  background:
-    linear-gradient(180deg, rgba(255, 255, 255, 0.025), rgba(255, 255, 255, 0.01)), rgba(255, 255, 255, 0.015);
-  border: 1px solid var(--border-glass);
+  background: var(--surface-section);
+  border: 1px solid var(--surface-border-strong);
   box-shadow: var(--shadow-soft);
 }
 
 .home-stats-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 20px;
+  gap: var(--grid-gap);
 }
 
 .home-stat-tile {
@@ -3250,14 +3253,11 @@ body[data-country] .content-article .timeline a[href*='/responsible-gambling/'] 
   flex-direction: column;
   gap: 10px;
   min-height: 220px;
-  padding: 24px;
+  padding: var(--card-padding);
   border-radius: var(--radius-lg);
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.028), rgba(255, 255, 255, 0.01)), var(--bg-card);
-  border: 1px solid rgba(173, 102, 255, 0.28);
-  box-shadow:
-    0 0 0 1px rgba(173, 102, 255, 0.06),
-    0 0 22px rgba(173, 102, 255, 0.12),
-    var(--shadow-soft);
+  background: var(--surface-card);
+  border: 1px solid var(--surface-border);
+  box-shadow: var(--shadow-soft);
 }
 
 .home-stat-link {
@@ -3271,11 +3271,8 @@ body[data-country] .content-article .timeline a[href*='/responsible-gambling/'] 
 
 .home-stat-link:hover {
   transform: translateY(-4px);
-  border-color: rgba(214, 136, 255, 0.42);
-  box-shadow:
-    0 0 0 1px rgba(214, 136, 255, 0.08),
-    0 0 28px rgba(214, 136, 255, 0.18),
-    0 22px 56px rgba(76, 22, 124, 0.28);
+  border-color: var(--border-soft);
+  box-shadow: 0 18px 42px rgba(15, 23, 42, 0.12);
 }
 
 .home-stat-number {
@@ -3283,7 +3280,7 @@ body[data-country] .content-article .timeline a[href*='/responsible-gambling/'] 
   line-height: 0.95;
   font-weight: 700;
   color: var(--text-main);
-  text-shadow: 0 0 18px rgba(196, 129, 255, 0.18);
+  text-shadow: none;
 }
 
 .home-stat-tile strong {
@@ -3298,12 +3295,11 @@ body[data-country] .content-article .timeline a[href*='/responsible-gambling/'] 
 .home-insight-card {
   display: flex;
   flex-direction: column;
-  gap: 24px;
-  padding: 28px;
+  gap: var(--section-gap-tight);
+  padding: var(--panel-padding);
   border-radius: var(--radius-lg);
-  background:
-    linear-gradient(180deg, rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0.01)), rgba(255, 255, 255, 0.015);
-  border: 1px solid var(--border-glass);
+  background: var(--surface-section-alt);
+  border: 1px solid var(--surface-border-strong);
   box-shadow: var(--shadow-soft);
 }
 
@@ -3327,13 +3323,10 @@ body[data-country] .content-article .timeline a[href*='/responsible-gambling/'] 
 
 .home-insight .feature-card {
   min-height: 180px;
-  padding: 22px;
-  border: 1px solid rgba(173, 102, 255, 0.22);
+  padding: var(--card-padding);
+  border: 1px solid var(--surface-border);
   border-radius: var(--radius-lg);
-  box-shadow:
-    0 0 0 1px rgba(173, 102, 255, 0.05),
-    0 0 18px rgba(173, 102, 255, 0.09),
-    var(--shadow-soft);
+  box-shadow: var(--shadow-soft);
 }
 
 .home-insight .feature-card strong {
@@ -3406,13 +3399,10 @@ body[data-country] .content-article .timeline a[href*='/responsible-gambling/'] 
   padding: 22px;
   text-decoration: none;
   color: var(--text-main);
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.025), rgba(255, 255, 255, 0.01)), var(--bg-card);
-  border: 1px solid rgba(173, 102, 255, 0.24);
+  background: var(--surface-card-soft);
+  border: 1px solid var(--surface-border);
   border-radius: var(--radius-lg);
-  box-shadow:
-    0 0 0 1px rgba(173, 102, 255, 0.05),
-    0 0 20px rgba(173, 102, 255, 0.1),
-    var(--shadow-soft);
+  box-shadow: var(--shadow-soft);
   transition:
     transform 0.22s ease,
     box-shadow 0.22s ease,
@@ -3421,11 +3411,8 @@ body[data-country] .content-article .timeline a[href*='/responsible-gambling/'] 
 
 .home-link-card:hover {
   transform: translateY(-4px);
-  border-color: rgba(214, 136, 255, 0.4);
-  box-shadow:
-    0 0 0 1px rgba(214, 136, 255, 0.08),
-    0 0 28px rgba(214, 136, 255, 0.18),
-    0 22px 56px rgba(76, 22, 124, 0.26);
+  border-color: var(--border-soft);
+  box-shadow: 0 18px 42px rgba(15, 23, 42, 0.12);
 }
 
 .home-link-card strong {
@@ -3663,14 +3650,11 @@ body[data-country] .content-article .timeline a[href*='/responsible-gambling/'] 
 }
 
 html[data-theme='light'] body {
-  background:
-    radial-gradient(circle at 16% 0%, rgba(255, 255, 255, 0.92), transparent 30%),
-    radial-gradient(circle at 84% 0%, rgba(226, 232, 240, 0.48), transparent 28%),
-    linear-gradient(180deg, #f9fafb 0%, #f4f6f8 52%, #eef2f6 100%);
+  background: #ffffff;
 }
 
 html[data-theme='light'] .header {
-  background-color: #05070d;
+  background-color: var(--chrome-bg);
   border-bottom: none;
 }
 
@@ -3729,7 +3713,7 @@ html[data-theme='light'] .countries-cloud a::before {
 html[data-theme='light'] .home-country-jump,
 html[data-theme='light'] .casino-actions .cta-secondary,
 html[data-theme='light'] .view-all {
-  background: linear-gradient(180deg, #ffffff 0%, #f5f8fc 54%, #edf2f8 100%);
+  background: var(--surface-card);
   border-color: rgba(15, 23, 42, 0.08);
   color: #172033;
   box-shadow:
@@ -3761,7 +3745,7 @@ html[data-theme='light'] .home-country-jump:hover {
 }
 
 html[data-theme='light'] .home-country-jump:hover {
-  background: linear-gradient(180deg, #ffffff 0%, #f8fbff 54%, #f0f5fb 100%);
+  background: var(--surface-card-hover);
   border-color: rgba(15, 23, 42, 0.12);
   box-shadow:
     inset 0 1px 0 rgba(255, 255, 255, 0.96),
@@ -3770,7 +3754,7 @@ html[data-theme='light'] .home-country-jump:hover {
 }
 
 html[data-theme='light'] .footer {
-  background: #020617;
+  background: var(--chrome-bg);
   border-top: none;
   color: #94a3b8;
 }
@@ -3960,6 +3944,13 @@ html[data-theme='light'] .loader {
   border-top-color: var(--accent);
 }
 
+html[data-theme='light'] .home-stats-card,
+html[data-theme='light'] .home-insight-card {
+  background: var(--surface-section);
+  border-color: var(--surface-border-strong);
+  box-shadow: var(--shadow-soft);
+}
+
 html[data-theme='light'] .casino-card,
 html[data-theme='light'] .bonus-card,
 html[data-theme='light'] .top-slot-card,
@@ -3970,9 +3961,7 @@ html[data-theme='light'] .page-responsible .content-article .timeline > div,
 html[data-theme='light'] .page-privacy .content-article .timeline > div,
 html[data-theme='light'] .page-about .content-article .timeline > div,
 html[data-theme='light'] body[data-country] .expert-card,
-html[data-theme='light'] body[data-country] .content-article .timeline > div,
-html[data-theme='light'] .home-stats-card,
-html[data-theme='light'] .home-insight-card {
+html[data-theme='light'] body[data-country] .content-article .timeline > div {
   background: linear-gradient(180deg, var(--ui-surface-elevated), var(--ui-surface-elevated-alt));
   border-color: var(--ui-border-subtle);
   box-shadow: var(--shadow-soft);
@@ -4039,8 +4028,8 @@ html[data-theme='light'] tbody tr:hover {
 html[data-theme='light'] .home-stat-tile,
 html[data-theme='light'] .home-link-card,
 html[data-theme='light'] .home-insight .feature-card {
-  background: linear-gradient(180deg, var(--ui-surface-elevated), var(--ui-surface-elevated-neo-alt));
-  border-color: var(--ui-border-neo);
+  background: var(--surface-card);
+  border-color: var(--surface-border);
   box-shadow:
     var(--ui-shadow-neo-outline),
     var(--ui-shadow-neo-glow),
@@ -4051,9 +4040,8 @@ html[data-theme='light'] .home-stat-link:hover,
 html[data-theme='light'] .home-link-card:hover,
 html[data-theme='light'] .home-insight .feature-card:hover {
   box-shadow:
-    0 0 0 1px rgba(214, 136, 255, 0.06),
-    0 0 22px rgba(214, 136, 255, 0.1),
-    0 18px 42px rgba(76, 22, 124, 0.12);
+    0 0 0 1px rgba(15, 23, 42, 0.06),
+    0 18px 42px rgba(15, 23, 42, 0.12);
 }
 
 html[data-theme='light'] .home-stat-number {
@@ -4061,7 +4049,7 @@ html[data-theme='light'] .home-stat-number {
 }
 
 html[data-theme='light'] .casino-actions .cta-secondary {
-  background: linear-gradient(180deg, #ffffff 0%, #f5f8fc 54%, #edf2f8 100%);
+  background: var(--surface-card);
   color: #172033;
   border-color: rgba(15, 23, 42, 0.08);
   box-shadow:
@@ -4071,7 +4059,7 @@ html[data-theme='light'] .casino-actions .cta-secondary {
 }
 
 html[data-theme='light'] .casino-actions .cta-secondary:hover {
-  background: linear-gradient(180deg, #ffffff 0%, #f8fbff 54%, #f0f5fb 100%);
+  background: var(--surface-card-hover);
   border-color: rgba(15, 23, 42, 0.12);
   box-shadow:
     inset 0 1px 0 rgba(255, 255, 255, 0.96),
@@ -4081,7 +4069,7 @@ html[data-theme='light'] .casino-actions .cta-secondary:hover {
 
 html[data-theme='light'] .view-all {
   color: #172033;
-  background: linear-gradient(180deg, #ffffff 0%, #f5f8fc 54%, #edf2f8 100%);
+  background: var(--surface-card);
   border-color: rgba(15, 23, 42, 0.08);
   box-shadow:
     inset 0 1px 0 rgba(255, 255, 255, 0.92),
@@ -4091,7 +4079,7 @@ html[data-theme='light'] .view-all {
 
 html[data-theme='light'] .view-all:hover {
   color: #172033;
-  background: linear-gradient(180deg, #ffffff 0%, #f8fbff 54%, #f0f5fb 100%);
+  background: var(--surface-card-hover);
   border-color: rgba(15, 23, 42, 0.12);
   box-shadow:
     inset 0 1px 0 rgba(255, 255, 255, 0.96),
@@ -4105,10 +4093,7 @@ html[data-theme='light'] .theme-settings-backdrop {
 }
 
 html[data-theme='light'] .theme-settings-modal {
-  background:
-    radial-gradient(circle at 12% 0%, rgba(255, 223, 0, 0.14), transparent 34%),
-    radial-gradient(circle at 100% 0%, rgba(15, 23, 42, 0.06), transparent 36%),
-    linear-gradient(180deg, #ffffff, #f6f8fb);
+  background: var(--surface-panel);
   border-color: rgba(15, 23, 42, 0.1);
   box-shadow:
     inset 0 1px 0 rgba(255, 255, 255, 0.92),
@@ -4129,7 +4114,7 @@ html[data-theme='light'] .theme-settings-close:hover {
 
 html[data-theme='light'] .theme-settings-option {
   color: #172033;
-  background: linear-gradient(180deg, #ffffff 0%, #f5f8fc 54%, #edf2f8 100%);
+  background: var(--surface-card);
   border-color: rgba(15, 23, 42, 0.08);
   box-shadow:
     inset 0 1px 0 rgba(255, 255, 255, 0.92),
@@ -4139,496 +4124,10 @@ html[data-theme='light'] .theme-settings-option {
 
 html[data-theme='light'] .theme-settings-option:hover {
   color: #172033;
-  background: linear-gradient(180deg, #ffffff 0%, #f8fbff 54%, #f0f5fb 100%);
+  background: var(--surface-card-hover);
   border-color: rgba(15, 23, 42, 0.12);
   box-shadow:
     inset 0 1px 0 rgba(255, 255, 255, 0.96),
     inset 0 -1px 0 rgba(15, 23, 42, 0.06),
     0 14px 28px rgba(15, 23, 42, 0.11);
-}
-
-@media (prefers-color-scheme: light) {
-  html[data-theme='light'] body {
-    background:
-      radial-gradient(circle at 16% 0%, rgba(255, 255, 255, 0.92), transparent 30%),
-      radial-gradient(circle at 84% 0%, rgba(226, 232, 240, 0.48), transparent 28%),
-      linear-gradient(180deg, #f9fafb 0%, #f4f6f8 52%, #eef2f6 100%);
-  }
-
-  html[data-theme='light'] .header {
-    background-color: #05070d;
-    border-bottom: none;
-  }
-
-  html[data-theme='light'] .header-container {
-    box-shadow:
-      0 14px 34px rgba(15, 23, 42, 0.14),
-      inset 0 -1px 0 rgba(255, 255, 255, 0.04);
-  }
-
-  html[data-theme='light'] .logo {
-    color: #e5e7eb;
-  }
-
-  html[data-theme='light'] .nav a,
-  html[data-theme='light'] .nav-dropdown-btn,
-  html[data-theme='light'] .nav-dropdown-link {
-    color: #94a3b8;
-  }
-
-  html[data-theme='light'] .nav a:hover,
-  html[data-theme='light'] .nav-dropdown-btn:hover,
-  html[data-theme='light'] .nav-dropdown-link:hover,
-  html[data-theme='light'] .nav-dropdown-link:focus-visible {
-    color: #e5e7eb;
-  }
-
-  html[data-theme='light'] .burger span {
-    background: #e5e7eb;
-  }
-
-  html[data-theme='light'] .nav-dropdown-menu {
-    background: transparent;
-    border-color: rgba(255, 255, 255, 0.08);
-  }
-
-  html[data-theme='light'] .nav-dropdown-menu a {
-    color: #e5e7eb;
-  }
-
-  html[data-theme='light'] .countries-cloud a,
-  html[data-theme='light'] .home-country-jump,
-  html[data-theme='light'] .country-chip,
-  html[data-theme='light'] .payment-chip {
-    background: rgba(255, 255, 255, 0.94);
-    border-color: rgba(15, 23, 42, 0.06);
-    color: var(--text-main);
-    box-shadow:
-      0 10px 24px rgba(15, 23, 42, 0.07),
-      inset 0 1px 0 rgba(255, 255, 255, 0.9);
-  }
-
-  html[data-theme='light'] .countries-cloud a::before {
-    content: none;
-  }
-
-  html[data-theme='light'] .home-country-jump,
-  html[data-theme='light'] .casino-actions .cta-secondary,
-  html[data-theme='light'] .view-all {
-    background: linear-gradient(180deg, #ffffff 0%, #f5f8fc 54%, #edf2f8 100%);
-    border-color: rgba(15, 23, 42, 0.08);
-    color: #172033;
-    box-shadow:
-      inset 0 1px 0 rgba(255, 255, 255, 0.92),
-      inset 0 -1px 0 rgba(15, 23, 42, 0.05),
-      0 10px 22px rgba(15, 23, 42, 0.08);
-  }
-
-  html[data-theme='light'] .home-country-jump::before,
-  html[data-theme='light'] .casino-actions .cta-secondary::before,
-  html[data-theme='light'] .view-all::before {
-    background:
-      linear-gradient(
-        180deg,
-        rgba(255, 255, 255, 0.92) 0%,
-        rgba(255, 255, 255, 0.35) 48%,
-        rgba(255, 255, 255, 0) 100%
-      );
-  }
-
-  html[data-theme='light'] .countries-cloud a:hover,
-  html[data-theme='light'] .home-country-jump:hover {
-    background: #ffffff;
-    border-color: rgba(15, 23, 42, 0.1);
-    color: var(--text-main);
-    box-shadow:
-      0 14px 28px rgba(15, 23, 42, 0.11),
-      inset 0 1px 0 rgba(255, 255, 255, 0.96);
-  }
-
-  html[data-theme='light'] .home-country-jump:hover {
-    background: linear-gradient(180deg, #ffffff 0%, #f8fbff 54%, #f0f5fb 100%);
-    border-color: rgba(15, 23, 42, 0.12);
-    box-shadow:
-      inset 0 1px 0 rgba(255, 255, 255, 0.96),
-      inset 0 -1px 0 rgba(15, 23, 42, 0.06),
-      0 14px 28px rgba(15, 23, 42, 0.11);
-  }
-
-  html[data-theme='light'] .footer {
-    background: #020617;
-    border-top: none;
-    color: #94a3b8;
-  }
-
-  html[data-theme='light'] .footer-nav a {
-    color: #94a3b8;
-  }
-
-  html[data-theme='light'] .footer-settings-trigger {
-    color: #94a3b8;
-    background: transparent;
-    border-color: transparent;
-    box-shadow: none;
-  }
-
-  html[data-theme='light'] .footer-nav a:hover,
-  html[data-theme='light'] .footer-settings-trigger:hover {
-    color: #e5e7eb;
-  }
-
-  html[data-theme='light'] .footer-social {
-    color: #c9ddff;
-    background: linear-gradient(180deg, rgba(255, 255, 255, 0.115) 0%, rgba(2, 6, 23, 0.2) 52%, rgba(2, 6, 23, 0.08) 100%);
-    border-color: rgba(226, 232, 240, 0.74);
-    box-shadow:
-      inset 0 1px 0 rgba(255, 255, 255, 0.48),
-      inset 0 -1px 0 rgba(2, 6, 23, 0.38);
-  }
-
-  html[data-theme='light'] .footer-social:hover {
-    color: #c9ddff;
-    background: linear-gradient(180deg, rgba(255, 255, 255, 0.145) 0%, rgba(15, 23, 42, 0.46) 54%, rgba(8, 13, 31, 0.2) 100%);
-    border-color: rgba(255, 255, 255, 0.94);
-    box-shadow:
-      inset 0 1px 0 rgba(255, 255, 255, 0.56),
-      inset 0 -1px 0 rgba(2, 6, 23, 0.42),
-      0 8px 18px rgba(0, 0, 0, 0.22);
-  }
-
-  html[data-theme='light'] .footer-brand-directory {
-    border-top-color: rgba(255, 255, 255, 0.08);
-  }
-
-  html[data-theme='light'] .footer-brand-column a {
-    color: #94a3b8;
-  }
-
-  html[data-theme='light'] .footer-brand-column a:hover {
-    color: #e5e7eb;
-  }
-
-  html[data-theme='light'] .mobile-overlay {
-    background: rgba(241, 245, 249, 0.36);
-  }
-
-  html[data-theme='light'] .mobile-menu-panel {
-    background: linear-gradient(180deg, var(--ui-surface-elevated), var(--ui-surface-elevated-soft-alt));
-    box-shadow:
-      -10px 0 40px rgba(15, 23, 42, 0.12),
-      inset 1px 0 0 rgba(255, 255, 255, 0.5);
-  }
-
-  html[data-theme='light'] .mobile-menu-inner > a,
-  html[data-theme='light'] .submenu-toggle,
-  html[data-theme='light'] .mobile-theme-settings,
-  html[data-theme='light'] .mobile-submenu a {
-    background: transparent;
-    border-color: var(--border-soft);
-    color: var(--text-main);
-    box-shadow: none;
-  }
-
-  html[data-theme='light'] .mobile-menu-inner > a:hover,
-  html[data-theme='light'] .submenu-toggle:hover,
-  html[data-theme='light'] .mobile-submenu a:hover,
-  html[data-theme='light'] .mobile-theme-settings:hover,
-  html[data-theme='light'] .mobile-theme-settings:focus-visible {
-    background: rgba(15, 23, 42, 0.025);
-    border-color: var(--gold);
-    color: #8a5e1f;
-  }
-
-  html[data-theme='light'] .site-search-results {
-    border-color: rgba(15, 23, 42, 0.08);
-    background: linear-gradient(180deg, rgba(255, 255, 255, 0.98), rgba(248, 250, 252, 0.98));
-    box-shadow:
-      0 22px 54px rgba(15, 23, 42, 0.14),
-      inset 0 1px 0 rgba(255, 255, 255, 0.9);
-  }
-
-  html[data-theme='light'] .site-search-result {
-    color: #0f172a;
-  }
-
-  html[data-theme='light'] .site-search-result:hover,
-  html[data-theme='light'] .site-search-result:focus-visible {
-    background: rgba(15, 23, 42, 0.045);
-    color: #0f172a;
-  }
-
-  html[data-theme='light'] .site-search-result-type {
-    color: #a06b00;
-  }
-
-  html[data-theme='light'] .site-search-result span:last-child,
-  html[data-theme='light'] .site-search-empty {
-    color: #475569;
-  }
-
-  html[data-theme='light'] .site-search--desktop .site-search-results {
-    background: linear-gradient(135deg, rgba(5, 7, 13, 0.98), rgba(2, 6, 23, 0.96));
-    border-color: rgba(255, 255, 255, 0.08);
-    box-shadow: var(--shadow-soft);
-  }
-
-  html[data-theme='light'] .site-search--desktop .site-search-result {
-    color: #dbeafe;
-  }
-
-  html[data-theme='light'] .site-search--desktop .site-search-result:hover,
-  html[data-theme='light'] .site-search--desktop .site-search-result:focus-visible {
-    background: rgba(255, 255, 255, 0.075);
-    color: #ffffff;
-  }
-
-  html[data-theme='light'] .site-search--desktop .site-search-result-type {
-    color: var(--gold);
-  }
-
-  html[data-theme='light'] .site-search--desktop .site-search-result span:last-child,
-  html[data-theme='light'] .site-search--desktop .site-search-empty {
-    color: #94a3b8;
-  }
-
-  html[data-theme='light'] .site-search-flag {
-    box-shadow: 0 0 0 1px rgba(15, 23, 42, 0.1), 0 2px 5px rgba(15, 23, 42, 0.08);
-  }
-
-  html[data-theme='light'] .site-search--mobile .site-search-shell {
-    min-height: 40px;
-    border-radius: 4px;
-    border-color: var(--border-soft);
-    background: transparent;
-    box-shadow: none;
-    transform: none;
-  }
-
-  html[data-theme='light'] .site-search--mobile .site-search-shell::before {
-    content: none;
-  }
-
-  html[data-theme='light'] .site-search--mobile:focus-within .site-search-shell {
-    border-color: var(--gold);
-    background: rgba(15, 23, 42, 0.025);
-    box-shadow: none;
-  }
-
-  html[data-theme='light'] .site-search--mobile .site-search-icon {
-    opacity: 0.72;
-    filter: invert(38%) sepia(11%) saturate(886%) hue-rotate(176deg) brightness(92%) contrast(90%);
-  }
-
-  html[data-theme='light'] .site-search--mobile .site-search-input {
-    color: var(--text-main);
-  }
-
-  html[data-theme='light'] .site-search--mobile .site-search-input::placeholder {
-    color: #64748b;
-  }
-
-  html[data-theme='light'] .mobile-submenu a:hover {
-    background: rgba(15, 23, 42, 0.025);
-    border-color: var(--gold);
-  }
-
-  html[data-theme='light'] .mobile-submenu .flag {
-    box-shadow: 0 2px 6px rgba(15, 23, 42, 0.12);
-  }
-
-  html[data-theme='light'] #globalLoader {
-    background: rgba(248, 250, 252, 0.9);
-  }
-
-  html[data-theme='light'] .loader {
-    border-color: rgba(15, 23, 42, 0.12);
-    border-top-color: var(--accent);
-  }
-
-  html[data-theme='light'] .casino-card,
-  html[data-theme='light'] .bonus-card,
-  html[data-theme='light'] .top-slot-card,
-  html[data-theme='light'] .payment-methods-page .payment-method-card,
-  html[data-theme='light'] .faq-card,
-  html[data-theme='light'] .country-brand-summary-card,
-  html[data-theme='light'] .page-responsible .content-article .timeline > div,
-  html[data-theme='light'] .page-privacy .content-article .timeline > div,
-  html[data-theme='light'] .page-about .content-article .timeline > div,
-  html[data-theme='light'] body[data-country] .expert-card,
-  html[data-theme='light'] body[data-country] .content-article .timeline > div,
-  html[data-theme='light'] .home-stats-card,
-  html[data-theme='light'] .home-insight-card {
-    background: linear-gradient(180deg, var(--ui-surface-elevated), var(--ui-surface-elevated-alt));
-    border-color: var(--ui-border-subtle);
-    box-shadow: var(--shadow-soft);
-  }
-
-  html[data-theme='light'] .casino-card .card-img {
-    height: 108px;
-    flex: 0 0 108px;
-    min-height: 108px;
-    margin:
-      calc(-1 * var(--casino-card-pad))
-      calc(-1 * var(--casino-card-pad))
-      6px;
-    padding: 18px 16px 14px;
-    border-radius: var(--radius-lg) var(--radius-lg) 20px 20px;
-    background:
-      radial-gradient(circle at top right, rgba(56, 189, 248, 0.16), transparent 34%),
-      radial-gradient(circle at top left, rgba(255, 223, 0, 0.12), transparent 28%),
-      linear-gradient(180deg, rgba(10, 15, 30, 0.98), rgba(20, 30, 52, 0.94));
-    box-shadow:
-      inset 0 -1px 0 rgba(255, 255, 255, 0.06),
-      0 12px 28px rgba(15, 23, 42, 0.12);
-  }
-
-  html[data-theme='light'] .casino-card .card-img img,
-  html[data-theme='light'] .casino-card .card-img .casino-image {
-    filter: drop-shadow(0 8px 18px rgba(0, 0, 0, 0.22));
-  }
-
-  html[data-theme='light'] .home-link-grid-vertical .home-link-logo {
-    background:
-      radial-gradient(circle at top right, rgba(56, 189, 248, 0.16), transparent 34%),
-      radial-gradient(circle at top left, rgba(255, 223, 0, 0.12), transparent 28%),
-      linear-gradient(180deg, rgba(10, 15, 30, 0.98), rgba(20, 30, 52, 0.94));
-    box-shadow:
-      inset 0 -1px 0 rgba(255, 255, 255, 0.06),
-      0 10px 22px rgba(15, 23, 42, 0.1);
-  }
-
-  html[data-theme='light'] body.casinos-page .casino-list-row,
-  html[data-theme='light'] body.casinos-page .casino-list-logo {
-    background: linear-gradient(180deg, var(--ui-surface-elevated), var(--ui-surface-elevated-alt));
-    border-color: var(--ui-border-subtle);
-  }
-
-  html[data-theme='light'] body.casinos-page .casino-list-logo {
-    background:
-      radial-gradient(circle at top right, rgba(56, 189, 248, 0.16), transparent 34%),
-      radial-gradient(circle at top left, rgba(255, 223, 0, 0.12), transparent 28%),
-      linear-gradient(180deg, rgba(10, 15, 30, 0.98), rgba(20, 30, 52, 0.94));
-    box-shadow:
-      inset 0 -1px 0 rgba(255, 255, 255, 0.06),
-      0 12px 28px rgba(15, 23, 42, 0.12);
-  }
-
-  html[data-theme='light'] tbody tr:nth-child(even) {
-    background: rgba(15, 23, 42, 0.025);
-  }
-
-  html[data-theme='light'] tbody tr:hover {
-    background: rgba(56, 189, 248, 0.08);
-  }
-
-  html[data-theme='light'] .home-stat-tile,
-  html[data-theme='light'] .home-link-card,
-  html[data-theme='light'] .home-insight .feature-card {
-    background: linear-gradient(180deg, var(--ui-surface-elevated), var(--ui-surface-elevated-neo-alt));
-    border-color: var(--ui-border-neo);
-    box-shadow:
-      var(--ui-shadow-neo-outline),
-      var(--ui-shadow-neo-glow),
-      var(--shadow-soft);
-  }
-
-  html[data-theme='light'] .home-stat-link:hover,
-  html[data-theme='light'] .home-link-card:hover,
-  html[data-theme='light'] .home-insight .feature-card:hover {
-    box-shadow:
-      0 0 0 1px rgba(214, 136, 255, 0.06),
-      0 0 22px rgba(214, 136, 255, 0.1),
-      0 18px 42px rgba(76, 22, 124, 0.12);
-  }
-
-  html[data-theme='light'] .home-stat-number {
-    text-shadow: none;
-  }
-
-  html[data-theme='light'] .casino-actions .cta-secondary {
-    background: linear-gradient(180deg, #ffffff 0%, #f5f8fc 54%, #edf2f8 100%);
-    color: #172033;
-    border-color: rgba(15, 23, 42, 0.08);
-    box-shadow:
-      inset 0 1px 0 rgba(255, 255, 255, 0.92),
-      inset 0 -1px 0 rgba(15, 23, 42, 0.05),
-      0 10px 22px rgba(15, 23, 42, 0.08);
-  }
-
-  html[data-theme='light'] .casino-actions .cta-secondary:hover {
-    background: linear-gradient(180deg, #ffffff 0%, #f8fbff 54%, #f0f5fb 100%);
-    border-color: rgba(15, 23, 42, 0.12);
-    box-shadow:
-      inset 0 1px 0 rgba(255, 255, 255, 0.96),
-      inset 0 -1px 0 rgba(15, 23, 42, 0.06),
-      0 14px 28px rgba(15, 23, 42, 0.11);
-  }
-
-  html[data-theme='light'] .view-all {
-    color: #172033;
-    background: linear-gradient(180deg, #ffffff 0%, #f5f8fc 54%, #edf2f8 100%);
-    border-color: rgba(15, 23, 42, 0.08);
-    box-shadow:
-      inset 0 1px 0 rgba(255, 255, 255, 0.92),
-      inset 0 -1px 0 rgba(15, 23, 42, 0.05),
-      0 10px 22px rgba(15, 23, 42, 0.08);
-  }
-
-  html[data-theme='light'] .view-all:hover {
-    color: #172033;
-    background: linear-gradient(180deg, #ffffff 0%, #f8fbff 54%, #f0f5fb 100%);
-    border-color: rgba(15, 23, 42, 0.12);
-    box-shadow:
-      inset 0 1px 0 rgba(255, 255, 255, 0.96),
-      inset 0 -1px 0 rgba(15, 23, 42, 0.06),
-      0 14px 28px rgba(15, 23, 42, 0.11);
-  }
-
-  html[data-theme='light'] .theme-settings-backdrop {
-    background: rgba(15, 23, 42, 0.24);
-    backdrop-filter: blur(14px) saturate(1.02);
-  }
-
-  html[data-theme='light'] .theme-settings-modal {
-    background:
-      radial-gradient(circle at 12% 0%, rgba(255, 223, 0, 0.14), transparent 34%),
-      radial-gradient(circle at 100% 0%, rgba(15, 23, 42, 0.06), transparent 36%),
-      linear-gradient(180deg, #ffffff, #f6f8fb);
-    border-color: rgba(15, 23, 42, 0.1);
-    box-shadow:
-      inset 0 1px 0 rgba(255, 255, 255, 0.92),
-      0 26px 64px rgba(15, 23, 42, 0.18);
-  }
-
-  html[data-theme='light'] .theme-settings-close {
-    color: #475569;
-    background: transparent;
-    border-color: transparent;
-  }
-
-  html[data-theme='light'] .theme-settings-close:hover {
-    color: #8a5e1f;
-    background: transparent;
-    border-color: transparent;
-  }
-
-  html[data-theme='light'] .theme-settings-option {
-    color: #172033;
-    background: linear-gradient(180deg, #ffffff 0%, #f5f8fc 54%, #edf2f8 100%);
-    border-color: rgba(15, 23, 42, 0.08);
-    box-shadow:
-      inset 0 1px 0 rgba(255, 255, 255, 0.92),
-      inset 0 -1px 0 rgba(15, 23, 42, 0.05),
-      0 10px 22px rgba(15, 23, 42, 0.08);
-  }
-
-  html[data-theme='light'] .theme-settings-option:hover {
-    color: #172033;
-    background: linear-gradient(180deg, #ffffff 0%, #f8fbff 54%, #f0f5fb 100%);
-    border-color: rgba(15, 23, 42, 0.12);
-    box-shadow:
-      inset 0 1px 0 rgba(255, 255, 255, 0.96),
-      inset 0 -1px 0 rgba(15, 23, 42, 0.06),
-      0 14px 28px rgba(15, 23, 42, 0.11);
-  }
 }
