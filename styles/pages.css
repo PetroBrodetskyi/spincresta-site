@@ -357,7 +357,7 @@ body[data-brand] .brand-sticky-title__inner {
   display: flex;
   align-items: center;
   justify-content: flex-start;
-  gap: 12px;
+  gap: 10px;
   min-height: 50px;
   padding: 10px 18px;
   border-radius: 999px;
@@ -1479,7 +1479,7 @@ body.casinos-page .hero p {
   flex-basis: 108px;
   min-height: 0;
   margin: 0;
-  padding: 14px 16px;
+  padding: 10px 12px;
   border-radius: 8px;
   min-height: 0;
   display: flex;
@@ -1994,7 +1994,7 @@ body[data-page='top-casinos'] .content[data-country] .view-all-wrapper {
   box-shadow: none;
   min-height: 0;
   padding: 8px var(--card-padding);
-  gap: 12px;
+  gap: 8px;
   position: relative;
   transition: background 0.25s ease;
 }
@@ -3338,11 +3338,58 @@ body[data-brand='Leon'] .hero-content.glass-card {
   max-width: var(--site-max-width);
   margin: 0 auto;
   padding: 0;
+  align-items: stretch;
+  gap: 8px;
   border: 0;
   border-radius: 0;
   background: transparent;
   box-shadow: none;
   backdrop-filter: none;
+}
+
+body[data-brand] .brand-hero-panel {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid var(--surface-border);
+  border-radius: var(--radius-md);
+  background: var(--surface-card);
+  box-shadow: var(--shadow-soft);
+  text-align: left;
+}
+
+body[data-brand] .brand-hero-logo-panel {
+  align-items: center;
+}
+
+body[data-brand] .brand-hero-logo-panel .brand-logo-container.hero-logo {
+  width: 100%;
+  max-width: none;
+  margin: 0;
+  min-height: 112px;
+  padding: 12px;
+}
+
+body[data-brand] .brand-hero-summary-panel {
+  gap: 8px;
+}
+
+body[data-brand] .brand-hero-summary-panel .hero-cta-wrapper {
+  margin-top: 0;
+}
+
+body[data-brand] .brand-hero-nav-panel .brand-section-nav {
+  margin: 0;
+  padding: 0;
+  border-top: 0;
+}
+
+@media (max-width: 768px) {
+body[data-brand] .brand-hero-panel {
+    padding: 8px 10px;
+  }
 }
 
 body[data-brand] .brand-logo-container.hero-logo {
@@ -3908,17 +3955,15 @@ body:not(.home-page):not(.casinos-page)
 }
 
 body:not(.home-page) :where(.features-grid, .premium-grid) {
-  gap: 0;
-  border-top: 1px solid var(--border-soft);
-  border-bottom: 1px solid var(--border-soft);
+  gap: 8px;
+  border: 0;
 }
 
 body:not(.home-page) :where(.feature-card, .payment-method-card, .country-brand-summary-card, .bonus-card) {
   padding: var(--card-padding);
-  border: 0;
-  border-left: 1px solid var(--surface-border);
-  border-radius: 0;
-  background: var(--surface-card-soft);
+  border: 1px solid var(--surface-border);
+  border-radius: var(--radius-md);
+  background: var(--surface-card);
   box-shadow: none;
   transform: none;
   transition:
@@ -4645,9 +4690,8 @@ body[data-brand] .hero .brand-hero-why .premium-grid,
 body[data-brand='Leon'] .hero .brand-hero-why .features-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 0;
-  border-top: 1px solid var(--border-soft);
-  border-bottom: 1px solid var(--border-soft);
+  gap: 8px;
+  border: 0;
 }
 
 body[data-brand] .hero .brand-hero-why .feature-card,
@@ -4678,6 +4722,8 @@ html.has-brand-sticky-layout body {
 @media (min-width: 901px) {
   body[data-brand].has-brand-sticky-layout {
     --brand-sticky-top: calc(var(--header-height, 64px) + clamp(40px, 4.2vh, 64px));
+    --split-side-column: minmax(250px, 330px);
+    --split-side-max: 330px;
   }
 
   body[data-brand].has-brand-sticky-layout .brand-sticky-review-layout {
@@ -4813,9 +4859,8 @@ html.has-brand-sticky-layout body {
   body[data-brand].has-brand-sticky-layout .brand-sticky-main .brand-hero-why .premium-grid {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 0;
-    border-top: 1px solid var(--border-soft);
-    border-bottom: 1px solid var(--border-soft);
+    gap: 8px;
+    border: 0;
   }
 
   body[data-brand].has-brand-sticky-layout .brand-sticky-main .brand-hero-why .feature-card {
@@ -8204,10 +8249,11 @@ body:not(.home-page)
 }
 
 body[data-brand] .brand-sticky-aside .hero-content.glass-card {
-  border: 1px solid var(--surface-border);
-  border-radius: var(--radius-lg);
-  background: var(--surface-card);
-  box-shadow: var(--shadow-soft);
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
 }
 
 body[data-brand] .brand-sticky-main .feature-card,

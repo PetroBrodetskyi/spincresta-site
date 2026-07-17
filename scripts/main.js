@@ -1963,6 +1963,36 @@ const initBrandSectionNav = () => {
   }
 };
 
+const initBrandHeroPanels = () => {
+  const heroContent = document.querySelector('body[data-brand] .hero-content');
+  if (!heroContent || heroContent.dataset.panelsReady === 'true') return;
+
+  const logo = heroContent.querySelector(':scope > .brand-logo-container');
+  const nav = heroContent.querySelector(':scope > .brand-section-nav');
+  if (!logo) return;
+
+  const logoPanel = document.createElement('div');
+  logoPanel.className = 'brand-hero-panel brand-hero-logo-panel';
+  logoPanel.appendChild(logo);
+
+  const summaryPanel = document.createElement('div');
+  summaryPanel.className = 'brand-hero-panel brand-hero-summary-panel';
+
+  const summaryNodes = Array.from(heroContent.children).filter(child => child !== logo && child !== nav);
+  summaryPanel.append(...summaryNodes);
+
+  const panels = [logoPanel, summaryPanel];
+  if (nav) {
+    const navPanel = document.createElement('div');
+    navPanel.className = 'brand-hero-panel brand-hero-nav-panel';
+    navPanel.appendChild(nav);
+    panels.push(navPanel);
+  }
+
+  heroContent.replaceChildren(...panels);
+  heroContent.dataset.panelsReady = 'true';
+};
+
 const renderSnapshotItems = (items, isAvailable) =>
   items
     .map(
@@ -2668,6 +2698,7 @@ export const initCasinoPage = () => {
     }
 
     initBrandSectionNav();
+    initBrandHeroPanels();
     applyBrandStickyReviewLayout();
     initBrandCountryCollapse();
   }
@@ -3096,7 +3127,8 @@ export const initCasinoPage = () => {
     const updateScrollChrome = () => {
       const current = window.pageYOffset || document.documentElement.scrollTop;
       const isScrollingDown = current > lastScroll;
-      const shouldHide = isScrollingDown && current > 100;
+      const isDesktop = window.matchMedia('(min-width: 1025px)').matches;
+      const shouldHide = !isDesktop && isScrollingDown && current > 100;
       const shouldShowScrollNav = Boolean(casinosScrollNav) && !shouldHide && current > 280;
 
       header.classList.toggle('hidden', shouldHide);
