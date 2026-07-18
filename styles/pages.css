@@ -4719,6 +4719,96 @@ html.has-brand-sticky-layout body {
   overflow-y: visible;
 }
 
+body[data-brand] .brand-new-games-rail {
+  display: none;
+  min-width: 0;
+}
+
+body[data-brand] .brand-new-games-panel {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+  padding: 12px;
+  border: 1px solid var(--surface-border);
+  border-radius: var(--radius-md);
+  background: var(--surface-card);
+  box-shadow: var(--shadow-soft);
+}
+
+body[data-brand] .brand-new-games-heading {
+  padding: 2px 2px 10px;
+  border-bottom: 1px solid var(--surface-border);
+}
+
+body[data-brand] .brand-new-games-kicker {
+  display: block;
+  margin-bottom: 5px;
+  color: var(--section-accent);
+  font-size: 10px;
+  font-weight: 750;
+  letter-spacing: 0.08em;
+  line-height: 1.2;
+}
+
+body[data-brand] .brand-new-games-heading h2 {
+  margin: 0;
+  color: var(--text-main);
+  font-size: clamp(22px, 2vw, 28px);
+  font-weight: 700;
+  line-height: 1.05;
+  letter-spacing: 0;
+}
+
+body[data-brand] .brand-new-games-list {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 10px;
+  min-width: 0;
+  max-height: none;
+  overflow: visible;
+}
+
+body[data-brand] .brand-new-game-card {
+  display: block;
+  min-width: 0;
+  overflow: hidden;
+  border: 1px solid var(--surface-border);
+  border-radius: 8px;
+  background: var(--surface-card-soft);
+  color: inherit;
+  box-shadow: none;
+  text-decoration: none;
+  transition:
+    border-color 0.2s ease,
+    background 0.2s ease,
+    transform 0.2s ease;
+}
+
+body[data-brand] .brand-new-game-card:hover {
+  border-color: var(--surface-border-strong);
+  background: var(--surface-card-hover);
+  transform: translateY(-2px);
+}
+
+body[data-brand] .brand-new-game-card img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 1.5;
+  object-fit: cover;
+  background: var(--surface-card-soft);
+}
+
+body[data-brand] .brand-new-game-card span {
+  display: block;
+  padding: 7px 8px 8px;
+  color: var(--text-main);
+  font-size: 12px;
+  font-weight: 650;
+  line-height: 1.2;
+  overflow-wrap: anywhere;
+}
+
 @media (min-width: 901px) {
   body[data-brand].has-brand-sticky-layout {
     --brand-sticky-top: calc(var(--header-height, 64px) + clamp(40px, 4.2vh, 64px));
@@ -4753,6 +4843,10 @@ html.has-brand-sticky-layout body {
     flex-direction: column;
     min-width: 0;
     gap: 0;
+  }
+
+  body[data-brand].has-brand-sticky-layout .brand-new-games-rail {
+    align-self: start;
   }
 
   body[data-brand].has-brand-sticky-layout .brand-sticky-main > section.container + section.container {
@@ -4881,6 +4975,47 @@ html.has-brand-sticky-layout body {
 
   body[data-brand].has-brand-sticky-layout .brand-sticky-title {
     display: none;
+  }
+}
+
+@media (min-width: 1200px) {
+  body[data-brand].has-brand-sticky-layout {
+    --split-side-column: minmax(250px, 300px);
+    --split-side-max: 300px;
+  }
+
+  body[data-brand].has-brand-sticky-layout .brand-sticky-review-layout {
+    width: calc(100% - (var(--page-gutter) * 2));
+    max-width: none;
+    padding-right: 0;
+    padding-left: 0;
+    grid-template-columns: var(--split-side-column) minmax(0, 1fr) minmax(230px, 260px);
+    gap: 20px;
+  }
+
+  body[data-brand].has-brand-sticky-layout .brand-new-games-rail {
+    display: block;
+  }
+}
+
+@media (min-width: 901px) and (max-width: 1199px) {
+  body[data-brand].has-brand-sticky-layout .brand-sticky-review-layout {
+    width: calc(100% - (var(--page-gutter-mobile) * 2));
+    max-width: none;
+    padding-right: 0;
+    padding-left: 0;
+  }
+
+  body[data-brand].has-brand-sticky-layout .brand-new-games-rail {
+    display: block;
+    grid-column: 1 / -1;
+    margin-top: var(--section-gap);
+  }
+
+  body[data-brand] .brand-new-games-list {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    max-height: none;
+    overflow: visible;
   }
 }
 
@@ -5055,6 +5190,21 @@ html.has-brand-sticky-layout body {
 }
 
 @media (max-width: 900px) {
+  body[data-brand] .brand-new-games-rail {
+    display: block;
+    margin-top: var(--section-gap);
+  }
+
+  body[data-brand] .brand-new-games-panel {
+    padding: 10px;
+  }
+
+  body[data-brand] .brand-new-games-list {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    max-height: none;
+    overflow: visible;
+  }
+
   body[data-brand].has-brand-sticky-layout .brand-sticky-review-layout {
     display: block;
     padding-top: 106px;

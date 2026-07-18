@@ -3,6 +3,7 @@
 // =====================
 import { BRANDS } from './brands.js?v=20260712-brands';
 import { BRAND_SNAPSHOT_CONFIGS } from './brand-snapshot-configs.js';
+import { BRAND_NEW_GAMES } from './brand-new-games.js?v=20260718-brand-games-21';
 import { COUNTRIES } from './countries.js';
 
 // =====================
@@ -2442,6 +2443,59 @@ const applyBrandHeroConcept = () => {
   hero.appendChild(whySection);
 };
 
+const createBrandNewGamesRail = () => {
+  const brandKey = normalizeBrandKey(document.body.dataset.brand || '');
+  const games = BRAND_NEW_GAMES[brandKey] || [];
+  if (!games.length) return null;
+
+  const playNowLink = document.querySelector(
+    'body[data-brand] .brand-sticky-aside .hero-cta-wrapper a.cta-brands[href], body[data-brand] .hero-cta-wrapper a.cta-brands[href]'
+  );
+  const casinoHref = playNowLink?.getAttribute('href') || '';
+  const cardMarkup = game => {
+    const cardContent = `
+      <img
+        src="${escapeHtml(game.image)}"
+        alt="${escapeHtml(game.name)} at ${escapeHtml(document.body.dataset.brand)}"
+        loading="lazy"
+        decoding="async"
+      />
+      <span>${escapeHtml(game.name)}</span>
+    `;
+
+    if (!casinoHref) return `<article class="brand-new-game-card">${cardContent}</article>`;
+
+    return `
+      <a
+        class="brand-new-game-card"
+        href="${escapeHtml(casinoHref)}"
+        target="_blank"
+        rel="noopener noreferrer nofollow sponsored"
+        aria-label="Play ${escapeHtml(game.name)} at ${escapeHtml(document.body.dataset.brand)}"
+      >
+        ${cardContent}
+      </a>
+    `;
+  };
+
+  const rail = document.createElement('aside');
+  rail.className = 'brand-new-games-rail';
+  rail.setAttribute('aria-label', 'New games');
+  rail.innerHTML = `
+    <div class="brand-new-games-panel">
+      <div class="brand-new-games-heading">
+        <span class="brand-new-games-kicker">LATEST RELEASES</span>
+        <h2>New Games</h2>
+      </div>
+      <div class="brand-new-games-list">
+        ${games.map(cardMarkup).join('')}
+      </div>
+    </div>
+  `;
+
+  return rail;
+};
+
 const applyBrandStickyReviewLayout = () => {
   const hero = document.querySelector('body[data-brand] .hero');
   const heroContent = hero?.querySelector(':scope > .hero-content');
@@ -2474,6 +2528,8 @@ const applyBrandStickyReviewLayout = () => {
   }
 
   layout.append(aside, main);
+  const newGamesRail = createBrandNewGamesRail();
+  if (newGamesRail) layout.appendChild(newGamesRail);
   hero.remove();
   document.body.classList.add('has-brand-sticky-layout');
   document.documentElement.classList.add('has-brand-sticky-layout');
