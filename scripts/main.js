@@ -3,7 +3,7 @@
 // =====================
 import { BRANDS } from './brands.js?v=20260712-brands';
 import { BRAND_SNAPSHOT_CONFIGS } from './brand-snapshot-configs.js';
-import { BRAND_NEW_GAMES } from './brand-new-games.js?v=20260718-brand-games-21';
+import { BRAND_NEW_GAMES } from './brand-new-games.js?v=20260719-brand-games-25';
 import { COUNTRIES } from './countries.js';
 
 // =====================
