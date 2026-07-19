@@ -4794,8 +4794,9 @@ body[data-brand] .brand-new-game-card:hover {
 body[data-brand] .brand-new-game-card img {
   display: block;
   width: 100%;
-  aspect-ratio: 1.5;
-  object-fit: cover;
+  aspect-ratio: 3 / 4;
+  object-fit: contain;
+  object-position: center;
   background: var(--surface-card-soft);
 }
 
