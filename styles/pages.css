@@ -7783,8 +7783,7 @@ body.casinos-page .casino-list-row.is-not-recommended {
 
 .casino-card-risk-icon,
 .casino-list-risk-icon,
-.brand-risk-inline__icon,
-.brand-risk-alert img {
+.brand-risk-inline__icon {
   width: 18px;
   height: 18px;
   object-fit: contain;
@@ -7892,150 +7891,12 @@ button.cta-blocked:disabled {
   line-height: 1.2;
 }
 
-body.not-recommended-overlay-active {
-  overflow: hidden;
-}
-
-body.not-recommended-overlay-active > :not(.brand-risk-overlay):not(script):not(style) {
-  filter: blur(9px);
-  pointer-events: none;
-  user-select: none;
-}
-
-.brand-risk-overlay {
-  position: fixed;
-  inset: 0;
-  z-index: 10000;
-  display: grid;
-  place-items: center;
-  padding: 24px;
-  background: rgba(2, 6, 23, 0.48);
-  overflow-y: auto;
-}
-
-.brand-risk-dialog {
-  position: relative;
-  display: grid;
-  gap: 18px;
-  width: min(100%, 1080px);
-  max-height: calc(100vh - 48px);
-  padding: clamp(20px, 3vw, 30px);
-  border: 1px solid rgba(148, 163, 184, 0.24);
-  border-radius: 16px;
-  background:
-    radial-gradient(circle at 0 0, rgba(239, 68, 68, 0.14), transparent 34%),
-    rgba(9, 14, 28, 0.96);
-  box-shadow: 0 30px 90px rgba(0, 0, 0, 0.42);
-  overflow-y: auto;
-}
-
-.brand-risk-close {
-  position: absolute;
-  top: 14px;
-  right: 14px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 38px;
-  height: 38px;
-  border: 1px solid rgba(148, 163, 184, 0.28);
-  border-radius: 999px;
-  background: rgba(255, 255, 255, 0.04);
-  color: var(--text-main);
-  cursor: pointer;
-  font-size: 24px;
-  line-height: 1;
-}
-
-.brand-risk-close img {
-  width: 16px;
-  height: 16px;
-  object-fit: contain;
-}
-
-.brand-risk-alert {
-  display: grid;
-  grid-template-columns: 64px minmax(0, 1fr);
-  gap: 18px;
-  align-items: center;
-  padding-right: 38px;
-}
-
-.brand-risk-alert img {
-  width: 64px;
-  height: 64px;
-  padding: 14px;
-  border: 1px solid rgba(239, 68, 68, 0.28);
-  border-radius: 18px;
-  background: rgba(239, 68, 68, 0.1);
-}
-
-.brand-risk-kicker {
-  display: block;
-  margin-bottom: 6px;
-  color: #fca5a5;
-  font-size: 12px;
-  font-weight: 800;
-  line-height: 1.2;
-  text-transform: uppercase;
-}
-
-.brand-risk-alert h2 {
-  margin: 0;
-  color: var(--text-main);
-  font-size: clamp(28px, 4vw, 54px);
-  font-weight: 650;
-  line-height: 1;
-  letter-spacing: 0;
-}
-
-.brand-risk-alert p {
-  max-width: 760px;
-  margin: 12px 0 0;
-  color: var(--text-muted);
-  font-size: clamp(15px, 1.3vw, 18px);
-  line-height: 1.5;
-}
-
-.brand-risk-actions {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-}
-
-.brand-risk-actions .cta {
-  min-width: 164px;
-}
-
-.brand-risk-home {
-  background: #f8fafc;
-  border-color: #f8fafc;
-  color: #111827;
-}
-
-.brand-risk-alternatives {
-  display: grid;
-  gap: 14px;
-  padding-top: 8px;
-  border-top: 1px solid rgba(148, 163, 184, 0.18);
-}
-
-.brand-risk-alternatives h3 {
-  margin: 0;
-  color: var(--text-main);
-  font-size: 15px;
-  font-weight: 750;
-  line-height: 1.2;
-}
-
-.brand-risk-grid,
 .brand-risk-inline-grid {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 12px;
 }
 
-.brand-risk-grid .casino-card,
 .brand-risk-inline-grid .casino-card {
   display: flex;
   flex-direction: column;
@@ -8050,12 +7911,10 @@ body.not-recommended-overlay-active > :not(.brand-risk-overlay):not(script):not(
   overflow: hidden;
 }
 
-.brand-risk-grid .casino-card::before,
 .brand-risk-inline-grid .casino-card::before {
   display: none;
 }
 
-.brand-risk-grid .casino-card .card-img,
 .brand-risk-inline-grid .casino-card .card-img {
   width: 100%;
   height: 104px;
@@ -8063,8 +7922,6 @@ body.not-recommended-overlay-active > :not(.brand-risk-overlay):not(script):not(
   padding: 14px 16px;
 }
 
-.brand-risk-grid .casino-card .card-img img,
-.brand-risk-grid .casino-card .casino-image,
 .brand-risk-inline-grid .casino-card .card-img img,
 .brand-risk-inline-grid .casino-card .casino-image {
   width: 100%;
@@ -8075,39 +7932,31 @@ body.not-recommended-overlay-active > :not(.brand-risk-overlay):not(script):not(
   transform: scale(1);
 }
 
-.brand-risk-grid .casino-card-heading,
 .brand-risk-inline-grid .casino-card-heading {
   align-self: stretch;
   flex-wrap: wrap;
   min-height: 38px;
 }
 
-.brand-risk-grid .casino-card h3,
 .brand-risk-inline-grid .casino-card h3 {
   font-size: 16px;
 }
 
-.brand-risk-grid .casino-bonus,
 .brand-risk-inline-grid .casino-bonus {
   min-height: 36px;
   font-size: 11.5px;
   -webkit-line-clamp: 2;
 }
 
-.brand-risk-grid .payment-icons,
 .brand-risk-inline-grid .payment-icons {
   min-height: 20px;
 }
 
-.brand-risk-grid .casino-footer,
 .brand-risk-inline-grid .casino-footer {
   width: 100%;
   margin-top: auto;
 }
 
-.brand-risk-grid .casino-actions,
-.brand-risk-grid .casino-actions.has-two-actions,
-.brand-risk-grid .casino-actions.has-single-action,
 .brand-risk-inline-grid .casino-actions,
 .brand-risk-inline-grid .casino-actions.has-two-actions,
 .brand-risk-inline-grid .casino-actions.has-single-action {
@@ -8117,7 +7966,6 @@ body.not-recommended-overlay-active > :not(.brand-risk-overlay):not(script):not(
   gap: 6px;
 }
 
-.brand-risk-grid .casino-actions .cta,
 .brand-risk-inline-grid .casino-actions .cta {
   width: 100%;
   min-width: 0;
@@ -8125,92 +7973,44 @@ body.not-recommended-overlay-active > :not(.brand-risk-overlay):not(script):not(
   font-size: 9.5px;
 }
 
-html[data-theme='light'] .brand-risk-dialog,
-html[data-theme='light'] .brand-risk-dialog {
-  background:
-    radial-gradient(circle at 0 0, rgba(239, 68, 68, 0.1), transparent 34%),
-    rgba(255, 255, 255, 0.97);
-  box-shadow: 0 30px 90px rgba(15, 23, 42, 0.28);
-}
-
-html[data-theme='light'] .brand-risk-close,
-html[data-theme='light'] .brand-risk-close {
-  background: rgba(255, 255, 255, 0.86);
-}
-
-html[data-theme='light'] .brand-risk-grid .casino-card,
-html[data-theme='light'] .brand-risk-grid .casino-card,
 html[data-theme='light'] .brand-risk-inline-grid .casino-card,
 html[data-theme='light'] .brand-risk-inline-grid .casino-card {
   background: rgba(255, 255, 255, 0.82);
 }
 
 @media (max-width: 900px) {
-  .brand-risk-grid,
   .brand-risk-inline-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 
 @media (max-width: 640px) {
-  .brand-risk-overlay {
-    align-items: start;
-    padding: 12px;
-  }
-
-  .brand-risk-dialog {
-    max-height: none;
-    padding: 18px;
-    border-radius: 12px;
-  }
-
-  .brand-risk-alert {
-    grid-template-columns: 44px minmax(0, 1fr);
-    gap: 12px;
-    padding-right: 34px;
-  }
-
-  .brand-risk-alert img {
-    width: 44px;
-    height: 44px;
-    padding: 9px;
-    border-radius: 12px;
-  }
-
-  .brand-risk-grid,
   .brand-risk-inline-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 10px;
   }
 
-  .brand-risk-grid .casino-card,
   .brand-risk-inline-grid .casino-card {
     min-height: 276px;
     padding: 10px;
   }
 
-  .brand-risk-grid .casino-card .card-img,
   .brand-risk-inline-grid .casino-card .card-img {
     height: 86px;
     flex-basis: 86px;
     padding: 12px;
   }
 
-  .brand-risk-grid .casino-card h3,
   .brand-risk-inline-grid .casino-card h3 {
     font-size: 14px;
   }
 
-  .brand-risk-grid .casino-actions .cta,
   .brand-risk-inline-grid .casino-actions .cta {
     min-height: 31px;
     padding: 7px 4px;
     font-size: 8.5px;
   }
 
-  .brand-risk-actions .cta {
-    flex: 1 1 160px;
-  }
 }
 
 @media (max-width: 768px) {

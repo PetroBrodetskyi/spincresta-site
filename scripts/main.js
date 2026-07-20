@@ -3,7 +3,7 @@
 // =====================
 import { BRANDS } from './brands.js?v=20260712-brands';
 import { BRAND_SNAPSHOT_CONFIGS } from './brand-snapshot-configs.js';
-import { BRAND_NEW_GAMES } from './brand-new-games.js?v=20260719-brand-games-27';
+import { BRAND_NEW_GAMES } from './brand-new-games.js?v=20260719-brand-games-28';
 import { COUNTRIES } from './countries.js';
 
 // =====================
@@ -14,7 +14,6 @@ const MOJIBAKE_FIXES = [];
 const THEME_STORAGE_KEY = 'spincresta-theme';
 const THEME_OPTIONS = ['dark', 'light'];
 const BLOCKED_BRAND_ICON = '/icons/ui/stop-blocked-icon.svg';
-const CLOSE_ICON = '/icons/ui/close-line-icon.svg';
 const BLOCKED_BRAND_NOTICE =
   'According to verified information from our analysts, this casino has issues with law enforcement authorities of the Republic of Belarus.';
 const BLOCKED_BRAND_CTA = 'Not recommended';
@@ -544,63 +543,6 @@ const insertBrandRiskInlineNotice = brand => {
   main?.insertAdjacentElement('afterbegin', notice);
 };
 
-const renderBrandRiskOverlay = brand => {
-  if (!brand?.notRecommended || document.querySelector('.brand-risk-overlay')) return;
-
-  const safeName = escapeHtml(normalizeText(brand.name));
-  const alternatives = getBrandAlternatives(brand);
-  const overlay = document.createElement('section');
-  overlay.className = 'brand-risk-overlay';
-  overlay.setAttribute('role', 'dialog');
-  overlay.setAttribute('aria-modal', 'true');
-  overlay.setAttribute('aria-labelledby', 'brand-risk-title');
-  overlay.innerHTML = `
-    <div class="brand-risk-dialog">
-      <button class="brand-risk-close" type="button" data-risk-close aria-label="Close warning">
-        <img src="${CLOSE_ICON}" alt="" aria-hidden="true" loading="lazy" decoding="async" />
-      </button>
-      <div class="brand-risk-alert">
-        <img src="${BLOCKED_BRAND_ICON}" alt="" aria-hidden="true" loading="lazy" decoding="async" />
-        <div>
-          <span class="brand-risk-kicker">${escapeHtml(BLOCKED_BRAND_CTA)}</span>
-          <h2 id="brand-risk-title">${safeName}</h2>
-          <p>${escapeHtml(BLOCKED_BRAND_NOTICE)}</p>
-        </div>
-      </div>
-      <div class="brand-risk-actions">
-        <button class="cta cta-secondary brand-risk-dismiss" type="button" data-risk-close>Close warning</button>
-        <a class="cta cta-primary brand-risk-home" href="/">Go to homepage</a>
-      </div>
-      ${
-        alternatives.length
-          ? `<div class="brand-risk-alternatives">
-              <h3>We recommend these casinos instead</h3>
-              <div class="brand-risk-grid"></div>
-            </div>`
-          : ''
-      }
-    </div>
-  `;
-
-  const grid = overlay.querySelector('.brand-risk-grid');
-  alternatives.forEach(candidate => {
-    grid?.appendChild(createCasinoCard(candidate));
-  });
-
-  const closeOverlay = () => {
-    document.body.classList.remove('not-recommended-overlay-active');
-    overlay.remove();
-  };
-
-  overlay.querySelectorAll('[data-risk-close]').forEach(button => {
-    button.addEventListener('click', closeOverlay);
-  });
-
-  document.body.appendChild(overlay);
-  document.body.classList.add('not-recommended-brand', 'not-recommended-overlay-active');
-  requestPaymentIconSync();
-};
-
 const applyNotRecommendedBrandPage = brand => {
   if (!brand?.notRecommended) return;
 
@@ -622,7 +564,6 @@ const applyNotRecommendedBrandPage = brand => {
   });
 
   insertBrandRiskInlineNotice(brand);
-  renderBrandRiskOverlay(brand);
 };
 
 const applyNotRecommendedCasinoRows = () => {
