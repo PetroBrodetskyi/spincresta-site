@@ -152,6 +152,13 @@ const STATIC_SEARCH_ITEMS = [
     href: '/about/',
     keywords: 'about spincresta team reviews mission',
   },
+  {
+    label: 'SpinCresta Blog',
+    type: 'Blog',
+    href: '/blog/',
+    summary: 'Casino guides, payment explainers, bonus terms, and safer-play checks',
+    keywords: 'blog casino guides payment bonuses withdrawals kyc country reviews',
+  },
 ];
 
 const normalizeSearchValue = value =>
@@ -355,6 +362,17 @@ const initDesktopSiteSearch = () => {
 };
 
 const getDefaultTheme = () => 'dark';
+
+const ensureFooterBlogLink = () => {
+  document.querySelectorAll('.footer-nav').forEach((footerNav) => {
+    if (footerNav.querySelector('a[href="/blog/"]')) return;
+
+    const link = document.createElement('a');
+    link.href = '/blog/';
+    link.textContent = 'Blog';
+    footerNav.append(link);
+  });
+};
 
 const getStoredTheme = () => {
   try {
@@ -2796,6 +2814,7 @@ export const initCasinoPage = () => {
   navDropdownLink?.querySelector('.nav-dropdown-icon')?.remove();
 
   initDesktopSiteSearch();
+  ensureFooterBlogLink();
   const desktopSearch = desktopNavHeaderInner?.querySelector('.site-search--desktop');
   const desktopSearchTrigger = desktopNavHeaderInner?.querySelector('.site-search-trigger--desktop');
   const desktopSearchInput = desktopSearch?.querySelector('.site-search-input');

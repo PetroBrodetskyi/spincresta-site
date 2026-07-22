@@ -5903,7 +5903,7 @@ body[data-brand='Leon'] .brand-logo-container.hero-logo {
     opacity 0.22s ease,
     transform 0.22s ease;
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-  background: rgba(2, 6, 23, 0.96);
+  background: rgba(16, 17, 18, 0.97);
   box-shadow: 0 16px 34px rgba(0, 0, 0, 0.28);
 }
 
@@ -5939,6 +5939,20 @@ body[data-brand='Leon'] .brand-logo-container.hero-logo {
   min-width: 42px;
   min-height: 34px;
   padding: 8px 12px;
+}
+
+html:not([data-theme='light']) body.casinos-page .casino-scroll-nav .alpha-nav .view-all {
+  color: var(--text-main);
+  background: var(--surface-graphite-gradient);
+  border-color: rgba(255, 255, 255, 0.14);
+  box-shadow: var(--shadow-control);
+}
+
+html:not([data-theme='light']) body.casinos-page .casino-scroll-nav .alpha-nav .view-all:hover {
+  color: var(--text-main);
+  background: var(--surface-graphite-gradient-hover);
+  border-color: rgba(255, 255, 255, 0.22);
+  box-shadow: var(--shadow-control);
 }
 
 html[data-theme='light'] .casino-scroll-nav,
