@@ -2808,6 +2808,48 @@ const applyBrandLogoBackgrounds = () => {
   }
 };
 
+const initBrandWhyPreview = () => {
+  const preview = document.querySelector('body[data-brand] .brand-why-media');
+  const heading = preview?.closest('.brand-why-heading');
+  if (!preview || !heading || preview.dataset.bound === 'true') return;
+
+  preview.dataset.bound = 'true';
+
+  const setExpanded = expanded => {
+    heading.classList.toggle('is-expanded', expanded);
+    preview.setAttribute('aria-expanded', String(expanded));
+    preview.setAttribute(
+      'aria-label',
+      expanded ? 'Collapse casino screenshot' : 'Expand casino screenshot'
+    );
+  };
+
+  const mobileQuery = window.matchMedia('(max-width: 768px)');
+  const syncMobilePreviewState = () => {
+    const isMobile = mobileQuery.matches;
+    preview.disabled = isMobile;
+    preview.tabIndex = isMobile ? -1 : 0;
+
+    if (isMobile) setExpanded(false);
+  };
+
+  preview.addEventListener('click', () => {
+    if (mobileQuery.matches) return;
+
+    setExpanded(preview.getAttribute('aria-expanded') !== 'true');
+  });
+
+  preview.addEventListener('keydown', event => {
+    if (event.key !== 'Escape' || preview.getAttribute('aria-expanded') !== 'true') return;
+
+    setExpanded(false);
+    preview.focus();
+  });
+
+  syncMobilePreviewState();
+  mobileQuery.addEventListener?.('change', syncMobilePreviewState);
+};
+
 // =====================
 // INIT FUNCTION
 // =====================
@@ -2845,6 +2887,7 @@ export const initCasinoPage = () => {
   applyNotRecommendedCasinoRows();
   applyBrandHeroConcept();
   applyBrandStickyReviewLayout();
+  initBrandWhyPreview();
 
   if (pageCountry) {
     ensureCountryBrandStage(pageCountry);
