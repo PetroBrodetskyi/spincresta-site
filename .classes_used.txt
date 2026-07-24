@@ -43,7 +43,6 @@ expert-header
 expert-info
 expert-meta
 expert-methodology
-expert-photo
 expert-platforms
 expert-review
 expert-role

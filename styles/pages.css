@@ -4051,7 +4051,10 @@ body:not(.home-page) :where(.timeline h3, .faq-card h3, .faq-card summary) {
 }
 
 body[data-country] .content-article:has(> .faq-grid) .faq-grid {
-  gap: var(--grid-gap);
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  align-items: start;
+  column-gap: 22px;
+  row-gap: 16px;
 }
 
 body[data-country] .content-article:has(> .faq-grid) .faq-card {
@@ -4064,6 +4067,84 @@ body[data-country] .content-article:has(> .faq-grid) .faq-card {
   overflow: hidden;
 }
 
+body[data-country] .content-article:has(> .faq-grid) .faq-card--accordion {
+  padding: 0;
+  align-self: start;
+  transition: border-color 180ms ease, box-shadow 180ms ease;
+}
+
+body[data-country] .content-article:has(> .faq-grid) .faq-card--accordion.is-open {
+  border-color: var(--surface-border);
+  box-shadow: var(--shadow-soft);
+}
+
+body[data-country] .content-article:has(> .faq-grid) .faq-accordion-trigger {
+  appearance: none;
+  width: 100%;
+  min-height: 68px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px 20px;
+  border: 0;
+  background: transparent;
+  color: var(--text-main);
+  font: inherit;
+  font-size: 17px;
+  font-weight: 650;
+  line-height: 1.35;
+  text-align: left;
+  cursor: pointer;
+}
+
+body[data-country] .content-article:has(> .faq-grid) .faq-accordion-trigger:hover {
+  background: rgba(255, 255, 255, 0.025);
+}
+
+body[data-country] .content-article:has(> .faq-grid) .faq-accordion-trigger:focus-visible {
+  outline: 2px solid var(--text-muted);
+  outline-offset: -3px;
+}
+
+body[data-country] .content-article:has(> .faq-grid) .faq-question-icon {
+  width: 20px;
+  height: 20px;
+  flex: 0 0 20px;
+  margin: 0;
+}
+
+body[data-country] .content-article:has(> .faq-grid) .faq-question-label {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+body[data-country] .content-article:has(> .faq-grid) .faq-accordion-toggle {
+  width: 10px;
+  height: 10px;
+  flex: 0 0 10px;
+  margin: -5px 3px 0 auto;
+  border-right: 2px solid currentColor;
+  border-bottom: 2px solid currentColor;
+  opacity: 0.7;
+  transform: rotate(45deg);
+  transition: transform 180ms ease, margin 180ms ease;
+}
+
+body[data-country] .content-article:has(> .faq-grid) .faq-card--accordion.is-open .faq-accordion-toggle {
+  margin-top: 5px;
+  transform: rotate(225deg);
+}
+
+body[data-country] .content-article:has(> .faq-grid) .faq-answer-panel {
+  padding: 0 20px 18px 52px;
+  border-top: 1px solid var(--border-soft);
+}
+
+body[data-country] .content-article:has(> .faq-grid) .faq-answer-panel .faq-answer {
+  margin: 0;
+  padding-top: 14px;
+}
+
 body[data-country] .content-article:has(> .faq-grid) .faq-question,
 body[data-country] .content-article:has(> .faq-grid) .faq-answer {
   gap: 12px;
@@ -4072,6 +4153,31 @@ body[data-country] .content-article:has(> .faq-grid) .faq-answer {
 html[data-theme='light'] body[data-country] .content-article:has(> .faq-grid) .faq-card {
   background: linear-gradient(180deg, var(--ui-surface-elevated), var(--ui-surface-elevated-alt));
   box-shadow: var(--shadow-soft);
+}
+
+html[data-theme='light'] body[data-country] .content-article:has(> .faq-grid) .faq-accordion-trigger:hover {
+  background: rgba(15, 23, 42, 0.035);
+}
+
+html[data-theme='light'] body[data-country] .content-article:has(> .faq-grid) .faq-card--accordion.is-open {
+  border-color: var(--border-soft);
+}
+
+@media (max-width: 768px) {
+  body[data-country] .content-article:has(> .faq-grid) .faq-grid {
+    grid-template-columns: 1fr;
+    row-gap: 12px;
+  }
+
+  body[data-country] .content-article:has(> .faq-grid) .faq-accordion-trigger {
+    min-height: 60px;
+    padding: 16px 18px;
+    font-size: 16px;
+  }
+
+  body[data-country] .content-article:has(> .faq-grid) .faq-answer-panel {
+    padding: 0 18px 18px 50px;
+  }
 }
 
 body:not(.home-page) :where(table) {
@@ -4990,7 +5096,7 @@ body[data-brand] .brand-new-game-card span {
     max-width: none;
     padding-right: 0;
     padding-left: 0;
-    grid-template-columns: var(--split-side-column) minmax(0, 1fr) minmax(230px, 260px);
+    grid-template-columns: var(--split-side-column) minmax(0, 1fr) minmax(200px, 230px);
     gap: 20px;
   }
 
@@ -6721,11 +6827,22 @@ body[data-country] .country-new-reviews .home-insight-card:hover {
 /* Expert Review - editorial review panel */
 body[data-country] .expert-review {
   --section-eyebrow: 'Editorial Review';
+  --expert-accent: var(--section-accent);
+  --expert-line: color-mix(in srgb, var(--expert-accent) 28%, transparent);
+  --expert-soft: color-mix(in srgb, var(--expert-accent) 10%, transparent);
+  --expert-strong: color-mix(in srgb, var(--expert-accent) 68%, transparent);
+  width: 100%;
+  border-radius: 0;
+  background: transparent;
+  border-top-color: var(--expert-line);
+  border-bottom-color: var(--expert-line);
+  box-shadow: none;
 }
 
 body[data-country] .expert-review .container {
-  width: min(100% - (var(--page-gutter) * 2), 1180px);
-  max-width: 1180px;
+  width: 100%;
+  max-width: none;
+  padding: 0;
   text-align: center;
 }
 
@@ -6736,20 +6853,20 @@ body[data-country] .expert-review .title {
 }
 
 body[data-country] .expert-card {
-  --expert-accent: var(--section-accent);
   position: relative;
-  display: grid;
-  grid-template-columns: minmax(210px, 268px) minmax(0, 1fr);
-  gap: var(--section-gap);
-  align-items: start;
-  padding: var(--panel-padding);
+  display: block;
+  min-height: 0;
+  padding: clamp(34px, 4.2vw, 68px);
   border: 1px solid var(--border-soft);
-  border-radius: 8px;
-  background:
-    linear-gradient(180deg, rgba(255, 255, 255, 0.052), rgba(255, 255, 255, 0.018)),
-    #0d0f12;
+  border-radius: 18px;
+  background-color: #0b0f14;
+  background-image:
+    linear-gradient(90deg, rgba(8, 12, 18, 0.98) 0%, rgba(8, 12, 18, 0.94) 58%, rgba(8, 12, 18, 0.72) 82%, rgba(8, 12, 18, 0.54) 100%),
+    url('https://res.cloudinary.com/drj61gmd2/image/upload/f_webp/v1784837707/spincresta/editorial/expert-review-dark.png');
+  background-position: center, top center;
+  background-size: cover, 100% auto;
+  background-repeat: no-repeat;
   box-shadow: var(--shadow-soft);
-  backdrop-filter: var(--blur-glass);
   overflow: hidden;
 }
 
@@ -6759,39 +6876,26 @@ body[data-country] .expert-card::before {
   top: 0;
   right: 0;
   left: 0;
-  height: 3px;
-  background: linear-gradient(90deg, rgba(255, 223, 0, 0.92), rgba(255, 223, 0, 0.1));
+  height: 2px;
+  background: linear-gradient(90deg, var(--expert-strong), var(--expert-soft));
 }
 
 body[data-country] .expert-header {
   position: relative;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: 16px;
+  display: block;
+  max-width: 100%;
   min-width: 0;
   margin: 0;
-  padding: 4px clamp(22px, 2.8vw, 34px) 4px 0;
+  padding: 0 0 24px;
   border: 0;
-  border-right: 1px solid var(--border-soft);
+  border-bottom: 1px solid var(--expert-line);
   text-align: left;
-}
-
-body[data-country] .expert-photo {
-  width: 82px;
-  height: 82px;
-  padding: 7px;
-  border: 1px solid var(--border-soft);
-  border-radius: 8px;
-  background:
-    linear-gradient(145deg, rgba(8, 9, 11, 0.98), rgba(13, 15, 18, 0.92));
-  box-shadow: 0 16px 34px rgba(0, 0, 0, 0.24);
-  object-fit: contain;
 }
 
 body[data-country] .expert-info {
   display: flex;
   flex-direction: column;
+  align-items: flex-start;
   gap: 8px;
   min-width: 0;
 }
@@ -6820,12 +6924,15 @@ body[data-country] .expert-meta {
   color: var(--text-muted);
   font-size: 13.5px;
   line-height: 1.55;
+  text-align: left;
 }
 
 body[data-country] .expert-body {
   display: grid;
   grid-template-columns: minmax(0, 1fr);
   gap: 20px;
+  max-width: 100%;
+  margin: 28px 0 0;
   min-width: 0;
   text-align: left;
 }
@@ -6838,7 +6945,7 @@ body[data-country] .expert-body > .expert-disclaimer {
 }
 
 body[data-country] .expert-body > p {
-  max-width: 80ch;
+  max-width: 96ch;
   margin: 0;
   color: var(--text-muted);
   font-size: 15.25px;
@@ -6907,9 +7014,9 @@ body[data-country] .expert-methodology li::before {
   place-items: center;
   width: 24px;
   height: 24px;
-  border: 1px solid rgba(255, 223, 0, 0.42);
+  border: 1px solid var(--expert-strong);
   border-radius: 999px;
-  background: rgba(255, 223, 0, 0.08);
+  background: var(--expert-soft);
   color: var(--expert-accent);
   font-size: 11px;
   font-weight: 800;
@@ -6933,54 +7040,59 @@ body[data-country] .expert-platforms li {
 body[data-country] .expert-disclaimer {
   margin: 4px 0 0;
   padding: 14px 16px 14px 18px;
-  border: 1px solid rgba(255, 223, 0, 0.2);
+  border: 1px solid var(--expert-line);
   border-radius: 8px;
   background:
-    linear-gradient(90deg, rgba(255, 223, 0, 0.085), rgba(255, 223, 0, 0.025));
+    linear-gradient(90deg, var(--expert-soft), transparent);
   color: var(--text-muted);
   font-size: 13px;
   line-height: 1.58;
 }
 
 html[data-theme='light'] body[data-country] .expert-card {
-  background:
-    linear-gradient(180deg, rgba(255, 255, 255, 0.98), rgba(248, 250, 252, 0.94)),
-    rgba(255, 255, 255, 0.94);
-}
-
-html[data-theme='light'] body[data-country] .expert-photo {
-  background:
-    linear-gradient(145deg, rgba(15, 23, 42, 0.96), rgba(30, 41, 59, 0.9));
+  background-color: #ffffff;
+  background-image:
+    linear-gradient(90deg, rgba(255, 255, 255, 0.99) 0%, rgba(255, 255, 255, 0.96) 58%, rgba(255, 255, 255, 0.78) 82%, rgba(255, 255, 255, 0.58) 100%),
+    url('https://res.cloudinary.com/drj61gmd2/image/upload/f_webp/v1784837710/spincresta/editorial/expert-review-light.png');
+  background-position: center, top center;
+  background-size: cover, 100% auto;
+  background-repeat: no-repeat;
+  border-color: rgba(15, 23, 42, 0.12);
 }
 
 html[data-theme='light'] body[data-country] .expert-disclaimer {
   color: #64748b;
-  background:
-    linear-gradient(90deg, rgba(255, 223, 0, 0.16), rgba(255, 223, 0, 0.05));
+  background: linear-gradient(90deg, var(--expert-soft), transparent);
 }
 
 @media (max-width: 900px) {
   body[data-country] .expert-review .container {
-    width: min(100% - (var(--page-gutter-mobile) * 2), 1180px);
+    width: 100%;
+    max-width: none;
+    padding: 0;
   }
 
   body[data-country] .expert-card {
-    grid-template-columns: 1fr;
-    gap: var(--section-gap-tight);
+    min-height: 0;
     padding: var(--panel-padding);
+    background-position: center, top center;
+    background-size: cover, 100% 220px;
   }
 
   body[data-country] .expert-header {
-    flex-direction: row;
-    align-items: center;
-    gap: 16px;
+    max-width: 100%;
+    margin: 0;
     padding: 0 0 18px;
-    border-right: 0;
     border-bottom: 1px solid var(--border-soft);
+  }
+
+  body[data-country] .expert-body {
+    max-width: 100%;
   }
 
   body[data-country] .expert-meta {
     max-width: none;
+    text-align: left;
   }
 
   body[data-country] .expert-body,
@@ -7001,14 +7113,13 @@ html[data-theme='light'] body[data-country] .expert-disclaimer {
   }
 
   body[data-country] .expert-header {
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 14px;
+    display: block;
+    max-width: 230px;
   }
 
-  body[data-country] .expert-photo {
-    width: 74px;
-    height: 74px;
+  body[data-country] .expert-card {
+    background-position: center, right top;
+    background-size: cover, 100% 180px;
   }
 
   body[data-country] .expert-info h3 {
@@ -8237,14 +8348,13 @@ body[data-brand] .brand-sticky-main .faq-card:hover {
 }
 
 body[data-country] .expert-card {
-  background: var(--surface-card);
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-soft);
 }
 
 body[data-country] .expert-card::before {
   height: 2px;
-  background: linear-gradient(90deg, var(--surface-border-strong), transparent 72%);
+  background: linear-gradient(90deg, var(--expert-strong), transparent 72%);
 }
 
 /* Light home stats: keep the emphasis without the hard black tile. */
@@ -8308,5 +8418,309 @@ html[data-theme='light'] body.home-page .home-stat-link:hover {
       .payment-methods-page .payment-methods-grid
     ) {
     border-radius: var(--radius-md);
+  }
+}
+
+/* =============================================================
+   COUNTRY GAMBLING GUIDE CAROUSEL
+   Horizontal cards keep the guide scannable while preserving all copy.
+============================================================= */
+
+body[data-country] .content-article .country-guide-carousel {
+  --guide-card-width: min(360px, calc((100% - 32px) / 3));
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: stretch;
+  gap: 16px;
+  overflow-x: auto;
+  margin: 0 -2px;
+  padding: 2px 2px 16px;
+  border: 0;
+  background: transparent;
+  scrollbar-color: var(--surface-border-strong) transparent;
+  scrollbar-width: thin;
+  overscroll-behavior-x: contain;
+  scroll-behavior: smooth;
+  scroll-padding-inline: 2px;
+  scroll-snap-type: x mandatory;
+  cursor: grab;
+  touch-action: pan-y;
+}
+
+body[data-country] .country-guide-carousel::-webkit-scrollbar {
+  height: 6px;
+}
+
+body[data-country] .country-guide-carousel::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+body[data-country] .country-guide-carousel::-webkit-scrollbar-thumb {
+  border-radius: 999px;
+  background: var(--surface-border-strong);
+}
+
+body[data-country] .content-article .country-guide-carousel > div {
+  position: relative;
+  display: flex;
+  flex: 0 0 var(--guide-card-width);
+  flex-direction: column;
+  width: var(--guide-card-width);
+  min-height: 292px;
+  padding: 24px;
+  border: 1px solid var(--surface-border);
+  border-radius: var(--radius-md);
+  background:
+    linear-gradient(
+      145deg,
+      color-mix(in srgb, var(--surface-card) 92%, var(--section-accent) 8%),
+      var(--surface-card) 62%
+    );
+  box-shadow: var(--shadow-soft);
+  scroll-snap-align: start;
+  transition:
+    border-color 0.2s ease,
+    background 0.2s ease,
+    transform 0.2s ease;
+}
+
+body[data-country] .content-article .country-guide-carousel > div:hover {
+  border-color: color-mix(in srgb, var(--section-accent) 52%, var(--surface-border));
+  background: var(--surface-card-hover);
+  transform: translateY(-2px);
+}
+
+body[data-country] .content-article .country-guide-carousel .guide-card-index {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 38px;
+  height: 28px;
+  border: 1px solid color-mix(in srgb, var(--section-accent) 58%, var(--surface-border));
+  border-radius: 6px;
+  background: color-mix(in srgb, var(--section-accent) 10%, transparent);
+  color: var(--section-accent);
+  font-size: 12px;
+  font-weight: 750;
+  letter-spacing: 0.08em;
+  line-height: 1;
+  font-variant-numeric: tabular-nums;
+}
+
+body[data-country] .content-article .country-guide-carousel > div h3 {
+  margin: 22px 0 10px;
+  color: var(--text-main);
+  font-size: 20px;
+  line-height: 1.22;
+  letter-spacing: 0;
+}
+
+body[data-country] .content-article .country-guide-carousel > div p {
+  margin: 0;
+  color: var(--text-muted);
+  font-size: 15px;
+  line-height: 1.62;
+  text-align: left;
+}
+
+body[data-country] .content-article .country-guide-carousel > div p + p {
+  margin-top: 12px;
+}
+
+body[data-country] .content-article .country-guide-carousel > div a {
+  color: var(--text-main);
+  text-decoration: underline;
+  text-decoration-color: color-mix(in srgb, var(--section-accent) 68%, transparent);
+  text-underline-offset: 3px;
+}
+
+body[data-country] .content-article .country-guide-carousel:focus-visible {
+  outline: 2px solid var(--section-accent);
+  outline-offset: 4px;
+}
+
+body[data-country] .content-article .country-guide-carousel.is-dragging {
+  cursor: grabbing;
+  scroll-behavior: auto;
+  scroll-snap-type: none;
+  user-select: none;
+}
+
+@media (max-width: 1120px) {
+  body[data-country] .content-article .country-guide-carousel {
+    --guide-card-width: min(390px, calc((100% - 16px) / 2));
+  }
+}
+
+@media (max-width: 680px) {
+  body[data-country] .content-article {
+    width: 100%;
+    min-width: 0;
+  }
+
+  body[data-country] .content-article .country-guide-carousel {
+    --guide-card-width: min(320px, 84vw);
+    width: 100%;
+    min-width: 0;
+    gap: 12px;
+    padding-bottom: 14px;
+  }
+
+  body[data-country] .content-article .country-guide-carousel > div {
+    min-height: 268px;
+    padding: 20px;
+  }
+
+  body[data-country] .content-article .country-guide-carousel > div h3 {
+    font-size: 18px;
+  }
+}
+
+/* Shared FAQ accordion surface for brand and country pages. */
+.timeline.faq-accordion-surface {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+.faq-accordion-surface .faq-card--accordion {
+  min-width: 0;
+  padding: 0;
+  overflow: hidden;
+  border: 1px solid var(--surface-border);
+  border-radius: var(--radius-md);
+  background: var(--surface-card);
+  box-shadow: none;
+  transition: border-color 180ms ease, box-shadow 180ms ease, background 180ms ease;
+}
+
+.faq-accordion-surface .faq-card--accordion.is-open {
+  border-color: var(--surface-border-strong);
+  box-shadow: var(--shadow-soft);
+}
+
+.faq-accordion-surface .faq-accordion-trigger {
+  appearance: none;
+  width: 100%;
+  min-height: 66px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 16px 20px;
+  border: 0;
+  background: transparent;
+  color: var(--text-main);
+  font: inherit;
+  font-size: 17px;
+  font-weight: 650;
+  line-height: 1.35;
+  text-align: left;
+  cursor: pointer;
+}
+
+.faq-accordion-surface .faq-accordion-trigger:focus-visible {
+  outline: 2px solid var(--text-muted);
+  outline-offset: -3px;
+}
+
+.faq-accordion-surface .faq-question-icon {
+  width: 20px;
+  height: 20px;
+  flex: 0 0 20px;
+  margin: 0;
+}
+
+.faq-accordion-surface .faq-question-label {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.faq-accordion-surface .faq-accordion-toggle {
+  width: 10px;
+  height: 10px;
+  flex: 0 0 10px;
+  margin: -5px 3px 0 auto;
+  border-right: 2px solid currentColor;
+  border-bottom: 2px solid currentColor;
+  opacity: 0.7;
+  transform: rotate(45deg);
+  transition: transform 180ms ease, margin 180ms ease;
+}
+
+.faq-accordion-surface .faq-card--accordion.is-open .faq-accordion-toggle {
+  margin-top: 5px;
+  transform: rotate(225deg);
+}
+
+.faq-accordion-surface .faq-answer-panel {
+  padding: 0 20px 18px 52px;
+  border-top: 1px solid var(--border-soft);
+}
+
+.faq-accordion-surface .faq-answer-panel .faq-answer {
+  margin: 0;
+  padding-top: 14px;
+}
+
+.faq-accordion-surface .faq-question,
+.faq-accordion-surface .faq-answer {
+  gap: 12px;
+}
+
+html[data-theme='light'] .faq-accordion-surface .faq-card--accordion {
+  background: linear-gradient(180deg, var(--ui-surface-elevated), var(--ui-surface-elevated-alt));
+  border-color: var(--ui-border-subtle);
+  box-shadow: var(--shadow-soft);
+}
+
+html[data-theme='light'] .faq-accordion-surface .faq-card--accordion.is-open {
+  border-color: var(--border-soft);
+}
+
+/* FAQ cards stay still under the pointer; opening is click-only. */
+.faq-accordion-surface .faq-accordion-trigger:hover {
+  background: transparent;
+}
+
+body[data-brand] .faq-accordion-surface .faq-card--accordion:hover {
+  transform: none;
+  border-color: var(--surface-border);
+  background: var(--surface-card);
+  box-shadow: none;
+}
+
+body[data-brand] .faq-accordion-surface .faq-card--accordion.is-open:hover {
+  border-color: var(--surface-border-strong);
+  background: var(--surface-card);
+  box-shadow: var(--shadow-soft);
+}
+
+html[data-theme='light'] body[data-brand] .faq-accordion-surface .faq-card--accordion:hover {
+  border-color: var(--ui-border-subtle);
+  background: linear-gradient(180deg, var(--ui-surface-elevated), var(--ui-surface-elevated-alt));
+  box-shadow: var(--shadow-soft);
+}
+
+html[data-theme='light'] body[data-brand] .faq-accordion-surface .faq-card--accordion.is-open:hover {
+  border-color: var(--border-soft);
+}
+
+@media (max-width: 768px) {
+  .timeline.faq-accordion-surface {
+    gap: 10px;
+  }
+
+  .faq-accordion-surface .faq-accordion-trigger {
+    min-height: 60px;
+    padding: 16px 18px;
+    font-size: 16px;
+  }
+
+  .faq-accordion-surface .faq-answer-panel {
+    padding: 0 18px 18px 50px;
   }
 }

@@ -1624,6 +1624,108 @@ const initCountryNewReviewsCarousel = () => {
   });
 };
 
+const initCountryGuideCarousels = () => {
+  document.querySelectorAll('[data-carousel="gambling-guide"]').forEach(carousel => {
+    const cards = Array.from(carousel.children).filter(card => card.tagName === 'DIV');
+    if (!cards.length) return;
+
+    const title = carousel.closest('.content-article')?.querySelector(':scope > .title');
+    const guideLabel = normalizeText(title?.textContent || 'Gambling Guide').trim();
+
+    carousel.setAttribute('role', 'region');
+    carousel.setAttribute('aria-label', `${guideLabel} carousel`);
+
+    let pointerId = null;
+    let startX = 0;
+    let startScrollLeft = 0;
+    let dragged = false;
+    let suppressClick = false;
+
+    cards.forEach((card, index) => {
+      if (card.querySelector(':scope > .guide-card-index')) return;
+
+      const indexLabel = document.createElement('span');
+      indexLabel.className = 'guide-card-index';
+      indexLabel.textContent = String(index + 1).padStart(2, '0');
+      indexLabel.setAttribute('aria-hidden', 'true');
+      card.prepend(indexLabel);
+    });
+
+    const releasePointer = event => {
+      if (pointerId !== event.pointerId) return;
+
+      pointerId = null;
+      carousel.classList.remove('is-dragging');
+
+      if (carousel.hasPointerCapture?.(event.pointerId)) {
+        carousel.releasePointerCapture(event.pointerId);
+      }
+
+      if (dragged) {
+        suppressClick = true;
+        window.setTimeout(() => {
+          suppressClick = false;
+        }, 0);
+      }
+
+      dragged = false;
+    };
+
+    carousel.addEventListener('pointerdown', event => {
+      if (event.pointerType === 'mouse' && event.button !== 0) return;
+      if (event.target.closest('a, button, input, select, textarea')) return;
+
+      pointerId = event.pointerId;
+      startX = event.clientX;
+      startScrollLeft = carousel.scrollLeft;
+      dragged = false;
+      carousel.classList.add('is-dragging');
+      carousel.setPointerCapture?.(pointerId);
+    });
+
+    carousel.addEventListener(
+      'pointermove',
+      event => {
+        if (pointerId !== event.pointerId) return;
+
+        const delta = event.clientX - startX;
+        if (Math.abs(delta) < 6) return;
+
+        dragged = true;
+        carousel.scrollLeft = startScrollLeft - delta;
+        event.preventDefault();
+      },
+      { passive: false }
+    );
+
+    carousel.addEventListener('pointerup', releasePointer);
+    carousel.addEventListener('pointercancel', releasePointer);
+    carousel.addEventListener('lostpointercapture', releasePointer);
+
+    carousel.addEventListener(
+      'click',
+      event => {
+        if (!suppressClick) return;
+
+        event.preventDefault();
+        event.stopPropagation();
+        suppressClick = false;
+      },
+      true
+    );
+
+    carousel.addEventListener('keydown', event => {
+      if (event.key !== 'ArrowLeft' && event.key !== 'ArrowRight') return;
+
+      carousel.scrollBy({
+        left: event.key === 'ArrowRight' ? carousel.clientWidth * 0.82 : -carousel.clientWidth * 0.82,
+        behavior: 'smooth',
+      });
+      event.preventDefault();
+    });
+  });
+};
+
 const ensureCountryBrandStage = pageCountry => {
   const brandCards = document.getElementById('brand-cards');
   if (!brandCards) return;
@@ -2283,6 +2385,150 @@ const enhanceFaqBlocks = () => {
     answer.prepend(icon);
   };
 
+  const enhanceCountryFaqCard = (card, faqGrid, index) => {
+    if (card.querySelector(':scope > .faq-accordion-trigger')) return;
+
+    const question = card.querySelector(':scope > h3');
+    const answers = Array.from(card.querySelectorAll(':scope > p'));
+    if (!question || !answers.length) return;
+
+    addQuestionIcon(question);
+    answers.forEach(addAnswerIcon);
+    faqGrid.classList.add('faq-accordion-surface');
+
+    const trigger = document.createElement('button');
+    trigger.className = 'faq-question faq-accordion-trigger';
+    trigger.type = 'button';
+    trigger.setAttribute('aria-expanded', 'false');
+
+    const questionIcon = question.querySelector(':scope > .faq-question-icon');
+    const questionLabel = document.createElement('span');
+    questionLabel.className = 'faq-question-label';
+
+    Array.from(question.childNodes).forEach(node => {
+      if (node !== questionIcon) questionLabel.append(node);
+    });
+
+    if (questionIcon) trigger.append(questionIcon);
+    trigger.append(questionLabel);
+
+    const toggle = document.createElement('span');
+    toggle.className = 'faq-accordion-toggle';
+    toggle.setAttribute('aria-hidden', 'true');
+    trigger.append(toggle);
+
+    const answerPanel = document.createElement('div');
+    answerPanel.className = 'faq-answer-panel';
+    answerPanel.id = `country-faq-answer-${index + 1}`;
+    answerPanel.hidden = true;
+    trigger.setAttribute('aria-controls', answerPanel.id);
+    answers.forEach(answer => answerPanel.append(answer));
+
+    question.replaceWith(trigger);
+    card.classList.add('faq-card--accordion');
+    card.append(answerPanel);
+
+    const closeOpenCards = () => {
+      faqGrid.querySelectorAll('.faq-accordion-trigger[aria-expanded="true"]').forEach(openTrigger => {
+        openTrigger.setAttribute('aria-expanded', 'false');
+        openTrigger.closest('.faq-card')?.classList.remove('is-open');
+
+        const openPanel = document.getElementById(openTrigger.getAttribute('aria-controls'));
+        if (openPanel) openPanel.hidden = true;
+      });
+    };
+
+    trigger.addEventListener('click', () => {
+      const isOpening = trigger.getAttribute('aria-expanded') !== 'true';
+      if (isOpening) closeOpenCards();
+
+      trigger.setAttribute('aria-expanded', String(isOpening));
+      card.classList.toggle('is-open', isOpening);
+      answerPanel.hidden = !isOpening;
+    });
+  };
+
+  const enhanceBrandFaqTimeline = timeline => {
+    if (timeline.dataset.faqAccordionBound === 'true') return;
+
+    timeline.dataset.faqAccordionBound = 'true';
+    timeline.classList.add('faq-accordion-surface');
+
+    const groups = [];
+    let currentGroup = null;
+
+    Array.from(timeline.children).forEach(child => {
+      if (child.matches('h3')) {
+        currentGroup = { question: child, answers: [] };
+        groups.push(currentGroup);
+        return;
+      }
+
+      if (currentGroup && child.matches('p')) currentGroup.answers.push(child);
+    });
+
+    groups.forEach((group, index) => {
+      if (!group.answers.length) return;
+
+      const { question, answers } = group;
+      addQuestionIcon(question);
+      answers.forEach(addAnswerIcon);
+
+      const card = document.createElement('div');
+      card.className = 'faq-card faq-card--accordion';
+
+      const trigger = document.createElement('button');
+      trigger.className = 'faq-question faq-accordion-trigger';
+      trigger.type = 'button';
+      trigger.setAttribute('aria-expanded', 'false');
+
+      const questionIcon = question.querySelector(':scope > .faq-question-icon');
+      const questionLabel = document.createElement('span');
+      questionLabel.className = 'faq-question-label';
+
+      Array.from(question.childNodes).forEach(node => {
+        if (node !== questionIcon) questionLabel.append(node);
+      });
+
+      if (questionIcon) trigger.append(questionIcon);
+      trigger.append(questionLabel);
+
+      const toggle = document.createElement('span');
+      toggle.className = 'faq-accordion-toggle';
+      toggle.setAttribute('aria-hidden', 'true');
+      trigger.append(toggle);
+
+      const answerPanel = document.createElement('div');
+      answerPanel.className = 'faq-answer-panel';
+      answerPanel.id = `brand-faq-answer-${index + 1}`;
+      answerPanel.hidden = true;
+      trigger.setAttribute('aria-controls', answerPanel.id);
+
+      question.replaceWith(card);
+      card.append(trigger, answerPanel);
+      answers.forEach(answer => answerPanel.append(answer));
+
+      const closeOpenCards = () => {
+        timeline.querySelectorAll('.faq-accordion-trigger[aria-expanded="true"]').forEach(openTrigger => {
+          openTrigger.setAttribute('aria-expanded', 'false');
+          openTrigger.closest('.faq-card')?.classList.remove('is-open');
+
+          const openPanel = document.getElementById(openTrigger.getAttribute('aria-controls'));
+          if (openPanel) openPanel.hidden = true;
+        });
+      };
+
+      trigger.addEventListener('click', () => {
+        const isOpening = trigger.getAttribute('aria-expanded') !== 'true';
+        if (isOpening) closeOpenCards();
+
+        trigger.setAttribute('aria-expanded', String(isOpening));
+        card.classList.toggle('is-open', isOpening);
+        answerPanel.hidden = !isOpening;
+      });
+    });
+  };
+
   document.querySelectorAll('section.container, .content-article').forEach(section => {
     const title = section.querySelector('h2.title');
     const timeline = section.querySelector('.timeline');
@@ -2292,12 +2538,23 @@ const enhanceFaqBlocks = () => {
     const titleText = normalizeText(title.textContent).trim().toLowerCase();
     if (!titleText.includes('faq')) return;
 
+    if (document.body.matches('[data-brand]') && timeline) {
+      enhanceBrandFaqTimeline(timeline);
+      return;
+    }
+
     timeline?.querySelectorAll(':scope > h3').forEach(addQuestionIcon);
     timeline?.querySelectorAll(':scope > p').forEach(addAnswerIcon);
 
-    faqGrid?.querySelectorAll('.faq-card').forEach(card => {
+    faqGrid?.querySelectorAll('.faq-card').forEach((card, index) => {
       const question = card.querySelector(':scope > h3');
       const answers = card.querySelectorAll(':scope > p');
+
+      if (document.body.matches('[data-country]')) {
+        enhanceCountryFaqCard(card, faqGrid, index);
+        return;
+      }
+
       if (question) addQuestionIcon(question);
       answers.forEach(addAnswerIcon);
     });
@@ -2591,6 +2848,7 @@ export const initCasinoPage = () => {
 
   if (pageCountry) {
     ensureCountryBrandStage(pageCountry);
+    initCountryGuideCarousels();
     applyCountryHeroConcept();
     const brands = BRANDS.filter(b => b.countries?.some(c => c.toUpperCase() === pageCountry));
 

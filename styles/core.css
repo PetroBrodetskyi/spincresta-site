@@ -323,28 +323,18 @@ textarea {
 .logo {
   display: flex;
   align-items: center;
-  gap: 9px;
-  min-height: 44px;
-  font-size: 19px;
-  font-weight: 700;
-  line-height: 1.04;
-  letter-spacing: 0;
+  min-height: 46px;
   color: var(--text-main);
   text-decoration: none;
   cursor: pointer;
   text-shadow: none;
 }
 
-.logo > div {
-  display: inline-flex;
-  align-items: baseline;
-  gap: 0;
-  white-space: nowrap;
-}
-
-.logo-icon {
-  width: 28px;
-  height: 28px;
+.logo-lockup {
+  display: block;
+  width: clamp(158px, 15vw, 182px);
+  height: auto;
+  max-height: 48px;
   object-fit: contain;
 }
 
@@ -1156,12 +1146,27 @@ textarea {
    MOBILE
 ===================== */
 @media (max-width: 768px) {
+  .logo {
+    min-height: 40px;
+  }
+
+  .logo-lockup {
+    width: 150px;
+    max-height: 40px;
+  }
+
   .nav {
     display: none;
   }
 
   .hero p {
     font-size: 16px;
+  }
+}
+
+@media (max-width: 420px) {
+  .logo-lockup {
+    width: 136px;
   }
 }
 
@@ -2537,13 +2542,6 @@ body.theme-settings-open {
   margin-bottom: 30px;
 }
 
-.expert-photo {
-  width: 110px;
-  height: 110px;
-  border-radius: 50%;
-  object-fit: cover;
-}
-
 .expert-role {
   font-weight: 600;
 }
@@ -2595,14 +2593,6 @@ body[data-country] .expert-header {
   margin-bottom: 24px;
   padding-bottom: 20px;
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-}
-
-body[data-country] .expert-photo {
-  flex: 0 0 auto;
-  width: 96px;
-  height: 96px;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.22);
 }
 
 body[data-country] .expert-info h3 {
@@ -3600,11 +3590,6 @@ body[data-country] .content-article .timeline a[href*='/responsible-gambling/'] 
     gap: 16px;
     margin-bottom: 18px;
     padding-bottom: 18px;
-  }
-
-  body[data-country] .expert-photo {
-    width: 82px;
-    height: 82px;
   }
 
   body[data-country] .expert-body {
