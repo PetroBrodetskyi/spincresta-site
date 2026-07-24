@@ -8709,7 +8709,7 @@ html[data-theme='light'] body[data-brand] .faq-accordion-surface .faq-card--acco
   border-color: var(--border-soft);
 }
 
-/* Brand main-page previews share one layout; pages without a preview stay unchanged. */
+/* Brand main-page previews use one media-led layout; pages without a preview stay unchanged. */
 body[data-brand] #brand-why-section {
   padding-right: clamp(10px, 1.2vw, 18px);
   padding-left: clamp(10px, 1.2vw, 18px);
@@ -8717,9 +8717,9 @@ body[data-brand] #brand-why-section {
 
 body[data-brand] .brand-why-heading {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(360px, 48%);
+  grid-template-columns: minmax(0, 1fr);
   align-items: start;
-  gap: clamp(20px, 3vw, 42px);
+  gap: clamp(20px, 2.4vw, 32px);
   width: 100%;
   margin: 0;
 }
@@ -8757,7 +8757,7 @@ body[data-brand] .brand-why-media {
   appearance: none;
   display: block;
   width: 100%;
-  aspect-ratio: 16 / 9;
+  aspect-ratio: auto;
   margin: 0;
   padding: 0;
   overflow: hidden;
@@ -8768,7 +8768,7 @@ body[data-brand] .brand-why-media {
   color: inherit;
   font: inherit;
   text-align: left;
-  cursor: zoom-in;
+  cursor: default;
   transition: border-color 180ms ease, box-shadow 180ms ease;
 }
 
@@ -8789,9 +8789,9 @@ body[data-brand] .brand-why-media:disabled {
 body[data-brand] .brand-why-media img {
   display: block;
   width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center top;
+  height: auto;
+  object-fit: contain;
+  object-position: center;
 }
 
 body[data-brand] .brand-why-heading.is-expanded {
@@ -8800,8 +8800,7 @@ body[data-brand] .brand-why-heading.is-expanded {
 
 body[data-brand] .brand-why-heading.is-expanded .brand-why-media {
   grid-column: 1 / -1;
-  aspect-ratio: 3010 / 1574;
-  cursor: zoom-out;
+  cursor: default;
 }
 
 @media (min-width: 769px) {
@@ -8811,10 +8810,6 @@ body[data-brand] .brand-why-heading.is-expanded .brand-why-media {
 
   body[data-brand] #brand-why-section .brand-why-heading {
     padding-top: var(--section-padding-y-tight);
-  }
-
-  body[data-brand] #brand-why-section .brand-why-media {
-    margin-top: calc(-1 * var(--section-padding-y-tight));
   }
 }
 
@@ -8842,7 +8837,7 @@ body[data-brand] .brand-why-heading.is-expanded .brand-why-media {
   }
 
   body[data-brand] .brand-why-media {
-    aspect-ratio: 16 / 9;
+    aspect-ratio: auto;
     pointer-events: none;
     cursor: default;
   }
