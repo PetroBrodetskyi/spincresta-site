@@ -155,7 +155,7 @@ export const BRAND_NEW_GAMES = {
         image: 'https://res.cloudinary.com/drj61gmd2/image/upload/v1784457141/spincresta/brands/goldenstar/new-games/goldenstar-elvis-frog-in-vegas_aq26c3.webp',
       },
     ],
-    slotmafia: [
+    slotsmafia: [
       {
         name: 'Gates of Olympus Super Scatter',
         image: 'https://res.cloudinary.com/drj61gmd2/image/upload/v1784457242/spincresta/brands/slotsmafia/new-games/slotsmafia-gates-of-olympus-super-scatter_buuzy3.webp',
@@ -493,7 +493,7 @@ export const BRAND_NEW_GAMES = {
         image: 'https://res.cloudinary.com/drj61gmd2/image/upload/v1784457154/spincresta/brands/hollywin/new-games/hollywin-blast-the-bass_u1bqkg.webp',
       },
     ],
-    leon: [
+    'leon-casino': [
       {
         name: 'Imperial Express Hold & Win',
         image: 'https://res.cloudinary.com/drj61gmd2/image/upload/v1784457183/spincresta/brands/leon-casino/new-games/leon-new-game-imperial-express-hold-and-win_jganik.webp',
@@ -1918,5 +1918,13 @@ export const BRAND_NEW_GAMES = {
       { name: 'Clovers and Diamonds 20', image: 'https://res.cloudinary.com/drj61gmd2/image/upload/v1784572760/spincresta/brands/fraga-tr/new-games/fraga-new-game-clovers-and-diamonds-20_bc3ckm.webp' },
       { name: 'Cosmic Clusters', image: 'https://res.cloudinary.com/drj61gmd2/image/upload/v1784572767/spincresta/brands/fraga-tr/new-games/fraga-new-game-cosmic-clusters_pmvuga.webp' },
       { name: 'Multi Hot 10', image: 'https://res.cloudinary.com/drj61gmd2/image/upload/v1784572763/spincresta/brands/fraga-tr/new-games/fraga-new-game-multi-hot-10_gemo7q.webp' },
+    ],
+    manga: [
+      { name: 'Candy Chaos', image: 'https://res.cloudinary.com/drj61gmd2/image/upload/v1785091828/spincresta/brands/manga/new-games/manga-new-game-candy-chaos.webp' },
+      { name: 'Pirots 5', image: 'https://res.cloudinary.com/drj61gmd2/image/upload/v1785091829/spincresta/brands/manga/new-games/manga-new-game-pirots-5.webp' },
+      { name: 'The Cursed Mummy', image: 'https://res.cloudinary.com/drj61gmd2/image/upload/v1785091830/spincresta/brands/manga/new-games/manga-new-game-cursed-mummy.webp' },
+      { name: 'Imperial Express Hold & Win', image: 'https://res.cloudinary.com/drj61gmd2/image/upload/v1785091831/spincresta/brands/manga/new-games/manga-new-game-imperial-express-hold-win.webp' },
+      { name: 'Reel Bass: Jackpot Catch', image: 'https://res.cloudinary.com/drj61gmd2/image/upload/v1785091832/spincresta/brands/manga/new-games/manga-new-game-reel-bass-jackpot-catch.webp' },
+      { name: 'Storm Talisman', image: 'https://res.cloudinary.com/drj61gmd2/image/upload/v1785091834/spincresta/brands/manga/new-games/manga-new-game-storm-talisman.webp' },
     ],
   };

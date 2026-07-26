@@ -83,7 +83,7 @@ const alias = {
   'amonbet': ['amonbet'],
   'amon': ['amoncasino', 'amon'],
   'lasvegasusa': ['lasvegasusa'],
-  'roletto': ['rolletto', 'roletto'],
+  'rolletto': ['rolletto'],
   'yepcasino': ['7yep', 'yepcasino'],
   'fairgo': ['fairg0', 'fairgo'],
   'redstag': ['stagspins', 'redstag'],
