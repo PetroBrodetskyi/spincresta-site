@@ -168,6 +168,11 @@ const gamblezenConfig = createGamesLiveConfig(
   ['Live shows', 'Live baccarat', 'Live blackjack', 'Other live games', 'Live roulette']
 );
 
+const onlywinConfig = createGamesLiveConfig(
+  ['Slots', 'Roulette', 'Blackjack', 'Baccarat', 'Jackpot games', 'Live games', 'Poker', 'Crash games'],
+  ['Live shows', 'Live baccarat', 'Live blackjack', 'Other live games', 'Live roulette']
+);
+
 const tenBetConfig = createGamesLiveBettingConfig(
   ['Slots', 'Roulette', 'Blackjack', 'Baccarat', 'Jackpot games', 'Live games', 'Crash games'],
   ['Live shows', 'Live baccarat', 'Live blackjack', 'Other live games', 'Live roulette'],
@@ -494,6 +499,7 @@ export const BRAND_SNAPSHOT_CONFIGS = {
   'pin-up': pinUpConfig,
   pinco: pincoConfig,
   gamblezen: gamblezenConfig,
+  onlywin: onlywinConfig,
   '10bet': tenBetConfig,
   'oshi-casino': oshiCasinoConfig,
   rajabets: rajabetsConfig,

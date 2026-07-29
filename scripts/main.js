@@ -1,9 +1,9 @@
 ﻿// =====================
 // IMPORTS
 // =====================
-import { BRANDS } from './brands.js?v=20260712-brands';
+import { BRANDS } from './brands.js?v=20260727-onlywin';
 import { BRAND_SNAPSHOT_CONFIGS } from './brand-snapshot-configs.js';
-import { BRAND_NEW_GAMES } from './brand-new-games.js?v=20260719-brand-games-28';
+import { BRAND_NEW_GAMES } from './brand-new-games.js?v=20260727-onlywin-new-games';
 import { COUNTRIES } from './countries.js';
 
 // =====================

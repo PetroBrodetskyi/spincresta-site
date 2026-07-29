@@ -113,18 +113,20 @@ export const BRANDS = [
     payments: [''],
     hasDetailPage: true,
   },
+  */
   {
     name: 'OnlyWin',
-    bonus: '',
+    bonus: '375% up to €3,000 + 500 Free Spins',
     cta: 'Play Now',
     urlDetail: 'brands/onlywin.html',
     urlCasino: 'https://armadaapp.media-412.com/click?pid=3862&offer_id=124395',
     image: 'images/onlywin.png',
     bgColor: '#160B27',
     countries: ['AU', 'AT', 'CA', 'CZ', 'DK', 'FI', 'DE', 'GR', 'HU', 'IT', 'NZ', 'NO', 'PL', 'PT', 'ES', 'SE', 'CH', 'AL', 'AD', 'BA', 'HR', 'EE', 'IS', 'IE', 'XK', 'LV', 'LI', 'LU', 'MC', 'ME', 'MK', 'SM', 'RS', 'SI', 'VA'],
-    payments: [''],
+    payments: ['visa', 'mastercard', 'applepay', 'googlepay', 'banktransfer', 'skrill', 'neteller', 'bitcoin', 'ethereum', 'tether', 'litecoin'],
     hasDetailPage: true,
   },
+  /*
   {
     name: 'Spinko',
     bonus: '',

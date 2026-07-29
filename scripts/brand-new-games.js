@@ -25,6 +25,32 @@ export const BRAND_NEW_GAMES = {
       image: 'https://res.cloudinary.com/drj61gmd2/image/upload/v1784457311/spincresta/brands/winhero/new-games/winhero-new-game-wish-spin_ati8ty.webp',
     },
   ],
+  onlywin: [
+    {
+      name: 'Leprechauns Fortune Clover',
+      image: 'https://res.cloudinary.com/drj61gmd2/image/upload/v1785181600/spincresta/brands/onlywin/new-games/onlywin-new-game-leprechauns-fortune-clover_mz7nft.webp',
+    },
+    {
+      name: 'Joker Gems',
+      image: 'https://res.cloudinary.com/drj61gmd2/image/upload/v1785181599/spincresta/brands/onlywin/new-games/onlywin-new-game-joker-gems_gfgcsa.webp',
+    },
+    {
+      name: 'Book of Waka Waka',
+      image: 'https://res.cloudinary.com/drj61gmd2/image/upload/v1785181599/spincresta/brands/onlywin/new-games/onlywin-new-game-book-of-waka-waka_fmdp2o.webp',
+    },
+    {
+      name: 'Book of Artemis Hold and Win',
+      image: 'https://res.cloudinary.com/drj61gmd2/image/upload/v1785181597/spincresta/brands/onlywin/new-games/onlywin-new-game-book-of-artemis-hold-and-win_wnwdy2.webp',
+    },
+    {
+      name: '10 Frozen Fruits',
+      image: 'https://res.cloudinary.com/drj61gmd2/image/upload/v1785181597/spincresta/brands/onlywin/new-games/onlywin-new-game-10-frozen-fruits_nhecn3.webp',
+    },
+    {
+      name: '7 x 7 Fruity Shots',
+      image: 'https://res.cloudinary.com/drj61gmd2/image/upload/v1785181596/spincresta/brands/onlywin/new-games/onlywin-new-game-7-x-7-fruity-shots_wygdza.webp',
+    },
+  ],
     '1red': [
       {
         name: '1Red Trillion',
