@@ -8802,9 +8802,51 @@ body[data-brand] .brand-why-heading {
   display: grid;
   grid-template-columns: minmax(0, 1fr);
   align-items: start;
-  gap: clamp(20px, 2.4vw, 32px);
+  row-gap: 12px;
+  column-gap: 0;
   width: 100%;
   margin: 0;
+}
+
+body[data-brand] .brand-promo-teaser {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  justify-self: end;
+  align-self: end;
+  min-height: 0;
+  padding: 12px 18px;
+  border: 1px solid var(--gold);
+  border-radius: 8px;
+  background: var(--gold);
+  box-shadow: 0 8px 22px rgba(255, 223, 0, 0.2);
+  color: #11131a;
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  line-height: 1;
+  text-decoration: none;
+  text-transform: uppercase;
+  transition: background-color 180ms ease, box-shadow 180ms ease, transform 180ms ease;
+}
+
+body[data-brand] .brand-promo-teaser:hover,
+body[data-brand] .brand-promo-teaser:focus-visible {
+  border-color: var(--gold);
+  background: #ffe45c;
+  box-shadow: 0 10px 26px rgba(255, 223, 0, 0.28);
+  color: #11131a;
+  transform: translateY(-2px);
+}
+
+body[data-brand] .brand-promo-teaser:focus-visible {
+  outline: 2px solid var(--section-accent);
+  outline-offset: 4px;
+}
+
+body[data-brand] #mostbet-promo-code,
+body[data-brand] #allwin-promo-code {
+  scroll-margin-top: 96px;
 }
 
 body[data-brand] .brand-why-heading > .title {
@@ -8896,10 +8938,18 @@ body[data-brand] .brand-why-heading.is-expanded .brand-why-media {
   }
 }
 
+@media (min-width: 1100px) {
+  body[data-brand='mostbet'] .brand-why-heading > .title,
+  body[data-brand='allwin'] .brand-why-heading > .title {
+    white-space: nowrap;
+  }
+}
+
 @media (max-width: 768px) {
   body[data-brand] .brand-why-heading {
     grid-template-columns: minmax(0, 1fr);
-    gap: 16px;
+    row-gap: 12px;
+    column-gap: 0;
   }
 
   body[data-brand] .brand-why-heading.is-expanded {
@@ -8923,6 +8973,11 @@ body[data-brand] .brand-why-heading.is-expanded .brand-why-media {
     aspect-ratio: auto;
     pointer-events: none;
     cursor: default;
+  }
+
+  body[data-brand] .brand-promo-teaser {
+    justify-self: start;
+    align-self: start;
   }
 }
 

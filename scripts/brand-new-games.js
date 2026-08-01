@@ -51,6 +51,32 @@ export const BRAND_NEW_GAMES = {
       image: 'https://res.cloudinary.com/drj61gmd2/image/upload/v1785181596/spincresta/brands/onlywin/new-games/onlywin-new-game-7-x-7-fruity-shots_wygdza.webp',
     },
   ],
+  mostbet: [
+    {
+      name: 'Aviatrix Mines',
+      image: 'https://res.cloudinary.com/drj61gmd2/image/upload/f_webp,q_auto/v1785610806/spincresta/brands/mostbet/new-games/mostbet-new-game-aviatorix-mines_lbo0p8.webp',
+    },
+    {
+      name: 'CoinUp Volcano',
+      image: 'https://res.cloudinary.com/drj61gmd2/image/upload/f_webp,q_auto/v1785610806/spincresta/brands/mostbet/new-games/mostbet-new-game-coinup-volcano_a6pqaz.webp',
+    },
+    {
+      name: 'Joker Heist',
+      image: 'https://res.cloudinary.com/drj61gmd2/image/upload/f_webp,q_auto/v1785610807/spincresta/brands/mostbet/new-games/mostbet-new-game-joker-heist_etmf1v.webp',
+    },
+    {
+      name: 'Midnight Vault',
+      image: 'https://res.cloudinary.com/drj61gmd2/image/upload/f_webp,q_auto/v1785610808/spincresta/brands/mostbet/new-games/mostbet-new-game-midnight-vault_hse1m9.webp',
+    },
+    {
+      name: 'Poseidon: The Deep King',
+      image: 'https://res.cloudinary.com/drj61gmd2/image/upload/f_webp,q_auto/v1785610809/spincresta/brands/mostbet/new-games/mostbet-new-game-poseidon-the-deep-king_deyv32.webp',
+    },
+    {
+      name: 'Rhino Coins',
+      image: 'https://res.cloudinary.com/drj61gmd2/image/upload/f_webp,q_auto/v1785610810/spincresta/brands/mostbet/new-games/mostbet-new-game-rhino-coins_sukang.webp',
+    },
+  ],
     '1red': [
       {
         name: '1Red Trillion',

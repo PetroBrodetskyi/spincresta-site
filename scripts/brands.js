@@ -281,14 +281,14 @@ export const BRANDS = [
   },
   {
     name: 'Mostbet',
-    bonus: '',
+    bonus: 'Welcome offer up to €3,000 + 400 Free Spins + 70 Free Bets in Aviator',
     cta: 'Play Now',
     urlDetail: 'brands/mostbet.html',
     urlCasino: 'https://armadaapp.media-412.com/click?pid=3862&offer_id=124843',
     image: 'images/mostbet.webp',
     bgColor: '#064C95',
-    countries: ['ES', 'DE', 'AT', 'NO', 'FI', 'IE', 'HU', 'PL', 'SI', 'SK', 'CZ', 'IT', 'CH', 'BE', 'CA', 'AU', 'NZ'],
-    payments: [],
+    countries: ['PL', 'CZ', 'HU', 'RU', 'AZ', 'UZ', 'KZ', 'KG', 'TJ', 'MD', 'PK', 'IN', 'MA', 'NP', 'BD', 'LK', 'NG', 'TR', 'PH', 'TZ', 'BJ', 'KE', 'CA', 'IE', 'MX', 'AR', 'CO', 'BR', 'CL', 'CI', 'BY', 'PE', 'EG'],
+    payments: ['visa', 'mastercard', 'banktransfer', 'tether', 'bitcoin', 'ethereum'],
     hasDetailPage: true,
   },
   {
