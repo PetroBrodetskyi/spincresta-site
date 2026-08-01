@@ -1,0 +1,37 @@
+name: Submit URLs to IndexNow
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: indexnow
+  cancel-in-progress: false
+
+jobs:
+  submit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Check out site
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Wait for Vercel deployment
+        run: sleep 90
+
+      - name: Submit sitemap URLs to IndexNow
+        env:
+          INDEXNOW_HOST: spincresta.com
+          INDEXNOW_KEY_LOCATION: https://spincresta.com/4f6c73cc63b84633ad627127be893da7.txt
+        run: node scripts/submit-indexnow.mjs

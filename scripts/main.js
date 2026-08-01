@@ -826,15 +826,33 @@ const syncFooterBrandDirectory = () => {
   const grids = Array.from(document.querySelectorAll('.footer-brand-grid'));
   if (!grids.length) return;
 
+  const countryNames = new Map(COUNTRIES.map(country => [country.code.toUpperCase(), country.name]));
   const brandLinks = BRANDS.filter(brand => brand.hasDetailPage && brand.urlDetail)
     .map(brand => ({
       href: normalizePagePath(brand.urlDetail),
       label: normalizeText(brand.name),
+      countries: (brand.countries || []).filter(Boolean),
     }))
     .filter(item => item.href && item.label)
     .sort((a, b) => a.label.localeCompare(b.label, undefined, { numeric: true, sensitivity: 'base' }));
 
   const uniqueLinks = Array.from(new Map(brandLinks.map(item => [item.href, item])).values());
+  const repeatedNames = new Set(
+    Array.from(
+      uniqueLinks.reduce((counts, item) => counts.set(item.label, (counts.get(item.label) || 0) + 1), new Map())
+    )
+      .filter(([, count]) => count > 1)
+      .map(([label]) => label)
+  );
+
+  uniqueLinks.forEach(item => {
+    if (repeatedNames.has(item.label) && item.countries.length === 1) {
+      const countryCode = item.countries[0].toUpperCase();
+      const countryName = countryNames.get(countryCode) || item.countries[0];
+      item.label = `${item.label} ${countryName}`;
+    }
+  });
+
   const columnCount = 5;
   const columnSize = Math.ceil(uniqueLinks.length / columnCount);
 
