@@ -490,6 +490,12 @@ const velobetConfig = createGamesLiveBettingConfig(
   ['Football', 'Basketball', 'Tennis', 'Table tennis', 'Volleyball', 'Ice hockey', 'Cricket', 'Baseball', 'Handball', 'eSports', 'Virtual sports', 'Combat sports', 'Motorsport']
 );
 
+const spinkoConfig = createGamesLiveBettingConfig(
+  ['Slots', 'Roulette', 'Blackjack', 'Baccarat', 'Jackpot games', 'Live games', 'Poker', 'Crash games'],
+  ['Live shows', 'Live baccarat', 'Live blackjack', 'Other live games', 'Live roulette'],
+  ['Football', 'Basketball', 'Tennis', 'Ice hockey', 'eSports', 'Virtual sports']
+);
+
 export const BRAND_SNAPSHOT_CONFIGS = {
   ...mapSnapshotConfig(['trino', 'spellwin'], mixedCasinoSportsConfig),
   ...mapSnapshotConfig(['amonbet', 'luckywave', 'slotlair'], sportsPromoCasinoConfig),
@@ -551,4 +557,5 @@ export const BRAND_SNAPSHOT_CONFIGS = {
   twin: twinConfig,
   winairlines: winairlinesConfig,
   velobet: velobetConfig,
+  spinko: spinkoConfig,
 };

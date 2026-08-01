@@ -415,11 +415,12 @@ const getActiveTheme = () => getStoredTheme() || getDefaultTheme();
 applyTheme(getActiveTheme());
 
 const renderPayments = (payments = []) => {
-  if (!payments.length) return '';
+  const availablePayments = payments.filter(Boolean);
+  if (!availablePayments.length) return '';
 
   return `
-    <div class="payment-icons" data-payment-count="${payments.length}">
-      ${payments
+    <div class="payment-icons" data-payment-count="${availablePayments.length}">
+      ${availablePayments
         .map(
           method =>
             `<img src="${paymentPath(method)}" alt="${normalizeText(method)} payment method" loading="lazy" decoding="async"/>`
@@ -920,7 +921,7 @@ const createCasinoCard = ({
       }
       ${createBadge({ isTopRated, isExclusive, isNew })}
     </div>
-    <p class="casino-bonus">${safeBonus}</p>
+    ${safeBonus ? `<p class="casino-bonus">${safeBonus}</p>` : ''}
     ${renderPayments(payments)}
     <div class="casino-footer">
       <div class="casino-actions ${showReviewAction && showPlayAction ? 'has-two-actions' : 'has-single-action'}">
@@ -3017,8 +3018,10 @@ export const initCasinoPage = () => {
         initBrandCountryCollapse();
       }
 
-      if (paymentsEl && brand.payments?.length) {
-        paymentsEl.innerHTML = brand.payments
+      const availablePayments = (brand.payments || []).filter(Boolean);
+
+      if (paymentsEl && availablePayments.length) {
+        paymentsEl.innerHTML = availablePayments
           .map(
             p =>
               `<div class="payments">

@@ -155,6 +155,32 @@ export const BRAND_NEW_GAMES = {
         image: 'https://res.cloudinary.com/drj61gmd2/image/upload/v1784457232/spincresta/brands/retrobet/new-games/retrobet-book-of-ra_s0fvs7.webp',
       },
     ],
+    spinko: [
+      {
+        name: 'Sugar Land',
+        image: 'https://res.cloudinary.com/drj61gmd2/image/upload/f_webp,q_auto/v1785602009/spincresta/brands/spinko/new-games/spinko-new-game-sugar-land_cjqped.webp',
+      },
+      {
+        name: 'Coinboy Riches',
+        image: 'https://res.cloudinary.com/drj61gmd2/image/upload/f_webp,q_auto/v1785602008/spincresta/brands/spinko/new-games/spinko-new-game-coinboy-rishes_waei9j.webp',
+      },
+      {
+        name: 'Ice Vacation',
+        image: 'https://res.cloudinary.com/drj61gmd2/image/upload/f_webp,q_auto/v1785602008/spincresta/brands/spinko/new-games/spinko-new-game-ice-vacation_sq76yu.webp',
+      },
+      {
+        name: '30 Boost Clover',
+        image: 'https://res.cloudinary.com/drj61gmd2/image/upload/f_webp,q_auto/v1785184481/spincresta/brands/spinko/new-games/spinko-new-game-30-boost-clover_qpk2io.webp',
+      },
+      {
+        name: 'Fortune Dice',
+        image: 'https://res.cloudinary.com/drj61gmd2/image/upload/f_webp,q_auto/v1785184288/spincresta/brands/spinko/new-games/spinko-new-game-fortune-dice_wtp42f.webp',
+      },
+      {
+        name: 'Cash 40',
+        image: 'https://res.cloudinary.com/drj61gmd2/image/upload/f_webp,q_auto/v1785184288/spincresta/brands/spinko/new-games/spinko-new-game-cash-40_v7ie0h.webp',
+      },
+    ],
     goldenstar: [
       {
         name: 'Bonanza Trillion',

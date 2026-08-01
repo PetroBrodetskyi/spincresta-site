@@ -3234,6 +3234,89 @@ html[data-theme='light'] .footer {
   }
 }
 
+/* Temporary brand pages keep acquisition links live while editorial reviews are prepared. */
+body.brand-coming-soon-page .brand-coming-soon-section {
+  padding-top: var(--section-padding-y-compact);
+  padding-bottom: var(--section-padding-y);
+}
+
+body.brand-coming-soon-page .all-countries {
+  display: none;
+}
+
+body.brand-coming-soon-page .brand-coming-soon-card {
+  width: 100%;
+  max-width: 860px;
+  margin: 0 auto;
+  padding: clamp(26px, 4vw, 56px);
+  border: 1px solid var(--surface-border);
+  border-radius: var(--radius-lg);
+  background: var(--surface-card);
+  box-shadow: var(--shadow-card);
+}
+
+body.brand-coming-soon-page .brand-coming-soon-card h2 {
+  max-width: 18ch;
+  margin: 10px 0 18px;
+  color: var(--text-main);
+  font-size: clamp(30px, 4vw, 52px);
+  line-height: 1.04;
+  letter-spacing: 0;
+}
+
+body.brand-coming-soon-page .brand-coming-soon-card > p:not(.section-label) {
+  max-width: 68ch;
+  margin: 0;
+  color: var(--text-muted);
+  font-size: clamp(16px, 1.35vw, 20px);
+  line-height: 1.6;
+}
+
+body.brand-coming-soon-page .brand-coming-soon-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 24px;
+  margin-top: 28px;
+  padding-top: 18px;
+  border-top: 1px solid var(--border-soft);
+  color: var(--section-accent);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+body.brand-coming-soon-page .brand-coming-soon-meta span {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+body.brand-coming-soon-page .brand-coming-soon-meta span::before {
+  content: '';
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--section-accent);
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--section-accent) 12%, transparent);
+}
+
+@media (max-width: 768px) {
+  body.brand-coming-soon-page .brand-coming-soon-section {
+    padding-top: var(--section-padding-y-tight);
+  }
+
+  body.brand-coming-soon-page .brand-coming-soon-card {
+    padding: 24px 20px;
+    border-radius: var(--radius-md);
+  }
+
+  body.brand-coming-soon-page .brand-coming-soon-meta {
+    gap: 12px;
+    line-height: 1.4;
+  }
+}
+
 /* Mobile - collapse actions under content */
 @media (max-width: 768px) {
   .casino-card {

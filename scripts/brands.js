@@ -74,9 +74,6 @@ export const BRANDS = [
     payments: ['visa', 'mastercard', 'bitcoin', 'tether', 'litecoin', 'bitcoincash', 'ethereum', 'cardano'],
     hasDetailPage: true,
   },
-  /*
-   * Pending brand pages. Uncomment these records after their matching
-   * brands/<slug>/index.html pages have been created.
   {
     name: 'SilverPlay',
     bonus: '',
@@ -86,7 +83,7 @@ export const BRANDS = [
     image: 'images/silverplay.svg',
     bgColor: '#000000',
     countries: ['DE', 'IT', 'ES', 'CH', 'AT', 'PT', 'IE', 'CA', 'CL', 'UY', 'MX', 'PE', 'AR', 'CO', 'BR', 'SE', 'FI', 'NO', 'DK', 'HU', 'SA', 'AE', 'KW', 'EG', 'BE', 'IS', 'EE', 'LV', 'HR', 'MD', 'KZ', 'UZ', 'AZ', 'BA'],
-    payments: [''],
+    payments: [],
     hasDetailPage: true,
   },
   {
@@ -98,7 +95,7 @@ export const BRANDS = [
     image: 'images/dazart.svg',
     bgColor: '#130A4D',
     countries: [''],
-    payments: [''],
+    payments: [],
     hasDetailPage: true,
   },
   {
@@ -110,10 +107,9 @@ export const BRANDS = [
     image: 'images/billybillion.svg',
     bgColor: '#19181B',
     countries: [''],
-    payments: [''],
+    payments: [],
     hasDetailPage: true,
   },
-  */
   {
     name: 'OnlyWin',
     bonus: '375% up to €3,000 + 500 Free Spins',
@@ -124,19 +120,19 @@ export const BRANDS = [
     bgColor: '#160B27',
     countries: ['AU', 'AT', 'CA', 'CZ', 'DK', 'FI', 'DE', 'GR', 'HU', 'IT', 'NZ', 'NO', 'PL', 'PT', 'ES', 'SE', 'CH', 'AL', 'AD', 'BA', 'HR', 'EE', 'IS', 'IE', 'XK', 'LV', 'LI', 'LU', 'MC', 'ME', 'MK', 'SM', 'RS', 'SI', 'VA'],
     payments: ['visa', 'mastercard', 'applepay', 'googlepay', 'banktransfer', 'skrill', 'neteller', 'bitcoin', 'ethereum', 'tether', 'litecoin'],
+    isNew: true,
     hasDetailPage: true,
   },
-  /*
   {
     name: 'Spinko',
-    bonus: '',
+    bonus: '€3,000 + 300 No-Wager Free Spins',
     cta: 'Play Now',
     urlDetail: 'brands/spinko.html',
     urlCasino: 'https://armadaapp.media-412.com/click?pid=3862&offer_id=124396',
-    image: 'images/spinko.jpg',
+    image: 'images/spinko.png',
     bgColor: '#1E0F16',
     countries: ['DE', 'NL', 'SE', 'CA', 'GR'],
-    payments: [''],
+    payments: ['visa', 'mastercard', 'applepay', 'googlepay', 'banktransfer', 'bitcoin'],
     hasDetailPage: true,
   },
   {
@@ -148,7 +144,7 @@ export const BRANDS = [
     image: 'images/felicebet.svg',
     bgColor: '#0D70C4',
     countries: ['DE', 'IT', 'ES', 'CH', 'AT', 'PT', 'IE', 'LU', 'CA', 'FI', 'NO', 'DK', 'PL', 'CZ', 'SK', 'HU', 'SA', 'AE', 'KW', 'EG', 'NL', 'IS', 'EE', 'SI', 'LV', 'HR', 'MD', 'KZ', 'UZ', 'AZ'],
-    payments: [''],
+    payments: [],
     hasDetailPage: true,
   },
   {
@@ -160,7 +156,7 @@ export const BRANDS = [
     image: 'images/grandwin.svg',
     bgColor: '#007537',
     countries: ['DE', 'IT', 'ES', 'CH', 'AT', 'PT', 'IE', 'CA', 'CL', 'UY', 'MX', 'PE', 'AR', 'CO', 'BR', 'SE', 'FI', 'NO', 'DK', 'SK', 'HU', 'SA', 'AE', 'KW', 'EG', 'NL', 'BE', 'IS', 'EE', 'SI', 'LV', 'HR', 'MD', 'KZ', 'UZ', 'AZ', 'BA'],
-    payments: [''],
+    payments: [],
     hasDetailPage: true,
   },
   {
@@ -172,7 +168,7 @@ export const BRANDS = [
     image: 'images/vavada.svg',
     bgColor: '#252536',
     countries: ['IT', 'CA', 'BG', 'HU', 'GR', 'PL', 'RO', 'CZ', 'EE', 'HR', 'RS', 'ME', 'LV', 'RU', 'KZ', 'UA', 'BY', 'BA', 'AZ', 'AM', 'UZ', 'IN'],
-    payments: [''],
+    payments: [],
     hasDetailPage: true,
   },
   {
@@ -184,7 +180,7 @@ export const BRANDS = [
     image: 'images/warriorbet.svg',
     bgColor: '#1C1C1E',
     countries: ['CA', 'NZ'],
-    payments: [''],
+    payments: [],
     hasDetailPage: true,
   },
   {
@@ -196,7 +192,7 @@ export const BRANDS = [
     image: 'images/warriorbet.svg',
     bgColor: '#1C1C1E',
     countries: ['CA', 'NZ'],
-    payments: [''],
+    payments: [],
     hasDetailPage: true,
   },
   {
@@ -208,7 +204,7 @@ export const BRANDS = [
     image: 'images/viperwin.png',
     bgColor: '#060B26',
     countries: ['IT', 'ES', 'CH', 'AT', 'IE', 'LU', 'CA', 'NZ', 'AU', 'CL', 'UY', 'MX', 'PE', 'AR', 'CO', 'BR', 'FI', 'NO', 'PL', 'CZ', 'SK', 'HU', 'TR', 'ZA', 'IS', 'SI', 'LV'],
-    payments: [''],
+    payments: [],
     hasDetailPage: true,
   },
   {
@@ -220,7 +216,7 @@ export const BRANDS = [
     image: 'images/bcgame.png',
     bgColor: '#292D2E',
     countries: ['AR', 'MX', 'IN', 'NG', 'KE', 'PH'],
-    payments: [''],
+    payments: [],
     hasDetailPage: true,
   },
   {
@@ -232,7 +228,7 @@ export const BRANDS = [
     image: 'images/goldenbet.svg',
     bgColor: '#000000',
     countries: ['UK'],
-    payments: [''],
+    payments: [],
     hasDetailPage: true,
   },
   {
@@ -244,7 +240,7 @@ export const BRANDS = [
     image: 'images/goldenbet.svg',
     bgColor: '#000000',
     countries: ['AU'],
-    payments: [''],
+    payments: [],
     hasDetailPage: true,
   },
   {
@@ -256,7 +252,7 @@ export const BRANDS = [
     image: 'images/vikingluck.webp',
     bgColor: '#4A221B',
     countries: ['IT', 'ES', 'CH', 'AT', 'IE', 'LU', 'CA', 'NZ', 'AU', 'CL', 'UY', 'MX', 'PE', 'AR', 'CO', 'BR', 'FI', 'NO', 'PL', 'CZ', 'SK', 'HU', 'TR', 'ZA', 'IS', 'SI', 'LV'],
-    payments: [''],
+    payments: [],
     hasDetailPage: true,
   },
   {
@@ -268,7 +264,7 @@ export const BRANDS = [
     image: 'images/browinner.svg',
     bgColor: '#0B092D',
     countries: ['DE', 'BE', 'IT', 'ES', 'GR', 'SK', 'SI', 'CZ', 'AT', 'CH', 'PL', 'HU', 'DK', 'AU', 'PT', 'RO', 'LU', 'CA', 'NO', 'IE', 'NZ', 'HR', 'FI', 'MK', 'RS', 'AL', 'ME', 'BR', 'KR'],
-    payments: [''],
+    payments: [],
     hasDetailPage: true,
   },
   {
@@ -280,7 +276,7 @@ export const BRANDS = [
     image: 'images/casinobossy.svg',
     bgColor: '#29155B',
     countries: ['DE', 'ES', 'BE', 'IT', 'LU', 'DK', 'SI', 'CH', 'MK', 'SK', 'AT', 'RS', 'PL', 'HU', 'RO', 'PT', 'CA', 'AU', 'FI', 'NZ', 'NO', 'BR', 'KR'],
-    payments: [''],
+    payments: [],
     hasDetailPage: true,
   },
   {
@@ -292,7 +288,7 @@ export const BRANDS = [
     image: 'images/mostbet.webp',
     bgColor: '#064C95',
     countries: ['ES', 'DE', 'AT', 'NO', 'FI', 'IE', 'HU', 'PL', 'SI', 'SK', 'CZ', 'IT', 'CH', 'BE', 'CA', 'AU', 'NZ'],
-    payments: [''],
+    payments: [],
     hasDetailPage: true,
   },
   {
@@ -304,7 +300,7 @@ export const BRANDS = [
     image: 'images/casinado.svg',
     bgColor: '#1C2738',
     countries: ['IT', 'ES', 'CH', 'AT', 'IE', 'LU', 'CA', 'NZ', 'AU', 'CL', 'UY', 'MX', 'PE', 'AR', 'CO', 'BR', 'FI', 'NO', 'PL', 'CZ', 'SK', 'HU', 'TR', 'ZA', 'IS', 'SI', 'LV'],
-    payments: [''],
+    payments: [],
     hasDetailPage: true,
   },
   {
@@ -316,7 +312,7 @@ export const BRANDS = [
     image: 'images/betrepublic.svg',
     bgColor: '#0E2542',
     countries: ['ES', 'DE', 'AT', 'NO', 'FI', 'IE', 'HU', 'PL', 'SI', 'SK', 'CZ', 'IT', 'CH', 'BE', 'CA', 'AU', 'NZ'],
-    payments: [''],
+    payments: [],
     hasDetailPage: true,
   },
   {
@@ -328,7 +324,7 @@ export const BRANDS = [
     image: 'images/casinova.svg',
     bgColor: '#1E1F2B',
     countries: ['ES', 'DE', 'AT', 'NO', 'FI', 'IE', 'HU', 'PL', 'SI', 'SK', 'CZ', 'IT', 'CH', 'BE', 'CA', 'AU', 'NZ'],
-    payments: [''],
+    payments: [],
     hasDetailPage: true,
   },
   {
@@ -340,7 +336,7 @@ export const BRANDS = [
     image: 'images/kingmaker.svg',
     bgColor: '#430F71',
     countries: ['ES', 'DE', 'AT', 'NO', 'FI', 'IE', 'HU', 'PL', 'SI', 'SK', 'CZ', 'IT', 'CH', 'BE', 'CA', 'AU', 'NZ'],
-    payments: [''],
+    payments: [],
     hasDetailPage: true,
   },
   {
@@ -352,7 +348,7 @@ export const BRANDS = [
     image: 'images/coldbet.svg',
     bgColor: '#012F3C',
     countries: ['PT', 'PL', 'GE'],
-    payments: [''],
+    payments: [],
     hasDetailPage: true,
   },
   {
@@ -364,7 +360,7 @@ export const BRANDS = [
     image: 'images/mafia.svg',
     bgColor: '#141923',
     countries: ['AU', 'AT', 'BE', 'CA', 'HR', 'CZ', 'DE', 'HU', 'IE', 'IT', 'NZ', 'PL', 'ES', 'SK'],
-    payments: [''],
+    payments: [],
     hasDetailPage: true,
   },
   {
@@ -376,10 +372,9 @@ export const BRANDS = [
     image: 'images/winolot.svg',
     bgColor: '#000000',
     countries: ['DE', 'IT', 'ES', 'CH', 'AT', 'IE', 'LU', 'CA', 'NZ', 'AU', 'CL', 'UY', 'MX', 'PE', 'AR', 'CO', 'BR', 'SE', 'FI', 'NO', 'DK', 'HU', 'NL', 'BE', 'IS', 'EE', 'LV', 'HR', 'MD', 'KZ', 'UZ', 'AZ', 'BA'],
-    payments: [''],
+    payments: [],
     hasDetailPage: true,
   },
-  */
   {
     name: 'DudeSpin',
     bonus: 'Casino Welcome Package - 300% up to €2,000 + 150 Free Spins',
@@ -1685,19 +1680,20 @@ export const BRANDS = [
     isTopRated: true,
     hasDetailPage: true,
   },
-  // {
-  //   name: 'Lucky Red',
-  //   bonus: 'Get up to $4,000 400% match +$75 free chip when using Crypto',
-  //   cta: 'Play Now',
-  //   urlDetail: 'brands/luckyred.html',
-  //   urlCasino: 'https://armadaapp.media-412.com/click?pid=3862&offer_id=119927',
-  //   image: 'images/luckyred.webp',
-  // bgColor: #000000,
-  //   top: ['US'],
-  //   countries: ['US'],
-  //   payments: ['visa', 'mastercard', 'americanexpress', 'bitcoin', 'etherium', 'litecoin', 'tether'],
-  //   isExclusive: true,
-  // },
+  {
+    name: 'Lucky Red',
+    bonus: 'Get up to $4,000 400% match +$75 free chip when using Crypto',
+    cta: 'Play Now',
+    urlDetail: 'brands/luckyred.html',
+    urlCasino: 'https://armadaapp.media-412.com/click?pid=3862&offer_id=119927',
+    image: 'images/luckyred.webp',
+    bgColor: '#000000',
+    top: ['US'],
+    countries: ['US'],
+    payments: ['visa', 'mastercard', 'americanexpress', 'bitcoin', 'etherium', 'litecoin', 'tether'],
+    isExclusive: true,
+    hasDetailPage: true,
+  },
   {
     name: 'Cazino',
     bonus: 'Welcome offer get an Extra 100% in Coins',
