@@ -51,6 +51,58 @@ export const BRAND_NEW_GAMES = {
       image: 'https://res.cloudinary.com/drj61gmd2/image/upload/v1785181596/spincresta/brands/onlywin/new-games/onlywin-new-game-7-x-7-fruity-shots_wygdza.webp',
     },
   ],
+  dazard: [
+    {
+      name: 'Ultras',
+      image: 'https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto/v1785663966/spincresta/brands/dazard/new-games/dazard-new-game-ultras_cimbkj',
+    },
+    {
+      name: 'Le Digger',
+      image: 'https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto/v1785663965/spincresta/brands/dazard/new-games/dazard-new-game-le-digger_ghu5g0',
+    },
+    {
+      name: 'Thor Power',
+      image: 'https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto/v1785663964/spincresta/brands/dazard/new-games/dazard-new-game-thor-power-whack-win_zzdemh',
+    },
+    {
+      name: 'Jungle Volcano',
+      image: 'https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto/v1785663963/spincresta/brands/dazard/new-games/dazard-new-game-jungle-volcano_svzdk0',
+    },
+    {
+      name: 'Hell Cash',
+      image: 'https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto/v1785663962/spincresta/brands/dazard/new-games/dazard-new-game-hell-cash_ud0lgr',
+    },
+    {
+      name: 'Gift of Midas',
+      image: 'https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto/v1785663961/spincresta/brands/dazard/new-games/dazard-new-game-gift-of-midas_aqthpw',
+    },
+  ],
+  billybillion: [
+    {
+      name: "Loki's Descendants",
+      image: 'https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto/v1785670157/spincresta/brands/billybillion/new-games/billybillion-new-game-lokis-descendants_xsb5mr',
+    },
+    {
+      name: 'Le Digger',
+      image: 'https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto/v1785670156/spincresta/brands/billybillion/new-games/billybillion-new-game-le-digger_xfmoqr',
+    },
+    {
+      name: 'Launch to Riches',
+      image: 'https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto/v1785670155/spincresta/brands/billybillion/new-games/billybillion-new-game-launch-to-riches_zr9gux',
+    },
+    {
+      name: 'Jungle Volcano',
+      image: 'https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto/v1785670155/spincresta/brands/billybillion/new-games/billybillion-new-game-jungle-volcano_mnxa0r',
+    },
+    {
+      name: 'Heartbreakers',
+      image: 'https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto/v1785670154/spincresta/brands/billybillion/new-games/billybillion-new-game-heartbreakers_iahin0',
+    },
+    {
+      name: 'Fruitillionaire',
+      image: 'https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto/v1785670153/spincresta/brands/billybillion/new-games/billybillion-new-game-fruitillionaire_pixmls',
+    },
+  ],
   mostbet: [
     {
       name: 'Aviatrix Mines',

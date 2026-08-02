@@ -505,6 +505,17 @@ const mostbetConfig = createGamesLiveBettingConfig(
   ['Football', 'Basketball', 'Tennis', 'Table tennis', 'Volleyball', 'Ice hockey', 'Cricket', 'Baseball', 'Handball', 'American football', 'eSports', 'Virtual sports', 'Combat sports', 'Boxing', 'Martial arts']
 );
 
+const dazardConfig = createGamesLiveBettingConfig(
+  ['Slots', 'Roulette', 'Blackjack', 'Baccarat', 'Jackpot games', 'Live games', 'Poker', 'Crash games'],
+  ['Live shows', 'Live baccarat', 'Live blackjack', 'Other live games', 'Live roulette', 'Live poker'],
+  ['Football', 'Basketball', 'Tennis', 'Table tennis', 'Volleyball', 'Ice hockey', 'Cricket', 'Baseball', 'Handball', 'American football', 'eSports', 'Virtual sports']
+);
+
+const billyBillionConfig = createGamesLiveConfig(
+  ['Slots', 'Roulette', 'Blackjack', 'Baccarat', 'Jackpot games', 'Live games', 'Poker'],
+  ['Live baccarat', 'Live blackjack', 'Other live games', 'Live poker', 'Live roulette']
+);
+
 export const BRAND_SNAPSHOT_CONFIGS = {
   ...mapSnapshotConfig(['trino', 'spellwin'], mixedCasinoSportsConfig),
   ...mapSnapshotConfig(['amonbet', 'luckywave', 'slotlair'], sportsPromoCasinoConfig),
@@ -568,4 +579,6 @@ export const BRAND_SNAPSHOT_CONFIGS = {
   velobet: velobetConfig,
   spinko: spinkoConfig,
   mostbet: mostbetConfig,
+  dazard: dazardConfig,
+  billybillion: billyBillionConfig,
 };

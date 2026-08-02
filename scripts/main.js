@@ -1,9 +1,9 @@
 ﻿// =====================
 // IMPORTS
 // =====================
-import { BRANDS } from './brands.js?v=20260801-mostbet-review-1';
+import { BRANDS } from './brands.js?v=20260802-directory-sync-1';
 import { BRAND_SNAPSHOT_CONFIGS } from './brand-snapshot-configs.js';
-import { BRAND_NEW_GAMES } from './brand-new-games.js?v=20260801-mostbet-review-1';
+import { BRAND_NEW_GAMES } from './brand-new-games.js?v=20260802-directory-sync-1';
 import { COUNTRIES } from './countries.js';
 
 // =====================
