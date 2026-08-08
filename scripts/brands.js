@@ -1690,7 +1690,7 @@ export const BRANDS = [
     bgColor: '#000000',
     top: ['US'],
     countries: ['US'],
-    payments: ['visa', 'mastercard', 'americanexpress', 'bitcoin', 'etherium', 'litecoin', 'tether'],
+    payments: ['visa', 'mastercard', 'americanexpress', 'bitcoin', 'ethereum', 'litecoin', 'tether'],
     isExclusive: true,
     hasDetailPage: true,
   },

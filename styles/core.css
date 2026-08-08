@@ -388,6 +388,106 @@ textarea {
   width: 100%;
 }
 
+.language-switcher {
+  position: relative;
+  order: 3;
+  margin-left: auto;
+  z-index: 20;
+}
+
+.language-switcher-current {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  min-width: 68px;
+  height: 44px;
+  padding: 0 10px;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.035);
+  color: var(--text-muted);
+  cursor: pointer;
+  list-style: none;
+  box-shadow: var(--shadow-control);
+  transition:
+    border-color 0.2s ease,
+    background 0.2s ease,
+    box-shadow 0.2s ease,
+    color 0.2s ease;
+}
+
+.language-switcher-current::-webkit-details-marker {
+  display: none;
+}
+
+.language-switcher-current img,
+.language-switcher-option img {
+  object-fit: contain;
+}
+
+.language-switcher-current img {
+  width: 24px;
+  height: 16px;
+}
+
+.language-switcher-option img {
+  width: 20px;
+  height: 14px;
+}
+
+.language-switcher-code {
+  color: currentColor;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: 0.04em;
+}
+
+.language-switcher-current:hover,
+.language-switcher-current:focus-visible,
+.language-switcher[open] .language-switcher-current {
+  border-color: rgba(255, 255, 255, 0.24);
+  background: rgba(255, 255, 255, 0.055);
+  color: var(--text-muted);
+  outline: none;
+}
+
+.language-switcher-menu {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  display: grid;
+  min-width: 66px;
+  padding: 5px;
+  border: 1px solid var(--border-soft);
+  border-radius: 10px;
+  background: var(--surface-card);
+  box-shadow: var(--shadow-card);
+}
+
+.language-switcher-option {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 7px;
+  width: 100%;
+  min-height: 34px;
+  padding: 7px 8px;
+  border-radius: 7px;
+  color: var(--text-muted);
+  text-decoration: none;
+}
+
+.language-switcher-option:visited,
+.language-switcher-option:hover,
+.language-switcher-option:focus-visible,
+.language-switcher-option[aria-current='page'] {
+  background: var(--surface-card-hover);
+  color: var(--text-muted);
+  outline: none;
+}
+
 .site-search {
   position: relative;
   flex: 0 1 224px;
@@ -1747,6 +1847,16 @@ textarea {
 
   .burger {
     display: flex;
+  }
+
+  .language-switcher {
+    order: 1;
+    margin-left: auto;
+    margin-right: 10px;
+  }
+
+  .burger {
+    order: 2;
   }
 }
 

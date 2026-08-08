@@ -13,6 +13,8 @@ desktop.ini
 *.log
 *.tmp
 *.bak
+tmp-*
+.localization-cache/
 
 # Build/cache outputs
 node_modules/

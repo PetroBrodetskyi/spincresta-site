@@ -1,7 +1,7 @@
 ﻿// =====================
 // IMPORTS
 // =====================
-import { BRANDS } from './brands.js?v=20260802-directory-sync-1';
+import { BRANDS } from './brands.js?v=20260808-ethereum-fix-1';
 import { BRAND_SNAPSHOT_CONFIGS } from './brand-snapshot-configs.js';
 import { BRAND_NEW_GAMES } from './brand-new-games.js?v=20260802-directory-sync-1';
 import { COUNTRIES } from './countries.js';
@@ -13,10 +13,19 @@ const PLACEHOLDER_LINK = '#';
 const MOJIBAKE_FIXES = [];
 const THEME_STORAGE_KEY = 'spincresta-theme';
 const THEME_OPTIONS = ['dark', 'light'];
+const LANGUAGE_STORAGE_KEY = 'spincresta-language';
+const LANGUAGE_OPTIONS = ['en', 'de'];
 const BLOCKED_BRAND_ICON = '/icons/ui/stop-blocked-icon.svg';
-const BLOCKED_BRAND_NOTICE =
-  'According to verified information from our analysts, this casino has issues with law enforcement authorities of the Republic of Belarus.';
-const BLOCKED_BRAND_CTA = 'Not recommended';
+const BLOCKED_BRAND_COPY = {
+  en: {
+    notice: 'According to verified information from our analysts, this casino has issues with law enforcement authorities of the Republic of Belarus.',
+    cta: 'Not recommended',
+  },
+  de: {
+    notice: 'Nach den von unseren Analysten geprüften Informationen hat dieses Casino Probleme mit den Strafverfolgungsbehörden der Republik Belarus.',
+    cta: 'Nicht empfohlen',
+  },
+};
 
 const normalizeText = value => {
   if (typeof value !== 'string') return value ?? '';
@@ -82,8 +91,210 @@ const normalizePagePath = path => {
   return `/${cleaned}/`;
 };
 
-const countryPagePath = slug => `/online-casinos/${slug}/`;
 const iconPath = slug => `/icons/${slug}-flag-icon.svg`;
+const SITE_LOCALE = document.documentElement.lang?.toLowerCase().startsWith('de') ? 'de' : 'en';
+const getStoredLanguage = () => {
+  try {
+    const stored = window.localStorage.getItem(LANGUAGE_STORAGE_KEY);
+    return LANGUAGE_OPTIONS.includes(stored) ? stored : null;
+  } catch {
+    return null;
+  }
+};
+const persistLanguage = locale => {
+  if (!LANGUAGE_OPTIONS.includes(locale)) return;
+
+  try {
+    window.localStorage.setItem(LANGUAGE_STORAGE_KEY, locale);
+  } catch {
+    // Ignore storage errors in private or restricted browsing modes.
+  }
+};
+const restoreLanguageOnEntry = () => {
+  const entryPath = window.location.pathname.replace(/\/index\.html$/, '/');
+  const storedLanguage = getStoredLanguage();
+
+  if (entryPath === '/' && SITE_LOCALE === 'en' && storedLanguage === 'de') {
+    window.location.replace(`/de/${window.location.search}${window.location.hash}`);
+    return;
+  }
+
+  persistLanguage(SITE_LOCALE);
+};
+
+restoreLanguageOnEntry();
+const GERMAN_COUNTRY_SLUGS = new Set(['argentina', 'australia', 'austria', 'azerbaijan', 'bangladesh', 'belgium', 'brazil', 'bulgaria', 'canada', 'chile', 'colombia', 'croatia', 'czech-republic', 'denmark', 'egypt', 'estonia', 'finland', 'france', 'germany', 'ghana', 'greece', 'hungary', 'iceland', 'india', 'indonesia', 'ireland', 'italy', 'japan', 'kazakhstan', 'kenya', 'kyrgyzstan', 'latvia', 'lithuania', 'luxembourg', 'malaysia', 'mexico', 'nepal', 'netherlands', 'new-zealand', 'nigeria', 'norway', 'peru', 'philippines', 'poland', 'portugal', 'romania', 'russia', 'singapore', 'slovakia', 'slovenia', 'south-africa', 'south-korea', 'spain', 'sweden', 'switzerland', 'tanzania', 'thailand', 'turkey', 'uganda', 'ukraine', 'united-kingdom', 'united-states', 'uzbekistan', 'vietnam']);
+const countryPagePath = slug =>
+  SITE_LOCALE === 'de' && GERMAN_COUNTRY_SLUGS.has(slug)
+    ? `/de/online-casinos/${slug}/`
+    : `/online-casinos/${slug}/`;
+const brandPagePath = brandOrPath => {
+  const rawPath = typeof brandOrPath === 'string' ? brandOrPath : brandOrPath?.urlDetail;
+  const normalized = normalizePagePath(rawPath || '');
+
+  if (SITE_LOCALE === 'de' && normalized.startsWith('/brands/')) {
+    return `/de${normalized}`;
+  }
+
+  return normalized;
+};
+const UI_COPY = {
+  en: {
+    searchLabel: 'Search SpinCresta',
+    searchPlaceholder: 'Search',
+    availableCountries: 'Available countries',
+    noMatches: 'No matches found',
+    openSearch: 'Open search',
+    closeSearch: 'Close search',
+    languageSwitcher: 'Choose language',
+    countries: 'Countries',
+    settings: 'Settings',
+    blog: 'Blog',
+    languageEnglish: 'English',
+    languageGerman: 'German',
+    countryGuide: 'Country guide',
+    brandReview: 'Brand review',
+    casinoReview: 'Casino review and player checks',
+    visitCasino: 'Visit Casino',
+    claimBonusPlay: 'Claim Bonus & Play',
+    review: 'Review',
+    topRated: 'Top Rated',
+    exclusive: 'Exclusive',
+    new: 'New',
+    all: 'All',
+    crypto: 'Crypto',
+    fastPayout: 'Fast Payout',
+    sportsbook: 'Sportsbook',
+    sweepstakes: 'Sweepstakes',
+    filterBrands: 'Filter casino brands',
+    noFilterMatches: 'No casinos match this filter yet.',
+    noCountryCasinos: 'No casinos available for this country.',
+    topCasinos: 'Top Casinos',
+    newCasinos: 'New Casinos',
+  },
+  de: {
+    searchLabel: 'SpinCresta durchsuchen',
+    searchPlaceholder: 'Suchen',
+    availableCountries: 'Verfügbare Länder',
+    noMatches: 'Keine Treffer gefunden',
+    openSearch: 'Suche öffnen',
+    closeSearch: 'Suche schließen',
+    languageSwitcher: 'Sprache auswählen',
+    countries: 'Länder',
+    settings: 'Einstellungen',
+    blog: 'Blog',
+    languageEnglish: 'Englisch',
+    languageGerman: 'Deutsch',
+    countryGuide: 'Länder-Guide',
+    brandReview: 'Marken-Test',
+    casinoReview: 'Casino-Test und Spieler-Checks',
+    visitCasino: 'Spielen',
+    claimBonusPlay: 'Bonus sichern & spielen',
+    review: 'Test',
+    topRated: 'Top bewertet',
+    exclusive: 'Exklusiv',
+    new: 'Neu',
+    all: 'Alle',
+    crypto: 'Krypto',
+    fastPayout: 'Schnelle Auszahlung',
+    sportsbook: 'Sportwetten',
+    sweepstakes: 'Social Casino',
+    filterBrands: 'Casino-Marken filtern',
+    noFilterMatches: 'Noch keine Casinos für diesen Filter.',
+    noCountryCasinos: 'Für dieses Land sind noch keine Casinos verfügbar.',
+    topCasinos: 'Top Casinos',
+    newCasinos: 'Neue Casinos',
+  },
+};
+const uiCopy = UI_COPY[SITE_LOCALE];
+const localizedPagePath = path => {
+  const normalized = normalizePagePath(path);
+  if (SITE_LOCALE !== 'de' || !normalized.startsWith('/') || normalized.startsWith('/de/')) {
+    return normalized;
+  }
+
+  return normalized === '/' ? '/de/' : `/de${normalized}`;
+};
+const COUNTRY_NAMES_DE = {
+  argentina: 'Argentinien',
+  australia: 'Australien',
+  austria: 'Österreich',
+  azerbaijan: 'Aserbaidschan',
+  bangladesh: 'Bangladesch',
+  belgium: 'Belgien',
+  brazil: 'Brasilien',
+  bulgaria: 'Bulgarien',
+  canada: 'Kanada',
+  chile: 'Chile',
+  colombia: 'Kolumbien',
+  croatia: 'Kroatien',
+  'czech-republic': 'Tschechien',
+  denmark: 'Dänemark',
+  egypt: 'Ägypten',
+  estonia: 'Estland',
+  finland: 'Finnland',
+  france: 'Frankreich',
+  germany: 'Deutschland',
+  ghana: 'Ghana',
+  greece: 'Griechenland',
+  hungary: 'Ungarn',
+  iceland: 'Island',
+  india: 'Indien',
+  indonesia: 'Indonesien',
+  ireland: 'Irland',
+  italy: 'Italien',
+  japan: 'Japan',
+  kazakhstan: 'Kasachstan',
+  kenya: 'Kenia',
+  kyrgyzstan: 'Kirgisistan',
+  latvia: 'Lettland',
+  lithuania: 'Litauen',
+  luxembourg: 'Luxemburg',
+  malaysia: 'Malaysia',
+  mexico: 'Mexiko',
+  netherlands: 'Niederlande',
+  nepal: 'Nepal',
+  'new-zealand': 'Neuseeland',
+  nigeria: 'Nigeria',
+  norway: 'Norwegen',
+  philippines: 'Philippinen',
+  poland: 'Polen',
+  portugal: 'Portugal',
+  peru: 'Peru',
+  russia: 'Russland',
+  romania: 'Rumänien',
+  singapore: 'Singapur',
+  slovakia: 'Slowakei',
+  slovenia: 'Slowenien',
+  'south-africa': 'Südafrika',
+  'south-korea': 'Südkorea',
+  spain: 'Spanien',
+  sweden: 'Schweden',
+  switzerland: 'Schweiz',
+  thailand: 'Thailand',
+  turkey: 'Türkei',
+  tanzania: 'Tansania',
+  uganda: 'Uganda',
+  ukraine: 'Ukraine',
+  'united-kingdom': 'Vereinigtes Königreich',
+  'united-states': 'Vereinigte Staaten',
+  uzbekistan: 'Usbekistan',
+  vietnam: 'Vietnam',
+};
+const localizedCountryName = country =>
+  SITE_LOCALE === 'de' ? COUNTRY_NAMES_DE[country.slug] || country.name : country.name;
+
+const localizedCountryTitle = country => {
+  const name = localizedCountryName(country);
+  if (SITE_LOCALE !== 'de') return `Top ${name} Casinos`;
+
+  const germanCases = {
+    'united-states': 'in den Vereinigten Staaten',
+    'united-kingdom': 'im Vereinigten Königreich',
+  };
+
+  return `Top Casinos ${germanCases[country.slug] || `in ${name}`}`;
+};
 
 const syncHeaderFlowMetrics = header => {
   if (!header) return;
@@ -101,62 +312,72 @@ const syncHeaderFlowMetrics = header => {
   document.body.classList.toggle('header-is-expanded', isExpanded);
 };
 const paymentPath = method => `/icons/payments/${method}.svg`;
-const pagePath = fileName => normalizePagePath(fileName);
+const pagePath = fileName => localizedPagePath(fileName);
 
 const STATIC_SEARCH_ITEMS = [
   {
     label: 'Top Casinos',
+    labelDe: 'Top Casinos',
     type: 'Page',
     href: '/top-casinos/',
     keywords: 'best casinos top casino reviews worldwide',
   },
   {
     label: 'New Casinos',
+    labelDe: 'Neue Casinos',
     type: 'Page',
     href: '/new-casinos/',
     keywords: 'new casino reviews fresh brands latest',
   },
   {
     label: 'Top Rated',
+    labelDe: 'Top bewertet',
     type: 'Page',
     href: '/top-rated/',
     keywords: 'top rated trusted casino reviews rating',
   },
   {
     label: 'Exclusive',
+    labelDe: 'Exklusiv',
     type: 'Page',
     href: '/exclusive-offers/',
     keywords: 'exclusive offers private bonuses promotions deals',
   },
   {
     label: 'Casinos & Betting',
+    labelDe: 'Casinos & Wetten',
     type: 'Page',
     href: '/casinos-and-betting/',
     keywords: 'all brands casinos betting sportsbooks a to z',
   },
   {
     label: 'Payment Methods',
+    labelDe: 'Zahlungsmethoden',
     type: 'Page',
     href: '/payment-methods/',
     keywords: 'payments visa mastercard crypto bank transfer ewallets',
   },
   {
     label: 'Responsible Gambling',
+    labelDe: 'Verantwortungsvolles Spielen',
     type: 'Page',
     href: '/responsible-gambling/',
     keywords: 'responsible gambling safer play limits help',
   },
   {
     label: 'About SpinCresta',
+    labelDe: 'Über SpinCresta',
     type: 'Page',
     href: '/about/',
     keywords: 'about spincresta team reviews mission',
   },
   {
     label: 'SpinCresta Blog',
+    labelDe: 'SpinCresta Blog',
     type: 'Blog',
     href: '/blog/',
     summary: 'Casino guides, payment explainers, bonus terms, and safer-play checks',
+    summaryDe: 'Casino-Ratgeber, Erklärungen zu Zahlungen, Bonusbedingungen und Spielerschutz',
     keywords: 'blog casino guides payment bonuses withdrawals kyc country reviews',
   },
 ];
@@ -197,14 +418,24 @@ const getSiteSearchItems = () => {
     items.set(item.href, { ...item, haystack });
   };
 
-  STATIC_SEARCH_ITEMS.forEach(addItem);
+  STATIC_SEARCH_ITEMS.forEach(item => addItem({
+    ...item,
+    label: SITE_LOCALE === 'de' ? item.labelDe || item.label : item.label,
+    type: SITE_LOCALE === 'de' && item.type === 'Page' ? 'Seite' : item.type,
+    summary: SITE_LOCALE === 'de' ? item.summaryDe || item.summary : item.summary,
+    href: localizedPagePath(item.href),
+  }));
 
   COUNTRIES.forEach(country => {
+    const countryName = localizedCountryName(country);
     addItem({
-      label: `${country.name} casinos`,
-      type: 'Country guide',
+      label: `${countryName} casinos`,
+      type: uiCopy.countryGuide,
       href: countryPagePath(country.slug),
-      summary: `Online casinos and betting in ${country.name}`,
+      summary:
+        SITE_LOCALE === 'de'
+          ? `Online Casinos und Sportwetten in ${countryName}`
+          : `Online casinos and betting in ${countryName}`,
       keywords: `${country.code} ${country.slug}`,
     });
   });
@@ -219,12 +450,12 @@ const getSiteSearchItems = () => {
 
     addItem({
       label: brand.name,
-      type: 'Brand review',
-      href: normalizePagePath(brand.urlDetail),
-      summary: brand.bonus || 'Casino review and player checks',
+      type: uiCopy.brandReview,
+      href: brandPagePath(brand),
+      summary: brand.bonus || uiCopy.casinoReview,
       keywords: [countries, brand.payments?.join(' ')].filter(Boolean).join(' '),
       flags: brandCountries.map(country => ({
-        name: country.name,
+        name: localizedCountryName(country),
         slug: country.slug,
       })),
     });
@@ -239,12 +470,12 @@ const createSiteSearch = variant => {
   const id = `site-search-${variant}`;
   form.className = `site-search site-search--${variant}`;
   form.setAttribute('role', 'search');
-  form.setAttribute('aria-label', 'Search SpinCresta');
+  form.setAttribute('aria-label', uiCopy.searchLabel);
   form.innerHTML = `
-    <label class="site-search-label" for="${id}">Search SpinCresta</label>
+    <label class="site-search-label" for="${id}">${uiCopy.searchLabel}</label>
     <div class="site-search-shell">
       <img class="site-search-icon" src="/icons/ui/search-icon.svg" alt="" aria-hidden="true" loading="lazy" decoding="async" />
-      <input id="${id}" class="site-search-input" type="search" placeholder="Search" autocomplete="off" spellcheck="false" />
+      <input id="${id}" class="site-search-input" type="search" placeholder="${uiCopy.searchPlaceholder}" autocomplete="off" spellcheck="false" />
     </div>
     <div class="site-search-results" hidden></div>
   `;
@@ -262,7 +493,7 @@ const createSiteSearch = variant => {
   const renderResultLink = item => {
     const flagsHtml = item.flags?.length
       ? `
-        <span class="site-search-flags" aria-label="Available countries">
+        <span class="site-search-flags" aria-label="${uiCopy.availableCountries}">
           ${item.flags
             .map(
               flag => `
@@ -307,7 +538,7 @@ const createSiteSearch = variant => {
     resultsEl.hidden = false;
     resultsEl.innerHTML = activeResults.length
       ? activeResults.map(renderResultLink).join('')
-      : '<div class="site-search-empty">No matches found</div>';
+      : `<div class="site-search-empty">${uiCopy.noMatches}</div>`;
   };
 
   form.addEventListener('submit', event => {
@@ -349,7 +580,7 @@ const initDesktopSiteSearch = () => {
     const trigger = document.createElement('button');
     trigger.type = 'button';
     trigger.className = 'site-search-trigger site-search-trigger--desktop';
-    trigger.setAttribute('aria-label', 'Open search');
+    trigger.setAttribute('aria-label', uiCopy.openSearch);
     trigger.setAttribute('aria-controls', search.id);
     trigger.setAttribute('aria-expanded', 'false');
     trigger.innerHTML = `
@@ -364,13 +595,77 @@ const initDesktopSiteSearch = () => {
 const getDefaultTheme = () => 'dark';
 
 const ensureFooterBlogLink = () => {
+  const blogHref = localizedPagePath('/blog/');
   document.querySelectorAll('.footer-nav').forEach((footerNav) => {
-    if (footerNav.querySelector('a[href="/blog/"]')) return;
+    if (footerNav.querySelector(`a[href="${blogHref}"]`)) return;
 
     const link = document.createElement('a');
-    link.href = '/blog/';
-    link.textContent = 'Blog';
+    link.href = blogHref;
+    link.textContent = uiCopy.blog;
     footerNav.append(link);
+  });
+};
+
+const initLanguageSwitcher = () => {
+  const headerInner = document.querySelector('.header-inner');
+  if (!headerInner || headerInner.querySelector('.language-switcher')) return;
+
+  const isGerman = SITE_LOCALE === 'de';
+  const getLocaleSwitchPath = locale => {
+    const countryMatch = window.location.pathname.match(/^\/(?:de\/)?online-casinos\/([^/]+)\/?$/);
+    if (countryMatch) {
+      const slug = countryMatch[1];
+      return locale === 'de'
+        ? GERMAN_COUNTRY_SLUGS.has(slug) ? `/de/online-casinos/${slug}/` : '/de/'
+        : `/online-casinos/${slug}/`;
+    }
+
+    const brandMatch = window.location.pathname.match(/^\/(?:de\/)?brands\/([^/]+)\/?$/);
+    if (brandMatch) {
+      const slug = brandMatch[1];
+      return locale === 'de' ? `/de/brands/${slug}/` : `/brands/${slug}/`;
+    }
+
+    const currentPath = window.location.pathname;
+    if (locale === 'de') {
+      if (currentPath === '/de' || currentPath.startsWith('/de/')) return currentPath === '/de' ? '/de/' : currentPath;
+      return currentPath === '/' ? '/de/' : `/de${currentPath}`;
+    }
+
+    const englishPath = currentPath.replace(/^\/de(?=\/|$)/, '');
+    return englishPath || '/';
+  };
+
+  const switcher = document.createElement('details');
+  switcher.className = 'language-switcher';
+  switcher.innerHTML = `
+    <summary class="language-switcher-current" aria-label="${uiCopy.languageSwitcher}">
+      <img src="/icons/${isGerman ? 'germany' : 'united-kingdom'}-flag-icon.svg" alt="" aria-hidden="true" loading="lazy" decoding="async" />
+      <span class="language-switcher-code" aria-hidden="true">${isGerman ? 'DE' : 'EN'}</span>
+    </summary>
+    <div class="language-switcher-menu">
+      <a class="language-switcher-option" href="${getLocaleSwitchPath('en')}" lang="en" aria-label="${uiCopy.languageEnglish}" title="${uiCopy.languageEnglish}"${isGerman ? '' : ' aria-current="page"'}>
+        <img src="/icons/united-kingdom-flag-icon.svg" alt="" aria-hidden="true" loading="lazy" decoding="async" />
+        <span class="language-switcher-code" aria-hidden="true">EN</span>
+      </a>
+      <a class="language-switcher-option" href="${getLocaleSwitchPath('de')}" lang="de" aria-label="${uiCopy.languageGerman}" title="${uiCopy.languageGerman}"${isGerman ? ' aria-current="page"' : ''}>
+        <img src="/icons/germany-flag-icon.svg" alt="" aria-hidden="true" loading="lazy" decoding="async" />
+        <span class="language-switcher-code" aria-hidden="true">DE</span>
+      </a>
+    </div>
+  `;
+  headerInner.append(switcher);
+
+  switcher.addEventListener('click', event => {
+    const option = event.target.closest('.language-switcher-option');
+    if (option) {
+      persistLanguage(option.getAttribute('lang'));
+      switcher.removeAttribute('open');
+    }
+  });
+
+  document.addEventListener('click', event => {
+    if (!switcher.contains(event.target)) switcher.removeAttribute('open');
   });
 };
 
@@ -480,7 +775,7 @@ const getBrandAlternatives = brand => {
 };
 
 const getBlockedCtaMarkup = () => `
-  <span>Visit Casino</span>
+  <span>${uiCopy.visitCasino}</span>
 `;
 
 const disableCasinoCta = element => {
@@ -524,8 +819,8 @@ const insertBrandRiskInlineNotice = brand => {
     <div class="brand-risk-inline__notice">
       <img class="brand-risk-inline__icon" src="${BLOCKED_BRAND_ICON}" alt="" aria-hidden="true" loading="lazy" decoding="async" />
       <div class="brand-risk-inline__copy">
-        <strong>${escapeHtml(BLOCKED_BRAND_CTA)}</strong>
-        <p>${escapeHtml(BLOCKED_BRAND_NOTICE)}</p>
+        <strong>${escapeHtml(BLOCKED_BRAND_COPY[SITE_LOCALE].cta)}</strong>
+        <p>${escapeHtml(BLOCKED_BRAND_COPY[SITE_LOCALE].notice)}</p>
       </div>
     </div>
     ${
@@ -630,9 +925,9 @@ const getBrandBackgroundStyle = brand => {
 };
 
 const createBadge = ({ isTopRated, isExclusive, isNew }) => {
-  if (isTopRated) return `<span class="casino-status-badge top-rated-badge">Top Rated</span>`;
-  if (isExclusive) return `<span class="casino-status-badge exclusive-badge">Exclusive</span>`;
-  if (isNew) return `<span class="casino-status-badge new-badge">New</span>`;
+  if (isTopRated) return `<span class="casino-status-badge top-rated-badge">${uiCopy.topRated}</span>`;
+  if (isExclusive) return `<span class="casino-status-badge exclusive-badge">${uiCopy.exclusive}</span>`;
+  if (isNew) return `<span class="casino-status-badge new-badge">${uiCopy.new}</span>`;
   return '';
 };
 
@@ -830,7 +1125,7 @@ const syncFooterBrandDirectory = () => {
   const countryNames = new Map(COUNTRIES.map(country => [country.code.toUpperCase(), country.name]));
   const brandLinks = BRANDS.filter(brand => brand.hasDetailPage && brand.urlDetail)
     .map(brand => ({
-      href: normalizePagePath(brand.urlDetail),
+      href: brandPagePath(brand),
       label: normalizeText(brand.name),
       countries: (brand.countries || []).filter(Boolean),
     }))
@@ -896,8 +1191,8 @@ const createCasinoCard = ({
   const safeUrl = urlCasino || PLACEHOLDER_LINK;
   const safeName = normalizeText(name);
   const safeBonus = normalizeText(bonus);
-  const primaryCtaText = 'Visit Casino';
-  const detailUrl = normalizePagePath(urlDetail ?? '');
+  const primaryCtaText = uiCopy.visitCasino;
+  const detailUrl = brandPagePath(urlDetail ?? '');
   const imageUrl = normalizeAssetPath(image ?? '');
   const isBlocked = Boolean(notRecommended);
   const showReviewAction = Boolean(hasDetailPage && detailUrl);
@@ -927,7 +1222,7 @@ const createCasinoCard = ({
       <div class="casino-actions ${showReviewAction && showPlayAction ? 'has-two-actions' : 'has-single-action'}">
         ${
           showReviewAction
-            ? `<a class="cta cta-secondary" href="${detailUrl}">Review</a>`
+            ? `<a class="cta cta-secondary" href="${detailUrl}">${uiCopy.review}</a>`
             : ''
         }
         ${
@@ -1100,34 +1395,34 @@ const renderBrandList = (brands, containerSelector, emptyText) => {
 const getCountryFilterDefinitions = () => [
   {
     id: 'all',
-    label: 'All',
+    label: uiCopy.all,
     matches: () => true,
   },
   {
     id: 'top-rated',
-    label: 'Top Rated',
+    label: uiCopy.topRated,
     matches: brand => Boolean(brand.isTopRated || brand.top?.length),
   },
   {
     id: 'new',
-    label: 'New',
+    label: uiCopy.new,
     matches: brand => Boolean(brand.isNew),
   },
   {
     id: 'crypto',
-    label: 'Crypto',
+    label: uiCopy.crypto,
     matches: brand => (brand.payments || []).some(isCryptoPayment),
   },
   {
     id: 'fast-payout',
-    label: 'Fast Payout',
+    label: uiCopy.fastPayout,
     matches: brand =>
       /fast|payout|withdraw/i.test(normalizeText(brand.bonus)) ||
       (brand.payments || []).some(isFastPayment),
   },
   {
     id: 'sportsbook',
-    label: 'Sportsbook',
+    label: uiCopy.sportsbook,
     matches: brand =>
       /sport|sportsbook|betting|free bets/i.test(
         [brand.name, brand.bonus, brand.urlDetail].map(normalizeText).join(' ')
@@ -1135,7 +1430,7 @@ const getCountryFilterDefinitions = () => [
   },
   {
     id: 'sweepstakes',
-    label: 'Sweepstakes',
+    label: uiCopy.sweepstakes,
     matches: brand => /sweep|sweeps|social casino/i.test(normalizeText(brand.bonus)),
   },
 ];
@@ -1157,7 +1452,7 @@ const initCountryBrandFilters = (pageCountry, brands, onChange) => {
 
   const filterBar = document.createElement('div');
   filterBar.className = 'country-filter-bar';
-  filterBar.setAttribute('aria-label', 'Filter casino brands');
+  filterBar.setAttribute('aria-label', uiCopy.filterBrands);
   filterBar.innerHTML = `
     <div class="country-filter-bar__controls">
       ${filterDefinitions
@@ -1778,7 +2073,20 @@ const ensureCountryBrandStage = pageCountry => {
 
 const applyCountryHeroConcept = () => {
   const hero = document.querySelector('body[data-country] .hero');
-  const heroContent = hero?.querySelector(':scope > .hero-content');
+  let heroContent = hero?.querySelector(':scope > .hero-content');
+  if (!heroContent) {
+    const legacyHeroCopy = hero?.querySelector(':scope > .container > .hero-copy');
+    if (legacyHeroCopy) {
+      const legacyContainer = legacyHeroCopy.parentElement;
+      legacyHeroCopy.classList.remove('hero-copy');
+      legacyHeroCopy.classList.add('hero-content');
+      hero.classList.remove('content-hero');
+      hero.classList.add('container');
+      hero.appendChild(legacyHeroCopy);
+      legacyContainer?.remove();
+      heroContent = legacyHeroCopy;
+    }
+  }
   const stage = document.querySelector('.country-brand-stage');
   const brandMain = stage?.querySelector('.country-brand-main');
   const brandSide = stage?.querySelector('.country-brand-side');
@@ -1849,7 +2157,7 @@ const renderCountryNewReviews = pageCountry => {
 
   container.innerHTML = reviewBrands
     .map(brand => {
-      const detailUrl = normalizePagePath(brand.urlDetail);
+      const detailUrl = brandPagePath(brand);
       const imageUrl = normalizeAssetPath(brand.image);
       const bonus = normalizeText(brand.bonus || 'Fresh review with updated bonus and payment details.');
       const compactBonus = bonus.replace(/\s+/g, ' ').trim();
@@ -1947,7 +2255,7 @@ const normalizeFinalBrandCtaLabels = () => {
   document
     .querySelectorAll('body[data-brand] .final-cta-glass a.cta-brands')
     .forEach(link => {
-      link.textContent = 'Claim Bonus & Play';
+      link.textContent = uiCopy.claimBonusPlay;
     });
 };
 
@@ -2074,6 +2382,41 @@ const initBrandHeroPanels = () => {
   heroContent.dataset.panelsReady = 'true';
 };
 
+const SNAPSHOT_DE_TRANSLATIONS = {
+  'Games & Betting Snapshot': 'Spiele- und Wettüberblick',
+  'Visible now:': 'Aktuell sichtbar:',
+  'Not surfaced:': 'Nicht eingeblendet:',
+  'These are the main game categories currently visible in the account.':
+    'Dies sind die wichtigsten Spielkategorien, die aktuell im Konto sichtbar sind.',
+  'These are the main betting categories currently visible in the account.':
+    'Dies sind die wichtigsten Wettkategorien, die aktuell im Konto sichtbar sind.',
+  Games: 'SPIELE',
+  GAMES: 'SPIELE',
+  'LIVE GAMES': 'LIVE-SPIELE',
+  Betting: 'SPORTWETTEN',
+  BETTING: 'SPORTWETTEN',
+  Slots: 'Slots',
+  Roulette: 'Roulette',
+  Blackjack: 'Blackjack',
+  Baccarat: 'Baccarat',
+  Poker: 'Poker',
+  Keno: 'Keno',
+  Bingo: 'Bingo',
+  'Jackpot games': 'Jackpot-Spiele',
+  'Live games': 'Live-Spiele',
+  'Live dice games': 'Live-Würfelspiele',
+  'Craps and dice': 'Craps und Würfelspiele',
+  'Scratch cards': 'Rubbellose',
+  'Video poker': 'Video-Poker',
+  'Crash games': 'Crash-Spiele',
+  'Other live games': 'Weitere Live-Spiele',
+  'Live casino': 'Live-Casino',
+  'Game shows': 'Game Shows',
+};
+
+const snapshotLabel = value =>
+  SITE_LOCALE === 'de' ? SNAPSHOT_DE_TRANSLATIONS[value] || value : value;
+
 const renderSnapshotItems = (items, isAvailable) =>
   items
     .map(
@@ -2084,7 +2427,7 @@ const renderSnapshotItems = (items, isAvailable) =>
             alt="${isAvailable ? 'Available section' : 'Unavailable section'}"
             aria-hidden="true"
           />
-          <span>${normalizeText(item)}</span>
+          <span>${normalizeText(snapshotLabel(item))}</span>
         </div>
       `
     )
@@ -2127,7 +2470,7 @@ const renderBrandAvailabilityWidget = brandKey => {
             data-tab-target="${panelId}"
             ${index === 0 ? '' : 'tabindex="-1"'}
           >
-            ${normalizeText(tab.label)}
+            ${normalizeText(snapshotLabel(tab.label))}
           </button>
         `,
         panel: `
@@ -2147,14 +2490,18 @@ const renderBrandAvailabilityWidget = brandKey => {
               <div class="availability-counts">
                 <span class="is-available">
                   <img src="/icons/ui/confirm-icon.svg" alt="Available sections" aria-hidden="true" />
-                  Visible now: ${availableCount}
+                  ${snapshotLabel('Visible now:')} ${availableCount}
                 </span>
                 <span class="is-unavailable">
                   <img src="/icons/ui/remove-close-round-grey-icon.svg" alt="Unavailable sections" aria-hidden="true" />
-                  Not surfaced: ${unavailableCount}
+                  ${snapshotLabel('Not surfaced:')} ${unavailableCount}
                 </span>
               </div>
-              <p>${normalizeText(tab.note || `These are the main ${tab.label.toLowerCase()} sections currently visible on the account.`)}</p>
+              <p>${normalizeText(
+                snapshotLabel(
+                  tab.note || `These are the main ${tab.label.toLowerCase()} sections currently visible on the account.`
+                )
+              )}</p>
             </div>
           </div>
         `,
@@ -2171,7 +2518,7 @@ const renderBrandAvailabilityWidget = brandKey => {
 
   section.innerHTML = `
     <div class="brand-availability-widget glass-section">
-      <h2 class="title">Games &amp; Betting Snapshot</h2>
+      <h2 class="title">${normalizeText(snapshotLabel('Games & Betting Snapshot'))}</h2>
       <p class="brand-availability-intro">
         ${normalizeText(
           snapshotIntro ||
@@ -2355,21 +2702,27 @@ const initBrandCountryCollapse = () => {
 const enhanceBrandProsCons = () => {
   document.querySelectorAll('body[data-brand] .feature-card > strong').forEach(heading => {
     const label = normalizeText(heading.textContent).trim().toLowerCase();
-    if (label !== 'pros' && label !== 'cons') return;
+    const kind =
+      label === 'pros' || label === 'vorteile'
+        ? 'pros'
+        : label === 'cons' || label === 'nachteile'
+          ? 'cons'
+          : '';
+    if (!kind) return;
     if (heading.querySelector('.pros-cons-icon')) return;
 
     const card = heading.closest('.feature-card');
     if (card) {
-      card.classList.add(label === 'pros' ? 'is-pros-card' : 'is-cons-card');
+      card.classList.add(kind === 'pros' ? 'is-pros-card' : 'is-cons-card');
       card.closest('.features-grid')?.classList.add('pros-cons-grid');
     }
 
-    heading.classList.add('pros-cons-heading', label === 'pros' ? 'is-pros' : 'is-cons');
+    heading.classList.add('pros-cons-heading', kind === 'pros' ? 'is-pros' : 'is-cons');
 
     const icon = document.createElement('img');
     icon.className = 'pros-cons-icon';
     icon.src =
-      label === 'pros' ? '/icons/ui/addition-color-icon.svg' : '/icons/ui/subtract-color-icon.svg';
+      kind === 'pros' ? '/icons/ui/addition-color-icon.svg' : '/icons/ui/subtract-color-icon.svg';
     icon.alt = '';
     icon.setAttribute('aria-hidden', 'true');
 
@@ -2555,7 +2908,8 @@ const enhanceFaqBlocks = () => {
     if (!title || (!timeline && !faqGrid)) return;
 
     const titleText = normalizeText(title.textContent).trim().toLowerCase();
-    if (!titleText.includes('faq')) return;
+    const isFaqTitle = titleText.includes('faq') || titleText.includes('häufige fragen');
+    if (!isFaqTitle) return;
 
     if (document.body.matches('[data-brand]') && timeline) {
       enhanceBrandFaqTimeline(timeline);
@@ -2713,14 +3067,15 @@ const createBrandNewGamesRail = () => {
     `;
   };
 
+  const newGamesLabel = SITE_LOCALE === 'de' ? 'Neue Spiele' : 'New Games';
   const rail = document.createElement('aside');
   rail.className = 'brand-new-games-rail';
-  rail.setAttribute('aria-label', 'New games');
+  rail.setAttribute('aria-label', newGamesLabel);
   rail.innerHTML = `
     <div class="brand-new-games-panel">
       <div class="brand-new-games-heading">
         <span class="brand-new-games-kicker">LATEST RELEASES</span>
-        <h2>New Games</h2>
+        <h2>${newGamesLabel}</h2>
       </div>
       <div class="brand-new-games-list">
         ${games.map(cardMarkup).join('')}
@@ -2780,6 +3135,8 @@ const applyBrandLogoBackgrounds = () => {
 
     const detailPath = normalizePagePath(brand.urlDetail || '');
     if (detailPath) byDetailPath.set(detailPath, brand);
+    const localizedDetailPath = brandPagePath(brand);
+    if (localizedDetailPath) byDetailPath.set(localizedDetailPath, brand);
 
     const nameKey = normalizeBrandKey(brand.name);
     if (nameKey && !byName.has(nameKey)) byName.set(nameKey, brand);
@@ -2915,11 +3272,11 @@ export const initCasinoPage = () => {
     const brands = BRANDS.filter(b => b.countries?.some(c => c.toUpperCase() === pageCountry));
 
     initCountryBrandFilters(pageCountry, brands, filteredBrands => {
-      renderBrandList(filteredBrands, '#brand-cards', 'No casinos match this filter yet.');
+      renderBrandList(filteredBrands, '#brand-cards', uiCopy.noFilterMatches);
       applyBrandLogoBackgrounds();
       requestPaymentIconSync();
     });
-    renderBrandList(brands, '#brand-cards', 'No casinos available for this country.');
+    renderBrandList(brands, '#brand-cards', uiCopy.noCountryCasinos);
     applyBrandLogoBackgrounds();
   }
 
@@ -2962,7 +3319,7 @@ export const initCasinoPage = () => {
     const country = COUNTRIES.find(c => c.code.toUpperCase() === code);
     const limit = Number(grid.dataset.limit) || 4;
 
-    titleEl.textContent = `Top ${country?.name || code} Casinos`;
+    titleEl.textContent = localizedCountryTitle(country || { slug: '', name: code });
 
     const topBrands = BRANDS.filter(b => b.top?.includes(code) && b.countries?.includes(code));
     const needsTopCasinosFill = document.body.dataset.page === 'top-casinos' && topBrands.length < limit;
@@ -3103,8 +3460,8 @@ export const initCasinoPage = () => {
     countriesDropdown.innerHTML = COUNTRIES.map(
       c => `
         <a href="${countryPagePath(c.slug)}">
-          <img class="flag" src="${iconPath(c.slug)}" alt="${normalizeText(c.name)}" loading="lazy" decoding="async"/>
-          ${normalizeText(c.name)}
+          <img class="flag" src="${iconPath(c.slug)}" alt="${normalizeText(localizedCountryName(c))}" loading="lazy" decoding="async"/>
+          ${normalizeText(localizedCountryName(c))}
         </a>
       `
     ).join('');
@@ -3136,6 +3493,7 @@ export const initCasinoPage = () => {
   navDropdownLink?.querySelector('.nav-dropdown-icon')?.remove();
 
   initDesktopSiteSearch();
+  initLanguageSwitcher();
   ensureFooterBlogLink();
   const desktopSearch = desktopNavHeaderInner?.querySelector('.site-search--desktop');
   const desktopSearchTrigger = desktopNavHeaderInner?.querySelector('.site-search-trigger--desktop');
@@ -3175,7 +3533,10 @@ export const initCasinoPage = () => {
       desktopNavHeaderInner.classList.toggle('search-expanded', nextOpen);
       desktopSearchTrigger.classList.toggle('is-active', nextOpen);
       desktopSearchTrigger.setAttribute('aria-expanded', nextOpen ? 'true' : 'false');
-      desktopSearchTrigger.setAttribute('aria-label', nextOpen ? 'Close search' : 'Open search');
+      desktopSearchTrigger.setAttribute(
+        'aria-label',
+        nextOpen ? uiCopy.closeSearch : uiCopy.openSearch
+      );
       desktopSearch.setAttribute('aria-hidden', nextOpen ? 'false' : 'true');
 
       if (nextOpen) {
@@ -3344,8 +3705,8 @@ export const initCasinoPage = () => {
       a.href = countryPagePath(c.slug);
       a.className = 'country-link';
       a.innerHTML = `
-        <img class="flag" src="${iconPath(c.slug)}" alt="${normalizeText(c.name)}" loading="lazy" decoding="async">
-        <span>${normalizeText(c.name)}</span>
+        <img class="flag" src="${iconPath(c.slug)}" alt="${normalizeText(localizedCountryName(c))}" loading="lazy" decoding="async">
+        <span>${normalizeText(localizedCountryName(c))}</span>
       `;
       return a;
     })
@@ -3362,12 +3723,12 @@ export const initCasinoPage = () => {
     if (!mobileMenuInner) return;
 
     mobileMenuInner.innerHTML = `
-    <button class="submenu-toggle" aria-expanded="false">Countries</button>
-    <a href="${pagePath('top-casinos.html')}">Top Casinos</a>
-    <a href="${pagePath('new-casinos.html')}">New Casinos</a>
-    <a href="${pagePath('top-rated.html')}">Top Rated</a>
-    <a href="${pagePath('exclusive-offers.html')}">Exclusive</a>
-    <button type="button" class="mobile-theme-settings" data-theme-settings-trigger aria-haspopup="dialog">Settings</button>
+    <button class="submenu-toggle" aria-expanded="false">${uiCopy.countries}</button>
+    <a href="${pagePath('top-casinos.html')}">${uiCopy.topCasinos}</a>
+    <a href="${pagePath('new-casinos.html')}">${uiCopy.newCasinos}</a>
+    <a href="${pagePath('top-rated.html')}">${uiCopy.topRated}</a>
+    <a href="${pagePath('exclusive-offers.html')}">${uiCopy.exclusive}</a>
+    <button type="button" class="mobile-theme-settings" data-theme-settings-trigger aria-haspopup="dialog">${uiCopy.settings}</button>
   `;
 
     const submenuToggle = mobileMenuInner.querySelector('.submenu-toggle');
@@ -3382,8 +3743,8 @@ export const initCasinoPage = () => {
     countriesSubmenu.innerHTML = COUNTRIES.map(
       c => `
     <a href="${countryPagePath(c.slug)}">
-      <img class="flag" src="${iconPath(c.slug)}" alt="${normalizeText(c.name)}" loading="lazy" decoding="async"/>
-      ${normalizeText(c.name)}
+      <img class="flag" src="${iconPath(c.slug)}" alt="${normalizeText(localizedCountryName(c))}" loading="lazy" decoding="async"/>
+      ${normalizeText(localizedCountryName(c))}
     </a>
   `
     ).join('');
