@@ -6914,7 +6914,8 @@ body[data-country] .country-new-reviews .home-insight-card:hover {
 /* Expert Review - editorial review panel */
 body[data-country] .expert-review {
   --section-eyebrow: 'Editorial Review';
-  --expert-accent: var(--section-accent);
+  --section-accent: #c8ced6;
+  --expert-accent: #c8ced6;
   --expert-line: color-mix(in srgb, var(--expert-accent) 32%, transparent);
   --expert-soft: color-mix(in srgb, var(--expert-accent) 12%, transparent);
   --expert-strong: color-mix(in srgb, var(--expert-accent) 76%, transparent);
@@ -6984,7 +6985,7 @@ body[data-country] .expert-header {
   border-radius: 18px;
   background:
     radial-gradient(circle at 50% 18%, color-mix(in srgb, var(--expert-accent) 18%, transparent), transparent 34%),
-    linear-gradient(160deg, #10181b, #080d10 72%);
+    linear-gradient(160deg, #16181b, #090a0c 72%);
   text-align: center;
 }
 
@@ -7134,7 +7135,7 @@ body[data-country] .expert-body {
   border-radius: 18px;
   background:
     radial-gradient(circle at 94% 4%, color-mix(in srgb, var(--expert-accent) 17%, transparent), transparent 28%),
-    linear-gradient(145deg, #11191c 0%, #0a1013 58%, #070c0f 100%);
+    linear-gradient(145deg, #17191c 0%, #0d0f12 58%, #08090b 100%);
   box-shadow:
     inset 0 1px 0 rgba(255, 255, 255, 0.055),
     0 24px 55px rgba(0, 0, 0, 0.16);
@@ -7391,7 +7392,7 @@ html[data-theme='light'] body[data-country] .expert-card {
 html[data-theme='light'] body[data-country] .expert-header {
   background:
     radial-gradient(circle at 50% 18%, color-mix(in srgb, var(--expert-accent) 18%, transparent), transparent 34%),
-    linear-gradient(160deg, #132024, #091013 72%);
+    linear-gradient(160deg, #181a1d, #0a0b0d 72%);
 }
 
 @media (max-width: 1200px) and (min-width: 901px) {
@@ -10836,6 +10837,196 @@ body[data-country] .country-casino-shot:focus-visible {
 @media (max-width: 560px) {
   body[data-country] .country-casino-gallery-grid {
     grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+/* Country-specific new game releases, using the compact New Reviews visual language. */
+body[data-country] .country-new-games {
+  padding-top: clamp(46px, 6vw, 76px);
+  padding-bottom: clamp(46px, 6vw, 76px);
+}
+
+body[data-country] .country-new-games > .container {
+  width: 100%;
+  min-width: 0;
+}
+
+body[data-country] .country-new-games-head {
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(320px, 1fr);
+  gap: 24px clamp(30px, 5vw, 72px);
+  align-items: end;
+  margin-bottom: clamp(24px, 3vw, 38px);
+}
+
+body[data-country] .country-new-games-kicker {
+  display: block;
+  color: var(--section-accent);
+  font-size: 11px;
+  font-weight: 800;
+  line-height: 1.2;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+body[data-country] .country-new-games-head h2 {
+  max-width: 18ch;
+  margin: 10px 0 0;
+  color: var(--text-main);
+  font-size: clamp(32px, 4.2vw, 58px);
+  font-weight: 650;
+  line-height: 1.02;
+  letter-spacing: -0.025em;
+  text-wrap: balance;
+}
+
+body[data-country] .country-new-games-head > p {
+  max-width: 64ch;
+  margin: 0;
+  color: var(--text-muted);
+  font-size: 15px;
+  line-height: 1.68;
+}
+
+body[data-country] .country-new-games-grid {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 12px;
+}
+
+body[data-country] .country-new-games.is-sparse .country-new-games-grid {
+  grid-template-columns: repeat(var(--country-game-count), minmax(0, 210px));
+  justify-content: start;
+}
+
+body[data-country] .country-new-game-card {
+  display: grid;
+  min-width: 0;
+  grid-template-rows: 154px minmax(62px, auto);
+  overflow: hidden;
+  border: 1px solid var(--surface-border);
+  border-radius: var(--radius-md);
+  background: var(--surface-card);
+  color: var(--text-main);
+  text-decoration: none;
+  box-shadow: var(--shadow-soft);
+  scroll-snap-align: start;
+  transition:
+    transform 180ms ease,
+    border-color 180ms ease,
+    box-shadow 180ms ease;
+}
+
+body[data-country] .country-new-game-card:hover,
+body[data-country] .country-new-game-card:focus-visible {
+  border-color: var(--section-accent);
+  box-shadow: var(--shadow-hover);
+  transform: translateY(-3px);
+}
+
+body[data-country] .country-new-game-card:focus-visible {
+  outline: 2px solid var(--section-accent);
+  outline-offset: 3px;
+}
+
+body[data-country] .country-new-game-art {
+  display: grid;
+  min-width: 0;
+  place-items: center;
+  padding: 7px;
+  overflow: hidden;
+  border-bottom: 1px solid var(--surface-border);
+  background:
+    radial-gradient(circle at 85% 0%, rgba(255, 255, 255, 0.12), transparent 36%),
+    radial-gradient(circle at 0% 100%, rgba(168, 205, 185, 0.1), transparent 40%),
+    linear-gradient(155deg, #171d21, #080c0f 72%);
+}
+
+body[data-country] .country-new-game-art img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center;
+}
+
+body[data-country] .country-new-game-copy {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  padding: 10px 9px;
+  text-align: center;
+}
+
+body[data-country] .country-new-game-copy strong {
+  display: -webkit-box;
+  overflow: hidden;
+  color: var(--text-main);
+  font-size: 12.5px;
+  font-weight: 750;
+  line-height: 1.25;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+
+body[data-country] .country-new-game-copy small {
+  display: block;
+  max-width: 100%;
+  overflow: hidden;
+  color: var(--text-muted);
+  font-size: 10.5px;
+  line-height: 1.2;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+@media (max-width: 1024px) {
+  body[data-country] .country-new-games-grid {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 768px) {
+  body[data-country] .country-new-games {
+    padding-top: 42px;
+    padding-bottom: 42px;
+  }
+
+  body[data-country] .country-new-games-head {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 14px;
+  }
+
+  body[data-country] .country-new-games-head h2 {
+    max-width: none;
+    font-size: clamp(30px, 9vw, 42px);
+  }
+
+  body[data-country] .country-new-games-head > p {
+    font-size: 13.5px;
+    line-height: 1.55;
+  }
+
+  body[data-country] .country-new-games-grid,
+  body[data-country] .country-new-games.is-sparse .country-new-games-grid {
+    grid-template-columns: none;
+    grid-auto-flow: column;
+    grid-auto-columns: minmax(158px, 44vw);
+    justify-content: start;
+    gap: 10px;
+    padding: 2px 2px 12px;
+    overflow-x: auto;
+    overscroll-behavior-inline: contain;
+    scroll-snap-type: inline proximity;
+    scrollbar-color: var(--surface-border-strong) transparent;
+    scrollbar-width: thin;
+  }
+
+  body[data-country] .country-new-game-card {
+    grid-template-rows: 132px minmax(60px, auto);
   }
 }
 
