@@ -3857,17 +3857,24 @@ export const initCasinoPage = () => {
               const market = BRAND_ONLY_COUNTRIES[code.toUpperCase()];
               if (!market) return '';
               const marketName = market.name[SITE_LOCALE] || market.name.en;
+              const marketLabel =
+                SITE_LOCALE === 'de'
+                  ? `${marketName} Marktverfügbarkeit`
+                  : `${marketName} market availability`;
               return `
-                <span class="flag-container brand-country-market" aria-label="${normalizeText(marketName)} market availability">
+                <span class="flag-container brand-country-market" aria-label="${normalizeText(marketLabel)}">
                   <img class="hero-flag" src="${iconPath(market.slug)}" alt="${normalizeText(marketName)}" loading="lazy" decoding="async"/>
                   <span>${normalizeText(marketName)}</span>
                 </span>
               `;
             }
+            const countryName = localizedCountryName(c);
+            const countryGuideLabel =
+              SITE_LOCALE === 'de' ? `${countryName} Casino-Guide` : `${countryName} casino guide`;
             return `
-              <a class="flag-container" href="${countryPagePath(c.slug)}" aria-label="${normalizeText(c.name)} casino guide">
-                <img class="hero-flag" src="${iconPath(c.slug)}" alt="${normalizeText(c.name)}" loading="lazy" decoding="async"/>
-                <span>${normalizeText(c.name)}</span>
+              <a class="flag-container" href="${countryPagePath(c.slug)}" aria-label="${normalizeText(countryGuideLabel)}">
+                <img class="hero-flag" src="${iconPath(c.slug)}" alt="${normalizeText(countryName)}" loading="lazy" decoding="async"/>
+                <span>${normalizeText(countryName)}</span>
               </a>
             `;
           })
