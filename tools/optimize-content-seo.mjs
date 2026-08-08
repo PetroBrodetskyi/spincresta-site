@@ -163,6 +163,7 @@ const syncJsonLd = (html, { title, description, locale, brandPage, legalAnswer }
         if (node['@type'] === 'WebPage') {
           if (title) node.name = title;
           if (description) node.description = description;
+          if (legalAnswer) node.reviewedBy = { '@id': 'https://spincresta.com/#odri-chambers' };
         }
         if (brandPage && node['@type'] === 'BreadcrumbList') {
           const second = node.itemListElement?.find(item => item.position === 2);
@@ -184,6 +185,23 @@ const syncJsonLd = (html, { title, description, locale, brandPage, legalAnswer }
           );
           if (question?.acceptedAnswer) question.acceptedAnswer.text = legalAnswer;
         }
+      }
+
+      if (
+        legalAnswer &&
+        Array.isArray(data['@graph']) &&
+        !data['@graph'].some(node => node['@id'] === 'https://spincresta.com/#odri-chambers')
+      ) {
+        data['@graph'].push({
+          '@type': 'Person',
+          '@id': 'https://spincresta.com/#odri-chambers',
+          name: 'Odri Chambers',
+          url: `https://spincresta.com/${locale === 'de' ? 'de/' : ''}authors/odri-chambers/`,
+          image: 'https://spincresta.com/images/team/odri-chambers.jpg',
+          jobTitle: locale === 'de' ? 'iGaming-Expertin' : 'iGaming Expert',
+          worksFor: { '@id': 'https://spincresta.com/#organization' },
+          sameAs: ['https://www.linkedin.com/in/odri-chambers-4344091b5/'],
+        });
       }
       return `${open}${JSON.stringify(data)}${close}`;
     }
@@ -277,6 +295,32 @@ const countryMetadata = (html, locale) => {
 };
 
 const replaceCountryExpertReview = (html, locale, data) => {
+  const header =
+    locale === 'de'
+      ? `<div class="expert-header">
+              <a class="expert-avatar" href="/de/authors/odri-chambers/" aria-label="Autorenprofil von Odri Chambers">
+                <img src="/images/team/odri-chambers.jpg" alt="Odri Chambers" width="800" height="800" loading="lazy" decoding="async" />
+              </a>
+              <div class="expert-info">
+                <span class="expert-byline-label">Geprüft von</span>
+                <h3><a href="/de/authors/odri-chambers/">Odri Chambers</a></h3>
+                <p class="expert-role">iGaming-Expertin</p>
+                <p class="expert-meta">Tätig in der iGaming-Branche seit 2020</p>
+                <a class="expert-linkedin" href="https://www.linkedin.com/in/odri-chambers-4344091b5/" target="_blank" rel="me noopener noreferrer">LinkedIn-Profil</a>
+              </div>
+            </div>`
+      : `<div class="expert-header">
+              <a class="expert-avatar" href="/authors/odri-chambers/" aria-label="Odri Chambers author profile">
+                <img src="/images/team/odri-chambers.jpg" alt="Odri Chambers" width="800" height="800" loading="lazy" decoding="async" />
+              </a>
+              <div class="expert-info">
+                <span class="expert-byline-label">Reviewed by</span>
+                <h3><a href="/authors/odri-chambers/">Odri Chambers</a></h3>
+                <p class="expert-role">iGaming Expert</p>
+                <p class="expert-meta">Working in the iGaming industry since 2020</p>
+                <a class="expert-linkedin" href="https://www.linkedin.com/in/odri-chambers-4344091b5/" target="_blank" rel="me noopener noreferrer">LinkedIn profile</a>
+              </div>
+            </div>`;
   const body =
     locale === 'de'
       ? `<div class="expert-body">
@@ -309,6 +353,11 @@ const replaceCountryExpertReview = (html, locale, data) => {
               <p>Operators rank higher when their terms are clear, licence information is traceable, payment routes fit the market, and safer-play controls are easy to find. Commercial relationships do not replace these criteria.</p>
               <p class="expert-disclaimer">Editorially updated: August ${YEAR}. Offers and regional rules can change. Before registering or depositing, verify the operator's current terms and guidance from the relevant authority. Gambling is for adults only and can be addictive.</p>
             </div>`;
+  html = html.replace(
+    /<div class=["']expert-header["']>\s*<div class=["']expert-info["']>[\s\S]*?<\/div>\s*<\/div>/i,
+    header
+  );
+
   return html.replace(/<div class=["']expert-body["']>[\s\S]*?<\/div>\s*<\/div>\s*<\/div>\s*<\/section>/i, `${body}\n          </div>\n        </div>\n      </section>`);
 };
 

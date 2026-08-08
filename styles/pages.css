@@ -4485,11 +4485,15 @@ html[data-theme='light']
 
 html[data-theme='light'] .footer-settings-trigger {
   border-color: transparent;
-  color: var(--text-muted);
+  color: #94a3b8;
+}
+
+html[data-theme='light'] .footer-nav .footer-settings-trigger {
+  border-right: 1px solid rgba(255, 255, 255, 0.16);
 }
 
 html[data-theme='light'] .footer-settings-trigger:hover {
-  color: #8a5e1f;
+  color: var(--gold, #ffdf00);
 }
 
 .theme-settings-option {
@@ -6911,9 +6915,9 @@ body[data-country] .country-new-reviews .home-insight-card:hover {
 body[data-country] .expert-review {
   --section-eyebrow: 'Editorial Review';
   --expert-accent: var(--section-accent);
-  --expert-line: color-mix(in srgb, var(--expert-accent) 28%, transparent);
-  --expert-soft: color-mix(in srgb, var(--expert-accent) 10%, transparent);
-  --expert-strong: color-mix(in srgb, var(--expert-accent) 68%, transparent);
+  --expert-line: color-mix(in srgb, var(--expert-accent) 32%, transparent);
+  --expert-soft: color-mix(in srgb, var(--expert-accent) 12%, transparent);
+  --expert-strong: color-mix(in srgb, var(--expert-accent) 76%, transparent);
   width: 100%;
   border-radius: 0;
   background: transparent;
@@ -6922,139 +6926,311 @@ body[data-country] .expert-review {
   box-shadow: none;
 }
 
+html[lang='de'] body[data-country] .expert-review {
+  --section-eyebrow: 'Redaktionelle Prüfung';
+}
+
+html[lang='de'] body[data-country] .expert-review .container {
+  --section-eyebrow: 'Redaktionelle Prüfung';
+}
+
 body[data-country] .expert-review .container {
   width: 100%;
   max-width: none;
   padding: 0;
-  text-align: center;
+  text-align: left;
 }
 
 body[data-country] .expert-review .title {
-  max-width: 760px;
-  margin: 0 auto clamp(24px, 3vw, 34px);
-  text-align: center;
+  max-width: none;
+  margin: 0 0 clamp(24px, 3vw, 34px);
+  text-align: left;
+}
+
+body[data-country] .expert-review .title::before {
+  text-align: left;
 }
 
 body[data-country] .expert-card {
   position: relative;
-  display: block;
+  display: grid;
+  grid-template-columns: minmax(290px, 0.72fr) minmax(0, 1.8fr);
+  gap: clamp(30px, 4vw, 58px);
   min-height: 0;
-  padding: clamp(34px, 4.2vw, 68px);
-  border: 1px solid var(--border-soft);
-  border-radius: 18px;
-  background-color: #0b0f14;
-  background-image:
-    linear-gradient(90deg, rgba(8, 12, 18, 0.98) 0%, rgba(8, 12, 18, 0.94) 58%, rgba(8, 12, 18, 0.72) 82%, rgba(8, 12, 18, 0.54) 100%),
-    url('https://res.cloudinary.com/drj61gmd2/image/upload/f_webp/v1784837707/spincresta/editorial/expert-review-dark.png');
-  background-position: center, top center;
-  background-size: cover, 100% auto;
-  background-repeat: no-repeat;
-  box-shadow: var(--shadow-soft);
-  overflow: hidden;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+  overflow: visible;
 }
 
 body[data-country] .expert-card::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  right: 0;
-  left: 0;
-  height: 2px;
-  background: linear-gradient(90deg, var(--expert-strong), var(--expert-soft));
+  display: none;
 }
 
 body[data-country] .expert-header {
   position: relative;
-  display: block;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
   max-width: 100%;
   min-width: 0;
   margin: 0;
-  padding: 0 0 24px;
+  padding: clamp(24px, 3vw, 38px);
   border: 0;
-  border-bottom: 1px solid var(--expert-line);
-  text-align: left;
+  border-radius: 18px;
+  background:
+    radial-gradient(circle at 50% 18%, color-mix(in srgb, var(--expert-accent) 18%, transparent), transparent 34%),
+    linear-gradient(160deg, #10181b, #080d10 72%);
+  text-align: center;
+}
+
+body[data-country] .expert-header::before {
+  content: '\2713';
+  position: absolute;
+  top: clamp(24px, 3vw, 38px);
+  left: clamp(24px, 3vw, 38px);
+  display: grid;
+  place-items: center;
+  width: 42px;
+  height: 42px;
+  border: 1px solid var(--expert-strong);
+  border-radius: 50%;
+  background: rgba(5, 10, 14, 0.72);
+  color: var(--expert-accent);
+  font-size: 19px;
+  font-weight: 850;
+  line-height: 1;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.24);
+  backdrop-filter: blur(10px);
 }
 
 body[data-country] .expert-info {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
-  gap: 8px;
+  align-items: center;
+  gap: 7px;
+  width: 100%;
   min-width: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+  text-align: center;
+}
+
+body[data-country] .expert-avatar {
+  position: relative;
+  display: block;
+  width: clamp(112px, 9vw, 136px);
+  height: clamp(112px, 9vw, 136px);
+  flex: 0 0 auto;
+  overflow: hidden;
+  border: 3px solid color-mix(in srgb, var(--expert-accent) 72%, #ffffff 28%);
+  border-radius: 50%;
+  background: #11181b;
+  box-shadow:
+    0 0 0 8px color-mix(in srgb, var(--expert-accent) 9%, transparent),
+    0 22px 46px rgba(0, 0, 0, 0.34);
+}
+
+body[data-country] .expert-avatar img {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  display: block;
+  width: 220%;
+  max-width: none;
+  height: 220%;
+  object-fit: cover;
+  transform: translate(-54%, -31%);
+}
+
+body[data-country] .expert-byline-label {
+  color: rgba(226, 232, 240, 0.58);
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  line-height: 1.2;
+  text-transform: uppercase;
 }
 
 body[data-country] .expert-info h3 {
   margin: 0;
-  color: var(--text-main);
-  font-size: clamp(21px, 1.8vw, 27px);
-  font-weight: 650;
-  line-height: 1.08;
+  color: #f7f9fb;
+  font-size: clamp(20px, 1.65vw, 25px);
+  font-weight: 700;
+  line-height: 1.12;
   letter-spacing: 0;
+}
+
+body[data-country] .expert-info h3 a {
+  color: inherit;
+  text-decoration: none;
+}
+
+body[data-country] .expert-info h3 a:hover,
+body[data-country] .expert-info h3 a:focus-visible {
+  color: var(--expert-accent);
+  outline: none;
 }
 
 body[data-country] .expert-role {
   margin: 0;
   color: var(--expert-accent);
-  font-size: 12px;
-  font-weight: 750;
+  font-size: 11px;
+  font-weight: 800;
   line-height: 1.25;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
 }
 
 body[data-country] .expert-meta {
   margin: 0;
-  max-width: 30ch;
-  color: var(--text-muted);
-  font-size: 13.5px;
+  max-width: 34ch;
+  color: rgba(226, 232, 240, 0.7);
+  font-size: 13px;
   line-height: 1.55;
-  text-align: left;
+  text-align: center;
+}
+
+body[data-country] .expert-linkedin {
+  display: inline-flex;
+  min-height: 34px;
+  align-items: center;
+  justify-content: center;
+  margin-top: 7px;
+  padding: 8px 12px;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 999px;
+  color: rgba(241, 245, 249, 0.82);
+  font-size: 11px;
+  font-weight: 700;
+  line-height: 1;
+  text-decoration: none;
+}
+
+body[data-country] .expert-linkedin:hover,
+body[data-country] .expert-linkedin:focus-visible {
+  border-color: var(--expert-strong);
+  color: var(--expert-accent);
+  outline: none;
 }
 
 body[data-country] .expert-body {
+  position: relative;
   display: grid;
-  grid-template-columns: minmax(0, 1fr);
-  gap: 20px;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  align-content: start;
+  gap: 14px;
   max-width: 100%;
-  margin: 28px 0 0;
+  margin: 0;
   min-width: 0;
+  padding: clamp(26px, 3vw, 40px);
+  border-radius: 18px;
+  background:
+    radial-gradient(circle at 94% 4%, color-mix(in srgb, var(--expert-accent) 17%, transparent), transparent 28%),
+    linear-gradient(145deg, #11191c 0%, #0a1013 58%, #070c0f 100%);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.055),
+    0 24px 55px rgba(0, 0, 0, 0.16);
   text-align: left;
+  isolation: isolate;
+  overflow: hidden;
+}
+
+body[data-country] .expert-body::before {
+  content: 'SpinCresta review framework  /  5-point check';
+  position: relative;
+  z-index: 1;
+  grid-column: 1 / -1;
+  display: block;
+  margin: 0 0 4px;
+  color: var(--expert-accent);
+  font-size: 10px;
+  font-weight: 850;
+  letter-spacing: 0.13em;
+  line-height: 1.3;
+  text-transform: uppercase;
+}
+
+html[lang='de'] body[data-country] .expert-body::before {
+  content: 'SpinCresta-Prüfmodell  /  5-Punkte-Check';
+}
+
+body[data-country] .expert-body::after {
+  content: '';
+  position: absolute;
+  z-index: -1;
+  right: -72px;
+  bottom: -88px;
+  width: 250px;
+  height: 250px;
+  border: 1px solid color-mix(in srgb, var(--expert-accent) 15%, transparent);
+  border-radius: 50%;
+  box-shadow:
+    0 0 0 34px color-mix(in srgb, var(--expert-accent) 3%, transparent),
+    0 0 0 68px color-mix(in srgb, var(--expert-accent) 2%, transparent);
 }
 
 body[data-country] .expert-body > p,
 body[data-country] .expert-body > h3,
 body[data-country] .expert-body > ul,
 body[data-country] .expert-body > .expert-disclaimer {
+  position: relative;
+  z-index: 1;
   grid-column: 1 / -1;
 }
 
 body[data-country] .expert-body > p {
   max-width: 96ch;
   margin: 0;
-  color: var(--text-muted);
-  font-size: 15.25px;
-  line-height: 1.68;
+  color: rgba(226, 232, 240, 0.7);
+  font-size: 14.5px;
+  line-height: 1.66;
   text-align: left;
 }
 
 body[data-country] .expert-body > p:first-of-type {
-  padding: 0 0 0 20px;
+  grid-column: 1 / 8;
+  align-self: stretch;
+  max-width: none;
+  padding: 0 16px 0 0;
   border: 0;
-  border-left: 3px solid var(--expert-accent);
   border-radius: 0;
   background: transparent;
-  color: var(--text-main);
-  font-size: clamp(16.5px, 1.28vw, 18.5px);
-  line-height: 1.64;
+  color: #f8fafc;
+  font-size: clamp(17px, 1.25vw, 20px);
+  font-weight: 560;
+  line-height: 1.5;
+  letter-spacing: -0.015em;
+}
+
+body[data-country] .expert-body > p:nth-of-type(2) {
+  grid-column: 8 / -1;
+  align-self: stretch;
+  max-width: none;
+  padding: 15px 17px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.035);
+  color: rgba(226, 232, 240, 0.66);
+  font-size: 13px;
+  line-height: 1.58;
 }
 
 body[data-country] .expert-body h3 {
   position: relative;
-  margin: 4px 0 0;
-  padding-top: 20px;
-  border-top: 1px solid var(--border-soft);
-  color: var(--text-main);
-  font-size: clamp(18px, 1.45vw, 22px);
-  font-weight: 650;
+  margin: 8px 0 0;
+  padding-top: 22px;
+  border-top: 1px solid rgba(255, 255, 255, 0.09);
+  color: #f8fafc;
+  font-size: clamp(18px, 1.4vw, 21px);
+  font-weight: 700;
   line-height: 1.2;
   text-align: left;
 }
@@ -7062,8 +7238,8 @@ body[data-country] .expert-body h3 {
 body[data-country] .expert-criteria,
 body[data-country] .expert-methodology {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 0 26px;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 12px;
   margin: 0;
   padding: 0;
   list-style: none;
@@ -7073,37 +7249,56 @@ body[data-country] .expert-methodology {
 body[data-country] .expert-criteria li,
 body[data-country] .expert-methodology li {
   position: relative;
-  min-height: 0;
-  padding: 14px 0 14px 40px;
-  border: 0;
-  border-top: 1px solid var(--border-soft);
-  border-radius: 0;
-  background: transparent;
-  color: var(--text-muted);
-  font-size: 13.5px;
-  line-height: 1.48;
+  grid-column: span 2;
+  min-height: 132px;
+  padding: 50px 17px 18px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 14px;
+  background:
+    linear-gradient(150deg, rgba(255, 255, 255, 0.055), rgba(255, 255, 255, 0.018)),
+    color-mix(in srgb, var(--expert-accent) 3%, transparent);
+  color: rgba(226, 232, 240, 0.76);
+  font-size: 13px;
+  line-height: 1.5;
   text-align: left;
-  box-shadow: none;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.035);
   counter-increment: expert-review-step;
+  overflow: hidden;
 }
 
 body[data-country] .expert-criteria li::before,
 body[data-country] .expert-methodology li::before {
-  content: counter(expert-review-step);
+  content: '0' counter(expert-review-step);
   position: absolute;
-  top: 13px;
-  left: 0;
-  display: grid;
-  place-items: center;
-  width: 24px;
-  height: 24px;
-  border: 1px solid var(--expert-strong);
-  border-radius: 999px;
-  background: var(--expert-soft);
+  top: 17px;
+  left: 17px;
+  display: block;
+  width: auto;
+  height: auto;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
   color: var(--expert-accent);
-  font-size: 11px;
-  font-weight: 800;
+  font-size: 12px;
+  font-weight: 850;
+  letter-spacing: 0.08em;
   line-height: 1;
+}
+
+body[data-country] .expert-methodology li::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 17px;
+  width: 42px;
+  height: 2px;
+  border-radius: 999px;
+  background: var(--expert-accent);
+  opacity: 0.72;
+}
+
+body[data-country] .expert-methodology li:nth-child(n + 4) {
+  grid-column: span 3;
 }
 
 body[data-country] .expert-platforms {
@@ -7122,30 +7317,96 @@ body[data-country] .expert-platforms li {
 
 body[data-country] .expert-disclaimer {
   margin: 4px 0 0;
-  padding: 14px 16px 14px 18px;
-  border: 1px solid var(--expert-line);
-  border-radius: 8px;
-  background:
-    linear-gradient(90deg, var(--expert-soft), transparent);
-  color: var(--text-muted);
-  font-size: 13px;
+  padding: 16px 18px 16px 54px;
+  border: 1px solid color-mix(in srgb, var(--expert-accent) 24%, transparent);
+  border-radius: 14px;
+  background: linear-gradient(100deg, color-mix(in srgb, var(--expert-accent) 10%, transparent), rgba(255, 255, 255, 0.018));
+  color: rgba(226, 232, 240, 0.66);
+  font-size: 12px;
   line-height: 1.58;
 }
 
-html[data-theme='light'] body[data-country] .expert-card {
-  background-color: #ffffff;
-  background-image:
-    linear-gradient(90deg, rgba(255, 255, 255, 0.99) 0%, rgba(255, 255, 255, 0.96) 58%, rgba(255, 255, 255, 0.78) 82%, rgba(255, 255, 255, 0.58) 100%),
-    url('https://res.cloudinary.com/drj61gmd2/image/upload/f_webp/v1784837710/spincresta/editorial/expert-review-light.png');
-  background-position: center, top center;
-  background-size: cover, 100% auto;
-  background-repeat: no-repeat;
-  border-color: rgba(15, 23, 42, 0.12);
+body[data-country] .expert-disclaimer::before {
+  content: '\2713';
+  position: absolute;
+  top: 17px;
+  left: 17px;
+  display: grid;
+  place-items: center;
+  width: 24px;
+  height: 24px;
+  border: 1px solid var(--expert-strong);
+  border-radius: 50%;
+  color: var(--expert-accent);
+  font-size: 11px;
+  font-weight: 850;
+  line-height: 1;
 }
 
-html[data-theme='light'] body[data-country] .expert-disclaimer {
-  color: #64748b;
-  background: linear-gradient(90deg, var(--expert-soft), transparent);
+body[data-country] .expert-body h3:nth-of-type(2) {
+  grid-column: 1 / 5;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 118px;
+  margin: 6px 0 0;
+  padding: 20px;
+  border: 1px solid color-mix(in srgb, var(--expert-accent) 22%, transparent);
+  border-radius: 14px;
+  background: color-mix(in srgb, var(--expert-accent) 8%, transparent);
+}
+
+body[data-country] .expert-body h3:nth-of-type(2)::after {
+  content: 'Clear terms  /  Traceable licences  /  Market fit';
+  display: block;
+  margin-top: 12px;
+  color: var(--expert-accent);
+  font-size: 9px;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  line-height: 1.45;
+  text-transform: uppercase;
+}
+
+html[lang='de'] body[data-country] .expert-body h3:nth-of-type(2)::after {
+  content: 'Klare Regeln  /  Prüfbare Lizenzen  /  Marktbezug';
+}
+
+body[data-country] .expert-body > p:nth-of-type(3) {
+  grid-column: 5 / -1;
+  align-self: stretch;
+  max-width: none;
+  margin: 6px 0 0;
+  padding: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.035);
+  color: rgba(226, 232, 240, 0.76);
+}
+
+html[data-theme='light'] body[data-country] .expert-card {
+  background: transparent;
+}
+
+html[data-theme='light'] body[data-country] .expert-header {
+  background:
+    radial-gradient(circle at 50% 18%, color-mix(in srgb, var(--expert-accent) 18%, transparent), transparent 34%),
+    linear-gradient(160deg, #132024, #091013 72%);
+}
+
+@media (max-width: 1200px) and (min-width: 901px) {
+  body[data-country] .expert-methodology {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  body[data-country] .expert-methodology li,
+  body[data-country] .expert-methodology li:nth-child(n + 4) {
+    grid-column: auto;
+  }
+
+  body[data-country] .expert-methodology li:last-child:nth-child(odd) {
+    grid-column: 1 / -1;
+  }
 }
 
 @media (max-width: 900px) {
@@ -7156,33 +7417,49 @@ html[data-theme='light'] body[data-country] .expert-disclaimer {
   }
 
   body[data-country] .expert-card {
+    grid-template-columns: 1fr;
+    gap: 24px;
     min-height: 0;
-    padding: var(--panel-padding);
-    background-position: center, top center;
-    background-size: cover, 100% 220px;
+    padding: 0;
   }
 
   body[data-country] .expert-header {
+    align-items: center;
+    justify-content: center;
     max-width: 100%;
+    min-height: 360px;
     margin: 0;
-    padding: 0 0 18px;
-    border-bottom: 1px solid var(--border-soft);
+    padding: var(--panel-padding);
+    border: 0;
   }
 
   body[data-country] .expert-body {
     max-width: 100%;
+    padding: clamp(22px, 5vw, 30px);
   }
 
   body[data-country] .expert-meta {
     max-width: none;
-    text-align: left;
+    text-align: center;
   }
 
   body[data-country] .expert-body,
   body[data-country] .expert-criteria,
   body[data-country] .expert-methodology {
     grid-template-columns: 1fr;
-    gap: 0;
+  }
+
+  body[data-country] .expert-body > p,
+  body[data-country] .expert-body > h3,
+  body[data-country] .expert-body > ul,
+  body[data-country] .expert-body > .expert-disclaimer,
+  body[data-country] .expert-body > p:first-of-type,
+  body[data-country] .expert-body > p:nth-of-type(2),
+  body[data-country] .expert-body > p:nth-of-type(3),
+  body[data-country] .expert-body h3:nth-of-type(2),
+  body[data-country] .expert-methodology li,
+  body[data-country] .expert-methodology li:nth-child(n + 4) {
+    grid-column: 1;
   }
 }
 
@@ -7192,17 +7469,26 @@ html[data-theme='light'] body[data-country] .expert-disclaimer {
   }
 
   body[data-country] .expert-card {
-    padding: var(--panel-padding-tight);
+    border-radius: 0;
   }
 
   body[data-country] .expert-header {
-    display: block;
-    max-width: 230px;
+    display: flex;
+    max-width: none;
+    min-height: 340px;
+    padding: var(--panel-padding-tight);
+    border-radius: 14px;
   }
 
-  body[data-country] .expert-card {
-    background-position: center, right top;
-    background-size: cover, 100% 180px;
+  body[data-country] .expert-header::before {
+    top: var(--panel-padding-tight);
+    left: var(--panel-padding-tight);
+    width: 36px;
+    height: 36px;
+  }
+
+  body[data-country] .expert-info {
+    padding: 16px;
   }
 
   body[data-country] .expert-info h3 {
@@ -7210,16 +7496,22 @@ html[data-theme='light'] body[data-country] .expert-disclaimer {
   }
 
   body[data-country] .expert-body > p:first-of-type {
-    padding-left: 14px;
+    padding: 0;
   }
 
   body[data-country] .expert-criteria li,
   body[data-country] .expert-methodology li {
-    padding: 13px 0 13px 38px;
+    min-height: 0;
+    padding: 13px 14px 13px 47px;
   }
 
   body[data-country] .expert-disclaimer {
-    padding: 13px 14px;
+    padding: 14px 14px 14px 50px;
+  }
+
+  body[data-country] .expert-disclaimer::before {
+    top: 15px;
+    left: 14px;
   }
 }
 
@@ -8431,13 +8723,12 @@ body[data-brand] .brand-sticky-main .faq-card:hover {
 }
 
 body[data-country] .expert-card {
-  border-radius: var(--radius-lg);
-  box-shadow: var(--shadow-soft);
+  border-radius: 0;
+  box-shadow: none;
 }
 
 body[data-country] .expert-card::before {
-  height: 2px;
-  background: linear-gradient(90deg, var(--expert-strong), transparent 72%);
+  display: none;
 }
 
 /* Light home stats: keep the emphasis without the hard black tile. */
@@ -8506,18 +8797,41 @@ html[data-theme='light'] body.home-page .home-stat-link:hover {
 
 /* =============================================================
    COUNTRY GAMBLING GUIDE CAROUSEL
-   Horizontal cards keep the guide scannable while preserving all copy.
+   Uses the same editorial card language as the homepage methodology.
 ============================================================= */
 
+body[data-country] .content-article:has(> .country-guide-carousel) > .title {
+  max-width: 18ch;
+  margin: 0 0 clamp(24px, 3vw, 38px);
+  padding: 0;
+  border: 0;
+  color: var(--text-main);
+  font-size: clamp(32px, 4.2vw, 58px);
+  font-weight: 650;
+  line-height: 1.02;
+  letter-spacing: -0.025em;
+  text-align: left;
+  text-wrap: balance;
+}
+
+body[data-country] .content-article:has(> .country-guide-carousel) > .title::before {
+  margin-bottom: 10px;
+  text-align: left;
+}
+
+html[lang='de'] body[data-country] .content-article:has(> .country-guide-carousel) {
+  --section-eyebrow: 'Spielerleitfaden';
+}
+
 body[data-country] .content-article .country-guide-carousel {
-  --guide-card-width: min(360px, calc((100% - 32px) / 3));
+  --guide-card-width: calc((100% - 36px) / 4);
   display: flex;
   flex-wrap: nowrap;
   align-items: stretch;
-  gap: 16px;
+  gap: 12px;
   overflow-x: auto;
   margin: 0 -2px;
-  padding: 2px 2px 16px;
+  padding: 2px 2px 14px;
   border: 0;
   background: transparent;
   scrollbar-color: var(--surface-border-strong) transparent;
@@ -8531,7 +8845,7 @@ body[data-country] .content-article .country-guide-carousel {
 }
 
 body[data-country] .country-guide-carousel::-webkit-scrollbar {
-  height: 6px;
+  height: 4px;
 }
 
 body[data-country] .country-guide-carousel::-webkit-scrollbar-track {
@@ -8549,60 +8863,52 @@ body[data-country] .content-article .country-guide-carousel > div {
   flex: 0 0 var(--guide-card-width);
   flex-direction: column;
   width: var(--guide-card-width);
-  min-height: 292px;
+  min-height: 330px;
   padding: 24px;
-  border: 1px solid var(--surface-border);
-  border-radius: var(--radius-md);
-  background:
-    linear-gradient(
-      145deg,
-      color-mix(in srgb, var(--surface-card) 92%, var(--section-accent) 8%),
-      var(--surface-card) 62%
-    );
-  box-shadow: var(--shadow-soft);
+  border: 0;
+  border-top: 2px solid var(--section-accent);
+  border-radius: 0 0 var(--radius-md) var(--radius-md);
+  background: var(--surface-card);
+  box-shadow: none;
   scroll-snap-align: start;
   transition:
-    border-color 0.2s ease,
     background 0.2s ease,
     transform 0.2s ease;
 }
 
 body[data-country] .content-article .country-guide-carousel > div:hover {
-  border-color: color-mix(in srgb, var(--section-accent) 52%, var(--surface-border));
-  background: var(--surface-card-hover);
-  transform: translateY(-2px);
+  background: color-mix(in srgb, var(--surface-card) 94%, var(--section-accent) 6%);
+  transform: translateY(-1px);
 }
 
 body[data-country] .content-article .country-guide-carousel .guide-card-index {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 38px;
-  height: 28px;
-  border: 1px solid color-mix(in srgb, var(--section-accent) 58%, var(--surface-border));
-  border-radius: 6px;
-  background: color-mix(in srgb, var(--section-accent) 10%, transparent);
+  display: block;
+  width: auto;
+  height: auto;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
   color: var(--section-accent);
-  font-size: 12px;
-  font-weight: 750;
-  letter-spacing: 0.08em;
+  font-size: 11px;
+  font-weight: 850;
+  letter-spacing: 0.12em;
   line-height: 1;
   font-variant-numeric: tabular-nums;
 }
 
 body[data-country] .content-article .country-guide-carousel > div h3 {
-  margin: 22px 0 10px;
+  margin: 30px 0 10px;
   color: var(--text-main);
-  font-size: 20px;
-  line-height: 1.22;
+  font-size: 18px;
+  line-height: 1.2;
   letter-spacing: 0;
 }
 
 body[data-country] .content-article .country-guide-carousel > div p {
   margin: 0;
   color: var(--text-muted);
-  font-size: 15px;
-  line-height: 1.62;
+  font-size: 13px;
+  line-height: 1.58;
   text-align: left;
 }
 
@@ -8631,7 +8937,7 @@ body[data-country] .content-article .country-guide-carousel.is-dragging {
 
 @media (max-width: 1120px) {
   body[data-country] .content-article .country-guide-carousel {
-    --guide-card-width: min(390px, calc((100% - 16px) / 2));
+    --guide-card-width: calc((100% - 12px) / 2);
   }
 }
 
@@ -8650,8 +8956,13 @@ body[data-country] .content-article .country-guide-carousel.is-dragging {
   }
 
   body[data-country] .content-article .country-guide-carousel > div {
-    min-height: 268px;
+    min-height: 300px;
     padding: 20px;
+  }
+
+  body[data-country] .content-article:has(> .country-guide-carousel) > .title {
+    max-width: none;
+    font-size: clamp(30px, 10vw, 42px);
   }
 
   body[data-country] .content-article .country-guide-carousel > div h3 {
@@ -9000,5 +9311,1836 @@ body[data-brand] .brand-why-heading.is-expanded .brand-why-media {
   .faq-accordion-surface .faq-answer-panel .faq-answer {
     font-size: 14px;
     line-height: 1.55;
+  }
+}
+
+/* =============================================================
+   HOMEPAGE DISCOVERY EXPERIENCE
+   Data-led recommendations, casino previews, and new-game cards.
+   ============================================================= */
+
+body.home-page .hero-content::before {
+  display: none;
+}
+
+body.home-page .home-hero-kicker,
+body.home-page .home-section-kicker {
+  display: block;
+  color: var(--section-accent);
+  font-size: 11px;
+  font-weight: 800;
+  line-height: 1.2;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+body.home-page .home-hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 6px;
+}
+
+body.home-page .home-primary-action,
+body.home-page .home-secondary-action,
+body.home-page .home-section-cta > a {
+  display: inline-flex;
+  min-height: 48px;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 20px;
+  border: 1px solid var(--surface-border-strong);
+  border-radius: 9px;
+  color: var(--text-main);
+  font-size: 14px;
+  font-weight: 750;
+  line-height: 1.2;
+  text-decoration: none;
+  transition: transform 180ms ease, border-color 180ms ease, background 180ms ease;
+}
+
+body.home-page .home-primary-action,
+body.home-page .home-section-cta > a {
+  border-color: var(--section-accent);
+  background: var(--section-accent);
+  color: #111713;
+}
+
+body.home-page .home-secondary-action {
+  background: rgba(255, 255, 255, 0.035);
+}
+
+body.home-page .home-primary-action:hover,
+body.home-page .home-secondary-action:hover,
+body.home-page .home-section-cta > a:hover {
+  transform: translateY(-2px);
+}
+
+body.home-page .home-secondary-action:hover {
+  border-color: var(--section-accent);
+  background: rgba(255, 255, 255, 0.07);
+}
+
+body.home-page .content-area {
+  display: grid;
+  gap: clamp(52px, 7vw, 92px);
+}
+
+body.home-page .home-showcase-section {
+  min-width: 0;
+  scroll-margin-top: 104px;
+}
+
+body.home-page .home-showcase-heading {
+  display: grid;
+  grid-template-columns: minmax(0, 0.85fr) minmax(320px, 0.7fr);
+  gap: clamp(24px, 5vw, 72px);
+  align-items: end;
+  margin-bottom: clamp(24px, 3vw, 38px);
+}
+
+body.home-page .home-showcase-heading h2,
+body.home-page .home-insight-head h2 {
+  max-width: 18ch;
+  margin: 10px 0 0;
+  color: var(--text-main);
+  font-size: clamp(32px, 4.2vw, 58px);
+  font-weight: 650;
+  line-height: 1.02;
+  letter-spacing: -0.025em;
+  text-wrap: balance;
+}
+
+body.home-page .home-showcase-heading > p,
+body.home-page .home-insight-head > p {
+  max-width: 64ch;
+  margin: 0;
+  color: var(--text-muted);
+  font-size: 15px;
+  line-height: 1.68;
+}
+
+body.home-page .home-stats-card .home-insight-head {
+  display: grid;
+  max-width: none;
+  grid-template-columns: minmax(0, 0.9fr) minmax(320px, 1fr);
+  gap: 8px clamp(28px, 5vw, 72px);
+  align-items: end;
+  margin-bottom: 18px;
+  padding-bottom: 18px;
+}
+
+body.home-page .home-stats-card .home-insight-head h2 {
+  max-width: 18ch;
+  grid-column: 1;
+  margin: 0;
+  font-size: clamp(30px, 3.15vw, 46px);
+}
+
+body.home-page .home-stats-card .home-section-kicker {
+  grid-column: 1;
+}
+
+body.home-page .home-stats-card .home-insight-head > p {
+  grid-row: 1 / span 2;
+  grid-column: 2;
+  align-self: end;
+  margin: 0;
+  font-size: 14px;
+  line-height: 1.55;
+}
+
+body.home-page .home-stats-card {
+  padding: clamp(20px, 2.4vw, 32px);
+}
+
+body.home-page .home-stats-card .home-stat-tile {
+  min-height: 138px;
+  padding: clamp(16px, 1.8vw, 22px);
+  gap: 6px;
+}
+
+body.home-page .home-stats-card .home-stat-number {
+  font-size: clamp(46px, 5vw, 68px);
+}
+
+body.home-page .home-stats-card .home-stat-tile span:last-child {
+  font-size: 12.5px;
+  line-height: 1.42;
+}
+
+body.home-page .home-recommendation-grid {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 14px;
+}
+
+body.home-page .home-recommendation-grid .casino-actions.has-single-action {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+body.home-page .home-new-reviews-grid {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: 12px;
+}
+
+body.home-page .home-new-review-card {
+  display: grid;
+  min-width: 0;
+  grid-template-rows: 82px auto;
+  overflow: hidden;
+  border: 1px solid var(--surface-border);
+  border-radius: var(--radius-md);
+  background: var(--surface-card);
+  color: var(--text-main);
+  text-decoration: none;
+  box-shadow: var(--shadow-soft);
+  scroll-snap-align: start;
+  transition: transform 180ms ease, border-color 180ms ease, box-shadow 180ms ease;
+}
+
+body.home-page .home-new-review-card:hover {
+  border-color: var(--section-accent);
+  box-shadow: var(--shadow-hover);
+  transform: translateY(-3px);
+}
+
+body.home-page .home-new-review-logo,
+html[data-theme='light'] body.home-page .home-new-review-logo {
+  display: grid;
+  min-width: 0;
+  place-items: center;
+  padding: 14px 12px;
+  border-bottom: 1px solid var(--surface-border);
+  background:
+    radial-gradient(circle at 85% 0%, rgba(255, 255, 255, 0.12), transparent 36%),
+    radial-gradient(circle at 0% 100%, rgba(255, 223, 0, 0.08), transparent 38%),
+    linear-gradient(
+      180deg,
+      var(--brand-bg-color, rgba(10, 15, 30, 0.98)),
+      var(--brand-bg-color, rgba(20, 30, 52, 0.96))
+    );
+}
+
+body.home-page .home-new-review-logo img {
+  display: block;
+  width: auto;
+  max-width: 88%;
+  height: auto;
+  max-height: 48px;
+  object-fit: contain;
+}
+
+body.home-page .home-new-review-card > strong {
+  display: flex;
+  min-width: 0;
+  min-height: 42px;
+  align-items: center;
+  justify-content: center;
+  padding: 9px 7px;
+  overflow: hidden;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1.2;
+  text-align: center;
+  text-overflow: ellipsis;
+}
+
+body.home-page .home-recommendation-card {
+  position: relative;
+  display: flex;
+  min-width: 0;
+  min-height: 410px;
+  flex-direction: column;
+  padding: clamp(20px, 2.2vw, 30px);
+  overflow: hidden;
+  border: 1px solid var(--surface-border);
+  border-radius: var(--radius-lg);
+  background:
+    radial-gradient(circle at 100% 0%, rgba(255, 223, 0, 0.07), transparent 36%),
+    var(--surface-card);
+  box-shadow: var(--shadow-soft);
+  transition: transform 200ms ease, border-color 200ms ease, box-shadow 200ms ease;
+}
+
+body.home-page .home-recommendation-card::after {
+  content: '';
+  position: absolute;
+  inset: auto 0 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--section-accent), transparent);
+  opacity: 0;
+  transition: opacity 200ms ease;
+}
+
+body.home-page .home-recommendation-card:hover {
+  transform: translateY(-5px);
+  border-color: var(--surface-border-strong);
+  box-shadow: var(--shadow-hover);
+}
+
+body.home-page .home-recommendation-card:hover::after,
+body.home-page .home-recommendation-card-featured::after {
+  opacity: 1;
+}
+
+body.home-page .home-recommendation-card-featured {
+  border-color: rgba(255, 223, 0, 0.42);
+}
+
+body.home-page .home-recommendation-topline {
+  display: flex;
+  min-height: 24px;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+body.home-page .home-rank {
+  color: var(--section-accent);
+  font-size: 13px;
+  font-weight: 850;
+  letter-spacing: 0.1em;
+}
+
+body.home-page .home-demand-tag {
+  color: var(--text-muted);
+  font-size: 10px;
+  font-weight: 750;
+  letter-spacing: 0.06em;
+  text-align: right;
+  text-transform: uppercase;
+}
+
+body.home-page .home-recommendation-logo {
+  display: grid;
+  width: 100%;
+  height: 78px;
+  place-items: center;
+  margin-bottom: 20px;
+  padding: 14px 18px;
+  border: 1px solid var(--surface-border);
+  border-radius: var(--radius-md);
+  background: var(--surface-card-soft);
+}
+
+body.home-page .home-recommendation-logo img {
+  display: block;
+  width: auto;
+  max-width: 82%;
+  height: auto;
+  max-height: 50px;
+  object-fit: contain;
+}
+
+body.home-page .home-recommendation-card h3 {
+  margin: 0 0 10px;
+  color: var(--text-main);
+  font-size: 25px;
+  line-height: 1.1;
+}
+
+body.home-page .home-recommendation-card > p {
+  margin: 0;
+  color: var(--text-muted);
+  font-size: 14px;
+  line-height: 1.58;
+}
+
+body.home-page .home-brand-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+  margin: 18px 0 22px;
+  padding: 0;
+  list-style: none;
+}
+
+body.home-page .home-brand-tags li {
+  padding: 6px 9px;
+  border: 1px solid var(--surface-border);
+  border-radius: 999px;
+  color: var(--text-muted);
+  font-size: 10.5px;
+  font-weight: 700;
+  line-height: 1;
+}
+
+body.home-page .home-recommendation-actions {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 8px;
+  margin-top: auto;
+}
+
+body.home-page .home-recommendation-actions-split {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+body.home-page .home-recommendation-actions a {
+  display: inline-flex;
+  min-height: 42px;
+  align-items: center;
+  justify-content: center;
+  padding: 9px 12px;
+  border: 1px solid var(--surface-border-strong);
+  border-radius: 8px;
+  color: var(--text-main);
+  font-size: 12px;
+  font-weight: 750;
+  line-height: 1.25;
+  text-align: center;
+  text-decoration: none;
+}
+
+body.home-page .home-recommendation-actions a:hover {
+  border-color: var(--section-accent);
+  color: var(--section-accent);
+}
+
+body.home-page .home-section-cta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  margin-top: 18px;
+  padding: 22px 24px;
+  border: 1px solid var(--surface-border);
+  border-radius: var(--radius-lg);
+  background: var(--surface-card-soft);
+}
+
+body.home-page .home-section-cta > div {
+  display: grid;
+  gap: 5px;
+}
+
+body.home-page .home-section-cta strong {
+  color: var(--text-main);
+  font-size: 16px;
+}
+
+body.home-page .home-section-cta span {
+  color: var(--text-muted);
+  font-size: 13px;
+}
+
+body.home-page .home-section-cta > a {
+  flex: 0 0 auto;
+}
+
+body.home-page .home-casino-gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+}
+
+body.home-page .home-casino-shot {
+  position: relative;
+  display: block;
+  min-width: 0;
+  min-height: 0;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  border: 1px solid var(--surface-border);
+  border-radius: var(--radius-lg);
+  background: var(--surface-card);
+  box-shadow: var(--shadow-soft);
+}
+
+body.home-page .home-casino-shot-wide {
+  grid-row: auto;
+}
+
+body.home-page .home-casino-shot img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+  transition: transform 450ms ease, filter 300ms ease;
+}
+
+body.home-page .home-casino-shot::after {
+  content: '';
+  position: absolute;
+  inset: 38% 0 0;
+  background: linear-gradient(180deg, transparent, rgba(4, 7, 11, 0.93));
+  pointer-events: none;
+}
+
+body.home-page .home-casino-shot > span {
+  position: absolute;
+  z-index: 1;
+  right: 18px;
+  bottom: 16px;
+  left: 18px;
+  display: grid;
+  gap: 3px;
+  color: #fff;
+}
+
+body.home-page .home-casino-shot strong {
+  font-size: 18px;
+  line-height: 1.1;
+}
+
+body.home-page .home-casino-shot small {
+  color: rgba(255, 255, 255, 0.72);
+  font-size: 12px;
+}
+
+body.home-page .home-casino-shot:hover img {
+  transform: scale(1.025);
+  filter: saturate(1.08);
+}
+
+body.home-page .home-games-grid {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 14px;
+}
+
+body.home-page .home-game-card {
+  display: grid;
+  min-width: 0;
+  overflow: hidden;
+  border: 1px solid var(--surface-border);
+  border-radius: var(--radius-md);
+  background: var(--surface-card);
+  color: var(--text-main);
+  text-decoration: none;
+  box-shadow: var(--shadow-soft);
+  transition: transform 200ms ease, border-color 200ms ease;
+}
+
+body.home-page .home-game-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--section-accent);
+}
+
+body.home-page .home-game-card img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: contain;
+  background: #0d1014;
+}
+
+body.home-page .home-game-card > span {
+  display: grid;
+  gap: 4px;
+  min-width: 0;
+  padding: 14px;
+}
+
+body.home-page .home-game-card strong {
+  overflow: hidden;
+  font-size: 13px;
+  line-height: 1.25;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+body.home-page .home-game-card small {
+  color: var(--text-muted);
+  font-size: 11px;
+}
+
+body.home-page .home-method-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+}
+
+body.home-page .home-method-grid article {
+  min-width: 0;
+  padding: 24px;
+  border-top: 2px solid var(--section-accent);
+  border-radius: 0 0 var(--radius-md) var(--radius-md);
+  background: var(--surface-card);
+}
+
+body.home-page .home-method-grid article > span {
+  color: var(--section-accent);
+  font-size: 11px;
+  font-weight: 850;
+  letter-spacing: 0.12em;
+}
+
+body.home-page .home-method-grid h3 {
+  margin: 30px 0 10px;
+  color: var(--text-main);
+  font-size: 18px;
+  line-height: 1.2;
+}
+
+body.home-page .home-method-grid p {
+  margin: 0;
+  color: var(--text-muted);
+  font-size: 13px;
+  line-height: 1.58;
+}
+
+html[data-theme='light'] body.home-page .home-secondary-action {
+  background: rgba(15, 23, 42, 0.025);
+}
+
+html[data-theme='light'] body.home-page .home-recommendation-card,
+html[data-theme='light'] body.home-page .home-new-review-card,
+html[data-theme='light'] body.home-page .home-game-card,
+html[data-theme='light'] body.home-page .home-method-grid article,
+html[data-theme='light'] body.home-page .home-casino-shot {
+  background-color: #fff;
+}
+
+@media (max-width: 1024px) {
+  body.home-page .home-new-reviews-grid {
+    grid-template-columns: none;
+    grid-template-rows: repeat(2, auto);
+    grid-auto-flow: column;
+    grid-auto-columns: 150px;
+    gap: 10px;
+    padding: 2px 0 10px;
+    overflow-x: auto;
+    overscroll-behavior-inline: contain;
+    scroll-snap-type: inline proximity;
+    scrollbar-color: var(--surface-border-strong) transparent;
+    scrollbar-width: thin;
+  }
+
+  body.home-page .home-recommendation-grid,
+  body.home-page .home-games-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  body.home-page .home-casino-gallery-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  body.home-page .home-method-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 768px) {
+  body.home-page .home-stats-card {
+    padding: 18px;
+  }
+
+  body.home-page .home-stats-card .home-insight-head {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 8px;
+    margin-bottom: 12px;
+    padding-bottom: 14px;
+  }
+
+  body.home-page .home-stats-card .home-insight-head h2,
+  body.home-page .home-stats-card .home-section-kicker,
+  body.home-page .home-stats-card .home-insight-head > p {
+    grid-row: auto;
+    grid-column: 1;
+  }
+
+  body.home-page .home-stats-card .home-insight-head h2 {
+    font-size: clamp(26px, 8.6vw, 36px);
+  }
+
+  body.home-page .home-stats-card .home-insight-head > p {
+    max-width: none;
+    font-size: 12.5px;
+    line-height: 1.45;
+  }
+
+  body.home-page .home-stats-card .home-stat-tile {
+    min-height: 0;
+    padding: 12px 9px;
+  }
+
+  body.home-page .home-stats-card .home-stat-number {
+    font-size: clamp(34px, 11vw, 44px);
+  }
+
+  body.home-page .home-hero-kicker {
+    text-align: center;
+  }
+
+  body.home-page .home-hero-actions {
+    width: 100%;
+    justify-content: center;
+  }
+
+  body.home-page .home-primary-action,
+  body.home-page .home-secondary-action {
+    width: 100%;
+  }
+
+  body.home-page .content-area {
+    gap: 56px;
+  }
+
+  body.home-page .home-showcase-heading {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 14px;
+    align-items: start;
+  }
+
+  body.home-page .home-showcase-heading h2,
+  body.home-page .home-insight-head h2 {
+    max-width: none;
+    font-size: clamp(30px, 10vw, 42px);
+  }
+
+  body.home-page .home-recommendation-card {
+    min-height: 0;
+  }
+
+  body.home-page .home-section-cta {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  body.home-page .home-section-cta > a {
+    width: 100%;
+  }
+
+  body.home-page .home-casino-gallery-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    grid-template-rows: none;
+  }
+
+  body.home-page .home-casino-shot,
+  body.home-page .home-casino-shot-wide {
+    grid-row: auto;
+    aspect-ratio: 16 / 9;
+  }
+}
+
+@media (max-width: 560px) {
+  body.home-page .home-new-reviews-grid {
+    grid-auto-columns: 132px;
+  }
+
+  body.home-page .home-new-review-card {
+    grid-template-rows: 74px auto;
+  }
+
+  body.home-page .home-new-review-logo {
+    padding: 11px 10px;
+  }
+
+  body.home-page .home-new-review-logo img {
+    max-height: 43px;
+  }
+
+  body.home-page .home-method-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  body.home-page .home-recommendation-grid,
+  body.home-page .home-games-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  body.home-page .home-casino-gallery-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  body.home-page .home-games-grid {
+    gap: 9px;
+  }
+
+  body.home-page .home-game-card > span {
+    padding: 11px;
+  }
+
+  body.home-page .home-recommendation-actions-split {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+/* Keep every editorial CTA in the site's original dark secondary-button style. */
+body.home-page .home-primary-action,
+body.home-page .home-secondary-action,
+body.home-page .home-section-cta > a,
+body.home-page .home-country-more {
+  display: inline-flex;
+  min-height: 36px;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 9px 16px;
+  border: 1px solid var(--border-soft);
+  border-radius: 4px;
+  background: transparent;
+  color: var(--text-main);
+  box-shadow: none;
+  filter: none;
+  font-size: 12.5px;
+  font-weight: 600;
+  line-height: 1.1;
+  letter-spacing: 0;
+  text-align: center;
+  text-decoration: none;
+  text-transform: uppercase;
+  transform: none;
+  transition:
+    border-color 0.2s ease,
+    background 0.2s ease,
+    color 0.2s ease,
+    transform 0.2s ease;
+}
+
+body.home-page .home-primary-action::after,
+body.home-page .home-secondary-action::after,
+body.home-page .home-section-cta > a::after {
+  content: '\2192';
+  font-size: 14px;
+  font-weight: 500;
+  transition: transform 0.2s ease;
+}
+
+body.home-page .home-primary-action:hover,
+body.home-page .home-primary-action:focus-visible,
+body.home-page .home-secondary-action:hover,
+body.home-page .home-secondary-action:focus-visible,
+body.home-page .home-section-cta > a:hover,
+body.home-page .home-section-cta > a:focus-visible,
+body.home-page .home-country-more:hover,
+body.home-page .home-country-more:focus-visible {
+  border-color: var(--gold, #ffdf00);
+  background: rgba(255, 255, 255, 0.035);
+  color: var(--gold, #ffdf00);
+  box-shadow: none;
+  outline: none;
+  transform: translateY(-1px);
+}
+
+body.home-page .home-primary-action:hover::after,
+body.home-page .home-primary-action:focus-visible::after,
+body.home-page .home-secondary-action:hover::after,
+body.home-page .home-secondary-action:focus-visible::after,
+body.home-page .home-section-cta > a:hover::after,
+body.home-page .home-section-cta > a:focus-visible::after {
+  transform: translateX(3px);
+}
+
+html[data-theme='light'] body.home-page .home-primary-action,
+html[data-theme='light'] body.home-page .home-secondary-action,
+html[data-theme='light'] body.home-page .home-section-cta > a,
+html[data-theme='light'] body.home-page .home-country-more {
+  border-color: rgba(15, 23, 42, 0.2);
+  background: transparent;
+  color: var(--text-main);
+}
+
+html[data-theme='light'] body.home-page .home-primary-action:hover,
+html[data-theme='light'] body.home-page .home-primary-action:focus-visible,
+html[data-theme='light'] body.home-page .home-secondary-action:hover,
+html[data-theme='light'] body.home-page .home-secondary-action:focus-visible,
+html[data-theme='light'] body.home-page .home-section-cta > a:hover,
+html[data-theme='light'] body.home-page .home-section-cta > a:focus-visible,
+html[data-theme='light'] body.home-page .home-country-more:hover,
+html[data-theme='light'] body.home-page .home-country-more:focus-visible {
+  border-color: var(--gold, #ffdf00);
+  background: rgba(15, 23, 42, 0.025);
+  color: #8a5e1f;
+}
+
+/* Desktop coverage band: editorial heading and both figures share one row. */
+@media (min-width: 1025px) {
+  body.home-page .home-stats-card {
+    display: grid;
+    grid-template-columns: minmax(0, 1.2fr) minmax(0, 0.72fr) minmax(0, 0.72fr);
+    gap: 12px;
+    align-items: stretch;
+  }
+
+  body.home-page .home-stats-card .home-insight-head {
+    display: flex;
+    flex-direction: column;
+    grid-column: 1;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: 10px;
+    min-width: 0;
+    margin: 0;
+    padding: clamp(16px, 1.8vw, 22px);
+    border-bottom: 0;
+    text-align: left;
+  }
+
+  body.home-page .home-stats-card .home-insight-head h2,
+  body.home-page .home-stats-card .home-section-kicker,
+  body.home-page .home-stats-card .home-insight-head > p {
+    grid-row: auto;
+    grid-column: auto;
+    width: 100%;
+  }
+
+  body.home-page .home-stats-card .home-insight-head h2 {
+    max-width: 16ch;
+    font-size: clamp(28px, 2.35vw, 40px);
+  }
+
+  body.home-page .home-stats-card .home-insight-head > p {
+    max-width: 48ch;
+    align-self: auto;
+    font-size: 13px;
+    line-height: 1.5;
+  }
+
+  body.home-page .home-stats-grid {
+    grid-column: 2 / 4;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+    min-width: 0;
+  }
+
+  body.home-page .home-stats-card .home-stat-tile {
+    min-height: 100%;
+  }
+}
+
+/* Editorial links keep the original button treatment without decorative arrows. */
+.view-all::after,
+.home-country-more::after,
+body.home-page .home-primary-action::after,
+body.home-page .home-secondary-action::after,
+body.home-page .home-section-cta > a::after,
+body.home-page .home-stat-link::after {
+  content: none;
+  display: none;
+}
+
+/* =============================================================
+   Top Casinos: homepage-aligned hero, complete market navigator,
+   and editorial comparison cards.
+   ============================================================= */
+body[data-page='top-casinos'] .hero {
+  min-height: clamp(430px, 58vh, 660px);
+  justify-content: space-between;
+  gap: clamp(32px, 6vw, 92px);
+  padding-top: clamp(54px, 7vw, 92px);
+  padding-bottom: clamp(48px, 6vw, 82px);
+}
+
+body[data-page='top-casinos'] .hero-content {
+  align-items: flex-start;
+  flex: 1 1 560px;
+  gap: 20px;
+  max-width: 620px;
+  text-align: left;
+}
+
+body[data-page='top-casinos'] .top-casinos-hero-kicker,
+body[data-page='top-casinos'] .top-casinos-section-kicker {
+  display: block;
+  color: var(--section-accent);
+  font-size: 11px;
+  font-weight: 800;
+  line-height: 1.2;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+body[data-page='top-casinos'] .hero h1 {
+  max-width: 12ch;
+  margin: 0;
+  font-size: clamp(50px, 5vw, 78px);
+  font-weight: 650;
+  line-height: 0.98;
+  letter-spacing: -0.03em;
+  text-align: left;
+  text-wrap: balance;
+}
+
+body[data-page='top-casinos'] .hero p {
+  max-width: 48ch;
+  margin: 0;
+  font-size: clamp(16px, 1.1vw, 19px);
+  line-height: 1.55;
+  text-align: left;
+}
+
+body[data-page='top-casinos'] .hero-banner {
+  flex: 0 1 620px;
+  min-width: 0;
+}
+
+body[data-page='top-casinos'] .top-casinos-hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 4px;
+}
+
+body[data-page='top-casinos'] .top-casinos-hero-actions a,
+body[data-page='top-casinos'] .top-casino-jump-toggle {
+  appearance: none;
+  display: inline-flex;
+  min-height: 38px;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 17px;
+  border: 1px solid var(--border-soft);
+  border-radius: 8px;
+  background: transparent;
+  color: var(--text-main);
+  box-shadow: none;
+  font: inherit;
+  font-size: 12px;
+  font-weight: 650;
+  line-height: 1.15;
+  text-align: center;
+  text-decoration: none;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: border-color 0.2s ease, background 0.2s ease, color 0.2s ease, transform 0.2s ease;
+}
+
+body[data-page='top-casinos'] .top-casinos-hero-actions a:hover,
+body[data-page='top-casinos'] .top-casinos-hero-actions a:focus-visible,
+body[data-page='top-casinos'] .top-casino-jump-toggle:hover,
+body[data-page='top-casinos'] .top-casino-jump-toggle:focus-visible {
+  border-color: var(--gold, #ffdf00);
+  background: rgba(255, 255, 255, 0.035);
+  color: var(--gold, #ffdf00);
+  outline: none;
+  transform: translateY(-1px);
+}
+
+body[data-page='top-casinos'] .top-casino-jump-nav {
+  position: relative;
+  top: auto;
+  z-index: 1;
+  display: block;
+  width: min(100% - (var(--page-gutter) * 2), var(--site-max-width));
+  margin: 0 auto clamp(42px, 5vw, 68px);
+  padding: clamp(22px, 2.8vw, 34px);
+  border: 1px solid var(--surface-border-strong);
+  border-radius: var(--radius-lg);
+  background: var(--surface-section);
+  box-shadow: var(--shadow-soft);
+  overflow: hidden;
+}
+
+body[data-page='top-casinos'] .top-casino-jump-nav__head {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 18px 30px;
+  align-items: end;
+  margin-bottom: 20px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--border-soft);
+}
+
+body[data-page='top-casinos'] .top-casino-jump-nav__head h2 {
+  max-width: 18ch;
+  margin: 8px 0 0;
+  color: var(--text-main);
+  font-size: clamp(28px, 3.5vw, 48px);
+  font-weight: 650;
+  line-height: 1.02;
+  letter-spacing: -0.025em;
+  text-wrap: balance;
+}
+
+body[data-page='top-casinos'] .top-casino-jump-nav__head p {
+  max-width: 62ch;
+  margin: 10px 0 0;
+  color: var(--text-muted);
+  font-size: 14px;
+  line-height: 1.55;
+}
+
+body[data-page='top-casinos'] .top-casino-jump-nav__links {
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 8px;
+  width: 100%;
+  max-height: 96px;
+  overflow: hidden;
+  transition: max-height 0.3s ease;
+}
+
+body[data-page='top-casinos'] .top-casino-jump-nav.is-expanded .top-casino-jump-nav__links {
+  max-height: 720px;
+}
+
+body[data-page='top-casinos'] .top-casino-jump-nav a {
+  justify-content: flex-start;
+  width: 100%;
+  min-width: 0;
+  min-height: 44px;
+  padding: 9px 11px;
+  border: 1px solid var(--surface-border);
+  border-radius: 8px;
+  background: var(--surface-card);
+  color: var(--text-main);
+  font-size: 12px;
+  font-weight: 600;
+  text-align: left;
+}
+
+body[data-page='top-casinos'] .top-casino-jump-nav a[data-featured='true'] {
+  border-color: var(--surface-border-strong);
+  background: var(--surface-card-hover);
+}
+
+body[data-page='top-casinos'] .top-casino-jump-nav a:hover,
+body[data-page='top-casinos'] .top-casino-jump-nav a:focus-visible {
+  border-color: var(--gold, #ffdf00);
+  background: var(--surface-card-hover);
+  color: var(--gold, #ffdf00);
+  outline: none;
+  transform: translateY(-1px);
+}
+
+body[data-page='top-casinos'] .top-casino-jump-nav .flag {
+  width: 20px;
+  height: 15px;
+  flex: 0 0 20px;
+  border-radius: 3px;
+}
+
+body[data-page='top-casinos'] .top-casino-jump-nav a span {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+body[data-page='top-casinos'] .content-area.container {
+  gap: clamp(48px, 6vw, 78px);
+}
+
+body[data-page='top-casinos'] .content[data-country] .top-country-title::before {
+  letter-spacing: 0.12em;
+}
+
+body[data-page='top-casinos'][data-language='de'] .content[data-country] .top-country-title::before {
+  content: 'Top-Casino-Auswahl';
+}
+
+body[data-page='top-casinos'] .top-casinos-method {
+  padding: 0;
+}
+
+body[data-page='top-casinos'] .top-casinos-method-panel,
+body[data-page='top-casinos'] .top-casinos-reading-guide .content-article {
+  width: 100%;
+  padding: clamp(24px, 3vw, 40px);
+  border: 1px solid var(--surface-border-strong);
+  border-radius: var(--radius-lg);
+  background: var(--surface-section);
+  box-shadow: var(--shadow-soft);
+}
+
+body[data-page='top-casinos'] .top-casinos-method-head {
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(320px, 1fr);
+  gap: 24px clamp(30px, 5vw, 72px);
+  align-items: end;
+  margin-bottom: 22px;
+  padding-bottom: 22px;
+  border-bottom: 1px solid var(--border-soft);
+}
+
+body[data-page='top-casinos'] .top-casinos-method-head h2,
+body[data-page='top-casinos'] .top-casinos-reading-guide h2.title {
+  max-width: 18ch;
+  margin: 10px 0 0;
+  color: var(--text-main);
+  font-size: clamp(30px, 3.8vw, 52px);
+  font-weight: 650;
+  line-height: 1.02;
+  letter-spacing: -0.025em;
+  text-wrap: balance;
+}
+
+body[data-page='top-casinos'] .top-casinos-method-head > p {
+  max-width: 62ch;
+  margin: 0;
+  color: var(--text-muted);
+  font-size: 14px;
+  line-height: 1.65;
+}
+
+body[data-page='top-casinos'] .top-casinos-method-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+}
+
+body[data-page='top-casinos'] .top-casinos-method-card {
+  min-width: 0;
+  min-height: 210px;
+  padding: clamp(20px, 2.3vw, 28px);
+  border: 1px solid var(--surface-border);
+  border-radius: var(--radius-md);
+  background: var(--surface-contrast);
+  color: var(--surface-contrast-text);
+}
+
+body[data-page='top-casinos'] .top-casinos-method-card-wide {
+  grid-column: span 2;
+}
+
+body[data-page='top-casinos'] .top-casinos-method-index {
+  display: block;
+  margin-bottom: 28px;
+  color: var(--section-accent);
+  font-size: 11px;
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: 0.14em;
+}
+
+body[data-page='top-casinos'] .top-casinos-method-card h3 {
+  margin: 0 0 10px;
+  color: var(--surface-contrast-text);
+  font-size: clamp(19px, 1.5vw, 24px);
+  font-weight: 650;
+  line-height: 1.12;
+}
+
+body[data-page='top-casinos'] .top-casinos-method-card p,
+body[data-page='top-casinos'] .top-casinos-reading-guide p {
+  margin: 0;
+  color: var(--surface-contrast-muted);
+  font-size: 13.5px;
+  line-height: 1.6;
+}
+
+body[data-page='top-casinos'] .top-casinos-method-card a {
+  color: var(--section-accent);
+}
+
+body[data-page='top-casinos'] .top-casinos-reading-guide {
+  width: min(100% - (var(--page-gutter) * 2), var(--site-max-width));
+  margin: 0 auto clamp(48px, 6vw, 82px);
+  padding: 0;
+}
+
+body[data-page='top-casinos'] .top-casinos-reading-guide .content-article {
+  max-width: none;
+}
+
+body[data-page='top-casinos'] .top-casinos-reading-guide h2.title {
+  margin-bottom: 18px;
+}
+
+body[data-page='top-casinos'] .top-casinos-reading-guide p {
+  max-width: 88ch;
+  color: var(--text-muted);
+}
+
+body[data-page='top-casinos'] .top-casinos-reading-guide p + p {
+  margin-top: 12px;
+}
+
+html[data-theme='light'] body[data-page='top-casinos'] .top-casinos-hero-actions a,
+html[data-theme='light'] body[data-page='top-casinos'] .top-casino-jump-toggle {
+  border-color: rgba(15, 23, 42, 0.2);
+  color: var(--text-main);
+}
+
+@media (max-width: 1024px) {
+  body[data-page='top-casinos'] .hero {
+    min-height: 420px;
+    justify-content: flex-start;
+  }
+
+  body[data-page='top-casinos'] .hero-content {
+    max-width: 720px;
+  }
+
+  body[data-page='top-casinos'] .top-casino-jump-nav__links {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  body[data-page='top-casinos'] .top-casino-jump-nav.is-expanded .top-casino-jump-nav__links {
+    max-height: 1180px;
+  }
+
+  body[data-page='top-casinos'] .top-casinos-method-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  body[data-page='top-casinos'] .top-casinos-method-card-wide {
+    grid-column: span 2;
+  }
+}
+
+@media (max-width: 768px) {
+  body[data-page='top-casinos'] .hero {
+    min-height: 0;
+    margin-top: 64px;
+    padding-top: 52px;
+    padding-bottom: 44px;
+  }
+
+  body[data-page='top-casinos'] .hero-content {
+    flex-basis: auto;
+    gap: 14px;
+  }
+
+  body[data-page='top-casinos'] .hero h1 {
+    max-width: 12ch;
+    font-size: clamp(40px, 12vw, 58px);
+  }
+
+  body[data-page='top-casinos'] .hero p {
+    font-size: 15px;
+  }
+
+  body[data-page='top-casinos'] .top-casinos-hero-actions {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    width: 100%;
+  }
+
+  body[data-page='top-casinos'] .top-casinos-hero-actions a {
+    width: 100%;
+  }
+
+  body[data-page='top-casinos'] .top-casino-jump-nav {
+    margin-bottom: 46px;
+    padding: 18px;
+  }
+
+  body[data-page='top-casinos'] .top-casino-jump-nav__head,
+  body[data-page='top-casinos'] .top-casinos-method-head {
+    grid-template-columns: minmax(0, 1fr);
+    align-items: start;
+  }
+
+  body[data-page='top-casinos'] .top-casino-jump-toggle {
+    width: 100%;
+  }
+
+  body[data-page='top-casinos'] .top-casino-jump-nav__links {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    max-height: 148px;
+  }
+
+  body[data-page='top-casinos'] .top-casino-jump-nav.is-expanded .top-casino-jump-nav__links {
+    max-height: 2200px;
+  }
+
+  body[data-page='top-casinos'] .top-casinos-method-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  body[data-page='top-casinos'] .top-casinos-method-card,
+  body[data-page='top-casinos'] .top-casinos-method-card-wide {
+    grid-column: auto;
+    min-height: 0;
+  }
+
+  body[data-page='top-casinos'] .top-casinos-method-head h2,
+  body[data-page='top-casinos'] .top-casinos-reading-guide h2.title {
+    font-size: clamp(28px, 9vw, 40px);
+  }
+}
+
+/* Match the homepage hero grid and wide 2:1 affiliate creative. */
+@media (min-width: 1025px) {
+  body[data-page='top-casinos'] .hero {
+    min-height: clamp(430px, 50vh, 580px);
+    align-items: center;
+    justify-content: center;
+    gap: clamp(64px, 4.4vw, 90px);
+    padding-top: clamp(44px, 5vw, 70px);
+    padding-bottom: clamp(42px, 5vw, 66px);
+  }
+
+  body[data-page='top-casinos'] .hero-content {
+    flex: 0 1 560px;
+    max-width: 560px;
+  }
+
+  body[data-page='top-casinos'] .hero h1 {
+    width: 100%;
+    max-width: 11ch;
+    font-size: clamp(50px, 5vw, 78px);
+  }
+
+  body[data-page='top-casinos'] .hero p {
+    max-width: 44ch;
+  }
+
+  body[data-page='top-casinos'] .hero-banner {
+    display: flex;
+    flex: 0 1 810px;
+    max-width: 810px;
+    max-height: 430px;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+
+  body[data-page='top-casinos'] .hero-banner > :not(script),
+  body[data-page='top-casinos'] .hero-banner iframe,
+  body[data-page='top-casinos'] .hero-banner img {
+    max-width: 100% !important;
+    max-height: 430px !important;
+  }
+
+  body[data-page='top-casinos'] .top-casino-jump-nav {
+    margin-top: clamp(24px, 3vw, 40px);
+  }
+}
+
+/* Country-specific casino homepage previews. */
+body[data-country] .country-casino-gallery {
+  padding-top: clamp(46px, 6vw, 76px);
+  padding-bottom: clamp(46px, 6vw, 76px);
+}
+
+body[data-country] .country-casino-gallery-head {
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(320px, 1fr);
+  gap: 24px clamp(30px, 5vw, 72px);
+  align-items: end;
+  margin-bottom: clamp(24px, 3vw, 38px);
+}
+
+body[data-country] .country-casino-gallery-kicker {
+  display: block;
+  color: var(--section-accent);
+  font-size: 11px;
+  font-weight: 800;
+  line-height: 1.2;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+body[data-country] .country-casino-gallery-head h2 {
+  max-width: 18ch;
+  margin: 10px 0 0;
+  color: var(--text-main);
+  font-size: clamp(32px, 4.2vw, 58px);
+  font-weight: 650;
+  line-height: 1.02;
+  letter-spacing: -0.025em;
+  text-wrap: balance;
+}
+
+body[data-country] .country-casino-gallery-head > p {
+  max-width: 64ch;
+  margin: 0;
+  color: var(--text-muted);
+  font-size: 15px;
+  line-height: 1.68;
+}
+
+body[data-country] .country-casino-gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+}
+
+body[data-country] .country-casino-shot {
+  position: relative;
+  display: block;
+  min-width: 0;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  border: 1px solid var(--surface-border);
+  border-radius: var(--radius-lg);
+  background: var(--surface-card);
+  box-shadow: var(--shadow-soft);
+}
+
+body[data-country] .country-casino-shot img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+  transition: transform 450ms ease, filter 300ms ease;
+}
+
+body[data-country] .country-casino-shot::after {
+  content: '';
+  position: absolute;
+  inset: 38% 0 0;
+  background: linear-gradient(180deg, transparent, rgba(4, 7, 11, 0.93));
+  pointer-events: none;
+}
+
+body[data-country] .country-casino-shot > span {
+  position: absolute;
+  z-index: 1;
+  right: 18px;
+  bottom: 16px;
+  left: 18px;
+  display: grid;
+  gap: 3px;
+  color: #fff;
+}
+
+body[data-country] .country-casino-shot strong {
+  font-size: 18px;
+  line-height: 1.1;
+}
+
+body[data-country] .country-casino-shot small {
+  color: rgba(255, 255, 255, 0.72);
+  font-size: 12px;
+}
+
+body[data-country] .country-casino-shot:hover img,
+body[data-country] .country-casino-shot:focus-visible img {
+  transform: scale(1.025);
+  filter: saturate(1.08);
+}
+
+body[data-country] .country-casino-shot:focus-visible {
+  outline: 2px solid var(--section-accent);
+  outline-offset: 3px;
+}
+
+@media (max-width: 1024px) {
+  body[data-country] .country-casino-gallery-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 768px) {
+  body[data-country] .country-casino-gallery {
+    padding-top: 42px;
+    padding-bottom: 42px;
+  }
+
+  body[data-country] .country-casino-gallery-head {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 14px;
+  }
+
+  body[data-country] .country-casino-gallery-head h2 {
+    max-width: none;
+    font-size: clamp(30px, 9vw, 42px);
+  }
+
+  body[data-country] .country-casino-gallery-head > p {
+    font-size: 13.5px;
+    line-height: 1.55;
+  }
+}
+
+@media (max-width: 560px) {
+  body[data-country] .country-casino-gallery-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
+/* =============================================================
+   AUTHOR PROFILE
+============================================================= */
+
+body.author-page {
+  --author-accent: var(--section-accent, #a8cdb9);
+  background:
+    radial-gradient(circle at 75% 6%, rgba(107, 174, 142, 0.1), transparent 28%),
+    var(--bg-main);
+}
+
+.author-shell {
+  display: grid;
+  gap: clamp(54px, 7vw, 92px);
+  width: min(100% - (var(--page-gutter) * 2), var(--site-max-width));
+  margin: 0 auto;
+  padding: clamp(52px, 7vw, 94px) 0 clamp(70px, 8vw, 110px);
+}
+
+.author-hero {
+  display: grid;
+  grid-template-columns: minmax(240px, 0.62fr) minmax(0, 1.45fr);
+  gap: clamp(34px, 6vw, 88px);
+  align-items: center;
+  min-height: 430px;
+  padding: clamp(18px, 3vw, 34px) clamp(6px, 1.4vw, 18px);
+  overflow: visible;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+.author-photo {
+  position: relative;
+  width: min(100%, 290px);
+  aspect-ratio: 1;
+  justify-self: center;
+  overflow: hidden;
+  border: 4px solid color-mix(in srgb, var(--author-accent) 70%, #ffffff 30%);
+  border-radius: 50%;
+  background: #11181b;
+  box-shadow:
+    0 0 0 14px color-mix(in srgb, var(--author-accent) 9%, transparent),
+    0 30px 70px rgba(0, 0, 0, 0.36);
+}
+
+.author-photo img {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  display: block;
+  width: 220%;
+  max-width: none;
+  height: 220%;
+  object-fit: cover;
+  transform: translate(-54%, -31%);
+}
+
+.author-hero-copy {
+  max-width: 720px;
+}
+
+.author-kicker {
+  display: block;
+  color: var(--author-accent);
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  line-height: 1.25;
+  text-transform: uppercase;
+}
+
+.author-hero h1 {
+  margin: 12px 0 10px;
+  color: var(--text-main);
+  font-size: clamp(42px, 5.2vw, 72px);
+  font-weight: 650;
+  line-height: 0.98;
+  letter-spacing: -0.035em;
+}
+
+.author-hero-copy > p:not(.author-role) {
+  max-width: 58ch;
+  margin: 20px 0 0;
+  color: var(--text-muted);
+  font-size: clamp(16px, 1.4vw, 19px);
+  line-height: 1.65;
+}
+
+.author-role {
+  margin: 0;
+  color: var(--author-accent);
+  font-size: 14px;
+  font-weight: 750;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.author-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 30px;
+}
+
+.author-actions a {
+  display: inline-flex;
+  min-height: 42px;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 16px;
+  border: 1px solid var(--border-soft);
+  border-radius: 5px;
+  color: var(--text-main);
+  font-size: 12px;
+  font-weight: 700;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+.author-actions a:first-child {
+  border-color: var(--author-accent);
+}
+
+.author-actions a:hover,
+.author-actions a:focus-visible {
+  border-color: var(--author-accent);
+  color: var(--author-accent);
+  outline: none;
+}
+
+.author-content {
+  display: grid;
+  gap: clamp(28px, 4vw, 46px);
+}
+
+.author-intro {
+  display: grid;
+  grid-template-columns: minmax(0, 0.86fr) minmax(320px, 0.72fr);
+  gap: 10px clamp(28px, 6vw, 90px);
+  align-items: end;
+}
+
+.author-intro .author-kicker,
+.author-intro h2 {
+  grid-column: 1;
+}
+
+.author-intro h2,
+.author-standard h2,
+.author-background h2 {
+  margin: 8px 0 0;
+  color: var(--text-main);
+  font-size: clamp(34px, 4.4vw, 62px);
+  font-weight: 650;
+  line-height: 1.02;
+  letter-spacing: -0.03em;
+  text-wrap: balance;
+}
+
+.author-intro > p {
+  grid-row: 1 / span 2;
+  grid-column: 2;
+  margin: 0;
+  color: var(--text-muted);
+  font-size: 15px;
+  line-height: 1.68;
+}
+
+.author-focus-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.author-focus-grid article {
+  min-width: 0;
+  min-height: 244px;
+  padding: 24px;
+  border-top: 2px solid var(--author-accent);
+  border-radius: 0 0 var(--radius-md) var(--radius-md);
+  background: var(--surface-card);
+}
+
+.author-focus-grid article > span {
+  color: var(--author-accent);
+  font-size: 11px;
+  font-weight: 850;
+  letter-spacing: 0.12em;
+}
+
+.author-focus-grid h3 {
+  margin: 30px 0 10px;
+  color: var(--text-main);
+  font-size: 18px;
+  line-height: 1.2;
+}
+
+.author-focus-grid p {
+  margin: 0;
+  color: var(--text-muted);
+  font-size: 13px;
+  line-height: 1.58;
+}
+
+.author-standard,
+.author-background {
+  display: grid;
+  grid-template-columns: minmax(0, 0.85fr) minmax(340px, 1fr);
+  gap: clamp(30px, 6vw, 96px);
+}
+
+.author-standard {
+  padding: clamp(30px, 4.5vw, 58px);
+  border: 1px solid var(--border-soft);
+  border-radius: 18px;
+  background: var(--surface-card-soft);
+}
+
+.author-standard p,
+.author-background p {
+  margin: 0;
+  color: var(--text-muted);
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+.author-standard p + p,
+.author-background p + p {
+  margin-top: 16px;
+  padding-top: 16px;
+  border-top: 1px solid var(--border-soft);
+}
+
+html[data-theme='light'] body.author-page .author-hero,
+html[data-theme='light'] body.author-page .author-focus-grid article,
+html[data-theme='light'] body.author-page .author-standard {
+  background-color: #ffffff;
+}
+
+@media (max-width: 1024px) {
+  .author-hero {
+    grid-template-columns: minmax(220px, 0.55fr) minmax(0, 1fr);
+  }
+
+  .author-focus-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 768px) {
+  .author-shell {
+    width: min(100% - (var(--page-gutter-mobile) * 2), var(--site-max-width));
+    gap: 54px;
+    padding-top: 36px;
+  }
+
+  .author-hero,
+  .author-intro,
+  .author-standard,
+  .author-background {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .author-hero {
+    min-height: 0;
+    padding: 18px 0 8px;
+    text-align: center;
+  }
+
+  .author-photo {
+    width: min(64vw, 220px);
+  }
+
+  .author-actions {
+    justify-content: center;
+  }
+
+  .author-intro .author-kicker,
+  .author-intro h2,
+  .author-intro > p {
+    grid-row: auto;
+    grid-column: 1;
+  }
+
+  .author-intro > p {
+    margin-top: 8px;
+  }
+}
+
+@media (max-width: 520px) {
+  .author-focus-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .author-focus-grid article {
+    min-height: 0;
+  }
+
+  .author-actions {
+    align-items: stretch;
+    flex-direction: column;
   }
 }
