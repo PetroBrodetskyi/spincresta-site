@@ -1,7 +1,7 @@
 ﻿// =====================
 // IMPORTS
 // =====================
-import { BRANDS } from './brands.js?v=20260808-ethereum-fix-1';
+import { BRANDS } from './brands.js?v=20260808-advertiser-geo-updates-1';
 import { BRAND_SNAPSHOT_CONFIGS } from './brand-snapshot-configs.js';
 import { BRAND_NEW_GAMES } from './brand-new-games.js?v=20260802-directory-sync-1';
 import { BRAND_HOMEPAGE_SCREENSHOTS } from './brand-homepage-screenshots.js?v=20260808-country-galleries-1';
@@ -17,6 +17,10 @@ const THEME_OPTIONS = ['dark', 'light'];
 const LANGUAGE_STORAGE_KEY = 'spincresta-language';
 const LANGUAGE_OPTIONS = ['en', 'de'];
 const BLOCKED_BRAND_ICON = '/icons/ui/stop-blocked-icon.svg';
+const BRAND_ONLY_COUNTRIES = {
+  CY: { slug: 'cyprus', name: { en: 'Cyprus', de: 'Zypern' } },
+  RS: { slug: 'serbia', name: { en: 'Serbia', de: 'Serbien' } },
+};
 const BLOCKED_BRAND_COPY = {
   en: {
     notice: 'According to verified information from our analysts, this casino has issues with law enforcement authorities of the Republic of Belarus.',
@@ -3849,7 +3853,17 @@ export const initCasinoPage = () => {
         countriesEl.innerHTML = brand.countries
           .map(code => {
             const c = COUNTRIES.find(x => x.code.toLowerCase() === code.toLowerCase());
-            if (!c) return '';
+            if (!c) {
+              const market = BRAND_ONLY_COUNTRIES[code.toUpperCase()];
+              if (!market) return '';
+              const marketName = market.name[SITE_LOCALE] || market.name.en;
+              return `
+                <span class="flag-container brand-country-market" aria-label="${normalizeText(marketName)} market availability">
+                  <img class="hero-flag" src="${iconPath(market.slug)}" alt="${normalizeText(marketName)}" loading="lazy" decoding="async"/>
+                  <span>${normalizeText(marketName)}</span>
+                </span>
+              `;
+            }
             return `
               <a class="flag-container" href="${countryPagePath(c.slug)}" aria-label="${normalizeText(c.name)} casino guide">
                 <img class="hero-flag" src="${iconPath(c.slug)}" alt="${normalizeText(c.name)}" loading="lazy" decoding="async"/>
