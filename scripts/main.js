@@ -3226,6 +3226,36 @@ const initBrandWhyPreview = () => {
   mobileQuery.addEventListener?.('change', syncMobilePreviewState);
 };
 
+const initAffiliateClickTracking = () => {
+  if (document.documentElement.dataset.affiliateTrackingBound === 'true') return;
+
+  document.documentElement.dataset.affiliateTrackingBound = 'true';
+  document.addEventListener('click', event => {
+    const target = event.target instanceof Element ? event.target : null;
+    const link = target?.closest('a[rel~="sponsored"]');
+    if (!link || typeof window.gtag !== 'function') return;
+
+    let destination;
+    try {
+      const url = new URL(link.href, window.location.href);
+      destination = `${url.origin}${url.pathname}`;
+    } catch {
+      destination = link.getAttribute('href') || '';
+    }
+
+    window.gtag('event', 'affiliate_click', {
+      link_url: destination,
+      link_text: normalizeText(link.textContent).trim().slice(0, 100),
+      page_language: SITE_LOCALE,
+      brand_slug:
+        document.body.dataset.brand ||
+        document.querySelector('meta[name="brand-slug"]')?.content ||
+        '',
+      transport_type: 'beacon',
+    });
+  });
+};
+
 // =====================
 // INIT FUNCTION
 // =====================
@@ -3236,6 +3266,7 @@ export const initCasinoPage = () => {
   const siteBrandCountEl = document.getElementById('siteBrandCount');
 
   initFooterThemeSettings();
+  initAffiliateClickTracking();
   window.addEventListener('resize', requestPaymentIconSync, { passive: true });
   document.addEventListener(
     'load',
