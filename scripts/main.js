@@ -1,7 +1,7 @@
 ﻿// =====================
 // IMPORTS
 // =====================
-import { BRANDS } from './brands.js?v=20260808-advertiser-geo-updates-1';
+import { BRANDS } from './brands.js?v=20260810-inactive-brands-1';
 import { BRAND_SNAPSHOT_CONFIGS } from './brand-snapshot-configs.js';
 import { BRAND_NEW_GAMES } from './brand-new-games.js?v=20260802-directory-sync-1';
 import { BRAND_HOMEPAGE_SCREENSHOTS } from './brand-homepage-screenshots.js?v=20260808-country-galleries-1';
@@ -17,6 +17,7 @@ const THEME_OPTIONS = ['dark', 'light'];
 const LANGUAGE_STORAGE_KEY = 'spincresta-language';
 const LANGUAGE_OPTIONS = ['en', 'de'];
 const BLOCKED_BRAND_ICON = '/icons/ui/stop-blocked-icon.svg';
+const UNAVAILABLE_BRAND_ICON = '/icons/ui/remove-close-round-grey-icon.svg';
 const BRAND_ONLY_COUNTRIES = {
   CY: { slug: 'cyprus', name: { en: 'Cyprus', de: 'Zypern' } },
   RS: { slug: 'serbia', name: { en: 'Serbia', de: 'Serbien' } },
@@ -25,10 +26,24 @@ const BLOCKED_BRAND_COPY = {
   en: {
     notice: 'According to verified information from our analysts, this casino has issues with law enforcement authorities of the Republic of Belarus.',
     cta: 'Not recommended',
+    alternatives: 'We recommend these casinos instead',
   },
   de: {
     notice: 'Nach den von unseren Analysten geprüften Informationen hat dieses Casino Probleme mit den Strafverfolgungsbehörden der Republik Belarus.',
     cta: 'Nicht empfohlen',
+    alternatives: 'Wir empfehlen stattdessen diese Casinos',
+  },
+};
+const UNAVAILABLE_BRAND_COPY = {
+  en: {
+    notice: 'This casino is currently unavailable for our players. We will update this review when access becomes available again.',
+    cta: 'Currently unavailable',
+    alternatives: 'Available casinos you can explore instead',
+  },
+  de: {
+    notice: 'Dieses Casino ist derzeit für unsere Spieler nicht verfügbar. Wir aktualisieren diesen Test, sobald der Zugang wieder möglich ist.',
+    cta: 'Derzeit nicht verfügbar',
+    alternatives: 'Stattdessen verfügbare Casinos entdecken',
   },
 };
 
@@ -779,11 +794,14 @@ const getBrandAlternatives = brand => {
   return alternatives.slice(0, 4);
 };
 
-const getBlockedCtaMarkup = () => `
-  <span>${uiCopy.visitCasino}</span>
+const getDisabledBrandCopy = brand =>
+  (brand?.temporarilyUnavailable ? UNAVAILABLE_BRAND_COPY : BLOCKED_BRAND_COPY)[SITE_LOCALE];
+
+const getBlockedCtaMarkup = brand => `
+  <span>${escapeHtml(brand?.temporarilyUnavailable ? getDisabledBrandCopy(brand).cta : uiCopy.visitCasino)}</span>
 `;
 
-const disableCasinoCta = element => {
+const disableCasinoCta = (element, brand) => {
   if (!element || element.dataset.blockedCta === 'true') return;
 
   element.dataset.blockedCta = 'true';
@@ -794,7 +812,7 @@ const disableCasinoCta = element => {
   element.removeAttribute('href');
   element.removeAttribute('target');
   element.removeAttribute('rel');
-  element.innerHTML = getBlockedCtaMarkup();
+  element.innerHTML = getBlockedCtaMarkup(brand);
 
   element.addEventListener('click', event => {
     event.preventDefault();
@@ -802,10 +820,10 @@ const disableCasinoCta = element => {
   });
 };
 
-const createBlockedBrandIcon = className => {
+const createBlockedBrandIcon = (className, brand) => {
   const icon = document.createElement('img');
   icon.className = className;
-  icon.src = BLOCKED_BRAND_ICON;
+  icon.src = brand?.temporarilyUnavailable ? UNAVAILABLE_BRAND_ICON : BLOCKED_BRAND_ICON;
   icon.alt = '';
   icon.loading = 'lazy';
   icon.decoding = 'async';
@@ -817,21 +835,24 @@ const insertBrandRiskInlineNotice = brand => {
   if (document.querySelector('body[data-brand] .brand-risk-inline')) return;
 
   const alternatives = getBrandAlternatives(brand);
+  const copy = getDisabledBrandCopy(brand);
+  const icon = brand?.temporarilyUnavailable ? UNAVAILABLE_BRAND_ICON : BLOCKED_BRAND_ICON;
   const notice = document.createElement('aside');
   notice.className = 'brand-risk-inline';
+  notice.classList.toggle('is-temporarily-unavailable', Boolean(brand?.temporarilyUnavailable));
   notice.setAttribute('role', 'note');
   notice.innerHTML = `
     <div class="brand-risk-inline__notice">
-      <img class="brand-risk-inline__icon" src="${BLOCKED_BRAND_ICON}" alt="" aria-hidden="true" loading="lazy" decoding="async" />
+      <img class="brand-risk-inline__icon" src="${icon}" alt="" aria-hidden="true" loading="lazy" decoding="async" />
       <div class="brand-risk-inline__copy">
-        <strong>${escapeHtml(BLOCKED_BRAND_COPY[SITE_LOCALE].cta)}</strong>
-        <p>${escapeHtml(BLOCKED_BRAND_COPY[SITE_LOCALE].notice)}</p>
+        <strong>${escapeHtml(copy.cta)}</strong>
+        <p>${escapeHtml(copy.notice)}</p>
       </div>
     </div>
     ${
       alternatives.length
         ? `<div class="brand-risk-inline__alternatives">
-            <h3>We recommend these casinos instead</h3>
+            <h3>${escapeHtml(copy.alternatives)}</h3>
             <div class="brand-risk-inline-grid"></div>
           </div>`
         : ''
@@ -866,20 +887,27 @@ const applyNotRecommendedBrandPage = brand => {
   if (!brand?.notRecommended) return;
 
   document.body.classList.add('not-recommended-brand');
-  document.querySelectorAll('body[data-brand] a.cta-brands').forEach(disableCasinoCta);
+  document.body.classList.toggle('temporarily-unavailable-brand', Boolean(brand.temporarilyUnavailable));
+  document.querySelectorAll('body[data-brand] .cta-brands').forEach(element => disableCasinoCta(element, brand));
 
   document.querySelectorAll('body[data-brand] .brand-sticky-title[href]').forEach(stickyTitle => {
     stickyTitle.removeAttribute('href');
     stickyTitle.removeAttribute('target');
     stickyTitle.removeAttribute('rel');
     stickyTitle.setAttribute('role', 'status');
-    stickyTitle.setAttribute('aria-label', `${normalizeText(brand.name)} is not recommended`);
+    stickyTitle.setAttribute(
+      'aria-label',
+      brand.temporarilyUnavailable
+        ? `${normalizeText(brand.name)} is currently unavailable`
+        : `${normalizeText(brand.name)} is not recommended`
+    );
     stickyTitle.classList.add('is-not-recommended');
+    stickyTitle.classList.toggle('is-temporarily-unavailable', Boolean(brand.temporarilyUnavailable));
   });
 
   document.querySelectorAll('body[data-brand] .brand-sticky-title__cta').forEach(cta => {
     cta.classList.add('cta-blocked');
-    cta.innerHTML = getBlockedCtaMarkup();
+    cta.innerHTML = getBlockedCtaMarkup(brand);
   });
 
   insertBrandRiskInlineNotice(brand);
@@ -899,12 +927,14 @@ const applyNotRecommendedCasinoRows = () => {
     if (!brand) return;
 
     row.classList.add('is-not-recommended');
+    row.classList.toggle('is-temporarily-unavailable', Boolean(brand.temporarilyUnavailable));
     row.dataset.notRecommended = 'true';
-    row.querySelectorAll('.casino-list-cta .cta[href]').forEach(disableCasinoCta);
+    if (brand.temporarilyUnavailable) row.dataset.temporarilyUnavailable = 'true';
+    row.querySelectorAll('.casino-list-cta .cta').forEach(element => disableCasinoCta(element, brand));
 
     const name = row.querySelector('.casino-name');
     if (name && !name.querySelector('.casino-list-risk-icon')) {
-      name.appendChild(createBlockedBrandIcon('casino-list-risk-icon'));
+      name.appendChild(createBlockedBrandIcon('casino-list-risk-icon', brand));
     }
   });
 };
@@ -1188,6 +1218,7 @@ const createCasinoCard = ({
   isExclusive = false,
   isTopRated = false,
   notRecommended = false,
+  temporarilyUnavailable = false,
   hasDetailPage = false,
 }) => {
   const article = document.createElement('article');
@@ -1200,12 +1231,15 @@ const createCasinoCard = ({
   const detailUrl = brandPagePath(urlDetail ?? '');
   const imageUrl = normalizeAssetPath(image ?? '');
   const isBlocked = Boolean(notRecommended);
+  const isUnavailable = Boolean(temporarilyUnavailable);
   const showReviewAction = Boolean(hasDetailPage && detailUrl);
   const showPlayAction = safeUrl !== PLACEHOLDER_LINK || isBlocked;
 
   article.dataset.page = detailUrl;
   article.classList.toggle('is-not-recommended', isBlocked);
+  article.classList.toggle('is-temporarily-unavailable', isUnavailable);
   if (isBlocked) article.dataset.notRecommended = 'true';
+  if (isUnavailable) article.dataset.temporarilyUnavailable = 'true';
   setBrandBackground(article, bgColor);
 
   article.innerHTML = `
@@ -1216,7 +1250,9 @@ const createCasinoCard = ({
       <h3 class="casino-name">${safeName}</h3>
       ${
         isBlocked
-          ? `<img class="casino-card-risk-icon" src="${BLOCKED_BRAND_ICON}" alt="" aria-hidden="true" loading="lazy" decoding="async" />`
+          ? `<img class="casino-card-risk-icon" src="${
+              isUnavailable ? UNAVAILABLE_BRAND_ICON : BLOCKED_BRAND_ICON
+            }" alt="" aria-hidden="true" loading="lazy" decoding="async" />`
           : ''
       }
       ${createBadge({ isTopRated, isExclusive, isNew })}
@@ -1233,7 +1269,7 @@ const createCasinoCard = ({
         ${
           isBlocked
             ? `<button class="cta cta-primary cta-blocked" type="button" disabled aria-disabled="true">
-                ${getBlockedCtaMarkup()}
+                ${getBlockedCtaMarkup({ temporarilyUnavailable: isUnavailable })}
               </button>`
             : showPlayAction
             ? `<a class="cta cta-primary" href="${safeUrl}" target="_blank" rel="noopener noreferrer nofollow sponsored">${primaryCtaText}</a>`
@@ -2566,6 +2602,7 @@ const initStickyBrandTitle = () => {
   if (!brandKey) return;
   const brand = findBrandByPageKey(brandKey);
   const isBlocked = Boolean(brand?.notRecommended);
+  const isUnavailable = Boolean(brand?.temporarilyUnavailable);
 
   const source = document.querySelector('.brand-sticky-aside') || document.querySelector('.hero');
   const heading = source?.querySelector('h1');
@@ -2598,8 +2635,12 @@ const initStickyBrandTitle = () => {
   stickyTitle.className = 'brand-sticky-title';
   if (isBlocked) {
     stickyTitle.classList.add('is-not-recommended');
+    stickyTitle.classList.toggle('is-temporarily-unavailable', isUnavailable);
     stickyTitle.setAttribute('role', 'status');
-    stickyTitle.setAttribute('aria-label', `${titleText} is not recommended`);
+    stickyTitle.setAttribute(
+      'aria-label',
+      isUnavailable ? `${titleText} is currently unavailable` : `${titleText} is not recommended`
+    );
   } else {
     stickyTitle.href = casinoHref;
     stickyTitle.target = heroCta?.getAttribute('target') || '_blank';
@@ -2611,7 +2652,7 @@ const initStickyBrandTitle = () => {
       ${brandLogoMarkup}
       <span class="brand-sticky-title__text">${titleText}</span>
       <span class="brand-sticky-title__cta${isBlocked ? ' cta-blocked' : ''}">
-        Visit Casino
+        ${isBlocked ? getBlockedCtaMarkup(brand) : uiCopy.visitCasino}
       </span>
     </div>
   `;
