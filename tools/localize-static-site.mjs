@@ -44,7 +44,7 @@ const visitHtml = (html, callback) => {
           const key = keyFor(value);
           return key && shouldTranslate(key) ? `${name}=${quote}${callback(key).replaceAll('&', '&amp;').replaceAll(quote, quote === '"' ? '&quot;' : '&#39;')}${quote}` : full;
         });
-        if (/^<meta\b/i.test(updated) && /(?:name|property)=['"](?:description|og:title|og:description|og:image:alt|twitter:title|twitter:description|twitter:image:alt)['"]/i.test(updated)) {
+        if (/^<meta\b/i.test(updated) && /(?:name|property)=['"](?:description|brand-snapshot-intro|og:title|og:description|og:image:alt|twitter:title|twitter:description|twitter:image:alt)['"]/i.test(updated)) {
           updated = updated.replace(/\bcontent=(['"])(.*?)\1/i, (full, quote, value) => {
             const key = keyFor(value);
             return key && shouldTranslate(key) ? `content=${quote}${callback(key).replaceAll('&', '&amp;').replaceAll(quote, quote === '"' ? '&quot;' : '&#39;')}${quote}` : full;
@@ -87,16 +87,26 @@ if (mode === 'plan') {
 }
 
 const brandNames = fs.existsSync(path.join(root, 'scripts/brands.js'))
-  ? [...new Set([...fs.readFileSync(path.join(root, 'scripts/brands.js'), 'utf8').matchAll(/\bname:\s*'([^']+)'/g)].map(match => match[1]).concat('SpinCresta'))].sort((a, b) => b.length - a.length)
-  : ['SpinCresta'];
+  ? [...new Set([...fs.readFileSync(path.join(root, 'scripts/brands.js'), 'utf8').matchAll(/\bname:\s*'([^']+)'/g)].map(match => match[1]).concat('SpinCresta', 'Odri Chambers', 'Telegram', 'LinkedIn'))].sort((a, b) => b.length - a.length)
+  : ['SpinCresta', 'Odri Chambers', 'Telegram', 'LinkedIn'];
+const genericFirstFollower = /^(?:deposit|withdrawal|cashout|payout|payment|bonus|impression|session|real-money|five|four|three|two|stage|step|thing|time|visit|priority|check|verify|read|start|week|month|day|purchase|entry|wager|bet|game|spin)\b/i;
+const shouldProtectBrandTerm = (value, term, index) => {
+  if (term !== 'First') return true;
+  const following = value.slice(index + term.length).replace(/^[\s:'’"-]+/, '');
+  return !genericFirstFollower.test(following);
+};
 const protect = value => {
   const terms = [];
   let masked = value;
   for (const term of brandNames) {
-    if (!masked.toLowerCase().includes(term.toLowerCase())) continue;
-    const marker = `ZXQTERM${terms.length}QXZ`;
-    masked = masked.replace(new RegExp(term.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'gi'), marker);
-    terms.push(term);
+    if (!masked.includes(term)) continue;
+    const pattern = new RegExp(term.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'g');
+    masked = masked.replace(pattern, (match, index) => {
+      if (!shouldProtectBrandTerm(value, term, index)) return match;
+      const marker = `ZXQTERM${terms.length}QXZ`;
+      terms.push(term);
+      return marker;
+    });
   }
   return { masked, terms };
 };
@@ -109,18 +119,31 @@ const restore = (value, terms) => {
 if (mode === 'translate') {
   const translated = fs.existsSync(cachePath) ? JSON.parse(fs.readFileSync(cachePath, 'utf8')) : {};
   const pending = [...strings].filter(text => !(text in translated));
-  for (let offset = 0; offset < pending.length; offset += 25) {
-    await Promise.all(pending.slice(offset, offset + 25).map(async text => {
+  const requestTranslation = async text => {
+    let lastError;
+    for (let attempt = 1; attempt <= 5; attempt += 1) {
       const { masked, terms } = protect(text);
       const url = new URL('https://translate.googleapis.com/translate_a/single');
       url.searchParams.set('client', 'gtx'); url.searchParams.set('sl', 'en'); url.searchParams.set('tl', locale); url.searchParams.set('dt', 't'); url.searchParams.set('q', masked);
-      const response = await fetch(url, { headers: { 'User-Agent': 'Mozilla/5.0' } });
-      if (!response.ok) throw new Error(`Google Translate ${response.status}`);
-      const data = await response.json();
-      translated[text] = restore((data[0] || []).map(row => row[0]).join(''), terms);
+      try {
+        const response = await fetch(url, { headers: { 'User-Agent': 'Mozilla/5.0' } });
+        if (!response.ok) throw new Error(`Google Translate ${response.status}`);
+        const data = await response.json();
+        return restore((data[0] || []).map(row => row[0]).join(''), terms);
+      } catch (error) {
+        lastError = error;
+        if (attempt < 5) await new Promise(resolve => setTimeout(resolve, attempt * 600));
+      }
+    }
+    throw lastError;
+  };
+  const batchSize = 15;
+  for (let offset = 0; offset < pending.length; offset += batchSize) {
+    await Promise.all(pending.slice(offset, offset + batchSize).map(async text => {
+      translated[text] = await requestTranslation(text);
     }));
     fs.writeFileSync(cachePath, JSON.stringify(translated, null, 2));
-    console.log(`Translated ${Math.min(offset + 25, pending.length)}/${pending.length}`);
+    console.log(`Translated ${Math.min(offset + batchSize, pending.length)}/${pending.length}`);
   }
   console.log(`Translation cache: ${cachePath}`);
   process.exit(0);
@@ -129,20 +152,48 @@ if (mode === 'translate') {
 if (!fs.existsSync(cachePath)) throw new Error(`Missing translation cache: ${cachePath}. Run --translate first.`);
 const translated = new Map(Object.entries(JSON.parse(fs.readFileSync(cachePath, 'utf8'))));
 const translate = value => translated.get(value) || value;
-const preserveJsonKeys = new Set(['@context', '@type', 'url', 'item', 'image', 'logo', 'sameAs', 'datePublished', 'dateModified', 'priceCurrency', 'currenciesAccepted', 'paymentAccepted']);
+const preserveJsonKeys = new Set(['@context', '@type', 'image', 'logo', 'sameAs', 'datePublished', 'dateModified', 'priceCurrency', 'currenciesAccepted', 'paymentAccepted']);
+const routePath = file => `/${path.relative(root, file).replace(/index\.html$/, '').split(path.sep).join('/')}`;
+const sourceRoutes = new Set(sourceFiles.map(routePath));
+const localeRoute = route => route === '/' ? `/${locale}/` : `/${locale}${route}`;
+const localeUrl = route => `https://spincresta.com${localeRoute(route)}`;
+const localizeInternalHref = value => {
+  if (!value.startsWith('/') || value.startsWith('//') || value.startsWith(`/${locale}/`)) return value;
+
+  const suffixIndex = value.search(/[?#]/);
+  const pathname = suffixIndex === -1 ? value : value.slice(0, suffixIndex);
+  const suffix = suffixIndex === -1 ? '' : value.slice(suffixIndex);
+  return sourceRoutes.has(pathname) ? `${localeRoute(pathname)}${suffix}` : value;
+};
+const localizeStructuredUrl = value => {
+  if (typeof value !== 'string' || !value.startsWith('https://spincresta.com/')) return value;
+
+  try {
+    const url = new URL(value);
+    if (!sourceRoutes.has(url.pathname)) return value;
+    url.pathname = localeRoute(url.pathname);
+    return url.toString();
+  } catch {
+    return value;
+  }
+};
 const translateJson = (value, key = '') => {
   if (Array.isArray(value)) return value.map(item => translateJson(item, key));
   if (value && typeof value === 'object') return Object.fromEntries(Object.entries(value).map(([childKey, child]) => [childKey, translateJson(child, childKey)]));
   if (key === 'inLanguage' && typeof value === 'string') return locale;
-  if (typeof value !== 'string' || preserveJsonKeys.has(key) || /^https?:\/\//i.test(value)) return value;
+  if (typeof value !== 'string') return value;
+  if (/^https?:\/\//i.test(value)) return localizeStructuredUrl(value);
+  if (preserveJsonKeys.has(key)) return value;
   return translate(keyFor(value));
 };
-const routePath = file => `/${path.relative(root, file).replace(/index\.html$/, '').split(path.sep).join('/')}`;
 
 for (const sourceFile of sourceFiles) {
   const targetFile = path.join(root, locale, path.relative(root, sourceFile));
   if (fs.existsSync(targetFile) && !force) continue;
   const source = fs.readFileSync(sourceFile, 'utf8');
+  const sourceLanguageTag = source.match(/<html\b[^>]*\blang=['"]([^'"]+)['"]/i)?.[1] || 'en';
+  const region = sourceLanguageTag.split('-')[1]?.toUpperCase();
+  const localizedLanguageTag = region ? `${locale}-${region}` : locale;
   let html = visitHtml(source, translate);
   const blocks = [...source.matchAll(jsonPattern)].map(match => {
     try { return `<script type="application/ld+json">\n${JSON.stringify(translateJson(JSON.parse(match[1])), null, 2)}\n</script>`; }
@@ -150,15 +201,27 @@ for (const sourceFile of sourceFiles) {
   }).join('\n');
   html = html.replace(/\s*<script\b[^>]*type=['"]application\/ld\+json['"][^>]*>[\s\S]*?<\/script>/gi, '');
   html = html.replace(/\s*<\/head>/i, `\n${blocks}\n</head>`);
-  html = html.replace(/<html\b([^>]*)lang=['"][^'"]+['"]([^>]*)>/i, `<html$1lang="${locale}"$2>`);
+  html = html.replace(/<html\b([^>]*)lang=['"][^'"]+['"]([^>]*)>/i, `<html$1lang="${localizedLanguageTag}"$2>`);
   html = html.replace(/<body\b([^>]*)>/i, (full, attrs) => `<body${attrs.replace(/\sdata-language=['"][^'"]+['"]/i, '')} data-language="${locale}">`);
   const route = routePath(sourceFile);
-  html = html.replaceAll(`https://spincresta.com${route}`, `https://spincresta.com/${locale}${route}`);
-  for (const file of sourceFiles) {
-    const internal = routePath(file);
-    html = html.replace(new RegExp(`href=(['"])${internal.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}`, 'g'), `href=$1/${locale}${internal}`);
-  }
-  html = html.replace(/<a href="\/" class="logo"/g, `<a href="/${locale}/" class="logo"`);
+  const canonical = localeUrl(route);
+  html = html.replace(/<link\b(?=[^>]*\brel=['"]canonical['"])[^>]*>/i, `<link rel="canonical" href="${canonical}" />`);
+  html = html.replace(/<meta\b(?=[^>]*\bproperty=['"]og:url['"])[^>]*>/i, `<meta property="og:url" content="${canonical}" />`);
+  html = html.replace(/<meta\b(?=[^>]*\bproperty=['"]og:locale['"])[^>]*>/i, '<meta property="og:locale" content="es_ES" />');
+  html = html.replace(/\s*<link\b(?=[^>]*\brel=['"]alternate['"])(?=[^>]*\bhreflang=['"])[^>]*>/gi, '');
+  const germanRoute = route === '/' ? '/de/' : `/de${route}`;
+  const languageSuffix = region ? `-${region}` : '';
+  const alternates = [
+    `<link rel="alternate" hreflang="en${languageSuffix}" href="https://spincresta.com${route}" />`,
+    `<link rel="alternate" hreflang="de${languageSuffix}" href="https://spincresta.com${germanRoute}" />`,
+    `<link rel="alternate" hreflang="es${languageSuffix}" href="${canonical}" />`,
+    `<link rel="alternate" hreflang="x-default" href="https://spincresta.com${route}" />`,
+  ].join('\n    ');
+  html = html.replace(/(<link\b(?=[^>]*\brel=['"]canonical['"])[^>]*>)/i, `$1\n    ${alternates}`);
+  html = html.replace(/\bhref=(['"])(\/[^'"]*)\1/gi, (full, quote, value) => {
+    const localized = localizeInternalHref(value);
+    return `href=${quote}${localized}${quote}`;
+  });
   fs.mkdirSync(path.dirname(targetFile), { recursive: true });
   fs.writeFileSync(targetFile, html);
 }

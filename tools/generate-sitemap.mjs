@@ -43,15 +43,15 @@ const getExistingMetadata = () => {
 };
 
 const getDefaultMetadata = pagePath => {
-  if (pagePath === '/' || pagePath === '/de/' || /\/(?:de\/)?online-casinos\/$/.test(pagePath)) {
+  if (pagePath === '/' || pagePath === '/de/' || pagePath === '/es/' || /\/(?:(?:de|es)\/)?online-casinos\/$/.test(pagePath)) {
     return { changefreq: 'weekly', priority: '0.9' };
   }
 
-  if (/\/(?:de\/)?online-casinos\/[^/]+\/$/.test(pagePath)) {
+  if (/\/(?:(?:de|es)\/)?online-casinos\/[^/]+\/$/.test(pagePath)) {
     return { changefreq: 'weekly', priority: '0.7' };
   }
 
-  if (/\/(?:de\/)?brands\/[^/]+\/$/.test(pagePath)) {
+  if (/\/(?:(?:de|es)\/)?brands\/[^/]+\/$/.test(pagePath)) {
     return { changefreq: 'monthly', priority: '0.7' };
   }
 
@@ -89,6 +89,7 @@ const sitemap = [
 
 fs.writeFileSync(SITEMAP_PATH, sitemap);
 
-const englishCount = pages.filter(page => !page.pagePath.startsWith('/de/')).length;
+const englishCount = pages.filter(page => !page.pagePath.startsWith('/de/') && !page.pagePath.startsWith('/es/')).length;
 const germanCount = pages.filter(page => page.pagePath.startsWith('/de/')).length;
-console.log(`Generated ${pages.length} sitemap URLs: ${englishCount} EN, ${germanCount} DE.`);
+const spanishCount = pages.filter(page => page.pagePath.startsWith('/es/')).length;
+console.log(`Generated ${pages.length} sitemap URLs: ${englishCount} EN, ${germanCount} DE, ${spanishCount} ES.`);

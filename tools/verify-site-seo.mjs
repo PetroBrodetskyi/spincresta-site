@@ -44,7 +44,7 @@ for (const absolute of files) {
     .map(([, code, href]) => ({ code: code.toLowerCase(), href }));
   pages.set(urlPath, { absolute, html, lang, canonical, robots, title, description, alternates });
 
-  const expectedLang = urlPath.startsWith('/de/') ? 'de' : 'en';
+  const expectedLang = urlPath.startsWith('/de/') ? 'de' : urlPath.startsWith('/es/') ? 'es' : 'en';
   if (!lang.toLowerCase().startsWith(expectedLang)) errors.push(`${urlPath}: lang=${lang || 'missing'}, expected ${expectedLang}`);
   if (canonical !== `${ORIGIN}${urlPath}`) errors.push(`${urlPath}: canonical does not match its URL`);
 
@@ -61,21 +61,33 @@ for (const absolute of files) {
   }
 }
 
-// Validate language pairs and reciprocal alternate links after every page is known.
+// Validate language variants and reciprocal alternate links after every page is known.
 for (const [urlPath, page] of pages) {
-  const pairPath = urlPath.startsWith('/de/')
-    ? (urlPath === '/de/' ? '/' : urlPath.replace(/^\/de/, ''))
-    : (urlPath === '/' ? '/de/' : `/de${urlPath}`);
-  const pair = pages.get(pairPath);
-  if (!pair) {
-    if (!/noindex/i.test(page.robots)) errors.push(`${urlPath}: missing ${page.lang === 'de' ? 'English' : 'German'} page`);
-    continue;
+  const basePath = urlPath.replace(/^\/(?:de|es)(?=\/)/, '');
+  const localePaths = {
+    en: basePath,
+    de: basePath === '/' ? '/de/' : `/de${basePath}`,
+    es: basePath === '/' ? '/es/' : `/es${basePath}`,
+  };
+
+  for (const [locale, variantPath] of Object.entries(localePaths)) {
+    const variant = pages.get(variantPath);
+    if (!variant) {
+      if (!/noindex/i.test(page.robots)) errors.push(`${urlPath}: missing ${locale.toUpperCase()} page`);
+      continue;
+    }
+
+    const hasVariantAlternate = page.alternates.some(link =>
+      link.code.startsWith(locale) && new URL(link.href).pathname === variantPath
+    );
+    if (!hasVariantAlternate) errors.push(`${urlPath}: missing alternate link to ${variantPath}`);
+
+    const pageLocale = urlPath.startsWith('/de/') ? 'de' : urlPath.startsWith('/es/') ? 'es' : 'en';
+    const hasReturnAlternate = variant.alternates.some(link =>
+      link.code.startsWith(pageLocale) && new URL(link.href).pathname === urlPath
+    );
+    if (!hasReturnAlternate) errors.push(`${urlPath}: alternate link is not reciprocal with ${variantPath}`);
   }
-  const expectedPairLang = pairPath.startsWith('/de/') ? 'de' : 'en';
-  const hasPairAlternate = page.alternates.some(link => link.code.startsWith(expectedPairLang) && new URL(link.href).pathname === pairPath);
-  if (!hasPairAlternate) errors.push(`${urlPath}: missing alternate link to ${pairPath}`);
-  const hasReturnAlternate = pair.alternates.some(link => link.code.startsWith(page.lang.toLowerCase()) && new URL(link.href).pathname === urlPath);
-  if (!hasReturnAlternate) errors.push(`${urlPath}: alternate link is not reciprocal with ${pairPath}`);
 }
 
 // Validate local navigation targets.

@@ -2778,7 +2778,7 @@ export const BRANDS = [
     image: 'images/vicibet.webp',
     bgColor: '#CFB69F',
     countries: ['PL', 'NO', 'FI', 'BE', 'HU', 'AT', 'CH', 'CZ', 'IT', 'DE', 'CA'],
-    payments: ['visa', 'mastercard', 'jeton', 'bitcoin', 'litecoin', 'bitcoincash', 'cordano'],
+    payments: ['visa', 'mastercard', 'jeton', 'bitcoin', 'litecoin', 'bitcoincash', 'cardano'],
     hasDetailPage: true,
   },
   {
