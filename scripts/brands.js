@@ -257,14 +257,14 @@ export const BRANDS = [
   },
   {
     name: 'Browinner',
-    bonus: '',
+    bonus: 'Welcome Package up to EUR 2,500 + 250 Free Spins',
     cta: 'Play Now',
     urlDetail: 'brands/browinner.html',
     urlCasino: 'https://armadaapp.media-412.com/click?pid=3862&offer_id=124532',
     image: 'images/browinner.svg',
     bgColor: '#0B092D',
     countries: ['DE', 'BE', 'IT', 'ES', 'GR', 'SK', 'SI', 'CZ', 'AT', 'CH', 'PL', 'HU', 'DK', 'AU', 'PT', 'RO', 'LU', 'CA', 'NO', 'IE', 'NZ', 'HR', 'FI', 'MK', 'RS', 'AL', 'ME', 'BR', 'KR'],
-    payments: [],
+    payments: ['visa', 'mastercard', 'banktransfer', 'applepay', 'googlepay', 'paysafecard', 'skrill', 'bitcoin', 'ethereum', 'tether', 'tron'],
     hasDetailPage: true,
   },
   {

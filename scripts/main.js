@@ -1,10 +1,10 @@
 ﻿// =====================
 // IMPORTS
 // =====================
-import { BRANDS } from './brands.js?v=20260810-inactive-brands-1';
-import { BRAND_SNAPSHOT_CONFIGS } from './brand-snapshot-configs.js';
-import { BRAND_NEW_GAMES } from './brand-new-games.js?v=20260802-directory-sync-1';
-import { BRAND_HOMEPAGE_SCREENSHOTS } from './brand-homepage-screenshots.js?v=20260808-country-galleries-1';
+import { BRANDS } from './brands.js?v=20260811-browinner-review-1';
+import { BRAND_SNAPSHOT_CONFIGS } from './brand-snapshot-configs.js?v=20260811-browinner-review-1';
+import { BRAND_NEW_GAMES } from './brand-new-games.js?v=20260811-browinner-review-1';
+import { BRAND_HOMEPAGE_SCREENSHOTS } from './brand-homepage-screenshots.js?v=20260811-browinner-review-1';
 import { COUNTRIES } from './countries.js';
 
 // =====================

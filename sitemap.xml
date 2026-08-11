@@ -191,6 +191,11 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://spincresta.com/brands/browinner/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://spincresta.com/brands/casinoinfinity/</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
@@ -1017,6 +1022,11 @@
   </url>
   <url>
     <loc>https://spincresta.com/de/brands/britsino/</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://spincresta.com/de/brands/browinner/</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>

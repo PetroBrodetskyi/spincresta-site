@@ -1,4 +1,30 @@
 export const BRAND_NEW_GAMES = {
+  browinner: [
+    {
+      name: 'Totem Tower Bonanza',
+      image: 'https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto/v1786476355/spincresta/brands/browinner/new-games/browinner-new-game-totem-tower-bonanza_e7aahw',
+    },
+    {
+      name: "St. Patrick's Pots Hold & Win",
+      image: 'https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto/v1786476354/spincresta/brands/browinner/new-games/browinner-new-game-st-patricks-pots-hold-_-win_ijnjhs',
+    },
+    {
+      name: 'Pompeii Lava Hold and Win',
+      image: 'https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto/v1786476353/spincresta/brands/browinner/new-games/browinner-new-game-pompeii-lava-hold-_-win_vnyxcs',
+    },
+    {
+      name: 'Clover Boost',
+      image: 'https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto/v1786476352/spincresta/brands/browinner/new-games/browinner-new-game-clover-boost_sxmrmm',
+    },
+    {
+      name: 'Canyon Cart Bonanza: Hold & Win',
+      image: 'https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto/v1786476351/spincresta/brands/browinner/new-games/browinner-new-game-canyon-cart-bonanza-hold-_-win_attgtx',
+    },
+    {
+      name: '3 Supercharged Diamonds: Hold and Win',
+      image: 'https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto/v1786476351/spincresta/brands/browinner/new-games/browinner-new-game-3-supercharged-diamonds-hold-_-win_aamglg',
+    },
+  ],
   winhero: [
     {
       name: 'Balls',
