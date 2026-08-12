@@ -3978,6 +3978,120 @@ body[data-brand] .content-article > section {
   --section-eyebrow: 'Brand Review';
 }
 
+html[lang^='it'] body:not(.home-page):not(.casinos-page)
+  :where(
+    .section-head,
+    .expert-review .container,
+    .features-section,
+    .brand-countries,
+    .brand-payments,
+    .brand-availability-widget,
+    .content-review > section,
+    .content-article,
+    .content-article > section,
+    .final-cta-glass
+  ) {
+  --section-eyebrow: 'GUIDA SPINCRESTA';
+}
+
+html[lang^='it'] body[data-brand] .features-section,
+html[lang^='it'] body[data-brand] .brand-why-heading {
+  --section-eyebrow: 'IN EVIDENZA';
+}
+
+html[lang^='it'] body[data-brand] .brand-countries,
+html[lang^='it'] body[data-brand] .brand-availability-widget {
+  --section-eyebrow: 'DISPONIBILITÀ';
+}
+
+html[lang^='it'] body[data-brand] .brand-payments {
+  --section-eyebrow: 'METODI DI PAGAMENTO';
+}
+
+html[lang^='it'] body[data-brand] .content-review > section,
+html[lang^='it'] body[data-brand] .content-article,
+html[lang^='it'] body[data-brand] .content-article > section {
+  --section-eyebrow: 'RECENSIONE DEL BRAND';
+}
+
+html[lang^='it'] body[data-country] .section-head {
+  --section-eyebrow: 'MIGLIORI BRAND';
+}
+
+html[lang^='it'] body[data-country] .expert-review,
+html[lang^='it'] body[data-country] .expert-review .container {
+  --section-eyebrow: 'RECENSIONE EDITORIALE';
+}
+
+html[lang^='it'] body[data-country] .content-article,
+html[lang^='it'] body[data-country] .content-article > section,
+html[lang^='it'] body[data-country] .content-article:has(> .country-guide-carousel) {
+  --section-eyebrow: 'GUIDA PER GIOCATORI';
+}
+
+html[lang^='it'] body:not(.home-page) .content-article:has(> .faq-grid),
+html[lang^='it'] body:not(.home-page) .content-article > section:has(> .faq-grid),
+html[lang^='it'] body:not(.home-page) .content-review > section:has(> .faq-grid) {
+  --section-eyebrow: 'DOMANDE FREQUENTI';
+}
+
+html[lang^='pl'] body:not(.home-page):not(.casinos-page)
+  :where(
+    .section-head,
+    .expert-review .container,
+    .features-section,
+    .brand-countries,
+    .brand-payments,
+    .brand-availability-widget,
+    .content-review > section,
+    .content-article,
+    .content-article > section,
+    .final-cta-glass
+  ) {
+  --section-eyebrow: 'PRZEWODNIK SPINCRESTA';
+}
+
+html[lang^='pl'] body[data-brand] .features-section,
+html[lang^='pl'] body[data-brand] .brand-why-heading {
+  --section-eyebrow: 'NAJWAŻNIEJSZE INFORMACJE';
+}
+
+html[lang^='pl'] body[data-brand] .brand-countries,
+html[lang^='pl'] body[data-brand] .brand-availability-widget {
+  --section-eyebrow: 'DOSTĘPNOŚĆ';
+}
+
+html[lang^='pl'] body[data-brand] .brand-payments {
+  --section-eyebrow: 'METODY PŁATNOŚCI';
+}
+
+html[lang^='pl'] body[data-brand] .content-review > section,
+html[lang^='pl'] body[data-brand] .content-article,
+html[lang^='pl'] body[data-brand] .content-article > section {
+  --section-eyebrow: 'RECENZJA MARKI';
+}
+
+html[lang^='pl'] body[data-country] .section-head {
+  --section-eyebrow: 'NAJLEPSZE MARKI';
+}
+
+html[lang^='pl'] body[data-country] .expert-review,
+html[lang^='pl'] body[data-country] .expert-review .container {
+  --section-eyebrow: 'RECENZJA REDAKCYJNA';
+}
+
+html[lang^='pl'] body[data-country] .content-article,
+html[lang^='pl'] body[data-country] .content-article > section,
+html[lang^='pl'] body[data-country] .content-article:has(> .country-guide-carousel) {
+  --section-eyebrow: 'PRZEWODNIK DLA GRACZY';
+}
+
+html[lang^='pl'] body:not(.home-page) .content-article:has(> .faq-grid),
+html[lang^='pl'] body:not(.home-page) .content-article > section:has(> .faq-grid),
+html[lang^='pl'] body:not(.home-page) .content-review > section:has(> .faq-grid) {
+  --section-eyebrow: 'NAJCZĘŚCIEJ ZADAWANE PYTANIA';
+}
+
 body[data-country] .section-head {
   --section-eyebrow: 'Top Brands';
 }

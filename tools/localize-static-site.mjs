@@ -3,6 +3,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 
 const root = process.cwd();
+const supportedLocales = ['en', 'de', 'es', 'it', 'pl'];
 const args = new Map(process.argv.slice(2).map((value, index, all) => value.startsWith('--') ? [value, all[index + 1]?.startsWith('--') ? true : all[index + 1]] : null).filter(Boolean));
 const locale = String(args.get('--locale') || '').toLowerCase();
 const language = String(args.get('--language') || '');
@@ -137,7 +138,7 @@ if (mode === 'translate') {
     }
     throw lastError;
   };
-  const batchSize = 15;
+  const batchSize = 60;
   for (let offset = 0; offset < pending.length; offset += batchSize) {
     await Promise.all(pending.slice(offset, offset + batchSize).map(async text => {
       translated[text] = await requestTranslation(text);
@@ -207,14 +208,18 @@ for (const sourceFile of sourceFiles) {
   const canonical = localeUrl(route);
   html = html.replace(/<link\b(?=[^>]*\brel=['"]canonical['"])[^>]*>/i, `<link rel="canonical" href="${canonical}" />`);
   html = html.replace(/<meta\b(?=[^>]*\bproperty=['"]og:url['"])[^>]*>/i, `<meta property="og:url" content="${canonical}" />`);
-  html = html.replace(/<meta\b(?=[^>]*\bproperty=['"]og:locale['"])[^>]*>/i, '<meta property="og:locale" content="es_ES" />');
+  const openGraphLocales = { en: 'en_GB', de: 'de_DE', es: 'es_ES', it: 'it_IT', pl: 'pl_PL' };
+  html = html.replace(
+    /<meta\b(?=[^>]*\bproperty=['"]og:locale['"])[^>]*>/i,
+    `<meta property="og:locale" content="${openGraphLocales[locale] || locale}" />`
+  );
   html = html.replace(/\s*<link\b(?=[^>]*\brel=['"]alternate['"])(?=[^>]*\bhreflang=['"])[^>]*>/gi, '');
-  const germanRoute = route === '/' ? '/de/' : `/de${route}`;
   const languageSuffix = region ? `-${region}` : '';
   const alternates = [
-    `<link rel="alternate" hreflang="en${languageSuffix}" href="https://spincresta.com${route}" />`,
-    `<link rel="alternate" hreflang="de${languageSuffix}" href="https://spincresta.com${germanRoute}" />`,
-    `<link rel="alternate" hreflang="es${languageSuffix}" href="${canonical}" />`,
+    ...supportedLocales.map(targetLocale => {
+      const targetRoute = targetLocale === 'en' ? route : (route === '/' ? `/${targetLocale}/` : `/${targetLocale}${route}`);
+      return `<link rel="alternate" hreflang="${targetLocale}${languageSuffix}" href="https://spincresta.com${targetRoute}" />`;
+    }),
     `<link rel="alternate" hreflang="x-default" href="https://spincresta.com${route}" />`,
   ].join('\n    ');
   html = html.replace(/(<link\b(?=[^>]*\brel=['"]canonical['"])[^>]*>)/i, `$1\n    ${alternates}`);
