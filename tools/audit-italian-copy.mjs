@@ -39,6 +39,11 @@ const forbidden = [
   ['source-document disclosure', /\b(?:foglio di calcolo|documento sorgente|briefing|file sorgente)\b/gi],
   ['untranslated UI phrase', /\b(?:play now|claim bonus|learn more|payment methods|why players choose)\b/gi],
   ['untranslated First marker', /\bFirst\b/g],
+  ['corrupted instant-game wording', /\b(?:vincita|elaborazione|crittografia|banca|riproduzione|area) Panoramica\b|normalmente Panoramica/gi],
+  ['literal fit wording', /\bvestibilità\b/gi],
+  ['literal product-shell wording', /\b(?:guscio|shell) (?:di scommesse|con un bonus|bonus|solo|promozionale|piatta|standard)\b/gi],
+  ['internal bonus-document wording', /\bbrief (?:sul|sui|attuale|elenca|dice|chiede)\b/gi],
+  ['awkward mobile wording', /\baccesso Web mobile\b/gi],
 ];
 
 const errors = [];

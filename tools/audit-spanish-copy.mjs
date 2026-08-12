@@ -33,6 +33,11 @@ const forbidden = [
   ['literal reality-check translation', /\bcontroles de la realidad\b/gi],
   ['literal deposit-match translation', /\bcoincidencias de depósitos?\b/gi],
   ['English translation marker', /\bFirst\b/g],
+  ['corrupted instant-game wording', /\b(?:ganancia|área|banca|Compra) Resumen\b|Pix \(Resumen\)|una Resumen rápida/gi],
+  ['literal caution heading', /\bPiensa dos veces si\b/gi],
+  ['literal product-shell wording', /\bcaparazón (?:de bonificación|adicional|plano para todos los juegos)\b/gi],
+  ['technical website wording', /\b(?:construcción actual del sitio|configuración actual del sitio carga)\b/gi],
+  ['awkward mobile wording', /\bacceso web móvil\b/gi],
 ];
 
 const allowedFirstFiles = new Set(['brands/first/index.html', 'casinos-and-betting/index.html']);

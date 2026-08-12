@@ -17,6 +17,18 @@ const walk = directory => {
 walk(PL_ROOT);
 
 const replacements = [
+  [/Casino Casino/g, 'Casino'],
+  [/\bPomyśl dwa razy, jeśli\b/gi, 'Może nie być odpowiednie, jeśli'],
+  [/\bpowłoki z jednym bonusem\b/gi, 'oferty z jednym bonusem'],
+  [/\bW briefie prosi się graczy\b/gi, 'Warunki proszą graczy'],
+  [/\bBieżąca konfiguracja witryny ładuje pieczęć weryfikacyjną Anjouan Gaming\b/gi, 'Strona wyświetla znak weryfikacyjny Anjouan Gaming'],
+  [/\bmobilny dostęp do Internetu\b/gi, 'mobilna wersja strony'],
+  [/\bdodatkow(?:e|ym) tarci(?:e|em) KYC\b/gi, 'dodatkowe opóźnienia związane z KYC'],
+  [/\btarci(?:e|a|em) KYC\b/gi, 'opóźnienia związane z KYC'],
+  [/\bdodatkow(?:e|ych) tarci(?:a|ach) weryfikacyjn(?:e|ych)\b/gi, 'dodatkowe opóźnienia podczas weryfikacji'],
+  [/\bsprawność pierwszej wypłaty\b/gi, 'przebieg pierwszej wypłaty'],
+  [/\bdopasowani(?:e|a|em) własności płatności\b/gi, 'zgodność danych właściciela metody płatności'],
+  [/\bpasującą własnością płatności\b/gi, 'zgodnymi danymi właściciela metody płatności'],
   [/\bkontrole rzeczywistości\b/gi, 'przypomnienia o czasie gry'],
   [/\bkontrola rzeczywistości\b/gi, 'przypomnienie o czasie gry'],
   [/\bnarzędzia bezpieczniejszej gry\b/gi, 'narzędzia odpowiedzialnej gry'],

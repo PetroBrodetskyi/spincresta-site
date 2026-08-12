@@ -4092,6 +4092,63 @@ html[lang^='pl'] body:not(.home-page) .content-review > section:has(> .faq-grid)
   --section-eyebrow: 'NAJCZĘŚCIEJ ZADAWANE PYTANIA';
 }
 
+html[lang^='uk'] body:not(.home-page):not(.casinos-page)
+  :where(
+    .section-head,
+    .expert-review .container,
+    .features-section,
+    .brand-countries,
+    .brand-payments,
+    .brand-availability-widget,
+    .content-review > section,
+    .content-article,
+    .content-article > section,
+    .final-cta-glass
+  ) {
+  --section-eyebrow: 'ГІД SPINCRESTA';
+}
+
+html[lang^='uk'] body[data-brand] .features-section,
+html[lang^='uk'] body[data-brand] .brand-why-heading {
+  --section-eyebrow: 'ГОЛОВНЕ';
+}
+
+html[lang^='uk'] body[data-brand] .brand-countries,
+html[lang^='uk'] body[data-brand] .brand-availability-widget {
+  --section-eyebrow: 'ДОСТУПНІСТЬ';
+}
+
+html[lang^='uk'] body[data-brand] .brand-payments {
+  --section-eyebrow: 'СПОСОБИ ОПЛАТИ';
+}
+
+html[lang^='uk'] body[data-brand] .content-review > section,
+html[lang^='uk'] body[data-brand] .content-article,
+html[lang^='uk'] body[data-brand] .content-article > section {
+  --section-eyebrow: 'ОГЛЯД БРЕНДУ';
+}
+
+html[lang^='uk'] body[data-country] .section-head {
+  --section-eyebrow: 'НАЙКРАЩІ БРЕНДИ';
+}
+
+html[lang^='uk'] body[data-country] .expert-review,
+html[lang^='uk'] body[data-country] .expert-review .container {
+  --section-eyebrow: 'РЕДАКЦІЙНИЙ ОГЛЯД';
+}
+
+html[lang^='uk'] body[data-country] .content-article,
+html[lang^='uk'] body[data-country] .content-article > section,
+html[lang^='uk'] body[data-country] .content-article:has(> .country-guide-carousel) {
+  --section-eyebrow: 'ГІД ДЛЯ ГРАВЦІВ';
+}
+
+html[lang^='uk'] body:not(.home-page) .content-article:has(> .faq-grid),
+html[lang^='uk'] body:not(.home-page) .content-article > section:has(> .faq-grid),
+html[lang^='uk'] body:not(.home-page) .content-review > section:has(> .faq-grid) {
+  --section-eyebrow: 'ЧАСТІ ЗАПИТАННЯ';
+}
+
 body[data-country] .section-head {
   --section-eyebrow: 'Top Brands';
 }

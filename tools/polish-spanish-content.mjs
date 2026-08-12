@@ -17,6 +17,17 @@ const walk = directory => {
 walk(ES_ROOT);
 
 const replacements = [
+  [/Casino Casino/g, 'Casino'],
+  [/\bPiensa dos veces si\b/gi, 'Puede no ser ideal si'],
+  [/\bPiénselo dos veces,? si\b/gi, 'Puede no ser ideal si'],
+  [/\bcaparazón de bonificación única\b/gi, 'oferta con un único bono'],
+  [/\bcaparazón adicional de una página\b/gi, 'sitio de bonos de una sola página'],
+  [/\bcaparazón plano para todos los juegos\b/gi, 'página única de juegos sin filtros'],
+  [/\bLa construcción actual del sitio Wildsino incorpora un sello de verificación de Anjouan Gaming\b/gi, 'El sitio de Wildsino muestra un distintivo de verificación de Anjouan Gaming'],
+  [/\bLa construcción actual del sitio incorpora un sello de verificación de Anjouan(?: Gaming)?\b/gi, 'El sitio muestra un distintivo de verificación de Anjouan Gaming'],
+  [/\bLa configuración actual del sitio carga un sello de verificación de Anjouan Gaming\b/gi, 'El sitio muestra un distintivo de verificación de Anjouan Gaming'],
+  [/\bel página de verificación\b/gi, 'la página de verificación'],
+  [/\bacceso web móvil\b/gi, 'versión móvil del sitio'],
   [/\bFogonadura\b/g, 'Socios'],
   [/\bHogar\b/g, 'Inicio'],
   [/\bTelegrama\b/g, 'Telegram'],

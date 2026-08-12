@@ -36,6 +36,12 @@ const forbidden = [
   ['untranslated translation marker', /\b(?:Mobile-First|Crypto-First|Casino-First|Sport-First)\b/g],
   ['bad home translation', />Dom</g],
   ['untranslated First marker', /\bFirst\b/g],
+  ['literal caution heading', /\bPomyśl dwa razy, jeśli\b/gi],
+  ['literal product-shell wording', /\bpowłoki? z jednym bonusem\b/gi],
+  ['internal brief wording', /\bW briefie\b/gi],
+  ['technical website wording', /\bBieżąca konfiguracja witryny ładuje\b/gi],
+  ['awkward mobile wording', /\bmobilny dostęp do Internetu\b/gi],
+  ['literal friction wording', /\btarci(?:e|a|em) (?:KYC|weryfikacyjn)/gi],
 ];
 
 const errors = [];
