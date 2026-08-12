@@ -4,7 +4,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 
 const ROOT = process.cwd();
-const localizedRoots = new Set(['de', 'es', 'it', 'pl', 'uk', 'node_modules', '.git']);
+const localizedRoots = new Set(['de', 'es', 'it', 'pl', 'uk', 'pt', 'node_modules', '.git']);
 const files = [];
 
 const walk = directory => {

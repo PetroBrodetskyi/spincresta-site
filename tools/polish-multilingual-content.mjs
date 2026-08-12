@@ -4,7 +4,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 
 const ROOT = process.cwd();
-const locales = ['de', 'es', 'it', 'pl', 'uk'];
+const locales = ['de', 'es', 'it', 'pl', 'uk', 'pt'];
 const emailPattern = /[^\s<>"']+@[^\s<>"']+\.[A-Za-z]{2,}/g;
 
 const replacements = {
@@ -72,6 +72,17 @@ const replacements = {
     [/poziomów kariery/gi, 'poziomów VIP'],
   ],
   uk: [],
+  pt: [
+    [/(<h2 class="title">[^<]*)\bInstantâneo\b([^<]*<\/h2>)/gi, '$1Resumo$2'],
+    [/Este instantâneo/gi, 'Este resumo'],
+    [/Esta instantâneo/gi, 'Este resumo'],
+    [/Bom ajuste/gi, 'Ideal para'],
+    [/Melhor ajuste/gi, 'Ideal para'],
+    [/Pense duas vezes se/gi, 'Pode não ser ideal se'],
+    [/selo ao vivo/gi, 'página de verificação'],
+    [/compilação atual/gi, 'site atual'],
+    [/níveis de carreira/gi, 'níveis VIP'],
+  ],
 };
 
 const walk = directory => {
@@ -122,6 +133,10 @@ const restoreSpinbossTierNames = (html, locale) => {
       [/na poziomach Stażysta, Recepcjonista, Przedstawiciel handlowy, Menedżer regionalny i Najlepszy szef świata/gi, "w pięciu oficjalnych grupach: Intern, Receptionist, Sales Rep, Regional Manager i World's Best Boss"],
     ],
     uk: [],
+    pt: [
+      [/entre os níveis de Estagiário, Rececionista, Representante de Vendas, Gestor Regional e Melhor Chefe do Mundo/gi, "em cinco grupos oficiais: Intern, Receptionist, Sales Rep, Regional Manager e World's Best Boss"],
+      [/Os níveis Representante de Vendas, Gestor Regional e Melhor Chefe do Mundo/gi, "Os grupos Sales Rep, Regional Manager e World's Best Boss"],
+    ],
   };
   let result = html;
   for (const [pattern, replacement] of rules[locale]) result = result.replace(pattern, replacement);

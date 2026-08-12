@@ -4149,6 +4149,63 @@ html[lang^='uk'] body:not(.home-page) .content-review > section:has(> .faq-grid)
   --section-eyebrow: 'ЧАСТІ ЗАПИТАННЯ';
 }
 
+html[lang^='pt'] body:not(.home-page):not(.casinos-page)
+  :where(
+    .section-head,
+    .expert-review .container,
+    .features-section,
+    .brand-countries,
+    .brand-payments,
+    .brand-availability-widget,
+    .content-review > section,
+    .content-article,
+    .content-article > section,
+    .final-cta-glass
+  ) {
+  --section-eyebrow: 'GUIA SPINCRESTA';
+}
+
+html[lang^='pt'] body[data-brand] .features-section,
+html[lang^='pt'] body[data-brand] .brand-why-heading {
+  --section-eyebrow: 'DESTAQUES DA MARCA';
+}
+
+html[lang^='pt'] body[data-brand] .brand-countries,
+html[lang^='pt'] body[data-brand] .brand-availability-widget {
+  --section-eyebrow: 'DISPONIBILIDADE';
+}
+
+html[lang^='pt'] body[data-brand] .brand-payments {
+  --section-eyebrow: 'MÉTODOS DE PAGAMENTO';
+}
+
+html[lang^='pt'] body[data-brand] .content-review > section,
+html[lang^='pt'] body[data-brand] .content-article,
+html[lang^='pt'] body[data-brand] .content-article > section {
+  --section-eyebrow: 'ANÁLISE DA MARCA';
+}
+
+html[lang^='pt'] body[data-country] .section-head {
+  --section-eyebrow: 'MELHORES MARCAS';
+}
+
+html[lang^='pt'] body[data-country] .expert-review,
+html[lang^='pt'] body[data-country] .expert-review .container {
+  --section-eyebrow: 'ANÁLISE EDITORIAL';
+}
+
+html[lang^='pt'] body[data-country] .content-article,
+html[lang^='pt'] body[data-country] .content-article > section,
+html[lang^='pt'] body[data-country] .content-article:has(> .country-guide-carousel) {
+  --section-eyebrow: 'GUIA PARA JOGADORES';
+}
+
+html[lang^='pt'] body:not(.home-page) .content-article:has(> .faq-grid),
+html[lang^='pt'] body:not(.home-page) .content-article > section:has(> .faq-grid),
+html[lang^='pt'] body:not(.home-page) .content-review > section:has(> .faq-grid) {
+  --section-eyebrow: 'PERGUNTAS FREQUENTES';
+}
+
 body[data-country] .section-head {
   --section-eyebrow: 'Top Brands';
 }

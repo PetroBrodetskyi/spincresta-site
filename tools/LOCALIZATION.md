@@ -1,6 +1,6 @@
 # Static-site localization
 
-The production site currently has matching English, German, Spanish, Italian, Polish, and Ukrainian page trees. Use `localize-static-site.mjs` when a new English page needs a localized counterpart or when a locale must be regenerated.
+The production site currently has matching English, German, Spanish, Italian, Polish, Ukrainian, and Portuguese page trees. Use `localize-static-site.mjs` when a new English page needs a localized counterpart or when a locale must be regenerated.
 
 ```bash
 node tools/localize-static-site.mjs --locale es --language Spanish
@@ -20,13 +20,15 @@ node tools/polish-italian-content.mjs
 node tools/polish-polish-content.mjs
 node tools/polish-ukrainian-content.mjs
 node tools/polish-ukrainian-headings.mjs
+node tools/polish-portuguese-content.mjs
 node tools/polish-multilingual-content.mjs
 node tools/optimize-geo-variant-seo.mjs
 node tools/optimize-spanish-seo.mjs
+node tools/optimize-portuguese-seo.mjs
 node tools/sync-hreflang.mjs
 node tools/generate-sitemap.mjs
 for audit in tools/audit-*-copy.mjs; do node "$audit"; done
-for locale in de es it pl uk; do node tools/audit-localization-parity.mjs "$locale"; done
+for locale in de es it pl uk pt; do node tools/audit-localization-parity.mjs "$locale"; done
 node tools/audit-content-seo.mjs
 node tools/verify-site-seo.mjs
 ```

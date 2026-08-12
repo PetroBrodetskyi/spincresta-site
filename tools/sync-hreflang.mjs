@@ -4,12 +4,12 @@ import path from 'node:path';
 
 const root = process.cwd();
 const origin = 'https://spincresta.com';
-const locales = ['en', 'de', 'es', 'it', 'pl', 'uk'];
+const locales = ['en', 'de', 'es', 'it', 'pl', 'uk', 'pt'];
 
 const sourceFiles = [];
 const walk = directory => {
   for (const entry of fs.readdirSync(directory, { withFileTypes: true })) {
-    if (['.git', 'node_modules', 'tools', 'de', 'es', 'it', 'pl', 'uk'].includes(entry.name) && directory === root) continue;
+    if (['.git', 'node_modules', 'tools', 'de', 'es', 'it', 'pl', 'uk', 'pt'].includes(entry.name) && directory === root) continue;
     const target = path.join(directory, entry.name);
     if (entry.isDirectory()) walk(target);
     else if (entry.name === 'index.html') sourceFiles.push(target);

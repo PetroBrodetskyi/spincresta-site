@@ -4,7 +4,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 
 const ROOT = process.cwd();
-const excluded = new Set(['de', 'es', 'it', 'pl', 'uk', 'node_modules', '.git']);
+const excluded = new Set(['de', 'es', 'it', 'pl', 'uk', 'pt', 'node_modules', '.git']);
 const files = [];
 const walk = directory => {
   for (const entry of fs.readdirSync(directory, { withFileTypes: true })) {
