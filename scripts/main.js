@@ -1,10 +1,10 @@
 ﻿// =====================
 // IMPORTS
 // =====================
-import { BRANDS } from './brands.js?v=20260813-spinko-unavailable-1';
-import { BRAND_SNAPSHOT_CONFIGS } from './brand-snapshot-configs.js?v=20260812-portuguese-1';
-import { BRAND_NEW_GAMES } from './brand-new-games.js?v=20260812-portuguese-1';
-import { BRAND_HOMEPAGE_SCREENSHOTS } from './brand-homepage-screenshots.js?v=20260812-portuguese-1';
+import { BRANDS } from './brands.js?v=20260813-french-1';
+import { BRAND_SNAPSHOT_CONFIGS } from './brand-snapshot-configs.js?v=20260813-french-1';
+import { BRAND_NEW_GAMES } from './brand-new-games.js?v=20260813-french-1';
+import { BRAND_HOMEPAGE_SCREENSHOTS } from './brand-homepage-screenshots.js?v=20260813-french-1';
 import { COUNTRIES } from './countries.js';
 
 // =====================
@@ -15,12 +15,12 @@ const MOJIBAKE_FIXES = [];
 const THEME_STORAGE_KEY = 'spincresta-theme';
 const THEME_OPTIONS = ['dark', 'light'];
 const LANGUAGE_STORAGE_KEY = 'spincresta-language';
-const LANGUAGE_OPTIONS = ['en', 'de', 'es', 'it', 'pl', 'uk', 'pt'];
+const LANGUAGE_OPTIONS = ['en', 'de', 'es', 'it', 'pl', 'uk', 'pt', 'fr'];
 const BLOCKED_BRAND_ICON = '/icons/ui/stop-blocked-icon.svg';
 const UNAVAILABLE_BRAND_ICON = '/icons/ui/remove-close-round-grey-icon.svg';
 const BRAND_ONLY_COUNTRIES = {
-  CY: { slug: 'cyprus', name: { en: 'Cyprus', de: 'Zypern', es: 'Chipre', it: 'Cipro', pl: 'Cypr', uk: 'Кіпр', pt: 'Chipre' } },
-  RS: { slug: 'serbia', name: { en: 'Serbia', de: 'Serbien', es: 'Serbia', it: 'Serbia', pl: 'Serbia', uk: 'Сербія', pt: 'Sérvia' } },
+  CY: { slug: 'cyprus', name: { en: 'Cyprus', de: 'Zypern', es: 'Chipre', it: 'Cipro', pl: 'Cypr', uk: 'Кіпр', pt: 'Chipre', fr: 'Chypre' } },
+  RS: { slug: 'serbia', name: { en: 'Serbia', de: 'Serbien', es: 'Serbia', it: 'Serbia', pl: 'Serbia', uk: 'Сербія', pt: 'Sérvia', fr: 'Serbie' } },
 };
 const BLOCKED_BRAND_COPY = {
   en: {
@@ -58,6 +58,11 @@ const BLOCKED_BRAND_COPY = {
     cta: 'Não recomendado',
     alternatives: 'Em alternativa, recomendamos estes casinos',
   },
+  fr: {
+    notice: 'Selon les informations vérifiées par nos analystes, ce casino rencontre des problèmes avec les autorités chargées de l’application de la loi en République de Biélorussie.',
+    cta: 'Non recommandé',
+    alternatives: 'Nous recommandons plutôt ces casinos',
+  },
 };
 const UNAVAILABLE_BRAND_COPY = {
   en: {
@@ -94,6 +99,11 @@ const UNAVAILABLE_BRAND_COPY = {
     notice: 'Este casino não está atualmente disponível para os nossos jogadores. Atualizaremos esta análise quando o acesso voltar a estar disponível.',
     cta: 'Indisponível neste momento',
     alternatives: 'Outros casinos disponíveis que pode consultar',
+  },
+  fr: {
+    notice: 'Ce casino est actuellement indisponible pour nos joueurs. Nous mettrons cet avis à jour dès que l’accès sera de nouveau possible.',
+    cta: 'Indisponible actuellement',
+    alternatives: 'Découvrez plutôt ces casinos disponibles',
   },
 };
 
@@ -175,6 +185,8 @@ const SITE_LOCALE = DOCUMENT_LANGUAGE.startsWith('de')
           ? 'uk'
           : DOCUMENT_LANGUAGE.startsWith('pt')
             ? 'pt'
+            : DOCUMENT_LANGUAGE.startsWith('fr')
+              ? 'fr'
       : 'en';
 const getStoredLanguage = () => {
   try {
@@ -212,6 +224,7 @@ const ITALIAN_COUNTRY_SLUGS = GERMAN_COUNTRY_SLUGS;
 const POLISH_COUNTRY_SLUGS = GERMAN_COUNTRY_SLUGS;
 const UKRAINIAN_COUNTRY_SLUGS = GERMAN_COUNTRY_SLUGS;
 const PORTUGUESE_COUNTRY_SLUGS = GERMAN_COUNTRY_SLUGS;
+const FRENCH_COUNTRY_SLUGS = GERMAN_COUNTRY_SLUGS;
 const countryPagePath = slug =>
   SITE_LOCALE === 'de' && GERMAN_COUNTRY_SLUGS.has(slug)
     ? `/de/online-casinos/${slug}/`
@@ -225,6 +238,8 @@ const countryPagePath = slug =>
             ? `/uk/online-casinos/${slug}/`
             : SITE_LOCALE === 'pt' && PORTUGUESE_COUNTRY_SLUGS.has(slug)
               ? `/pt/online-casinos/${slug}/`
+              : SITE_LOCALE === 'fr' && FRENCH_COUNTRY_SLUGS.has(slug)
+                ? `/fr/online-casinos/${slug}/`
         : `/online-casinos/${slug}/`;
 const brandPagePath = brandOrPath => {
   const rawPath = typeof brandOrPath === 'string' ? brandOrPath : brandOrPath?.urlDetail;
@@ -255,6 +270,7 @@ const UI_COPY = {
     languagePolish: 'Polish',
     languageUkrainian: 'Ukrainian',
     languagePortuguese: 'Portuguese',
+    languageFrench: 'French',
     countryGuide: 'Country guide',
     brandReview: 'Brand review',
     casinoReview: 'Casino review and player checks',
@@ -293,6 +309,7 @@ const UI_COPY = {
     languagePolish: 'Polnisch',
     languageUkrainian: 'Ukrainisch',
     languagePortuguese: 'Portugiesisch',
+    languageFrench: 'Französisch',
     countryGuide: 'Länder-Guide',
     brandReview: 'Marken-Test',
     casinoReview: 'Casino-Test und Spieler-Checks',
@@ -331,6 +348,7 @@ const UI_COPY = {
     languagePolish: 'Polaco',
     languageUkrainian: 'Ucraniano',
     languagePortuguese: 'Portugués',
+    languageFrench: 'Francés',
     countryGuide: 'Guía por país',
     brandReview: 'Reseña de marca',
     casinoReview: 'Reseña del casino y controles para jugadores',
@@ -369,6 +387,7 @@ const UI_COPY = {
     languagePolish: 'Polacco',
     languageUkrainian: 'Ucraino',
     languagePortuguese: 'Portoghese',
+    languageFrench: 'Francese',
     countryGuide: 'Guida per paese',
     brandReview: 'Recensione del brand',
     casinoReview: 'Recensione del casinò e controlli per i giocatori',
@@ -407,6 +426,7 @@ const UI_COPY = {
     languagePolish: 'Polski',
     languageUkrainian: 'Ukraiński',
     languagePortuguese: 'Portugalski',
+    languageFrench: 'Francuski',
     countryGuide: 'Przewodnik po kraju',
     brandReview: 'Recenzja marki',
     casinoReview: 'Recenzja kasyna i najważniejsze informacje dla graczy',
@@ -445,6 +465,7 @@ const UI_COPY = {
     languagePolish: 'Польська',
     languageUkrainian: 'Українська',
     languagePortuguese: 'Португальська',
+    languageFrench: 'Французька',
     countryGuide: 'Гід країною',
     brandReview: 'Огляд бренду',
     casinoReview: 'Огляд казино та важлива інформація для гравців',
@@ -483,6 +504,7 @@ const UI_COPY = {
     languagePolish: 'Polaco',
     languageUkrainian: 'Ucraniano',
     languagePortuguese: 'Português',
+    languageFrench: 'Francês',
     countryGuide: 'Guia do país',
     brandReview: 'Análise da marca',
     casinoReview: 'Análise do casino e informações importantes para jogadores',
@@ -502,6 +524,45 @@ const UI_COPY = {
     noCountryCasinos: 'Não existem casinos disponíveis para este país.',
     topCasinos: 'Melhores casinos',
     newCasinos: 'Novos casinos',
+  },
+  fr: {
+    searchLabel: 'Rechercher sur SpinCresta',
+    searchPlaceholder: 'Rechercher',
+    availableCountries: 'Pays disponibles',
+    noMatches: 'Aucun résultat trouvé',
+    openSearch: 'Ouvrir la recherche',
+    closeSearch: 'Fermer la recherche',
+    languageSwitcher: 'Choisir la langue',
+    countries: 'Pays',
+    settings: 'Paramètres',
+    blog: 'Blog',
+    languageEnglish: 'Anglais',
+    languageGerman: 'Allemand',
+    languageSpanish: 'Espagnol',
+    languageItalian: 'Italien',
+    languagePolish: 'Polonais',
+    languageUkrainian: 'Ukrainien',
+    languagePortuguese: 'Portugais',
+    languageFrench: 'Français',
+    countryGuide: 'Guide par pays',
+    brandReview: 'Avis sur la marque',
+    casinoReview: 'Avis sur le casino et informations essentielles pour les joueurs',
+    visitCasino: 'Jouer',
+    claimBonusPlay: 'Obtenir le bonus et jouer',
+    review: 'Avis',
+    topRated: 'Mieux notés',
+    exclusive: 'Exclusifs',
+    new: 'Nouveaux',
+    all: 'Tous',
+    crypto: 'Crypto',
+    fastPayout: 'Retraits rapides',
+    sportsbook: 'Paris sportifs',
+    sweepstakes: 'Casino social',
+    filterBrands: 'Filtrer les marques de casino',
+    noFilterMatches: 'Aucun casino ne correspond encore à ce filtre.',
+    noCountryCasinos: 'Aucun casino disponible pour ce pays.',
+    topCasinos: 'Meilleurs casinos',
+    newCasinos: 'Nouveaux casinos',
   },
 };
 const uiCopy = UI_COPY[SITE_LOCALE];
@@ -741,6 +802,60 @@ const portugueseRuntimeText = english => {
     .replace(/^Play (.*) at (.*)$/, 'Jogar $1 no $2');
 };
 
+const FRENCH_RUNTIME_COPY = {
+  'Close settings': 'Fermer les paramètres',
+  Theme: 'Thème',
+  'Choose the theme you want to use on SpinCresta.': 'Choisissez le thème à utiliser sur SpinCresta.',
+  'Theme options': 'Options du thème',
+  Dark: 'Sombre',
+  Light: 'Clair',
+  'CASINO LOBBY PREVIEWS': 'APERÇUS DES CASINOS',
+  'Review and current details': 'Avis et informations à jour',
+  'FRESH FROM REVIEWED LOBBIES': 'NOUVEAUTÉS DES CASINOS ÉVALUÉS',
+  at: 'chez',
+  Highlights: 'Points forts',
+  Countries: 'Pays',
+  Payments: 'Paiements',
+  Games: 'Jeux',
+  Bonuses: 'Bonus',
+  Checklist: 'Points vérifiés',
+  Trust: 'Fiabilité',
+  'Pros & Cons': 'Avantages et inconvénients',
+  'Best For': 'Idéal pour',
+  'On this page': 'Sur cette page',
+  'Show fewer countries': 'Afficher moins de pays',
+  'Show all countries': 'Afficher tous les pays',
+  'Casino brand letter navigation': 'Navigation alphabétique des marques de casino',
+  'New Games': 'Nouveaux jeux',
+  'LATEST RELEASES': 'DERNIÈRES SORTIES',
+  'No top casinos available.': 'Aucun casino recommandé disponible.',
+  'No exclusive offers available at the moment.': 'Aucune offre exclusive disponible actuellement.',
+  'No new casinos available at the moment.': 'Aucun nouveau casino disponible actuellement.',
+  'No top rated casinos available at the moment.': 'Aucun casino parmi les mieux notés disponible actuellement.',
+};
+const frenchRuntimeText = english => {
+  if (FRENCH_RUNTIME_COPY[english]) return FRENCH_RUNTIME_COPY[english];
+  return english
+    .replace(/^(.*) is currently unavailable$/, '$1 est actuellement indisponible')
+    .replace(/^(.*) is not recommended$/, '$1 n’est pas recommandé')
+    .replace(/^(\d+) more payment methods$/, '$1 moyens de paiement supplémentaires')
+    .replace(/^Read the (.*) review$/, 'Lire l’avis sur $1')
+    .replace(/^Inside casinos available in (.*)$/, 'Aperçu des casinos disponibles en $1')
+    .replace(/^Real homepage captures from brands included in our (.*) comparison\. Open any preview for the complete review and current details\.$/, 'Captures réelles des pages d’accueil des marques incluses dans notre comparatif pour $1. Ouvrez un aperçu pour consulter l’avis complet et les informations à jour.')
+    .replace(/^(.*) casino homepage for (.*)$/, 'Page d’accueil du casino $1 pour $2')
+    .replace(/^New games in (.*)$/, 'Nouveaux jeux en $1')
+    .replace(/^Recent releases from casino brands included in our (.*) comparison\. Each card opens the relevant review; availability can vary by region and account\.$/, 'Sorties récentes des marques incluses dans notre comparatif pour $1. Chaque carte ouvre l’avis correspondant ; la disponibilité peut varier selon la région et le compte.')
+    .replace(/^New games for (.*)$/, 'Nouveaux jeux pour $1')
+    .replace(/^(.*) game artwork at (.*)$/, 'Visuel du jeu $1 chez $2')
+    .replace(/^(.*) Gambling Guide$/, 'Guide des jeux d’argent : $1')
+    .replace(/^Visit (.*)$/, 'Visiter $1')
+    .replace(/^(.*) product snapshot$/, 'Aperçu de l’offre $1')
+    .replace(/^View all (.*) casinos$/, 'Voir tous les casinos en $1')
+    .replace(/^(.*) market availability$/, 'Disponibilité de $1 selon le marché')
+    .replace(/^(.*) casino guide$/, 'Guide des casinos : $1')
+    .replace(/^Play (.*) at (.*)$/, 'Jouer à $1 chez $2');
+};
+
 const polishBrandBonusText = value => {
   if (SITE_LOCALE !== 'pl') return normalizeText(value);
 
@@ -943,14 +1058,71 @@ const portugueseBrandBonusText = value => {
     .replace(/\s+/g, ' ')
     .trim();
 };
+const frenchBrandBonusText = value => {
+  if (SITE_LOCALE !== 'fr') return normalizeText(value);
+  const normalized = normalizeText(value);
+  const exactTranslations = {
+    'Bet on your favorite sports, enjoy great odds, and spin to win in exciting casino games!': 'Pariez sur vos sports favoris, profitez de cotes attractives et découvrez les jeux de casino.',
+    'Casino, betting, quest and tournament bonuses vary by country': 'Les bonus de casino, de paris, de quêtes et de tournois varient selon le pays.',
+    'Cricket exchange, slots, live casino and local payment routes': 'Bourse de paris sur le cricket, machines à sous, casino en direct et moyens de paiement locaux.',
+    'Fast payouts for players': 'Retraits rapides pour les joueurs.',
+    'Fortunica Casino features slots, fast payouts, and attractive bonuses': 'Fortunica propose des machines à sous, des retraits rapides et des bonus attractifs.',
+    'Bonus for sports.  Casino + Win Games': 'Bonus de paris sportifs, casino et jeux avec gains.',
+  };
+  if (exactTranslations[normalized]) return exactTranslations[normalized];
+
+  return normalized
+    .replace(/Live Casino Welcome Package/gi, 'Offre de bienvenue du casino en direct')
+    .replace(/Sports welcome package/gi, 'Offre de bienvenue pour les paris sportifs')
+    .replace(/Casino Welcome Package|Casino Welcome Pack|Welcome Package|Welcome Pack/gi, 'Offre de bienvenue du casino')
+    .replace(/Casino Welcome Bonus|Welcome Casino Bonus|Welcome Bonus/gi, 'Bonus de bienvenue du casino')
+    .replace(/Welcome Offer/gi, 'Offre de bienvenue')
+    .replace(/Deposit Bonus|Match Bonus/gi, 'Bonus de dépôt')
+    .replace(/No Deposit Bonus/gi, 'Bonus sans dépôt')
+    .replace(/First Deposit/gi, 'Premier dépôt')
+    .replace(/Free Spins?/gi, 'tours gratuits')
+    .replace(/\bFS\b/g, 'tours gratuits')
+    .replace(/Free Bets?/gi, 'paris gratuits')
+    .replace(/Fast Payouts/gi, 'retraits rapides')
+    .replace(/Sports Bonus/gi, 'Bonus de paris sportifs')
+    .replace(/Casino Bonus/gi, 'Bonus de casino')
+    .replace(/Sign up and get/gi, 'Inscrivez-vous et obtenez')
+    .replace(/Join Now To Get Your/gi, 'Inscrivez-vous pour obtenir votre')
+    .replace(/Grab Your|Claim your|Claim a|\bClaim\b/gi, 'Obtenez')
+    .replace(/Start Strong with a/gi, 'Commencez avec')
+    .replace(/Start Fast With/gi, 'Commencez avec')
+    .replace(/for a Great Start/gi, 'pour bien commencer')
+    .replace(/Fast Payouts/gi, 'retraits rapides')
+    .replace(/Real Wins/gi, 'gains réels')
+    .replace(/Nothing but Casino/gi, 'Tout pour le casino')
+    .replace(/Welcome Match/gi, 'Bonus de bienvenue sur dépôt')
+    .replace(/Premium Pack/gi, 'Offre premium')
+    .replace(/Total Welcome Pack/gi, 'Offre de bienvenue complète')
+    .replace(/Regional welcome pack/gi, 'Offre de bienvenue régionale')
+    .replace(/Regional Welcome Bonus/gi, 'Bonus de bienvenue régional')
+    .replace(/No-Wager/gi, 'sans condition de mise')
+    .replace(/\bGet Bonus\b/gi, 'Obtenez le bonus')
+    .replace(/\bGet\b/gi, 'Obtenez')
+    .replace(/live casino cashback/gi, 'de cashback au casino en direct')
+    .replace(/cashback every week/gi, 'de cashback chaque semaine')
+    .replace(/local caps vary/gi, 'les plafonds varient selon le pays')
+    .replace(/bonuses excluded in SE\/FI/gi, 'bonus indisponibles en SE/FI')
+    .replace(/\bup to\b/gi, 'jusqu’à')
+    .replace(/\bper week\b|\bweekly\b/gi, 'par semaine')
+    .replace(/\bdaily\b/gi, 'chaque jour')
+    .replace(/\s+/g, ' ')
+    .trim();
+};
 const localizedBrandBonusText = value =>
   SITE_LOCALE === 'uk'
     ? ukrainianBrandBonusText(value)
     : SITE_LOCALE === 'pt'
       ? portugueseBrandBonusText(value)
+      : SITE_LOCALE === 'fr'
+        ? frenchBrandBonusText(value)
       : polishBrandBonusText(value);
 
-const localeText = (english, german, spanish, italian, polish, ukrainian, portuguese) =>
+const localeText = (english, german, spanish, italian, polish, ukrainian, portuguese, french) =>
   SITE_LOCALE === 'de'
     ? german
     : SITE_LOCALE === 'es'
@@ -963,6 +1135,8 @@ const localeText = (english, german, spanish, italian, polish, ukrainian, portug
             ? (ukrainian || ukrainianRuntimeText(english))
             : SITE_LOCALE === 'pt'
               ? (portuguese || portugueseRuntimeText(english))
+              : SITE_LOCALE === 'fr'
+                ? (french || frenchRuntimeText(english))
         : english;
 const localizedPagePath = path => {
   const normalized = normalizePagePath(path);
@@ -1368,6 +1542,72 @@ const COUNTRY_NAMES_PT = {
   uzbekistan: 'Uzbequistão',
   vietnam: 'Vietname',
 };
+const COUNTRY_NAMES_FR = {
+  argentina: 'Argentine',
+  australia: 'Australie',
+  austria: 'Autriche',
+  azerbaijan: 'Azerbaïdjan',
+  bangladesh: 'Bangladesh',
+  belgium: 'Belgique',
+  brazil: 'Brésil',
+  bulgaria: 'Bulgarie',
+  canada: 'Canada',
+  chile: 'Chili',
+  colombia: 'Colombie',
+  croatia: 'Croatie',
+  'czech-republic': 'Tchéquie',
+  denmark: 'Danemark',
+  egypt: 'Égypte',
+  estonia: 'Estonie',
+  finland: 'Finlande',
+  france: 'France',
+  germany: 'Allemagne',
+  ghana: 'Ghana',
+  greece: 'Grèce',
+  hungary: 'Hongrie',
+  iceland: 'Islande',
+  india: 'Inde',
+  indonesia: 'Indonésie',
+  ireland: 'Irlande',
+  italy: 'Italie',
+  japan: 'Japon',
+  kazakhstan: 'Kazakhstan',
+  kenya: 'Kenya',
+  kyrgyzstan: 'Kirghizistan',
+  latvia: 'Lettonie',
+  lithuania: 'Lituanie',
+  luxembourg: 'Luxembourg',
+  malaysia: 'Malaisie',
+  mexico: 'Mexique',
+  netherlands: 'Pays-Bas',
+  nepal: 'Népal',
+  'new-zealand': 'Nouvelle-Zélande',
+  nigeria: 'Nigeria',
+  norway: 'Norvège',
+  philippines: 'Philippines',
+  poland: 'Pologne',
+  portugal: 'Portugal',
+  peru: 'Pérou',
+  russia: 'Russie',
+  romania: 'Roumanie',
+  singapore: 'Singapour',
+  slovakia: 'Slovaquie',
+  slovenia: 'Slovénie',
+  'south-africa': 'Afrique du Sud',
+  'south-korea': 'Corée du Sud',
+  spain: 'Espagne',
+  sweden: 'Suède',
+  switzerland: 'Suisse',
+  thailand: 'Thaïlande',
+  turkey: 'Turquie',
+  tanzania: 'Tanzanie',
+  uganda: 'Ouganda',
+  ukraine: 'Ukraine',
+  'united-kingdom': 'Royaume-Uni',
+  'united-states': 'États-Unis',
+  uzbekistan: 'Ouzbékistan',
+  vietnam: 'Viêt Nam',
+};
 const localizedCountryName = country =>
   SITE_LOCALE === 'de'
     ? COUNTRY_NAMES_DE[country.slug] || country.name
@@ -1381,6 +1621,8 @@ const localizedCountryName = country =>
             ? COUNTRY_NAMES_UK[country.slug] || country.name
             : SITE_LOCALE === 'pt'
               ? COUNTRY_NAMES_PT[country.slug] || country.name
+              : SITE_LOCALE === 'fr'
+                ? COUNTRY_NAMES_FR[country.slug] || country.name
         : country.name;
 
 const localizedCountryTitle = country => {
@@ -1391,6 +1633,7 @@ const localizedCountryTitle = country => {
   if (SITE_LOCALE === 'pl') return `Najlepsze kasyna online: ${name}`;
   if (SITE_LOCALE === 'uk') return `Найкращі онлайн-казино: ${name}`;
   if (SITE_LOCALE === 'pt') return `Melhores casinos online em ${name}`;
+  if (SITE_LOCALE === 'fr') return `Meilleurs casinos en ligne en ${name}`;
 
   const germanCases = {
     'united-states': 'in den Vereinigten Staaten',
@@ -1427,6 +1670,7 @@ const STATIC_SEARCH_ITEMS = [
     labelPl: 'Najlepsze kasyna',
     labelUk: 'Найкращі казино',
     labelPt: 'Melhores casinos',
+    labelFr: 'Meilleurs casinos',
     type: 'Page',
     href: '/top-casinos/',
     keywords: 'best casinos top casino reviews worldwide',
@@ -1439,6 +1683,7 @@ const STATIC_SEARCH_ITEMS = [
     labelPl: 'Nowe kasyna',
     labelUk: 'Нові казино',
     labelPt: 'Novos casinos',
+    labelFr: 'Nouveaux casinos',
     type: 'Page',
     href: '/new-casinos/',
     keywords: 'new casino reviews fresh brands latest',
@@ -1451,6 +1696,7 @@ const STATIC_SEARCH_ITEMS = [
     labelPl: 'Najwyżej oceniane',
     labelUk: 'Найвище оцінені',
     labelPt: 'Melhor avaliados',
+    labelFr: 'Mieux notés',
     type: 'Page',
     href: '/top-rated/',
     keywords: 'top rated trusted casino reviews rating',
@@ -1463,6 +1709,7 @@ const STATIC_SEARCH_ITEMS = [
     labelPl: 'Ekskluzywne',
     labelUk: 'Ексклюзивні',
     labelPt: 'Exclusivos',
+    labelFr: 'Exclusifs',
     type: 'Page',
     href: '/exclusive-offers/',
     keywords: 'exclusive offers private bonuses promotions deals',
@@ -1475,6 +1722,7 @@ const STATIC_SEARCH_ITEMS = [
     labelPl: 'Kasyna i zakłady',
     labelUk: 'Казино та ставки',
     labelPt: 'Casinos e apostas',
+    labelFr: 'Casinos et paris',
     type: 'Page',
     href: '/casinos-and-betting/',
     keywords: 'all brands casinos betting sportsbooks a to z',
@@ -1487,6 +1735,7 @@ const STATIC_SEARCH_ITEMS = [
     labelPl: 'Metody płatności',
     labelUk: 'Способи оплати',
     labelPt: 'Métodos de pagamento',
+    labelFr: 'Moyens de paiement',
     type: 'Page',
     href: '/payment-methods/',
     keywords: 'payments visa mastercard crypto bank transfer ewallets',
@@ -1499,6 +1748,7 @@ const STATIC_SEARCH_ITEMS = [
     labelPl: 'Odpowiedzialna gra',
     labelUk: 'Відповідальна гра',
     labelPt: 'Jogo responsável',
+    labelFr: 'Jeu responsable',
     type: 'Page',
     href: '/responsible-gambling/',
     keywords: 'responsible gambling safer play limits help',
@@ -1511,6 +1761,7 @@ const STATIC_SEARCH_ITEMS = [
     labelPl: 'O SpinCresta',
     labelUk: 'Про SpinCresta',
     labelPt: 'Sobre o SpinCresta',
+    labelFr: 'À propos de SpinCresta',
     type: 'Page',
     href: '/about/',
     keywords: 'about spincresta team reviews mission',
@@ -1523,6 +1774,7 @@ const STATIC_SEARCH_ITEMS = [
     labelPl: 'Blog SpinCresta',
     labelUk: 'Блог SpinCresta',
     labelPt: 'Blog SpinCresta',
+    labelFr: 'Blog SpinCresta',
     type: 'Blog',
     href: '/blog/',
     summary: 'Casino guides, payment explainers, bonus terms, and safer-play checks',
@@ -1532,6 +1784,7 @@ const STATIC_SEARCH_ITEMS = [
     summaryPl: 'Przewodniki po kasynach, metody płatności, warunki bonusów i narzędzia odpowiedzialnej gry',
     summaryUk: 'Гіди казино, способи оплати, умови бонусів та інструменти відповідальної гри',
     summaryPt: 'Guias de casinos, métodos de pagamento, condições de bónus e ferramentas de jogo responsável',
+    summaryFr: 'Guides de casino, moyens de paiement, conditions des bonus et outils de jeu responsable',
     keywords: 'blog casino guides payment bonuses withdrawals kyc country reviews',
   },
 ];
@@ -1574,9 +1827,9 @@ const getSiteSearchItems = () => {
 
   STATIC_SEARCH_ITEMS.forEach(item => addItem({
     ...item,
-    label: SITE_LOCALE === 'de' ? item.labelDe || item.label : SITE_LOCALE === 'es' ? item.labelEs || item.label : SITE_LOCALE === 'it' ? item.labelIt || item.label : SITE_LOCALE === 'pl' ? item.labelPl || item.label : SITE_LOCALE === 'uk' ? item.labelUk || item.label : SITE_LOCALE === 'pt' ? item.labelPt || item.label : item.label,
-    type: SITE_LOCALE === 'de' && item.type === 'Page' ? 'Seite' : SITE_LOCALE === 'es' && item.type === 'Page' ? 'Página' : SITE_LOCALE === 'it' && item.type === 'Page' ? 'Pagina' : SITE_LOCALE === 'pl' && item.type === 'Page' ? 'Strona' : SITE_LOCALE === 'uk' && item.type === 'Page' ? 'Сторінка' : SITE_LOCALE === 'pt' && item.type === 'Page' ? 'Página' : item.type,
-    summary: SITE_LOCALE === 'de' ? item.summaryDe || item.summary : SITE_LOCALE === 'es' ? item.summaryEs || item.summary : SITE_LOCALE === 'it' ? item.summaryIt || item.summary : SITE_LOCALE === 'pl' ? item.summaryPl || item.summary : SITE_LOCALE === 'uk' ? item.summaryUk || item.summary : SITE_LOCALE === 'pt' ? item.summaryPt || item.summary : item.summary,
+    label: SITE_LOCALE === 'de' ? item.labelDe || item.label : SITE_LOCALE === 'es' ? item.labelEs || item.label : SITE_LOCALE === 'it' ? item.labelIt || item.label : SITE_LOCALE === 'pl' ? item.labelPl || item.label : SITE_LOCALE === 'uk' ? item.labelUk || item.label : SITE_LOCALE === 'pt' ? item.labelPt || item.label : SITE_LOCALE === 'fr' ? item.labelFr || item.label : item.label,
+    type: SITE_LOCALE === 'de' && item.type === 'Page' ? 'Seite' : SITE_LOCALE === 'es' && item.type === 'Page' ? 'Página' : SITE_LOCALE === 'it' && item.type === 'Page' ? 'Pagina' : SITE_LOCALE === 'pl' && item.type === 'Page' ? 'Strona' : SITE_LOCALE === 'uk' && item.type === 'Page' ? 'Сторінка' : SITE_LOCALE === 'pt' && item.type === 'Page' ? 'Página' : SITE_LOCALE === 'fr' && item.type === 'Page' ? 'Page' : item.type,
+    summary: SITE_LOCALE === 'de' ? item.summaryDe || item.summary : SITE_LOCALE === 'es' ? item.summaryEs || item.summary : SITE_LOCALE === 'it' ? item.summaryIt || item.summary : SITE_LOCALE === 'pl' ? item.summaryPl || item.summary : SITE_LOCALE === 'uk' ? item.summaryUk || item.summary : SITE_LOCALE === 'pt' ? item.summaryPt || item.summary : SITE_LOCALE === 'fr' ? item.summaryFr || item.summary : item.summary,
     href: localizedPagePath(item.href),
   }));
 
@@ -1599,6 +1852,8 @@ const getSiteSearchItems = () => {
                   ? `Онлайн-казино та ставки: ${countryName}`
                   : SITE_LOCALE === 'pt'
                     ? `Casinos online e apostas em ${countryName}`
+                    : SITE_LOCALE === 'fr'
+                      ? `Casinos en ligne et paris en ${countryName}`
               : `Online casinos and betting in ${countryName}`,
       keywords: `${country.code} ${country.slug}`,
     });
@@ -1776,7 +2031,7 @@ const initLanguageSwitcher = () => {
 
   const getLocaleSwitchPath = locale => {
     const currentPath = window.location.pathname;
-    const englishPath = currentPath.replace(/^\/(?:de|es|it|pl|uk|pt)(?=\/|$)/, '') || '/';
+    const englishPath = currentPath.replace(/^\/(?:de|es|it|pl|uk|pt|fr)(?=\/|$)/, '') || '/';
     const localizedPath = locale === 'en'
       ? englishPath
       : englishPath === '/'
@@ -1792,6 +2047,7 @@ const initLanguageSwitcher = () => {
     pl: { code: 'PL', flag: 'poland', label: uiCopy.languagePolish },
     uk: { code: 'UK', flag: 'ukraine', label: uiCopy.languageUkrainian },
     pt: { code: 'PT', flag: 'portugal', label: uiCopy.languagePortuguese },
+    fr: { code: 'FR', flag: 'france', label: uiCopy.languageFrench },
   };
   const currentLocale = localeDisplay[SITE_LOCALE];
 
@@ -1830,6 +2086,10 @@ const initLanguageSwitcher = () => {
       <a class="language-switcher-option" href="${getLocaleSwitchPath('pt')}" lang="pt" aria-label="${uiCopy.languagePortuguese}" title="${uiCopy.languagePortuguese}"${SITE_LOCALE === 'pt' ? ' aria-current="page"' : ''}>
         <img src="/icons/portugal-flag-icon.svg" alt="" aria-hidden="true" loading="lazy" decoding="async" />
         <span class="language-switcher-code" aria-hidden="true">PT</span>
+      </a>
+      <a class="language-switcher-option" href="${getLocaleSwitchPath('fr')}" lang="fr" aria-label="${uiCopy.languageFrench}" title="${uiCopy.languageFrench}"${SITE_LOCALE === 'fr' ? ' aria-current="page"' : ''}>
+        <img src="/icons/france-flag-icon.svg" alt="" aria-hidden="true" loading="lazy" decoding="async" />
+        <span class="language-switcher-code" aria-hidden="true">FR</span>
       </a>
     </div>
   `;
@@ -2390,7 +2650,7 @@ const createCasinoCard = ({
   const safeUrl = urlCasino || PLACEHOLDER_LINK;
   const safeName = normalizeText(name);
   const safeBonus = localizedBrandBonusText(bonus);
-  const primaryCtaText = localeText('Play', 'Spielen', 'Jugar', 'Gioca', 'Zagraj', 'Грати', 'Jogar');
+  const primaryCtaText = localeText('Play', 'Spielen', 'Jugar', 'Gioca', 'Zagraj', 'Грати', 'Jogar', 'Jouer');
   const detailUrl = brandPagePath(urlDetail ?? '');
   const imageUrl = normalizeAssetPath(image ?? '');
   const isBlocked = Boolean(notRecommended);
@@ -2490,6 +2750,7 @@ const HOME_GEO_BY_LOCALE = Object.freeze({
   it: 'IT',
   pl: 'PL',
   pt: 'PT',
+  fr: 'FR',
 });
 
 const getHomeGeoCode = () => HOME_GEO_BY_LOCALE[SITE_LOCALE] || '';
@@ -4348,6 +4609,37 @@ const SNAPSHOT_PT_TRANSLATIONS = {
   'Live casino': 'Casino ao vivo',
   'Game shows': 'Game shows',
 };
+const SNAPSHOT_FR_TRANSLATIONS = {
+  'Games & Betting Snapshot': 'Aperçu des jeux et des paris',
+  'Visible now:': 'Disponible actuellement :',
+  'Not surfaced:': 'Non proposé :',
+  'These are the main game categories currently visible in the account.':
+    'Voici les principales catégories de jeux actuellement visibles dans le compte.',
+  'These are the main betting categories currently visible in the account.':
+    'Voici les principales catégories de paris actuellement visibles dans le compte.',
+  Games: 'JEUX',
+  GAMES: 'JEUX',
+  'LIVE GAMES': 'JEUX EN DIRECT',
+  Betting: 'PARIS',
+  BETTING: 'PARIS',
+  Slots: 'Machines à sous',
+  Roulette: 'Roulette',
+  Blackjack: 'Blackjack',
+  Baccarat: 'Baccarat',
+  Poker: 'Poker',
+  Keno: 'Keno',
+  Bingo: 'Bingo',
+  'Jackpot games': 'Jeux à jackpot',
+  'Live games': 'Jeux en direct',
+  'Live dice games': 'Jeux de dés en direct',
+  'Craps and dice': 'Craps et jeux de dés',
+  'Scratch cards': 'Jeux à gratter',
+  'Video poker': 'Vidéo poker',
+  'Crash games': 'Jeux crash',
+  'Other live games': 'Autres jeux en direct',
+  'Live casino': 'Casino en direct',
+  'Game shows': 'Jeux télévisés',
+};
 
 const snapshotLabel = value =>
   SITE_LOCALE === 'de'
@@ -4362,6 +4654,8 @@ const snapshotLabel = value =>
             ? SNAPSHOT_UK_TRANSLATIONS[value] || value
             : SITE_LOCALE === 'pt'
               ? SNAPSHOT_PT_TRANSLATIONS[value] || value
+              : SITE_LOCALE === 'fr'
+                ? SNAPSHOT_FR_TRANSLATIONS[value] || value
         : value;
 
 const renderSnapshotItems = (items, isAvailable) =>
@@ -4656,9 +4950,9 @@ const enhanceBrandProsCons = () => {
   document.querySelectorAll('body[data-brand] .feature-card > strong').forEach(heading => {
     const label = normalizeText(heading.textContent).trim().toLowerCase();
     const kind =
-      label === 'pros' || label === 'prós' || label === 'vorteile' || label === 'ventajas' || label === 'pro' || label === 'vantaggi' || label === 'zalety' || label === 'plusy' || label === 'переваги' || label === 'плюси'
+      label === 'pros' || label === 'prós' || label === 'vorteile' || label === 'ventajas' || label === 'pro' || label === 'vantaggi' || label === 'zalety' || label === 'plusy' || label === 'переваги' || label === 'плюси' || label === 'avantages'
         ? 'pros'
-        : label === 'cons' || label === 'nachteile' || label === 'contras' || label === 'desventajas' || label === 'contro' || label === 'svantaggi' || label === 'wady' || label === 'minusy' || label === 'недоліки' || label === 'мінуси'
+        : label === 'cons' || label === 'nachteile' || label === 'contras' || label === 'desventajas' || label === 'contro' || label === 'svantaggi' || label === 'wady' || label === 'minusy' || label === 'недоліки' || label === 'мінуси' || label === 'inconvénients'
           ? 'cons'
           : '';
     if (!kind) return;
@@ -4992,6 +5286,15 @@ const initTopCasinosJumpNav = () => {
                   hide: 'Mostrar menos',
                   label: 'Classificações de casinos e guias por país',
                 }
+              : SITE_LOCALE === 'fr'
+                ? {
+                    kicker: `${COUNTRIES.length} GUIDES PAR PAYS`,
+                    title: 'Choisissez votre marché',
+                    description: 'Ouvrez un classement mis en avant ou accédez directement au guide complet de votre pays.',
+                    show: 'Afficher tous les pays',
+                    hide: 'Afficher moins de pays',
+                    label: 'Classements de casinos et guides par pays',
+                  }
         : {
         kicker: `${COUNTRIES.length} COUNTRY GUIDES`,
         title: 'Choose your market',

@@ -3,7 +3,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 
 const root = process.cwd();
-const supportedLocales = ['en', 'de', 'es', 'it', 'pl', 'uk', 'pt'];
+const supportedLocales = ['en', 'de', 'es', 'it', 'pl', 'uk', 'pt', 'fr'];
 const args = new Map(process.argv.slice(2).map((value, index, all) => value.startsWith('--') ? [value, all[index + 1]?.startsWith('--') ? true : all[index + 1]] : null).filter(Boolean));
 const locale = String(args.get('--locale') || '').toLowerCase();
 const language = String(args.get('--language') || '');
@@ -208,7 +208,7 @@ for (const sourceFile of sourceFiles) {
   const canonical = localeUrl(route);
   html = html.replace(/<link\b(?=[^>]*\brel=['"]canonical['"])[^>]*>/i, `<link rel="canonical" href="${canonical}" />`);
   html = html.replace(/<meta\b(?=[^>]*\bproperty=['"]og:url['"])[^>]*>/i, `<meta property="og:url" content="${canonical}" />`);
-  const openGraphLocales = { en: 'en_GB', de: 'de_DE', es: 'es_ES', it: 'it_IT', pl: 'pl_PL', uk: 'uk_UA', pt: 'pt_PT' };
+  const openGraphLocales = { en: 'en_GB', de: 'de_DE', es: 'es_ES', it: 'it_IT', pl: 'pl_PL', uk: 'uk_UA', pt: 'pt_PT', fr: 'fr_FR' };
   html = html.replace(
     /<meta\b(?=[^>]*\bproperty=['"]og:locale['"])[^>]*>/i,
     `<meta property="og:locale" content="${openGraphLocales[locale] || locale}" />`

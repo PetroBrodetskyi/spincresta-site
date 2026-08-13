@@ -4,7 +4,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 
 const ROOT = process.cwd();
-const locales = ['de', 'es', 'it', 'pl', 'uk', 'pt'];
+const locales = ['de', 'es', 'it', 'pl', 'uk', 'pt', 'fr'];
 const emailPattern = /[^\s<>"']+@[^\s<>"']+\.[A-Za-z]{2,}/g;
 const errors = [];
 
@@ -34,7 +34,7 @@ for (const locale of locales) {
 }
 
 const officialSpinbossTiers = ['Intern', 'Receptionist', 'Sales Rep', 'Regional Manager', "World's Best Boss"];
-for (const locale of locales) {
+for (const locale of ['de', 'es', 'it', 'pl', 'uk', 'pt']) {
   const file = path.join(ROOT, locale, 'brands/spinboss/index.html');
   const html = fs.readFileSync(file, 'utf8');
   for (const tier of officialSpinbossTiers) {
