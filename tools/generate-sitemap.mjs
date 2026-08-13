@@ -43,15 +43,15 @@ const getExistingMetadata = () => {
 };
 
 const getDefaultMetadata = pagePath => {
-  if (pagePath === '/' || /^\/(?:de|es|it|pl|uk|pt|fr)\/$/.test(pagePath) || /\/(?:(?:de|es|it|pl|uk|pt|fr)\/)?online-casinos\/$/.test(pagePath)) {
+  if (pagePath === '/' || /^\/(?:de|es|it|pl|uk|pt|fr|hi)\/$/.test(pagePath) || /\/(?:(?:de|es|it|pl|uk|pt|fr|hi)\/)?online-casinos\/$/.test(pagePath)) {
     return { changefreq: 'weekly', priority: '0.9' };
   }
 
-  if (/\/(?:(?:de|es|it|pl|uk|pt|fr)\/)?online-casinos\/[^/]+\/$/.test(pagePath)) {
+  if (/\/(?:(?:de|es|it|pl|uk|pt|fr|hi)\/)?online-casinos\/[^/]+\/$/.test(pagePath)) {
     return { changefreq: 'weekly', priority: '0.7' };
   }
 
-  if (/\/(?:(?:de|es|it|pl|uk|pt|fr)\/)?brands\/[^/]+\/$/.test(pagePath)) {
+  if (/\/(?:(?:de|es|it|pl|uk|pt|fr|hi)\/)?brands\/[^/]+\/$/.test(pagePath)) {
     return { changefreq: 'monthly', priority: '0.7' };
   }
 
@@ -89,7 +89,7 @@ const sitemap = [
 
 fs.writeFileSync(SITEMAP_PATH, sitemap);
 
-const englishCount = pages.filter(page => !/^\/(?:de|es|it|pl|uk|pt|fr)\//.test(page.pagePath)).length;
+const englishCount = pages.filter(page => !/^\/(?:de|es|it|pl|uk|pt|fr|hi)\//.test(page.pagePath)).length;
 const germanCount = pages.filter(page => page.pagePath.startsWith('/de/')).length;
 const spanishCount = pages.filter(page => page.pagePath.startsWith('/es/')).length;
 const italianCount = pages.filter(page => page.pagePath.startsWith('/it/')).length;
@@ -97,4 +97,5 @@ const polishCount = pages.filter(page => page.pagePath.startsWith('/pl/')).lengt
 const ukrainianCount = pages.filter(page => page.pagePath.startsWith('/uk/')).length;
 const portugueseCount = pages.filter(page => page.pagePath.startsWith('/pt/')).length;
 const frenchCount = pages.filter(page => page.pagePath.startsWith('/fr/')).length;
-console.log(`Generated ${pages.length} sitemap URLs: ${englishCount} EN, ${germanCount} DE, ${spanishCount} ES, ${italianCount} IT, ${polishCount} PL, ${ukrainianCount} UK, ${portugueseCount} PT, ${frenchCount} FR.`);
+const hindiCount = pages.filter(page => page.pagePath.startsWith('/hi/')).length;
+console.log(`Generated ${pages.length} sitemap URLs: ${englishCount} EN, ${germanCount} DE, ${spanishCount} ES, ${italianCount} IT, ${polishCount} PL, ${ukrainianCount} UK, ${portugueseCount} PT, ${frenchCount} FR, ${hindiCount} HI.`);

@@ -13,6 +13,7 @@ const checks = {
   uk: [/Перки прогресу/gi, /VIP-термінів/gi, /оплату права власності/gi, /роботу гри та касира/gi, /даних бренду/gi, /\bшлях(?:и|ів|ах|ами)?\b/gi],
   pt: [/\bda operador\b/gi, /\bas métodos\b/gi, /\bos ferramentas\b/gi, /fluxo de levantamento/gi, /dados da marca/gi, /profundidade de apostas/gi, /apenos/gi, /cado operador/gi],
   fr: [/flux de retrait/gi, /fenêtres de validité/gi, /actions de compte bloqué/gi, /propriété du paiement/gi, /données (?:actuelles )?de la marque/gi, /profondeur des paris/gi, /Avis sur la marque/g, /correspondances sur dépôt/gi, /vérifications de la réalité/gi, /\bitinéraires?\b/gi],
+  hi: [/वर्तमान ब्रांड डेटा/gi, /भुगतान मार्ग/gi, /निकासी मार्ग/gi, /शिकायत मार्ग/gi, /उत्पाद शेल/gi, /कैशियर प्रदर्शन/gi],
 };
 
 const walk = directory => {
@@ -26,7 +27,7 @@ const walk = directory => {
 };
 
 const errors = [];
-const localizedRoots = new Set(['de', 'es', 'it', 'pl', 'uk', 'pt', 'fr', '.git', 'node_modules', 'tools']);
+const localizedRoots = new Set(['de', 'es', 'it', 'pl', 'uk', 'pt', 'fr', 'hi', '.git', 'node_modules', 'tools']);
 const walkEnglish = directory => {
   const files = [];
   for (const entry of fs.readdirSync(directory, { withFileTypes: true })) {

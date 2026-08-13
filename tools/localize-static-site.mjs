@@ -3,7 +3,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 
 const root = process.cwd();
-const supportedLocales = ['en', 'de', 'es', 'it', 'pl', 'uk', 'pt', 'fr'];
+const supportedLocales = ['en', 'de', 'es', 'it', 'pl', 'uk', 'pt', 'fr', 'hi'];
 const args = new Map(process.argv.slice(2).map((value, index, all) => value.startsWith('--') ? [value, all[index + 1]?.startsWith('--') ? true : all[index + 1]] : null).filter(Boolean));
 const locale = String(args.get('--locale') || '').toLowerCase();
 const language = String(args.get('--language') || '');
@@ -194,7 +194,7 @@ for (const sourceFile of sourceFiles) {
   const source = fs.readFileSync(sourceFile, 'utf8');
   const sourceLanguageTag = source.match(/<html\b[^>]*\blang=['"]([^'"]+)['"]/i)?.[1] || 'en';
   const region = sourceLanguageTag.split('-')[1]?.toUpperCase();
-  const localizedLanguageTag = region ? `${locale}-${region}` : locale;
+  const localizedLanguageTag = locale === 'hi' ? 'hi-IN' : (region ? `${locale}-${region}` : locale);
   let html = visitHtml(source, translate);
   const blocks = [...source.matchAll(jsonPattern)].map(match => {
     try { return `<script type="application/ld+json">\n${JSON.stringify(translateJson(JSON.parse(match[1])), null, 2)}\n</script>`; }
@@ -208,13 +208,13 @@ for (const sourceFile of sourceFiles) {
   const canonical = localeUrl(route);
   html = html.replace(/<link\b(?=[^>]*\brel=['"]canonical['"])[^>]*>/i, `<link rel="canonical" href="${canonical}" />`);
   html = html.replace(/<meta\b(?=[^>]*\bproperty=['"]og:url['"])[^>]*>/i, `<meta property="og:url" content="${canonical}" />`);
-  const openGraphLocales = { en: 'en_GB', de: 'de_DE', es: 'es_ES', it: 'it_IT', pl: 'pl_PL', uk: 'uk_UA', pt: 'pt_PT', fr: 'fr_FR' };
+  const openGraphLocales = { en: 'en_GB', de: 'de_DE', es: 'es_ES', it: 'it_IT', pl: 'pl_PL', uk: 'uk_UA', pt: 'pt_PT', fr: 'fr_FR', hi: 'hi_IN' };
   html = html.replace(
     /<meta\b(?=[^>]*\bproperty=['"]og:locale['"])[^>]*>/i,
     `<meta property="og:locale" content="${openGraphLocales[locale] || locale}" />`
   );
   html = html.replace(/\s*<link\b(?=[^>]*\brel=['"]alternate['"])(?=[^>]*\bhreflang=['"])[^>]*>/gi, '');
-  const languageSuffix = region ? `-${region}` : '';
+  const languageSuffix = locale === 'hi' ? '' : (region ? `-${region}` : '');
   const alternates = [
     ...supportedLocales.map(targetLocale => {
       const targetRoute = targetLocale === 'en' ? route : (route === '/' ? `/${targetLocale}/` : `/${targetLocale}${route}`);

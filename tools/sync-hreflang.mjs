@@ -4,12 +4,12 @@ import path from 'node:path';
 
 const root = process.cwd();
 const origin = 'https://spincresta.com';
-const locales = ['en', 'de', 'es', 'it', 'pl', 'uk', 'pt', 'fr'];
+const locales = ['en', 'de', 'es', 'it', 'pl', 'uk', 'pt', 'fr', 'hi'];
 
 const sourceFiles = [];
 const walk = directory => {
   for (const entry of fs.readdirSync(directory, { withFileTypes: true })) {
-    if (['.git', 'node_modules', 'tools', 'de', 'es', 'it', 'pl', 'uk', 'pt', 'fr'].includes(entry.name) && directory === root) continue;
+    if (['.git', 'node_modules', 'tools', 'de', 'es', 'it', 'pl', 'uk', 'pt', 'fr', 'hi'].includes(entry.name) && directory === root) continue;
     const target = path.join(directory, entry.name);
     if (entry.isDirectory()) walk(target);
     else if (entry.name === 'index.html') sourceFiles.push(target);
@@ -37,7 +37,7 @@ for (const sourceFile of sourceFiles) {
   const suffix = region ? `-${region}` : '';
   const alternates = [
     ...locales.map(locale =>
-      `<link rel="alternate" hreflang="${locale}${suffix}" href="${origin}${localizedRoute(route, locale)}" />`
+      `<link rel="alternate" hreflang="${locale === 'hi' ? 'hi' : `${locale}${suffix}`}" href="${origin}${localizedRoute(route, locale)}" />`
     ),
     `<link rel="alternate" hreflang="x-default" href="${origin}${route}" />`,
   ].join('\n    ');
