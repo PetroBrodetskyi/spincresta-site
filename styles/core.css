@@ -107,9 +107,10 @@
   --blur-glass: blur(14px);
 }
 
-@media (min-width: 1500px) {
+/* Keep the desktop shell as fluid as the wide brand-review layout. */
+@media (min-width: 1200px) {
   :root {
-    --site-max-width: 1420px;
+    --site-max-width: 100vw;
     --hero-panel-max: 1040px;
     --hero-copy-max: 880px;
   }
@@ -117,7 +118,6 @@
 
 @media (min-width: 1800px) {
   :root {
-    --site-max-width: 1540px;
     --hero-panel-max: 1120px;
     --hero-copy-max: 940px;
   }
@@ -294,7 +294,10 @@ textarea {
   width: 100%;
   max-width: none;
   margin: 0;
-  padding: 10px max(24px, calc((100vw - var(--site-max-width)) / 2 + 24px));
+  padding: 10px max(
+    var(--page-gutter),
+    calc((100vw - var(--site-max-width)) / 2 + var(--page-gutter))
+  );
   background: var(--chrome-bg);
   border-bottom: 1px solid rgba(255, 255, 255, 0.08);
   box-shadow: var(--shadow-header);
@@ -302,6 +305,13 @@ textarea {
     padding 0.28s ease,
     box-shadow 0.28s ease,
     background 0.28s ease;
+}
+
+@media (max-width: 1024px) {
+  .header-container {
+    padding-right: var(--page-gutter-mobile);
+    padding-left: var(--page-gutter-mobile);
+  }
 }
 
 .header-inner {

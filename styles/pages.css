@@ -1369,8 +1369,8 @@ html[data-theme='light'] .payment-chip {
 body[data-page='new-casinos'] .content > .container:has(> .casino-grid),
 body[data-page='exclusive-offers'] .content > .container:has(> .casino-grid),
 body[data-page='top-rated'] .content > .container:has(> .casino-grid) {
-  width: min(100% - (var(--page-gutter) * 2), 1306px);
-  max-width: 1306px;
+  width: min(100% - (var(--page-gutter) * 2), var(--site-max-width));
+  max-width: var(--site-max-width);
   margin-right: auto;
   margin-left: auto;
   padding-right: 0;
@@ -6024,8 +6024,8 @@ body.casinos-page .hero-content {
 }
 
 body.casinos-page .content > .container {
-  width: min(100% - (var(--page-gutter) * 2), 1306px);
-  max-width: 1306px;
+  width: min(100% - (var(--page-gutter) * 2), var(--site-max-width));
+  max-width: var(--site-max-width);
   margin-right: auto;
   margin-left: auto;
   padding-right: 0;
@@ -11145,7 +11145,7 @@ body[data-country] .country-new-games.is-sparse .country-new-games-grid {
 body[data-country] .country-new-game-card {
   display: grid;
   min-width: 0;
-  grid-template-rows: 154px minmax(62px, auto);
+  grid-template-rows: auto minmax(64px, auto);
   overflow: hidden;
   border: 1px solid var(--surface-border);
   border-radius: var(--radius-md);
@@ -11175,6 +11175,7 @@ body[data-country] .country-new-game-card:focus-visible {
 body[data-country] .country-new-game-art {
   display: grid;
   min-width: 0;
+  aspect-ratio: 1 / 1;
   place-items: center;
   padding: 7px;
   overflow: hidden;
@@ -11189,6 +11190,9 @@ body[data-country] .country-new-game-art img {
   display: block;
   width: 100%;
   height: 100%;
+  min-height: 0;
+  max-width: 100%;
+  max-height: 100%;
   object-fit: contain;
   object-position: center;
 }
@@ -11269,7 +11273,7 @@ body[data-country] .country-new-game-copy small {
   }
 
   body[data-country] .country-new-game-card {
-    grid-template-rows: 132px minmax(60px, auto);
+    grid-template-rows: auto minmax(60px, auto);
   }
 }
 
@@ -11577,4 +11581,248 @@ html[data-theme='light'] body.author-page .author-standard {
     align-items: stretch;
     flex-direction: column;
   }
+}
+
+/* =============================================================
+   Unified heading hierarchy
+   ============================================================= */
+:root {
+  --heading-display-size: clamp(48px, 4.6vw, 64px);
+  --heading-home-section-size: clamp(40px, 3.2vw, 48px);
+  --heading-content-section-size: clamp(32px, 2.7vw, 40px);
+  --heading-subsection-size: clamp(22px, 1.8vw, 26px);
+}
+
+body .hero h1,
+body.home-page .hero h1,
+body:not(.home-page) .hero h1,
+body[data-page='top-casinos'] .hero h1,
+body[data-country] .hero h1,
+body[data-brand] .hero h1,
+body[data-brand] .brand-sticky-aside h1,
+body[data-brand].has-brand-sticky-layout .brand-sticky-aside h1,
+body.author-page .author-hero h1 {
+  font-size: var(--heading-display-size) !important;
+  line-height: 0.98;
+  letter-spacing: -0.045em;
+}
+
+body[data-brand] .brand-sticky-aside h1,
+body[data-brand].has-brand-sticky-layout .brand-sticky-aside h1 {
+  font-size: clamp(28px, 2.2vw, 34px) !important;
+  line-height: 1.06;
+  letter-spacing: -0.03em;
+}
+
+body[data-brand] .brand-new-games-heading h2 {
+  font-size: clamp(22px, 1.5vw, 28px) !important;
+  line-height: 1.08;
+  letter-spacing: -0.02em;
+}
+
+body.home-page main h2,
+body.home-page .home-showcase-heading h2,
+body.home-page .home-insight-head h2,
+body.home-page .section-head h2 {
+  font-size: var(--heading-home-section-size) !important;
+  line-height: 1.04;
+  letter-spacing: -0.035em;
+}
+
+body:not(.home-page) main h2,
+body:not(.home-page) .section-head h2,
+body:not(.home-page) .content-review > section > h2,
+body:not(.home-page) .content-article > section > h2,
+body:not(.home-page) .brand-countries > h2,
+body:not(.home-page) .brand-payments > h2,
+body.author-page main h2 {
+  font-size: var(--heading-content-section-size) !important;
+  line-height: 1.08;
+  letter-spacing: -0.03em;
+}
+
+:where(
+    .content-review,
+    .content-article,
+    .timeline,
+    .faq-grid,
+    .expert-review,
+    .home-method-grid,
+    .top-casinos-method-grid,
+    .author-page main
+  ) h3:not(.casino-name) {
+  font-size: var(--heading-subsection-size) !important;
+  line-height: 1.18;
+  letter-spacing: -0.02em;
+}
+
+@media (max-width: 768px) {
+  :root {
+    --heading-display-size: clamp(36px, 10.5vw, 48px);
+    --heading-home-section-size: clamp(30px, 8.6vw, 38px);
+    --heading-content-section-size: clamp(28px, 7.8vw, 34px);
+    --heading-subsection-size: clamp(20px, 5.8vw, 23px);
+  }
+
+  body .hero h1,
+  body.home-page .hero h1,
+  body:not(.home-page) .hero h1,
+  body[data-page='top-casinos'] .hero h1,
+  body[data-country] .hero h1,
+  body[data-brand] .hero h1,
+  body[data-brand] .brand-sticky-aside h1,
+  body[data-brand].has-brand-sticky-layout .brand-sticky-aside h1,
+  body.author-page .author-hero h1 {
+    line-height: 1;
+    letter-spacing: -0.04em;
+  }
+
+  body[data-brand] .brand-sticky-aside h1,
+  body[data-brand].has-brand-sticky-layout .brand-sticky-aside h1 {
+    font-size: clamp(27px, 8vw, 32px) !important;
+    line-height: 1.06;
+  }
+
+  body[data-brand] .brand-new-games-heading h2 {
+    font-size: clamp(22px, 6.2vw, 26px) !important;
+  }
+}
+
+/* =============================================================
+   Country hero editorial composition
+   ============================================================= */
+@media (min-width: 1121px) {
+  body[data-country] .hero.country-hero-with-cards {
+    grid-template-columns: minmax(420px, 0.72fr) minmax(0, 1.28fr);
+    column-gap: clamp(24px, 2.5vw, 42px);
+    row-gap: 0;
+    align-items: stretch;
+    padding-top: clamp(106px, 8vw, 128px);
+    background:
+      radial-gradient(circle at 8% 8%, rgba(56, 189, 248, 0.075), transparent 26%),
+      radial-gradient(circle at 92% 4%, rgba(255, 223, 0, 0.045), transparent 24%);
+  }
+
+  body[data-country] .hero.country-hero-with-cards .country-hero-rail {
+    position: relative;
+    isolation: isolate;
+    justify-content: center;
+    min-height: 350px;
+    padding: clamp(28px, 3vw, 42px);
+    overflow: hidden;
+    border: 1px solid var(--surface-border);
+    border-radius: 20px;
+    background:
+      linear-gradient(145deg, rgba(255, 255, 255, 0.055), transparent 42%),
+      var(--surface-card-soft);
+    box-shadow: var(--shadow-soft);
+  }
+
+  body[data-country] .hero.country-hero-with-cards .hero-content {
+    position: relative;
+    z-index: 1;
+    justify-content: center;
+    gap: 20px;
+    width: 100%;
+    max-width: none;
+  }
+
+  body[data-country] .hero.country-hero-with-cards h1 {
+    max-width: 13ch;
+    font-size: clamp(46px, 3.8vw, 58px) !important;
+    line-height: 0.98;
+    letter-spacing: -0.045em;
+    text-wrap: balance;
+  }
+
+  body[data-country] .country-hero-cards .section-head h2::before {
+    margin-bottom: 14px;
+    text-align: left;
+  }
+
+  body[data-country] .hero.country-hero-with-cards .hero-content > p {
+    max-width: 42ch;
+    font-size: clamp(15px, 1.15vw, 18px);
+    line-height: 1.58;
+  }
+
+  body[data-country] .country-hero-cards .section-head {
+    position: relative;
+    align-self: stretch;
+    min-height: 0;
+    margin: 0;
+    padding: clamp(30px, 3vw, 42px) 124px 14px clamp(28px, 3vw, 42px);
+    border: 1px solid var(--surface-border);
+    border-bottom: 0;
+    border-radius: 20px 20px 0 0;
+    background:
+      linear-gradient(150deg, rgba(255, 255, 255, 0.045), transparent 48%),
+      var(--surface-card-soft);
+    box-shadow: var(--shadow-soft);
+  }
+
+  body[data-country] .country-hero-cards .section-head::before {
+    margin: 0 0 14px;
+    color: var(--section-accent);
+  }
+
+  body[data-country] .country-hero-cards .section-head h2 {
+    max-width: 21ch;
+    padding: 0;
+    border: 0;
+    font-size: clamp(34px, 3vw, 46px) !important;
+    line-height: 1.02;
+    letter-spacing: -0.035em;
+    text-align: left;
+    text-wrap: balance;
+  }
+
+  body[data-country] .country-hero-cards > .intro {
+    align-self: stretch;
+    max-width: none;
+    min-height: 0;
+    margin: 0;
+    padding: 4px clamp(28px, 3vw, 42px) clamp(30px, 3vw, 42px);
+    border: 1px solid var(--surface-border);
+    border-top: 0;
+    border-radius: 0 0 20px 20px;
+    background: var(--surface-card-soft);
+    color: var(--text-muted);
+    box-shadow: var(--shadow-soft);
+    font-size: clamp(15px, 1.08vw, 17px);
+    line-height: 1.62;
+    text-align: left;
+  }
+
+  body[data-country] .country-card-flag {
+    align-self: start;
+    width: 72px;
+    margin: clamp(30px, 3vw, 42px) clamp(28px, 3vw, 42px) 0 0;
+    padding: 0;
+    border: 0;
+    border-radius: 4px;
+    background: transparent;
+    box-shadow: none;
+  }
+
+  body[data-country] .country-hero-cards > .country-filter-bar {
+    margin-top: clamp(24px, 2.6vw, 38px);
+    margin-bottom: 18px;
+    padding: 10px;
+    border: 1px solid var(--surface-border);
+    border-radius: 12px;
+    background: var(--surface-card-soft);
+    box-shadow: var(--shadow-soft);
+  }
+
+  body[data-country] .country-filter-bar__controls {
+    gap: 6px;
+  }
+}
+
+html[data-theme='light'] body[data-country] .hero.country-hero-with-cards .country-hero-rail,
+html[data-theme='light'] body[data-country] .country-hero-cards .section-head,
+html[data-theme='light'] body[data-country] .country-hero-cards > .intro,
+html[data-theme='light'] body[data-country] .country-hero-cards > .country-filter-bar {
+  background-color: rgba(255, 255, 255, 0.72);
 }

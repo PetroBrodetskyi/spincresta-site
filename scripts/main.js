@@ -1,7 +1,7 @@
 ﻿// =====================
 // IMPORTS
 // =====================
-import { BRANDS } from './brands.js?v=20260812-portuguese-1';
+import { BRANDS } from './brands.js?v=20260813-spinko-unavailable-1';
 import { BRAND_SNAPSHOT_CONFIGS } from './brand-snapshot-configs.js?v=20260812-portuguese-1';
 import { BRAND_NEW_GAMES } from './brand-new-games.js?v=20260812-portuguese-1';
 import { BRAND_HOMEPAGE_SCREENSHOTS } from './brand-homepage-screenshots.js?v=20260812-portuguese-1';
@@ -2390,10 +2390,7 @@ const createCasinoCard = ({
   const safeUrl = urlCasino || PLACEHOLDER_LINK;
   const safeName = normalizeText(name);
   const safeBonus = localizedBrandBonusText(bonus);
-  const primaryCtaText =
-    document.body.classList.contains('home-page') || document.body.dataset.page === 'top-casinos'
-      ? localeText('Play', 'Spielen', 'Jugar', 'Gioca', 'Zagraj', 'Грати', 'Jogar')
-      : uiCopy.visitCasino;
+  const primaryCtaText = localeText('Play', 'Spielen', 'Jugar', 'Gioca', 'Zagraj', 'Грати', 'Jogar');
   const detailUrl = brandPagePath(urlDetail ?? '');
   const imageUrl = normalizeAssetPath(image ?? '');
   const isBlocked = Boolean(notRecommended);
