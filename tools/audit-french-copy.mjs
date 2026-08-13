@@ -28,6 +28,7 @@ const forbidden = [
   ['awkward fit heading', /\bBon ajustement\b/gi],
   ['awkward caution heading', /\bRéfléchissez à deux fois si\b/gi],
   ['translated complaints email', /plaintes@spinboss\.com/gi],
+  ['outdated review wording', /Revue en préparation|La révision complète|"name": "(?:Examen|[^"\n]+ Examen|Revue du casino)/gi],
 ];
 
 const errors = [];

@@ -17,6 +17,15 @@ const walk = directory => {
 walk(FR_ROOT);
 
 const replacements = [
+  [/Examens fiables de plates-formes sous licence avec prise en charge UPI, Paytm et INR pour les joueurs indiens\./g, 'Sélection de plateformes sous licence proposant UPI, Paytm et les paiements en INR aux joueurs indiens.'],
+  [/Examens fiables des plates-formes sous licence avec support EasyEFT, Ozow, Sid Instant EFT, ZAR, bonus exclusifs et meilleurs jeux pour les joueurs sud-africains/g, 'Sélection de plateformes sous licence proposant EasyEFT, Ozow, Sid Instant EFT, les paiements en ZAR, des bonus exclusifs et une offre de jeux adaptée aux joueurs sud-africains.'],
+  [/"name": "Examen du ([^"]+)"/g, '"name": "Avis sur $1"'],
+  [/"name": "Examen ([^"]+)"/g, '"name": "Avis sur $1"'],
+  [/"name": "([^"]+) Examen"/g, '"name": "Avis sur $1"'],
+  [/"name": "Revue du casino ([^"]+)"/g, '"name": "Avis sur $1"'],
+  [/La révision complète du ([^<]+) est en cours/g, 'L’avis complet sur $1 est en préparation'],
+  [/aria-label="Statut de l'examen"/g, 'aria-label="Statut de l’avis"'],
+  [/<span>Revue en préparation<\/span>/g, '<span>Avis en préparation</span>'],
   [/"name": "Maison"/g, '"name": "Accueil"'],
   [/>Maison</g, '>Accueil<'],
   [/Expert en jeux vidéo/g, 'Experte iGaming'],

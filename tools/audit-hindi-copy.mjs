@@ -35,6 +35,8 @@ const forbidden = [
   [/सामना वाली/gi, 'literal facing-market wording'],
   [/श्रेणीे/gi, 'corrupted lene wording'],
   [/विकल्पदर्श/gi, 'corrupted margdarshan wording'],
+  [/प्रयास करें मार्गदर्शक/gi, 'translated TRY currency code'],
+  [/समीक्षा विवरण जल्द ही आ रहा है/gi, 'placeholder review wording'],
 ];
 
 const walk = directory => fs.readdirSync(directory, { withFileTypes: true }).flatMap(entry => {

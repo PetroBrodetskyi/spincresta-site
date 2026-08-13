@@ -34,6 +34,8 @@ const forbidden = [
   ['lowercase FAQ answer', /(?:<p>|"text": ")(?:так|ні)\s/gu],
   ['withdrawal agreement error', /(?:перше|першого|першим|мінімальне|максимальне|швидке|плавне|надійне|щомісячне) виплати|виплатим/gi],
   ['duplicate withdrawal wording', /виплати,\s*виплати/gi],
+  ['awkward fast-access wording', /Швидкий розділ/gi],
+  ['wrong betting category', /Статистика та казино/gi],
 ];
 
 const errors = [];

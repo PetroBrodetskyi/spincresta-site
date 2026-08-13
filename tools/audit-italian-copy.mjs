@@ -44,6 +44,7 @@ const forbidden = [
   ['literal product-shell wording', /\b(?:guscio|shell) (?:di scommesse|con un bonus|bonus|solo|promozionale|piatta|standard)\b/gi],
   ['internal bonus-document wording', /\bbrief (?:sul|sui|attuale|elenca|dice|chiede)\b/gi],
   ['awkward mobile wording', /\baccesso Web mobile\b/gi],
+  ['awkward fast-access wording', /\b(?:un )?sezione rapido\b/gi],
 ];
 
 const errors = [];

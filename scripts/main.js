@@ -5,6 +5,7 @@ import { BRANDS } from './brands.js?v=20260813-french-1';
 import { BRAND_SNAPSHOT_CONFIGS } from './brand-snapshot-configs.js?v=20260813-french-1';
 import { BRAND_NEW_GAMES } from './brand-new-games.js?v=20260813-french-1';
 import { BRAND_HOMEPAGE_SCREENSHOTS } from './brand-homepage-screenshots.js?v=20260813-french-1';
+import { BRAND_BONUS_TRANSLATIONS } from './brand-bonus-translations.js?v=20260813-qa-1';
 import { COUNTRIES } from './countries.js';
 
 // =====================
@@ -44,7 +45,7 @@ const BLOCKED_BRAND_COPY = {
     alternatives: 'In alternativa, consigliamo questi casinò',
   },
   pl: {
-    notice: 'Według informacji zweryfikowanych przez naszych analityków ten kasyno ma problemy z organami ścigania Republiki Białorusi.',
+    notice: 'Według informacji zweryfikowanych przez naszych analityków to kasyno ma problemy z organami ścigania Republiki Białorusi.',
     cta: 'Nierekomendowane',
     alternatives: 'Zamiast tego polecamy te kasyna',
   },
@@ -1270,8 +1271,12 @@ const hindiBrandBonusText = value => {
     .replace(/\s+/g, ' ')
     .trim();
 };
-const localizedBrandBonusText = value =>
-  SITE_LOCALE === 'uk'
+const localizedBrandBonusText = value => {
+  const normalized = normalizeText(value);
+  const catalogTranslation = BRAND_BONUS_TRANSLATIONS[SITE_LOCALE]?.[normalized];
+  if (catalogTranslation) return catalogTranslation;
+
+  return SITE_LOCALE === 'uk'
     ? ukrainianBrandBonusText(value)
     : SITE_LOCALE === 'pt'
       ? portugueseBrandBonusText(value)
@@ -1279,7 +1284,8 @@ const localizedBrandBonusText = value =>
         ? frenchBrandBonusText(value)
         : SITE_LOCALE === 'hi'
           ? hindiBrandBonusText(value)
-      : polishBrandBonusText(value);
+          : polishBrandBonusText(value);
+};
 
 const localeText = (english, german, spanish, italian, polish, ukrainian, portuguese, french, hindi) =>
   SITE_LOCALE === 'de'
