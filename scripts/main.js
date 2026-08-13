@@ -13,6 +13,22 @@ let initBrandPageModule = null;
 let initTopCasinosPageModule = null;
 let initBrandLayoutModule = null;
 
+const brandLayoutFallbackTimer = document.body?.dataset.brand
+  ? window.setTimeout(() => {
+      if (!document.body.classList.contains('has-brand-sticky-layout')) {
+        document.body.classList.add('brand-layout-failed');
+      }
+    }, 1500)
+  : null;
+const brandLayoutModuleReady = document.body?.dataset.brand
+  ? import('./pages/brand-layout.js?v=20260813-brand-cls-1').then(module => {
+      initBrandLayoutModule = module.initBrandLayout;
+    }).catch(error => {
+      document.body.classList.add('brand-layout-failed');
+      console.warn('Could not initialize the enhanced brand layout.', error);
+    })
+  : Promise.resolve();
+
 const loadPageModules = async () => {
   const isHomePage = document.body.classList.contains('home-page');
   const isCountryPage = Boolean(document.body.dataset.country);
@@ -41,16 +57,14 @@ const loadPageModules = async () => {
   }
 
   if (isBrandPage) {
-    const [snapshotsModule, gamesModule, pageModule, layoutModule] = await Promise.all([
+    const [snapshotsModule, gamesModule, pageModule] = await Promise.all([
       import('./brand-snapshot-configs.js?v=20260813-french-1'),
       import('./brand-new-games.js?v=20260813-french-1'),
       import('./pages/brand.js?v=20260813-page-modules-1'),
-      import('./pages/brand-layout.js?v=20260813-page-modules-1'),
     ]);
     BRAND_SNAPSHOT_CONFIGS = snapshotsModule.BRAND_SNAPSHOT_CONFIGS || {};
     BRAND_NEW_GAMES = gamesModule.BRAND_NEW_GAMES || {};
     initBrandPageModule = pageModule.initBrandPage;
-    initBrandLayoutModule = layoutModule.initBrandLayout;
   }
 
   if (document.body.dataset.page === 'top-casinos') {
@@ -4015,10 +4029,27 @@ const initAffiliateClickTracking = () => {
 export const initCasinoPage = async () => {
   const pageType = document.body.dataset.page;
   const pageCountry = document.body.dataset.country?.toUpperCase();
+  const isBrandPage = Boolean(document.body.dataset.brand);
   const siteCountryCountEl = document.getElementById('siteCountryCount');
   const siteBrandCountEl = document.getElementById('siteBrandCount');
 
-  await loadPageModules();
+  const pageModulesReady = loadPageModules();
+
+  if (isBrandPage) {
+    await brandLayoutModuleReady;
+    initBrandLayoutModule?.({
+      BRAND_NEW_GAMES: {},
+      normalizeText,
+      normalizeBrandKey,
+      escapeHtml,
+      localeText,
+    });
+    if (document.body.classList.contains('has-brand-sticky-layout') && brandLayoutFallbackTimer) {
+      window.clearTimeout(brandLayoutFallbackTimer);
+    }
+  }
+
+  await Promise.all([pageModulesReady, brandBonusTranslationsReady]);
 
   initFooterThemeSettings();
   initAffiliateClickTracking();
@@ -4742,8 +4773,7 @@ export const initCasinoPage = async () => {
   requestPaymentIconSync();
 };
 
-document.addEventListener('DOMContentLoaded', async () => {
-  await brandBonusTranslationsReady;
+document.addEventListener('DOMContentLoaded', () => {
   initCasinoPage();
 });
 

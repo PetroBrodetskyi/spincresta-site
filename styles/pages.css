@@ -5197,6 +5197,13 @@ html.has-brand-sticky-layout body {
   overflow-y: visible;
 }
 
+/* Prevent the source markup from flashing at its pre-enhancement width while
+   the small brand-layout module builds the final stable grid. */
+body[data-brand]:not(.has-brand-sticky-layout):not(.brand-layout-failed)
+  > :where(.hero, section, main, .all-countries, .footer) {
+  visibility: hidden;
+}
+
 body[data-brand] .brand-new-games-rail {
   display: none;
   min-width: 0;

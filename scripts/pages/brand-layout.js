@@ -94,10 +94,19 @@ export const initBrandLayout = context => {
   };
   
   const applyBrandStickyReviewLayout = () => {
+    const existingLayout = document.querySelector('.brand-sticky-review-layout');
+    if (existingLayout) {
+      if (!existingLayout.querySelector('.brand-new-games-rail')) {
+        const newGamesRail = createBrandNewGamesRail();
+        if (newGamesRail) existingLayout.appendChild(newGamesRail);
+      }
+      return;
+    }
+
     const hero = document.querySelector('body[data-brand] .hero');
     const heroContent = hero?.querySelector(':scope > .hero-content');
     const allCountries = document.querySelector('body[data-brand] .all-countries');
-    if (!hero || !heroContent || !allCountries || document.querySelector('.brand-sticky-review-layout')) {
+    if (!hero || !heroContent || !allCountries) {
       return;
     }
   
