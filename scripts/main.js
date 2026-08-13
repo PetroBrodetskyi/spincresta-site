@@ -2,11 +2,62 @@
 // IMPORTS
 // =====================
 import { BRANDS } from './brands.js?v=20260813-french-1';
-import { BRAND_SNAPSHOT_CONFIGS } from './brand-snapshot-configs.js?v=20260813-french-1';
-import { BRAND_NEW_GAMES } from './brand-new-games.js?v=20260813-french-1';
-import { BRAND_HOMEPAGE_SCREENSHOTS } from './brand-homepage-screenshots.js?v=20260813-french-1';
-import { BRAND_BONUS_TRANSLATIONS } from './brand-bonus-translations.js?v=20260813-qa-1';
 import { COUNTRIES } from './countries.js';
+
+let BRAND_SNAPSHOT_CONFIGS = {};
+let BRAND_NEW_GAMES = {};
+let BRAND_HOMEPAGE_SCREENSHOTS = {};
+let initHomePageModule = null;
+let renderCountryMediaModule = null;
+let initBrandPageModule = null;
+let initTopCasinosPageModule = null;
+let initBrandLayoutModule = null;
+
+const loadPageModules = async () => {
+  const isHomePage = document.body.classList.contains('home-page');
+  const isCountryPage = Boolean(document.body.dataset.country);
+  const isBrandPage = Boolean(document.body.dataset.brand);
+
+  if (isHomePage) {
+    const [screenshotsModule, gamesModule, pageModule] = await Promise.all([
+      import('./brand-homepage-screenshots.js?v=20260813-french-1'),
+      import('./brand-new-games.js?v=20260813-french-1'),
+      import('./pages/home.js?v=20260813-page-modules-1'),
+    ]);
+    BRAND_HOMEPAGE_SCREENSHOTS = screenshotsModule.BRAND_HOMEPAGE_SCREENSHOTS || {};
+    BRAND_NEW_GAMES = gamesModule.BRAND_NEW_GAMES || {};
+    initHomePageModule = pageModule.initHomePage;
+  }
+
+  if (isCountryPage) {
+    const [screenshotsModule, gamesModule, pageModule] = await Promise.all([
+      import('./brand-homepage-screenshots.js?v=20260813-french-1'),
+      import('./brand-new-games.js?v=20260813-french-1'),
+      import('./pages/country-media.js?v=20260813-page-modules-1'),
+    ]);
+    BRAND_HOMEPAGE_SCREENSHOTS = screenshotsModule.BRAND_HOMEPAGE_SCREENSHOTS || {};
+    BRAND_NEW_GAMES = gamesModule.BRAND_NEW_GAMES || {};
+    renderCountryMediaModule = pageModule.renderCountryMedia;
+  }
+
+  if (isBrandPage) {
+    const [snapshotsModule, gamesModule, pageModule, layoutModule] = await Promise.all([
+      import('./brand-snapshot-configs.js?v=20260813-french-1'),
+      import('./brand-new-games.js?v=20260813-french-1'),
+      import('./pages/brand.js?v=20260813-page-modules-1'),
+      import('./pages/brand-layout.js?v=20260813-page-modules-1'),
+    ]);
+    BRAND_SNAPSHOT_CONFIGS = snapshotsModule.BRAND_SNAPSHOT_CONFIGS || {};
+    BRAND_NEW_GAMES = gamesModule.BRAND_NEW_GAMES || {};
+    initBrandPageModule = pageModule.initBrandPage;
+    initBrandLayoutModule = layoutModule.initBrandLayout;
+  }
+
+  if (document.body.dataset.page === 'top-casinos') {
+    const pageModule = await import('./pages/top-casinos.js?v=20260813-page-modules-1');
+    initTopCasinosPageModule = pageModule.initTopCasinosPage;
+  }
+};
 
 // =====================
 // HELPERS
@@ -183,6 +234,31 @@ const normalizePagePath = path => {
 };
 
 const iconPath = slug => `/icons/${slug}-flag-icon.svg`;
+const loadDeferredCountryFlags = container => {
+  if (!container) return;
+
+  container.querySelectorAll('img[data-country-flag-src]').forEach(image => {
+    image.src = image.dataset.countryFlagSrc;
+    image.removeAttribute('data-country-flag-src');
+  });
+};
+const observeDeferredCountryFlags = container => {
+  if (!container) return;
+  if (!('IntersectionObserver' in window)) {
+    loadDeferredCountryFlags(container);
+    return;
+  }
+
+  const observer = new IntersectionObserver(
+    entries => {
+      if (!entries.some(entry => entry.isIntersecting)) return;
+      loadDeferredCountryFlags(container);
+      observer.disconnect();
+    },
+    { rootMargin: '500px 0px' }
+  );
+  observer.observe(container);
+};
 const DOCUMENT_LANGUAGE = document.documentElement.lang?.toLowerCase() || 'en';
 const SITE_LOCALE = DOCUMENT_LANGUAGE.startsWith('de')
   ? 'de'
@@ -201,6 +277,16 @@ const SITE_LOCALE = DOCUMENT_LANGUAGE.startsWith('de')
               : DOCUMENT_LANGUAGE.startsWith('hi')
                 ? 'hi'
       : 'en';
+let brandBonusTranslations = {};
+const brandBonusTranslationsReady = SITE_LOCALE === 'en'
+  ? Promise.resolve()
+  : import(`./brand-bonus-translations/${SITE_LOCALE}.js?v=20260813-optimized-1`)
+      .then(module => {
+        brandBonusTranslations = module.default || {};
+      })
+      .catch(error => {
+        console.warn(`Could not load ${SITE_LOCALE} bonus translations.`, error);
+      });
 const getStoredLanguage = () => {
   try {
     const stored = window.localStorage.getItem(LANGUAGE_STORAGE_KEY);
@@ -974,317 +1060,9 @@ const hindiRuntimeText = english => {
     .replace(/^Play (.*) at (.*)$/, '$2 पर $1 खेलें');
 };
 
-const polishBrandBonusText = value => {
-  if (SITE_LOCALE !== 'pl') return normalizeText(value);
-
-  const normalized = normalizeText(value);
-  const exactTranslations = {
-    'Bet on your favorite sports, enjoy great odds, and spin to win in exciting casino games!': 'Obstawiaj ulubione dyscypliny, korzystaj z atrakcyjnych kursów i graj w emocjonujące gry kasynowe.',
-    'Casino, betting, quest and tournament bonuses vary by country': 'Bonusy kasynowe, bukmacherskie, za zadania i turnieje zależą od kraju.',
-    'Cricket exchange, slots, live casino and local payment routes': 'Giełda zakładów na krykieta, automaty, kasyno live i lokalne metody płatności.',
-    'Fast payouts for players': 'Szybkie wypłaty dla graczy.',
-    'Fortunica Casino features slots, fast payouts, and attractive bonuses': 'Fortunica Casino oferuje automaty, szybkie wypłaty i atrakcyjne bonusy.',
-    'Bonus for sports. Casino + Win Games': 'Bonus sportowy. Kasyno i gry z nagrodami.',
-  };
-
-  if (exactTranslations[normalized]) return exactTranslations[normalized];
-
-  return normalized
-    .replace(/Live Casino Welcome Package/gi, 'Pakiet powitalny kasyna live')
-    .replace(/Sports welcome package/gi, 'Sportowy pakiet powitalny')
-    .replace(/Casino Welcome Package/gi, 'Pakiet powitalny kasyna')
-    .replace(/Casino Welcome Bonus/gi, 'Bonus powitalny kasyna')
-    .replace(/Casino Welcome Pack/gi, 'Pakiet powitalny kasyna')
-    .replace(/Welcome Casino Bonus/gi, 'Bonus powitalny kasyna')
-    .replace(/Casino welcome offer/gi, 'Oferta powitalna kasyna')
-    .replace(/Regional Welcome Bonus/gi, 'Regionalny bonus powitalny')
-    .replace(/Regional welcome pack/gi, 'Regionalny pakiet powitalny')
-    .replace(/Total Welcome Pack/gi, 'Łączny pakiet powitalny')
-    .replace(/Free Welcome Bonus/gi, 'Darmowy bonus powitalny')
-    .replace(/Welcome Bonus Pack/gi, 'Pakiet powitalny')
-    .replace(/Welcome Package/gi, 'Pakiet powitalny')
-    .replace(/Welcome Pack/gi, 'Pakiet powitalny')
-    .replace(/Welcome Bonus/gi, 'Bonus powitalny')
-    .replace(/Welcome Offer/gi, 'Oferta powitalna')
-    .replace(/Welcome Match/gi, 'Bonus powitalny od depozytu')
-    .replace(/Deposit Bonus/gi, 'Bonus od depozytu')
-    .replace(/Match Bonus/gi, 'Bonus od depozytu')
-    .replace(/No Deposit Bonus/gi, 'Bonus bez depozytu')
-    .replace(/No-Wager/gi, 'bez wymogu obrotu')
-    .replace(/1st deposit bonus/gi, 'Bonus od pierwszego depozytu')
-    .replace(/on Your First Crypto Deposit/gi, 'przy pierwszym depozycie kryptowalutowym')
-    .replace(/on Your First Deposit/gi, 'przy pierwszym depozycie')
-    .replace(/on the First Deposits/gi, 'przy pierwszych depozytach')
-    .replace(/on your first 4 deposits/gi, 'przy pierwszych 4 depozytach')
-    .replace(/across (?:the )?first 5 deposits/gi, 'przy pierwszych 5 depozytach')
-    .replace(/for Your First Deposit/gi, 'przy pierwszym depozycie')
-    .replace(/for your first deposit/gi, 'przy pierwszym depozycie')
-    .replace(/First Deposit/gi, 'Pierwszy depozyt')
-    .replace(/for new players:/gi, 'Dla nowych graczy:')
-    .replace(/Sign up and get/gi, 'Zarejestruj się i odbierz')
-    .replace(/Join Now To Get Your/gi, 'Dołącz teraz i odbierz')
-    .replace(/Grab Your/gi, 'Odbierz')
-    .replace(/Claim your/gi, 'Odbierz')
-    .replace(/Claim a/gi, 'Odbierz')
-    .replace(/\bClaim\b/gi, 'Odbierz')
-    .replace(/Start Fast With/gi, 'Zacznij szybko z')
-    .replace(/Start Strong with a/gi, 'Zacznij z bonusem')
-    .replace(/for a Great Start/gi, 'na dobry start')
-    .replace(/New in Uptown\?/gi, 'Nowy w Uptown?')
-    .replace(/Easiest Bonus/gi, 'Prosty bonus')
-    .replace(/Fast Track to Real Balance/gi, 'Szybka droga do salda gotówkowego')
-    .replace(/Fast Payouts/gi, 'szybkie wypłaty')
-    .replace(/Real Wins/gi, 'prawdziwe wygrane')
-    .replace(/Play and win, be a little bit crazy!/gi, 'Graj, wygrywaj i baw się!')
-    .replace(/Play games and get/gi, 'Graj i odbierz')
-    .replace(/Enjoy/gi, 'Odbierz')
-    .replace(/Nothing but Casino/gi, 'Tylko kasyno')
-    .replace(/\bCasino\b/gi, 'Kasyno')
-    .replace(/\bSports\b/gi, 'Zakłady sportowe')
-    .replace(/Premium Pack/gi, 'Pakiet premium')
-    .replace(/Casino Bonus/gi, 'Bonus kasynowy')
-    .replace(/Sports Bonus/gi, 'Bonus sportowy')
-    .replace(/Free Bets?/gi, match => /Bets/i.test(match) ? 'darmowych zakładów' : 'darmowy zakład')
-    .replace(/Free Spins?/gi, 'darmowych spinów')
-    .replace(/\bFS\b/g, 'darmowych spinów')
-    .replace(/Free Sweep Coins/gi, 'darmowych monet Sweep')
-    .replace(/Gold Coins/gi, 'złotych monet')
-    .replace(/free chip/gi, 'darmowy żeton')
-    .replace(/\bFree\b/gi, 'darmowy')
-    .replace(/Extra/gi, 'dodatkowe')
-    .replace(/in Coins/gi, 'w monetach')
-    .replace(/in 3 Bonuses/gi, 'w 3 bonusach')
-    .replace(/\bBoost\b/gi, 'bonus')
-    .replace(/\bplus\b/gi, '+')
-    .replace(/\bno wager\b/gi, 'bez wymogu obrotu')
-    .replace(/\bup to\b/gi, 'do')
-    .replace(/\bUp To\b/gi, 'do')
-    .replace(/\bGet Bonus\b/gi, 'Odbierz bonus')
-    .replace(/\bGet\b/gi, 'Odbierz')
-    .replace(/\bwith Crypto\b/gi, 'przy płatności kryptowalutą')
-    .replace(/when using Crypto/gi, 'przy płatności kryptowalutą')
-    .replace(/live casino cashback/gi, 'cashbacku w kasynie live')
-    .replace(/cashback every week/gi, 'cashbacku co tydzień')
-    .replace(/local caps vary/gi, 'lokalne limity mogą się różnić')
-    .replace(/bonuses excluded in SE\/FI/gi, 'bonusy niedostępne w SE/FI')
-    .replace(/play live & get more credits!/gi, 'graj live i odbieraj więcej środków!')
-    .replace(/\bper week\b/gi, 'tygodniowo')
-    .replace(/\bweekly\b/gi, 'tygodniowo')
-    .replace(/\bdaily\b/gi, 'dziennie')
-    .replace(/\s+/g, ' ')
-    .trim();
-};
-const ukrainianBrandBonusText = value => {
-  if (SITE_LOCALE !== 'uk') return normalizeText(value);
-
-  const normalized = normalizeText(value);
-  const exactTranslations = {
-    'Bet on your favorite sports, enjoy great odds, and spin to win in exciting casino games!': 'Робіть ставки на улюблені види спорту, користуйтеся вигідними коефіцієнтами та грайте в захопливі ігри казино.',
-    'Casino, betting, quest and tournament bonuses vary by country': 'Бонуси казино, ставок, квестів і турнірів залежать від країни.',
-    'Cricket exchange, slots, live casino and local payment routes': 'Біржа ставок на крикет, слоти, live-казино та місцеві способи оплати.',
-    'Fast payouts for players': 'Швидкі виплати для гравців.',
-    'Fortunica Casino features slots, fast payouts, and attractive bonuses': 'Fortunica Casino пропонує слоти, швидкі виплати та привабливі бонуси.',
-    'Bonus for sports. Casino + Win Games': 'Спортивний бонус. Казино та ігри з призами.',
-  };
-  if (exactTranslations[normalized]) return exactTranslations[normalized];
-
-  return normalized
-    .replace(/Live Casino Welcome Package/gi, 'Вітальний пакет live-казино')
-    .replace(/Sports welcome package/gi, 'Вітальний спортивний пакет')
-    .replace(/Casino Welcome Package/gi, 'Вітальний пакет казино')
-    .replace(/Casino Welcome Bonus/gi, 'Вітальний бонус казино')
-    .replace(/Casino Welcome Pack/gi, 'Вітальний пакет казино')
-    .replace(/Welcome Casino Bonus/gi, 'Вітальний бонус казино')
-    .replace(/Casino welcome offer/gi, 'Вітальна пропозиція казино')
-    .replace(/Regional Welcome Bonus/gi, 'Регіональний вітальний бонус')
-    .replace(/Regional welcome pack/gi, 'Регіональний вітальний пакет')
-    .replace(/Total Welcome Pack/gi, 'Загальний вітальний пакет')
-    .replace(/Free Welcome Bonus/gi, 'Безкоштовний вітальний бонус')
-    .replace(/Welcome Bonus Pack/gi, 'Вітальний пакет')
-    .replace(/Welcome Package/gi, 'Вітальний пакет')
-    .replace(/Welcome Pack/gi, 'Вітальний пакет')
-    .replace(/Welcome Bonus/gi, 'Вітальний бонус')
-    .replace(/Welcome Offer/gi, 'Вітальна пропозиція')
-    .replace(/Welcome Match/gi, 'Вітальний бонус на депозит')
-    .replace(/Deposit Bonus/gi, 'Бонус на депозит')
-    .replace(/Match Bonus/gi, 'Бонус на депозит')
-    .replace(/No Deposit Bonus/gi, 'Бездепозитний бонус')
-    .replace(/No-Wager/gi, 'без відіграшу')
-    .replace(/1st deposit bonus/gi, 'Бонус на перший депозит')
-    .replace(/on Your First Crypto Deposit/gi, 'на перший криптовалютний депозит')
-    .replace(/on Your First Deposit/gi, 'на перший депозит')
-    .replace(/on the First Deposits/gi, 'на перші депозити')
-    .replace(/on your first 4 deposits/gi, 'на перші 4 депозити')
-    .replace(/across (?:the )?first 5 deposits/gi, 'на перші 5 депозитів')
-    .replace(/for Your First Deposit/gi, 'на перший депозит')
-    .replace(/for your first deposit/gi, 'на перший депозит')
-    .replace(/First Deposit/gi, 'Перший депозит')
-    .replace(/for new players:/gi, 'Для нових гравців:')
-    .replace(/Sign up and get/gi, 'Зареєструйтеся та отримайте')
-    .replace(/Join Now To Get Your/gi, 'Приєднуйтеся та отримайте')
-    .replace(/Grab Your|Claim your|Claim a|\bClaim\b/gi, 'Отримайте')
-    .replace(/Start Fast With/gi, 'Швидко почніть із')
-    .replace(/Start Strong with a/gi, 'Почніть із бонусу')
-    .replace(/for a Great Start/gi, 'для вдалого старту')
-    .replace(/Easiest Bonus/gi, 'Простий бонус')
-    .replace(/Fast Track to Real Balance/gi, 'Швидкий перехід до реального балансу')
-    .replace(/Fast Payouts/gi, 'швидкі виплати')
-    .replace(/Real Wins/gi, 'реальні виграші')
-    .replace(/Play games and get/gi, 'Грайте та отримуйте')
-    .replace(/Nothing but Casino/gi, 'Лише казино')
-    .replace(/Premium Pack/gi, 'Преміумпакет')
-    .replace(/Casino Bonus/gi, 'Бонус казино')
-    .replace(/Sports Bonus/gi, 'Спортивний бонус')
-    .replace(/Free Bets?/gi, 'безкоштовних ставок')
-    .replace(/Free Spins?/gi, 'безкоштовних обертань')
-    .replace(/\bFS\b/g, 'безкоштовних обертань')
-    .replace(/Free Sweep Coins/gi, 'безкоштовних монет Sweep')
-    .replace(/Gold Coins/gi, 'золотих монет')
-    .replace(/free chip/gi, 'безкоштовний жетон')
-    .replace(/\bup to\b/gi, 'до')
-    .replace(/\bGet Bonus\b/gi, 'Отримайте бонус')
-    .replace(/\bGet\b/gi, 'Отримайте')
-    .replace(/\bwith Crypto\b|when using Crypto/gi, 'за оплату криптовалютою')
-    .replace(/live casino cashback/gi, 'кешбеку в live-казино')
-    .replace(/cashback every week/gi, 'щотижневого кешбеку')
-    .replace(/local caps vary/gi, 'місцеві ліміти можуть відрізнятися')
-    .replace(/bonuses excluded in SE\/FI/gi, 'бонуси недоступні у SE/FI')
-    .replace(/\bper week\b|\bweekly\b/gi, 'щотижня')
-    .replace(/\bdaily\b/gi, 'щодня')
-    .replace(/\s+/g, ' ')
-    .trim();
-};
-const portugueseBrandBonusText = value => {
-  if (SITE_LOCALE !== 'pt') return normalizeText(value);
-  return normalizeText(value)
-    .replace(/Live Casino Welcome Package/gi, 'Pacote de boas-vindas do casino ao vivo')
-    .replace(/Sports welcome package/gi, 'Pacote de boas-vindas para apostas desportivas')
-    .replace(/Casino Welcome Package|Casino Welcome Pack|Welcome Package|Welcome Pack/gi, 'Pacote de boas-vindas do casino')
-    .replace(/Casino Welcome Bonus|Welcome Casino Bonus|Welcome Bonus/gi, 'Bónus de boas-vindas do casino')
-    .replace(/Welcome Offer/gi, 'Oferta de boas-vindas')
-    .replace(/Deposit Bonus|Match Bonus/gi, 'Bónus de depósito')
-    .replace(/No Deposit Bonus/gi, 'Bónus sem depósito')
-    .replace(/First Deposit/gi, 'Primeiro depósito')
-    .replace(/Free Spins?/gi, 'jogadas grátis')
-    .replace(/Free Bets?/gi, 'apostas grátis')
-    .replace(/Fast Payouts/gi, 'levantamentos rápidos')
-    .replace(/Sports Bonus/gi, 'Bónus desportivo')
-    .replace(/Casino Bonus/gi, 'Bónus de casino')
-    .replace(/\bup to\b/gi, 'até')
-    .replace(/\bper week\b|\bweekly\b/gi, 'por semana')
-    .replace(/\bdaily\b/gi, 'diariamente')
-    .replace(/\s+/g, ' ')
-    .trim();
-};
-const frenchBrandBonusText = value => {
-  if (SITE_LOCALE !== 'fr') return normalizeText(value);
-  const normalized = normalizeText(value);
-  const exactTranslations = {
-    'Bet on your favorite sports, enjoy great odds, and spin to win in exciting casino games!': 'Pariez sur vos sports favoris, profitez de cotes attractives et découvrez les jeux de casino.',
-    'Casino, betting, quest and tournament bonuses vary by country': 'Les bonus de casino, de paris, de quêtes et de tournois varient selon le pays.',
-    'Cricket exchange, slots, live casino and local payment routes': 'Bourse de paris sur le cricket, machines à sous, casino en direct et moyens de paiement locaux.',
-    'Fast payouts for players': 'Retraits rapides pour les joueurs.',
-    'Fortunica Casino features slots, fast payouts, and attractive bonuses': 'Fortunica propose des machines à sous, des retraits rapides et des bonus attractifs.',
-    'Bonus for sports.  Casino + Win Games': 'Bonus de paris sportifs, casino et jeux avec gains.',
-  };
-  if (exactTranslations[normalized]) return exactTranslations[normalized];
-
-  return normalized
-    .replace(/Live Casino Welcome Package/gi, 'Offre de bienvenue du casino en direct')
-    .replace(/Sports welcome package/gi, 'Offre de bienvenue pour les paris sportifs')
-    .replace(/Casino Welcome Package|Casino Welcome Pack|Welcome Package|Welcome Pack/gi, 'Offre de bienvenue du casino')
-    .replace(/Casino Welcome Bonus|Welcome Casino Bonus|Welcome Bonus/gi, 'Bonus de bienvenue du casino')
-    .replace(/Welcome Offer/gi, 'Offre de bienvenue')
-    .replace(/Deposit Bonus|Match Bonus/gi, 'Bonus de dépôt')
-    .replace(/No Deposit Bonus/gi, 'Bonus sans dépôt')
-    .replace(/First Deposit/gi, 'Premier dépôt')
-    .replace(/Free Spins?/gi, 'tours gratuits')
-    .replace(/\bFS\b/g, 'tours gratuits')
-    .replace(/Free Bets?/gi, 'paris gratuits')
-    .replace(/Fast Payouts/gi, 'retraits rapides')
-    .replace(/Sports Bonus/gi, 'Bonus de paris sportifs')
-    .replace(/Casino Bonus/gi, 'Bonus de casino')
-    .replace(/Sign up and get/gi, 'Inscrivez-vous et obtenez')
-    .replace(/Join Now To Get Your/gi, 'Inscrivez-vous pour obtenir votre')
-    .replace(/Grab Your|Claim your|Claim a|\bClaim\b/gi, 'Obtenez')
-    .replace(/Start Strong with a/gi, 'Commencez avec')
-    .replace(/Start Fast With/gi, 'Commencez avec')
-    .replace(/for a Great Start/gi, 'pour bien commencer')
-    .replace(/Fast Payouts/gi, 'retraits rapides')
-    .replace(/Real Wins/gi, 'gains réels')
-    .replace(/Nothing but Casino/gi, 'Tout pour le casino')
-    .replace(/Welcome Match/gi, 'Bonus de bienvenue sur dépôt')
-    .replace(/Premium Pack/gi, 'Offre premium')
-    .replace(/Total Welcome Pack/gi, 'Offre de bienvenue complète')
-    .replace(/Regional welcome pack/gi, 'Offre de bienvenue régionale')
-    .replace(/Regional Welcome Bonus/gi, 'Bonus de bienvenue régional')
-    .replace(/No-Wager/gi, 'sans condition de mise')
-    .replace(/\bGet Bonus\b/gi, 'Obtenez le bonus')
-    .replace(/\bGet\b/gi, 'Obtenez')
-    .replace(/live casino cashback/gi, 'de cashback au casino en direct')
-    .replace(/cashback every week/gi, 'de cashback chaque semaine')
-    .replace(/local caps vary/gi, 'les plafonds varient selon le pays')
-    .replace(/bonuses excluded in SE\/FI/gi, 'bonus indisponibles en SE/FI')
-    .replace(/\bup to\b/gi, 'jusqu’à')
-    .replace(/\bper week\b|\bweekly\b/gi, 'par semaine')
-    .replace(/\bdaily\b/gi, 'chaque jour')
-    .replace(/\s+/g, ' ')
-    .trim();
-};
-const hindiBrandBonusText = value => {
-  if (SITE_LOCALE !== 'hi') return normalizeText(value);
-  const normalized = normalizeText(value);
-  const exactTranslations = {
-    'Bet on your favorite sports, enjoy great odds, and spin to win in exciting casino games!': 'अपने पसंदीदा खेलों पर बेट लगाएं, अच्छे ऑड्स पाएं और रोमांचक कैसीनो गेम खेलें।',
-    'Casino, betting, quest and tournament bonuses vary by country': 'कैसीनो, बेटिंग, क्वेस्ट और टूर्नामेंट बोनस देश के अनुसार बदलते हैं।',
-    'Cricket exchange, slots, live casino and local payment routes': 'क्रिकेट एक्सचेंज, स्लॉट, लाइव कैसीनो और स्थानीय भुगतान विधियां।',
-    'Fast payouts for players': 'खिलाड़ियों के लिए तेज़ निकासी।',
-    'Fortunica Casino features slots, fast payouts, and attractive bonuses': 'Fortunica में स्लॉट, तेज़ निकासी और आकर्षक बोनस उपलब्ध हैं।',
-    'Bonus for sports. Casino + Win Games': 'स्पोर्ट्स बोनस, कैसीनो और पुरस्कार वाले गेम।',
-    'Bonus for sports.  Casino + Win Games': 'स्पोर्ट्स बोनस, कैसीनो और पुरस्कार वाले गेम।',
-    'Easiest Bonus 700% - Fast Track to Real Balance!': '700% तक का बोनस — शर्तें पूरी होने पर राशि असली बैलेंस में जुड़ती है।',
-  };
-  if (exactTranslations[normalized]) return exactTranslations[normalized];
-  return normalized
-    .replace(/Live Casino Welcome Package/gi, 'लाइव कैसीनो स्वागत पैकेज')
-    .replace(/Sports welcome package/gi, 'स्पोर्ट्स बेटिंग स्वागत पैकेज')
-    .replace(/Casino Welcome Package|Casino Welcome Pack|Welcome Package|Welcome Pack/gi, 'कैसीनो स्वागत पैकेज')
-    .replace(/Casino Welcome Bonus|Welcome Casino Bonus|Welcome Bonus/gi, 'कैसीनो स्वागत बोनस')
-    .replace(/Welcome Offer/gi, 'स्वागत ऑफर')
-    .replace(/Deposit Bonus|Match Bonus/gi, 'डिपॉजिट बोनस')
-    .replace(/No Deposit Bonus/gi, 'बिना डिपॉजिट का बोनस')
-    .replace(/on Your First Crypto Deposit/gi, 'आपके पहले क्रिप्टो डिपॉजिट पर')
-    .replace(/on Your First Deposit/gi, 'आपके पहले डिपॉजिट पर')
-    .replace(/for Your First Deposit/gi, 'आपके पहले डिपॉजिट के लिए')
-    .replace(/First Deposit/gi, 'पहला डिपॉजिट')
-    .replace(/Free Spins?/gi, 'फ्री स्पिन')
-    .replace(/\bFS\b/g, 'फ्री स्पिन')
-    .replace(/Free Bets?/gi, 'फ्री बेट')
-    .replace(/Fast Payouts/gi, 'तेज़ निकासी')
-    .replace(/Sports Bonus/gi, 'स्पोर्ट्स बोनस')
-    .replace(/Casino Bonus/gi, 'कैसीनो बोनस')
-    .replace(/Sign up and get|Join Now To Get Your|Grab Your|Claim your|Claim a|\bClaim\b/gi, 'पाएं')
-    .replace(/No-Wager/gi, 'बिना टर्नओवर शर्त के')
-    .replace(/\bup to\b/gi, 'तक')
-    .replace(/\bper week\b|\bweekly\b/gi, 'हर सप्ताह')
-    .replace(/\bdaily\b/gi, 'प्रतिदिन')
-    .replace(/\s+/g, ' ')
-    .trim();
-};
 const localizedBrandBonusText = value => {
   const normalized = normalizeText(value);
-  const catalogTranslation = BRAND_BONUS_TRANSLATIONS[SITE_LOCALE]?.[normalized];
-  if (catalogTranslation) return catalogTranslation;
-
-  return SITE_LOCALE === 'uk'
-    ? ukrainianBrandBonusText(value)
-    : SITE_LOCALE === 'pt'
-      ? portugueseBrandBonusText(value)
-      : SITE_LOCALE === 'fr'
-        ? frenchBrandBonusText(value)
-        : SITE_LOCALE === 'hi'
-          ? hindiBrandBonusText(value)
-          : polishBrandBonusText(value);
+  return brandBonusTranslations[normalized] || normalized;
 };
 
 const localeText = (english, german, spanish, italian, polish, ukrainian, portuguese, french, hindi) =>
@@ -2374,6 +2152,12 @@ const normalizeBrandKey = value =>
     .replace(/&/g, 'and')
     .replace(/[^a-z0-9]+/g, '');
 
+const getBrandDetailSlug = brand =>
+  String(brand?.urlDetail || '')
+    .replace(/^\/?brands\//i, '')
+    .replace(/\.html$/i, '')
+    .replace(/^\/+|\/+$/g, '');
+
 const getBrandDetailPath = brand => normalizePagePath(brand?.urlDetail || '');
 
 const findBrandByPageKey = brandKey => {
@@ -2924,538 +2708,6 @@ const createCasinoCard = ({
   });
 
   return article;
-};
-
-const HOME_RECOMMENDATION_SLUGS = [
-  'fraga-tr',
-  '55bet',
-  'zarbet',
-  'lizaro',
-  'spinboss',
-  'dragonia',
-  'onluck',
-  'yepcasino',
-  'sunpalace',
-  'leon-casino',
-  'stonevegas',
-  'immerion',
-  'lasvegasusa',
-  'trino',
-  'gamblezen',
-  '10bet',
-  'pinco',
-  'ybets',
-];
-
-const HOME_GEO_BY_LOCALE = Object.freeze({
-  de: 'DE',
-  es: 'ES',
-  it: 'IT',
-  pl: 'PL',
-  pt: 'PT',
-  fr: 'FR',
-  hi: 'IN',
-});
-
-const getHomeGeoCode = () => HOME_GEO_BY_LOCALE[SITE_LOCALE] || '';
-
-const getBrandDetailSlug = brand =>
-  String(brand?.urlDetail || '')
-    .replace(/^\/?brands\//i, '')
-    .replace(/\.html$/i, '')
-    .replace(/^\/+|\/+$/g, '');
-
-const getHomeGeoBrands = countryCode => {
-  if (!countryCode) return [];
-
-  return BRANDS.map((brand, index) => ({ brand, index, slug: getBrandDetailSlug(brand) }))
-    .filter(({ brand, slug }) =>
-      Boolean(
-        slug &&
-        brand.hasDetailPage &&
-        brand.urlDetail &&
-        brand.image &&
-        !brand.notRecommended &&
-        brand.countries?.some(code => code.toUpperCase() === countryCode)
-      )
-    );
-};
-
-const selectUniqueHomeBrands = (candidates, limit) => {
-  const selected = [];
-  const slugs = new Set();
-
-  candidates.forEach(candidate => {
-    if (selected.length >= limit || slugs.has(candidate.slug)) return;
-    slugs.add(candidate.slug);
-    selected.push(candidate);
-  });
-
-  return selected;
-};
-
-const getHomeRecommendationCandidates = countryCode => {
-  const candidates = getHomeGeoBrands(countryCode);
-  const priority = new Map(HOME_RECOMMENDATION_SLUGS.map((slug, index) => [slug, index]));
-
-  return candidates.sort((a, b) => {
-    const score = candidate =>
-      (candidate.brand.top?.some(code => code.toUpperCase() === countryCode) ? 2000 : 0) +
-      (priority.has(candidate.slug) ? 1000 - priority.get(candidate.slug) : 0) +
-      (candidate.brand.isTopRated ? 200 : 0) +
-      (candidate.brand.isExclusive ? 60 : 0) +
-      (candidate.brand.isNew ? 30 : 0);
-    return score(b) - score(a) || a.index - b.index;
-  });
-};
-
-const renderHomeRecommendationCards = () => {
-  const grid = document.querySelector('.home-recommendation-grid');
-  if (!grid) return;
-
-  const homeGeo = getHomeGeoCode();
-  const fragment = document.createDocumentFragment();
-
-  if (homeGeo) {
-    selectUniqueHomeBrands(getHomeRecommendationCandidates(homeGeo), 18).forEach(({ brand }) => {
-      fragment.appendChild(createCasinoCard(brand));
-    });
-  } else {
-    const brandBySlug = new Map(
-      BRANDS.filter(brand => brand.hasDetailPage && brand.urlDetail).map(brand => [getBrandDetailSlug(brand), brand])
-    );
-    HOME_RECOMMENDATION_SLUGS.forEach(slug => {
-      const brand = brandBySlug.get(slug);
-      if (brand) fragment.appendChild(createCasinoCard(brand));
-    });
-  }
-
-  grid.replaceChildren(fragment);
-  applyBrandLogoBackgrounds();
-  requestPaymentIconSync();
-};
-
-const HOME_NEW_REVIEW_SLUGS = [
-  'onlywin',
-  'robocat',
-  'allwin',
-  'letslucky',
-  'zizobet',
-  'winairlines',
-  'spininio',
-  'jeetcity',
-  'goldenstar',
-  'luckyhunter',
-  'moonwin',
-  'mrpunter',
-  'wildsino',
-  'hollywin',
-  'westace',
-  'spinrise',
-  'winhero',
-  'casinoinfinity',
-  'dazard',
-  'billybillion',
-  'spinko',
-  'felicebet',
-  'grandwin',
-  'viperwin',
-];
-
-const renderHomeNewReviews = () => {
-  const grid = document.querySelector('.home-new-reviews-grid');
-  if (!grid) return;
-
-  const homeGeo = getHomeGeoCode();
-  const brandBySlug = new Map(
-    BRANDS.filter(brand => brand.hasDetailPage && brand.urlDetail && brand.image && !brand.notRecommended).map(
-      brand => [getBrandDetailSlug(brand), brand]
-    )
-  );
-  const fragment = document.createDocumentFragment();
-
-  const reviewCandidates = homeGeo
-    ? (() => {
-        const eligible = getHomeGeoBrands(homeGeo);
-        const bySlug = new Map(eligible.map(candidate => [candidate.slug, candidate]));
-        const preferred = HOME_NEW_REVIEW_SLUGS.map(slug => bySlug.get(slug)).filter(Boolean);
-        const recentRemainder = [...eligible].sort((a, b) => b.index - a.index);
-        return selectUniqueHomeBrands([...preferred, ...recentRemainder], 24).map(candidate => candidate.brand);
-      })()
-    : HOME_NEW_REVIEW_SLUGS.map(slug => brandBySlug.get(slug)).filter(Boolean);
-
-  reviewCandidates.forEach(brand => {
-    if (!brand) return;
-
-    const name = normalizeText(brand.name);
-    const link = document.createElement('a');
-    const logo = document.createElement('span');
-    const image = document.createElement('img');
-    const title = document.createElement('strong');
-
-    link.className = 'home-new-review-card';
-    link.href = brandPagePath(brand.urlDetail);
-    link.setAttribute(
-      'aria-label',
-      localeText(
-        `Read the ${name} review`,
-        `${name} Test lesen`,
-        `Leer la reseña de ${name}`,
-        `Leggi la recensione di ${name}`,
-        `Przeczytaj recenzję ${name}`,
-        `Прочитати огляд ${name}`,
-        null,
-        null,
-        `${name} की समीक्षा पढ़ें`
-      )
-    );
-    logo.className = 'home-new-review-logo';
-    setBrandBackground(logo, brand.bgColor);
-    image.src = normalizeAssetPath(brand.image);
-    image.alt = `${name} logo`;
-    image.loading = 'lazy';
-    image.decoding = 'async';
-    title.textContent = name;
-
-    logo.appendChild(image);
-    link.append(logo, title);
-    fragment.appendChild(link);
-  });
-
-  grid.replaceChildren(fragment);
-};
-
-const renderLocalizedHomeCasinoGallery = () => {
-  const homeGeo = getHomeGeoCode();
-  const grid = document.querySelector('.home-casino-gallery-grid');
-  if (!homeGeo || !grid) return;
-
-  const candidates = getHomeRecommendationCandidates(homeGeo).filter(candidate =>
-    Boolean(BRAND_HOMEPAGE_SCREENSHOTS[candidate.slug])
-  );
-  const fragment = document.createDocumentFragment();
-
-  selectUniqueHomeBrands(candidates, 9).forEach(({ brand, slug }) => {
-    const name = normalizeText(brand.name);
-    const link = document.createElement('a');
-    const image = document.createElement('img');
-    const copy = document.createElement('span');
-    const title = document.createElement('strong');
-    const detail = document.createElement('small');
-
-    link.className = 'home-casino-shot';
-    link.href = brandPagePath(brand);
-    image.src = BRAND_HOMEPAGE_SCREENSHOTS[slug];
-    image.alt = localeText(
-      `${name} casino homepage`,
-      `${name} Casino-Startseite`,
-      `Página de inicio del casino ${name}`,
-      `Home page del casinò ${name}`,
-      `Strona główna kasyna ${name}`,
-      `Головна сторінка казино ${name}`,
-      null,
-      null,
-      `${name} कैसीनो होमपेज`
-    );
-    image.width = 3024;
-    image.height = 1574;
-    image.loading = 'lazy';
-    image.decoding = 'async';
-    title.textContent = name;
-    detail.textContent = localeText(
-      'Casino review and current details',
-      'Casino-Test und aktuelle Details',
-      'Reseña y datos actuales',
-      'Recensione e dettagli aggiornati',
-      'Recenzja i aktualne informacje',
-      'Огляд та актуальна інформація',
-      null,
-      null,
-      'समीक्षा और नवीनतम जानकारी'
-    );
-
-    copy.append(title, detail);
-    link.append(image, copy);
-    fragment.appendChild(link);
-  });
-
-  grid.replaceChildren(fragment);
-};
-
-const renderLocalizedHomeGames = () => {
-  const homeGeo = getHomeGeoCode();
-  const grid = document.querySelector('.home-games-grid');
-  if (!homeGeo || !grid) return;
-
-  const candidates = getHomeRecommendationCandidates(homeGeo).filter(candidate =>
-    Array.isArray(BRAND_NEW_GAMES[candidate.slug]) && BRAND_NEW_GAMES[candidate.slug].length
-  );
-  const selected = [];
-  const brandSlugs = new Set();
-  const gameNames = new Set();
-
-  candidates.forEach(candidate => {
-    if (selected.length >= 18 || brandSlugs.has(candidate.slug)) return;
-    const games = BRAND_NEW_GAMES[candidate.slug] || [];
-    const game = games.find(item => {
-      const key = normalizeText(item?.name).trim().toLocaleLowerCase();
-      return item?.image && key && !gameNames.has(key);
-    });
-    if (!game) return;
-    brandSlugs.add(candidate.slug);
-    gameNames.add(normalizeText(game.name).trim().toLocaleLowerCase());
-    selected.push({ brand: candidate.brand, game });
-  });
-
-  const fragment = document.createDocumentFragment();
-  selected.forEach(({ brand, game }) => {
-    const brandName = normalizeText(brand.name);
-    const gameName = normalizeText(game.name);
-    const link = document.createElement('a');
-    const image = document.createElement('img');
-    const copy = document.createElement('span');
-    const title = document.createElement('strong');
-    const detail = document.createElement('small');
-
-    link.className = 'home-game-card';
-    link.href = brandPagePath(brand);
-    image.src = game.image;
-    image.alt = localeText(
-      `${gameName} game artwork`,
-      `${gameName} Spielgrafik`,
-      `Imagen del juego ${gameName}`,
-      `Immagine del gioco ${gameName}`,
-      `Grafika gry ${gameName}`,
-      `Зображення гри ${gameName}`,
-      null,
-      null,
-      `${gameName} गेम का चित्र`
-    );
-    image.loading = 'lazy';
-    image.decoding = 'async';
-    title.textContent = gameName;
-    detail.textContent = `${localeText('at', 'bei', 'en', 'su', 'w', 'у', 'no', 'chez', 'पर')} ${brandName}`;
-
-    copy.append(title, detail);
-    link.append(image, copy);
-    fragment.appendChild(link);
-  });
-
-  grid.replaceChildren(fragment);
-};
-
-const renderCountryCasinoGallery = pageCountry => {
-  const main = document.querySelector('body[data-country] main');
-  const hero = main?.querySelector(':scope > .hero');
-  const country = COUNTRIES.find(item => item.code.toUpperCase() === pageCountry);
-  if (!main || !hero || !country || main.querySelector('.country-casino-gallery')) return;
-
-  const candidates = BRANDS.map((brand, index) => ({ brand, index }))
-    .filter(({ brand }) => {
-      const slug = getBrandDetailSlug(brand);
-      return (
-        brand.hasDetailPage &&
-        brand.urlDetail &&
-        !brand.notRecommended &&
-        brand.countries?.some(code => code.toUpperCase() === pageCountry) &&
-        Boolean(BRAND_HOMEPAGE_SCREENSHOTS[slug])
-      );
-    })
-    .sort((a, b) => {
-      const score = brand =>
-        (brand.top?.some(code => code.toUpperCase() === pageCountry) ? 100 : 0) +
-        (brand.isTopRated ? 30 : 0) +
-        (brand.isExclusive ? 10 : 0) +
-        (brand.isNew ? 5 : 0);
-      return score(b.brand) - score(a.brand) || a.index - b.index;
-    });
-
-  const selectedBrands = [];
-  const selectedSlugs = new Set();
-  candidates.forEach(({ brand }) => {
-    const slug = getBrandDetailSlug(brand);
-    if (selectedBrands.length >= 6 || selectedSlugs.has(slug)) return;
-    selectedSlugs.add(slug);
-    selectedBrands.push(brand);
-  });
-
-  if (!selectedBrands.length) return;
-
-  const countryName = normalizeText(localizedCountryName(country));
-  const headingId = `country-casino-gallery-${country.slug}`;
-  const section = document.createElement('section');
-  section.className = 'content country-casino-gallery';
-  section.setAttribute('aria-labelledby', headingId);
-  section.innerHTML = `
-    <div class="container">
-      <div class="country-casino-gallery-head">
-        <div>
-          <span class="country-casino-gallery-kicker">${localeText('CASINO LOBBY PREVIEWS', 'EINBLICKE IN CASINO-LOBBYS', 'VISTAS PREVIAS DE LOBBIES')}</span>
-          <h2 id="${headingId}">${localeText(
-            `Inside casinos available in ${countryName}`,
-            `Einblicke in Casinos für ${countryName}`,
-            `Así son los casinos disponibles en ${countryName}`
-          )}</h2>
-        </div>
-        <p>${
-          localeText(
-            `Real homepage captures from brands included in our ${countryName} comparison. Open any preview for the complete review and current details.`,
-            `Echte Startseiten-Aufnahmen von Marken, die in unserem ${countryName}-Vergleich vertreten sind. Öffnen Sie eine Vorschau für den vollständigen Test.`,
-            `Capturas reales de las páginas principales de marcas incluidas en nuestra comparativa de ${countryName}. Abre cualquier vista previa para consultar la reseña completa y los datos actuales.`
-          )
-        }</p>
-      </div>
-      <div class="country-casino-gallery-grid">
-        ${selectedBrands
-          .map(brand => {
-            const slug = getBrandDetailSlug(brand);
-            const name = normalizeText(brand.name);
-            const source = BRAND_HOMEPAGE_SCREENSHOTS[slug].replace(
-              '/image/upload/',
-              '/image/upload/c_fill,g_north,w_900,h_506/'
-            );
-            return `
-              <a class="country-casino-shot" href="${brandPagePath(brand)}">
-                <img src="${source}" alt="${localeText(
-                  `${name} casino homepage for ${countryName}`,
-                  `${name} Casino-Startseite für ${countryName}`,
-                  `Página principal de ${name} para ${countryName}`
-                )}" width="900" height="506" loading="lazy" decoding="async" />
-                <span>
-                  <strong>${name}</strong>
-                  <small>${localeText('Review and current details', 'Test und aktuelle Details', 'Reseña y datos actuales')}</small>
-                </span>
-              </a>
-            `;
-          })
-          .join('')}
-      </div>
-    </div>
-  `;
-
-  hero.insertAdjacentElement('afterend', section);
-};
-
-const renderCountryNewGames = pageCountry => {
-  const main = document.querySelector('body[data-country] main');
-  const country = COUNTRIES.find(item => item.code.toUpperCase() === pageCountry);
-  if (!main || !country || main.querySelector('.country-new-games')) return;
-
-  const countryHash = Array.from(pageCountry).reduce((total, char) => total + char.charCodeAt(0), 0);
-  const candidates = BRANDS.map((brand, index) => ({
-    brand,
-    index,
-    slug: getBrandDetailSlug(brand),
-  }))
-    .filter(({ brand, slug }) =>
-      brand.hasDetailPage &&
-      brand.urlDetail &&
-      !brand.notRecommended &&
-      brand.countries?.some(code => code.toUpperCase() === pageCountry) &&
-      Array.isArray(BRAND_NEW_GAMES[slug]) &&
-      BRAND_NEW_GAMES[slug].length
-    )
-    .sort((a, b) => {
-      const score = item =>
-        (item.brand.top?.some(code => code.toUpperCase() === pageCountry) ? 100 : 0) +
-        (item.brand.isTopRated ? 30 : 0) +
-        (item.brand.isNew ? 12 : 0) +
-        (item.brand.isExclusive ? 5 : 0);
-      return score(b) - score(a) || a.index - b.index;
-    });
-
-  const selectedGames = [];
-  const selectedNames = new Set();
-  const maxCards = 12;
-
-  const addGame = (candidate, gameIndex) => {
-    const games = BRAND_NEW_GAMES[candidate.slug] || [];
-    if (!games.length) return false;
-
-    for (let offset = 0; offset < games.length; offset += 1) {
-      const game = games[(gameIndex + offset) % games.length];
-      const name = normalizeText(game?.name).trim();
-      const nameKey = name.toLocaleLowerCase();
-      if (!name || !game?.image || selectedNames.has(nameKey)) continue;
-
-      selectedNames.add(nameKey);
-      selectedGames.push({ brand: candidate.brand, game });
-      return true;
-    }
-
-    return false;
-  };
-
-  candidates.forEach(candidate => {
-    if (selectedGames.length >= maxCards) return;
-    const games = BRAND_NEW_GAMES[candidate.slug] || [];
-    const startingIndex = games.length ? (countryHash + candidate.index) % games.length : 0;
-    addGame(candidate, startingIndex);
-  });
-
-  if (!selectedGames.length) return;
-
-  const countryName = normalizeText(localizedCountryName(country));
-  const headingId = `country-new-games-${country.slug}`;
-  const section = document.createElement('section');
-  section.className = `content country-new-games${selectedGames.length < 6 ? ' is-sparse' : ''}`;
-  section.setAttribute('aria-labelledby', headingId);
-  section.style.setProperty('--country-game-count', String(Math.min(selectedGames.length, 6)));
-  section.innerHTML = `
-    <div class="container">
-      <div class="country-new-games-head">
-        <div>
-          <span class="country-new-games-kicker">${localeText('FRESH FROM REVIEWED LOBBIES', 'NEU IN GEPRÜFTEN LOBBYS', 'NOVEDADES DE LOBBIES REVISADOS')}</span>
-          <h2 id="${headingId}">${localeText(
-            `New games in ${countryName}`,
-            `Neue Spiele im ${countryName}-Vergleich`,
-            `Juegos nuevos en ${countryName}`
-          )}</h2>
-        </div>
-        <p>${
-          localeText(
-            `Recent releases from casino brands included in our ${countryName} comparison. Each card opens the relevant review; availability can vary by region and account.`,
-            `Aktuelle Neuerscheinungen aus Casino-Marken unseres ${countryName}-Vergleichs. Jede Karte führt zum passenden Test; die Verfügbarkeit kann je nach Region und Konto variieren.`,
-            `Lanzamientos recientes de marcas incluidas en nuestra comparativa de ${countryName}. Cada tarjeta abre la reseña correspondiente; la disponibilidad puede variar según la región y la cuenta.`
-          )
-        }</p>
-      </div>
-      <div class="country-new-games-grid" aria-label="${
-        localeText(`New games for ${countryName}`, `Neue Spiele für ${countryName}`, `Juegos nuevos para ${countryName}`)
-      }">
-        ${selectedGames
-          .map(({ brand, game }) => {
-            const brandName = normalizeText(brand.name);
-            const gameName = normalizeText(game.name);
-            return `
-              <a class="country-new-game-card" href="${brandPagePath(brand)}">
-                <span class="country-new-game-art">
-                  <img
-                    src="${escapeHtml(game.image)}"
-                    alt="${localeText(
-                      `${escapeHtml(gameName)} game artwork at ${escapeHtml(brandName)}`,
-                      `${escapeHtml(gameName)} Spielgrafik bei ${escapeHtml(brandName)}`,
-                      `Imagen del juego ${escapeHtml(gameName)} en ${escapeHtml(brandName)}`
-                    )}"
-                    loading="lazy"
-                    decoding="async"
-                  />
-                </span>
-                <span class="country-new-game-copy">
-                  <strong>${escapeHtml(gameName)}</strong>
-                  <small>${localeText('at', 'bei', 'en')} ${escapeHtml(brandName)}</small>
-                </span>
-              </a>
-            `;
-          })
-          .join('')}
-      </div>
-    </div>
-  `;
-
-  const gallery = main.querySelector('.country-casino-gallery');
-  const hero = main.querySelector(':scope > .hero');
-  (gallery || hero)?.insertAdjacentElement('afterend', section);
 };
 
 const ITEMS_PER_BATCH = 12;
@@ -4428,786 +3680,6 @@ const renderCountryNewReviews = pageCountry => {
     .join('');
 };
 
-const getBrandSnapshotName = () => {
-  const heading = document.querySelector('.hero h1, .hero-content h1, h1');
-  if (!heading) return 'This brand';
-  return normalizeText(heading.textContent).replace(/\s+Review$/i, '').trim() || 'This brand';
-};
-
-const initStickyBrandTitle = () => {
-  const brandKey = document.body.dataset.brand?.toLowerCase();
-  if (!brandKey) return;
-  const brand = findBrandByPageKey(brandKey);
-  const isBlocked = Boolean(brand?.notRecommended);
-  const isUnavailable = Boolean(brand?.temporarilyUnavailable);
-
-  const source = document.querySelector('.brand-sticky-aside') || document.querySelector('.hero');
-  const heading = source?.querySelector('h1');
-  const brandLogo = source?.querySelector('.brand-logo');
-  const heroCta = source?.querySelector('a.cta-brands[href]');
-  const header = document.querySelector('.header');
-  if (!source || !heading || !header) return;
-  if (document.querySelector('.brand-sticky-title')) return;
-
-  const titleText = normalizeText(heading.textContent).trim();
-  if (!titleText) return;
-
-  const casinoHref = heroCta?.getAttribute('href')?.trim() || '';
-  if (!casinoHref && !isBlocked) return;
-
-  const brandLogoSrc = brandLogo?.getAttribute('src') || '';
-  const brandLogoMarkup = brandLogoSrc
-    ? `
-      <span class="brand-sticky-title__brand" aria-hidden="true">
-        <img
-          class="brand-sticky-title__brand-logo"
-          src="${brandLogoSrc}"
-          alt="${titleText} logo"
-        />
-      </span>
-    `
-    : '';
-
-  const stickyTitle = document.createElement(isBlocked ? 'div' : 'a');
-  stickyTitle.className = 'brand-sticky-title';
-  if (isBlocked) {
-    stickyTitle.classList.add('is-not-recommended');
-    stickyTitle.classList.toggle('is-temporarily-unavailable', isUnavailable);
-    stickyTitle.setAttribute('role', 'status');
-    stickyTitle.setAttribute(
-      'aria-label',
-      isUnavailable
-        ? localeText(`${titleText} is currently unavailable`, `${titleText} ist derzeit nicht verfügbar`, `${titleText} no está disponible actualmente`)
-        : localeText(`${titleText} is not recommended`, `${titleText} wird nicht empfohlen`, `${titleText} no está recomendado`)
-    );
-  } else {
-    stickyTitle.href = casinoHref;
-    stickyTitle.target = heroCta?.getAttribute('target') || '_blank';
-    stickyTitle.rel = heroCta?.getAttribute('rel') || 'noopener noreferrer nofollow sponsored';
-    stickyTitle.setAttribute('aria-label', localeText(`Visit ${titleText}`, `${titleText} besuchen`, `Visitar ${titleText}`));
-  }
-  stickyTitle.innerHTML = `
-    <div class="brand-sticky-title__inner">
-      ${brandLogoMarkup}
-      <span class="brand-sticky-title__text">${titleText}</span>
-      <span class="brand-sticky-title__cta${isBlocked ? ' cta-blocked' : ''}">
-        ${isBlocked ? getBlockedCtaMarkup(brand) : uiCopy.visitCasino}
-      </span>
-    </div>
-  `;
-
-  document.body.appendChild(stickyTitle);
-
-  const updateStickyVisibility = () => {
-    const headerHeight = header.offsetHeight || 0;
-    const headingBottom = heading.getBoundingClientRect().bottom;
-    const shouldShow = headingBottom <= headerHeight + 16;
-    stickyTitle.classList.toggle('is-visible', shouldShow);
-  };
-
-  updateStickyVisibility();
-
-  window.addEventListener('scroll', updateStickyVisibility, { passive: true });
-  window.addEventListener('resize', updateStickyVisibility);
-};
-
-const normalizeFinalBrandCtaLabels = () => {
-  document
-    .querySelectorAll('body[data-brand] .final-cta-glass a.cta-brands')
-    .forEach(link => {
-      link.textContent = uiCopy.claimBonusPlay;
-    });
-};
-
-const getShortBrandSectionLabel = title => {
-  const normalizedTitle = normalizeText(title);
-  const lowerTitle = normalizedTitle.toLowerCase();
-
-  if (/why players choose|warum spieler|por qué los jugadores|perché i giocatori scelgono|dlaczego gracze wybierają|чому гравці обирають|por que os jogadores escolhem/.test(lowerTitle)) return localeText('Highlights', 'Highlights', 'Aspectos clave', null, null, 'Головне');
-  if (/available countries|verfügbare länder|países disponibles|paesi disponibili|dostępne kraje|доступні країни/.test(lowerTitle)) return localeText('Countries', 'Länder', 'Países', null, null, 'Країни');
-  if (/payment|zahlung|pago|pagament|płatno/.test(lowerTitle)) return localeText('Payments', 'Zahlungen', 'Pagos');
-  if (
-    /games|slots|live betting|betting snapshot|spiele|sportwetten|juegos|tragaperras|apuestas|giochi|scommesse|gry|automaty|zakłady|ігри|слоти|ставки|jogos|apostas/.test(lowerTitle)
-  ) return localeText('Games', 'Spiele', 'Juegos', null, null, 'Ігри');
-  if (/bonus|promotion|aktion|bono|promoción|promozion|promocj|бонус|акці/.test(lowerTitle)) return localeText('Bonuses', 'Boni', 'Bonos', null, null, 'Бонуси');
-  if (/checklist|checkliste|lista de control|lista di controllo|lista kontrolna|lista de verificação/.test(lowerTitle)) return localeText('Checklist', 'Checkliste', 'Lista');
-  if (/licensing|trust|lizenz|vertrauen|licencia|confianza|licenz|fiducia|affidabil|licenc|wiarygod|licença|confiança|fiabilidade/.test(lowerTitle)) return localeText('Trust', 'Vertrauen', 'Confianza');
-  if (lowerTitle.includes('faq') || lowerTitle.includes('pregunta') || lowerTitle.includes('domand') || lowerTitle.includes('pytan') || lowerTitle.includes('питан')) return 'FAQ';
-  if ((/pros|vorteile|ventajas|vantaggi|zalety|plusy|переваги|плюси|vantagens|\bpro\b/.test(lowerTitle)) && (/cons|nachteile|desventajas|svantaggi|contro|wady|minusy|недоліки|мінуси|desvantagens|contras/.test(lowerTitle))) return localeText('Pros & Cons', 'Vor- & Nachteile', 'Ventajas y desventajas', null, null, 'Переваги та недоліки');
-  if (/suits|passt|geeignet|ideal para|ideale per|adatto|najlepsze dla|odpowiednie dla/.test(lowerTitle)) return localeText('Best For', 'Geeignet für', 'Ideal para');
-
-  return normalizedTitle.replace(/\s+Review$/i, '').split(/[,&:|]/)[0].trim().slice(0, 18);
-};
-
-const initBrandSectionNav = () => {
-  const heroContent =
-    document.querySelector('body[data-brand] .brand-sticky-aside .hero-content') ||
-    document.querySelector('body[data-brand] .hero-content');
-  const reviewRoot =
-    document.querySelector('body[data-brand] .brand-sticky-main') ||
-    document.querySelector('body[data-brand] main.content-review') ||
-    document.querySelector('body[data-brand]');
-  if (!heroContent || !reviewRoot || heroContent.querySelector('.brand-section-nav')) return;
-
-  const titleSelector = [
-    '.brand-hero-why > .title',
-    '.brand-countries > .title',
-    '.brand-payments > .title',
-    '.brand-availability-widget .title',
-    '.content-review > section > .title',
-    '.content-review > section > h2',
-    '.content-article > section > .title',
-    '.content-article > section > h2',
-    '.final-cta-glass .title',
-  ].join(', ');
-
-  const seenLabels = new Set();
-  const headings = Array.from(reviewRoot.querySelectorAll(titleSelector))
-    .map(heading => {
-      const text = normalizeText(heading.textContent).trim();
-      const label = getShortBrandSectionLabel(text);
-      return { heading, text, label };
-    })
-    .filter(item => item.text && item.label && !seenLabels.has(item.label) && seenLabels.add(item.label))
-    .slice(0, 9);
-
-  if (headings.length < 2) return;
-
-  headings.forEach(({ heading, label }, index) => {
-    if (!heading.id) {
-      const baseId = slugifyText(label || heading.textContent) || `brand-section-${index + 1}`;
-      let nextId = baseId;
-      let suffix = 2;
-      while (document.getElementById(nextId)) {
-        nextId = `${baseId}-${suffix}`;
-        suffix += 1;
-      }
-      heading.id = nextId;
-    }
-  });
-
-  const nav = document.createElement('nav');
-  nav.className = 'brand-section-nav';
-  nav.setAttribute('aria-label', localeText('On this page', 'Auf dieser Seite', 'En esta página'));
-  nav.innerHTML = `
-    <div class="brand-section-nav__links">
-      ${headings
-        .map(
-          ({ heading, label }) => `
-            <a href="#${escapeHtml(heading.id)}">${escapeHtml(label)}</a>
-          `
-        )
-        .join('')}
-    </div>
-  `;
-
-  const ctaWrapper = heroContent.querySelector('.hero-cta-wrapper');
-  if (ctaWrapper) {
-    ctaWrapper.insertAdjacentElement('afterend', nav);
-  } else {
-    heroContent.appendChild(nav);
-  }
-};
-
-const initBrandHeroPanels = () => {
-  const heroContent = document.querySelector('body[data-brand] .hero-content');
-  if (!heroContent || heroContent.dataset.panelsReady === 'true') return;
-
-  const logo = heroContent.querySelector(':scope > .brand-logo-container');
-  const nav = heroContent.querySelector(':scope > .brand-section-nav');
-  if (!logo) return;
-
-  const logoPanel = document.createElement('div');
-  logoPanel.className = 'brand-hero-panel brand-hero-logo-panel';
-  logoPanel.appendChild(logo);
-
-  const summaryPanel = document.createElement('div');
-  summaryPanel.className = 'brand-hero-panel brand-hero-summary-panel';
-
-  const summaryNodes = Array.from(heroContent.children).filter(child => child !== logo && child !== nav);
-  summaryPanel.append(...summaryNodes);
-
-  const panels = [logoPanel, summaryPanel];
-  if (nav) {
-    const navPanel = document.createElement('div');
-    navPanel.className = 'brand-hero-panel brand-hero-nav-panel';
-    navPanel.appendChild(nav);
-    panels.push(navPanel);
-  }
-
-  heroContent.replaceChildren(...panels);
-  heroContent.dataset.panelsReady = 'true';
-};
-
-const SNAPSHOT_DE_TRANSLATIONS = {
-  'Games & Betting Snapshot': 'Spiele- und Wettüberblick',
-  'Visible now:': 'Aktuell sichtbar:',
-  'Not surfaced:': 'Nicht eingeblendet:',
-  'These are the main game categories currently visible in the account.':
-    'Dies sind die wichtigsten Spielkategorien, die aktuell im Konto sichtbar sind.',
-  'These are the main betting categories currently visible in the account.':
-    'Dies sind die wichtigsten Wettkategorien, die aktuell im Konto sichtbar sind.',
-  Games: 'SPIELE',
-  GAMES: 'SPIELE',
-  'LIVE GAMES': 'LIVE-SPIELE',
-  Betting: 'SPORTWETTEN',
-  BETTING: 'SPORTWETTEN',
-  Slots: 'Slots',
-  Roulette: 'Roulette',
-  Blackjack: 'Blackjack',
-  Baccarat: 'Baccarat',
-  Poker: 'Poker',
-  Keno: 'Keno',
-  Bingo: 'Bingo',
-  'Jackpot games': 'Jackpot-Spiele',
-  'Live games': 'Live-Spiele',
-  'Live dice games': 'Live-Würfelspiele',
-  'Craps and dice': 'Craps und Würfelspiele',
-  'Scratch cards': 'Rubbellose',
-  'Video poker': 'Video-Poker',
-  'Crash games': 'Crash-Spiele',
-  'Other live games': 'Weitere Live-Spiele',
-  'Live casino': 'Live-Casino',
-  'Game shows': 'Game Shows',
-};
-const SNAPSHOT_ES_TRANSLATIONS = {
-  'Games & Betting Snapshot': 'Resumen de juegos y apuestas',
-  'Visible now:': 'Visible ahora:',
-  'Not surfaced:': 'No disponible:',
-  'These are the main game categories currently visible in the account.':
-    'Estas son las principales categorías de juegos visibles actualmente en la cuenta.',
-  'These are the main betting categories currently visible in the account.':
-    'Estas son las principales categorías de apuestas visibles actualmente en la cuenta.',
-  Games: 'JUEGOS',
-  GAMES: 'JUEGOS',
-  'LIVE GAMES': 'JUEGOS EN VIVO',
-  Betting: 'APUESTAS',
-  BETTING: 'APUESTAS',
-  Slots: 'Tragaperras',
-  Roulette: 'Ruleta',
-  Blackjack: 'Blackjack',
-  Baccarat: 'Bacará',
-  Poker: 'Póker',
-  Keno: 'Keno',
-  Bingo: 'Bingo',
-  'Jackpot games': 'Juegos con jackpot',
-  'Live games': 'Juegos en vivo',
-  'Live dice games': 'Juegos de dados en vivo',
-  'Craps and dice': 'Craps y dados',
-  'Scratch cards': 'Rasca y gana',
-  'Video poker': 'Video póker',
-  'Crash games': 'Juegos crash',
-  'Other live games': 'Otros juegos en vivo',
-  'Live casino': 'Casino en vivo',
-  'Game shows': 'Game shows',
-};
-const SNAPSHOT_IT_TRANSLATIONS = {
-  'Games & Betting Snapshot': 'Panoramica di giochi e scommesse',
-  'Visible now:': 'Disponibili ora:',
-  'Not surfaced:': 'Non disponibili:',
-  'These are the main game categories currently visible in the account.':
-    'Queste sono le principali categorie di giochi attualmente visibili nell’account.',
-  'These are the main betting categories currently visible in the account.':
-    'Queste sono le principali categorie di scommesse attualmente visibili nell’account.',
-  Games: 'GIOCHI',
-  GAMES: 'GIOCHI',
-  'LIVE GAMES': 'GIOCHI LIVE',
-  Betting: 'SCOMMESSE',
-  BETTING: 'SCOMMESSE',
-  Slots: 'Slot',
-  Roulette: 'Roulette',
-  Blackjack: 'Blackjack',
-  Baccarat: 'Baccarat',
-  Poker: 'Poker',
-  Keno: 'Keno',
-  Bingo: 'Bingo',
-  'Jackpot games': 'Giochi con jackpot',
-  'Live games': 'Giochi live',
-  'Live dice games': 'Giochi di dadi live',
-  'Craps and dice': 'Craps e dadi',
-  'Scratch cards': 'Gratta e vinci',
-  'Video poker': 'Video poker',
-  'Crash games': 'Giochi crash',
-  'Other live games': 'Altri giochi live',
-  'Live casino': 'Casinò live',
-  'Game shows': 'Game show',
-};
-const SNAPSHOT_PL_TRANSLATIONS = {
-  'Games & Betting Snapshot': 'Przegląd gier i zakładów',
-  'Visible now:': 'Dostępne teraz:',
-  'Not surfaced:': 'Niedostępne:',
-  'These are the main game categories currently visible in the account.':
-    'To główne kategorie gier widoczne obecnie na koncie.',
-  'These are the main betting categories currently visible in the account.':
-    'To główne kategorie zakładów widoczne obecnie na koncie.',
-  Games: 'GRY',
-  GAMES: 'GRY',
-  'LIVE GAMES': 'GRY NA ŻYWO',
-  Betting: 'ZAKŁADY',
-  BETTING: 'ZAKŁADY',
-  Slots: 'Automaty',
-  Roulette: 'Ruletka',
-  Blackjack: 'Blackjack',
-  Baccarat: 'Bakarat',
-  Poker: 'Poker',
-  Keno: 'Keno',
-  Bingo: 'Bingo',
-  'Jackpot games': 'Gry jackpot',
-  'Live games': 'Gry na żywo',
-  'Live dice games': 'Gry w kości na żywo',
-  'Craps and dice': 'Craps i gry w kości',
-  'Scratch cards': 'Zdrapki',
-  'Video poker': 'Wideopoker',
-  'Crash games': 'Gry crash',
-  'Other live games': 'Inne gry na żywo',
-  'Live casino': 'Kasyno na żywo',
-  'Game shows': 'Teleturnieje',
-};
-const SNAPSHOT_UK_TRANSLATIONS = {
-  'Games & Betting Snapshot': 'Огляд ігор і ставок',
-  'Visible now:': 'Доступно зараз:',
-  'Not surfaced:': 'Не представлено:',
-  'These are the main game categories currently visible in the account.':
-    'Це основні категорії ігор, які зараз доступні в акаунті.',
-  'These are the main betting categories currently visible in the account.':
-    'Це основні категорії ставок, які зараз доступні в акаунті.',
-  Games: 'ІГРИ',
-  GAMES: 'ІГРИ',
-  'LIVE GAMES': 'LIVE-ІГРИ',
-  Betting: 'СТАВКИ',
-  BETTING: 'СТАВКИ',
-  Slots: 'Слоти',
-  Roulette: 'Рулетка',
-  Blackjack: 'Блекджек',
-  Baccarat: 'Бакара',
-  Poker: 'Покер',
-  Keno: 'Кено',
-  Bingo: 'Бінго',
-  'Jackpot games': 'Джекпот-ігри',
-  'Live games': 'Live-ігри',
-  'Live dice games': 'Live-ігри в кості',
-  'Craps and dice': 'Крепс та ігри в кості',
-  'Scratch cards': 'Скретч-картки',
-  'Video poker': 'Відеопокер',
-  'Crash games': 'Краш-ігри',
-  'Other live games': 'Інші live-ігри',
-  'Live casino': 'Live-казино',
-  'Game shows': 'Ігрові шоу',
-};
-const SNAPSHOT_PT_TRANSLATIONS = {
-  'Games & Betting Snapshot': 'Resumo de jogos e apostas',
-  'Visible now:': 'Disponível agora:',
-  'Not surfaced:': 'Não disponível:',
-  'These are the main game categories currently visible in the account.':
-    'Estas são as principais categorias de jogos atualmente visíveis na conta.',
-  'These are the main betting categories currently visible in the account.':
-    'Estas são as principais categorias de apostas atualmente visíveis na conta.',
-  Games: 'JOGOS',
-  GAMES: 'JOGOS',
-  'LIVE GAMES': 'JOGOS AO VIVO',
-  Betting: 'APOSTAS',
-  BETTING: 'APOSTAS',
-  Slots: 'Slots',
-  Roulette: 'Roleta',
-  Blackjack: 'Blackjack',
-  Baccarat: 'Bacará',
-  Poker: 'Póquer',
-  Keno: 'Keno',
-  Bingo: 'Bingo',
-  'Jackpot games': 'Jogos com jackpot',
-  'Live games': 'Jogos ao vivo',
-  'Live dice games': 'Jogos de dados ao vivo',
-  'Craps and dice': 'Craps e jogos de dados',
-  'Scratch cards': 'Raspadinhas',
-  'Video poker': 'Vídeo póquer',
-  'Crash games': 'Jogos crash',
-  'Other live games': 'Outros jogos ao vivo',
-  'Live casino': 'Casino ao vivo',
-  'Game shows': 'Game shows',
-};
-const SNAPSHOT_FR_TRANSLATIONS = {
-  'Games & Betting Snapshot': 'Aperçu des jeux et des paris',
-  'Visible now:': 'Disponible actuellement :',
-  'Not surfaced:': 'Non proposé :',
-  'These are the main game categories currently visible in the account.':
-    'Voici les principales catégories de jeux actuellement visibles dans le compte.',
-  'These are the main betting categories currently visible in the account.':
-    'Voici les principales catégories de paris actuellement visibles dans le compte.',
-  Games: 'JEUX',
-  GAMES: 'JEUX',
-  'LIVE GAMES': 'JEUX EN DIRECT',
-  Betting: 'PARIS',
-  BETTING: 'PARIS',
-  Slots: 'Machines à sous',
-  Roulette: 'Roulette',
-  Blackjack: 'Blackjack',
-  Baccarat: 'Baccarat',
-  Poker: 'Poker',
-  Keno: 'Keno',
-  Bingo: 'Bingo',
-  'Jackpot games': 'Jeux à jackpot',
-  'Live games': 'Jeux en direct',
-  'Live dice games': 'Jeux de dés en direct',
-  'Craps and dice': 'Craps et jeux de dés',
-  'Scratch cards': 'Jeux à gratter',
-  'Video poker': 'Vidéo poker',
-  'Crash games': 'Jeux crash',
-  'Other live games': 'Autres jeux en direct',
-  'Live casino': 'Casino en direct',
-  'Game shows': 'Jeux télévisés',
-};
-const SNAPSHOT_HI_TRANSLATIONS = {
-  'Games & Betting Snapshot': 'गेम और बेटिंग का सार',
-  'Visible now:': 'अभी उपलब्ध:',
-  'Not surfaced:': 'उपलब्ध नहीं:',
-  'These are the main game categories currently visible in the account.': 'खाते में फिलहाल उपलब्ध प्रमुख गेम श्रेणियां ये हैं।',
-  'These are the main betting categories currently visible in the account.': 'खाते में फिलहाल उपलब्ध प्रमुख बेटिंग श्रेणियां ये हैं।',
-  Games: 'गेम', GAMES: 'गेम', 'LIVE GAMES': 'लाइव गेम', Betting: 'बेटिंग', BETTING: 'बेटिंग',
-  Slots: 'स्लॉट', Roulette: 'रूलेट', Blackjack: 'ब्लैकजैक', Baccarat: 'बैकारेट', Poker: 'पोकर',
-  Keno: 'कीनो', Bingo: 'बिंगो', 'Jackpot games': 'जैकपॉट गेम', 'Live games': 'लाइव गेम',
-  'Live dice games': 'लाइव डाइस गेम', 'Craps and dice': 'क्रैप्स और डाइस', 'Scratch cards': 'स्क्रैच कार्ड',
-  'Video poker': 'वीडियो पोकर', 'Crash games': 'क्रैश गेम', 'Other live games': 'अन्य लाइव गेम',
-  'Live casino': 'लाइव कैसीनो', 'Game shows': 'गेम शो',
-};
-
-const snapshotLabel = value =>
-  SITE_LOCALE === 'de'
-    ? SNAPSHOT_DE_TRANSLATIONS[value] || value
-    : SITE_LOCALE === 'es'
-      ? SNAPSHOT_ES_TRANSLATIONS[value] || value
-      : SITE_LOCALE === 'it'
-        ? SNAPSHOT_IT_TRANSLATIONS[value] || value
-        : SITE_LOCALE === 'pl'
-          ? SNAPSHOT_PL_TRANSLATIONS[value] || value
-          : SITE_LOCALE === 'uk'
-            ? SNAPSHOT_UK_TRANSLATIONS[value] || value
-            : SITE_LOCALE === 'pt'
-              ? SNAPSHOT_PT_TRANSLATIONS[value] || value
-              : SITE_LOCALE === 'fr'
-                ? SNAPSHOT_FR_TRANSLATIONS[value] || value
-                : SITE_LOCALE === 'hi'
-                  ? SNAPSHOT_HI_TRANSLATIONS[value] || value
-        : value;
-
-const renderSnapshotItems = (items, isAvailable) =>
-  items
-    .map(
-      item => `
-        <div class="availability-item ${isAvailable ? 'is-available' : 'is-unavailable'}">
-          <img
-            src="${isAvailable ? '/icons/ui/confirm-icon.svg' : '/icons/ui/remove-close-round-grey-icon.svg'}"
-            alt="${isAvailable ? 'Available section' : 'Unavailable section'}"
-            aria-hidden="true"
-          />
-          <span>${normalizeText(snapshotLabel(item))}</span>
-        </div>
-      `
-    )
-    .join('');
-
-const renderBrandAvailabilityWidget = brandKey => {
-  const normalizedKey = brandKey?.toLowerCase();
-  const config = normalizedKey ? BRAND_SNAPSHOT_CONFIGS[normalizedKey] : null;
-  if (!config || document.querySelector('.brand-availability-widget')) return;
-
-  const paymentSection = document.querySelector('.brand-payments')?.closest('section');
-  const reviewRoot = document.querySelector('main.content-review');
-  if (!paymentSection || !reviewRoot) return;
-
-  const brandName = getBrandSnapshotName();
-  const snapshotIntro =
-    document
-      .querySelector('meta[name="brand-snapshot-intro"]')
-      ?.getAttribute('content')
-      ?.trim() || '';
-  const section = document.createElement('section');
-  section.className = 'container';
-
-  const tabsMarkup = config.tabs
-    .map((tab, index) => {
-      const tabId = `${normalizedKey}-snapshot-tab-${index + 1}`;
-      const panelId = `${normalizedKey}-snapshot-panel-${index + 1}`;
-      const availableCount = tab.available.length;
-      const unavailableCount = tab.unavailable.length;
-
-      return {
-        button: `
-          <button
-            class="availability-tab ${index === 0 ? 'is-active' : ''}"
-            type="button"
-            role="tab"
-            id="${tabId}"
-            aria-selected="${index === 0 ? 'true' : 'false'}"
-            aria-controls="${panelId}"
-            data-tab-target="${panelId}"
-            ${index === 0 ? '' : 'tabindex="-1"'}
-          >
-            ${normalizeText(snapshotLabel(tab.label))}
-          </button>
-        `,
-        panel: `
-          <div
-            class="availability-panel ${index === 0 ? 'is-active' : ''}"
-            id="${panelId}"
-            role="tabpanel"
-            aria-labelledby="${tabId}"
-            ${index === 0 ? '' : 'hidden'}
-          >
-            <div class="availability-grid">
-              ${renderSnapshotItems(tab.available, true)}
-              ${renderSnapshotItems(tab.unavailable, false)}
-            </div>
-
-            <div class="availability-summary">
-              <div class="availability-counts">
-                <span class="is-available">
-                  <img src="/icons/ui/confirm-icon.svg" alt="Available sections" aria-hidden="true" />
-                  ${snapshotLabel('Visible now:')} ${availableCount}
-                </span>
-                <span class="is-unavailable">
-                  <img src="/icons/ui/remove-close-round-grey-icon.svg" alt="Unavailable sections" aria-hidden="true" />
-                  ${snapshotLabel('Not surfaced:')} ${unavailableCount}
-                </span>
-              </div>
-              <p>${normalizeText(
-                snapshotLabel(
-                  tab.note || `These are the main ${tab.label.toLowerCase()} sections currently visible on the account.`
-                )
-              )}</p>
-            </div>
-          </div>
-        `,
-      };
-    })
-    .reduce(
-      (acc, item) => {
-        acc.buttons.push(item.button);
-        acc.panels.push(item.panel);
-        return acc;
-      },
-      { buttons: [], panels: [] }
-    );
-
-  section.innerHTML = `
-    <div class="brand-availability-widget glass-section">
-      <h2 class="title">${normalizeText(snapshotLabel('Games & Betting Snapshot'))}</h2>
-      <p class="brand-availability-intro">
-        ${normalizeText(
-          snapshotIntro ||
-            localeText(
-              `This section shows which game, live-casino, and betting categories ${brandName} currently highlights, so you can quickly check whether it covers the types of games and betting options you want before you deposit.`,
-              `Dieser Abschnitt zeigt, welche Spiele-, Live-Casino- und Wettkategorien ${brandName} aktuell hervorhebt, damit Sie das Angebot vor einer Einzahlung prüfen können.`,
-              `Esta sección muestra las categorías de juegos, casino en vivo y apuestas que ${brandName} destaca actualmente para que puedas comprobar la oferta antes de depositar.`
-            )
-        )}
-      </p>
-
-      <div class="availability-tabs" data-tabs>
-        <div class="availability-tab-list" role="tablist" aria-label="${localeText(`${normalizeText(brandName)} product snapshot`, `${normalizeText(brandName)} Produktüberblick`, `Resumen de productos de ${normalizeText(brandName)}`)}">
-          ${tabsMarkup.buttons.join('')}
-        </div>
-        ${tabsMarkup.panels.join('')}
-      </div>
-    </div>
-  `;
-
-  paymentSection.insertAdjacentElement('afterend', section);
-};
-
-const applyBrandInfoPairLayout = () => {
-  const countriesBlock = document.querySelector('body[data-brand] .brand-countries');
-  const paymentsBlock = document.querySelector('body[data-brand] .brand-payments');
-  if (!countriesBlock || !paymentsBlock) return;
-
-  if (
-    countriesBlock.closest('.brand-info-pair') &&
-    paymentsBlock.closest('.brand-info-pair')
-  ) {
-    return;
-  }
-
-  const countriesSection = countriesBlock.closest('section.container');
-  const paymentsSection = paymentsBlock.closest('section.container');
-  if (!countriesSection || !paymentsSection) return;
-
-  const pairSection = document.createElement('section');
-  pairSection.className = 'container brand-info-pair';
-
-  countriesSection.insertAdjacentElement('beforebegin', pairSection);
-  pairSection.append(countriesBlock, paymentsBlock);
-
-  if (countriesSection !== pairSection && !countriesSection.children.length) {
-    countriesSection.remove();
-  }
-
-  if (
-    paymentsSection !== countriesSection &&
-    paymentsSection !== pairSection &&
-    !paymentsSection.children.length
-  ) {
-    paymentsSection.remove();
-  }
-};
-
-const initBrandCountryCollapse = () => {
-  const block = document.querySelector('body[data-brand] .brand-countries');
-  const countriesEl = document.getElementById('brand-countries');
-  if (!block || !countriesEl) return;
-
-  const rowsToShow = 3;
-  let toggle = block.querySelector('.brand-country-toggle');
-
-  const syncToggleReference = () => {
-    const toggles = Array.from(block.querySelectorAll('.brand-country-toggle'));
-    toggle = toggles[0] || null;
-    toggles.slice(1).forEach(extraToggle => extraToggle.remove());
-    return toggle;
-  };
-
-  const updateToggleLabel = () => {
-    syncToggleReference();
-    if (!toggle) return;
-    const isExpanded = block.classList.contains('is-country-expanded');
-    toggle.setAttribute('aria-expanded', isExpanded ? 'true' : 'false');
-    const label = toggle.querySelector('.brand-country-toggle__text');
-    if (label) {
-      label.textContent = isExpanded
-        ? localeText('Show fewer countries', 'Weniger Länder anzeigen', 'Mostrar menos países')
-        : localeText('Show all countries', 'Alle Länder anzeigen', 'Mostrar todos los países');
-    }
-  };
-
-  const ensureToggle = () => {
-    syncToggleReference();
-    if (toggle) return toggle;
-
-    toggle = document.createElement('button');
-    toggle.type = 'button';
-    toggle.className = 'brand-country-toggle';
-    toggle.setAttribute('aria-controls', 'brand-countries');
-    toggle.innerHTML = `
-      <span class="brand-country-toggle__text">${localeText('Show all countries', 'Alle Länder anzeigen', 'Mostrar todos los países')}</span>
-      <span class="brand-country-toggle__icon" aria-hidden="true"></span>
-    `;
-
-    toggle.addEventListener('click', () => {
-      block.classList.toggle('is-country-expanded');
-      updateToggleLabel();
-    });
-
-    countriesEl.insertAdjacentElement('afterend', toggle);
-    return toggle;
-  };
-
-  const reset = () => {
-    block.classList.remove('is-country-collapsible', 'is-country-expanded');
-    countriesEl.style.removeProperty('--brand-countries-collapsed-height');
-    countriesEl.style.removeProperty('--brand-countries-expanded-height');
-    block.querySelectorAll('.brand-country-toggle').forEach(countryToggle => countryToggle.remove());
-    toggle = null;
-  };
-
-  const sync = () => {
-    const countryItems = Array.from(countriesEl.querySelectorAll('.flag-container')).filter(
-      item => item.offsetParent !== null
-    );
-
-    if (!countryItems.length) {
-      reset();
-      return;
-    }
-
-    const rowTops = countryItems
-      .map(item => Math.round(item.offsetTop))
-      .reduce((tops, top) => {
-        if (!tops.some(existingTop => Math.abs(existingTop - top) <= 1)) {
-          tops.push(top);
-        }
-        return tops;
-      }, [])
-      .sort((a, b) => a - b);
-
-    const expandedHeight = Math.ceil(countriesEl.scrollHeight);
-    let collapsedHeight = 0;
-
-    if (rowTops.length > rowsToShow) {
-      const visibleRows = rowTops.slice(0, rowsToShow);
-      const visibleBottom = countryItems
-        .filter(item => visibleRows.some(top => Math.abs(top - Math.round(item.offsetTop)) <= 1))
-        .reduce((bottom, item) => Math.max(bottom, item.offsetTop + item.offsetHeight), 0);
-
-      collapsedHeight = Math.ceil(visibleBottom - rowTops[0] + 2);
-    } else if (countryItems.length > rowsToShow * 6) {
-      const itemHeight = countryItems
-        .slice(0, Math.min(countryItems.length, 6))
-        .reduce((height, item) => Math.max(height, item.offsetHeight), 0);
-      const rowGap = Number.parseFloat(window.getComputedStyle(countriesEl).rowGap) || 12;
-      collapsedHeight = Math.ceil(itemHeight * rowsToShow + rowGap * (rowsToShow - 1) + 2);
-    } else {
-      reset();
-      return;
-    }
-
-    if (collapsedHeight <= 0 || expandedHeight <= collapsedHeight + 8) {
-      reset();
-      return;
-    }
-
-    countriesEl.style.setProperty('--brand-countries-collapsed-height', `${collapsedHeight}px`);
-    countriesEl.style.setProperty('--brand-countries-expanded-height', `${expandedHeight}px`);
-    block.classList.add('is-country-collapsible');
-    ensureToggle();
-    updateToggleLabel();
-  };
-
-  const scheduleSync = () => window.requestAnimationFrame(sync);
-
-  scheduleSync();
-  window.setTimeout(scheduleSync, 250);
-
-  if (block.dataset.countryCollapseBound === 'true') return;
-  block.dataset.countryCollapseBound = 'true';
-
-  if ('ResizeObserver' in window) {
-    const observer = new ResizeObserver(scheduleSync);
-    observer.observe(block);
-    observer.observe(countriesEl);
-  }
-
-  window.addEventListener('resize', scheduleSync, { passive: true });
-};
-
-const enhanceBrandProsCons = () => {
-  document.querySelectorAll('body[data-brand] .feature-card > strong').forEach(heading => {
-    const label = normalizeText(heading.textContent).trim().toLowerCase();
-    const kind =
-      label === 'pros' || label === 'prós' || label === 'vorteile' || label === 'ventajas' || label === 'pro' || label === 'vantaggi' || label === 'zalety' || label === 'plusy' || label === 'переваги' || label === 'плюси' || label === 'avantages' || label === 'फायदे'
-        ? 'pros'
-        : label === 'cons' || label === 'nachteile' || label === 'contras' || label === 'desventajas' || label === 'contro' || label === 'svantaggi' || label === 'wady' || label === 'minusy' || label === 'недоліки' || label === 'мінуси' || label === 'inconvénients' || label === 'नुकसान'
-          ? 'cons'
-          : '';
-    if (!kind) return;
-    if (heading.querySelector('.pros-cons-icon')) return;
-
-    const card = heading.closest('.feature-card');
-    if (card) {
-      card.classList.add(kind === 'pros' ? 'is-pros-card' : 'is-cons-card');
-      card.closest('.features-grid')?.classList.add('pros-cons-grid');
-    }
-
-    heading.classList.add('pros-cons-heading', kind === 'pros' ? 'is-pros' : 'is-cons');
-
-    const icon = document.createElement('img');
-    icon.className = 'pros-cons-icon';
-    icon.src =
-      kind === 'pros' ? '/icons/ui/addition-color-icon.svg' : '/icons/ui/subtract-color-icon.svg';
-    icon.alt = '';
-    icon.setAttribute('aria-hidden', 'true');
-
-    heading.prepend(icon);
-  });
-};
-
 const enhanceFaqBlocks = () => {
   const addQuestionIcon = question => {
     if (question.querySelector('.faq-question-icon')) return;
@@ -5448,308 +3920,6 @@ const initCasinosScrollNav = () => {
   return scrollNav;
 };
 
-const initTopCasinosJumpNav = () => {
-  if (document.body.dataset.page !== 'top-casinos' || document.querySelector('.top-casino-jump-nav')) {
-    return;
-  }
-
-  const contentArea = document.querySelector('.content-area');
-  const sections = Array.from(document.querySelectorAll('.content[data-country]'));
-  if (!contentArea || sections.length < 2) return;
-
-  const sectionsByCode = new Map();
-  sections.forEach(section => {
-    const code = section.dataset.country?.toUpperCase();
-    const country = COUNTRIES.find(item => item.code.toUpperCase() === code);
-    if (!code || !country) return;
-    section.id = section.id || `top-${country.slug}`;
-    sectionsByCode.set(code, section);
-  });
-
-  const featuredCodes = new Set(['US', 'UK', 'AU', 'CA', 'BR']);
-  const copy = SITE_LOCALE === 'de'
-    ? {
-        kicker: `${COUNTRIES.length} LÄNDER-GUIDES`,
-        title: 'Wählen Sie Ihren Markt',
-        description: 'Öffnen Sie eine hervorgehobene Rangliste oder wechseln Sie direkt zum vollständigen Länder-Guide.',
-        show: 'Alle Länder anzeigen',
-        hide: 'Weniger anzeigen',
-        label: 'Casino-Rankings und Länder-Guides',
-      }
-    : SITE_LOCALE === 'es'
-      ? {
-          kicker: `${COUNTRIES.length} GUÍAS POR PAÍS`,
-          title: 'Elige tu mercado',
-          description: 'Abre una clasificación destacada o accede directamente a la guía completa de tu país.',
-          show: 'Mostrar todos los países',
-          hide: 'Mostrar menos',
-          label: 'Clasificaciones de casinos y guías por país',
-        }
-      : SITE_LOCALE === 'it'
-        ? {
-            kicker: `${COUNTRIES.length} GUIDE PER PAESE`,
-            title: 'Scegli il tuo mercato',
-            description: 'Apri una classifica in evidenza oppure vai direttamente alla guida completa per il tuo paese.',
-            show: 'Mostra tutti i paesi',
-            hide: 'Mostra meno',
-            label: 'Classifiche dei casinò e guide per paese',
-          }
-        : SITE_LOCALE === 'pl'
-          ? {
-              kicker: `${COUNTRIES.length} PRZEWODNIKI PO KRAJACH`,
-              title: 'Wybierz swój rynek',
-              description: 'Otwórz wyróżniony ranking lub przejdź bezpośrednio do pełnego przewodnika po swoim kraju.',
-              show: 'Pokaż wszystkie kraje',
-              hide: 'Pokaż mniej',
-              label: 'Rankingi kasyn i przewodniki po krajach',
-            }
-          : SITE_LOCALE === 'uk'
-            ? {
-                kicker: `${COUNTRIES.length} ГІДИ ЗА КРАЇНАМИ`,
-                title: 'Оберіть свій ринок',
-                description: 'Відкрийте вибраний рейтинг або перейдіть до повного гіда для своєї країни.',
-                show: 'Показати всі країни',
-                hide: 'Показати менше',
-                label: 'Рейтинги казино та гіди за країнами',
-              }
-            : SITE_LOCALE === 'pt'
-              ? {
-                  kicker: `${COUNTRIES.length} GUIAS POR PAÍS`,
-                  title: 'Escolha o seu mercado',
-                  description: 'Abra uma classificação em destaque ou aceda diretamente ao guia completo do seu país.',
-                  show: 'Mostrar todos os países',
-                  hide: 'Mostrar menos',
-                  label: 'Classificações de casinos e guias por país',
-                }
-              : SITE_LOCALE === 'fr'
-                ? {
-                    kicker: `${COUNTRIES.length} GUIDES PAR PAYS`,
-                    title: 'Choisissez votre marché',
-                    description: 'Ouvrez un classement mis en avant ou accédez directement au guide complet de votre pays.',
-                    show: 'Afficher tous les pays',
-                    hide: 'Afficher moins de pays',
-                    label: 'Classements de casinos et guides par pays',
-                  }
-                : SITE_LOCALE === 'hi'
-                  ? {
-                      kicker: `${COUNTRIES.length} देश गाइड`,
-                      title: 'अपना बाज़ार चुनें',
-                      description: 'चुनिंदा रैंकिंग खोलें या सीधे अपने देश की पूरी गाइड देखें।',
-                      show: 'सभी देश दिखाएं',
-                      hide: 'कम देश दिखाएं',
-                      label: 'कैसीनो रैंकिंग और देश गाइड',
-                    }
-        : {
-        kicker: `${COUNTRIES.length} COUNTRY GUIDES`,
-        title: 'Choose your market',
-        description: 'Open a featured ranking below or go directly to the complete guide for your country.',
-        show: 'Show all countries',
-        hide: 'Show fewer',
-        label: 'Casino rankings and country guides',
-      };
-
-  const nav = document.createElement('nav');
-  nav.className = 'top-casino-jump-nav';
-  nav.id = 'top-casino-markets';
-  nav.setAttribute('aria-label', copy.label);
-  nav.innerHTML = `
-    <div class="top-casino-jump-nav__head">
-      <div>
-        <span class="top-casinos-section-kicker">${escapeHtml(copy.kicker)}</span>
-        <h2>${escapeHtml(copy.title)}</h2>
-        <p>${escapeHtml(copy.description)}</p>
-      </div>
-      <button class="top-casino-jump-toggle" type="button" aria-expanded="false" aria-controls="top-casino-country-links">
-        ${escapeHtml(copy.show)}
-      </button>
-    </div>
-    <div class="top-casino-jump-nav__links" id="top-casino-country-links">
-      ${COUNTRIES.map(country => {
-          const code = country.code.toUpperCase();
-          const section = sectionsByCode.get(code);
-          const title = localizedCountryName(country);
-          const href = section ? `#${section.id}` : countryPagePath(country.slug);
-          return `
-            <a class="top-casino-jump-link" href="${escapeHtml(href)}" data-featured="${featuredCodes.has(code) ? 'true' : 'false'}">
-              <img class="flag" src="${iconPath(country.slug)}" alt="" aria-hidden="true" loading="lazy" decoding="async" />
-              <span>${escapeHtml(title)}</span>
-            </a>
-          `;
-        })
-        .join('')}
-    </div>
-  `;
-
-  contentArea.insertAdjacentElement('beforebegin', nav);
-
-  const toggle = nav.querySelector('.top-casino-jump-toggle');
-  toggle?.addEventListener('click', () => {
-    const isExpanded = nav.classList.toggle('is-expanded');
-    toggle.setAttribute('aria-expanded', String(isExpanded));
-    toggle.textContent = isExpanded ? copy.hide : copy.show;
-  });
-};
-
-const ensureTopCasinosCountrySections = () => {
-  if (document.body.dataset.page !== 'top-casinos') return;
-
-  const contentArea = document.querySelector('.content-area');
-  const insertionPoint = contentArea?.querySelector('.top-casinos-method');
-  if (!contentArea || !insertionPoint) return;
-
-  const existingCodes = new Set(
-    Array.from(contentArea.querySelectorAll('.content[data-country]'))
-      .map(section => section.dataset.country?.toUpperCase())
-      .filter(Boolean)
-  );
-  const fragment = document.createDocumentFragment();
-
-  COUNTRIES.forEach(country => {
-    const code = country.code.toUpperCase();
-    if (existingCodes.has(code)) return;
-
-    const section = document.createElement('section');
-    section.className = 'content top-casinos-generated-country';
-    section.dataset.country = code;
-    section.id = `top-${country.slug}`;
-    section.innerHTML = `
-      <div class="cards-main">
-        <h2 class="top-country-title">${escapeHtml(localizedCountryName(country))}</h2>
-        <div class="casino-grid" data-limit="6"></div>
-        <div class="view-all-wrapper" hidden>
-          <a class="view-all" href="${countryPagePath(country.slug)}"></a>
-        </div>
-      </div>
-    `;
-    fragment.appendChild(section);
-  });
-
-  insertionPoint.after(fragment);
-};
-
-const applyBrandHeroConcept = () => {
-  const hero = document.querySelector('body[data-brand] .hero');
-  const heroContent = hero?.querySelector(':scope > .hero-content');
-  if (!hero || !heroContent) return;
-
-  const existingWhy = hero.querySelector(':scope > .brand-hero-why');
-  if (existingWhy) {
-    hero.classList.add('brand-hero-with-why');
-    return;
-  }
-
-  const whySection = Array.from(
-    document.querySelectorAll('body[data-brand] section.features-section')
-  ).find(section => {
-    const title = section.querySelector(':scope > .title, :scope > h2');
-    return /why\s+players\s+choose|warum\s+spieler|por\s+qu[eé]\s+los\s+jugadores/i.test(normalizeText(title?.textContent || ''));
-  });
-
-  if (!whySection) return;
-
-  whySection.classList.add('brand-hero-why');
-  hero.classList.add('brand-hero-with-why');
-  hero.appendChild(whySection);
-};
-
-const createBrandNewGamesRail = () => {
-  const brandKey = normalizeBrandKey(document.body.dataset.brand || '');
-  const games = BRAND_NEW_GAMES[brandKey] || [];
-  if (!games.length) return null;
-
-  const playNowLink = document.querySelector(
-    'body[data-brand] .brand-sticky-aside .hero-cta-wrapper a.cta-brands[href], body[data-brand] .hero-cta-wrapper a.cta-brands[href]'
-  );
-  const casinoHref = playNowLink?.getAttribute('href') || '';
-  const cardMarkup = game => {
-    const cardContent = `
-      <img
-        src="${escapeHtml(game.image)}"
-        alt="${escapeHtml(game.name)} at ${escapeHtml(document.body.dataset.brand)}"
-        loading="lazy"
-        decoding="async"
-      />
-      <span>${escapeHtml(game.name)}</span>
-    `;
-
-    if (!casinoHref) return `<article class="brand-new-game-card">${cardContent}</article>`;
-
-    return `
-      <a
-        class="brand-new-game-card"
-        href="${escapeHtml(casinoHref)}"
-        target="_blank"
-        rel="noopener noreferrer nofollow sponsored"
-        aria-label="${localeText(
-          `Play ${escapeHtml(game.name)} at ${escapeHtml(document.body.dataset.brand)}`,
-          `${escapeHtml(game.name)} bei ${escapeHtml(document.body.dataset.brand)} spielen`,
-          `Jugar a ${escapeHtml(game.name)} en ${escapeHtml(document.body.dataset.brand)}`
-        )}"
-      >
-        ${cardContent}
-      </a>
-    `;
-  };
-
-  const newGamesLabel = localeText('New Games', 'Neue Spiele', 'Juegos nuevos');
-  const newGamesKicker = localeText('LATEST RELEASES', 'NEUESTE VERÖFFENTLICHUNGEN', 'ÚLTIMOS LANZAMIENTOS');
-  const rail = document.createElement('aside');
-  rail.className = 'brand-new-games-rail';
-  rail.setAttribute('aria-label', newGamesLabel);
-  rail.innerHTML = `
-    <div class="brand-new-games-panel">
-      <div class="brand-new-games-heading">
-        <span class="brand-new-games-kicker">${newGamesKicker}</span>
-        <h2>${newGamesLabel}</h2>
-      </div>
-      <div class="brand-new-games-list">
-        ${games.map(cardMarkup).join('')}
-      </div>
-    </div>
-  `;
-
-  return rail;
-};
-
-const applyBrandStickyReviewLayout = () => {
-  const hero = document.querySelector('body[data-brand] .hero');
-  const heroContent = hero?.querySelector(':scope > .hero-content');
-  const allCountries = document.querySelector('body[data-brand] .all-countries');
-  if (!hero || !heroContent || !allCountries || document.querySelector('.brand-sticky-review-layout')) {
-    return;
-  }
-
-  const layout = document.createElement('section');
-  layout.className = 'container brand-sticky-review-layout';
-
-  const aside = document.createElement('aside');
-  aside.className = 'brand-sticky-aside';
-
-  const main = document.createElement('div');
-  main.className = 'brand-sticky-main';
-
-  hero.insertAdjacentElement('beforebegin', layout);
-  aside.appendChild(heroContent);
-
-  Array.from(hero.children).forEach(child => {
-    main.appendChild(child);
-  });
-
-  let sibling = hero.nextElementSibling;
-  while (sibling && sibling !== allCountries) {
-    const nextSibling = sibling.nextElementSibling;
-    main.appendChild(sibling);
-    sibling = nextSibling;
-  }
-
-  layout.append(aside, main);
-  const newGamesRail = createBrandNewGamesRail();
-  if (newGamesRail) layout.appendChild(newGamesRail);
-  hero.remove();
-  document.body.classList.add('has-brand-sticky-layout');
-  document.documentElement.classList.add('has-brand-sticky-layout');
-};
-
 const applyBrandLogoBackgrounds = () => {
   const byDetailPath = new Map();
   const byName = new Map();
@@ -5809,48 +3979,6 @@ const applyBrandLogoBackgrounds = () => {
   }
 };
 
-const initBrandWhyPreview = () => {
-  const preview = document.querySelector('body[data-brand] .brand-why-media');
-  const heading = preview?.closest('.brand-why-heading');
-  if (!preview || !heading || preview.dataset.bound === 'true') return;
-
-  preview.dataset.bound = 'true';
-
-  const setExpanded = expanded => {
-    heading.classList.toggle('is-expanded', expanded);
-    preview.setAttribute('aria-expanded', String(expanded));
-    preview.setAttribute(
-      'aria-label',
-      expanded ? 'Collapse casino screenshot' : 'Expand casino screenshot'
-    );
-  };
-
-  const mobileQuery = window.matchMedia('(max-width: 768px)');
-  const syncMobilePreviewState = () => {
-    const isMobile = mobileQuery.matches;
-    preview.disabled = isMobile;
-    preview.tabIndex = isMobile ? -1 : 0;
-
-    if (isMobile) setExpanded(false);
-  };
-
-  preview.addEventListener('click', () => {
-    if (mobileQuery.matches) return;
-
-    setExpanded(preview.getAttribute('aria-expanded') !== 'true');
-  });
-
-  preview.addEventListener('keydown', event => {
-    if (event.key !== 'Escape' || preview.getAttribute('aria-expanded') !== 'true') return;
-
-    setExpanded(false);
-    preview.focus();
-  });
-
-  syncMobilePreviewState();
-  mobileQuery.addEventListener?.('change', syncMobilePreviewState);
-};
-
 const initAffiliateClickTracking = () => {
   if (document.documentElement.dataset.affiliateTrackingBound === 'true') return;
 
@@ -5884,11 +4012,13 @@ const initAffiliateClickTracking = () => {
 // =====================
 // INIT FUNCTION
 // =====================
-export const initCasinoPage = () => {
+export const initCasinoPage = async () => {
   const pageType = document.body.dataset.page;
   const pageCountry = document.body.dataset.country?.toUpperCase();
   const siteCountryCountEl = document.getElementById('siteCountryCount');
   const siteBrandCountEl = document.getElementById('siteBrandCount');
+
+  await loadPageModules();
 
   initFooterThemeSettings();
   initAffiliateClickTracking();
@@ -5914,16 +4044,30 @@ export const initCasinoPage = () => {
     siteBrandCountEl.textContent = uniqueBrandCount.toString();
   }
 
-  renderHomeRecommendationCards();
-  renderHomeNewReviews();
-  renderLocalizedHomeCasinoGallery();
-  renderLocalizedHomeGames();
+  initHomePageModule?.({
+    BRANDS,
+    BRAND_HOMEPAGE_SCREENSHOTS,
+    BRAND_NEW_GAMES,
+    SITE_LOCALE,
+    normalizeText,
+    normalizeAssetPath,
+    createCasinoCard,
+    applyBrandLogoBackgrounds,
+    requestPaymentIconSync,
+    brandPagePath,
+    localeText,
+    setBrandBackground,
+  });
   initHomeNewBrandsCarousel();
   applyBrandLogoBackgrounds();
   applyNotRecommendedCasinoRows();
-  applyBrandHeroConcept();
-  applyBrandStickyReviewLayout();
-  initBrandWhyPreview();
+  initBrandLayoutModule?.({
+    BRAND_NEW_GAMES,
+    normalizeText,
+    normalizeBrandKey,
+    escapeHtml,
+    localeText,
+  });
 
   if (pageCountry) {
     ensureCountryBrandStage(pageCountry);
@@ -5938,8 +4082,19 @@ export const initCasinoPage = () => {
     });
     renderBrandList(brands, '#brand-cards', uiCopy.noCountryCasinos);
     applyBrandLogoBackgrounds();
-    renderCountryCasinoGallery(pageCountry);
-    renderCountryNewGames(pageCountry);
+    renderCountryMediaModule?.({
+      pageCountry,
+      BRANDS,
+      COUNTRIES,
+      BRAND_HOMEPAGE_SCREENSHOTS,
+      BRAND_NEW_GAMES,
+      normalizeText,
+      localizedCountryName,
+      getBrandDetailSlug,
+      brandPagePath,
+      localeText,
+      escapeHtml,
+    });
   }
 
   if (pageType === 'exclusive-offers') {
@@ -5967,59 +4122,39 @@ export const initCasinoPage = () => {
   }
 
   enhanceFaqBlocks();
-  ensureTopCasinosCountrySections();
-
-  document.querySelectorAll('.content[data-country]').forEach(section => {
-    const code = section.dataset.country?.toUpperCase();
-    if (!code) return;
-
-    const titleEl = section.querySelector('.top-country-title');
-    const grid = section.querySelector('.casino-grid');
-    const viewAllWrapper = section.querySelector('.view-all-wrapper');
-    const viewAllLink = section.querySelector('.view-all');
-    if (!titleEl || !grid) return;
-
-    const country = COUNTRIES.find(c => c.code.toUpperCase() === code);
-    const limit = Number(grid.dataset.limit) || 4;
-
-    titleEl.textContent = localizedCountryTitle(country || { slug: '', name: code });
-
-    const topBrands = BRANDS.filter(b => b.top?.includes(code) && b.countries?.includes(code));
-    const needsTopCasinosFill = document.body.dataset.page === 'top-casinos' && topBrands.length < limit;
-    const countryFillBrands = needsTopCasinosFill
-      ? BRANDS.filter(b => b.countries?.includes(code) && !topBrands.includes(b))
-      : [];
-    const renderedBrands = [...topBrands, ...countryFillBrands].slice(0, limit);
-
-    if (!renderedBrands.length) {
-      grid.innerHTML = `<p>${localeText('No top casinos available.', 'Keine Top-Casinos verfügbar.', 'No hay casinos destacados disponibles.')}</p>`;
-    } else {
-      const fragment = document.createDocumentFragment();
-      renderedBrands.forEach(b => fragment.appendChild(createCasinoCard(b)));
-      grid.replaceChildren(fragment);
-      requestPaymentIconSync();
-    }
-
-    if (country && viewAllWrapper && viewAllLink) {
-      viewAllWrapper.hidden = false;
-      viewAllLink.href = countryPagePath(country.slug);
-      viewAllLink.textContent = localeText(
-        `View all ${localizedCountryName(country)} casinos`,
-        `Alle Casinos in ${localizedCountryName(country)} anzeigen`,
-        `Ver todos los casinos de ${localizedCountryName(country)}`
-      );
-    }
+  initTopCasinosPageModule?.({
+    COUNTRIES,
+    BRANDS,
+    SITE_LOCALE,
+    localeText,
+    escapeHtml,
+    localizedCountryName,
+    localizedCountryTitle,
+    countryPagePath,
+    iconPath,
+    createCasinoCard,
+    requestPaymentIconSync,
   });
-
-  initTopCasinosJumpNav();
 
   const brandKey = document.body.dataset.brand?.toLowerCase();
   if (brandKey) {
-    normalizeFinalBrandCtaLabels();
-    initStickyBrandTitle();
-    enhanceBrandProsCons();
-    applyBrandInfoPairLayout();
-    renderBrandAvailabilityWidget(brandKey);
+    initBrandPageModule?.({
+      brandKey,
+      BRANDS,
+      BRAND_SNAPSHOT_CONFIGS,
+      SITE_LOCALE,
+      uiCopy,
+      normalizeText,
+      normalizeAssetPath,
+      findBrandByPageKey,
+      normalizeBrandKey,
+      getDisabledBrandCopy,
+      getBlockedCtaMarkup,
+      escapeHtml,
+      slugifyText,
+      localeText,
+      syncHeaderFlowMetrics,
+    });
 
     const brand = findBrandByPageKey(brandKey);
 
@@ -6061,7 +4196,6 @@ export const initCasinoPage = () => {
             `;
           })
           .join('');
-        initBrandCountryCollapse();
       }
 
       const availablePayments = (brand.payments || []).filter(Boolean);
@@ -6080,10 +4214,6 @@ export const initCasinoPage = () => {
       applyNotRecommendedBrandPage(brand);
     }
 
-    initBrandSectionNav();
-    initBrandHeroPanels();
-    applyBrandStickyReviewLayout();
-    initBrandCountryCollapse();
   }
 
   const promoCopyBoxes = document.querySelectorAll('[data-copy-code]');
@@ -6149,7 +4279,7 @@ export const initCasinoPage = () => {
     countriesDropdown.innerHTML = COUNTRIES.map(
       c => `
         <a href="${countryPagePath(c.slug)}">
-          <img class="flag" src="${iconPath(c.slug)}" alt="${normalizeText(localizedCountryName(c))}" loading="lazy" decoding="async"/>
+          <img class="flag" data-country-flag-src="${iconPath(c.slug)}" alt="${normalizeText(localizedCountryName(c))}" loading="lazy" decoding="async"/>
           ${normalizeText(localizedCountryName(c))}
         </a>
       `
@@ -6318,6 +4448,7 @@ export const initCasinoPage = () => {
       navDropdownLink.setAttribute('aria-expanded', nextOpen ? 'true' : 'false');
       navDropdownMenu.setAttribute('aria-hidden', nextOpen ? 'false' : 'true');
       if (nextOpen) {
+        loadDeferredCountryFlags(navDropdownMenu);
         expandedSettleTimerId = window.setTimeout(() => {
           desktopNavHeader.classList.add('countries-expanded-settled');
         }, 380);
@@ -6388,18 +4519,20 @@ export const initCasinoPage = () => {
     }
   }
 
-  document.querySelector('.all-countries .countries-cloud')?.replaceChildren(
+  const countriesCloud = document.querySelector('.all-countries .countries-cloud');
+  countriesCloud?.replaceChildren(
     ...COUNTRIES.map(c => {
       const a = document.createElement('a');
       a.href = countryPagePath(c.slug);
       a.className = 'country-link';
       a.innerHTML = `
-        <img class="flag" src="${iconPath(c.slug)}" alt="${normalizeText(localizedCountryName(c))}" loading="lazy" decoding="async">
+        <img class="flag" data-country-flag-src="${iconPath(c.slug)}" alt="${normalizeText(localizedCountryName(c))}" loading="lazy" decoding="async">
         <span>${normalizeText(localizedCountryName(c))}</span>
       `;
       return a;
     })
   );
+  observeDeferredCountryFlags(countriesCloud);
 
   const burger = document.querySelector('.burger');
   const mobileMenu = document.getElementById('mobileMenu');
@@ -6432,7 +4565,7 @@ export const initCasinoPage = () => {
     countriesSubmenu.innerHTML = COUNTRIES.map(
       c => `
     <a href="${countryPagePath(c.slug)}">
-      <img class="flag" src="${iconPath(c.slug)}" alt="${normalizeText(localizedCountryName(c))}" loading="lazy" decoding="async"/>
+      <img class="flag" data-country-flag-src="${iconPath(c.slug)}" alt="${normalizeText(localizedCountryName(c))}" loading="lazy" decoding="async"/>
       ${normalizeText(localizedCountryName(c))}
     </a>
   `
@@ -6442,6 +4575,7 @@ export const initCasinoPage = () => {
 
     submenuToggle.addEventListener('click', () => {
       const expanded = submenuToggle.getAttribute('aria-expanded') !== 'true';
+      if (expanded) loadDeferredCountryFlags(countriesSubmenu);
       submenuToggle.setAttribute('aria-expanded', String(expanded));
       submenuToggle.classList.toggle('active', expanded);
       countriesSubmenu.style.maxHeight = expanded ? `${countriesSubmenu.scrollHeight}px` : '0px';
@@ -6490,12 +4624,18 @@ export const initCasinoPage = () => {
     });
   }
 
-  window.addEventListener('load', () => {
+  const dismissGlobalLoader = () => {
     const loader = document.getElementById('globalLoader');
     if (!loader) return;
     loader.classList.add('hidden');
     setTimeout(() => loader.remove(), 300);
-  });
+  };
+
+  if (document.readyState === 'complete') {
+    dismissGlobalLoader();
+  } else {
+    window.addEventListener('load', dismissGlobalLoader, { once: true });
+  }
 
   const header = document.querySelector('.header');
   const casinosScrollNav = initCasinosScrollNav();
@@ -6599,14 +4739,13 @@ export const initCasinoPage = () => {
   });
 
   applyBrandLogoBackgrounds();
-  if (brandKey) {
-    window.requestAnimationFrame(initBrandCountryCollapse);
-    window.addEventListener('load', initBrandCountryCollapse, { once: true });
-  }
   requestPaymentIconSync();
 };
 
-document.addEventListener('DOMContentLoaded', initCasinoPage);
+document.addEventListener('DOMContentLoaded', async () => {
+  await brandBonusTranslationsReady;
+  initCasinoPage();
+});
 
 (function renderHeroCountries() {
   const container = document.getElementById('heroCountries');
