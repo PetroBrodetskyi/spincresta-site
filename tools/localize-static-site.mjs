@@ -3,7 +3,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 
 const root = process.cwd();
-const supportedLocales = ['en', 'de', 'es', 'it', 'pl', 'uk', 'pt', 'fr', 'hi'];
+const supportedLocales = ['en', 'de', 'es', 'it', 'pl', 'uk', 'pt', 'fr', 'hi', 'fi'];
 const args = new Map(process.argv.slice(2).map((value, index, all) => value.startsWith('--') ? [value, all[index + 1]?.startsWith('--') ? true : all[index + 1]] : null).filter(Boolean));
 const locale = String(args.get('--locale') || '').toLowerCase();
 const language = String(args.get('--language') || '');
@@ -152,7 +152,14 @@ if (mode === 'translate') {
 
 if (!fs.existsSync(cachePath)) throw new Error(`Missing translation cache: ${cachePath}. Run --translate first.`);
 const translated = new Map(Object.entries(JSON.parse(fs.readFileSync(cachePath, 'utf8'))));
-const translate = value => translated.get(value) || value;
+const emailPattern = /[^\s<>"']+@[^\s<>"']+\.[A-Za-z]{2,}/g;
+const preserveEmails = (source, localized) => {
+  const sourceEmails = source.match(emailPattern) || [];
+  if (!sourceEmails.length) return localized;
+  let index = 0;
+  return localized.replace(emailPattern, () => sourceEmails[index++] || sourceEmails.at(-1));
+};
+const translate = value => preserveEmails(value, translated.get(value) || value);
 const preserveJsonKeys = new Set(['@context', '@type', 'image', 'logo', 'sameAs', 'datePublished', 'dateModified', 'priceCurrency', 'currenciesAccepted', 'paymentAccepted']);
 const routePath = file => `/${path.relative(root, file).replace(/index\.html$/, '').split(path.sep).join('/')}`;
 const sourceRoutes = new Set(sourceFiles.map(routePath));
@@ -194,7 +201,7 @@ for (const sourceFile of sourceFiles) {
   const source = fs.readFileSync(sourceFile, 'utf8');
   const sourceLanguageTag = source.match(/<html\b[^>]*\blang=['"]([^'"]+)['"]/i)?.[1] || 'en';
   const region = sourceLanguageTag.split('-')[1]?.toUpperCase();
-  const localizedLanguageTag = locale === 'hi' ? 'hi-IN' : (region ? `${locale}-${region}` : locale);
+  const localizedLanguageTag = locale === 'hi' ? 'hi-IN' : locale === 'fi' ? 'fi-FI' : (region ? `${locale}-${region}` : locale);
   let html = visitHtml(source, translate);
   const blocks = [...source.matchAll(jsonPattern)].map(match => {
     try { return `<script type="application/ld+json">\n${JSON.stringify(translateJson(JSON.parse(match[1])), null, 2)}\n</script>`; }
@@ -208,7 +215,7 @@ for (const sourceFile of sourceFiles) {
   const canonical = localeUrl(route);
   html = html.replace(/<link\b(?=[^>]*\brel=['"]canonical['"])[^>]*>/i, `<link rel="canonical" href="${canonical}" />`);
   html = html.replace(/<meta\b(?=[^>]*\bproperty=['"]og:url['"])[^>]*>/i, `<meta property="og:url" content="${canonical}" />`);
-  const openGraphLocales = { en: 'en_GB', de: 'de_DE', es: 'es_ES', it: 'it_IT', pl: 'pl_PL', uk: 'uk_UA', pt: 'pt_PT', fr: 'fr_FR', hi: 'hi_IN' };
+  const openGraphLocales = { en: 'en_GB', de: 'de_DE', es: 'es_ES', it: 'it_IT', pl: 'pl_PL', uk: 'uk_UA', pt: 'pt_PT', fr: 'fr_FR', hi: 'hi_IN', fi: 'fi_FI' };
   html = html.replace(
     /<meta\b(?=[^>]*\bproperty=['"]og:locale['"])[^>]*>/i,
     `<meta property="og:locale" content="${openGraphLocales[locale] || locale}" />`
@@ -218,7 +225,8 @@ for (const sourceFile of sourceFiles) {
   const alternates = [
     ...supportedLocales.map(targetLocale => {
       const targetRoute = targetLocale === 'en' ? route : (route === '/' ? `/${targetLocale}/` : `/${targetLocale}${route}`);
-      return `<link rel="alternate" hreflang="${targetLocale}${languageSuffix}" href="https://spincresta.com${targetRoute}" />`;
+      const hreflang = targetLocale === 'fi' ? 'fi-FI' : `${targetLocale}${languageSuffix}`;
+      return `<link rel="alternate" hreflang="${hreflang}" href="https://spincresta.com${targetRoute}" />`;
     }),
     `<link rel="alternate" hreflang="x-default" href="https://spincresta.com${route}" />`,
   ].join('\n    ');

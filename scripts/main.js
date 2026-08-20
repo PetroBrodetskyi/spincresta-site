@@ -30,7 +30,7 @@ const brandLayoutModuleReady = document.body?.dataset.brand
   : Promise.resolve();
 
 const loadPageModules = async () => {
-  const isHomePage = document.body.classList.contains('home-page');
+  const isHomePage = document.body.classList.contains('home-page') && !document.body.dataset.page;
   const isCountryPage = Boolean(document.body.dataset.country);
   const isBrandPage = Boolean(document.body.dataset.brand);
 
@@ -38,7 +38,7 @@ const loadPageModules = async () => {
     const [screenshotsModule, gamesModule, pageModule] = await Promise.all([
       import('./brand-homepage-screenshots.js?v=20260813-french-1'),
       import('./brand-new-games.js?v=20260813-french-1'),
-      import('./pages/home.js?v=20260813-page-modules-1'),
+      import('./pages/home.js?v=20260814-finnish-1'),
     ]);
     BRAND_HOMEPAGE_SCREENSHOTS = screenshotsModule.BRAND_HOMEPAGE_SCREENSHOTS || {};
     BRAND_NEW_GAMES = gamesModule.BRAND_NEW_GAMES || {};
@@ -60,7 +60,7 @@ const loadPageModules = async () => {
     const [snapshotsModule, gamesModule, pageModule] = await Promise.all([
       import('./brand-snapshot-configs.js?v=20260813-french-1'),
       import('./brand-new-games.js?v=20260813-french-1'),
-      import('./pages/brand.js?v=20260813-page-modules-1'),
+      import('./pages/brand.js?v=20260820-finnish-ui-1'),
     ]);
     BRAND_SNAPSHOT_CONFIGS = snapshotsModule.BRAND_SNAPSHOT_CONFIGS || {};
     BRAND_NEW_GAMES = gamesModule.BRAND_NEW_GAMES || {};
@@ -68,7 +68,7 @@ const loadPageModules = async () => {
   }
 
   if (document.body.dataset.page === 'top-casinos') {
-    const pageModule = await import('./pages/top-casinos.js?v=20260813-page-modules-1');
+    const pageModule = await import('./pages/top-casinos.js?v=20260814-finnish-1');
     initTopCasinosPageModule = pageModule.initTopCasinosPage;
   }
 };
@@ -81,12 +81,12 @@ const MOJIBAKE_FIXES = [];
 const THEME_STORAGE_KEY = 'spincresta-theme';
 const THEME_OPTIONS = ['dark', 'light'];
 const LANGUAGE_STORAGE_KEY = 'spincresta-language';
-const LANGUAGE_OPTIONS = ['en', 'de', 'es', 'it', 'pl', 'uk', 'pt', 'fr', 'hi'];
+const LANGUAGE_OPTIONS = ['en', 'de', 'es', 'it', 'pl', 'uk', 'pt', 'fr', 'hi', 'fi'];
 const BLOCKED_BRAND_ICON = '/icons/ui/stop-blocked-icon.svg';
 const UNAVAILABLE_BRAND_ICON = '/icons/ui/remove-close-round-grey-icon.svg';
 const BRAND_ONLY_COUNTRIES = {
-  CY: { slug: 'cyprus', name: { en: 'Cyprus', de: 'Zypern', es: 'Chipre', it: 'Cipro', pl: 'Cypr', uk: 'Кіпр', pt: 'Chipre', fr: 'Chypre', hi: 'साइप्रस' } },
-  RS: { slug: 'serbia', name: { en: 'Serbia', de: 'Serbien', es: 'Serbia', it: 'Serbia', pl: 'Serbia', uk: 'Сербія', pt: 'Sérvia', fr: 'Serbie', hi: 'सर्बिया' } },
+  CY: { slug: 'cyprus', name: { en: 'Cyprus', de: 'Zypern', es: 'Chipre', it: 'Cipro', pl: 'Cypr', uk: 'Кіпр', pt: 'Chipre', fr: 'Chypre', hi: 'साइप्रस', fi: 'Kypros' } },
+  RS: { slug: 'serbia', name: { en: 'Serbia', de: 'Serbien', es: 'Serbia', it: 'Serbia', pl: 'Serbia', uk: 'Сербія', pt: 'Sérvia', fr: 'Serbie', hi: 'सर्बिया', fi: 'Serbia' } },
 };
 const BLOCKED_BRAND_COPY = {
   en: {
@@ -134,6 +134,11 @@ const BLOCKED_BRAND_COPY = {
     cta: 'अनुशंसित नहीं',
     alternatives: 'इसके बजाय इन कैसीनो पर विचार करें',
   },
+  fi: {
+    notice: 'Analyytikkojemme tarkistamien tietojen mukaan tällä kasinolla on ongelmia Valko-Venäjän lainvalvontaviranomaisten kanssa.',
+    cta: 'Ei suositella',
+    alternatives: 'Suosittelemme sen sijaan näitä kasinoita',
+  },
 };
 const UNAVAILABLE_BRAND_COPY = {
   en: {
@@ -180,6 +185,11 @@ const UNAVAILABLE_BRAND_COPY = {
     notice: 'यह कैसीनो फिलहाल हमारे खिलाड़ियों के लिए उपलब्ध नहीं है। दोबारा उपलब्ध होने पर हम इस समीक्षा को अपडेट करेंगे।',
     cta: 'फिलहाल उपलब्ध नहीं',
     alternatives: 'इसके बजाय उपलब्ध कैसीनो देखें',
+  },
+  fi: {
+    notice: 'Tämä kasino ei ole tällä hetkellä pelaajiemme saatavilla. Päivitämme arvostelun, kun se on jälleen käytettävissä.',
+    cta: 'Ei tällä hetkellä saatavilla',
+    alternatives: 'Tutustu sen sijaan näihin saatavilla oleviin kasinoihin',
   },
 };
 
@@ -290,11 +300,13 @@ const SITE_LOCALE = DOCUMENT_LANGUAGE.startsWith('de')
               ? 'fr'
               : DOCUMENT_LANGUAGE.startsWith('hi')
                 ? 'hi'
+                : DOCUMENT_LANGUAGE.startsWith('fi')
+                  ? 'fi'
       : 'en';
 let brandBonusTranslations = {};
 const brandBonusTranslationsReady = SITE_LOCALE === 'en'
   ? Promise.resolve()
-  : import(`./brand-bonus-translations/${SITE_LOCALE}.js?v=20260813-optimized-1`)
+  : import(`./brand-bonus-translations/${SITE_LOCALE}.js?v=20260814-finnish-1`)
       .then(module => {
         brandBonusTranslations = module.default || {};
       })
@@ -339,6 +351,7 @@ const UKRAINIAN_COUNTRY_SLUGS = GERMAN_COUNTRY_SLUGS;
 const PORTUGUESE_COUNTRY_SLUGS = GERMAN_COUNTRY_SLUGS;
 const FRENCH_COUNTRY_SLUGS = GERMAN_COUNTRY_SLUGS;
 const HINDI_COUNTRY_SLUGS = GERMAN_COUNTRY_SLUGS;
+const FINNISH_COUNTRY_SLUGS = GERMAN_COUNTRY_SLUGS;
 const countryPagePath = slug =>
   SITE_LOCALE === 'de' && GERMAN_COUNTRY_SLUGS.has(slug)
     ? `/de/online-casinos/${slug}/`
@@ -356,6 +369,8 @@ const countryPagePath = slug =>
                 ? `/fr/online-casinos/${slug}/`
                 : SITE_LOCALE === 'hi' && HINDI_COUNTRY_SLUGS.has(slug)
                   ? `/hi/online-casinos/${slug}/`
+                  : SITE_LOCALE === 'fi' && FINNISH_COUNTRY_SLUGS.has(slug)
+                    ? `/fi/online-casinos/${slug}/`
         : `/online-casinos/${slug}/`;
 const brandPagePath = brandOrPath => {
   const rawPath = typeof brandOrPath === 'string' ? brandOrPath : brandOrPath?.urlDetail;
@@ -728,7 +743,55 @@ const UI_COPY = {
     topCasinos: 'सर्वश्रेष्ठ कैसीनो',
     newCasinos: 'नए कैसीनो',
   },
+  fi: {
+    searchLabel: 'Hae SpinCrestasta',
+    searchPlaceholder: 'Hae',
+    availableCountries: 'Saatavilla olevat maat',
+    noMatches: 'Ei hakutuloksia',
+    openSearch: 'Avaa haku',
+    closeSearch: 'Sulje haku',
+    languageSwitcher: 'Valitse kieli',
+    countries: 'Maat',
+    settings: 'Asetukset',
+    blog: 'Blogi',
+    languageEnglish: 'Englanti',
+    languageGerman: 'Saksa',
+    languageSpanish: 'Espanja',
+    languageItalian: 'Italia',
+    languagePolish: 'Puola',
+    languageUkrainian: 'Ukraina',
+    languagePortuguese: 'Portugali',
+    languageFrench: 'Ranska',
+    languageHindi: 'Hindi',
+    languageFinnish: 'Suomi',
+    countryGuide: 'Maaopas',
+    brandReview: 'Brändiarvostelu',
+    casinoReview: 'Kasinoarvostelu ja tärkeät tiedot pelaajille',
+    visitCasino: 'Pelaa',
+    claimBonusPlay: 'Pelaa',
+    review: 'Arvostelu',
+    topRated: 'Parhaiten arvioidut',
+    exclusive: 'Eksklusiiviset',
+    new: 'Uudet',
+    all: 'Kaikki',
+    crypto: 'Krypto',
+    fastPayout: 'Nopeat kotiutukset',
+    sportsbook: 'Vedonlyönti',
+    sweepstakes: 'Sosiaalinen kasino',
+    filterBrands: 'Suodata kasinobrändejä',
+    noFilterMatches: 'Tällä suodattimella ei löytynyt kasinoita.',
+    noCountryCasinos: 'Tähän maahan ei ole saatavilla kasinoita.',
+    topCasinos: 'Parhaat kasinot',
+    newCasinos: 'Uudet kasinot',
+  },
 };
+const FINNISH_LANGUAGE_LABELS = {
+  en: 'Finnish', de: 'Finnisch', es: 'Finés', it: 'Finlandese', pl: 'Fiński',
+  uk: 'Фінська', pt: 'Finlandês', fr: 'Finnois', hi: 'फ़िनिश', fi: 'Suomi',
+};
+Object.entries(UI_COPY).forEach(([locale, copy]) => {
+  copy.languageFinnish = FINNISH_LANGUAGE_LABELS[locale] || 'Finnish';
+});
 const uiCopy = UI_COPY[SITE_LOCALE];
 const ITALIAN_RUNTIME_COPY = {
   'Close settings': 'Chiudi impostazioni',
@@ -1074,12 +1137,71 @@ const hindiRuntimeText = english => {
     .replace(/^Play (.*) at (.*)$/, '$2 पर $1 खेलें');
 };
 
+const FINNISH_RUNTIME_COPY = {
+  'Close settings': 'Sulje asetukset',
+  Theme: 'Teema',
+  'Choose the theme you want to use on SpinCresta.': 'Valitse SpinCrestassa käytettävä teema.',
+  'Theme options': 'Teemavaihtoehdot',
+  Dark: 'Tumma',
+  Light: 'Vaalea',
+  'BROWSE BY MARKET': 'SELAA MAITTAIN',
+  'CASINO LOBBY PREVIEWS': 'KATSAUS KASINOIDEN AULOIHIN',
+  'Review and current details': 'Arvostelu ja ajantasaiset tiedot',
+  'Casino review and current details': 'Arvostelu ja ajantasaiset tiedot',
+  'FRESH FROM REVIEWED LOBBIES': 'UUTUUKSIA ARVOSTELLUILTA KASINOILTA',
+  Play: 'Pelaa',
+  at: 'kasinolla',
+  Highlights: 'Kohokohdat',
+  Countries: 'Maat',
+  Payments: 'Maksutavat',
+  Games: 'Pelit',
+  Bonuses: 'Bonukset',
+  Checklist: 'Tarkistuslista',
+  Trust: 'Luotettavuus',
+  'Pros & Cons': 'Hyvät ja huonot puolet',
+  'Best For': 'Sopii parhaiten',
+  'On this page': 'Tällä sivulla',
+  'Show fewer countries': 'Näytä vähemmän maita',
+  'Show all countries': 'Näytä kaikki maat',
+  'Casino brand letter navigation': 'Kasinobrändien aakkosellinen navigointi',
+  'New Games': 'Uudet pelit',
+  'LATEST RELEASES': 'UUSIMMAT JULKAISUT',
+  'No top casinos available.': 'Suositeltuja kasinoita ei ole juuri nyt saatavilla.',
+  'No exclusive offers available at the moment.': 'Eksklusiivisia tarjouksia ei ole juuri nyt saatavilla.',
+  'No new casinos available at the moment.': 'Uusia kasinoita ei ole juuri nyt saatavilla.',
+  'No top rated casinos available at the moment.': 'Parhaiten arvioituja kasinoita ei ole juuri nyt saatavilla.',
+};
+const finnishRuntimeText = english => {
+  if (FINNISH_RUNTIME_COPY[english]) return FINNISH_RUNTIME_COPY[english];
+  return english
+    .replace(/^(.*) is currently unavailable$/, '$1 ei ole tällä hetkellä saatavilla')
+    .replace(/^(.*) is not recommended$/, '$1 ei ole suositeltu')
+    .replace(/^(\d+) more payment methods$/, '$1 muuta maksutapaa')
+    .replace(/^Read the (.*) review$/, 'Lue kasinon $1 arvostelu')
+    .replace(/^Inside casinos available in (.*)$/, 'Kasinoiden esikatselu – $1')
+    .replace(/^Real homepage captures from brands included in our (.*) comparison\. Open any preview for the complete review and current details\.$/, 'Aitoja kuvia $1-vertailuumme kuuluvien kasinoiden etusivuilta. Avaa kortti nähdäksesi koko arvostelun ja ajantasaiset tiedot.')
+    .replace(/^(.*) casino homepage for (.*)$/, '$1-kasinon etusivu, markkina $2')
+    .replace(/^(.*) casino homepage$/, '$1-kasinon etusivu')
+    .replace(/^New games in (.*)$/, 'Uudet pelit: $1')
+    .replace(/^Recent releases from casino brands included in our (.*) comparison\. Each card opens the relevant review; availability can vary by region and account\.$/, 'Uusimpia julkaisuja $1-vertailuumme kuuluvilta kasinoilta. Jokainen kortti avaa asiaankuuluvan arvostelun; saatavuus voi vaihdella alueen ja pelitilin mukaan.')
+    .replace(/^New games for (.*)$/, 'Uudet pelit: $1')
+    .replace(/^(.*) game artwork at (.*)$/, 'Pelin $1 kuva kasinolla $2')
+    .replace(/^(.*) game artwork$/, '$1 -pelin kuva')
+    .replace(/^(.*) Gambling Guide$/, 'Rahapeliopas: $1')
+    .replace(/^Visit (.*)$/, 'Pelaa kasinolla $1')
+    .replace(/^(.*) product snapshot$/, 'Kasinon $1 tarjonnan yhteenveto')
+    .replace(/^View all (.*) casinos$/, 'Näytä kaikki kasinot: $1')
+    .replace(/^(.*) market availability$/, 'Saatavuus markkinalla $1')
+    .replace(/^(.*) casino guide$/, 'Kasino-opas: $1')
+    .replace(/^Play (.*) at (.*)$/, 'Pelaa peliä $1 kasinolla $2');
+};
+
 const localizedBrandBonusText = value => {
   const normalized = normalizeText(value);
   return brandBonusTranslations[normalized] || normalized;
 };
 
-const localeText = (english, german, spanish, italian, polish, ukrainian, portuguese, french, hindi) =>
+const localeText = (english, german, spanish, italian, polish, ukrainian, portuguese, french, hindi, finnish) =>
   SITE_LOCALE === 'de'
     ? german
     : SITE_LOCALE === 'es'
@@ -1096,6 +1218,8 @@ const localeText = (english, german, spanish, italian, polish, ukrainian, portug
                 ? (french || frenchRuntimeText(english))
                 : SITE_LOCALE === 'hi'
                   ? (hindi || hindiRuntimeText(english))
+                  : SITE_LOCALE === 'fi'
+                    ? (finnish || finnishRuntimeText(english))
         : english;
 const localizedPagePath = path => {
   const normalized = normalizePagePath(path);
@@ -1583,6 +1707,11 @@ const COUNTRY_NAMES_HI = {
   ukraine: 'यूक्रेन', 'united-kingdom': 'यूनाइटेड किंगडम', 'united-states': 'संयुक्त राज्य अमेरिका',
   uzbekistan: 'उज़्बेकिस्तान', vietnam: 'वियतनाम',
 };
+const FINNISH_REGION_NAMES = typeof Intl.DisplayNames === 'function'
+  ? new Intl.DisplayNames(['fi'], { type: 'region' })
+  : null;
+const finnishCountryName = country =>
+  FINNISH_REGION_NAMES?.of(country.code.toUpperCase()) || country.name;
 const localizedCountryName = country =>
   SITE_LOCALE === 'de'
     ? COUNTRY_NAMES_DE[country.slug] || country.name
@@ -1600,6 +1729,8 @@ const localizedCountryName = country =>
                 ? COUNTRY_NAMES_FR[country.slug] || country.name
                 : SITE_LOCALE === 'hi'
                   ? COUNTRY_NAMES_HI[country.slug] || country.name
+                  : SITE_LOCALE === 'fi'
+                    ? finnishCountryName(country)
         : country.name;
 
 const localizedCountryTitle = country => {
@@ -1612,6 +1743,7 @@ const localizedCountryTitle = country => {
   if (SITE_LOCALE === 'pt') return `Melhores casinos online em ${name}`;
   if (SITE_LOCALE === 'fr') return `Meilleurs casinos en ligne en ${name}`;
   if (SITE_LOCALE === 'hi') return `${name} के सर्वश्रेष्ठ ऑनलाइन कैसीनो`;
+  if (SITE_LOCALE === 'fi') return `Parhaat nettikasinot: ${name}`;
 
   const germanCases = {
     'united-states': 'in den Vereinigten Staaten',
@@ -1650,6 +1782,7 @@ const STATIC_SEARCH_ITEMS = [
     labelPt: 'Melhores casinos',
     labelFr: 'Meilleurs casinos',
     labelHi: 'सर्वश्रेष्ठ कैसीनो',
+    labelFi: 'Parhaat kasinot',
     type: 'Page',
     href: '/top-casinos/',
     keywords: 'best casinos top casino reviews worldwide',
@@ -1664,6 +1797,7 @@ const STATIC_SEARCH_ITEMS = [
     labelPt: 'Novos casinos',
     labelFr: 'Nouveaux casinos',
     labelHi: 'नए कैसीनो',
+    labelFi: 'Uudet kasinot',
     type: 'Page',
     href: '/new-casinos/',
     keywords: 'new casino reviews fresh brands latest',
@@ -1678,6 +1812,7 @@ const STATIC_SEARCH_ITEMS = [
     labelPt: 'Melhor avaliados',
     labelFr: 'Mieux notés',
     labelHi: 'सर्वोच्च रेटिंग',
+    labelFi: 'Parhaiten arvioidut',
     type: 'Page',
     href: '/top-rated/',
     keywords: 'top rated trusted casino reviews rating',
@@ -1692,6 +1827,7 @@ const STATIC_SEARCH_ITEMS = [
     labelPt: 'Exclusivos',
     labelFr: 'Exclusifs',
     labelHi: 'एक्सक्लूसिव',
+    labelFi: 'Eksklusiiviset',
     type: 'Page',
     href: '/exclusive-offers/',
     keywords: 'exclusive offers private bonuses promotions deals',
@@ -1706,6 +1842,7 @@ const STATIC_SEARCH_ITEMS = [
     labelPt: 'Casinos e apostas',
     labelFr: 'Casinos et paris',
     labelHi: 'कैसीनो और बेटिंग',
+    labelFi: 'Kasinot ja vedonlyönti',
     type: 'Page',
     href: '/casinos-and-betting/',
     keywords: 'all brands casinos betting sportsbooks a to z',
@@ -1720,6 +1857,7 @@ const STATIC_SEARCH_ITEMS = [
     labelPt: 'Métodos de pagamento',
     labelFr: 'Moyens de paiement',
     labelHi: 'भुगतान विधियां',
+    labelFi: 'Maksutavat',
     type: 'Page',
     href: '/payment-methods/',
     keywords: 'payments visa mastercard crypto bank transfer ewallets',
@@ -1734,6 +1872,7 @@ const STATIC_SEARCH_ITEMS = [
     labelPt: 'Jogo responsável',
     labelFr: 'Jeu responsable',
     labelHi: 'ज़िम्मेदारी से खेलना',
+    labelFi: 'Vastuullinen pelaaminen',
     type: 'Page',
     href: '/responsible-gambling/',
     keywords: 'responsible gambling safer play limits help',
@@ -1748,6 +1887,7 @@ const STATIC_SEARCH_ITEMS = [
     labelPt: 'Sobre o SpinCresta',
     labelFr: 'À propos de SpinCresta',
     labelHi: 'SpinCresta के बारे में',
+    labelFi: 'Tietoa SpinCrestasta',
     type: 'Page',
     href: '/about/',
     keywords: 'about spincresta team reviews mission',
@@ -1762,6 +1902,7 @@ const STATIC_SEARCH_ITEMS = [
     labelPt: 'Blog SpinCresta',
     labelFr: 'Blog SpinCresta',
     labelHi: 'SpinCresta ब्लॉग',
+    labelFi: 'SpinCresta-blogi',
     type: 'Blog',
     href: '/blog/',
     summary: 'Casino guides, payment explainers, bonus terms, and safer-play checks',
@@ -1773,6 +1914,7 @@ const STATIC_SEARCH_ITEMS = [
     summaryPt: 'Guias de casinos, métodos de pagamento, condições de bónus e ferramentas de jogo responsável',
     summaryFr: 'Guides de casino, moyens de paiement, conditions des bonus et outils de jeu responsable',
     summaryHi: 'कैसीनो गाइड, भुगतान विधियां, बोनस की शर्तें और ज़िम्मेदारी से खेलने के टूल',
+    summaryFi: 'Kasino-oppaat, maksutavat, bonusehdot ja vastuullisen pelaamisen työkalut',
     keywords: 'blog casino guides payment bonuses withdrawals kyc country reviews',
   },
 ];
@@ -1815,16 +1957,16 @@ const getSiteSearchItems = () => {
 
   STATIC_SEARCH_ITEMS.forEach(item => addItem({
     ...item,
-    label: SITE_LOCALE === 'de' ? item.labelDe || item.label : SITE_LOCALE === 'es' ? item.labelEs || item.label : SITE_LOCALE === 'it' ? item.labelIt || item.label : SITE_LOCALE === 'pl' ? item.labelPl || item.label : SITE_LOCALE === 'uk' ? item.labelUk || item.label : SITE_LOCALE === 'pt' ? item.labelPt || item.label : SITE_LOCALE === 'fr' ? item.labelFr || item.label : SITE_LOCALE === 'hi' ? item.labelHi || item.label : item.label,
-    type: SITE_LOCALE === 'de' && item.type === 'Page' ? 'Seite' : SITE_LOCALE === 'es' && item.type === 'Page' ? 'Página' : SITE_LOCALE === 'it' && item.type === 'Page' ? 'Pagina' : SITE_LOCALE === 'pl' && item.type === 'Page' ? 'Strona' : SITE_LOCALE === 'uk' && item.type === 'Page' ? 'Сторінка' : SITE_LOCALE === 'pt' && item.type === 'Page' ? 'Página' : SITE_LOCALE === 'fr' && item.type === 'Page' ? 'Page' : SITE_LOCALE === 'hi' && item.type === 'Page' ? 'पेज' : item.type,
-    summary: SITE_LOCALE === 'de' ? item.summaryDe || item.summary : SITE_LOCALE === 'es' ? item.summaryEs || item.summary : SITE_LOCALE === 'it' ? item.summaryIt || item.summary : SITE_LOCALE === 'pl' ? item.summaryPl || item.summary : SITE_LOCALE === 'uk' ? item.summaryUk || item.summary : SITE_LOCALE === 'pt' ? item.summaryPt || item.summary : SITE_LOCALE === 'fr' ? item.summaryFr || item.summary : SITE_LOCALE === 'hi' ? item.summaryHi || item.summary : item.summary,
+    label: SITE_LOCALE === 'de' ? item.labelDe || item.label : SITE_LOCALE === 'es' ? item.labelEs || item.label : SITE_LOCALE === 'it' ? item.labelIt || item.label : SITE_LOCALE === 'pl' ? item.labelPl || item.label : SITE_LOCALE === 'uk' ? item.labelUk || item.label : SITE_LOCALE === 'pt' ? item.labelPt || item.label : SITE_LOCALE === 'fr' ? item.labelFr || item.label : SITE_LOCALE === 'hi' ? item.labelHi || item.label : SITE_LOCALE === 'fi' ? item.labelFi || item.label : item.label,
+    type: SITE_LOCALE === 'de' && item.type === 'Page' ? 'Seite' : SITE_LOCALE === 'es' && item.type === 'Page' ? 'Página' : SITE_LOCALE === 'it' && item.type === 'Page' ? 'Pagina' : SITE_LOCALE === 'pl' && item.type === 'Page' ? 'Strona' : SITE_LOCALE === 'uk' && item.type === 'Page' ? 'Сторінка' : SITE_LOCALE === 'pt' && item.type === 'Page' ? 'Página' : SITE_LOCALE === 'fr' && item.type === 'Page' ? 'Page' : SITE_LOCALE === 'hi' && item.type === 'Page' ? 'पेज' : SITE_LOCALE === 'fi' && item.type === 'Page' ? 'Sivu' : item.type,
+    summary: SITE_LOCALE === 'de' ? item.summaryDe || item.summary : SITE_LOCALE === 'es' ? item.summaryEs || item.summary : SITE_LOCALE === 'it' ? item.summaryIt || item.summary : SITE_LOCALE === 'pl' ? item.summaryPl || item.summary : SITE_LOCALE === 'uk' ? item.summaryUk || item.summary : SITE_LOCALE === 'pt' ? item.summaryPt || item.summary : SITE_LOCALE === 'fr' ? item.summaryFr || item.summary : SITE_LOCALE === 'hi' ? item.summaryHi || item.summary : SITE_LOCALE === 'fi' ? item.summaryFi || item.summary : item.summary,
     href: localizedPagePath(item.href),
   }));
 
   COUNTRIES.forEach(country => {
     const countryName = localizedCountryName(country);
     addItem({
-      label: `${countryName} casinos`,
+      label: SITE_LOCALE === 'fi' ? `${countryName}: kasinot` : `${countryName} casinos`,
       type: uiCopy.countryGuide,
       href: countryPagePath(country.slug),
       summary:
@@ -1844,6 +1986,8 @@ const getSiteSearchItems = () => {
                       ? `Casinos en ligne et paris en ${countryName}`
                       : SITE_LOCALE === 'hi'
                         ? `${countryName} में ऑनलाइन कैसीनो और बेटिंग`
+                        : SITE_LOCALE === 'fi'
+                          ? `Nettikasinot ja vedonlyönti: ${countryName}`
               : `Online casinos and betting in ${countryName}`,
       keywords: `${country.code} ${country.slug}`,
     });
@@ -2021,7 +2165,7 @@ const initLanguageSwitcher = () => {
 
   const getLocaleSwitchPath = locale => {
     const currentPath = window.location.pathname;
-    const englishPath = currentPath.replace(/^\/(?:de|es|it|pl|uk|pt|fr|hi)(?=\/|$)/, '') || '/';
+    const englishPath = currentPath.replace(/^\/(?:de|es|it|pl|uk|pt|fr|hi|fi)(?=\/|$)/, '') || '/';
     const localizedPath = locale === 'en'
       ? englishPath
       : englishPath === '/'
@@ -2039,6 +2183,7 @@ const initLanguageSwitcher = () => {
     pt: { code: 'PT', flag: 'portugal', label: uiCopy.languagePortuguese },
     fr: { code: 'FR', flag: 'france', label: uiCopy.languageFrench },
     hi: { code: 'HI', flag: 'india', label: uiCopy.languageHindi },
+    fi: { code: 'FI', flag: 'finland', label: uiCopy.languageFinnish },
   };
   const currentLocale = localeDisplay[SITE_LOCALE];
 
@@ -2085,6 +2230,10 @@ const initLanguageSwitcher = () => {
       <a class="language-switcher-option" href="${getLocaleSwitchPath('hi')}" lang="hi" aria-label="${uiCopy.languageHindi}" title="${uiCopy.languageHindi}"${SITE_LOCALE === 'hi' ? ' aria-current="page"' : ''}>
         <img src="/icons/india-flag-icon.svg" alt="" aria-hidden="true" loading="lazy" decoding="async" />
         <span class="language-switcher-code" aria-hidden="true">HI</span>
+      </a>
+      <a class="language-switcher-option" href="${getLocaleSwitchPath('fi')}" lang="fi" aria-label="${uiCopy.languageFinnish}" title="${uiCopy.languageFinnish}"${SITE_LOCALE === 'fi' ? ' aria-current="page"' : ''}>
+        <img src="/icons/finland-flag-icon.svg" alt="" aria-hidden="true" loading="lazy" decoding="async" />
+        <span class="language-switcher-code" aria-hidden="true">FI</span>
       </a>
     </div>
   `;
@@ -3881,6 +4030,8 @@ const enhanceFaqBlocks = () => {
       titleText.includes('domand') ||
       titleText.includes('pytan') ||
       titleText.includes('питан') ||
+      titleText.includes('ukk') ||
+      titleText.includes('kysym') ||
       titleText.includes('पूछे जाने वाले प्रश्न') ||
       titleText.includes('प्रश्नोत्तर');
     if (!isFaqTitle) return;

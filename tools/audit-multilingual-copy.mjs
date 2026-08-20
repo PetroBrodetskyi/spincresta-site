@@ -4,7 +4,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 
 const ROOT = process.cwd();
-const locales = ['de', 'es', 'it', 'pl', 'uk', 'pt', 'fr', 'hi'];
+const locales = ['de', 'es', 'it', 'pl', 'uk', 'pt', 'fr', 'hi', 'fi'];
 const emailPattern = /[^\s<>"']+@[^\s<>"']+\.[A-Za-z]{2,}/g;
 const errors = [];
 

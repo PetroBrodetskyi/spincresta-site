@@ -45,6 +45,7 @@ export const initHomePage = context => {
     pt: 'PT',
     fr: 'FR',
     hi: 'IN',
+    fi: 'FI',
   });
   
   const getHomeGeoCode = () => HOME_GEO_BY_LOCALE[SITE_LOCALE] || '';

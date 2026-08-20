@@ -5,7 +5,7 @@ import path from 'node:path';
 import { BRANDS } from '../scripts/brands.js';
 
 const ROOT = process.cwd();
-const LOCALES = ['de', 'es', 'it', 'pl', 'uk', 'pt', 'fr', 'hi'];
+const LOCALES = ['de', 'es', 'it', 'pl', 'uk', 'pt', 'fr', 'hi', 'fi'];
 const OUTPUT_DIRECTORY = path.join(ROOT, 'scripts', 'brand-bonus-translations');
 
 const decodeHtml = value =>

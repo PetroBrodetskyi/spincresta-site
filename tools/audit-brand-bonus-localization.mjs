@@ -6,7 +6,7 @@ import { pathToFileURL } from 'node:url';
 import { BRANDS } from '../scripts/brands.js';
 
 const ROOT = process.cwd();
-const LOCALES = ['de', 'es', 'it', 'pl', 'uk', 'pt', 'fr', 'hi'];
+const LOCALES = ['de', 'es', 'it', 'pl', 'uk', 'pt', 'fr', 'hi', 'fi'];
 const bonuses = [...new Set(BRANDS.map(brand => brand.bonus?.replace(/\s+/g, ' ').trim()).filter(Boolean))];
 const errors = [];
 

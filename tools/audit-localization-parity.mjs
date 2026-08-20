@@ -6,7 +6,7 @@ import vm from 'node:vm';
 
 const ROOT = process.cwd();
 const LOCALE = String(process.argv[2] || 'es').toLowerCase();
-const SKIP_ROOTS = new Set(['.git', '.vercel', 'node_modules', 'tools', 'de', 'es', 'it', 'pl', 'uk', 'pt', 'fr', 'hi']);
+const SKIP_ROOTS = new Set(['.git', '.vercel', 'node_modules', 'tools', 'de', 'es', 'it', 'pl', 'uk', 'pt', 'fr', 'hi', 'fi']);
 const TAGS = ['h1', 'h2', 'h3', 'p', 'section', 'article', 'table', 'thead', 'tbody', 'tr', 'li', 'img', 'details', 'summary'];
 
 const sourceFiles = [];

@@ -106,6 +106,15 @@ export const initTopCasinosPage = context => {
                         hide: 'कम देश दिखाएं',
                         label: 'कैसीनो रैंकिंग और देश गाइड',
                       }
+                    : SITE_LOCALE === 'fi'
+                      ? {
+                          kicker: `${COUNTRIES.length} MAAOPASTA`,
+                          title: 'Valitse markkinasi',
+                          description: 'Avaa suositeltu ranking tai siirry suoraan oman maasi kattavaan oppaaseen.',
+                          show: 'Näytä kaikki maat',
+                          hide: 'Näytä vähemmän',
+                          label: 'Kasinorankingit ja maaoppaat',
+                        }
           : {
           kicker: `${COUNTRIES.length} COUNTRY GUIDES`,
           title: 'Choose your market',

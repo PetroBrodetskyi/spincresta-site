@@ -459,6 +459,21 @@ export const initBrandPage = context => {
     'Video poker': 'वीडियो पोकर', 'Crash games': 'क्रैश गेम', 'Other live games': 'अन्य लाइव गेम',
     'Live casino': 'लाइव कैसीनो', 'Game shows': 'गेम शो',
   };
+  const SNAPSHOT_FI_TRANSLATIONS = {
+    'Games & Betting Snapshot': 'Pelit ja vedonlyönti lyhyesti',
+    'Visible now:': 'Saatavilla nyt:',
+    'Not surfaced:': 'Ei näkyvissä:',
+    'These are the main game categories currently visible in the account.':
+      'Nämä ovat tilillä tällä hetkellä näkyvät tärkeimmät peliluokat.',
+    'These are the main betting categories currently visible in the account.':
+      'Nämä ovat tilillä tällä hetkellä näkyvät tärkeimmät vedonlyöntiluokat.',
+    Games: 'PELIT', GAMES: 'PELIT', 'LIVE GAMES': 'LIVE-PELIT', Betting: 'VEDONLYÖNTI', BETTING: 'VEDONLYÖNTI',
+    Slots: 'Kolikkopelit', Roulette: 'Ruletti', Blackjack: 'Blackjack', Baccarat: 'Baccarat', Poker: 'Pokeri',
+    Keno: 'Keno', Bingo: 'Bingo', 'Jackpot games': 'Jackpottipelit', 'Live games': 'Live-pelit',
+    'Live dice games': 'Live-noppapelit', 'Craps and dice': 'Craps ja noppapelit', 'Scratch cards': 'Raaputusarvat',
+    'Video poker': 'Videopokeri', 'Crash games': 'Crash-pelit', 'Other live games': 'Muut live-pelit',
+    'Live casino': 'Livekasino', 'Game shows': 'Peliohjelmat',
+  };
   
   const snapshotLabel = value =>
     SITE_LOCALE === 'de'
@@ -477,6 +492,8 @@ export const initBrandPage = context => {
                   ? SNAPSHOT_FR_TRANSLATIONS[value] || value
                   : SITE_LOCALE === 'hi'
                     ? SNAPSHOT_HI_TRANSLATIONS[value] || value
+                    : SITE_LOCALE === 'fi'
+                      ? SNAPSHOT_FI_TRANSLATIONS[value] || value
           : value;
   
   const renderSnapshotItems = (items, isAvailable) =>
@@ -771,9 +788,9 @@ export const initBrandPage = context => {
     document.querySelectorAll('body[data-brand] .feature-card > strong').forEach(heading => {
       const label = normalizeText(heading.textContent).trim().toLowerCase();
       const kind =
-        label === 'pros' || label === 'prós' || label === 'vorteile' || label === 'ventajas' || label === 'pro' || label === 'vantaggi' || label === 'zalety' || label === 'plusy' || label === 'переваги' || label === 'плюси' || label === 'avantages' || label === 'फायदे'
+        label === 'pros' || label === 'prós' || label === 'vorteile' || label === 'ventajas' || label === 'pro' || label === 'vantaggi' || label === 'zalety' || label === 'plusy' || label === 'переваги' || label === 'плюси' || label === 'avantages' || label === 'फायदे' || label === 'plussat'
           ? 'pros'
-          : label === 'cons' || label === 'nachteile' || label === 'contras' || label === 'desventajas' || label === 'contro' || label === 'svantaggi' || label === 'wady' || label === 'minusy' || label === 'недоліки' || label === 'мінуси' || label === 'inconvénients' || label === 'नुकसान'
+          : label === 'cons' || label === 'nachteile' || label === 'contras' || label === 'desventajas' || label === 'contro' || label === 'svantaggi' || label === 'wady' || label === 'minusy' || label === 'недоліки' || label === 'мінуси' || label === 'inconvénients' || label === 'नुकसान' || label === 'miinukset'
             ? 'cons'
             : '';
       if (!kind) return;

@@ -44,7 +44,7 @@ for (const absolute of files) {
     .map(([, code, href]) => ({ code: code.toLowerCase(), href }));
   pages.set(urlPath, { absolute, html, lang, canonical, robots, title, description, alternates });
 
-  const expectedLang = urlPath.startsWith('/de/') ? 'de' : urlPath.startsWith('/es/') ? 'es' : urlPath.startsWith('/it/') ? 'it' : urlPath.startsWith('/pl/') ? 'pl' : urlPath.startsWith('/uk/') ? 'uk' : urlPath.startsWith('/pt/') ? 'pt' : urlPath.startsWith('/fr/') ? 'fr' : urlPath.startsWith('/hi/') ? 'hi' : 'en';
+  const expectedLang = urlPath.startsWith('/de/') ? 'de' : urlPath.startsWith('/es/') ? 'es' : urlPath.startsWith('/it/') ? 'it' : urlPath.startsWith('/pl/') ? 'pl' : urlPath.startsWith('/uk/') ? 'uk' : urlPath.startsWith('/pt/') ? 'pt' : urlPath.startsWith('/fr/') ? 'fr' : urlPath.startsWith('/hi/') ? 'hi' : urlPath.startsWith('/fi/') ? 'fi' : 'en';
   if (!lang.toLowerCase().startsWith(expectedLang)) errors.push(`${urlPath}: lang=${lang || 'missing'}, expected ${expectedLang}`);
   if (canonical !== `${ORIGIN}${urlPath}`) errors.push(`${urlPath}: canonical does not match its URL`);
 
@@ -63,7 +63,7 @@ for (const absolute of files) {
 
 // Validate language variants and reciprocal alternate links after every page is known.
 for (const [urlPath, page] of pages) {
-  const basePath = urlPath.replace(/^\/(?:de|es|it|pl|uk|pt|fr|hi)(?=\/)/, '');
+  const basePath = urlPath.replace(/^\/(?:de|es|it|pl|uk|pt|fr|hi|fi)(?=\/)/, '');
   const localePaths = {
     en: basePath,
     de: basePath === '/' ? '/de/' : `/de${basePath}`,
@@ -74,6 +74,7 @@ for (const [urlPath, page] of pages) {
     pt: basePath === '/' ? '/pt/' : `/pt${basePath}`,
     fr: basePath === '/' ? '/fr/' : `/fr${basePath}`,
     hi: basePath === '/' ? '/hi/' : `/hi${basePath}`,
+    fi: basePath === '/' ? '/fi/' : `/fi${basePath}`,
   };
 
   for (const [locale, variantPath] of Object.entries(localePaths)) {
@@ -88,7 +89,7 @@ for (const [urlPath, page] of pages) {
     );
     if (!hasVariantAlternate) errors.push(`${urlPath}: missing alternate link to ${variantPath}`);
 
-    const pageLocale = urlPath.startsWith('/de/') ? 'de' : urlPath.startsWith('/es/') ? 'es' : urlPath.startsWith('/it/') ? 'it' : urlPath.startsWith('/pl/') ? 'pl' : urlPath.startsWith('/uk/') ? 'uk' : urlPath.startsWith('/pt/') ? 'pt' : urlPath.startsWith('/fr/') ? 'fr' : urlPath.startsWith('/hi/') ? 'hi' : 'en';
+    const pageLocale = urlPath.startsWith('/de/') ? 'de' : urlPath.startsWith('/es/') ? 'es' : urlPath.startsWith('/it/') ? 'it' : urlPath.startsWith('/pl/') ? 'pl' : urlPath.startsWith('/uk/') ? 'uk' : urlPath.startsWith('/pt/') ? 'pt' : urlPath.startsWith('/fr/') ? 'fr' : urlPath.startsWith('/hi/') ? 'hi' : urlPath.startsWith('/fi/') ? 'fi' : 'en';
     const hasReturnAlternate = variant.alternates.some(link =>
       link.code.startsWith(pageLocale) && new URL(link.href).pathname === urlPath
     );
