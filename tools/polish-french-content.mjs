@@ -132,7 +132,7 @@ const replacements = [
   [/Signal d'Anjouan/gi, 'Licence d’Anjouan'],
   [/plaintes@spinboss\.com/gi, 'complaints@spinboss.com'],
   [/plaintes@(longfu88|westace|wildsino)\.com/gi, 'complaints@$1.com'],
-  [/confidentialité@spincresta\.com/gi, 'privacy@spincresta.com'],
+  [/confidentialité@spincresta\.com/gi, 'affiliates@armadaapp.com'],
   [/info-fr@betwinner\.com/gi, 'info-en@betwinner.com'],
   [/Jouez maintenant/g, 'Jouer'],
   [/Visitez le casino/g, 'Jouer'],
