@@ -4263,6 +4263,90 @@ html[lang^='fr'] body:not(.home-page) .content-review > section:has(> .faq-grid)
   --section-eyebrow: 'QUESTIONS FRÉQUENTES';
 }
 
+html[lang^='hi'] body:not(.home-page):not(.casinos-page)
+  :where(
+    .section-head,
+    .expert-review .container,
+    .features-section,
+    .brand-countries,
+    .brand-payments,
+    .brand-availability-widget,
+    .content-review > section,
+    .content-article,
+    .content-article > section,
+    .final-cta-glass
+  ) {
+  --section-eyebrow: 'SPINCRESTA गाइड';
+}
+
+html[lang^='hi'] body[data-brand] .features-section,
+html[lang^='hi'] body[data-brand] .brand-why-heading {
+  --section-eyebrow: 'मुख्य विशेषताएँ';
+}
+
+html[lang^='hi'] body[data-brand] .brand-countries,
+html[lang^='hi'] body[data-brand] .brand-availability-widget {
+  --section-eyebrow: 'उपलब्धता';
+}
+
+html[lang^='hi'] body[data-brand] .brand-payments {
+  --section-eyebrow: 'भुगतान के तरीके';
+}
+
+html[lang^='hi'] body[data-brand] .content-review > section,
+html[lang^='hi'] body[data-brand] .content-article,
+html[lang^='hi'] body[data-brand] .content-article > section {
+  --section-eyebrow: 'ब्रांड समीक्षा';
+}
+
+html[lang^='hi'] body:not(.home-page) .content-article:has(> .faq-grid),
+html[lang^='hi'] body:not(.home-page) .content-article > section:has(> .faq-grid),
+html[lang^='hi'] body:not(.home-page) .content-review > section:has(> .faq-grid) {
+  --section-eyebrow: 'अक्सर पूछे जाने वाले प्रश्न';
+}
+
+html[lang^='fi'] body:not(.home-page):not(.casinos-page)
+  :where(
+    .section-head,
+    .expert-review .container,
+    .features-section,
+    .brand-countries,
+    .brand-payments,
+    .brand-availability-widget,
+    .content-review > section,
+    .content-article,
+    .content-article > section,
+    .final-cta-glass
+  ) {
+  --section-eyebrow: 'SPINCRESTA-OPAS';
+}
+
+html[lang^='fi'] body[data-brand] .features-section,
+html[lang^='fi'] body[data-brand] .brand-why-heading {
+  --section-eyebrow: 'TÄRKEIMMÄT TIEDOT';
+}
+
+html[lang^='fi'] body[data-brand] .brand-countries,
+html[lang^='fi'] body[data-brand] .brand-availability-widget {
+  --section-eyebrow: 'SAATAVUUS';
+}
+
+html[lang^='fi'] body[data-brand] .brand-payments {
+  --section-eyebrow: 'MAKSUTAVAT';
+}
+
+html[lang^='fi'] body[data-brand] .content-review > section,
+html[lang^='fi'] body[data-brand] .content-article,
+html[lang^='fi'] body[data-brand] .content-article > section {
+  --section-eyebrow: 'BRÄNDIARVOSTELU';
+}
+
+html[lang^='fi'] body:not(.home-page) .content-article:has(> .faq-grid),
+html[lang^='fi'] body:not(.home-page) .content-article > section:has(> .faq-grid),
+html[lang^='fi'] body:not(.home-page) .content-review > section:has(> .faq-grid) {
+  --section-eyebrow: 'USEIN KYSYTYT KYSYMYKSET';
+}
+
 body[data-country] .section-head {
   --section-eyebrow: 'Top Brands';
 }

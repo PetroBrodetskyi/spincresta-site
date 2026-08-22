@@ -134,5 +134,6 @@ export default {
   "Welcome Package - Up to €3,000 + 300 Free Spins": "Tervetuliaispaketti - Jopa 3 000 € + 300 ilmaiskierrosta",
   "280% Match Bonus up to R5500 + 45 Free Spins": "280 % Match Bonus R5500 asti + 45 ilmaispyöräytystä",
   "Welcome Bonus - 550% Up to €3,800 + 50 Free Spins": "Tervetuliaisbonus - 550 % Jopa 3 800 € + 50 ilmaispyöräytystä",
-  "100% Welcome Bonus up to $5,000 on Your First Deposit": "100 % tervetuliaisbonus 5 000 dollariin asti ensimmäisestä talletuksestasi"
+  "100% Welcome Bonus up to $5,000 on Your First Deposit": "100 % tervetuliaisbonus 5 000 dollariin asti ensimmäisestä talletuksestasi",
+  "Welcome Package up to NGN 716,000 + 150 Free Spins": "Tervetuliaispaketti jopa 716 000 NGN + 150 ilmaiskierrosta"
 };

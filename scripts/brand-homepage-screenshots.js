@@ -2,6 +2,7 @@
 // Keys match the review slug used by BRANDS.urlDetail.
 export const BRAND_HOMEPAGE_SCREENSHOTS = Object.freeze(
 {
+  "goldpari": "https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto/v1787410332/spincresta/brands/goldpari/main-page/goldpari-page_iicb86",
   "browinner": "https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto/v1786475672/spincresta/brands/browinner/main-page/browinner-page_wevvz1",
   "10bet": "https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto/v1784918333/spincresta/brands/10bet/main-page/10bet-page_u4vkbe.webp",
   "1red": "https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto/v1784918450/spincresta/brands/1red/main-page/1red-page_cpvuxm.webp",

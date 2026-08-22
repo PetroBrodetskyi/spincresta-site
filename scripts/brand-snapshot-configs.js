@@ -177,6 +177,12 @@ const browinnerConfig = createGamesLiveBettingConfig(
   ['Football', 'Basketball', 'Tennis', 'Table tennis', 'Volleyball', 'Ice hockey', 'Cricket', 'Baseball', 'Handball', 'American football', 'eSports', 'Virtual sports', 'Combat sports', 'Boxing', 'Martial arts', 'Motorsport']
 );
 
+const goldpariConfig = createGamesLiveBettingConfig(
+  ['Slots', 'Roulette', 'Blackjack', 'Bingo', 'Baccarat', 'Jackpot games', 'Live games', 'Poker', 'Keno', 'Crash games'],
+  ['Live shows', 'Live baccarat', 'Live blackjack', 'Other live games', 'Live poker', 'Live roulette'],
+  ['Football', 'Basketball', 'Tennis', 'Table tennis', 'Volleyball', 'Ice hockey', 'Cricket', 'Baseball', 'Handball', 'American football', 'eSports', 'Virtual sports', 'Combat sports', 'Boxing', 'Martial arts', 'Motorsport']
+);
+
 const onlywinConfig = createGamesLiveConfig(
   ['Slots', 'Roulette', 'Blackjack', 'Baccarat', 'Jackpot games', 'Live games', 'Poker', 'Crash games'],
   ['Live shows', 'Live baccarat', 'Live blackjack', 'Other live games', 'Live roulette']
@@ -532,6 +538,7 @@ export const BRAND_SNAPSHOT_CONFIGS = {
   pinco: pincoConfig,
   gamblezen: gamblezenConfig,
   browinner: browinnerConfig,
+  goldpari: goldpariConfig,
   onlywin: onlywinConfig,
   '10bet': tenBetConfig,
   'oshi-casino': oshiCasinoConfig,

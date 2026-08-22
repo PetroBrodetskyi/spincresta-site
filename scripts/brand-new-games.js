@@ -1,4 +1,30 @@
 export const BRAND_NEW_GAMES = {
+  goldpari: [
+    {
+      name: "Groovin' Tiger",
+      image: 'https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto/v1787410706/spincresta/brands/goldpari/new-games/goldpari-new-game-groovin-tiger_tyn4zn',
+    },
+    {
+      name: 'Hit The Jackpot',
+      image: 'https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto/v1787410705/spincresta/brands/goldpari/new-games/goldpari-new-game-hit-the-jackpot_jaakcv',
+    },
+    {
+      name: 'The Big Dog House',
+      image: 'https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto/v1787410704/spincresta/brands/goldpari/new-games/goldpari-new-game-the-big-dog-house_mo7bia',
+    },
+    {
+      name: 'Ice Fish',
+      image: 'https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto/v1787410703/spincresta/brands/goldpari/new-games/goldpari-new-game-ice-fish_zilhvl',
+    },
+    {
+      name: 'Drop the Billionaire',
+      image: 'https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto/v1787410702/spincresta/brands/goldpari/new-games/goldpari-new-game-drop-the-billionare_b01fyr',
+    },
+    {
+      name: 'Burning Coins 100',
+      image: 'https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto/v1787410702/spincresta/brands/goldpari/new-games/goldpari-new-game-burning-coins-100_zq0nqz',
+    },
+  ],
   browinner: [
     {
       name: 'Totem Tower Bonanza',

@@ -1092,6 +1092,18 @@ export const BRANDS = [
     hasDetailPage: true,
   },
   {
+    name: 'GoldPari',
+    bonus: 'Welcome Package up to NGN 716,000 + 150 Free Spins',
+    cta: 'Play Now',
+    urlDetail: 'brands/goldpari.html',
+    urlCasino: 'https://armadaapp.media-412.com/click?pid=3862&offer_id=126298',
+    image: 'images/goldpari.svg',
+    bgColor: '#171612',
+    countries: ['BD', 'BJ', 'BF', 'CM', 'CD', 'EG', 'ET', 'GH', 'CI', 'JO', 'KE', 'MA', 'NG', 'RU', 'SN', 'SO', 'LK', 'TZ', 'TG', 'UZ', 'ZM'],
+    payments: ['visa', 'mastercard', 'banktransfer', 'bitcoin', 'ethereum', 'tether', 'bitcoincash', 'cardano', 'dogecoin', 'litecoin', 'tron'],
+    hasDetailPage: true,
+  },
+  {
     name: 'GETX',
     bonus: 'Welcome Bonus: 350% + 250 Free Spins on the First Deposits',
     cta: 'Play Now',

@@ -134,5 +134,6 @@ export default {
   "Welcome Package - Up to €3,000 + 300 Free Spins": "Pacchetto di benvenuto: fino a 3.000 € + 300 giri gratuiti",
   "280% Match Bonus up to R5500 + 45 Free Spins": "Bonus del 280% fino a R5500 + 45 giri gratuiti",
   "Welcome Bonus - 550% Up to €3,800 + 50 Free Spins": "Bonus di benvenuto - 550% fino a € 3.800 + 50 giri gratuiti",
-  "100% Welcome Bonus up to $5,000 on Your First Deposit": "Bonus di benvenuto del 100% fino a $ 5.000 sul tuo primo deposito"
+  "100% Welcome Bonus up to $5,000 on Your First Deposit": "Bonus di benvenuto del 100% fino a $ 5.000 sul tuo primo deposito",
+  "Welcome Package up to NGN 716,000 + 150 Free Spins": "Pacchetto di benvenuto fino a 716.000 NGN + 150 giri gratuiti"
 };

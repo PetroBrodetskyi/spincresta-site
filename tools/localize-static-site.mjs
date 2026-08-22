@@ -9,23 +9,35 @@ const locale = String(args.get('--locale') || '').toLowerCase();
 const language = String(args.get('--language') || '');
 const mode = args.has('--translate') ? 'translate' : args.has('--apply') ? 'apply' : 'plan';
 const force = args.has('--force');
+const routeFilter = String(args.get('--route') || '').replace(/^\/+|\/+$/g, '');
 
 if (!/^[a-z]{2}(?:-[a-z]{2})?$/.test(locale) || !language) {
-  console.error('Usage: node tools/localize-static-site.mjs --locale es --language Spanish [--translate|--apply] [--force]');
+  console.error('Usage: node tools/localize-static-site.mjs --locale es --language Spanish [--translate|--apply] [--force] [--route brands/example]');
   process.exit(1);
 }
 
 const cachePath = String(args.get('--cache') || `/private/tmp/spincresta-localize-${locale}.json`);
-const sourceFiles = [];
+const allSourceFiles = [];
 const walk = dir => {
   for (const entry of fs.readdirSync(dir, { withFileTypes: true })) {
     if (['.git', 'node_modules', 'tools'].includes(entry.name) || (/^[a-z]{2}(?:-[a-z]{2})?$/.test(entry.name) && dir === root)) continue;
     const file = path.join(dir, entry.name);
     if (entry.isDirectory()) walk(file);
-    else if (entry.name === 'index.html') sourceFiles.push(file);
+    else if (entry.name === 'index.html') allSourceFiles.push(file);
   }
 };
 walk(root);
+const sourceFiles = routeFilter
+  ? allSourceFiles.filter(file => {
+      const relative = path.relative(root, file).split(path.sep).join('/');
+      return relative === `${routeFilter}/index.html` || relative === `${routeFilter}.html`;
+    })
+  : allSourceFiles;
+
+if (routeFilter && !sourceFiles.length) {
+  console.error(`No source page found for --route ${routeFilter}`);
+  process.exit(1);
+}
 
 const decode = value => value.replaceAll('&amp;', '&').replaceAll('&quot;', '"').replaceAll('&#39;', "'").replaceAll('&apos;', "'").replaceAll('&nbsp;', ' ');
 const keyFor = value => decode(value).replace(/\s+/g, ' ').trim();
@@ -162,7 +174,7 @@ const preserveEmails = (source, localized) => {
 const translate = value => preserveEmails(value, translated.get(value) || value);
 const preserveJsonKeys = new Set(['@context', '@type', 'image', 'logo', 'sameAs', 'datePublished', 'dateModified', 'priceCurrency', 'currenciesAccepted', 'paymentAccepted']);
 const routePath = file => `/${path.relative(root, file).replace(/index\.html$/, '').split(path.sep).join('/')}`;
-const sourceRoutes = new Set(sourceFiles.map(routePath));
+const sourceRoutes = new Set(allSourceFiles.map(routePath));
 const localeRoute = route => route === '/' ? `/${locale}/` : `/${locale}${route}`;
 const localeUrl = route => `https://spincresta.com${localeRoute(route)}`;
 const localizeInternalHref = value => {

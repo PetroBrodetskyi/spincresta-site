@@ -85,8 +85,21 @@ const LANGUAGE_OPTIONS = ['en', 'de', 'es', 'it', 'pl', 'uk', 'pt', 'fr', 'hi', 
 const BLOCKED_BRAND_ICON = '/icons/ui/stop-blocked-icon.svg';
 const UNAVAILABLE_BRAND_ICON = '/icons/ui/remove-close-round-grey-icon.svg';
 const BRAND_ONLY_COUNTRIES = {
+  BJ: { slug: 'benin', name: { en: 'Benin', de: 'Benin', es: 'Benín', it: 'Benin', pl: 'Benin', uk: 'Бенін', pt: 'Benim', fr: 'Bénin', hi: 'बेनिन', fi: 'Benin' } },
+  BF: { slug: 'burkina-faso', name: { en: 'Burkina Faso', de: 'Burkina Faso', es: 'Burkina Faso', it: 'Burkina Faso', pl: 'Burkina Faso', uk: 'Буркіна-Фасо', pt: 'Burquina Faso', fr: 'Burkina Faso', hi: 'बुर्किना फासो', fi: 'Burkina Faso' } },
+  CM: { slug: 'cameroon', name: { en: 'Cameroon', de: 'Kamerun', es: 'Camerún', it: 'Camerun', pl: 'Kamerun', uk: 'Камерун', pt: 'Camarões', fr: 'Cameroun', hi: 'कैमरून', fi: 'Kamerun' } },
+  CD: { slug: 'democratic-republic-of-the-congo', name: { en: 'DR Congo', de: 'Demokratische Republik Kongo', es: 'República Democrática del Congo', it: 'Repubblica Democratica del Congo', pl: 'Demokratyczna Republika Konga', uk: 'Демократична Республіка Конго', pt: 'República Democrática do Congo', fr: 'République démocratique du Congo', hi: 'कांगो लोकतांत्रिक गणराज्य', fi: 'Kongon demokraattinen tasavalta' } },
   CY: { slug: 'cyprus', name: { en: 'Cyprus', de: 'Zypern', es: 'Chipre', it: 'Cipro', pl: 'Cypr', uk: 'Кіпр', pt: 'Chipre', fr: 'Chypre', hi: 'साइप्रस', fi: 'Kypros' } },
+  ET: { slug: 'ethiopia', name: { en: 'Ethiopia', de: 'Äthiopien', es: 'Etiopía', it: 'Etiopia', pl: 'Etiopia', uk: 'Ефіопія', pt: 'Etiópia', fr: 'Éthiopie', hi: 'इथियोपिया', fi: 'Etiopia' } },
+  CI: { slug: 'ivory-coast', name: { en: "Côte d’Ivoire", de: 'Elfenbeinküste', es: 'Costa de Marfil', it: "Costa d’Avorio", pl: 'Wybrzeże Kości Słoniowej', uk: 'Кот-д’Івуар', pt: 'Costa do Marfim', fr: "Côte d’Ivoire", hi: 'कोट डी आइवर', fi: 'Norsunluurannikko' } },
+  JO: { slug: 'jordan', name: { en: 'Jordan', de: 'Jordanien', es: 'Jordania', it: 'Giordania', pl: 'Jordania', uk: 'Йорданія', pt: 'Jordânia', fr: 'Jordanie', hi: 'जॉर्डन', fi: 'Jordania' } },
+  MA: { slug: 'morocco', name: { en: 'Morocco', de: 'Marokko', es: 'Marruecos', it: 'Marocco', pl: 'Maroko', uk: 'Марокко', pt: 'Marrocos', fr: 'Maroc', hi: 'मोरक्को', fi: 'Marokko' } },
   RS: { slug: 'serbia', name: { en: 'Serbia', de: 'Serbien', es: 'Serbia', it: 'Serbia', pl: 'Serbia', uk: 'Сербія', pt: 'Sérvia', fr: 'Serbie', hi: 'सर्बिया', fi: 'Serbia' } },
+  SN: { slug: 'senegal', name: { en: 'Senegal', de: 'Senegal', es: 'Senegal', it: 'Senegal', pl: 'Senegal', uk: 'Сенегал', pt: 'Senegal', fr: 'Sénégal', hi: 'सेनेगल', fi: 'Senegal' } },
+  SO: { slug: 'somalia', name: { en: 'Somalia', de: 'Somalia', es: 'Somalia', it: 'Somalia', pl: 'Somalia', uk: 'Сомалі', pt: 'Somália', fr: 'Somalie', hi: 'सोमालिया', fi: 'Somalia' } },
+  LK: { slug: 'sri-lanka', name: { en: 'Sri Lanka', de: 'Sri Lanka', es: 'Sri Lanka', it: 'Sri Lanka', pl: 'Sri Lanka', uk: 'Шрі-Ланка', pt: 'Sri Lanka', fr: 'Sri Lanka', hi: 'श्रीलंका', fi: 'Sri Lanka' } },
+  TG: { slug: 'togo', name: { en: 'Togo', de: 'Togo', es: 'Togo', it: 'Togo', pl: 'Togo', uk: 'Того', pt: 'Togo', fr: 'Togo', hi: 'टोगो', fi: 'Togo' } },
+  ZM: { slug: 'zambia', name: { en: 'Zambia', de: 'Sambia', es: 'Zambia', it: 'Zambia', pl: 'Zambia', uk: 'Замбія', pt: 'Zâmbia', fr: 'Zambie', hi: 'जाम्बिया', fi: 'Sambia' } },
 };
 const BLOCKED_BRAND_COPY = {
   en: {
