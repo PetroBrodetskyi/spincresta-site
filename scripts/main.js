@@ -3,6 +3,7 @@
 // =====================
 import { BRANDS } from './brands.js?v=20260813-french-1';
 import { COUNTRIES } from './countries.js';
+import { initFooterNewsletter } from './footer-newsletter.js?v=20260825-newsletter-1';
 
 let BRAND_SNAPSHOT_CONFIGS = {};
 let BRAND_NEW_GAMES = {};
@@ -4215,6 +4216,7 @@ export const initCasinoPage = async () => {
 
   await Promise.all([pageModulesReady, brandBonusTranslationsReady]);
 
+  initFooterNewsletter(SITE_LOCALE);
   initFooterThemeSettings();
   initAffiliateClickTracking();
   window.addEventListener('resize', requestPaymentIconSync, { passive: true });
