@@ -3,7 +3,7 @@
 // =====================
 import { BRANDS } from './brands.js?v=20260813-french-1';
 import { COUNTRIES } from './countries.js';
-import { initFooterNewsletter } from './footer-newsletter.js?v=20260826-newsletter-2';
+import { initFooterNewsletter } from './footer-newsletter.js?v=20260826-newsletter-3';
 
 let BRAND_SNAPSHOT_CONFIGS = {};
 let BRAND_NEW_GAMES = {};

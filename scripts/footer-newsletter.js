@@ -12,9 +12,12 @@ const COPY = {
     success: 'Almost done — check your inbox and confirm your subscription.',
     invalid: 'Enter a valid email address.',
     error: 'We could not start your subscription. Please try again shortly.',
+    ageRequired: 'Confirm that you are 18 or older.',
     consentRequired: 'Confirm that you agree to receive SpinCresta updates.',
     rateLimited: 'Too many attempts. Please wait a minute and try again.',
-    consent: 'I am 18+ and agree to receive SpinCresta updates. I can unsubscribe at any time.',
+    age: 'I confirm that I am 18 or older.',
+    consent: 'I agree to receive SpinCresta email updates about new reviews, country guides and important availability changes. I can unsubscribe at any time.',
+    disclosure: 'SpinCresta uses Brevo to deliver emails and manage subscriptions.',
     privacy: 'Privacy Policy',
   },
   de: {
@@ -28,9 +31,12 @@ const COPY = {
     success: 'Fast geschafft — öffnen Sie Ihr Postfach und bestätigen Sie das Abonnement.',
     invalid: 'Geben Sie eine gültige E-Mail-Adresse ein.',
     error: 'Das Abonnement konnte nicht gestartet werden. Versuchen Sie es bitte später erneut.',
+    ageRequired: 'Bestätigen Sie, dass Sie mindestens 18 Jahre alt sind.',
     consentRequired: 'Bestätigen Sie, dass Sie SpinCresta-Updates erhalten möchten.',
     rateLimited: 'Zu viele Versuche. Warten Sie bitte eine Minute und versuchen Sie es erneut.',
-    consent: 'Ich bin volljährig und möchte SpinCresta-Updates erhalten. Eine Abmeldung ist jederzeit möglich.',
+    age: 'Ich bestätige, dass ich mindestens 18 Jahre alt bin.',
+    consent: 'Ich möchte E-Mail-Updates von SpinCresta zu neuen Tests, Länder-Guides und wichtigen Änderungen der Verfügbarkeit erhalten. Eine Abmeldung ist jederzeit möglich.',
+    disclosure: 'SpinCresta nutzt Brevo für den E-Mail-Versand und die Verwaltung von Abonnements.',
     privacy: 'Datenschutzerklärung',
   },
   es: {
@@ -44,9 +50,12 @@ const COPY = {
     success: 'Ya casi está: revisa tu correo y confirma la suscripción.',
     invalid: 'Introduce un correo electrónico válido.',
     error: 'No hemos podido iniciar la suscripción. Inténtalo de nuevo en unos minutos.',
+    ageRequired: 'Confirma que tienes al menos 18 años.',
     consentRequired: 'Confirma que aceptas recibir novedades de SpinCresta.',
     rateLimited: 'Demasiados intentos. Espera un minuto y vuelve a intentarlo.',
-    consent: 'Soy mayor de 18 años y acepto recibir novedades de SpinCresta. Puedo darme de baja cuando quiera.',
+    age: 'Confirmo que tengo al menos 18 años.',
+    consent: 'Acepto recibir por correo electrónico novedades de SpinCresta sobre nuevas reseñas, guías por país y cambios importantes de disponibilidad. Puedo darme de baja cuando quiera.',
+    disclosure: 'SpinCresta utiliza Brevo para enviar correos y gestionar las suscripciones.',
     privacy: 'Política de privacidad',
   },
   it: {
@@ -60,9 +69,12 @@ const COPY = {
     success: 'Ci siamo quasi: controlla la posta e conferma l’iscrizione.',
     invalid: 'Inserisci un indirizzo email valido.',
     error: 'Non è stato possibile avviare l’iscrizione. Riprova tra poco.',
+    ageRequired: 'Conferma di avere almeno 18 anni.',
     consentRequired: 'Conferma di voler ricevere gli aggiornamenti di SpinCresta.',
     rateLimited: 'Troppi tentativi. Attendi un minuto e riprova.',
-    consent: 'Sono maggiorenne e accetto di ricevere aggiornamenti da SpinCresta. Posso annullare l’iscrizione in qualsiasi momento.',
+    age: 'Confermo di avere almeno 18 anni.',
+    consent: 'Accetto di ricevere via email gli aggiornamenti di SpinCresta su nuove recensioni, guide per paese e importanti variazioni di disponibilità. Posso annullare l’iscrizione in qualsiasi momento.',
+    disclosure: 'SpinCresta utilizza Brevo per inviare le email e gestire le iscrizioni.',
     privacy: 'Informativa sulla privacy',
   },
   pl: {
@@ -76,9 +88,12 @@ const COPY = {
     success: 'Prawie gotowe — sprawdź skrzynkę i potwierdź zapis.',
     invalid: 'Podaj prawidłowy adres e-mail.',
     error: 'Nie udało się rozpocząć zapisu. Spróbuj ponownie za chwilę.',
+    ageRequired: 'Potwierdź, że masz co najmniej 18 lat.',
     consentRequired: 'Potwierdź zgodę na otrzymywanie aktualności SpinCresta.',
     rateLimited: 'Zbyt wiele prób. Odczekaj minutę i spróbuj ponownie.',
-    consent: 'Jestem osobą pełnoletnią i zgadzam się na aktualności SpinCresta. Mogę zrezygnować w dowolnym momencie.',
+    age: 'Potwierdzam, że mam co najmniej 18 lat.',
+    consent: 'Zgadzam się otrzymywać e-maile SpinCresta o nowych recenzjach, przewodnikach po krajach i ważnych zmianach dostępności. Mogę zrezygnować w dowolnym momencie.',
+    disclosure: 'SpinCresta korzysta z Brevo do wysyłania wiadomości i zarządzania subskrypcjami.',
     privacy: 'Polityka prywatności',
   },
   uk: {
@@ -92,9 +107,12 @@ const COPY = {
     success: 'Майже готово — перевірте пошту та підтвердьте підписку.',
     invalid: 'Введіть коректну адресу електронної пошти.',
     error: 'Не вдалося розпочати підписку. Спробуйте ще раз трохи пізніше.',
+    ageRequired: 'Підтвердьте, що вам виповнилося 18 років.',
     consentRequired: 'Підтвердьте згоду на отримання оновлень SpinCresta.',
     rateLimited: 'Забагато спроб. Зачекайте хвилину та спробуйте ще раз.',
-    consent: 'Мені виповнилося 18 років, і я погоджуюся отримувати оновлення SpinCresta. Відписатися можна будь-коли.',
+    age: 'Підтверджую, що мені виповнилося 18 років.',
+    consent: 'Погоджуюся отримувати електронні листи SpinCresta про нові огляди, гіди за країнами та важливі зміни доступності. Відписатися можна будь-коли.',
+    disclosure: 'SpinCresta використовує Brevo для надсилання листів і керування підписками.',
     privacy: 'Політика конфіденційності',
   },
   pt: {
@@ -108,9 +126,12 @@ const COPY = {
     success: 'Falta pouco — consulte o seu email e confirme a subscrição.',
     invalid: 'Introduza um endereço de email válido.',
     error: 'Não foi possível iniciar a subscrição. Tente novamente dentro de instantes.',
+    ageRequired: 'Confirme que tem pelo menos 18 anos.',
     consentRequired: 'Confirme que aceita receber novidades da SpinCresta.',
     rateLimited: 'Demasiadas tentativas. Aguarde um minuto e tente novamente.',
-    consent: 'Sou maior de 18 anos e aceito receber novidades da SpinCresta. Posso cancelar a subscrição a qualquer momento.',
+    age: 'Confirmo que tenho pelo menos 18 anos.',
+    consent: 'Aceito receber por email novidades da SpinCresta sobre novas análises, guias por país e alterações importantes de disponibilidade. Posso cancelar a subscrição a qualquer momento.',
+    disclosure: 'A SpinCresta utiliza a Brevo para enviar emails e gerir subscrições.',
     privacy: 'Política de privacidade',
   },
   fr: {
@@ -124,9 +145,12 @@ const COPY = {
     success: 'Vous y êtes presque : consultez votre messagerie et confirmez votre inscription.',
     invalid: 'Saisissez une adresse e-mail valide.',
     error: 'Nous n’avons pas pu lancer votre inscription. Réessayez dans quelques instants.',
+    ageRequired: 'Confirmez que vous avez au moins 18 ans.',
     consentRequired: 'Confirmez que vous acceptez de recevoir les actualités de SpinCresta.',
     rateLimited: 'Trop de tentatives. Patientez une minute avant de réessayer.',
-    consent: 'Je confirme avoir l’âge légal et accepter les actualités de SpinCresta. Je peux me désabonner à tout moment.',
+    age: 'Je confirme avoir au moins 18 ans.',
+    consent: 'J’accepte de recevoir par e-mail les actualités de SpinCresta sur les nouveaux avis, les guides par pays et les changements importants de disponibilité. Je peux me désabonner à tout moment.',
+    disclosure: 'SpinCresta utilise Brevo pour envoyer les e-mails et gérer les abonnements.',
     privacy: 'Politique de confidentialité',
   },
   hi: {
@@ -140,9 +164,12 @@ const COPY = {
     success: 'बस एक कदम बाकी है — अपना इनबॉक्स देखें और सदस्यता की पुष्टि करें।',
     invalid: 'मान्य ईमेल पता दर्ज करें।',
     error: 'सदस्यता शुरू नहीं हो सकी। कृपया थोड़ी देर बाद फिर कोशिश करें।',
+    ageRequired: 'कृपया पुष्टि करें कि आपकी आयु कम से कम 18 वर्ष है।',
     consentRequired: 'कृपया पुष्टि करें कि आप SpinCresta के अपडेट पाना चाहते हैं।',
     rateLimited: 'बहुत अधिक प्रयास किए गए हैं। एक मिनट रुककर फिर कोशिश करें।',
-    consent: 'मैं वयस्क हूँ और SpinCresta के अपडेट पाने के लिए सहमत हूँ। मैं किसी भी समय सदस्यता छोड़ सकता हूँ।',
+    age: 'मैं पुष्टि करता/करती हूँ कि मेरी आयु कम से कम 18 वर्ष है।',
+    consent: 'मैं नई समीक्षाओं, देश गाइड और उपलब्धता से जुड़े महत्वपूर्ण बदलावों के बारे में SpinCresta के ईमेल पाने के लिए सहमत हूँ। मैं किसी भी समय सदस्यता छोड़ सकता/सकती हूँ।',
+    disclosure: 'SpinCresta ईमेल भेजने और सदस्यताएँ प्रबंधित करने के लिए Brevo का उपयोग करता है।',
     privacy: 'गोपनीयता नीति',
   },
   fi: {
@@ -156,9 +183,12 @@ const COPY = {
     success: 'Melkein valmista — tarkista sähköpostisi ja vahvista tilaus.',
     invalid: 'Anna kelvollinen sähköpostiosoite.',
     error: 'Tilausta ei voitu aloittaa. Yritä hetken kuluttua uudelleen.',
+    ageRequired: 'Vahvista, että olet vähintään 18-vuotias.',
     consentRequired: 'Vahvista, että haluat vastaanottaa SpinCrestan uutisia.',
     rateLimited: 'Liian monta yritystä. Odota minuutti ja yritä uudelleen.',
-    consent: 'Olen täysi-ikäinen ja hyväksyn SpinCrestan uutiset. Voin perua tilauksen milloin tahansa.',
+    age: 'Vahvistan olevani vähintään 18-vuotias.',
+    consent: 'Hyväksyn SpinCrestan sähköpostit uusista arvosteluista, maaoppaista ja tärkeistä saatavuusmuutoksista. Voin perua tilauksen milloin tahansa.',
+    disclosure: 'SpinCresta käyttää Brevoa sähköpostien lähettämiseen ja tilausten hallintaan.',
     privacy: 'Tietosuojakäytäntö',
   },
 };
@@ -175,9 +205,10 @@ const setStatus = (form, message, state = '') => {
 
 const bindForm = (form, copy, locale) => {
   const email = form.querySelector('input[type="email"]');
+  const age = form.querySelector('input[name="newsletterAge"]');
   const consent = form.querySelector('input[name="newsletterConsent"]');
   const submit = form.querySelector('button[type="submit"]');
-  if (!email || !consent || !submit) return;
+  if (!email || !age || !consent || !submit) return;
 
   form.addEventListener('submit', async event => {
     event.preventDefault();
@@ -185,6 +216,12 @@ const bindForm = (form, copy, locale) => {
     if (!email.validity.valid) {
       setStatus(form, copy.invalid, 'error');
       email.focus();
+      return;
+    }
+
+    if (!age.checked) {
+      setStatus(form, copy.ageRequired, 'error');
+      age.focus();
       return;
     }
 
@@ -241,6 +278,7 @@ const bindForm = (form, copy, locale) => {
       }
 
       email.value = '';
+      age.checked = false;
       consent.checked = false;
       setStatus(form, copy.success, 'success');
 
@@ -292,9 +330,14 @@ export const initFooterNewsletter = locale => {
           <button class="footer-newsletter-submit" type="submit">${copy.submit}</button>
         </div>
         <label class="footer-newsletter-consent">
+          <input name="newsletterAge" type="checkbox" required />
+          <span>${copy.age}</span>
+        </label>
+        <label class="footer-newsletter-consent">
           <input name="newsletterConsent" type="checkbox" required />
           <span>${copy.consent} <a href="${privacyPath(locale)}">${copy.privacy}</a></span>
         </label>
+        <p class="footer-newsletter-disclosure">${copy.disclosure}</p>
         <p id="${statusId}" class="footer-newsletter-status" role="status" aria-live="polite"></p>
       </form>
     `;

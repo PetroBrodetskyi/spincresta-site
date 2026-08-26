@@ -3199,6 +3199,7 @@ html[data-theme='light'] .countries-cloud .country-link:hover {
 }
 
 .footer-newsletter-consent,
+.footer-newsletter-disclosure,
 .footer-newsletter-status {
   margin: 8px 0 0 !important;
   padding: 0 !important;
@@ -3209,6 +3210,11 @@ html[data-theme='light'] .countries-cloud .country-link:hover {
   letter-spacing: 0 !important;
   text-align: left !important;
   text-transform: none !important;
+}
+
+.footer-newsletter-disclosure {
+  color: var(--text-muted) !important;
+  opacity: 0.64 !important;
 }
 
 .footer-newsletter-consent {
