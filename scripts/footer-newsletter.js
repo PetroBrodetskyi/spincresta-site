@@ -13,6 +13,7 @@ const COPY = {
     invalid: 'Enter a valid email address.',
     error: 'We could not start your subscription. Please try again shortly.',
     consentRequired: 'Confirm that you agree to receive SpinCresta updates.',
+    rateLimited: 'Too many attempts. Please wait a minute and try again.',
     consent: 'I am 18+ and agree to receive SpinCresta updates. I can unsubscribe at any time.',
     privacy: 'Privacy Policy',
   },
@@ -28,6 +29,7 @@ const COPY = {
     invalid: 'Geben Sie eine gültige E-Mail-Adresse ein.',
     error: 'Das Abonnement konnte nicht gestartet werden. Versuchen Sie es bitte später erneut.',
     consentRequired: 'Bestätigen Sie, dass Sie SpinCresta-Updates erhalten möchten.',
+    rateLimited: 'Zu viele Versuche. Warten Sie bitte eine Minute und versuchen Sie es erneut.',
     consent: 'Ich bin volljährig und möchte SpinCresta-Updates erhalten. Eine Abmeldung ist jederzeit möglich.',
     privacy: 'Datenschutzerklärung',
   },
@@ -43,6 +45,7 @@ const COPY = {
     invalid: 'Introduce un correo electrónico válido.',
     error: 'No hemos podido iniciar la suscripción. Inténtalo de nuevo en unos minutos.',
     consentRequired: 'Confirma que aceptas recibir novedades de SpinCresta.',
+    rateLimited: 'Demasiados intentos. Espera un minuto y vuelve a intentarlo.',
     consent: 'Soy mayor de 18 años y acepto recibir novedades de SpinCresta. Puedo darme de baja cuando quiera.',
     privacy: 'Política de privacidad',
   },
@@ -58,6 +61,7 @@ const COPY = {
     invalid: 'Inserisci un indirizzo email valido.',
     error: 'Non è stato possibile avviare l’iscrizione. Riprova tra poco.',
     consentRequired: 'Conferma di voler ricevere gli aggiornamenti di SpinCresta.',
+    rateLimited: 'Troppi tentativi. Attendi un minuto e riprova.',
     consent: 'Sono maggiorenne e accetto di ricevere aggiornamenti da SpinCresta. Posso annullare l’iscrizione in qualsiasi momento.',
     privacy: 'Informativa sulla privacy',
   },
@@ -73,6 +77,7 @@ const COPY = {
     invalid: 'Podaj prawidłowy adres e-mail.',
     error: 'Nie udało się rozpocząć zapisu. Spróbuj ponownie za chwilę.',
     consentRequired: 'Potwierdź zgodę na otrzymywanie aktualności SpinCresta.',
+    rateLimited: 'Zbyt wiele prób. Odczekaj minutę i spróbuj ponownie.',
     consent: 'Jestem osobą pełnoletnią i zgadzam się na aktualności SpinCresta. Mogę zrezygnować w dowolnym momencie.',
     privacy: 'Polityka prywatności',
   },
@@ -88,6 +93,7 @@ const COPY = {
     invalid: 'Введіть коректну адресу електронної пошти.',
     error: 'Не вдалося розпочати підписку. Спробуйте ще раз трохи пізніше.',
     consentRequired: 'Підтвердьте згоду на отримання оновлень SpinCresta.',
+    rateLimited: 'Забагато спроб. Зачекайте хвилину та спробуйте ще раз.',
     consent: 'Мені виповнилося 18 років, і я погоджуюся отримувати оновлення SpinCresta. Відписатися можна будь-коли.',
     privacy: 'Політика конфіденційності',
   },
@@ -103,6 +109,7 @@ const COPY = {
     invalid: 'Introduza um endereço de email válido.',
     error: 'Não foi possível iniciar a subscrição. Tente novamente dentro de instantes.',
     consentRequired: 'Confirme que aceita receber novidades da SpinCresta.',
+    rateLimited: 'Demasiadas tentativas. Aguarde um minuto e tente novamente.',
     consent: 'Sou maior de 18 anos e aceito receber novidades da SpinCresta. Posso cancelar a subscrição a qualquer momento.',
     privacy: 'Política de privacidade',
   },
@@ -118,6 +125,7 @@ const COPY = {
     invalid: 'Saisissez une adresse e-mail valide.',
     error: 'Nous n’avons pas pu lancer votre inscription. Réessayez dans quelques instants.',
     consentRequired: 'Confirmez que vous acceptez de recevoir les actualités de SpinCresta.',
+    rateLimited: 'Trop de tentatives. Patientez une minute avant de réessayer.',
     consent: 'Je confirme avoir l’âge légal et accepter les actualités de SpinCresta. Je peux me désabonner à tout moment.',
     privacy: 'Politique de confidentialité',
   },
@@ -133,6 +141,7 @@ const COPY = {
     invalid: 'मान्य ईमेल पता दर्ज करें।',
     error: 'सदस्यता शुरू नहीं हो सकी। कृपया थोड़ी देर बाद फिर कोशिश करें।',
     consentRequired: 'कृपया पुष्टि करें कि आप SpinCresta के अपडेट पाना चाहते हैं।',
+    rateLimited: 'बहुत अधिक प्रयास किए गए हैं। एक मिनट रुककर फिर कोशिश करें।',
     consent: 'मैं वयस्क हूँ और SpinCresta के अपडेट पाने के लिए सहमत हूँ। मैं किसी भी समय सदस्यता छोड़ सकता हूँ।',
     privacy: 'गोपनीयता नीति',
   },
@@ -148,6 +157,7 @@ const COPY = {
     invalid: 'Anna kelvollinen sähköpostiosoite.',
     error: 'Tilausta ei voitu aloittaa. Yritä hetken kuluttua uudelleen.',
     consentRequired: 'Vahvista, että haluat vastaanottaa SpinCrestan uutisia.',
+    rateLimited: 'Liian monta yritystä. Odota minuutti ja yritä uudelleen.',
     consent: 'Olen täysi-ikäinen ja hyväksyn SpinCrestan uutiset. Voin perua tilauksen milloin tahansa.',
     privacy: 'Tietosuojakäytäntö',
   },
@@ -163,7 +173,7 @@ const setStatus = (form, message, state = '') => {
   status.dataset.state = state;
 };
 
-const bindForm = (form, copy) => {
+const bindForm = (form, copy, locale) => {
   const email = form.querySelector('input[type="email"]');
   const consent = form.querySelector('input[name="newsletterConsent"]');
   const submit = form.querySelector('button[type="submit"]');
@@ -203,12 +213,18 @@ const bindForm = (form, copy) => {
             email: email.value.trim(),
             website: form.elements.website?.value || '',
             consent: true,
+            locale,
           }),
           signal: controller.signal,
         }
       );
 
       if (!response.ok) {
+        if (response.status === 429) {
+          setStatus(form, copy.rateLimited, 'error');
+          return;
+        }
+
         let errorCode = '';
         try {
           errorCode = (await response.json()).error || '';
@@ -284,6 +300,6 @@ export const initFooterNewsletter = locale => {
     `;
 
     container.prepend(section);
-    bindForm(section.querySelector('form'), copy);
+    bindForm(section.querySelector('form'), copy, locale);
   });
 };
