@@ -3253,6 +3253,85 @@ html[data-theme='light'] .countries-cloud .country-link:hover {
   color: #d5b2b2 !important;
 }
 
+.newsletter-confirmation-notice {
+  position: fixed;
+  top: 88px;
+  left: 50%;
+  z-index: 10020;
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr) auto;
+  gap: 12px;
+  align-items: center;
+  width: min(520px, calc(100vw - 28px));
+  padding: 14px 16px;
+  color: var(--text-main);
+  background: var(--surface-panel);
+  border: 1px solid var(--surface-border-strong);
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-floating);
+  opacity: 0;
+  transform: translate(-50%, -12px);
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+
+.newsletter-confirmation-notice.is-visible {
+  opacity: 1;
+  transform: translate(-50%, 0);
+}
+
+.newsletter-confirmation-icon {
+  display: grid;
+  place-items: center;
+  width: 32px;
+  height: 32px;
+  color: #152018;
+  font-size: 18px;
+  font-weight: 800;
+  background: var(--section-accent);
+  border-radius: 50%;
+}
+
+.newsletter-confirmation-copy {
+  display: grid;
+  gap: 2px;
+  min-width: 0;
+}
+
+.newsletter-confirmation-copy strong {
+  font-size: 14px;
+  line-height: 1.25;
+}
+
+.newsletter-confirmation-copy span {
+  color: var(--text-muted);
+  font-size: 12px;
+  line-height: 1.45;
+}
+
+.newsletter-confirmation-notice button {
+  width: 32px;
+  height: 32px;
+  padding: 0;
+  color: var(--text-muted);
+  font-size: 22px;
+  line-height: 1;
+  background: transparent;
+  border: 1px solid var(--surface-border);
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.newsletter-confirmation-notice button:hover {
+  color: var(--text-main);
+  border-color: var(--surface-border-strong);
+}
+
+@media (max-width: 640px) {
+  .newsletter-confirmation-notice {
+    top: 76px;
+  }
+}
+
 html[data-theme='light'] .footer-newsletter-row input[type='email'] {
   background: rgba(15, 23, 42, 0.025);
   border-color: rgba(15, 23, 42, 0.2);

@@ -19,6 +19,9 @@ const COPY = {
     consent: 'I agree to receive SpinCresta email updates about new reviews, country guides and important availability changes. I can unsubscribe at any time.',
     disclosure: 'SpinCresta uses Brevo to deliver emails and manage subscriptions.',
     privacy: 'Privacy Policy',
+    confirmedTitle: 'Subscription confirmed',
+    confirmedMessage: 'Your email is confirmed. You will now receive occasional SpinCresta updates.',
+    close: 'Close',
   },
   de: {
     eyebrow: 'AUF DEM LAUFENDEN BLEIBEN',
@@ -38,6 +41,9 @@ const COPY = {
     consent: 'Ich möchte E-Mail-Updates von SpinCresta zu neuen Tests, Länder-Guides und wichtigen Änderungen der Verfügbarkeit erhalten. Eine Abmeldung ist jederzeit möglich.',
     disclosure: 'SpinCresta nutzt Brevo für den E-Mail-Versand und die Verwaltung von Abonnements.',
     privacy: 'Datenschutzerklärung',
+    confirmedTitle: 'Abonnement bestätigt',
+    confirmedMessage: 'Ihre E-Mail-Adresse ist bestätigt. Sie erhalten nun gelegentliche SpinCresta-Updates.',
+    close: 'Schließen',
   },
   es: {
     eyebrow: 'MANTENTE AL DÍA',
@@ -57,6 +63,9 @@ const COPY = {
     consent: 'Acepto recibir por correo electrónico novedades de SpinCresta sobre nuevas reseñas, guías por país y cambios importantes de disponibilidad. Puedo darme de baja cuando quiera.',
     disclosure: 'SpinCresta utiliza Brevo para enviar correos y gestionar las suscripciones.',
     privacy: 'Política de privacidad',
+    confirmedTitle: 'Suscripción confirmada',
+    confirmedMessage: 'Tu correo está confirmado. A partir de ahora recibirás novedades ocasionales de SpinCresta.',
+    close: 'Cerrar',
   },
   it: {
     eyebrow: 'RESTA AGGIORNATO',
@@ -76,6 +85,9 @@ const COPY = {
     consent: 'Accetto di ricevere via email gli aggiornamenti di SpinCresta su nuove recensioni, guide per paese e importanti variazioni di disponibilità. Posso annullare l’iscrizione in qualsiasi momento.',
     disclosure: 'SpinCresta utilizza Brevo per inviare le email e gestire le iscrizioni.',
     privacy: 'Informativa sulla privacy',
+    confirmedTitle: 'Iscrizione confermata',
+    confirmedMessage: 'Il tuo indirizzo email è stato confermato. Ora riceverai occasionali aggiornamenti da SpinCresta.',
+    close: 'Chiudi',
   },
   pl: {
     eyebrow: 'BĄDŹ NA BIEŻĄCO',
@@ -95,6 +107,9 @@ const COPY = {
     consent: 'Zgadzam się otrzymywać e-maile SpinCresta o nowych recenzjach, przewodnikach po krajach i ważnych zmianach dostępności. Mogę zrezygnować w dowolnym momencie.',
     disclosure: 'SpinCresta korzysta z Brevo do wysyłania wiadomości i zarządzania subskrypcjami.',
     privacy: 'Polityka prywatności',
+    confirmedTitle: 'Subskrypcja potwierdzona',
+    confirmedMessage: 'Twój adres e-mail został potwierdzony. Od teraz będziesz otrzymywać okazjonalne aktualności SpinCresta.',
+    close: 'Zamknij',
   },
   uk: {
     eyebrow: 'БУДЬТЕ В КУРСІ',
@@ -114,6 +129,9 @@ const COPY = {
     consent: 'Погоджуюся отримувати електронні листи SpinCresta про нові огляди, гіди за країнами та важливі зміни доступності. Відписатися можна будь-коли.',
     disclosure: 'SpinCresta використовує Brevo для надсилання листів і керування підписками.',
     privacy: 'Політика конфіденційності',
+    confirmedTitle: 'Підписку підтверджено',
+    confirmedMessage: 'Вашу електронну адресу підтверджено. Тепер ви отримуватимете періодичні оновлення SpinCresta.',
+    close: 'Закрити',
   },
   pt: {
     eyebrow: 'RECEBA AS NOVIDADES',
@@ -133,6 +151,9 @@ const COPY = {
     consent: 'Aceito receber por email novidades da SpinCresta sobre novas análises, guias por país e alterações importantes de disponibilidade. Posso cancelar a subscrição a qualquer momento.',
     disclosure: 'A SpinCresta utiliza a Brevo para enviar emails e gerir subscrições.',
     privacy: 'Política de privacidade',
+    confirmedTitle: 'Subscrição confirmada',
+    confirmedMessage: 'O seu endereço de email foi confirmado. Passará a receber atualizações ocasionais da SpinCresta.',
+    close: 'Fechar',
   },
   fr: {
     eyebrow: 'RESTEZ INFORMÉ',
@@ -152,6 +173,9 @@ const COPY = {
     consent: 'J’accepte de recevoir par e-mail les actualités de SpinCresta sur les nouveaux avis, les guides par pays et les changements importants de disponibilité. Je peux me désabonner à tout moment.',
     disclosure: 'SpinCresta utilise Brevo pour envoyer les e-mails et gérer les abonnements.',
     privacy: 'Politique de confidentialité',
+    confirmedTitle: 'Inscription confirmée',
+    confirmedMessage: 'Votre adresse e-mail est confirmée. Vous recevrez désormais les actualités occasionnelles de SpinCresta.',
+    close: 'Fermer',
   },
   hi: {
     eyebrow: 'अपडेट रहें',
@@ -171,6 +195,9 @@ const COPY = {
     consent: 'मैं नई समीक्षाओं, देश गाइड और उपलब्धता से जुड़े महत्वपूर्ण बदलावों के बारे में SpinCresta के ईमेल पाने के लिए सहमत हूँ। मैं किसी भी समय सदस्यता छोड़ सकता/सकती हूँ।',
     disclosure: 'SpinCresta ईमेल भेजने और सदस्यताएँ प्रबंधित करने के लिए Brevo का उपयोग करता है।',
     privacy: 'गोपनीयता नीति',
+    confirmedTitle: 'सदस्यता की पुष्टि हो गई',
+    confirmedMessage: 'आपका ईमेल पता सत्यापित हो गया है। अब आपको कभी-कभी SpinCresta के अपडेट मिलेंगे।',
+    close: 'बंद करें',
   },
   fi: {
     eyebrow: 'PYSY AJAN TASALLA',
@@ -190,6 +217,9 @@ const COPY = {
     consent: 'Hyväksyn SpinCrestan sähköpostit uusista arvosteluista, maaoppaista ja tärkeistä saatavuusmuutoksista. Voin perua tilauksen milloin tahansa.',
     disclosure: 'SpinCresta käyttää Brevoa sähköpostien lähettämiseen ja tilausten hallintaan.',
     privacy: 'Tietosuojakäytäntö',
+    confirmedTitle: 'Tilaus vahvistettu',
+    confirmedMessage: 'Sähköpostiosoitteesi on vahvistettu. Saat nyt ajoittain SpinCrestan päivityksiä.',
+    close: 'Sulje',
   },
 };
 
@@ -201,6 +231,49 @@ const setStatus = (form, message, state = '') => {
   if (!status) return;
   status.textContent = message;
   status.dataset.state = state;
+};
+
+const showConfirmationNotice = copy => {
+  const params = new URLSearchParams(window.location.search);
+  if (params.get('subscription') !== 'confirmed') return;
+
+  const notice = document.createElement('aside');
+  notice.className = 'newsletter-confirmation-notice';
+  notice.setAttribute('role', 'status');
+  notice.setAttribute('aria-live', 'polite');
+  notice.innerHTML = `
+    <span class="newsletter-confirmation-icon" aria-hidden="true">✓</span>
+    <span class="newsletter-confirmation-copy">
+      <strong>${copy.confirmedTitle}</strong>
+      <span>${copy.confirmedMessage}</span>
+    </span>
+    <button type="button" aria-label="${copy.close}">×</button>
+  `;
+
+  const removeNotice = () => {
+    notice.classList.remove('is-visible');
+    window.setTimeout(() => notice.remove(), 220);
+  };
+
+  notice.querySelector('button')?.addEventListener('click', removeNotice);
+  document.body.append(notice);
+  window.requestAnimationFrame(() => notice.classList.add('is-visible'));
+  window.setTimeout(removeNotice, 10_000);
+
+  params.delete('subscription');
+  const query = params.toString();
+  window.history.replaceState(
+    {},
+    '',
+    `${window.location.pathname}${query ? `?${query}` : ''}${window.location.hash}`
+  );
+
+  if (typeof window.gtag === 'function') {
+    window.gtag('event', 'newsletter_subscription_confirmed', {
+      page_language: document.documentElement.lang || 'en',
+      transport_type: 'beacon',
+    });
+  }
 };
 
 const bindForm = (form, copy, locale) => {
@@ -304,6 +377,8 @@ const bindForm = (form, copy, locale) => {
 
 export const initFooterNewsletter = locale => {
   const copy = COPY[locale] || COPY.en;
+
+  showConfirmationNotice(copy);
 
   document.querySelectorAll('.footer > .container').forEach((container, index) => {
     if (container.querySelector('.footer-newsletter')) return;
