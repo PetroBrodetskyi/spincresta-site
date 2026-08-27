@@ -207,15 +207,25 @@ export const initModeratorPage = async () => {
     button.addEventListener('click', () => loadReviews(button.dataset.moderatorStatus));
   });
 
+  const syncAccess = async () => {
+    accessToken = '';
+    if (!account?.getState().signedIn) {
+      showAccess('Sign in with an approved moderator account to continue.');
+      return;
+    }
+    accessToken = await account.getAccessToken();
+    if (!accessToken) {
+      showAccess('Your session has expired. Sign in again to continue.');
+      return;
+    }
+    await loadReviews(currentStatus);
+  };
+
   account = await waitForAccount();
-  if (!account?.getState().signedIn) {
-    showAccess('Sign in with an approved moderator account to continue.');
-    return;
-  }
-  accessToken = await account.getAccessToken();
-  if (!accessToken) {
-    showAccess('Your session has expired. Sign in again to continue.');
-    return;
-  }
-  await loadReviews(currentStatus);
+  await syncAccess();
+  window.addEventListener('spincresta:account-state', () => {
+    syncAccess().catch(() => {
+      showAccess('The moderation queue is temporarily unavailable. Please try again.');
+    });
+  });
 };

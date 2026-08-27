@@ -3,7 +3,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
-const assetVersion = '20260827-moderation-2';
+const assetVersion = '20260827-moderation-3';
 
 const main = `
     <main>
