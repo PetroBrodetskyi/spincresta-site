@@ -85,7 +85,7 @@ const loadPageModules = async () => {
   }
 
   if (document.body.dataset.page === 'moderator') {
-    const pageModule = await import('./pages/moderator.js?v=20260827-moderation-1');
+    const pageModule = await import('./pages/moderator.js?v=20260827-moderation-2');
     initModeratorPageModule = pageModule.initModeratorPage;
   }
 };

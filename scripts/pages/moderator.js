@@ -135,6 +135,9 @@ export const initModeratorPage = async () => {
     list.hidden = true;
     empty.hidden = true;
     access.querySelector('p').textContent = message;
+    signIn.textContent = account?.getState().signedIn
+      ? 'Open account / switch user'
+      : 'Sign in with Google';
     access.hidden = false;
   };
 
