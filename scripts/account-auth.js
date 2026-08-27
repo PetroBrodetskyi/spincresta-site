@@ -76,6 +76,7 @@ const responsiblePath = locale => locale === 'en'
   : `/${locale}/responsible-gambling/`;
 const accountPath = locale => locale === 'en' ? '/account/' : `/${locale}/account/`;
 const ACCOUNT_NOTICE_KEY = 'spincresta-account-notice';
+const ACCOUNT_BRIDGE_KEY = 'SpinCrestaAccount';
 
 const loadGoogleIdentity = () => new Promise((resolve, reject) => {
   if (window.google?.accounts?.id) {
@@ -201,6 +202,15 @@ export const initAccountAuth = async locale => {
   let currentUser = null;
   let currentProfile = null;
   let autoCloseTimer = 0;
+
+  const publishAccountState = () => {
+    window.dispatchEvent(new CustomEvent('spincresta:account-state', {
+      detail: {
+        signedIn: Boolean(currentUser),
+        registrationComplete: Boolean(currentProfile?.registration_completed_at),
+      },
+    }));
+  };
 
   const showView = name => {
     views.forEach(view => { view.hidden = view.dataset.accountView !== name; });
@@ -332,6 +342,7 @@ export const initAccountAuth = async locale => {
     currentProfile = currentUser ? await loadProfile(currentUser) : null;
     updateControl();
     renderAccountPage();
+    publishAccountState();
 
     if (currentUser && googleReady) {
       window.google?.accounts?.id?.cancel();
@@ -471,6 +482,8 @@ export const initAccountAuth = async locale => {
 
       currentProfile = await loadProfile(currentUser);
       updateControl();
+      renderAccountPage();
+      publishAccountState();
       populateUser('profile', currentUser, currentProfile);
       populateProfileSummary(currentProfile);
       openModal('profile');
@@ -501,6 +514,7 @@ export const initAccountAuth = async locale => {
     currentProfile = null;
     updateControl();
     renderAccountPage();
+    publishAccountState();
     closeModal();
   };
 
@@ -526,9 +540,29 @@ export const initAccountAuth = async locale => {
       auth: { persistSession: true, autoRefreshToken: true, detectSessionInUrl: true },
     });
 
+    window[ACCOUNT_BRIDGE_KEY] = {
+      getAccessToken: async () => {
+        const { data } = await supabase.auth.getSession();
+        return data.session?.access_token || '';
+      },
+      getState: () => ({
+        signedIn: Boolean(currentUser),
+        registrationComplete: Boolean(currentProfile?.registration_completed_at),
+      }),
+      openSignIn: () => {
+        if (currentUser && !currentProfile?.registration_completed_at) {
+          populateUser('account', currentUser, currentProfile);
+          openModal('completion');
+          return;
+        }
+        openModal(currentUser ? 'profile' : 'signin');
+      },
+    };
+
     await syncSession({ openIncomplete: true });
     await prepareGoogle(config);
     control.disabled = false;
+    window.dispatchEvent(new CustomEvent('spincresta:account-ready'));
     supabase.auth.onAuthStateChange(() => {
       window.setTimeout(() => syncSession({ openIncomplete: true }).catch(() => {}), 0);
     });

@@ -4,7 +4,7 @@
 import { BRANDS } from './brands.js?v=20260813-french-1';
 import { COUNTRIES } from './countries.js';
 import { initFooterNewsletter } from './footer-newsletter.js?v=20260826-newsletter-4';
-import { initAccountAuth } from './account-auth.js?v=20260827-account-page-3';
+import { initAccountAuth } from './account-auth.js?v=20260827-player-feedback-1';
 
 let BRAND_SNAPSHOT_CONFIGS = {};
 let BRAND_NEW_GAMES = {};
@@ -12,6 +12,7 @@ let BRAND_HOMEPAGE_SCREENSHOTS = {};
 let initHomePageModule = null;
 let renderCountryMediaModule = null;
 let initBrandPageModule = null;
+let initBrandFeedbackModule = null;
 let initTopCasinosPageModule = null;
 let initBrandLayoutModule = null;
 
@@ -59,14 +60,16 @@ const loadPageModules = async () => {
   }
 
   if (isBrandPage) {
-    const [snapshotsModule, gamesModule, pageModule] = await Promise.all([
+    const [snapshotsModule, gamesModule, pageModule, feedbackModule] = await Promise.all([
       import('./brand-snapshot-configs.js?v=20260813-french-1'),
       import('./brand-new-games.js?v=20260813-french-1'),
       import('./pages/brand.js?v=20260820-finnish-ui-1'),
+      import('./pages/brand-feedback.js?v=20260827-player-feedback-1'),
     ]);
     BRAND_SNAPSHOT_CONFIGS = snapshotsModule.BRAND_SNAPSHOT_CONFIGS || {};
     BRAND_NEW_GAMES = gamesModule.BRAND_NEW_GAMES || {};
     initBrandPageModule = pageModule.initBrandPage;
+    initBrandFeedbackModule = feedbackModule.initBrandFeedback;
   }
 
   if (document.body.dataset.page === 'top-casinos') {
@@ -4354,8 +4357,11 @@ export const initCasinoPage = async () => {
       localeText,
       syncHeaderFlowMetrics,
     });
-
     const brand = findBrandByPageKey(brandKey);
+    initBrandFeedbackModule?.({
+      brand: brand ? getBrandDetailSlug(brand) : brandKey,
+      locale: SITE_LOCALE,
+    });
 
     if (brand) {
       const countriesEl = document.getElementById('brand-countries');

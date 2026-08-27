@@ -576,8 +576,12 @@ body.account-auth-open {
 .account-auth-modal[hidden],
 .account-auth-completion[hidden],
 .account-auth-profile[hidden],
-.account-auth-signin[hidden] {
-  display: none;
+.account-auth-signin[hidden],
+[data-account-page-loading][hidden],
+[data-account-page-notice][hidden],
+[data-account-page-signed-out][hidden],
+[data-account-page-signed-in][hidden] {
+  display: none !important;
 }
 
 .account-auth-modal {

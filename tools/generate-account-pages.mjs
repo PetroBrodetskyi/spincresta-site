@@ -3,6 +3,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
+const ACCOUNT_ASSET_VERSION = '20260827-account-visibility-1';
 
 const locales = {
   en: {
@@ -189,6 +190,7 @@ for (const [language, locale] of Object.entries(locales)) {
     .replace(/<meta name="twitter:(?:title|description)"[^>]*\/>/g, '')
     .replace(/<meta property="og:(?:title|description|url)"[^>]*\/>/g, '')
     .replace('data-page="about"', 'data-page="account"')
+    .replace(/\/styles\.css\?v=[^"']+/g, `/styles.css?v=${ACCOUNT_ASSET_VERSION}`)
     .replace(/\s*<main>[\s\S]*?<\/main>/, `\n${renderMain(locale)}`);
 
   html = `${html.split('\n').map(line => line.trimEnd()).join('\n').trimEnd()}\n`;
