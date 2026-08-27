@@ -64,7 +64,7 @@ const loadPageModules = async () => {
       import('./brand-snapshot-configs.js?v=20260813-french-1'),
       import('./brand-new-games.js?v=20260813-french-1'),
       import('./pages/brand.js?v=20260820-finnish-ui-1'),
-      import('./pages/brand-feedback.js?v=20260827-player-feedback-1'),
+      import('./pages/brand-feedback.js?v=20260827-player-feedback-2'),
     ]);
     BRAND_SNAPSHOT_CONFIGS = snapshotsModule.BRAND_SNAPSHOT_CONFIGS || {};
     BRAND_NEW_GAMES = gamesModule.BRAND_NEW_GAMES || {};

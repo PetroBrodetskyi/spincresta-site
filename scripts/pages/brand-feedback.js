@@ -203,11 +203,15 @@ export const initBrandFeedback = async ({ brand, locale = 'en' }) => {
   window.addEventListener('spincresta:account-ready', syncAuth);
   syncAuth();
 
-  const loadFeedback = async () => {
-    const response = await fetch(
-      `${feedbackEndpoint()}?brand=${encodeURIComponent(brand)}&limit=10`,
-      { headers: { Accept: 'application/json' } }
-    );
+  const loadFeedback = async ({ fresh = false } = {}) => {
+    const requestUrl = new URL(feedbackEndpoint());
+    requestUrl.searchParams.set('brand', brand);
+    requestUrl.searchParams.set('limit', '10');
+    if (fresh) requestUrl.searchParams.set('_', String(Date.now()));
+    const response = await fetch(requestUrl, {
+      cache: fresh ? 'no-store' : 'default',
+      headers: { Accept: 'application/json' },
+    });
     if (response.status === 404) return false;
     if (!response.ok) throw new Error('feedback_unavailable');
     const payload = await response.json();
@@ -270,7 +274,7 @@ export const initBrandFeedback = async ({ brand, locale = 'en' }) => {
       status.textContent = payload.reviewStatus === 'pending' ? copy.pending : copy.ratingSaved;
       status.dataset.state = 'success';
       form.reset();
-      await loadFeedback();
+      await loadFeedback({ fresh: true });
     } catch {
       status.textContent = copy.failed;
       status.dataset.state = 'error';
