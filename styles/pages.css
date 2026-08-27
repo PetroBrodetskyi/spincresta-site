@@ -12553,6 +12553,18 @@ body[data-page='moderator'] [hidden] {
   display: none !important;
 }
 
+body[data-page='moderator'] .moderation-hero {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+body[data-page='moderator'] .moderation-hero .hero-content {
+  max-width: 820px;
+}
+
+body[data-page='moderator'] .account-auth-control {
+  margin-left: auto;
+}
+
 body[data-page='account'] [data-moderator-link][hidden] {
   display: none !important;
 }

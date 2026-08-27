@@ -3,7 +3,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
-const assetVersion = '20260827-moderation-3';
+const assetVersion = '20260827-moderation-4';
 
 const main = `
     <main>
@@ -12,20 +12,6 @@ const main = `
           <span class="home-hero-kicker">SPINCRESTA TEAM</span>
           <h1>Player review moderation</h1>
           <p>Review player submissions, keep public feedback useful and document moderation decisions.</p>
-        </div>
-        <div class="home-insight-card">
-          <div class="home-stats-grid">
-            <div class="home-stat-tile">
-              <span class="home-stat-number">01</span>
-              <strong>Read the full context</strong>
-              <span>Check the brand, rating, language and exact player experience.</span>
-            </div>
-            <div class="home-stat-tile">
-              <span class="home-stat-number">02</span>
-              <strong>Make a clear decision</strong>
-              <span>Approve useful feedback or reject content that does not meet the review rules.</span>
-            </div>
-          </div>
         </div>
       </section>
 

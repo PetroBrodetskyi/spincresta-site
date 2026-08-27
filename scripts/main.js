@@ -2269,6 +2269,12 @@ const initLanguageSwitcher = () => {
   `;
   headerInner.append(switcher);
 
+  // Keep the visual and keyboard order consistent: language first, account second.
+  // Account auth is initialized before the language switcher, so move its control
+  // behind the newly-created switcher once both controls exist.
+  const accountControl = headerInner.querySelector('.account-auth-control');
+  if (accountControl) headerInner.append(accountControl);
+
   switcher.addEventListener('click', event => {
     const option = event.target.closest('.language-switcher-option');
     if (option) {
@@ -4232,7 +4238,7 @@ export const initCasinoPage = async () => {
 
   await Promise.all([pageModulesReady, brandBonusTranslationsReady]);
 
-  initFooterNewsletter(SITE_LOCALE);
+  if (pageType !== 'moderator') initFooterNewsletter(SITE_LOCALE);
   initAccountAuth(SITE_LOCALE);
   initAccountPageModule?.();
   initModeratorPageModule?.();
@@ -4531,7 +4537,7 @@ export const initCasinoPage = async () => {
   navDropdownLink?.querySelector('.nav-dropdown-icon')?.remove();
 
   initDesktopSiteSearch();
-  initLanguageSwitcher();
+  if (pageType !== 'moderator') initLanguageSwitcher();
   ensureFooterBlogLink();
   const desktopSearch = desktopNavHeaderInner?.querySelector('.site-search--desktop');
   const desktopSearchTrigger = desktopNavHeaderInner?.querySelector('.site-search-trigger--desktop');
