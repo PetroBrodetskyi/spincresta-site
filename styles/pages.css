@@ -12547,3 +12547,259 @@ html[data-theme='light'] body[data-country] .country-hero-cards > .intro,
 html[data-theme='light'] body[data-country] .country-hero-cards > .country-filter-bar {
   background-color: rgba(255, 255, 255, 0.72);
 }
+
+/* Private review moderation reuses the account and home editorial system. */
+body[data-page='moderator'] [hidden] {
+  display: none !important;
+}
+
+body[data-page='account'] [data-moderator-link][hidden] {
+  display: none !important;
+}
+
+body[data-page='moderator'] .moderation-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 20px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid var(--surface-border);
+}
+
+body[data-page='moderator'] .moderation-toolbar button,
+body[data-page='moderator'] .moderation-access button,
+body[data-page='moderator'] .moderation-action {
+  min-height: 38px;
+  padding: 9px 16px;
+  border: 1px solid var(--surface-border-strong);
+  border-radius: 4px;
+  background: transparent;
+  color: var(--text-main);
+  font: inherit;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1.1;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: border-color 180ms ease, background 180ms ease, color 180ms ease;
+}
+
+body[data-page='moderator'] .moderation-toolbar button:hover,
+body[data-page='moderator'] .moderation-toolbar button:focus-visible,
+body[data-page='moderator'] .moderation-toolbar button.is-active,
+body[data-page='moderator'] .moderation-access button:hover,
+body[data-page='moderator'] .moderation-access button:focus-visible,
+body[data-page='moderator'] .moderation-action:hover,
+body[data-page='moderator'] .moderation-action:focus-visible {
+  border-color: var(--gold, #ffdf00);
+  background: rgba(255, 223, 0, 0.08);
+  color: var(--gold, #ffdf00);
+  outline: none;
+}
+
+body[data-page='moderator'] .moderation-action:disabled {
+  opacity: 0.5;
+  cursor: wait;
+}
+
+body[data-page='moderator'] .moderation-loading,
+body[data-page='moderator'] .moderation-empty {
+  margin: 0;
+  padding: 28px;
+  border: 1px solid var(--surface-border);
+  border-radius: var(--radius-lg);
+  background: var(--surface-card-soft);
+  color: var(--text-muted);
+  text-align: center;
+}
+
+body[data-page='moderator'] .moderation-access p {
+  margin: 0;
+  color: var(--text-muted);
+  font-size: 13px;
+  line-height: 1.55;
+}
+
+body[data-page='moderator'] .moderation-notice {
+  margin: 0 0 16px;
+}
+
+body[data-page='moderator'] .moderation-review-list {
+  display: grid;
+  gap: 14px;
+}
+
+body[data-page='moderator'] .moderation-review-card {
+  display: grid;
+  grid-template-columns: minmax(180px, 0.28fr) minmax(0, 0.72fr);
+  gap: 18px 28px;
+  padding: clamp(20px, 2.5vw, 32px);
+  border: 1px solid var(--surface-border);
+  border-radius: var(--radius-lg);
+  background: var(--surface-card);
+  box-shadow: var(--shadow-soft);
+}
+
+body[data-page='moderator'] .moderation-review-meta {
+  display: flex;
+  flex-wrap: wrap;
+  grid-column: 1 / -1;
+  align-items: center;
+  gap: 8px 12px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--surface-border);
+}
+
+body[data-page='moderator'] .moderation-brand-link {
+  color: var(--text-main);
+  font-size: 18px;
+  font-weight: 750;
+  text-decoration: none;
+}
+
+body[data-page='moderator'] .moderation-brand-link:hover {
+  color: var(--gold, #ffdf00);
+}
+
+body[data-page='moderator'] .moderation-status-pill {
+  padding: 5px 8px;
+  border: 1px solid var(--surface-border-strong);
+  border-radius: 999px;
+  color: var(--text-muted);
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+body[data-page='moderator'] .moderation-rating {
+  margin-left: auto;
+  color: var(--gold, #ffdf00);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+}
+
+body[data-page='moderator'] .moderation-author {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+body[data-page='moderator'] .moderation-author img {
+  width: 46px;
+  height: 46px;
+  flex: 0 0 46px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+body[data-page='moderator'] .moderation-author div {
+  display: grid;
+  gap: 4px;
+}
+
+body[data-page='moderator'] .moderation-author strong {
+  color: var(--text-main);
+  font-size: 14px;
+}
+
+body[data-page='moderator'] .moderation-author span {
+  color: var(--text-muted);
+  font-size: 11px;
+  line-height: 1.45;
+}
+
+body[data-page='moderator'] .moderation-review-content h3 {
+  margin: 0 0 10px;
+  color: var(--text-main);
+  font-size: clamp(20px, 2vw, 26px);
+  line-height: 1.16;
+}
+
+body[data-page='moderator'] .moderation-review-content p {
+  margin: 0;
+  color: var(--text-muted);
+  font-size: 14px;
+  line-height: 1.7;
+  white-space: pre-wrap;
+}
+
+body[data-page='moderator'] .moderation-review-controls {
+  display: grid;
+  grid-column: 1 / -1;
+  gap: 12px;
+  padding-top: 18px;
+  border-top: 1px solid var(--surface-border);
+}
+
+body[data-page='moderator'] .moderation-review-controls label {
+  display: grid;
+  gap: 8px;
+  color: var(--text-main);
+  font-size: 12px;
+  font-weight: 700;
+}
+
+body[data-page='moderator'] .moderation-review-controls textarea {
+  width: 100%;
+  min-height: 86px;
+  resize: vertical;
+  padding: 12px 14px;
+  border: 1px solid var(--surface-border-strong);
+  border-radius: 6px;
+  background: var(--surface-card-soft);
+  color: var(--text-main);
+  font: inherit;
+  font-size: 13px;
+  line-height: 1.55;
+}
+
+body[data-page='moderator'] .moderation-review-controls textarea:focus {
+  border-color: var(--gold, #ffdf00);
+  outline: none;
+}
+
+body[data-page='moderator'] .moderation-review-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+
+body[data-page='moderator'] .moderation-action-approve {
+  border-color: var(--gold, #ffdf00);
+}
+
+body[data-page='moderator'] .moderation-card-message {
+  margin-left: auto;
+  color: var(--text-muted);
+  font-size: 12px;
+}
+
+html[data-theme='light'] body[data-page='moderator'] .moderation-review-card,
+html[data-theme='light'] body[data-page='moderator'] .moderation-loading,
+html[data-theme='light'] body[data-page='moderator'] .moderation-empty {
+  background-color: #fff;
+}
+
+@media (max-width: 720px) {
+  body[data-page='moderator'] .moderation-review-card {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  body[data-page='moderator'] .moderation-review-meta,
+  body[data-page='moderator'] .moderation-review-controls {
+    grid-column: 1;
+  }
+
+  body[data-page='moderator'] .moderation-rating {
+    width: 100%;
+    margin-left: 0;
+  }
+
+  body[data-page='moderator'] .moderation-card-message {
+    width: 100%;
+    margin-left: 0;
+  }
+}

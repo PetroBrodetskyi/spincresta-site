@@ -3,7 +3,8 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
-const ACCOUNT_ASSET_VERSION = '20260827-account-visibility-1';
+const ACCOUNT_ASSET_VERSION = '20260827-moderation-1';
+const MAIN_ASSET_VERSION = '20260827-moderation-1';
 
 const locales = {
   en: {
@@ -12,7 +13,7 @@ const locales = {
     overviewKicker: 'Account overview', overviewTitle: 'Profile and account details', overviewIntro: 'Your Google profile is used to identify your SpinCresta account securely.',
     loading: 'Loading your account…', signedOutTitle: 'Sign in to open your account', signedOutIntro: 'Use the Google account connected to SpinCresta.', signIn: 'Sign in with Google',
     signedInAs: 'Signed in as', status: 'Account status', active: 'Active', language: 'Site language', memberSince: 'Member since',
-    privacy: 'Privacy Policy', responsible: 'Responsible gambling', signOut: 'Sign out',
+    privacy: 'Privacy Policy', responsible: 'Responsible gambling', signOut: 'Sign out', moderator: 'Moderator dashboard',
     quickTitle: 'Account essentials', quickText: 'Review how your account data is handled and find safer-play information at any time.',
   },
   de: {
@@ -21,7 +22,7 @@ const locales = {
     overviewKicker: 'Kontoübersicht', overviewTitle: 'Profil- und Kontodaten', overviewIntro: 'Ihr Google-Profil dient zur sicheren Identifizierung Ihres SpinCresta-Kontos.',
     loading: 'Ihr Konto wird geladen…', signedOutTitle: 'Melden Sie sich an, um Ihr Konto zu öffnen', signedOutIntro: 'Verwenden Sie das mit SpinCresta verknüpfte Google-Konto.', signIn: 'Mit Google anmelden',
     signedInAs: 'Angemeldet als', status: 'Kontostatus', active: 'Aktiv', language: 'Seitensprache', memberSince: 'Mitglied seit',
-    privacy: 'Datenschutzerklärung', responsible: 'Verantwortungsvolles Spielen', signOut: 'Abmelden',
+    privacy: 'Datenschutzerklärung', responsible: 'Verantwortungsvolles Spielen', signOut: 'Abmelden', moderator: 'Moderationsbereich',
     quickTitle: 'Wichtige Kontoinformationen', quickText: 'Lesen Sie jederzeit, wie Ihre Kontodaten verarbeitet werden, und finden Sie Informationen zum Spielerschutz.',
   },
   es: {
@@ -30,7 +31,7 @@ const locales = {
     overviewKicker: 'Resumen de la cuenta', overviewTitle: 'Perfil y datos de la cuenta', overviewIntro: 'Tu perfil de Google se utiliza para identificar tu cuenta de SpinCresta de forma segura.',
     loading: 'Cargando tu cuenta…', signedOutTitle: 'Inicia sesión para abrir tu cuenta', signedOutIntro: 'Utiliza la cuenta de Google vinculada a SpinCresta.', signIn: 'Iniciar sesión con Google',
     signedInAs: 'Sesión iniciada como', status: 'Estado de la cuenta', active: 'Activa', language: 'Idioma del sitio', memberSince: 'Miembro desde',
-    privacy: 'Política de privacidad', responsible: 'Juego responsable', signOut: 'Cerrar sesión',
+    privacy: 'Política de privacidad', responsible: 'Juego responsable', signOut: 'Cerrar sesión', moderator: 'Panel de moderación',
     quickTitle: 'Información esencial', quickText: 'Consulta cómo tratamos los datos de tu cuenta y accede cuando quieras a la información sobre juego responsable.',
   },
   it: {
@@ -39,7 +40,7 @@ const locales = {
     overviewKicker: 'Riepilogo account', overviewTitle: 'Profilo e dati dell’account', overviewIntro: 'Il tuo profilo Google viene utilizzato per identificare in modo sicuro l’account SpinCresta.',
     loading: 'Caricamento dell’account…', signedOutTitle: 'Accedi per aprire il tuo account', signedOutIntro: 'Utilizza l’account Google collegato a SpinCresta.', signIn: 'Accedi con Google',
     signedInAs: 'Accesso effettuato come', status: 'Stato dell’account', active: 'Attivo', language: 'Lingua del sito', memberSince: 'Membro dal',
-    privacy: 'Informativa sulla privacy', responsible: 'Gioco responsabile', signOut: 'Esci',
+    privacy: 'Informativa sulla privacy', responsible: 'Gioco responsabile', signOut: 'Esci', moderator: 'Pannello di moderazione',
     quickTitle: 'Informazioni essenziali', quickText: 'Consulta come vengono gestiti i dati del tuo account e accedi alle informazioni sul gioco responsabile.',
   },
   pl: {
@@ -48,7 +49,7 @@ const locales = {
     overviewKicker: 'Przegląd konta', overviewTitle: 'Profil i dane konta', overviewIntro: 'Twój profil Google służy do bezpiecznej identyfikacji konta SpinCresta.',
     loading: 'Wczytywanie konta…', signedOutTitle: 'Zaloguj się, aby otworzyć konto', signedOutIntro: 'Użyj konta Google połączonego ze SpinCresta.', signIn: 'Zaloguj się przez Google',
     signedInAs: 'Zalogowano jako', status: 'Status konta', active: 'Aktywne', language: 'Język strony', memberSince: 'Użytkownik od',
-    privacy: 'Polityka prywatności', responsible: 'Odpowiedzialna gra', signOut: 'Wyloguj się',
+    privacy: 'Polityka prywatności', responsible: 'Odpowiedzialna gra', signOut: 'Wyloguj się', moderator: 'Panel moderatora',
     quickTitle: 'Najważniejsze informacje', quickText: 'Sprawdź, jak przetwarzamy dane konta, i w każdej chwili przejdź do informacji o odpowiedzialnej grze.',
   },
   uk: {
@@ -57,7 +58,7 @@ const locales = {
     overviewKicker: 'Огляд акаунта', overviewTitle: 'Профіль і дані акаунта', overviewIntro: 'Ваш Google-профіль використовується для безпечної ідентифікації акаунта SpinCresta.',
     loading: 'Завантажуємо акаунт…', signedOutTitle: 'Увійдіть, щоб відкрити свій акаунт', signedOutIntro: 'Скористайтеся Google-акаунтом, підключеним до SpinCresta.', signIn: 'Увійти через Google',
     signedInAs: 'Ви увійшли як', status: 'Статус акаунта', active: 'Активний', language: 'Мова сайту', memberSince: 'Дата реєстрації',
-    privacy: 'Політика конфіденційності', responsible: 'Відповідальна гра', signOut: 'Вийти',
+    privacy: 'Політика конфіденційності', responsible: 'Відповідальна гра', signOut: 'Вийти', moderator: 'Кабінет модератора',
     quickTitle: 'Важливе про акаунт', quickText: 'Перевіряйте, як ми обробляємо дані акаунта, і будь-коли відкривайте інформацію про відповідальну гру.',
   },
   pt: {
@@ -66,7 +67,7 @@ const locales = {
     overviewKicker: 'Resumo da conta', overviewTitle: 'Perfil e dados da conta', overviewIntro: 'O seu perfil Google é utilizado para identificar a conta SpinCresta de forma segura.',
     loading: 'A carregar a sua conta…', signedOutTitle: 'Inicie sessão para abrir a sua conta', signedOutIntro: 'Utilize a conta Google associada à SpinCresta.', signIn: 'Entrar com o Google',
     signedInAs: 'Sessão iniciada como', status: 'Estado da conta', active: 'Ativa', language: 'Idioma do site', memberSince: 'Membro desde',
-    privacy: 'Política de privacidade', responsible: 'Jogo responsável', signOut: 'Terminar sessão',
+    privacy: 'Política de privacidade', responsible: 'Jogo responsável', signOut: 'Terminar sessão', moderator: 'Painel de moderação',
     quickTitle: 'Informações essenciais', quickText: 'Consulte como tratamos os dados da conta e aceda às informações sobre jogo responsável quando quiser.',
   },
   fr: {
@@ -75,7 +76,7 @@ const locales = {
     overviewKicker: 'Vue d’ensemble', overviewTitle: 'Profil et informations du compte', overviewIntro: 'Votre profil Google permet d’identifier votre compte SpinCresta de manière sécurisée.',
     loading: 'Chargement de votre compte…', signedOutTitle: 'Connectez-vous pour ouvrir votre compte', signedOutIntro: 'Utilisez le compte Google associé à SpinCresta.', signIn: 'Se connecter avec Google',
     signedInAs: 'Connecté en tant que', status: 'Statut du compte', active: 'Actif', language: 'Langue du site', memberSince: 'Membre depuis',
-    privacy: 'Politique de confidentialité', responsible: 'Jeu responsable', signOut: 'Se déconnecter',
+    privacy: 'Politique de confidentialité', responsible: 'Jeu responsable', signOut: 'Se déconnecter', moderator: 'Espace de modération',
     quickTitle: 'Informations essentielles', quickText: 'Consultez la gestion des données de votre compte et accédez à tout moment aux informations sur le jeu responsable.',
   },
   hi: {
@@ -84,7 +85,7 @@ const locales = {
     overviewKicker: 'खाते का सारांश', overviewTitle: 'प्रोफ़ाइल और खाते की जानकारी', overviewIntro: 'आपके SpinCresta खाते की सुरक्षित पहचान के लिए आपकी Google प्रोफ़ाइल का उपयोग किया जाता है।',
     loading: 'आपका खाता लोड हो रहा है…', signedOutTitle: 'अपना खाता खोलने के लिए साइन इन करें', signedOutIntro: 'SpinCresta से जुड़े Google खाते का उपयोग करें।', signIn: 'Google से साइन इन करें',
     signedInAs: 'इस रूप में साइन इन हैं', status: 'खाते की स्थिति', active: 'सक्रिय', language: 'साइट की भाषा', memberSince: 'सदस्यता की तारीख',
-    privacy: 'गोपनीयता नीति', responsible: 'जिम्मेदार जुआ', signOut: 'साइन आउट करें',
+    privacy: 'गोपनीयता नीति', responsible: 'जिम्मेदार जुआ', signOut: 'साइन आउट करें', moderator: 'मॉडरेटर पैनल',
     quickTitle: 'खाते की जरूरी जानकारी', quickText: 'देखें कि आपके खाते के डेटा का उपयोग कैसे होता है और जिम्मेदार जुए की जानकारी कभी भी खोलें।',
   },
   fi: {
@@ -93,7 +94,7 @@ const locales = {
     overviewKicker: 'Tilin yhteenveto', overviewTitle: 'Profiili ja tilin tiedot', overviewIntro: 'Google-profiiliasi käytetään SpinCresta-tilisi turvalliseen tunnistamiseen.',
     loading: 'Tiliäsi ladataan…', signedOutTitle: 'Avaa tilisi kirjautumalla sisään', signedOutIntro: 'Käytä SpinCrestaan yhdistettyä Google-tiliä.', signIn: 'Kirjaudu Googlella',
     signedInAs: 'Kirjautuneena käyttäjänä', status: 'Tilin tila', active: 'Aktiivinen', language: 'Sivuston kieli', memberSince: 'Jäsen alkaen',
-    privacy: 'Tietosuojakäytäntö', responsible: 'Vastuullinen pelaaminen', signOut: 'Kirjaudu ulos',
+    privacy: 'Tietosuojakäytäntö', responsible: 'Vastuullinen pelaaminen', signOut: 'Kirjaudu ulos', moderator: 'Moderaattorin hallintapaneeli',
     quickTitle: 'Tilin tärkeät tiedot', quickText: 'Tarkista, miten tilisi tietoja käsitellään, ja avaa vastuullisen pelaamisen tiedot milloin tahansa.',
   },
 };
@@ -168,6 +169,7 @@ const renderMain = locale => `
               <div><strong>${escapeHtml(locale.quickTitle)}</strong><span>${escapeHtml(locale.quickText)}</span></div>
               <a href="${pagePath(locale, 'privacy-policy')}">${escapeHtml(locale.privacy)}</a>
               <a href="${pagePath(locale, 'responsible-gambling')}">${escapeHtml(locale.responsible)}</a>
+              <a href="/moderator/" data-moderator-link hidden>${escapeHtml(locale.moderator)}</a>
               <a href="${pagePath(locale, 'account')}" data-account-page-signout>${escapeHtml(locale.signOut)}</a>
             </div>
           </div>
@@ -191,6 +193,7 @@ for (const [language, locale] of Object.entries(locales)) {
     .replace(/<meta property="og:(?:title|description|url)"[^>]*\/>/g, '')
     .replace('data-page="about"', 'data-page="account"')
     .replace(/\/styles\.css\?v=[^"']+/g, `/styles.css?v=${ACCOUNT_ASSET_VERSION}`)
+    .replace(/\/scripts\/main\.js\?v=[^"']+/g, `/scripts/main.js?v=${MAIN_ASSET_VERSION}`)
     .replace(/\s*<main>[\s\S]*?<\/main>/, `\n${renderMain(locale)}`);
 
   html = `${html.split('\n').map(line => line.trimEnd()).join('\n').trimEnd()}\n`;

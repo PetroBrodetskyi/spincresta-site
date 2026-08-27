@@ -15,13 +15,13 @@
       gtag('config', 'G-5NWTMCZ14N');
     </script>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-
+    
     <meta name="theme-color" content="#080d1f" />
-<title>Your SpinCresta Account | SpinCresta</title>
+<title>Review Moderation | SpinCresta</title>
     <link rel="icon" type="image/png" sizes="64x64" href="/favicon.png" />
-    <meta name="description" content="View your SpinCresta profile, account status, language and important account links." />
+    <meta name="description" content="Private SpinCresta player-review moderation workspace." />
     <meta name="robots" content="noindex, nofollow" />
-
+    
 
 
 
@@ -29,16 +29,16 @@
 
     <meta name="twitter:image" content="https://spincresta.com/favicon.png" />
 
-
+  
   <meta property="og:type" content="website" />
-
+  
   <meta property="og:image" content="https://spincresta.com/favicon.png" />
   <meta property="og:site_name" content="SpinCresta" />
   <meta name="twitter:card" content="summary_large_image" />
-
+  
       <link rel="stylesheet" href="/styles.css?v=20260827-moderation-1" />
   </head>
-  <body class="home-page" data-page="account">
+  <body class="home-page" data-page="moderator">
     <header class="header">
       <div class="header-container header-inner">
         <a href="/" class="logo">
@@ -76,70 +76,57 @@
     </header>
 
     <main>
-      <section class="hero container">
+      <section class="hero container moderation-hero">
         <div class="hero-content">
-          <span class="home-hero-kicker">SPINCRESTA ACCOUNT</span>
-          <h1>Your account, in one place</h1>
-          <p>View your profile details and use the account tools available to you.</p>
+          <span class="home-hero-kicker">SPINCRESTA TEAM</span>
+          <h1>Player review moderation</h1>
+          <p>Review player submissions, keep public feedback useful and document moderation decisions.</p>
         </div>
         <div class="home-insight-card">
           <div class="home-stats-grid">
             <div class="home-stat-tile">
-              <span class="home-stat-number">18+</span>
-              <strong>Account status</strong>
-              <span>Review how your account data is handled and find safer-play information at any time.</span>
+              <span class="home-stat-number">01</span>
+              <strong>Read the full context</strong>
+              <span>Check the brand, rating, language and exact player experience.</span>
             </div>
             <div class="home-stat-tile">
-              <span class="home-stat-number">01</span>
-              <strong>Privacy Policy</strong>
-              <span>Your Google profile is used to identify your SpinCresta account securely.</span>
+              <span class="home-stat-number">02</span>
+              <strong>Make a clear decision</strong>
+              <span>Approve useful feedback or reject content that does not meet the review rules.</span>
             </div>
           </div>
         </div>
       </section>
 
       <div class="content-area container">
-        <section class="home-showcase-section" data-account-page aria-labelledby="account-overview-title">
+        <section class="home-showcase-section moderation-workspace" data-moderator-page aria-labelledby="moderation-title">
           <div class="home-showcase-heading">
             <div>
-              <span class="home-section-kicker">Account overview</span>
-              <h2 id="account-overview-title">Profile and account details</h2>
+              <span class="home-section-kicker">MODERATION QUEUE</span>
+              <h2 id="moderation-title">Player reviews</h2>
             </div>
-            <p>Your Google profile is used to identify your SpinCresta account securely.</p>
+            <p>Pending reviews are shown oldest first. Approved feedback becomes visible on the relevant brand page.</p>
           </div>
 
-          <p class="account-auth-status" data-account-page-notice role="status" aria-live="polite" hidden></p>
-          <p data-account-page-loading>Loading your account…</p>
+          <div class="moderation-toolbar" role="group" aria-label="Filter reviews by status">
+            <button class="is-active" type="button" data-moderator-status="pending" aria-pressed="true">Pending</button>
+            <button type="button" data-moderator-status="approved" aria-pressed="false">Approved</button>
+            <button type="button" data-moderator-status="rejected" aria-pressed="false">Rejected</button>
+          </div>
 
-          <div class="home-section-cta" data-account-page-signed-out hidden>
+          <p class="account-auth-status moderation-notice" data-moderator-notice role="status" aria-live="polite" hidden></p>
+          <p class="moderation-loading" data-moderator-loading>Loading moderation queue…</p>
+
+          <div class="home-section-cta moderation-access" data-moderator-access hidden>
             <div>
-              <strong>Sign in to open your account</strong>
-              <span>Use the Google account connected to SpinCresta.</span>
+              <strong>Moderator access required</strong>
+              <p>Sign in with an approved Armada account to continue.</p>
             </div>
-            <a href="/account/" data-account-page-signin>Sign in with Google</a>
+            <button type="button" data-moderator-signin>Sign in with Google</button>
           </div>
 
-          <div data-account-page-signed-in hidden>
-            <div class="account-auth-user-preview">
-              <img alt="" data-account-page-avatar hidden />
-              <div><small>Signed in as</small><strong data-account-page-name></strong><span data-account-page-email></span></div>
-            </div>
-
-            <div class="home-method-grid">
-              <article><span>01</span><h3>Account status</h3><p data-account-page-status>Active</p></article>
-              <article><span>02</span><h3>Site language</h3><p data-account-page-locale></p></article>
-              <article><span>03</span><h3>Member since</h3><p data-account-page-created></p></article>
-              <article><span>04</span><h3>Sign in with Google</h3><p>Google</p></article>
-            </div>
-
-            <div class="home-section-cta">
-              <div><strong>Account essentials</strong><span>Review how your account data is handled and find safer-play information at any time.</span></div>
-              <a href="/privacy-policy/">Privacy Policy</a>
-              <a href="/responsible-gambling/">Responsible gambling</a>
-              <a href="/moderator/" data-moderator-link hidden>Moderator dashboard</a>
-              <a href="/account/" data-account-page-signout>Sign out</a>
-            </div>
-          </div>
+          <p class="moderation-empty" data-moderator-empty hidden></p>
+          <div class="moderation-review-list" data-moderator-list hidden></div>
         </section>
       </div>
     </main>
