@@ -443,50 +443,98 @@ body[data-brand] .content-review > section {
 /* Registered player ratings and moderated reviews */
 body[data-brand] .brand-player-feedback {
   display: grid;
-  gap: 24px;
+  gap: clamp(28px, 3vw, 40px);
 }
 
 body[data-brand] .brand-feedback-heading {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(180px, 0.34fr);
-  gap: 28px;
-  align-items: end;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 24px;
+  align-items: start;
+  text-align: center;
+}
+
+body[data-brand] .brand-feedback-heading > div:first-child {
+  width: min(100%, 900px);
+  margin: 0 auto;
+}
+
+body[data-brand] .brand-feedback-heading .section-kicker,
+body[data-brand] .brand-feedback-compose .section-kicker {
+  display: block;
+  color: var(--section-accent);
+  font-size: 11px;
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
 }
 
 body[data-brand] .brand-feedback-heading h2 {
-  margin: 8px 0 10px;
+  max-width: 900px;
+  margin: 12px auto 18px;
+  padding-bottom: 22px;
+  border-bottom: 1px solid var(--border-soft);
+  color: var(--text-main);
+  font-size: var(--heading-content-section-size) !important;
+  font-weight: 600;
+  line-height: 1.08;
+  letter-spacing: -0.03em;
+  text-align: center;
 }
 
 body[data-brand] .brand-feedback-heading p,
 body[data-brand] .brand-feedback-compose > div > p {
   margin: 0;
   color: var(--text-muted);
+  line-height: 1.65;
+}
+
+body[data-brand] .brand-feedback-heading p {
+  max-width: 72ch;
+  margin-right: auto;
+  margin-left: auto;
 }
 
 body[data-brand] .brand-feedback-score {
-  padding-left: 24px;
-  border-left: 1px solid var(--surface-border);
+  display: grid;
+  grid-template-columns: auto auto;
+  grid-template-areas:
+    'average stars'
+    'average counts';
+  column-gap: 18px;
+  align-items: center;
+  justify-self: center;
+  width: fit-content;
+  min-width: min(100%, 320px);
+  padding: 16px 22px;
+  border-top: 1px solid var(--border-soft);
+  border-bottom: 1px solid var(--border-soft);
+  text-align: left;
 }
 
 body[data-brand] .brand-feedback-score > strong {
   display: block;
+  grid-area: average;
   color: var(--text-main);
-  font-size: clamp(42px, 5vw, 64px);
-  font-weight: 800;
+  font-size: clamp(38px, 4vw, 52px);
+  font-weight: 650;
   line-height: 0.95;
 }
 
 body[data-brand] .brand-feedback-score > span {
   display: block;
-  margin-top: 8px;
+  grid-area: counts;
+  margin-top: 5px;
   color: var(--text-muted);
   font-size: 13px;
 }
 
 body[data-brand] .brand-feedback-stars {
   display: flex;
+  grid-area: stars;
   gap: 3px;
-  margin-top: 10px;
+  margin: 0;
   color: var(--surface-border-strong);
   font-size: 18px;
   line-height: 1;
@@ -499,24 +547,30 @@ body[data-brand] .brand-feedback-stars .is-filled {
 body[data-brand] .brand-feedback-list {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 14px;
+  gap: 16px;
+  padding-top: 24px;
+  border-top: 1px solid var(--border-soft);
 }
 
 body[data-brand] .brand-feedback-empty {
   grid-column: 1 / -1;
   margin: 0;
-  padding: 20px;
-  border: 1px solid var(--surface-border);
-  border-radius: var(--radius-lg);
+  padding: 2px 0;
+  border: 0;
+  border-radius: 0;
   color: var(--text-muted);
-  background: var(--surface-card-soft);
+  background: transparent;
+  font-size: 16px;
+  line-height: 1.6;
+  text-align: center;
 }
 
 body[data-brand] .brand-feedback-review {
-  padding: 20px;
-  border: 1px solid var(--surface-border);
-  border-radius: var(--radius-lg);
-  background: var(--surface-card-soft);
+  padding: 20px 0 0;
+  border: 0;
+  border-top: 2px solid var(--section-accent);
+  border-radius: 0;
+  background: transparent;
 }
 
 body[data-brand] .brand-feedback-author {
@@ -532,7 +586,7 @@ body[data-brand] .brand-feedback-author > span {
   height: 40px;
   flex: 0 0 40px;
   place-items: center;
-  border: 1px solid var(--surface-border);
+  border: 1px solid var(--border-soft);
   border-radius: 50%;
   background: var(--surface-card);
   color: var(--text-main);
@@ -552,7 +606,10 @@ body[data-brand] .brand-feedback-author time {
 
 body[data-brand] .brand-feedback-review h3 {
   margin: 18px 0 8px;
-  font-size: 20px;
+  color: var(--text-main);
+  font-size: var(--heading-subsection-size) !important;
+  font-weight: 600;
+  line-height: 1.15;
 }
 
 body[data-brand] .brand-feedback-review > p {
@@ -563,15 +620,23 @@ body[data-brand] .brand-feedback-review > p {
 
 body[data-brand] .brand-feedback-compose {
   display: grid;
-  gap: 18px;
-  padding-top: 22px;
-  border-top: 1px solid var(--surface-border);
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 20px 28px;
+  align-items: end;
+  padding-top: 28px;
+  border-top: 1px solid var(--border-soft);
+}
+
+body[data-brand] .brand-feedback-compose > div {
+  max-width: 68ch;
 }
 
 body[data-brand] .brand-feedback-compose form {
   display: grid;
+  grid-column: 1 / -1;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 16px;
+  padding-top: 4px;
 }
 
 body[data-brand] .brand-feedback-compose form > label,
@@ -600,8 +665,8 @@ body[data-brand] .brand-feedback-compose input[type='text'],
 body[data-brand] .brand-feedback-compose textarea {
   width: 100%;
   border: 1px solid var(--surface-border-strong);
-  border-radius: var(--radius-md);
-  background: var(--surface-card-soft);
+  border-radius: 4px;
+  background: transparent;
   color: var(--text-main);
   font: inherit;
   line-height: 1.5;
@@ -663,21 +728,33 @@ body[data-brand] .brand-feedback-rating-options input:focus-visible + label {
 
 body[data-brand] .brand-feedback-signin,
 body[data-brand] .brand-feedback-submit {
-  min-height: 48px;
-  padding: 0 22px;
-  border-radius: var(--radius-md);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 40px;
+  padding: 10px 18px;
+  border-radius: 4px;
   font: inherit;
-  font-size: 13px;
-  font-weight: 800;
+  font-size: 12.5px;
+  font-weight: 700;
+  line-height: 1.1;
   text-transform: uppercase;
   cursor: pointer;
+  transition: border-color 160ms ease, background-color 160ms ease, color 160ms ease,
+    transform 160ms ease;
 }
 
 body[data-brand] .brand-feedback-signin {
   width: fit-content;
-  border: 1px solid var(--surface-border-strong);
-  background: var(--surface-card-soft);
+  border: 1px solid var(--border-soft);
+  background: transparent;
   color: var(--text-main);
+}
+
+body[data-brand] .brand-feedback-signin:hover {
+  border-color: var(--gold);
+  color: var(--gold);
+  transform: translateY(-1px);
 }
 
 body[data-brand] .brand-feedback-submit {
@@ -686,12 +763,19 @@ body[data-brand] .brand-feedback-submit {
   color: #111;
 }
 
+body[data-brand] .brand-feedback-submit:hover {
+  border-color: #ffe45c;
+  background: #ffe45c;
+  transform: translateY(-1px);
+}
+
 body[data-brand] .brand-feedback-submit:disabled {
   cursor: wait;
   opacity: 0.65;
 }
 
 body[data-brand] .brand-feedback-status {
+  grid-column: 1 / -1;
   min-height: 20px;
   margin: 0;
   color: var(--text-muted);
@@ -713,14 +797,22 @@ body[data-brand] [data-feedback-signin][hidden] {
 @media (max-width: 720px) {
   body[data-brand] .brand-feedback-heading,
   body[data-brand] .brand-feedback-list,
+  body[data-brand] .brand-feedback-compose,
   body[data-brand] .brand-feedback-compose form {
     grid-template-columns: 1fr;
   }
 
   body[data-brand] .brand-feedback-score {
-    padding: 18px 0 0;
-    border-top: 1px solid var(--surface-border);
-    border-left: 0;
+    min-width: 0;
+    padding: 14px 16px;
+  }
+
+  body[data-brand] .brand-feedback-compose {
+    align-items: start;
+  }
+
+  body[data-brand] .brand-feedback-signin {
+    justify-self: start;
   }
 
   body[data-brand] .brand-feedback-compose form > label,
