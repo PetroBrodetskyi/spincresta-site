@@ -13458,3 +13458,76 @@ html[data-theme='light'] body[data-page='moderator'] .moderation-user-table-wrap
     align-items: stretch;
   }
 }
+
+/* Compact brand highlights below the casino lobby preview. */
+body[data-brand] #brand-why-section > :where(.features-grid, .premium-grid) {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px;
+  margin-top: 10px;
+}
+
+body[data-brand] #brand-why-section > :where(.features-grid, .premium-grid) > .feature-card {
+  display: grid;
+  grid-template-columns: 42px minmax(0, 1fr);
+  grid-template-rows: auto 1fr;
+  align-content: start;
+  column-gap: 14px;
+  row-gap: 5px;
+  min-height: 0;
+  padding: 16px;
+  border-radius: var(--radius-md);
+}
+
+body[data-brand] #brand-why-section .feature-card > .icon-placeholder {
+  grid-row: 1 / 3;
+  align-self: start;
+  justify-self: start;
+  width: 42px;
+  min-width: 42px;
+  height: 32px;
+  min-height: 32px;
+  margin: 0;
+  padding: 0;
+  border-radius: 4px;
+}
+
+body[data-brand] #brand-why-section .feature-card > strong {
+  margin: 0;
+  font-size: 16px;
+  line-height: 1.3;
+}
+
+body[data-brand] #brand-why-section .feature-card > :where(span, p) {
+  margin: 0;
+  font-size: 13.5px;
+  line-height: 1.5;
+}
+
+@media (max-width: 560px) {
+  body[data-brand] #brand-why-section > :where(.features-grid, .premium-grid) {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 8px;
+  }
+
+  body[data-brand] #brand-why-section > :where(.features-grid, .premium-grid) > .feature-card {
+    grid-template-columns: 36px minmax(0, 1fr);
+    column-gap: 12px;
+    padding: 14px;
+  }
+
+  body[data-brand] #brand-why-section .feature-card > .icon-placeholder {
+    width: 36px;
+    min-width: 36px;
+    height: 30px;
+    min-height: 30px;
+  }
+
+  body[data-brand] #brand-why-section .feature-card > strong {
+    font-size: 15px;
+  }
+
+  body[data-brand] #brand-why-section .feature-card > :where(span, p) {
+    font-size: 13px;
+    line-height: 1.45;
+  }
+}
