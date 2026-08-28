@@ -36,7 +36,7 @@
   <meta property="og:site_name" content="SpinCresta" />
   <meta name="twitter:card" content="summary_large_image" />
 
-      <link rel="stylesheet" href="/styles.css?v=20260827-moderation-1" />
+      <link rel="stylesheet" href="/styles.css?v=20260827-private-contacts-1" />
 </head>
   <body class="home-page" data-page="account" data-language="uk">
     <header class="header">
@@ -132,6 +132,23 @@
               <article><span>04</span><h3>Увійти через Google</h3><p>Google</p></article>
             </div>
 
+            <form class="account-contact-form" data-account-contact-form>
+              <div class="account-contact-heading">
+                <span class="home-section-kicker">ПРИВАТНІ КОНТАКТНІ ДАНІ</span>
+                <h3>Ваші контактні дані</h3>
+                <p>Необов’язкові дані, які бачите лише ви та уповноважені модератори SpinCresta.</p>
+              </div>
+              <div class="account-contact-fields">
+                <label><span>Країна проживання</span><select name="countryCode" data-account-country><option value="">Виберіть країну</option></select></label>
+                <label><span>Номер телефону</span><input name="phoneNumber" type="tel" maxlength="32" autocomplete="tel" placeholder="+380 67 123 45 67" /></label>
+                <label><span>Ім’я користувача в Telegram</span><input name="telegramUsername" type="text" maxlength="33" autocomplete="off" placeholder="@username" /></label>
+              </div>
+              <div class="account-contact-actions">
+                <button type="submit" data-account-contact-submit>Зберегти дані</button>
+                <p class="account-auth-status" data-account-contact-status role="status" aria-live="polite" hidden></p>
+              </div>
+            </form>
+
             <div class="home-section-cta">
               <div><strong>Важливе про акаунт</strong><span>Перевіряйте, як ми обробляємо дані акаунта, і будь-коли відкривайте інформацію про відповідальну гру.</span></div>
               <a href="/uk/privacy-policy/">Політика конфіденційності</a>
@@ -187,6 +204,6 @@
 </div>
     </footer>
 
-    <script type="module" src="/scripts/main.js?v=20260827-moderation-1"></script>
+    <script type="module" src="/scripts/main.js?v=20260827-private-contacts-1"></script>
   </body>
 </html>

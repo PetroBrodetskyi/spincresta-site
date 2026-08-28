@@ -36,7 +36,7 @@
   <meta property="og:site_name" content="SpinCresta" />
   <meta name="twitter:card" content="summary_large_image" />
 
-      <link rel="stylesheet" href="/styles.css?v=20260827-moderation-1" />
+      <link rel="stylesheet" href="/styles.css?v=20260827-private-contacts-1" />
 </head>
   <body class="home-page" data-page="account" data-language="pl">
     <header class="header">
@@ -132,6 +132,23 @@
               <article><span>04</span><h3>Zaloguj się przez Google</h3><p>Google</p></article>
             </div>
 
+            <form class="account-contact-form" data-account-contact-form>
+              <div class="account-contact-heading">
+                <span class="home-section-kicker">PRYWATNE DANE KONTAKTOWE</span>
+                <h3>Twoje dane kontaktowe</h3>
+                <p>Opcjonalne dane widoczne tylko dla Ciebie i upoważnionych moderatorów SpinCresta.</p>
+              </div>
+              <div class="account-contact-fields">
+                <label><span>Kraj zamieszkania</span><select name="countryCode" data-account-country><option value="">Wybierz kraj</option></select></label>
+                <label><span>Numer telefonu</span><input name="phoneNumber" type="tel" maxlength="32" autocomplete="tel" placeholder="+48 123 456 789" /></label>
+                <label><span>Nazwa użytkownika Telegram</span><input name="telegramUsername" type="text" maxlength="33" autocomplete="off" placeholder="@nazwauzytkownika" /></label>
+              </div>
+              <div class="account-contact-actions">
+                <button type="submit" data-account-contact-submit>Zapisz dane</button>
+                <p class="account-auth-status" data-account-contact-status role="status" aria-live="polite" hidden></p>
+              </div>
+            </form>
+
             <div class="home-section-cta">
               <div><strong>Najważniejsze informacje</strong><span>Sprawdź, jak przetwarzamy dane konta, i w każdej chwili przejdź do informacji o odpowiedzialnej grze.</span></div>
               <a href="/pl/privacy-policy/">Polityka prywatności</a>
@@ -187,6 +204,6 @@
 </div>
     </footer>
 
-    <script type="module" src="/scripts/main.js?v=20260827-moderation-1"></script>
+    <script type="module" src="/scripts/main.js?v=20260827-private-contacts-1"></script>
   </body>
 </html>

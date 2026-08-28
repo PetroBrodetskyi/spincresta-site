@@ -1,4 +1,5 @@
 const DEFAULT_MODERATION_ENDPOINT = 'https://api.spincresta.com/api/moderation-reviews';
+const DEFAULT_USERS_ENDPOINT = 'https://api.spincresta.com/api/moderation-users';
 const STATUSES = ['pending', 'approved', 'rejected'];
 
 const waitForAccount = () => {
@@ -107,6 +108,51 @@ const reviewCard = (review, onModerate) => {
   return article;
 };
 
+const userRow = user => {
+  const row = document.createElement('tr');
+  const identityCell = document.createElement('td');
+  const identity = createElement('div', 'moderation-user-identity');
+  if (user.avatarUrl) {
+    const avatar = document.createElement('img');
+    avatar.src = user.avatarUrl;
+    avatar.alt = '';
+    avatar.loading = 'lazy';
+    identity.append(avatar);
+  }
+  const identityText = createElement('div');
+  identityText.append(createElement('strong', '', user.displayName || 'SpinCresta player'));
+  identityText.append(createElement('a', '', user.email));
+  identityText.lastElementChild.href = `mailto:${user.email}`;
+  const labels = createElement('span', 'moderation-user-labels');
+  labels.append(createElement('em', '', (user.locale || 'en').toUpperCase()));
+  if (user.role === 'moderator') labels.append(createElement('em', 'is-moderator', 'Moderator'));
+  identityText.append(labels);
+  identity.append(identityText);
+  identityCell.append(identity);
+
+  const country = createElement('td', '', user.countryCode || '—');
+  const phone = createElement('td');
+  if (user.phoneNumber) {
+    const phoneLink = createElement('a', '', user.phoneNumber);
+    phoneLink.href = `tel:${user.phoneNumber.replace(/[^+\d]/g, '')}`;
+    phone.append(phoneLink);
+  } else phone.textContent = '—';
+  const telegram = createElement('td');
+  if (user.telegramUsername) {
+    const telegramLink = createElement('a', '', `@${user.telegramUsername}`);
+    telegramLink.href = `https://t.me/${user.telegramUsername}`;
+    telegramLink.target = '_blank';
+    telegramLink.rel = 'noopener';
+    telegram.append(telegramLink);
+  } else telegram.textContent = '—';
+  const newsletter = createElement('td');
+  newsletter.append(createElement('span', `moderation-status-pill is-${user.newsletterStatus || 'not-subscribed'}`, user.newsletterStatus || 'Not subscribed'));
+  row.append(identityCell, country, phone, telegram, newsletter, createElement('td', '', formatDate(user.registeredAt)), createElement('td', '', formatDate(user.lastSignInAt)));
+  row.dataset.search = [user.displayName, user.email, user.countryCode, user.phoneNumber, user.telegramUsername]
+    .filter(Boolean).join(' ').toLowerCase();
+  return row;
+};
+
 export const initModeratorPage = async () => {
   const root = document.querySelector('[data-moderator-page]');
   if (!root) return;
@@ -118,11 +164,24 @@ export const initModeratorPage = async () => {
   const notice = root.querySelector('[data-moderator-notice]');
   const signIn = root.querySelector('[data-moderator-signin]');
   const filters = Array.from(root.querySelectorAll('[data-moderator-status]'));
+  const viewButtons = Array.from(root.querySelectorAll('[data-moderator-view]'));
+  const panels = Array.from(root.querySelectorAll('[data-moderator-panel]'));
+  const usersLoading = root.querySelector('[data-moderator-users-loading]');
+  const usersEmpty = root.querySelector('[data-moderator-users-empty]');
+  const usersTable = root.querySelector('[data-moderator-users-table]');
+  const usersList = root.querySelector('[data-moderator-users-list]');
+  const userSearch = root.querySelector('[data-moderator-user-search]');
+  const userTotal = root.querySelector('[data-moderator-user-total]');
+  const userRefresh = root.querySelector('[data-moderator-user-refresh]');
   const endpoint = document.documentElement.dataset.moderationEndpoint
     || DEFAULT_MODERATION_ENDPOINT;
+  const usersEndpoint = document.documentElement.dataset.moderationUsersEndpoint
+    || DEFAULT_USERS_ENDPOINT;
   let account = null;
   let currentStatus = 'pending';
   let accessToken = '';
+  let currentView = 'reviews';
+  let usersLoaded = false;
 
   const showNotice = (message, state = '') => {
     notice.textContent = message;
@@ -132,6 +191,7 @@ export const initModeratorPage = async () => {
 
   const showAccess = message => {
     loading.hidden = true;
+    usersLoading.hidden = true;
     list.hidden = true;
     empty.hidden = true;
     access.querySelector('p').textContent = message;
@@ -139,6 +199,52 @@ export const initModeratorPage = async () => {
       ? 'Open account / switch user'
       : 'Sign in with Google';
     access.hidden = false;
+  };
+
+  const filterUsers = () => {
+    const query = userSearch.value.trim().toLowerCase();
+    const rows = Array.from(usersList.children);
+    let visible = 0;
+    rows.forEach(row => {
+      row.hidden = Boolean(query) && !row.dataset.search.includes(query);
+      if (!row.hidden) visible += 1;
+    });
+    usersEmpty.hidden = visible !== 0;
+    usersTable.hidden = visible === 0;
+  };
+
+  const loadUsers = async ({ force = false } = {}) => {
+    if (usersLoaded && !force) return;
+    usersLoading.hidden = false;
+    usersEmpty.hidden = true;
+    usersTable.hidden = true;
+    usersList.replaceChildren();
+    const response = await fetch(`${usersEndpoint}?limit=100&offset=0`, {
+      headers: { Accept: 'application/json', Authorization: `Bearer ${accessToken}` },
+    });
+    const body = await response.json().catch(() => ({}));
+    usersLoading.hidden = true;
+    if (response.status === 401) return showAccess('Sign in with an approved moderator account to continue.');
+    if (response.status === 403) return showAccess('This account does not have moderator access.');
+    if (!response.ok) return showAccess('The registered-user directory is temporarily unavailable. Please try again.');
+    const users = Array.isArray(body.users) ? body.users : [];
+    users.forEach(user => usersList.append(userRow(user)));
+    userTotal.textContent = `${body.pagination?.total ?? users.length} users`;
+    usersLoaded = true;
+    filterUsers();
+  };
+
+  const openView = async view => {
+    currentView = view === 'users' ? 'users' : 'reviews';
+    viewButtons.forEach(button => {
+      const active = button.dataset.moderatorView === currentView;
+      button.classList.toggle('is-active', active);
+      button.setAttribute('aria-selected', String(active));
+    });
+    panels.forEach(panel => { panel.hidden = panel.dataset.moderatorPanel !== currentView; });
+    if (!accessToken) return;
+    if (currentView === 'users') await loadUsers();
+    else await loadReviews(currentStatus);
   };
 
   const moderate = async (reviewId, action, note) => {
@@ -206,6 +312,9 @@ export const initModeratorPage = async () => {
   filters.forEach(button => {
     button.addEventListener('click', () => loadReviews(button.dataset.moderatorStatus));
   });
+  viewButtons.forEach(button => button.addEventListener('click', () => openView(button.dataset.moderatorView)));
+  userSearch.addEventListener('input', filterUsers);
+  userRefresh.addEventListener('click', () => loadUsers({ force: true }));
 
   const syncAccess = async () => {
     accessToken = '';
@@ -218,7 +327,9 @@ export const initModeratorPage = async () => {
       showAccess('Your session has expired. Sign in again to continue.');
       return;
     }
-    await loadReviews(currentStatus);
+    access.hidden = true;
+    if (currentView === 'users') await loadUsers({ force: true });
+    else await loadReviews(currentStatus);
   };
 
   account = await waitForAccount();

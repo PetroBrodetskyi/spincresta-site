@@ -3,8 +3,8 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
-const ACCOUNT_ASSET_VERSION = '20260827-moderation-1';
-const MAIN_ASSET_VERSION = '20260827-moderation-1';
+const ACCOUNT_ASSET_VERSION = '20260827-private-contacts-1';
+const MAIN_ASSET_VERSION = '20260827-private-contacts-1';
 
 const locales = {
   en: {
@@ -99,6 +99,19 @@ const locales = {
   },
 };
 
+const contactCopy = {
+  en: { kicker: 'PRIVATE CONTACT DETAILS', title: 'Your contact details', intro: 'Optional details visible only to you and approved SpinCresta moderators.', country: 'Country of residence', chooseCountry: 'Choose a country', phone: 'Phone number', phonePlaceholder: '+49 123 456789', telegram: 'Telegram username', telegramPlaceholder: '@username', save: 'Save details' },
+  de: { kicker: 'PRIVATE KONTAKTDATEN', title: 'Ihre Kontaktdaten', intro: 'Optionale Angaben, die nur für Sie und freigeschaltete SpinCresta-Moderatoren sichtbar sind.', country: 'Wohnsitzland', chooseCountry: 'Land auswählen', phone: 'Telefonnummer', phonePlaceholder: '+49 123 456789', telegram: 'Telegram-Benutzername', telegramPlaceholder: '@benutzername', save: 'Angaben speichern' },
+  es: { kicker: 'DATOS DE CONTACTO PRIVADOS', title: 'Tus datos de contacto', intro: 'Datos opcionales visibles solo para ti y para los moderadores autorizados de SpinCresta.', country: 'País de residencia', chooseCountry: 'Elige un país', phone: 'Número de teléfono', phonePlaceholder: '+34 612 345 678', telegram: 'Usuario de Telegram', telegramPlaceholder: '@usuario', save: 'Guardar datos' },
+  it: { kicker: 'CONTATTI PRIVATI', title: 'I tuoi contatti', intro: 'Dati facoltativi visibili solo a te e ai moderatori SpinCresta autorizzati.', country: 'Paese di residenza', chooseCountry: 'Seleziona un Paese', phone: 'Numero di telefono', phonePlaceholder: '+39 312 345 6789', telegram: 'Nome utente Telegram', telegramPlaceholder: '@nomeutente', save: 'Salva i dati' },
+  pl: { kicker: 'PRYWATNE DANE KONTAKTOWE', title: 'Twoje dane kontaktowe', intro: 'Opcjonalne dane widoczne tylko dla Ciebie i upoważnionych moderatorów SpinCresta.', country: 'Kraj zamieszkania', chooseCountry: 'Wybierz kraj', phone: 'Numer telefonu', phonePlaceholder: '+48 123 456 789', telegram: 'Nazwa użytkownika Telegram', telegramPlaceholder: '@nazwauzytkownika', save: 'Zapisz dane' },
+  uk: { kicker: 'ПРИВАТНІ КОНТАКТНІ ДАНІ', title: 'Ваші контактні дані', intro: 'Необов’язкові дані, які бачите лише ви та уповноважені модератори SpinCresta.', country: 'Країна проживання', chooseCountry: 'Виберіть країну', phone: 'Номер телефону', phonePlaceholder: '+380 67 123 45 67', telegram: 'Ім’я користувача в Telegram', telegramPlaceholder: '@username', save: 'Зберегти дані' },
+  pt: { kicker: 'CONTACTOS PRIVADOS', title: 'Os seus contactos', intro: 'Dados opcionais visíveis apenas para si e para os moderadores autorizados da SpinCresta.', country: 'País de residência', chooseCountry: 'Escolha um país', phone: 'Número de telefone', phonePlaceholder: '+351 912 345 678', telegram: 'Nome de utilizador do Telegram', telegramPlaceholder: '@utilizador', save: 'Guardar dados' },
+  fr: { kicker: 'COORDONNÉES PRIVÉES', title: 'Vos coordonnées', intro: 'Informations facultatives visibles uniquement par vous et les modérateurs SpinCresta autorisés.', country: 'Pays de résidence', chooseCountry: 'Choisissez un pays', phone: 'Numéro de téléphone', phonePlaceholder: '+33 6 12 34 56 78', telegram: 'Nom d’utilisateur Telegram', telegramPlaceholder: '@utilisateur', save: 'Enregistrer' },
+  hi: { kicker: 'निजी संपर्क विवरण', title: 'आपके संपर्क विवरण', intro: 'वैकल्पिक जानकारी, जिसे केवल आप और अधिकृत SpinCresta मॉडरेटर देख सकते हैं।', country: 'निवास का देश', chooseCountry: 'देश चुनें', phone: 'फ़ोन नंबर', phonePlaceholder: '+91 98765 43210', telegram: 'Telegram यूज़रनेम', telegramPlaceholder: '@username', save: 'जानकारी सेव करें' },
+  fi: { kicker: 'YKSITYISET YHTEYSTIEDOT', title: 'Yhteystietosi', intro: 'Vapaaehtoiset tiedot näkyvät vain sinulle ja hyväksytyille SpinCresta-moderaattoreille.', country: 'Asuinmaa', chooseCountry: 'Valitse maa', phone: 'Puhelinnumero', phonePlaceholder: '+358 40 123 4567', telegram: 'Telegram-käyttäjänimi', telegramPlaceholder: '@kayttajanimi', save: 'Tallenna tiedot' },
+};
+
 const escapeHtml = value => String(value)
   .replaceAll('&', '&amp;')
   .replaceAll('<', '&lt;')
@@ -107,7 +120,9 @@ const escapeHtml = value => String(value)
 
 const pagePath = (locale, slug) => locale.base ? `/${locale.base}/${slug}/` : `/${slug}/`;
 
-const renderMain = locale => `
+const renderMain = (locale, language) => {
+  const contact = contactCopy[language] || contactCopy.en;
+  return `
     <main>
       <section class="hero container">
         <div class="hero-content">
@@ -165,6 +180,23 @@ const renderMain = locale => `
               <article><span>04</span><h3>${escapeHtml(locale.signIn)}</h3><p>Google</p></article>
             </div>
 
+            <form class="account-contact-form" data-account-contact-form>
+              <div class="account-contact-heading">
+                <span class="home-section-kicker">${escapeHtml(contact.kicker)}</span>
+                <h3>${escapeHtml(contact.title)}</h3>
+                <p>${escapeHtml(contact.intro)}</p>
+              </div>
+              <div class="account-contact-fields">
+                <label><span>${escapeHtml(contact.country)}</span><select name="countryCode" data-account-country><option value="">${escapeHtml(contact.chooseCountry)}</option></select></label>
+                <label><span>${escapeHtml(contact.phone)}</span><input name="phoneNumber" type="tel" maxlength="32" autocomplete="tel" placeholder="${escapeHtml(contact.phonePlaceholder)}" /></label>
+                <label><span>${escapeHtml(contact.telegram)}</span><input name="telegramUsername" type="text" maxlength="33" autocomplete="off" placeholder="${escapeHtml(contact.telegramPlaceholder)}" /></label>
+              </div>
+              <div class="account-contact-actions">
+                <button type="submit" data-account-contact-submit>${escapeHtml(contact.save)}</button>
+                <p class="account-auth-status" data-account-contact-status role="status" aria-live="polite" hidden></p>
+              </div>
+            </form>
+
             <div class="home-section-cta">
               <div><strong>${escapeHtml(locale.quickTitle)}</strong><span>${escapeHtml(locale.quickText)}</span></div>
               <a href="${pagePath(locale, 'privacy-policy')}">${escapeHtml(locale.privacy)}</a>
@@ -176,6 +208,7 @@ const renderMain = locale => `
         </section>
       </div>
     </main>`;
+};
 
 for (const [language, locale] of Object.entries(locales)) {
   const source = path.join(root, locale.base, 'about', 'index.html');
@@ -194,7 +227,7 @@ for (const [language, locale] of Object.entries(locales)) {
     .replace('data-page="about"', 'data-page="account"')
     .replace(/\/styles\.css\?v=[^"']+/g, `/styles.css?v=${ACCOUNT_ASSET_VERSION}`)
     .replace(/\/scripts\/main\.js\?v=[^"']+/g, `/scripts/main.js?v=${MAIN_ASSET_VERSION}`)
-    .replace(/\s*<main>[\s\S]*?<\/main>/, `\n${renderMain(locale)}`);
+    .replace(/\s*<main>[\s\S]*?<\/main>/, `\n${renderMain(locale, language)}`);
 
   html = `${html.split('\n').map(line => line.trimEnd()).join('\n').trimEnd()}\n`;
 

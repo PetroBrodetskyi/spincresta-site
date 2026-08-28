@@ -1,3 +1,5 @@
+import { COUNTRIES } from './countries.js';
+
 const DEFAULT_CONFIG_ENDPOINT = 'https://api.spincresta.com/api/auth-config';
 const DEFAULT_NEWSLETTER_ENDPOINT = 'https://api.spincresta.com/api/subscribe';
 const SUPABASE_MODULE_URL = 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm';
@@ -68,6 +70,19 @@ const COPY = {
     signIn: 'Kirjaudu', dialogTitle: 'Liity SpinCrestaan', dialogIntro: 'Tallenna profiilisi Google-tilillä ja osallistu myöhemmin arvioihin ja arvosteluihin.', completeTitle: 'Viimeistele rekisteröityminen', age: 'Vahvistan olevani vähintään 18-vuotias.', privacy: 'Olen lukenut tietosuojakäytännön.', newsletter: 'Haluan saada ajoittain SpinCrestan päivityksiä. Voin perua tilauksen milloin tahansa.', privacyLink: 'Tietosuojakäytäntö', complete: 'Luo tili', completing: 'Tiliä luodaan…', account: 'Tilisi', signedInAs: 'Kirjautuneena käyttäjänä', signOut: 'Kirjaudu ulos', required: 'Vahvista ikäsi ja tietosuojakäytäntö jatkaaksesi.', failed: 'Google-kirjautuminen ei ole juuri nyt käytettävissä. Yritä uudelleen.', profileFailed: 'Profiilia ei voitu viimeistellä. Yritä uudelleen.', newsletterPending: 'Tili luotiin. Vahvista valinnainen sähköpostitilaus postilaatikostasi.', newsletterFailed: 'Tilisi on valmis, mutta valinnaista sähköpostitilausta ei voitu aloittaa. Voit tilata myöhemmin alatunnisteesta.', success: 'SpinCresta-tilisi on valmis.', close: 'Sulje',
     accountIntro: 'SpinCresta-profiilisi ja tilisi tiedot.', statusLabel: 'Tilin tila', active: 'Aktiivinen', languageLabel: 'Sivuston kieli', memberSince: 'Jäsen alkaen', responsibleLink: 'Vastuullinen pelaaminen',
   },
+};
+
+const CONTACT_COPY = {
+  en: { save: 'Save details', saving: 'Saving…', saved: 'Your contact details have been saved.', invalidPhone: 'Enter a valid phone number or leave the field empty.', invalidTelegram: 'Enter a Telegram username with 5–32 letters, numbers or underscores.', failed: 'We could not save your contact details. Please try again.' },
+  de: { save: 'Angaben speichern', saving: 'Wird gespeichert…', saved: 'Ihre Kontaktdaten wurden gespeichert.', invalidPhone: 'Geben Sie eine gültige Telefonnummer ein oder lassen Sie das Feld leer.', invalidTelegram: 'Geben Sie einen Telegram-Benutzernamen mit 5–32 Buchstaben, Zahlen oder Unterstrichen ein.', failed: 'Ihre Kontaktdaten konnten nicht gespeichert werden. Versuchen Sie es erneut.' },
+  es: { save: 'Guardar datos', saving: 'Guardando…', saved: 'Tus datos de contacto se han guardado.', invalidPhone: 'Introduce un número de teléfono válido o deja el campo vacío.', invalidTelegram: 'Introduce un usuario de Telegram de 5 a 32 letras, números o guiones bajos.', failed: 'No hemos podido guardar tus datos. Inténtalo de nuevo.' },
+  it: { save: 'Salva i dati', saving: 'Salvataggio…', saved: 'I tuoi contatti sono stati salvati.', invalidPhone: 'Inserisci un numero di telefono valido oppure lascia vuoto il campo.', invalidTelegram: 'Inserisci un nome utente Telegram di 5–32 lettere, numeri o trattini bassi.', failed: 'Non è stato possibile salvare i dati. Riprova.' },
+  pl: { save: 'Zapisz dane', saving: 'Zapisywanie…', saved: 'Dane kontaktowe zostały zapisane.', invalidPhone: 'Wpisz prawidłowy numer telefonu albo pozostaw pole puste.', invalidTelegram: 'Wpisz nazwę użytkownika Telegram zawierającą 5–32 litery, cyfry lub podkreślenia.', failed: 'Nie udało się zapisać danych. Spróbuj ponownie.' },
+  uk: { save: 'Зберегти дані', saving: 'Зберігаємо…', saved: 'Контактні дані збережено.', invalidPhone: 'Введіть коректний номер телефону або залиште поле порожнім.', invalidTelegram: 'Введіть ім’я користувача Telegram із 5–32 літер, цифр або символів підкреслення.', failed: 'Не вдалося зберегти контактні дані. Спробуйте ще раз.' },
+  pt: { save: 'Guardar dados', saving: 'A guardar…', saved: 'Os seus contactos foram guardados.', invalidPhone: 'Introduza um número de telefone válido ou deixe o campo vazio.', invalidTelegram: 'Introduza um nome de utilizador Telegram com 5–32 letras, números ou sublinhados.', failed: 'Não foi possível guardar os dados. Tente novamente.' },
+  fr: { save: 'Enregistrer', saving: 'Enregistrement…', saved: 'Vos coordonnées ont été enregistrées.', invalidPhone: 'Saisissez un numéro de téléphone valide ou laissez le champ vide.', invalidTelegram: 'Saisissez un nom d’utilisateur Telegram de 5 à 32 lettres, chiffres ou traits de soulignement.', failed: 'Impossible d’enregistrer vos coordonnées. Réessayez.' },
+  hi: { save: 'जानकारी सेव करें', saving: 'सेव किया जा रहा है…', saved: 'आपके संपर्क विवरण सेव हो गए हैं।', invalidPhone: 'सही फ़ोन नंबर दर्ज करें या फ़ील्ड खाली छोड़ दें।', invalidTelegram: '5–32 अक्षरों, अंकों या अंडरस्कोर वाला Telegram यूज़रनेम दर्ज करें।', failed: 'संपर्क विवरण सेव नहीं हो सके। फिर कोशिश करें।' },
+  fi: { save: 'Tallenna tiedot', saving: 'Tallennetaan…', saved: 'Yhteystietosi on tallennettu.', invalidPhone: 'Anna kelvollinen puhelinnumero tai jätä kenttä tyhjäksi.', invalidTelegram: 'Anna 5–32 kirjainta, numeroa tai alaviivaa sisältävä Telegram-käyttäjänimi.', failed: 'Yhteystietoja ei voitu tallentaa. Yritä uudelleen.' },
 };
 
 const privacyPath = locale => locale === 'en' ? '/privacy-policy/' : `/${locale}/privacy-policy/`;
@@ -187,6 +202,7 @@ const createInterface = (copy, locale) => {
 
 export const initAccountAuth = async locale => {
   const copy = COPY[locale] || COPY.en;
+  const contactCopy = CONTACT_COPY[locale] || CONTACT_COPY.en;
   const ui = createInterface(copy, locale);
   if (!ui) return;
 
@@ -195,6 +211,7 @@ export const initAccountAuth = async locale => {
   const completionForm = modal.querySelector('.account-auth-completion');
   const googleButton = modal.querySelector('[data-google-button]');
   const accountPage = document.querySelector('[data-account-page]');
+  const contactForm = accountPage?.querySelector('[data-account-contact-form]');
   const originalCompleteLabel = completionForm.querySelector('.account-auth-primary').textContent;
   let supabase;
   let googleReady = false;
@@ -202,6 +219,27 @@ export const initAccountAuth = async locale => {
   let currentUser = null;
   let currentProfile = null;
   let autoCloseTimer = 0;
+
+  const countrySelect = contactForm?.querySelector('[data-account-country]');
+  if (countrySelect) {
+    let regionNames;
+    try {
+      regionNames = new Intl.DisplayNames([locale], { type: 'region' });
+    } catch {
+      regionNames = null;
+    }
+    const options = COUNTRIES.map(country => {
+      const code = country.code.toUpperCase();
+      const displayCode = code === 'UK' ? 'GB' : code;
+      return { code, name: regionNames?.of(displayCode) || country.name };
+    }).sort((a, b) => a.name.localeCompare(b.name, locale));
+    options.forEach(country => {
+      const option = document.createElement('option');
+      option.value = country.code;
+      option.textContent = country.name;
+      countrySelect.append(option);
+    });
+  }
 
   const publishAccountState = () => {
     window.dispatchEvent(new CustomEvent('spincresta:account-state', {
@@ -258,7 +296,7 @@ export const initAccountAuth = async locale => {
         .single(),
       supabase
         .from('user_account_settings')
-        .select('locale, age_confirmed_at, privacy_acknowledged_at, registration_completed_at, created_at')
+        .select('locale, age_confirmed_at, privacy_acknowledged_at, registration_completed_at, country_code, phone_number, telegram_username, created_at')
         .eq('user_id', user.id)
         .single(),
     ]);
@@ -317,6 +355,13 @@ export const initAccountAuth = async locale => {
     if (currentUser) {
       populateUser('account-page', currentUser, currentProfile, accountPage);
       populateProfileSummary(currentProfile, accountPage, 'account-page');
+      if (contactForm) {
+        contactForm.elements.countryCode.value = currentProfile?.country_code || '';
+        contactForm.elements.phoneNumber.value = currentProfile?.phone_number || '';
+        contactForm.elements.telegramUsername.value = currentProfile?.telegram_username
+          ? `@${currentProfile.telegram_username}`
+          : '';
+      }
     }
 
     if (notice && !notice.dataset.initialized) {
@@ -526,6 +571,58 @@ export const initAccountAuth = async locale => {
   accountPage?.querySelector('[data-account-page-signout]')?.addEventListener('click', event => {
     event.preventDefault();
     signOut();
+  });
+
+  contactForm?.addEventListener('submit', async event => {
+    event.preventDefault();
+    if (!currentUser) return;
+
+    const status = contactForm.querySelector('[data-account-contact-status]');
+    const button = contactForm.querySelector('[data-account-contact-submit]');
+    const countryCode = String(contactForm.elements.countryCode.value || '').toUpperCase();
+    const phoneNumber = String(contactForm.elements.phoneNumber.value || '').trim().replace(/\s+/g, ' ');
+    const telegramUsername = String(contactForm.elements.telegramUsername.value || '')
+      .trim()
+      .replace(/^https?:\/\/(?:www\.)?t\.me\//i, '')
+      .replace(/^@/, '');
+    const validCountries = new Set(COUNTRIES.map(country => country.code.toUpperCase()));
+    const showContactStatus = (message, state = '') => {
+      status.textContent = message;
+      status.dataset.state = state;
+      status.hidden = !message;
+    };
+
+    if (countryCode && !validCountries.has(countryCode)) return;
+    if (phoneNumber && !/^\+?[0-9][0-9 ()-]{5,30}[0-9]$/.test(phoneNumber)) {
+      showContactStatus(contactCopy.invalidPhone, 'error');
+      contactForm.elements.phoneNumber.focus();
+      return;
+    }
+    if (telegramUsername && !/^[A-Za-z0-9_]{5,32}$/.test(telegramUsername)) {
+      showContactStatus(contactCopy.invalidTelegram, 'error');
+      contactForm.elements.telegramUsername.focus();
+      return;
+    }
+
+    button.disabled = true;
+    button.textContent = contactCopy.saving;
+    showContactStatus('');
+    try {
+      const { error } = await supabase.from('user_account_settings').update({
+        country_code: countryCode || null,
+        phone_number: phoneNumber || null,
+        telegram_username: telegramUsername || null,
+      }).eq('user_id', currentUser.id);
+      if (error) throw error;
+      currentProfile = await loadProfile(currentUser);
+      renderAccountPage();
+      showContactStatus(contactCopy.saved, 'success');
+    } catch {
+      showContactStatus(contactCopy.failed, 'error');
+    } finally {
+      button.disabled = false;
+      button.textContent = contactCopy.save;
+    }
   });
 
   try {

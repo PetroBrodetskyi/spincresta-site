@@ -4,7 +4,7 @@
 import { BRANDS } from './brands.js?v=20260813-french-1';
 import { COUNTRIES } from './countries.js';
 import { initFooterNewsletter } from './footer-newsletter.js?v=20260826-newsletter-4';
-import { initAccountAuth } from './account-auth.js?v=20260827-moderation-1';
+import { initAccountAuth } from './account-auth.js?v=20260827-private-contacts-1';
 
 let BRAND_SNAPSHOT_CONFIGS = {};
 let BRAND_NEW_GAMES = {};
@@ -85,7 +85,7 @@ const loadPageModules = async () => {
   }
 
   if (document.body.dataset.page === 'moderator') {
-    const pageModule = await import('./pages/moderator.js?v=20260827-moderation-3');
+    const pageModule = await import('./pages/moderator.js?v=20260827-private-contacts-1');
     initModeratorPageModule = pageModule.initModeratorPage;
   }
 };
