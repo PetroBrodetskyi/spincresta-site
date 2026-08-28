@@ -4,7 +4,7 @@
 import { BRANDS } from './brands.js?v=20260813-french-1';
 import { COUNTRIES } from './countries.js';
 import { initFooterNewsletter } from './footer-newsletter.js?v=20260826-newsletter-4';
-import { initAccountAuth } from './account-auth.js?v=20260828-review-editing-2';
+import { initAccountAuth } from './account-auth.js?v=20260828-review-editing-3';
 
 let BRAND_SNAPSHOT_CONFIGS = {};
 let BRAND_NEW_GAMES = {};
@@ -16,7 +16,6 @@ let initBrandFeedbackModule = null;
 let initTopCasinosPageModule = null;
 let initBrandLayoutModule = null;
 let initAccountPageModule = null;
-let initModeratorPageModule = null;
 
 const brandLayoutFallbackTimer = document.body?.dataset.brand
   ? window.setTimeout(() => {
@@ -84,10 +83,6 @@ const loadPageModules = async () => {
     initAccountPageModule = pageModule.initAccountPage;
   }
 
-  if (document.body.dataset.page === 'moderator') {
-    const pageModule = await import('./pages/moderator.js?v=20260828-review-editing-2');
-    initModeratorPageModule = pageModule.initModeratorPage;
-  }
 };
 
 // =====================
@@ -4241,7 +4236,6 @@ export const initCasinoPage = async () => {
   if (pageType !== 'moderator') initFooterNewsletter(SITE_LOCALE);
   initAccountAuth(SITE_LOCALE);
   initAccountPageModule?.();
-  initModeratorPageModule?.();
   initFooterThemeSettings();
   initAffiliateClickTracking();
   window.addEventListener('resize', requestPaymentIconSync, { passive: true });

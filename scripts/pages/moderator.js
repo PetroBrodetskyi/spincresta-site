@@ -285,17 +285,17 @@ export const initModeratorPage = async () => {
     else await loadReviews(currentStatus);
   };
 
-  const moderate = async (reviewId, action, note, title, body) => {
+  const moderate = async (reviewId, action, note, title, reviewBody) => {
     const response = await fetch(endpoint, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
         Authorization: `Bearer ${accessToken}`,
       },
-      body: JSON.stringify({ reviewId, action, note, title, body }),
+      body: JSON.stringify({ reviewId, action, note, title, body: reviewBody }),
     });
-    const body = await response.json().catch(() => ({}));
-    if (!response.ok) throw new Error(body.error === 'review_not_found'
+    const responseBody = await response.json().catch(() => ({}));
+    if (!response.ok) throw new Error(responseBody.error === 'review_not_found'
       ? 'This review no longer exists.'
       : 'Could not update this review. Please try again.');
     showNotice(action === 'approve' ? 'Review approved and published.' : 'Review rejected.', 'success');

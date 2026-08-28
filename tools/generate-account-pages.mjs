@@ -3,8 +3,8 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
-const ACCOUNT_ASSET_VERSION = '20260828-review-editing-2';
-const MAIN_ASSET_VERSION = '20260828-review-editing-2';
+const ACCOUNT_ASSET_VERSION = '20260828-review-editing-3';
+const MAIN_ASSET_VERSION = '20260828-review-editing-3';
 
 const locales = {
   en: {

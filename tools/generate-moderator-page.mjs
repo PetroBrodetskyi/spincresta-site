@@ -3,7 +3,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
-const assetVersion = '20260828-review-editing-2';
+const assetVersion = '20260828-review-editing-3';
 
 const main = `
     <main>
@@ -89,6 +89,11 @@ html = html
   .replace(/\/styles\.css\?v=[^"']+/g, `/styles.css?v=${assetVersion}`)
   .replace(/\/scripts\/main\.js\?v=[^"']+/g, `/scripts/main.js?v=${assetVersion}`)
   .replace(/\s*<main>[\s\S]*?<\/main>/, `\n${main}`);
+
+html = html.replace(
+  '</body>',
+  `    <script type="module" src="/scripts/moderator-bootstrap.js?v=${assetVersion}"></script>\n  </body>`
+);
 
 const target = path.join(root, 'moderator');
 await mkdir(target, { recursive: true });
