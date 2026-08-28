@@ -305,6 +305,19 @@ export const initAccountAuth = async locale => {
     return { ...profileResult.data, ...settingsResult.data };
   };
 
+  const syncProfileLocale = async profile => {
+    if (!currentUser || !profile?.registration_completed_at || profile.locale === locale) {
+      return profile;
+    }
+
+    const { error } = await supabase
+      .from('user_account_settings')
+      .update({ locale })
+      .eq('user_id', currentUser.id);
+    if (error) return profile;
+    return { ...profile, locale };
+  };
+
   const populateUser = (prefix, user, profile, root = modal) => {
     const name = profile?.display_name || user.user_metadata?.full_name || user.user_metadata?.name || user.email || '';
     const avatarUrl = profile?.avatar_url || user.user_metadata?.avatar_url || user.user_metadata?.picture;
@@ -385,6 +398,7 @@ export const initAccountAuth = async locale => {
     const { data } = await supabase.auth.getSession();
     currentUser = data.session?.user || null;
     currentProfile = currentUser ? await loadProfile(currentUser) : null;
+    currentProfile = await syncProfileLocale(currentProfile);
     updateControl();
     renderAccountPage();
     publishAccountState();

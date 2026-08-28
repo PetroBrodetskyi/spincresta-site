@@ -64,8 +64,34 @@ const reviewCard = (review, onModerate) => {
   author.append(authorText);
 
   const content = createElement('div', 'moderation-review-content');
-  if (review.title) content.append(createElement('h3', '', review.title));
-  content.append(createElement('p', '', review.body));
+  const editingHint = createElement(
+    'p',
+    'moderation-editing-hint',
+    'You may remove links or personal details and correct obvious mistakes. Keep the player’s meaning unchanged.'
+  );
+  content.append(editingHint);
+
+  const titleLabel = createElement('label');
+  titleLabel.append(createElement('span', '', 'Public review title'));
+  const titleInput = document.createElement('input');
+  titleInput.type = 'text';
+  titleInput.minLength = 3;
+  titleInput.maxLength = 120;
+  titleInput.placeholder = 'Optional title';
+  titleInput.value = review.title || '';
+  titleLabel.append(titleInput);
+  content.append(titleLabel);
+
+  const bodyLabel = createElement('label');
+  bodyLabel.append(createElement('span', '', 'Public review text'));
+  const bodyTextarea = document.createElement('textarea');
+  bodyTextarea.rows = 6;
+  bodyTextarea.minLength = 20;
+  bodyTextarea.maxLength = 5000;
+  bodyTextarea.required = true;
+  bodyTextarea.value = review.body;
+  bodyLabel.append(bodyTextarea);
+  content.append(bodyLabel);
 
   const controls = createElement('div', 'moderation-review-controls');
   const label = createElement('label');
@@ -89,11 +115,23 @@ const reviewCard = (review, onModerate) => {
   controls.append(actions);
 
   const moderate = async action => {
+    const editedTitle = titleInput.value.trim();
+    const editedBody = bodyTextarea.value.trim();
+    if ((editedTitle && editedTitle.length < 3) || editedTitle.length > 120) {
+      message.textContent = 'The public title must contain 3–120 characters or be left empty.';
+      titleInput.focus();
+      return;
+    }
+    if (editedBody.length < 20 || editedBody.length > 5000) {
+      message.textContent = 'The public review text must contain 20–5,000 characters.';
+      bodyTextarea.focus();
+      return;
+    }
     approve.disabled = true;
     reject.disabled = true;
     message.textContent = action === 'approve' ? 'Approving…' : 'Rejecting…';
     try {
-      await onModerate(review.id, action, textarea.value);
+      await onModerate(review.id, action, textarea.value, editedTitle, editedBody);
       article.remove();
     } catch (error) {
       message.textContent = error instanceof Error ? error.message : 'Could not update review.';
@@ -247,14 +285,14 @@ export const initModeratorPage = async () => {
     else await loadReviews(currentStatus);
   };
 
-  const moderate = async (reviewId, action, note) => {
+  const moderate = async (reviewId, action, note, title, body) => {
     const response = await fetch(endpoint, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
         Authorization: `Bearer ${accessToken}`,
       },
-      body: JSON.stringify({ reviewId, action, note }),
+      body: JSON.stringify({ reviewId, action, note, title, body }),
     });
     const body = await response.json().catch(() => ({}));
     if (!response.ok) throw new Error(body.error === 'review_not_found'

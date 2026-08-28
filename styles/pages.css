@@ -12935,19 +12935,24 @@ body[data-page='moderator'] .moderation-author span {
   line-height: 1.45;
 }
 
-body[data-page='moderator'] .moderation-review-content h3 {
-  margin: 0 0 10px;
-  color: var(--text-main);
-  font-size: clamp(20px, 2vw, 26px);
-  line-height: 1.16;
+body[data-page='moderator'] .moderation-review-content {
+  display: grid;
+  gap: 14px;
 }
 
-body[data-page='moderator'] .moderation-review-content p {
+body[data-page='moderator'] .moderation-review-content .moderation-editing-hint {
   margin: 0;
   color: var(--text-muted);
-  font-size: 14px;
-  line-height: 1.7;
-  white-space: pre-wrap;
+  font-size: 12px;
+  line-height: 1.55;
+}
+
+body[data-page='moderator'] .moderation-review-content label {
+  display: grid;
+  gap: 8px;
+  color: var(--text-main);
+  font-size: 12px;
+  font-weight: 700;
 }
 
 body[data-page='moderator'] .moderation-review-controls {
@@ -12966,9 +12971,10 @@ body[data-page='moderator'] .moderation-review-controls label {
   font-weight: 700;
 }
 
+body[data-page='moderator'] .moderation-review-content input,
+body[data-page='moderator'] .moderation-review-content textarea,
 body[data-page='moderator'] .moderation-review-controls textarea {
   width: 100%;
-  min-height: 86px;
   resize: vertical;
   padding: 12px 14px;
   border: 1px solid var(--surface-border-strong);
@@ -12980,6 +12986,13 @@ body[data-page='moderator'] .moderation-review-controls textarea {
   line-height: 1.55;
 }
 
+body[data-page='moderator'] .moderation-review-content textarea,
+body[data-page='moderator'] .moderation-review-controls textarea {
+  min-height: 86px;
+}
+
+body[data-page='moderator'] .moderation-review-content input:focus,
+body[data-page='moderator'] .moderation-review-content textarea:focus,
 body[data-page='moderator'] .moderation-review-controls textarea:focus {
   border-color: var(--gold, #ffdf00);
   outline: none;
