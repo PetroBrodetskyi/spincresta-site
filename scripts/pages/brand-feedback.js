@@ -66,6 +66,19 @@ const TEASER_COPY = {
   fi: { read: 'Lue pelaajien kokemuksia', first: 'Kirjoita ensimmäinen kokemus', ratings: 'Arviot', reviews: 'Kokemukset' },
 };
 
+const REVIEW_STATUS_COPY = {
+  en: { pending: 'Your review is awaiting moderation', rejected: 'Your review was not published' },
+  de: { pending: 'Ihr Beitrag wartet auf die Prüfung', rejected: 'Ihr Beitrag wurde nicht veröffentlicht' },
+  es: { pending: 'Tu reseña está pendiente de moderación', rejected: 'Tu reseña no se publicó' },
+  it: { pending: 'La tua recensione attende la moderazione', rejected: 'La tua recensione non è stata pubblicata' },
+  pl: { pending: 'Twoja recenzja oczekuje na moderację', rejected: 'Twoja recenzja nie została opublikowana' },
+  uk: { pending: 'Ваш відгук очікує на модерацію', rejected: 'Ваш відгук не опубліковано' },
+  pt: { pending: 'A sua opinião aguarda moderação', rejected: 'A sua opinião não foi publicada' },
+  fr: { pending: 'Votre avis attend sa modération', rejected: 'Votre avis n’a pas été publié' },
+  hi: { pending: 'आपकी समीक्षा मॉडरेशन की प्रतीक्षा में है', rejected: 'आपकी समीक्षा प्रकाशित नहीं हुई' },
+  fi: { pending: 'Kokemuksesi odottaa tarkistusta', rejected: 'Kokemustasi ei julkaistu' },
+};
+
 const escapeHtml = value => String(value ?? '')
   .replaceAll('&', '&amp;')
   .replaceAll('<', '&lt;')
@@ -84,6 +97,50 @@ const renderStars = rating => {
 
 const formatFeedbackCounts = (ratingCount, reviewCount, teaserCopy) =>
   `${teaserCopy.ratings}: ${ratingCount} · ${teaserCopy.reviews}: ${reviewCount}`;
+
+const reviewCountry = (review, locale) => {
+  const rawCode = String(review.author?.countryCode || '').trim().toUpperCase();
+  const countryCode = rawCode === 'UK' ? 'GB' : rawCode;
+  if (!/^[A-Z]{2}$/.test(countryCode)) return null;
+  const flag = countryCode
+    .split('')
+    .map(character => String.fromCodePoint(127397 + character.charCodeAt(0)))
+    .join('');
+  let name = countryCode;
+  try {
+    name = new Intl.DisplayNames([locale], { type: 'region' }).of(countryCode) || countryCode;
+  } catch {
+    // The country code remains a useful accessible fallback.
+  }
+  return { flag, name };
+};
+
+const renderReviewCard = (review, copy, locale, statusCopy) => {
+  const author = review.author?.displayName || copy.anonymous;
+  const avatar = review.author?.avatarUrl
+    ? `<img src="${escapeHtml(review.author.avatarUrl)}" alt="" loading="lazy" referrerpolicy="no-referrer" />`
+    : `<span aria-hidden="true">${escapeHtml(author.slice(0, 1).toUpperCase())}</span>`;
+  const createdAt = review.createdAt
+    ? new Intl.DateTimeFormat(locale, { dateStyle: 'medium' }).format(new Date(review.createdAt))
+    : '';
+  const country = reviewCountry(review, locale);
+  const countryFlag = country
+    ? `<span class="brand-feedback-country" role="img" aria-label="${escapeHtml(country.name)}" title="${escapeHtml(country.name)}">${country.flag}</span>`
+    : '';
+  const ownStatus = review.isOwn && review.status && review.status !== 'approved'
+    ? `<span class="brand-feedback-own-status is-${escapeHtml(review.status)}">${escapeHtml(statusCopy[review.status] || statusCopy.pending)}</span>`
+    : '';
+  return `
+    <article class="brand-feedback-review${review.isOwn ? ' is-own-review' : ''}" id="player-review-${escapeHtml(review.id)}">
+      <header>
+        <div class="brand-feedback-author">${avatar}<div><strong>${escapeHtml(author)}${countryFlag}</strong><time>${escapeHtml(createdAt)}</time></div></div>
+        ${ownStatus}
+      </header>
+      ${review.title ? `<h3>${escapeHtml(review.title)}</h3>` : ''}
+      <p>${escapeHtml(review.body)}</p>
+    </article>
+  `;
+};
 
 const createWhyRatingLink = (copy, teaserCopy) => {
   const whySection = document.querySelector(
@@ -217,24 +274,8 @@ const renderReviews = (section, payload, copy, teaserCopy, locale, teaserLink) =
     return;
   }
 
-  list.innerHTML = reviews.map(review => {
-    const author = review.author?.displayName || copy.anonymous;
-    const avatar = review.author?.avatarUrl
-      ? `<img src="${escapeHtml(review.author.avatarUrl)}" alt="" loading="lazy" referrerpolicy="no-referrer" />`
-      : `<span aria-hidden="true">${escapeHtml(author.slice(0, 1).toUpperCase())}</span>`;
-    const createdAt = review.createdAt
-      ? new Intl.DateTimeFormat(locale, { dateStyle: 'medium' }).format(new Date(review.createdAt))
-      : '';
-    return `
-      <article class="brand-feedback-review">
-        <header>
-          <div class="brand-feedback-author">${avatar}<div><strong>${escapeHtml(author)}</strong><time>${escapeHtml(createdAt)}</time></div></div>
-        </header>
-        ${review.title ? `<h3>${escapeHtml(review.title)}</h3>` : ''}
-        <p>${escapeHtml(review.body)}</p>
-      </article>
-    `;
-  }).join('');
+  const statusCopy = REVIEW_STATUS_COPY[locale] || REVIEW_STATUS_COPY.en;
+  list.innerHTML = reviews.map(review => renderReviewCard(review, copy, locale, statusCopy)).join('');
 };
 
 export const initBrandFeedback = async ({ brand, locale = 'en' }) => {
@@ -243,6 +284,7 @@ export const initBrandFeedback = async ({ brand, locale = 'en' }) => {
 
   const copy = COPY[locale] || COPY.en;
   const teaserCopy = TEASER_COPY[locale] || TEASER_COPY.en;
+  const reviewStatusCopy = REVIEW_STATUS_COPY[locale] || REVIEW_STATUS_COPY.en;
   const section = createSection(brand, copy);
   main.append(section);
   const teaserLink = createWhyRatingLink(copy, teaserCopy);
@@ -279,8 +321,23 @@ export const initBrandFeedback = async ({ brand, locale = 'en' }) => {
     if (!response.ok) throw new Error('feedback_unavailable');
     const payload = await response.json();
     renderReviews(section, payload, copy, teaserCopy, locale, teaserLink);
+    const ownReview = await accountBridge()?.getOwnReview?.(brand);
+    if (ownReview && !section.querySelector(`#player-review-${ownReview.id}`)) {
+      const list = section.querySelector('[data-feedback-list]');
+      if (list?.querySelector('.brand-feedback-empty')) list.replaceChildren();
+      list?.insertAdjacentHTML('afterbegin', renderReviewCard(
+        { ...ownReview, isOwn: true },
+        copy,
+        locale,
+        reviewStatusCopy
+      ));
+    }
     return true;
   };
+
+  window.addEventListener('spincresta:account-ready', () => {
+    loadFeedback({ fresh: true }).catch(() => {});
+  }, { once: true });
 
   try {
     const brandAvailable = await loadFeedback();

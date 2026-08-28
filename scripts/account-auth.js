@@ -85,11 +85,28 @@ const CONTACT_COPY = {
   fi: { save: 'Tallenna tiedot', saving: 'Tallennetaan…', saved: 'Yhteystietosi on tallennettu.', invalidPhone: 'Anna kelvollinen puhelinnumero tai jätä kenttä tyhjäksi.', invalidTelegram: 'Anna 5–32 kirjainta, numeroa tai alaviivaa sisältävä Telegram-käyttäjänimi.', failed: 'Yhteystietoja ei voitu tallentaa. Yritä uudelleen.' },
 };
 
+const ACCOUNT_REVIEWS_COPY = {
+  en: { signedOut: 'Sign in to see your reviews.', failed: 'We could not load your reviews.', untitled: 'Casino review', pending: 'Awaiting moderation', approved: 'Published', rejected: 'Not published', open: 'Open review' },
+  de: { signedOut: 'Melden Sie sich an, um Ihre Erfahrungsberichte zu sehen.', failed: 'Ihre Erfahrungsberichte konnten nicht geladen werden.', untitled: 'Casino-Erfahrungsbericht', pending: 'Wartet auf Prüfung', approved: 'Veröffentlicht', rejected: 'Nicht veröffentlicht', open: 'Beitrag öffnen' },
+  es: { signedOut: 'Inicia sesión para ver tus reseñas.', failed: 'No hemos podido cargar tus reseñas.', untitled: 'Reseña del casino', pending: 'Pendiente de moderación', approved: 'Publicada', rejected: 'No publicada', open: 'Abrir reseña' },
+  it: { signedOut: 'Accedi per vedere le tue recensioni.', failed: 'Non è stato possibile caricare le recensioni.', untitled: 'Recensione del casinò', pending: 'In attesa di moderazione', approved: 'Pubblicata', rejected: 'Non pubblicata', open: 'Apri recensione' },
+  pl: { signedOut: 'Zaloguj się, aby zobaczyć swoje recenzje.', failed: 'Nie udało się wczytać recenzji.', untitled: 'Recenzja kasyna', pending: 'Oczekuje na moderację', approved: 'Opublikowana', rejected: 'Nieopublikowana', open: 'Otwórz recenzję' },
+  uk: { signedOut: 'Увійдіть, щоб переглянути свої відгуки.', failed: 'Не вдалося завантажити ваші відгуки.', untitled: 'Відгук про казино', pending: 'Очікує на модерацію', approved: 'Опубліковано', rejected: 'Не опубліковано', open: 'Відкрити відгук' },
+  pt: { signedOut: 'Inicie sessão para ver as suas opiniões.', failed: 'Não foi possível carregar as suas opiniões.', untitled: 'Opinião sobre o casino', pending: 'Aguarda moderação', approved: 'Publicada', rejected: 'Não publicada', open: 'Abrir opinião' },
+  fr: { signedOut: 'Connectez-vous pour consulter vos avis.', failed: 'Impossible de charger vos avis.', untitled: 'Avis sur le casino', pending: 'En attente de modération', approved: 'Publié', rejected: 'Non publié', open: 'Ouvrir l’avis' },
+  hi: { signedOut: 'अपनी समीक्षाएँ देखने के लिए साइन इन करें।', failed: 'आपकी समीक्षाएँ लोड नहीं हो सकीं।', untitled: 'कैसीनो समीक्षा', pending: 'मॉडरेशन की प्रतीक्षा में', approved: 'प्रकाशित', rejected: 'प्रकाशित नहीं', open: 'समीक्षा खोलें' },
+  fi: { signedOut: 'Kirjaudu sisään nähdäksesi kokemuksesi.', failed: 'Kokemuksiasi ei voitu ladata.', untitled: 'Kasinokokemus', pending: 'Odottaa tarkistusta', approved: 'Julkaistu', rejected: 'Ei julkaistu', open: 'Avaa kokemus' },
+};
+
 const privacyPath = locale => locale === 'en' ? '/privacy-policy/' : `/${locale}/privacy-policy/`;
 const responsiblePath = locale => locale === 'en'
   ? '/responsible-gambling/'
   : `/${locale}/responsible-gambling/`;
 const accountPath = locale => locale === 'en' ? '/account/' : `/${locale}/account/`;
+const brandReviewPath = (locale, brand, reviewId) => {
+  const prefix = locale === 'en' ? '' : `/${locale}`;
+  return `${prefix}/brands/${brand}/#player-review-${reviewId}`;
+};
 const ACCOUNT_NOTICE_KEY = 'spincresta-account-notice';
 const ACCOUNT_BRIDGE_KEY = 'SpinCrestaAccount';
 
@@ -203,6 +220,7 @@ const createInterface = (copy, locale) => {
 export const initAccountAuth = async locale => {
   const copy = COPY[locale] || COPY.en;
   const contactCopy = CONTACT_COPY[locale] || CONTACT_COPY.en;
+  const accountReviewsCopy = ACCOUNT_REVIEWS_COPY[locale] || ACCOUNT_REVIEWS_COPY.en;
   const ui = createInterface(copy, locale);
   if (!ui) return;
 
@@ -212,6 +230,9 @@ export const initAccountAuth = async locale => {
   const googleButton = modal.querySelector('[data-google-button]');
   const accountPage = document.querySelector('[data-account-page]');
   const contactForm = accountPage?.querySelector('[data-account-contact-form]');
+  const reviewHistory = document.querySelector('[data-account-review-history]');
+  const reviewHistoryEmptyCopy =
+    reviewHistory?.querySelector('[data-account-reviews-empty]')?.textContent?.trim() || '';
   const originalCompleteLabel = completionForm.querySelector('.account-auth-primary').textContent;
   let supabase;
   let googleReady = false;
@@ -355,6 +376,84 @@ export const initAccountAuth = async locale => {
     }
   };
 
+  const setReviewHistoryState = (state, message = '') => {
+    if (!reviewHistory) return;
+    const loading = reviewHistory.querySelector('[data-account-reviews-loading]');
+    const empty = reviewHistory.querySelector('[data-account-reviews-empty]');
+    const list = reviewHistory.querySelector('[data-account-reviews-list]');
+    if (loading) loading.hidden = state !== 'loading';
+    if (empty) {
+      empty.textContent = message || reviewHistoryEmptyCopy;
+      empty.hidden = state !== 'empty' && state !== 'error' && state !== 'signed-out';
+      empty.dataset.state = state === 'error' ? 'error' : '';
+    }
+    if (list) list.hidden = state !== 'ready';
+  };
+
+  const renderAccountReviews = async () => {
+    if (!reviewHistory) return;
+    const list = reviewHistory.querySelector('[data-account-reviews-list]');
+    if (!list) return;
+    list.replaceChildren();
+
+    if (!currentUser) {
+      setReviewHistoryState('signed-out', accountReviewsCopy.signedOut);
+      return;
+    }
+
+    setReviewHistoryState('loading');
+    const { data, error } = await supabase
+      .from('reviews')
+      .select('id,title,body,status,language,created_at,brands!inner(slug,name)')
+      .eq('user_id', currentUser.id)
+      .order('created_at', { ascending: false });
+
+    if (error) {
+      setReviewHistoryState('error', accountReviewsCopy.failed);
+      return;
+    }
+
+    const reviews = Array.isArray(data) ? data : [];
+    if (!reviews.length) {
+      setReviewHistoryState('empty');
+      return;
+    }
+
+    reviews.forEach(review => {
+      const brand = Array.isArray(review.brands) ? review.brands[0] : review.brands;
+      if (!brand?.slug) return;
+      const link = document.createElement('a');
+      link.className = 'account-review-history-item';
+      link.href = brandReviewPath(locale, brand.slug, review.id);
+
+      const meta = document.createElement('span');
+      meta.className = 'account-review-history-meta';
+      const brandName = document.createElement('strong');
+      brandName.textContent = brand.name || brand.slug;
+      const reviewStatus = document.createElement('em');
+      reviewStatus.className = `is-${review.status || 'pending'}`;
+      reviewStatus.textContent = accountReviewsCopy[review.status] || accountReviewsCopy.pending;
+      meta.append(brandName, reviewStatus);
+
+      const title = document.createElement('span');
+      title.className = 'account-review-history-title';
+      title.textContent = review.title || accountReviewsCopy.untitled;
+
+      const detail = document.createElement('span');
+      detail.className = 'account-review-history-detail';
+      const createdAt = review.created_at
+        ? new Intl.DateTimeFormat(locale, { dateStyle: 'medium' }).format(new Date(review.created_at))
+        : '';
+      detail.textContent = createdAt
+        ? `${createdAt} · ${accountReviewsCopy.open}`
+        : accountReviewsCopy.open;
+      link.append(meta, title, detail);
+      list.append(link);
+    });
+
+    setReviewHistoryState(list.childElementCount ? 'ready' : 'empty');
+  };
+
   const renderAccountPage = () => {
     if (!accountPage) return;
     const loading = accountPage.querySelector('[data-account-page-loading]');
@@ -401,6 +500,7 @@ export const initAccountAuth = async locale => {
     currentProfile = await syncProfileLocale(currentProfile);
     updateControl();
     renderAccountPage();
+    await renderAccountReviews();
     publishAccountState();
 
     if (currentUser && googleReady) {
@@ -573,6 +673,7 @@ export const initAccountAuth = async locale => {
     currentProfile = null;
     updateControl();
     renderAccountPage();
+    await renderAccountReviews();
     publishAccountState();
     closeModal();
   };
@@ -660,6 +761,29 @@ export const initAccountAuth = async locale => {
         signedIn: Boolean(currentUser),
         registrationComplete: Boolean(currentProfile?.registration_completed_at),
       }),
+      getOwnReview: async brandSlug => {
+        if (!currentUser) return null;
+        const { data, error } = await supabase
+          .from('reviews')
+          .select('id,title,body,status,language,created_at,brands!inner(slug,name)')
+          .eq('user_id', currentUser.id)
+          .eq('brands.slug', brandSlug)
+          .maybeSingle();
+        if (error || !data) return null;
+        return {
+          id: data.id,
+          title: data.title,
+          body: data.body,
+          language: data.language,
+          status: data.status,
+          createdAt: data.created_at,
+          author: {
+            displayName: currentProfile?.display_name || currentUser.user_metadata?.full_name || currentUser.email,
+            avatarUrl: currentProfile?.avatar_url || currentUser.user_metadata?.avatar_url || null,
+            countryCode: currentProfile?.country_code || null,
+          },
+        };
+      },
       openSignIn: () => {
         if (currentUser && !currentProfile?.registration_completed_at) {
           populateUser('account', currentUser, currentProfile);

@@ -3,8 +3,8 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
-const ACCOUNT_ASSET_VERSION = '20260828-account-country-select-1';
-const MAIN_ASSET_VERSION = '20260828-review-editing-3';
+const ACCOUNT_ASSET_VERSION = '20260828-account-reviews-1';
+const MAIN_ASSET_VERSION = '20260828-account-reviews-1';
 
 const locales = {
   en: {
@@ -100,16 +100,29 @@ const locales = {
 };
 
 const contactCopy = {
-  en: { kicker: 'PRIVATE CONTACT DETAILS', title: 'Your contact details', intro: 'Optional details visible only to you and approved SpinCresta moderators.', country: 'Country of residence', chooseCountry: 'Choose a country', phone: 'Phone number', phonePlaceholder: '+49 123 456789', telegram: 'Telegram username', telegramPlaceholder: '@username', save: 'Save details' },
-  de: { kicker: 'PRIVATE KONTAKTDATEN', title: 'Ihre Kontaktdaten', intro: 'Optionale Angaben, die nur für Sie und freigeschaltete SpinCresta-Moderatoren sichtbar sind.', country: 'Wohnsitzland', chooseCountry: 'Land auswählen', phone: 'Telefonnummer', phonePlaceholder: '+49 123 456789', telegram: 'Telegram-Benutzername', telegramPlaceholder: '@benutzername', save: 'Angaben speichern' },
-  es: { kicker: 'DATOS DE CONTACTO PRIVADOS', title: 'Tus datos de contacto', intro: 'Datos opcionales visibles solo para ti y para los moderadores autorizados de SpinCresta.', country: 'País de residencia', chooseCountry: 'Elige un país', phone: 'Número de teléfono', phonePlaceholder: '+34 612 345 678', telegram: 'Usuario de Telegram', telegramPlaceholder: '@usuario', save: 'Guardar datos' },
-  it: { kicker: 'CONTATTI PRIVATI', title: 'I tuoi contatti', intro: 'Dati facoltativi visibili solo a te e ai moderatori SpinCresta autorizzati.', country: 'Paese di residenza', chooseCountry: 'Seleziona un Paese', phone: 'Numero di telefono', phonePlaceholder: '+39 312 345 6789', telegram: 'Nome utente Telegram', telegramPlaceholder: '@nomeutente', save: 'Salva i dati' },
-  pl: { kicker: 'PRYWATNE DANE KONTAKTOWE', title: 'Twoje dane kontaktowe', intro: 'Opcjonalne dane widoczne tylko dla Ciebie i upoważnionych moderatorów SpinCresta.', country: 'Kraj zamieszkania', chooseCountry: 'Wybierz kraj', phone: 'Numer telefonu', phonePlaceholder: '+48 123 456 789', telegram: 'Nazwa użytkownika Telegram', telegramPlaceholder: '@nazwauzytkownika', save: 'Zapisz dane' },
-  uk: { kicker: 'ПРИВАТНІ КОНТАКТНІ ДАНІ', title: 'Ваші контактні дані', intro: 'Необов’язкові дані, які бачите лише ви та уповноважені модератори SpinCresta.', country: 'Країна проживання', chooseCountry: 'Виберіть країну', phone: 'Номер телефону', phonePlaceholder: '+380 67 123 45 67', telegram: 'Ім’я користувача в Telegram', telegramPlaceholder: '@username', save: 'Зберегти дані' },
-  pt: { kicker: 'CONTACTOS PRIVADOS', title: 'Os seus contactos', intro: 'Dados opcionais visíveis apenas para si e para os moderadores autorizados da SpinCresta.', country: 'País de residência', chooseCountry: 'Escolha um país', phone: 'Número de telefone', phonePlaceholder: '+351 912 345 678', telegram: 'Nome de utilizador do Telegram', telegramPlaceholder: '@utilizador', save: 'Guardar dados' },
-  fr: { kicker: 'COORDONNÉES PRIVÉES', title: 'Vos coordonnées', intro: 'Informations facultatives visibles uniquement par vous et les modérateurs SpinCresta autorisés.', country: 'Pays de résidence', chooseCountry: 'Choisissez un pays', phone: 'Numéro de téléphone', phonePlaceholder: '+33 6 12 34 56 78', telegram: 'Nom d’utilisateur Telegram', telegramPlaceholder: '@utilisateur', save: 'Enregistrer' },
-  hi: { kicker: 'निजी संपर्क विवरण', title: 'आपके संपर्क विवरण', intro: 'वैकल्पिक जानकारी, जिसे केवल आप और अधिकृत SpinCresta मॉडरेटर देख सकते हैं।', country: 'निवास का देश', chooseCountry: 'देश चुनें', phone: 'फ़ोन नंबर', phonePlaceholder: '+91 98765 43210', telegram: 'Telegram यूज़रनेम', telegramPlaceholder: '@username', save: 'जानकारी सेव करें' },
-  fi: { kicker: 'YKSITYISET YHTEYSTIEDOT', title: 'Yhteystietosi', intro: 'Vapaaehtoiset tiedot näkyvät vain sinulle ja hyväksytyille SpinCresta-moderaattoreille.', country: 'Asuinmaa', chooseCountry: 'Valitse maa', phone: 'Puhelinnumero', phonePlaceholder: '+358 40 123 4567', telegram: 'Telegram-käyttäjänimi', telegramPlaceholder: '@kayttajanimi', save: 'Tallenna tiedot' },
+  en: { kicker: 'PROFILE DETAILS', title: 'Your contact details', intro: 'Your selected country may appear as a flag beside published reviews. Your phone and Telegram remain private.', country: 'Country of residence', chooseCountry: 'Choose a country', phone: 'Phone number', phonePlaceholder: '+49 123 456789', telegram: 'Telegram username', telegramPlaceholder: '@username', save: 'Save details' },
+  de: { kicker: 'PROFILDATEN', title: 'Ihre Kontaktdaten', intro: 'Ihr ausgewähltes Land kann als Flagge neben veröffentlichten Beiträgen erscheinen. Telefon und Telegram bleiben privat.', country: 'Wohnsitzland', chooseCountry: 'Land auswählen', phone: 'Telefonnummer', phonePlaceholder: '+49 123 456789', telegram: 'Telegram-Benutzername', telegramPlaceholder: '@benutzername', save: 'Angaben speichern' },
+  es: { kicker: 'DATOS DEL PERFIL', title: 'Tus datos de contacto', intro: 'El país elegido puede aparecer como bandera junto a las reseñas publicadas. El teléfono y Telegram siguen siendo privados.', country: 'País de residencia', chooseCountry: 'Elige un país', phone: 'Número de teléfono', phonePlaceholder: '+34 612 345 678', telegram: 'Usuario de Telegram', telegramPlaceholder: '@usuario', save: 'Guardar datos' },
+  it: { kicker: 'DATI DEL PROFILO', title: 'I tuoi contatti', intro: 'Il Paese selezionato può apparire come bandiera accanto alle recensioni pubblicate. Telefono e Telegram restano privati.', country: 'Paese di residenza', chooseCountry: 'Seleziona un Paese', phone: 'Numero di telefono', phonePlaceholder: '+39 312 345 6789', telegram: 'Nome utente Telegram', telegramPlaceholder: '@nomeutente', save: 'Salva i dati' },
+  pl: { kicker: 'DANE PROFILU', title: 'Twoje dane kontaktowe', intro: 'Wybrany kraj może pojawić się jako flaga przy opublikowanych recenzjach. Telefon i Telegram pozostają prywatne.', country: 'Kraj zamieszkania', chooseCountry: 'Wybierz kraj', phone: 'Numer telefonu', phonePlaceholder: '+48 123 456 789', telegram: 'Nazwa użytkownika Telegram', telegramPlaceholder: '@nazwauzytkownika', save: 'Zapisz dane' },
+  uk: { kicker: 'ДАНІ ПРОФІЛЮ', title: 'Ваші контактні дані', intro: 'Вибрана країна може відображатися прапорцем біля опублікованих відгуків. Телефон і Telegram залишаються приватними.', country: 'Країна проживання', chooseCountry: 'Виберіть країну', phone: 'Номер телефону', phonePlaceholder: '+380 67 123 45 67', telegram: 'Ім’я користувача в Telegram', telegramPlaceholder: '@username', save: 'Зберегти дані' },
+  pt: { kicker: 'DADOS DO PERFIL', title: 'Os seus contactos', intro: 'O país selecionado pode aparecer como bandeira junto das opiniões publicadas. O telefone e o Telegram permanecem privados.', country: 'País de residência', chooseCountry: 'Escolha um país', phone: 'Número de telefone', phonePlaceholder: '+351 912 345 678', telegram: 'Nome de utilizador do Telegram', telegramPlaceholder: '@utilizador', save: 'Guardar dados' },
+  fr: { kicker: 'DONNÉES DU PROFIL', title: 'Vos coordonnées', intro: 'Le pays choisi peut apparaître sous forme de drapeau à côté des avis publiés. Le téléphone et Telegram restent privés.', country: 'Pays de résidence', chooseCountry: 'Choisissez un pays', phone: 'Numéro de téléphone', phonePlaceholder: '+33 6 12 34 56 78', telegram: 'Nom d’utilisateur Telegram', telegramPlaceholder: '@utilisateur', save: 'Enregistrer' },
+  hi: { kicker: 'प्रोफ़ाइल विवरण', title: 'आपके संपर्क विवरण', intro: 'चुना गया देश प्रकाशित समीक्षाओं के पास झंडे के रूप में दिख सकता है। फ़ोन और Telegram निजी रहेंगे।', country: 'निवास का देश', chooseCountry: 'देश चुनें', phone: 'फ़ोन नंबर', phonePlaceholder: '+91 98765 43210', telegram: 'Telegram यूज़रनेम', telegramPlaceholder: '@username', save: 'जानकारी सेव करें' },
+  fi: { kicker: 'PROFIILITIEDOT', title: 'Yhteystietosi', intro: 'Valittu maa voidaan näyttää lippuna julkaistun kokemuksen vieressä. Puhelin ja Telegram pysyvät yksityisinä.', country: 'Asuinmaa', chooseCountry: 'Valitse maa', phone: 'Puhelinnumero', phonePlaceholder: '+358 40 123 4567', telegram: 'Telegram-käyttäjänimi', telegramPlaceholder: '@kayttajanimi', save: 'Tallenna tiedot' },
+};
+
+const reviewCopy = {
+  en: { kicker: 'YOUR ACTIVITY', title: 'Your reviews', intro: 'Open a review to see it on the casino page.', loading: 'Loading your reviews…', empty: 'You have not written any reviews yet.' },
+  de: { kicker: 'IHRE AKTIVITÄT', title: 'Ihre Erfahrungsberichte', intro: 'Öffnen Sie einen Beitrag, um ihn auf der Casino-Seite anzusehen.', loading: 'Ihre Erfahrungsberichte werden geladen…', empty: 'Sie haben noch keine Erfahrungsberichte geschrieben.' },
+  es: { kicker: 'TU ACTIVIDAD', title: 'Tus reseñas', intro: 'Abre una reseña para verla en la página del casino.', loading: 'Cargando tus reseñas…', empty: 'Todavía no has escrito ninguna reseña.' },
+  it: { kicker: 'LA TUA ATTIVITÀ', title: 'Le tue recensioni', intro: 'Apri una recensione per visualizzarla nella pagina del casinò.', loading: 'Caricamento delle recensioni…', empty: 'Non hai ancora scritto recensioni.' },
+  pl: { kicker: 'TWOJA AKTYWNOŚĆ', title: 'Twoje recenzje', intro: 'Otwórz recenzję, aby zobaczyć ją na stronie kasyna.', loading: 'Wczytywanie recenzji…', empty: 'Nie masz jeszcze żadnych recenzji.' },
+  uk: { kicker: 'ВАША АКТИВНІСТЬ', title: 'Ваші відгуки', intro: 'Відкрийте відгук, щоб переглянути його на сторінці казино.', loading: 'Завантажуємо ваші відгуки…', empty: 'Ви ще не залишали текстових відгуків.' },
+  pt: { kicker: 'A SUA ATIVIDADE', title: 'As suas opiniões', intro: 'Abra uma opinião para a ver na página do casino.', loading: 'A carregar as suas opiniões…', empty: 'Ainda não escreveu nenhuma opinião.' },
+  fr: { kicker: 'VOTRE ACTIVITÉ', title: 'Vos avis', intro: 'Ouvrez un avis pour le consulter sur la page du casino.', loading: 'Chargement de vos avis…', empty: 'Vous n’avez encore publié aucun avis.' },
+  hi: { kicker: 'आपकी गतिविधि', title: 'आपकी समीक्षाएँ', intro: 'कैसीनो पेज पर समीक्षा देखने के लिए उसे खोलें।', loading: 'आपकी समीक्षाएँ लोड हो रही हैं…', empty: 'आपने अभी तक कोई समीक्षा नहीं लिखी है।' },
+  fi: { kicker: 'TOIMINTASI', title: 'Kokemuksesi', intro: 'Avaa kokemus nähdäksesi sen kasinon sivulla.', loading: 'Kokemuksiasi ladataan…', empty: 'Et ole vielä kirjoittanut kokemuksia.' },
 };
 
 const escapeHtml = value => String(value)
@@ -122,6 +135,7 @@ const pagePath = (locale, slug) => locale.base ? `/${locale.base}/${slug}/` : `/
 
 const renderMain = (locale, language) => {
   const contact = contactCopy[language] || contactCopy.en;
+  const reviews = reviewCopy[language] || reviewCopy.en;
   return `
     <main>
       <section class="hero container">
@@ -130,20 +144,16 @@ const renderMain = (locale, language) => {
           <h1>${escapeHtml(locale.heading)}</h1>
           <p>${escapeHtml(locale.intro)}</p>
         </div>
-        <div class="home-insight-card">
-          <div class="home-stats-grid">
-            <div class="home-stat-tile">
-              <span class="home-stat-number">18+</span>
-              <strong>${escapeHtml(locale.status)}</strong>
-              <span>${escapeHtml(locale.quickText)}</span>
-            </div>
-            <div class="home-stat-tile">
-              <span class="home-stat-number">01</span>
-              <strong>${escapeHtml(locale.privacy)}</strong>
-              <span>${escapeHtml(locale.overviewIntro)}</span>
-            </div>
+        <aside class="account-review-history" data-account-review-history aria-labelledby="account-review-history-title">
+          <span class="home-section-kicker">${escapeHtml(reviews.kicker)}</span>
+          <div class="account-review-history-heading">
+            <h2 id="account-review-history-title">${escapeHtml(reviews.title)}</h2>
+            <p>${escapeHtml(reviews.intro)}</p>
           </div>
-        </div>
+          <p class="account-review-history-state" data-account-reviews-loading>${escapeHtml(reviews.loading)}</p>
+          <p class="account-review-history-state" data-account-reviews-empty hidden>${escapeHtml(reviews.empty)}</p>
+          <div class="account-review-history-list" data-account-reviews-list hidden></div>
+        </aside>
       </section>
 
       <div class="content-area container">

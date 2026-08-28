@@ -36,7 +36,7 @@
   <meta property="og:site_name" content="SpinCresta" />
   <meta name="twitter:card" content="summary_large_image" />
 
-      <link rel="stylesheet" href="/styles.css?v=20260828-account-country-select-1" />
+      <link rel="stylesheet" href="/styles.css?v=20260828-account-reviews-1" />
 </head>
   <body class="home-page" data-page="account" data-language="uk">
     <header class="header">
@@ -82,20 +82,16 @@
           <h1>Ваш акаунт в одному місці</h1>
           <p>Переглядайте дані профілю та користуйтеся доступними функціями акаунта.</p>
         </div>
-        <div class="home-insight-card">
-          <div class="home-stats-grid">
-            <div class="home-stat-tile">
-              <span class="home-stat-number">18+</span>
-              <strong>Статус акаунта</strong>
-              <span>Перевіряйте, як ми обробляємо дані акаунта, і будь-коли відкривайте інформацію про відповідальну гру.</span>
-            </div>
-            <div class="home-stat-tile">
-              <span class="home-stat-number">01</span>
-              <strong>Політика конфіденційності</strong>
-              <span>Ваш Google-профіль використовується для безпечної ідентифікації акаунта SpinCresta.</span>
-            </div>
+        <aside class="account-review-history" data-account-review-history aria-labelledby="account-review-history-title">
+          <span class="home-section-kicker">ВАША АКТИВНІСТЬ</span>
+          <div class="account-review-history-heading">
+            <h2 id="account-review-history-title">Ваші відгуки</h2>
+            <p>Відкрийте відгук, щоб переглянути його на сторінці казино.</p>
           </div>
-        </div>
+          <p class="account-review-history-state" data-account-reviews-loading>Завантажуємо ваші відгуки…</p>
+          <p class="account-review-history-state" data-account-reviews-empty hidden>Ви ще не залишали текстових відгуків.</p>
+          <div class="account-review-history-list" data-account-reviews-list hidden></div>
+        </aside>
       </section>
 
       <div class="content-area container">
@@ -134,9 +130,9 @@
 
             <form class="account-contact-form" data-account-contact-form>
               <div class="account-contact-heading">
-                <span class="home-section-kicker">ПРИВАТНІ КОНТАКТНІ ДАНІ</span>
+                <span class="home-section-kicker">ДАНІ ПРОФІЛЮ</span>
                 <h3>Ваші контактні дані</h3>
-                <p>Необов’язкові дані, які бачите лише ви та уповноважені модератори SpinCresta.</p>
+                <p>Вибрана країна може відображатися прапорцем біля опублікованих відгуків. Телефон і Telegram залишаються приватними.</p>
               </div>
               <div class="account-contact-fields">
                 <label><span>Країна проживання</span><select name="countryCode" data-account-country><option value="">Виберіть країну</option></select></label>
@@ -204,6 +200,6 @@
 </div>
     </footer>
 
-    <script type="module" src="/scripts/main.js?v=20260828-review-editing-3"></script>
+    <script type="module" src="/scripts/main.js?v=20260828-account-reviews-1"></script>
   </body>
 </html>

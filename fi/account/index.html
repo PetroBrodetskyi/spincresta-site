@@ -36,7 +36,7 @@
   <meta property="og:site_name" content="SpinCresta" />
   <meta name="twitter:card" content="summary_large_image" />
 
-      <link rel="stylesheet" href="/styles.css?v=20260828-account-country-select-1" />
+      <link rel="stylesheet" href="/styles.css?v=20260828-account-reviews-1" />
 </head>
   <body class="home-page" data-page="account" data-language="fi">
     <header class="header">
@@ -82,20 +82,16 @@
           <h1>Tilisi yhdessä paikassa</h1>
           <p>Näytä profiilisi tiedot ja käytä tilillesi saatavilla olevia toimintoja.</p>
         </div>
-        <div class="home-insight-card">
-          <div class="home-stats-grid">
-            <div class="home-stat-tile">
-              <span class="home-stat-number">18+</span>
-              <strong>Tilin tila</strong>
-              <span>Tarkista, miten tilisi tietoja käsitellään, ja avaa vastuullisen pelaamisen tiedot milloin tahansa.</span>
-            </div>
-            <div class="home-stat-tile">
-              <span class="home-stat-number">01</span>
-              <strong>Tietosuojakäytäntö</strong>
-              <span>Google-profiiliasi käytetään SpinCresta-tilisi turvalliseen tunnistamiseen.</span>
-            </div>
+        <aside class="account-review-history" data-account-review-history aria-labelledby="account-review-history-title">
+          <span class="home-section-kicker">TOIMINTASI</span>
+          <div class="account-review-history-heading">
+            <h2 id="account-review-history-title">Kokemuksesi</h2>
+            <p>Avaa kokemus nähdäksesi sen kasinon sivulla.</p>
           </div>
-        </div>
+          <p class="account-review-history-state" data-account-reviews-loading>Kokemuksiasi ladataan…</p>
+          <p class="account-review-history-state" data-account-reviews-empty hidden>Et ole vielä kirjoittanut kokemuksia.</p>
+          <div class="account-review-history-list" data-account-reviews-list hidden></div>
+        </aside>
       </section>
 
       <div class="content-area container">
@@ -134,9 +130,9 @@
 
             <form class="account-contact-form" data-account-contact-form>
               <div class="account-contact-heading">
-                <span class="home-section-kicker">YKSITYISET YHTEYSTIEDOT</span>
+                <span class="home-section-kicker">PROFIILITIEDOT</span>
                 <h3>Yhteystietosi</h3>
-                <p>Vapaaehtoiset tiedot näkyvät vain sinulle ja hyväksytyille SpinCresta-moderaattoreille.</p>
+                <p>Valittu maa voidaan näyttää lippuna julkaistun kokemuksen vieressä. Puhelin ja Telegram pysyvät yksityisinä.</p>
               </div>
               <div class="account-contact-fields">
                 <label><span>Asuinmaa</span><select name="countryCode" data-account-country><option value="">Valitse maa</option></select></label>
@@ -204,6 +200,6 @@
 </div>
     </footer>
 
-    <script type="module" src="/scripts/main.js?v=20260828-review-editing-3"></script>
+    <script type="module" src="/scripts/main.js?v=20260828-account-reviews-1"></script>
   </body>
 </html>

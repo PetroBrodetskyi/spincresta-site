@@ -36,7 +36,7 @@
   <meta property="og:site_name" content="SpinCresta" />
   <meta name="twitter:card" content="summary_large_image" />
 
-      <link rel="stylesheet" href="/styles.css?v=20260828-account-country-select-1" />
+      <link rel="stylesheet" href="/styles.css?v=20260828-account-reviews-1" />
 </head>
   <body class="home-page" data-page="account" data-language="es">
     <header class="header">
@@ -82,20 +82,16 @@
           <h1>Tu cuenta, en un solo lugar</h1>
           <p>Consulta los datos de tu perfil y utiliza las opciones disponibles para tu cuenta.</p>
         </div>
-        <div class="home-insight-card">
-          <div class="home-stats-grid">
-            <div class="home-stat-tile">
-              <span class="home-stat-number">18+</span>
-              <strong>Estado de la cuenta</strong>
-              <span>Consulta cómo tratamos los datos de tu cuenta y accede cuando quieras a la información sobre juego responsable.</span>
-            </div>
-            <div class="home-stat-tile">
-              <span class="home-stat-number">01</span>
-              <strong>Política de privacidad</strong>
-              <span>Tu perfil de Google se utiliza para identificar tu cuenta de SpinCresta de forma segura.</span>
-            </div>
+        <aside class="account-review-history" data-account-review-history aria-labelledby="account-review-history-title">
+          <span class="home-section-kicker">TU ACTIVIDAD</span>
+          <div class="account-review-history-heading">
+            <h2 id="account-review-history-title">Tus reseñas</h2>
+            <p>Abre una reseña para verla en la página del casino.</p>
           </div>
-        </div>
+          <p class="account-review-history-state" data-account-reviews-loading>Cargando tus reseñas…</p>
+          <p class="account-review-history-state" data-account-reviews-empty hidden>Todavía no has escrito ninguna reseña.</p>
+          <div class="account-review-history-list" data-account-reviews-list hidden></div>
+        </aside>
       </section>
 
       <div class="content-area container">
@@ -134,9 +130,9 @@
 
             <form class="account-contact-form" data-account-contact-form>
               <div class="account-contact-heading">
-                <span class="home-section-kicker">DATOS DE CONTACTO PRIVADOS</span>
+                <span class="home-section-kicker">DATOS DEL PERFIL</span>
                 <h3>Tus datos de contacto</h3>
-                <p>Datos opcionales visibles solo para ti y para los moderadores autorizados de SpinCresta.</p>
+                <p>El país elegido puede aparecer como bandera junto a las reseñas publicadas. El teléfono y Telegram siguen siendo privados.</p>
               </div>
               <div class="account-contact-fields">
                 <label><span>País de residencia</span><select name="countryCode" data-account-country><option value="">Elige un país</option></select></label>
@@ -204,6 +200,6 @@
 </div>
     </footer>
 
-    <script type="module" src="/scripts/main.js?v=20260828-review-editing-3"></script>
+    <script type="module" src="/scripts/main.js?v=20260828-account-reviews-1"></script>
   </body>
 </html>
