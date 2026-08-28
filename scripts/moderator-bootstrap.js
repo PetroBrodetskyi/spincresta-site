@@ -1,4 +1,4 @@
-import { initModeratorPage } from './pages/moderator.js?v=20260828-review-editing-3';
+import { initModeratorPage } from './pages/moderator.js?v=20260828-brand-representatives-1';
 
 const startModerator = () => {
   initModeratorPage().catch(() => {

@@ -146,7 +146,7 @@ const reviewCard = (review, onModerate) => {
   return article;
 };
 
-const userRow = user => {
+const userRow = (user, brands, onSaveRole) => {
   const row = document.createElement('tr');
   const identityCell = document.createElement('td');
   const identity = createElement('div', 'moderation-user-identity');
@@ -164,6 +164,7 @@ const userRow = user => {
   const labels = createElement('span', 'moderation-user-labels');
   labels.append(createElement('em', '', (user.locale || 'en').toUpperCase()));
   if (user.role === 'moderator') labels.append(createElement('em', 'is-moderator', 'Moderator'));
+  if (Array.isArray(user.representativeBrands) && user.representativeBrands.length) labels.append(createElement('em', 'is-representative', 'Brand representative'));
   identityText.append(labels);
   identity.append(identityText);
   identityCell.append(identity);
@@ -185,7 +186,38 @@ const userRow = user => {
   } else telegram.textContent = '—';
   const newsletter = createElement('td');
   newsletter.append(createElement('span', `moderation-status-pill is-${user.newsletterStatus || 'not-subscribed'}`, user.newsletterStatus || 'Not subscribed'));
-  row.append(identityCell, country, phone, telegram, newsletter, createElement('td', '', formatDate(user.registeredAt)), createElement('td', '', formatDate(user.lastSignInAt)));
+  const accessCell = createElement('td', 'moderation-user-access');
+  const roleSelect = document.createElement('select');
+  roleSelect.innerHTML = '<option value="user">Player</option><option value="brand_representative">Brand representative</option>';
+  roleSelect.value = user.representativeBrands?.length ? 'brand_representative' : 'user';
+  const brandSelect = document.createElement('select');
+  brandSelect.multiple = true;
+  brandSelect.setAttribute('aria-label', 'Assigned brands');
+  const assigned = new Set((user.representativeBrands || []).map(brand => brand.slug));
+  brands.forEach(brand => {
+    const option = document.createElement('option');
+    option.value = brand.slug;
+    option.textContent = brand.name;
+    option.selected = assigned.has(brand.slug);
+    brandSelect.append(option);
+  });
+  brandSelect.hidden = roleSelect.value !== 'brand_representative';
+  roleSelect.addEventListener('change', () => { brandSelect.hidden = roleSelect.value !== 'brand_representative'; });
+  const save = createElement('button', '', 'Save role');
+  save.type = 'button';
+  const message = createElement('small');
+  save.addEventListener('click', async () => {
+    const brandSlugs = Array.from(brandSelect.selectedOptions).map(option => option.value);
+    if (roleSelect.value === 'brand_representative' && !brandSlugs.length) { message.textContent = 'Choose at least one brand.'; return; }
+    save.disabled = true;
+    message.textContent = 'Saving…';
+    try {
+      await onSaveRole(user.userId, roleSelect.value, brandSlugs);
+      message.textContent = 'Saved';
+    } catch { message.textContent = 'Could not save'; save.disabled = false; }
+  });
+  accessCell.append(roleSelect, brandSelect, save, message);
+  row.append(identityCell, country, phone, telegram, newsletter, createElement('td', '', formatDate(user.registeredAt)), createElement('td', '', formatDate(user.lastSignInAt)), accessCell);
   row.dataset.search = [user.displayName, user.email, user.countryCode, user.phoneNumber, user.telegramUsername]
     .filter(Boolean).join(' ').toLowerCase();
   return row;
@@ -220,6 +252,7 @@ export const initModeratorPage = async () => {
   let accessToken = '';
   let currentView = 'reviews';
   let usersLoaded = false;
+  let availableBrands = [];
 
   const showNotice = (message, state = '') => {
     notice.textContent = message;
@@ -266,7 +299,19 @@ export const initModeratorPage = async () => {
     if (response.status === 403) return showAccess('This account does not have moderator access.');
     if (!response.ok) return showAccess('The registered-user directory is temporarily unavailable. Please try again.');
     const users = Array.isArray(body.users) ? body.users : [];
-    users.forEach(user => usersList.append(userRow(user)));
+    availableBrands = Array.isArray(body.brands) ? body.brands : [];
+    const saveRole = async (userId, role, brandSlugs) => {
+      const roleResponse = await fetch(usersEndpoint, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${accessToken}` },
+        body: JSON.stringify({ userId, role, brandSlugs }),
+      });
+      if (!roleResponse.ok) throw new Error('role_update_failed');
+      usersLoaded = false;
+      await loadUsers({ force: true });
+      showNotice('Brand representative access updated.', 'success');
+    };
+    users.forEach(user => usersList.append(userRow(user, availableBrands, saveRole)));
     userTotal.textContent = `${body.pagination?.total ?? users.length} users`;
     usersLoaded = true;
     filterUsers();

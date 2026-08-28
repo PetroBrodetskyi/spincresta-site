@@ -3,7 +3,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
-const assetVersion = '20260828-review-editing-3';
+const assetVersion = '20260828-brand-representatives-1';
 
 const main = `
     <main>
@@ -66,7 +66,7 @@ const main = `
             <p class="moderation-empty" data-moderator-users-empty hidden>No registered users found.</p>
             <div class="moderation-user-table-wrap" data-moderator-users-table hidden>
               <table class="moderation-user-table">
-                <thead><tr><th>User</th><th>Country</th><th>Phone</th><th>Telegram</th><th>Newsletter</th><th>Registered</th><th>Last sign-in</th></tr></thead>
+                <thead><tr><th>User</th><th>Country</th><th>Phone</th><th>Telegram</th><th>Newsletter</th><th>Registered</th><th>Last sign-in</th><th>Brand access</th></tr></thead>
                 <tbody data-moderator-users-list></tbody>
               </table>
             </div>

@@ -1,4 +1,5 @@
 const DEFAULT_FEEDBACK_ENDPOINT = 'https://api.spincresta.com/api/brand-feedback';
+const DEFAULT_REPLIES_ENDPOINT = 'https://api.spincresta.com/api/brand-replies';
 
 const COPY = {
   en: {
@@ -79,6 +80,19 @@ const REVIEW_STATUS_COPY = {
   fi: { pending: 'Kokemuksesi odottaa tarkistusta', rejected: 'Kokemustasi ei julkaistu' },
 };
 
+const REPLY_COPY = {
+  en: { badge: 'Official brand representative', title: 'Official response', label: 'Reply to this review', placeholder: 'Write a helpful official response…', submit: 'Publish response', sending: 'Publishing…', sent: 'Your official response is now published.', invalid: 'Write at least 10 characters.', failed: 'The response could not be published. Please try again.' },
+  de: { badge: 'Offizielle Markenvertretung', title: 'Offizielle Antwort', label: 'Auf diesen Beitrag antworten', placeholder: 'Schreiben Sie eine hilfreiche offizielle Antwort…', submit: 'Antwort veröffentlichen', sending: 'Wird veröffentlicht…', sent: 'Ihre offizielle Antwort wurde veröffentlicht.', invalid: 'Schreiben Sie mindestens 10 Zeichen.', failed: 'Die Antwort konnte nicht veröffentlicht werden.' },
+  es: { badge: 'Representante oficial de la marca', title: 'Respuesta oficial', label: 'Responder a esta reseña', placeholder: 'Escribe una respuesta oficial útil…', submit: 'Publicar respuesta', sending: 'Publicando…', sent: 'Tu respuesta oficial ya está publicada.', invalid: 'Escribe al menos 10 caracteres.', failed: 'No se pudo publicar la respuesta.' },
+  it: { badge: 'Rappresentante ufficiale del brand', title: 'Risposta ufficiale', label: 'Rispondi a questa recensione', placeholder: 'Scrivi una risposta ufficiale utile…', submit: 'Pubblica risposta', sending: 'Pubblicazione…', sent: 'La risposta ufficiale è stata pubblicata.', invalid: 'Scrivi almeno 10 caratteri.', failed: 'Impossibile pubblicare la risposta.' },
+  pl: { badge: 'Oficjalny przedstawiciel marki', title: 'Oficjalna odpowiedź', label: 'Odpowiedz na tę recenzję', placeholder: 'Napisz pomocną oficjalną odpowiedź…', submit: 'Opublikuj odpowiedź', sending: 'Publikowanie…', sent: 'Oficjalna odpowiedź została opublikowana.', invalid: 'Wpisz co najmniej 10 znaków.', failed: 'Nie udało się opublikować odpowiedzi.' },
+  uk: { badge: 'Офіційний представник бренду', title: 'Офіційна відповідь', label: 'Відповісти на цей відгук', placeholder: 'Напишіть корисну офіційну відповідь…', submit: 'Опублікувати відповідь', sending: 'Публікуємо…', sent: 'Офіційну відповідь опубліковано.', invalid: 'Напишіть щонайменше 10 символів.', failed: 'Не вдалося опублікувати відповідь.' },
+  pt: { badge: 'Representante oficial da marca', title: 'Resposta oficial', label: 'Responder a esta opinião', placeholder: 'Escreva uma resposta oficial útil…', submit: 'Publicar resposta', sending: 'A publicar…', sent: 'A resposta oficial foi publicada.', invalid: 'Escreva pelo menos 10 caracteres.', failed: 'Não foi possível publicar a resposta.' },
+  fr: { badge: 'Représentant officiel de la marque', title: 'Réponse officielle', label: 'Répondre à cet avis', placeholder: 'Rédigez une réponse officielle utile…', submit: 'Publier la réponse', sending: 'Publication…', sent: 'La réponse officielle est publiée.', invalid: 'Écrivez au moins 10 caractères.', failed: 'Impossible de publier la réponse.' },
+  hi: { badge: 'आधिकारिक ब्रांड प्रतिनिधि', title: 'आधिकारिक जवाब', label: 'इस समीक्षा का जवाब दें', placeholder: 'एक उपयोगी आधिकारिक जवाब लिखें…', submit: 'जवाब प्रकाशित करें', sending: 'प्रकाशित हो रहा है…', sent: 'आधिकारिक जवाब प्रकाशित हो गया है।', invalid: 'कम से कम 10 अक्षर लिखें।', failed: 'जवाब प्रकाशित नहीं हो सका।' },
+  fi: { badge: 'Brändin virallinen edustaja', title: 'Virallinen vastaus', label: 'Vastaa tähän kokemukseen', placeholder: 'Kirjoita hyödyllinen virallinen vastaus…', submit: 'Julkaise vastaus', sending: 'Julkaistaan…', sent: 'Virallinen vastaus on julkaistu.', invalid: 'Kirjoita vähintään 10 merkkiä.', failed: 'Vastausta ei voitu julkaista.' },
+};
+
 const escapeHtml = value => String(value ?? '')
   .replaceAll('&', '&amp;')
   .replaceAll('<', '&lt;')
@@ -115,7 +129,7 @@ const reviewCountry = (review, locale) => {
   return { flag, name };
 };
 
-const renderReviewCard = (review, copy, locale, statusCopy) => {
+const renderReviewCard = (review, copy, locale, statusCopy, canReply = false, replyCopy = REPLY_COPY.en) => {
   const author = review.author?.displayName || copy.anonymous;
   const avatar = review.author?.avatarUrl
     ? `<img src="${escapeHtml(review.author.avatarUrl)}" alt="" loading="lazy" referrerpolicy="no-referrer" />`
@@ -130,6 +144,17 @@ const renderReviewCard = (review, copy, locale, statusCopy) => {
   const ownStatus = review.isOwn && review.status && review.status !== 'approved'
     ? `<span class="brand-feedback-own-status is-${escapeHtml(review.status)}">${escapeHtml(statusCopy[review.status] || statusCopy.pending)}</span>`
     : '';
+  const replies = Array.isArray(review.replies) ? review.replies : [];
+  const repliesHtml = replies.map(reply => {
+    const replyAuthor = reply.author?.displayName || replyCopy.badge;
+    const replyDate = reply.createdAt
+      ? new Intl.DateTimeFormat(locale, { dateStyle: 'medium' }).format(new Date(reply.createdAt))
+      : '';
+    return `<div class="brand-feedback-official-reply"><span class="brand-representative-badge">${escapeHtml(replyCopy.badge)}</span><h4>${escapeHtml(replyCopy.title)}</h4><div class="brand-feedback-reply-author"><strong>${escapeHtml(replyAuthor)}</strong><time>${escapeHtml(replyDate)}</time></div><p>${escapeHtml(reply.body)}</p></div>`;
+  }).join('');
+  const replyForm = canReply && review.status !== 'pending' && review.status !== 'rejected'
+    ? `<form class="brand-feedback-reply-form" data-review-reply-form data-review-id="${escapeHtml(review.id)}"><label><span>${escapeHtml(replyCopy.label)}</span><textarea name="body" rows="3" minlength="10" maxlength="3000" placeholder="${escapeHtml(replyCopy.placeholder)}" required></textarea></label><button type="submit">${escapeHtml(replyCopy.submit)}</button><small role="status" aria-live="polite"></small></form>`
+    : '';
   return `
     <article class="brand-feedback-review${review.isOwn ? ' is-own-review' : ''}" id="player-review-${escapeHtml(review.id)}">
       <header>
@@ -138,6 +163,8 @@ const renderReviewCard = (review, copy, locale, statusCopy) => {
       </header>
       ${review.title ? `<h3>${escapeHtml(review.title)}</h3>` : ''}
       <p>${escapeHtml(review.body)}</p>
+      ${repliesHtml}
+      ${replyForm}
     </article>
   `;
 };
@@ -255,7 +282,7 @@ const createSection = (brand, copy) => {
   return section;
 };
 
-const renderReviews = (section, payload, copy, teaserCopy, locale, teaserLink) => {
+const renderReviews = (section, payload, copy, teaserCopy, locale, teaserLink, canReply = false) => {
   const average = Number(payload.summary?.averageRating || 0);
   const ratingCount = Number(payload.summary?.ratingCount || 0);
   const reviewCount = Number(payload.summary?.reviewCount || 0);
@@ -275,7 +302,8 @@ const renderReviews = (section, payload, copy, teaserCopy, locale, teaserLink) =
   }
 
   const statusCopy = REVIEW_STATUS_COPY[locale] || REVIEW_STATUS_COPY.en;
-  list.innerHTML = reviews.map(review => renderReviewCard(review, copy, locale, statusCopy)).join('');
+  const replyCopy = REPLY_COPY[locale] || REPLY_COPY.en;
+  list.innerHTML = reviews.map(review => renderReviewCard(review, copy, locale, statusCopy, canReply, replyCopy)).join('');
 };
 
 export const initBrandFeedback = async ({ brand, locale = 'en' }) => {
@@ -285,6 +313,7 @@ export const initBrandFeedback = async ({ brand, locale = 'en' }) => {
   const copy = COPY[locale] || COPY.en;
   const teaserCopy = TEASER_COPY[locale] || TEASER_COPY.en;
   const reviewStatusCopy = REVIEW_STATUS_COPY[locale] || REVIEW_STATUS_COPY.en;
+  const replyCopy = REPLY_COPY[locale] || REPLY_COPY.en;
   const section = createSection(brand, copy);
   main.append(section);
   const teaserLink = createWhyRatingLink(copy, teaserCopy);
@@ -320,7 +349,9 @@ export const initBrandFeedback = async ({ brand, locale = 'en' }) => {
     if (response.status === 404) return false;
     if (!response.ok) throw new Error('feedback_unavailable');
     const payload = await response.json();
-    renderReviews(section, payload, copy, teaserCopy, locale, teaserLink);
+    const access = accountBridge()?.getAccountAccess?.() || {};
+    const canReply = Boolean(access.representative && (access.brands || []).some(item => item.slug === brand));
+    renderReviews(section, payload, copy, teaserCopy, locale, teaserLink, canReply);
     const ownReview = await accountBridge()?.getOwnReview?.(brand);
     if (ownReview && !section.querySelector(`#player-review-${ownReview.id}`)) {
       const list = section.querySelector('[data-feedback-list]');
@@ -334,6 +365,36 @@ export const initBrandFeedback = async ({ brand, locale = 'en' }) => {
     }
     return true;
   };
+
+  section.addEventListener('submit', async event => {
+    const replyForm = event.target.closest?.('[data-review-reply-form]');
+    if (!replyForm) return;
+    event.preventDefault();
+    const textarea = replyForm.elements.body;
+    const message = replyForm.querySelector('small');
+    const button = replyForm.querySelector('button');
+    const body = textarea.value.trim();
+    if (body.length < 10) { message.textContent = replyCopy.invalid; textarea.focus(); return; }
+    const token = await accountBridge()?.getAccessToken?.();
+    if (!token) { accountBridge()?.openSignIn?.(); return; }
+    button.disabled = true;
+    button.textContent = replyCopy.sending;
+    message.textContent = '';
+    try {
+      const response = await fetch(document.documentElement.dataset.brandRepliesEndpoint || DEFAULT_REPLIES_ENDPOINT, {
+        method: 'POST',
+        headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' },
+        body: JSON.stringify({ reviewId: replyForm.dataset.reviewId, body }),
+      });
+      if (!response.ok) throw new Error('reply_failed');
+      message.textContent = replyCopy.sent;
+      await loadFeedback({ fresh: true });
+    } catch {
+      message.textContent = replyCopy.failed;
+      button.disabled = false;
+      button.textContent = replyCopy.submit;
+    }
+  });
 
   window.addEventListener('spincresta:account-ready', () => {
     loadFeedback({ fresh: true }).catch(() => {});

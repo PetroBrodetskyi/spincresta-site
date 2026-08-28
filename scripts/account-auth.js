@@ -2,6 +2,7 @@ import { COUNTRIES } from './countries.js';
 
 const DEFAULT_CONFIG_ENDPOINT = 'https://api.spincresta.com/api/auth-config';
 const DEFAULT_NEWSLETTER_ENDPOINT = 'https://api.spincresta.com/api/subscribe';
+const DEFAULT_ACCOUNT_ACCESS_ENDPOINT = 'https://api.spincresta.com/api/account-access';
 const SUPABASE_MODULE_URL = 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm';
 const GOOGLE_SCRIPT_URL = 'https://accounts.google.com/gsi/client';
 
@@ -239,6 +240,7 @@ export const initAccountAuth = async locale => {
   let nonce;
   let currentUser = null;
   let currentProfile = null;
+  let currentAccess = { role: 'user', representative: false, brands: [] };
   let autoCloseTimer = 0;
 
   const countrySelect = contactForm?.querySelector('[data-account-country]');
@@ -267,8 +269,25 @@ export const initAccountAuth = async locale => {
       detail: {
         signedIn: Boolean(currentUser),
         registrationComplete: Boolean(currentProfile?.registration_completed_at),
+        role: currentAccess.role,
+        representative: currentAccess.representative,
+        brands: currentAccess.brands,
       },
     }));
+  };
+
+  const loadAccountAccess = async accessToken => {
+    if (!accessToken) return { role: 'user', representative: false, brands: [] };
+    try {
+      const response = await fetch(
+        document.documentElement.dataset.accountAccessEndpoint || DEFAULT_ACCOUNT_ACCESS_ENDPOINT,
+        { headers: { Accept: 'application/json', Authorization: `Bearer ${accessToken}` } }
+      );
+      if (!response.ok) throw new Error('account_access_unavailable');
+      return await response.json();
+    } catch {
+      return { role: 'user', representative: false, brands: [] };
+    }
   };
 
   const showView = name => {
@@ -474,6 +493,32 @@ export const initAccountAuth = async locale => {
           ? `@${currentProfile.telegram_username}`
           : '';
       }
+
+      const previewText = accountPage.querySelector('.account-auth-user-preview > div');
+      previewText?.querySelector('.account-role-badge')?.remove();
+      if (currentAccess.representative) {
+        const badge = document.createElement('em');
+        badge.className = 'account-role-badge';
+        badge.textContent = 'Official brand representative';
+        previewText?.append(badge);
+      }
+
+      let representativePanel = accountPage.querySelector('[data-account-representative]');
+      if (!representativePanel && currentAccess.representative) {
+        representativePanel = document.createElement('section');
+        representativePanel.className = 'account-representative-panel';
+        representativePanel.dataset.accountRepresentative = '';
+        contactForm?.insertAdjacentElement('beforebegin', representativePanel);
+      }
+      if (representativePanel) {
+        representativePanel.hidden = !currentAccess.representative;
+        if (currentAccess.representative) {
+          const prefix = locale === 'en' ? '' : `/${locale}`;
+          representativePanel.innerHTML = `
+            <div><span class="home-section-kicker">BRAND REPRESENTATIVE</span><h3>Your SpinCresta brands</h3><p>Open a brand page to read player reviews and publish an official response.</p></div>
+            <nav>${(currentAccess.brands || []).map(brand => `<a href="${prefix}/brands/${encodeURIComponent(brand.slug)}/">${String(brand.name).replaceAll('&', '&amp;').replaceAll('<', '&lt;')}</a>`).join('')}</nav>`;
+        }
+      }
     }
 
     if (notice && !notice.dataset.initialized) {
@@ -498,6 +543,9 @@ export const initAccountAuth = async locale => {
     currentUser = data.session?.user || null;
     currentProfile = currentUser ? await loadProfile(currentUser) : null;
     currentProfile = await syncProfileLocale(currentProfile);
+    currentAccess = currentUser
+      ? await loadAccountAccess(data.session?.access_token || '')
+      : { role: 'user', representative: false, brands: [] };
     updateControl();
     renderAccountPage();
     await renderAccountReviews();
@@ -671,6 +719,7 @@ export const initAccountAuth = async locale => {
     await supabase.auth.signOut();
     currentUser = null;
     currentProfile = null;
+    currentAccess = { role: 'user', representative: false, brands: [] };
     updateControl();
     renderAccountPage();
     await renderAccountReviews();
@@ -760,7 +809,11 @@ export const initAccountAuth = async locale => {
       getState: () => ({
         signedIn: Boolean(currentUser),
         registrationComplete: Boolean(currentProfile?.registration_completed_at),
+        role: currentAccess.role,
+        representative: currentAccess.representative,
+        brands: currentAccess.brands,
       }),
+      getAccountAccess: () => currentAccess,
       getOwnReview: async brandSlug => {
         if (!currentUser) return null;
         const { data, error } = await supabase
