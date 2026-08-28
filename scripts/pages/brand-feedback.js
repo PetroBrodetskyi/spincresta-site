@@ -53,6 +53,19 @@ const COPY = {
   },
 };
 
+const TEASER_COPY = {
+  en: { read: 'Read player reviews', first: 'Be the first to review', ratings: 'Ratings', reviews: 'Reviews' },
+  de: { read: 'Spielerbewertungen lesen', first: 'Erste Bewertung abgeben', ratings: 'Bewertungen', reviews: 'Erfahrungsberichte' },
+  es: { read: 'Leer reseñas de jugadores', first: 'Escribe la primera reseña', ratings: 'Valoraciones', reviews: 'Reseñas' },
+  it: { read: 'Leggi le recensioni dei giocatori', first: 'Scrivi la prima recensione', ratings: 'Valutazioni', reviews: 'Recensioni' },
+  pl: { read: 'Przeczytaj opinie graczy', first: 'Dodaj pierwszą opinię', ratings: 'Oceny', reviews: 'Recenzje' },
+  uk: { read: 'Читати відгуки гравців', first: 'Залишити перший відгук', ratings: 'Оцінки', reviews: 'Відгуки' },
+  pt: { read: 'Ler opiniões dos jogadores', first: 'Escrever a primeira opinião', ratings: 'Avaliações', reviews: 'Opiniões' },
+  fr: { read: 'Lire les avis des joueurs', first: 'Publier le premier avis', ratings: 'Notes', reviews: 'Avis' },
+  hi: { read: 'खिलाड़ियों की समीक्षाएँ पढ़ें', first: 'पहली समीक्षा लिखें', ratings: 'रेटिंग', reviews: 'समीक्षाएँ' },
+  fi: { read: 'Lue pelaajien kokemuksia', first: 'Kirjoita ensimmäinen kokemus', ratings: 'Arviot', reviews: 'Kokemukset' },
+};
+
 const escapeHtml = value => String(value ?? '')
   .replaceAll('&', '&amp;')
   .replaceAll('<', '&lt;')
@@ -67,6 +80,53 @@ const renderStars = rating => {
   return Array.from({ length: 5 }, (_, index) =>
     `<span class="${index < rounded ? 'is-filled' : ''}" aria-hidden="true">★</span>`
   ).join('');
+};
+
+const formatFeedbackCounts = (ratingCount, reviewCount, teaserCopy) =>
+  `${teaserCopy.ratings}: ${ratingCount} · ${teaserCopy.reviews}: ${reviewCount}`;
+
+const createWhyRatingLink = (copy, teaserCopy) => {
+  const whySection = document.querySelector(
+    'body[data-brand] #brand-why-section, body[data-brand] .brand-hero-why'
+  );
+  if (!whySection || whySection.querySelector('.brand-rating-teaser')) return null;
+
+  const heading = whySection.querySelector('.brand-why-heading') || whySection;
+  const title = heading.querySelector(':scope > .title, :scope > h2');
+  if (!title) return null;
+
+  const link = document.createElement('a');
+  link.className = 'brand-rating-teaser';
+  link.href = '#player-reviews';
+  link.setAttribute('aria-label', teaserCopy.first);
+  link.innerHTML = `
+    <strong data-rating-teaser-average>—</strong>
+    <span class="brand-rating-teaser-summary">
+      <span class="brand-rating-teaser-stars" data-rating-teaser-stars aria-hidden="true">${renderStars(0)}</span>
+      <span data-rating-teaser-counts>${escapeHtml(copy.average)}</span>
+    </span>
+    <span class="brand-rating-teaser-action" data-rating-teaser-action>${escapeHtml(teaserCopy.first)}</span>
+  `;
+
+  title.insertAdjacentElement('afterend', link);
+  return link;
+};
+
+const updateWhyRatingLink = (link, payload, copy, teaserCopy) => {
+  if (!link) return;
+  const average = Number(payload.summary?.averageRating || 0);
+  const ratingCount = Number(payload.summary?.ratingCount || 0);
+  const reviewCount = Number(payload.summary?.reviewCount || 0);
+  const action = reviewCount > 0 ? teaserCopy.read : teaserCopy.first;
+
+  link.querySelector('[data-rating-teaser-average]').textContent = ratingCount
+    ? average.toFixed(1)
+    : '—';
+  link.querySelector('[data-rating-teaser-stars]').innerHTML = renderStars(average);
+  link.querySelector('[data-rating-teaser-counts]').textContent =
+    formatFeedbackCounts(ratingCount, reviewCount, teaserCopy);
+  link.querySelector('[data-rating-teaser-action]').textContent = action;
+  link.setAttribute('aria-label', action);
 };
 
 const feedbackEndpoint = () =>
@@ -138,7 +198,7 @@ const createSection = (brand, copy) => {
   return section;
 };
 
-const renderReviews = (section, payload, copy, locale) => {
+const renderReviews = (section, payload, copy, teaserCopy, locale, teaserLink) => {
   const average = Number(payload.summary?.averageRating || 0);
   const ratingCount = Number(payload.summary?.ratingCount || 0);
   const reviewCount = Number(payload.summary?.reviewCount || 0);
@@ -147,7 +207,8 @@ const renderReviews = (section, payload, copy, locale) => {
     : '—';
   section.querySelector('[data-feedback-stars]').innerHTML = renderStars(average);
   section.querySelector('[data-feedback-counts]').textContent =
-    `${ratingCount} ${copy.ratings} · ${reviewCount} ${copy.reviews}`;
+    formatFeedbackCounts(ratingCount, reviewCount, teaserCopy);
+  updateWhyRatingLink(teaserLink, payload, copy, teaserCopy);
 
   const list = section.querySelector('[data-feedback-list]');
   const reviews = Array.isArray(payload.reviews) ? payload.reviews : [];
@@ -181,8 +242,10 @@ export const initBrandFeedback = async ({ brand, locale = 'en' }) => {
   if (!main || !brand || document.getElementById('player-reviews')) return;
 
   const copy = COPY[locale] || COPY.en;
+  const teaserCopy = TEASER_COPY[locale] || TEASER_COPY.en;
   const section = createSection(brand, copy);
   main.append(section);
+  const teaserLink = createWhyRatingLink(copy, teaserCopy);
   const form = section.querySelector('[data-feedback-form]');
   const signIn = section.querySelector('[data-feedback-signin]');
   const status = section.querySelector('[data-feedback-status]');
@@ -215,13 +278,14 @@ export const initBrandFeedback = async ({ brand, locale = 'en' }) => {
     if (response.status === 404) return false;
     if (!response.ok) throw new Error('feedback_unavailable');
     const payload = await response.json();
-    renderReviews(section, payload, copy, locale);
+    renderReviews(section, payload, copy, teaserCopy, locale, teaserLink);
     return true;
   };
 
   try {
     const brandAvailable = await loadFeedback();
     if (!brandAvailable) {
+      teaserLink?.remove();
       section.remove();
       return;
     }
