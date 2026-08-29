@@ -123,6 +123,131 @@ const renderStars = rating => {
   ).join('');
 };
 
+const validRating = value => {
+  const rating = Number(value);
+  return Number.isFinite(rating) && rating >= 1 && rating <= 5 ? rating : null;
+};
+
+const absoluteAssetUrl = value => {
+  const asset = String(value || '').trim();
+  if (!asset || typeof window === 'undefined') return '';
+  try {
+    const source = /^(?:https?:|data:)/i.test(asset)
+      ? asset
+      : `/${asset.replace(/^\/+/, '')}`;
+    return new URL(source, window.location.origin).href;
+  } catch {
+    return '';
+  }
+};
+
+export const buildFeedbackStructuredData = ({
+  payload,
+  canonicalUrl,
+  brandName,
+  brandImage,
+  locale = 'en',
+}) => {
+  const averageRating = validRating(payload?.summary?.averageRating);
+  const ratingCount = Math.max(0, Math.trunc(Number(payload?.summary?.ratingCount) || 0));
+  const reviewCount = Math.max(0, Math.trunc(Number(payload?.summary?.reviewCount) || 0));
+  const pageUrl = String(canonicalUrl || '').split('#')[0];
+  const reviewedBrandName = String(brandName || '').trim();
+
+  if (!pageUrl || !reviewedBrandName || !averageRating || !ratingCount) return null;
+
+  const reviews = (Array.isArray(payload?.reviews) ? payload.reviews : [])
+    .map(review => {
+      const ratingValue = validRating(review.rating);
+      const authorName = String(review.author?.displayName || '').trim();
+      const reviewBody = String(review.body || '').trim();
+      if (!ratingValue || !authorName || !reviewBody) return null;
+
+      const datePublished = review.createdAt
+        ? new Date(review.createdAt).toISOString().slice(0, 10)
+        : '';
+      const structuredReview = {
+        '@type': 'Review',
+        '@id': `${pageUrl}#player-review-${review.id}`,
+        reviewBody,
+        inLanguage: String(review.language || locale),
+        author: {
+          '@type': 'Person',
+          name: authorName.slice(0, 100),
+        },
+        reviewRating: {
+          '@type': 'Rating',
+          ratingValue,
+          bestRating: 5,
+          worstRating: 1,
+        },
+      };
+      const reviewTitle = String(review.title || '').trim();
+      if (reviewTitle) structuredReview.name = reviewTitle;
+      if (datePublished) structuredReview.datePublished = datePublished;
+      return structuredReview;
+    })
+    .filter(Boolean);
+
+  const reviewedBrand = {
+    '@type': 'Organization',
+    '@id': `${pageUrl}#reviewed-brand`,
+    name: reviewedBrandName,
+    aggregateRating: {
+      '@type': 'AggregateRating',
+      ratingValue: Number(averageRating.toFixed(2)),
+      ratingCount,
+      bestRating: 5,
+      worstRating: 1,
+    },
+  };
+  if (reviewCount) reviewedBrand.aggregateRating.reviewCount = reviewCount;
+  if (reviews.length) reviewedBrand.review = reviews;
+  if (brandImage) {
+    reviewedBrand.logo = {
+      '@type': 'ImageObject',
+      url: brandImage,
+    };
+  }
+
+  return {
+    '@context': 'https://schema.org',
+    '@graph': [
+      {
+        '@type': 'WebPage',
+        '@id': `${pageUrl}#webpage`,
+        mainEntity: { '@id': `${pageUrl}#reviewed-brand` },
+      },
+      reviewedBrand,
+    ],
+  };
+};
+
+const updateFeedbackStructuredData = (payload, { brandName, brandImage, locale }) => {
+  const scriptId = 'brand-feedback-structured-data';
+  const existing = document.getElementById(scriptId);
+  const canonicalUrl = document.querySelector('link[rel="canonical"]')?.href
+    || window.location.href.split('#')[0];
+  const structuredData = buildFeedbackStructuredData({
+    payload,
+    canonicalUrl,
+    brandName,
+    brandImage: absoluteAssetUrl(brandImage),
+    locale,
+  });
+
+  if (!structuredData) {
+    existing?.remove();
+    return;
+  }
+
+  const script = existing || document.createElement('script');
+  script.id = scriptId;
+  script.type = 'application/ld+json';
+  script.textContent = JSON.stringify(structuredData);
+  if (!existing) document.head.append(script);
+};
+
 const formatFeedbackCounts = (ratingCount, reviewCount, teaserCopy) =>
   `${teaserCopy.ratings}: ${ratingCount} · ${teaserCopy.reviews}: ${reviewCount}`;
 
@@ -168,6 +293,10 @@ const renderReviewCard = (review, copy, locale, statusCopy, canReply = false, re
   const ownStatus = review.isOwn && review.status && review.status !== 'approved'
     ? `<span class="brand-feedback-own-status is-${escapeHtml(review.status)}">${escapeHtml(statusCopy[review.status] || statusCopy.pending)}</span>`
     : '';
+  const reviewRating = validRating(review.rating);
+  const reviewRatingHtml = reviewRating
+    ? `<span class="brand-feedback-stars brand-feedback-review-rating" role="img" aria-label="${escapeHtml(starLabel(copy, reviewRating))}">${renderStars(reviewRating)}</span>`
+    : '';
   const replies = Array.isArray(review.replies) ? review.replies : [];
   const repliesHtml = replies.map(reply => {
     const replyAuthor = reply.author?.displayName || replyCopy.badge;
@@ -183,7 +312,7 @@ const renderReviewCard = (review, copy, locale, statusCopy, canReply = false, re
     <article class="brand-feedback-review${review.isOwn ? ' is-own-review' : ''}" id="player-review-${escapeHtml(review.id)}">
       <header>
         <div class="brand-feedback-author">${avatar}<div><strong>${escapeHtml(author)}${countryFlag}</strong><time>${escapeHtml(createdAt)}</time></div></div>
-        ${ownStatus}
+        ${ownStatus || reviewRatingHtml}
       </header>
       ${review.title ? `<h3>${escapeHtml(review.title)}</h3>` : ''}
       <p>${escapeHtml(review.body)}</p>
@@ -335,7 +464,7 @@ const renderReviews = (section, payload, copy, teaserCopy, locale, teaserLink, c
   list.innerHTML = reviews.map(review => renderReviewCard(review, copy, locale, statusCopy, canReply, replyCopy, voteCopy)).join('');
 };
 
-export const initBrandFeedback = async ({ brand, locale = 'en' }) => {
+export const initBrandFeedback = async ({ brand, brandName = '', brandImage = '', locale = 'en' }) => {
   const main = document.querySelector('body[data-brand] .content-review');
   if (!main || !brand || document.getElementById('player-reviews')) return;
 
@@ -379,6 +508,11 @@ export const initBrandFeedback = async ({ brand, locale = 'en' }) => {
     if (response.status === 404) return false;
     if (!response.ok) throw new Error('feedback_unavailable');
     const payload = await response.json();
+    updateFeedbackStructuredData(payload, {
+      brandName: brandName || brand,
+      brandImage,
+      locale,
+    });
     const voteRequestUrl = new URL(votesEndpoint());
     voteRequestUrl.searchParams.set('brand', brand);
     if (fresh) voteRequestUrl.searchParams.set('_', String(Date.now()));
