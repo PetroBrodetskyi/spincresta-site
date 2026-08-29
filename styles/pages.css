@@ -893,6 +893,30 @@ body[data-brand] table {
   border-radius: var(--radius-md);
   overflow: hidden;
   box-shadow: var(--shadow-soft);
+  font-size: 14px;
+  line-height: 1.45;
+}
+
+body[data-brand] .content-review :where(th, td) {
+  padding: 10px 12px;
+}
+
+body[data-brand] .content-review thead th {
+  font-size: 11px;
+  line-height: 1.3;
+}
+
+body[data-brand] .content-review tbody td:first-child {
+  color: var(--text-main);
+  font-weight: 650;
+}
+
+body[data-brand] .content-review :where(th, td) > :first-child {
+  margin-top: 0;
+}
+
+body[data-brand] .content-review :where(th, td) > :last-child {
+  margin-bottom: 0;
 }
 
 body[data-brand] .timeline {
@@ -1089,14 +1113,20 @@ body[data-brand] .pros-cons-icon {
 @media (max-width: 900px) {
   body[data-brand] table {
     display: block;
+    max-width: 100%;
     overflow-x: auto;
-    white-space: nowrap;
+    font-size: 13px;
+    white-space: normal;
   }
 
   body[data-brand] table thead,
   body[data-brand] table tbody,
   body[data-brand] table tr {
-    white-space: nowrap;
+    white-space: normal;
+  }
+
+  body[data-brand] .content-review :where(th, td) {
+    padding: 9px 10px;
   }
 
   body[data-brand] .hero-content.glass-card {
