@@ -855,6 +855,22 @@ export const initAccountAuth = async locale => {
       window.setTimeout(() => syncSession({ openIncomplete: true }).catch(() => {}), 0);
     });
   } catch {
+    const isLocalPreview = ['127.0.0.1', 'localhost'].includes(window.location.hostname);
+
+    if (isLocalPreview) {
+      // Google Identity and the API only trust the production origin. Keep the
+      // header consistent in Live Server previews and continue registration on
+      // the real site instead of silently removing the account control.
+      control.disabled = false;
+      control.addEventListener('click', event => {
+        event.preventDefault();
+        event.stopImmediatePropagation();
+        window.location.assign(new URL(accountPath(locale), 'https://spincresta.com').href);
+      }, { capture: true });
+      modal.remove();
+      return;
+    }
+
     control.remove();
     modal.remove();
   }

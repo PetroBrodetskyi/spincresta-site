@@ -335,8 +335,72 @@ export const initHomePage = context => {
     grid.replaceChildren(fragment);
   };
 
+  const initMobileEditorialMethod = () => {
+    const articles = document.querySelectorAll('.home-editorial-method .home-method-grid article');
+    if (!articles.length) return;
+
+    const collapsedLabel = localeText(
+      'Show check details',
+      'Prüfdetails anzeigen',
+      'Mostrar los detalles de la revisión',
+      'Mostra i dettagli del controllo',
+      'Pokaż szczegóły weryfikacji',
+      'Показати деталі перевірки',
+      'Mostrar detalhes da verificação',
+      'Afficher les détails du contrôle',
+      'जाँच का विवरण दिखाएँ',
+      'Näytä tarkistuksen tiedot'
+    );
+    const expandedLabel = localeText(
+      'Hide check details',
+      'Prüfdetails ausblenden',
+      'Ocultar los detalles de la revisión',
+      'Nascondi i dettagli del controllo',
+      'Ukryj szczegóły weryfikacji',
+      'Сховати деталі перевірки',
+      'Ocultar detalhes da verificação',
+      'Masquer les détails du contrôle',
+      'जाँच का विवरण छिपाएँ',
+      'Piilota tarkistuksen tiedot'
+    );
+
+    articles.forEach((article, index) => {
+      if (article.dataset.mobileAccordionReady === 'true') return;
+      const heading = article.querySelector(':scope > h3');
+      const copy = article.querySelector(':scope > p');
+      if (!heading || !copy) return;
+
+      const headingId = heading.id || `home-method-heading-${index + 1}`;
+      const copyId = copy.id || `home-method-copy-${index + 1}`;
+      heading.id = headingId;
+      copy.id = copyId;
+
+      const toggle = document.createElement('button');
+      toggle.type = 'button';
+      toggle.className = 'home-method-toggle';
+      toggle.setAttribute('aria-controls', copyId);
+      toggle.setAttribute('aria-labelledby', headingId);
+      toggle.innerHTML = '<span aria-hidden="true"></span>';
+
+      const syncToggle = isExpanded => {
+        article.classList.toggle('is-mobile-expanded', isExpanded);
+        toggle.setAttribute('aria-expanded', isExpanded ? 'true' : 'false');
+        toggle.setAttribute('aria-label', isExpanded ? expandedLabel : collapsedLabel);
+        toggle.title = isExpanded ? expandedLabel : collapsedLabel;
+      };
+      toggle.addEventListener('click', () => {
+        syncToggle(toggle.getAttribute('aria-expanded') !== 'true');
+      });
+
+      article.appendChild(toggle);
+      article.dataset.mobileAccordionReady = 'true';
+      syncToggle(false);
+    });
+  };
+
   renderHomeRecommendationCards();
   renderHomeNewReviews();
   renderLocalizedHomeCasinoGallery();
   renderLocalizedHomeGames();
+  initMobileEditorialMethod();
 };

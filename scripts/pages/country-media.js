@@ -33,6 +33,7 @@ export const renderCountryMedia = context => {
       })
       .sort((a, b) => {
         const score = brand =>
+          (Number.isFinite(brand.countryPagePriority) ? 1000 - brand.countryPagePriority : 0) +
           (brand.top?.some(code => code.toUpperCase() === pageCountry) ? 100 : 0) +
           (brand.isTopRated ? 30 : 0) +
           (brand.isExclusive ? 10 : 0) +
@@ -127,6 +128,7 @@ export const renderCountryMedia = context => {
       )
       .sort((a, b) => {
         const score = item =>
+          (Number.isFinite(item.brand.countryPagePriority) ? 1000 - item.brand.countryPagePriority : 0) +
           (item.brand.top?.some(code => code.toUpperCase() === pageCountry) ? 100 : 0) +
           (item.brand.isTopRated ? 30 : 0) +
           (item.brand.isNew ? 12 : 0) +

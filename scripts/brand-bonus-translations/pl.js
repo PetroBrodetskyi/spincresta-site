@@ -135,5 +135,5 @@ export default {
   "280% Match Bonus up to R5500 + 45 Free Spins": "280% bonusu meczowego do R5500 + 45 darmowych spinów",
   "Welcome Bonus - 550% Up to €3,800 + 50 Free Spins": "Bonus powitalny - 550% Do 3800 € + 50 darmowych spinów",
   "100% Welcome Bonus up to $5,000 on Your First Deposit": "100% bonusu powitalnego do 5000 $ przy pierwszym depozycie",
-  "Welcome Package up to NGN 716,000 + 150 Free Spins": "Pakiet powitalny do 716 000 NGN + 150 darmowych spinów"
+  "100% First-Deposit Bonus + 30 Free Spins in Selected Markets": "100% bonusu od pierwszej wpłaty + 30 darmowych spinów na wybranych rynkach"
 };

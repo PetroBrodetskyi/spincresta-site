@@ -135,5 +135,5 @@ export default {
   "280% Match Bonus up to R5500 + 45 Free Spins": "R5500 तक 280% मैच बोनस + 45 निःशुल्क स्पिन",
   "Welcome Bonus - 550% Up to €3,800 + 50 Free Spins": "स्वागत बोनस - 550% €3,800 तक + 50 निःशुल्क स्पिन",
   "100% Welcome Bonus up to $5,000 on Your First Deposit": "आपकी पहली जमा राशि पर $5,000 तक 100% स्वागत बोनस",
-  "Welcome Package up to NGN 716,000 + 150 Free Spins": "716,000 NGN तक का वेलकम पैकेज + 150 फ्री स्पिन"
+  "100% First-Deposit Bonus + 30 Free Spins in Selected Markets": "चुनिंदा बाज़ारों में पहले जमा पर 100% बोनस + 30 फ्री स्पिन"
 };

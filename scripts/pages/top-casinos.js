@@ -219,11 +219,17 @@ export const initTopCasinosPage = context => {
     const limit = Number(grid.dataset.limit) || 4;
     titleEl.textContent = localizedCountryTitle(country || { slug: '', name: code });
 
-    const topBrands = BRANDS.filter(brand => brand.top?.includes(code) && brand.countries?.includes(code));
+    const eligibleBrands = BRANDS.filter(brand => brand.countries?.includes(code));
+    const promotedBrands = eligibleBrands
+      .filter(brand => Number.isFinite(brand.countryPagePriority))
+      .sort((a, b) => a.countryPagePriority - b.countryPagePriority);
+    const topBrands = BRANDS.filter(
+      brand => brand.top?.includes(code) && brand.countries?.includes(code) && !promotedBrands.includes(brand)
+    );
     const fillBrands = topBrands.length < limit
-      ? BRANDS.filter(brand => brand.countries?.includes(code) && !topBrands.includes(brand))
+      ? eligibleBrands.filter(brand => !promotedBrands.includes(brand) && !topBrands.includes(brand))
       : [];
-    const renderedBrands = [...topBrands, ...fillBrands].slice(0, limit);
+    const renderedBrands = [...promotedBrands, ...topBrands, ...fillBrands].slice(0, limit);
 
     if (!renderedBrands.length) {
       grid.innerHTML = '<p>' + localeText('No top casinos available.', 'Keine Top-Casinos verfügbar.', 'No hay casinos destacados disponibles.') + '</p>';

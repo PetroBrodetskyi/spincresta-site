@@ -4,7 +4,7 @@
 import { BRANDS } from './brands.js?v=20260813-french-1';
 import { COUNTRIES } from './countries.js';
 import { initFooterNewsletter } from './footer-newsletter.js?v=20260826-newsletter-4';
-import { initAccountAuth } from './account-auth.js?v=20260828-brand-representatives-1';
+import { initAccountAuth } from './account-auth.js?v=20260829-local-preview-1';
 
 let BRAND_SNAPSHOT_CONFIGS = {};
 let BRAND_NEW_GAMES = {};
@@ -42,7 +42,7 @@ const loadPageModules = async () => {
     const [screenshotsModule, gamesModule, pageModule] = await Promise.all([
       import('./brand-homepage-screenshots.js?v=20260813-french-1'),
       import('./brand-new-games.js?v=20260813-french-1'),
-      import('./pages/home.js?v=20260814-finnish-1'),
+      import('./pages/home.js?v=20260829-mobile-density-1'),
     ]);
     BRAND_HOMEPAGE_SCREENSHOTS = screenshotsModule.BRAND_HOMEPAGE_SCREENSHOTS || {};
     BRAND_NEW_GAMES = gamesModule.BRAND_NEW_GAMES || {};
@@ -64,8 +64,8 @@ const loadPageModules = async () => {
     const [snapshotsModule, gamesModule, pageModule, feedbackModule] = await Promise.all([
       import('./brand-snapshot-configs.js?v=20260813-french-1'),
       import('./brand-new-games.js?v=20260813-french-1'),
-      import('./pages/brand.js?v=20260820-finnish-ui-1'),
-      import('./pages/brand-feedback.js?v=20260829-review-schema-1'),
+      import('./pages/brand.js?v=20260829-mobile-density-2'),
+      import('./pages/brand-feedback.js?v=20260829-mobile-compose-1'),
     ]);
     BRAND_SNAPSHOT_CONFIGS = snapshotsModule.BRAND_SNAPSHOT_CONFIGS || {};
     BRAND_NEW_GAMES = gamesModule.BRAND_NEW_GAMES || {};
@@ -101,6 +101,7 @@ const BRAND_ONLY_COUNTRIES = {
   BF: { slug: 'burkina-faso', name: { en: 'Burkina Faso', de: 'Burkina Faso', es: 'Burkina Faso', it: 'Burkina Faso', pl: 'Burkina Faso', uk: 'Буркіна-Фасо', pt: 'Burquina Faso', fr: 'Burkina Faso', hi: 'बुर्किना फासो', fi: 'Burkina Faso' } },
   CM: { slug: 'cameroon', name: { en: 'Cameroon', de: 'Kamerun', es: 'Camerún', it: 'Camerun', pl: 'Kamerun', uk: 'Камерун', pt: 'Camarões', fr: 'Cameroun', hi: 'कैमरून', fi: 'Kamerun' } },
   CD: { slug: 'democratic-republic-of-the-congo', name: { en: 'DR Congo', de: 'Demokratische Republik Kongo', es: 'República Democrática del Congo', it: 'Repubblica Democratica del Congo', pl: 'Demokratyczna Republika Konga', uk: 'Демократична Республіка Конго', pt: 'República Democrática do Congo', fr: 'République démocratique du Congo', hi: 'कांगो लोकतांत्रिक गणराज्य', fi: 'Kongon demokraattinen tasavalta' } },
+  DZ: { slug: 'algeria', name: { en: 'Algeria', de: 'Algerien', es: 'Argelia', it: 'Algeria', pl: 'Algieria', uk: 'Алжир', pt: 'Argélia', fr: 'Algérie', hi: 'अल्जीरिया', fi: 'Algeria' } },
   CY: { slug: 'cyprus', name: { en: 'Cyprus', de: 'Zypern', es: 'Chipre', it: 'Cipro', pl: 'Cypr', uk: 'Кіпр', pt: 'Chipre', fr: 'Chypre', hi: 'साइप्रस', fi: 'Kypros' } },
   ET: { slug: 'ethiopia', name: { en: 'Ethiopia', de: 'Äthiopien', es: 'Etiopía', it: 'Etiopia', pl: 'Etiopia', uk: 'Ефіопія', pt: 'Etiópia', fr: 'Éthiopie', hi: 'इथियोपिया', fi: 'Etiopia' } },
   CI: { slug: 'ivory-coast', name: { en: "Côte d’Ivoire", de: 'Elfenbeinküste', es: 'Costa de Marfil', it: "Costa d’Avorio", pl: 'Wybrzeże Kości Słoniowej', uk: 'Кот-д’Івуар', pt: 'Costa do Marfim', fr: "Côte d’Ivoire", hi: 'कोट डी आइवर', fi: 'Norsunluurannikko' } },
@@ -3037,6 +3038,21 @@ const renderBrandList = (brands, containerSelector, emptyText) => {
   renderNextBatch();
 };
 
+const sortCountryBrands = brands =>
+  brands
+    .map((brand, index) => ({ brand, index }))
+    .sort((a, b) => {
+      const priorityA = Number.isFinite(a.brand.countryPagePriority)
+        ? a.brand.countryPagePriority
+        : Number.MAX_SAFE_INTEGER;
+      const priorityB = Number.isFinite(b.brand.countryPagePriority)
+        ? b.brand.countryPagePriority
+        : Number.MAX_SAFE_INTEGER;
+
+      return priorityA - priorityB || a.index - b.index;
+    })
+    .map(({ brand }) => brand);
+
 const getCountryFilterDefinitions = () => [
   {
     id: 'all',
@@ -4289,7 +4305,9 @@ export const initCasinoPage = async () => {
     ensureCountryBrandStage(pageCountry);
     initCountryGuideCarousels();
     applyCountryHeroConcept();
-    const brands = BRANDS.filter(b => b.countries?.some(c => c.toUpperCase() === pageCountry));
+    const brands = sortCountryBrands(
+      BRANDS.filter(b => b.countries?.some(c => c.toUpperCase() === pageCountry))
+    );
 
     initCountryBrandFilters(pageCountry, brands, filteredBrands => {
       renderBrandList(filteredBrands, '#brand-cards', uiCopy.noFilterMatches);

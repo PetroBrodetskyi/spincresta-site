@@ -55,6 +55,19 @@ const COPY = {
   },
 };
 
+const FORM_TOGGLE_COPY = {
+  en: { open: 'Write a review', close: 'Close review form' },
+  de: { open: 'Bewertung schreiben', close: 'Bewertungsformular schließen' },
+  es: { open: 'Escribir una reseña', close: 'Cerrar el formulario' },
+  it: { open: 'Scrivi una recensione', close: 'Chiudi il modulo' },
+  pl: { open: 'Napisz recenzję', close: 'Zamknij formularz' },
+  uk: { open: 'Написати відгук', close: 'Закрити форму' },
+  pt: { open: 'Escrever uma opinião', close: 'Fechar o formulário' },
+  fr: { open: 'Écrire un avis', close: 'Fermer le formulaire' },
+  hi: { open: 'समीक्षा लिखें', close: 'समीक्षा फ़ॉर्म बंद करें' },
+  fi: { open: 'Kirjoita kokemus', close: 'Sulje lomake' },
+};
+
 const TEASER_COPY = {
   en: { read: 'Read player reviews', first: 'Be the first to review', ratings: 'Ratings', reviews: 'Reviews' },
   de: { read: 'Spielerbewertungen lesen', first: 'Erste Bewertung abgeben', ratings: 'Bewertungen', reviews: 'Erfahrungsberichte' },
@@ -411,6 +424,7 @@ const createSection = (brand, copy) => {
         <p>${escapeHtml(copy.rateHint)}</p>
       </div>
       <button class="brand-feedback-signin" type="button" data-feedback-signin>${escapeHtml(copy.signIn)}</button>
+      <button class="brand-feedback-compose-toggle" type="button" data-feedback-compose-toggle hidden></button>
       <form data-feedback-form hidden>
         <fieldset class="brand-feedback-rating">
           <legend>${escapeHtml(copy.rateTitle)}</legend>
@@ -478,14 +492,35 @@ export const initBrandFeedback = async ({ brand, brandName = '', brandImage = ''
   const teaserLink = createWhyRatingLink(copy, teaserCopy);
   const form = section.querySelector('[data-feedback-form]');
   const signIn = section.querySelector('[data-feedback-signin]');
+  const composeToggle = section.querySelector('[data-feedback-compose-toggle]');
   const status = section.querySelector('[data-feedback-status]');
+  const formToggleCopy = FORM_TOGGLE_COPY[locale] || FORM_TOGGLE_COPY.en;
+  const compactComposeQuery = window.matchMedia('(max-width: 720px)');
+  let composeExpanded = false;
 
   const syncAuth = () => {
     const state = accountBridge()?.getState?.() || {};
     const canReview = Boolean(state.signedIn && state.registrationComplete);
-    form.hidden = !canReview;
+    const usesCompactCompose = compactComposeQuery.matches;
+    form.hidden = !canReview || (usesCompactCompose && !composeExpanded);
     signIn.hidden = canReview;
+    composeToggle.hidden = !canReview || !usesCompactCompose;
+    composeToggle.textContent = composeExpanded ? formToggleCopy.close : formToggleCopy.open;
+    composeToggle.setAttribute('aria-expanded', composeExpanded ? 'true' : 'false');
   };
+
+  composeToggle.addEventListener('click', () => {
+    composeExpanded = !composeExpanded;
+    syncAuth();
+    if (composeExpanded) {
+      window.requestAnimationFrame(() => form.querySelector('input[name="rating"]')?.focus());
+    }
+  });
+
+  compactComposeQuery.addEventListener?.('change', () => {
+    if (!compactComposeQuery.matches) composeExpanded = false;
+    syncAuth();
+  });
 
   signIn.addEventListener('click', async () => {
     const bridge = await waitForAccountBridge();
@@ -690,6 +725,8 @@ export const initBrandFeedback = async ({ brand, brandName = '', brandImage = ''
       status.textContent = payload.reviewStatus === 'pending' ? copy.pending : copy.ratingSaved;
       status.dataset.state = 'success';
       form.reset();
+      composeExpanded = false;
+      syncAuth();
       await loadFeedback({ fresh: true });
     } catch {
       status.textContent = copy.failed;

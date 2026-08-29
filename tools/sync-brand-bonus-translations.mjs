@@ -7,17 +7,17 @@ import { BRANDS } from '../scripts/brands.js';
 const ROOT = process.cwd();
 const LOCALES = ['de', 'es', 'it', 'pl', 'uk', 'pt', 'fr', 'hi', 'fi'];
 const OUTPUT_DIRECTORY = path.join(ROOT, 'scripts', 'brand-bonus-translations');
-const GOLDPARI_BONUS = 'Welcome Package up to NGN 716,000 + 150 Free Spins';
+const GOLDPARI_BONUS = '100% First-Deposit Bonus + 30 Free Spins in Selected Markets';
 const BONUS_TRANSLATION_OVERRIDES = {
-  de: { [GOLDPARI_BONUS]: 'Willkommenspaket bis zu 716.000 NGN + 150 Freispiele' },
-  es: { [GOLDPARI_BONUS]: 'Paquete de bienvenida de hasta 716.000 NGN + 150 giros gratis' },
-  it: { [GOLDPARI_BONUS]: 'Pacchetto di benvenuto fino a 716.000 NGN + 150 giri gratuiti' },
-  pl: { [GOLDPARI_BONUS]: 'Pakiet powitalny do 716 000 NGN + 150 darmowych spinów' },
-  uk: { [GOLDPARI_BONUS]: 'Вітальний пакет до 716 000 NGN + 150 фріспінів' },
-  pt: { [GOLDPARI_BONUS]: 'Pacote de boas-vindas até 716.000 NGN + 150 jogadas grátis' },
-  fr: { [GOLDPARI_BONUS]: 'Pack de bienvenue jusqu’à 716 000 NGN + 150 tours gratuits' },
-  hi: { [GOLDPARI_BONUS]: '716,000 NGN तक का वेलकम पैकेज + 150 फ्री स्पिन' },
-  fi: { [GOLDPARI_BONUS]: 'Tervetuliaispaketti jopa 716 000 NGN + 150 ilmaiskierrosta' },
+  de: { [GOLDPARI_BONUS]: '100 % Ersteinzahlungsbonus + 30 Freispiele in ausgewählten Märkten' },
+  es: { [GOLDPARI_BONUS]: 'Bono del 100 % en el primer depósito + 30 giros gratis en mercados seleccionados' },
+  it: { [GOLDPARI_BONUS]: 'Bonus del 100% sul primo deposito + 30 giri gratis nei mercati selezionati' },
+  pl: { [GOLDPARI_BONUS]: '100% bonusu od pierwszej wpłaty + 30 darmowych spinów na wybranych rynkach' },
+  uk: { [GOLDPARI_BONUS]: '100% бонус на перший депозит + 30 фріспінів на вибраних ринках' },
+  pt: { [GOLDPARI_BONUS]: 'Bónus de 100% no primeiro depósito + 30 jogadas grátis em mercados selecionados' },
+  fr: { [GOLDPARI_BONUS]: 'Bonus de 100 % sur le premier dépôt + 30 tours gratuits dans certains marchés' },
+  hi: { [GOLDPARI_BONUS]: 'चुनिंदा बाज़ारों में पहले जमा पर 100% बोनस + 30 फ्री स्पिन' },
+  fi: { [GOLDPARI_BONUS]: '100 % ensitalletusbonus + 30 ilmaiskierrosta valituilla markkinoilla' },
 };
 
 const decodeHtml = value =>

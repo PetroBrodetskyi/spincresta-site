@@ -228,6 +228,129 @@ export const initBrandPage = context => {
     heroContent.replaceChildren(...panels);
     heroContent.dataset.panelsReady = 'true';
   };
+
+  const initMobileEditorialDetails = () => {
+    const summaryPanel = document.querySelector(
+      'body[data-brand] .brand-hero-summary-panel'
+    );
+    const editorialMeta = summaryPanel?.querySelector(':scope > .editorial-meta');
+    const summary = summaryPanel?.querySelector(
+      ':scope > .hero-subtitle:not(.editorial-meta)'
+    );
+    if (!summaryPanel || !summary || !editorialMeta) return;
+    if (summaryPanel.querySelector('.brand-editorial-toggle')) return;
+
+    const detailsId =
+      editorialMeta.id || `brand-editorial-details-${normalizeBrandKey(context.brandKey || 'review')}`;
+    editorialMeta.id = detailsId;
+    summaryPanel.classList.add('is-editorial-collapsible');
+
+    const toggle = document.createElement('button');
+    toggle.type = 'button';
+    toggle.className = 'brand-editorial-toggle';
+    toggle.setAttribute('aria-controls', detailsId);
+    toggle.setAttribute('aria-expanded', 'false');
+
+    const collapsedLabel = localeText(
+      'Show review details',
+      'Details zur Bewertung anzeigen',
+      'Mostrar detalles de la reseña',
+      'Mostra i dettagli della recensione',
+      'Pokaż szczegóły recenzji',
+      'Показати деталі огляду',
+      'Mostrar detalhes da análise',
+      'Afficher les détails de l’avis',
+      'समीक्षा का विवरण दिखाएँ',
+      'Näytä arvostelun tiedot'
+    );
+    const expandedLabel = localeText(
+      'Hide review details',
+      'Details zur Bewertung ausblenden',
+      'Ocultar detalles de la reseña',
+      'Nascondi i dettagli della recensione',
+      'Ukryj szczegóły recenzji',
+      'Сховати деталі огляду',
+      'Ocultar detalhes da análise',
+      'Masquer les détails de l’avis',
+      'समीक्षा का विवरण छिपाएँ',
+      'Piilota arvostelun tiedot'
+    );
+
+    const updateToggle = isExpanded => {
+      summaryPanel.classList.toggle('is-editorial-expanded', isExpanded);
+      toggle.setAttribute('aria-expanded', isExpanded ? 'true' : 'false');
+      toggle.setAttribute('aria-label', isExpanded ? expandedLabel : collapsedLabel);
+      toggle.title = isExpanded ? expandedLabel : collapsedLabel;
+    };
+
+    toggle.innerHTML = '<span aria-hidden="true"></span>';
+    toggle.addEventListener('click', () => {
+      updateToggle(toggle.getAttribute('aria-expanded') !== 'true');
+    });
+
+    editorialMeta.insertAdjacentElement('beforebegin', toggle);
+    updateToggle(false);
+  };
+
+  const initMobileTableDisclosures = () => {
+    const collapsedLabel = localeText(
+      'Show full table',
+      'Vollständige Tabelle anzeigen',
+      'Mostrar la tabla completa',
+      'Mostra la tabella completa',
+      'Pokaż całą tabelę',
+      'Показати всю таблицю',
+      'Mostrar a tabela completa',
+      'Afficher le tableau complet',
+      'पूरी तालिका दिखाएँ',
+      'Näytä koko taulukko'
+    );
+    const expandedLabel = localeText(
+      'Show fewer rows',
+      'Weniger Zeilen anzeigen',
+      'Mostrar menos filas',
+      'Mostra meno righe',
+      'Pokaż mniej wierszy',
+      'Показати менше рядків',
+      'Mostrar menos linhas',
+      'Afficher moins de lignes',
+      'कम पंक्तियाँ दिखाएँ',
+      'Näytä vähemmän rivejä'
+    );
+
+    document
+      .querySelectorAll('body[data-brand] .content-review > section.container table')
+      .forEach((table, index) => {
+        if (table.dataset.mobileDisclosureReady === 'true') {
+          return;
+        }
+        const rows = table.querySelectorAll('tbody > tr');
+        if (rows.length <= 3) return;
+
+        const tableId = table.id || `brand-table-${normalizeBrandKey(context.brandKey || 'review')}-${index + 1}`;
+        table.id = tableId;
+        table.classList.add('brand-mobile-table');
+        if (rows.length > 4) table.classList.add('brand-table-is-long');
+        table.dataset.mobileDisclosureReady = 'true';
+
+        const toggle = document.createElement('button');
+        toggle.type = 'button';
+        toggle.className = 'brand-table-toggle';
+        toggle.setAttribute('aria-controls', tableId);
+
+        const syncToggle = isExpanded => {
+          table.classList.toggle('is-mobile-expanded', isExpanded);
+          toggle.setAttribute('aria-expanded', isExpanded ? 'true' : 'false');
+          toggle.innerHTML = `<span>${isExpanded ? expandedLabel : collapsedLabel}</span><i aria-hidden="true"></i>`;
+        };
+
+        toggle.addEventListener('click', () => {
+          syncToggle(toggle.getAttribute('aria-expanded') !== 'true');
+        });
+        table.insertAdjacentElement('afterend', toggle);
+        syncToggle(false);
+      });
+  };
   
   const SNAPSHOT_DE_TRANSLATIONS = {
     'Games & Betting Snapshot': 'Spiele- und Wettüberblick',
@@ -823,6 +946,8 @@ export const initBrandPage = context => {
   renderBrandAvailabilityWidget(brandKey);
   initBrandSectionNav();
   initBrandHeroPanels();
+  initMobileEditorialDetails();
+  initMobileTableDisclosures();
   initBrandCountryCollapse();
   window.requestAnimationFrame(initBrandCountryCollapse);
   window.addEventListener('load', initBrandCountryCollapse, { once: true });

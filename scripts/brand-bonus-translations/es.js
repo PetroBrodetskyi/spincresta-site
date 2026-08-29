@@ -135,5 +135,5 @@ export default {
   "280% Match Bonus up to R5500 + 45 Free Spins": "Bono de partido del 280% hasta R5500 + 45 giros gratis",
   "Welcome Bonus - 550% Up to €3,800 + 50 Free Spins": "Bono de bienvenida: 550 % hasta 3800 € + 50 giros gratis",
   "100% Welcome Bonus up to $5,000 on Your First Deposit": "Bono de bienvenida del 100% hasta $5,000 en su primer depósito",
-  "Welcome Package up to NGN 716,000 + 150 Free Spins": "Paquete de bienvenida de hasta 716.000 NGN + 150 giros gratis"
+  "100% First-Deposit Bonus + 30 Free Spins in Selected Markets": "Bono del 100 % en el primer depósito + 30 giros gratis en mercados seleccionados"
 };

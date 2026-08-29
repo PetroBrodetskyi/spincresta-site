@@ -3436,6 +3436,16 @@ body.home-page .all-countries > .container {
   text-align: center;
 }
 
+html[lang='de'] .all-countries .title::before { content: 'NACH LAND DURCHSUCHEN'; }
+html[lang='es'] .all-countries .title::before { content: 'EXPLORAR POR PAÍS'; }
+html[lang='it'] .all-countries .title::before { content: 'ESPLORA PER PAESE'; }
+html[lang='pl'] .all-countries .title::before { content: 'PRZEGLĄDAJ WEDŁUG KRAJU'; }
+html[lang='uk'] .all-countries .title::before { content: 'ПЕРЕГЛЯНУТИ ЗА КРАЇНОЮ'; }
+html[lang='pt'] .all-countries .title::before { content: 'EXPLORAR POR PAÍS'; }
+html[lang='fr'] .all-countries .title::before { content: 'PARCOURIR PAR PAYS'; }
+html[lang='hi'] .all-countries .title::before { content: 'देश के अनुसार देखें'; }
+html[lang='fi'] .all-countries .title::before { content: 'SELAA MAITTAIN'; }
+
 .countries-cloud {
   display: flex;
   flex-wrap: wrap;
@@ -3507,9 +3517,97 @@ html[data-theme='light'] .countries-cloud .country-link:hover {
 }
 
 @media (max-width: 768px) {
-  .all-countries {
-    padding: var(--section-padding-y-tight) var(--section-padding-x);
+  :root {
+    --heading-compact-mobile-section-size: clamp(24px, 6.8vw, 28px);
   }
+
+  .all-countries {
+    width: calc(100% - 24px);
+    margin: var(--section-gap) auto 20px;
+    padding: 22px 16px 16px;
+    overflow: hidden;
+    border: 1px solid var(--surface-border);
+    border-radius: var(--radius-lg);
+    background: var(--surface-card-soft);
+    box-shadow: var(--shadow-soft);
+  }
+
+  .all-countries > .container {
+    width: 100%;
+    max-width: none;
+    padding: 0;
+  }
+
+  .all-countries .title {
+    margin: 0 0 16px;
+    padding: 0 0 16px;
+    font-size: var(--heading-compact-mobile-section-size) !important;
+    line-height: 1.08;
+    text-align: center;
+  }
+
+  .all-countries .title::before {
+    margin-bottom: 8px;
+    font-size: 10px;
+    text-align: center;
+  }
+
+  .countries-cloud {
+    display: grid;
+    grid-template-rows: repeat(4, minmax(44px, auto));
+    grid-auto-flow: column;
+    grid-auto-columns: minmax(174px, 62vw);
+    justify-content: start;
+    gap: 8px;
+    margin: 0;
+    padding: 0 24px 8px 0;
+    overflow-x: auto;
+    overflow-y: hidden;
+    overscroll-behavior-x: contain;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .countries-cloud::-webkit-scrollbar {
+    display: none;
+  }
+
+  .countries-cloud a,
+  .countries-cloud .country-link {
+    width: 100%;
+    min-height: 44px;
+    padding: 10px 12px;
+    gap: 10px;
+    border-color: var(--surface-border);
+    border-radius: 9px;
+    background: var(--surface-card);
+    font-size: 13px;
+    line-height: 1.25;
+  }
+
+  .countries-cloud a:nth-child(4n + 1),
+  .countries-cloud .country-link:nth-child(4n + 1) {
+    scroll-snap-align: start;
+  }
+
+  .countries-cloud .flag {
+    width: 22px;
+    height: 16px;
+  }
+
+  .countries-cloud a:active,
+  .countries-cloud .country-link:active {
+    background: var(--surface-card-hover);
+    border-color: var(--surface-border-strong);
+  }
+
+  html[data-theme='light'] .countries-cloud a,
+  html[data-theme='light'] .countries-cloud .country-link {
+    background: var(--surface-card);
+    border-color: var(--surface-border);
+  }
+
 }
 
 /* =============================================================
@@ -14105,5 +14203,318 @@ body[data-brand] .content-review > section.container > .timeline:not(.faq-accord
 
   body[data-brand] .faq-accordion-surface .faq-answer-panel {
     padding: 0 14px 13px 42px;
+  }
+}
+
+/* Canonical mobile heading rhythm for the recurring brand-page sections. */
+@media (max-width: 768px) {
+  body[data-brand] .brand-new-games-heading,
+  body[data-brand] .brand-new-games-kicker,
+  body[data-brand] .brand-new-games-heading h2 {
+    text-align: center;
+  }
+
+  body[data-brand] .brand-new-games-heading h2,
+  body[data-brand] .final-cta-glass .title,
+  body[data-brand] .brand-feedback-heading h2 {
+    font-size: var(--heading-compact-mobile-section-size) !important;
+    line-height: 1.08;
+    letter-spacing: -0.025em;
+    text-align: center;
+  }
+
+  body[data-brand] .final-cta-glass .title,
+  body[data-brand] .brand-feedback-heading h2 {
+    margin-bottom: 18px;
+    padding-bottom: 16px;
+  }
+}
+
+/* Mobile brand summary: keep the useful introduction visible and tuck the
+   editorial status away behind one compact, accessible disclosure control. */
+body[data-brand] .brand-editorial-toggle {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  body[data-brand] .brand-hero-summary-panel.is-editorial-collapsible > .editorial-meta {
+    display: none;
+  }
+
+  body[data-brand]
+    .brand-hero-summary-panel.is-editorial-collapsible.is-editorial-expanded
+    > .editorial-meta {
+    display: block;
+  }
+
+  body[data-brand] .brand-editorial-toggle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    align-self: center;
+    width: 38px;
+    min-width: 38px;
+    height: 30px;
+    margin: -4px auto;
+    padding: 0;
+    border: 0;
+    border-radius: 999px;
+    background: transparent;
+    color: var(--text-muted);
+    cursor: pointer;
+  }
+
+  body[data-brand] .brand-editorial-toggle:hover,
+  body[data-brand] .brand-editorial-toggle:focus-visible {
+    background: var(--surface-card-soft);
+    color: var(--text-main);
+    outline: 1px solid var(--border-soft);
+    outline-offset: 2px;
+  }
+
+  body[data-brand] .brand-editorial-toggle > span {
+    width: 9px;
+    height: 9px;
+    border-right: 2px solid currentColor;
+    border-bottom: 2px solid currentColor;
+    transform: translateY(-2px) rotate(45deg);
+    transition: transform 180ms ease;
+  }
+
+  body[data-brand]
+    .brand-hero-summary-panel.is-editorial-expanded
+    > .brand-editorial-toggle
+    > span {
+    transform: translateY(2px) rotate(225deg);
+  }
+}
+
+/* Use more of the narrow viewport for the generated product snapshot. */
+@media (max-width: 520px) {
+  body[data-brand] .brand-availability-widget {
+    padding-right: 8px !important;
+    padding-left: 8px !important;
+  }
+
+  body[data-brand] .availability-panel {
+    padding-right: 10px;
+    padding-left: 10px;
+  }
+
+  body[data-brand] .availability-item {
+    padding-right: 0;
+    padding-left: 0;
+  }
+}
+
+@media (max-width: 768px) {
+  body[data-brand] .brand-hero-summary-panel .hero-cta-wrapper {
+    margin-bottom: 0;
+  }
+}
+
+/* Mobile progressive disclosure for long comparison tables. The complete
+   table remains in the document and is restored without a page reload. */
+body[data-brand] .brand-table-toggle {
+  display: none;
+}
+
+body[data-brand] .brand-mobile-table.brand-table-is-long:not(.is-mobile-expanded) tbody > tr:nth-child(n + 5) {
+  display: none !important;
+}
+
+body[data-brand] .brand-mobile-table.brand-table-is-long + .brand-table-toggle {
+  display: flex;
+  width: 100%;
+  min-height: 44px;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  margin-top: 8px;
+  padding: 10px 14px;
+  border: 1px solid var(--border-soft);
+  border-radius: 4px;
+  background: transparent;
+  color: var(--text-main);
+  font: inherit;
+  font-size: 12px;
+  font-weight: 750;
+  text-transform: uppercase;
+  cursor: pointer;
+}
+
+body[data-brand] .brand-table-toggle i {
+  width: 8px;
+  height: 8px;
+  border-right: 2px solid currentColor;
+  border-bottom: 2px solid currentColor;
+  transform: translateY(-2px) rotate(45deg);
+  transition: transform 180ms ease;
+}
+
+body[data-brand] .brand-table-toggle[aria-expanded='true'] i {
+  transform: translateY(2px) rotate(225deg);
+}
+
+@media (max-width: 768px) {
+  body[data-brand] .brand-mobile-table:not(.is-mobile-expanded) tbody > tr:nth-child(n + 4) {
+    display: none !important;
+  }
+
+  body[data-brand] .brand-table-toggle {
+    display: flex;
+    width: 100%;
+    min-height: 44px;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 8px;
+    padding: 10px 14px;
+    border: 1px solid var(--border-soft);
+    border-radius: 4px;
+    background: transparent;
+    color: var(--text-main);
+    font: inherit;
+    font-size: 12px;
+    font-weight: 750;
+    text-transform: uppercase;
+    cursor: pointer;
+  }
+
+}
+
+/* Supporting information cards use the same swipe pattern as the compact
+   highlights beneath the lobby preview. */
+@media (max-width: 560px) {
+  body[data-brand]
+    .content-review
+    > section.container:not(#brand-why-section)
+    > :where(.features-grid, .premium-grid) {
+    display: grid;
+    grid-template-columns: none;
+    grid-auto-flow: column;
+    grid-auto-columns: min(82vw, 330px);
+    justify-content: start;
+    gap: 10px;
+    width: 100%;
+    padding: 2px 16px 12px 2px;
+    overflow-x: auto;
+    overflow-y: hidden;
+    overscroll-behavior-inline: contain;
+    scroll-padding-inline: 2px;
+    scroll-snap-type: inline mandatory;
+    scrollbar-width: thin;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  body[data-brand]
+    .content-review
+    > section.container:not(#brand-why-section)
+    > :where(.features-grid, .premium-grid)
+    > .feature-card {
+    width: auto;
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+  }
+}
+
+/* Compact mobile accordion for the editorial method on every localized home. */
+body.home-page .home-method-toggle {
+  display: none;
+}
+
+@media (max-width: 560px) {
+  body.home-page .home-method-grid {
+    gap: 8px;
+  }
+
+  body.home-page .home-method-grid article {
+    position: relative;
+    min-height: 82px;
+    padding: 14px 52px 14px 16px;
+  }
+
+  body.home-page .home-method-grid article > span {
+    display: block;
+  }
+
+  body.home-page .home-method-grid h3 {
+    margin: 8px 0 0;
+    font-size: 17px !important;
+  }
+
+  body.home-page .home-method-grid article > p {
+    display: none;
+    margin-top: 10px;
+    font-size: 12.5px;
+    line-height: 1.5;
+  }
+
+  body.home-page .home-method-grid article.is-mobile-expanded > p {
+    display: block;
+  }
+
+  body.home-page .home-method-toggle {
+    position: absolute;
+    top: 20px;
+    right: 14px;
+    display: inline-flex;
+    width: 34px;
+    height: 34px;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    border: 1px solid var(--border-soft);
+    border-radius: 50%;
+    background: transparent;
+    color: var(--text-muted);
+    cursor: pointer;
+  }
+
+  body.home-page .home-method-toggle > span {
+    width: 8px;
+    height: 8px;
+    border-right: 2px solid currentColor;
+    border-bottom: 2px solid currentColor;
+    transform: translateY(-2px) rotate(45deg);
+    transition: transform 180ms ease;
+  }
+
+  body.home-page .home-method-toggle[aria-expanded='true'] > span {
+    transform: translateY(2px) rotate(225deg);
+  }
+}
+
+/* Registered players open the mobile review form only when they intend to use it. */
+body[data-brand] .brand-feedback-compose-toggle {
+  display: none;
+}
+
+body[data-brand] [data-feedback-compose-toggle][hidden] {
+  display: none !important;
+}
+
+@media (max-width: 720px) {
+  body[data-brand] .brand-feedback-compose {
+    gap: 14px;
+    padding-top: 20px;
+  }
+
+  body[data-brand] .brand-feedback-compose-toggle:not([hidden]) {
+    display: inline-flex;
+    width: 100%;
+    min-height: 42px;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 16px;
+    border: 1px solid var(--border-soft);
+    border-radius: 4px;
+    background: transparent;
+    color: var(--text-main);
+    font: inherit;
+    font-size: 12.5px;
+    font-weight: 700;
+    text-transform: uppercase;
+    cursor: pointer;
   }
 }
