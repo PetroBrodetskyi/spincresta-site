@@ -1,4 +1,4 @@
-import { initModeratorPage } from './pages/moderator.js?v=20260828-feedback-votes-1';
+import { initModeratorPage } from './pages/moderator.js?v=20260829-moderation-delete-1';
 
 const startModerator = () => {
   initModeratorPage().catch(() => {

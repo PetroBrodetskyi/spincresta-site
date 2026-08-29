@@ -109,9 +109,11 @@ const reviewCard = (review, onModerate) => {
   approve.type = 'button';
   const reject = createElement('button', 'moderation-action', 'Reject');
   reject.type = 'button';
+  const deleteReview = createElement('button', 'moderation-action moderation-action-delete', 'Delete review');
+  deleteReview.type = 'button';
   const message = createElement('span', 'moderation-card-message');
   message.setAttribute('role', 'status');
-  actions.append(approve, reject, message);
+  actions.append(approve, reject, deleteReview, message);
   controls.append(actions);
 
   const moderate = async action => {
@@ -129,6 +131,7 @@ const reviewCard = (review, onModerate) => {
     }
     approve.disabled = true;
     reject.disabled = true;
+    deleteReview.disabled = true;
     message.textContent = action === 'approve' ? 'Approving…' : 'Rejecting…';
     try {
       await onModerate(review.id, action, textarea.value, editedTitle, editedBody);
@@ -137,12 +140,70 @@ const reviewCard = (review, onModerate) => {
       message.textContent = error instanceof Error ? error.message : 'Could not update review.';
       approve.disabled = false;
       reject.disabled = false;
+      deleteReview.disabled = false;
     }
   };
   approve.addEventListener('click', () => moderate('approve'));
   reject.addEventListener('click', () => moderate('reject'));
 
-  article.append(meta, author, content, controls);
+  deleteReview.addEventListener('click', async () => {
+    const confirmed = window.confirm(
+      'Permanently delete this written player review? Its separate star rating will remain. Any official responses attached to this review will also be deleted.'
+    );
+    if (!confirmed) return;
+    approve.disabled = true;
+    reject.disabled = true;
+    deleteReview.disabled = true;
+    message.textContent = 'Deleting review…';
+    try {
+      await onModerate(review.id, 'delete_review');
+      article.remove();
+    } catch (error) {
+      message.textContent = error instanceof Error ? error.message : 'Could not delete review.';
+      approve.disabled = false;
+      reject.disabled = false;
+      deleteReview.disabled = false;
+    }
+  });
+
+  article.append(meta, author, content);
+
+  const replies = Array.isArray(review.replies) ? review.replies : [];
+  if (replies.length) {
+    const replySection = createElement('section', 'moderation-replies');
+    replySection.append(createElement('h3', '', 'Official brand responses'));
+    replies.forEach(reply => {
+      const replyCard = createElement('article', 'moderation-reply-card');
+      const replyHeader = createElement('div', 'moderation-reply-header');
+      const replyAuthor = createElement('strong', '', reply.author?.displayName || 'Brand representative');
+      replyHeader.append(replyAuthor, createElement('time', '', formatDate(reply.createdAt)));
+      const replyBody = createElement('p', '', reply.body);
+      const replyActions = createElement('div', 'moderation-reply-actions');
+      const deleteReply = createElement('button', 'moderation-action moderation-action-delete', 'Delete response');
+      deleteReply.type = 'button';
+      const replyMessage = createElement('span', 'moderation-card-message');
+      replyMessage.setAttribute('role', 'status');
+      deleteReply.addEventListener('click', async () => {
+        if (!window.confirm('Permanently delete this official brand response?')) return;
+        deleteReply.disabled = true;
+        replyMessage.textContent = 'Deleting response…';
+        try {
+          await onModerate(review.id, 'delete_reply', '', '', '', reply.id);
+          replyCard.remove();
+          if (!replySection.querySelector('.moderation-reply-card')) replySection.remove();
+        } catch (error) {
+          replyMessage.textContent = error instanceof Error ? error.message : 'Could not delete response.';
+          deleteReply.disabled = false;
+        }
+      });
+      replyActions.append(deleteReply, replyMessage);
+      replyCard.append(replyHeader, replyBody, replyActions);
+      replySection.append(replyCard);
+    });
+    article.append(replySection);
+  }
+
+  article.append(controls);
   return article;
 };
 
@@ -375,20 +436,30 @@ export const initModeratorPage = async () => {
     else await loadReviews(currentStatus);
   };
 
-  const moderate = async (reviewId, action, note, title, reviewBody) => {
+  const moderate = async (reviewId, action, note = '', title = '', reviewBody = '', replyId = '') => {
     const response = await fetch(endpoint, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
         Authorization: `Bearer ${accessToken}`,
       },
-      body: JSON.stringify({ reviewId, action, note, title, body: reviewBody }),
+      body: JSON.stringify({ reviewId, replyId, action, note, title, body: reviewBody }),
     });
     const responseBody = await response.json().catch(() => ({}));
-    if (!response.ok) throw new Error(responseBody.error === 'review_not_found'
-      ? 'This review no longer exists.'
-      : 'Could not update this review. Please try again.');
-    showNotice(action === 'approve' ? 'Review approved and published.' : 'Review rejected.', 'success');
+    if (!response.ok) {
+      if (responseBody.error === 'review_not_found') throw new Error('This review no longer exists.');
+      if (responseBody.error === 'reply_not_found') throw new Error('This official response no longer exists.');
+      throw new Error(action.startsWith('delete_')
+        ? 'Could not delete this content. Please try again.'
+        : 'Could not update this review. Please try again.');
+    }
+    const notices = {
+      approve: 'Review approved and published.',
+      reject: 'Review rejected.',
+      delete_review: 'Written player review permanently deleted. Its star rating was kept.',
+      delete_reply: 'Official brand response permanently deleted.',
+    };
+    showNotice(notices[action] || 'Moderation action completed.', 'success');
   };
 
   const loadReviews = async status => {

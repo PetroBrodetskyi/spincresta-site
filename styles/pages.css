@@ -13452,6 +13452,72 @@ body[data-page='moderator'] .moderation-action-approve {
   border-color: var(--gold, #ffdf00);
 }
 
+body[data-page='moderator'] .moderation-action-delete {
+  margin-left: auto;
+  border-color: rgba(216, 117, 117, 0.48);
+  color: #dca0a0;
+}
+
+body[data-page='moderator'] .moderation-action-delete:hover,
+body[data-page='moderator'] .moderation-action-delete:focus-visible {
+  border-color: #d87575;
+  background: rgba(216, 117, 117, 0.1);
+  color: #efb0b0;
+}
+
+body[data-page='moderator'] .moderation-replies {
+  display: grid;
+  grid-column: 1 / -1;
+  gap: 10px;
+  padding-top: 18px;
+  border-top: 1px solid var(--surface-border);
+}
+
+body[data-page='moderator'] .moderation-replies h3 {
+  margin: 0;
+  color: var(--text-main);
+  font-size: 14px;
+}
+
+body[data-page='moderator'] .moderation-reply-card {
+  display: grid;
+  gap: 10px;
+  padding: 16px;
+  border: 1px solid var(--surface-border);
+  border-radius: 7px;
+  background: var(--surface-card-soft);
+}
+
+body[data-page='moderator'] .moderation-reply-header,
+body[data-page='moderator'] .moderation-reply-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 14px;
+}
+
+body[data-page='moderator'] .moderation-reply-header strong {
+  color: var(--text-main);
+  font-size: 13px;
+}
+
+body[data-page='moderator'] .moderation-reply-header time {
+  color: var(--text-muted);
+  font-size: 11px;
+}
+
+body[data-page='moderator'] .moderation-reply-card p {
+  margin: 0;
+  color: var(--text-muted);
+  font-size: 13px;
+  line-height: 1.6;
+  white-space: pre-wrap;
+}
+
+body[data-page='moderator'] .moderation-reply-actions .moderation-action-delete {
+  margin-left: 0;
+}
+
 body[data-page='moderator'] .moderation-card-message {
   margin-left: auto;
   color: var(--text-muted);
