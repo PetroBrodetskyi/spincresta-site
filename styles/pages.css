@@ -13839,7 +13839,6 @@ body[data-brand]
 }
 
 @media (max-width: 560px) {
-  body[data-brand] #brand-why-section > :where(.features-grid, .premium-grid),
   body[data-brand]
     .content-review
     > section.container:not(#brand-why-section)
@@ -13868,5 +13867,243 @@ body[data-brand]
   body[data-brand] #brand-why-section .feature-card > :where(span, p) {
     font-size: 13px;
     line-height: 1.45;
+  }
+
+  body[data-brand] #brand-why-section > :where(.features-grid, .premium-grid) {
+    display: grid;
+    grid-template-columns: none;
+    grid-auto-flow: column;
+    grid-auto-columns: min(82vw, 330px);
+    justify-content: start;
+    gap: 10px;
+    width: 100%;
+    margin-top: 10px;
+    padding: 2px 16px 12px 2px;
+    overflow-x: auto;
+    overflow-y: hidden;
+    overscroll-behavior-inline: contain;
+    scroll-padding-inline: 2px;
+    scroll-snap-type: inline mandatory;
+    scrollbar-width: thin;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  body[data-brand]
+    #brand-why-section
+    > :where(.features-grid, .premium-grid)
+    > .feature-card {
+    width: auto;
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+  }
+}
+
+/* Compact supporting sections across brand reviews. */
+body[data-brand] .brand-info-pair,
+body[data-brand]
+  .content-review
+  > section.container:not(#brand-why-section):not(.brand-player-feedback):not(:has(> .final-cta-glass)):not(
+    :has(> .brand-availability-widget)
+  ),
+body[data-brand] .brand-availability-widget {
+  gap: clamp(12px, 1.4vw, 18px);
+  padding-top: clamp(20px, 2vw, 28px);
+  padding-bottom: clamp(20px, 2vw, 28px);
+}
+
+body[data-brand].has-brand-sticky-layout .brand-sticky-main > .brand-info-pair.container {
+  gap: clamp(12px, 1.4vw, 18px);
+  padding: clamp(20px, 2vw, 28px) var(--section-padding-x);
+}
+
+body[data-brand] .brand-info-pair > .brand-countries > .title,
+body[data-brand] .brand-info-pair > .brand-payments > .title,
+body[data-brand] .brand-availability-widget > .title,
+body[data-brand]
+  .content-review
+  > section.container:not(#brand-why-section):not(.brand-player-feedback)
+  > .title {
+  width: min(100%, 900px);
+  max-width: 900px;
+  margin: 0 auto 14px;
+  padding-bottom: 12px;
+  font-size: clamp(24px, 2.4vw, 34px) !important;
+  line-height: 1.1;
+  text-align: center;
+}
+
+body[data-brand]
+  :where(
+    .brand-info-pair > .brand-countries > .title,
+    .brand-info-pair > .brand-payments > .title,
+    .brand-availability-widget > .title,
+    .content-review > section.container:not(#brand-why-section):not(.brand-player-feedback) > .title
+  )::before {
+  margin-bottom: 8px;
+}
+
+body[data-brand] .brand-info-pair > .brand-payments {
+  padding-top: clamp(18px, 2vw, 26px);
+}
+
+body[data-brand] .brand-info-pair > :where(.brand-countries, .brand-payments) {
+  gap: 12px;
+}
+
+body[data-brand] .brand-info-pair .brand-countries .countries-container {
+  grid-template-columns: repeat(auto-fit, minmax(92px, 1fr));
+  gap: 10px;
+}
+
+body[data-brand] .brand-info-pair .brand-countries .flag-container {
+  max-width: 102px;
+  min-height: 72px;
+  gap: 5px;
+  padding: 7px 6px;
+}
+
+body[data-brand] .brand-info-pair .brand-countries .hero-flag {
+  width: 40px;
+  height: 27px;
+}
+
+body[data-brand] .brand-info-pair .payments-container {
+  gap: 8px;
+}
+
+body[data-brand] .brand-info-pair .brand-payments .payments {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 34px;
+  padding: 6px 10px;
+  border: 1px solid var(--border-soft);
+  border-radius: 4px;
+  background: transparent;
+}
+
+body[data-brand] .brand-info-pair .brand-payments .payments img {
+  height: 18px;
+  max-width: 104px;
+}
+
+body[data-brand] .brand-availability-intro {
+  margin-bottom: 10px;
+  font-size: 14px;
+  line-height: 1.55;
+}
+
+body[data-brand] .availability-tab-list {
+  gap: clamp(14px, 2vw, 24px);
+  padding-bottom: 10px;
+}
+
+body[data-brand] .availability-tab {
+  padding-bottom: 8px;
+  font-size: 12px;
+}
+
+body[data-brand] .availability-panel {
+  padding: clamp(16px, 1.8vw, 24px);
+}
+
+body[data-brand] .availability-item {
+  padding: 9px 6px;
+}
+
+body[data-brand] .timeline.faq-accordion-surface {
+  gap: 8px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+body[data-brand] .faq-accordion-surface .faq-accordion-trigger {
+  min-height: 54px;
+  gap: 10px;
+  padding: 12px 16px;
+  font-size: 15px;
+  line-height: 1.3;
+}
+
+body[data-brand] .faq-accordion-surface .faq-question-icon {
+  width: 18px;
+  height: 18px;
+  flex-basis: 18px;
+}
+
+body[data-brand] .faq-accordion-surface .faq-answer-panel {
+  padding: 0 16px 14px 44px;
+}
+
+body[data-brand] .faq-accordion-surface .faq-answer-panel .faq-answer {
+  padding-top: 10px;
+  font-size: 14px;
+  line-height: 1.55;
+}
+
+body[data-brand] .content-review > section.container > :where(.faq-grid, .timeline) {
+  margin-top: 0;
+}
+
+body[data-brand] .content-review > section.container > .faq-grid {
+  gap: 8px;
+}
+
+body[data-brand]
+  .content-review
+  > section.container
+  > .faq-grid:not(.faq-accordion-surface)
+  > .faq-card {
+  padding: 16px;
+}
+
+body[data-brand] .content-review > section.container > .timeline:not(.faq-accordion-surface) {
+  padding: clamp(16px, 1.8vw, 22px);
+}
+
+body[data-brand] .content-review > section.container > .timeline:not(.faq-accordion-surface) h3 {
+  margin: 10px 0 4px;
+  font-size: 16px !important;
+  line-height: 1.3;
+}
+
+body[data-brand] .content-review > section.container > .timeline:not(.faq-accordion-surface) p {
+  margin-bottom: 8px;
+  font-size: 14px;
+  line-height: 1.55;
+}
+
+@media (max-width: 768px) {
+  body[data-brand] .brand-info-pair,
+  body[data-brand]
+    .content-review
+    > section.container:not(#brand-why-section):not(.brand-player-feedback):not(:has(> .final-cta-glass)):not(
+      :has(> .brand-availability-widget)
+    ),
+  body[data-brand] .brand-availability-widget {
+    gap: 12px;
+    padding-top: 18px;
+    padding-bottom: 18px;
+  }
+
+  body[data-brand] .brand-info-pair .brand-countries .countries-container {
+    gap: 8px;
+  }
+
+  body[data-brand] .brand-info-pair .brand-countries .flag-container {
+    min-height: 66px;
+    padding: 6px 5px;
+  }
+
+  body[data-brand] .faq-accordion-surface .faq-accordion-trigger {
+    min-height: 50px;
+    padding: 11px 14px;
+    font-size: 14px;
+  }
+
+  body[data-brand] .faq-accordion-surface .faq-answer-panel {
+    padding: 0 14px 13px 42px;
   }
 }
