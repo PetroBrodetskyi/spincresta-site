@@ -1,5 +1,6 @@
 const DEFAULT_FEEDBACK_ENDPOINT = 'https://api.spincresta.com/api/brand-feedback';
 const DEFAULT_REPLIES_ENDPOINT = 'https://api.spincresta.com/api/brand-replies';
+const DEFAULT_VOTES_ENDPOINT = 'https://api.spincresta.com/api/feedback-votes';
 
 const COPY = {
   en: {
@@ -93,6 +94,19 @@ const REPLY_COPY = {
   fi: { badge: 'Brändin virallinen edustaja', title: 'Virallinen vastaus', label: 'Vastaa tähän kokemukseen', placeholder: 'Kirjoita hyödyllinen virallinen vastaus…', submit: 'Julkaise vastaus', sending: 'Julkaistaan…', sent: 'Virallinen vastaus on julkaistu.', invalid: 'Kirjoita vähintään 10 merkkiä.', failed: 'Vastausta ei voitu julkaista.' },
 };
 
+const VOTE_COPY = {
+  en: { like: 'Helpful', dislike: 'Not helpful', own: 'You cannot vote on your own content.', failed: 'Your vote could not be saved.' },
+  de: { like: 'Hilfreich', dislike: 'Nicht hilfreich', own: 'Sie können Ihren eigenen Beitrag nicht bewerten.', failed: 'Ihre Stimme konnte nicht gespeichert werden.' },
+  es: { like: 'Útil', dislike: 'No útil', own: 'No puedes votar tu propio contenido.', failed: 'No se pudo guardar tu voto.' },
+  it: { like: 'Utile', dislike: 'Non utile', own: 'Non puoi votare i tuoi contenuti.', failed: 'Impossibile salvare il voto.' },
+  pl: { like: 'Pomocne', dislike: 'Niepomocne', own: 'Nie możesz głosować na własną treść.', failed: 'Nie udało się zapisać głosu.' },
+  uk: { like: 'Корисно', dislike: 'Не корисно', own: 'Не можна голосувати за власний матеріал.', failed: 'Не вдалося зберегти ваш голос.' },
+  pt: { like: 'Útil', dislike: 'Não útil', own: 'Não pode votar no seu próprio conteúdo.', failed: 'Não foi possível guardar o voto.' },
+  fr: { like: 'Utile', dislike: 'Pas utile', own: 'Vous ne pouvez pas voter pour votre propre contenu.', failed: 'Impossible d’enregistrer votre vote.' },
+  hi: { like: 'उपयोगी', dislike: 'उपयोगी नहीं', own: 'आप अपनी सामग्री पर वोट नहीं कर सकते।', failed: 'आपका वोट सेव नहीं हो सका।' },
+  fi: { like: 'Hyödyllinen', dislike: 'Ei hyödyllinen', own: 'Et voi äänestää omaa sisältöäsi.', failed: 'Ääntäsi ei voitu tallentaa.' },
+};
+
 const escapeHtml = value => String(value ?? '')
   .replaceAll('&', '&amp;')
   .replaceAll('<', '&lt;')
@@ -129,7 +143,17 @@ const reviewCountry = (review, locale) => {
   return { flag, name };
 };
 
-const renderReviewCard = (review, copy, locale, statusCopy, canReply = false, replyCopy = REPLY_COPY.en) => {
+const renderVoteControls = (targetType, targetId, votes, voteCopy) => {
+  const likes = Number(votes?.likes || 0);
+  const dislikes = Number(votes?.dislikes || 0);
+  const myVote = Number(votes?.myVote || 0);
+  return `<div class="brand-feedback-votes" data-vote-target="${escapeHtml(targetType)}" data-vote-id="${escapeHtml(targetId)}">
+    <button class="brand-feedback-vote${myVote === 1 ? ' is-active' : ''}" type="button" data-vote-value="1" aria-pressed="${myVote === 1}" aria-label="${escapeHtml(voteCopy.like)}" title="${escapeHtml(voteCopy.like)}"><span aria-hidden="true">👍</span><strong data-vote-count>${likes}</strong></button>
+    <button class="brand-feedback-vote${myVote === -1 ? ' is-active' : ''}" type="button" data-vote-value="-1" aria-pressed="${myVote === -1}" aria-label="${escapeHtml(voteCopy.dislike)}" title="${escapeHtml(voteCopy.dislike)}"><span aria-hidden="true">👎</span><strong data-vote-count>${dislikes}</strong></button>
+  </div>`;
+};
+
+const renderReviewCard = (review, copy, locale, statusCopy, canReply = false, replyCopy = REPLY_COPY.en, voteCopy = VOTE_COPY.en) => {
   const author = review.author?.displayName || copy.anonymous;
   const avatar = review.author?.avatarUrl
     ? `<img src="${escapeHtml(review.author.avatarUrl)}" alt="" loading="lazy" referrerpolicy="no-referrer" />`
@@ -150,7 +174,7 @@ const renderReviewCard = (review, copy, locale, statusCopy, canReply = false, re
     const replyDate = reply.createdAt
       ? new Intl.DateTimeFormat(locale, { dateStyle: 'medium' }).format(new Date(reply.createdAt))
       : '';
-    return `<div class="brand-feedback-official-reply"><span class="brand-representative-badge">${escapeHtml(replyCopy.badge)}</span><h4>${escapeHtml(replyCopy.title)}</h4><div class="brand-feedback-reply-author"><strong>${escapeHtml(replyAuthor)}</strong><time>${escapeHtml(replyDate)}</time></div><p>${escapeHtml(reply.body)}</p></div>`;
+    return `<div class="brand-feedback-official-reply"><span class="brand-representative-badge">${escapeHtml(replyCopy.badge)}</span><h4>${escapeHtml(replyCopy.title)}</h4><div class="brand-feedback-reply-author"><strong>${escapeHtml(replyAuthor)}</strong><time>${escapeHtml(replyDate)}</time></div><p>${escapeHtml(reply.body)}</p>${renderVoteControls('reply', reply.id, reply.votes, voteCopy)}</div>`;
   }).join('');
   const replyForm = canReply && review.status !== 'pending' && review.status !== 'rejected'
     ? `<form class="brand-feedback-reply-form" data-review-reply-form data-review-id="${escapeHtml(review.id)}"><label><span>${escapeHtml(replyCopy.label)}</span><textarea name="body" rows="3" minlength="10" maxlength="3000" placeholder="${escapeHtml(replyCopy.placeholder)}" required></textarea></label><button type="submit">${escapeHtml(replyCopy.submit)}</button><small role="status" aria-live="polite"></small></form>`
@@ -163,6 +187,7 @@ const renderReviewCard = (review, copy, locale, statusCopy, canReply = false, re
       </header>
       ${review.title ? `<h3>${escapeHtml(review.title)}</h3>` : ''}
       <p>${escapeHtml(review.body)}</p>
+      ${renderVoteControls('review', review.id, review.votes, voteCopy)}
       ${repliesHtml}
       ${replyForm}
     </article>
@@ -215,6 +240,9 @@ const updateWhyRatingLink = (link, payload, copy, teaserCopy) => {
 
 const feedbackEndpoint = () =>
   document.documentElement.dataset.feedbackEndpoint || DEFAULT_FEEDBACK_ENDPOINT;
+
+const votesEndpoint = () =>
+  document.documentElement.dataset.feedbackVotesEndpoint || DEFAULT_VOTES_ENDPOINT;
 
 const accountBridge = () => window.SpinCrestaAccount || null;
 
@@ -303,7 +331,8 @@ const renderReviews = (section, payload, copy, teaserCopy, locale, teaserLink, c
 
   const statusCopy = REVIEW_STATUS_COPY[locale] || REVIEW_STATUS_COPY.en;
   const replyCopy = REPLY_COPY[locale] || REPLY_COPY.en;
-  list.innerHTML = reviews.map(review => renderReviewCard(review, copy, locale, statusCopy, canReply, replyCopy)).join('');
+  const voteCopy = VOTE_COPY[locale] || VOTE_COPY.en;
+  list.innerHTML = reviews.map(review => renderReviewCard(review, copy, locale, statusCopy, canReply, replyCopy, voteCopy)).join('');
 };
 
 export const initBrandFeedback = async ({ brand, locale = 'en' }) => {
@@ -314,6 +343,7 @@ export const initBrandFeedback = async ({ brand, locale = 'en' }) => {
   const teaserCopy = TEASER_COPY[locale] || TEASER_COPY.en;
   const reviewStatusCopy = REVIEW_STATUS_COPY[locale] || REVIEW_STATUS_COPY.en;
   const replyCopy = REPLY_COPY[locale] || REPLY_COPY.en;
+  const voteCopy = VOTE_COPY[locale] || VOTE_COPY.en;
   const section = createSection(brand, copy);
   main.append(section);
   const teaserLink = createWhyRatingLink(copy, teaserCopy);
@@ -349,6 +379,26 @@ export const initBrandFeedback = async ({ brand, locale = 'en' }) => {
     if (response.status === 404) return false;
     if (!response.ok) throw new Error('feedback_unavailable');
     const payload = await response.json();
+    const voteRequestUrl = new URL(votesEndpoint());
+    voteRequestUrl.searchParams.set('brand', brand);
+    if (fresh) voteRequestUrl.searchParams.set('_', String(Date.now()));
+    const voteToken = await accountBridge()?.getAccessToken?.();
+    const voteResponse = await fetch(voteRequestUrl, {
+      cache: 'no-store',
+      headers: {
+        Accept: 'application/json',
+        ...(voteToken ? { Authorization: `Bearer ${voteToken}` } : {}),
+      },
+    }).catch(() => null);
+    const votePayload = voteResponse?.ok ? await voteResponse.json() : { reviews: {}, replies: {} };
+    payload.reviews = (payload.reviews || []).map(review => ({
+      ...review,
+      votes: votePayload.reviews?.[review.id] || null,
+      replies: (review.replies || []).map(reply => ({
+        ...reply,
+        votes: votePayload.replies?.[reply.id] || null,
+      })),
+    }));
     const access = accountBridge()?.getAccountAccess?.() || {};
     const canReply = Boolean(access.representative && (access.brands || []).some(item => item.slug === brand));
     renderReviews(section, payload, copy, teaserCopy, locale, teaserLink, canReply);
@@ -360,7 +410,10 @@ export const initBrandFeedback = async ({ brand, locale = 'en' }) => {
         { ...ownReview, isOwn: true },
         copy,
         locale,
-        reviewStatusCopy
+        reviewStatusCopy,
+        false,
+        replyCopy,
+        voteCopy
       ));
     }
     return true;
@@ -393,6 +446,53 @@ export const initBrandFeedback = async ({ brand, locale = 'en' }) => {
       message.textContent = replyCopy.failed;
       button.disabled = false;
       button.textContent = replyCopy.submit;
+    }
+  });
+
+  section.addEventListener('click', async event => {
+    const button = event.target.closest?.('.brand-feedback-vote');
+    if (!button) return;
+    const group = button.closest('[data-vote-target][data-vote-id]');
+    const bridge = await waitForAccountBridge();
+    const state = bridge?.getState?.() || {};
+    if (!state.signedIn || !state.registrationComplete) {
+      bridge?.openSignIn?.();
+      return;
+    }
+    const token = await bridge?.getAccessToken?.();
+    if (!token) {
+      bridge?.openSignIn?.();
+      return;
+    }
+    const currentValue = button.classList.contains('is-active') ? Number(button.dataset.voteValue) : 0;
+    const value = currentValue === Number(button.dataset.voteValue) ? 0 : Number(button.dataset.voteValue);
+    const buttons = Array.from(group.querySelectorAll('.brand-feedback-vote'));
+    buttons.forEach(item => { item.disabled = true; });
+    status.textContent = '';
+    status.dataset.state = '';
+    try {
+      const response = await fetch(votesEndpoint(), {
+        method: 'POST',
+        headers: { Authorization: `Bearer ${token}`, 'Content-Type': 'application/json' },
+        body: JSON.stringify({ targetType: group.dataset.voteTarget, targetId: group.dataset.voteId, value }),
+      });
+      const payload = await response.json().catch(() => ({}));
+      if (!response.ok) {
+        status.textContent = payload.error === 'own_content' ? voteCopy.own : voteCopy.failed;
+        status.dataset.state = 'error';
+        return;
+      }
+      buttons.forEach(item => {
+        const itemValue = Number(item.dataset.voteValue);
+        item.classList.toggle('is-active', payload.myVote === itemValue);
+        item.setAttribute('aria-pressed', String(payload.myVote === itemValue));
+        item.querySelector('[data-vote-count]').textContent = itemValue === 1 ? payload.likes : payload.dislikes;
+      });
+    } catch {
+      status.textContent = voteCopy.failed;
+      status.dataset.state = 'error';
+    } finally {
+      buttons.forEach(item => { item.disabled = false; });
     }
   });
 

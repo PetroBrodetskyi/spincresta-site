@@ -190,33 +190,72 @@ const userRow = (user, brands, onSaveRole) => {
   const roleSelect = document.createElement('select');
   roleSelect.innerHTML = '<option value="user">Player</option><option value="brand_representative">Brand representative</option>';
   roleSelect.value = user.representativeBrands?.length ? 'brand_representative' : 'user';
-  const brandSelect = document.createElement('select');
-  brandSelect.multiple = true;
-  brandSelect.setAttribute('aria-label', 'Assigned brands');
+  const brandPicker = document.createElement('details');
+  brandPicker.className = 'moderation-brand-picker';
+  const brandSummary = document.createElement('summary');
+  const brandPanel = createElement('div', 'moderation-brand-picker-panel');
+  const brandSearch = document.createElement('input');
+  brandSearch.type = 'search';
+  brandSearch.placeholder = 'Search brands';
+  brandSearch.setAttribute('aria-label', 'Search brands');
+  const brandOptions = createElement('div', 'moderation-brand-options');
   const assigned = new Set((user.representativeBrands || []).map(brand => brand.slug));
+  const checkboxes = [];
+
+  const updateBrandSummary = () => {
+    const selectedCount = checkboxes.filter(checkbox => checkbox.checked).length;
+    brandSummary.textContent = selectedCount
+      ? `${selectedCount} brand${selectedCount === 1 ? '' : 's'} selected`
+      : 'Choose brands';
+  };
+
   brands.forEach(brand => {
-    const option = document.createElement('option');
-    option.value = brand.slug;
-    option.textContent = brand.name;
-    option.selected = assigned.has(brand.slug);
-    brandSelect.append(option);
+    const label = document.createElement('label');
+    label.dataset.search = `${brand.name} ${brand.slug}`.toLowerCase();
+    const checkbox = document.createElement('input');
+    checkbox.type = 'checkbox';
+    checkbox.value = brand.slug;
+    checkbox.checked = assigned.has(brand.slug);
+    checkbox.addEventListener('change', updateBrandSummary);
+    checkboxes.push(checkbox);
+    label.append(checkbox, createElement('span', '', brand.name));
+    brandOptions.append(label);
   });
-  brandSelect.hidden = roleSelect.value !== 'brand_representative';
-  roleSelect.addEventListener('change', () => { brandSelect.hidden = roleSelect.value !== 'brand_representative'; });
+  updateBrandSummary();
+  brandSearch.addEventListener('input', () => {
+    const query = brandSearch.value.trim().toLowerCase();
+    Array.from(brandOptions.children).forEach(option => {
+      option.hidden = Boolean(query) && !option.dataset.search.includes(query);
+    });
+  });
+  brandPanel.append(brandSearch, brandOptions);
+  brandPicker.append(brandSummary, brandPanel);
+  brandPicker.addEventListener('toggle', () => {
+    if (!brandPicker.open) return;
+    document.querySelectorAll('.moderation-brand-picker[open]').forEach(picker => {
+      if (picker !== brandPicker) picker.open = false;
+    });
+  });
+  brandPicker.hidden = roleSelect.value !== 'brand_representative';
+  roleSelect.addEventListener('change', () => {
+    brandPicker.hidden = roleSelect.value !== 'brand_representative';
+    if (brandPicker.hidden) brandPicker.open = false;
+  });
   const save = createElement('button', '', 'Save role');
   save.type = 'button';
   const message = createElement('small');
   save.addEventListener('click', async () => {
-    const brandSlugs = Array.from(brandSelect.selectedOptions).map(option => option.value);
+    const brandSlugs = checkboxes.filter(checkbox => checkbox.checked).map(checkbox => checkbox.value);
     if (roleSelect.value === 'brand_representative' && !brandSlugs.length) { message.textContent = 'Choose at least one brand.'; return; }
     save.disabled = true;
     message.textContent = 'Saving…';
     try {
       await onSaveRole(user.userId, roleSelect.value, brandSlugs);
+      brandPicker.open = false;
       message.textContent = 'Saved';
     } catch { message.textContent = 'Could not save'; save.disabled = false; }
   });
-  accessCell.append(roleSelect, brandSelect, save, message);
+  accessCell.append(roleSelect, brandPicker, save, message);
   row.append(identityCell, country, phone, telegram, newsletter, createElement('td', '', formatDate(user.registeredAt)), createElement('td', '', formatDate(user.lastSignInAt)), accessCell);
   row.dataset.search = [user.displayName, user.email, user.countryCode, user.phoneNumber, user.telegramUsername]
     .filter(Boolean).join(' ').toLowerCase();
@@ -226,6 +265,12 @@ const userRow = (user, brands, onSaveRole) => {
 export const initModeratorPage = async () => {
   const root = document.querySelector('[data-moderator-page]');
   if (!root) return;
+
+  document.addEventListener('click', event => {
+    root.querySelectorAll('.moderation-brand-picker[open]').forEach(picker => {
+      if (!picker.contains(event.target)) picker.open = false;
+    });
+  });
 
   const loading = root.querySelector('[data-moderator-loading]');
   const access = root.querySelector('[data-moderator-access]');
