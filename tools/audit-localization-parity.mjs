@@ -49,13 +49,14 @@ const validateInlineScripts = (html, label) => {
 const errors = [];
 for (const sourceFile of sourceFiles.sort()) {
   const relative = path.relative(ROOT, sourceFile);
+  const sourceHtml = fs.readFileSync(sourceFile, 'utf8');
+  if (/<meta\b(?=[^>]*\bname=["']robots["'])[^>]*\bcontent=["'][^"']*noindex/i.test(sourceHtml)) continue;
   const localizedFile = path.join(ROOT, LOCALE, relative);
   if (!fs.existsSync(localizedFile)) {
     errors.push(`${relative}: missing ${LOCALE.toUpperCase()} page`);
     continue;
   }
 
-  const sourceHtml = fs.readFileSync(sourceFile, 'utf8');
   const localizedHtml = fs.readFileSync(localizedFile, 'utf8');
   validateInlineScripts(sourceHtml, relative);
   validateInlineScripts(localizedHtml, `${LOCALE}/${relative}`);

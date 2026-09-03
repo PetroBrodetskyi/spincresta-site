@@ -26,6 +26,23 @@ const suspicious = {
 
 const count = (html, pattern) => (html.match(pattern) || []).length;
 const stripComments = html => html.replace(/<!--[\s\S]*?-->/g, '');
+const toPlainText = html => html
+  .replace(/<script\b[\s\S]*?<\/script>/gi, ' ')
+  .replace(/<style\b[\s\S]*?<\/style>/gi, ' ')
+  .replace(/<[^>]+>/g, ' ')
+  .replace(/&nbsp;|&#160;/g, ' ')
+  .replace(/&amp;/g, '&')
+  .replace(/&#(\d+);/g, (_, code) => String.fromCharCode(Number(code)))
+  .replace(/\s+/g, ' ');
+const exactCount = (text, value) => text.split(value).length - 1;
+const technicalTokens = ['ERC-20', 'TRC-20', 'P2P', 'CQ9', 'T20'];
+const corruptionPatterns = [
+  [/(?:\d+x){2,}\d*/g, 'duplicated wagering multiplier'],
+  [/\b10050\b/g, 'merged numeric values'],
+  [/\bZXQTERM\w*\b/g, 'translation placeholder'],
+  [/\b4,24(?:\.|\s)000\b/g, 'malformed 4.24K amount'],
+  [/\d+\s*%\s*0\b/g, 'malformed percentage'],
+];
 const errors = [];
 const sourceSlugs = slugsFor('en');
 
@@ -49,6 +66,24 @@ for (const locale of locales) {
       pattern.lastIndex = 0;
       const matches = html.match(pattern);
       if (matches?.length) errors.push(`${label}: suspicious copy ${pattern.source} (${matches.length})`);
+    }
+
+    for (const [pattern, description] of corruptionPatterns) {
+      pattern.lastIndex = 0;
+      const matches = html.match(pattern);
+      if (matches?.length) errors.push(`${label}: ${description} (${matches.join(', ')})`);
+    }
+
+    if (locale !== 'en') {
+      const sourceText = toPlainText(source);
+      const localizedText = toPlainText(html);
+      const promoCodes = [...sourceText.matchAll(/\bcode\s+([A-Z][A-Z0-9-]{1,20})\b/g)].map(match => match[1]);
+      const protectedTokens = new Set([...promoCodes, ...technicalTokens.filter(token => sourceText.includes(token))]);
+      for (const token of protectedTokens) {
+        const expected = exactCount(sourceText, token);
+        const actual = exactCount(localizedText, token);
+        if (actual < expected) errors.push(`${label}: protected token ${token} ${actual}, expected at least ${expected}`);
+      }
     }
 
     for (const [name, pattern] of [
