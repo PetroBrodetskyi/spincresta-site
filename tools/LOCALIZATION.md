@@ -28,7 +28,9 @@ node tools/optimize-geo-variant-seo.mjs
 node tools/optimize-spanish-seo.mjs
 node tools/optimize-portuguese-seo.mjs
 node tools/sync-hreflang.mjs
+node tools/build-crawlable-navigation.mjs
 node tools/generate-sitemap.mjs
+node tools/audit-crawlable-navigation.mjs
 for audit in tools/audit-*-copy.mjs; do node "$audit"; done
 for locale in de es it pl uk pt fr hi; do node tools/audit-localization-parity.mjs "$locale"; done
 node tools/audit-content-seo.mjs

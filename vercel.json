@@ -1,6 +1,36 @@
 {
   "redirects": [
     {
+      "source": "/brands",
+      "destination": "/casinos-and-betting/",
+      "permanent": true
+    },
+    {
+      "source": "/brands/",
+      "destination": "/casinos-and-betting/",
+      "permanent": true
+    },
+    {
+      "source": "/:locale(de|es|it|pl|uk|pt|fr|hi|fi)/brands",
+      "destination": "/:locale/casinos-and-betting/",
+      "permanent": true
+    },
+    {
+      "source": "/:locale(de|es|it|pl|uk|pt|fr|hi|fi)/brands/",
+      "destination": "/:locale/casinos-and-betting/",
+      "permanent": true
+    },
+    {
+      "source": "/online-casinos/:legacyCountry(australia|united-kingdom|latvia)/:country(colombia|luxembourg|ghana|norway|azerbaijan|portugal|indonesia|greece).html",
+      "destination": "/online-casinos/:country/",
+      "permanent": true
+    },
+    {
+      "source": "/online-casinos/latvia/top-casinos.html",
+      "destination": "/top-casinos/",
+      "permanent": true
+    },
+    {
       "source": "/casinos",
       "destination": "/casinos-and-betting/",
       "permanent": true

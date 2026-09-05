@@ -1,14 +1,15 @@
 import fs from 'node:fs';
 import path from 'node:path';
+import { execFileSync } from 'node:child_process';
 
 const SITE_ORIGIN = 'https://spincresta.com';
 const ROOT_DIR = process.cwd();
 const SITEMAP_PATH = path.join(ROOT_DIR, 'sitemap.xml');
-const SKIPPED_DIRECTORIES = new Set(['.git', '.localization-cache', 'node_modules']);
+const SKIPPED_DIRECTORIES = new Set(['node_modules', 'tmp', 'tools']);
 
 const walkIndexPages = directory =>
   fs.readdirSync(directory, { withFileTypes: true }).flatMap(entry => {
-    if (entry.isDirectory() && SKIPPED_DIRECTORIES.has(entry.name)) return [];
+    if (entry.isDirectory() && (entry.name.startsWith('.') || SKIPPED_DIRECTORIES.has(entry.name))) return [];
 
     const absolutePath = path.join(directory, entry.name);
     if (entry.isDirectory()) return walkIndexPages(absolutePath);
@@ -59,20 +60,37 @@ const getDefaultMetadata = pagePath => {
 };
 
 const existingMetadata = getExistingMetadata();
+// Use actual page history, not the date on which the sitemap was generated.
+// If Git is unavailable, omit lastmod rather than invent a freshness signal.
+const modifiedDates = new Map();
+try {
+  const history = execFileSync('git', ['log', '--format=DATE:%cI', '--name-only', '--', '*.html'], { encoding: 'utf8', maxBuffer: 64 * 1024 * 1024 });
+  let date;
+  for (const line of history.split('\n')) {
+    if (line.startsWith('DATE:')) date = line.slice(5, 15);
+    else if (line.endsWith('index.html') && !modifiedDates.has(line)) modifiedDates.set(line, date);
+  }
+  const changed = execFileSync('git', ['diff', '--name-only', 'HEAD', '--', '*.html'], { encoding: 'utf8' }).trim().split('\n');
+  const untracked = execFileSync('git', ['ls-files', '--others', '--exclude-standard', '--', '*.html'], { encoding: 'utf8' }).trim().split('\n');
+  for (const file of [...changed, ...untracked]) {
+    if (file && fs.existsSync(file)) modifiedDates.set(file, fs.statSync(file).mtime.toISOString().slice(0, 10));
+  }
+} catch { console.warn('Git history unavailable; lastmod is omitted for pages without known dates.'); }
 const pages = walkIndexPages(ROOT_DIR)
   .map(filePath => {
     const pagePath = getPagePath(filePath);
     const html = fs.readFileSync(filePath, 'utf8');
-    return { pagePath, robots: getRobotsDirective(html) };
+    return { pagePath, robots: getRobotsDirective(html), lastmod: modifiedDates.get(path.relative(ROOT_DIR, filePath).split(path.sep).join('/')) };
   })
   .filter(page => !page.robots.includes('noindex'))
   .sort((a, b) => a.pagePath.localeCompare(b.pagePath, 'en'));
 
-const sitemapEntries = pages.map(({ pagePath }) => {
+const sitemapEntries = pages.map(({ pagePath, lastmod }) => {
   const metadata = existingMetadata.get(pagePath) || getDefaultMetadata(pagePath);
   return [
     '  <url>',
     `    <loc>${SITE_ORIGIN}${pagePath}</loc>`,
+    ...(lastmod ? [`    <lastmod>${lastmod}</lastmod>`] : []),
     `    <changefreq>${metadata.changefreq || getDefaultMetadata(pagePath).changefreq}</changefreq>`,
     `    <priority>${metadata.priority || getDefaultMetadata(pagePath).priority}</priority>`,
     '  </url>',

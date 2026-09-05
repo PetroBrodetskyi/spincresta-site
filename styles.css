@@ -1,2 +1,11 @@
 ﻿@import url('/styles/core.css?v=20260827-account-visibility-1');
 @import url('/styles/pages.css?v=20260829-mobile-brand-highlights-carousel-1');
+
+/* Persistent review links also work before the interactive cards load. */
+.country-review-directory { width: 100%; max-width: none; margin: 24px 0 0; border-top: 1px solid var(--surface-border-strong); text-align: left; }
+.country-review-directory summary { padding: 16px 4px; cursor: pointer; color: var(--section-accent); font-weight: 600; }
+.country-review-directory summary span { color: var(--text-muted); }
+.country-review-directory nav { display: flex; flex-wrap: wrap; gap: 10px 20px; padding: 0 4px 18px; }
+.country-review-directory nav a { color: var(--text-main); text-underline-offset: 4px; font-size: 15px; }
+.country-review-directory nav a:hover { color: var(--section-accent); }
+.country-review-directory a:focus-visible, .country-review-directory summary:focus-visible { outline: 2px solid var(--gold); outline-offset: 4px; }

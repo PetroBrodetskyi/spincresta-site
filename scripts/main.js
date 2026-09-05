@@ -3768,6 +3768,7 @@ const ensureCountryBrandStage = pageCountry => {
   const sectionHead = container.querySelector('.section-head');
   const intro = container.querySelector('.intro');
   const loadMoreWrapper = container.querySelector('.load-more-wrapper');
+  const reviewDirectory = container.querySelector('.country-review-directory');
 
   const stage = document.createElement('div');
   stage.className = 'country-brand-stage';
@@ -3779,7 +3780,7 @@ const ensureCountryBrandStage = pageCountry => {
   const insertionPoint = sectionHead || intro || brandCards;
   container.insertBefore(stage, insertionPoint ?? null);
 
-  [sectionHead, intro, brandCards, loadMoreWrapper].forEach(node => {
+  [sectionHead, intro, brandCards, loadMoreWrapper, reviewDirectory].forEach(node => {
     if (node) {
       main.appendChild(node);
     }
