@@ -11415,14 +11415,12 @@ html[data-theme='light'] body.home-page .home-casino-shot {
 
 @media (max-width: 768px) {
   body.home-page .home-stats-card {
-    padding: 18px;
+    padding: 8px;
+    gap: 0;
   }
 
   body.home-page .home-stats-card .home-insight-head {
-    grid-template-columns: minmax(0, 1fr);
-    gap: 8px;
-    margin-bottom: 12px;
-    padding-bottom: 14px;
+    display: none;
   }
 
   body.home-page .home-stats-card .home-insight-head h2,
@@ -11444,7 +11442,7 @@ html[data-theme='light'] body.home-page .home-casino-shot {
 
   body.home-page .home-stats-card .home-stat-tile {
     min-height: 0;
-    padding: 12px 9px;
+    padding: 10px 8px;
   }
 
   body.home-page .home-stats-card .home-stat-number {

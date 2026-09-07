@@ -360,6 +360,8 @@ export const initBrandPage = context => {
       'Dies sind die wichtigsten Spielkategorien, die aktuell im Konto sichtbar sind.',
     'These are the main betting categories currently visible in the account.':
       'Dies sind die wichtigsten Wettkategorien, die aktuell im Konto sichtbar sind.',
+    'These are the live-dealer categories currently visible in the account.':
+      'Dies sind die aktuell im Konto sichtbaren Live-Dealer-Kategorien.',
     Games: 'SPIELE',
     GAMES: 'SPIELE',
     'LIVE GAMES': 'LIVE-SPIELE',
@@ -382,6 +384,11 @@ export const initBrandPage = context => {
     'Other live games': 'Weitere Live-Spiele',
     'Live casino': 'Live-Casino',
     'Game shows': 'Game Shows',
+    'Live shows': 'Live-Spielshows', 'Live baccarat': 'Live-Baccarat', 'Live blackjack': 'Live-Blackjack',
+    'Live poker': 'Live-Poker', 'Live roulette': 'Live-Roulette', Football: 'Fußball', Basketball: 'Basketball',
+    Tennis: 'Tennis', 'Table tennis': 'Tischtennis', Volleyball: 'Volleyball', 'Ice hockey': 'Eishockey',
+    Cricket: 'Cricket', Baseball: 'Baseball', Handball: 'Handball', 'American football': 'American Football',
+    eSports: 'E-Sport', 'Virtual sports': 'Virtuelle Sportarten', Boxing: 'Boxen', 'Martial arts': 'Kampfsport', Motorsport: 'Motorsport',
   };
   const SNAPSHOT_ES_TRANSLATIONS = {
     'Games & Betting Snapshot': 'Resumen de juegos y apuestas',
@@ -391,6 +398,8 @@ export const initBrandPage = context => {
       'Estas son las principales categorías de juegos visibles actualmente en la cuenta.',
     'These are the main betting categories currently visible in the account.':
       'Estas son las principales categorías de apuestas visibles actualmente en la cuenta.',
+    'These are the live-dealer categories currently visible in the account.':
+      'Estas son las categorías principales de casino en vivo visibles actualmente en la cuenta.',
     Games: 'JUEGOS',
     GAMES: 'JUEGOS',
     'LIVE GAMES': 'JUEGOS EN VIVO',
@@ -413,6 +422,11 @@ export const initBrandPage = context => {
     'Other live games': 'Otros juegos en vivo',
     'Live casino': 'Casino en vivo',
     'Game shows': 'Game shows',
+    'Live shows': 'Programas en vivo', 'Live baccarat': 'Bacará en vivo', 'Live blackjack': 'Blackjack en vivo',
+    'Live poker': 'Póker en vivo', 'Live roulette': 'Ruleta en vivo', Football: 'Fútbol', Basketball: 'Baloncesto',
+    Tennis: 'Tenis', 'Table tennis': 'Tenis de mesa', Volleyball: 'Voleibol', 'Ice hockey': 'Hockey sobre hielo',
+    Cricket: 'Críquet', Baseball: 'Béisbol', Handball: 'Balonmano', 'American football': 'Fútbol americano',
+    eSports: 'Esports', 'Virtual sports': 'Deportes virtuales', Boxing: 'Boxeo', 'Martial arts': 'Artes marciales', Motorsport: 'Automovilismo',
   };
   const SNAPSHOT_IT_TRANSLATIONS = {
     'Games & Betting Snapshot': 'Panoramica di giochi e scommesse',
@@ -422,6 +436,8 @@ export const initBrandPage = context => {
       'Queste sono le principali categorie di giochi attualmente visibili nell’account.',
     'These are the main betting categories currently visible in the account.':
       'Queste sono le principali categorie di scommesse attualmente visibili nell’account.',
+    'These are the live-dealer categories currently visible in the account.':
+      'Queste sono le principali categorie con croupier dal vivo attualmente visibili nell’account.',
     Games: 'GIOCHI',
     GAMES: 'GIOCHI',
     'LIVE GAMES': 'GIOCHI LIVE',
@@ -444,6 +460,11 @@ export const initBrandPage = context => {
     'Other live games': 'Altri giochi live',
     'Live casino': 'Casinò live',
     'Game shows': 'Game show',
+    'Live shows': 'Game show live', 'Live baccarat': 'Baccarat live', 'Live blackjack': 'Blackjack live',
+    'Live poker': 'Poker live', 'Live roulette': 'Roulette live', Football: 'Calcio', Basketball: 'Pallacanestro',
+    Tennis: 'Tennis', 'Table tennis': 'Tennistavolo', Volleyball: 'Pallavolo', 'Ice hockey': 'Hockey su ghiaccio',
+    Cricket: 'Cricket', Baseball: 'Baseball', Handball: 'Pallamano', 'American football': 'Football americano',
+    eSports: 'Esports', 'Virtual sports': 'Sport virtuali', Boxing: 'Pugilato', 'Martial arts': 'Arti marziali', Motorsport: 'Motorsport',
   };
   const SNAPSHOT_PL_TRANSLATIONS = {
     'Games & Betting Snapshot': 'Przegląd gier i zakładów',
@@ -453,6 +474,8 @@ export const initBrandPage = context => {
       'To główne kategorie gier widoczne obecnie na koncie.',
     'These are the main betting categories currently visible in the account.':
       'To główne kategorie zakładów widoczne obecnie na koncie.',
+    'These are the live-dealer categories currently visible in the account.':
+      'To główne kategorie gier z krupierem na żywo widoczne obecnie na koncie.',
     Games: 'GRY',
     GAMES: 'GRY',
     'LIVE GAMES': 'GRY NA ŻYWO',
@@ -475,6 +498,11 @@ export const initBrandPage = context => {
     'Other live games': 'Inne gry na żywo',
     'Live casino': 'Kasyno na żywo',
     'Game shows': 'Teleturnieje',
+    'Live shows': 'Teleturnieje na żywo', 'Live baccarat': 'Bakarat na żywo', 'Live blackjack': 'Blackjack na żywo',
+    'Live poker': 'Poker na żywo', 'Live roulette': 'Ruletka na żywo', Football: 'Piłka nożna', Basketball: 'Koszykówka',
+    Tennis: 'Tenis', 'Table tennis': 'Tenis stołowy', Volleyball: 'Siatkówka', 'Ice hockey': 'Hokej na lodzie',
+    Cricket: 'Krykiet', Baseball: 'Baseball', Handball: 'Piłka ręczna', 'American football': 'Futbol amerykański',
+    eSports: 'Esport', 'Virtual sports': 'Sporty wirtualne', Boxing: 'Boks', 'Martial arts': 'Sztuki walki', Motorsport: 'Sporty motorowe',
   };
   const SNAPSHOT_UK_TRANSLATIONS = {
     'Games & Betting Snapshot': 'Огляд ігор і ставок',
@@ -484,6 +512,8 @@ export const initBrandPage = context => {
       'Це основні категорії ігор, які зараз доступні в акаунті.',
     'These are the main betting categories currently visible in the account.':
       'Це основні категорії ставок, які зараз доступні в акаунті.',
+    'These are the live-dealer categories currently visible in the account.':
+      'Це основні категорії ігор із live-дилерами, які зараз доступні в акаунті.',
     Games: 'ІГРИ',
     GAMES: 'ІГРИ',
     'LIVE GAMES': 'LIVE-ІГРИ',
@@ -506,6 +536,11 @@ export const initBrandPage = context => {
     'Other live games': 'Інші live-ігри',
     'Live casino': 'Live-казино',
     'Game shows': 'Ігрові шоу',
+    'Live shows': 'Live-шоу', 'Live baccarat': 'Live-бакара', 'Live blackjack': 'Live-блекджек',
+    'Live poker': 'Live-покер', 'Live roulette': 'Live-рулетка', Football: 'Футбол', Basketball: 'Баскетбол',
+    Tennis: 'Теніс', 'Table tennis': 'Настільний теніс', Volleyball: 'Волейбол', 'Ice hockey': 'Хокей',
+    Cricket: 'Крикет', Baseball: 'Бейсбол', Handball: 'Гандбол', 'American football': 'Американський футбол',
+    eSports: 'Кіберспорт', 'Virtual sports': 'Віртуальний спорт', Boxing: 'Бокс', 'Martial arts': 'Бойові мистецтва', Motorsport: 'Автоспорт',
   };
   const SNAPSHOT_PT_TRANSLATIONS = {
     'Games & Betting Snapshot': 'Resumo de jogos e apostas',
@@ -515,6 +550,8 @@ export const initBrandPage = context => {
       'Estas são as principais categorias de jogos atualmente visíveis na conta.',
     'These are the main betting categories currently visible in the account.':
       'Estas são as principais categorias de apostas atualmente visíveis na conta.',
+    'These are the live-dealer categories currently visible in the account.':
+      'Estas são as principais categorias com dealer ao vivo atualmente visíveis na conta.',
     Games: 'JOGOS',
     GAMES: 'JOGOS',
     'LIVE GAMES': 'JOGOS AO VIVO',
@@ -537,6 +574,11 @@ export const initBrandPage = context => {
     'Other live games': 'Outros jogos ao vivo',
     'Live casino': 'Casino ao vivo',
     'Game shows': 'Game shows',
+    'Live shows': 'Game shows ao vivo', 'Live baccarat': 'Bacará ao vivo', 'Live blackjack': 'Blackjack ao vivo',
+    'Live poker': 'Póquer ao vivo', 'Live roulette': 'Roleta ao vivo', Football: 'Futebol', Basketball: 'Basquetebol',
+    Tennis: 'Ténis', 'Table tennis': 'Ténis de mesa', Volleyball: 'Voleibol', 'Ice hockey': 'Hóquei no gelo',
+    Cricket: 'Críquete', Baseball: 'Basebol', Handball: 'Andebol', 'American football': 'Futebol americano',
+    eSports: 'Esports', 'Virtual sports': 'Desportos virtuais', Boxing: 'Boxe', 'Martial arts': 'Artes marciais', Motorsport: 'Desportos motorizados',
   };
   const SNAPSHOT_FR_TRANSLATIONS = {
     'Games & Betting Snapshot': 'Aperçu des jeux et des paris',
@@ -546,6 +588,8 @@ export const initBrandPage = context => {
       'Voici les principales catégories de jeux actuellement visibles dans le compte.',
     'These are the main betting categories currently visible in the account.':
       'Voici les principales catégories de paris actuellement visibles dans le compte.',
+    'These are the live-dealer categories currently visible in the account.':
+      'Voici les principales catégories avec croupier en direct actuellement visibles dans le compte.',
     Games: 'JEUX',
     GAMES: 'JEUX',
     'LIVE GAMES': 'JEUX EN DIRECT',
@@ -568,6 +612,11 @@ export const initBrandPage = context => {
     'Other live games': 'Autres jeux en direct',
     'Live casino': 'Casino en direct',
     'Game shows': 'Jeux télévisés',
+    'Live shows': 'Jeux télévisés en direct', 'Live baccarat': 'Baccarat en direct', 'Live blackjack': 'Blackjack en direct',
+    'Live poker': 'Poker en direct', 'Live roulette': 'Roulette en direct', Football: 'Football', Basketball: 'Basket-ball',
+    Tennis: 'Tennis', 'Table tennis': 'Tennis de table', Volleyball: 'Volley-ball', 'Ice hockey': 'Hockey sur glace',
+    Cricket: 'Cricket', Baseball: 'Baseball', Handball: 'Handball', 'American football': 'Football américain',
+    eSports: 'Esport', 'Virtual sports': 'Sports virtuels', Boxing: 'Boxe', 'Martial arts': 'Arts martiaux', Motorsport: 'Sports mécaniques',
   };
   const SNAPSHOT_HI_TRANSLATIONS = {
     'Games & Betting Snapshot': 'गेम और बेटिंग का सार',
@@ -575,12 +624,18 @@ export const initBrandPage = context => {
     'Not surfaced:': 'उपलब्ध नहीं:',
     'These are the main game categories currently visible in the account.': 'खाते में फिलहाल उपलब्ध प्रमुख गेम श्रेणियां ये हैं।',
     'These are the main betting categories currently visible in the account.': 'खाते में फिलहाल उपलब्ध प्रमुख बेटिंग श्रेणियां ये हैं।',
+    'These are the live-dealer categories currently visible in the account.': 'खाते में फिलहाल उपलब्ध प्रमुख लाइव-डीलर श्रेणियां ये हैं।',
     Games: 'गेम', GAMES: 'गेम', 'LIVE GAMES': 'लाइव गेम', Betting: 'बेटिंग', BETTING: 'बेटिंग',
     Slots: 'स्लॉट', Roulette: 'रूलेट', Blackjack: 'ब्लैकजैक', Baccarat: 'बैकारेट', Poker: 'पोकर',
     Keno: 'कीनो', Bingo: 'बिंगो', 'Jackpot games': 'जैकपॉट गेम', 'Live games': 'लाइव गेम',
     'Live dice games': 'लाइव डाइस गेम', 'Craps and dice': 'क्रैप्स और डाइस', 'Scratch cards': 'स्क्रैच कार्ड',
     'Video poker': 'वीडियो पोकर', 'Crash games': 'क्रैश गेम', 'Other live games': 'अन्य लाइव गेम',
     'Live casino': 'लाइव कैसीनो', 'Game shows': 'गेम शो',
+    'Live shows': 'लाइव गेम शो', 'Live baccarat': 'लाइव बैकारेट', 'Live blackjack': 'लाइव ब्लैकजैक',
+    'Live poker': 'लाइव पोकर', 'Live roulette': 'लाइव रूलेट', Football: 'फ़ुटबॉल', Basketball: 'बास्केटबॉल',
+    Tennis: 'टेनिस', 'Table tennis': 'टेबल टेनिस', Volleyball: 'वॉलीबॉल', 'Ice hockey': 'आइस हॉकी',
+    Cricket: 'क्रिकेट', Baseball: 'बेसबॉल', Handball: 'हैंडबॉल', 'American football': 'अमेरिकन फ़ुटबॉल',
+    eSports: 'ईस्पोर्ट्स', 'Virtual sports': 'वर्चुअल स्पोर्ट्स', Boxing: 'मुक्केबाज़ी', 'Martial arts': 'मार्शल आर्ट्स', Motorsport: 'मोटरस्पोर्ट',
   };
   const SNAPSHOT_FI_TRANSLATIONS = {
     'Games & Betting Snapshot': 'Pelit ja vedonlyönti lyhyesti',
@@ -590,12 +645,19 @@ export const initBrandPage = context => {
       'Nämä ovat tilillä tällä hetkellä näkyvät tärkeimmät peliluokat.',
     'These are the main betting categories currently visible in the account.':
       'Nämä ovat tilillä tällä hetkellä näkyvät tärkeimmät vedonlyöntiluokat.',
+    'These are the live-dealer categories currently visible in the account.':
+      'Nämä ovat tilillä tällä hetkellä näkyvät tärkeimmät live-jakajapelien luokat.',
     Games: 'PELIT', GAMES: 'PELIT', 'LIVE GAMES': 'LIVE-PELIT', Betting: 'VEDONLYÖNTI', BETTING: 'VEDONLYÖNTI',
     Slots: 'Kolikkopelit', Roulette: 'Ruletti', Blackjack: 'Blackjack', Baccarat: 'Baccarat', Poker: 'Pokeri',
     Keno: 'Keno', Bingo: 'Bingo', 'Jackpot games': 'Jackpottipelit', 'Live games': 'Live-pelit',
     'Live dice games': 'Live-noppapelit', 'Craps and dice': 'Craps ja noppapelit', 'Scratch cards': 'Raaputusarvat',
     'Video poker': 'Videopokeri', 'Crash games': 'Crash-pelit', 'Other live games': 'Muut live-pelit',
     'Live casino': 'Livekasino', 'Game shows': 'Peliohjelmat',
+    'Live shows': 'Live-peliohjelmat', 'Live baccarat': 'Live-baccarat', 'Live blackjack': 'Live-blackjack',
+    'Live poker': 'Live-pokeri', 'Live roulette': 'Live-ruletti', Football: 'Jalkapallo', Basketball: 'Koripallo',
+    Tennis: 'Tennis', 'Table tennis': 'Pöytätennis', Volleyball: 'Lentopallo', 'Ice hockey': 'Jääkiekko',
+    Cricket: 'Kriketti', Baseball: 'Baseball', Handball: 'Käsipallo', 'American football': 'Amerikkalainen jalkapallo',
+    eSports: 'E-urheilu', 'Virtual sports': 'Virtuaaliurheilu', Boxing: 'Nyrkkeily', 'Martial arts': 'Kamppailulajit', Motorsport: 'Moottoriurheilu',
   };
   
   const snapshotLabel = value =>

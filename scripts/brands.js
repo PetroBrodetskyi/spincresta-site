@@ -76,14 +76,14 @@ export const BRANDS = [
   },
   {
     name: 'SilverPlay',
-    bonus: '',
+    bonus: '300% up to EUR 2,500 + 250 Free Spins',
     cta: 'Play Now',
     urlDetail: 'brands/silverplay.html',
     urlCasino: 'https://armadaapp.media-412.com/click?pid=3862&offer_id=124850',
     image: 'images/silverplay.svg',
     bgColor: '#000000',
-    countries: ['DE', 'IT', 'ES', 'CH', 'AT', 'PT', 'IE', 'CA', 'CL', 'UY', 'MX', 'PE', 'AR', 'CO', 'BR', 'SE', 'FI', 'NO', 'DK', 'HU', 'SA', 'AE', 'KW', 'EG', 'BE', 'IS', 'EE', 'LV', 'HR', 'MD', 'KZ', 'UZ', 'AZ', 'BA'],
-    payments: [],
+    countries: ['DE', 'IT', 'ES', 'CH', 'AT', 'PT', 'IE', 'CA', 'NZ', 'CL', 'UY', 'MX', 'PE', 'AR', 'CO', 'BR', 'SE', 'FI', 'NO', 'DK', 'HU', 'ZA', 'SA', 'AE', 'KW', 'EG', 'BE', 'IS', 'EE', 'LV', 'HR', 'MD', 'KZ', 'UZ', 'AZ', 'BA'],
+    payments: ['visa', 'mastercard', 'skrill', 'neteller', 'ecopayz', 'mifinity', 'bitcoin', 'ethereum', 'litecoin', 'tether'],
     hasDetailPage: true,
   },
   {

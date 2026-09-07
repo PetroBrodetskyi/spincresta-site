@@ -529,6 +529,13 @@ const billyBillionConfig = createGamesLiveConfig(
 );
 
 export const BRAND_SNAPSHOT_CONFIGS = {
+  silverplay: {
+    tabs: [
+      createSnapshotTab('Games', ['Slots', 'Jackpot games', 'Scratch cards', 'Live games'], [], 'These are the main game categories currently visible in the account.'),
+      createSnapshotTab('Live games', ['Live shows', 'Live baccarat', 'Live blackjack', 'Live poker', 'Live roulette'], [], 'These are the live-dealer categories currently visible in the account.'),
+      createSnapshotTab('Betting', ['Football', 'Basketball', 'Tennis', 'Table tennis', 'Volleyball', 'Ice hockey', 'Cricket', 'Baseball', 'Handball', 'American football', 'eSports', 'Virtual sports', 'Boxing', 'Martial arts', 'Motorsport'], [], 'These are the main betting categories currently visible in the account.'),
+    ],
+  },
   ...mapSnapshotConfig(['trino', 'spellwin'], mixedCasinoSportsConfig),
   ...mapSnapshotConfig(['amonbet', 'luckywave', 'slotlair'], sportsPromoCasinoConfig),
   ...mapSnapshotConfig(['ybets', 'immerion'], sportsRewardsCasinoConfig),

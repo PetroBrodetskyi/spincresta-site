@@ -97,6 +97,12 @@ const LANGUAGE_OPTIONS = ['en', 'de', 'es', 'it', 'pl', 'uk', 'pt', 'fr', 'hi', 
 const BLOCKED_BRAND_ICON = '/icons/ui/stop-blocked-icon.svg';
 const UNAVAILABLE_BRAND_ICON = '/icons/ui/remove-close-round-grey-icon.svg';
 const BRAND_ONLY_COUNTRIES = {
+  UY: { slug: 'uruguay', flag: '🇺🇾', name: { en: 'Uruguay', de: 'Uruguay', es: 'Uruguay', it: 'Uruguay', pl: 'Urugwaj', uk: 'Уругвай', pt: 'Uruguai', fr: 'Uruguay', hi: 'उरुग्वे', fi: 'Uruguay' } },
+  SA: { slug: 'saudi-arabia', flag: '🇸🇦', name: { en: 'Saudi Arabia', de: 'Saudi-Arabien', es: 'Arabia Saudita', it: 'Arabia Saudita', pl: 'Arabia Saudyjska', uk: 'Саудівська Аравія', pt: 'Arábia Saudita', fr: 'Arabie saoudite', hi: 'सऊदी अरब', fi: 'Saudi-Arabia' } },
+  AE: { slug: 'united-arab-emirates', flag: '🇦🇪', name: { en: 'United Arab Emirates', de: 'Vereinigte Arabische Emirate', es: 'Emiratos Árabes Unidos', it: 'Emirati Arabi Uniti', pl: 'Zjednoczone Emiraty Arabskie', uk: 'Об’єднані Арабські Емірати', pt: 'Emirados Árabes Unidos', fr: 'Émirats arabes unis', hi: 'संयुक्त अरब अमीरात', fi: 'Yhdistyneet arabiemiirikunnat' } },
+  KW: { slug: 'kuwait', flag: '🇰🇼', name: { en: 'Kuwait', de: 'Kuwait', es: 'Kuwait', it: 'Kuwait', pl: 'Kuwejt', uk: 'Кувейт', pt: 'Kuwait', fr: 'Koweït', hi: 'कुवैत', fi: 'Kuwait' } },
+  MD: { slug: 'moldova', flag: '🇲🇩', name: { en: 'Moldova', de: 'Moldau', es: 'Moldavia', it: 'Moldavia', pl: 'Mołdawia', uk: 'Молдова', pt: 'Moldávia', fr: 'Moldavie', hi: 'मोल्दोवा', fi: 'Moldova' } },
+  BA: { slug: 'bosnia-and-herzegovina', flag: '🇧🇦', name: { en: 'Bosnia and Herzegovina', de: 'Bosnien und Herzegowina', es: 'Bosnia y Herzegovina', it: 'Bosnia ed Erzegovina', pl: 'Bośnia i Hercegowina', uk: 'Боснія і Герцеговина', pt: 'Bósnia e Herzegovina', fr: 'Bosnie-Herzégovine', hi: 'बोस्निया और हर्ज़ेगोविना', fi: 'Bosnia ja Hertsegovina' } },
   BJ: { slug: 'benin', name: { en: 'Benin', de: 'Benin', es: 'Benín', it: 'Benin', pl: 'Benin', uk: 'Бенін', pt: 'Benim', fr: 'Bénin', hi: 'बेनिन', fi: 'Benin' } },
   BF: { slug: 'burkina-faso', name: { en: 'Burkina Faso', de: 'Burkina Faso', es: 'Burkina Faso', it: 'Burkina Faso', pl: 'Burkina Faso', uk: 'Буркіна-Фасо', pt: 'Burquina Faso', fr: 'Burkina Faso', hi: 'बुर्किना फासो', fi: 'Burkina Faso' } },
   CM: { slug: 'cameroon', name: { en: 'Cameroon', de: 'Kamerun', es: 'Camerún', it: 'Camerun', pl: 'Kamerun', uk: 'Камерун', pt: 'Camarões', fr: 'Cameroun', hi: 'कैमरून', fi: 'Kamerun' } },
@@ -332,7 +338,7 @@ const SITE_LOCALE = DOCUMENT_LANGUAGE.startsWith('de')
 let brandBonusTranslations = {};
 const brandBonusTranslationsReady = SITE_LOCALE === 'en'
   ? Promise.resolve()
-  : import(`./brand-bonus-translations/${SITE_LOCALE}.js?v=20260814-finnish-1`)
+  : import(`./brand-bonus-translations/${SITE_LOCALE}.js?v=20260907-silverplay-1`)
       .then(module => {
         brandBonusTranslations = module.default || {};
       })
@@ -4417,7 +4423,7 @@ export const initCasinoPage = async () => {
               );
               return `
                 <span class="flag-container brand-country-market" aria-label="${normalizeText(marketLabel)}">
-                  <img class="hero-flag" src="${iconPath(market.slug)}" alt="${normalizeText(marketName)}" loading="lazy" decoding="async"/>
+                  ${market.flag ? `<span class="hero-flag brand-country-emoji" aria-hidden="true">${market.flag}</span>` : `<img class="hero-flag" src="${iconPath(market.slug)}" alt="${normalizeText(marketName)}" loading="lazy" decoding="async"/>`}
                   <span>${normalizeText(marketName)}</span>
                 </span>
               `;

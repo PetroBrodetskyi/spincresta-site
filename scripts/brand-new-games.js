@@ -1,4 +1,12 @@
 export const BRAND_NEW_GAMES = {
+  silverplay: [
+    { name: 'Striking Diamond Link: Running Wins', image: 'https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto/v1788687724/spincresta/brands/silverplay/new-games/silverplay-new-game-striking-diamond-link-running-wins_a9ec0u' },
+    { name: 'Super SugarPop', image: 'https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto/v1788687722/spincresta/brands/silverplay/new-games/silverplay-new-game-super-sugarpop_www6w6' },
+    { name: 'Divine Divas', image: 'https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto/v1788687720/spincresta/brands/silverplay/new-games/silverplay-new-game-divine-divas_vccix7' },
+    { name: 'Mackereels: Catch Them All', image: 'https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto/v1788687721/spincresta/brands/silverplay/new-games/silverplay-new-game-mackereels-catch-them-all_rpk45v' },
+    { name: 'The Big Take', image: 'https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto/v1788687723/spincresta/brands/silverplay/new-games/silverplay-new-game-the-big-take_uxntpd' },
+    { name: 'Baron: Lord of Saturday', image: 'https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto/v1788687720/spincresta/brands/silverplay/new-games/silverplay-new-game-baron-lord-of-saturday_f5gk9f' },
+  ],
   goldpari: [
     {
       name: "Groovin' Tiger",

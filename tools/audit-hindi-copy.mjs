@@ -56,7 +56,8 @@ for (const file of files) {
   }
   const relative = path.relative(LOCALE_ROOT, file).split(path.sep).join('/');
   if (!['brands/first/index.html', 'casinos-and-betting/index.html'].includes(relative)) {
-    const firstMatches = html.match(/\bFirst\b/g);
+    const copyWithoutFirstBrandLinks = html.replace(/<a\b[^>]*href=["']\/hi\/brands\/first\/["'][^>]*>First<\/a>/gi, '');
+    const firstMatches = copyWithoutFirstBrandLinks.match(/\bFirst\b/g);
     if (firstMatches?.length) errors.push(`${relative}: untranslated First marker (${firstMatches.length})`);
   }
 }
