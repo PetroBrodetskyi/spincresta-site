@@ -40,6 +40,7 @@ export default {
   "125% +250 Free Spins - Start Fast With Crorewin": "125% +250 ilmaispyöräytystä - Aloita nopeasti Crorewin:lla",
   "Welcome Package up to €6,000 + 250 Free Spins": "Tervetuliaispaketti jopa 6 000 € + 250 ilmaiskierrosta",
   "Welcome Pack 400% up to €4,000 + 250 FS. Get Bonus": "Tervetuliaispaketti 400 % 4 000 € asti + 250 FS. Hanki bonus",
+  "Up to €2,000 + 350 Free Spins": "Enintään 2 000 € + 350 ilmaiskierrosta",
   "250% Welcome Bonus up to €1,000": "250 % tervetuliaisbonus 1000 € asti",
   "Welcome Package - 225% Up to €1,000": "Tervetuliaispaketti - 225 % 1 000 € asti",
   "Casino Welcome Bonus - 100% up to €500 + 200 Free Spins": "Kasinon tervetuliaisbonus - 100 % aina 500 € asti + 200 ilmaiskierrosta",

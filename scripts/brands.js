@@ -319,14 +319,14 @@ export const BRANDS = [
   },
   {
     name: 'Casinova',
-    bonus: '',
+    bonus: 'Up to €2,000 + 350 Free Spins',
     cta: 'Play Now',
     urlDetail: 'brands/casinova.html',
     urlCasino: 'https://armadaapp.media-412.com/click?pid=3862&offer_id=124845',
     image: 'images/casinova.svg',
     bgColor: '#1E1F2B',
     countries: ['ES', 'DE', 'AT', 'NO', 'FI', 'IE', 'HU', 'PL', 'SI', 'SK', 'CZ', 'IT', 'CH', 'BE', 'CA', 'AU', 'NZ'],
-    payments: [],
+    payments: ['visa', 'mastercard', 'banktransfer', 'mifinity', 'bitcoin', 'bitcoincash', 'ethereum', 'litecoin', 'tether', 'tron', 'cardano', 'dogecoin'],
     hasDetailPage: true,
   },
   {

@@ -40,6 +40,7 @@ export default {
   "125% +250 Free Spins - Start Fast With Crorewin": "125 % +250 Freispiele – Starten Sie schnell mit Crorewin",
   "Welcome Package up to €6,000 + 250 Free Spins": "Willkommenspaket bis zu 6.000 € + 250 Freispiele",
   "Welcome Pack 400% up to €4,000 + 250 FS. Get Bonus": "Willkommenspaket 400 % bis zu 4.000 € + 250 FS. Bonus erhalten",
+  "Up to €2,000 + 350 Free Spins": "Bis zu 2.000 € + 350 Freispiele",
   "250% Welcome Bonus up to €1,000": "250 % Willkommensbonus bis zu 1.000 €",
   "Welcome Package - 225% Up to €1,000": "Willkommenspaket – 225 % bis zu 1.000 €",
   "Casino Welcome Bonus - 100% up to €500 + 200 Free Spins": "Casino-Willkommensbonus – 100 % bis zu 500 € + 200 Freispiele",

@@ -381,6 +381,7 @@ const replacements = {
     [/ज़िम्मेदारी से खेलने के नियंत्रणों/gi, 'ज़िम्मेदारी से खेलने के टूल'],
     [/व्यावसायिक रिश्ते इन मानदंडों को प्रतिस्थापित नहीं करते हैं/gi, 'व्यावसायिक संबंध इन मानकों को नहीं बदलते'],
   ],
+  fi: [],
 };
 
 const walk = directory => {
@@ -440,6 +441,7 @@ const restoreSpinbossTierNames = (html, locale) => {
       [/इंटर्न, रिसेप्शनिस्ट, सेल्स प्रतिनिधि, क्षेत्रीय प्रबंधक और विश्व के सर्वश्रेष्ठ बॉस स्तरों/gi, "पांच आधिकारिक समूहों—Intern, Receptionist, Sales Rep, Regional Manager और World's Best Boss—"],
       [/बिक्री प्रतिनिधि, क्षेत्रीय प्रबंधक और विश्व के सर्वश्रेष्ठ बॉस स्तरों/gi, "Sales Rep, Regional Manager और World's Best Boss समूहों"],
     ],
+    fi: [],
   };
   let result = html;
   for (const [pattern, replacement] of rules[locale]) result = result.replace(pattern, replacement);

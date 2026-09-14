@@ -25,7 +25,7 @@ const brandLayoutFallbackTimer = document.body?.dataset.brand
     }, 1500)
   : null;
 const brandLayoutModuleReady = document.body?.dataset.brand
-  ? import('./pages/brand-layout.js?v=20260813-brand-cls-1').then(module => {
+  ? import('./pages/brand-layout.js?v=20260913-brand-profile-8').then(module => {
       initBrandLayoutModule = module.initBrandLayout;
     }).catch(error => {
       document.body.classList.add('brand-layout-failed');
@@ -64,7 +64,7 @@ const loadPageModules = async () => {
     const [snapshotsModule, gamesModule, pageModule, feedbackModule] = await Promise.all([
       import('./brand-snapshot-configs.js?v=20260813-french-1'),
       import('./brand-new-games.js?v=20260813-french-1'),
-      import('./pages/brand.js?v=20260829-mobile-density-2'),
+      import('./pages/brand.js?v=20260913-sticky-cta-1'),
       import('./pages/brand-feedback.js?v=20260829-mobile-compose-1'),
     ]);
     BRAND_SNAPSHOT_CONFIGS = snapshotsModule.BRAND_SNAPSHOT_CONFIGS || {};
@@ -2177,7 +2177,7 @@ const initDesktopSiteSearch = () => {
   return search;
 };
 
-const getDefaultTheme = () => 'dark';
+const getDefaultTheme = () => 'light';
 
 const ensureFooterBlogLink = () => {
   const blogHref = localizedPagePath('/blog/');
@@ -3824,6 +3824,10 @@ const applyCountryHeroConcept = () => {
     hero.prepend(rail);
   }
 
+  if (inlineFlag instanceof HTMLImageElement && inlineFlag.src) {
+    rail.style.setProperty('--country-hero-flag-image', `url(${JSON.stringify(inlineFlag.src)})`);
+  }
+
   hero.classList.add('country-hero-with-cards');
   brandMain.classList.add('country-hero-cards');
   brandMain.querySelector('.country-card-flag')?.remove();
@@ -4243,11 +4247,14 @@ export const initCasinoPage = async () => {
   if (isBrandPage) {
     await brandLayoutModuleReady;
     initBrandLayoutModule?.({
+      BRANDS,
       BRAND_NEW_GAMES: {},
       normalizeText,
       normalizeBrandKey,
+      findBrandByPageKey,
       escapeHtml,
       localeText,
+      localizedBrandBonusText,
     });
     if (document.body.classList.contains('has-brand-sticky-layout') && brandLayoutFallbackTimer) {
       window.clearTimeout(brandLayoutFallbackTimer);
@@ -4301,11 +4308,14 @@ export const initCasinoPage = async () => {
   applyBrandLogoBackgrounds();
   applyNotRecommendedCasinoRows();
   initBrandLayoutModule?.({
+    BRANDS,
     BRAND_NEW_GAMES,
     normalizeText,
     normalizeBrandKey,
+    findBrandByPageKey,
     escapeHtml,
     localeText,
+    localizedBrandBonusText,
   });
 
   if (pageCountry) {
@@ -4395,6 +4405,16 @@ export const initCasinoPage = async () => {
       slugifyText,
       localeText,
       syncHeaderFlowMetrics,
+    });
+    initBrandLayoutModule?.({
+      BRANDS,
+      BRAND_NEW_GAMES,
+      normalizeText,
+      normalizeBrandKey,
+      findBrandByPageKey,
+      escapeHtml,
+      localeText,
+      localizedBrandBonusText,
     });
     const brand = findBrandByPageKey(brandKey);
     initBrandFeedbackModule?.({

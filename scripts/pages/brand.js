@@ -108,6 +108,18 @@ export const initBrandPage = context => {
         link.textContent = uiCopy.claimBonusPlay;
       });
   };
+
+  const removeFinalBrandCtas = () => {
+    document.querySelectorAll('body[data-brand] .final-cta-glass').forEach(card => {
+      const section = card.closest('section.container');
+      if (section && section.children.length === 1) {
+        section.remove();
+        return;
+      }
+
+      card.remove();
+    });
+  };
   
   const getShortBrandSectionLabel = title => {
     const normalizedTitle = normalizeText(title);
@@ -1003,6 +1015,7 @@ export const initBrandPage = context => {
   const brandKey = context.brandKey;
   normalizeFinalBrandCtaLabels();
   initStickyBrandTitle();
+  removeFinalBrandCtas();
   enhanceBrandProsCons();
   applyBrandInfoPairLayout();
   renderBrandAvailabilityWidget(brandKey);

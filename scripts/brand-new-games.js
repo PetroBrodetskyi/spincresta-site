@@ -1,4 +1,12 @@
 export const BRAND_NEW_GAMES = {
+  casinova: [
+    { name: 'Vortex Pulse', image: 'https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto/spincresta/brands/casinova/new-games/casinova-new-game-vortex-pulse_xwrypp' },
+    { name: 'Divine Egypt', image: 'https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto/spincresta/brands/casinova/new-games/casinova-new-game-divine-egypt_pvu5rt' },
+    { name: 'Freya 1000', image: 'https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto/spincresta/brands/casinova/new-games/casinova-new-game-freya-1000_jvjz7c' },
+    { name: 'De Rat Heist', image: 'https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto/spincresta/brands/casinova/new-games/casinova-new-game-de-rat-heist_ayq0gi' },
+    { name: 'Big Bells Double Fire', image: 'https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto/spincresta/brands/casinova/new-games/casinova-new-game-big-bells-double-fire_r74opk' },
+    { name: 'Book of Olympus', image: 'https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto/spincresta/brands/casinova/new-games/casinova-new-game-book-of-olympus_gtd6hk' },
+  ],
   silverplay: [
     { name: 'Striking Diamond Link: Running Wins', image: 'https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto/v1788687724/spincresta/brands/silverplay/new-games/silverplay-new-game-striking-diamond-link-running-wins_a9ec0u' },
     { name: 'Super SugarPop', image: 'https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto/v1788687722/spincresta/brands/silverplay/new-games/silverplay-new-game-super-sugarpop_www6w6' },
