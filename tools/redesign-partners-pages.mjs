@@ -4,6 +4,9 @@ import fs from 'node:fs';
 import path from 'node:path';
 
 const ROOT = process.cwd();
+const PARTNERSHIP_EMAIL = 'affiliates@armadaapp.com';
+const PARTNERSHIP_TELEGRAM_HANDLE = '@armada_affiliates_team';
+const PARTNERSHIP_TELEGRAM_URL = 'https://t.me/armada_affiliates_team';
 
 const copy = {
   en: {
@@ -158,6 +161,15 @@ const updateStructuredData = (html, pageTitle, pageDescription) => html.replace(
       if (!webpage) return full;
       webpage.name = pageTitle;
       webpage.description = pageDescription;
+      const organization = nodes.find(node => node?.['@type'] === 'Organization');
+      if (organization) {
+        organization.contactPoint = {
+          '@type': 'ContactPoint',
+          contactType: 'partnerships',
+          email: PARTNERSHIP_EMAIL,
+          url: PARTNERSHIP_TELEGRAM_URL,
+        };
+      }
       return `<script type="application/ld+json">\n${JSON.stringify(data, null, 2)}\n</script>`;
     } catch {
       return full;
@@ -192,7 +204,7 @@ const renderMain = (locale, faq, homeStatsGrid) => {
           <h1>${escapeHtml(t.title)}</h1>
           <p>${escapeHtml(t.lead)}</p>
           <div class="home-hero-actions">
-            <a class="home-primary-action" href="https://t.me/spincresta" target="_blank" rel="noopener noreferrer nofollow">${escapeHtml(t.primary)}</a>
+            <a class="home-primary-action" href="${PARTNERSHIP_TELEGRAM_URL}" target="_blank" rel="noopener noreferrer nofollow">${escapeHtml(t.primary)}</a>
             <a class="home-secondary-action" href="${prefix}/about/">${escapeHtml(t.secondary)}</a>
           </div>
         </div>
@@ -251,7 +263,8 @@ const renderMain = (locale, faq, homeStatsGrid) => {
                 <strong>${escapeHtml(t.contactTitle)}</strong>
                 <span>${escapeHtml(t.contactLead)}</span>
               </div>
-              <a href="https://t.me/spincresta" target="_blank" rel="noopener noreferrer nofollow">${escapeHtml(t.contactPrimary)}</a>
+              <a href="mailto:${PARTNERSHIP_EMAIL}">${PARTNERSHIP_EMAIL}</a>
+              <a href="${PARTNERSHIP_TELEGRAM_URL}" target="_blank" rel="noopener noreferrer nofollow">${PARTNERSHIP_TELEGRAM_HANDLE}</a>
             </div>
           </section>
 
@@ -302,7 +315,7 @@ for (const locale of Object.keys(copy)) {
     .replace(/<meta\s+property="og:description"\s+content="[\s\S]*?"\s*\/>/i, `<meta property="og:description" content="${escapeHtml(pageDescription)}" />`)
     .replace(/<meta\s+name="twitter:title"\s+content="[\s\S]*?"\s*\/>/i, `<meta name="twitter:title" content="${escapeHtml(pageTitle)}" />`)
     .replace(/<meta\s+name="twitter:description"\s+content="[\s\S]*?"\s*\/>/i, `<meta name="twitter:description" content="${escapeHtml(pageDescription)}" />`)
-    .replace(/\/styles\.css\?v=[^"]+/i, '/styles.css?v=20260820-partners-existing-1');
+    .replace(/\/styles\.css\?v=[^"]+/i, '/styles.css?v=20260827-account-page-3');
 
   html = updateStructuredData(html, pageTitle, pageDescription);
 
