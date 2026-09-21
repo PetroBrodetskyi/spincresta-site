@@ -15596,3 +15596,759 @@ html[data-theme='light'] body[data-country] .country-hero-cards > .intro {
     padding: 12px 16px;
   }
 }
+
+/* Country Expert Review — editorial dossier with a readable mobile fallback. */
+@media (min-width: 1001px) {
+  body[data-country] .expert-review {
+    scroll-margin-top: 132px;
+  }
+
+  body[data-country] .expert-card {
+    display: grid;
+    grid-template-columns: minmax(250px, 300px) minmax(0, 1fr);
+    align-items: stretch;
+    gap: 18px;
+    padding: 18px;
+    border: 1px solid color-mix(in srgb, var(--expert-accent) 18%, transparent);
+    border-radius: 22px;
+    background:
+      radial-gradient(circle at 92% 8%, color-mix(in srgb, var(--expert-accent) 7%, transparent), transparent 28%),
+      linear-gradient(145deg, #171a1d, #0c0f11 72%);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.055),
+      0 24px 55px rgba(0, 0, 0, 0.16);
+    overflow: hidden;
+  }
+
+  body[data-country] .expert-card > .expert-body {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    min-width: 0;
+    padding: 0;
+    border: 0;
+    border-top: 0;
+    border-radius: 0;
+    background: transparent;
+    box-shadow: none;
+    overflow: visible;
+  }
+
+  body[data-country] .expert-card > .expert-body::before,
+  body[data-country] .expert-card > .expert-body::after {
+    display: none;
+  }
+
+  body[data-country] .expert-card .expert-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 22px;
+    width: 100%;
+    max-width: 300px;
+    min-height: 0;
+    padding: 34px 24px;
+    border: 1px solid color-mix(in srgb, var(--expert-accent) 18%, transparent);
+    border-radius: 18px;
+    background:
+      radial-gradient(circle at 50% 20%, color-mix(in srgb, var(--expert-accent) 11%, transparent), transparent 34%),
+      rgba(255, 255, 255, 0.025);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
+    text-align: center;
+    transform: none;
+  }
+
+  body[data-country] .expert-card .expert-header::before {
+    display: none;
+  }
+
+  body[data-country] .expert-card .expert-avatar {
+    width: 118px;
+    height: 118px;
+    border-width: 3px;
+    box-shadow:
+      0 0 0 7px color-mix(in srgb, var(--expert-accent) 9%, transparent),
+      0 0 0 8px color-mix(in srgb, var(--expert-accent) 25%, transparent),
+      0 20px 42px rgba(0, 0, 0, 0.3);
+  }
+
+  body[data-country] .expert-card .expert-info {
+    align-items: center;
+    gap: 6px;
+    text-align: center;
+  }
+
+  body[data-country] .expert-card .expert-meta {
+    max-width: 24ch;
+    font-size: 12px;
+    line-height: 1.45;
+    text-align: center;
+  }
+
+  body[data-country] .expert-card .expert-linkedin {
+    min-height: 0;
+    margin-top: 2px;
+    padding: 6px 9px;
+  }
+
+  body[data-country] .expert-card > .expert-body > p:first-of-type {
+    margin: 0;
+    padding: 24px;
+    border: 1px solid color-mix(in srgb, var(--expert-accent) 18%, transparent);
+    border-radius: 16px;
+    background: rgba(255, 255, 255, 0.035);
+  }
+
+  body[data-country] .expert-card > .expert-body > p:nth-of-type(2) {
+    margin: 0;
+    padding: 20px 24px;
+    border: 1px solid color-mix(in srgb, var(--expert-accent) 14%, transparent);
+    border-radius: 16px;
+    background: rgba(255, 255, 255, 0.018);
+  }
+
+  body[data-country] .expert-card > .expert-body > h3:first-of-type {
+    margin: 14px 2px 2px;
+    padding: 0;
+    border: 0;
+    border-top: 0;
+  }
+
+  body[data-country] .expert-card .expert-methodology {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+    overflow: visible;
+  }
+
+  body[data-country] .expert-card .expert-methodology::before {
+    display: none;
+  }
+
+  body[data-country] .expert-card .expert-methodology > li {
+    display: flex;
+    align-items: center;
+    min-height: 72px;
+    padding: 18px 20px;
+    border: 1px solid color-mix(in srgb, var(--expert-accent) 18%, transparent);
+    border-radius: 16px;
+    background:
+      linear-gradient(145deg, rgba(255, 255, 255, 0.055), rgba(255, 255, 255, 0.018)),
+      color-mix(in srgb, var(--expert-accent) 3%, transparent);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.035);
+    overflow: hidden;
+    transition:
+      border-color 0.22s ease,
+      box-shadow 0.22s ease;
+  }
+
+  body[data-country] .expert-card .expert-methodology > li:hover {
+    border-color: color-mix(in srgb, var(--expert-accent) 32%, transparent);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.055);
+    transform: none;
+  }
+
+  body[data-country] .expert-card .expert-methodology > li::before {
+    display: none;
+  }
+
+  body[data-country] .expert-card .expert-methodology > li:nth-child(even) {
+    padding-left: 20px;
+  }
+
+  body[data-country] .expert-card .expert-methodology > li:nth-child(odd):not(:last-child) {
+    padding-right: 20px;
+  }
+
+  body[data-country] .expert-card .expert-methodology > li::after {
+    display: none;
+  }
+
+  body[data-country] .expert-card > .expert-body > h3:nth-of-type(2) {
+    min-height: 0;
+    margin: 14px 2px 2px;
+    padding: 0;
+    border: 0;
+    border-top: 0;
+    border-radius: 0;
+    background: transparent;
+  }
+
+  body[data-country] .expert-card > .expert-body > h3:nth-of-type(2)::after {
+    display: none;
+  }
+
+  body[data-country] .expert-card > .expert-body > p:nth-of-type(3) {
+    min-height: 0;
+    margin: 0;
+    padding: 20px 24px;
+    border: 1px solid color-mix(in srgb, var(--expert-accent) 14%, transparent);
+    border-radius: 16px;
+    background: rgba(255, 255, 255, 0.018);
+  }
+
+  body[data-country] .expert-card > .expert-body > .expert-disclaimer {
+    width: auto;
+    max-width: none;
+    margin: 0;
+    padding: 8px 4px 2px;
+    border: 0;
+    border-top: 0;
+    border-radius: 0;
+    background: transparent;
+  }
+
+  body[data-country] .expert-card > .expert-body > .expert-disclaimer::before {
+    display: none;
+  }
+
+  html[data-theme='light'] body[data-country] .expert-card {
+    border-color: rgba(30, 39, 45, 0.12);
+    background:
+      radial-gradient(circle at 92% 8%, rgba(53, 85, 72, 0.065), transparent 28%),
+      linear-gradient(145deg, #f7f8f6, #eff2ef);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.9),
+      0 22px 48px rgba(25, 35, 32, 0.1);
+  }
+
+  html[data-theme='light'] body[data-country] .expert-card .expert-header {
+    border-color: rgba(23, 32, 30, 0.13);
+    background:
+      radial-gradient(circle at 50% 20%, rgba(53, 85, 72, 0.1), transparent 34%),
+      rgba(255, 255, 255, 0.58);
+    box-shadow:
+      inset 0 1px 0 #ffffff,
+      0 12px 26px rgba(25, 35, 32, 0.055);
+  }
+
+  html[data-theme='light'] body[data-country] .expert-card .expert-info h3,
+  html[data-theme='light'] body[data-country] .expert-card > .expert-body > p:first-of-type,
+  html[data-theme='light'] body[data-country] .expert-card > .expert-body > h3 {
+    color: #17201e;
+  }
+
+  html[data-theme='light'] body[data-country] .expert-card .expert-byline-label,
+  html[data-theme='light'] body[data-country] .expert-card .expert-meta,
+  html[data-theme='light'] body[data-country] .expert-card > .expert-body > p {
+    color: #59665f;
+  }
+
+  html[data-theme='light'] body[data-country] .expert-card .expert-linkedin {
+    border-color: rgba(23, 32, 30, 0.16);
+    color: #34413b;
+  }
+
+  html[data-theme='light'] body[data-country] .expert-card .expert-methodology > li {
+    border-color: rgba(23, 32, 30, 0.13);
+    background:
+      linear-gradient(145deg, rgba(255, 255, 255, 0.88), rgba(255, 255, 255, 0.58)),
+      rgba(255, 255, 255, 0.62);
+    color: #4b5952;
+    box-shadow:
+      inset 0 1px 0 #ffffff,
+      0 12px 26px rgba(25, 35, 32, 0.065);
+  }
+
+  html[data-theme='light'] body[data-country] .expert-card .expert-methodology > li:hover {
+    border-color: rgba(53, 85, 72, 0.24);
+    box-shadow:
+      inset 0 1px 0 #ffffff,
+      0 16px 32px rgba(25, 35, 32, 0.09);
+  }
+
+  html[data-theme='light'] body[data-country] .expert-card .expert-methodology {
+    border-color: rgba(23, 32, 30, 0.11);
+    background:
+      radial-gradient(circle at 50% 50%, rgba(53, 85, 72, 0.11), transparent 23%),
+      rgba(255, 255, 255, 0.5);
+  }
+
+  html[data-theme='light'] body[data-country] .expert-card .expert-header .expert-info h3 {
+    color: #17201e;
+  }
+
+  html[data-theme='light'] body[data-country] .expert-card .expert-header .expert-byline-label,
+  html[data-theme='light'] body[data-country] .expert-card .expert-header .expert-meta {
+    color: #59665f;
+  }
+
+  html[data-theme='light'] body[data-country] .expert-card .expert-header .expert-linkedin {
+    border-color: rgba(23, 32, 30, 0.16);
+    color: #34413b;
+  }
+
+  html[data-theme='light'] body[data-country] .expert-card > .expert-body > p:first-of-type {
+    border-color: rgba(23, 32, 30, 0.13);
+    background: rgba(255, 255, 255, 0.72);
+  }
+
+  html[data-theme='light'] body[data-country] .expert-card > .expert-body > p:nth-of-type(2) {
+    border-color: rgba(23, 32, 30, 0.13);
+    background: rgba(255, 255, 255, 0.46);
+  }
+
+  html[data-theme='light'] body[data-country] .expert-card > .expert-body > p:nth-of-type(2),
+  html[data-theme='light'] body[data-country] .expert-card > .expert-body > h3:nth-of-type(2),
+  html[data-theme='light'] body[data-country] .expert-card > .expert-body > .expert-disclaimer {
+    border-color: rgba(23, 32, 30, 0.12);
+    color: #59665f;
+  }
+
+  html[data-theme='light'] body[data-country] .expert-card > .expert-body > p:nth-of-type(3) {
+    border-color: rgba(23, 32, 30, 0.13);
+    background: rgba(255, 255, 255, 0.46);
+    color: #59665f;
+  }
+}
+
+@media (max-width: 1000px) {
+  body[data-country] .expert-card {
+    gap: 16px;
+  }
+
+  body[data-country] .expert-card .expert-header {
+    min-height: 0;
+    padding: clamp(24px, 6vw, 34px);
+    border-radius: 22px;
+  }
+
+  body[data-country] .expert-card .expert-header::before {
+    display: none;
+  }
+
+  body[data-country] .expert-card .expert-body {
+    border-radius: 22px;
+  }
+
+  body[data-country] .expert-card .expert-methodology li {
+    min-height: 0;
+    margin-bottom: 10px;
+    padding: 16px;
+    border: 1px solid color-mix(in srgb, var(--expert-accent) 18%, transparent);
+    border-radius: 14px;
+    background: rgba(255, 255, 255, 0.025);
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.035);
+  }
+
+  body[data-country] .expert-card .expert-methodology li:last-child {
+    margin-bottom: 0;
+  }
+
+  body[data-country] .expert-card .expert-methodology li::before {
+    display: none;
+  }
+
+  body[data-country] .expert-card .expert-methodology li::after {
+    display: none;
+  }
+
+  body[data-country] .expert-card > .expert-body > p:nth-of-type(2) {
+    padding: 0;
+    border: 0;
+    background: transparent;
+  }
+
+  body[data-country] .expert-card > .expert-body > h3:nth-of-type(2) {
+    min-height: 0;
+    margin: 8px 0 0;
+    padding: 8px 0 0;
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+  }
+
+  body[data-country] .expert-card > .expert-body > h3:nth-of-type(2)::after {
+    display: none;
+  }
+
+  body[data-country] .expert-card > .expert-body > p:nth-of-type(3) {
+    min-height: 0;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    background: transparent;
+  }
+
+  body[data-country] .expert-card > .expert-body > .expert-disclaimer {
+    margin: 8px 0 0;
+    padding: 8px 0 0;
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+  }
+
+  body[data-country] .expert-card > .expert-body > .expert-disclaimer::before {
+    display: none;
+  }
+}
+
+/* Country hero photography. */
+body[data-country='IN'] {
+  --country-hero-photo: url('https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto,w_2000/spincresta/countries/india/india-hero_feowdk.webp');
+  --country-hero-photo-position: center center;
+}
+
+body[data-country='ID'] {
+  --country-hero-photo: url('https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto,w_2000/spincresta/countries/indonesia/indonesia-hero_uutwcz.webp');
+  --country-hero-photo-position: center center;
+}
+
+body[data-country='UK'] {
+  --country-hero-photo: url('https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto,w_2000/spincresta/countries/united-kingdom/united-kingdom-hero_wuzscu.webp');
+  --country-hero-photo-position: center center;
+}
+
+body[data-country='US'] {
+  --country-hero-photo: url('https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto,w_2000/spincresta/countries/united-states/united-states-hero_ufaahw.webp');
+  --country-hero-photo-position: center center;
+}
+
+body[data-country='DE'] {
+  --country-hero-photo: url('https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto,w_2000/spincresta/countries/germany/germany-hero_gsmg4r.webp');
+  --country-hero-photo-position: center center;
+}
+
+body[data-country='CA'] {
+  --country-hero-photo: url('https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto,w_2000/spincresta/countries/canada/canada-hero_udkalw.webp');
+  --country-hero-photo-position: center center;
+}
+
+body[data-country='AU'] {
+  --country-hero-photo: url('https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto,w_2000/spincresta/countries/australia/australia-hero_dhf3e2.webp');
+  --country-hero-photo-position: center center;
+}
+
+body[data-country='FR'] {
+  --country-hero-photo: url('https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto,w_2000/spincresta/countries/france/france-hero_untvug.webp');
+  --country-hero-photo-position: center center;
+}
+
+body[data-country='EG'] {
+  --country-hero-photo: url('https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto,w_2000/spincresta/countries/egypt/egypt-hero_rkd0vj.webp');
+  --country-hero-photo-position: center center;
+}
+
+body[data-country='KE'] {
+  --country-hero-photo: url('https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto,w_2000/spincresta/countries/kenya/kenya-hero_vlysht.webp');
+  --country-hero-photo-position: center center;
+}
+
+body[data-country='BD'] {
+  --country-hero-photo: url('https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto,w_2000/spincresta/countries/bangladesh/bangladesh-hero_yvhvz8.webp');
+  --country-hero-photo-position: center center;
+}
+
+body[data-country='AZ'] {
+  --country-hero-photo: url('https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto,w_2000/spincresta/countries/azerbaijan/azerbaijan-hero_k2tae2.webp');
+  --country-hero-photo-position: center center;
+}
+
+body[data-country='AT'] {
+  --country-hero-photo: url('https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto,w_2000/spincresta/countries/austria/austria-hero_mmpgxi.webp');
+  --country-hero-photo-position: center center;
+}
+
+body[data-country='AR'] {
+  --country-hero-photo: url('https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto,w_2000/spincresta/countries/argentina/argentina-hero_jtaj1n.webp');
+  --country-hero-photo-position: center center;
+}
+
+body[data-country='BE'] {
+  --country-hero-photo: url('https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto,w_2000/spincresta/countries/belgium/belgium-hero_hnlkuz.webp');
+  --country-hero-photo-position: center center;
+}
+
+body[data-country='BR'] {
+  --country-hero-photo: url('https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto,w_2000/spincresta/countries/brazil/brazil-hero_tkxgrm.webp');
+  --country-hero-photo-position: center center;
+}
+
+body:is([data-country='IN'], [data-country='ID'], [data-country='UK'], [data-country='US'], [data-country='DE'], [data-country='CA'], [data-country='AU'], [data-country='FR'], [data-country='EG'], [data-country='KE'], [data-country='BD'], [data-country='AZ'], [data-country='AT'], [data-country='AR'], [data-country='BE'], [data-country='BR']) .hero.country-hero-with-cards .country-hero-rail,
+html[data-theme='light'] body:is([data-country='IN'], [data-country='ID'], [data-country='UK'], [data-country='US'], [data-country='DE'], [data-country='CA'], [data-country='AU'], [data-country='FR'], [data-country='EG'], [data-country='KE'], [data-country='BD'], [data-country='AZ'], [data-country='AT'], [data-country='AR'], [data-country='BE'], [data-country='BR']) .hero.country-hero-with-cards .country-hero-rail,
+html:not([data-theme='light']) body:is([data-country='IN'], [data-country='ID'], [data-country='UK'], [data-country='US'], [data-country='DE'], [data-country='CA'], [data-country='AU'], [data-country='FR'], [data-country='EG'], [data-country='KE'], [data-country='BD'], [data-country='AZ'], [data-country='AT'], [data-country='AR'], [data-country='BE'], [data-country='BR']) .hero.country-hero-with-cards .country-hero-rail {
+  background-color: #0d1214;
+  background-image: var(--country-hero-photo);
+  background-repeat: no-repeat;
+  background-position: var(--country-hero-photo-position);
+  background-size: cover;
+}
+
+body:is([data-country='IN'], [data-country='ID'], [data-country='UK'], [data-country='US'], [data-country='DE'], [data-country='CA'], [data-country='AU'], [data-country='FR'], [data-country='EG'], [data-country='KE'], [data-country='BD'], [data-country='AZ'], [data-country='AT'], [data-country='AR'], [data-country='BE'], [data-country='BR']) .hero.country-hero-with-cards .country-hero-rail::before,
+html:not([data-theme='light']) body:is([data-country='IN'], [data-country='ID'], [data-country='UK'], [data-country='US'], [data-country='DE'], [data-country='CA'], [data-country='AU'], [data-country='FR'], [data-country='EG'], [data-country='KE'], [data-country='BD'], [data-country='AZ'], [data-country='AT'], [data-country='AR'], [data-country='BE'], [data-country='BR']) .hero.country-hero-with-cards .country-hero-rail::before {
+  inset: 0;
+  background:
+    linear-gradient(90deg, rgba(7, 11, 13, 0.94) 0%, rgba(7, 11, 13, 0.8) 43%, rgba(7, 11, 13, 0.36) 72%, rgba(7, 11, 13, 0.2) 100%),
+    linear-gradient(180deg, rgba(5, 8, 10, 0.18), rgba(5, 8, 10, 0.4));
+  filter: none;
+  opacity: 1;
+  transform: none;
+}
+
+@media (max-width: 768px) {
+  body:is([data-country='IN'], [data-country='ID'], [data-country='UK'], [data-country='US'], [data-country='DE'], [data-country='CA'], [data-country='AU'], [data-country='FR'], [data-country='EG'], [data-country='KE'], [data-country='BD'], [data-country='AZ'], [data-country='AT'], [data-country='AR'], [data-country='BE'], [data-country='BR']) .hero.country-hero-with-cards .country-hero-rail,
+  html[data-theme='light'] body:is([data-country='IN'], [data-country='ID'], [data-country='UK'], [data-country='US'], [data-country='DE'], [data-country='CA'], [data-country='AU'], [data-country='FR'], [data-country='EG'], [data-country='KE'], [data-country='BD'], [data-country='AZ'], [data-country='AT'], [data-country='AR'], [data-country='BE'], [data-country='BR']) .hero.country-hero-with-cards .country-hero-rail,
+  html:not([data-theme='light']) body:is([data-country='IN'], [data-country='ID'], [data-country='UK'], [data-country='US'], [data-country='DE'], [data-country='CA'], [data-country='AU'], [data-country='FR'], [data-country='EG'], [data-country='KE'], [data-country='BD'], [data-country='AZ'], [data-country='AT'], [data-country='AR'], [data-country='BE'], [data-country='BR']) .hero.country-hero-with-cards .country-hero-rail {
+    background-image:
+      linear-gradient(180deg, rgba(7, 11, 13, 0.76), rgba(7, 11, 13, 0.88)),
+      var(--country-hero-photo);
+  }
+
+  body:is([data-country='IN'], [data-country='ID'], [data-country='UK'], [data-country='US'], [data-country='DE'], [data-country='CA'], [data-country='AU'], [data-country='FR'], [data-country='EG'], [data-country='KE'], [data-country='BD'], [data-country='AZ'], [data-country='AT'], [data-country='AR'], [data-country='BE'], [data-country='BR']) .hero.country-hero-with-cards .country-hero-rail::before,
+  html:not([data-theme='light']) body:is([data-country='IN'], [data-country='ID'], [data-country='UK'], [data-country='US'], [data-country='DE'], [data-country='CA'], [data-country='AU'], [data-country='FR'], [data-country='EG'], [data-country='KE'], [data-country='BD'], [data-country='AZ'], [data-country='AT'], [data-country='AR'], [data-country='BE'], [data-country='BR']) .hero.country-hero-with-cards .country-hero-rail::before {
+    display: none;
+  }
+
+  body:is([data-country='IN'], [data-country='ID'], [data-country='UK'], [data-country='US'], [data-country='DE'], [data-country='CA'], [data-country='AU'], [data-country='FR'], [data-country='EG'], [data-country='KE'], [data-country='BD'], [data-country='AZ'], [data-country='AT'], [data-country='AR'], [data-country='BE'], [data-country='BR']) .hero.country-hero-with-cards .hero-content > p {
+    color: #e2e8f0;
+    text-shadow: 0 2px 16px rgba(0, 0, 0, 0.9);
+  }
+}
+
+/* Country Expert Review — one profile rail and two editorial panels. */
+@media (min-width: 1001px) {
+  body[data-country] .expert-card {
+    grid-template-columns: minmax(270px, 310px) minmax(0, 1fr);
+    gap: 18px;
+  }
+
+  body[data-country] .expert-card .expert-header {
+    align-self: stretch;
+    max-width: none;
+    padding: 36px 26px;
+  }
+
+  body[data-country] .expert-card > .expert-body {
+    position: relative;
+    gap: 0;
+  }
+
+  /* A concise methodology note belongs to the expert rail. */
+  body[data-country] .expert-card > .expert-body > p:nth-of-type(2) {
+    position: absolute;
+    top: 350px;
+    right: calc(100% + 44px);
+    width: 258px;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+    font-size: 13px;
+    line-height: 1.65;
+    text-align: center;
+  }
+
+  /* Panel one: review scope and the five criteria. */
+  body[data-country] .expert-card > .expert-body > p:first-of-type {
+    padding: 26px 28px 18px;
+    border-bottom: 0;
+    border-radius: 18px 18px 0 0;
+  }
+
+  body[data-country] .expert-card > .expert-body > h3:first-of-type {
+    margin: 0;
+    padding: 8px 28px 16px;
+    border: 1px solid color-mix(in srgb, var(--expert-accent) 18%, transparent);
+    border-top: 0;
+    border-bottom: 0;
+    background: rgba(255, 255, 255, 0.035);
+  }
+
+  body[data-country] .expert-card .expert-methodology {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px 28px;
+    padding: 0 28px 26px;
+    border: 1px solid color-mix(in srgb, var(--expert-accent) 18%, transparent);
+    border-top: 0;
+    border-radius: 0 0 18px 18px;
+    background: rgba(255, 255, 255, 0.035);
+  }
+
+  body[data-country] .expert-card .expert-methodology > li,
+  body[data-country] .expert-card .expert-methodology > li:nth-child(even),
+  body[data-country] .expert-card .expert-methodology > li:nth-child(odd):not(:last-child) {
+    min-height: 0;
+    padding: 0;
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+    box-shadow: none;
+    line-height: 1.55;
+  }
+
+  body[data-country] .expert-card .expert-methodology > li:hover {
+    border: 0;
+    box-shadow: none;
+  }
+
+  body[data-country] .expert-card .expert-methodology > li:last-child {
+    grid-column: 1 / -1;
+    max-width: 62ch;
+  }
+
+  /* Panel two: ranking method and the editorial note. */
+  body[data-country] .expert-card > .expert-body > h3:nth-of-type(2) {
+    margin: 18px 0 0;
+    padding: 26px 28px 12px;
+    border: 1px solid color-mix(in srgb, var(--expert-accent) 16%, transparent);
+    border-bottom: 0;
+    border-radius: 18px 18px 0 0;
+    background: rgba(255, 255, 255, 0.02);
+  }
+
+  body[data-country] .expert-card > .expert-body > p:nth-of-type(3) {
+    padding: 0 28px 16px;
+    border: 1px solid color-mix(in srgb, var(--expert-accent) 16%, transparent);
+    border-top: 0;
+    border-bottom: 0;
+    border-radius: 0;
+    background: rgba(255, 255, 255, 0.02);
+  }
+
+  body[data-country] .expert-card > .expert-body > .expert-disclaimer {
+    margin: 0;
+    padding: 0 28px 26px;
+    border: 1px solid color-mix(in srgb, var(--expert-accent) 16%, transparent);
+    border-top: 0;
+    border-radius: 0 0 18px 18px;
+    background: rgba(255, 255, 255, 0.02);
+  }
+
+  html[data-theme='light'] body[data-country] .expert-card > .expert-body > h3:first-of-type,
+  html[data-theme='light'] body[data-country] .expert-card .expert-methodology,
+  html[data-theme='light'] body[data-country] .expert-card > .expert-body > p:first-of-type {
+    border-color: rgba(23, 32, 30, 0.13);
+    background: rgba(255, 255, 255, 0.72);
+  }
+
+  html[data-theme='light'] body[data-country] .expert-card .expert-methodology > li,
+  html[data-theme='light'] body[data-country] .expert-card .expert-methodology > li:hover {
+    border: 0;
+    background: transparent;
+    box-shadow: none;
+  }
+
+  html[data-theme='light'] body[data-country] .expert-card > .expert-body > h3:nth-of-type(2),
+  html[data-theme='light'] body[data-country] .expert-card > .expert-body > p:nth-of-type(3),
+  html[data-theme='light'] body[data-country] .expert-card > .expert-body > .expert-disclaimer {
+    border-color: rgba(23, 32, 30, 0.12);
+    background: rgba(255, 255, 255, 0.46);
+  }
+
+  html[data-theme='light'] body[data-country] .expert-card > .expert-body > p:nth-of-type(2) {
+    color: #59665f;
+  }
+}
+
+@media (max-width: 1000px) {
+  body[data-country] .expert-card > .expert-body {
+    display: flex;
+    gap: 0;
+  }
+
+  body[data-country] .expert-card > .expert-body > p:first-of-type { order: 1; }
+  body[data-country] .expert-card > .expert-body > h3:first-of-type { order: 2; }
+  body[data-country] .expert-card .expert-methodology { order: 3; }
+  body[data-country] .expert-card > .expert-body > h3:nth-of-type(2) { order: 4; }
+  body[data-country] .expert-card > .expert-body > p:nth-of-type(2) { order: 5; }
+  body[data-country] .expert-card > .expert-body > p:nth-of-type(3) { order: 6; }
+  body[data-country] .expert-card > .expert-body > .expert-disclaimer { order: 7; }
+
+  body[data-country] .expert-card > .expert-body > p:first-of-type {
+    margin: 0;
+    padding: 20px 18px 14px;
+    border: 1px solid color-mix(in srgb, var(--expert-accent) 18%, transparent);
+    border-bottom: 0;
+    border-radius: 16px 16px 0 0;
+    background: rgba(255, 255, 255, 0.025);
+  }
+
+  body[data-country] .expert-card > .expert-body > h3:first-of-type {
+    margin: 0;
+    padding: 8px 18px 12px;
+    border: 1px solid color-mix(in srgb, var(--expert-accent) 18%, transparent);
+    border-top: 0;
+    border-bottom: 0;
+    background: rgba(255, 255, 255, 0.025);
+  }
+
+  body[data-country] .expert-card .expert-methodology {
+    display: grid;
+    gap: 12px;
+    margin: 0 0 14px;
+    padding: 0 18px 20px;
+    border: 1px solid color-mix(in srgb, var(--expert-accent) 18%, transparent);
+    border-top: 0;
+    border-radius: 0 0 16px 16px;
+    background: rgba(255, 255, 255, 0.025);
+  }
+
+  body[data-country] .expert-card .expert-methodology li,
+  body[data-country] .expert-card .expert-methodology li:last-child {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    border-radius: 0;
+    background: transparent;
+    box-shadow: none;
+  }
+
+  body[data-country] .expert-card > .expert-body > h3:nth-of-type(2) {
+    margin: 0;
+    padding: 20px 18px 8px;
+    border: 1px solid color-mix(in srgb, var(--expert-accent) 16%, transparent);
+    border-bottom: 0;
+    border-radius: 16px 16px 0 0;
+    background: rgba(255, 255, 255, 0.018);
+  }
+
+  body[data-country] .expert-card > .expert-body > p:nth-of-type(2),
+  body[data-country] .expert-card > .expert-body > p:nth-of-type(3) {
+    margin: 0;
+    padding: 0 18px 12px;
+    border: 1px solid color-mix(in srgb, var(--expert-accent) 16%, transparent);
+    border-top: 0;
+    border-bottom: 0;
+    border-radius: 0;
+    background: rgba(255, 255, 255, 0.018);
+  }
+
+  body[data-country] .expert-card > .expert-body > .expert-disclaimer {
+    margin: 0;
+    padding: 0 18px 20px;
+    border: 1px solid color-mix(in srgb, var(--expert-accent) 16%, transparent);
+    border-top: 0;
+    border-radius: 0 0 16px 16px;
+    background: rgba(255, 255, 255, 0.018);
+  }
+
+  html[data-theme='light'] body[data-country] .expert-card > .expert-body > p:first-of-type,
+  html[data-theme='light'] body[data-country] .expert-card > .expert-body > h3:first-of-type,
+  html[data-theme='light'] body[data-country] .expert-card .expert-methodology {
+    border-color: rgba(23, 32, 30, 0.13);
+    background: rgba(255, 255, 255, 0.72);
+  }
+
+  html[data-theme='light'] body[data-country] .expert-card .expert-methodology li,
+  html[data-theme='light'] body[data-country] .expert-card .expert-methodology li:hover {
+    border: 0;
+    background: transparent;
+    box-shadow: none;
+  }
+
+  html[data-theme='light'] body[data-country] .expert-card > .expert-body > h3:nth-of-type(2),
+  html[data-theme='light'] body[data-country] .expert-card > .expert-body > p:nth-of-type(2),
+  html[data-theme='light'] body[data-country] .expert-card > .expert-body > p:nth-of-type(3),
+  html[data-theme='light'] body[data-country] .expert-card > .expert-body > .expert-disclaimer {
+    border-color: rgba(23, 32, 30, 0.12);
+    background: rgba(255, 255, 255, 0.46);
+  }
+}

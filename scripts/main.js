@@ -62,7 +62,7 @@ const loadPageModules = async () => {
 
   if (isBrandPage) {
     const [snapshotsModule, gamesModule, pageModule, feedbackModule] = await Promise.all([
-      import('./brand-snapshot-configs.js?v=20260813-french-1'),
+      import('./brand-snapshot-configs.js?v=20260920-yepcasino-1'),
       import('./brand-new-games.js?v=20260813-french-1'),
       import('./pages/brand.js?v=20260913-sticky-cta-1'),
       import('./pages/brand-feedback.js?v=20260829-mobile-compose-1'),

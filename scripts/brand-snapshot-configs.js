@@ -559,6 +559,7 @@ export const BRAND_SNAPSHOT_CONFIGS = {
   rajabets: rajabetsConfig,
   ...mapSnapshotConfig(['fortunica-es', 'fortunica-nl', 'fortunica-uk'], fortunicaConfig),
   ...mapSnapshotConfig(['justcasino', 'letslucky', 'luckydreams', 'luckyones', 'lukki'], clubCasinoSportsConfig),
+  yepcasino: clubCasinoSportsConfig,
   duckyluck: duckyluckConfig,
   slotsandcasino: slotsAndCasinoConfig,
   lasvegasusa: lasVegasUsaConfig,
