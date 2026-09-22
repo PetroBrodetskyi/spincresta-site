@@ -16271,7 +16271,7 @@ html[data-theme='light'] body[data-country] .hero.country-hero-with-cards .hero-
 @media (max-width: 768px) {
   body[data-country] .hero.country-hero-with-cards {
     gap: 14px;
-    padding-bottom: 18px;
+    padding-bottom: 0;
   }
 
   body[data-country] .hero.country-hero-with-cards .country-hero-rail {
@@ -16330,8 +16330,11 @@ html[data-theme='light'] body[data-country] .hero.country-hero-with-cards .hero-
   }
 
   body[data-country] .country-hero-cards {
-    margin-top: 0;
-    padding: 12px 0 20px;
+    position: relative;
+    z-index: 3;
+    width: calc(100% - 20px);
+    margin: -44px auto 0;
+    padding: 0 0 20px;
     border: 0;
     border-radius: 0;
     background: transparent;
@@ -16340,7 +16343,7 @@ html[data-theme='light'] body[data-country] .hero.country-hero-with-cards .hero-
 
   body[data-country] .country-hero-cards .section-head,
   body[data-country] .country-hero-cards > .intro {
-    width: calc(100% - 16px);
+    width: 100%;
     margin-right: auto;
     margin-left: auto;
     border-color: color-mix(in srgb, var(--surface-border) 76%, var(--section-accent) 24%);
