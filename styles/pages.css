@@ -16519,6 +16519,24 @@ html:not([data-theme='light']) body:is([data-country='BG'], [data-country='CL'],
   }
 }
 
+/* Let the country photography breathe a little more in the light theme. */
+html[data-theme='light'] body:is([data-country='IN'], [data-country='ID'], [data-country='UK'], [data-country='US'], [data-country='DE'], [data-country='CA'], [data-country='AU'], [data-country='FR'], [data-country='EG'], [data-country='KE'], [data-country='BD'], [data-country='AZ'], [data-country='AT'], [data-country='AR'], [data-country='BE'], [data-country='BR']) .hero.country-hero-with-cards .country-hero-rail::before,
+html[data-theme='light'] body:is([data-country='BG'], [data-country='CL'], [data-country='CO'], [data-country='HR'], [data-country='CZ'], [data-country='DK'], [data-country='EE'], [data-country='FI'], [data-country='GH'], [data-country='GR'], [data-country='HU'], [data-country='IS'], [data-country='IE'], [data-country='IT'], [data-country='JP'], [data-country='KZ'], [data-country='KG'], [data-country='LV'], [data-country='LT'], [data-country='LU'], [data-country='MY'], [data-country='MX'], [data-country='NP'], [data-country='NL'], [data-country='NZ'], [data-country='NG'], [data-country='NO'], [data-country='PH'], [data-country='PL']) .hero.country-hero-with-cards .country-hero-rail::before {
+  background:
+    linear-gradient(90deg, rgba(7, 11, 13, 0.88) 0%, rgba(7, 11, 13, 0.7) 43%, rgba(7, 11, 13, 0.28) 72%, rgba(7, 11, 13, 0.14) 100%),
+    linear-gradient(180deg, rgba(5, 8, 10, 0.12), rgba(5, 8, 10, 0.32));
+}
+
+@media (max-width: 768px) {
+  html[data-theme='light'] body:is([data-country='IN'], [data-country='ID'], [data-country='UK'], [data-country='US'], [data-country='DE'], [data-country='CA'], [data-country='AU'], [data-country='FR'], [data-country='EG'], [data-country='KE'], [data-country='BD'], [data-country='AZ'], [data-country='AT'], [data-country='AR'], [data-country='BE'], [data-country='BR']) .hero.country-hero-with-cards .country-hero-rail,
+  html[data-theme='light'] body:is([data-country='BG'], [data-country='CL'], [data-country='CO'], [data-country='HR'], [data-country='CZ'], [data-country='DK'], [data-country='EE'], [data-country='FI'], [data-country='GH'], [data-country='GR'], [data-country='HU'], [data-country='IS'], [data-country='IE'], [data-country='IT'], [data-country='JP'], [data-country='KZ'], [data-country='KG'], [data-country='LV'], [data-country='LT'], [data-country='LU'], [data-country='MY'], [data-country='MX'], [data-country='NP'], [data-country='NL'], [data-country='NZ'], [data-country='NG'], [data-country='NO'], [data-country='PH'], [data-country='PL']) .hero.country-hero-with-cards .country-hero-rail {
+    background-image:
+      linear-gradient(90deg, rgba(7, 11, 13, 0.6) 0%, rgba(7, 11, 13, 0.38) 58%, rgba(7, 11, 13, 0.18) 100%),
+      linear-gradient(0deg, rgba(5, 8, 10, 0.4) 0%, rgba(5, 8, 10, 0.05) 68%),
+      var(--country-hero-photo);
+  }
+}
+
 /* Country Expert Review — one profile rail and two editorial panels. */
 @media (min-width: 1001px) {
   body[data-country] .expert-card {

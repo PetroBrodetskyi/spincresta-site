@@ -2177,7 +2177,7 @@ const initDesktopSiteSearch = () => {
   return search;
 };
 
-const getDefaultTheme = () => 'light';
+const getDefaultTheme = () => 'dark';
 
 const ensureFooterBlogLink = () => {
   const blogHref = localizedPagePath('/blog/');

@@ -1,5 +1,5 @@
 ﻿@import url('/styles/core.css?v=20260914-opaque-mobile-menu-5');
-@import url('/styles/pages.css?v=20260921-country-hero-countries-33');
+@import url('/styles/pages.css?v=20260922-country-hero-light-34');
 
 /* Persistent review links also work before the interactive cards load. */
 .country-review-directory { width: 100%; max-width: none; margin: 24px 0 0; border-top: 1px solid var(--surface-border-strong); text-align: left; }
