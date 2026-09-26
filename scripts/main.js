@@ -4232,6 +4232,33 @@ const initAffiliateClickTracking = () => {
   });
 };
 
+const relocateResponsibleGamblingRules = () => {
+  if (document.body.dataset.page !== 'responsible-gambling') return;
+
+  const rules = document.querySelector('.hero.container > .faq-grid');
+  const guide = document.getElementById('safe-play-guide');
+  if (!rules || !guide || rules.dataset.relocated === 'true') return;
+
+  const label = rules.getAttribute('aria-label') || 'Key rules for safer play';
+  const section = document.createElement('section');
+  const heading = document.createElement('div');
+  const headingText = document.createElement('div');
+  const title = document.createElement('h2');
+
+  section.className = 'home-showcase-section safe-play-rules-section';
+  section.setAttribute('aria-labelledby', 'safe-play-rules-title');
+  heading.className = 'home-showcase-heading';
+  title.id = 'safe-play-rules-title';
+  title.textContent = label;
+
+  headingText.append(title);
+  heading.append(headingText);
+  rules.dataset.relocated = 'true';
+  rules.classList.add('safe-play-rules-grid');
+  section.append(heading, rules);
+  guide.insertAdjacentElement('afterend', section);
+};
+
 // =====================
 // INIT FUNCTION
 // =====================
@@ -4241,6 +4268,8 @@ export const initCasinoPage = async () => {
   const isBrandPage = Boolean(document.body.dataset.brand);
   const siteCountryCountEl = document.getElementById('siteCountryCount');
   const siteBrandCountEl = document.getElementById('siteBrandCount');
+
+  relocateResponsibleGamblingRules();
 
   const pageModulesReady = loadPageModules();
 

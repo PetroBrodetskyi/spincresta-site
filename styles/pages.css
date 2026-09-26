@@ -5,7 +5,6 @@
 body.casinos-page {
   overflow-x: hidden;
 }
-
 body.casinos-page main {
   overflow-x: clip;
 }
@@ -16932,5 +16931,2692 @@ html[data-theme='light'] body:is([data-country='TR'], [data-country='TZ'], [data
   html[data-theme='light'] body[data-country] .expert-card > .expert-body > .expert-disclaimer {
     border-color: rgba(23, 32, 30, 0.12);
     background: rgba(255, 255, 255, 0.46);
+  }
+}
+
+/* =============================================================
+   Homepage video hero
+   Country-style media rail with the discovery overview integrated below.
+   ============================================================= */
+body.home-page .hero.home-video-hero {
+  position: relative;
+  isolation: isolate;
+  display: flex;
+  width: calc(100% - (var(--page-gutter) * 2));
+  max-width: 1280px;
+  min-height: clamp(390px, 31vw, 430px);
+  align-items: center;
+  justify-content: flex-start;
+  margin: 18px auto 0;
+  padding: clamp(42px, 4.4vw, 64px) clamp(40px, 5vw, 72px) clamp(76px, 6.4vw, 94px);
+  overflow: hidden;
+  border: 1px solid rgba(148, 163, 184, 0.28);
+  border-radius: 24px;
+  background: #0d1214;
+  box-shadow:
+    0 28px 72px rgba(0, 0, 0, 0.26),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+
+body.home-page .hero.home-video-hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background:
+    linear-gradient(90deg, rgba(6, 10, 12, 0.94) 0%, rgba(6, 10, 12, 0.76) 42%, rgba(6, 10, 12, 0.2) 72%, rgba(6, 10, 12, 0.06) 100%),
+    linear-gradient(180deg, rgba(5, 8, 10, 0.1), rgba(5, 8, 10, 0.3));
+  pointer-events: none;
+}
+
+body.home-page .hero.home-video-hero::after {
+  content: '';
+  position: absolute;
+  inset: auto 0 0;
+  z-index: 1;
+  height: 34%;
+  background: linear-gradient(180deg, transparent, rgba(5, 8, 10, 0.24));
+  pointer-events: none;
+}
+
+body.home-page .home-hero-video {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+  background: #0d1214;
+}
+
+body.home-page .home-hero-video video {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  filter: saturate(1.06) contrast(1.02);
+}
+
+body.home-page .hero.home-video-hero .hero-content {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  width: min(58%, 690px);
+  max-width: 690px;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 16px;
+  text-align: left;
+}
+
+body.home-page .hero.home-video-hero .home-hero-kicker {
+  color: #a8d8bc;
+  text-align: left;
+}
+
+body.home-page .hero.home-video-hero h1 {
+  max-width: 12ch;
+  color: #f8fafc;
+  font-size: clamp(50px, 4.7vw, 72px);
+  line-height: 0.98;
+  letter-spacing: -0.045em;
+  text-align: left;
+  text-shadow: 0 5px 28px rgba(0, 0, 0, 0.32);
+}
+
+body.home-page .hero.home-video-hero p {
+  max-width: 56ch;
+  color: rgba(226, 232, 240, 0.82);
+  font-size: clamp(15px, 1.18vw, 18px);
+  line-height: 1.55;
+  text-align: left;
+  text-shadow: 0 2px 14px rgba(0, 0, 0, 0.4);
+}
+
+body.home-page .hero.home-video-hero .home-hero-actions {
+  justify-content: flex-start;
+  margin-top: 4px;
+}
+
+body.home-page .hero.home-video-hero :is(.home-primary-action, .home-secondary-action) {
+  border-color: rgba(255, 255, 255, 0.3);
+  background: rgba(8, 12, 14, 0.42);
+  color: #f8fafc;
+  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: blur(10px);
+}
+
+body.home-page .hero.home-video-hero :is(.home-primary-action, .home-secondary-action):is(:hover, :focus-visible) {
+  border-color: var(--gold, #ffdf00);
+  background: rgba(8, 12, 14, 0.62);
+  color: var(--gold, #ffdf00);
+}
+
+body.home-page .hero.home-video-hero + .content-area {
+  position: relative;
+  z-index: 3;
+}
+
+body.home-page .hero.home-video-hero + .content-area > .home-stats {
+  width: min(100%, 1220px);
+  margin: -68px auto 0;
+}
+
+body.home-page .hero.home-video-hero + .content-area .home-stats-card {
+  display: grid;
+  grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.25fr);
+  gap: 0;
+  align-items: stretch;
+  padding: 0;
+  overflow: hidden;
+  border: 1px solid rgba(148, 163, 184, 0.3);
+  border-radius: 24px;
+  background: rgba(28, 33, 36, 0.9);
+  box-shadow:
+    0 24px 58px rgba(0, 0, 0, 0.24),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  -webkit-backdrop-filter: blur(18px) saturate(1.04);
+  backdrop-filter: blur(18px) saturate(1.04);
+}
+
+body.home-page .hero.home-video-hero + .content-area .home-stats-card .home-insight-head {
+  display: flex;
+  grid-column: 1;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 10px;
+  min-width: 0;
+  margin: 0;
+  padding: clamp(24px, 2.6vw, 34px);
+  border: 0;
+  border-right: 1px solid rgba(148, 163, 184, 0.18);
+  text-align: left;
+}
+
+body.home-page .hero.home-video-hero + .content-area .home-stats-card .home-insight-head h2 {
+  width: 100%;
+  max-width: 17ch;
+  margin: 0;
+  color: #f8fafc;
+  font-size: clamp(27px, 2.35vw, 38px) !important;
+  line-height: 1.02;
+}
+
+body.home-page .hero.home-video-hero + .content-area .home-stats-card .home-section-kicker {
+  color: #a8d8bc;
+}
+
+body.home-page .hero.home-video-hero + .content-area .home-stats-card .home-insight-head > p {
+  width: 100%;
+  max-width: 54ch;
+  margin: 0;
+  color: rgba(203, 213, 225, 0.78);
+  font-size: 12.5px;
+  line-height: 1.5;
+}
+
+body.home-page .hero.home-video-hero + .content-area .home-stats-grid {
+  display: grid;
+  min-width: 0;
+  grid-column: 2;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0;
+}
+
+body.home-page .hero.home-video-hero + .content-area .home-stat-tile,
+body.home-page .hero.home-video-hero + .content-area .home-stats-grid > .home-stat-tile:first-child {
+  min-height: 100%;
+  align-content: center;
+  gap: 7px;
+  padding: clamp(22px, 2.5vw, 34px);
+  border: 0;
+  border-radius: 0;
+  background: rgba(255, 255, 255, 0.025);
+  box-shadow: none;
+}
+
+body.home-page .hero.home-video-hero + .content-area .home-stats-grid > .home-stat-tile + .home-stat-tile {
+  border-left: 1px solid rgba(148, 163, 184, 0.18);
+}
+
+body.home-page .hero.home-video-hero + .content-area .home-stat-number {
+  color: #f8fafc;
+  font-size: clamp(44px, 4.4vw, 64px);
+  line-height: 0.95;
+}
+
+body.home-page .hero.home-video-hero + .content-area .home-stat-tile strong {
+  color: #a8d8bc;
+}
+
+body.home-page .hero.home-video-hero + .content-area .home-stat-tile span:last-child {
+  color: rgba(203, 213, 225, 0.72);
+  font-size: 12px;
+  line-height: 1.42;
+}
+
+html[data-theme='light'] body.home-page .hero.home-video-hero + .content-area .home-stats-card {
+  border-color: rgba(32, 48, 42, 0.18);
+  background: rgba(248, 250, 249, 0.88);
+  box-shadow:
+    0 24px 58px rgba(22, 30, 27, 0.12),
+    inset 0 1px 0 rgba(255, 255, 255, 0.96);
+}
+
+html[data-theme='light'] body.home-page .hero.home-video-hero + .content-area .home-stats-card .home-insight-head {
+  border-right-color: rgba(32, 48, 42, 0.13);
+}
+
+html[data-theme='light'] body.home-page .hero.home-video-hero + .content-area .home-stats-card .home-insight-head h2,
+html[data-theme='light'] body.home-page .hero.home-video-hero + .content-area .home-stat-number {
+  color: #0f1b30;
+}
+
+html[data-theme='light'] body.home-page .hero.home-video-hero + .content-area .home-stats-card .home-insight-head > p,
+html[data-theme='light'] body.home-page .hero.home-video-hero + .content-area .home-stat-tile span:last-child {
+  color: #53627a;
+}
+
+html[data-theme='light'] body.home-page .hero.home-video-hero + .content-area .home-stat-tile,
+html[data-theme='light'] body.home-page .hero.home-video-hero + .content-area .home-stats-grid > .home-stat-tile:first-child {
+  background: rgba(255, 255, 255, 0.34);
+}
+
+html[data-theme='light'] body.home-page .hero.home-video-hero + .content-area .home-stats-grid > .home-stat-tile + .home-stat-tile {
+  border-left-color: rgba(32, 48, 42, 0.13);
+}
+
+@media (max-width: 1024px) {
+  body.home-page .hero.home-video-hero {
+    display: flex;
+    width: calc(100% - (var(--page-gutter-mobile) * 2));
+    min-height: 430px;
+    margin-top: 18px;
+    padding: 42px clamp(26px, 6vw, 48px) 78px;
+  }
+
+  body.home-page .hero.home-video-hero .hero-content {
+    width: min(70%, 620px);
+  }
+
+  body.home-page .hero.home-video-hero + .content-area > .home-stats {
+    width: calc(100% - 20px);
+    margin-top: -52px;
+  }
+}
+
+@media (max-width: 768px) {
+  body.home-page .hero.home-video-hero {
+    min-height: 470px;
+    align-items: flex-start;
+    margin-top: 18px;
+    padding: 38px 20px 74px;
+    border-radius: 20px;
+  }
+
+  body.home-page .hero.home-video-hero::before {
+    background:
+      linear-gradient(90deg, rgba(6, 10, 12, 0.8) 0%, rgba(6, 10, 12, 0.56) 64%, rgba(6, 10, 12, 0.26) 100%),
+      linear-gradient(0deg, rgba(5, 8, 10, 0.58), rgba(5, 8, 10, 0.12) 72%);
+  }
+
+  body.home-page .home-hero-video video {
+    object-position: center;
+  }
+
+  body.home-page .hero.home-video-hero .hero-content {
+    width: 100%;
+    max-width: none;
+    align-items: flex-start;
+    gap: 13px;
+    text-align: left;
+  }
+
+  body.home-page .hero.home-video-hero .home-hero-kicker {
+    text-align: left;
+  }
+
+  body.home-page .hero.home-video-hero h1 {
+    max-width: 11ch;
+    font-size: clamp(38px, 11vw, 48px);
+    text-align: left;
+  }
+
+  body.home-page .hero.home-video-hero p {
+    max-width: 34ch;
+    font-size: 15px;
+    line-height: 1.48;
+    text-align: left;
+  }
+
+  body.home-page .hero.home-video-hero .home-hero-actions {
+    display: grid;
+    width: 100%;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 8px;
+    justify-content: stretch;
+  }
+
+  body.home-page .hero.home-video-hero :is(.home-primary-action, .home-secondary-action) {
+    width: 100%;
+  }
+
+  body.home-page .hero.home-video-hero + .content-area > .home-stats {
+    width: calc(100% - 20px);
+    margin-top: -34px;
+  }
+
+  body.home-page .hero.home-video-hero + .content-area .home-stats-card {
+    grid-template-columns: minmax(0, 1fr);
+    border-radius: 20px;
+  }
+
+  body.home-page .hero.home-video-hero + .content-area .home-stats-card .home-insight-head {
+    display: flex;
+    grid-column: 1;
+    align-items: center;
+    gap: 10px;
+    padding: 24px 20px 20px;
+    border-right: 0;
+    border-bottom: 1px solid rgba(148, 163, 184, 0.18);
+    text-align: center;
+  }
+
+  body.home-page .hero.home-video-hero + .content-area .home-stats-card .home-insight-head h2 {
+    max-width: 17ch;
+    font-size: clamp(26px, 8vw, 34px) !important;
+    text-align: center;
+  }
+
+  body.home-page .hero.home-video-hero + .content-area .home-stats-card .home-insight-head > p {
+    max-width: 44ch;
+    padding-left: 14px;
+    border-left: 3px solid var(--section-accent);
+    font-size: 12.5px;
+    text-align: left;
+  }
+
+  body.home-page .hero.home-video-hero + .content-area .home-stats-grid {
+    grid-column: 1;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  body.home-page .hero.home-video-hero + .content-area .home-stat-tile,
+  body.home-page .hero.home-video-hero + .content-area .home-stats-grid > .home-stat-tile:first-child {
+    min-height: 118px;
+    justify-items: center;
+    padding: 18px 12px;
+    text-align: center;
+  }
+
+  body.home-page .hero.home-video-hero + .content-area .home-stat-number {
+    font-size: 40px;
+  }
+
+  body.home-page .hero.home-video-hero + .content-area .home-stat-tile span:last-child {
+    display: none;
+  }
+
+  html[data-theme='light'] body.home-page .hero.home-video-hero + .content-area .home-stats-card .home-insight-head {
+    border-bottom-color: rgba(32, 48, 42, 0.13);
+  }
+
+  body.home-page .content-area {
+    gap: 50px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body.home-page .home-hero-video video {
+    animation: none;
+  }
+}
+
+/* =============================================================
+   Unified hero/header overlap
+   Let country artwork and brand screenshots continue beneath the floating
+   header, matching the homepage composition while keeping copy unobscured.
+   ============================================================= */
+body[data-country] .hero.country-hero-with-cards,
+body[data-brand].has-brand-sticky-layout
+  .brand-sticky-review-layout:has(> .brand-profile-showcase) {
+  padding-top: 18px;
+}
+
+/* =============================================================
+   Unified hero media geometry and glass treatment
+   ============================================================= */
+:is(body.home-page, body[data-country], body[data-brand]) {
+  --unified-hero-media-height: clamp(340px, 26.4vw, 380px);
+  --unified-hero-lower-bg: linear-gradient(145deg, rgba(28, 34, 38, 0.5), rgba(17, 22, 25, 0.34));
+  --unified-hero-lower-border: rgba(148, 163, 184, 0.3);
+  --unified-hero-lower-shadow: 0 24px 58px rgba(0, 0, 0, 0.22),
+    inset 0 1px 0 rgba(255, 255, 255, 0.07);
+}
+
+html[data-theme='light'] :is(body.home-page, body[data-country], body[data-brand]) {
+  --unified-hero-lower-bg: linear-gradient(145deg, rgba(255, 255, 255, 0.62), rgba(244, 248, 246, 0.46));
+  --unified-hero-lower-border: rgba(32, 48, 42, 0.18);
+  --unified-hero-lower-shadow: 0 24px 58px rgba(22, 30, 27, 0.12),
+    inset 0 1px 0 rgba(255, 255, 255, 0.84);
+}
+
+body.home-page .hero.home-video-hero,
+body[data-country] .hero.country-hero-with-cards .country-hero-rail,
+body[data-brand] .brand-profile-showcase__media {
+  height: var(--unified-hero-media-height);
+  min-height: var(--unified-hero-media-height) !important;
+  border-radius: 0 0 24px 24px;
+}
+
+body.home-page .hero.home-video-hero {
+  padding-top: clamp(58px, 5vw, 72px);
+  padding-bottom: clamp(28px, 3.2vw, 44px);
+}
+
+body.home-page .hero.home-video-hero::before {
+  background:
+    linear-gradient(90deg, rgba(6, 10, 12, 0.62) 0%, rgba(6, 10, 12, 0.34) 48%, rgba(6, 10, 12, 0.1) 100%),
+    linear-gradient(180deg, rgba(5, 8, 10, 0.04), rgba(5, 8, 10, 0.16));
+}
+
+body.home-page .hero.home-video-hero::after {
+  display: none;
+}
+
+body.home-page .home-hero-video video {
+  filter: brightness(1.06) saturate(1.1) contrast(1.02);
+}
+
+body.home-page .hero.home-video-hero + .content-area .home-stats-card,
+body[data-country] .country-hero-cards .section-head,
+body[data-country] .country-hero-cards > .intro,
+body[data-brand] .brand-profile-showcase__bar {
+  border-color: var(--unified-hero-lower-border);
+  background: var(--unified-hero-lower-bg) !important;
+  box-shadow: var(--unified-hero-lower-shadow);
+  -webkit-backdrop-filter: blur(18px) saturate(1.08) !important;
+  backdrop-filter: blur(18px) saturate(1.08) !important;
+}
+
+body[data-brand] .brand-profile-showcase__media {
+  position: relative;
+  isolation: isolate;
+  padding: 72px clamp(10px, 1.1vw, 16px) clamp(10px, 1.1vw, 16px);
+  background: #090b0d;
+}
+
+body[data-brand] .brand-profile-showcase__media::before {
+  content: '';
+  position: absolute;
+  inset: -20px;
+  z-index: -2;
+  background-image: var(--brand-showcase-image);
+  background-position: center top;
+  background-size: cover;
+  filter: blur(24px) saturate(0.92) brightness(0.62);
+  opacity: 0.9;
+  pointer-events: none;
+}
+
+body[data-brand] .brand-profile-showcase .brand-why-media {
+  border-radius: 0 0 18px 18px;
+}
+
+body[data-brand] .brand-profile-showcase .brand-why-media img {
+  object-position: center top;
+}
+
+@media (max-width: 768px) {
+  :is(body.home-page, body[data-country], body[data-brand]) {
+    --unified-hero-media-height: 400px;
+    --unified-hero-lower-bg: linear-gradient(145deg, rgba(42, 48, 52, 0.78), rgba(31, 37, 41, 0.66));
+  }
+
+  html[data-theme='light'] :is(body.home-page, body[data-country], body[data-brand]) {
+    --unified-hero-lower-bg: linear-gradient(145deg, rgba(255, 255, 255, 0.82), rgba(240, 246, 242, 0.72));
+  }
+
+  body.home-page .hero.home-video-hero,
+  body[data-country] .hero.country-hero-with-cards .country-hero-rail,
+  body[data-brand] .brand-profile-showcase__media {
+    border-radius: 0 0 18px 18px;
+  }
+
+  body.home-page .hero.home-video-hero {
+    padding: 66px 20px 24px;
+  }
+
+  body.home-page .hero.home-video-hero .hero-content {
+    gap: 10px;
+  }
+
+  body.home-page .hero.home-video-hero h1 {
+    font-size: clamp(34px, 9.4vw, 42px);
+  }
+
+  body.home-page .hero.home-video-hero p {
+    font-size: 13.5px;
+    line-height: 1.42;
+  }
+
+  body.home-page .hero.home-video-hero .home-hero-actions {
+    gap: 7px;
+  }
+
+  body.home-page .hero.home-video-hero :is(.home-primary-action, .home-secondary-action) {
+    min-height: 40px;
+    padding-top: 9px;
+    padding-bottom: 9px;
+  }
+
+  body[data-brand] .brand-profile-showcase__media {
+    padding: 64px 8px 8px;
+  }
+
+  body[data-brand] .brand-profile-showcase .brand-why-media {
+    border-radius: 0 0 14px 14px;
+  }
+}
+
+/* Keep the homepage discovery panel closer to the compact country-hero rail. */
+body.home-page .hero.home-video-hero + .content-area .home-stats-card .home-insight-head {
+  gap: 7px;
+  padding: 20px clamp(22px, 2.2vw, 28px);
+}
+
+body.home-page .hero.home-video-hero + .content-area .home-stats-card .home-insight-head h2 {
+  font-size: clamp(26px, 2.05vw, 34px) !important;
+  line-height: 1;
+}
+
+body.home-page .hero.home-video-hero + .content-area .home-stats-card .home-insight-head > p {
+  font-size: 12px;
+  line-height: 1.4;
+}
+
+body.home-page .hero.home-video-hero + .content-area .home-stat-tile,
+body.home-page .hero.home-video-hero + .content-area .home-stats-grid > .home-stat-tile:first-child {
+  gap: 5px;
+  padding: 20px clamp(22px, 2.2vw, 28px);
+}
+
+body.home-page .hero.home-video-hero + .content-area .home-stat-number {
+  font-size: clamp(42px, 3.8vw, 56px);
+}
+
+@media (max-width: 768px) {
+  body.home-page .hero.home-video-hero + .content-area .home-stats-card .home-insight-head {
+    padding: 20px 18px 16px;
+  }
+
+  body.home-page .hero.home-video-hero + .content-area .home-stat-tile,
+  body.home-page .hero.home-video-hero + .content-area .home-stats-grid > .home-stat-tile:first-child {
+    min-height: 100px;
+    padding: 14px 10px;
+  }
+
+  body.home-page .hero.home-video-hero + .content-area .home-stat-number {
+    font-size: 36px;
+  }
+}
+
+/* =============================================================
+   Top-rated hero showcase
+   Uses the same media height, header overlap and split glass rail as the
+   homepage and country guides while preserving every locale's copy.
+   ============================================================= */
+body[data-page='top-rated'] {
+  --unified-hero-media-height: clamp(340px, 26.4vw, 380px);
+  --unified-hero-lower-bg: linear-gradient(145deg, rgba(28, 34, 38, 0.5), rgba(17, 22, 25, 0.34));
+  --unified-hero-lower-border: rgba(148, 163, 184, 0.3);
+  --unified-hero-lower-shadow: 0 24px 58px rgba(0, 0, 0, 0.22),
+    inset 0 1px 0 rgba(255, 255, 255, 0.07);
+  --top-rated-hero-image: url('https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto,w_2000/v1790437606/spincresta/pages/top-rated-page/top-rated-hero_oufnpj.webp');
+}
+
+html[data-theme='light'] body[data-page='top-rated'] {
+  --unified-hero-lower-bg: linear-gradient(145deg, rgba(255, 255, 255, 0.62), rgba(244, 248, 246, 0.46));
+  --unified-hero-lower-border: rgba(32, 48, 42, 0.18);
+  --unified-hero-lower-shadow: 0 24px 58px rgba(22, 30, 27, 0.12),
+    inset 0 1px 0 rgba(255, 255, 255, 0.84);
+}
+
+body[data-page='top-rated'] main {
+  overflow-x: clip;
+}
+
+body[data-page='top-rated'] .hero.container {
+  position: relative;
+  isolation: isolate;
+  display: flex;
+  width: min(calc(100% - (var(--page-gutter) * 2)), 1280px);
+  max-width: 1280px;
+  height: var(--unified-hero-media-height);
+  min-height: var(--unified-hero-media-height);
+  align-items: center;
+  justify-content: flex-start;
+  margin: 18px auto 0;
+  padding: clamp(94px, 7.2vw, 112px) clamp(40px, 5vw, 72px) clamp(32px, 3.8vw, 52px);
+  overflow: hidden;
+  border: 1px solid rgba(148, 163, 184, 0.28);
+  border-radius: 0 0 24px 24px;
+  background-color: #0d1214;
+  background-image: var(--top-rated-hero-image);
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+  box-shadow:
+    0 28px 72px rgba(0, 0, 0, 0.26),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+
+body[data-page='top-rated'] .hero.container::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  height: auto;
+  background:
+    linear-gradient(90deg, rgba(7, 11, 13, 0.93) 0%, rgba(7, 11, 13, 0.76) 43%, rgba(7, 11, 13, 0.22) 74%, rgba(7, 11, 13, 0.06) 100%),
+    linear-gradient(180deg, rgba(5, 8, 10, 0.08), rgba(5, 8, 10, 0.24));
+  filter: none;
+  opacity: 1;
+  pointer-events: none;
+}
+
+html[data-theme='light'] body[data-page='top-rated'] .hero.container::before {
+  background:
+    linear-gradient(90deg, rgba(7, 11, 13, 0.86) 0%, rgba(7, 11, 13, 0.62) 43%, rgba(7, 11, 13, 0.16) 74%, rgba(7, 11, 13, 0.035) 100%),
+    linear-gradient(180deg, rgba(5, 8, 10, 0.05), rgba(5, 8, 10, 0.18));
+}
+
+body[data-page='top-rated'] .hero.container .hero-content {
+  position: relative;
+  z-index: 1;
+  align-items: flex-start;
+  gap: clamp(16px, 1.7vw, 22px);
+  width: min(68%, 780px);
+  max-width: 780px;
+  text-align: left;
+}
+
+body[data-page='top-rated'] .hero.container h1 {
+  max-width: 13ch;
+  margin: 0;
+  color: #f8fafc;
+  font-size: clamp(48px, 4.4vw, 68px);
+  font-weight: 700;
+  line-height: 0.98;
+  letter-spacing: -0.04em;
+  text-align: left;
+  text-wrap: balance;
+  text-shadow: 0 3px 24px rgba(0, 0, 0, 0.62);
+}
+
+body[data-page='top-rated'] .hero.container p {
+  max-width: 58ch;
+  margin: 0;
+  color: #d2dbea;
+  font-size: clamp(15px, 1.15vw, 18px);
+  line-height: 1.55;
+  text-align: left;
+  text-shadow: 0 2px 16px rgba(0, 0, 0, 0.82);
+}
+
+body[data-page='top-rated'] .hero.container .hero-banner {
+  display: none;
+}
+
+body[data-page='top-rated'] .hero.container + .content {
+  position: relative;
+  z-index: 3;
+}
+
+body[data-page='top-rated'] .hero.container + .content > .container:has(> #top-rated-cards) {
+  display: grid;
+  width: min(calc(100% - (var(--page-gutter) * 2)), 1232px);
+  max-width: 1232px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  margin: 0 auto;
+  padding: 0;
+}
+
+body[data-page='top-rated'] .hero.container + .content .section-head,
+body[data-page='top-rated'] .hero.container + .content .intro {
+  min-width: 0;
+  min-height: 134px;
+  margin-top: -72px;
+  border: 1px solid var(--unified-hero-lower-border);
+  background: var(--unified-hero-lower-bg);
+  box-shadow: var(--unified-hero-lower-shadow);
+  -webkit-backdrop-filter: blur(18px) saturate(1.08);
+  backdrop-filter: blur(18px) saturate(1.08);
+}
+
+body[data-page='top-rated'] .hero.container + .content .section-head {
+  display: flex;
+  align-items: center;
+  margin-bottom: 0;
+  padding: 22px clamp(24px, 3vw, 42px);
+  border-right: 0;
+  border-radius: 20px 0 0 20px;
+  text-align: left;
+}
+
+body[data-page='top-rated'] .hero.container + .content .section-head h2 {
+  max-width: 21ch;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: clamp(28px, 2.4vw, 36px);
+  line-height: 1.04;
+  letter-spacing: -0.035em;
+  text-align: left;
+  text-wrap: balance;
+}
+
+body[data-page='top-rated'] .hero.container + .content .intro {
+  position: relative;
+  display: flex;
+  max-width: none;
+  align-items: center;
+  gap: clamp(18px, 2vw, 28px);
+  margin-right: 0;
+  margin-bottom: 0;
+  margin-left: 0;
+  padding: 22px clamp(24px, 3vw, 42px);
+  border-left: 0;
+  border-radius: 0 20px 20px 0;
+  color: var(--text-muted);
+  font-size: clamp(15px, 1.05vw, 17px);
+  line-height: 1.58;
+  text-align: left;
+}
+
+body[data-page='top-rated'] .hero.container + .content .intro::before {
+  content: '';
+  flex: 0 0 4px;
+  width: 4px;
+  height: clamp(54px, 4vw, 68px);
+  border-radius: 999px;
+  background: linear-gradient(180deg, var(--section-accent), var(--gold));
+  box-shadow: 0 0 20px color-mix(in srgb, var(--section-accent) 30%, transparent);
+}
+
+body[data-page='top-rated'] .hero.container + .content #top-rated-cards {
+  grid-column: 1 / -1;
+  margin-top: clamp(30px, 3vw, 44px);
+}
+
+@media (max-width: 768px) {
+  body[data-page='top-rated'] {
+    --unified-hero-media-height: 400px;
+    --unified-hero-lower-bg: linear-gradient(145deg, rgba(42, 48, 52, 0.78), rgba(31, 37, 41, 0.66));
+  }
+
+  html[data-theme='light'] body[data-page='top-rated'] {
+    --unified-hero-lower-bg: linear-gradient(145deg, rgba(255, 255, 255, 0.82), rgba(240, 246, 242, 0.72));
+  }
+
+  body[data-page='top-rated'] .hero.container {
+    width: calc(100% - (var(--page-gutter-mobile) * 2));
+    max-width: calc(100% - (var(--page-gutter-mobile) * 2));
+    min-height: var(--unified-hero-media-height);
+    align-items: center;
+    margin-top: 18px;
+    padding: 98px 20px 30px;
+    border-radius: 0 0 18px 18px;
+    background-position: center center;
+  }
+
+  body[data-page='top-rated'] .hero.container::before,
+  html[data-theme='light'] body[data-page='top-rated'] .hero.container::before {
+    background:
+      linear-gradient(90deg, rgba(7, 11, 13, 0.72) 0%, rgba(7, 11, 13, 0.5) 60%, rgba(7, 11, 13, 0.22) 100%),
+      linear-gradient(0deg, rgba(5, 8, 10, 0.54) 0%, rgba(5, 8, 10, 0.08) 70%);
+  }
+
+  body[data-page='top-rated'] .hero.container .hero-content {
+    width: 100%;
+    max-width: none;
+    gap: 14px;
+  }
+
+  body[data-page='top-rated'] .hero.container h1 {
+    max-width: 12ch;
+    font-size: clamp(34px, 9.4vw, 42px);
+    line-height: 1;
+  }
+
+  body[data-page='top-rated'] .hero.container p {
+    max-width: 34ch;
+    font-size: 13.5px;
+    line-height: 1.45;
+  }
+
+  body[data-page='top-rated'] .hero.container + .content > .container:has(> #top-rated-cards) {
+    width: calc(100% - 20px);
+    max-width: calc(100% - 20px);
+    grid-template-columns: minmax(0, 1fr);
+    margin: -44px auto 0;
+  }
+
+  body[data-page='top-rated'] .hero.container + .content .section-head,
+  body[data-page='top-rated'] .hero.container + .content .intro {
+    width: 100%;
+    min-height: 0;
+    margin: 0;
+  }
+
+  body[data-page='top-rated'] .hero.container + .content .section-head {
+    padding: 20px 20px 10px;
+    border-right: 1px solid var(--unified-hero-lower-border);
+    border-bottom: 0;
+    border-radius: 18px 18px 0 0;
+  }
+
+  body[data-page='top-rated'] .hero.container + .content .section-head h2 {
+    max-width: 20ch;
+    font-size: clamp(24px, 6.8vw, 29px);
+    line-height: 1.04;
+  }
+
+  body[data-page='top-rated'] .hero.container + .content .intro {
+    gap: 14px;
+    margin-bottom: 18px;
+    padding: 10px 20px 22px;
+    border-top: 0;
+    border-left: 1px solid var(--unified-hero-lower-border);
+    border-radius: 0 0 18px 18px;
+    font-size: 13.5px;
+    line-height: 1.45;
+  }
+
+  body[data-page='top-rated'] .hero.container + .content .intro::before {
+    height: 54px;
+  }
+
+  body[data-page='top-rated'] .hero.container + .content #top-rated-cards {
+    margin-top: 10px;
+  }
+}
+
+/* =============================================================
+   Editorial page hero family
+   Page photography shares the country/home geometry while each page keeps
+   its own localized copy and navigation controls.
+   ============================================================= */
+body[data-page='exclusive-offers'] {
+  --editorial-hero-image: url('https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto,w_2000/v1790431955/spincresta/pages/exclusive-offers-page/exclusive-offers-hero_stovxp.webp');
+}
+
+body[data-page='new-casinos'] {
+  --editorial-hero-image: url('https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto,w_2000/v1790432072/spincresta/pages/new-casinos-page/new-casinos-hero_vfw8od.webp');
+}
+
+body[data-page='online-casinos'] {
+  --editorial-hero-image: url('https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto,w_2000/v1790432122/spincresta/pages/online-casinos-page/online-casinos-hero_rkh6y2.webp');
+}
+
+body.casinos-page {
+  --editorial-hero-image: url('https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto,w_2000/v1790432859/spincresta/pages/casinos-and-betting/casinos-and-betting-hero_yzo0p4.webp');
+}
+
+body.payment-methods-page {
+  --editorial-hero-image: url('https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto,w_2000/v1790433073/spincresta/pages/payment-methods/payment-methods-hero_xbeflp.webp');
+}
+
+body.home-page[data-page='partners'] {
+  --editorial-hero-image: url('https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto,w_2000/v1790433260/spincresta/pages/partners/partners-hero_uj9ici.webp');
+}
+
+body.home-page[data-page='about'] {
+  --editorial-hero-image: url('https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto,w_2000/v1790433605/spincresta/pages/about/about-hero_c30xl8.webp');
+}
+
+body.home-page[data-page='privacy'] {
+  --editorial-hero-image: url('https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto,w_2000/v1790433896/spincresta/pages/privacy-policy-page/privacy-policy-hero_x2q8bk.webp');
+}
+
+body.home-page[data-page='responsible-gambling'] {
+  --editorial-hero-image: url('https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto,w_2000/v1790434003/spincresta/pages/responsible-gambling-page/responsible-gambling-hero_urspnd.webp');
+}
+
+body.blog-page[data-page='blog'] {
+  --editorial-hero-image: url('https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto,w_2000/v1790434278/spincresta/pages/blog-page/blog-hero_vdkklc.webp');
+}
+
+:is(
+    body[data-page='exclusive-offers'],
+    body[data-page='new-casinos'],
+    body[data-page='online-casinos'],
+    body.casinos-page,
+    body.payment-methods-page,
+    body.home-page[data-page='partners'],
+    body.home-page[data-page='about'],
+    body.home-page[data-page='privacy'],
+    body.home-page[data-page='responsible-gambling'],
+    body.blog-page[data-page='blog']
+  ) {
+  --editorial-hero-height: clamp(340px, 26.4vw, 380px);
+}
+
+:is(
+    body[data-page='exclusive-offers'],
+    body[data-page='new-casinos'],
+    body[data-page='online-casinos'],
+    body.casinos-page,
+    body.payment-methods-page,
+    body.home-page[data-page='partners'],
+    body.home-page[data-page='about'],
+    body.home-page[data-page='privacy'],
+    body.home-page[data-page='responsible-gambling']
+  ) main {
+  overflow-x: clip;
+}
+
+:is(
+    body[data-page='exclusive-offers'],
+    body[data-page='new-casinos'],
+    body[data-page='online-casinos'],
+    body.casinos-page,
+    body.payment-methods-page,
+    body.home-page[data-page='partners'],
+    body.home-page[data-page='about'],
+    body.home-page[data-page='privacy'],
+    body.home-page[data-page='responsible-gambling']
+  ) .hero.container {
+  position: relative;
+  isolation: isolate;
+  display: flex;
+  width: min(calc(100% - (var(--page-gutter) * 2)), 1280px);
+  max-width: 1280px;
+  height: var(--editorial-hero-height);
+  min-height: var(--editorial-hero-height);
+  align-items: center;
+  justify-content: flex-start;
+  margin: 18px auto 0;
+  padding: clamp(94px, 7.2vw, 112px) clamp(40px, 5vw, 72px) clamp(30px, 3.5vw, 48px);
+  overflow: hidden;
+  border: 1px solid rgba(148, 163, 184, 0.28);
+  border-radius: 0 0 24px 24px;
+  background-color: #0d1214;
+  background-image: var(--editorial-hero-image);
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+  box-shadow:
+    0 28px 72px rgba(0, 0, 0, 0.26),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+
+:is(
+    body[data-page='exclusive-offers'],
+    body[data-page='new-casinos'],
+    body[data-page='online-casinos'],
+    body.casinos-page,
+    body.payment-methods-page,
+    body.home-page[data-page='partners'],
+    body.home-page[data-page='about'],
+    body.home-page[data-page='privacy'],
+    body.home-page[data-page='responsible-gambling']
+  ) .hero.container::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  height: auto;
+  background:
+    linear-gradient(90deg, rgba(7, 11, 13, 0.93) 0%, rgba(7, 11, 13, 0.75) 43%, rgba(7, 11, 13, 0.2) 74%, rgba(7, 11, 13, 0.055) 100%),
+    linear-gradient(180deg, rgba(5, 8, 10, 0.08), rgba(5, 8, 10, 0.24));
+  filter: none;
+  opacity: 1;
+  pointer-events: none;
+}
+
+html[data-theme='light']
+  :is(
+    body[data-page='exclusive-offers'],
+    body[data-page='new-casinos'],
+    body[data-page='online-casinos'],
+    body.casinos-page,
+    body.payment-methods-page,
+    body.home-page[data-page='partners'],
+    body.home-page[data-page='about'],
+    body.home-page[data-page='privacy'],
+    body.home-page[data-page='responsible-gambling']
+  ) .hero.container::before {
+  background:
+    linear-gradient(90deg, rgba(7, 11, 13, 0.86) 0%, rgba(7, 11, 13, 0.61) 43%, rgba(7, 11, 13, 0.15) 74%, rgba(7, 11, 13, 0.03) 100%),
+    linear-gradient(180deg, rgba(5, 8, 10, 0.05), rgba(5, 8, 10, 0.18));
+}
+
+:is(
+    body[data-page='exclusive-offers'],
+    body[data-page='new-casinos'],
+    body[data-page='online-casinos'],
+    body.casinos-page,
+    body.payment-methods-page,
+    body.home-page[data-page='partners'],
+    body.home-page[data-page='about'],
+    body.home-page[data-page='privacy'],
+    body.home-page[data-page='responsible-gambling']
+  ) .hero.container > .hero-content {
+  position: relative;
+  z-index: 2;
+  align-items: flex-start;
+  gap: clamp(14px, 1.5vw, 20px);
+  width: min(64%, 760px);
+  max-width: 760px;
+  text-align: left;
+}
+
+:is(
+    body[data-page='exclusive-offers'],
+    body[data-page='new-casinos'],
+    body[data-page='online-casinos'],
+    body.casinos-page,
+    body.payment-methods-page,
+    body.home-page[data-page='partners'],
+    body.home-page[data-page='about'],
+    body.home-page[data-page='privacy'],
+    body.home-page[data-page='responsible-gambling']
+  ) .hero.container h1 {
+  max-width: 13ch;
+  margin: 0;
+  color: #f8fafc;
+  font-size: clamp(46px, 4.15vw, 64px);
+  font-weight: 700;
+  line-height: 0.98;
+  letter-spacing: -0.04em;
+  text-align: left;
+  text-wrap: balance;
+  text-shadow: 0 3px 24px rgba(0, 0, 0, 0.62);
+}
+
+:is(
+    body[data-page='exclusive-offers'],
+    body[data-page='new-casinos'],
+    body[data-page='online-casinos'],
+    body.casinos-page,
+    body.payment-methods-page,
+    body.home-page[data-page='partners'],
+    body.home-page[data-page='about'],
+    body.home-page[data-page='privacy'],
+    body.home-page[data-page='responsible-gambling']
+  ) .hero.container .hero-content > p {
+  max-width: 58ch;
+  margin: 0;
+  color: #d2dbea;
+  font-size: clamp(15px, 1.12vw, 18px);
+  line-height: 1.52;
+  text-align: left;
+  text-shadow: 0 2px 16px rgba(0, 0, 0, 0.82);
+}
+
+:is(body[data-page='exclusive-offers'], body[data-page='new-casinos']) .hero.container .hero-banner {
+  display: none;
+}
+
+/* Compact controls remain part of the A-Z hero without increasing its media height. */
+body.casinos-page .hero.container > .hero-content {
+  gap: 10px;
+  width: min(76%, 900px);
+  max-width: 900px;
+}
+
+body.casinos-page[class] .hero.container {
+  align-items: flex-start !important;
+  justify-content: flex-start !important;
+  margin-bottom: 76px;
+  overflow: visible;
+}
+
+body.casinos-page .hero.container::after {
+  content: '';
+  position: absolute;
+  right: 24px;
+  bottom: -58px;
+  left: 24px;
+  z-index: 1;
+  height: 70px;
+  border: 1px solid rgba(148, 163, 184, 0.26);
+  border-radius: 18px;
+  background: linear-gradient(145deg, rgba(28, 34, 38, 0.72), rgba(17, 22, 25, 0.58));
+  box-shadow:
+    0 22px 48px rgba(0, 0, 0, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  -webkit-backdrop-filter: blur(18px) saturate(1.08);
+  backdrop-filter: blur(18px) saturate(1.08);
+}
+
+body.casinos-page .hero.container h1 {
+  font-size: clamp(42px, 3.8vw, 58px);
+}
+
+body.casinos-page .hero.container .filters-wrap {
+  position: absolute;
+  bottom: -48px;
+  left: 48px;
+  z-index: 3;
+  justify-content: flex-start;
+  margin-top: 2px;
+}
+
+body.casinos-page .hero.container .alpha-nav {
+  position: absolute;
+  right: 48px;
+  bottom: -47px;
+  left: 318px;
+  z-index: 3;
+  display: flex;
+  width: auto;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  gap: 5px;
+  padding: 2px 0 6px;
+  overflow-x: auto;
+  overscroll-behavior-inline: contain;
+  scrollbar-width: thin;
+}
+
+body.casinos-page .hero.container .alpha-nav .view-all {
+  flex: 0 0 auto;
+  min-width: 30px;
+  min-height: 30px;
+  padding: 5px 8px;
+}
+
+/* About and partnership metrics become a restrained glass rail on the image. */
+:is(body.home-page[data-page='partners'], body.home-page[data-page='about']) .hero.container > .hero-content {
+  gap: 10px;
+  width: min(54%, 660px);
+}
+
+:is(body.home-page[data-page='partners'], body.home-page[data-page='about']) .hero.container .home-hero-kicker {
+  display: none;
+}
+
+:is(body.home-page[data-page='partners'], body.home-page[data-page='about']) .hero.container h1 {
+  font-size: clamp(44px, 3.7vw, 54px);
+}
+
+:is(
+    body.home-page[data-page='partners'],
+    body.home-page[data-page='about'],
+    body.home-page[data-page='privacy'],
+    body.home-page[data-page='responsible-gambling']
+  ) .hero.container .home-hero-actions {
+  position: relative;
+  z-index: 3;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  gap: 8px;
+  margin-top: 2px;
+}
+
+:is(
+    body.home-page[data-page='partners'],
+    body.home-page[data-page='about'],
+    body.home-page[data-page='privacy'],
+    body.home-page[data-page='responsible-gambling']
+  ) .hero.container .home-primary-action {
+  border-color: var(--gold);
+  background: var(--gold);
+  color: #191400;
+  box-shadow: 0 12px 26px rgba(255, 223, 0, 0.18);
+}
+
+:is(
+    body.home-page[data-page='partners'],
+    body.home-page[data-page='about'],
+    body.home-page[data-page='privacy'],
+    body.home-page[data-page='responsible-gambling']
+  ) .hero.container .home-secondary-action {
+  border-color: rgba(255, 255, 255, 0.34);
+  background: rgba(12, 17, 20, 0.34);
+  color: #f8fafc;
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+}
+
+:is(body.home-page[data-page='partners'], body.home-page[data-page='about']) .hero.container .home-insight-card {
+  position: absolute;
+  right: clamp(24px, 3.5vw, 52px);
+  bottom: clamp(24px, 3vw, 40px);
+  z-index: 2;
+  width: min(39%, 460px);
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 18px;
+  background: linear-gradient(145deg, rgba(28, 34, 38, 0.72), rgba(17, 22, 25, 0.56));
+  box-shadow:
+    0 24px 58px rgba(0, 0, 0, 0.22),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  -webkit-backdrop-filter: blur(18px) saturate(1.08);
+  backdrop-filter: blur(18px) saturate(1.08);
+}
+
+:is(body.home-page[data-page='partners'], body.home-page[data-page='about']) .hero.container .home-stats-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0;
+}
+
+:is(body.home-page[data-page='partners'], body.home-page[data-page='about']) .hero.container .home-stat-tile {
+  min-height: 132px;
+  gap: 4px;
+  padding: 18px;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+:is(body.home-page[data-page='partners'], body.home-page[data-page='about'])
+  .hero.container .home-stat-tile + .home-stat-tile {
+  border-left: 1px solid rgba(255, 255, 255, 0.14);
+}
+
+:is(body.home-page[data-page='partners'], body.home-page[data-page='about']) .hero.container .home-stat-number {
+  color: #f8fafc;
+  font-size: clamp(34px, 3vw, 46px);
+}
+
+:is(body.home-page[data-page='partners'], body.home-page[data-page='about']) .hero.container .home-stat-tile strong {
+  color: #a8d8bc;
+}
+
+:is(body.home-page[data-page='partners'], body.home-page[data-page='about']) .hero.container .home-stat-tile span:last-child {
+  display: none;
+}
+
+/* Responsible-gambling essentials stay visible as four concise glass notes. */
+body.home-page[data-page='responsible-gambling'] .hero.container > .hero-content {
+  width: min(48%, 590px);
+}
+
+body.home-page[data-page='responsible-gambling'] .hero.container > .faq-grid {
+  position: absolute;
+  right: clamp(24px, 3.5vw, 52px);
+  bottom: clamp(24px, 3vw, 38px);
+  z-index: 2;
+  display: grid;
+  width: min(44%, 520px);
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+}
+
+body.home-page[data-page='responsible-gambling'] .hero.container > .faq-grid .faq-card {
+  min-height: 92px;
+  padding: 13px 14px;
+  border-color: rgba(255, 255, 255, 0.18);
+  background: rgba(20, 26, 30, 0.62);
+  box-shadow: none;
+  -webkit-backdrop-filter: blur(16px);
+  backdrop-filter: blur(16px);
+}
+
+body.home-page[data-page='responsible-gambling'] .hero.container > .faq-grid h3 {
+  color: #f8fafc;
+  font-size: 13px;
+  line-height: 1.22;
+}
+
+body.home-page[data-page='responsible-gambling'] .hero.container > .faq-grid p {
+  display: -webkit-box;
+  margin-top: 5px;
+  overflow: hidden;
+  color: #cbd5e1;
+  font-size: 10px;
+  line-height: 1.35;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+
+/* The blog uses its existing semantic hero, now inside the same media frame. */
+body.blog-page[data-page='blog'] .blog-shell {
+  width: 100%;
+  max-width: none;
+  padding-top: 18px;
+}
+
+body.blog-page[data-page='blog'] .blog-hero {
+  position: relative;
+  isolation: isolate;
+  display: flex;
+  width: min(calc(100% - (var(--page-gutter) * 2)), 1280px);
+  max-width: 1280px;
+  height: 380px;
+  min-height: 380px;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 14px;
+  margin: 0 auto;
+  padding: 82px clamp(40px, 5vw, 72px) 24px;
+  overflow: hidden;
+  border: 1px solid rgba(148, 163, 184, 0.28);
+  border-radius: 0 0 24px 24px;
+  background-color: #0d1214;
+  background-image:
+    linear-gradient(90deg, rgba(7, 11, 13, 0.93) 0%, rgba(7, 11, 13, 0.73) 43%, rgba(7, 11, 13, 0.18) 74%, rgba(7, 11, 13, 0.04) 100%),
+    linear-gradient(180deg, rgba(5, 8, 10, 0.08), rgba(5, 8, 10, 0.24)),
+    var(--editorial-hero-image);
+  background-position: center, center, center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  box-shadow:
+    0 28px 72px rgba(0, 0, 0, 0.26),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+
+body.blog-page[data-page='blog'] .blog-hero :is(.blog-kicker, h1, p, .blog-hero-links) {
+  position: relative;
+  z-index: 1;
+}
+
+body.blog-page[data-page='blog'] .blog-hero > .blog-kicker {
+  display: none;
+}
+
+body.blog-page[data-page='blog'] .blog-hero h1 {
+  max-width: 13ch;
+  color: #f8fafc;
+  font-size: clamp(44px, 3.75vw, 54px);
+  line-height: 0.98;
+  letter-spacing: -0.04em;
+  text-shadow: 0 3px 24px rgba(0, 0, 0, 0.62);
+}
+
+body.blog-page[data-page='blog'] .blog-hero > p {
+  max-width: 58ch;
+  color: #d2dbea;
+  font-size: clamp(15px, 1.12vw, 18px);
+  line-height: 1.52;
+  text-shadow: 0 2px 16px rgba(0, 0, 0, 0.82);
+}
+
+body.blog-page[data-page='blog'] .blog-hero .blog-hero-links {
+  position: absolute;
+  right: clamp(40px, 5vw, 72px);
+  bottom: 16px;
+  left: clamp(40px, 5vw, 72px);
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  gap: 8px;
+  overflow-x: auto;
+  overscroll-behavior-inline: contain;
+  scrollbar-width: none;
+}
+
+body.blog-page[data-page='blog'] .blog-hero .blog-hero-links::-webkit-scrollbar {
+  display: none;
+}
+
+body.blog-page[data-page='blog'] .blog-hero .blog-hero-links a {
+  flex: 0 0 auto;
+  min-height: 36px;
+  padding: 8px 13px;
+  border-color: rgba(255, 255, 255, 0.28);
+  background: rgba(12, 17, 20, 0.34);
+  color: #f8fafc;
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+}
+
+@media (max-width: 768px) {
+  :is(
+      body[data-page='exclusive-offers'],
+      body[data-page='new-casinos'],
+      body[data-page='online-casinos'],
+      body.casinos-page,
+      body.payment-methods-page,
+      body.home-page[data-page='partners'],
+      body.home-page[data-page='about'],
+      body.home-page[data-page='privacy'],
+      body.home-page[data-page='responsible-gambling'],
+      body.blog-page[data-page='blog']
+    ) {
+    --editorial-hero-height: 400px;
+  }
+
+  :is(
+      body[data-page='exclusive-offers'],
+      body[data-page='new-casinos'],
+      body[data-page='online-casinos'],
+      body.casinos-page,
+      body.payment-methods-page,
+      body.home-page[data-page='partners'],
+      body.home-page[data-page='about'],
+      body.home-page[data-page='privacy'],
+      body.home-page[data-page='responsible-gambling']
+    ) .hero.container,
+  body.blog-page[data-page='blog'] .blog-hero {
+    width: calc(100% - (var(--page-gutter-mobile) * 2));
+    max-width: calc(100% - (var(--page-gutter-mobile) * 2));
+    min-height: var(--editorial-hero-height);
+    margin-top: 18px;
+    padding: 96px 20px 26px;
+    border-radius: 0 0 18px 18px;
+  }
+
+  body.blog-page[data-page='blog'] .blog-shell {
+    padding-top: 0;
+  }
+
+  :is(
+      body[data-page='exclusive-offers'],
+      body[data-page='new-casinos'],
+      body[data-page='online-casinos'],
+      body.casinos-page,
+      body.payment-methods-page,
+      body.home-page[data-page='partners'],
+      body.home-page[data-page='about'],
+      body.home-page[data-page='privacy'],
+      body.home-page[data-page='responsible-gambling']
+    ) .hero.container::before {
+    background:
+      linear-gradient(90deg, rgba(7, 11, 13, 0.72) 0%, rgba(7, 11, 13, 0.49) 60%, rgba(7, 11, 13, 0.22) 100%),
+      linear-gradient(0deg, rgba(5, 8, 10, 0.54) 0%, rgba(5, 8, 10, 0.08) 70%);
+  }
+
+  :is(
+      body[data-page='exclusive-offers'],
+      body[data-page='new-casinos'],
+      body[data-page='online-casinos'],
+      body.casinos-page,
+      body.payment-methods-page,
+      body.home-page[data-page='partners'],
+      body.home-page[data-page='about'],
+      body.home-page[data-page='privacy'],
+      body.home-page[data-page='responsible-gambling']
+    ) .hero.container > .hero-content,
+  body.blog-page[data-page='blog'] .blog-hero {
+    width: 100%;
+    max-width: none;
+    align-items: flex-start;
+    text-align: left;
+  }
+
+  :is(
+      body[data-page='exclusive-offers'],
+      body[data-page='new-casinos'],
+      body[data-page='online-casinos'],
+      body.casinos-page,
+      body.payment-methods-page,
+      body.home-page[data-page='partners'],
+      body.home-page[data-page='about'],
+      body.home-page[data-page='privacy'],
+      body.home-page[data-page='responsible-gambling']
+    ) .hero.container h1,
+  body.blog-page[data-page='blog'] .blog-hero h1 {
+    max-width: 12ch;
+    font-size: clamp(33px, 9.2vw, 41px);
+    line-height: 1;
+    text-align: left;
+  }
+
+  :is(
+      body[data-page='exclusive-offers'],
+      body[data-page='new-casinos'],
+      body[data-page='online-casinos'],
+      body.casinos-page,
+      body.payment-methods-page,
+      body.home-page[data-page='partners'],
+      body.home-page[data-page='about'],
+      body.home-page[data-page='privacy'],
+      body.home-page[data-page='responsible-gambling']
+    ) .hero.container .hero-content > p,
+  body.blog-page[data-page='blog'] .blog-hero > p {
+    max-width: 34ch;
+    font-size: 13px;
+    line-height: 1.42;
+    text-align: left;
+  }
+
+  body.casinos-page .hero.container > .hero-content {
+    position: static;
+    gap: 7px;
+  }
+
+  body.casinos-page .hero.container {
+    margin-bottom: 118px;
+  }
+
+  body.casinos-page .hero.container::after {
+    right: 10px;
+    bottom: -104px;
+    left: 10px;
+    height: 116px;
+    border-radius: 16px;
+  }
+
+  body.casinos-page .hero.container .filters-wrap {
+    right: 24px;
+    bottom: -45px;
+    left: 24px;
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    width: 100%;
+    overflow-x: auto;
+  }
+
+  body.casinos-page .hero.container .alpha-nav {
+    right: 24px;
+    bottom: -91px;
+    left: 24px;
+    width: auto;
+  }
+
+  :is(body.home-page[data-page='partners'], body.home-page[data-page='about']) .hero.container {
+    align-items: flex-start;
+    padding-bottom: 26px;
+  }
+
+  :is(body.home-page[data-page='partners'], body.home-page[data-page='about']) .hero.container > .hero-content {
+    width: 100%;
+  }
+
+  :is(body.home-page[data-page='partners'], body.home-page[data-page='about']) .hero.container .home-hero-kicker {
+    display: none;
+  }
+
+  :is(body.home-page[data-page='partners'], body.home-page[data-page='about']) .hero.container .home-insight-card {
+    display: none;
+  }
+
+  :is(body.home-page[data-page='partners'], body.home-page[data-page='about']) .hero.container .home-stat-tile {
+    min-height: 78px;
+    padding: 10px;
+  }
+
+  :is(body.home-page[data-page='partners'], body.home-page[data-page='about']) .hero.container .home-stat-number {
+    font-size: 29px;
+  }
+
+  :is(body.home-page[data-page='partners'], body.home-page[data-page='about']) .hero.container .home-stat-tile strong {
+    font-size: 10px;
+  }
+
+  body.home-page[data-page='responsible-gambling'] .hero.container > .hero-content {
+    width: 100%;
+    padding-bottom: 0;
+  }
+
+  body.home-page[data-page='responsible-gambling'] .hero.container > .faq-grid {
+    display: none;
+  }
+
+  body.home-page[data-page='responsible-gambling'] .hero.container > .faq-grid .faq-card {
+    flex: 0 0 152px;
+    min-height: 74px;
+    padding: 10px;
+    scroll-snap-align: start;
+  }
+
+  body.home-page[data-page='responsible-gambling'] .hero.container > .faq-grid p {
+    display: none;
+  }
+
+  body.blog-page[data-page='blog'] .blog-hero {
+    justify-content: center;
+  }
+
+body.blog-page[data-page='blog'] .blog-hero-links {
+    right: 20px;
+    left: 20px;
+  }
+}
+
+/* =============================================================
+   Top casinos image hero
+   Keeps the ranking page's existing localized copy and actions inside the
+   same header-overlap media frame used across the refreshed page family.
+   ============================================================= */
+body[data-page='top-casinos'] {
+  --top-casinos-hero-image: url('https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto,w_2000/v1790434962/spincresta/pages/top-casinos-page/top-casinos_imilaj.webp');
+}
+
+body[data-page='top-casinos'] main {
+  overflow-x: clip;
+}
+
+body[data-page='top-casinos'] .hero.container {
+  position: relative;
+  isolation: isolate;
+  display: flex;
+  width: min(calc(100% - (var(--page-gutter) * 2)), 1280px);
+  max-width: 1280px;
+  height: clamp(340px, 26.4vw, 380px);
+  min-height: clamp(340px, 26.4vw, 380px);
+  align-items: center;
+  justify-content: flex-start;
+  gap: 0;
+  margin: 18px auto 0;
+  padding: clamp(94px, 7.2vw, 112px) clamp(40px, 5vw, 72px) clamp(30px, 3.5vw, 48px);
+  overflow: hidden;
+  border: 1px solid rgba(148, 163, 184, 0.28);
+  border-radius: 0 0 24px 24px;
+  background-color: #0d1214;
+  background-image: var(--top-casinos-hero-image);
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: cover;
+  box-shadow:
+    0 28px 72px rgba(0, 0, 0, 0.26),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+
+body[data-page='top-casinos'] .hero.container::before,
+html[data-theme='light'] body[data-page='top-casinos'] .hero.container::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  height: auto;
+  background:
+    linear-gradient(90deg, rgba(7, 11, 13, 0.93) 0%, rgba(7, 11, 13, 0.75) 43%, rgba(7, 11, 13, 0.2) 74%, rgba(7, 11, 13, 0.045) 100%),
+    linear-gradient(180deg, rgba(5, 8, 10, 0.08), rgba(5, 8, 10, 0.25));
+  filter: none;
+  opacity: 1;
+  pointer-events: none;
+}
+
+html[data-theme='light'] body[data-page='top-casinos'] .hero.container::before {
+  background:
+    linear-gradient(90deg, rgba(7, 11, 13, 0.86) 0%, rgba(7, 11, 13, 0.61) 43%, rgba(7, 11, 13, 0.15) 74%, rgba(7, 11, 13, 0.025) 100%),
+    linear-gradient(180deg, rgba(5, 8, 10, 0.05), rgba(5, 8, 10, 0.18));
+}
+
+body[data-page='top-casinos'] .hero.container > .hero-content {
+  position: relative;
+  z-index: 2;
+  align-items: flex-start;
+  gap: clamp(12px, 1.35vw, 18px);
+  width: min(62%, 720px);
+  max-width: 720px;
+  text-align: left;
+}
+
+body[data-page='top-casinos'] .hero.container .top-casinos-hero-kicker {
+  color: #a8d8bc;
+  text-shadow: 0 2px 14px rgba(0, 0, 0, 0.72);
+}
+
+body[data-page='top-casinos'] .hero.container h1 {
+  max-width: 13ch;
+  margin: 0;
+  color: #f8fafc;
+  font-size: clamp(46px, 4.15vw, 64px);
+  font-weight: 700;
+  line-height: 0.98;
+  letter-spacing: -0.04em;
+  text-align: left;
+  text-wrap: balance;
+  text-shadow: 0 3px 24px rgba(0, 0, 0, 0.62);
+}
+
+body[data-page='top-casinos'] .hero.container p {
+  max-width: 58ch;
+  margin: 0;
+  color: #d2dbea;
+  font-size: clamp(15px, 1.12vw, 18px);
+  line-height: 1.52;
+  text-align: left;
+  text-shadow: 0 2px 16px rgba(0, 0, 0, 0.82);
+}
+
+body[data-page='top-casinos'] .hero.container .top-casinos-hero-actions {
+  gap: 8px;
+  margin-top: 2px;
+}
+
+body[data-page='top-casinos'] .hero.container .top-casinos-hero-actions a {
+  min-height: 40px;
+  border-color: rgba(255, 255, 255, 0.32);
+  background: rgba(12, 17, 20, 0.34);
+  color: #f8fafc;
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+}
+
+body[data-page='top-casinos'] .hero.container .top-casinos-hero-primary {
+  border-color: var(--gold);
+  background: var(--gold);
+  color: #191400;
+  box-shadow: 0 12px 26px rgba(255, 223, 0, 0.18);
+}
+
+body[data-page='top-casinos'] .hero.container .top-casinos-hero-actions a:hover,
+body[data-page='top-casinos'] .hero.container .top-casinos-hero-actions a:focus-visible {
+  border-color: var(--gold);
+  color: var(--gold);
+}
+
+body[data-page='top-casinos'] .hero.container .top-casinos-hero-primary:hover,
+body[data-page='top-casinos'] .hero.container .top-casinos-hero-primary:focus-visible {
+  background: #ffe51e;
+  color: #191400;
+}
+
+@media (max-width: 768px) {
+  body[data-page='top-casinos'] .hero.container {
+    width: calc(100% - (var(--page-gutter-mobile) * 2));
+    max-width: calc(100% - (var(--page-gutter-mobile) * 2));
+    height: 400px;
+    min-height: 400px;
+    align-items: center;
+    margin-top: 18px;
+    padding: 96px 20px 26px;
+    border-radius: 0 0 18px 18px;
+    background-position: center center;
+  }
+
+  body[data-page='top-casinos'] .hero.container::before,
+  html[data-theme='light'] body[data-page='top-casinos'] .hero.container::before {
+    background:
+      linear-gradient(90deg, rgba(7, 11, 13, 0.74) 0%, rgba(7, 11, 13, 0.5) 62%, rgba(7, 11, 13, 0.2) 100%),
+      linear-gradient(0deg, rgba(5, 8, 10, 0.58) 0%, rgba(5, 8, 10, 0.08) 72%);
+  }
+
+  body[data-page='top-casinos'] .hero.container > .hero-content {
+    width: 100%;
+    max-width: none;
+    gap: 12px;
+  }
+
+  body[data-page='top-casinos'] .hero.container .top-casinos-hero-kicker {
+    display: none;
+  }
+
+  body[data-page='top-casinos'] .hero.container h1 {
+    max-width: 10ch;
+    font-size: clamp(35px, 10.4vw, 43px);
+    line-height: 0.98;
+  }
+
+  body[data-page='top-casinos'] .hero.container p {
+    max-width: 34ch;
+    font-size: 13.5px;
+    line-height: 1.44;
+  }
+
+  body[data-page='top-casinos'] .hero.container .top-casinos-hero-actions {
+    flex-wrap: nowrap;
+    width: 100%;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+
+  body[data-page='top-casinos'] .hero.container .top-casinos-hero-actions::-webkit-scrollbar {
+    display: none;
+  }
+
+  body[data-page='top-casinos'] .hero.container .top-casinos-hero-actions a {
+    flex: 0 0 auto;
+    min-height: 38px;
+    padding: 9px 13px;
+    font-size: 10px;
+  }
+}
+
+/* =============================================================
+   Unified hero lower rails
+   Every refreshed editorial hero now pairs its media frame with a real,
+   content-bearing glass section rather than a decorative empty strip.
+   ============================================================= */
+:is(
+    body[data-page='exclusive-offers'],
+    body[data-page='new-casinos'],
+    body[data-page='online-casinos'],
+    body[data-page='top-casinos'],
+    body.casinos-page,
+    body.payment-methods-page,
+    body.home-page[data-page='partners'],
+    body.home-page[data-page='about'],
+    body.home-page[data-page='privacy'],
+    body.home-page[data-page='responsible-gambling'],
+    body.blog-page[data-page='blog']
+  ) {
+  --editorial-hero-rail-bg: linear-gradient(145deg, rgba(30, 36, 40, 0.78), rgba(16, 22, 25, 0.64));
+  --editorial-hero-rail-border: rgba(148, 163, 184, 0.3);
+  --editorial-hero-rail-shadow: 0 24px 58px rgba(0, 0, 0, 0.23), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+
+html[data-theme='light']
+  :is(
+    body[data-page='exclusive-offers'],
+    body[data-page='new-casinos'],
+    body[data-page='online-casinos'],
+    body[data-page='top-casinos'],
+    body.casinos-page,
+    body.payment-methods-page,
+    body.home-page[data-page='partners'],
+    body.home-page[data-page='about'],
+    body.home-page[data-page='privacy'],
+    body.home-page[data-page='responsible-gambling'],
+    body.blog-page[data-page='blog']
+  ) {
+  --editorial-hero-rail-bg: linear-gradient(145deg, rgba(255, 255, 255, 0.72), rgba(239, 245, 242, 0.56));
+  --editorial-hero-rail-border: rgba(32, 48, 42, 0.18);
+  --editorial-hero-rail-shadow: 0 24px 58px rgba(22, 30, 27, 0.13), inset 0 1px 0 rgba(255, 255, 255, 0.78);
+}
+
+/* Listing pages reuse their real section heading and intro as the lower rail. */
+:is(body[data-page='exclusive-offers'], body[data-page='new-casinos']) .hero.container + .content {
+  position: relative;
+  z-index: 4;
+}
+
+:is(body[data-page='exclusive-offers'], body[data-page='new-casinos']) .hero.container + .content > .container {
+  display: grid;
+  width: min(calc(100% - (var(--page-gutter) * 2)), 1232px);
+  max-width: 1232px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  margin: 0 auto;
+  padding: 0;
+}
+
+:is(body[data-page='exclusive-offers'], body[data-page='new-casinos']) .hero.container + .content :is(.section-head, .intro) {
+  min-width: 0;
+  min-height: 134px;
+  margin-top: -72px;
+  margin-bottom: 0;
+  border: 1px solid var(--editorial-hero-rail-border);
+  background: var(--editorial-hero-rail-bg);
+  box-shadow: var(--editorial-hero-rail-shadow);
+  -webkit-backdrop-filter: blur(18px) saturate(1.08);
+  backdrop-filter: blur(18px) saturate(1.08);
+}
+
+:is(body[data-page='exclusive-offers'], body[data-page='new-casinos']) .hero.container + .content .section-head {
+  display: flex;
+  align-items: center;
+  padding: 22px clamp(24px, 3vw, 42px);
+  border-right: 0;
+  border-radius: 20px 0 0 20px;
+  text-align: left;
+}
+
+:is(body[data-page='exclusive-offers'], body[data-page='new-casinos']) .hero.container + .content .section-head h2 {
+  max-width: 21ch;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: clamp(28px, 2.4vw, 36px);
+  line-height: 1.04;
+  letter-spacing: -0.035em;
+  text-align: left;
+  text-wrap: balance;
+}
+
+/* Eyebrows inside the lower hero rails follow the same left edge as their titles. */
+:is(
+    body[data-page='top-rated'],
+    body[data-page='exclusive-offers'],
+    body[data-page='new-casinos']
+  ) .hero.container + .content .section-head h2::before {
+  text-align: left;
+}
+
+:is(body[data-page='exclusive-offers'], body[data-page='new-casinos']) .hero.container + .content .intro {
+  position: relative;
+  display: flex;
+  max-width: none;
+  align-items: center;
+  gap: clamp(18px, 2vw, 28px);
+  margin-right: 0;
+  margin-left: 0;
+  padding: 22px clamp(24px, 3vw, 42px);
+  border-left: 0;
+  border-radius: 0 20px 20px 0;
+  font-size: clamp(15px, 1.05vw, 17px);
+  line-height: 1.58;
+  text-align: left;
+}
+
+:is(body[data-page='exclusive-offers'], body[data-page='new-casinos']) .hero.container + .content .intro::before {
+  content: '';
+  flex: 0 0 4px;
+  width: 4px;
+  height: 62px;
+  border-radius: 999px;
+  background: linear-gradient(180deg, var(--section-accent), var(--gold));
+}
+
+:is(body[data-page='exclusive-offers'], body[data-page='new-casinos']) .hero.container + .content .casino-grid {
+  grid-column: 1 / -1;
+  margin-top: clamp(30px, 3vw, 44px);
+}
+
+body[data-page='new-casinos'] .hero.container + .content .load-more-wrapper {
+  grid-column: 1 / -1;
+}
+
+/* Country directory: its introductory timeline becomes the two-part rail. */
+body[data-page='online-casinos'] .hero.container + .content {
+  position: relative;
+  z-index: 4;
+  margin: 0;
+}
+
+body[data-page='online-casinos'] .hero.container + .content > .container.content-article {
+  width: min(calc(100% - (var(--page-gutter) * 2)), 1232px);
+  max-width: 1232px;
+  min-height: 134px;
+  margin: -72px auto 28px;
+  padding: 0;
+  border: 1px solid var(--editorial-hero-rail-border);
+  border-radius: 20px;
+  background: var(--editorial-hero-rail-bg);
+  box-shadow: var(--editorial-hero-rail-shadow);
+  -webkit-backdrop-filter: blur(18px) saturate(1.08);
+  backdrop-filter: blur(18px) saturate(1.08);
+}
+
+body[data-page='online-casinos'] .hero.container + .content .timeline {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+body[data-page='online-casinos'] .hero.container + .content .timeline h2,
+body[data-page='online-casinos'] .hero.container + .content .timeline p {
+  display: flex;
+  min-height: 132px;
+  align-items: center;
+  margin: 0;
+  padding: 22px clamp(24px, 3vw, 42px);
+  border: 0;
+  background: transparent;
+  text-align: left;
+}
+
+body[data-page='online-casinos'] .hero.container + .content .timeline h2 {
+  font-size: clamp(28px, 2.4vw, 36px);
+  line-height: 1.04;
+  letter-spacing: -0.035em;
+}
+
+body[data-page='online-casinos'] .hero.container + .content .timeline p {
+  position: relative;
+  border-left: 1px solid var(--editorial-hero-rail-border);
+  font-size: clamp(15px, 1.05vw, 17px);
+  line-height: 1.58;
+}
+
+body[data-page='online-casinos'] .hero.container + .content .timeline p::before {
+  content: '';
+  flex: 0 0 4px;
+  width: 4px;
+  height: 62px;
+  margin-right: 24px;
+  border-radius: 999px;
+  background: linear-gradient(180deg, var(--section-accent), var(--gold));
+}
+
+/* A-Z directory: both filter rows live completely inside one lower rail. */
+body.casinos-page[class] .hero.container {
+  margin-bottom: 104px;
+  overflow: visible;
+}
+
+body.casinos-page[class] .hero.container > .hero-content {
+  position: static;
+}
+
+body.casinos-page[class] .hero.container > .hero-content > :is(h1, p) {
+  position: relative;
+  z-index: 2;
+}
+
+body.casinos-page[class] .hero.container::after {
+  right: 24px;
+  bottom: auto;
+  left: 24px;
+  top: calc(100% - 18px);
+  height: 92px;
+  border-radius: 20px;
+  background: var(--editorial-hero-rail-bg);
+  box-shadow: var(--editorial-hero-rail-shadow);
+}
+
+body.casinos-page[class] .hero.container .filters-wrap,
+body.casinos-page[class] .hero.container .alpha-nav {
+  top: calc(100% + 16px);
+  bottom: auto;
+}
+
+body.casinos-page[class] .hero.container .filters-wrap {
+  left: 48px;
+}
+
+body.casinos-page[class] .hero.container .alpha-nav {
+  right: 48px;
+  left: 320px;
+}
+
+/* Top casinos: calls to action are the useful lower rail content. */
+body[data-page='top-casinos'] .hero.container {
+  margin-bottom: 104px;
+  overflow: visible;
+}
+
+body[data-page='top-casinos'] .hero.container > .hero-content {
+  position: static;
+}
+
+body[data-page='top-casinos'] .hero.container > .hero-content > :is(.top-casinos-hero-kicker, h1, p) {
+  position: relative;
+  z-index: 2;
+}
+
+body[data-page='top-casinos'] .hero.container .top-casinos-hero-actions {
+  position: absolute;
+  top: calc(100% - 18px);
+  right: 24px;
+  left: 24px;
+  z-index: 4;
+  display: flex;
+  min-height: 92px;
+  align-items: center;
+  gap: 10px;
+  margin: 0;
+  padding: 22px 28px;
+  overflow: hidden;
+  border: 1px solid var(--editorial-hero-rail-border);
+  border-radius: 20px;
+  background: var(--editorial-hero-rail-bg);
+  box-shadow: var(--editorial-hero-rail-shadow);
+  -webkit-backdrop-filter: blur(18px) saturate(1.08);
+  backdrop-filter: blur(18px) saturate(1.08);
+}
+
+/* Payment and privacy pages use existing copy/actions inside a lower rail. */
+body.payment-methods-page[class] .hero.container,
+body.home-page[data-page='privacy'] .hero.container {
+  margin-bottom: 104px;
+  overflow: visible;
+}
+
+body.payment-methods-page[class] .hero.container > .hero-content,
+body.home-page[data-page='privacy'] .hero.container > .hero-content {
+  position: static;
+  z-index: 4;
+}
+
+body.payment-methods-page[class] .hero.container > .hero-content > h1,
+body.home-page[data-page='privacy'] .hero.container > .hero-content > :is(.home-hero-kicker, h1, p) {
+  position: relative;
+  z-index: 2;
+}
+
+body.payment-methods-page[class] .hero.container::after,
+body.home-page[data-page='privacy'] .hero.container::after {
+  content: '';
+  position: absolute;
+  top: calc(100% - 18px);
+  right: 24px;
+  left: 24px;
+  z-index: 3;
+  height: 92px;
+  border: 1px solid var(--editorial-hero-rail-border);
+  border-radius: 20px;
+  background: var(--editorial-hero-rail-bg);
+  box-shadow: var(--editorial-hero-rail-shadow);
+  -webkit-backdrop-filter: blur(18px) saturate(1.08);
+  backdrop-filter: blur(18px) saturate(1.08);
+}
+
+body.payment-methods-page[class] .hero.container > .hero-content > p {
+  position: absolute;
+  top: calc(100% + 12px);
+  right: 54px;
+  left: 54px;
+  z-index: 4;
+  display: flex;
+  max-width: none;
+  min-height: 52px;
+  align-items: center;
+  margin: 0;
+  padding-left: 24px;
+  border-left: 4px solid var(--section-accent);
+  color: var(--text-muted);
+  text-shadow: none;
+}
+
+body.home-page[data-page='privacy'] .hero.container .home-hero-actions {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 48px;
+  left: 48px;
+  z-index: 4;
+  min-height: 54px;
+  align-items: center;
+  margin: 0;
+}
+
+/* About and partnerships: existing site metrics become the lower section. */
+:is(body.home-page[data-page='partners'], body.home-page[data-page='about']) .hero.container {
+  margin-bottom: 150px;
+  overflow: visible;
+}
+
+:is(body.home-page[data-page='partners'], body.home-page[data-page='about']) .hero.container .home-insight-card {
+  top: calc(100% - 20px);
+  right: 24px;
+  bottom: auto;
+  left: 24px;
+  width: auto;
+  max-width: none;
+  min-height: 100px;
+  border-color: var(--editorial-hero-rail-border);
+  background: var(--editorial-hero-rail-bg);
+  box-shadow: var(--editorial-hero-rail-shadow);
+}
+
+:is(body.home-page[data-page='partners'], body.home-page[data-page='about']) .hero.container .home-stat-tile {
+  min-height: 100px;
+  padding: 14px 28px;
+}
+
+/* Responsible gambling: the key rules form the lower section. */
+body.home-page[data-page='responsible-gambling'] .hero.container {
+  margin-bottom: 160px;
+  overflow: visible;
+}
+
+body.home-page[data-page='responsible-gambling'] .hero.container > .faq-grid {
+  top: calc(100% - 18px);
+  right: 24px;
+  bottom: auto;
+  left: 24px;
+  width: auto;
+  height: 148px;
+  min-height: 148px;
+  max-height: 148px;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0;
+  padding: 10px;
+  overflow: hidden;
+  border: 1px solid var(--editorial-hero-rail-border);
+  border-radius: 20px;
+  background: var(--editorial-hero-rail-bg);
+  box-shadow: var(--editorial-hero-rail-shadow);
+  -webkit-backdrop-filter: blur(18px) saturate(1.08);
+  backdrop-filter: blur(18px) saturate(1.08);
+}
+
+body.home-page[data-page='responsible-gambling'] .hero.container > .faq-grid .faq-card {
+  height: 128px;
+  min-height: 128px;
+  max-height: 128px;
+  overflow: hidden;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+}
+
+body.home-page[data-page='responsible-gambling'] .hero.container > .faq-grid .faq-card + .faq-card {
+  border-left: 1px solid var(--editorial-hero-rail-border);
+}
+
+body.home-page[data-page='responsible-gambling'] .hero.container > .faq-grid h3 {
+  display: -webkit-box;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+}
+
+body.home-page[data-page='responsible-gambling'] .hero.container > .faq-grid p {
+  -webkit-line-clamp: 3;
+}
+
+/* Blog navigation becomes a true overlapping lower rail. */
+body.blog-page[data-page='blog'] .blog-hero {
+  margin-bottom: 104px;
+  overflow: visible;
+}
+
+body.blog-page[data-page='blog'] .blog-hero::after {
+  content: '';
+  position: absolute;
+  top: calc(100% - 18px);
+  right: 24px;
+  left: 24px;
+  z-index: 2;
+  height: 92px;
+  border: 1px solid var(--editorial-hero-rail-border);
+  border-radius: 20px;
+  background: var(--editorial-hero-rail-bg);
+  box-shadow: var(--editorial-hero-rail-shadow);
+  -webkit-backdrop-filter: blur(18px) saturate(1.08);
+  backdrop-filter: blur(18px) saturate(1.08);
+}
+
+body.blog-page[data-page='blog'] .blog-hero-links {
+  top: calc(100% + 8px);
+  right: 48px;
+  bottom: auto;
+  left: 48px;
+  z-index: 4;
+  min-height: 54px;
+  align-items: center;
+  margin: 0;
+}
+
+body.blog-page[data-page='blog'][data-page] .blog-hero-links {
+  top: calc(100% + 8px);
+  bottom: auto;
+  z-index: 4;
+}
+
+@media (max-width: 768px) {
+  :is(body[data-page='exclusive-offers'], body[data-page='new-casinos']) .hero.container + .content > .container {
+    width: calc(100% - 20px);
+    max-width: calc(100% - 20px);
+    grid-template-columns: minmax(0, 1fr);
+    margin-top: -44px;
+  }
+
+  :is(body[data-page='exclusive-offers'], body[data-page='new-casinos']) .hero.container + .content :is(.section-head, .intro) {
+    width: 100%;
+    min-height: 0;
+    margin: 0;
+  }
+
+  :is(body[data-page='exclusive-offers'], body[data-page='new-casinos']) .hero.container + .content .section-head {
+    padding: 20px 20px 10px;
+    border-right: 1px solid var(--editorial-hero-rail-border);
+    border-bottom: 0;
+    border-radius: 18px 18px 0 0;
+  }
+
+  :is(body[data-page='exclusive-offers'], body[data-page='new-casinos']) .hero.container + .content .section-head h2 {
+    font-size: clamp(24px, 6.8vw, 29px);
+  }
+
+  :is(body[data-page='exclusive-offers'], body[data-page='new-casinos']) .hero.container + .content .intro {
+    gap: 14px;
+    padding: 10px 20px 22px;
+    border-top: 0;
+    border-left: 1px solid var(--editorial-hero-rail-border);
+    border-radius: 0 0 18px 18px;
+    font-size: 13.5px;
+    line-height: 1.45;
+  }
+
+  :is(body[data-page='exclusive-offers'], body[data-page='new-casinos']) .hero.container + .content .casino-grid {
+    margin-top: 18px;
+  }
+
+  body[data-page='online-casinos'] .hero.container + .content > .container.content-article {
+    width: calc(100% - 20px);
+    max-width: calc(100% - 20px);
+    min-height: 0;
+    margin: -44px auto 22px;
+    border-radius: 18px;
+  }
+
+  body[data-page='online-casinos'] .hero.container + .content .timeline {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  body[data-page='online-casinos'] .hero.container + .content .timeline :is(h2, p) {
+    min-height: 0;
+  }
+
+  body[data-page='online-casinos'] .hero.container + .content .timeline h2 {
+    padding: 20px 20px 10px;
+    font-size: clamp(24px, 6.8vw, 29px);
+  }
+
+  body[data-page='online-casinos'] .hero.container + .content .timeline p {
+    padding: 10px 20px 22px;
+    border-left: 0;
+    font-size: 13.5px;
+    line-height: 1.45;
+  }
+
+  body[data-page='online-casinos'] .hero.container + .content .timeline p::before {
+    height: 52px;
+    margin-right: 14px;
+  }
+
+  body.casinos-page[class] .hero.container {
+    margin-bottom: 142px;
+  }
+
+  body.casinos-page[class] .hero.container::after {
+    top: calc(100% - 14px);
+    right: 10px;
+    left: 10px;
+    height: 130px;
+    border-radius: 18px;
+  }
+
+  body.casinos-page[class] .hero.container .filters-wrap {
+    top: calc(100% + 12px);
+    right: 24px;
+    bottom: auto;
+    left: 24px;
+    width: auto;
+  }
+
+  body.casinos-page[class] .hero.container .alpha-nav {
+    top: calc(100% + 64px);
+    right: 24px;
+    bottom: auto;
+    left: 24px;
+  }
+
+  body[data-page='top-casinos'] .hero.container,
+  body.payment-methods-page[class] .hero.container,
+  body.home-page[data-page='privacy'] .hero.container,
+  body.blog-page[data-page='blog'] .blog-hero {
+    margin-bottom: 98px;
+  }
+
+  body[data-page='top-casinos'] .hero.container .top-casinos-hero-actions,
+  body.blog-page[data-page='blog'] .blog-hero-links {
+    top: calc(100% - 14px);
+    right: 10px;
+    left: 10px;
+    min-height: 88px;
+    padding: 16px;
+    border-radius: 18px;
+  }
+
+  body[data-page='top-casinos'] .hero.container .top-casinos-hero-actions {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+  }
+
+  body[data-page='top-casinos'] .hero.container .top-casinos-hero-actions a {
+    flex: 1 1 0;
+    min-width: 0;
+    padding-right: 8px;
+    padding-left: 8px;
+    font-size: 9px;
+    white-space: normal;
+  }
+
+  body.payment-methods-page[class] .hero.container::after,
+  body.home-page[data-page='privacy'] .hero.container::after,
+  body.blog-page[data-page='blog'] .blog-hero::after {
+    top: calc(100% - 14px);
+    right: 10px;
+    left: 10px;
+    height: 88px;
+    border-radius: 18px;
+  }
+
+  body.payment-methods-page[class] .hero.container > .hero-content > p {
+    top: calc(100% + 7px);
+    right: 26px;
+    left: 26px;
+    min-height: 48px;
+    padding-left: 14px;
+    font-size: 13px;
+    line-height: 1.4;
+  }
+
+  body.home-page[data-page='privacy'] .hero.container .home-hero-actions,
+  body.blog-page[data-page='blog'] .blog-hero-links {
+    top: calc(100% + 3px);
+    right: 24px;
+    left: 24px;
+    min-height: 54px;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+  }
+
+  body.blog-page[data-page='blog'][data-page] .blog-hero-links {
+    top: calc(100% + 3px);
+    bottom: auto;
+    z-index: 4;
+  }
+
+  :is(body.home-page[data-page='partners'], body.home-page[data-page='about']) .hero.container {
+    margin-bottom: 112px;
+  }
+
+  :is(body.home-page[data-page='partners'], body.home-page[data-page='about']) .hero.container .home-insight-card {
+    display: block;
+    top: calc(100% - 14px);
+    right: 10px;
+    left: 10px;
+    min-height: 84px;
+    border-radius: 18px;
+  }
+
+  :is(body.home-page[data-page='partners'], body.home-page[data-page='about']) .hero.container .home-stats-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  :is(body.home-page[data-page='partners'], body.home-page[data-page='about']) .hero.container .home-stat-tile {
+    min-height: 82px;
+    padding: 10px 12px;
+  }
+
+  body.home-page[data-page='responsible-gambling'] .hero.container {
+    margin-bottom: 120px;
+  }
+
+  body.home-page[data-page='responsible-gambling'] .hero.container > .faq-grid {
+    top: calc(100% - 14px);
+    right: 10px;
+    left: 10px;
+    display: flex;
+    height: 104px;
+    min-height: 104px;
+    max-height: 104px;
+    gap: 0;
+    padding: 8px;
+    overflow-x: auto;
+    border-radius: 18px;
+    scroll-snap-type: x proximity;
+  }
+
+  body.home-page[data-page='responsible-gambling'] .hero.container > .faq-grid .faq-card {
+    display: block;
+    flex: 0 0 150px;
+    height: 84px;
+    min-height: 84px;
+    max-height: 84px;
+    padding: 10px 12px;
+    overflow: hidden;
+    scroll-snap-align: start;
+  }
+
+  body.home-page[data-page='responsible-gambling'] .hero.container > .faq-grid h3 {
+    display: -webkit-box;
+    margin: 0;
+    overflow: hidden;
+    font-size: 14px;
+    line-height: 1.16;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+  }
+
+  body.home-page[data-page='responsible-gambling'] .hero.container > .faq-grid .faq-card + .faq-card {
+    border-left: 1px solid var(--editorial-hero-rail-border);
+  }
+
+  body.home-page[data-page='responsible-gambling'] .hero.container > .faq-grid p {
+    display: none;
+  }
+}
+
+/* =============================================================
+   Responsible-gambling content flow and final hero refinements
+   ============================================================= */
+body[data-page='top-rated'] .hero.container .hero-content > p {
+  display: none;
+}
+
+body.home-page[data-page='responsible-gambling'][data-page] .hero.container {
+  margin-bottom: 104px;
+  overflow: visible;
+}
+
+body.home-page[data-page='responsible-gambling'][data-page] .hero.container > .hero-content {
+  position: static;
+  z-index: 4;
+  width: min(58%, 700px);
+}
+
+body.home-page[data-page='responsible-gambling'][data-page] .hero.container > .hero-content > :is(.home-hero-kicker, h1, p) {
+  position: relative;
+  z-index: 2;
+}
+
+body.home-page[data-page='responsible-gambling'][data-page] .hero.container .home-hero-actions {
+  position: absolute;
+  top: calc(100% - 18px);
+  right: 24px;
+  left: 24px;
+  z-index: 4;
+  display: flex;
+  min-height: 92px;
+  align-items: center;
+  gap: 10px;
+  margin: 0;
+  padding: 22px 28px;
+  overflow: hidden;
+  border: 1px solid var(--editorial-hero-rail-border);
+  border-radius: 20px;
+  background: var(--editorial-hero-rail-bg);
+  box-shadow: var(--editorial-hero-rail-shadow);
+  -webkit-backdrop-filter: blur(18px) saturate(1.08);
+  backdrop-filter: blur(18px) saturate(1.08);
+}
+
+body.home-page[data-page='responsible-gambling'] .safe-play-rules-section .home-showcase-heading {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+body.home-page[data-page='responsible-gambling'] .safe-play-rules-section .home-showcase-heading h2 {
+  max-width: 26ch;
+}
+
+body.home-page[data-page='responsible-gambling'] .safe-play-rules-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+
+body.home-page[data-page='responsible-gambling'] .safe-play-rules-grid .faq-card {
+  min-height: 168px;
+  padding: clamp(20px, 2.4vw, 30px);
+  border: 1px solid var(--surface-border-strong);
+  border-radius: 18px;
+  background: var(--surface-panel-gradient);
+  box-shadow: var(--shadow-card-soft);
+}
+
+body.home-page[data-page='responsible-gambling'] .safe-play-rules-grid .faq-card h3 {
+  max-width: 24ch;
+  margin: 0;
+  font-size: clamp(20px, 1.7vw, 26px);
+  line-height: 1.12;
+  letter-spacing: -0.025em;
+}
+
+body.home-page[data-page='responsible-gambling'] .safe-play-rules-grid .faq-card p {
+  display: block;
+  margin-top: 14px;
+  overflow: visible;
+  color: var(--text-muted);
+  font-size: 14px;
+  line-height: 1.55;
+}
+
+@media (max-width: 768px) {
+  body.payment-methods-page[class] .hero.container {
+    margin-bottom: 124px;
+  }
+
+  body.home-page[data-page='responsible-gambling'][data-page] .hero.container {
+    margin-bottom: 98px;
+  }
+
+  body.home-page[data-page='responsible-gambling'][data-page] .hero.container > .hero-content {
+    width: 100%;
+  }
+
+  body.home-page[data-page='responsible-gambling'][data-page] .hero.container .home-hero-actions {
+    top: calc(100% - 14px);
+    right: 10px;
+    left: 10px;
+    min-height: 88px;
+    padding: 14px 16px;
+    border-radius: 18px;
+  }
+
+  body.home-page[data-page='responsible-gambling'][data-page] .hero.container .home-hero-actions a {
+    flex: 1 1 0;
+    min-width: 0;
+    padding-right: 8px;
+    padding-left: 8px;
+    font-size: 10px;
+    white-space: normal;
+  }
+
+  body.home-page[data-page='responsible-gambling'] .safe-play-rules-grid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 10px;
+  }
+
+  body.home-page[data-page='responsible-gambling'] .safe-play-rules-grid .faq-card {
+    min-height: 0;
+    padding: 20px;
+    border-radius: 16px;
+  }
+
+  body.home-page[data-page='responsible-gambling'] .safe-play-rules-grid .faq-card h3 {
+    font-size: 20px;
+  }
+
+  body.home-page[data-page='responsible-gambling'] .safe-play-rules-grid .faq-card p {
+    font-size: 13.5px;
+  }
+}
+
+/* Compact metric rail for About and Partners. */
+:is(
+    body.home-page[data-page='partners'][data-page],
+    body.home-page[data-page='about'][data-page]
+  ) .hero.container {
+  margin-bottom: 120px;
+}
+
+:is(
+    body.home-page[data-page='partners'][data-page],
+    body.home-page[data-page='about'][data-page]
+  ) .hero.container .home-insight-card {
+  top: calc(100% - 18px);
+  height: 112px;
+  min-height: 112px;
+  max-height: 112px;
+  padding: 0;
+}
+
+:is(
+    body.home-page[data-page='partners'][data-page],
+    body.home-page[data-page='about'][data-page]
+  ) .hero.container .home-stats-grid {
+  height: 110px;
+}
+
+:is(
+    body.home-page[data-page='partners'][data-page],
+    body.home-page[data-page='about'][data-page]
+  ) .hero.container .home-stat-tile {
+  height: 110px;
+  min-height: 110px;
+  max-height: 110px;
+  justify-content: center;
+  padding: 14px clamp(22px, 3vw, 38px);
+}
+
+@media (max-width: 768px) {
+  :is(
+      body.home-page[data-page='partners'][data-page],
+      body.home-page[data-page='about'][data-page]
+    ) .hero.container {
+    margin-bottom: 98px;
+  }
+
+  :is(
+      body.home-page[data-page='partners'][data-page],
+      body.home-page[data-page='about'][data-page]
+    ) .hero.container .home-insight-card {
+    top: calc(100% - 14px);
+    height: 86px;
+    min-height: 86px;
+    max-height: 86px;
+  }
+
+  :is(
+      body.home-page[data-page='partners'][data-page],
+      body.home-page[data-page='about'][data-page]
+    ) .hero.container .home-stats-grid,
+  :is(
+      body.home-page[data-page='partners'][data-page],
+      body.home-page[data-page='about'][data-page]
+    ) .hero.container .home-stat-tile {
+    height: 84px;
+    min-height: 84px;
+    max-height: 84px;
   }
 }
