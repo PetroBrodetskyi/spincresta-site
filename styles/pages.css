@@ -15991,12 +15991,12 @@ html[data-theme='light'] body[data-country] .country-hero-cards > .intro {
 
 /* Country hero photography. */
 body[data-country='IN'] {
-  --country-hero-photo: url('https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto,w_2000/spincresta/countries/india/india-hero_feowdk.webp');
+  --country-hero-photo: url('https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto,w_2000/spincresta/countries/india/india-hero_qnasqx.webp');
   --country-hero-photo-position: center center;
 }
 
 body[data-country='ID'] {
-  --country-hero-photo: url('https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto,w_2000/spincresta/countries/indonesia/indonesia-hero_uutwcz.webp');
+  --country-hero-photo: url('https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto,w_2000/spincresta/countries/indonesia/indonesia-hero_pbgzxd.webp');
   --country-hero-photo-position: center center;
 }
 
@@ -16240,6 +16240,76 @@ body[data-country='SG'] {
   --country-hero-photo-position: center center;
 }
 
+body[data-country='SK'] {
+  --country-hero-photo: url('https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto,w_2000/spincresta/countries/slovakia/slovakia-hero_kgcmua.webp');
+  --country-hero-photo-position: center center;
+}
+
+body[data-country='SI'] {
+  --country-hero-photo: url('https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto,w_2000/spincresta/countries/slovenia/slovenia-hero_cwpdq1.webp');
+  --country-hero-photo-position: center center;
+}
+
+body[data-country='ZA'] {
+  --country-hero-photo: url('https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto,w_2000/spincresta/countries/south-africa/south-africa-hero_t6a5u7.webp');
+  --country-hero-photo-position: center center;
+}
+
+body[data-country='KR'] {
+  --country-hero-photo: url('https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto,w_2000/spincresta/countries/south-korea/south-korea-hero_yzfjqy.webp');
+  --country-hero-photo-position: center center;
+}
+
+body[data-country='ES'] {
+  --country-hero-photo: url('https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto,w_2000/spincresta/countries/spain/spain-hero_av9tjv.webp');
+  --country-hero-photo-position: center center;
+}
+
+body[data-country='SE'] {
+  --country-hero-photo: url('https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto,w_2000/spincresta/countries/sweden/sweden-hero_xrbonv.webp');
+  --country-hero-photo-position: center center;
+}
+
+body[data-country='CH'] {
+  --country-hero-photo: url('https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto,w_2000/spincresta/countries/switzerland/switzerland-hero_ldkaaq.webp');
+  --country-hero-photo-position: center center;
+}
+
+body[data-country='TH'] {
+  --country-hero-photo: url('https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto,w_2000/spincresta/countries/thailand/thailand-hero_ppsedg.webp');
+  --country-hero-photo-position: center center;
+}
+
+body[data-country='TR'] {
+  --country-hero-photo: url('https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto,w_2000/spincresta/countries/turkey/turkey-hero_pifpon.webp');
+  --country-hero-photo-position: center center;
+}
+
+body[data-country='TZ'] {
+  --country-hero-photo: url('https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto,w_2000/spincresta/countries/tanzania/tanzania-hero_r6vbhm.webp');
+  --country-hero-photo-position: center center;
+}
+
+body[data-country='UG'] {
+  --country-hero-photo: url('https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto,w_2000/spincresta/countries/uganda/uganda-hero_cszufz.webp');
+  --country-hero-photo-position: center center;
+}
+
+body[data-country='UA'] {
+  --country-hero-photo: url('https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto,w_2000/spincresta/countries/ukraine/ukraine-hero_cofeau.webp');
+  --country-hero-photo-position: center center;
+}
+
+body[data-country='UZ'] {
+  --country-hero-photo: url('https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto,w_2000/spincresta/countries/uzbekistan/uzbekistan-hero_vgynod.webp');
+  --country-hero-photo-position: center center;
+}
+
+body[data-country='VN'] {
+  --country-hero-photo: url('https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto,w_2000/spincresta/countries/vietnam/vietnam-hero_rbrebu.webp');
+  --country-hero-photo-position: center center;
+}
+
 body:is([data-country='IN'], [data-country='ID'], [data-country='UK'], [data-country='US'], [data-country='DE'], [data-country='CA'], [data-country='AU'], [data-country='FR'], [data-country='EG'], [data-country='KE'], [data-country='BD'], [data-country='AZ'], [data-country='AT'], [data-country='AR'], [data-country='BE'], [data-country='BR']) .hero.country-hero-with-cards .country-hero-rail,
 html[data-theme='light'] body:is([data-country='IN'], [data-country='ID'], [data-country='UK'], [data-country='US'], [data-country='DE'], [data-country='CA'], [data-country='AU'], [data-country='FR'], [data-country='EG'], [data-country='KE'], [data-country='BD'], [data-country='AZ'], [data-country='AT'], [data-country='AR'], [data-country='BE'], [data-country='BR']) .hero.country-hero-with-cards .country-hero-rail,
 html:not([data-theme='light']) body:is([data-country='IN'], [data-country='ID'], [data-country='UK'], [data-country='US'], [data-country='DE'], [data-country='CA'], [data-country='AU'], [data-country='FR'], [data-country='EG'], [data-country='KE'], [data-country='BD'], [data-country='AZ'], [data-country='AT'], [data-country='AR'], [data-country='BE'], [data-country='BR']) .hero.country-hero-with-cards .country-hero-rail {
@@ -16254,8 +16324,8 @@ body:is([data-country='IN'], [data-country='ID'], [data-country='UK'], [data-cou
 html:not([data-theme='light']) body:is([data-country='IN'], [data-country='ID'], [data-country='UK'], [data-country='US'], [data-country='DE'], [data-country='CA'], [data-country='AU'], [data-country='FR'], [data-country='EG'], [data-country='KE'], [data-country='BD'], [data-country='AZ'], [data-country='AT'], [data-country='AR'], [data-country='BE'], [data-country='BR']) .hero.country-hero-with-cards .country-hero-rail::before {
   inset: 0;
   background:
-    linear-gradient(90deg, rgba(7, 11, 13, 0.94) 0%, rgba(7, 11, 13, 0.8) 43%, rgba(7, 11, 13, 0.36) 72%, rgba(7, 11, 13, 0.2) 100%),
-    linear-gradient(180deg, rgba(5, 8, 10, 0.18), rgba(5, 8, 10, 0.4));
+    linear-gradient(90deg, rgba(7, 11, 13, 0.94) 0%, rgba(7, 11, 13, 0.78) 43%, rgba(7, 11, 13, 0.22) 72%, rgba(7, 11, 13, 0.07) 100%),
+    linear-gradient(180deg, rgba(5, 8, 10, 0.12), rgba(5, 8, 10, 0.26));
   filter: none;
   opacity: 1;
   transform: none;
@@ -16523,8 +16593,8 @@ body:is([data-country='BG'], [data-country='CL'], [data-country='CO'], [data-cou
 html:not([data-theme='light']) body:is([data-country='BG'], [data-country='CL'], [data-country='CO'], [data-country='HR'], [data-country='CZ'], [data-country='DK'], [data-country='EE'], [data-country='FI'], [data-country='GH'], [data-country='GR'], [data-country='HU'], [data-country='IS'], [data-country='IE'], [data-country='IT'], [data-country='JP'], [data-country='KZ'], [data-country='KG'], [data-country='LV'], [data-country='LT'], [data-country='LU'], [data-country='MY'], [data-country='MX'], [data-country='NP'], [data-country='NL'], [data-country='NZ'], [data-country='NG'], [data-country='NO'], [data-country='PH'], [data-country='PL'], [data-country='PT'], [data-country='PE'], [data-country='RU'], [data-country='RO'], [data-country='SG']) .hero.country-hero-with-cards .country-hero-rail::before {
   inset: 0;
   background:
-    linear-gradient(90deg, rgba(7, 11, 13, 0.94) 0%, rgba(7, 11, 13, 0.8) 43%, rgba(7, 11, 13, 0.36) 72%, rgba(7, 11, 13, 0.2) 100%),
-    linear-gradient(180deg, rgba(5, 8, 10, 0.18), rgba(5, 8, 10, 0.4));
+    linear-gradient(90deg, rgba(7, 11, 13, 0.94) 0%, rgba(7, 11, 13, 0.78) 43%, rgba(7, 11, 13, 0.22) 72%, rgba(7, 11, 13, 0.07) 100%),
+    linear-gradient(180deg, rgba(5, 8, 10, 0.12), rgba(5, 8, 10, 0.26));
   filter: none;
   opacity: 1;
   transform: none;
@@ -16551,8 +16621,8 @@ html:not([data-theme='light']) body:is([data-country='BG'], [data-country='CL'],
 html[data-theme='light'] body:is([data-country='IN'], [data-country='ID'], [data-country='UK'], [data-country='US'], [data-country='DE'], [data-country='CA'], [data-country='AU'], [data-country='FR'], [data-country='EG'], [data-country='KE'], [data-country='BD'], [data-country='AZ'], [data-country='AT'], [data-country='AR'], [data-country='BE'], [data-country='BR']) .hero.country-hero-with-cards .country-hero-rail::before,
 html[data-theme='light'] body:is([data-country='BG'], [data-country='CL'], [data-country='CO'], [data-country='HR'], [data-country='CZ'], [data-country='DK'], [data-country='EE'], [data-country='FI'], [data-country='GH'], [data-country='GR'], [data-country='HU'], [data-country='IS'], [data-country='IE'], [data-country='IT'], [data-country='JP'], [data-country='KZ'], [data-country='KG'], [data-country='LV'], [data-country='LT'], [data-country='LU'], [data-country='MY'], [data-country='MX'], [data-country='NP'], [data-country='NL'], [data-country='NZ'], [data-country='NG'], [data-country='NO'], [data-country='PH'], [data-country='PL'], [data-country='PT'], [data-country='PE'], [data-country='RU'], [data-country='RO'], [data-country='SG']) .hero.country-hero-with-cards .country-hero-rail::before {
   background:
-    linear-gradient(90deg, rgba(7, 11, 13, 0.88) 0%, rgba(7, 11, 13, 0.7) 43%, rgba(7, 11, 13, 0.28) 72%, rgba(7, 11, 13, 0.14) 100%),
-    linear-gradient(180deg, rgba(5, 8, 10, 0.12), rgba(5, 8, 10, 0.32));
+    linear-gradient(90deg, rgba(7, 11, 13, 0.88) 0%, rgba(7, 11, 13, 0.66) 43%, rgba(7, 11, 13, 0.16) 72%, rgba(7, 11, 13, 0.04) 100%),
+    linear-gradient(180deg, rgba(5, 8, 10, 0.08), rgba(5, 8, 10, 0.2));
 }
 
 @media (max-width: 768px) {
@@ -16562,6 +16632,64 @@ html[data-theme='light'] body:is([data-country='BG'], [data-country='CL'], [data
       linear-gradient(90deg, rgba(7, 11, 13, 0.6) 0%, rgba(7, 11, 13, 0.38) 58%, rgba(7, 11, 13, 0.18) 100%),
       linear-gradient(0deg, rgba(5, 8, 10, 0.4) 0%, rgba(5, 8, 10, 0.05) 68%),
       var(--country-hero-photo);
+  }
+}
+
+/* Latest Cloudinary country photography. */
+body:is([data-country='SK'], [data-country='SI'], [data-country='ZA'], [data-country='KR'], [data-country='ES'], [data-country='SE'], [data-country='CH'], [data-country='TH']) .hero.country-hero-with-cards .country-hero-rail,
+html[data-theme='light'] body:is([data-country='SK'], [data-country='SI'], [data-country='ZA'], [data-country='KR'], [data-country='ES'], [data-country='SE'], [data-country='CH'], [data-country='TH']) .hero.country-hero-with-cards .country-hero-rail,
+html:not([data-theme='light']) body:is([data-country='SK'], [data-country='SI'], [data-country='ZA'], [data-country='KR'], [data-country='ES'], [data-country='SE'], [data-country='CH'], [data-country='TH']) .hero.country-hero-with-cards .country-hero-rail,
+body:is([data-country='TR'], [data-country='TZ'], [data-country='UG'], [data-country='UA'], [data-country='UZ'], [data-country='VN']) .hero.country-hero-with-cards .country-hero-rail,
+html[data-theme='light'] body:is([data-country='TR'], [data-country='TZ'], [data-country='UG'], [data-country='UA'], [data-country='UZ'], [data-country='VN']) .hero.country-hero-with-cards .country-hero-rail,
+html:not([data-theme='light']) body:is([data-country='TR'], [data-country='TZ'], [data-country='UG'], [data-country='UA'], [data-country='UZ'], [data-country='VN']) .hero.country-hero-with-cards .country-hero-rail {
+  background-color: #0d1214;
+  background-image: var(--country-hero-photo);
+  background-repeat: no-repeat;
+  background-position: var(--country-hero-photo-position);
+  background-size: cover;
+}
+
+body:is([data-country='SK'], [data-country='SI'], [data-country='ZA'], [data-country='KR'], [data-country='ES'], [data-country='SE'], [data-country='CH'], [data-country='TH']) .hero.country-hero-with-cards .country-hero-rail::before,
+html:not([data-theme='light']) body:is([data-country='SK'], [data-country='SI'], [data-country='ZA'], [data-country='KR'], [data-country='ES'], [data-country='SE'], [data-country='CH'], [data-country='TH']) .hero.country-hero-with-cards .country-hero-rail::before,
+body:is([data-country='TR'], [data-country='TZ'], [data-country='UG'], [data-country='UA'], [data-country='UZ'], [data-country='VN']) .hero.country-hero-with-cards .country-hero-rail::before,
+html:not([data-theme='light']) body:is([data-country='TR'], [data-country='TZ'], [data-country='UG'], [data-country='UA'], [data-country='UZ'], [data-country='VN']) .hero.country-hero-with-cards .country-hero-rail::before {
+  inset: 0;
+  background:
+    linear-gradient(90deg, rgba(7, 11, 13, 0.94) 0%, rgba(7, 11, 13, 0.78) 43%, rgba(7, 11, 13, 0.22) 72%, rgba(7, 11, 13, 0.07) 100%),
+    linear-gradient(180deg, rgba(5, 8, 10, 0.12), rgba(5, 8, 10, 0.26));
+  filter: none;
+  opacity: 1;
+  transform: none;
+}
+
+html[data-theme='light'] body:is([data-country='SK'], [data-country='SI'], [data-country='ZA'], [data-country='KR'], [data-country='ES'], [data-country='SE'], [data-country='CH'], [data-country='TH']) .hero.country-hero-with-cards .country-hero-rail::before,
+html[data-theme='light'] body:is([data-country='TR'], [data-country='TZ'], [data-country='UG'], [data-country='UA'], [data-country='UZ'], [data-country='VN']) .hero.country-hero-with-cards .country-hero-rail::before {
+  background:
+    linear-gradient(90deg, rgba(7, 11, 13, 0.88) 0%, rgba(7, 11, 13, 0.66) 43%, rgba(7, 11, 13, 0.16) 72%, rgba(7, 11, 13, 0.04) 100%),
+    linear-gradient(180deg, rgba(5, 8, 10, 0.08), rgba(5, 8, 10, 0.2));
+}
+
+@media (max-width: 768px) {
+  body:is([data-country='SK'], [data-country='SI'], [data-country='ZA'], [data-country='KR'], [data-country='ES'], [data-country='SE'], [data-country='CH'], [data-country='TH']) .hero.country-hero-with-cards .country-hero-rail,
+  body:is([data-country='TR'], [data-country='TZ'], [data-country='UG'], [data-country='UA'], [data-country='UZ'], [data-country='VN']) .hero.country-hero-with-cards .country-hero-rail {
+    background-image:
+      linear-gradient(90deg, rgba(7, 11, 13, 0.68) 0%, rgba(7, 11, 13, 0.46) 58%, rgba(7, 11, 13, 0.22) 100%),
+      linear-gradient(0deg, rgba(5, 8, 10, 0.48) 0%, rgba(5, 8, 10, 0.08) 68%),
+      var(--country-hero-photo);
+    background-size: cover, cover, cover;
+  }
+
+  html[data-theme='light'] body:is([data-country='SK'], [data-country='SI'], [data-country='ZA'], [data-country='KR'], [data-country='ES'], [data-country='SE'], [data-country='CH'], [data-country='TH']) .hero.country-hero-with-cards .country-hero-rail,
+  html[data-theme='light'] body:is([data-country='TR'], [data-country='TZ'], [data-country='UG'], [data-country='UA'], [data-country='UZ'], [data-country='VN']) .hero.country-hero-with-cards .country-hero-rail {
+    background-image:
+      linear-gradient(90deg, rgba(7, 11, 13, 0.6) 0%, rgba(7, 11, 13, 0.38) 58%, rgba(7, 11, 13, 0.18) 100%),
+      linear-gradient(0deg, rgba(5, 8, 10, 0.4) 0%, rgba(5, 8, 10, 0.05) 68%),
+      var(--country-hero-photo);
+  }
+
+  body:is([data-country='SK'], [data-country='SI'], [data-country='ZA'], [data-country='KR'], [data-country='ES'], [data-country='SE'], [data-country='CH'], [data-country='TH']) .hero.country-hero-with-cards .country-hero-rail::before,
+  body:is([data-country='TR'], [data-country='TZ'], [data-country='UG'], [data-country='UA'], [data-country='UZ'], [data-country='VN']) .hero.country-hero-with-cards .country-hero-rail::before {
+    display: none;
   }
 }
 
