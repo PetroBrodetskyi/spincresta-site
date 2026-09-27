@@ -64,7 +64,7 @@ const loadPageModules = async () => {
     const [snapshotsModule, gamesModule, pageModule, feedbackModule] = await Promise.all([
       import('./brand-snapshot-configs.js?v=20260920-yepcasino-1'),
       import('./brand-new-games.js?v=20260813-french-1'),
-      import('./pages/brand.js?v=20260913-sticky-cta-1'),
+      import('./pages/brand.js?v=20260927-hero-anchor-row-2'),
       import('./pages/brand-feedback.js?v=20260829-mobile-compose-1'),
     ]);
     BRAND_SNAPSHOT_CONFIGS = snapshotsModule.BRAND_SNAPSHOT_CONFIGS || {};
@@ -74,7 +74,7 @@ const loadPageModules = async () => {
   }
 
   if (document.body.dataset.page === 'top-casinos') {
-    const pageModule = await import('./pages/top-casinos.js?v=20260814-finnish-1');
+    const pageModule = await import('./pages/top-casinos.js?v=20260927-country-brand-order-1');
     initTopCasinosPageModule = pageModule.initTopCasinosPage;
   }
 
@@ -2404,8 +2404,8 @@ const getBrandAlternatives = brand => {
 const getDisabledBrandCopy = brand =>
   (brand?.temporarilyUnavailable ? UNAVAILABLE_BRAND_COPY : BLOCKED_BRAND_COPY)[SITE_LOCALE];
 
-const getBlockedCtaMarkup = brand => `
-  <span>${escapeHtml(brand?.temporarilyUnavailable ? getDisabledBrandCopy(brand).cta : uiCopy.visitCasino)}</span>
+const getBlockedCtaMarkup = () => `
+  <span>${escapeHtml(UNAVAILABLE_BRAND_COPY[SITE_LOCALE].cta)}</span>
 `;
 
 const disableCasinoCta = (element, brand) => {
@@ -2880,7 +2880,7 @@ const createCasinoCard = ({
         ${
           isBlocked
             ? `<button class="cta cta-primary cta-blocked" type="button" disabled aria-disabled="true">
-                ${getBlockedCtaMarkup({ temporarilyUnavailable: isUnavailable })}
+                ${getBlockedCtaMarkup()}
               </button>`
             : showPlayAction
             ? `<a class="cta cta-primary" href="${safeUrl}" target="_blank" rel="noopener noreferrer nofollow sponsored">${primaryCtaText}</a>`
@@ -3048,6 +3048,8 @@ const sortCountryBrands = brands =>
   brands
     .map((brand, index) => ({ brand, index }))
     .sort((a, b) => {
+      const blockedA = a.brand.notRecommended || a.brand.temporarilyUnavailable ? 1 : 0;
+      const blockedB = b.brand.notRecommended || b.brand.temporarilyUnavailable ? 1 : 0;
       const priorityA = Number.isFinite(a.brand.countryPagePriority)
         ? a.brand.countryPagePriority
         : Number.MAX_SAFE_INTEGER;
@@ -3055,7 +3057,7 @@ const sortCountryBrands = brands =>
         ? b.brand.countryPagePriority
         : Number.MAX_SAFE_INTEGER;
 
-      return priorityA - priorityB || a.index - b.index;
+      return blockedA - blockedB || priorityA - priorityB || a.index - b.index;
     })
     .map(({ brand }) => brand);
 

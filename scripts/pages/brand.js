@@ -241,6 +241,33 @@ export const initBrandPage = context => {
     heroContent.dataset.panelsReady = 'true';
   };
 
+  const positionBrandSectionNav = () => {
+    const layout = document.querySelector(
+      'body[data-brand].has-brand-sticky-layout .brand-sticky-review-layout'
+    );
+    const showcase = layout?.querySelector(':scope > .brand-profile-showcase');
+    const nav = document.querySelector('body[data-brand] .brand-section-nav');
+    const navPanel = nav?.closest('.brand-hero-nav-panel');
+    if (!layout || !showcase || !nav || !navPanel) return;
+
+    const desktopQuery = window.matchMedia('(min-width: 901px)');
+    const syncPosition = () => {
+      if (desktopQuery.matches) {
+        nav.classList.add('brand-section-nav--hero-row');
+        showcase.insertAdjacentElement('afterend', nav);
+        navPanel.hidden = true;
+        return;
+      }
+
+      nav.classList.remove('brand-section-nav--hero-row');
+      navPanel.hidden = false;
+      navPanel.appendChild(nav);
+    };
+
+    syncPosition();
+    desktopQuery.addEventListener?.('change', syncPosition);
+  };
+
   const initMobileEditorialDetails = () => {
     const summaryPanel = document.querySelector(
       'body[data-brand] .brand-hero-summary-panel'
@@ -1021,6 +1048,8 @@ export const initBrandPage = context => {
   renderBrandAvailabilityWidget(brandKey);
   initBrandSectionNav();
   initBrandHeroPanels();
+  positionBrandSectionNav();
+  window.requestAnimationFrame(positionBrandSectionNav);
   initMobileEditorialDetails();
   initMobileTableDisclosures();
   initBrandCountryCollapse();

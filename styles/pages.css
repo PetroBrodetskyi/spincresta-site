@@ -4335,9 +4335,70 @@ body[data-brand] .brand-hero-nav-panel .brand-section-nav {
   border-top: 0;
 }
 
+body[data-brand] .brand-hero-nav-panel[hidden] {
+  display: none !important;
+}
+
+@media (min-width: 901px) {
+  body[data-brand].has-brand-sticky-layout
+    .brand-sticky-review-layout:has(> .brand-section-nav--hero-row) {
+    row-gap: 0;
+  }
+
+  body[data-brand].has-brand-sticky-layout
+    .brand-sticky-review-layout
+    > .brand-profile-showcase:has(+ .brand-section-nav--hero-row) {
+    margin-bottom: 0;
+  }
+
+  body[data-brand].has-brand-sticky-layout
+    .brand-sticky-review-layout
+    > .brand-section-nav--hero-row {
+    grid-column: 1 / -1;
+    justify-self: center;
+    width: min(100%, 1280px);
+    margin: 10px 0;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    box-shadow: none;
+  }
+
+  body[data-brand] .brand-section-nav--hero-row .brand-section-nav__links {
+    justify-content: center;
+    flex-wrap: nowrap;
+    gap: 8px;
+    overflow-x: auto;
+    padding: 0;
+    scrollbar-width: none;
+  }
+
+  body[data-brand]
+    .brand-section-nav--hero-row
+    .brand-section-nav__links::-webkit-scrollbar {
+    display: none;
+  }
+}
+
 @media (max-width: 768px) {
-body[data-brand] .brand-hero-panel {
+  body[data-brand] {
+    --brand-mobile-hero-section-gap: 14px;
+  }
+
+  body[data-brand] .brand-profile-showcase {
+    margin-bottom: var(--brand-mobile-hero-section-gap);
+  }
+
+  body[data-brand].has-brand-sticky-layout .brand-sticky-aside .hero-content {
+    gap: var(--brand-mobile-hero-section-gap);
+  }
+
+  body[data-brand] .brand-hero-panel {
     padding: 8px 10px;
+  }
+
+  body[data-brand] .brand-hero-nav-panel {
+    margin-bottom: var(--brand-mobile-hero-section-gap);
   }
 }
 
@@ -15130,7 +15191,9 @@ body[data-brand] [data-feedback-compose-toggle][hidden] {
     width: min(100%, 1280px);
     height: clamp(300px, 25vw, 380px);
     min-height: 0 !important;
-    padding: clamp(34px, 3.5vw, 52px) clamp(40px, 5vw, 72px) clamp(58px, 5vw, 76px);
+    justify-content: center;
+    padding: max(66px, calc(var(--header-height, 68px) - 4px)) clamp(40px, 5vw, 72px)
+      clamp(58px, 5vw, 76px);
     overflow: hidden;
     border: 1px solid rgba(148, 163, 184, 0.28);
     border-radius: 24px;
@@ -15165,17 +15228,17 @@ body[data-brand] [data-feedback-compose-toggle][hidden] {
     grid-template-columns: minmax(0, 1fr) auto;
     grid-template-areas: 'title flag' 'copy flag';
     align-items: center;
-    gap: 20px clamp(36px, 6vw, 92px);
+    gap: 12px clamp(32px, 4vw, 64px);
     width: 100%;
     max-width: none;
   }
 
   body[data-country] .hero.country-hero-with-cards h1 {
     grid-area: title;
-    max-width: 17ch;
+    max-width: 22ch;
     margin: 0;
     color: #f8fafc;
-    font-size: clamp(48px, 4.4vw, 68px) !important;
+    font-size: clamp(46px, 4vw, 58px) !important;
     line-height: 0.98;
     text-align: left;
   }
@@ -15193,7 +15256,7 @@ body[data-brand] [data-feedback-compose-toggle][hidden] {
   body[data-country] .hero.country-hero-with-cards .hero-content .hero-flag {
     grid-area: flag;
     display: block;
-    width: clamp(112px, 12vw, 176px);
+    width: clamp(112px, 10vw, 156px);
     max-height: 124px;
     margin: 0;
     padding: 10px;
@@ -15289,7 +15352,9 @@ html[data-theme='light'] body[data-country] .country-hero-cards > .intro {
 
 @media (max-width: 1120px) {
   body[data-country] .hero.country-hero-with-cards .country-hero-rail {
-    padding: clamp(30px, 6vw, 52px);
+    justify-content: center;
+    padding: max(66px, calc(var(--header-height, 68px) - 4px)) clamp(30px, 6vw, 52px)
+      clamp(30px, 6vw, 52px);
     overflow: hidden;
     border: 1px solid rgba(148, 163, 184, 0.28);
     border-radius: 20px;
@@ -15298,6 +15363,34 @@ html[data-theme='light'] body[data-country] .country-hero-cards > .intro {
       radial-gradient(circle at 94% 90%, rgba(255, 223, 0, 0.1), transparent 34%),
       linear-gradient(135deg, #10191d 0%, #101416 52%, #080a0b 100%);
     box-shadow: 0 22px 54px rgba(0, 0, 0, 0.24);
+  }
+
+  body[data-country] .hero.country-hero-with-cards .hero-content {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    grid-template-areas: 'title flag' 'copy flag';
+    align-items: center;
+    gap: 12px clamp(28px, 4vw, 48px);
+    width: 100%;
+    max-width: none;
+  }
+
+  body[data-country] .hero.country-hero-with-cards h1 {
+    grid-area: title;
+    max-width: 22ch;
+    font-size: clamp(42px, 4vw, 52px) !important;
+  }
+
+  body[data-country] .hero.country-hero-with-cards .hero-content > p {
+    grid-area: copy;
+    max-width: 58ch;
+  }
+
+  body[data-country] .hero.country-hero-with-cards .hero-content .hero-flag {
+    grid-area: flag;
+    width: clamp(96px, 10vw, 128px);
+    max-height: 96px;
+    margin: 0;
   }
 
   body[data-country] .hero.country-hero-with-cards .hero-content h1 {
@@ -16546,7 +16639,7 @@ html[data-theme='light'] body[data-country] .hero.country-hero-with-cards .hero-
 @media (min-width: 1121px) {
   html:not([data-theme='light']) body[data-country] .country-hero-cards .section-head,
   html:not([data-theme='light']) body[data-country] .country-hero-cards > .intro {
-    margin-top: -72px;
+    margin-top: -64px;
     border-color: rgba(255, 255, 255, 0.18);
     background: linear-gradient(145deg, rgba(28, 34, 38, 0.5), rgba(17, 22, 25, 0.34));
     -webkit-backdrop-filter: blur(14px) saturate(1.16);
@@ -16561,7 +16654,7 @@ html[data-theme='light'] body[data-country] .hero.country-hero-with-cards .hero-
     position: relative;
     isolation: isolate;
     overflow: hidden;
-    margin-top: -72px;
+    margin-top: -64px;
     border-color: rgba(255, 255, 255, 0.82);
     background: linear-gradient(145deg, rgba(255, 255, 255, 0.62), rgba(244, 248, 246, 0.46));
     -webkit-backdrop-filter: blur(15px) saturate(0.66) brightness(1.08);
@@ -16945,7 +17038,7 @@ body.home-page .hero.home-video-hero {
   width: calc(100% - (var(--page-gutter) * 2));
   max-width: 1280px;
   min-height: clamp(390px, 31vw, 430px);
-  align-items: center;
+  align-items: flex-start;
   justify-content: flex-start;
   margin: 18px auto 0;
   padding: clamp(42px, 4.4vw, 64px) clamp(40px, 5vw, 72px) clamp(76px, 6.4vw, 94px);
@@ -17000,11 +17093,11 @@ body.home-page .hero.home-video-hero .hero-content {
   position: relative;
   z-index: 2;
   display: flex;
-  width: min(58%, 690px);
-  max-width: 690px;
+  width: min(64%, 760px);
+  max-width: 760px;
   align-items: flex-start;
   justify-content: center;
-  gap: 16px;
+  gap: 10px;
   text-align: left;
 }
 
@@ -17014,7 +17107,7 @@ body.home-page .hero.home-video-hero .home-hero-kicker {
 }
 
 body.home-page .hero.home-video-hero h1 {
-  max-width: 12ch;
+  max-width: 14ch;
   color: #f8fafc;
   font-size: clamp(50px, 4.7vw, 72px);
   line-height: 0.98;
@@ -17347,7 +17440,7 @@ body[data-brand].has-brand-sticky-layout
    Unified hero media geometry and glass treatment
    ============================================================= */
 :is(body.home-page, body[data-country], body[data-brand]) {
-  --unified-hero-media-height: clamp(340px, 26.4vw, 380px);
+  --unified-hero-media-height: 380px;
   --unified-hero-lower-bg: linear-gradient(145deg, rgba(28, 34, 38, 0.5), rgba(17, 22, 25, 0.34));
   --unified-hero-lower-border: rgba(148, 163, 184, 0.3);
   --unified-hero-lower-shadow: 0 24px 58px rgba(0, 0, 0, 0.22),
@@ -17370,7 +17463,7 @@ body[data-brand] .brand-profile-showcase__media {
 }
 
 body.home-page .hero.home-video-hero {
-  padding-top: clamp(58px, 5vw, 72px);
+  padding-top: clamp(66px, 5vw, 72px);
   padding-bottom: clamp(28px, 3.2vw, 44px);
 }
 
@@ -17429,7 +17522,7 @@ body[data-brand] .brand-profile-showcase .brand-why-media img {
 
 @media (max-width: 768px) {
   :is(body.home-page, body[data-country], body[data-brand]) {
-    --unified-hero-media-height: 400px;
+    --unified-hero-media-height: 420px;
     --unified-hero-lower-bg: linear-gradient(145deg, rgba(42, 48, 52, 0.78), rgba(31, 37, 41, 0.66));
   }
 
@@ -19634,9 +19727,9 @@ body.home-page[data-page='responsible-gambling'] .safe-play-rules-grid .faq-card
   }
 
   body[data-brand] .brand-profile-showcase__media {
-    height: clamp(210px, 58vw, 248px);
-    min-height: clamp(210px, 58vw, 248px) !important;
-    padding: 8px;
+    height: clamp(258px, 70vw, 286px);
+    min-height: clamp(258px, 70vw, 286px) !important;
+    padding: 64px 8px 8px;
     border-radius: 16px;
   }
 
@@ -19654,5 +19747,245 @@ body.home-page[data-page='responsible-gambling'] .safe-play-rules-grid .faq-card
     height: 100%;
     object-fit: contain;
     object-position: center top;
+  }
+}
+
+/* =============================================================
+   Theme settings — compact site-native glass panel
+   ============================================================= */
+.theme-settings-backdrop {
+  padding: 16px;
+  background: rgba(4, 7, 9, 0.72);
+  -webkit-backdrop-filter: blur(18px) saturate(1.08);
+  backdrop-filter: blur(18px) saturate(1.08);
+}
+
+.theme-settings-modal {
+  width: min(366px, calc(100vw - 28px));
+  gap: 10px;
+  padding: 22px 18px 18px;
+  border: 1px solid rgba(148, 163, 184, 0.28);
+  border-radius: 20px;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.045), transparent 42%),
+    linear-gradient(145deg, rgba(32, 38, 42, 0.98), rgba(17, 22, 25, 0.98));
+  box-shadow:
+    0 28px 70px rgba(0, 0, 0, 0.46),
+    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+}
+
+.theme-settings-modal h3 {
+  padding-right: 44px;
+  font-size: clamp(22px, 6vw, 26px);
+  line-height: 1.08;
+}
+
+.theme-settings-modal p {
+  max-width: 31ch;
+  font-size: 13.5px;
+  line-height: 1.45;
+}
+
+.theme-settings-close {
+  top: 14px;
+  right: 14px;
+  width: 36px;
+  height: 36px;
+  border: 1px solid rgba(148, 163, 184, 0.22);
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.035);
+}
+
+.theme-settings-close::before {
+  width: 15px;
+  height: 15px;
+}
+
+.theme-settings-close:hover,
+.theme-settings-close:focus-visible {
+  border-color: rgba(255, 223, 0, 0.52);
+  background: rgba(255, 223, 0, 0.08);
+  color: var(--gold, #ffdf00);
+}
+
+.theme-settings-options {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px;
+  margin-top: 4px;
+  padding: 5px;
+  border: 1px solid rgba(148, 163, 184, 0.2);
+  border-radius: 15px;
+  background: rgba(4, 7, 9, 0.34);
+}
+
+.theme-settings-option,
+html[data-theme='light'] .theme-settings-option {
+  justify-content: flex-start;
+  gap: 10px;
+  min-height: 54px;
+  padding: 10px 12px;
+  border: 1px solid transparent;
+  border-radius: 11px;
+  background: transparent;
+  color: var(--text-muted);
+  box-shadow: none;
+  overflow: visible;
+}
+
+.theme-settings-option::before {
+  display: none;
+}
+
+.theme-settings-option::after {
+  content: '';
+  width: 7px;
+  height: 7px;
+  margin-left: auto;
+  flex: 0 0 7px;
+  border: 1px solid rgba(148, 163, 184, 0.5);
+  border-radius: 50%;
+  background: transparent;
+  box-shadow: none;
+}
+
+.theme-settings-option img {
+  width: 20px;
+  height: 20px;
+  flex-basis: 20px;
+  opacity: 0.72;
+}
+
+.theme-settings-option:hover,
+.theme-settings-option:focus-visible,
+html[data-theme='light'] .theme-settings-option:hover,
+html[data-theme='light'] .theme-settings-option:focus-visible {
+  border-color: rgba(148, 163, 184, 0.28);
+  background: rgba(255, 255, 255, 0.045);
+  color: var(--text-main);
+  box-shadow: none;
+  transform: none;
+}
+
+.theme-settings-option.is-active,
+html[data-theme='light'] .theme-settings-option.is-active {
+  border-color: rgba(255, 223, 0, 0.72);
+  background: linear-gradient(145deg, rgba(255, 223, 0, 0.16), rgba(255, 223, 0, 0.07));
+  color: var(--text-main);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.08),
+    0 10px 24px rgba(0, 0, 0, 0.18);
+}
+
+.theme-settings-option.is-active::after {
+  border-color: var(--gold, #ffdf00);
+  background: var(--gold, #ffdf00);
+  box-shadow: 0 0 0 4px rgba(255, 223, 0, 0.1);
+}
+
+.theme-settings-option.is-active img {
+  opacity: 1;
+}
+
+html[data-theme='light'] .theme-settings-backdrop {
+  background: rgba(27, 38, 34, 0.28);
+  -webkit-backdrop-filter: blur(18px) saturate(1.04);
+  backdrop-filter: blur(18px) saturate(1.04);
+}
+
+html[data-theme='light'] .theme-settings-modal {
+  border-color: rgba(32, 48, 42, 0.18);
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.82), rgba(255, 255, 255, 0.58)),
+    rgba(239, 244, 241, 0.88);
+  box-shadow:
+    0 28px 70px rgba(22, 30, 27, 0.18),
+    inset 0 1px 0 rgba(255, 255, 255, 0.9);
+}
+
+html[data-theme='light'] .theme-settings-close {
+  border-color: rgba(32, 48, 42, 0.16);
+  background: rgba(255, 255, 255, 0.42);
+}
+
+html[data-theme='light'] .theme-settings-options {
+  border-color: rgba(32, 48, 42, 0.14);
+  background: rgba(32, 48, 42, 0.055);
+}
+
+html[data-theme='light'] .theme-settings-option:hover,
+html[data-theme='light'] .theme-settings-option:focus-visible {
+  border-color: rgba(32, 48, 42, 0.2);
+  background: rgba(255, 255, 255, 0.58);
+}
+
+html[data-theme='light'] .theme-settings-option.is-active {
+  border-color: rgba(176, 138, 0, 0.56);
+  background: linear-gradient(145deg, rgba(255, 223, 0, 0.28), rgba(255, 244, 181, 0.46));
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.8),
+    0 10px 24px rgba(32, 48, 42, 0.1);
+}
+
+@media (max-width: 480px) {
+  .theme-settings-modal {
+    padding: 20px 16px 16px;
+    border-radius: 18px;
+  }
+
+  .theme-settings-modal p {
+    padding-right: 18px;
+  }
+}
+
+/* Keep long unavailable/not-recommended labels inside casino-card actions. */
+.casino-card .casino-actions.has-two-actions:has(.cta-blocked) {
+  width: 100%;
+  align-items: stretch;
+}
+
+.casino-card .casino-actions.has-two-actions:has(.cta-blocked) > .cta {
+  min-width: 0;
+  flex: 1 1 0;
+}
+
+.casino-card .casino-actions .cta-blocked {
+  min-width: 0;
+  min-height: 46px;
+  padding: 8px 10px;
+  white-space: normal;
+  overflow-wrap: normal;
+  line-height: 1.14;
+  text-align: center;
+  text-wrap: balance;
+}
+
+.casino-card .casino-actions .cta-blocked > span {
+  display: block;
+  min-width: 0;
+  max-width: 100%;
+}
+
+body[data-brand] :is(.brand-profile-showcase .cta-brands.cta-blocked, .brand-sticky-title__cta.cta-blocked) {
+  min-width: 0;
+  padding: 8px 10px;
+  white-space: normal;
+  overflow-wrap: normal;
+  line-height: 1.14;
+  text-align: center;
+  text-wrap: balance;
+}
+
+body[data-brand]
+  :is(.brand-profile-showcase .cta-brands.cta-blocked, .brand-sticky-title__cta.cta-blocked)
+  > span {
+  display: block;
+  min-width: 0;
+  max-width: 100%;
+}
+
+@media (max-width: 600px) {
+  .casino-card .casino-actions.has-two-actions:has(.cta-blocked) {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
   }
 }

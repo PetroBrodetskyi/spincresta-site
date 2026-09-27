@@ -220,16 +220,25 @@ export const initTopCasinosPage = context => {
     titleEl.textContent = localizedCountryTitle(country || { slug: '', name: code });
 
     const eligibleBrands = BRANDS.filter(brand => brand.countries?.includes(code));
-    const promotedBrands = eligibleBrands
-      .filter(brand => Number.isFinite(brand.countryPagePriority))
-      .sort((a, b) => a.countryPagePriority - b.countryPagePriority);
-    const topBrands = BRANDS.filter(
-      brand => brand.top?.includes(code) && brand.countries?.includes(code) && !promotedBrands.includes(brand)
-    );
-    const fillBrands = topBrands.length < limit
-      ? eligibleBrands.filter(brand => !promotedBrands.includes(brand) && !topBrands.includes(brand))
-      : [];
-    const renderedBrands = [...promotedBrands, ...topBrands, ...fillBrands].slice(0, limit);
+    const isBlocked = brand => Boolean(brand.notRecommended || brand.temporarilyUnavailable);
+    const priority = brand =>
+      Number.isFinite(brand.countryPagePriority) ? brand.countryPagePriority : Number.MAX_SAFE_INTEGER;
+    const rankedBrands = eligibleBrands
+      .map((brand, index) => ({
+        brand,
+        index,
+        blocked: isBlocked(brand) ? 1 : 0,
+        tier: Number.isFinite(brand.countryPagePriority) ? 0 : brand.top?.includes(code) ? 1 : 2,
+      }))
+      .sort(
+        (a, b) =>
+          a.blocked - b.blocked ||
+          a.tier - b.tier ||
+          priority(a.brand) - priority(b.brand) ||
+          a.index - b.index
+      )
+      .map(({ brand }) => brand);
+    const renderedBrands = rankedBrands.slice(0, limit);
 
     if (!renderedBrands.length) {
       grid.innerHTML = '<p>' + localeText('No top casinos available.', 'Keine Top-Casinos verfügbar.', 'No hay casinos destacados disponibles.') + '</p>';
