@@ -63,6 +63,8 @@ export default {
   "100% Bonus up to $1,000 + 300 Free Spins": "$1,000 तक 100% बोनस + 300 निःशुल्क स्पिन",
   "100% Deposit Bonus up to EUR 1,000 + 300 Free Spins": "1,000 यूरो तक 100% जमा बोनस + 300 मुफ्त स्पिन",
   "Claim up to €500/£500 and enjoy 5% live casino cashback": "€500/€500 तक का दावा करें और 5% लाइव कैसीनो कैशबैक का आनंद लें",
+  "200 Free Spins + 20% Sports Cashback": "200 मुफ़्त स्पिन + 20% स्पोर्ट्स कैशबैक",
+  "A$100 Cash Gift + 300 Weekly Free Spins": "A$100 नकद बोनस + हर सप्ताह 300 मुफ़्त स्पिन",
   "Welcome Package up to 15,000 EUR/USD + 350 Free Spins": "15,000 EUR/USD + 350 निःशुल्क स्पिन तक का स्वागत पैकेज",
   "Welcome Bonus 250% Up To €3,471 + 250 Free Spins": "स्वागत बोनस 250% €3,471 तक + 250 निःशुल्क स्पिन",
   "Join Now To Get Your Bonus 550% plus 400 Free Spins": "अपना बोनस 550% प्लस 400 निःशुल्क स्पिन प्राप्त करने के लिए अभी शामिल हों",

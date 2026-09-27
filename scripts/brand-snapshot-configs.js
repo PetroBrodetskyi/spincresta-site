@@ -545,6 +545,7 @@ export const BRAND_SNAPSHOT_CONFIGS = {
   ...mapSnapshotConfig(['trino', 'spellwin'], mixedCasinoSportsConfig),
   ...mapSnapshotConfig(['amonbet', 'luckywave', 'slotlair'], sportsPromoCasinoConfig),
   ...mapSnapshotConfig(['ybets', 'immerion'], sportsRewardsCasinoConfig),
+  ...mapSnapshotConfig(['goldenbetuk', 'goldenbetau'], sportsRewardsCasinoConfig),
   ...mapSnapshotConfig(['iwild', 'snatch'], casinoToolsConfig),
   ...mapSnapshotConfig(['fraga-tr', 'fraga-az', 'fraga-ar', 'fraga-cl'], fragaConfig),
   'pin-up': pinUpConfig,

@@ -1,7 +1,7 @@
 ﻿// =====================
 // IMPORTS
 // =====================
-import { BRANDS } from './brands.js?v=20260813-french-1';
+import { BRANDS } from './brands.js?v=20260927-goldenbet-2';
 import { COUNTRIES } from './countries.js';
 import { initFooterNewsletter } from './footer-newsletter.js?v=20260826-newsletter-4';
 import { initAccountAuth } from './account-auth.js?v=20260829-local-preview-1';
@@ -25,7 +25,7 @@ const brandLayoutFallbackTimer = document.body?.dataset.brand
     }, 1500)
   : null;
 const brandLayoutModuleReady = document.body?.dataset.brand
-  ? import('./pages/brand-layout.js?v=20260913-brand-profile-8').then(module => {
+  ? import('./pages/brand-layout.js?v=20260927-faq-background-all-1').then(module => {
       initBrandLayoutModule = module.initBrandLayout;
     }).catch(error => {
       document.body.classList.add('brand-layout-failed');
@@ -41,7 +41,7 @@ const loadPageModules = async () => {
   if (isHomePage) {
     const [screenshotsModule, gamesModule, pageModule] = await Promise.all([
       import('./brand-homepage-screenshots.js?v=20260813-french-1'),
-      import('./brand-new-games.js?v=20260813-french-1'),
+      import('./brand-new-games.js?v=20260927-goldenbet-1'),
       import('./pages/home.js?v=20260829-mobile-density-1'),
     ]);
     BRAND_HOMEPAGE_SCREENSHOTS = screenshotsModule.BRAND_HOMEPAGE_SCREENSHOTS || {};
@@ -52,7 +52,7 @@ const loadPageModules = async () => {
   if (isCountryPage) {
     const [screenshotsModule, gamesModule, pageModule] = await Promise.all([
       import('./brand-homepage-screenshots.js?v=20260813-french-1'),
-      import('./brand-new-games.js?v=20260813-french-1'),
+      import('./brand-new-games.js?v=20260927-goldenbet-1'),
       import('./pages/country-media.js?v=20260813-page-modules-1'),
     ]);
     BRAND_HOMEPAGE_SCREENSHOTS = screenshotsModule.BRAND_HOMEPAGE_SCREENSHOTS || {};
@@ -62,8 +62,8 @@ const loadPageModules = async () => {
 
   if (isBrandPage) {
     const [snapshotsModule, gamesModule, pageModule, feedbackModule] = await Promise.all([
-      import('./brand-snapshot-configs.js?v=20260920-yepcasino-1'),
-      import('./brand-new-games.js?v=20260813-french-1'),
+      import('./brand-snapshot-configs.js?v=20260927-goldenbet-1'),
+      import('./brand-new-games.js?v=20260927-goldenbet-1'),
       import('./pages/brand.js?v=20260927-hero-anchor-row-2'),
       import('./pages/brand-feedback.js?v=20260829-mobile-compose-1'),
     ]);
@@ -338,7 +338,7 @@ const SITE_LOCALE = DOCUMENT_LANGUAGE.startsWith('de')
 let brandBonusTranslations = {};
 const brandBonusTranslationsReady = SITE_LOCALE === 'en'
   ? Promise.resolve()
-  : import(`./brand-bonus-translations/${SITE_LOCALE}.js?v=20260907-silverplay-1`)
+  : import(`./brand-bonus-translations/${SITE_LOCALE}.js?v=20260927-goldenbet-1`)
       .then(module => {
         brandBonusTranslations = module.default || {};
       })

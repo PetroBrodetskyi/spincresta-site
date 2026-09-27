@@ -243,8 +243,8 @@ export const initBrandLayout = context => {
     if (!layout || !aside || !rightRail) return;
 
     const needsResponsibleSection = layout.dataset.responsibleRailBound !== 'true';
-    const needsFaqSection = layout.dataset.faqRailBound !== 'true';
-    if (!needsResponsibleSection && !needsFaqSection) return;
+    const needsFaqDecoration = layout.dataset.faqDecorated !== 'true';
+    if (!needsResponsibleSection && !needsFaqDecoration) return;
 
     const sections = Array.from(
       layout.querySelectorAll('.brand-sticky-main .content-review > section.container')
@@ -264,34 +264,27 @@ export const initBrandLayout = context => {
             responsibleTitlePattern.test(titleText(section))
         )
       : null;
-    const faqSection = needsFaqSection
+    const faqSection = needsFaqDecoration
       ? sections.find(
           section =>
-            section !== responsibleSection &&
-            (/faq/i.test(section.id) ||
-              Boolean(
-                section.querySelector(
-                  ':scope > .faq-accordion-surface, :scope > .faq-grid, :scope > .timeline'
-                )
-              ))
+            /faq/i.test(section.id) ||
+            Boolean(
+              section.querySelector(
+                ':scope > .faq-accordion-surface, :scope > .faq-grid, :scope > .timeline'
+              )
+            )
         )
       : null;
 
+    if (faqSection) {
+      faqSection.classList.add('brand-faq-section');
+      layout.dataset.faqDecorated = 'true';
+    }
     if (responsibleSection) {
       layout.dataset.responsibleRailBound = 'true';
       bindResponsiveMove({
         element: responsibleSection,
         target: aside,
-        className: 'brand-sidebar-section',
-        mediaQuery: '(min-width: 1200px)',
-      });
-    }
-
-    if (faqSection) {
-      layout.dataset.faqRailBound = 'true';
-      bindResponsiveMove({
-        element: faqSection,
-        target: rightRail,
         className: 'brand-sidebar-section',
         mediaQuery: '(min-width: 1200px)',
       });

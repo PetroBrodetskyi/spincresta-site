@@ -1,4 +1,20 @@
 export const BRAND_NEW_GAMES = {
+  goldenbetuk: [
+    { name: '3 Fortune Nuts', image: 'https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto/v1790519628/spincresta/brands/goldenbet/new-games/goldenbet-new-game-3-fortune-nuts_osce6f' },
+    { name: 'Bison Fortune Coins', image: 'https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto/v1790519629/spincresta/brands/goldenbet/new-games/goldenbet-new-game-bison-fortune-coins_ufibbz' },
+    { name: 'Coin Storm', image: 'https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto/v1790519630/spincresta/brands/goldenbet/new-games/goldenbet-new-game-coin-storm_px3r1i' },
+    { name: 'Gold Mine Express', image: 'https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto/v1790519629/spincresta/brands/goldenbet/new-games/goldenbet-new-game-gold-mine-express_gctgbp' },
+    { name: 'Joker Coins Unlimited Fortune', image: 'https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto/v1790519631/spincresta/brands/goldenbet/new-games/goldenbet-new-game-joker-coins-unlimited-fortune_qs6vke' },
+    { name: 'Lucky Cerol 500', image: 'https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto/v1790519632/spincresta/brands/goldenbet/new-games/goldenbet-new-game-lucky-cerol-500_hzijbi' },
+  ],
+  goldenbetau: [
+    { name: '3 Fortune Nuts', image: 'https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto/v1790519628/spincresta/brands/goldenbet/new-games/goldenbet-new-game-3-fortune-nuts_osce6f' },
+    { name: 'Bison Fortune Coins', image: 'https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto/v1790519629/spincresta/brands/goldenbet/new-games/goldenbet-new-game-bison-fortune-coins_ufibbz' },
+    { name: 'Coin Storm', image: 'https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto/v1790519630/spincresta/brands/goldenbet/new-games/goldenbet-new-game-coin-storm_px3r1i' },
+    { name: 'Gold Mine Express', image: 'https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto/v1790519629/spincresta/brands/goldenbet/new-games/goldenbet-new-game-gold-mine-express_gctgbp' },
+    { name: 'Joker Coins Unlimited Fortune', image: 'https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto/v1790519631/spincresta/brands/goldenbet/new-games/goldenbet-new-game-joker-coins-unlimited-fortune_qs6vke' },
+    { name: 'Lucky Cerol 500', image: 'https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto/v1790519632/spincresta/brands/goldenbet/new-games/goldenbet-new-game-lucky-cerol-500_hzijbi' },
+  ],
   casinova: [
     { name: 'Vortex Pulse', image: 'https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto/spincresta/brands/casinova/new-games/casinova-new-game-vortex-pulse_xwrypp' },
     { name: 'Divine Egypt', image: 'https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto/spincresta/brands/casinova/new-games/casinova-new-game-divine-egypt_pvu5rt' },

@@ -14826,6 +14826,47 @@ body[data-brand] .content-review > section.container > .timeline:not(.faq-accord
   line-height: 1.55;
 }
 
+/* Shared brand FAQ artwork. The runtime adds this class to the actual FAQ section. */
+body[data-brand] .brand-faq-section {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+}
+
+body[data-brand] .brand-faq-section::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background-image: url('https://res.cloudinary.com/drj61gmd2/image/upload/f_webp,q_auto:eco,w_1200/v1790535835/spincresta/sections/faq-section/faq_dyugjr');
+  background-image: image-set(
+    url('https://res.cloudinary.com/drj61gmd2/image/upload/f_avif,q_auto,w_1200/v1790535835/spincresta/sections/faq-section/faq_dyugjr') type('image/avif'),
+    url('https://res.cloudinary.com/drj61gmd2/image/upload/f_webp,q_auto:eco,w_1200/v1790535835/spincresta/sections/faq-section/faq_dyugjr') type('image/webp')
+  );
+  background-position: center top;
+  background-repeat: no-repeat;
+  background-size: 100% auto;
+  opacity: 0.28;
+  pointer-events: none;
+}
+
+body[data-brand] .brand-faq-section > * {
+  position: relative;
+  z-index: 1;
+}
+
+html[data-theme='light'] body[data-brand] .brand-faq-section::before {
+  opacity: 0.38;
+}
+
+@media (max-width: 768px) {
+  body[data-brand] .brand-faq-section::before {
+    background-position: center top;
+    background-size: 100% auto;
+    opacity: 0.2;
+  }
+}
+
 @media (max-width: 768px) {
   body[data-brand] .brand-info-pair,
   body[data-brand]

@@ -63,6 +63,8 @@ export default {
   "100% Bonus up to $1,000 + 300 Free Spins": "100 % bonus 1000 dollariin asti + 300 ilmaiskierrosta",
   "100% Deposit Bonus up to EUR 1,000 + 300 Free Spins": "100 % talletusbonus 1 000 euroon asti + 300 ilmaiskierrosta",
   "Claim up to €500/£500 and enjoy 5% live casino cashback": "Lunasta jopa 500 €/500 € ja nauti 5 % livekasinon cashbackista",
+  "200 Free Spins + 20% Sports Cashback": "200 ilmaiskierrosta + 20 % cashback urheiluvedoista",
+  "A$100 Cash Gift + 300 Weekly Free Spins": "A$100 käteisbonus + 300 ilmaiskierrosta viikossa",
   "Welcome Package up to 15,000 EUR/USD + 350 Free Spins": "Tervetuliaispaketti jopa 15 000 EUR/USD + 350 ilmaiskierrosta",
   "Welcome Bonus 250% Up To €3,471 + 250 Free Spins": "Tervetuliaisbonus 250 % Jopa 3 471 € + 250 ilmaiskierrosta",
   "Join Now To Get Your Bonus 550% plus 400 Free Spins": "Liity nyt saadaksesi 550 % bonuksesi sekä 400 ilmaiskierrosta",
