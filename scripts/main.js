@@ -3930,8 +3930,8 @@ const enhanceFaqBlocks = () => {
     answer.prepend(icon);
   };
 
-  const enhanceCountryFaqSplit = faqGrid => {
-    if (faqGrid.dataset.countryFaqSplitBound === 'true') return;
+  const enhanceFaqSplit = faqGrid => {
+    if (faqGrid.dataset.faqSplitBound === 'true') return;
 
     const sourceCards = Array.from(faqGrid.querySelectorAll(':scope > .faq-card'));
     const entries = sourceCards
@@ -3943,7 +3943,9 @@ const enhanceFaqBlocks = () => {
 
     if (!entries.length) return;
 
-    faqGrid.dataset.countryFaqSplitBound = 'true';
+    const splitIndex = document.querySelectorAll('[data-faq-split-bound="true"]').length + 1;
+
+    faqGrid.dataset.faqSplitBound = 'true';
     faqGrid.classList.add('country-faq-split');
 
     const questionList = document.createElement('div');
@@ -3958,8 +3960,8 @@ const enhanceFaqBlocks = () => {
 
     entries.forEach(({ question, answers }, index) => {
       const label = normalizeText(question.textContent).trim();
-      const buttonId = `country-faq-question-${index + 1}`;
-      const panelId = `country-faq-answer-${index + 1}`;
+      const buttonId = `faq-split-${splitIndex}-question-${index + 1}`;
+      const panelId = `faq-split-${splitIndex}-answer-${index + 1}`;
 
       const button = document.createElement('button');
       button.type = 'button';
@@ -4127,13 +4129,14 @@ const enhanceFaqBlocks = () => {
     });
   };
 
-  document.querySelectorAll('section.container, .content-article').forEach(section => {
-    const title = section.querySelector('h2.title');
+  document.querySelectorAll('.content-article, section:has(> .faq-grid)').forEach(section => {
+    const title = section.querySelector('h2.title, h2');
+    const kicker = section.querySelector('.home-section-kicker');
     const timeline = section.querySelector('.timeline');
     const faqGrid = section.querySelector('.faq-grid');
     if (!title || (!timeline && !faqGrid)) return;
 
-    const titleText = normalizeText(title.textContent).trim().toLowerCase();
+    const titleText = normalizeText(`${kicker?.textContent || ''} ${title.textContent}`).trim().toLowerCase();
     const isFaqTitle =
       titleText.includes('faq') ||
       titleText.includes('häufige fragen') ||
@@ -4154,11 +4157,17 @@ const enhanceFaqBlocks = () => {
       return;
     }
 
-    if (document.body.matches('[data-country]') && faqGrid) {
+    if (!document.body.matches('[data-brand]') && faqGrid) {
       const faqShell = section.closest('section.content') || section;
-      faqShell.classList.add('country-faq-section');
-      section.classList.add('country-faq-content');
-      enhanceCountryFaqSplit(faqGrid);
+      faqShell.classList.add('site-faq-section');
+      section.classList.add('site-faq-content');
+
+      if (document.body.matches('[data-country]')) {
+        faqShell.classList.add('country-faq-section');
+        section.classList.add('country-faq-content');
+      }
+
+      enhanceFaqSplit(faqGrid);
       return;
     }
 
@@ -4171,6 +4180,29 @@ const enhanceFaqBlocks = () => {
 
       if (question) addQuestionIcon(question);
       answers.forEach(addAnswerIcon);
+    });
+  });
+};
+
+const reuseEditorialMethodGrid = () => {
+  if (!document.body.matches("[data-page='new-casinos'], [data-page='top-rated'], [data-page='exclusive-offers']")) {
+    return;
+  }
+
+  document.querySelectorAll('.content-article > .timeline').forEach(timeline => {
+    const sourceCards = Array.from(timeline.querySelectorAll(':scope > div'));
+    if (!sourceCards.length) return;
+
+    timeline.classList.add('home-method-grid');
+
+    sourceCards.forEach((sourceCard, index) => {
+      const card = document.createElement('article');
+      Array.from(sourceCard.attributes).forEach(attribute => card.setAttribute(attribute.name, attribute.value));
+
+      const cardIndex = document.createElement('span');
+      cardIndex.textContent = String(index + 1).padStart(2, '0');
+      card.append(cardIndex, ...Array.from(sourceCard.childNodes));
+      sourceCard.replaceWith(card);
     });
   });
 };
@@ -4459,6 +4491,7 @@ export const initCasinoPage = async () => {
     );
   }
 
+  reuseEditorialMethodGrid();
   enhanceFaqBlocks();
   initTopCasinosPageModule?.({
     COUNTRIES,

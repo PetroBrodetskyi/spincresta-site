@@ -4575,7 +4575,7 @@ body[data-brand] .availability-tabs {
 body[data-brand] .availability-tab-list {
   justify-content: flex-start;
   gap: var(--section-gap-tight);
-  padding: 0 0 14px;
+  padding: 14px 0;
   border-bottom: 1px solid var(--border-soft);
   background: transparent;
 }
@@ -5429,20 +5429,20 @@ body:not(.home-page) :where(.timeline h3, .faq-card h3, .faq-card summary) {
   letter-spacing: 0;
 }
 
-body[data-country] .content-article:has(> .faq-grid) .faq-grid.country-faq-split {
+.faq-grid.country-faq-split {
   display: grid;
   grid-template-columns: minmax(280px, 0.78fr) minmax(0, 1.22fr);
   gap: clamp(16px, 2vw, 28px);
   align-items: stretch;
 }
 
-body[data-country] .country-faq-question-list {
+.country-faq-question-list {
   display: grid;
   gap: 8px;
   align-content: start;
 }
 
-body[data-country] .country-faq-question-button {
+.country-faq-question-button {
   appearance: none;
   width: 100%;
   min-height: 62px;
@@ -5465,17 +5465,17 @@ body[data-country] .country-faq-question-button {
     transform 180ms ease;
 }
 
-body[data-country] .country-faq-question-button:hover {
+.country-faq-question-button:hover {
   border-color: var(--surface-border-strong);
   transform: translateX(2px);
 }
 
-body[data-country] .country-faq-question-button:focus-visible {
+.country-faq-question-button:focus-visible {
   outline: 2px solid var(--section-accent);
   outline-offset: 2px;
 }
 
-body[data-country] .country-faq-question-button.is-active {
+.country-faq-question-button.is-active {
   border-color: color-mix(in srgb, var(--section-accent) 60%, var(--border-soft));
   background:
     linear-gradient(90deg, color-mix(in srgb, var(--section-accent) 12%, transparent), transparent 74%),
@@ -5484,7 +5484,7 @@ body[data-country] .country-faq-question-button.is-active {
   transform: none;
 }
 
-body[data-country] .country-faq-question-icon {
+.country-faq-question-icon {
   width: 30px;
   height: 30px;
   justify-self: center;
@@ -5492,19 +5492,19 @@ body[data-country] .country-faq-question-icon {
   transition: opacity 180ms ease, transform 180ms ease;
 }
 
-body[data-country] .country-faq-question-button.is-active .country-faq-question-icon {
+.country-faq-question-button.is-active .country-faq-question-icon {
   opacity: 1;
   transform: scale(1.05);
 }
 
-body[data-country] .country-faq-question-label {
+.country-faq-question-label {
   min-width: 0;
   font-size: 15px;
   font-weight: 680;
   line-height: 1.34;
 }
 
-body[data-country] .country-faq-question-arrow {
+.country-faq-question-arrow {
   width: 8px;
   height: 8px;
   border-top: 2px solid currentColor;
@@ -5514,13 +5514,13 @@ body[data-country] .country-faq-question-arrow {
   transition: color 180ms ease, opacity 180ms ease, transform 180ms ease;
 }
 
-body[data-country] .country-faq-question-button.is-active .country-faq-question-arrow {
+.country-faq-question-button.is-active .country-faq-question-arrow {
   color: var(--section-accent);
   opacity: 1;
   transform: translateX(2px) rotate(45deg);
 }
 
-body[data-country] .country-faq-answer-stage {
+.country-faq-answer-stage {
   min-width: 0;
   display: grid;
   overflow: hidden;
@@ -5532,7 +5532,7 @@ body[data-country] .country-faq-answer-stage {
   box-shadow: var(--shadow-soft);
 }
 
-body[data-country] .country-faq-answer-item {
+.country-faq-answer-item {
   grid-area: 1 / 1;
   min-width: 0;
   padding: clamp(24px, 3vw, 40px);
@@ -5543,7 +5543,7 @@ body[data-country] .country-faq-answer-item {
   transition: opacity 180ms ease, transform 180ms ease, visibility 0s linear 180ms;
 }
 
-body[data-country] .country-faq-answer-item.is-active {
+.country-faq-answer-item.is-active {
   z-index: 1;
   visibility: visible;
   opacity: 1;
@@ -5552,7 +5552,7 @@ body[data-country] .country-faq-answer-item.is-active {
   transition-delay: 0s;
 }
 
-body[data-country] .country-faq-answer-item > h3 {
+.country-faq-answer-item > h3 {
   max-width: 26ch;
   margin: 0;
   padding-bottom: 20px;
@@ -5564,12 +5564,12 @@ body[data-country] .country-faq-answer-item > h3 {
   letter-spacing: -0.025em;
 }
 
-body[data-country] .country-faq-answer-body {
+.country-faq-answer-body {
   max-width: 72ch;
   padding-top: 18px;
 }
 
-body[data-country] .country-faq-answer-body .faq-answer {
+.country-faq-answer-body .faq-answer {
   display: flex;
   align-items: flex-start;
   gap: 12px;
@@ -5579,40 +5579,40 @@ body[data-country] .country-faq-answer-body .faq-answer {
   line-height: 1.7;
 }
 
-body[data-country] .country-faq-answer-body .faq-answer + .faq-answer {
+.country-faq-answer-body .faq-answer + .faq-answer {
   margin-top: 14px;
 }
 
-body[data-country] .country-faq-answer-body .faq-answer-icon {
+.country-faq-answer-body .faq-answer-icon {
   width: 19px;
   height: 19px;
   flex: 0 0 19px;
   margin-top: 0.28em;
 }
 
-html[data-theme='light'] body[data-country] .country-faq-question-button {
+html[data-theme='light'] .country-faq-question-button {
   background: color-mix(in srgb, var(--ui-surface-elevated) 94%, transparent);
 }
 
-html[data-theme='light'] body[data-country] .country-faq-question-button.is-active {
+html[data-theme='light'] .country-faq-question-button.is-active {
   background:
     linear-gradient(90deg, color-mix(in srgb, var(--section-accent) 16%, transparent), transparent 74%),
     var(--ui-surface-elevated);
 }
 
-html[data-theme='light'] body[data-country] .country-faq-answer-stage {
+html[data-theme='light'] .country-faq-answer-stage {
   background:
     linear-gradient(145deg, color-mix(in srgb, var(--section-accent) 10%, transparent), transparent 48%),
     color-mix(in srgb, var(--ui-surface-elevated) 96%, transparent);
 }
 
 @media (max-width: 768px) {
-  body[data-country] .content-article:has(> .faq-grid) .faq-grid.country-faq-split {
+  .faq-grid.country-faq-split {
     grid-template-columns: minmax(0, 1fr);
     gap: 14px;
   }
 
-  body[data-country] .country-faq-question-list {
+  .country-faq-question-list {
     display: flex;
     gap: 8px;
     overflow-x: auto;
@@ -5621,7 +5621,7 @@ html[data-theme='light'] body[data-country] .country-faq-answer-stage {
     scrollbar-width: thin;
   }
 
-  body[data-country] .country-faq-question-button {
+  .country-faq-question-button {
     flex: 0 0 min(78vw, 286px);
     min-height: 58px;
     grid-template-columns: 34px minmax(0, 1fr) 9px;
@@ -5630,37 +5630,37 @@ html[data-theme='light'] body[data-country] .country-faq-answer-stage {
     scroll-snap-align: start;
   }
 
-  body[data-country] .country-faq-question-button:hover {
+  .country-faq-question-button:hover {
     transform: none;
   }
 
-  body[data-country] .country-faq-question-icon {
+  .country-faq-question-icon {
     width: 27px;
     height: 27px;
   }
 
-  body[data-country] .country-faq-question-label {
+  .country-faq-question-label {
     font-size: 14px;
   }
 
-  body[data-country] .country-faq-answer-stage {
+  .country-faq-answer-stage {
     border-radius: 10px;
   }
 
-  body[data-country] .country-faq-answer-item {
+  .country-faq-answer-item {
     padding: 20px 18px 22px;
   }
 
-  body[data-country] .country-faq-answer-item > h3 {
+  .country-faq-answer-item > h3 {
     padding-bottom: 16px;
     font-size: clamp(21px, 7vw, 27px);
   }
 
-  body[data-country] .country-faq-answer-body {
+  .country-faq-answer-body {
     padding-top: 15px;
   }
 
-  body[data-country] .country-faq-answer-body .faq-answer {
+  .country-faq-answer-body .faq-answer {
     font-size: 15px;
     line-height: 1.62;
   }
@@ -12048,13 +12048,13 @@ body.home-page .home-game-card small {
   font-size: 11px;
 }
 
-body.home-page .home-method-grid {
+.home-method-grid {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr));
   gap: 12px;
 }
 
-body.home-page .home-method-grid article {
+.home-method-grid article {
   min-width: 0;
   padding: 24px;
   border-top: 2px solid var(--section-accent);
@@ -12062,21 +12062,21 @@ body.home-page .home-method-grid article {
   background: var(--surface-card);
 }
 
-body.home-page .home-method-grid article > span {
+.home-method-grid article > span {
   color: var(--section-accent);
   font-size: 11px;
   font-weight: 850;
   letter-spacing: 0.12em;
 }
 
-body.home-page .home-method-grid h3 {
+.home-method-grid h3 {
   margin: 30px 0 10px;
   color: var(--text-main);
   font-size: 18px;
   line-height: 1.2;
 }
 
-body.home-page .home-method-grid p {
+.home-method-grid p {
   margin: 0;
   color: var(--text-muted);
   font-size: 13px;
@@ -12090,7 +12090,7 @@ html[data-theme='light'] body.home-page .home-secondary-action {
 html[data-theme='light'] body.home-page .home-recommendation-card,
 html[data-theme='light'] body.home-page .home-new-review-card,
 html[data-theme='light'] body.home-page .home-game-card,
-html[data-theme='light'] body.home-page .home-method-grid article,
+html[data-theme='light'] .home-method-grid article,
 html[data-theme='light'] body.home-page .home-casino-shot {
   background-color: #fff;
 }
@@ -12119,8 +12119,12 @@ html[data-theme='light'] body.home-page .home-casino-shot {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
-  body.home-page .home-method-grid {
+  .home-method-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .home-method-grid > article:last-child:nth-child(odd) {
+    grid-column: 1 / -1;
   }
 }
 
@@ -12232,8 +12236,12 @@ html[data-theme='light'] body.home-page .home-casino-shot {
     max-height: 43px;
   }
 
-  body.home-page .home-method-grid {
+  .home-method-grid {
     grid-template-columns: minmax(0, 1fr);
+  }
+
+  .home-method-grid > article:last-child:nth-child(odd) {
+    grid-column: auto;
   }
 
   body.home-page .home-recommendation-grid,
@@ -14968,6 +14976,19 @@ body[data-brand] .brand-availability-widget > * {
   z-index: 1;
 }
 
+/* Keep the Snapshot data legible over the transparent artwork in dark mode.
+   This restores the existing elevated-surface treatment that the editorial
+   availability layout intentionally removes for sections without artwork. */
+html:not([data-theme='light']) body[data-brand] .brand-availability-widget .availability-tabs {
+  border: 1px solid var(--surface-border-strong);
+  border-radius: var(--radius-lg);
+  background: var(--surface-section);
+  background: color-mix(in srgb, var(--surface-section) 88%, transparent);
+  box-shadow: var(--shadow-soft);
+  -webkit-backdrop-filter: blur(18px) saturate(115%);
+  backdrop-filter: blur(18px) saturate(115%);
+}
+
 html[data-theme='light'] body[data-brand] .brand-availability-widget::before {
   opacity: 0.34;
 }
@@ -14979,23 +15000,23 @@ html[data-theme='light'] body[data-brand] .brand-availability-widget::before {
 }
 
 /* Shared FAQ artwork. The runtime adds these classes to the actual FAQ sections. */
-:is(body[data-brand] .brand-faq-section, body[data-country] .country-faq-section) {
+:is(body[data-brand] .brand-faq-section, .site-faq-section) {
   position: relative;
   isolation: isolate;
   overflow: hidden;
 }
 
-body[data-country] section.content.country-faq-section {
+section.content.site-faq-section {
   padding: clamp(34px, 4vw, 54px) 0;
 }
 
-body[data-country] section.content.country-faq-section > .country-faq-content {
+section.content.site-faq-section > .site-faq-content {
   margin-top: 0;
   padding-top: 0;
   padding-bottom: 0;
 }
 
-:is(body[data-brand] .brand-faq-section, body[data-country] .country-faq-section)::before {
+:is(body[data-brand] .brand-faq-section, .site-faq-section)::before {
   content: '';
   position: absolute;
   inset: 0;
@@ -15012,18 +15033,18 @@ body[data-country] section.content.country-faq-section > .country-faq-content {
   pointer-events: none;
 }
 
-:is(body[data-brand] .brand-faq-section, body[data-country] .country-faq-section) > * {
+:is(body[data-brand] .brand-faq-section, .site-faq-section) > * {
   position: relative;
   z-index: 1;
 }
 
 html[data-theme='light']
-  :is(body[data-brand] .brand-faq-section, body[data-country] .country-faq-section)::before {
+  :is(body[data-brand] .brand-faq-section, .site-faq-section)::before {
   opacity: 0.38;
 }
 
 @media (max-width: 768px) {
-  :is(body[data-brand] .brand-faq-section, body[data-country] .country-faq-section)::before {
+  :is(body[data-brand] .brand-faq-section, .site-faq-section)::before {
     background-position: center top;
     background-size: 100% auto;
     opacity: 0.2;
