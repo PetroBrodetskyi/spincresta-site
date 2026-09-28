@@ -143,7 +143,9 @@ export const initBrandLayout = context => {
   const prosConsTitlePattern =
     /\bpros?\b.*\bcons?\b|\bvorzüge\b.*\bnachteile\b|\bvorteile\b.*\bnachteile\b|ventajas.*desventajas|pro.*contro|zalety.*wady|переваги.*недоліки|pr[oó]s.*contras|avantages.*inconv[eé]nients|फायदे.*नुकसान|hyv[aä]t.*huonot/i;
   const responsibleTitlePattern =
-    /responsible|safer\s+play|verantwort|juego\s+responsable|gioco\s+responsabile|odpowiedzial|відповідаль|jogo\s+respons[aá]vel|jeu\s+responsable|जिम्मेदार|vastuull/i;
+    /responsible|safer[\s-]+play|verantwort|juego\s+responsable|gioco\s+responsabile|odpowiedzial|відповідаль|jogo\s+respons[aá]vel|jeu\s+responsable|जिम्मेदार|vastuull/i;
+  const trustSupportTitlePattern =
+    /licen[cs]|complaint|support|lizenz|beschwer|soporte|reclam|licenz|reclami|assistenza|licenc|skarg|wspar|ліценз|скарг|підтрим|licença|réclamation|plainte|assistance|लाइसेंस|शिकायत|सहायता|lisens|valitus|valitukset|tuki/i;
   const hasTabularContent = section =>
     Boolean(section?.querySelector('table, .brand-mobile-table, [role="table"]'));
 
@@ -195,7 +197,11 @@ export const initBrandLayout = context => {
       const title = normalizeText(
         section.querySelector(':scope > .title, :scope > h2')?.textContent || ''
       );
-      if (prosConsTitlePattern.test(title) || responsibleTitlePattern.test(title)) {
+      if (
+        prosConsTitlePattern.test(title) ||
+        responsibleTitlePattern.test(title) ||
+        trustSupportTitlePattern.test(title)
+      ) {
         return false;
       }
       if (
@@ -243,8 +249,9 @@ export const initBrandLayout = context => {
     if (!layout || !aside || !rightRail) return;
 
     const needsResponsibleSection = layout.dataset.responsibleRailBound !== 'true';
+    const needsTrustSupportSection = layout.dataset.trustSupportRailBound !== 'true';
     const needsFaqDecoration = layout.dataset.faqDecorated !== 'true';
-    if (!needsResponsibleSection && !needsFaqDecoration) return;
+    if (!needsResponsibleSection && !needsTrustSupportSection && !needsFaqDecoration) return;
 
     const sections = Array.from(
       layout.querySelectorAll('.brand-sticky-main .content-review > section.container')
@@ -264,6 +271,9 @@ export const initBrandLayout = context => {
             responsibleTitlePattern.test(titleText(section))
         )
       : null;
+    const trustSupportSections = needsTrustSupportSection
+      ? sections.filter(section => trustSupportTitlePattern.test(titleText(section)))
+      : [];
     const faqSection = needsFaqDecoration
       ? sections.find(
           section =>
@@ -287,6 +297,17 @@ export const initBrandLayout = context => {
         target: aside,
         className: 'brand-sidebar-section',
         mediaQuery: '(min-width: 1200px)',
+      });
+    }
+    if (trustSupportSections.length) {
+      layout.dataset.trustSupportRailBound = 'true';
+      trustSupportSections.forEach(section => {
+        bindResponsiveMove({
+          element: section,
+          target: aside,
+          className: 'brand-sidebar-section',
+          mediaQuery: '(min-width: 1200px)',
+        });
       });
     }
   };

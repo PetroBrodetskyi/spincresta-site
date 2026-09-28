@@ -10,6 +10,12 @@ body.blog-page main {
   padding-top: 88px;
 }
 
+body.blog-page[data-page='blog'] main,
+body.blog-article-page main {
+  padding-top: 0;
+  overflow-x: clip;
+}
+
 .blog-shell {
   width: min(100%, var(--site-max-width));
   margin: 0 auto;
@@ -216,18 +222,24 @@ body.blog-page main {
   margin: 0 auto;
 }
 
+body.blog-article-page .blog-shell {
+  width: 100%;
+  max-width: none;
+  padding: 18px 0 var(--section-padding-y);
+}
+
 .blog-article-header {
   position: relative;
   isolation: isolate;
   display: flex;
-  min-height: clamp(560px, 52vw, 720px);
+  width: min(calc(100% - (var(--page-gutter) * 2)), 1280px);
+  min-height: clamp(400px, 30vw, 450px);
   flex-direction: column;
   justify-content: flex-start;
   overflow: hidden;
-  padding: clamp(28px, 4vw, 56px);
-  padding-top: clamp(84px, 10vw, 132px);
-  border-radius: var(--radius-lg);
-  border-bottom: 0;
+  margin: 0 auto;
+  padding: clamp(98px, 8vw, 122px) clamp(40px, 5vw, 72px) clamp(28px, 3vw, 42px);
+  border-radius: 0 0 24px 24px;
   background-image:
     linear-gradient(90deg, rgba(12, 13, 14, 0.97) 0%, rgba(12, 13, 14, 0.88) 42%, rgba(12, 13, 14, 0.3) 100%),
     var(--blog-article-hero-image);
@@ -254,7 +266,11 @@ html[data-theme='light'] .blog-article-header {
 }
 
 .blog-article-header h1 {
-  max-width: 20ch;
+  max-width: 16ch;
+  font-size: clamp(44px, 4.4vw, 64px);
+  line-height: 0.98;
+  letter-spacing: -0.04em;
+  text-wrap: balance;
 }
 
 .blog-article-meta {
@@ -266,28 +282,49 @@ html[data-theme='light'] .blog-article-header {
   font-size: 13px;
 }
 
+.blog-article-meta > span {
+  padding: 7px 10px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 999px;
+  background: rgba(12, 17, 20, 0.42);
+  color: #dbe4ef;
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+}
+
+html[data-theme='light'] .blog-article-meta > span {
+  border-color: rgba(32, 48, 42, 0.16);
+  background: rgba(255, 255, 255, 0.72);
+  color: #334155;
+}
+
 .blog-article-layout {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) 260px;
+  width: min(calc(100% - (var(--page-gutter) * 2)), 1280px);
+  grid-template-columns: minmax(0, 1fr) minmax(250px, 300px);
   gap: var(--grid-gap);
-  margin-top: var(--section-gap);
+  margin: var(--section-gap) auto 0;
   align-items: start;
 }
 
 .blog-article-body {
   min-width: 0;
-  padding: clamp(24px, 4vw, 52px);
+  padding: clamp(24px, 3vw, 42px);
   border-radius: var(--radius-lg);
 }
 
 .blog-article-body h2 {
-  margin-top: 42px;
+  margin-top: 38px;
+  padding-top: 24px;
+  border-top: 1px solid var(--surface-border);
   font-size: clamp(24px, 2.8vw, 36px);
   line-height: 1.15;
 }
 
 .blog-article-body h2:first-child {
   margin-top: 0;
+  padding-top: 0;
+  border-top: 0;
 }
 
 .blog-article-body h3 {
@@ -325,9 +362,12 @@ html[data-theme='light'] .blog-article-header {
   border-left: 3px solid var(--section-accent);
   background: var(--surface-card-soft);
   color: var(--text-muted);
+  border-radius: 0 var(--radius-md) var(--radius-md) 0;
 }
 
 .blog-article-aside {
+  position: sticky;
+  top: calc(var(--header-height, 82px) + 22px);
   padding: 22px;
   border-radius: var(--radius-lg);
 }
@@ -365,7 +405,7 @@ html[data-theme='light'] .blog-article-header {
 }
 
 @media (max-width: 820px) {
-  body.blog-page main {
+  body.blog-page:not([data-page='blog']):not(.blog-article-page) main {
     padding-top: 70px;
   }
 
@@ -384,7 +424,41 @@ html[data-theme='light'] .blog-article-header {
   }
 
   .blog-article-aside {
+    position: static;
     order: -1;
+  }
+
+  .blog-article-header,
+  .blog-article-layout {
+    width: calc(100% - (var(--page-gutter-mobile) * 2));
+  }
+
+  .blog-article-header {
+    min-height: 440px;
+    padding: 94px 20px 28px;
+    border-radius: 0 0 18px 18px;
+    background-position: 66% center;
+  }
+
+  .blog-article-header h1 {
+    max-width: 13ch;
+    font-size: clamp(34px, 9.4vw, 43px);
+  }
+
+  .blog-article-header > p {
+    max-width: 36ch;
+    font-size: 14px;
+    line-height: 1.5;
+  }
+
+  .blog-article-meta {
+    gap: 7px;
+    margin-top: 16px;
+  }
+
+  .blog-article-meta > span {
+    padding: 6px 8px;
+    font-size: 11px;
   }
 }
 
@@ -415,8 +489,8 @@ html[data-theme='light'] .blog-article-header {
   }
 
   .blog-article-header {
-    min-height: 620px;
-    padding-top: 76px;
+    min-height: 430px;
+    padding-top: 92px;
     background-position: 68% center;
   }
 

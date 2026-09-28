@@ -3421,7 +3421,7 @@ body:not([data-country]) .all-countries::before {
   background-position: center top;
   background-repeat: no-repeat;
   background-size: 100% auto;
-  opacity: 0.22;
+  opacity: 0.17;
   pointer-events: none;
 }
 
@@ -3495,16 +3495,18 @@ html[lang='fi'] .all-countries .title::before { content: 'SELAA MAITTAIN'; }
   gap: 8px;
   min-height: 0;
   padding: 8px 14px;
-  background: transparent;
-  border: 1px solid rgba(255, 255, 255, 0.1);
+  background: rgba(13, 18, 24, 0.74);
+  border: 1px solid rgba(203, 213, 225, 0.22);
   border-radius: 4px;
   box-shadow: none;
-  color: var(--text-main);
+  color: #f1f5f9;
   font-size: 13px;
-  font-weight: 500;
+  font-weight: 600;
   letter-spacing: 0;
   line-height: 1.2;
   text-decoration: none;
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
   transition:
     background 0.2s ease,
     color 0.2s ease,
@@ -3518,7 +3520,7 @@ html[lang='fi'] .all-countries .title::before { content: 'SELAA MAITTAIN'; }
 
 .countries-cloud a:hover,
 .countries-cloud .country-link:hover {
-  background: rgba(255, 255, 255, 0.04);
+  background: rgba(20, 27, 35, 0.9);
   border-color: var(--gold, #ffdf00);
   color: var(--gold, #ffdf00);
   transform: none;
@@ -3535,7 +3537,11 @@ html[lang='fi'] .all-countries .title::before { content: 'SELAA MAITTAIN'; }
 
 html[data-theme='light'] .countries-cloud a,
 html[data-theme='light'] .countries-cloud .country-link {
+  background: transparent;
   border-color: rgba(15, 23, 42, 0.12);
+  color: var(--text-main);
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
 }
 
 html[data-theme='light'] .countries-cloud a:hover,
@@ -13289,14 +13295,14 @@ body.author-page {
 .author-shell {
   display: grid;
   gap: clamp(54px, 7vw, 92px);
-  width: min(100% - (var(--page-gutter) * 2), var(--site-max-width));
+  width: 100%;
   margin: 0 auto;
-  padding: clamp(52px, 7vw, 94px) 0 clamp(70px, 8vw, 110px);
+  padding: 0 0 clamp(70px, 8vw, 110px);
 }
 
 .author-hero {
   display: grid;
-  grid-template-columns: minmax(240px, 0.62fr) minmax(0, 1.45fr);
+  grid-template-columns: minmax(0, 1.45fr) minmax(240px, 0.62fr);
   gap: clamp(34px, 6vw, 88px);
   align-items: center;
   min-height: 430px;
@@ -13310,6 +13316,8 @@ body.author-page {
 
 .author-photo {
   position: relative;
+  grid-row: 1;
+  grid-column: 2;
   width: min(100%, 290px);
   aspect-ratio: 1;
   justify-self: center;
@@ -13335,6 +13343,8 @@ body.author-page {
 }
 
 .author-hero-copy {
+  grid-row: 1;
+  grid-column: 1;
   max-width: 720px;
 }
 
@@ -13409,7 +13419,9 @@ body.author-page {
 
 .author-content {
   display: grid;
+  width: min(calc(100% - (var(--page-gutter) * 2)), 1280px);
   gap: clamp(28px, 4vw, 46px);
+  margin: 0 auto;
 }
 
 .author-intro {
@@ -13484,8 +13496,10 @@ body.author-page {
 .author-standard,
 .author-background {
   display: grid;
+  width: min(calc(100% - (var(--page-gutter) * 2)), 1280px);
   grid-template-columns: minmax(0, 0.85fr) minmax(340px, 1fr);
   gap: clamp(30px, 6vw, 96px);
+  margin: 0 auto;
 }
 
 .author-standard {
@@ -13518,7 +13532,7 @@ html[data-theme='light'] body.author-page .author-standard {
 
 @media (max-width: 1024px) {
   .author-hero {
-    grid-template-columns: minmax(220px, 0.55fr) minmax(0, 1fr);
+    grid-template-columns: minmax(0, 1fr) minmax(220px, 0.55fr);
   }
 
   .author-focus-grid {
@@ -13528,9 +13542,15 @@ html[data-theme='light'] body.author-page .author-standard {
 
 @media (max-width: 768px) {
   .author-shell {
-    width: min(100% - (var(--page-gutter-mobile) * 2), var(--site-max-width));
+    width: 100%;
     gap: 54px;
-    padding-top: 36px;
+    padding-top: 0;
+  }
+
+  .author-content,
+  .author-standard,
+  .author-background {
+    width: calc(100% - (var(--page-gutter-mobile) * 2));
   }
 
   .author-hero,
@@ -13546,7 +13566,15 @@ html[data-theme='light'] body.author-page .author-standard {
     text-align: center;
   }
 
+  .author-hero-copy {
+    grid-row: 1;
+    grid-column: 1;
+    justify-self: center;
+  }
+
   .author-photo {
+    grid-row: 2;
+    grid-column: 1;
     width: min(64vw, 220px);
   }
 
@@ -18182,6 +18210,10 @@ body.payment-methods-page {
   --editorial-hero-image: url('https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto,w_2000/v1790433073/spincresta/pages/payment-methods/payment-methods-hero_xbeflp.webp');
 }
 
+body.author-page {
+  --editorial-hero-image: linear-gradient(135deg, #101719 0%, #141b1d 52%, #0b1012 100%);
+}
+
 body.home-page[data-page='partners'] {
   --editorial-hero-image: url('https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto,w_2000/v1790433260/spincresta/pages/partners/partners-hero_uj9ici.webp');
 }
@@ -18208,6 +18240,7 @@ body.blog-page[data-page='blog'] {
     body[data-page='online-casinos'],
     body.casinos-page,
     body.payment-methods-page,
+    body.author-page,
     body.home-page[data-page='partners'],
     body.home-page[data-page='about'],
     body.home-page[data-page='privacy'],
@@ -18223,6 +18256,7 @@ body.blog-page[data-page='blog'] {
     body[data-page='online-casinos'],
     body.casinos-page,
     body.payment-methods-page,
+    body.author-page,
     body.home-page[data-page='partners'],
     body.home-page[data-page='about'],
     body.home-page[data-page='privacy'],
@@ -18237,6 +18271,7 @@ body.blog-page[data-page='blog'] {
     body[data-page='online-casinos'],
     body.casinos-page,
     body.payment-methods-page,
+    body.author-page,
     body.home-page[data-page='partners'],
     body.home-page[data-page='about'],
     body.home-page[data-page='privacy'],
@@ -18272,6 +18307,7 @@ body.blog-page[data-page='blog'] {
     body[data-page='online-casinos'],
     body.casinos-page,
     body.payment-methods-page,
+    body.author-page,
     body.home-page[data-page='partners'],
     body.home-page[data-page='about'],
     body.home-page[data-page='privacy'],
@@ -18297,6 +18333,7 @@ html[data-theme='light']
     body[data-page='online-casinos'],
     body.casinos-page,
     body.payment-methods-page,
+    body.author-page,
     body.home-page[data-page='partners'],
     body.home-page[data-page='about'],
     body.home-page[data-page='privacy'],
@@ -18313,6 +18350,7 @@ html[data-theme='light']
     body[data-page='online-casinos'],
     body.casinos-page,
     body.payment-methods-page,
+    body.author-page,
     body.home-page[data-page='partners'],
     body.home-page[data-page='about'],
     body.home-page[data-page='privacy'],
@@ -18333,6 +18371,7 @@ html[data-theme='light']
     body[data-page='online-casinos'],
     body.casinos-page,
     body.payment-methods-page,
+    body.author-page,
     body.home-page[data-page='partners'],
     body.home-page[data-page='about'],
     body.home-page[data-page='privacy'],
@@ -18356,6 +18395,7 @@ html[data-theme='light']
     body[data-page='online-casinos'],
     body.casinos-page,
     body.payment-methods-page,
+    body.author-page,
     body.home-page[data-page='partners'],
     body.home-page[data-page='about'],
     body.home-page[data-page='privacy'],
@@ -18689,6 +18729,7 @@ body.blog-page[data-page='blog'] .blog-hero .blog-hero-links a {
       body[data-page='online-casinos'],
       body.casinos-page,
       body.payment-methods-page,
+      body.author-page,
       body.home-page[data-page='partners'],
       body.home-page[data-page='about'],
       body.home-page[data-page='privacy'],
@@ -18704,6 +18745,7 @@ body.blog-page[data-page='blog'] .blog-hero .blog-hero-links a {
       body[data-page='online-casinos'],
       body.casinos-page,
       body.payment-methods-page,
+      body.author-page,
       body.home-page[data-page='partners'],
       body.home-page[data-page='about'],
       body.home-page[data-page='privacy'],
@@ -18728,6 +18770,7 @@ body.blog-page[data-page='blog'] .blog-hero .blog-hero-links a {
       body[data-page='online-casinos'],
       body.casinos-page,
       body.payment-methods-page,
+      body.author-page,
       body.home-page[data-page='partners'],
       body.home-page[data-page='about'],
       body.home-page[data-page='privacy'],
@@ -18744,6 +18787,7 @@ body.blog-page[data-page='blog'] .blog-hero .blog-hero-links a {
       body[data-page='online-casinos'],
       body.casinos-page,
       body.payment-methods-page,
+      body.author-page,
       body.home-page[data-page='partners'],
       body.home-page[data-page='about'],
       body.home-page[data-page='privacy'],
@@ -18762,6 +18806,7 @@ body.blog-page[data-page='blog'] .blog-hero .blog-hero-links a {
       body[data-page='online-casinos'],
       body.casinos-page,
       body.payment-methods-page,
+      body.author-page,
       body.home-page[data-page='partners'],
       body.home-page[data-page='about'],
       body.home-page[data-page='privacy'],
@@ -18780,6 +18825,7 @@ body.blog-page[data-page='blog'] .blog-hero .blog-hero-links a {
       body[data-page='online-casinos'],
       body.casinos-page,
       body.payment-methods-page,
+      body.author-page,
       body.home-page[data-page='partners'],
       body.home-page[data-page='about'],
       body.home-page[data-page='privacy'],
@@ -19090,6 +19136,7 @@ body[data-page='top-casinos'] .hero.container .top-casinos-hero-primary:focus-vi
     body[data-page='top-casinos'],
     body.casinos-page,
     body.payment-methods-page,
+    body.author-page,
     body.home-page[data-page='partners'],
     body.home-page[data-page='about'],
     body.home-page[data-page='privacy'],
@@ -19109,6 +19156,7 @@ html[data-theme='light']
     body[data-page='top-casinos'],
     body.casinos-page,
     body.payment-methods-page,
+    body.author-page,
     body.home-page[data-page='partners'],
     body.home-page[data-page='about'],
     body.home-page[data-page='privacy'],
@@ -20225,6 +20273,206 @@ html[data-theme='light'] .theme-settings-option.is-active {
   display: block;
   min-width: 0;
   max-width: 100%;
+}
+
+/* The payment image is masked beneath its standard inset lower rail so the
+   frame keeps the same geometry as the rest of the editorial hero family. */
+body.payment-methods-page[class] .hero.container {
+  background-image:
+    linear-gradient(
+      to bottom,
+      transparent 0,
+      transparent calc(100% - 18px),
+      #0d1214 calc(100% - 18px),
+      #0d1214 100%
+    ),
+    var(--editorial-hero-image);
+}
+
+/* Author profile: shared editorial frame, portrait composition, and the
+   existing actions promoted into the same lower glass rail used site-wide. */
+body.author-page .author-hero.hero.container {
+  display: grid;
+  grid-template-columns: minmax(0, 1.45fr) minmax(240px, 0.62fr);
+  gap: clamp(34px, 6vw, 88px);
+  margin-bottom: clamp(42px, 5vw, 60px);
+  overflow: visible;
+}
+
+body.author-page .author-hero.hero.container::after {
+  content: '';
+  position: absolute;
+  top: calc(100% - 18px);
+  right: 24px;
+  left: 24px;
+  z-index: 3;
+  height: 92px;
+  border: 1px solid var(--editorial-hero-rail-border);
+  border-radius: 20px;
+  background: var(--editorial-hero-rail-bg);
+  box-shadow: var(--editorial-hero-rail-shadow);
+  -webkit-backdrop-filter: blur(18px) saturate(1.08);
+  backdrop-filter: blur(18px) saturate(1.08);
+}
+
+body.author-page .author-hero-copy.hero-content {
+  position: static !important;
+  z-index: 4 !important;
+  grid-row: 1;
+  grid-column: 1;
+  width: 100%;
+  max-width: 720px;
+}
+
+body.author-page .author-hero-copy > :not(.author-actions),
+body.author-page .author-photo {
+  position: relative;
+  z-index: 2;
+}
+
+body.author-page .author-photo {
+  grid-row: 1;
+  grid-column: 2;
+  width: min(100%, 260px);
+}
+
+body.author-page .author-actions {
+  position: absolute;
+  top: calc(100% + 7px);
+  right: 54px;
+  left: 54px;
+  z-index: 4;
+  min-height: 52px;
+  align-items: center;
+  margin: 0;
+}
+
+/* Country-directory editorial copy reuses the same compact information-card
+   language as the New Casinos explainer section. */
+body[data-page='online-casinos'] .country-directory-editorial-section {
+  margin-top: var(--section-gap);
+}
+
+body[data-page='online-casinos'] .country-directory-editorial {
+  padding: var(--section-padding-y-tight) var(--section-padding-x);
+}
+
+body[data-page='online-casinos'] .country-directory-editorial-intro {
+  max-width: 76ch;
+  margin: 0 auto var(--section-gap-tight);
+  color: var(--text-muted);
+  font-size: clamp(15px, 1.1vw, 17px);
+  line-height: 1.65;
+  text-align: center;
+}
+
+body[data-page='online-casinos'] .country-directory-info-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--grid-gap);
+}
+
+body[data-page='online-casinos'] .country-directory-info-card {
+  min-width: 0;
+  padding: clamp(20px, 2.4vw, 30px);
+  border: 1px solid var(--surface-border);
+  border-radius: var(--radius-md);
+  background: var(--surface-card);
+  box-shadow: var(--shadow-soft);
+}
+
+body[data-page='online-casinos'] .country-directory-info-card h3 {
+  margin: 0;
+  color: var(--text-main);
+  font-size: clamp(20px, 1.8vw, 26px);
+  line-height: 1.18;
+}
+
+body[data-page='online-casinos'] .country-directory-info-card p {
+  margin: 12px 0 0;
+  color: var(--text-muted);
+  line-height: 1.65;
+}
+
+html[data-theme='light'] body[data-page='online-casinos'] .country-directory-info-card {
+  border-color: var(--ui-border-subtle);
+  background: linear-gradient(180deg, var(--ui-surface-elevated), var(--ui-surface-elevated-alt));
+}
+
+@media (max-width: 768px) {
+  body.author-page .author-hero.hero.container {
+    display: block;
+    margin-bottom: 44px;
+    overflow: visible;
+  }
+
+  body.author-page .author-hero-copy.hero-content {
+    position: static !important;
+    width: 55% !important;
+    max-width: 200px !important;
+    align-items: flex-start;
+    justify-self: start !important;
+    text-align: left;
+  }
+
+  body.author-page .author-hero-copy.hero-content h1,
+  body.author-page .author-hero-copy.hero-content > p {
+    text-align: left;
+  }
+
+  body.author-page .author-photo {
+    position: absolute;
+    top: 112px;
+    right: 20px;
+    width: 124px;
+  }
+
+  body.author-page .author-hero.hero.container::after {
+    top: calc(100% - 14px);
+    right: 10px;
+    left: 10px;
+    height: 88px;
+    border-radius: 18px;
+  }
+
+  body.author-page .author-actions {
+    top: calc(100% + 7px);
+    right: 26px;
+    left: 26px;
+    min-height: 48px;
+    flex-flow: row nowrap;
+    justify-content: flex-start;
+    overflow-x: auto;
+  }
+
+  body.author-page .author-actions a {
+    min-width: 0;
+    flex: 1 1 0;
+    min-height: 38px;
+    padding: 7px 8px;
+    font-size: 9px;
+    line-height: 1.12;
+    text-align: center;
+    white-space: normal;
+  }
+
+  body[data-page='online-casinos'] .country-directory-editorial {
+    padding: 22px 16px;
+  }
+
+  body[data-page='online-casinos'] .country-directory-editorial-intro {
+    margin-bottom: 18px;
+    text-align: left;
+  }
+
+  body[data-page='online-casinos'] .country-directory-info-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  body[data-page='online-casinos'] .country-directory-info-card {
+    padding: 18px;
+  }
 }
 
 body[data-brand] :is(.brand-profile-showcase .cta-brands.cta-blocked, .brand-sticky-title__cta.cta-blocked) {

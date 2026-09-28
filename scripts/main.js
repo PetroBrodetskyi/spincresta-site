@@ -25,7 +25,7 @@ const brandLayoutFallbackTimer = document.body?.dataset.brand
     }, 1500)
   : null;
 const brandLayoutModuleReady = document.body?.dataset.brand
-  ? import('./pages/brand-layout.js?v=20260927-faq-background-all-1').then(module => {
+  ? import('./pages/brand-layout.js?v=20260928-brand-rail-faq-1').then(module => {
       initBrandLayoutModule = module.initBrandLayout;
     }).catch(error => {
       document.body.classList.add('brand-layout-failed');
@@ -4129,7 +4129,74 @@ const enhanceFaqBlocks = () => {
     });
   };
 
-  document.querySelectorAll('.content-article, section:has(> .faq-grid)').forEach(section => {
+  const enhanceCountryDirectoryEditorial = () => {
+    if (!document.body.matches('[data-page="online-casinos"]')) return;
+
+    const leadSection = document.querySelector('#seo-editorial-guide');
+    const leadArticle = leadSection?.querySelector(':scope > .content-article');
+    const mainTitle = leadArticle?.querySelector(':scope > h2.title');
+    if (!leadSection || !leadArticle || !mainTitle || leadSection.dataset.editorialCardsBound === 'true') {
+      return;
+    }
+
+    leadSection.dataset.editorialCardsBound = 'true';
+    leadSection.classList.add('country-directory-editorial-section');
+    leadArticle.classList.add('country-directory-editorial');
+
+    const intro = mainTitle.nextElementSibling?.matches('p') ? mainTitle.nextElementSibling : null;
+    if (intro) intro.classList.add('section-intro', 'country-directory-editorial-intro');
+
+    const cards = [];
+    let currentCard = null;
+    Array.from(leadArticle.children).forEach(child => {
+      if (child === mainTitle || child === intro) return;
+
+      if (child.matches('h2, h3')) {
+        currentCard = document.createElement('article');
+        currentCard.className = 'country-directory-info-card';
+        const heading = document.createElement('h3');
+        heading.innerHTML = child.innerHTML;
+        currentCard.appendChild(heading);
+        cards.push(currentCard);
+        child.remove();
+        return;
+      }
+
+      if (currentCard && child.matches('p, ul, ol')) currentCard.appendChild(child);
+    });
+
+    let sibling = leadSection.nextElementSibling;
+    while (sibling?.matches('section.content')) {
+      const nextSibling = sibling.nextElementSibling;
+      const article = sibling.querySelector(':scope > .content-article');
+      const title = article?.querySelector(':scope > h2.title, :scope > h2');
+      if (!article || !title || article.querySelector('.faq-grid, .timeline')) break;
+
+      const card = document.createElement('article');
+      card.className = 'country-directory-info-card';
+      const heading = document.createElement('h3');
+      heading.innerHTML = title.innerHTML;
+      card.appendChild(heading);
+      Array.from(article.children).forEach(child => {
+        if (child !== title) card.appendChild(child);
+      });
+      cards.push(card);
+      sibling.remove();
+      sibling = nextSibling;
+    }
+
+    if (!cards.length) return;
+    const grid = document.createElement('div');
+    grid.className = 'timeline country-directory-info-grid';
+    grid.append(...cards);
+    leadArticle.appendChild(grid);
+  };
+
+  enhanceCountryDirectoryEditorial();
+
+  document.querySelectorAll(
+    '.content-article, section:has(> .faq-grid), body[data-brand] .content-review > section:has(> .timeline)'
+  ).forEach(section => {
     const title = section.querySelector('h2.title, h2');
     const kicker = section.querySelector('.home-section-kicker');
     const timeline = section.querySelector('.timeline');
