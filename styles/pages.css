@@ -3399,10 +3399,39 @@ html[data-theme='light'] .home-country-more {
    ============================================================= */
 
 .all-countries {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
   margin: var(--section-gap) 0 28px;
   padding: var(--section-padding-y-tight) var(--section-padding-x);
   border-top: 1px solid var(--border-soft);
   border-bottom: 1px solid var(--border-soft);
+}
+
+body:not([data-country]) .all-countries::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background-image: url('https://res.cloudinary.com/drj61gmd2/image/upload/f_webp,q_auto:eco,w_1600/v1790604683/spincresta/sections/online-casinos-by-country-section/online-casinos-by-country_zlbbpi');
+  background-image: image-set(
+    url('https://res.cloudinary.com/drj61gmd2/image/upload/f_avif,q_auto,w_1600/v1790604683/spincresta/sections/online-casinos-by-country-section/online-casinos-by-country_zlbbpi') type('image/avif'),
+    url('https://res.cloudinary.com/drj61gmd2/image/upload/f_webp,q_auto:eco,w_1600/v1790604683/spincresta/sections/online-casinos-by-country-section/online-casinos-by-country_zlbbpi') type('image/webp')
+  );
+  background-position: center top;
+  background-repeat: no-repeat;
+  background-size: 100% auto;
+  opacity: 0.22;
+  pointer-events: none;
+}
+
+.all-countries > .container {
+  position: relative;
+  z-index: 1;
+}
+
+html[data-theme='light'] body:not([data-country]) .all-countries::before {
+  opacity: 0.38;
 }
 
 body.home-page .all-countries > .container {
@@ -3530,6 +3559,14 @@ html[data-theme='light'] .countries-cloud .country-link:hover {
     border-radius: var(--radius-lg);
     background: var(--surface-card-soft);
     box-shadow: var(--shadow-soft);
+  }
+
+  body:not([data-country]) .all-countries::before {
+    opacity: 0.18;
+  }
+
+  html[data-theme='light'] body:not([data-country]) .all-countries::before {
+    opacity: 0.3;
   }
 
   .all-countries > .container {
