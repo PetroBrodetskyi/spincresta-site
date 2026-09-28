@@ -3930,67 +3930,120 @@ const enhanceFaqBlocks = () => {
     answer.prepend(icon);
   };
 
-  const enhanceCountryFaqCard = (card, faqGrid, index) => {
-    if (card.querySelector(':scope > .faq-accordion-trigger')) return;
+  const enhanceCountryFaqSplit = faqGrid => {
+    if (faqGrid.dataset.countryFaqSplitBound === 'true') return;
 
-    const question = card.querySelector(':scope > h3');
-    const answers = Array.from(card.querySelectorAll(':scope > p'));
-    if (!question || !answers.length) return;
+    const sourceCards = Array.from(faqGrid.querySelectorAll(':scope > .faq-card'));
+    const entries = sourceCards
+      .map(card => ({
+        question: card.querySelector(':scope > h3'),
+        answers: Array.from(card.querySelectorAll(':scope > p')),
+      }))
+      .filter(({ question, answers }) => question && answers.length);
 
-    addQuestionIcon(question);
-    answers.forEach(addAnswerIcon);
-    faqGrid.classList.add('faq-accordion-surface');
+    if (!entries.length) return;
 
-    const trigger = document.createElement('button');
-    trigger.className = 'faq-question faq-accordion-trigger';
-    trigger.type = 'button';
-    trigger.setAttribute('aria-expanded', 'false');
+    faqGrid.dataset.countryFaqSplitBound = 'true';
+    faqGrid.classList.add('country-faq-split');
 
-    const questionIcon = question.querySelector(':scope > .faq-question-icon');
-    const questionLabel = document.createElement('span');
-    questionLabel.className = 'faq-question-label';
+    const questionList = document.createElement('div');
+    questionList.className = 'country-faq-question-list';
+    questionList.setAttribute('role', 'tablist');
 
-    Array.from(question.childNodes).forEach(node => {
-      if (node !== questionIcon) questionLabel.append(node);
+    const answerStage = document.createElement('div');
+    answerStage.className = 'country-faq-answer-stage';
+
+    const buttons = [];
+    const panels = [];
+
+    entries.forEach(({ question, answers }, index) => {
+      const label = normalizeText(question.textContent).trim();
+      const buttonId = `country-faq-question-${index + 1}`;
+      const panelId = `country-faq-answer-${index + 1}`;
+
+      const button = document.createElement('button');
+      button.type = 'button';
+      button.className = 'country-faq-question-button';
+      button.id = buttonId;
+      button.setAttribute('role', 'tab');
+      button.setAttribute('aria-controls', panelId);
+      button.setAttribute('aria-selected', 'false');
+      button.tabIndex = -1;
+
+      const questionIcon = document.createElement('img');
+      questionIcon.className = 'country-faq-question-icon';
+      questionIcon.src = '/icons/ui/question-mark-circle-icon.svg';
+      questionIcon.alt = '';
+      questionIcon.setAttribute('aria-hidden', 'true');
+
+      const questionLabel = document.createElement('span');
+      questionLabel.className = 'country-faq-question-label';
+      questionLabel.textContent = label;
+
+      const arrow = document.createElement('span');
+      arrow.className = 'country-faq-question-arrow';
+      arrow.setAttribute('aria-hidden', 'true');
+
+      button.append(questionIcon, questionLabel, arrow);
+
+      const panel = document.createElement('article');
+      panel.className = 'country-faq-answer-item';
+      panel.id = panelId;
+      panel.setAttribute('role', 'tabpanel');
+      panel.setAttribute('aria-labelledby', buttonId);
+      panel.setAttribute('aria-hidden', 'true');
+
+      const answerTitle = document.createElement('h3');
+      answerTitle.textContent = label;
+
+      const answerBody = document.createElement('div');
+      answerBody.className = 'country-faq-answer-body';
+      answers.forEach(answer => {
+        addAnswerIcon(answer);
+        answerBody.append(answer);
+      });
+
+      panel.append(answerTitle, answerBody);
+      questionList.append(button);
+      answerStage.append(panel);
+      buttons.push(button);
+      panels.push(panel);
     });
 
-    if (questionIcon) trigger.append(questionIcon);
-    trigger.append(questionLabel);
+    const activate = activeIndex => {
+      buttons.forEach((button, index) => {
+        const isActive = index === activeIndex;
+        button.classList.toggle('is-active', isActive);
+        button.setAttribute('aria-selected', String(isActive));
+        button.tabIndex = isActive ? 0 : -1;
 
-    const toggle = document.createElement('span');
-    toggle.className = 'faq-accordion-toggle';
-    toggle.setAttribute('aria-hidden', 'true');
-    trigger.append(toggle);
-
-    const answerPanel = document.createElement('div');
-    answerPanel.className = 'faq-answer-panel';
-    answerPanel.id = `country-faq-answer-${index + 1}`;
-    answerPanel.hidden = true;
-    trigger.setAttribute('aria-controls', answerPanel.id);
-    answers.forEach(answer => answerPanel.append(answer));
-
-    question.replaceWith(trigger);
-    card.classList.add('faq-card--accordion');
-    card.append(answerPanel);
-
-    const closeOpenCards = () => {
-      faqGrid.querySelectorAll('.faq-accordion-trigger[aria-expanded="true"]').forEach(openTrigger => {
-        openTrigger.setAttribute('aria-expanded', 'false');
-        openTrigger.closest('.faq-card')?.classList.remove('is-open');
-
-        const openPanel = document.getElementById(openTrigger.getAttribute('aria-controls'));
-        if (openPanel) openPanel.hidden = true;
+        panels[index].classList.toggle('is-active', isActive);
+        panels[index].setAttribute('aria-hidden', String(!isActive));
       });
     };
 
-    trigger.addEventListener('click', () => {
-      const isOpening = trigger.getAttribute('aria-expanded') !== 'true';
-      if (isOpening) closeOpenCards();
+    buttons.forEach((button, index) => {
+      button.addEventListener('click', () => activate(index));
+      button.addEventListener('keydown', event => {
+        if (!['ArrowDown', 'ArrowRight', 'ArrowUp', 'ArrowLeft', 'Home', 'End'].includes(event.key)) return;
 
-      trigger.setAttribute('aria-expanded', String(isOpening));
-      card.classList.toggle('is-open', isOpening);
-      answerPanel.hidden = !isOpening;
+        event.preventDefault();
+        let nextIndex = index;
+        if (event.key === 'Home') nextIndex = 0;
+        else if (event.key === 'End') nextIndex = buttons.length - 1;
+        else if (event.key === 'ArrowDown' || event.key === 'ArrowRight') {
+          nextIndex = (index + 1) % buttons.length;
+        } else {
+          nextIndex = (index - 1 + buttons.length) % buttons.length;
+        }
+
+        activate(nextIndex);
+        buttons[nextIndex].focus();
+      });
     });
+
+    faqGrid.replaceChildren(questionList, answerStage);
+    activate(0);
   };
 
   const enhanceBrandFaqTimeline = timeline => {
@@ -4101,17 +4154,20 @@ const enhanceFaqBlocks = () => {
       return;
     }
 
+    if (document.body.matches('[data-country]') && faqGrid) {
+      const faqShell = section.closest('section.content') || section;
+      faqShell.classList.add('country-faq-section');
+      section.classList.add('country-faq-content');
+      enhanceCountryFaqSplit(faqGrid);
+      return;
+    }
+
     timeline?.querySelectorAll(':scope > h3').forEach(addQuestionIcon);
     timeline?.querySelectorAll(':scope > p').forEach(addAnswerIcon);
 
-    faqGrid?.querySelectorAll('.faq-card').forEach((card, index) => {
+    faqGrid?.querySelectorAll('.faq-card').forEach(card => {
       const question = card.querySelector(':scope > h3');
       const answers = card.querySelectorAll(':scope > p');
-
-      if (document.body.matches('[data-country]')) {
-        enhanceCountryFaqCard(card, faqGrid, index);
-        return;
-      }
 
       if (question) addQuestionIcon(question);
       answers.forEach(addAnswerIcon);
