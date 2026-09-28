@@ -6702,6 +6702,15 @@ body[data-brand] .brand-new-game-card span {
   overflow-wrap: anywhere;
 }
 
+/* Responsive rail moves leave comment placeholders in their original
+   wrappers. Comments make :empty unreliable, so hide wrappers that contain
+   no actual elements on both desktop and mobile. */
+body[data-brand].has-brand-sticky-layout
+  .brand-sticky-main
+  > section.container:not(:has(*)) {
+  display: none;
+}
+
 @media (min-width: 901px) {
   body[data-brand].has-brand-sticky-layout {
     --brand-sticky-top: calc(var(--header-height, 64px) + clamp(40px, 4.2vh, 64px));
@@ -6775,10 +6784,6 @@ body[data-brand] .brand-new-game-card span {
     > section.container:has(> .brand-availability-widget) {
     padding-top: 0;
     padding-bottom: 0;
-  }
-
-  body[data-brand].has-brand-sticky-layout .brand-sticky-main > section.container:empty {
-    display: none;
   }
 
   body[data-brand].has-brand-sticky-layout .hero-content.glass-card {
@@ -14931,6 +14936,46 @@ body[data-brand] .content-review > section.container > .timeline:not(.faq-accord
   margin-bottom: 8px;
   font-size: 14px;
   line-height: 1.55;
+}
+
+/* Shared product-snapshot artwork. Keep the transparent centre behind the
+   heading and copy while the casino/sports details frame the section edges. */
+body[data-brand] .brand-availability-widget {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+}
+
+body[data-brand] .brand-availability-widget::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background-image: url('https://res.cloudinary.com/drj61gmd2/image/upload/f_webp,q_auto:eco,w_1200/v1790590491/spincresta/sections/snapshot-section/snapshot_sta7zo');
+  background-image: image-set(
+    url('https://res.cloudinary.com/drj61gmd2/image/upload/f_avif,q_auto,w_1200/v1790590491/spincresta/sections/snapshot-section/snapshot_sta7zo') type('image/avif'),
+    url('https://res.cloudinary.com/drj61gmd2/image/upload/f_webp,q_auto:eco,w_1200/v1790590491/spincresta/sections/snapshot-section/snapshot_sta7zo') type('image/webp')
+  );
+  background-position: center top;
+  background-repeat: no-repeat;
+  background-size: 100% auto;
+  opacity: 0.24;
+  pointer-events: none;
+}
+
+body[data-brand] .brand-availability-widget > * {
+  position: relative;
+  z-index: 1;
+}
+
+html[data-theme='light'] body[data-brand] .brand-availability-widget::before {
+  opacity: 0.34;
+}
+
+@media (max-width: 768px) {
+  body[data-brand] .brand-availability-widget::before {
+    opacity: 0.18;
+  }
 }
 
 /* Shared FAQ artwork. The runtime adds these classes to the actual FAQ sections. */
