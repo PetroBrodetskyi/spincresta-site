@@ -230,7 +230,7 @@ const buildPage = market => {
   const header = base.match(/<header class="header">[\s\S]*?<\/header>/)[0];
   const footer = base
     .slice(base.indexOf('<footer class="footer">'))
-    .replace(/\/scripts\/main\.js\?v=[^"]+/, '/scripts/main.js?v=20260927-faq-background-all-1')
+    .replace(/\/scripts\/main\.js\?v=[^"]+/, '/scripts/main.js?v=20260929-goldenbet-parity-2')
     .replace(/<\/body>[\s\S]*$/, '</body>\n</html>\n');
   const features = sharedFeatures.map(([heading, text], index) => `<div class="feature-card glass-card"><div class="icon-placeholder">0${index + 1}</div><strong>${esc(heading)}</strong><span>${text}</span></div>`).join('\n');
   const status = section('goldenbet-verdict', market.statusTitle, table(['Check', 'Finding', 'SpinCresta view'], market.statusRows), market.statusIntro);

@@ -25,7 +25,7 @@ const brandLayoutFallbackTimer = document.body?.dataset.brand
     }, 1500)
   : null;
 const brandLayoutModuleReady = document.body?.dataset.brand
-  ? import('./pages/brand-layout.js?v=20260928-brand-rail-faq-1').then(module => {
+  ? import('./pages/brand-layout.js?v=20260929-goldenbet-parity-2').then(module => {
       initBrandLayoutModule = module.initBrandLayout;
     }).catch(error => {
       document.body.classList.add('brand-layout-failed');
@@ -62,7 +62,7 @@ const loadPageModules = async () => {
 
   if (isBrandPage) {
     const [snapshotsModule, gamesModule, pageModule, feedbackModule] = await Promise.all([
-      import('./brand-snapshot-configs.js?v=20260927-goldenbet-1'),
+      import('./brand-snapshot-configs.js?v=20260929-goldenbet-parity-2'),
       import('./brand-new-games.js?v=20260927-goldenbet-1'),
       import('./pages/brand.js?v=20260927-hero-anchor-row-2'),
       import('./pages/brand-feedback.js?v=20260829-mobile-compose-1'),

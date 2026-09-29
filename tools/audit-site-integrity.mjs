@@ -2,6 +2,7 @@
 
 import fs from 'node:fs';
 import path from 'node:path';
+import { BRAND_SNAPSHOT_CONFIGS } from '../scripts/brand-snapshot-configs.js';
 
 const ROOT = process.cwd();
 const EXCLUDED_ROOTS = new Set(['.git', '.vercel', 'node_modules', 'tmp', 'keyboard-diagnostics', 'tools']);
@@ -40,6 +41,15 @@ for (const file of htmlFiles.sort()) {
   const ids = [...html.matchAll(/\bid=["']([^"']+)["']/gi)].map(match => match[1]);
   const idSet = new Set();
   const generatedIds = new Set();
+
+  if (/<meta\b[^>]*\bname=["']brand-snapshot-intro["']/i.test(html)) {
+    const brandKey = html
+      .match(/<body\b[^>]*\bdata-brand=["']([^"']+)["']/i)?.[1]
+      ?.toLowerCase();
+    if (!brandKey || !BRAND_SNAPSHOT_CONFIGS[brandKey]) {
+      errors.push(`${relative}: brand snapshot meta has no matching runtime config`);
+    }
+  }
 
   if (/data-page=["']top-casinos["']/i.test(html)) {
     generatedIds.add('top-casino-markets');

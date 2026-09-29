@@ -146,8 +146,16 @@ export const initBrandLayout = context => {
     /responsible|safer[\s-]+play|verantwort|juego\s+responsable|gioco\s+responsabile|odpowiedzial|відповідаль|jogo\s+respons[aá]vel|jeu\s+responsable|जिम्मेदार|vastuull/i;
   const trustSupportTitlePattern =
     /licen[cs]|complaint|support|lizenz|beschwer|soporte|reclam|licenz|reclami|assistenza|licenc|skarg|wspar|ліценз|скарг|підтрим|licença|réclamation|plainte|assistance|लाइसेंस|शिकायत|सहायता|lisens|valitus|valitukset|tuki/i;
+  const trustSupportIdPattern =
+    /(?:^|-)(?:regulation|licensing|licence|license|complaints?|support)(?:-|$)/i;
   const hasTabularContent = section =>
     Boolean(section?.querySelector('table, .brand-mobile-table, [role="table"]'));
+  const isTrustSupportSection = section => {
+    const title = normalizeText(
+      section?.querySelector(':scope > .title, :scope > h2')?.textContent || ''
+    );
+    return trustSupportIdPattern.test(section?.id || '') || trustSupportTitlePattern.test(title);
+  };
 
   const initSidebarEditorialSections = (layout, aside) => {
     if (!layout || !aside) return;
@@ -200,7 +208,7 @@ export const initBrandLayout = context => {
       if (
         prosConsTitlePattern.test(title) ||
         responsibleTitlePattern.test(title) ||
-        trustSupportTitlePattern.test(title)
+        isTrustSupportSection(section)
       ) {
         return false;
       }
@@ -272,7 +280,11 @@ export const initBrandLayout = context => {
         )
       : null;
     const trustSupportSections = needsTrustSupportSection
-      ? sections.filter(section => trustSupportTitlePattern.test(titleText(section)))
+      ? sections.filter(
+          section =>
+            section !== responsibleSection &&
+            isTrustSupportSection(section)
+        )
       : [];
     const faqSection = needsFaqDecoration
       ? sections.find(
