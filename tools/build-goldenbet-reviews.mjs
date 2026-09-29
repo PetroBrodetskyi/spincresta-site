@@ -59,7 +59,7 @@ const sharedGameSections = market => [
       ['Internal handling', 'Bank-transfer withdrawals are described as processed within three banking days', 'This is not a guaranteed arrival time and does not include KYC or bank delays.'],
       ['Verification', 'Identity, address, payment ownership and source-of-funds evidence may be requested', 'Use accurate personal details and payment methods in your own name.'],
     ]
-  )),
+  ), 'The published terms explain minimum amounts, deposit turnover, withdrawal limits and verification. The live cashier remains the final source for account-specific methods and availability.'),
   section('goldenbet-support', 'Support & Responsible Gambling', cards([
     ['Live chat and email', 'Goldenbet publishes 24/7 live chat and support@goldenbet.email for account, bonus, payment and verification questions.'],
     ['Account limits', 'The responsible-gambling page describes deposit and play controls. Set limits before funding an account, not after losses.'],
@@ -237,7 +237,7 @@ const buildPage = market => {
   const regulation = section('goldenbet-regulation', market.regulationTitle, cards(market.regulationCards));
   const promos = section('goldenbet-bonuses', market.promoTitle, table(['Offer', 'Public headline', 'Important check'], market.promoRows), market.promoIntro);
   const bestFor = section('goldenbet-best-for', market.bestForTitle, cards(market.bestFor));
-  const prosCons = section('goldenbet-pros-cons', 'Goldenbet Pros & Cons', `<div class="features-grid premium-grid"><div class="feature-card glass-card"><strong>Pros</strong>${market.pros.map(item => `<span>- ${item}</span>`).join('<br />')}</div><div class="feature-card glass-card"><strong>Cons</strong>${market.cons.map(item => `<span>- ${item}</span>`).join('<br />')}</div></div>`);
+  const prosCons = section('goldenbet-pros-cons', 'Goldenbet Pros & Cons', `<div class="features-grid premium-grid pros-cons-grid"><div class="feature-card glass-card"><strong>Pros</strong>${market.pros.map(item => `<span>- ${item}</span>`).join('<br />')}</div><div class="feature-card glass-card"><strong>Cons</strong>${market.cons.map(item => `<span>- ${item}</span>`).join('<br />')}</div></div>`);
   const faq = section('goldenbet-faq', 'Goldenbet FAQ', `<div class="timeline">${market.faq.map(([question, answer]) => `<h3>${esc(question)}</h3><p>${esc(answer)}</p>`).join('\n')}</div>`);
 
   return `${head}<body data-brand="${market.slug}">\n${header}

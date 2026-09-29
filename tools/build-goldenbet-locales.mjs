@@ -82,15 +82,32 @@ for (const [locale, copy] of Object.entries(GOLDENBET_LOCALE_COPY)) {
       [copy.games[2][0], copy.games[2][1], m.verdict[1][2]],
       [sl.live, copy.features[0][1], m.verdict[2][2]],
       [sl.racing, copy.features[0][1], m.verdict[0][2]],
+      [copy.features[0][0], copy.features[0][1], m.verdict[0][2]],
+    ];
+    const verdictRows = [
+      ...m.verdict,
+      [copy.labels.cashier, copy.cashierIntro, m.verdict[0][2]],
+      [copy.labels.safety, copy.features[5][1], m.verdict[2][2]],
+    ];
+    const bonusRows = [
+      ...m.bonuses,
+      [copy.features[1][0], copy.features[1][1], m.bonusIntro],
+    ];
+    const cashierRows = [
+      ...copy.cashier,
+      [copy.features[3][0], copy.features[3][1], copy.cashierIntro],
+      [copy.features[4][0], copy.features[4][1], m.verdict[0][2]],
+      [copy.labels.payments, copy.cashierIntro, copy.features[3][1]],
+      [sl.localChecks, m.verdictIntro, m.verdict[0][2]],
     ];
     const prosCons = `<div class="features-grid premium-grid pros-cons-grid"><div class="feature-card glass-card"><strong>${esc(sl.pros)}</strong><span>- ${esc(copy.features[0][1])}</span><br /><span>- ${esc(copy.features[2][1])}</span><br /><span>- ${esc(copy.features[5][1])}</span></div><div class="feature-card glass-card"><strong>${esc(sl.cons)}</strong><span>- ${esc(m.verdict[0][1])}</span><br /><span>- ${esc(m.verdict[1][1])}</span><br /><span>- ${esc(m.verdict[2][1])}</span></div></div>`;
     const content = [
-      section('goldenbet-verdict', m.verdictTitle, m.verdictIntro, table(tl.slice(0, 3), m.verdict)),
+      section('goldenbet-verdict', m.verdictTitle, m.verdictIntro, table(tl.slice(0, 3), verdictRows)),
       section('goldenbet-regulation', sl.regulation, '', cards(regulationCards)),
-      section('goldenbet-bonuses', m.bonusTitle, m.bonusIntro, table([tl[3], tl[4], tl[2]], m.bonuses)),
+      section('goldenbet-bonuses', m.bonusTitle, m.bonusIntro, table([tl[3], tl[4], tl[2]], bonusRows)),
       section('goldenbet-games', copy.labels.games, copy.gamesIntro, cards(gameCards)),
       section('goldenbet-sports', sl.sports, '', table([sl.area, sl.publicView, sl.limitation], sportsRows)),
-      section('goldenbet-payments', copy.labels.cashier, copy.cashierIntro, table([tl[0], tl[4], tl[2]], copy.cashier)),
+      section('goldenbet-payments', copy.labels.cashier, copy.cashierIntro, table([tl[0], tl[4], tl[2]], cashierRows)),
       section('goldenbet-support', copy.labels.safety, '', cards(supportCards)),
       section('goldenbet-best-for', sl.bestFor, '', cards([[sl.compare, copy.features[0][1]], [sl.careful, m.verdictIntro]])),
       section('goldenbet-pros-cons', sl.prosCons, '', prosCons),
@@ -107,7 +124,7 @@ ${header}
 <main class="content-review">${content}</main>
 <section class="all-countries"><div class="container"><h2 class="title">${esc(copy.labels.allCountries)}</h2><div class="countries-cloud"></div></div></section>
 ${footer}
-<script type="module" src="/scripts/main.js?v=20260927-faq-background-all-1"></script>
+<script type="module" src="/scripts/main.js?v=20260929-goldenbet-parity-2"></script>
 </body></html>`;
     fs.writeFileSync(targetFile, html);
     console.log(`Built ${targetFile}`);
