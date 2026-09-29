@@ -1,7 +1,7 @@
 ﻿// =====================
 // IMPORTS
 // =====================
-import { BRANDS } from './brands.js?v=20260929-bcgame-1';
+import { BRANDS } from './brands.js?v=20260929-first-refresh-1';
 import { COUNTRIES } from './countries.js';
 import { initFooterNewsletter } from './footer-newsletter.js?v=20260826-newsletter-4';
 import { initAccountAuth } from './account-auth.js?v=20260829-local-preview-1';
@@ -62,7 +62,7 @@ const loadPageModules = async () => {
 
   if (isBrandPage) {
     const [snapshotsModule, gamesModule, pageModule, feedbackModule] = await Promise.all([
-      import('./brand-snapshot-configs.js?v=20260929-bcgame-1'),
+      import('./brand-snapshot-configs.js?v=20260929-first-refresh-1'),
       import('./brand-new-games.js?v=20260929-bcgame-1'),
       import('./pages/brand.js?v=20260927-hero-anchor-row-2'),
       import('./pages/brand-feedback.js?v=20260829-mobile-compose-1'),

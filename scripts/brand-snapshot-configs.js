@@ -171,6 +171,11 @@ const gamblezenConfig = createGamesLiveConfig(
   ['Live shows', 'Live baccarat', 'Live blackjack', 'Other live games', 'Live roulette']
 );
 
+const firstConfig = createGamesLiveConfig(
+  ['Slots', 'Roulette', 'Blackjack', 'Baccarat', 'Jackpot games', 'Live games', 'Crash games'],
+  ['Live shows', 'Live baccarat', 'Live blackjack', 'Other live games', 'Live roulette']
+);
+
 const browinnerConfig = createGamesLiveBettingConfig(
   ['Slots', 'Roulette', 'Blackjack', 'Bingo', 'Baccarat', 'Jackpot games', 'Live games', 'Poker', 'Scratch cards', 'Crash games'],
   ['Live shows', 'Live baccarat', 'Live blackjack', 'Other live games', 'Live poker', 'Live roulette'],
@@ -552,6 +557,7 @@ export const BRAND_SNAPSHOT_CONFIGS = {
   'pin-up': pinUpConfig,
   pinco: pincoConfig,
   gamblezen: gamblezenConfig,
+  first: firstConfig,
   browinner: browinnerConfig,
   goldpari: goldpariConfig,
   casinova: casinovaConfig,

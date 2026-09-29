@@ -49,7 +49,7 @@ export default {
   "375% up to €5,250 + 325 Free Spins": "€5,250 तक 375% + 325 निःशुल्क स्पिन",
   "Play and win, be a little bit crazy! Fast payments. Welcome bonus up to €2,500": "खेलो और जीतो, थोड़ा पागल बनो! तेजी से भुगतान. €2,500 तक स्वागत बोनस",
   "Up to $1,000 Welcome Bonus. Fast Payouts and Real Wins": "$1,000 तक का स्वागत बोनस। तेज़ भुगतान और वास्तविक जीत",
-  "Premium Pack - ₴250,000 + 1300 FS": "प्रीमियम पैक - ₴250,000 + 1300 एफएस",
+  "Welcome Pack up to ₴500,000 + 555 Free Spins": "₴500,000 तक का वेलकम पैक + 555 फ्री स्पिन",
   "Fortunica Casino features slots, fast payouts, and attractive bonuses": "Fortunica कैसीनो में स्लॉट, तेज़ भुगतान और आकर्षक बोनस की सुविधा है",
   "Welcome Bonus 25,000 TRY + 500 Free Spins": "स्वागत बोनस €25,000 + 500 निःशुल्क स्पिन",
   "Welcome Bonus 3,000 AZN + 500 Free Spins": "स्वागत बोनस €25,000 + 500 निःशुल्क स्पिन",

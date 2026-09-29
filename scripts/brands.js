@@ -2254,7 +2254,7 @@ export const BRANDS = [
   },
   {
     name: 'First',
-    bonus: 'Premium Pack - ₴250,000 + 1300 FS',
+    bonus: 'Welcome Pack up to ₴500,000 + 555 Free Spins',
     cta: 'Play Now',
     urlDetail: 'brands/first.html',
     urlCasino: 'https://armadaapp.media-412.com/click?pid=3862&offer_id=122119',

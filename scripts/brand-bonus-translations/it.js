@@ -49,7 +49,7 @@ export default {
   "375% up to €5,250 + 325 Free Spins": "375% fino a 5.250€ + 325 giri gratuiti",
   "Play and win, be a little bit crazy! Fast payments. Welcome bonus up to €2,500": "Gioca e vinci, sii un po' pazzo! Pagamenti veloci. Bonus di benvenuto fino a 2.500€",
   "Up to $1,000 Welcome Bonus. Fast Payouts and Real Wins": "Bonus di benvenuto fino a $ 1.000. Pagamenti veloci e vincite reali",
-  "Premium Pack - ₴250,000 + 1300 FS": "Pacchetto Premium: 250.000 ₴ + 1.300 FS",
+  "Welcome Pack up to ₴500,000 + 555 Free Spins": "Pacchetto di benvenuto fino a 500.000 ₴ + 555 giri gratis",
   "Fortunica Casino features slots, fast payouts, and attractive bonuses": "Fortunica Casino offre slot, pagamenti rapidi e bonus interessanti",
   "Welcome Bonus 25,000 TRY + 500 Free Spins": "Bonus di benvenuto € 25.000 + 500 giri gratuiti",
   "Welcome Bonus 3,000 AZN + 500 Free Spins": "Bonus di benvenuto € 25.000 + 500 giri gratuiti",

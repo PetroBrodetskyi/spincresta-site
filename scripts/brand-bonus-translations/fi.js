@@ -49,7 +49,7 @@ export default {
   "375% up to €5,250 + 325 Free Spins": "375 % 5 250 € asti + 325 ilmaiskierrosta",
   "Play and win, be a little bit crazy! Fast payments. Welcome bonus up to €2,500": "Pelaa ja voita, ole vähän hullu! Nopeat maksut. Tervetuliaisbonus 2500 € asti",
   "Up to $1,000 Welcome Bonus. Fast Payouts and Real Wins": "Jopa 1 000 dollarin tervetuliaisbonus. Nopeat maksut ja todelliset voitot",
-  "Premium Pack - ₴250,000 + 1300 FS": "Premium-paketti - ₴250 000 + 1300 FS",
+  "Welcome Pack up to ₴500,000 + 555 Free Spins": "Tervetulopaketti jopa 500 000 ₴ + 555 ilmaiskierrosta",
   "Fortunica Casino features slots, fast payouts, and attractive bonuses": "Fortunica Casino tarjoaa kolikkopelejä, nopeita voittoja ja houkuttelevia bonuksia",
   "Welcome Bonus 25,000 TRY + 500 Free Spins": "Tervetuliaisbonus 25 000 € + 500 ilmaiskierrosta",
   "Welcome Bonus 3,000 AZN + 500 Free Spins": "Tervetuliaisbonus 25 000 € + 500 ilmaiskierrosta",
