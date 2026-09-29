@@ -211,14 +211,14 @@ export const BRANDS = [
   },
   {
     name: 'BC.Game',
-    bonus: '',
+    bonus: 'Up to $1,600 + 400 Free Spins',
     cta: 'Play Now',
     urlDetail: 'brands/bcgame.html',
     urlCasino: 'https://armadaapp.media-412.com/click?pid=3862&offer_id=124842',
     image: 'images/bcgame.png',
     bgColor: '#292D2E',
     countries: ['AR', 'MX', 'IN', 'NG', 'KE', 'PH'],
-    payments: [],
+    payments: ['banktransfer', 'bitcoin', 'ethereum', 'tether', 'litecoin', 'tron', 'cardano', 'dogecoin'],
     hasDetailPage: true,
   },
   {

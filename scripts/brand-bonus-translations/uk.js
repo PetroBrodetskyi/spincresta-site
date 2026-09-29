@@ -139,5 +139,6 @@ export default {
   "280% Match Bonus up to R5500 + 45 Free Spins": "280% бонус до R5500 + 45 безкоштовних обертань",
   "Welcome Bonus - 550% Up to €3,800 + 50 Free Spins": "Вітальний бонус - 550% до €3800 + 50 безкоштовних обертань",
   "100% Welcome Bonus up to $5,000 on Your First Deposit": "100% вітальний бонус до $5000 на ваш перший депозит",
-  "100% First-Deposit Bonus + 30 Free Spins in Selected Markets": "100% бонус на перший депозит + 30 фріспінів на вибраних ринках"
+  "100% First-Deposit Bonus + 30 Free Spins in Selected Markets": "100% бонус на перший депозит + 30 фріспінів на вибраних ринках",
+  "Up to $1,600 + 400 Free Spins": "До $1 600 + 400 фріспінів"
 };

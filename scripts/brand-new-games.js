@@ -1,4 +1,12 @@
 export const BRAND_NEW_GAMES = {
+  bcgame: [
+    { name: 'Tasty Rush Sweet Spots', image: 'https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto/v1790674857/spincresta/brands/bcgame/new-games/bcgame-new-game-tasty-rush-sweet-spots_g7fkqg' },
+    { name: "Druid's Fortune", image: 'https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto/v1790674856/spincresta/brands/bcgame/new-games/bcgame-new-game-druids-fortune_bj67rs' },
+    { name: '3 Wonders Robin Hood', image: 'https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto/v1790674855/spincresta/brands/bcgame/new-games/bcgame-new-game-3-wonders-robin-hood_koslgr' },
+    { name: 'The VIP', image: 'https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto/v1790674855/spincresta/brands/bcgame/new-games/bcgame-new-game-the-vip_nucvxc' },
+    { name: 'Welcome to Octoberfest', image: 'https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto/v1790674855/spincresta/brands/bcgame/new-games/bcgame-new-game-welcome-to-octoberfest_nrpkap' },
+    { name: 'Red Hot Chilli Chickens', image: 'https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto/v1790674854/spincresta/brands/bcgame/new-games/bcgame-new-game-red-hot-chilli-chickens_tlbklj' },
+  ],
   goldenbetuk: [
     { name: '3 Fortune Nuts', image: 'https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto/v1790519628/spincresta/brands/goldenbet/new-games/goldenbet-new-game-3-fortune-nuts_osce6f' },
     { name: 'Bison Fortune Coins', image: 'https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto/v1790519629/spincresta/brands/goldenbet/new-games/goldenbet-new-game-bison-fortune-coins_ufibbz' },
