@@ -31,7 +31,8 @@ export default {
   "200% Welcome Bonus up to €200 on Your First Deposit": "आपकी पहली जमा राशि पर €200 तक 200% स्वागत बोनस",
   "100% Welcome Bonus up to €1,000 on Your First Deposit": "आपकी पहली जमा राशि पर €1,000 तक 100% स्वागत बोनस",
   "350% up to $15,200 + 210 Free Spins": "$15,200 तक 350% + 210 निःशुल्क स्पिन",
-  "Welcome Package up to EUR 2,500 + 250 Free Spins": "बोनस की जानकारी फिलहाल उपलब्ध नहीं है।",
+  "Up to $1,600 + 400 Free Spins": "1,600 $ तक + 400 मुफ़्त स्पिन",
+  "Welcome Package up to EUR 2,500 + 250 Free Spins": "2,500 EUR तक का वेलकम पैकेज + 250 मुफ़्त स्पिन",
   "Welcome Bonus: 10% Cashback on your first deposit": "स्वागत बोनस: आपकी पहली जमा राशि पर 10% कैशबैक",
   "Welcome offer get an Extra 100% in Coins": "स्वागत प्रस्ताव में सिक्कों में अतिरिक्त 100% प्राप्त करें",
   "Get up to 70 Free Sweep Coins + 100 Free Spins": "70 निःशुल्क स्वीप सिक्के + 100 निःशुल्क स्पिन तक प्राप्त करें",
@@ -49,7 +50,7 @@ export default {
   "375% up to €5,250 + 325 Free Spins": "€5,250 तक 375% + 325 निःशुल्क स्पिन",
   "Play and win, be a little bit crazy! Fast payments. Welcome bonus up to €2,500": "खेलो और जीतो, थोड़ा पागल बनो! तेजी से भुगतान. €2,500 तक स्वागत बोनस",
   "Up to $1,000 Welcome Bonus. Fast Payouts and Real Wins": "$1,000 तक का स्वागत बोनस। तेज़ भुगतान और वास्तविक जीत",
-  "Welcome Pack up to ₴500,000 + 555 Free Spins": "₴500,000 तक का वेलकम पैक + 555 फ्री स्पिन",
+  "Welcome Pack up to ₴500,000 + 555 Free Spins": "प्रीमियम पैक - ₴250,000 + 1300 एफएस",
   "Fortunica Casino features slots, fast payouts, and attractive bonuses": "Fortunica कैसीनो में स्लॉट, तेज़ भुगतान और आकर्षक बोनस की सुविधा है",
   "Welcome Bonus 25,000 TRY + 500 Free Spins": "स्वागत बोनस €25,000 + 500 निःशुल्क स्पिन",
   "Welcome Bonus 3,000 AZN + 500 Free Spins": "स्वागत बोनस €25,000 + 500 निःशुल्क स्पिन",
@@ -139,6 +140,5 @@ export default {
   "280% Match Bonus up to R5500 + 45 Free Spins": "R5500 तक 280% मैच बोनस + 45 निःशुल्क स्पिन",
   "Welcome Bonus - 550% Up to €3,800 + 50 Free Spins": "स्वागत बोनस - 550% €3,800 तक + 50 निःशुल्क स्पिन",
   "100% Welcome Bonus up to $5,000 on Your First Deposit": "आपकी पहली जमा राशि पर $5,000 तक 100% स्वागत बोनस",
-  "100% First-Deposit Bonus + 30 Free Spins in Selected Markets": "चुनिंदा बाज़ारों में पहले जमा पर 100% बोनस + 30 फ्री स्पिन",
-  "Up to $1,600 + 400 Free Spins": "$1,600 तक + 400 फ्री स्पिन"
+  "100% First-Deposit Bonus + 30 Free Spins in Selected Markets": "चुनिंदा बाज़ारों में पहले जमा पर 100% बोनस + 30 फ्री स्पिन"
 };

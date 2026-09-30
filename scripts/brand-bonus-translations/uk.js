@@ -31,7 +31,8 @@ export default {
   "200% Welcome Bonus up to €200 on Your First Deposit": "200% вітальний бонус до 200 євро на ваш перший депозит",
   "100% Welcome Bonus up to €1,000 on Your First Deposit": "100% вітальний бонус до 1000 євро на ваш перший депозит",
   "350% up to $15,200 + 210 Free Spins": "350% до $15 200 + 210 безкоштовних обертань",
-  "Welcome Package up to EUR 2,500 + 250 Free Spins": "Інформацію про бонус наразі не вказано.",
+  "Up to $1,600 + 400 Free Spins": "До 1 600 $ + 400 фріспінів",
+  "Welcome Package up to EUR 2,500 + 250 Free Spins": "Вітальний пакет до 2 500 EUR + 250 фріспінів",
   "Welcome Bonus: 10% Cashback on your first deposit": "Вітальний бонус: 10% кешбеку від вашого першого депозиту",
   "Welcome offer get an Extra 100% in Coins": "Ласкаво просимо отримати додаткові 100% у монетах",
   "Get up to 70 Free Sweep Coins + 100 Free Spins": "Отримайте до 70 безкоштовних монет + 100 безкоштовних обертань",
@@ -49,7 +50,7 @@ export default {
   "375% up to €5,250 + 325 Free Spins": "375% до €5250 + 325 безкоштовних обертань",
   "Play and win, be a little bit crazy! Fast payments. Welcome bonus up to €2,500": "Грайте і вигравайте, будьте трохи божевільними! Швидкі виплати. Вітальний бонус до 2500 євро",
   "Up to $1,000 Welcome Bonus. Fast Payouts and Real Wins": "Вітальний бонус до 1000 доларів США. Швидкі виплати та реальні виграші",
-  "Welcome Pack up to ₴500,000 + 555 Free Spins": "Вітальний пакет до 500 000 ₴ + 555 фріспінів",
+  "Welcome Pack up to ₴500,000 + 555 Free Spins": "Premium Pack - ₴250 000 + 1300 FS",
   "Fortunica Casino features slots, fast payouts, and attractive bonuses": "Казино Fortunica пропонує слоти, швидкі виплати та привабливі бонуси",
   "Welcome Bonus 25,000 TRY + 500 Free Spins": "Вітальний бонус €25 000 + 500 безкоштовних обертань",
   "Welcome Bonus 3,000 AZN + 500 Free Spins": "Вітальний бонус €25 000 + 500 безкоштовних обертань",
@@ -139,6 +140,5 @@ export default {
   "280% Match Bonus up to R5500 + 45 Free Spins": "280% бонус до R5500 + 45 безкоштовних обертань",
   "Welcome Bonus - 550% Up to €3,800 + 50 Free Spins": "Вітальний бонус - 550% до €3800 + 50 безкоштовних обертань",
   "100% Welcome Bonus up to $5,000 on Your First Deposit": "100% вітальний бонус до $5000 на ваш перший депозит",
-  "100% First-Deposit Bonus + 30 Free Spins in Selected Markets": "100% бонус на перший депозит + 30 фріспінів на вибраних ринках",
-  "Up to $1,600 + 400 Free Spins": "До $1 600 + 400 фріспінів"
+  "100% First-Deposit Bonus + 30 Free Spins in Selected Markets": "100% бонус на перший депозит + 30 фріспінів на вибраних ринках"
 };

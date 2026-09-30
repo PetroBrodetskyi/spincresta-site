@@ -31,7 +31,8 @@ export default {
   "200% Welcome Bonus up to €200 on Your First Deposit": "Bonus de bienvenue de 200 % jusqu'à 200 € sur votre premier dépôt",
   "100% Welcome Bonus up to €1,000 on Your First Deposit": "Bonus de bienvenue de 100 % jusqu'à 1 000 € sur votre premier dépôt",
   "350% up to $15,200 + 210 Free Spins": "350 % jusqu'à 15 200 $ + 210 tours gratuits",
-  "Welcome Package up to EUR 2,500 + 250 Free Spins": "Les détails du bonus ne sont pas indiqués actuellement.",
+  "Up to $1,600 + 400 Free Spins": "Jusqu’à 1 600 $ + 400 tours gratuits",
+  "Welcome Package up to EUR 2,500 + 250 Free Spins": "Pack de bienvenue jusqu’à 2 500 EUR + 250 tours gratuits",
   "Welcome Bonus: 10% Cashback on your first deposit": "Bonus de bienvenue : 10 % de remise en argent sur votre premier dépôt",
   "Welcome offer get an Extra 100% in Coins": "Offre de bienvenue, obtenez 100 % de pièces supplémentaires",
   "Get up to 70 Free Sweep Coins + 100 Free Spins": "Obtenez jusqu'à 70 pièces de balayage gratuites + 100 tours gratuits",
@@ -49,7 +50,7 @@ export default {
   "375% up to €5,250 + 325 Free Spins": "375% jusqu'à 5 250 € + 325 tours gratuits",
   "Play and win, be a little bit crazy! Fast payments. Welcome bonus up to €2,500": "Jouez et gagnez, soyez un peu fou ! Paiements rapides. Bonus de bienvenue jusqu'à 2 500 €",
   "Up to $1,000 Welcome Bonus. Fast Payouts and Real Wins": "Jusqu'à 1 000 $ de bonus de bienvenue. Paiements rapides et gains réels",
-  "Welcome Pack up to ₴500,000 + 555 Free Spins": "Pack de bienvenue jusqu’à 500 000 ₴ + 555 tours gratuits",
+  "Welcome Pack up to ₴500,000 + 555 Free Spins": "Pack Premium - 250 000 ₴ + 1 300 FS",
   "Fortunica Casino features slots, fast payouts, and attractive bonuses": "Fortunica Casino propose des machines à sous, des paiements rapides et des bonus attractifs",
   "Welcome Bonus 25,000 TRY + 500 Free Spins": "Bonus de bienvenue 25 000 € + 500 tours gratuits",
   "Welcome Bonus 3,000 AZN + 500 Free Spins": "Bonus de bienvenue 25 000 € + 500 tours gratuits",
@@ -139,6 +140,5 @@ export default {
   "280% Match Bonus up to R5500 + 45 Free Spins": "280 % de bonus de match jusqu'à R5500 + 45 tours gratuits",
   "Welcome Bonus - 550% Up to €3,800 + 50 Free Spins": "Bonus de bienvenue - 550 % jusqu'à 3 800 € + 50 tours gratuits",
   "100% Welcome Bonus up to $5,000 on Your First Deposit": "Bonus de bienvenue de 100 % jusqu'à 5 000 $ sur votre premier dépôt",
-  "100% First-Deposit Bonus + 30 Free Spins in Selected Markets": "Bonus de 100 % sur le premier dépôt + 30 tours gratuits dans certains marchés",
-  "Up to $1,600 + 400 Free Spins": "Jusqu’à 1 600 $ + 400 tours gratuits"
+  "100% First-Deposit Bonus + 30 Free Spins in Selected Markets": "Bonus de 100 % sur le premier dépôt + 30 tours gratuits dans certains marchés"
 };

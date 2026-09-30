@@ -31,7 +31,8 @@ export default {
   "200% Welcome Bonus up to €200 on Your First Deposit": "200 % tervetuliaisbonus 200 € asti ensimmäiselle talletuksellesi",
   "100% Welcome Bonus up to €1,000 on Your First Deposit": "100 % tervetuliaisbonus 1 000 € asti ensimmäiselle talletuksellesi",
   "350% up to $15,200 + 210 Free Spins": "350 % aina $15 200 asti + 210 ilmaiskierrosta",
-  "Welcome Package up to EUR 2,500 + 250 Free Spins": "Bonustietoja ei ole tällä hetkellä listattu.",
+  "Up to $1,600 + 400 Free Spins": "Jopa 1 600 $ + 400 ilmaiskierrosta",
+  "Welcome Package up to EUR 2,500 + 250 Free Spins": "Tervetuliaispaketti enintään 2 500 EUR + 250 ilmaiskierrosta",
   "Welcome Bonus: 10% Cashback on your first deposit": "Tervetuliaisbonus: 10% Cashback ensimmäisestä talletuksestasi",
   "Welcome offer get an Extra 100% in Coins": "Tervetuliaistarjous saat ylimääräisen 100 % kolikoista",
   "Get up to 70 Free Sweep Coins + 100 Free Spins": "Saat jopa 70 ilmaista pyyhkäisykolikkoa + 100 ilmaispyöräytystä",
@@ -49,7 +50,7 @@ export default {
   "375% up to €5,250 + 325 Free Spins": "375 % 5 250 € asti + 325 ilmaiskierrosta",
   "Play and win, be a little bit crazy! Fast payments. Welcome bonus up to €2,500": "Pelaa ja voita, ole vähän hullu! Nopeat maksut. Tervetuliaisbonus 2500 € asti",
   "Up to $1,000 Welcome Bonus. Fast Payouts and Real Wins": "Jopa 1 000 dollarin tervetuliaisbonus. Nopeat maksut ja todelliset voitot",
-  "Welcome Pack up to ₴500,000 + 555 Free Spins": "Tervetulopaketti jopa 500 000 ₴ + 555 ilmaiskierrosta",
+  "Welcome Pack up to ₴500,000 + 555 Free Spins": "Premium-paketti - ₴250 000 + 1300 FS",
   "Fortunica Casino features slots, fast payouts, and attractive bonuses": "Fortunica Casino tarjoaa kolikkopelejä, nopeita voittoja ja houkuttelevia bonuksia",
   "Welcome Bonus 25,000 TRY + 500 Free Spins": "Tervetuliaisbonus 25 000 € + 500 ilmaiskierrosta",
   "Welcome Bonus 3,000 AZN + 500 Free Spins": "Tervetuliaisbonus 25 000 € + 500 ilmaiskierrosta",
@@ -139,6 +140,5 @@ export default {
   "280% Match Bonus up to R5500 + 45 Free Spins": "280 % Match Bonus R5500 asti + 45 ilmaispyöräytystä",
   "Welcome Bonus - 550% Up to €3,800 + 50 Free Spins": "Tervetuliaisbonus - 550 % Jopa 3 800 € + 50 ilmaispyöräytystä",
   "100% Welcome Bonus up to $5,000 on Your First Deposit": "100 % tervetuliaisbonus 5 000 dollariin asti ensimmäisestä talletuksestasi",
-  "100% First-Deposit Bonus + 30 Free Spins in Selected Markets": "100 % ensitalletusbonus + 30 ilmaiskierrosta valituilla markkinoilla",
-  "Up to $1,600 + 400 Free Spins": "Jopa 1 600 $ + 400 ilmaiskierrosta"
+  "100% First-Deposit Bonus + 30 Free Spins in Selected Markets": "100 % ensitalletusbonus + 30 ilmaiskierrosta valituilla markkinoilla"
 };

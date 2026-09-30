@@ -31,7 +31,8 @@ export default {
   "200% Welcome Bonus up to €200 on Your First Deposit": "Bónus de boas-vindas de 200% até € 200 no seu primeiro depósito",
   "100% Welcome Bonus up to €1,000 on Your First Deposit": "Bónus de boas-vindas de 100% até € 1.000 no seu primeiro depósito",
   "350% up to $15,200 + 210 Free Spins": "350% até US$ 15.200 + 210 jogadas grátis",
-  "Welcome Package up to EUR 2,500 + 250 Free Spins": "Os detalhes do bónus não estão disponíveis neste momento.",
+  "Up to $1,600 + 400 Free Spins": "Até 1 600 $ + 400 jogadas grátis",
+  "Welcome Package up to EUR 2,500 + 250 Free Spins": "Pacote de boas-vindas até 2 500 EUR + 250 jogadas grátis",
   "Welcome Bonus: 10% Cashback on your first deposit": "Bónus de Boas-Vindas: 10% de Cashback no seu primeiro depósito",
   "Welcome offer get an Extra 100% in Coins": "Oferta de boas-vindas e ganhe 100% extra em moedas",
   "Get up to 70 Free Sweep Coins + 100 Free Spins": "Ganhe até 70 moedas de varredura grátis + 100 jogadas grátis",
@@ -49,7 +50,7 @@ export default {
   "375% up to €5,250 + 325 Free Spins": "375% até € 5.250 + 325 jogadas grátis",
   "Play and win, be a little bit crazy! Fast payments. Welcome bonus up to €2,500": "Jogue e ganhe, seja um pouco louco! Pagamentos rápidos. Bónus de boas-vindas de até € 2.500",
   "Up to $1,000 Welcome Bonus. Fast Payouts and Real Wins": "Bónus de boas-vindas de até $ 1.000. Pagamentos rápidos e ganhos reais",
-  "Welcome Pack up to ₴500,000 + 555 Free Spins": "Pacote de boas-vindas até 500 000 ₴ + 555 jogadas grátis",
+  "Welcome Pack up to ₴500,000 + 555 Free Spins": "Pacote Premium - ₴250.000 + 1300 jogadas grátis",
   "Fortunica Casino features slots, fast payouts, and attractive bonuses": "O Fortunica Casino oferece slots, pagamentos rápidos e bónus atraentes",
   "Welcome Bonus 25,000 TRY + 500 Free Spins": "Bónus de boas-vindas de € 25.000 + 500 jogadas grátis",
   "Welcome Bonus 3,000 AZN + 500 Free Spins": "Bónus de boas-vindas de € 25.000 + 500 jogadas grátis",
@@ -139,6 +140,5 @@ export default {
   "280% Match Bonus up to R5500 + 45 Free Spins": "Bónus de partida de 280% até R5500 + 45 jogadas grátis",
   "Welcome Bonus - 550% Up to €3,800 + 50 Free Spins": "Bónus de boas-vindas - 550% até € 3.800 + 50 jogadas grátis",
   "100% Welcome Bonus up to $5,000 on Your First Deposit": "Bónus de boas-vindas de 100% até US$ 5.000 no seu primeiro depósito",
-  "100% First-Deposit Bonus + 30 Free Spins in Selected Markets": "Bónus de 100% no primeiro depósito + 30 jogadas grátis em mercados selecionados",
-  "Up to $1,600 + 400 Free Spins": "Até 1.600 $ + 400 rodadas grátis"
+  "100% First-Deposit Bonus + 30 Free Spins in Selected Markets": "Bónus de 100% no primeiro depósito + 30 jogadas grátis em mercados selecionados"
 };

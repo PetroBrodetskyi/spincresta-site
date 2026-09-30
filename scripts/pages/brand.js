@@ -268,6 +268,64 @@ export const initBrandPage = context => {
     desktopQuery.addEventListener?.('change', syncPosition);
   };
 
+  const initReviewerByline = () => {
+    const summaryPanel = document.querySelector(
+      'body[data-brand] .brand-hero-summary-panel'
+    );
+    if (!summaryPanel || summaryPanel.querySelector('.brand-reviewer-byline')) return;
+
+    const authorPrefix = SITE_LOCALE === 'en' ? '' : `/${SITE_LOCALE}`;
+    const authorHref = `${authorPrefix}/authors/odri-chambers/`;
+    const reviewedBy = localeText(
+      'Reviewed by',
+      'Geprüft von',
+      'Revisado por',
+      'Verificato da',
+      'Zweryfikowane przez',
+      'Перевірила',
+      'Revisto por',
+      'Vérifié par',
+      'समीक्षा की',
+      'Arvioinut'
+    );
+    const expertRole = localeText(
+      'iGaming Expert',
+      'iGaming-Expertin',
+      'Experta en iGaming',
+      'Esperta iGaming',
+      'Ekspertka iGaming',
+      'Експертка з iGaming',
+      'Especialista em iGaming',
+      'Experte iGaming',
+      'iGaming विशेषज्ञ',
+      'iGaming-asiantuntija'
+    );
+
+    const byline = document.createElement('a');
+    byline.className = 'brand-reviewer-byline';
+    byline.href = authorHref;
+    byline.rel = 'author';
+    byline.setAttribute('aria-label', `${reviewedBy} Odri Chambers, ${expertRole}`);
+    byline.innerHTML = `
+      <span class="brand-reviewer-byline__avatar" aria-hidden="true">
+        <img
+          src="/images/team/odri-chambers.jpg"
+          alt=""
+          width="800"
+          height="800"
+          loading="lazy"
+          decoding="async"
+        />
+      </span>
+      <span class="brand-reviewer-byline__copy">
+        <span>${escapeHtml(reviewedBy)} <strong>Odri Chambers</strong></span>
+        <span>${escapeHtml(expertRole)}</span>
+      </span>
+    `;
+
+    summaryPanel.prepend(byline);
+  };
+
   const initMobileEditorialDetails = () => {
     const summaryPanel = document.querySelector(
       'body[data-brand] .brand-hero-summary-panel'
@@ -1050,6 +1108,7 @@ export const initBrandPage = context => {
   initBrandHeroPanels();
   positionBrandSectionNav();
   window.requestAnimationFrame(positionBrandSectionNav);
+  initReviewerByline();
   initMobileEditorialDetails();
   initMobileTableDisclosures();
   initBrandCountryCollapse();

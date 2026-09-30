@@ -1,4 +1,12 @@
 export const BRAND_NEW_GAMES = {
+  casinobossy: [
+    { name: 'Fire Train', image: 'https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto/spincresta/brands/casinobossy/new-games/casinobossy-new-game-fire-train_gwvff1' },
+    { name: 'Gates of Olympus 2500', image: 'https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto/spincresta/brands/casinobossy/new-games/casinobossy-new-game-gates-of-olympus-2500_pqhpui' },
+    { name: 'Joker Charge', image: 'https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto/spincresta/brands/casinobossy/new-games/casinobossy-new-game-joker-charge_fykcsf' },
+    { name: 'Max Win', image: 'https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto/spincresta/brands/casinobossy/new-games/casinobossy-new-game-max-win_gt9isp' },
+    { name: 'Bazaar Monkey', image: 'https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto/spincresta/brands/casinobossy/new-games/casinobossy-new-game-bazaar-monkey_pn7f0u' },
+    { name: 'Turbo Coins', image: 'https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto/spincresta/brands/casinobossy/new-games/casinobossy-new-game-turbo-coins_r3ju1r' },
+  ],
   bcgame: [
     { name: 'Tasty Rush Sweet Spots', image: 'https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto/v1790674857/spincresta/brands/bcgame/new-games/bcgame-new-game-tasty-rush-sweet-spots_g7fkqg' },
     { name: "Druid's Fortune", image: 'https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto/v1790674856/spincresta/brands/bcgame/new-games/bcgame-new-game-druids-fortune_bj67rs' },

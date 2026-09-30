@@ -31,7 +31,8 @@ export default {
   "200% Welcome Bonus up to €200 on Your First Deposit": "200 % Willkommensbonus bis zu 200 € auf Ihre erste Einzahlung",
   "100% Welcome Bonus up to €1,000 on Your First Deposit": "100 % Willkommensbonus bis zu 1.000 € auf Ihre erste Einzahlung",
   "350% up to $15,200 + 210 Free Spins": "350 % bis zu 15.200 $ + 210 Freispiele",
-  "Welcome Package up to EUR 2,500 + 250 Free Spins": "Derzeit sind keine Bonusdetails angegeben.",
+  "Up to $1,600 + 400 Free Spins": "Bis zu 1.600 $ + 400 Freispiele",
+  "Welcome Package up to EUR 2,500 + 250 Free Spins": "Willkommenspaket bis zu 2.500 EUR + 250 Freispiele",
   "Welcome Bonus: 10% Cashback on your first deposit": "Willkommensbonus: 10 % Cashback auf Ihre erste Einzahlung",
   "Welcome offer get an Extra 100% in Coins": "Willkommensangebot: Erhalten Sie zusätzliche 100 % in Münzen",
   "Get up to 70 Free Sweep Coins + 100 Free Spins": "Erhalten Sie bis zu 70 kostenlose Sweep-Münzen + 100 Freispiele",
@@ -49,7 +50,7 @@ export default {
   "375% up to €5,250 + 325 Free Spins": "375 % bis zu 5.250 € + 325 Freispiele",
   "Play and win, be a little bit crazy! Fast payments. Welcome bonus up to €2,500": "Spielen und gewinnen, seien Sie ein bisschen verrückt! Schnelle Zahlungen. Willkommensbonus bis zu 2.500 €",
   "Up to $1,000 Welcome Bonus. Fast Payouts and Real Wins": "Bis zu 1.000 $ Willkommensbonus. Schnelle Auszahlungen und echte Gewinne",
-  "Welcome Pack up to ₴500,000 + 555 Free Spins": "Willkommenspaket bis zu 500.000 ₴ + 555 Freispiele",
+  "Welcome Pack up to ₴500,000 + 555 Free Spins": "Premium-Paket – ₴250.000 + 1300 FS",
   "Fortunica Casino features slots, fast payouts, and attractive bonuses": "Das Fortunica Casino bietet Spielautomaten, schnelle Auszahlungen und attraktive Boni",
   "Welcome Bonus 25,000 TRY + 500 Free Spins": "Willkommensbonus 25.000 € + 500 Freispiele",
   "Welcome Bonus 3,000 AZN + 500 Free Spins": "Willkommensbonus 25.000 € + 500 Freispiele",
@@ -139,6 +140,5 @@ export default {
   "280% Match Bonus up to R5500 + 45 Free Spins": "280 % Match-Bonus bis zu R5500 + 45 Freispiele",
   "Welcome Bonus - 550% Up to €3,800 + 50 Free Spins": "Willkommensbonus – 550 % bis zu 3.800 € + 50 Freispiele",
   "100% Welcome Bonus up to $5,000 on Your First Deposit": "100 % Willkommensbonus bis zu 5.000 $ auf Ihre erste Einzahlung",
-  "100% First-Deposit Bonus + 30 Free Spins in Selected Markets": "100 % Ersteinzahlungsbonus + 30 Freispiele in ausgewählten Märkten",
-  "Up to $1,600 + 400 Free Spins": "Bis zu 1.600 $ + 400 Freispiele"
+  "100% First-Deposit Bonus + 30 Free Spins in Selected Markets": "100 % Ersteinzahlungsbonus + 30 Freispiele in ausgewählten Märkten"
 };
