@@ -201,7 +201,7 @@ export const renderCountryMedia = context => {
               const gameName = normalizeText(game.name);
               return `
                 <a class="country-new-game-card" href="${brandPagePath(brand)}">
-                  <span class="country-new-game-art">
+                  <span class="country-new-game-art game-art-backdrop">
                     <img
                       src="${escapeHtml(game.image)}"
                       alt="${localeText(

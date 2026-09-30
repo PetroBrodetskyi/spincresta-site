@@ -26,6 +26,10 @@ const structuralLabels = {
   fi: { regulation: 'Lisenssi, pääsy ja pelaajansuoja', localChecks: 'Käytännön tarkistus ennen rekisteröitymistä', sports: 'Vedonlyönti, ravit ja live-vedot', area: 'Alue', publicView: 'Julkinen tarjonta', limitation: 'Tärkeä rajoitus', live: 'Live-vedonlyönti', racing: 'Hevosurheilu', bestFor: 'Kenelle Goldenbet sopii?', compare: 'Kasinon ja vedonlyönnin vertailijalle', careful: 'Ehdot huolellisesti tarkistavalle', prosCons: 'Goldenbet: plussat ja miinukset', pros: 'Plussat', cons: 'Miinukset', faqGames: 'Mitä pelejä ja vedonlyöntiä Goldenbet tarjoaa?', faqPayments: 'Mitä tarkistaa ennen kotiutusta?', faqPromos: 'Miten Goldenbet-kampanjoita kannattaa arvioida?' },
 };
 const esc = value => String(value).replaceAll('&', '&amp;').replaceAll('<', '&lt;').replaceAll('"', '&quot;');
+const finnishKeywords = {
+  uk: 'Goldenbet UK arvostelu, Goldenbet UKGC lisenssi, Goldenbet bonus, Goldenbet kotiutus, Goldenbet kasino',
+  au: 'Goldenbet Australia arvostelu, Goldenbet AU, Goldenbet bonus Australia, Goldenbet kotiutus, Goldenbet kasino',
+};
 const cards = items => `<div class="features-grid premium-grid">${items.map(([h, p]) => `<article class="feature-card glass-card"><h3>${esc(h)}</h3><p>${esc(p)}</p></article>`).join('')}</div>`;
 const table = (heads, rows) => `<div class="table-wrap"><table><thead><tr>${heads.map(h => `<th scope="col">${esc(h)}</th>`).join('')}</tr></thead><tbody>${rows.map(row => `<tr>${row.map(c => `<td>${esc(c)}</td>`).join('')}</tr>`).join('')}</tbody></table></div>`;
 const section = (id, title, intro, body) => `<section class="container" id="${id}"><h2 class="title">${esc(title)}</h2>${intro ? `<p class="section-intro">${esc(intro)}</p>` : ''}${body}</section>`;
@@ -37,6 +41,7 @@ const replaceHead = (english, locale, market, copy) => {
   head = head.replace(/<html lang="[^"]+">/, `<html lang="${copy.lang}">`)
     .replace(/<title>[\s\S]*?<\/title>/, `<title>${esc(copy[market].title)}</title>`)
     .replace(/<meta name="description" content="[^"]*">/, `<meta name="description" content="${esc(copy[market].description)}">`)
+    .replace(/<meta name="keywords" content="[^"]*">/, match => locale === 'fi' ? `<meta name="keywords" content="${finnishKeywords[market]}">` : match)
     .replace(/<link rel="canonical" href="[^"]+">/, `<link rel="canonical" href="${canonical}">`)
     .replace(/<meta property="og:title" content="[^"]+">/, `<meta property="og:title" content="${esc(copy[market].title)}">`)
     .replace(/<meta property="og:description" content="[^"]+">/, `<meta property="og:description" content="${esc(copy[market].description)}">`)

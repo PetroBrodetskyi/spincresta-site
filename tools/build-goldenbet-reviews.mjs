@@ -27,7 +27,7 @@ const sharedFeatures = [
   ['Casino and sportsbook', 'Goldenbet combines slots, live casino, instant games, racing, pre-match sports and in-play betting under one account.'],
   ['Published promotion rules', 'The public promotions hub describes deposit, cashback, free-spin and free-bet campaigns, but every campaign has separate eligibility and cashout limits.'],
   ['Casino discovery tools', 'New games, providers and lobby categories make the catalogue easier to scan than a single unfiltered game wall.'],
-  ['Cards and alternative payments', 'The terms mention Visa, Mastercard and alternative payment routes, while the live cashier decides which methods appear for an account.'],
+  ['Cards and alternative payments', 'The terms mention Visa, Mastercard and alternative payment methods, while the live cashier decides which methods appear for an account.'],
   ['KYC before withdrawals', 'Identity, address and payment-ownership checks can be requested, and withdrawals can remain pending until verification is complete.'],
   ['24/7 support and safer-play tools', 'Goldenbet publishes live chat, email support, account limits, time-outs and self-exclusion routes, although local protections still matter.'],
 ];

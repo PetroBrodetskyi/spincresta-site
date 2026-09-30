@@ -135,6 +135,7 @@ export default {
   "Welcome Pack - 325% up to €3,750 + 500 FS": "वेलकम पैक - 325% €3,750 + 500 एफएस तक",
   "Welcome Package up to €1,500 + 250 Free Spins": "€1,500 + 250 निःशुल्क स्पिन तक का स्वागत पैकेज",
   "Casino Welcome Package - Up to €2,500 in 3 Bonuses + 1 Bonus Crab": "कैसीनो वेलकम पैकेज - €2,500 तक 3 बोनस + 1 बोनस क्रैब",
+  "125% up to €1,000 + 200 Free Spins": "€1,000 तक 125% + 200 फ्री स्पिन",
   "Welcome Bonus 500% Up To €3,470 + 400 Free Spins": "स्वागत बोनस 500% €3,470 तक + 400 निःशुल्क स्पिन",
   "Welcome Package - Up to €3,000 + 300 Free Spins": "स्वागत पैकेज - €3,000 तक + 300 निःशुल्क स्पिन",
   "280% Match Bonus up to R5500 + 45 Free Spins": "R5500 तक 280% मैच बोनस + 45 निःशुल्क स्पिन",

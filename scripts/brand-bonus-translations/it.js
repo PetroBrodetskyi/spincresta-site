@@ -135,6 +135,7 @@ export default {
   "Welcome Pack - 325% up to €3,750 + 500 FS": "Pacchetto di benvenuto - 325% fino a 3.750 € + 500 FS",
   "Welcome Package up to €1,500 + 250 Free Spins": "Pacchetto di benvenuto fino a 1.500€ + 250 giri gratuiti",
   "Casino Welcome Package - Up to €2,500 in 3 Bonuses + 1 Bonus Crab": "Pacchetto di benvenuto del casinò: fino a 2.500 € in 3 bonus + 1 bonus Crab",
+  "125% up to €1,000 + 200 Free Spins": "125% fino a 1.000 € + 200 giri gratis",
   "Welcome Bonus 500% Up To €3,470 + 400 Free Spins": "Bonus di benvenuto del 500% fino a € 3.470 + 400 giri gratuiti",
   "Welcome Package - Up to €3,000 + 300 Free Spins": "Pacchetto di benvenuto: fino a 3.000 € + 300 giri gratuiti",
   "280% Match Bonus up to R5500 + 45 Free Spins": "Bonus del 280% fino a R5500 + 45 giri gratuiti",

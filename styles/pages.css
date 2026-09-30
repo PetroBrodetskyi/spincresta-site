@@ -6798,21 +6798,18 @@ body[data-brand] .brand-new-game-card:hover {
   transform: translateY(-3px);
 }
 
-body[data-brand] .brand-new-game-media {
+.game-art-backdrop {
   position: relative;
   isolation: isolate;
-  width: 100%;
-  aspect-ratio: 3 / 4;
   overflow: hidden;
   background-color: var(--surface-card-soft);
-  border-bottom: 1px solid var(--surface-border);
 }
 
-body[data-brand] .brand-new-game-media::before {
+.game-art-backdrop::before {
   position: absolute;
   z-index: 0;
   inset: -28px;
-  background-image: var(--brand-game-art);
+  background-image: var(--game-art);
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
@@ -6822,7 +6819,7 @@ body[data-brand] .brand-new-game-media::before {
   transform: scale(1.08);
 }
 
-body[data-brand] .brand-new-game-media::after {
+.game-art-backdrop::after {
   position: absolute;
   z-index: 0;
   inset: 0;
@@ -6830,9 +6827,18 @@ body[data-brand] .brand-new-game-media::after {
   content: '';
 }
 
-body[data-brand] .brand-new-game-card img {
+.game-art-backdrop > img {
   position: relative;
   z-index: 1;
+}
+
+body[data-brand] .brand-new-game-media {
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  border-bottom: 1px solid var(--surface-border);
+}
+
+body[data-brand] .brand-new-game-card img {
   display: block;
   width: 100%;
   height: 100%;
@@ -12169,15 +12175,20 @@ body.home-page .home-game-card:hover {
   border-color: var(--section-accent);
 }
 
-body.home-page .home-game-card img {
+body.home-page .home-game-art {
   display: block;
   width: 100%;
   aspect-ratio: 1 / 1;
-  object-fit: contain;
-  background: #0d1014;
 }
 
-body.home-page .home-game-card > span {
+body.home-page .home-game-card img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+body.home-page .home-game-card > span:not(.home-game-art) {
   display: grid;
   gap: 4px;
   min-width: 0;
@@ -13290,10 +13301,7 @@ body[data-country] .country-new-game-art {
   padding: 7px;
   overflow: hidden;
   border-bottom: 1px solid var(--surface-border);
-  background:
-    radial-gradient(circle at 85% 0%, rgba(255, 255, 255, 0.12), transparent 36%),
-    radial-gradient(circle at 0% 100%, rgba(168, 205, 185, 0.1), transparent 40%),
-    linear-gradient(155deg, #171d21, #080c0f 72%);
+  background: var(--surface-card-soft);
 }
 
 body[data-country] .country-new-game-art img {

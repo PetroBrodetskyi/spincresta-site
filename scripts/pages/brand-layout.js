@@ -48,7 +48,7 @@ export const initBrandLayout = context => {
     const casinoHref = playNowLink?.getAttribute('href') || '';
     const cardMarkup = game => {
       const cardContent = `
-        <div class="brand-new-game-media">
+        <div class="brand-new-game-media game-art-backdrop">
           <img
             src="${escapeHtml(game.image)}"
             alt="${escapeHtml(game.name)} at ${escapeHtml(document.body.dataset.brand)}"
@@ -95,21 +95,6 @@ export const initBrandLayout = context => {
       </div>
     `;
 
-    rail.querySelectorAll('.brand-new-game-media').forEach(media => {
-      const image = media.querySelector('img');
-      if (!image) return;
-
-      const applyBackdrop = () => {
-        media.style.setProperty(
-          '--brand-game-art',
-          `url(${JSON.stringify(image.currentSrc || image.getAttribute('src'))})`
-        );
-      };
-
-      if (image.complete && image.naturalWidth) applyBackdrop();
-      else image.addEventListener('load', applyBackdrop, { once: true });
-    });
-  
     return rail;
   };
 

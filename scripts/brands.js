@@ -367,14 +367,14 @@ export const BRANDS = [
   },
   {
     name: 'Winolot',
-    bonus: '',
+    bonus: '125% up to €1,000 + 200 Free Spins',
     cta: 'Play Now',
     urlDetail: 'brands/winolot.html',
     urlCasino: 'https://armadaapp.media-412.com/click?pid=3862&offer_id=124848',
     image: 'images/winolot.svg',
     bgColor: '#360220',
     countries: ['DE', 'IT', 'ES', 'CH', 'AT', 'IE', 'LU', 'CA', 'NZ', 'AU', 'CL', 'UY', 'MX', 'PE', 'AR', 'CO', 'BR', 'SE', 'FI', 'NO', 'DK', 'HU', 'NL', 'BE', 'IS', 'EE', 'LV', 'HR', 'MD', 'KZ', 'UZ', 'AZ', 'BA'],
-    payments: [],
+    payments: ['visa', 'mastercard', 'banktransfer', 'skrill', 'paysafecard'],
     hasDetailPage: true,
   },
   {

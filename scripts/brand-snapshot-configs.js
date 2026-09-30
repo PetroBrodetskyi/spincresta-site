@@ -553,6 +553,7 @@ export const BRAND_SNAPSHOT_CONFIGS = {
   ...mapSnapshotConfig(['goldenbet-uk', 'goldenbet-au'], sportsRewardsCasinoConfig),
   ...mapSnapshotConfig(['bcgame'], sportsRewardsCasinoConfig),
   ...mapSnapshotConfig(['casinobossy'], sportsPromoCasinoConfig),
+  ...mapSnapshotConfig(['winolot'], sportsPromoCasinoConfig),
   ...mapSnapshotConfig(['iwild', 'snatch'], casinoToolsConfig),
   ...mapSnapshotConfig(['fraga-tr', 'fraga-az', 'fraga-ar', 'fraga-cl'], fragaConfig),
   'pin-up': pinUpConfig,

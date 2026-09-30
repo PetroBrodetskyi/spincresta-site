@@ -135,6 +135,7 @@ export default {
   "Welcome Pack - 325% up to €3,750 + 500 FS": "Welcome Pack - 325% до €3750 + 500 FS",
   "Welcome Package up to €1,500 + 250 Free Spins": "Вітальний пакет до 1500 євро + 250 безкоштовних обертань",
   "Casino Welcome Package - Up to €2,500 in 3 Bonuses + 1 Bonus Crab": "Вітальний пакет для казино - до €2500 у вигляді 3 бонусів + 1 бонусний краб",
+  "125% up to €1,000 + 200 Free Spins": "125% до 1 000 € + 200 фріспінів",
   "Welcome Bonus 500% Up To €3,470 + 400 Free Spins": "Вітальний бонус 500% до €3470 + 400 безкоштовних обертань",
   "Welcome Package - Up to €3,000 + 300 Free Spins": "Вітальний пакет - до 3000 євро + 300 безкоштовних обертань",
   "280% Match Bonus up to R5500 + 45 Free Spins": "280% бонус до R5500 + 45 безкоштовних обертань",

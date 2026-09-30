@@ -1,4 +1,12 @@
 export const BRAND_NEW_GAMES = {
+  winolot: [
+    { name: 'Pirate Coins: 3 Chests', image: 'https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto/spincresta/brands/winolot/new-games/winolot-new-game-pirate-coins-3-chests_qxhfvk' },
+    { name: 'MLK Voyage', image: 'https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto/spincresta/brands/winolot/new-games/winolot-new-game-mlk-voyage_xarxdt' },
+    { name: 'Mines TNT', image: 'https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto/spincresta/brands/winolot/new-games/winolot-new-game-mines-tnt_qsngoa' },
+    { name: 'Fortune Trio: Minions of Fu', image: 'https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto/spincresta/brands/winolot/new-games/winolot-new-game-fortune-trio-minions-of-fu_jvtlbi' },
+    { name: 'Chonky Kong: Hold and Win', image: 'https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto/spincresta/brands/winolot/new-games/winolot-new-game-chonky-kong-hold-and-win_zbl8ff' },
+    { name: 'Fire Diamond', image: 'https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto/spincresta/brands/winolot/new-games/winolot-new-game-fire-diamond_msohcm' },
+  ],
   casinobossy: [
     { name: 'Fire Train', image: 'https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto/spincresta/brands/casinobossy/new-games/casinobossy-new-game-fire-train_gwvff1' },
     { name: 'Gates of Olympus 2500', image: 'https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto/spincresta/brands/casinobossy/new-games/casinobossy-new-game-gates-of-olympus-2500_pqhpui' },

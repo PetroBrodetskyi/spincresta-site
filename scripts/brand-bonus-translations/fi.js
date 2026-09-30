@@ -135,6 +135,7 @@ export default {
   "Welcome Pack - 325% up to €3,750 + 500 FS": "Tervetuliaispaketti - 325 % 3 750 € asti + 500 FS",
   "Welcome Package up to €1,500 + 250 Free Spins": "Tervetuliaispaketti 1 500 € asti + 250 ilmaiskierrosta",
   "Casino Welcome Package - Up to €2,500 in 3 Bonuses + 1 Bonus Crab": "Kasinon tervetulopaketti - Jopa 2 500 € 3 bonuksessa + 1 bonusrapu",
+  "125% up to €1,000 + 200 Free Spins": "125 % enintään 1 000 € + 200 ilmaiskierrosta",
   "Welcome Bonus 500% Up To €3,470 + 400 Free Spins": "500 % tervetuliaisbonus 3 470 € asti + 400 ilmaiskierrosta",
   "Welcome Package - Up to €3,000 + 300 Free Spins": "Tervetuliaispaketti - Jopa 3 000 € + 300 ilmaiskierrosta",
   "280% Match Bonus up to R5500 + 45 Free Spins": "280 % Match Bonus R5500 asti + 45 ilmaispyöräytystä",

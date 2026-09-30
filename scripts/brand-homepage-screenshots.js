@@ -2,6 +2,7 @@
 // Keys match the review slug used by BRANDS.urlDetail.
 export const BRAND_HOMEPAGE_SCREENSHOTS = Object.freeze(
 {
+  "winolot": "https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto,w_1600/spincresta/brands/winolot/main-page/winolot-page_fkwzvn",
   "casinobossy": "https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto,w_1600/spincresta/brands/casinobossy/main-page/casinobossy-page_uni4tq",
   "casinova": "https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto,w_1600/v1789301229/spincresta/brands/casinova/main-page/casinova-page_yp7nkk",
   "silverplay": "https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto/v1788687510/spincresta/brands/silverplay/main-page/silverplay-page_nglrsy",

@@ -1,7 +1,7 @@
 ﻿// =====================
 // IMPORTS
 // =====================
-import { BRANDS } from './brands.js?v=20260929-casinobossy-1';
+import { BRANDS } from './brands.js?v=20260930-winolot-1';
 import { COUNTRIES } from './countries.js';
 import { initFooterNewsletter } from './footer-newsletter.js?v=20260826-newsletter-4';
 import { initAccountAuth } from './account-auth.js?v=20260829-local-preview-1';
@@ -25,7 +25,7 @@ const brandLayoutFallbackTimer = document.body?.dataset.brand
     }, 1500)
   : null;
 const brandLayoutModuleReady = document.body?.dataset.brand
-  ? import('./pages/brand-layout.js?v=20260930-new-games-blur-1').then(module => {
+  ? import('./pages/brand-layout.js?v=20260930-global-game-blur-1').then(module => {
       initBrandLayoutModule = module.initBrandLayout;
     }).catch(error => {
       document.body.classList.add('brand-layout-failed');
@@ -40,8 +40,8 @@ const loadPageModules = async () => {
 
   if (isHomePage) {
     const [screenshotsModule, gamesModule, pageModule] = await Promise.all([
-      import('./brand-homepage-screenshots.js?v=20260929-casinobossy-1'),
-      import('./brand-new-games.js?v=20260929-casinobossy-1'),
+      import('./brand-homepage-screenshots.js?v=20260930-winolot-1'),
+      import('./brand-new-games.js?v=20260930-winolot-1'),
       import('./pages/home.js?v=20260829-mobile-density-1'),
     ]);
     BRAND_HOMEPAGE_SCREENSHOTS = screenshotsModule.BRAND_HOMEPAGE_SCREENSHOTS || {};
@@ -51,9 +51,9 @@ const loadPageModules = async () => {
 
   if (isCountryPage) {
     const [screenshotsModule, gamesModule, pageModule] = await Promise.all([
-      import('./brand-homepage-screenshots.js?v=20260929-casinobossy-1'),
-      import('./brand-new-games.js?v=20260929-casinobossy-1'),
-      import('./pages/country-media.js?v=20260813-page-modules-1'),
+      import('./brand-homepage-screenshots.js?v=20260930-winolot-1'),
+      import('./brand-new-games.js?v=20260930-winolot-1'),
+      import('./pages/country-media.js?v=20260930-global-game-blur-1'),
     ]);
     BRAND_HOMEPAGE_SCREENSHOTS = screenshotsModule.BRAND_HOMEPAGE_SCREENSHOTS || {};
     BRAND_NEW_GAMES = gamesModule.BRAND_NEW_GAMES || {};
@@ -62,8 +62,8 @@ const loadPageModules = async () => {
 
   if (isBrandPage) {
     const [snapshotsModule, gamesModule, pageModule, feedbackModule] = await Promise.all([
-      import('./brand-snapshot-configs.js?v=20260929-casinobossy-1'),
-      import('./brand-new-games.js?v=20260929-casinobossy-1'),
+      import('./brand-snapshot-configs.js?v=20260930-winolot-1'),
+      import('./brand-new-games.js?v=20260930-winolot-1'),
       import('./pages/brand.js?v=20260930-reviewer-byline-2'),
       import('./pages/brand-feedback.js?v=20260829-mobile-compose-1'),
     ]);
@@ -119,6 +119,33 @@ const BRAND_ONLY_COUNTRIES = {
   LK: { slug: 'sri-lanka', name: { en: 'Sri Lanka', de: 'Sri Lanka', es: 'Sri Lanka', it: 'Sri Lanka', pl: 'Sri Lanka', uk: 'Шрі-Ланка', pt: 'Sri Lanka', fr: 'Sri Lanka', hi: 'श्रीलंका', fi: 'Sri Lanka' } },
   TG: { slug: 'togo', name: { en: 'Togo', de: 'Togo', es: 'Togo', it: 'Togo', pl: 'Togo', uk: 'Того', pt: 'Togo', fr: 'Togo', hi: 'टोगो', fi: 'Togo' } },
   ZM: { slug: 'zambia', name: { en: 'Zambia', de: 'Sambia', es: 'Zambia', it: 'Zambia', pl: 'Zambia', uk: 'Замбія', pt: 'Zâmbia', fr: 'Zambie', hi: 'जाम्बिया', fi: 'Sambia' } },
+};
+
+const initGameArtworkBackdrops = (root = document) => {
+  root.querySelectorAll('.home-game-card > img').forEach(image => {
+    const media = document.createElement('span');
+    media.className = 'home-game-art game-art-backdrop';
+    image.before(media);
+    media.append(image);
+  });
+
+  root.querySelectorAll('.game-art-backdrop > img').forEach(image => {
+    if (image.dataset.gameBackdropBound === 'true') return;
+    image.dataset.gameBackdropBound = 'true';
+
+    const media = image.closest('.game-art-backdrop');
+    if (!media) return;
+
+    const applyBackdrop = () => {
+      media.style.setProperty(
+        '--game-art',
+        `url(${JSON.stringify(image.currentSrc || image.getAttribute('src'))})`
+      );
+    };
+
+    if (image.complete && image.naturalWidth) applyBackdrop();
+    else image.addEventListener('load', applyBackdrop, { once: true });
+  });
 };
 const BLOCKED_BRAND_COPY = {
   en: {
@@ -338,7 +365,7 @@ const SITE_LOCALE = DOCUMENT_LANGUAGE.startsWith('de')
 let brandBonusTranslations = {};
 const brandBonusTranslationsReady = SITE_LOCALE === 'en'
   ? Promise.resolve()
-  : import(`./brand-bonus-translations/${SITE_LOCALE}.js?v=20260929-casinobossy-1`)
+  : import(`./brand-bonus-translations/${SITE_LOCALE}.js?v=20260930-winolot-1`)
       .then(module => {
         brandBonusTranslations = module.default || {};
       })
@@ -5191,6 +5218,7 @@ export const initCasinoPage = async () => {
     });
   });
 
+  initGameArtworkBackdrops();
   applyBrandLogoBackgrounds();
   requestPaymentIconSync();
 };
