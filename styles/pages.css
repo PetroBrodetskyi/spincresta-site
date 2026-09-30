@@ -6734,9 +6734,9 @@ body[data-brand] .brand-profile-showcase .hero-cta-wrapper .cta-brands {
 body[data-brand] .brand-new-games-panel {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 16px;
   width: 100%;
-  padding: 12px;
+  padding: 14px;
   border: 1px solid var(--surface-border);
   border-radius: var(--radius-md);
   background: var(--surface-card);
@@ -6770,7 +6770,7 @@ body[data-brand] .brand-new-games-heading h2 {
 body[data-brand] .brand-new-games-list {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 10px;
+  gap: 14px;
   min-width: 0;
   max-height: none;
   overflow: visible;
@@ -6781,10 +6781,10 @@ body[data-brand] .brand-new-game-card {
   min-width: 0;
   overflow: hidden;
   border: 1px solid var(--surface-border);
-  border-radius: 8px;
+  border-radius: 12px;
   background: var(--surface-card-soft);
   color: inherit;
-  box-shadow: none;
+  box-shadow: 0 8px 20px rgba(3, 8, 18, 0.12);
   text-decoration: none;
   transition:
     border-color 0.2s ease,
@@ -6795,21 +6795,54 @@ body[data-brand] .brand-new-game-card {
 body[data-brand] .brand-new-game-card:hover {
   border-color: var(--surface-border-strong);
   background: var(--surface-card-hover);
-  transform: translateY(-2px);
+  transform: translateY(-3px);
+}
+
+body[data-brand] .brand-new-game-media {
+  position: relative;
+  isolation: isolate;
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  overflow: hidden;
+  background-color: var(--surface-card-soft);
+  border-bottom: 1px solid var(--surface-border);
+}
+
+body[data-brand] .brand-new-game-media::before {
+  position: absolute;
+  z-index: 0;
+  inset: -28px;
+  background-image: var(--brand-game-art);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  content: '';
+  filter: blur(20px) saturate(0.9);
+  opacity: 0.72;
+  transform: scale(1.08);
+}
+
+body[data-brand] .brand-new-game-media::after {
+  position: absolute;
+  z-index: 0;
+  inset: 0;
+  background: rgba(7, 12, 18, 0.16);
+  content: '';
 }
 
 body[data-brand] .brand-new-game-card img {
+  position: relative;
+  z-index: 1;
   display: block;
   width: 100%;
-  aspect-ratio: 3 / 4;
+  height: 100%;
   object-fit: contain;
   object-position: center;
-  background: var(--surface-card-soft);
 }
 
 body[data-brand] .brand-new-game-card span {
   display: block;
-  padding: 7px 8px 8px;
+  padding: 10px 11px 11px;
   color: var(--text-main);
   font-size: 12px;
   font-weight: 650;
@@ -7363,11 +7396,12 @@ body[data-brand].has-brand-sticky-layout
   }
 
   body[data-brand] .brand-new-games-panel {
-    padding: 10px;
+    padding: 12px;
   }
 
   body[data-brand] .brand-new-games-list {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
     max-height: none;
     overflow: visible;
   }
