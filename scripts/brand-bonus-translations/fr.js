@@ -64,6 +64,7 @@ export default {
   "100% Bonus up to $1,000 + 300 Free Spins": "100 % de bonus jusqu'à 1 000 $ + 300 tours gratuits",
   "100% Deposit Bonus up to EUR 1,000 + 300 Free Spins": "Bonus de dépôt de 100 % jusqu'à 1 000 EUR + 300 tours gratuits",
   "Claim up to €500/£500 and enjoy 5% live casino cashback": "Réclamez jusqu'à 500 €/500 € et profitez de 5 % de cashback du casino en direct",
+  "Up to €1,200 + 150 Free Spins": "Jusqu’à 1 200 € + 150 tours gratuits",
   "200 Free Spins + 20% Sports Cashback": "200 tours gratuits + 20 % de cashback sportif",
   "A$100 Cash Gift + 300 Weekly Free Spins": "A$100 en espèces + 300 tours gratuits par semaine",
   "Welcome Package up to 15,000 EUR/USD + 350 Free Spins": "Package de bienvenue jusqu'à 15 000 EUR/USD + 350 tours gratuits",

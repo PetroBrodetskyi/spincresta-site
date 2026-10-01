@@ -151,14 +151,14 @@ export const BRANDS = [
   },
   {
     name: 'GrandWin',
-    bonus: '',
+    bonus: 'Up to €1,200 + 150 Free Spins',
     cta: 'Play Now',
     urlDetail: 'brands/grandwin.html',
     urlCasino: 'https://armadaapp.media-412.com/click?pid=3862&offer_id=124849',
     image: 'images/grandwin.svg',
     bgColor: '#007537',
     countries: ['DE', 'IT', 'ES', 'CH', 'AT', 'PT', 'IE', 'CA', 'CL', 'UY', 'MX', 'PE', 'AR', 'CO', 'BR', 'SE', 'FI', 'NO', 'DK', 'SK', 'HU', 'SA', 'AE', 'KW', 'EG', 'NL', 'BE', 'IS', 'EE', 'SI', 'LV', 'HR', 'MD', 'KZ', 'UZ', 'AZ', 'BA'],
-    payments: [],
+    payments: ['visa', 'mastercard', 'banktransfer', 'skrill', 'neteller', 'mifinity', 'bitcoin', 'ethereum'],
     hasDetailPage: true,
   },
   {

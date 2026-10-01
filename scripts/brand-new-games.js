@@ -1,4 +1,12 @@
 export const BRAND_NEW_GAMES = {
+  grandwin: [
+    { name: 'Sugar Teddy x1000', image: 'https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto/spincresta/brands/grandwin/new-games/grandwin-new-game-sugar-teddy-x1000_hfkzno' },
+    { name: 'Pirate Coins: 3 Chests', image: 'https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto/spincresta/brands/grandwin/new-games/grandwin-new-game-pirate-coins-3-chests_ltuccr' },
+    { name: 'Egyptian Sun SE', image: 'https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto/spincresta/brands/grandwin/new-games/grandwin-new-game-egyptian-sun-se_pw7urb' },
+    { name: 'Candy Chaos', image: 'https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto/spincresta/brands/grandwin/new-games/grandwin-new-game-candy-chaos_icqslw' },
+    { name: 'Lucky Streak 1000', image: 'https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto/spincresta/brands/grandwin/new-games/grandwin-new-game-lucky-streak-1000_fucj1w' },
+    { name: 'Burning Chilli X', image: 'https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto/spincresta/brands/grandwin/new-games/grandwin-new-game-burning-chilli-x_zicce5' },
+  ],
   winolot: [
     { name: 'Pirate Coins: 3 Chests', image: 'https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto/spincresta/brands/winolot/new-games/winolot-new-game-pirate-coins-3-chests_qxhfvk' },
     { name: 'MLK Voyage', image: 'https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto/spincresta/brands/winolot/new-games/winolot-new-game-mlk-voyage_xarxdt' },

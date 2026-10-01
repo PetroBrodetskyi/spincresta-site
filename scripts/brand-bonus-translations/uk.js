@@ -64,6 +64,7 @@ export default {
   "100% Bonus up to $1,000 + 300 Free Spins": "100% бонус до $1000 + 300 безкоштовних обертань",
   "100% Deposit Bonus up to EUR 1,000 + 300 Free Spins": "100% бонус на депозит до 1000 євро + 300 безкоштовних обертань",
   "Claim up to €500/£500 and enjoy 5% live casino cashback": "Вимагайте до €500/€500 і отримуйте 5% кешбеку в реальному казино",
+  "Up to €1,200 + 150 Free Spins": "До 1 200 € + 150 фріспінів",
   "200 Free Spins + 20% Sports Cashback": "200 фріспінів + 20% кешбеку на спортивні ставки",
   "A$100 Cash Gift + 300 Weekly Free Spins": "A$100 грошового бонусу + 300 фріспінів щотижня",
   "Welcome Package up to 15,000 EUR/USD + 350 Free Spins": "Вітальний пакет до 15 000 EUR/USD + 350 безкоштовних обертань",
