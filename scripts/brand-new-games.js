@@ -1,4 +1,12 @@
 export const BRAND_NEW_GAMES = {
+  lukki: [
+    { name: 'Pelican Payday', image: 'https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto/spincresta/brands/lukki/new-games/lukki-new-game-pelican-payday_s0qubl' },
+    { name: 'Gates of Olympus 2500', image: 'https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto/spincresta/brands/lukki/new-games/lukki-new-game-gates-of-olympus-2500_itwng2' },
+    { name: 'Forever Split Megaways', image: 'https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto/spincresta/brands/lukki/new-games/lukki-new-game-forever-split-megaways_pqtbri' },
+    { name: 'Divine Queen: Power of Sun', image: 'https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto/spincresta/brands/lukki/new-games/lukki-new-game-divine-queen-power-of-sun_x5f64s' },
+    { name: 'Coin Volt: Charge & Strike', image: 'https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto/spincresta/brands/lukki/new-games/lukki-new-game-coin-volt-chargeand-strike_lqj40b' },
+    { name: '3 Burning Peppers', image: 'https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto/spincresta/brands/lukki/new-games/lukki-new-game-3-burning-peppers_lmyxca' },
+  ],
   grandwin: [
     { name: 'Sugar Teddy x1000', image: 'https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto/spincresta/brands/grandwin/new-games/grandwin-new-game-sugar-teddy-x1000_hfkzno' },
     { name: 'Pirate Coins: 3 Chests', image: 'https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto/spincresta/brands/grandwin/new-games/grandwin-new-game-pirate-coins-3-chests_ltuccr' },
