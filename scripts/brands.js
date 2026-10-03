@@ -139,14 +139,14 @@ export const BRANDS = [
   },
   {
     name: 'FeliceBet',
-    bonus: '',
+    bonus: 'Welcome Package up to €2,600 + 300 Free Spins',
     cta: 'Play Now',
     urlDetail: 'brands/felicebet.html',
     urlCasino: 'https://armadaapp.media-412.com/click?pid=3862&offer_id=124851',
     image: 'images/felicebet.svg',
     bgColor: '#0D70C4',
     countries: ['DE', 'IT', 'ES', 'CH', 'AT', 'PT', 'IE', 'LU', 'CA', 'FI', 'NO', 'DK', 'PL', 'CZ', 'SK', 'HU', 'SA', 'AE', 'KW', 'EG', 'NL', 'IS', 'EE', 'SI', 'LV', 'HR', 'MD', 'KZ', 'UZ', 'AZ'],
-    payments: [],
+    payments: ['visa', 'mastercard', 'banktransfer', 'skrill', 'neteller', 'paysafecard', 'mifinity', 'bitcoin', 'ethereum', 'litecoin', 'tether'],
     hasDetailPage: true,
   },
   {
@@ -199,14 +199,14 @@ export const BRANDS = [
   },
   {
     name: 'ViperWin',
-    bonus: '',
+    bonus: '100% up to €500 + 200 Free Spins',
     cta: 'Play Now',
     urlDetail: 'brands/viperwin.html',
     urlCasino: 'https://armadaapp.media-412.com/click?pid=3862&offer_id=124852',
     image: 'images/viperwin.png',
     bgColor: '#060B26',
     countries: ['IT', 'ES', 'CH', 'AT', 'IE', 'LU', 'CA', 'NZ', 'AU', 'CL', 'UY', 'MX', 'PE', 'AR', 'CO', 'BR', 'FI', 'NO', 'PL', 'CZ', 'SK', 'HU', 'TR', 'ZA', 'IS', 'SI', 'LV'],
-    payments: [],
+    payments: ['visa', 'mastercard', 'interac', 'neteller', 'mifinity', 'bitcoin', 'ethereum', 'litecoin', 'tether'],
     hasDetailPage: true,
   },
   {

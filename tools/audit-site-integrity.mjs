@@ -3,6 +3,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { BRAND_SNAPSHOT_CONFIGS } from '../scripts/brand-snapshot-configs.js';
+import { BRANDS } from '../scripts/brands.js';
 
 const ROOT = process.cwd();
 const EXCLUDED_ROOTS = new Set(['.git', '.vercel', 'node_modules', 'tmp', 'keyboard-diagnostics', 'tools']);
@@ -35,6 +36,15 @@ const resolveLocalReference = (sourceFile, reference) => {
 walk(ROOT);
 
 const errors = [];
+
+// These images are inserted by main.js and cannot be found in static HTML.
+// Check every configured payment method so a missing logo fails the audit.
+for (const method of new Set(BRANDS.flatMap(brand => brand.payments || []))) {
+  if (!fs.existsSync(path.join(ROOT, 'icons', 'payments', `${method}.svg`))) {
+    errors.push(`brands.js: missing payment logo /icons/payments/${method}.svg`);
+  }
+}
+
 for (const file of htmlFiles.sort()) {
   const html = fs.readFileSync(file, 'utf8');
   const relative = path.relative(ROOT, file);

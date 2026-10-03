@@ -341,6 +341,17 @@ export const initBrandLayout = context => {
     const countryCount = Array.isArray(brand.countries) ? brand.countries.length : 0;
     if (!bonus && !countryCount) return;
 
+    // Review headings receive localized IDs; #bonuses is not universal.
+    const reviewSections = Array.from(layout.querySelectorAll('.content-review > section'));
+    const bonusSection = reviewSections.find(section =>
+      /(?:^|-)(?:bonus(?:es)?|promotions?|welcome)(?:-|$)/i.test(section.id)
+    ) || reviewSections.find(section =>
+      /bonus|bono|boni|b[oóô]nus|бонус|बोनस|kierrätys|tervetulo/i.test(
+        normalizeText(section.querySelector(':scope > .title, :scope > h2')?.textContent || '')
+      )
+    );
+    const bonusTarget = bonusSection?.id || bonusSection?.querySelector(':scope > .title, :scope > h2')?.id;
+
     const labels = {
       heading: localeText('At a glance', 'Auf einen Blick', 'De un vistazo', 'In breve', 'W skrócie', 'Коротко', 'Em resumo', 'En bref', 'एक नज़र में', 'Yhteenveto'),
       bonus: localeText('Welcome offer', 'Willkommensangebot', 'Oferta de bienvenida', 'Offerta di benvenuto', 'Oferta powitalna', 'Вітальна пропозиція', 'Oferta de boas-vindas', 'Offre de bienvenue', 'वेलकम ऑफ़र', 'Tervetulotarjous'),
@@ -353,7 +364,7 @@ export const initBrandLayout = context => {
     facts.setAttribute('aria-label', labels.heading);
     facts.innerHTML = `
       <span class="brand-quick-facts__heading">${escapeHtml(labels.heading)}</span>
-      ${bonus ? `<a href="#bonuses"><small>${escapeHtml(labels.bonus)}</small><strong>${escapeHtml(bonus)}</strong></a>` : ''}
+      ${bonus && bonusTarget ? `<a href="#${escapeHtml(bonusTarget)}"><small>${escapeHtml(labels.bonus)}</small><strong>${escapeHtml(bonus)}</strong></a>` : ''}
       ${countryCount ? `<a href="#brand-countries"><small>${escapeHtml(labels.markets)}</small><strong>${countryCount} ${escapeHtml(labels.countries)}</strong></a>` : ''}
     `;
     rightRail.appendChild(facts);

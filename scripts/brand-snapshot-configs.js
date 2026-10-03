@@ -540,6 +540,11 @@ const billyBillionConfig = createGamesLiveConfig(
 );
 
 export const BRAND_SNAPSHOT_CONFIGS = {
+  viperwin: createGamesLiveBettingConfig(
+    ['Slots', 'Roulette', 'Blackjack', 'Video poker', 'Baccarat', 'Jackpot games', 'Live games', 'Poker', 'Keno', 'Crash games'],
+    ['Live shows', 'Live baccarat', 'Live blackjack', 'Live dice games', 'Live poker', 'Live roulette'],
+    ['Football', 'Basketball', 'Tennis', 'Table tennis', 'Ice hockey', 'Baseball', 'American football', 'Virtual sports']
+  ),
   silverplay: {
     tabs: [
       createSnapshotTab('Games', ['Slots', 'Jackpot games', 'Scratch cards', 'Live games'], [], 'These are the main game categories currently visible in the account.'),
@@ -553,7 +558,7 @@ export const BRAND_SNAPSHOT_CONFIGS = {
   ...mapSnapshotConfig(['goldenbet-uk', 'goldenbet-au'], sportsRewardsCasinoConfig),
   ...mapSnapshotConfig(['bcgame'], sportsRewardsCasinoConfig),
   ...mapSnapshotConfig(['casinobossy'], sportsPromoCasinoConfig),
-  ...mapSnapshotConfig(['winolot', 'grandwin'], sportsPromoCasinoConfig),
+  ...mapSnapshotConfig(['winolot', 'grandwin', 'felicebet'], sportsPromoCasinoConfig),
   ...mapSnapshotConfig(['iwild', 'snatch'], casinoToolsConfig),
   ...mapSnapshotConfig(['fraga-tr', 'fraga-az', 'fraga-ar', 'fraga-cl'], fragaConfig),
   'pin-up': pinUpConfig,

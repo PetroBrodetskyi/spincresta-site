@@ -1,7 +1,7 @@
 ﻿// =====================
 // IMPORTS
 // =====================
-import { BRANDS } from './brands.js?v=20261001-grandwin-1';
+import { BRANDS } from './brands.js?v=20261003-viperwin-1';
 import { COUNTRIES } from './countries.js';
 import { initFooterNewsletter } from './footer-newsletter.js?v=20260826-newsletter-4';
 import { initAccountAuth } from './account-auth.js?v=20260829-local-preview-1';
@@ -25,7 +25,7 @@ const brandLayoutFallbackTimer = document.body?.dataset.brand
     }, 1500)
   : null;
 const brandLayoutModuleReady = document.body?.dataset.brand
-  ? import('./pages/brand-layout.js?v=20260930-global-game-blur-1').then(module => {
+  ? import('./pages/brand-layout.js?v=20261003-payment-review-fixes-1').then(module => {
       initBrandLayoutModule = module.initBrandLayout;
     }).catch(error => {
       document.body.classList.add('brand-layout-failed');
@@ -40,8 +40,8 @@ const loadPageModules = async () => {
 
   if (isHomePage) {
     const [screenshotsModule, gamesModule, pageModule] = await Promise.all([
-      import('./brand-homepage-screenshots.js?v=20261001-grandwin-1'),
-      import('./brand-new-games.js?v=20261002-lukki-1'),
+      import('./brand-homepage-screenshots.js?v=20261003-viperwin-1'),
+      import('./brand-new-games.js?v=20261003-viperwin-1'),
       import('./pages/home.js?v=20260829-mobile-density-1'),
     ]);
     BRAND_HOMEPAGE_SCREENSHOTS = screenshotsModule.BRAND_HOMEPAGE_SCREENSHOTS || {};
@@ -51,8 +51,8 @@ const loadPageModules = async () => {
 
   if (isCountryPage) {
     const [screenshotsModule, gamesModule, pageModule] = await Promise.all([
-      import('./brand-homepage-screenshots.js?v=20261001-grandwin-1'),
-      import('./brand-new-games.js?v=20261002-lukki-1'),
+      import('./brand-homepage-screenshots.js?v=20261003-viperwin-1'),
+      import('./brand-new-games.js?v=20261003-viperwin-1'),
       import('./pages/country-media.js?v=20260930-global-game-blur-1'),
     ]);
     BRAND_HOMEPAGE_SCREENSHOTS = screenshotsModule.BRAND_HOMEPAGE_SCREENSHOTS || {};
@@ -62,9 +62,9 @@ const loadPageModules = async () => {
 
   if (isBrandPage) {
     const [snapshotsModule, gamesModule, pageModule, feedbackModule] = await Promise.all([
-      import('./brand-snapshot-configs.js?v=20261001-grandwin-1'),
-      import('./brand-new-games.js?v=20261002-lukki-1'),
-      import('./pages/brand.js?v=20260930-reviewer-byline-2'),
+      import('./brand-snapshot-configs.js?v=20261003-viperwin-1'),
+      import('./brand-new-games.js?v=20261003-viperwin-1'),
+      import('./pages/brand.js?v=20261003-payment-review-fixes-1'),
       import('./pages/brand-feedback.js?v=20260829-mobile-compose-1'),
     ]);
     BRAND_SNAPSHOT_CONFIGS = snapshotsModule.BRAND_SNAPSHOT_CONFIGS || {};
@@ -365,7 +365,7 @@ const SITE_LOCALE = DOCUMENT_LANGUAGE.startsWith('de')
 let brandBonusTranslations = {};
 const brandBonusTranslationsReady = SITE_LOCALE === 'en'
   ? Promise.resolve()
-  : import(`./brand-bonus-translations/${SITE_LOCALE}.js?v=20261001-grandwin-1`)
+  : import(`./brand-bonus-translations/${SITE_LOCALE}.js?v=20261003-viperwin-1`)
       .then(module => {
         brandBonusTranslations = module.default || {};
       })
@@ -4232,6 +4232,7 @@ const enhanceFaqBlocks = () => {
 
     const titleText = normalizeText(`${kicker?.textContent || ''} ${title.textContent}`).trim().toLowerCase();
     const isFaqTitle =
+      /(?:^|-)faq(?:-|$)/i.test(section.id) ||
       titleText.includes('faq') ||
       titleText.includes('häufige fragen') ||
       titleText.includes('pregunta') ||
@@ -4242,6 +4243,8 @@ const enhanceFaqBlocks = () => {
       titleText.includes('питан') ||
       titleText.includes('ukk') ||
       titleText.includes('kysym') ||
+      titleText.includes('usein kysytt') ||
+      titleText.includes('सवाल') ||
       titleText.includes('पूछे जाने वाले प्रश्न') ||
       titleText.includes('प्रश्नोत्तर');
     if (!isFaqTitle) return;

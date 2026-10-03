@@ -134,7 +134,7 @@ export const initBrandPage = context => {
     if (/bonus|promotion|aktion|bono|promoción|promozion|promocj|бонус|акці/.test(lowerTitle)) return localeText('Bonuses', 'Boni', 'Bonos', null, null, 'Бонуси');
     if (/checklist|checkliste|lista de control|lista di controllo|lista kontrolna|lista de verificação/.test(lowerTitle)) return localeText('Checklist', 'Checkliste', 'Lista');
     if (/licensing|trust|lizenz|vertrauen|licencia|confianza|licenz|fiducia|affidabil|licenc|wiarygod|licença|confiança|fiabilidade/.test(lowerTitle)) return localeText('Trust', 'Vertrauen', 'Confianza');
-    if (lowerTitle.includes('faq') || lowerTitle.includes('pregunta') || lowerTitle.includes('domand') || lowerTitle.includes('pytan') || lowerTitle.includes('питан')) return 'FAQ';
+    if (/faq|pregunta|pergunt|question|domand|pytan|питан|kysytt|kysym|सवाल|प्रश्न/.test(lowerTitle)) return 'FAQ';
     if ((/pros|vorteile|ventajas|vantaggi|zalety|plusy|переваги|плюси|vantagens|\bpro\b/.test(lowerTitle)) && (/cons|nachteile|desventajas|svantaggi|contro|wady|minusy|недоліки|мінуси|desvantagens|contras/.test(lowerTitle))) return localeText('Pros & Cons', 'Vor- & Nachteile', 'Ventajas y desventajas', null, null, 'Переваги та недоліки');
     if (/suits|passt|geeignet|ideal para|ideale per|adatto|najlepsze dla|odpowiednie dla/.test(lowerTitle)) return localeText('Best For', 'Geeignet für', 'Ideal para');
   

@@ -1,4 +1,20 @@
 export const BRAND_NEW_GAMES = {
+  viperwin: [
+    { name: 'Le Bandit Monsters Unleashed', image: 'https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto/spincresta/brands/viperwin/new-games/viperwin-new-game-le-bandit-monsters-unleashed_tozrz5' },
+    { name: 'Sun Totem: Hold & Win', image: 'https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto/spincresta/brands/viperwin/new-games/viperwin-new-game-sun-totem_rqr1o8' },
+    { name: 'Lightning Diamond Double Strike VIP (3x3)', image: 'https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto/spincresta/brands/viperwin/new-games/viperwin-new-game-lightning-diamond_m4uack' },
+    { name: 'Moon Dynasty', image: 'https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto/spincresta/brands/viperwin/new-games/viperwin-new-game-moon-dynasty_yghldq' },
+    { name: "Joker's Mega Fortune - Blast The Bonus 3x3", image: 'https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto/spincresta/brands/viperwin/new-games/viperwin-new-game-jokers-mega-fortune_h28nwg' },
+    { name: 'Battle Thunder', image: 'https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto/spincresta/brands/viperwin/new-games/viperwin-new-game-battle-thunder_rhmc7i' },
+  ],
+  felicebet: [
+    { name: 'The Big Take', image: 'https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto/spincresta/brands/felicebet/new-games/felicebet-new-game-the-big-take_rybvuw' },
+    { name: 'Gods of Sand', image: 'https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto/spincresta/brands/felicebet/new-games/felicebet-new-game-gods-of-sand_w0mnv3' },
+    { name: 'Mackereels: Catch Them All', image: 'https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto/spincresta/brands/felicebet/new-games/felicebet-new-game-mackereels-catch-them-all_mwjpcl' },
+    { name: 'Power Coin: CASH UP', image: 'https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto/spincresta/brands/felicebet/new-games/felicebet-new-game-power-coin-cash-up_tri7ka' },
+    { name: 'Coins of Buffalo - Hold & Win', image: 'https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto/spincresta/brands/felicebet/new-games/felicebet-new-game-coins-of-buffalo_xyfwmg' },
+    { name: '30 Tropical Fruits Boost', image: 'https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto/spincresta/brands/felicebet/new-games/felicebet-new-game-30-tropical-fruits-boost_udu0hz' },
+  ],
   lukki: [
     { name: 'Pelican Payday', image: 'https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto/spincresta/brands/lukki/new-games/lukki-new-game-pelican-payday_s0qubl' },
     { name: 'Gates of Olympus 2500', image: 'https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto/spincresta/brands/lukki/new-games/lukki-new-game-gates-of-olympus-2500_itwng2' },
