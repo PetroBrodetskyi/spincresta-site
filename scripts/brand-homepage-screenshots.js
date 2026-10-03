@@ -2,6 +2,8 @@
 // Keys match the review slug used by BRANDS.urlDetail.
 export const BRAND_HOMEPAGE_SCREENSHOTS = Object.freeze(
 {
+  "casinado": "https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto,w_1600/v1791035543/spincresta/brands/casinado/main-page/casinado-page_z6soxv",
+  "vikingluck": "https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto,w_1600/v1791034794/spincresta/brands/vikingluck/main-page/vikingluck-page_d8p9jb",
   "viperwin": "https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto,w_1600/spincresta/brands/viperwin/main-page/viperwin-page_je2txg",
   "felicebet": "https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto,w_1600/spincresta/brands/felicebet/main-page/felicebet-page_lnuqlq",
   "grandwin": "https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto,w_1600/spincresta/brands/grandwin/main-page/grandwin-page_mhfwvo",

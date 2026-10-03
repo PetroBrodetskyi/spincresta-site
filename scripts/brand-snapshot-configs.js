@@ -540,6 +540,18 @@ const billyBillionConfig = createGamesLiveConfig(
 );
 
 export const BRAND_SNAPSHOT_CONFIGS = {
+  casinado: {
+    tabs: [
+      createCategoryTab('Games', GAME_CATEGORIES, ['Slots', 'Roulette', 'Blackjack', 'Video poker', 'Baccarat', 'Jackpot games', 'Live games', 'Poker', 'Craps and dice', 'Keno', 'Scratch cards', 'Crash games'], 'These are the main game categories currently visible in the account.'),
+      createCategoryTab('Live games', LIVE_GAME_CATEGORIES, ['Live shows', 'Live baccarat', 'Live blackjack', 'Live dice games', 'Live roulette'], 'These are the live-dealer categories currently visible in the account.'),
+      createSnapshotTab('Betting', ['Football', 'Basketball', 'Tennis', 'Table tennis', 'Volleyball', 'Ice hockey', 'Cricket', 'Baseball', 'Handball', 'American football', 'eSports', 'Virtual sports', 'Boxing', 'Martial arts', 'Motorsport', 'Horse racing'], [], 'These are the main betting categories currently visible in the account.'),
+    ],
+  },
+  vikingluck: createGamesLiveBettingConfig(
+    ['Slots', 'Roulette', 'Blackjack', 'Video poker', 'Baccarat', 'Jackpot games', 'Live games', 'Poker'],
+    ['Live shows', 'Live baccarat', 'Live blackjack', 'Live dice games', 'Live poker', 'Live roulette'],
+    ['Football', 'Basketball', 'Tennis', 'Table tennis', 'Ice hockey', 'Baseball', 'American football', 'Virtual sports']
+  ),
   viperwin: createGamesLiveBettingConfig(
     ['Slots', 'Roulette', 'Blackjack', 'Video poker', 'Baccarat', 'Jackpot games', 'Live games', 'Poker', 'Keno', 'Crash games'],
     ['Live shows', 'Live baccarat', 'Live blackjack', 'Live dice games', 'Live poker', 'Live roulette'],

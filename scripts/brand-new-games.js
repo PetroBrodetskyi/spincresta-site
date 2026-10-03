@@ -1,4 +1,20 @@
 export const BRAND_NEW_GAMES = {
+  casinado: [
+    { name: 'Spooktacular Bonanza', image: 'https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto/v1791035908/spincresta/brands/casinado/new-games/casinado-new-game-spook-tacular-bonanza_swdiip' },
+    { name: 'Nectar of Power', image: 'https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto/v1791035906/spincresta/brands/casinado/new-games/casinado-new-game-nectar-of-power_ggiexh' },
+    { name: 'Fruit Mashin’', image: 'https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto/v1791035904/spincresta/brands/casinado/new-games/casinado-new-game-fruit-mashin_hcfbfb' },
+    { name: 'Frosty Bonanza', image: 'https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto/v1791035902/spincresta/brands/casinado/new-games/casinado-new-game-frosty-bonanza_xupchj' },
+    { name: 'Big Catch Rush', image: 'https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto/v1791035900/spincresta/brands/casinado/new-games/casinado-new-game-big-catch-rush_qtnoya' },
+    { name: '3 Crown Coins Deluxe', image: 'https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto/v1791035898/spincresta/brands/casinado/new-games/casinado-new-game-3-crown-coins-deluxe_pvncbw' },
+  ],
+  vikingluck: [
+    { name: 'Rainbow Mantis Masters', image: 'https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto/v1791035234/spincresta/brands/vikingluck/new-games/vikingluck-new-game-rainbow-mantis-masters_xgnxr3' },
+    { name: 'Outlaw Rooster', image: 'https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto/v1791035232/spincresta/brands/vikingluck/new-games/vikingluck-new-game-outlaw-rooster_alh7z8' },
+    { name: 'Lightning Diamond Double Strike VIP (3x3)', image: 'https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto/v1791035230/spincresta/brands/vikingluck/new-games/vikingluck-new-game-lightning-diamond_xzrniu' },
+    { name: 'Hamsterdam', image: 'https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto/v1791035228/spincresta/brands/vikingluck/new-games/vikingluck-new-game-hamsterdam_u8ugi8' },
+    { name: 'Coink Bank 777', image: 'https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto/v1791035226/spincresta/brands/vikingluck/new-games/vikingluck-new-game-coink-bank-777_q9pr6o' },
+    { name: 'Beez Turn Wild', image: 'https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto/v1791035224/spincresta/brands/vikingluck/new-games/vikingluck-new-game-beez-turn-wild_wzszuk' },
+  ],
   viperwin: [
     { name: 'Le Bandit Monsters Unleashed', image: 'https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto/spincresta/brands/viperwin/new-games/viperwin-new-game-le-bandit-monsters-unleashed_tozrz5' },
     { name: 'Sun Totem: Hold & Win', image: 'https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto/spincresta/brands/viperwin/new-games/viperwin-new-game-sun-totem_rqr1o8' },

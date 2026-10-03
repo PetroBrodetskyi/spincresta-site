@@ -111,6 +111,9 @@ writeDirectoryBonus('', 'casinova', CASINOVA_BONUS);
 writeDirectoryBonus('', 'winolot', WINOLOT_BONUS);
 writeDirectoryBonus('', 'felicebet', FELICEBET_BONUS);
 writeDirectoryBonus('', 'viperwin', VIPERWIN_BONUS);
+// VikingLuck has the same verified headline; reuse the existing translations.
+writeDirectoryBonus('', 'vikingluck', VIPERWIN_BONUS);
+writeDirectoryBonus('', 'casinado', VIPERWIN_BONUS);
 
 for (const locale of LOCALES) {
   const rows = readBonusRows(locale);
@@ -130,6 +133,8 @@ for (const locale of LOCALES) {
   writeDirectoryBonus(locale, 'winolot', BONUS_TRANSLATION_OVERRIDES[locale][WINOLOT_BONUS]);
   writeDirectoryBonus(locale, 'felicebet', BONUS_TRANSLATION_OVERRIDES[locale][FELICEBET_BONUS]);
   writeDirectoryBonus(locale, 'viperwin', VIPERWIN_BONUS_TRANSLATIONS[locale]);
+  writeDirectoryBonus(locale, 'vikingluck', VIPERWIN_BONUS_TRANSLATIONS[locale]);
+  writeDirectoryBonus(locale, 'casinado', VIPERWIN_BONUS_TRANSLATIONS[locale]);
 }
 
 console.log(`Brand bonus translations synced into ${LOCALES.length} locale-specific files.`);

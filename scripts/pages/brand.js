@@ -129,8 +129,8 @@ export const initBrandPage = context => {
     if (/available countries|verfügbare länder|países disponibles|paesi disponibili|dostępne kraje|доступні країни/.test(lowerTitle)) return localeText('Countries', 'Länder', 'Países', null, null, 'Країни');
     if (/payment|zahlung|pago|pagament|płatno/.test(lowerTitle)) return localeText('Payments', 'Zahlungen', 'Pagos');
     if (
-      /games|slots|live betting|betting snapshot|spiele|sportwetten|juegos|tragaperras|apuestas|giochi|scommesse|gry|automaty|zakłady|ігри|слоти|ставки|jogos|apostas/.test(lowerTitle)
-    ) return localeText('Games', 'Spiele', 'Juegos', null, null, 'Ігри');
+      /games|slots|live betting|betting snapshot|spiele|sportwetten|juegos|tragaperras|apuestas|giochi|scommesse|gry|automaty|zakłady|ігри|ігор|слоти|ставки|jogos|apostas|jeux|pelit|vedonlyön|गेम|बेटिंग/.test(lowerTitle)
+    ) return localeText('Games', 'Spiele', 'Juegos', 'Giochi', 'Gry', 'Ігри', 'Jogos', 'Jeux', 'गेम', 'Pelit');
     if (/bonus|promotion|aktion|bono|promoción|promozion|promocj|бонус|акці/.test(lowerTitle)) return localeText('Bonuses', 'Boni', 'Bonos', null, null, 'Бонуси');
     if (/checklist|checkliste|lista de control|lista di controllo|lista kontrolna|lista de verificação/.test(lowerTitle)) return localeText('Checklist', 'Checkliste', 'Lista');
     if (/licensing|trust|lizenz|vertrauen|licencia|confianza|licenz|fiducia|affidabil|licenc|wiarygod|licença|confiança|fiabilidade/.test(lowerTitle)) return localeText('Trust', 'Vertrauen', 'Confianza');
@@ -485,7 +485,7 @@ export const initBrandPage = context => {
     'Live poker': 'Live-Poker', 'Live roulette': 'Live-Roulette', Football: 'Fußball', Basketball: 'Basketball',
     Tennis: 'Tennis', 'Table tennis': 'Tischtennis', Volleyball: 'Volleyball', 'Ice hockey': 'Eishockey',
     Cricket: 'Cricket', Baseball: 'Baseball', Handball: 'Handball', 'American football': 'American Football',
-    eSports: 'E-Sport', 'Virtual sports': 'Virtuelle Sportarten', Boxing: 'Boxen', 'Martial arts': 'Kampfsport', Motorsport: 'Motorsport',
+    eSports: 'E-Sport', 'Virtual sports': 'Virtuelle Sportarten', Boxing: 'Boxen', 'Martial arts': 'Kampfsport', Motorsport: 'Motorsport', 'Horse racing': 'Pferderennen',
   };
   const SNAPSHOT_ES_TRANSLATIONS = {
     'Games & Betting Snapshot': 'Resumen de juegos y apuestas',
@@ -523,7 +523,7 @@ export const initBrandPage = context => {
     'Live poker': 'Póker en vivo', 'Live roulette': 'Ruleta en vivo', Football: 'Fútbol', Basketball: 'Baloncesto',
     Tennis: 'Tenis', 'Table tennis': 'Tenis de mesa', Volleyball: 'Voleibol', 'Ice hockey': 'Hockey sobre hielo',
     Cricket: 'Críquet', Baseball: 'Béisbol', Handball: 'Balonmano', 'American football': 'Fútbol americano',
-    eSports: 'Esports', 'Virtual sports': 'Deportes virtuales', Boxing: 'Boxeo', 'Martial arts': 'Artes marciales', Motorsport: 'Automovilismo',
+    eSports: 'Esports', 'Virtual sports': 'Deportes virtuales', Boxing: 'Boxeo', 'Martial arts': 'Artes marciales', Motorsport: 'Automovilismo', 'Horse racing': 'Carreras de caballos',
   };
   const SNAPSHOT_IT_TRANSLATIONS = {
     'Games & Betting Snapshot': 'Panoramica di giochi e scommesse',
@@ -561,7 +561,7 @@ export const initBrandPage = context => {
     'Live poker': 'Poker live', 'Live roulette': 'Roulette live', Football: 'Calcio', Basketball: 'Pallacanestro',
     Tennis: 'Tennis', 'Table tennis': 'Tennistavolo', Volleyball: 'Pallavolo', 'Ice hockey': 'Hockey su ghiaccio',
     Cricket: 'Cricket', Baseball: 'Baseball', Handball: 'Pallamano', 'American football': 'Football americano',
-    eSports: 'Esports', 'Virtual sports': 'Sport virtuali', Boxing: 'Pugilato', 'Martial arts': 'Arti marziali', Motorsport: 'Motorsport',
+    eSports: 'Esports', 'Virtual sports': 'Sport virtuali', Boxing: 'Pugilato', 'Martial arts': 'Arti marziali', Motorsport: 'Motorsport', 'Horse racing': 'Corse ippiche',
   };
   const SNAPSHOT_PL_TRANSLATIONS = {
     'Games & Betting Snapshot': 'Przegląd gier i zakładów',
@@ -599,7 +599,7 @@ export const initBrandPage = context => {
     'Live poker': 'Poker na żywo', 'Live roulette': 'Ruletka na żywo', Football: 'Piłka nożna', Basketball: 'Koszykówka',
     Tennis: 'Tenis', 'Table tennis': 'Tenis stołowy', Volleyball: 'Siatkówka', 'Ice hockey': 'Hokej na lodzie',
     Cricket: 'Krykiet', Baseball: 'Baseball', Handball: 'Piłka ręczna', 'American football': 'Futbol amerykański',
-    eSports: 'Esport', 'Virtual sports': 'Sporty wirtualne', Boxing: 'Boks', 'Martial arts': 'Sztuki walki', Motorsport: 'Sporty motorowe',
+    eSports: 'Esport', 'Virtual sports': 'Sporty wirtualne', Boxing: 'Boks', 'Martial arts': 'Sztuki walki', Motorsport: 'Sporty motorowe', 'Horse racing': 'Wyścigi konne',
   };
   const SNAPSHOT_UK_TRANSLATIONS = {
     'Games & Betting Snapshot': 'Огляд ігор і ставок',
@@ -637,7 +637,7 @@ export const initBrandPage = context => {
     'Live poker': 'Live-покер', 'Live roulette': 'Live-рулетка', Football: 'Футбол', Basketball: 'Баскетбол',
     Tennis: 'Теніс', 'Table tennis': 'Настільний теніс', Volleyball: 'Волейбол', 'Ice hockey': 'Хокей',
     Cricket: 'Крикет', Baseball: 'Бейсбол', Handball: 'Гандбол', 'American football': 'Американський футбол',
-    eSports: 'Кіберспорт', 'Virtual sports': 'Віртуальний спорт', Boxing: 'Бокс', 'Martial arts': 'Бойові мистецтва', Motorsport: 'Автоспорт',
+    eSports: 'Кіберспорт', 'Virtual sports': 'Віртуальний спорт', Boxing: 'Бокс', 'Martial arts': 'Бойові мистецтва', Motorsport: 'Автоспорт', 'Horse racing': 'Кінні перегони',
   };
   const SNAPSHOT_PT_TRANSLATIONS = {
     'Games & Betting Snapshot': 'Resumo de jogos e apostas',
@@ -675,7 +675,7 @@ export const initBrandPage = context => {
     'Live poker': 'Póquer ao vivo', 'Live roulette': 'Roleta ao vivo', Football: 'Futebol', Basketball: 'Basquetebol',
     Tennis: 'Ténis', 'Table tennis': 'Ténis de mesa', Volleyball: 'Voleibol', 'Ice hockey': 'Hóquei no gelo',
     Cricket: 'Críquete', Baseball: 'Basebol', Handball: 'Andebol', 'American football': 'Futebol americano',
-    eSports: 'Esports', 'Virtual sports': 'Desportos virtuais', Boxing: 'Boxe', 'Martial arts': 'Artes marciais', Motorsport: 'Desportos motorizados',
+    eSports: 'Esports', 'Virtual sports': 'Desportos virtuais', Boxing: 'Boxe', 'Martial arts': 'Artes marciais', Motorsport: 'Desportos motorizados', 'Horse racing': 'Corridas de cavalos',
   };
   const SNAPSHOT_FR_TRANSLATIONS = {
     'Games & Betting Snapshot': 'Aperçu des jeux et des paris',
@@ -713,7 +713,7 @@ export const initBrandPage = context => {
     'Live poker': 'Poker en direct', 'Live roulette': 'Roulette en direct', Football: 'Football', Basketball: 'Basket-ball',
     Tennis: 'Tennis', 'Table tennis': 'Tennis de table', Volleyball: 'Volley-ball', 'Ice hockey': 'Hockey sur glace',
     Cricket: 'Cricket', Baseball: 'Baseball', Handball: 'Handball', 'American football': 'Football américain',
-    eSports: 'Esport', 'Virtual sports': 'Sports virtuels', Boxing: 'Boxe', 'Martial arts': 'Arts martiaux', Motorsport: 'Sports mécaniques',
+    eSports: 'Esport', 'Virtual sports': 'Sports virtuels', Boxing: 'Boxe', 'Martial arts': 'Arts martiaux', Motorsport: 'Sports mécaniques', 'Horse racing': 'Courses hippiques',
   };
   const SNAPSHOT_HI_TRANSLATIONS = {
     'Games & Betting Snapshot': 'गेम और बेटिंग का सार',
@@ -732,7 +732,7 @@ export const initBrandPage = context => {
     'Live poker': 'लाइव पोकर', 'Live roulette': 'लाइव रूलेट', Football: 'फ़ुटबॉल', Basketball: 'बास्केटबॉल',
     Tennis: 'टेनिस', 'Table tennis': 'टेबल टेनिस', Volleyball: 'वॉलीबॉल', 'Ice hockey': 'आइस हॉकी',
     Cricket: 'क्रिकेट', Baseball: 'बेसबॉल', Handball: 'हैंडबॉल', 'American football': 'अमेरिकन फ़ुटबॉल',
-    eSports: 'ईस्पोर्ट्स', 'Virtual sports': 'वर्चुअल स्पोर्ट्स', Boxing: 'मुक्केबाज़ी', 'Martial arts': 'मार्शल आर्ट्स', Motorsport: 'मोटरस्पोर्ट',
+    eSports: 'ईस्पोर्ट्स', 'Virtual sports': 'वर्चुअल स्पोर्ट्स', Boxing: 'मुक्केबाज़ी', 'Martial arts': 'मार्शल आर्ट्स', Motorsport: 'मोटरस्पोर्ट', 'Horse racing': 'घुड़दौड़',
   };
   const SNAPSHOT_FI_TRANSLATIONS = {
     'Games & Betting Snapshot': 'Pelit ja vedonlyönti lyhyesti',
@@ -754,7 +754,7 @@ export const initBrandPage = context => {
     'Live poker': 'Live-pokeri', 'Live roulette': 'Live-ruletti', Football: 'Jalkapallo', Basketball: 'Koripallo',
     Tennis: 'Tennis', 'Table tennis': 'Pöytätennis', Volleyball: 'Lentopallo', 'Ice hockey': 'Jääkiekko',
     Cricket: 'Kriketti', Baseball: 'Baseball', Handball: 'Käsipallo', 'American football': 'Amerikkalainen jalkapallo',
-    eSports: 'E-urheilu', 'Virtual sports': 'Virtuaaliurheilu', Boxing: 'Nyrkkeily', 'Martial arts': 'Kamppailulajit', Motorsport: 'Moottoriurheilu',
+    eSports: 'E-urheilu', 'Virtual sports': 'Virtuaaliurheilu', Boxing: 'Nyrkkeily', 'Martial arts': 'Kamppailulajit', Motorsport: 'Moottoriurheilu', 'Horse racing': 'Hevosurheilu',
   };
   
   const snapshotLabel = value =>

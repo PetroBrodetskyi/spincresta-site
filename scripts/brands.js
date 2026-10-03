@@ -247,14 +247,14 @@ export const BRANDS = [
   },
   {
     name: 'VikingLuck',
-    bonus: '',
+    bonus: '100% up to €500 + 200 Free Spins',
     cta: 'Play Now',
     urlDetail: 'brands/vikingluck.html',
     urlCasino: 'https://armadaapp.media-412.com/click?pid=3862&offer_id=124853',
     image: 'images/vikingluck.webp',
     bgColor: '#4A221B',
     countries: ['IT', 'ES', 'CH', 'AT', 'IE', 'LU', 'CA', 'NZ', 'AU', 'CL', 'UY', 'MX', 'PE', 'AR', 'CO', 'BR', 'FI', 'NO', 'PL', 'CZ', 'SK', 'HU', 'TR', 'ZA', 'IS', 'SI', 'LV'],
-    payments: [],
+    payments: ['visa', 'mastercard', 'interac', 'neteller', 'skrill', 'banktransfer', 'mifinity', 'bitcoin', 'ethereum', 'litecoin', 'tether'],
     hasDetailPage: true,
   },
   {
@@ -295,14 +295,14 @@ export const BRANDS = [
   },
   {
     name: 'Casinado',
-    bonus: '',
+    bonus: '100% up to €500 + 200 Free Spins',
     cta: 'Play Now',
     urlDetail: 'brands/casinado.html',
     urlCasino: 'https://armadaapp.media-412.com/click?pid=3862&offer_id=124854',
     image: 'images/casinado.svg',
     bgColor: '#1C2738',
     countries: ['IT', 'ES', 'CH', 'AT', 'IE', 'LU', 'CA', 'NZ', 'AU', 'CL', 'UY', 'MX', 'PE', 'AR', 'CO', 'BR', 'FI', 'NO', 'PL', 'CZ', 'SK', 'HU', 'TR', 'ZA', 'IS', 'SI', 'LV'],
-    payments: [],
+    payments: ['visa', 'mastercard', 'interac', 'neteller', 'skrill', 'mifinity', 'banktransfer', 'bitcoin', 'ethereum', 'litecoin', 'tether'],
     hasDetailPage: true,
   },
   {
