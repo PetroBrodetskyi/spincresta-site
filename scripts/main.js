@@ -1,7 +1,7 @@
 ﻿// =====================
 // IMPORTS
 // =====================
-import { BRANDS } from './brands.js?v=20261003-casinado-1';
+import { BRANDS } from './brands.js?v=20261003-planbet-1';
 import { COUNTRIES } from './countries.js';
 import { initFooterNewsletter } from './footer-newsletter.js?v=20260826-newsletter-4';
 import { initAccountAuth } from './account-auth.js?v=20260829-local-preview-1';
@@ -40,8 +40,8 @@ const loadPageModules = async () => {
 
   if (isHomePage) {
     const [screenshotsModule, gamesModule, pageModule] = await Promise.all([
-      import('./brand-homepage-screenshots.js?v=20261003-casinado-1'),
-      import('./brand-new-games.js?v=20261003-casinado-1'),
+      import('./brand-homepage-screenshots.js?v=20261003-planbet-1'),
+      import('./brand-new-games.js?v=20261003-planbet-1'),
       import('./pages/home.js?v=20260829-mobile-density-1'),
     ]);
     BRAND_HOMEPAGE_SCREENSHOTS = screenshotsModule.BRAND_HOMEPAGE_SCREENSHOTS || {};
@@ -51,8 +51,8 @@ const loadPageModules = async () => {
 
   if (isCountryPage) {
     const [screenshotsModule, gamesModule, pageModule] = await Promise.all([
-      import('./brand-homepage-screenshots.js?v=20261003-casinado-1'),
-      import('./brand-new-games.js?v=20261003-casinado-1'),
+      import('./brand-homepage-screenshots.js?v=20261003-planbet-1'),
+      import('./brand-new-games.js?v=20261003-planbet-1'),
       import('./pages/country-media.js?v=20260930-global-game-blur-1'),
     ]);
     BRAND_HOMEPAGE_SCREENSHOTS = screenshotsModule.BRAND_HOMEPAGE_SCREENSHOTS || {};
@@ -62,9 +62,9 @@ const loadPageModules = async () => {
 
   if (isBrandPage) {
     const [snapshotsModule, gamesModule, pageModule, feedbackModule] = await Promise.all([
-      import('./brand-snapshot-configs.js?v=20261003-casinado-1'),
-      import('./brand-new-games.js?v=20261003-casinado-1'),
-      import('./pages/brand.js?v=20261003-casinado-1'),
+      import('./brand-snapshot-configs.js?v=20261003-planbet-1'),
+      import('./brand-new-games.js?v=20261003-planbet-1'),
+      import('./pages/brand.js?v=20261003-planbet-1'),
       import('./pages/brand-feedback.js?v=20260829-mobile-compose-1'),
     ]);
     BRAND_SNAPSHOT_CONFIGS = snapshotsModule.BRAND_SNAPSHOT_CONFIGS || {};
@@ -365,7 +365,7 @@ const SITE_LOCALE = DOCUMENT_LANGUAGE.startsWith('de')
 let brandBonusTranslations = {};
 const brandBonusTranslationsReady = SITE_LOCALE === 'en'
   ? Promise.resolve()
-  : import(`./brand-bonus-translations/${SITE_LOCALE}.js?v=20261003-casinado-1`)
+  : import(`./brand-bonus-translations/${SITE_LOCALE}.js?v=20261003-planbet-1`)
       .then(module => {
         brandBonusTranslations = module.default || {};
       })
@@ -4650,8 +4650,19 @@ export const initCasinoPage = async () => {
           .map(code => {
             const c = COUNTRIES.find(x => x.code.toLowerCase() === code.toLowerCase());
             if (!c) {
-              const market = BRAND_ONLY_COUNTRIES[code.toUpperCase()];
-              if (!market) return '';
+              // Preserve supplied GEOs even when a country has no guide yet.
+              // Intl gives native region names without a parallel translation list.
+              const region = code.toUpperCase();
+              if (!/^[A-Z]{2}$/.test(region)) return '';
+              let market = BRAND_ONLY_COUNTRIES[region];
+              if (!market) {
+                let name = region;
+                try { name = new Intl.DisplayNames([SITE_LOCALE], { type: 'region' }).of(region) || region; } catch { /* Keep the ISO code on older browsers. */ }
+                market = {
+                  name: { [SITE_LOCALE]: name, en: name },
+                  flag: String.fromCodePoint(...[...region].map(char => 0x1F1E6 + char.charCodeAt(0) - 65)),
+                };
+              }
               const marketName = market.name[SITE_LOCALE] || market.name.en;
               const marketLabel = localeText(
                 `${marketName} market availability`,

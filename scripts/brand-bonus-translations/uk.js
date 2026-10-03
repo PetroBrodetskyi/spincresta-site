@@ -42,6 +42,7 @@ export default {
   "Welcome Package up to €6,000 + 250 Free Spins": "Вітальний пакет до 6000 євро + 250 безкоштовних обертань",
   "Welcome Pack 400% up to €4,000 + 250 FS. Get Bonus": "Welcome Pack 400% до €4000 + 250 FS. Отримати бонус",
   "100% up to €500 + 200 Free Spins": "100% до 500 € + 200 фріспінів",
+  "Up to €1,500 + 150 Free Spins over 4 Deposits": "До 1 500 € + 150 фріспінів на 4 депозити",
   "Up to €2,000 + 350 Free Spins": "До 2 000 € + 350 фріспінів",
   "250% Welcome Bonus up to €1,000": "Вітальний бонус 250% до €1000",
   "Welcome Package - 225% Up to €1,000": "Вітальний пакет - 225% до 1000 євро",

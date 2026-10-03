@@ -42,6 +42,7 @@ export default {
   "Welcome Package up to €6,000 + 250 Free Spins": "€6,000 + 250 निःशुल्क स्पिन तक का स्वागत पैकेज",
   "Welcome Pack 400% up to €4,000 + 250 FS. Get Bonus": "वेलकम पैक 400% €4,000 + 250 एफएस तक। बोनस प्राप्त करें",
   "100% up to €500 + 200 Free Spins": "€500 तक 100% + 200 मुफ़्त स्पिन",
+  "Up to €1,500 + 150 Free Spins over 4 Deposits": "चार जमा पर €1,500 तक + 150 मुफ़्त स्पिन",
   "Up to €2,000 + 350 Free Spins": "€2,000 तक + 350 मुफ़्त स्पिन",
   "250% Welcome Bonus up to €1,000": "€1,000 तक 250% स्वागत बोनस",
   "Welcome Package - 225% Up to €1,000": "स्वागत पैकेज - 225% €1,000 तक",

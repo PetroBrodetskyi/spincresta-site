@@ -1,0 +1,62 @@
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+import { BRANDS } from '../scripts/brands.js';
+import { BRAND_NEW_GAMES } from '../scripts/brand-new-games.js';
+import { BRAND_HOMEPAGE_SCREENSHOTS } from '../scripts/brand-homepage-screenshots.js';
+import { BRAND_SNAPSHOT_CONFIGS } from '../scripts/brand-snapshot-configs.js';
+import { PLANBET_COPY } from './planbet-review-copy.mjs';
+
+const locales = ['en','de','es','it','pl','uk','pt','fr','hi','fi'];
+const brand = BRANDS.find(item => item.name === 'Planbet');
+assert.equal(brand.urlCasino, 'https://armadaapp.media-412.com/click?pid=3862&offer_id=127363');
+assert.equal(brand.bgColor, '#1F2528');
+assert.equal(brand.bonus, 'Up to €1,500 + 150 Free Spins over 4 Deposits');
+assert.equal(brand.image, 'images/planbet.svg');
+assert(fs.existsSync(brand.image));
+assert.deepEqual(brand.countries, ['AL','AD','AT','BD','BJ','BR','BG','BF','BI','CA','TD','CG','CD','HR','DK','FO','DE','GH','GR','GL','HU','IS','IN','JP','KE','LI','LU','MX','MD','MC','ME','NA','NP','NE','NG','MK','NO','PK','PG','PE','PH','PL','PT','RO','SM','SL','SI','ES','LK','CH','TZ','TH','TG']);
+assert.equal(brand.hasDetailPage, true);
+assert(!brand.notRecommended && !brand.temporarilyUnavailable);
+assert.deepEqual(brand.payments, [], 'No universal cashier methods independently verified');
+assert.equal(BRAND_NEW_GAMES.planbet.length, 6);
+assert.equal(new Set(BRAND_NEW_GAMES.planbet.map(game => game.image)).size, 6);
+assert.equal(BRAND_SNAPSHOT_CONFIGS.planbet.tabs.length, 3);
+assert(BRAND_SNAPSHOT_CONFIGS.planbet.tabs[1].available.includes('Live bingo'));
+assert(BRAND_SNAPSHOT_CONFIGS.planbet.tabs[2].available.includes('Cricket'));
+assert(BRAND_HOMEPAGE_SCREENSHOTS.planbet.includes('planbet-page_kouocy'));
+const decode = value => value.replaceAll('&quot;', '"').replaceAll('&lt;', '<').replaceAll('&gt;', '>').replaceAll('&amp;', '&');
+const sitemap = fs.readFileSync('sitemap.xml', 'utf8');
+let expectedSections;
+for (const locale of locales) {
+  const prefix = locale === 'en' ? '' : `${locale}/`;
+  const file = `${prefix}brands/planbet/index.html`;
+  const html = fs.readFileSync(file, 'utf8');
+  const url = `https://spincresta.com/${prefix}brands/planbet/`;
+  assert(html.includes(`<link rel="canonical" href="${url}"`), file);
+  assert(html.includes('index, follow, max-image-preview:large'), file);
+  assert(!/noindex|coming soon|Casinado|casinado|VikingLuck|vikingluck|Sources Checked|Planbetn|Planbetsta|\uFFFD|Champions Cup|Collections|Interac|7\.19|€500/i.test(html), file);
+  assert.equal([...html.matchAll(/hreflang=/g)].length, 11, file);
+  assert.equal([...html.matchAll(/<h1>/g)].length, 1, file);
+  const sections = [...html.matchAll(/<section[^>]*\sid="([^"]+)"/g)].map(match => match[1]);
+  expectedSections ||= sections;
+  assert.deepEqual(sections, expectedSections, `${file}: section parity`);
+  for (const suffix of ['verdict','bonus','games','sports','payments','safety']) assert(sections.includes(`planbet-${suffix}`), file);
+  assert(html.includes('name="brand-snapshot-intro"'), file);
+  for (const cap of [300,350,400,450]) assert(html.includes(`€${cap}`), `${file}: deposit stage missing`);
+  for (const address of ['support-en@planbet.com','security@planbet.com','complaints@planbet.com','block@planbet.com']) assert(html.includes(address), file);
+  const faqSection = html.match(/<section class="container" id="faq">[\s\S]*?<\/section>/)[0];
+  const faq = [...faqSection.matchAll(/<h3>(.*?)<\/h3><p>(.*?)<\/p>/g)].map(([,q,a]) => [decode(q),decode(a)]);
+  assert.deepEqual(faq, PLANBET_COPY[locale].faq, file);
+  assert.equal(faq.length, 8, file);
+  const graph = JSON.parse(html.match(/<script type="application\/ld\+json">(.*?)<\/script>/)[1])['@graph'];
+  assert.deepEqual(graph.find(node => node['@type'] === 'FAQPage').mainEntity.map(node => [node.name,node.acceptedAnswer.text]), faq, `${file}: FAQ schema mismatch`);
+  assert(graph.some(node => node['@type'] === 'Article' && node.dateModified === '2026-10-03'), file);
+  for (const href of [...html.matchAll(/<a[^>]*href="(https?:[^\"]+)"/g)].map(match => decode(match[1]))) {
+    const allowed = [brand.urlCasino,'https://t.me/spincresta','https://x.com/SpinCresta'];
+    assert(href.startsWith('https://spincresta.com/') || allowed.includes(href), `${file}: unexpected outbound link ${href}`);
+  }
+  const catalog = fs.readFileSync(`${prefix}casinos-and-betting/index.html`, 'utf8');
+  assert(catalog.includes(`href="/${prefix}brands/planbet/"`), `${file}: no crawlable catalogue link`);
+  assert.equal([...catalog.matchAll(/data-brand-slug="planbet"/g)].length, 1);
+  assert(sitemap.includes(`<loc>${url}</loc>`), file);
+}
+console.log('Planbet: 10 indexed locale reviews, matching sections and 8 FAQ/schema answers, 6 games, 3 Snapshot tabs, four-deposit bonus and all 53 unchanged GEOs. Checks passed.');

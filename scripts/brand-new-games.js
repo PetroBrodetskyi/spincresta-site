@@ -1,4 +1,12 @@
 export const BRAND_NEW_GAMES = {
+  planbet: [
+    { name: 'Zeus Powerstorm – Bonus Flash 3x3', image: 'https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto/v1791051304/spincresta/brands/planbet/new-games/planbet-new-game-zeus-powerstorm_cspdme' },
+    { name: 'Sugar Knight', image: 'https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto/v1791051303/spincresta/brands/planbet/new-games/planbet-new-game-sugar-knight_aydmdf' },
+    { name: 'The VIP', image: 'https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto/v1791051302/spincresta/brands/planbet/new-games/planbet-new-game-the-vip_js2l02' },
+    { name: 'Divine Queen: Power of Sun', image: 'https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto/v1791051300/spincresta/brands/planbet/new-games/planbet-new-game-divine-queen-power-of-sun_g6njbv' },
+    { name: 'Cats Love Yummy', image: 'https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto/v1791051299/spincresta/brands/planbet/new-games/planbet-new-game-cats-love-yummy_xtus5b' },
+    { name: 'Book of Golden Mirages', image: 'https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto/v1791051299/spincresta/brands/planbet/new-games/planbet-new-game-book-of-golden-mirages_uxdigy' },
+  ],
   casinado: [
     { name: 'Spooktacular Bonanza', image: 'https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto/v1791035908/spincresta/brands/casinado/new-games/casinado-new-game-spook-tacular-bonanza_swdiip' },
     { name: 'Nectar of Power', image: 'https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto/v1791035906/spincresta/brands/casinado/new-games/casinado-new-game-nectar-of-power_ggiexh' },

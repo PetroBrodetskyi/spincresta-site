@@ -1761,6 +1761,20 @@ export const BRANDS = [
     hasDetailPage: true,
   },
   {
+    name: 'Planbet',
+    bonus: 'Up to €1,500 + 150 Free Spins over 4 Deposits',
+    cta: 'Play Now',
+    urlDetail: 'brands/planbet.html',
+    urlCasino: 'https://armadaapp.media-412.com/click?pid=3862&offer_id=127363',
+    image: 'images/planbet.svg',
+    bgColor: '#1F2528',
+    countries: [
+      'AL', 'AD', 'AT', 'BD', 'BJ', 'BR', 'BG', 'BF', 'BI', 'CA', 'TD', 'CG', 'CD', 'HR', 'DK', 'FO', 'DE', 'GH', 'GR', 'GL', 'HU', 'IS', 'IN', 'JP', 'KE', 'LI', 'LU', 'MX', 'MD', 'MC', 'ME', 'NA', 'NP', 'NE', 'NG', 'MK', 'NO', 'PK', 'PG', 'PE', 'PH', 'PL', 'PT', 'RO', 'SM', 'SL', 'SI', 'ES', 'LK', 'CH', 'TZ', 'TH', 'TG',
+    ],
+    payments: [],
+    hasDetailPage: true,
+  },
+  {
     name: 'Betlabel',
     bonus: '100% Bonus of Up to €100 for Your First Deposit',
     cta: 'Play Now',

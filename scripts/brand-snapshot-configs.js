@@ -540,6 +540,25 @@ const billyBillionConfig = createGamesLiveConfig(
 );
 
 export const BRAND_SNAPSHOT_CONFIGS = {
+  planbet: {
+    ...createGamesLiveBettingConfig(
+      ['Slots', 'Roulette', 'Blackjack', 'Baccarat', 'Jackpot games', 'Live games', 'Poker', 'Craps and dice', 'Crash games'],
+      ['Live shows', 'Live baccarat', 'Live bingo', 'Live blackjack', 'Live dice games', 'Live poker', 'Live roulette'],
+      ['Football', 'Basketball', 'Tennis', 'Table tennis', 'Volleyball', 'Ice hockey', 'Cricket', 'Baseball', 'eSports', 'Combat sports']
+    ),
+    notes: {
+      en: 'Categories checked in the public lobby; access can vary by country and provider.',
+      de: 'Kategorien aus der öffentlichen Lobby; der Zugang kann je nach Land und Anbieter variieren.',
+      es: 'Categorías revisadas en el catálogo público; el acceso varía según el país y el proveedor.',
+      it: 'Categorie verificate nel catalogo pubblico; l’accesso varia secondo paese e fornitore.',
+      pl: 'Kategorie sprawdzone w publicznym katalogu; dostęp zależy od kraju i dostawcy.',
+      uk: 'Категорії перевірені у відкритому каталозі; доступ залежить від країни й провайдера.',
+      pt: 'Categorias verificadas no catálogo público; o acesso depende do país e do fornecedor.',
+      fr: 'Catégories vérifiées dans le catalogue public ; l’accès dépend du pays et du fournisseur.',
+      hi: 'श्रेणियाँ सार्वजनिक गेम सूची में जाँची गई हैं; उपलब्धता देश और प्रदाता पर निर्भर है।',
+      fi: 'Kategoriat tarkistettiin julkisesta peliaulasta; saatavuus riippuu maasta ja tarjoajasta.',
+    },
+  },
   casinado: {
     tabs: [
       createCategoryTab('Games', GAME_CATEGORIES, ['Slots', 'Roulette', 'Blackjack', 'Video poker', 'Baccarat', 'Jackpot games', 'Live games', 'Poker', 'Craps and dice', 'Keno', 'Scratch cards', 'Crash games'], 'These are the main game categories currently visible in the account.'),

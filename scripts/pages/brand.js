@@ -860,7 +860,7 @@ export const initBrandPage = context => {
                 </div>
                 <p>${normalizeText(
                   snapshotLabel(
-                    tab.note || `These are the main ${tab.label.toLowerCase()} sections currently visible on the account.`
+                    config.notes?.[SITE_LOCALE] || tab.note || `These are the main ${tab.label.toLowerCase()} sections currently visible on the account.`
                   )
                 )}</p>
               </div>
