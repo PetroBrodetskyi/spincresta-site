@@ -27,3 +27,7 @@ build/
 .env
 .env.*
 !.env.example
+
+# Private editorial source notes stay local and are excluded from deployment.
+research/
+tools/research/

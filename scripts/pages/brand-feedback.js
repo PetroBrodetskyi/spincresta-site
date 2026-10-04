@@ -30,7 +30,7 @@ const COPY = {
   },
   uk: {
     kicker: 'ВІДГУКИ ГРАВЦІВ', title: 'Оцінки та відгуки гравців', intro: 'Оцінки залишають зареєстровані користувачі SpinCresta. Текстові відгуки проходять перевірку перед публікацією.',
-    average: 'Середня оцінка', ratings: 'оцінок', reviews: 'опублікованих відгуків', noReviews: 'Опублікованих відгуків поки немає. Залиште перший корисний відгук про свій досвід.',
+    average: 'Середня оцінка', ratings: 'оцінок', reviews: 'опублікованих відгуків', noReviews: 'Відгуків гравців поки немає. Поділіться своїм досвідом.',
     rateTitle: 'Оцініть це казино', rateHint: 'Оберіть від 1 до 5 зірок. За бажанням додайте текстовий відгук.', titleLabel: 'Заголовок відгуку (необов’язково)', titlePlaceholder: 'Короткий підсумок', bodyLabel: 'Ваш досвід (необов’язково)', bodyPlaceholder: 'Що працювало добре? Що варто знати іншим гравцям?', bodyHint: 'Якщо додаєте текст, напишіть щонайменше 20 символів.', submit: 'Надіслати оцінку', submitting: 'Надсилаємо…', signIn: 'Увійдіть, щоб оцінити казино', pending: 'Дякуємо. Оцінку збережено, а відгук очікує на модерацію.', ratingSaved: 'Дякуємо. Вашу оцінку збережено.', selectRating: 'Перед надсиланням оберіть оцінку.', invalidReview: 'Напишіть щонайменше 20 символів або залиште текст відгуку порожнім.', failed: 'Не вдалося надіслати відгук. Спробуйте ще раз.', unavailable: 'Відгуки гравців тимчасово недоступні.', anonymous: 'Гравець SpinCresta', star: 'зірка', stars: 'зірки',
   },
   pt: {
@@ -53,6 +53,19 @@ const COPY = {
     average: 'Keskiarvo', ratings: 'arviota', reviews: 'julkaistua kokemusta', noReviews: 'Julkaistuja pelaajakokemuksia ei vielä ole. Jaa ensimmäinen hyödyllinen kokemus.',
     rateTitle: 'Arvioi tämä kasino', rateHint: 'Valitse 1–5 tähteä. Voit halutessasi lisätä kirjallisen kokemuksen.', titleLabel: 'Otsikko (valinnainen)', titlePlaceholder: 'Lyhyt yhteenveto', bodyLabel: 'Kokemuksesi (valinnainen)', bodyPlaceholder: 'Mikä toimi hyvin? Mitä muiden pelaajien tulisi tietää?', bodyHint: 'Vähintään 20 merkkiä, jos lisäät tekstin.', submit: 'Lähetä arvio', submitting: 'Lähetetään…', signIn: 'Kirjaudu sisään ja arvioi', pending: 'Kiitos. Arviosi tallennettiin ja kirjoitus odottaa tarkistusta.', ratingSaved: 'Kiitos. Arviosi tallennettiin.', selectRating: 'Valitse tähtiarvio ennen lähettämistä.', invalidReview: 'Kirjoita vähintään 20 merkkiä tai jätä teksti tyhjäksi.', failed: 'Palautetta ei voitu lähettää. Yritä uudelleen.', unavailable: 'Pelaajien palaute ei ole juuri nyt käytettävissä.', anonymous: 'SpinCresta-pelaaja', star: 'tähti', stars: 'tähteä',
   },
+};
+
+const FEEDBACK_LOAD_COPY = {
+  en: { loading: 'Loading player reviews…', failed: 'We could not load player reviews. Refresh the page to try again.', preview: 'Player reviews are available on the published page.' },
+  de: { loading: 'Spielerbewertungen werden geladen…', failed: 'Die Spielerbewertungen konnten nicht geladen werden. Laden Sie die Seite erneut.', preview: 'Spielerbewertungen finden Sie auf der veröffentlichten Seite.' },
+  es: { loading: 'Cargando reseñas de jugadores…', failed: 'No pudimos cargar las reseñas. Actualiza la página para volver a intentarlo.', preview: 'Las reseñas de jugadores están disponibles en la página publicada.' },
+  it: { loading: 'Caricamento delle recensioni…', failed: 'Non è stato possibile caricare le recensioni. Ricarica la pagina per riprovare.', preview: 'Le recensioni dei giocatori sono disponibili sulla pagina pubblicata.' },
+  pl: { loading: 'Wczytywanie opinii graczy…', failed: 'Nie udało się wczytać opinii. Odśwież stronę i spróbuj ponownie.', preview: 'Opinie graczy znajdziesz na opublikowanej stronie.' },
+  uk: { loading: 'Завантажуємо відгуки гравців…', failed: 'Не вдалося завантажити відгуки. Оновіть сторінку й спробуйте ще раз.', preview: 'Відгуки гравців доступні на опублікованій сторінці.' },
+  pt: { loading: 'A carregar opiniões dos jogadores…', failed: 'Não foi possível carregar as opiniões. Atualize a página para tentar novamente.', preview: 'As opiniões dos jogadores estão disponíveis na página publicada.' },
+  fr: { loading: 'Chargement des avis des joueurs…', failed: 'Les avis n’ont pas pu être chargés. Actualisez la page pour réessayer.', preview: 'Les avis des joueurs sont disponibles sur la page publiée.' },
+  hi: { loading: 'खिलाड़ियों की समीक्षाएँ लोड हो रही हैं…', failed: 'समीक्षाएँ लोड नहीं हो सकीं। पेज रीफ़्रेश करके फिर कोशिश करें।', preview: 'खिलाड़ियों की समीक्षाएँ प्रकाशित पेज पर उपलब्ध हैं।' },
+  fi: { loading: 'Ladataan pelaajien kokemuksia…', failed: 'Kokemuksia ei voitu ladata. Päivitä sivu ja yritä uudelleen.', preview: 'Pelaajien kokemukset löytyvät julkaistulta sivulta.' },
 };
 
 const FORM_TOGGLE_COPY = {
@@ -386,6 +399,29 @@ const feedbackEndpoint = () =>
 const votesEndpoint = () =>
   document.documentElement.dataset.feedbackVotesEndpoint || DEFAULT_VOTES_ENDPOINT;
 
+// An empty, successful response is different from an unavailable service.
+export const fetchPublicFeedback = async (url, options = {}) => {
+  const response = await fetch(url, options);
+  const payload = await response.json();
+  if (response.status === 404 && payload?.error === 'brand_not_found') return null;
+  if (!response.ok || payload?.ok !== true || !payload.summary || !Array.isArray(payload.reviews)) {
+    throw new Error('feedback_unavailable');
+  }
+  return payload;
+};
+
+export const fetchFeedbackVotes = async (url, options = {}) => {
+  try {
+    const response = await fetch(url, options);
+    if (!response.ok) return { reviews: {}, replies: {} };
+    const payload = await response.json();
+    return { reviews: payload?.reviews || {}, replies: payload?.replies || {} };
+  } catch {
+    // Optional vote counts must not hide otherwise available reviews.
+    return { reviews: {}, replies: {} };
+  }
+};
+
 const accountBridge = () => window.SpinCrestaAccount || null;
 
 const waitForAccountBridge = () => new Promise(resolve => {
@@ -398,7 +434,7 @@ const waitForAccountBridge = () => new Promise(resolve => {
   window.setTimeout(() => resolve(accountBridge()), 5000);
 });
 
-const createSection = (brand, copy) => {
+const createSection = (brand, copy, loadCopy) => {
   const section = document.createElement('section');
   section.className = 'brand-player-feedback';
   section.id = 'player-reviews';
@@ -415,8 +451,8 @@ const createSection = (brand, copy) => {
         <span data-feedback-counts>${escapeHtml(copy.average)}</span>
       </div>
     </div>
-    <div class="brand-feedback-list" data-feedback-list>
-      <p class="brand-feedback-empty">${escapeHtml(copy.noReviews)}</p>
+    <div class="brand-feedback-list" data-feedback-list data-state="loading" aria-live="polite">
+      <p class="brand-feedback-empty">${escapeHtml(loadCopy.loading)}</p>
     </div>
     <div class="brand-feedback-compose">
       <div>
@@ -466,6 +502,7 @@ const renderReviews = (section, payload, copy, teaserCopy, locale, teaserLink, c
   updateWhyRatingLink(teaserLink, payload, copy, teaserCopy);
 
   const list = section.querySelector('[data-feedback-list]');
+  list.dataset.state = 'ready';
   const reviews = Array.isArray(payload.reviews) ? payload.reviews : [];
   if (!reviews.length) {
     list.innerHTML = `<p class="brand-feedback-empty">${escapeHtml(copy.noReviews)}</p>`;
@@ -483,12 +520,25 @@ export const initBrandFeedback = async ({ brand, brandName = '', brandImage = ''
   if (!main || !brand || document.getElementById('player-reviews')) return;
 
   const copy = COPY[locale] || COPY.en;
+  const loadCopy = FEEDBACK_LOAD_COPY[locale] || FEEDBACK_LOAD_COPY.en;
   const teaserCopy = TEASER_COPY[locale] || TEASER_COPY.en;
   const reviewStatusCopy = REVIEW_STATUS_COPY[locale] || REVIEW_STATUS_COPY.en;
   const replyCopy = REPLY_COPY[locale] || REPLY_COPY.en;
   const voteCopy = VOTE_COPY[locale] || VOTE_COPY.en;
-  const section = createSection(brand, copy);
+  const section = createSection(brand, copy, loadCopy);
   main.append(section);
+  if (['127.0.0.1', 'localhost', '[::1]'].includes(window.location.hostname)) {
+    // The production API intentionally does not trust local preview origins.
+    // Do not present a blocked request as either zero reviews or a live outage.
+    const liveUrl = new URL(window.location.pathname, 'https://spincresta.com');
+    liveUrl.hash = 'player-reviews';
+    const list = section.querySelector('[data-feedback-list]');
+    list.dataset.state = 'preview';
+    list.innerHTML = `<p class="brand-feedback-empty">${escapeHtml(loadCopy.preview)} <a href="${escapeHtml(liveUrl.href)}">${escapeHtml(teaserCopy.read)}</a></p>`;
+    section.querySelector('.brand-feedback-score').remove();
+    section.querySelector('.brand-feedback-compose').remove();
+    return;
+  }
   const teaserLink = createWhyRatingLink(copy, teaserCopy);
   const form = section.querySelector('[data-feedback-form]');
   const signIn = section.querySelector('[data-feedback-signin]');
@@ -536,13 +586,11 @@ export const initBrandFeedback = async ({ brand, brandName = '', brandImage = ''
     requestUrl.searchParams.set('brand', brand);
     requestUrl.searchParams.set('limit', '10');
     if (fresh) requestUrl.searchParams.set('_', String(Date.now()));
-    const response = await fetch(requestUrl, {
+    const payload = await fetchPublicFeedback(requestUrl, {
       cache: fresh ? 'no-store' : 'default',
       headers: { Accept: 'application/json' },
     });
-    if (response.status === 404) return false;
-    if (!response.ok) throw new Error('feedback_unavailable');
-    const payload = await response.json();
+    if (!payload) return false;
     updateFeedbackStructuredData(payload, {
       brandName: brandName || brand,
       brandImage,
@@ -551,15 +599,17 @@ export const initBrandFeedback = async ({ brand, brandName = '', brandImage = ''
     const voteRequestUrl = new URL(votesEndpoint());
     voteRequestUrl.searchParams.set('brand', brand);
     if (fresh) voteRequestUrl.searchParams.set('_', String(Date.now()));
-    const voteToken = await accountBridge()?.getAccessToken?.();
-    const voteResponse = await fetch(voteRequestUrl, {
-      cache: 'no-store',
-      headers: {
-        Accept: 'application/json',
-        ...(voteToken ? { Authorization: `Bearer ${voteToken}` } : {}),
-      },
-    }).catch(() => null);
-    const votePayload = voteResponse?.ok ? await voteResponse.json() : { reviews: {}, replies: {} };
+    let votePayload = { reviews: {}, replies: {} };
+    if (payload.reviews.length) {
+      const voteToken = await Promise.resolve(accountBridge()?.getAccessToken?.()).catch(() => null);
+      votePayload = await fetchFeedbackVotes(voteRequestUrl, {
+        cache: 'no-store',
+        headers: {
+          Accept: 'application/json',
+          ...(voteToken ? { Authorization: `Bearer ${voteToken}` } : {}),
+        },
+      });
+    }
     payload.reviews = (payload.reviews || []).map(review => ({
       ...review,
       votes: votePayload.reviews?.[review.id] || null,
@@ -571,7 +621,7 @@ export const initBrandFeedback = async ({ brand, brandName = '', brandImage = ''
     const access = accountBridge()?.getAccountAccess?.() || {};
     const canReply = Boolean(access.representative && (access.brands || []).some(item => item.slug === brand));
     renderReviews(section, payload, copy, teaserCopy, locale, teaserLink, canReply);
-    const ownReview = await accountBridge()?.getOwnReview?.(brand);
+    const ownReview = await Promise.resolve(accountBridge()?.getOwnReview?.(brand)).catch(() => null);
     if (ownReview && !section.querySelector(`#player-review-${ownReview.id}`)) {
       const list = section.querySelector('[data-feedback-list]');
       if (list?.querySelector('.brand-feedback-empty')) list.replaceChildren();
@@ -665,8 +715,15 @@ export const initBrandFeedback = async ({ brand, brandName = '', brandImage = ''
     }
   });
 
+  const showFeedbackLoadError = () => {
+    const list = section.querySelector('[data-feedback-list]');
+    if (list.dataset.state === 'ready') return;
+    list.dataset.state = 'error';
+    list.innerHTML = `<p class="brand-feedback-empty">${escapeHtml(loadCopy.failed)}</p>`;
+  };
+
   window.addEventListener('spincresta:account-ready', () => {
-    loadFeedback({ fresh: true }).catch(() => {});
+    loadFeedback({ fresh: true }).catch(showFeedbackLoadError);
   }, { once: true });
 
   try {
@@ -677,8 +734,7 @@ export const initBrandFeedback = async ({ brand, brandName = '', brandImage = ''
       return;
     }
   } catch {
-    status.textContent = copy.unavailable;
-    status.dataset.state = 'error';
+    showFeedbackLoadError();
   }
 
   form.addEventListener('submit', async event => {

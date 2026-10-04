@@ -1,4 +1,20 @@
 export const BRAND_NEW_GAMES = {
+  '20bet': [
+    { name: 'Egyptian Legends', image: 'https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto/v1791109279/spincresta/brands/20bet/new-games/20bet-new-game-egyptian-legends_vldbxg' },
+    { name: 'Spooky Step', image: 'https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto/v1791109278/spincresta/brands/20bet/new-games/20bet-new-game-spooky-step_pfyxga' },
+    { name: 'Cats Love Yummy', image: 'https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto/v1791109277/spincresta/brands/20bet/new-games/20bet-new-game-cats-love-yummy_ltaghj' },
+    { name: 'Bunny Jitsu', image: 'https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto/v1791109276/spincresta/brands/20bet/new-games/20bet-new-game-bunny-jitsu_yojb93' },
+    { name: 'Bonanza Billion Merge Up', image: 'https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto/v1791109275/spincresta/brands/20bet/new-games/20bet-new-game-bonanza-billion-merge-up_jykf2q' },
+    { name: 'Big Catch Fortune', image: 'https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto/v1791109274/spincresta/brands/20bet/new-games/20bet-new-game-big-catch-fortune_ejhtyl' },
+  ],
+  pinco: [
+    { name: 'The Golden Touch', image: 'https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto/v1791104522/spincresta/brands/pinco/new-games/pinco-new-game-the-golden-touch_qzmsmy' },
+    { name: "Vulcan's Blessing", image: 'https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto/v1791104522/spincresta/brands/pinco/new-games/pinco-new-game-vulcans-blessing_mmknao' },
+    { name: 'Space Crash 2', image: 'https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto/v1791104521/spincresta/brands/pinco/new-games/pinco-new-game-space-crash-2_b97a6p' },
+    { name: 'Bikini Pick', image: 'https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto/v1791104521/spincresta/brands/pinco/new-games/pinco-new-game-bikini-pick_kmvolo' },
+    { name: 'Bird Up', image: 'https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto/v1791104521/spincresta/brands/pinco/new-games/pinco-new-game-bird-up_zgk7sy' },
+    { name: 'Big Catch Fortune', image: 'https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto/v1791104521/spincresta/brands/pinco/new-games/pinco-new-game-big-catch-fortune_xt4nix' },
+  ],
   planbet: [
     { name: 'Zeus Powerstorm – Bonus Flash 3x3', image: 'https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto/v1791051304/spincresta/brands/planbet/new-games/planbet-new-game-zeus-powerstorm_cspdme' },
     { name: 'Sugar Knight', image: 'https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto/v1791051303/spincresta/brands/planbet/new-games/planbet-new-game-sugar-knight_aydmdf' },

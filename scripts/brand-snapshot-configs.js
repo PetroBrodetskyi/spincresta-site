@@ -161,9 +161,9 @@ const pinUpConfig = createGamesLiveBettingConfig(
 );
 
 const pincoConfig = createGamesLiveBettingConfig(
-  ['Slots', 'Roulette', 'Blackjack', 'Bingo', 'Baccarat', 'Jackpot games', 'Live games', 'Poker', 'Craps and dice', 'Keno', 'Scratch cards', 'Crash games'],
-  ['Live shows', 'Live baccarat', 'Live blackjack', 'Live dice games', 'Other live games', 'Live poker', 'Live roulette'],
-  ['Football', 'Basketball', 'Tennis', 'Table tennis', 'Volleyball', 'Ice hockey', 'Cricket', 'Baseball', 'Handball', 'eSports', 'Virtual sports', 'Combat sports', 'Motorsport']
+  ['Slots', 'Roulette', 'Blackjack', 'Bingo', 'Baccarat', 'Jackpot games', 'Live games', 'Poker', 'Crash games'],
+  ['Live shows', 'Live baccarat', 'Live blackjack', 'Other live games', 'Live poker', 'Live roulette'],
+  ['Football', 'Basketball', 'Tennis', 'Table tennis', 'Volleyball', 'Ice hockey', 'Cricket', 'Baseball', 'Handball', 'American football', 'eSports', 'Virtual sports', 'Combat sports', 'Boxing', 'Martial arts', 'Motorsport']
 );
 
 const gamblezenConfig = createGamesLiveConfig(
@@ -540,6 +540,25 @@ const billyBillionConfig = createGamesLiveConfig(
 );
 
 export const BRAND_SNAPSHOT_CONFIGS = {
+  '20bet': {
+    ...createGamesLiveBettingConfig(
+      ['Slots', 'Roulette', 'Blackjack', 'Baccarat', 'Jackpot games', 'Live games', 'Poker', 'Crash games'],
+      ['Live shows', 'Live baccarat', 'Live blackjack', 'Live dice games', 'Live poker', 'Live roulette'],
+      ['Football', 'Basketball', 'Tennis', 'Table tennis', 'Volleyball', 'Ice hockey', 'Cricket', 'Baseball', 'Handball', 'American football', 'eSports', 'Virtual sports', 'Combat sports', 'Boxing', 'Martial arts', 'Motorsport']
+    ),
+    notes: {
+      en: 'Categories checked in the public catalogue; country and provider restrictions may apply.',
+      de: 'Kategorien aus dem öffentlichen Katalog; Länder- und Anbieterbeschränkungen sind möglich.',
+      es: 'Categorías revisadas en el catálogo público; pueden aplicarse restricciones de país y proveedor.',
+      it: 'Categorie verificate nel catalogo pubblico; possono esserci restrizioni per paese e fornitore.',
+      pl: 'Kategorie sprawdzone w publicznym katalogu; możliwe ograniczenia kraju i dostawcy.',
+      uk: 'Категорії перевірені у відкритому каталозі; можливі обмеження за країною та провайдером.',
+      pt: 'Categorias verificadas no catálogo público; podem aplicar-se restrições de país e fornecedor.',
+      fr: 'Catégories vérifiées dans le catalogue public ; restrictions de pays et de fournisseur possibles.',
+      hi: 'सार्वजनिक सूची में जाँचे गए प्रकार; देश और प्रदाता के प्रतिबंध लागू हो सकते हैं।',
+      fi: 'Kategoriat tarkistettiin julkisesta peliluettelosta; maa- ja tarjoajarajoituksia voi olla.',
+    },
+  },
   planbet: {
     ...createGamesLiveBettingConfig(
       ['Slots', 'Roulette', 'Blackjack', 'Baccarat', 'Jackpot games', 'Live games', 'Poker', 'Craps and dice', 'Crash games'],
@@ -593,7 +612,21 @@ export const BRAND_SNAPSHOT_CONFIGS = {
   ...mapSnapshotConfig(['iwild', 'snatch'], casinoToolsConfig),
   ...mapSnapshotConfig(['fraga-tr', 'fraga-az', 'fraga-ar', 'fraga-cl'], fragaConfig),
   'pin-up': pinUpConfig,
-  pinco: pincoConfig,
+  pinco: {
+    ...pincoConfig,
+    notes: {
+      en: 'Categories checked in the public catalogue; country and provider restrictions may apply.',
+      de: 'Kategorien aus dem öffentlichen Katalog; Länder- und Anbieterbeschränkungen sind möglich.',
+      es: 'Categorías revisadas en el catálogo público; pueden aplicarse restricciones de país y proveedor.',
+      it: 'Categorie verificate nel catalogo pubblico; possono esserci restrizioni per paese e fornitore.',
+      pl: 'Kategorie sprawdzone w publicznym katalogu; możliwe ograniczenia kraju i dostawcy.',
+      uk: 'Категорії перевірені у відкритому каталозі; можливі обмеження за країною та провайдером.',
+      pt: 'Categorias verificadas no catálogo público; podem aplicar-se restrições de país e fornecedor.',
+      fr: 'Catégories vérifiées dans le catalogue public ; restrictions de pays ou de fournisseur possibles.',
+      hi: 'सार्वजनिक सूची में जाँचे गए प्रकार; देश और प्रदाता के प्रतिबंध लागू हो सकते हैं।',
+      fi: 'Kategoriat tarkistettiin julkisesta valikoimasta; maa- ja tarjoajarajoituksia voi olla.',
+    },
+  },
   gamblezen: gamblezenConfig,
   first: firstConfig,
   browinner: browinnerConfig,
