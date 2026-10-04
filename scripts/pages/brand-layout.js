@@ -1,5 +1,9 @@
 // Brand layout module. Loaded only on body[data-brand] pages.
 
+// Registries use canonical slugs; older entries may use punctuation-free keys.
+export const resolveBrandNewGames = (pageKey, registry, normalizeKey) =>
+  registry[pageKey] || registry[normalizeKey(pageKey)] || [];
+
 export const initBrandLayout = context => {
   const {
     BRANDS = [],
@@ -38,8 +42,8 @@ export const initBrandLayout = context => {
   };
   
   const createBrandNewGamesRail = () => {
-    const brandKey = normalizeBrandKey(document.body.dataset.brand || '');
-    const games = BRAND_NEW_GAMES[brandKey] || [];
+    const pageKey = normalizeText(document.body.dataset.brand || '').trim().toLowerCase();
+    const games = resolveBrandNewGames(pageKey, BRAND_NEW_GAMES, normalizeBrandKey);
     if (!games.length) return null;
   
     const playNowLink = document.querySelector(

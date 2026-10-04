@@ -1,7 +1,7 @@
 ﻿// =====================
 // IMPORTS
 // =====================
-import { BRANDS } from './brands.js?v=20261004-20bet-1';
+import { BRANDS } from './brands.js?v=20261004-national-casino-1';
 import { COUNTRIES } from './countries.js';
 import { initFooterNewsletter } from './footer-newsletter.js?v=20260826-newsletter-4';
 import { initAccountAuth } from './account-auth.js?v=20260829-local-preview-1';
@@ -25,7 +25,7 @@ const brandLayoutFallbackTimer = document.body?.dataset.brand
     }, 1500)
   : null;
 const brandLayoutModuleReady = document.body?.dataset.brand
-  ? import('./pages/brand-layout.js?v=20261003-payment-review-fixes-1').then(module => {
+  ? import('./pages/brand-layout.js?v=20261004-national-casino-1').then(module => {
       initBrandLayoutModule = module.initBrandLayout;
     }).catch(error => {
       document.body.classList.add('brand-layout-failed');
@@ -40,8 +40,8 @@ const loadPageModules = async () => {
 
   if (isHomePage) {
     const [screenshotsModule, gamesModule, pageModule] = await Promise.all([
-      import('./brand-homepage-screenshots.js?v=20261004-20bet-1'),
-      import('./brand-new-games.js?v=20261004-20bet-1'),
+      import('./brand-homepage-screenshots.js?v=20261004-national-casino-1'),
+      import('./brand-new-games.js?v=20261004-national-casino-1'),
       import('./pages/home.js?v=20260829-mobile-density-1'),
     ]);
     BRAND_HOMEPAGE_SCREENSHOTS = screenshotsModule.BRAND_HOMEPAGE_SCREENSHOTS || {};
@@ -51,8 +51,8 @@ const loadPageModules = async () => {
 
   if (isCountryPage) {
     const [screenshotsModule, gamesModule, pageModule] = await Promise.all([
-      import('./brand-homepage-screenshots.js?v=20261004-20bet-1'),
-      import('./brand-new-games.js?v=20261004-20bet-1'),
+      import('./brand-homepage-screenshots.js?v=20261004-national-casino-1'),
+      import('./brand-new-games.js?v=20261004-national-casino-1'),
       import('./pages/country-media.js?v=20260930-global-game-blur-1'),
     ]);
     BRAND_HOMEPAGE_SCREENSHOTS = screenshotsModule.BRAND_HOMEPAGE_SCREENSHOTS || {};
@@ -62,9 +62,9 @@ const loadPageModules = async () => {
 
   if (isBrandPage) {
     const [snapshotsModule, gamesModule, pageModule, feedbackModule] = await Promise.all([
-      import('./brand-snapshot-configs.js?v=20261004-20bet-1'),
-      import('./brand-new-games.js?v=20261004-20bet-1'),
-      import('./pages/brand.js?v=20261004-20bet-1'),
+      import('./brand-snapshot-configs.js?v=20261004-national-casino-1'),
+      import('./brand-new-games.js?v=20261004-national-casino-1'),
+      import('./pages/brand.js?v=20261004-national-casino-1'),
       import('./pages/brand-feedback.js?v=20261004-feedback-states-1'),
     ]);
     BRAND_SNAPSHOT_CONFIGS = snapshotsModule.BRAND_SNAPSHOT_CONFIGS || {};
@@ -365,7 +365,7 @@ const SITE_LOCALE = DOCUMENT_LANGUAGE.startsWith('de')
 let brandBonusTranslations = {};
 const brandBonusTranslationsReady = SITE_LOCALE === 'en'
   ? Promise.resolve()
-  : import(`./brand-bonus-translations/${SITE_LOCALE}.js?v=20261004-20bet-1`)
+  : import(`./brand-bonus-translations/${SITE_LOCALE}.js?v=20261004-national-casino-1`)
       .then(module => {
         brandBonusTranslations = module.default || {};
       })
@@ -5173,9 +5173,17 @@ export const initCasinoPage = async () => {
     });
   }
 
+  const findAnchorTarget = (hash, root = document) => {
+    if (!hash || !hash.startsWith('#') || hash === '#') return null;
+    try {
+      return root.getElementById(decodeURIComponent(hash.slice(1)));
+    } catch {
+      return null;
+    }
+  };
+
   const scrollToAnchor = hash => {
-    if (!hash || hash === '#') return;
-    const target = document.querySelector(hash);
+    const target = findAnchorTarget(hash);
     if (!target) return;
 
     const headerHeight = header?.offsetHeight ?? 0;
@@ -5190,7 +5198,7 @@ export const initCasinoPage = async () => {
     link.addEventListener('click', event => {
       const hash = link.getAttribute('href');
       if (!hash) return;
-      const target = document.querySelector(hash);
+      const target = findAnchorTarget(hash);
       if (!target) return;
       event.preventDefault();
       scrollToAnchor(hash);

@@ -1,4 +1,12 @@
 export const BRAND_NEW_GAMES = {
+  'national-casino': [
+    { name: 'Starlight Princess Super Scatter', image: 'https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto/v1791116622/spincresta/brands/national-casino/new-games/national-casino-new-game-starlight-princess-super-scatter_cylz6a' },
+    { name: 'Book of Golden Mirages', image: 'https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto/v1791116620/spincresta/brands/national-casino/new-games/national-casino-new-game-book-of-golden-mirages_qgynry' },
+    { name: 'Royal Rage', image: 'https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto/v1791116619/spincresta/brands/national-casino/new-games/national-casino-new-game-royal-rage_tt4bpp' },
+    { name: 'Divine Queen: Power of Sun', image: 'https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto/v1791116617/spincresta/brands/national-casino/new-games/national-casino-new-game-divine-queen-power-of-sun_ca0bv5' },
+    { name: '20 Keys of Fate', image: 'https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto/v1791116615/spincresta/brands/national-casino/new-games/national-casino-new-game-20-keys-of-fate_rvjsi6' },
+    { name: '10 Keys of Fate', image: 'https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto/v1791116614/spincresta/brands/national-casino/new-games/national-casino-new-game-10-keys-of-fate_iavbdv' },
+  ],
   '20bet': [
     { name: 'Egyptian Legends', image: 'https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto/v1791109279/spincresta/brands/20bet/new-games/20bet-new-game-egyptian-legends_vldbxg' },
     { name: 'Spooky Step', image: 'https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto/v1791109278/spincresta/brands/20bet/new-games/20bet-new-game-spooky-step_pfyxga' },

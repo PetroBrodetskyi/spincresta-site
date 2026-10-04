@@ -188,6 +188,22 @@ export const BRANDS = [
     hasDetailPage: true,
   },
   {
+    name: 'National Casino',
+    bonus: '100% up to €100 + 100 Free Spins + Bonus Game',
+    cta: 'Play Now',
+    urlDetail: 'brands/national-casino.html',
+    urlCasino: 'https://armadaapp.media-412.com/click?pid=3862&offer_id=127266',
+    image: 'images/national-casino.svg',
+    bgColor: '#292526',
+    countries: ['AR', 'AU', 'AT', 'AZ', 'BD', 'BR', 'BG', 'CA', 'CL', 'CO', 'HR', 'CZ', 'DK', 'EG', 'FI', 'DE', 'GH', 'GR', 'HU', 'IS', 'IN', 'ID', 'IE', 'IT', 'JP', 'KZ', 'KE', 'KG', 'LU', 'MY', 'MX', 'NP', 'NZ', 'NG', 'NO', 'PH', 'PL', 'PT', 'PE', 'RO', 'SG', 'SK', 'SI', 'ZA', 'KR', 'ES', 'SE', 'CH', 'TH', 'TZ', 'UZ', 'VN'],
+    bonusByCountry: {
+      FI: { en: 'Deposit bonuses unavailable', de: 'Keine Einzahlungsboni', es: 'Sin bonos por depósito', it: 'Bonus sui depositi non disponibili', pl: 'Bonusy od wpłat niedostępne', uk: 'Депозитні бонуси недоступні', pt: 'Bónus de depósito indisponíveis', fr: 'Bonus de dépôt indisponibles', hi: 'जमा पर बोनस उपलब्ध नहीं', fi: 'Ei talletusbonuksia' },
+      JP: { en: 'Deposit bonuses unavailable', de: 'Keine Einzahlungsboni', es: 'Sin bonos por depósito', it: 'Bonus sui depositi non disponibili', pl: 'Bonusy od wpłat niedostępne', uk: 'Депозитні бонуси недоступні', pt: 'Bónus de depósito indisponíveis', fr: 'Bonus de dépôt indisponibles', hi: 'जमा पर बोनस उपलब्ध नहीं', fi: 'Ei talletusbonuksia' },
+    },
+    payments: ['visa', 'mastercard', 'skrill', 'neteller', 'banktransfer', 'flexepin'],
+    hasDetailPage: true,
+  },
+  {
     name: 'Vavada',
     bonus: '',
     cta: 'Play Now',

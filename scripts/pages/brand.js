@@ -167,7 +167,7 @@ export const initBrandPage = context => {
     const headings = Array.from(reviewRoot.querySelectorAll(titleSelector))
       .map(heading => {
         const text = normalizeText(heading.textContent).trim();
-        const label = getShortBrandSectionLabel(text);
+        const label = normalizeText(heading.dataset.navLabel || '').trim() || getShortBrandSectionLabel(text);
         return { heading, text, label };
       })
       .filter(item => item.text && item.label && !seenLabels.has(item.label) && seenLabels.add(item.label))
@@ -481,6 +481,8 @@ export const initBrandPage = context => {
     'Other live games': 'Weitere Live-Spiele',
     'Live casino': 'Live-Casino',
     'Game shows': 'Game Shows',
+    'Live bingo': 'Live-Bingo',
+    'Combat sports': 'Kampfsportarten',
     'Live shows': 'Live-Spielshows', 'Live baccarat': 'Live-Baccarat', 'Live blackjack': 'Live-Blackjack',
     'Live poker': 'Live-Poker', 'Live roulette': 'Live-Roulette', Football: 'Fußball', Basketball: 'Basketball',
     Tennis: 'Tennis', 'Table tennis': 'Tischtennis', Volleyball: 'Volleyball', 'Ice hockey': 'Eishockey',
@@ -519,6 +521,8 @@ export const initBrandPage = context => {
     'Other live games': 'Otros juegos en vivo',
     'Live casino': 'Casino en vivo',
     'Game shows': 'Game shows',
+    'Live bingo': 'Bingo en vivo',
+    'Combat sports': 'Deportes de combate',
     'Live shows': 'Programas en vivo', 'Live baccarat': 'Bacará en vivo', 'Live blackjack': 'Blackjack en vivo',
     'Live poker': 'Póker en vivo', 'Live roulette': 'Ruleta en vivo', Football: 'Fútbol', Basketball: 'Baloncesto',
     Tennis: 'Tenis', 'Table tennis': 'Tenis de mesa', Volleyball: 'Voleibol', 'Ice hockey': 'Hockey sobre hielo',
@@ -557,6 +561,8 @@ export const initBrandPage = context => {
     'Other live games': 'Altri giochi live',
     'Live casino': 'Casinò live',
     'Game shows': 'Game show',
+    'Live bingo': 'Bingo live',
+    'Combat sports': 'Sport da combattimento',
     'Live shows': 'Game show live', 'Live baccarat': 'Baccarat live', 'Live blackjack': 'Blackjack live',
     'Live poker': 'Poker live', 'Live roulette': 'Roulette live', Football: 'Calcio', Basketball: 'Pallacanestro',
     Tennis: 'Tennis', 'Table tennis': 'Tennistavolo', Volleyball: 'Pallavolo', 'Ice hockey': 'Hockey su ghiaccio',
@@ -595,6 +601,8 @@ export const initBrandPage = context => {
     'Other live games': 'Inne gry na żywo',
     'Live casino': 'Kasyno na żywo',
     'Game shows': 'Teleturnieje',
+    'Live bingo': 'Bingo na żywo',
+    'Combat sports': 'Sporty walki',
     'Live shows': 'Teleturnieje na żywo', 'Live baccarat': 'Bakarat na żywo', 'Live blackjack': 'Blackjack na żywo',
     'Live poker': 'Poker na żywo', 'Live roulette': 'Ruletka na żywo', Football: 'Piłka nożna', Basketball: 'Koszykówka',
     Tennis: 'Tenis', 'Table tennis': 'Tenis stołowy', Volleyball: 'Siatkówka', 'Ice hockey': 'Hokej na lodzie',
@@ -633,6 +641,8 @@ export const initBrandPage = context => {
     'Other live games': 'Інші live-ігри',
     'Live casino': 'Live-казино',
     'Game shows': 'Ігрові шоу',
+    'Live bingo': 'Live-бінго',
+    'Combat sports': 'Єдиноборства',
     'Live shows': 'Live-шоу', 'Live baccarat': 'Live-бакара', 'Live blackjack': 'Live-блекджек',
     'Live poker': 'Live-покер', 'Live roulette': 'Live-рулетка', Football: 'Футбол', Basketball: 'Баскетбол',
     Tennis: 'Теніс', 'Table tennis': 'Настільний теніс', Volleyball: 'Волейбол', 'Ice hockey': 'Хокей',
@@ -671,6 +681,8 @@ export const initBrandPage = context => {
     'Other live games': 'Outros jogos ao vivo',
     'Live casino': 'Casino ao vivo',
     'Game shows': 'Game shows',
+    'Live bingo': 'Bingo ao vivo',
+    'Combat sports': 'Desportos de combate',
     'Live shows': 'Game shows ao vivo', 'Live baccarat': 'Bacará ao vivo', 'Live blackjack': 'Blackjack ao vivo',
     'Live poker': 'Póquer ao vivo', 'Live roulette': 'Roleta ao vivo', Football: 'Futebol', Basketball: 'Basquetebol',
     Tennis: 'Ténis', 'Table tennis': 'Ténis de mesa', Volleyball: 'Voleibol', 'Ice hockey': 'Hóquei no gelo',
@@ -709,6 +721,8 @@ export const initBrandPage = context => {
     'Other live games': 'Autres jeux en direct',
     'Live casino': 'Casino en direct',
     'Game shows': 'Jeux télévisés',
+    'Live bingo': 'Bingo en direct',
+    'Combat sports': 'Sports de combat',
     'Live shows': 'Jeux télévisés en direct', 'Live baccarat': 'Baccarat en direct', 'Live blackjack': 'Blackjack en direct',
     'Live poker': 'Poker en direct', 'Live roulette': 'Roulette en direct', Football: 'Football', Basketball: 'Basket-ball',
     Tennis: 'Tennis', 'Table tennis': 'Tennis de table', Volleyball: 'Volley-ball', 'Ice hockey': 'Hockey sur glace',
@@ -728,6 +742,7 @@ export const initBrandPage = context => {
     'Live dice games': 'लाइव डाइस गेम', 'Craps and dice': 'क्रैप्स और डाइस', 'Scratch cards': 'स्क्रैच कार्ड',
     'Video poker': 'वीडियो पोकर', 'Crash games': 'क्रैश गेम', 'Other live games': 'अन्य लाइव गेम',
     'Live casino': 'लाइव कैसीनो', 'Game shows': 'गेम शो',
+    'Live bingo': 'लाइव बिंगो', 'Combat sports': 'कॉम्बैट स्पोर्ट्स',
     'Live shows': 'लाइव गेम शो', 'Live baccarat': 'लाइव बैकारेट', 'Live blackjack': 'लाइव ब्लैकजैक',
     'Live poker': 'लाइव पोकर', 'Live roulette': 'लाइव रूलेट', Football: 'फ़ुटबॉल', Basketball: 'बास्केटबॉल',
     Tennis: 'टेनिस', 'Table tennis': 'टेबल टेनिस', Volleyball: 'वॉलीबॉल', 'Ice hockey': 'आइस हॉकी',
@@ -750,6 +765,7 @@ export const initBrandPage = context => {
     'Live dice games': 'Live-noppapelit', 'Craps and dice': 'Craps ja noppapelit', 'Scratch cards': 'Raaputusarvat',
     'Video poker': 'Videopokeri', 'Crash games': 'Crash-pelit', 'Other live games': 'Muut live-pelit',
     'Live casino': 'Livekasino', 'Game shows': 'Peliohjelmat',
+    'Live bingo': 'Live-bingo', 'Combat sports': 'Kamppailu-urheilu',
     'Live shows': 'Live-peliohjelmat', 'Live baccarat': 'Live-baccarat', 'Live blackjack': 'Live-blackjack',
     'Live poker': 'Live-pokeri', 'Live roulette': 'Live-ruletti', Football: 'Jalkapallo', Basketball: 'Koripallo',
     Tennis: 'Tennis', 'Table tennis': 'Pöytätennis', Volleyball: 'Lentopallo', 'Ice hockey': 'Jääkiekko',

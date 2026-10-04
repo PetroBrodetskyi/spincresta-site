@@ -43,6 +43,7 @@ export default {
   "Welcome Pack 400% up to €4,000 + 250 FS. Get Bonus": "Tervetuliaispaketti 400 % 4 000 € asti + 250 FS. Hanki bonus",
   "100% up to €500 + 200 Free Spins": "100 % enintään 500 € + 200 ilmaiskierrosta",
   "Up to €1,500 + 150 Free Spins over 4 Deposits": "Enintään 1 500 € + 150 ilmaiskierrosta neljälle talletukselle",
+  "100% up to €100 + 100 Free Spins + Bonus Game": "100 % enintään 100 € + 100 ilmaiskierrosta + bonuskierros",
   "100% up to €120 + 120 Free Spins": "100 % enintään 120 € + 120 ilmaiskierrosta",
   "Up to €2,000 + 350 Free Spins": "Enintään 2 000 € + 350 ilmaiskierrosta",
   "250% Welcome Bonus up to €1,000": "250 % tervetuliaisbonus 1000 € asti",

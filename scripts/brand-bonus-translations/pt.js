@@ -43,6 +43,7 @@ export default {
   "Welcome Pack 400% up to €4,000 + 250 FS. Get Bonus": "Pacote de boas-vindas 400% até 4.000€ + 250 jogadas grátis. Ganhe bónus",
   "100% up to €500 + 200 Free Spins": "100% até 500 € + 200 jogadas grátis",
   "Up to €1,500 + 150 Free Spins over 4 Deposits": "Até 1.500 € + 150 jogadas grátis em 4 depósitos",
+  "100% up to €100 + 100 Free Spins + Bonus Game": "100% até 100 € + 100 rodadas grátis + ronda de bónus",
   "100% up to €120 + 120 Free Spins": "100% até 120 € + 120 jogadas grátis",
   "Up to €2,000 + 350 Free Spins": "Até 2 000 € + 350 jogadas grátis",
   "250% Welcome Bonus up to €1,000": "Bónus de boas-vindas de 250% até € 1.000",

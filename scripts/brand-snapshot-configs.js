@@ -540,6 +540,25 @@ const billyBillionConfig = createGamesLiveConfig(
 );
 
 export const BRAND_SNAPSHOT_CONFIGS = {
+  'national-casino': {
+    ...createGamesLiveBettingConfig(
+      ['Slots', 'Roulette', 'Blackjack', 'Baccarat', 'Jackpot games', 'Live games', 'Poker', 'Crash games'],
+      ['Live shows', 'Live baccarat', 'Live blackjack', 'Live poker', 'Live roulette'],
+      ['Football', 'Basketball', 'Tennis', 'Table tennis', 'Volleyball', 'Ice hockey', 'Baseball', 'Handball', 'American football', 'eSports', 'Boxing', 'Martial arts']
+    ),
+    notes: {
+      "fi": "Kategoriat tarkistettiin julkisesta peliluettelosta; maa- ja tarjoajarajoituksia voi olla. Ei vedonlyöntiä Australiassa.",
+      "hi": "सार्वजनिक सूची में जाँचे गए प्रकार; देश और प्रदाता के प्रतिबंध लागू हो सकते हैं। ऑस्ट्रेलिया में स्पोर्ट्स बेटिंग उपलब्ध नहीं है।",
+      "pt": "Categorias verificadas no catálogo público; possíveis restrições de país e fornecedor. Sem apostas desportivas na Austrália.",
+      "fr": "Catégories vérifiées dans le catalogue public ; restrictions de pays et de fournisseur possibles. Pas de paris sportifs en Australie.",
+      "it": "Categorie verificate nel catalogo pubblico; possibili restrizioni per paese e fornitore. Scommesse sportive non disponibili in Australia.",
+      "pl": "Kategorie sprawdzone w publicznym katalogu; możliwe ograniczenia kraju i dostawcy. Zakłady sportowe niedostępne w Australii.",
+      "de": "Kategorien aus dem öffentlichen Katalog; Länder- und Anbieterbeschränkungen sind möglich. Keine Sportwetten in Australien.",
+      "es": "Categorías revisadas en el catálogo público; pueden aplicarse restricciones de país y proveedor. Sin apuestas deportivas en Australia.",
+      "en": "Categories checked in the public catalogue; country and provider restrictions may apply. Sports betting is unavailable in Australia.",
+      "uk": "Категорії перевірені у відкритому каталозі; можливі обмеження за країною та провайдером. Ставки на спорт недоступні в Австралії."
+    },
+  },
   '20bet': {
     ...createGamesLiveBettingConfig(
       ['Slots', 'Roulette', 'Blackjack', 'Baccarat', 'Jackpot games', 'Live games', 'Poker', 'Crash games'],
