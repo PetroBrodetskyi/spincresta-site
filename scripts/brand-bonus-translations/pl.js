@@ -44,6 +44,7 @@ export default {
   "100% up to €500 + 200 Free Spins": "100% do 500 € + 200 darmowych spinów",
   "Up to €1,500 + 150 Free Spins over 4 Deposits": "Do 1 500 € + 150 darmowych spinów na 4 wpłaty",
   "100% up to €100 + 100 Free Spins + Bonus Game": "100% do 100 € + 100 darmowych spinów + runda bonusowa",
+  "Up to CA$5,500 + 400 Free Spins": "Do CA$5 500 + 400 darmowych spinów",
   "100% up to €120 + 120 Free Spins": "100% do 120 € + 120 darmowych spinów",
   "Up to €2,000 + 350 Free Spins": "Do 2 000 € + 350 darmowych spinów",
   "250% Welcome Bonus up to €1,000": "250% bonusu powitalnego do 1000 €",

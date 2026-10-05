@@ -44,6 +44,7 @@ export default {
   "100% up to €500 + 200 Free Spins": "100% fino a 500 € + 200 giri gratis",
   "Up to €1,500 + 150 Free Spins over 4 Deposits": "Fino a 1.500 € + 150 giri gratis su 4 depositi",
   "100% up to €100 + 100 Free Spins + Bonus Game": "100% fino a 100 € + 100 giri gratis + round bonus",
+  "Up to CA$5,500 + 400 Free Spins": "Fino a CA$5.500 + 400 giri gratis",
   "100% up to €120 + 120 Free Spins": "100% fino a 120 € + 120 giri gratis",
   "Up to €2,000 + 350 Free Spins": "Fino a 2.000 € + 350 giri gratis",
   "250% Welcome Bonus up to €1,000": "Bonus di benvenuto del 250% fino a 1.000€",

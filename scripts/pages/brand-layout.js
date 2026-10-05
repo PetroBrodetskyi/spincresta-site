@@ -45,6 +45,8 @@ export const initBrandLayout = context => {
     const pageKey = normalizeText(document.body.dataset.brand || '').trim().toLowerCase();
     const games = resolveBrandNewGames(pageKey, BRAND_NEW_GAMES, normalizeBrandKey);
     if (!games.length) return null;
+    const brandName = findBrandByPageKey(pageKey)?.name ||
+      BRANDS.find(item => normalizeBrandKey(item.name || '') === normalizeBrandKey(pageKey))?.name || pageKey;
   
     const playNowLink = document.querySelector(
       'body[data-brand] .brand-sticky-aside .hero-cta-wrapper a.cta-brands[href], body[data-brand] .hero-cta-wrapper a.cta-brands[href]'
@@ -55,7 +57,7 @@ export const initBrandLayout = context => {
         <div class="brand-new-game-media game-art-backdrop">
           <img
             src="${escapeHtml(game.image)}"
-            alt="${escapeHtml(game.name)} at ${escapeHtml(document.body.dataset.brand)}"
+            alt="${escapeHtml(game.name)} — ${escapeHtml(brandName)}"
             loading="lazy"
             decoding="async"
           />
@@ -72,9 +74,16 @@ export const initBrandLayout = context => {
           target="_blank"
           rel="noopener noreferrer nofollow sponsored"
           aria-label="${localeText(
-            `Play ${escapeHtml(game.name)} at ${escapeHtml(document.body.dataset.brand)}`,
-            `${escapeHtml(game.name)} bei ${escapeHtml(document.body.dataset.brand)} spielen`,
-            `Jugar a ${escapeHtml(game.name)} en ${escapeHtml(document.body.dataset.brand)}`
+            `Play ${escapeHtml(game.name)} at ${escapeHtml(brandName)}`,
+            `${escapeHtml(game.name)} bei ${escapeHtml(brandName)} spielen`,
+            `Jugar a ${escapeHtml(game.name)} en ${escapeHtml(brandName)}`,
+            `Gioca a ${escapeHtml(game.name)} su ${escapeHtml(brandName)}`,
+            `Zagraj w ${escapeHtml(game.name)} w ${escapeHtml(brandName)}`,
+            `Грати в ${escapeHtml(game.name)} у ${escapeHtml(brandName)}`,
+            `Jogar ${escapeHtml(game.name)} no ${escapeHtml(brandName)}`,
+            `Jouer à ${escapeHtml(game.name)} sur ${escapeHtml(brandName)}`,
+            `${escapeHtml(brandName)} पर ${escapeHtml(game.name)} खेलें`,
+            `Pelaa peliä ${escapeHtml(game.name)} kasinolla ${escapeHtml(brandName)}`
           )}"
         >
           ${cardContent}
@@ -344,6 +353,9 @@ export const initBrandLayout = context => {
     const bonus = localizedBrandBonusText(brand.bonus || '');
     const countryCount = Array.isArray(brand.countries) ? brand.countries.length : 0;
     if (!bonus && !countryCount) return;
+    const slavicCountryForm = (one, few, many) =>
+      countryCount % 10 === 1 && countryCount % 100 !== 11 ? one :
+      countryCount % 10 >= 2 && countryCount % 10 <= 4 && !(countryCount % 100 >= 12 && countryCount % 100 <= 14) ? few : many;
 
     // Review headings receive localized IDs; #bonuses is not universal.
     const reviewSections = Array.from(layout.querySelectorAll('.content-review > section'));
@@ -360,7 +372,7 @@ export const initBrandLayout = context => {
       heading: localeText('At a glance', 'Auf einen Blick', 'De un vistazo', 'In breve', 'W skrócie', 'Коротко', 'Em resumo', 'En bref', 'एक नज़र में', 'Yhteenveto'),
       bonus: localeText('Welcome offer', 'Willkommensangebot', 'Oferta de bienvenida', 'Offerta di benvenuto', 'Oferta powitalna', 'Вітальна пропозиція', 'Oferta de boas-vindas', 'Offre de bienvenue', 'वेलकम ऑफ़र', 'Tervetulotarjous'),
       markets: localeText('Available markets', 'Verfügbare Märkte', 'Mercados disponibles', 'Mercati disponibili', 'Dostępne rynki', 'Доступні ринки', 'Mercados disponíveis', 'Marchés disponibles', 'उपलब्ध बाज़ार', 'Saatavilla olevat markkinat'),
-      countries: localeText('countries', 'Länder', 'países', 'Paesi', 'krajów', 'країн', 'países', 'pays', 'देश', 'maata'),
+      countries: localeText(countryCount === 1 ? 'country' : 'countries', countryCount === 1 ? 'Land' : 'Länder', countryCount === 1 ? 'país' : 'países', countryCount === 1 ? 'Paese' : 'Paesi', countryCount === 1 ? 'kraj' : slavicCountryForm('krajów', 'kraje', 'krajów'), slavicCountryForm('країна', 'країни', 'країн'), countryCount === 1 ? 'país' : 'países', 'pays', 'देश', countryCount === 1 ? 'maa' : 'maata'),
     };
 
     const facts = document.createElement('aside');

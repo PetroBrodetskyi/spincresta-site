@@ -1,4 +1,12 @@
 export const BRAND_NEW_GAMES = {
+  gravira: [
+    { name: 'Toothrot Tilly', image: 'https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto/v1791229304/spincresta/brands/gravira/new-games/gravira-new-game-toothrot-tilly_t1bgxq' },
+    { name: 'Prosperity Lanterns', image: 'https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto/v1791229303/spincresta/brands/gravira/new-games/gravira-new-game-prosperity-lanterns_mmmity' },
+    { name: 'Ra vs Osiris', image: 'https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto/v1791229299/spincresta/brands/gravira/new-games/gravira-new-game-ra-vs-osiris_fnhgxg' },
+    { name: '4 Clover Pots', image: 'https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto/v1791229297/spincresta/brands/gravira/new-games/gravira-new-game-4-clover-pots_hnyjtn' },
+    { name: 'Fortune Balloons', image: 'https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto/v1791229294/spincresta/brands/gravira/new-games/gravira-new-game-fortune-balloons_v8fo9c' },
+    { name: 'Piggies & Diamonds', image: 'https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto/v1791229293/spincresta/brands/gravira/new-games/gravira-new-game-piggies-and-diamonds_hgs0pq' },
+  ],
   'national-casino': [
     { name: 'Starlight Princess Super Scatter', image: 'https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto/v1791116622/spincresta/brands/national-casino/new-games/national-casino-new-game-starlight-princess-super-scatter_cylz6a' },
     { name: 'Book of Golden Mirages', image: 'https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto/v1791116620/spincresta/brands/national-casino/new-games/national-casino-new-game-book-of-golden-mirages_qgynry' },

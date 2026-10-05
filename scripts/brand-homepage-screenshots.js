@@ -2,6 +2,7 @@
 // Keys match the review slug used by BRANDS.urlDetail.
 export const BRAND_HOMEPAGE_SCREENSHOTS = Object.freeze(
 {
+  "gravira": "https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto,w_1600/v1791228941/spincresta/brands/gravira/main-page/gravira-page_duucwo",
   "national-casino": "https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto,w_1600/v1791115685/spincresta/brands/national-casino/main-page/national-casino_kpay7y",
   "20bet": "https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto,w_1600/v1791108995/spincresta/brands/20bet/main-page/20bet-page_cizpsd",
   "planbet": "https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto,w_1600/v1791050980/spincresta/brands/planbet/main-page/planbet-page_kouocy",

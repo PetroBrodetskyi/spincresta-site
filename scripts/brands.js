@@ -228,6 +228,18 @@ export const BRANDS = [
     hasDetailPage: true,
   },
   {
+    name: 'Gravira',
+    bonus: 'Up to CA$5,500 + 400 Free Spins',
+    cta: 'Play Now',
+    urlDetail: 'brands/gravira.html',
+    urlCasino: 'https://armadaapp.media-412.com/click?pid=3862&offer_id=126829',
+    image: 'images/gravira.svg',
+    bgColor: '#0F1437',
+    countries: ['CA'],
+    payments: ['interac', 'visa', 'mastercard', 'applepay', 'googlepay', 'tether', 'usdc', 'solana', 'bitcoin', 'bitcoincash', 'litecoin', 'tron'],
+    hasDetailPage: true,
+  },
+  {
     name: 'WarriorBet Sports',
     bonus: '',
     cta: 'Play Now',

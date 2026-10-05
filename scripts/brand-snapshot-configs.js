@@ -540,6 +540,24 @@ const billyBillionConfig = createGamesLiveConfig(
 );
 
 export const BRAND_SNAPSHOT_CONFIGS = {
+  gravira: {
+    ...createGamesLiveConfig(
+      ['Slots', 'Roulette', 'Blackjack', 'Baccarat', 'Jackpot games', 'Live games', 'Poker', 'Craps and dice', 'Scratch cards', 'Crash games'],
+      ['Live shows', 'Live baccarat', 'Live blackjack', 'Live dice games', 'Other live games', 'Live roulette']
+    ),
+    notes: {
+      "pl": "Kategorie z publicznego katalogu, bez gry za prawdziwe pieniądze. Gry i dostawcy mogą się zmieniać; obowiązują warunki konta i ograniczenia regionalne.",
+      "fi": "Luokat perustuvat julkiseen valikoimaan, eivät oikean rahan pelitestiin. Pelit ja toimittajat voivat vaihtua; tilin ehdot ja alueelliset rajoitukset ovat voimassa.",
+      "hi": "श्रेणियाँ सार्वजनिक गेम सूची पर आधारित हैं, असली पैसे से खेलकर नहीं जाँची गईं। गेम और प्रदाता बदल सकते हैं; खाते और क्षेत्र की शर्तें लागू हैं।",
+      "fr": "Catégories du catalogue public, sans essai avec de l’argent réel. Jeux et fournisseurs peuvent changer ; les règles du compte et de la région restent applicables.",
+      "pt": "Categorias do catálogo público, sem teste com dinheiro real. Jogos e fornecedores podem mudar; aplicam-se as regras da conta e da região.",
+      "de": "Kategorien aus dem öffentlichen Katalog, kein Echtgeld-Spieltest. Spiele und Anbieter können wechseln; Konto- und Länderregeln gelten weiterhin.",
+      "es": "Categorías del catálogo público, sin prueba de juego con dinero real. Juegos y proveedores pueden cambiar; se aplican las reglas de cuenta y región.",
+      "it": "Categorie del catalogo pubblico, senza prova di gioco con denaro reale. Giochi e fornitori possono cambiare; valgono condizioni del conto e restrizioni regionali.",
+      "en": "Public catalogue categories, not a real-money gameplay test. Games and providers can change; availability remains subject to account and regional rules.",
+      "uk": "Категорії з відкритого каталогу, без тестової гри на гроші. Ігри та провайдери можуть змінюватися; діють правила акаунта й регіональні обмеження."
+    },
+  },
   'national-casino': {
     ...createGamesLiveBettingConfig(
       ['Slots', 'Roulette', 'Blackjack', 'Baccarat', 'Jackpot games', 'Live games', 'Poker', 'Crash games'],
