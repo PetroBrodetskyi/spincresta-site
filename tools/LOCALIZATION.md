@@ -32,6 +32,8 @@ node tools/polish-ukrainian-content.mjs
 node tools/polish-ukrainian-headings.mjs
 node tools/polish-portuguese-content.mjs
 node tools/polish-multilingual-content.mjs
+node tools/polish-clear-copy.mjs --apply
+node tools/polish-clear-copy.mjs --check
 node tools/optimize-geo-variant-seo.mjs
 node tools/optimize-spanish-seo.mjs
 node tools/optimize-portuguese-seo.mjs
@@ -50,3 +52,9 @@ The locale-specific polishers apply reviewed casino terminology, keep product an
 `polish-multilingual-content.mjs` must run after a locale-specific polisher. It restores protected contact addresses from English, preserves official product labels such as SpinBoss VIP tiers, and removes recurring literal wording shared across localized page trees. Validate it with `audit-multilingual-copy.mjs`.
 
 Then review new legal, affiliate, bonus, payment, and responsible-gambling copy editorially. Confirm desktop and mobile layouts, internal links, language persistence, and page-specific dynamic sections before deployment.
+
+## Plain-language editorial standard
+
+Write verified features directly, in the present tense. Keep bonus amounts, wagering, expiry, payment limits, eligibility and unverified claims explicit. Remove literary comparisons, speculation about operator intentions, and unsupported claims of seamless performance or guaranteed safety. Describe a game filter or reward condition rather than saying it makes the casino “more than a bonus page.”
+
+Run the clear-copy pass after any page generator or translation polisher. It uses reviewed native wording, does not call a translation service, updates matching literal source copy and structured answers, and checks that URLs, IDs, classes and assets stay unchanged. Run the audits afterward and review the diff; never replace unknown facts with confident marketing claims.

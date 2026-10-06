@@ -133,16 +133,18 @@ export const initBrandLayout = context => {
       `;
     };
   
-    const newGamesLabel = localeText('New Games', 'Neue Spiele', 'Juegos nuevos');
-    const newGamesKicker = localeText('LATEST RELEASES', 'NEUESTE VERÖFFENTLICHUNGEN', 'ÚLTIMOS LANZAMIENTOS');
+    const newGamesLabel = document.querySelector('meta[name="brand-games-title"]')?.content?.trim()
+      || localeText('New Games', 'Neue Spiele', 'Juegos nuevos');
+    const newGamesKicker = document.querySelector('meta[name="brand-games-kicker"]')?.content?.trim()
+      || localeText('LATEST RELEASES', 'NEUESTE VERÖFFENTLICHUNGEN', 'ÚLTIMOS LANZAMIENTOS');
     const rail = document.createElement('aside');
     rail.className = 'brand-new-games-rail';
     rail.setAttribute('aria-label', newGamesLabel);
     rail.innerHTML = `
       <div class="brand-new-games-panel">
         <div class="brand-new-games-heading">
-          <span class="brand-new-games-kicker">${newGamesKicker}</span>
-          <h2>${newGamesLabel}</h2>
+          <span class="brand-new-games-kicker">${escapeHtml(newGamesKicker)}</span>
+          <h2>${escapeHtml(newGamesLabel)}</h2>
         </div>
         <div class="brand-new-games-list">
           ${games.map(cardMarkup).join('')}

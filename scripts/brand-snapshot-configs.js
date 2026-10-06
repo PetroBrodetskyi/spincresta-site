@@ -540,6 +540,25 @@ const billyBillionConfig = createGamesLiveConfig(
 );
 
 export const BRAND_SNAPSHOT_CONFIGS = {
+  vegasnow: {
+    ...createGamesLiveBettingConfig(
+      ['Slots', 'Roulette', 'Blackjack', 'Baccarat', 'Jackpot games', 'Live games', 'Poker'],
+      ['Live shows', 'Live baccarat', 'Live blackjack', 'Live roulette'],
+      ['Football', 'American football', 'Martial arts']
+    ),
+    notes: {
+      en: 'Public lobby categories, not a real-money test. Games, sports and providers can vary by country.',
+      uk: 'Категорії з відкритого каталогу, без гри на гроші. Ігри, види спорту та провайдери можуть відрізнятися за країною.',
+      de: 'Öffentliche Lobby, kein Echtgeld-Test. Spiele, Sportarten und Anbieter können je nach Land abweichen.',
+      es: 'Catálogo público, sin juego con dinero real. Juegos, deportes y proveedores pueden variar según el país.',
+      it: 'Catalogo pubblico, senza gioco con denaro reale. Giochi, sport e fornitori possono variare per paese.',
+      pl: 'Publiczny katalog, bez gry za prawdziwe pieniądze. Gry, dyscypliny i dostawcy zależą od kraju.',
+      pt: 'Catálogo público, sem jogo com dinheiro real. Jogos, desportos e fornecedores podem variar por país.',
+      fr: 'Catalogue public, sans jeu en argent réel. Jeux, sports et fournisseurs peuvent varier selon le pays.',
+      hi: 'सार्वजनिक सूची पर आधारित; असली पैसे से परीक्षण नहीं। गेम, खेल और प्रदाता देश के अनुसार बदल सकते हैं।',
+      fi: 'Julkinen peliaula, ei oikean rahan pelitestiä. Pelit, urheilulajit ja tarjoajat voivat vaihdella maittain.',
+    },
+  },
   gravira: {
     ...createGamesLiveConfig(
       ['Slots', 'Roulette', 'Blackjack', 'Baccarat', 'Jackpot games', 'Live games', 'Poker', 'Craps and dice', 'Scratch cards', 'Crash games'],

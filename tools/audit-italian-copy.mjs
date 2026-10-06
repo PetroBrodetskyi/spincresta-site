@@ -29,7 +29,8 @@ const forbidden = [
   ['duplicated sportsbook phrase', /\bscommesse gratuite sulle scommesse sportive\b/gi],
   ['literal completed-wagering phrase', /\bscommessa del bonus (?:è completa|è completata)\b/gi],
   ['withdrawal mistranslation', /\britiro\b/gi],
-  ['English cash-out term', /\bcash out\b/gi],
+  // Preserve the operator's named UI feature "Cash Out"; flag literal prose.
+  ['English cash-out term', /\bcash out\b/g],
   ['literal risk-view heading', /SpinCresta Visualizzazione/gi],
   ['literal promotion snapshot heading', /Bonus e istantanea della promozione/gi],
   ['awkward brand review heading', /<h1>[^<]+ (?:Casino )?Recensione<\/h1>/gi],

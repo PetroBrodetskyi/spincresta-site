@@ -2,6 +2,7 @@
 
 import fs from 'node:fs';
 import path from 'node:path';
+import { run as polishClearCopy } from './polish-clear-copy.mjs';
 
 const ROOT = process.cwd();
 
@@ -678,3 +679,5 @@ for (const [locale, rules] of Object.entries(replacements)) {
 }
 
 console.log(`Human copy polish: ${changed} pages changed (${Object.entries(localeCounts).map(([locale, count]) => `${locale} ${count}`).join(', ')}).`);
+// Keep the factual editorial standard after older terminology replacements.
+polishClearCopy({apply: true});

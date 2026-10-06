@@ -39,6 +39,8 @@ const BONUS_TRANSLATION_OVERRIDES = {
   hi: { [GOLDPARI_BONUS]: 'चुनिंदा बाज़ारों में पहले जमा पर 100% बोनस + 30 फ्री स्पिन', [SILVERPLAY_BONUS]: '300% में 2,500 EUR तक + 250 मुफ़्त स्पिन', [CASINOVA_BONUS]: '€2,000 तक + 350 मुफ़्त स्पिन', [GOLDENBET_UK_BONUS]: '200 मुफ़्त स्पिन + 20% स्पोर्ट्स कैशबैक', [GOLDENBET_AU_BONUS]: 'A$100 नकद बोनस + हर सप्ताह 300 मुफ़्त स्पिन', [BCGAME_BONUS]: '1,600 $ तक + 400 मुफ़्त स्पिन', [CASINOBOSSY_BONUS]: '2,500 EUR तक का वेलकम पैकेज + 250 मुफ़्त स्पिन', [WINOLOT_BONUS]: '€1,000 तक 125% + 200 फ्री स्पिन', [FELICEBET_BONUS]: '€2,600 तक का वेलकम पैकेज + 300 मुफ़्त स्पिन' },
   fi: { [GOLDPARI_BONUS]: '100 % ensitalletusbonus + 30 ilmaiskierrosta valituilla markkinoilla', [SILVERPLAY_BONUS]: '300 % enintään 2 500 EUR + 250 ilmaiskierrosta', [CASINOVA_BONUS]: 'Enintään 2 000 € + 350 ilmaiskierrosta', [GOLDENBET_UK_BONUS]: '200 ilmaiskierrosta + 20 % cashback urheiluvedoista', [GOLDENBET_AU_BONUS]: 'A$100 käteisbonus + 300 ilmaiskierrosta viikossa', [BCGAME_BONUS]: 'Jopa 1 600 $ + 400 ilmaiskierrosta', [CASINOBOSSY_BONUS]: 'Tervetuliaispaketti enintään 2 500 EUR + 250 ilmaiskierrosta', [WINOLOT_BONUS]: '125 % enintään 1 000 € + 200 ilmaiskierrosta', [FELICEBET_BONUS]: 'Tervetuliaispaketti enintään 2 600 € + 300 ilmaiskierrosta' },
 };
+// Keep the manually reviewed Vegas Now terminology when regenerating maps.
+BONUS_TRANSLATION_OVERRIDES.uk['Up to 8,000 €/$ + 500 free spins'] = 'До 8 000 €/$ + 500 фриспінів';
 const decodeHtml = value =>
   value
     .replace(/&euro;/gi, '€')

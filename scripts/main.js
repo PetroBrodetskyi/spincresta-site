@@ -1,7 +1,7 @@
 ﻿// =====================
 // IMPORTS
 // =====================
-import { BRANDS } from './brands.js?v=20261006-mostbet-partners-3';
+import { BRANDS } from './brands.js?v=20261006-vegasnow-2';
 import { COUNTRIES } from './countries.js';
 import { initFooterNewsletter } from './footer-newsletter.js?v=20260826-newsletter-4';
 import { initAccountAuth } from './account-auth.js?v=20260829-local-preview-1';
@@ -25,7 +25,7 @@ const brandLayoutFallbackTimer = document.body?.dataset.brand
     }, 1500)
   : null;
 const brandLayoutModuleReady = document.body?.dataset.brand
-  ? import('./pages/brand-layout.js?v=20261006-mostbet-partners-3').then(module => {
+  ? import('./pages/brand-layout.js?v=20261006-vegasnow-2').then(module => {
       initBrandLayoutModule = module.initBrandLayout;
     }).catch(error => {
       document.body.classList.add('brand-layout-failed');
@@ -62,7 +62,7 @@ const loadPageModules = async () => {
 
   if (isBrandPage) {
     const [snapshotsModule, gamesModule, pageModule, feedbackModule] = await Promise.all([
-      import('./brand-snapshot-configs.js?v=20261005-gravira-1'),
+      import('./brand-snapshot-configs.js?v=20261006-vegasnow-2'),
       import('./brand-new-games.js?v=20261005-gravira-1'),
       import('./pages/brand.js?v=20261005-gravira-1'),
       import('./pages/brand-feedback.js?v=20261004-feedback-states-1'),
@@ -365,7 +365,7 @@ const SITE_LOCALE = DOCUMENT_LANGUAGE.startsWith('de')
 let brandBonusTranslations = {};
 const brandBonusTranslationsReady = SITE_LOCALE === 'en'
   ? Promise.resolve()
-  : import(`./brand-bonus-translations/${SITE_LOCALE}.js?v=20261005-gravira-1`)
+  : import(`./brand-bonus-translations/${SITE_LOCALE}.js?v=20261006-vegasnow-2`)
       .then(module => {
         brandBonusTranslations = module.default || {};
       })

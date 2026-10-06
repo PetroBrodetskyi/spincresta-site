@@ -135,7 +135,7 @@ export default {
   "New in Uptown? Grab Your $10 Welcome Bonus!": "Новий в Uptown? Отримайте вітальний бонус у розмірі $10!",
   "Casino Welcome Bonus - Up to €5,000 + 350 Free Spins": "Вітальний бонус казино - до 5000 євро + 350 безкоштовних обертань",
   "Welcome Bonus - ₴100,000 + 200 FS": "Вітальний бонус - ₴100 000 + 200 FS",
-  "Up to 8,000 €/$ + 500 free spins": "До 8000 €/$ + 500 безкоштовних обертань",
+  "Up to 8,000 €/$ + 500 free spins": "До 8 000 €/$ + 500 фриспінів",
   "Casino welcome package up to €1,500 + 70 Free Spins": "Вітальний пакет казино до 1500 євро + 70 безкоштовних обертань",
   "Start Strong with a 325% UP TO €3,000 + 300 FS!": "Почніть сильніше з 325% ДО €3000 + 300 FS!",
   "Welcome Package up to EUR 2,500 + 300 Free Spins + 1 Bonus Crab": "Вітальний пакет до 2500 євро + 300 безкоштовних обертань + 1 бонусний краб",

@@ -2873,7 +2873,7 @@ export const BRANDS = [
     image: 'images/vegasnow.webp',
     bgColor: '#181528',
     countries: ['AU', 'CA', 'NZ', 'AT', 'CH', 'NO', 'SE', 'FI', 'DK', 'IS'],
-    payments: ['visa', 'mastercard', 'bitcoin', 'neteller', 'skrill'],
+    payments: ['visa', 'mastercard', 'interac', 'skrill', 'neteller', 'mifinity', 'jeton', 'neosurf', 'bitcoin', 'tether', 'ethereum', 'litecoin'],
     top: ['AU'],
     hasDetailPage: true,
   },
