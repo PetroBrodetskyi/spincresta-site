@@ -15,7 +15,7 @@ const copy = {
       ['Shop and Achievements', 'The account also includes a shop, achievements and a bonus map. Reward availability and use are subject to their own rules.'],
       ['Mobile Access', 'Casino, sports, promotions and the cashier are accessible on mobile. Protect your account and use the brand’s official access routes.'],
     ],
-    partner: 'For website owners and iGaming publishers: Mostbet Partners is the brand’s affiliate programme, separate from a player account and casino bonuses. Referral link.',
+    partner: 'For website owners and iGaming publishers: Mostbet Partners is the brand’s affiliate programme, separate from a player account and casino bonuses.',
   },
   de: {
     title: 'Mostbet: Treueprogramm, VIP und weitere Angebote',
@@ -25,7 +25,7 @@ const copy = {
       ['Shop und Erfolge', 'Zum Konto gehören auch ein Shop, Erfolge und eine Bonuskarte. Für die Verfügbarkeit und Nutzung der Prämien gelten eigene Regeln.'],
       ['Mobiler Zugriff', 'Casino, Sportwetten, Aktionen und Kasse sind auch mobil zugänglich. Schützen Sie Ihr Konto und nutzen Sie die offiziellen Zugangswege der Marke.'],
     ],
-    partner: 'Für Website-Betreiber und iGaming-Publisher: Mostbet Partners ist das Partnerprogramm der Marke. Es ist kein Spielerkonto und kein Casinobonus. Empfehlungslink.',
+    partner: 'Für Website-Betreiber und iGaming-Publisher: Mostbet Partners ist das Partnerprogramm der Marke. Es ist kein Spielerkonto und kein Casinobonus.',
   },
   es: {
     title: 'Mostbet: fidelización, VIP y otras opciones',
@@ -35,7 +35,7 @@ const copy = {
       ['Tienda y logros', 'La cuenta también incluye una tienda, logros y un mapa de bonos. La disponibilidad y el uso de las recompensas tienen sus propias condiciones.'],
       ['Acceso móvil', 'El casino, las apuestas deportivas, las promociones y la caja son accesibles desde el móvil. Protege tu cuenta y utiliza las vías de acceso oficiales de la marca.'],
     ],
-    partner: 'Para propietarios de sitios web y creadores de contenido de iGaming: Mostbet Partners es el programa de afiliados de la marca, no una cuenta de jugador ni un bono de casino. Enlace de referido.',
+    partner: 'Para propietarios de sitios web y creadores de contenido de iGaming: Mostbet Partners es el programa de afiliados de la marca, no una cuenta de jugador ni un bono de casino.',
   },
   it: {
     title: 'Mostbet: fedeltà, VIP e altre opportunità',
@@ -45,7 +45,7 @@ const copy = {
       ['Negozio e obiettivi', 'L’account comprende anche un negozio, obiettivi e una mappa dei bonus. La disponibilità e l’utilizzo dei premi seguono regole specifiche.'],
       ['Accesso da mobile', 'Casino, scommesse sportive, promozioni e cassa sono accessibili anche da mobile. Proteggi il tuo account e utilizza i canali di accesso ufficiali del marchio.'],
     ],
-    partner: 'Per proprietari di siti e autori di contenuti iGaming: Mostbet Partners è il programma di affiliazione del marchio, distinto dall’account di gioco e dai bonus del casino. Link di referral.',
+    partner: 'Per proprietari di siti e autori di contenuti iGaming: Mostbet Partners è il programma di affiliazione del marchio, distinto dall’account di gioco e dai bonus del casino.',
   },
   pl: {
     title: 'Mostbet: program lojalnościowy, VIP i dodatkowe możliwości',
@@ -55,7 +55,7 @@ const copy = {
       ['Sklep i osiągnięcia', 'Na koncie dostępne są również sklep, osiągnięcia i mapa bonusów. Dostępność oraz wykorzystanie nagród podlegają osobnym zasadom.'],
       ['Dostęp mobilny', 'Kasyno, zakłady sportowe, promocje i kasa są dostępne także na urządzeniach mobilnych. Zabezpiecz swoje konto i korzystaj z oficjalnych kanałów dostępu marki.'],
     ],
-    partner: 'Dla właścicieli stron i wydawców treści iGaming: Mostbet Partners to program partnerski marki, a nie konto gracza ani bonus kasynowy. Link polecający.',
+    partner: 'Dla właścicieli stron i wydawców treści iGaming: Mostbet Partners to program partnerski marki, a nie konto gracza ani bonus kasynowy.',
   },
   uk: {
     title: 'Mostbet: лояльність, VIP та додаткові можливості',
@@ -65,7 +65,7 @@ const copy = {
       ['Магазин і досягнення', 'В акаунті також є магазин, досягнення та карта бонусів. Доступність і використання винагород регулюються окремими правилами.'],
       ['Мобільний доступ', 'Казино, спортивні ставки, акції та каса доступні з мобільного пристрою. Захистіть свій акаунт і користуйтеся офіційними каналами доступу бренду.'],
     ],
-    partner: 'Для власників сайтів і авторів iGaming-контенту: Mostbet Partners — партнерська програма бренду. Це не ігровий акаунт і не бонус для гравців. Реферальне посилання.',
+    partner: 'Для власників сайтів і авторів iGaming-контенту: Mostbet Partners — партнерська програма бренду. Це не ігровий акаунт і не бонус для гравців.',
   },
   pt: {
     title: 'Mostbet: fidelização, VIP e outras opções',
@@ -75,7 +75,7 @@ const copy = {
       ['Loja e conquistas', 'A conta também inclui uma loja, conquistas e um mapa de bónus. A disponibilidade e a utilização das recompensas seguem regras próprias.'],
       ['Acesso móvel', 'O casino, as apostas desportivas, as promoções e a caixa estão acessíveis em dispositivos móveis. Proteja a sua conta e utilize os canais de acesso oficiais da marca.'],
     ],
-    partner: 'Para proprietários de sites e autores de conteúdos de iGaming: a Mostbet Partners é o programa de afiliados da marca, distinto da conta de jogador e dos bónus de casino. Ligação de referência.',
+    partner: 'Para proprietários de sites e autores de conteúdos de iGaming: a Mostbet Partners é o programa de afiliados da marca, distinto da conta de jogador e dos bónus de casino.',
   },
   fr: {
     title: 'Mostbet : fidélité, VIP et autres possibilités',
@@ -85,7 +85,7 @@ const copy = {
       ['Boutique et objectifs', 'Le compte comprend également une boutique, des objectifs et une carte des bonus. La disponibilité et l’utilisation des récompenses obéissent à des règles spécifiques.'],
       ['Accès mobile', 'Le casino, les paris sportifs, les promotions et la caisse sont accessibles sur mobile. Protégez votre compte et utilisez les accès officiels de la marque.'],
     ],
-    partner: 'Pour les propriétaires de sites et les éditeurs de contenus iGaming : Mostbet Partners est le programme d’affiliation de la marque, distinct du compte joueur et des bonus de casino. Lien de parrainage.',
+    partner: 'Pour les propriétaires de sites et les éditeurs de contenus iGaming : Mostbet Partners est le programme d’affiliation de la marque, distinct du compte joueur et des bonus de casino.',
   },
   hi: {
     title: 'Mostbet: लॉयल्टी, VIP और अन्य सुविधाएँ',
@@ -95,7 +95,7 @@ const copy = {
       ['शॉप और उपलब्धियाँ', 'खाते में शॉप, उपलब्धियाँ और बोनस मैप भी हैं। पुरस्कारों की उपलब्धता और उनके इस्तेमाल के लिए अलग नियम लागू होते हैं।'],
       ['मोबाइल पर इस्तेमाल', 'कैसीनो, स्पोर्ट्स बेटिंग, प्रमोशन और कैशियर मोबाइल से भी उपलब्ध हैं। अपना खाता सुरक्षित रखें और ब्रांड के आधिकारिक माध्यमों का ही इस्तेमाल करें।'],
     ],
-    partner: 'वेबसाइट मालिकों और iGaming प्रकाशकों के लिए: Mostbet Partners ब्रांड का अफ़िलिएट कार्यक्रम है। यह खिलाड़ी का खाता या कैसीनो बोनस नहीं है। यह रेफ़रल लिंक है।',
+    partner: 'वेबसाइट मालिकों और iGaming प्रकाशकों के लिए: Mostbet Partners ब्रांड का अफ़िलिएट कार्यक्रम है। यह खिलाड़ी का खाता या कैसीनो बोनस नहीं है।',
   },
   fi: {
     title: 'Mostbet: kanta-asiakasohjelma, VIP ja muut palvelut',
@@ -105,7 +105,7 @@ const copy = {
       ['Kauppa ja saavutukset', 'Tilillä on myös kauppa, saavutuksia ja bonuskartta. Palkintojen saatavuutta ja käyttöä koskevat omat säännöt.'],
       ['Mobiilikäyttö', 'Kasino, urheiluvedonlyönti, kampanjat ja kassa ovat käytettävissä myös mobiililaitteella. Suojaa tilisi ja käytä brändin virallisia yhteyskanavia.'],
     ],
-    partner: 'Sivustojen omistajille ja iGaming-julkaisijoille: Mostbet Partners on brändin kumppaniohjelma, ei pelitili tai kasinobonus. Suosittelulinkki.',
+    partner: 'Sivustojen omistajille ja iGaming-julkaisijoille: Mostbet Partners on brändin kumppaniohjelma, ei pelitili tai kasinobonus.',
   },
 };
 const esc = value => String(value).replaceAll('&', '&amp;').replaceAll('<', '&lt;').replaceAll('"', '&quot;');
@@ -116,6 +116,8 @@ for (const [locale, c] of Object.entries(copy)) {
   assert(main, file);
   const previous = [...main.matchAll(/<section\b[^>]*>[\s\S]*?<\/section>/g)][5]?.[0];
   assert(previous?.includes('features-grid premium-grid'), `${file}: expected account-features section`);
+  const bestFor = [...main.matchAll(/<section\b[^>]*>[\s\S]*?<\/section>/g)][7]?.[0];
+  assert(bestFor?.includes('features-grid premium-grid'), `${file}: expected audience section`);
   const cards = c.cards.map(([title, body]) => `          <div class="feature-card glass-card"><strong>${esc(title)}</strong><span>${esc(body)}</span></div>`).join('\n');
   const next = `<section class="container" id="mostbet-account-features">
         <h2 class="title">${esc(c.title)}</h2>
@@ -125,8 +127,9 @@ ${cards}
         </div>
       </section>`;
   const updated = original.replace(previous, next)
-    .replace(/src="\/scripts\/main\.js\?v=[^"]+"/, 'src="/scripts/main.js?v=20261006-mostbet-partners-1"')
-    .replace(/href="\/styles\.css\?v=[^"]+"/, 'href="/styles.css?v=20261006-feature-card-links-1"');
+    .replace(bestFor, bestFor.replace(/<section\b[^>]*>/, '<section class="container" id="best-for">'))
+    .replace(/src="\/scripts\/main\.js\?v=[^"]+"/, 'src="/scripts/main.js?v=20261006-mostbet-partners-2"')
+    .replace(/href="\/styles\.css\?v=[^"]+"/, 'href="/styles.css?v=20261006-feature-card-links-2"');
   fs.writeFileSync(file, updated);
   console.log(`${locale}: updated account-features section and partner-program placement`);
 }

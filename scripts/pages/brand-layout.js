@@ -19,6 +19,12 @@ export const resolveBrandPartnerProgram = brand => {
   }
 };
 
+// JavaScript \b does not recognize Cyrillic words. Keep non-Latin branches
+// free of ASCII word boundaries and support the headings used by older reviews.
+const bestForTitlePattern = /(?:\bwho\b.*\b(?:suits?|best for)\b|\bbest for\b|\bfür wen\b|\bgeeignet für\b|\bpasst zu\b|\bpara quién\b|\bideal para\b|\ba chi\b.*\badatt|\bper chi\b|\bideale per\b|\bdla kogo\b|\bnajlepsze dla\b|\bodpowiednie dla\b|кому.*(?:підход|підійд)|найкраще.*(?:підход|підійд)|\bpara quem\b|\bindicado para\b|à qui.*(?:convient|s['’]adresse)|\bpour qui\b|किसके लिए|उपयुक्त|\bkenelle\b.*\bsopii|\bparas kenelle\b)/iu;
+export const matchesBrandBestForTitle = title =>
+  bestForTitlePattern.test(String(title || '').replace(/\s+/gu, ' '));
+
 export const initBrandLayout = context => {
   const {
     BRANDS = [],
@@ -190,7 +196,6 @@ export const initBrandLayout = context => {
     query.addEventListener?.('change', syncPosition);
   };
 
-  const bestForTitlePattern = /(?:\bwho\b.*\b(?:suits?|best for)\b|\bbest for\b|\bfür wen\b|\bgeeignet für\b|\bpasst zu\b|\bpara quién\b|\bideal para\b|\ba chi\b.*\badatt|\bideale per\b|\bdla kogo\b|\bnajlepsze dla\b|\bodpowiednie dla\b|\bкому\b.*\bпідход|\bнайкраще підход|\bpara quem\b|\bindicado para\b|\bà qui\b.*\bconvient|\bpour qui\b|किसके लिए|उपयुक्त|\bkenelle\b.*\bsopii|\bparas kenelle\b)/i;
   const prosConsTitlePattern =
     /\bpros?\b.*\bcons?\b|\bvorzüge\b.*\bnachteile\b|\bvorteile\b.*\bnachteile\b|ventajas.*desventajas|pro.*contro|zalety.*wady|переваги.*недоліки|pr[oó]s.*contras|avantages.*inconv[eé]nients|फायदे.*नुकसान|hyv[aä]t.*huonot/i;
   const responsibleTitlePattern =
@@ -218,7 +223,7 @@ export const initBrandLayout = context => {
       sections.find(section => section.id === 'best-for') ||
       sections.find(section => {
         const title = section.querySelector(':scope > .title, :scope > h2');
-        return bestForTitlePattern.test(normalizeText(title?.textContent || ''));
+        return matchesBrandBestForTitle(normalizeText(title?.textContent || ''));
       });
     const prosCons =
       sections.find(section => section.id === 'pros-cons') ||

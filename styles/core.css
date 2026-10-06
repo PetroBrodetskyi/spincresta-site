@@ -3976,6 +3976,12 @@ body[data-country] .content-article .timeline a[href*='/responsible-gambling/'] 
   color: var(--gold);
 }
 
+.feature-card strong a {
+  text-decoration: underline;
+  text-decoration-color: var(--section-accent);
+  text-underline-offset: 4px;
+}
+
 .feature-card strong a:hover,
 .feature-card strong a:focus-visible {
   color: var(--section-accent);
