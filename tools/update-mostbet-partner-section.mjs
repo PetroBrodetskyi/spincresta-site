@@ -9,6 +9,7 @@ assert(brand?.partnerProgram?.name);
 const copy = {
   en: {
     title: 'Mostbet Loyalty, VIP & Additional Features',
+    partnerTitle: 'Affiliate Programme',
     cards: [
       ['Loyalty Programme', 'Mostbet has a loyalty section alongside deposit bonuses and promotions. Check the rewards available to your account and the participation rules.'],
       ['VIP Club', 'VIP benefits depend on the account tier. Read the current requirements and do not increase your spending just to reach a higher level.'],
@@ -19,6 +20,7 @@ const copy = {
   },
   de: {
     title: 'Mostbet: Treueprogramm, VIP und weitere Angebote',
+    partnerTitle: 'Partnerprogramm',
     cards: [
       ['Treueprogramm', 'Neben Einzahlungsboni und Aktionen gibt es bei Mostbet ein Treueprogramm. Prüfen Sie im Konto, welche Prämien verfügbar sind und welche Teilnahmebedingungen gelten.'],
       ['VIP-Club', 'VIP-Vorteile hängen von der Kontostufe ab. Lesen Sie die aktuellen Bedingungen und erhöhen Sie Ihre Ausgaben nicht allein, um eine höhere Stufe zu erreichen.'],
@@ -29,6 +31,7 @@ const copy = {
   },
   es: {
     title: 'Mostbet: fidelización, VIP y otras opciones',
+    partnerTitle: 'Programa de afiliados',
     cards: [
       ['Programa de fidelización', 'Además de los bonos por depósito y las promociones, Mostbet tiene un programa de fidelización. Consulta en tu cuenta las recompensas disponibles y las condiciones para participar.'],
       ['Club VIP', 'Las ventajas VIP dependen del nivel de la cuenta. Revisa los requisitos actuales y no aumentes tus gastos solo para alcanzar un nivel superior.'],
@@ -39,6 +42,7 @@ const copy = {
   },
   it: {
     title: 'Mostbet: fedeltà, VIP e altre opportunità',
+    partnerTitle: 'Programma di affiliazione',
     cards: [
       ['Programma fedeltà', 'Oltre ai bonus sui depositi e alle promozioni, Mostbet offre un programma fedeltà. Controlla nel tuo account i premi disponibili e le condizioni di partecipazione.'],
       ['Club VIP', 'I vantaggi VIP dipendono dal livello dell’account. Leggi i requisiti aggiornati e non aumentare le spese soltanto per raggiungere un livello superiore.'],
@@ -49,6 +53,7 @@ const copy = {
   },
   pl: {
     title: 'Mostbet: program lojalnościowy, VIP i dodatkowe możliwości',
+    partnerTitle: 'Program partnerski',
     cards: [
       ['Program lojalnościowy', 'Oprócz bonusów od wpłat i promocji Mostbet ma program lojalnościowy. Sprawdź na swoim koncie dostępne nagrody oraz warunki udziału.'],
       ['Klub VIP', 'Korzyści VIP zależą od poziomu konta. Przeczytaj aktualne wymagania i nie zwiększaj wydatków tylko po to, by osiągnąć wyższy poziom.'],
@@ -59,6 +64,7 @@ const copy = {
   },
   uk: {
     title: 'Mostbet: лояльність, VIP та додаткові можливості',
+    partnerTitle: 'Партнерська програма',
     cards: [
       ['Програма лояльності', 'Окрім депозитних бонусів і акцій, Mostbet має програму лояльності. Перевірте в акаунті доступні винагороди та правила участі.'],
       ['VIP-клуб', 'VIP-переваги залежать від рівня акаунта. Ознайомтеся з актуальними вимогами й не збільшуйте витрати лише заради переходу на вищий рівень.'],
@@ -69,6 +75,7 @@ const copy = {
   },
   pt: {
     title: 'Mostbet: fidelização, VIP e outras opções',
+    partnerTitle: 'Programa de afiliados',
     cards: [
       ['Programa de fidelização', 'Além dos bónus de depósito e das promoções, a Mostbet tem um programa de fidelização. Consulte na sua conta as recompensas disponíveis e as condições de participação.'],
       ['Clube VIP', 'As vantagens VIP dependem do nível da conta. Leia os requisitos atuais e não aumente os gastos apenas para alcançar um nível superior.'],
@@ -79,6 +86,7 @@ const copy = {
   },
   fr: {
     title: 'Mostbet : fidélité, VIP et autres possibilités',
+    partnerTitle: 'Programme d’affiliation',
     cards: [
       ['Programme de fidélité', 'En plus des bonus de dépôt et des promotions, Mostbet propose un programme de fidélité. Consultez dans votre compte les récompenses disponibles et les conditions de participation.'],
       ['Club VIP', 'Les avantages VIP dépendent du niveau du compte. Lisez les conditions actuelles et n’augmentez pas vos dépenses uniquement pour atteindre un niveau supérieur.'],
@@ -89,6 +97,7 @@ const copy = {
   },
   hi: {
     title: 'Mostbet: लॉयल्टी, VIP और अन्य सुविधाएँ',
+    partnerTitle: 'अफ़िलिएट कार्यक्रम',
     cards: [
       ['लॉयल्टी कार्यक्रम', 'डिपॉज़िट बोनस और प्रमोशन के अलावा Mostbet में लॉयल्टी कार्यक्रम भी है। अपने खाते में उपलब्ध पुरस्कार और भाग लेने की शर्तें देखें।'],
       ['VIP क्लब', 'VIP सुविधाएँ खाते के स्तर पर निर्भर करती हैं। मौजूदा शर्तें पढ़ें और केवल अगला स्तर पाने के लिए अपना खर्च न बढ़ाएँ।'],
@@ -99,6 +108,7 @@ const copy = {
   },
   fi: {
     title: 'Mostbet: kanta-asiakasohjelma, VIP ja muut palvelut',
+    partnerTitle: 'Kumppaniohjelma',
     cards: [
       ['Kanta-asiakasohjelma', 'Talletusbonusten ja kampanjoiden lisäksi Mostbetilla on kanta-asiakasohjelma. Tarkista tililtäsi saatavilla olevat palkinnot ja osallistumisehdot.'],
       ['VIP-klubi', 'VIP-edut riippuvat tilin tasosta. Lue ajantasaiset ehdot äläkä lisää rahankäyttöäsi vain päästäksesi seuraavalle tasolle.'],
@@ -123,13 +133,13 @@ for (const [locale, c] of Object.entries(copy)) {
         <h2 class="title">${esc(c.title)}</h2>
         <div class="features-grid premium-grid">
 ${cards}
-          <div class="feature-card glass-card" data-brand-partner-program><strong data-partner-program-name>${esc(brand.partnerProgram.name)}</strong><span>${esc(c.partner)}</span></div>
+          <div class="feature-card glass-card" data-brand-partner-program><strong>${esc(c.partnerTitle)}</strong><span>${esc(c.partner)}</span><div data-partner-program-link>${esc(brand.partnerProgram.name)}</div></div>
         </div>
       </section>`;
   const updated = original.replace(previous, next)
     .replace(bestFor, bestFor.replace(/<section\b[^>]*>/, '<section class="container" id="best-for">'))
-    .replace(/src="\/scripts\/main\.js\?v=[^"]+"/, 'src="/scripts/main.js?v=20261006-mostbet-partners-2"')
-    .replace(/href="\/styles\.css\?v=[^"]+"/, 'href="/styles.css?v=20261006-feature-card-links-2"');
+    .replace(/src="\/scripts\/main\.js\?v=[^"]+"/, 'src="/scripts/main.js?v=20261006-mostbet-partners-3"')
+    .replace(/href="\/styles\.css\?v=[^"]+"/, 'href="/styles.css?v=20261006-feature-card-links-3"');
   fs.writeFileSync(file, updated);
   console.log(`${locale}: updated account-features section and partner-program placement`);
 }

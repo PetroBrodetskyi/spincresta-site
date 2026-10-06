@@ -37,10 +37,11 @@ test('all 10 Mostbet reviews have one localized placement inside the existing ac
     assert(section, locale);
     assert.equal([...html.matchAll(/data-brand-partner-program/g)].length, 1, locale);
     assert.equal([...section.matchAll(/class="feature-card glass-card"/g)].length, 5, locale);
-    assert(section.includes('<strong data-partner-program-name>Mostbet Partners</strong>'), locale);
+    assert(section.includes('<div data-partner-program-link>Mostbet Partners</div>'), locale);
+    assert(/data-brand-partner-program><strong>[^<]+<\/strong><span>[^<]+<\/span><div data-partner-program-link>/.test(section), `${locale}: localized heading, description and link must be in that order`);
     assert(!html.includes('mbp-aff.com') && !html.includes('480533'), `${locale}: referral URL must not be duplicated in HTML`);
-    assert(html.includes('/scripts/main.js?v=20261006-mostbet-partners-2'), locale);
-    assert(html.includes('/styles.css?v=20261006-feature-card-links-2'), locale);
+    assert(html.includes('/scripts/main.js?v=20261006-mostbet-partners-3'), locale);
+    assert(html.includes('/styles.css?v=20261006-feature-card-links-3'), locale);
     const bestFor = html.match(/<section class="container" id="best-for">[\s\S]*?<\/section>/)?.[0];
     assert(bestFor, `${locale}: audience section must have a stable sidebar ID`);
     const heading = bestFor.match(/<h2[^>]*>(.*?)<\/h2>/)?.[1];
@@ -57,15 +58,15 @@ test('legacy Ukrainian, Italian and French audience headings are recognized with
     assert.equal(matchesBrandBestForTitle(title), false, title);
   }
 });
-test('feature-card links use a visible underline and theme accent for their interactive state', () => {
+test('the partner link below the description uses the site accent without an underline', () => {
   const css = fs.readFileSync('styles/core.css', 'utf8');
-  assert(/\.feature-card strong a\s*\{[^}]*text-decoration:\s*underline/.test(css));
-  assert(/\.feature-card strong a:focus-visible\s*\{[^}]*color:\s*var\(--section-accent\)/.test(css));
+  assert(/\.feature-card \[data-partner-program-link\] a:visited\s*\{[^}]*text-decoration:\s*none/.test(css));
+  assert(/\.feature-card \[data-partner-program-link\] a:visited\s*\{[^}]*color:\s*var\(--section-accent\)/.test(css));
 });
-test('shared rendering marks the link sponsored and replaces its heading instead of duplicating it', () => {
+test('shared rendering marks the link sponsored and replaces its container instead of duplicating it', () => {
   const source = fs.readFileSync('scripts/pages/brand-layout.js', 'utf8');
   assert(source.includes("link.rel = 'noopener noreferrer nofollow sponsored'"));
-  assert(source.includes('heading.replaceChildren(link)'));
+  assert(source.includes('linkContainer.replaceChildren(link)'));
   assert(source.includes('initBrandPartnerProgram();'));
   assert(!source.includes('mbp-aff.com') && !source.includes('480533'));
 });

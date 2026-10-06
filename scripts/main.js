@@ -1,7 +1,7 @@
 ﻿// =====================
 // IMPORTS
 // =====================
-import { BRANDS } from './brands.js?v=20261006-mostbet-partners-2';
+import { BRANDS } from './brands.js?v=20261006-mostbet-partners-3';
 import { COUNTRIES } from './countries.js';
 import { initFooterNewsletter } from './footer-newsletter.js?v=20260826-newsletter-4';
 import { initAccountAuth } from './account-auth.js?v=20260829-local-preview-1';
@@ -25,7 +25,7 @@ const brandLayoutFallbackTimer = document.body?.dataset.brand
     }, 1500)
   : null;
 const brandLayoutModuleReady = document.body?.dataset.brand
-  ? import('./pages/brand-layout.js?v=20261006-mostbet-partners-2').then(module => {
+  ? import('./pages/brand-layout.js?v=20261006-mostbet-partners-3').then(module => {
       initBrandLayoutModule = module.initBrandLayout;
     }).catch(error => {
       document.body.classList.add('brand-layout-failed');

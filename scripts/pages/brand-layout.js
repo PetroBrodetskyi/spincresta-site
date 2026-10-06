@@ -47,14 +47,14 @@ export const initBrandLayout = context => {
         card.remove();
         return;
       }
-      const heading = card.querySelector('[data-partner-program-name]');
-      if (!heading) return;
+      const linkContainer = card.querySelector('[data-partner-program-link]');
+      if (!linkContainer) return;
       const link = document.createElement('a');
       link.href = program.url;
       link.textContent = program.name;
       link.target = '_blank';
       link.rel = 'noopener noreferrer nofollow sponsored';
-      heading.replaceChildren(link);
+      linkContainer.replaceChildren(link);
     });
   };
 
