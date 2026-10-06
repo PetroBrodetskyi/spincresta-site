@@ -1,5 +1,13 @@
 # Static-site localization
 
+## English editorial standard
+
+Use American English for new and revised English-language copy across the site: `program`, `license`, `color`, `center`, `favorite`, `organize`, and `anonymized`. Review existing copy when editing a page so its spelling remains consistent. Preserve official brand names, product titles, direct quotations, URLs, and text in other languages.
+
+This is an editorial spelling preference, not a change in the site's target markets. Do not change `en` language links, canonical URLs, country eligibility, or English-language navigation flags solely to adopt American spelling.
+
+## Localization workflow
+
 The production site currently has matching English, German, Spanish, Italian, Polish, Ukrainian, Portuguese, French, and Hindi page trees. Use `localize-static-site.mjs` when a new English page needs a localized counterpart or when a locale must be regenerated.
 
 ```bash

@@ -9,14 +9,14 @@ assert(brand?.partnerProgram?.name);
 const copy = {
   en: {
     title: 'Mostbet Loyalty, VIP & Additional Features',
-    partnerTitle: 'Affiliate Programme',
+    partnerTitle: 'Affiliate Program',
     cards: [
-      ['Loyalty Programme', 'Mostbet has a loyalty section alongside deposit bonuses and promotions. Check the rewards available to your account and the participation rules.'],
+      ['Loyalty Program', 'Mostbet has a loyalty section alongside deposit bonuses and promotions. Check the rewards available to your account and the participation rules.'],
       ['VIP Club', 'VIP benefits depend on the account tier. Read the current requirements and do not increase your spending just to reach a higher level.'],
       ['Shop and Achievements', 'The account also includes a shop, achievements and a bonus map. Reward availability and use are subject to their own rules.'],
       ['Mobile Access', 'Casino, sports, promotions and the cashier are accessible on mobile. Protect your account and use the brand’s official access routes.'],
     ],
-    partner: 'For website owners and iGaming publishers: Mostbet Partners is the brand’s affiliate programme, separate from a player account and casino bonuses.',
+    partner: 'For website owners and iGaming publishers: Mostbet Partners is the brand’s affiliate program, separate from a player account and casino bonuses.',
   },
   de: {
     title: 'Mostbet: Treueprogramm, VIP und weitere Angebote',

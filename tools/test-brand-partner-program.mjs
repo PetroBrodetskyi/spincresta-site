@@ -12,7 +12,7 @@ test('Mostbet referral destination comes from the brand registry', () => {
   });
   assert.equal(mostbet.urlCasino, 'https://armadaapp.media-412.com/click?pid=3862&offer_id=124843');
 });
-test('brands without a partner programme safely resolve no link', () => {
+test('brands without a partner program safely resolve no link', () => {
   assert.equal(resolveBrandPartnerProgram(undefined), null);
   assert.equal(resolveBrandPartnerProgram({ name: 'Other Brand' }), null);
   assert.equal(resolveBrandPartnerProgram(BRANDS.find(brand => brand.name === 'Gravira')), null);
@@ -57,6 +57,18 @@ test('legacy Ukrainian, Italian and French audience headings are recognized with
   for (const title of ['', undefined, 'Mostbet FAQ', 'Payments, Withdrawals & Verification', 'Responsible Gambling']) {
     assert.equal(matchesBrandBestForTitle(title), false, title);
   }
+});
+test('Mostbet English copy and its generator use the American English program spelling', () => {
+  const html = fs.readFileSync('brands/mostbet/index.html', 'utf8');
+  assert(html.includes('<strong>Affiliate Program</strong>'));
+  assert(html.includes('<strong>Loyalty Program</strong>'));
+  assert(html.includes('the brand’s affiliate program,'));
+  assert(!/\bprogrammes?\b/i.test(html));
+  const generator = fs.readFileSync('tools/update-mostbet-partner-section.mjs', 'utf8');
+  const englishCopy = generator.match(/\ben: \{([\s\S]*?)\n  \},\n  de:/)?.[1];
+  assert(englishCopy);
+  assert(!/\bprogrammes?\b/i.test(englishCopy));
+  assert(generator.includes("partnerTitle: 'Programme d’affiliation'"), 'French wording must stay unchanged');
 });
 test('the partner link below the description uses the site accent without an underline', () => {
   const css = fs.readFileSync('styles/core.css', 'utf8');
