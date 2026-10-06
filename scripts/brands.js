@@ -341,6 +341,10 @@ export const BRANDS = [
     cta: 'Play Now',
     urlDetail: 'brands/mostbet.html',
     urlCasino: 'https://armadaapp.media-412.com/click?pid=3862&offer_id=124843',
+    partnerProgram: {
+      name: 'Mostbet Partners',
+      url: 'https://mbp-aff.com/register/referral/480533',
+    },
     image: 'images/mostbet.webp',
     bgColor: '#064C95',
     countries: ['PL', 'CZ', 'HU', 'RU', 'AZ', 'UZ', 'KZ', 'KG', 'TJ', 'MD', 'PK', 'IN', 'MA', 'NP', 'BD', 'LK', 'NG', 'TR', 'PH', 'TZ', 'BJ', 'KE', 'CA', 'IE', 'MX', 'AR', 'CO', 'BR', 'CL', 'CI', 'BY', 'PE', 'EG'],

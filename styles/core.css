@@ -3964,7 +3964,9 @@ body[data-country] .content-article .timeline a[href*='/responsible-gambling/'] 
 }
 
 .home-global-guide a,
-.home-global-guide a:visited {
+.home-global-guide a:visited,
+.feature-card strong a,
+.feature-card strong a:visited {
   color: var(--text-main);
   text-decoration: none;
   font-weight: 700;
@@ -3972,6 +3974,11 @@ body[data-country] .content-article .timeline a[href*='/responsible-gambling/'] 
 
 .home-global-guide a:hover {
   color: var(--gold);
+}
+
+.feature-card strong a:hover,
+.feature-card strong a:focus-visible {
+  color: var(--section-accent);
 }
 
 @media (max-width: 1280px) {

@@ -4,6 +4,21 @@
 export const resolveBrandNewGames = (pageKey, registry, normalizeKey) =>
   registry[pageKey] || registry[normalizeKey(pageKey)] || [];
 
+// Optional B2B referral links live in brands.js, never in individual review pages.
+export const resolveBrandPartnerProgram = brand => {
+  const program = brand?.partnerProgram;
+  if (!program || typeof program.name !== 'string' || typeof program.url !== 'string') return null;
+  const name = program.name.trim();
+  if (!name) return null;
+  try {
+    const url = new URL(program.url);
+    if (url.protocol !== 'https:' || url.username || url.password) return null;
+    return { name, url: url.href };
+  } catch {
+    return null;
+  }
+};
+
 export const initBrandLayout = context => {
   const {
     BRANDS = [],
@@ -15,6 +30,27 @@ export const initBrandLayout = context => {
     localeText,
     localizedBrandBonusText = value => value,
   } = context;
+
+  const initBrandPartnerProgram = () => {
+    const pageKey = document.body.dataset.brand || '';
+    const brand = findBrandByPageKey(pageKey) ||
+      BRANDS.find(item => normalizeBrandKey(item.name || '') === normalizeBrandKey(pageKey));
+    const program = resolveBrandPartnerProgram(brand);
+    document.querySelectorAll('[data-brand-partner-program]').forEach(card => {
+      if (!program) {
+        card.remove();
+        return;
+      }
+      const heading = card.querySelector('[data-partner-program-name]');
+      if (!heading) return;
+      const link = document.createElement('a');
+      link.href = program.url;
+      link.textContent = program.name;
+      link.target = '_blank';
+      link.rel = 'noopener noreferrer nofollow sponsored';
+      heading.replaceChildren(link);
+    });
+  };
 
   const applyBrandHeroConcept = () => {
     const hero = document.querySelector('body[data-brand] .hero');
@@ -596,6 +632,7 @@ export const initBrandLayout = context => {
     mobileQuery.addEventListener?.('change', syncMobilePreviewState);
   };
 
+  initBrandPartnerProgram();
   applyBrandHeroConcept();
   applyBrandStickyReviewLayout();
   initBrandWhyPreview();
