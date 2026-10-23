@@ -4,6 +4,21 @@
 export const resolveBrandNewGames = (pageKey, registry, normalizeKey) =>
   registry[pageKey] || registry[normalizeKey(pageKey)] || [];
 
+// brands.js is authoritative even when an older review contains a stale href.
+// Run before the layout copies the hero CTA into the sticky bar and game rail.
+export const syncBrandCasinoLinks = (root, brand) => {
+  const href = typeof brand?.urlCasino === 'string' ? brand.urlCasino.trim() : '';
+  if (!href || brand.notRecommended || brand.temporarilyUnavailable) return 0;
+  let updated = 0;
+  root.querySelectorAll('a.cta-brands, a.brand-sticky-title, a.brand-new-game-card').forEach(link => {
+    if (link.getAttribute('aria-disabled') === 'true' || link.dataset.blockedCta === 'true') return;
+    if (link.getAttribute('href') === href) return;
+    link.setAttribute('href', href);
+    updated++;
+  });
+  return updated;
+};
+
 // Optional B2B referral links live in brands.js, never in individual review pages.
 export const resolveBrandPartnerProgram = brand => {
   const program = brand?.partnerProgram;
@@ -36,6 +51,11 @@ export const initBrandLayout = context => {
     localeText,
     localizedBrandBonusText = value => value,
   } = context;
+
+  const pageKey = document.body.dataset.brand || '';
+  const pageBrand = findBrandByPageKey(pageKey) ||
+    BRANDS.find(item => normalizeBrandKey(item.name || '') === normalizeBrandKey(pageKey));
+  if (pageKey) syncBrandCasinoLinks(document.body, pageBrand);
 
   const initBrandPartnerProgram = () => {
     const pageKey = document.body.dataset.brand || '';
