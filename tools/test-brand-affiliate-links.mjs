@@ -37,15 +37,21 @@ for (const brand of migrated) {
   });
 }
 
-test('all six migrated offers are covered without creating tracker requests', () => {
-  assert.deepEqual(migrated.map(brand => brand.urlDetail).sort(), [
-    'brands/fraga-ar.html', 'brands/fraga-az.html', 'brands/fraga-cl.html',
-    'brands/fraga-tr.html', 'brands/pin-up.html', 'brands/pinco.html',
-  ]);
+test('all approved migrated offers retain their exact mappings without tracker requests', () => {
+  const approvedOffers = {
+    'brands/fraga-ar.html': '253',
+    'brands/fraga-az.html': '255',
+    'brands/fraga-cl.html': '256',
+    'brands/fraga-tr.html': '254',
+    'brands/goldencrown.html': '260',
+    'brands/goldenstar.html': '259',
+    'brands/kaasino.html': '261',
+    'brands/pin-up.html': '257',
+    'brands/pinco.html': '258',
+  };
+  assert.deepEqual(migrated.map(brand => brand.urlDetail).sort(), Object.keys(approvedOffers).sort());
   for (const brand of migrated) {
-    const url = new URL(brand.urlCasino);
-    assert.equal(url.searchParams.get('pid'), '2');
-    assert.ok(/^25[3-8]$/.test(url.searchParams.get('offer_id')));
+    assert.equal(brand.urlCasino, `https://armada-offers.com/click?pid=2&offer_id=${approvedOffers[brand.urlDetail]}`);
   }
   assert.equal(new Set(migrated.map(brand => brand.urlCasino)).size, migrated.length);
 });
