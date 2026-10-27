@@ -876,7 +876,7 @@ export const BRANDS = [
     bonus: '500% Bonus + 350 FS up to €3,625',
     cta: 'Play Now',
     urlDetail: 'brands/gamblezen.html',
-    urlCasino: 'https://armadaapp.media-412.com/click?pid=3862&offer_id=122866',
+    urlCasino: 'https://offers-armada.com/click?pid=2&offer_id=262',
     image: 'images/gamblezen.webp',
     bgColor: '#141437',
     top: ['AU'],
