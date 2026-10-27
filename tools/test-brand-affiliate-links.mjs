@@ -8,7 +8,7 @@ import { BRAND_HOMEPAGE_SCREENSHOTS } from '../scripts/brand-homepage-screenshot
 import { PINCO_COPY } from './pinco-review-copy.mjs';
 
 const locales = ['en', 'de', 'es', 'it', 'pl', 'uk', 'pt', 'fr', 'hi', 'fi'];
-const migrated = BRANDS.filter(brand => brand.urlCasino?.startsWith('https://armada-offers.com/click?'));
+const migrated = BRANDS.filter(brand => brand.urlCasino?.startsWith('https://offers-armada.com/click?'));
 const decode = value => value.replaceAll('&amp;', '&');
 const externalClicks = html => [...html.matchAll(/<a\b[^>]*\bhref="([^"]+)"[^>]*>/g)]
   .map(match => decode(match[1]))
@@ -51,7 +51,7 @@ test('all approved migrated offers retain their exact mappings without tracker r
   };
   assert.deepEqual(migrated.map(brand => brand.urlDetail).sort(), Object.keys(approvedOffers).sort());
   for (const brand of migrated) {
-    assert.equal(brand.urlCasino, `https://armada-offers.com/click?pid=2&offer_id=${approvedOffers[brand.urlDetail]}`);
+    assert.equal(brand.urlCasino, `https://offers-armada.com/click?pid=2&offer_id=${approvedOffers[brand.urlDetail]}`);
   }
   assert.equal(new Set(migrated.map(brand => brand.urlCasino)).size, migrated.length);
 });
@@ -112,13 +112,13 @@ test('Pinco generator uses the brand registry instead of a hardcoded offer ID', 
   const generator = fs.readFileSync('tools/build-pinco-reviews.mjs', 'utf8');
   assert.ok(generator.includes('esc(brand.urlCasino)'));
   assert.ok(!generator.includes('123113'));
-  assert.ok(generator.includes('/scripts/main.js?v=20261023-armada-tracking-1'));
+  assert.ok(generator.includes('/scripts/main.js?v=20261027-tracking-domain-1'));
   const main = fs.readFileSync('scripts/main.js', 'utf8');
-  assert.ok(main.includes('./brands.js?v=20261023-armada-tracking-1'));
-  assert.ok(main.includes('./pages/brand-layout.js?v=20261023-armada-tracking-1'));
+  assert.ok(main.includes('./brands.js?v=20261027-tracking-domain-1'));
+  assert.ok(main.includes('./pages/brand-layout.js?v=20261027-tracking-domain-1'));
   for (const locale of locales) {
     const html = fs.readFileSync(`${locale === 'en' ? '' : `${locale}/`}brands/pinco/index.html`, 'utf8');
-    assert.ok(html.includes('/scripts/main.js?v=20261023-armada-tracking-1'));
+    assert.ok(html.includes('/scripts/main.js?v=20261027-tracking-domain-1'));
   }
 });
 

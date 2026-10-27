@@ -8,7 +8,7 @@ import { PINCO_COPY } from './pinco-review-copy.mjs';
 
 const locales=['en','de','es','it','pl','uk','pt','fr','hi','fi'];
 const brand=BRANDS.find(item => item.name === 'Pinco');
-assert.equal(brand.urlCasino,'https://armada-offers.com/click?pid=2&offer_id=258');
+assert.equal(brand.urlCasino,'https://offers-armada.com/click?pid=2&offer_id=258');
 assert.equal(brand.bgColor,'#171213');
 assert.equal(brand.image,'images/pinco.svg');
 assert(fs.existsSync(brand.image));

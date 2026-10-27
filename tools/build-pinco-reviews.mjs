@@ -26,7 +26,7 @@ for (const locale of locales) {
     .replace(/(<a\b(?=[^>]*\bclass="[^"]*\bcta-brands\b)[^>]*\bhref=")[^"]*"/g, (_, open) => `${open}${esc(brand.urlCasino)}"`)
     .replaceAll('width="1600" height="837"','width="3024" height="1582"')
     .replaceAll('20261003-pinco-1','20261004-pinco-1')
-    .replace(/\/scripts\/main\.js\?v=[^"']+/g, '/scripts/main.js?v=20261023-armada-tracking-1');
+    .replace(/\/scripts\/main\.js\?v=[^"']+/g, '/scripts/main.js?v=20261027-tracking-domain-1');
   if (locale === 'fi') html = html.replace(/Pincoin\b/g,'Pincon').replaceAll('Pincoista','Pincosta');
   const labels = Object.fromEntries(['verdict','bonus','games','sports','payments','safety'].map(id => [id,title(html,`pinco-${id}`)]));
   labels.sports = esc(c.sportsTitle);
