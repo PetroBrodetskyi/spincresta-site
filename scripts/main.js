@@ -1,7 +1,7 @@
 ﻿// =====================
 // IMPORTS
 // =====================
-import { BRANDS } from './brands.js?v=20261027-tracking-domain-1';
+import { BRANDS } from './brands.js?v=20261027-gamblezen-1';
 import { COUNTRIES } from './countries.js';
 import { initFooterNewsletter } from './footer-newsletter.js?v=20260826-newsletter-4';
 import { initAccountAuth } from './account-auth.js?v=20260829-local-preview-1';
