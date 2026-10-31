@@ -1,11 +1,15 @@
 import fs from 'node:fs';
+import { BRANDS } from '../scripts/brands.js';
+import { syncUnavailableBrandMarkup } from './sync-brand-availability.mjs';
 
 // Casinobossy public lobby, terms, bonus terms and brand documentation were
 // reviewed on 2026-09-29. Player-facing links intentionally use only the
 // approved affiliate URL; no direct operator URL is rendered on SpinCresta.
 const screenshot = 'https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto,w_1600/spincresta/brands/casinobossy/main-page/casinobossy-page_uni4tq';
 const logo = '/images/casinobossy.svg';
-const affiliate = 'https://armadaapp.media-412.com/click?pid=3862&amp;offer_id=124533';
+const brand = BRANDS.find(item => item.urlDetail === 'brands/casinobossy.html');
+if (!brand) throw new Error('Casinobossy is missing from the brand registry');
+const affiliate = brand.urlCasino.replaceAll('&', '&amp;');
 const locales = ['en', 'de', 'es', 'it', 'pl', 'uk', 'pt', 'fr', 'hi', 'fi'];
 const routePrefix = locale => locale === 'en' ? '' : `${locale}/`;
 
@@ -201,7 +205,7 @@ const buildPage = (locale, c, template) => {
 for (const locale of locales) {
   const file = `${routePrefix(locale)}brands/casinobossy/index.html`;
   const template = fs.readFileSync(file,'utf8');
-  fs.writeFileSync(file,buildPage(locale,copy[locale],template));
+  fs.writeFileSync(file,syncUnavailableBrandMarkup(buildPage(locale,copy[locale],template),brand,locale));
   console.log(`Built ${file}`);
 }
 

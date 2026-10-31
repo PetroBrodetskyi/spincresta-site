@@ -390,7 +390,7 @@ export const initFooterNewsletter = locale => {
     section.setAttribute('aria-labelledby', headingId);
     section.innerHTML = `
       <div class="footer-newsletter-copy">
-        <span class="footer-newsletter-eyebrow">${copy.eyebrow}</span>
+
         <h2 id="${headingId}">${copy.title}</h2>
         <p>${copy.description}</p>
       </div>

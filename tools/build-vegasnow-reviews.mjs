@@ -43,7 +43,6 @@ const plus = {en:'Pros',de:'Vorteile',es:'Ventajas',it:'Pro',pl:'Plusy',uk:'Пе
 const minus = {en:'Cons',de:'Nachteile',es:'Contras',it:'Contro',pl:'Wady',uk:'Недоліки',pt:'Contras',fr:'Inconvénients',hi:'नुकसान',fi:'Miinukset'};
 const spinLabels = {en:'free spins',de:'Freispiele',es:'giros gratis',it:'giri gratuiti',pl:'darmowych spinów',uk:'фриспінів',pt:'jogadas grátis',fr:'tours gratuits',hi:'फ़्री स्पिन',fi:'ilmaiskierrosta'};
 const gameTitles = {en:'New Games',de:'Neue Spiele',es:'Juegos nuevos',it:'Nuovi giochi',pl:'Nowe gry',uk:'Нові ігри',pt:'Novos jogos',fr:'Nouveaux jeux',hi:'नए गेम',fi:'Uudet pelit'};
-const gameKickers = {en:'GAME SCREENSHOTS',de:'SPIEL-SCREENSHOTS',es:'CAPTURAS DE JUEGOS',it:'SCHERMATE DEI GIOCHI',pl:'ZDJĘCIA GIER',uk:'СКРІНШОТИ ІГОР',pt:'CAPTURAS DOS JOGOS',fr:'CAPTURES DE JEUX',hi:'गेम स्क्रीनशॉट',fi:'PELIKUVAT'};
 const profitCaps = {
   en:['Daily profit cap','US$50,000 equivalent per UTC day','General terms allow winnings above this cap to be voided. This is separate from bonus cash-out caps and withdrawal limits. NOK withdrawals: 40,000/day, 80,000/week, 300,000/month.'],
   de:['Tägliche Gewinngrenze','US$50.000 Gegenwert pro UTC-Tag','Laut AGB können darüber hinausgehende Gewinne gestrichen werden. Separat von Bonus- und Auszahlungslimits. NOK-Auszahlungen: 40.000/Tag, 80.000/Woche, 300.000/Monat.'],
@@ -111,7 +110,8 @@ for (const locale of locales) {
   html=/<meta name="brand-snapshot-intro"/.test(html) ? html.replace(/<meta name="brand-snapshot-intro"[^>]*>/,meta) : html.replace('<meta name="theme-color"',`${meta}\n    <meta name="theme-color"`);
   // Use the site's New Games heading for the uploaded game cards. Optional
   // labels leave every other brand's defaults intact.
-  for (const [name,value] of [['brand-games-title',gameTitles[locale]],['brand-games-kicker',gameKickers[locale]]]) {
+  html=html.replace(/<meta name="brand-games-kicker"[^>]*>\s*/g,'');
+  for (const [name,value] of [['brand-games-title',gameTitles[locale]]]) {
     const tag=`<meta name="${name}" content="${esc(value)}" />`;
     const pattern=new RegExp(`<meta name="${name}"[^>]*>`);
     html=pattern.test(html)?html.replace(pattern,tag):html.replace('<meta name="theme-color"',`${tag}\n    <meta name="theme-color"`);

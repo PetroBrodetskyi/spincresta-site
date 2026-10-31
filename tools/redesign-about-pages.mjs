@@ -298,7 +298,7 @@ const renderMain = (locale, source, homeStatsGrid) => {
   return `<main>
       <section class="hero container">
         <div class="hero-content">
-          <span class="home-hero-kicker">${escapeHtml(t.eyebrow)}</span>
+
           <h1>${escapeHtml(t.title)}</h1>
           <p>${escapeHtml(t.lead)}</p>
           <div class="home-hero-actions">
@@ -316,7 +316,7 @@ const renderMain = (locale, source, homeStatsGrid) => {
         <section class="home-showcase-section" aria-labelledby="about-purpose-title">
           <div class="home-showcase-heading">
             <div>
-              <span class="home-section-kicker">${escapeHtml(t.purposeEyebrow)}</span>
+
               <h2 id="about-purpose-title">${escapeHtml(mission.title)}</h2>
             </div>
             ${renderCardBody(mission.body)}
@@ -328,7 +328,7 @@ const renderMain = (locale, source, homeStatsGrid) => {
         <section class="home-showcase-section" id="editorial-method" aria-labelledby="editorial-method-title">
           <div class="home-showcase-heading">
             <div>
-              <span class="home-section-kicker">${escapeHtml(t.principlesEyebrow)}</span>
+
               <h2 id="editorial-method-title">${escapeHtml(editorialTitle.text)}</h2>
             </div>
             <p>${escapeHtml(t.editorialLead)}</p>
@@ -358,7 +358,7 @@ const renderMain = (locale, source, homeStatsGrid) => {
         <section class="home-showcase-section" aria-labelledby="transparency-title">
           <div class="home-showcase-heading">
             <div>
-              <span class="home-section-kicker">${escapeHtml(t.transparencyEyebrow)}</span>
+
               <h2 id="transparency-title">${escapeHtml(transparencyTitle.text)}</h2>
             </div>
             <p>${transparencyText.html}</p>

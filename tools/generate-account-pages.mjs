@@ -140,12 +140,12 @@ const renderMain = (locale, language) => {
     <main>
       <section class="hero container">
         <div class="hero-content">
-          <span class="home-hero-kicker">${escapeHtml(locale.kicker)}</span>
+
           <h1>${escapeHtml(locale.heading)}</h1>
           <p>${escapeHtml(locale.intro)}</p>
         </div>
         <aside class="account-review-history" data-account-review-history aria-labelledby="account-review-history-title">
-          <span class="home-section-kicker">${escapeHtml(reviews.kicker)}</span>
+
           <div class="account-review-history-heading">
             <h2 id="account-review-history-title">${escapeHtml(reviews.title)}</h2>
             <p>${escapeHtml(reviews.intro)}</p>
@@ -160,7 +160,7 @@ const renderMain = (locale, language) => {
         <section class="home-showcase-section" data-account-page aria-labelledby="account-overview-title">
           <div class="home-showcase-heading">
             <div>
-              <span class="home-section-kicker">${escapeHtml(locale.overviewKicker)}</span>
+
               <h2 id="account-overview-title">${escapeHtml(locale.overviewTitle)}</h2>
             </div>
             <p>${escapeHtml(locale.overviewIntro)}</p>
@@ -192,7 +192,7 @@ const renderMain = (locale, language) => {
 
             <form class="account-contact-form" data-account-contact-form>
               <div class="account-contact-heading">
-                <span class="home-section-kicker">${escapeHtml(contact.kicker)}</span>
+
                 <h3>${escapeHtml(contact.title)}</h3>
                 <p>${escapeHtml(contact.intro)}</p>
               </div>

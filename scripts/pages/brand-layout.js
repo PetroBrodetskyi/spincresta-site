@@ -82,34 +82,34 @@ export const initBrandLayout = context => {
     const hero = document.querySelector('body[data-brand] .hero');
     const heroContent = hero?.querySelector(':scope > .hero-content');
     if (!hero || !heroContent) return;
-  
+
     const existingWhy = hero.querySelector(':scope > .brand-hero-why');
     if (existingWhy) {
       hero.classList.add('brand-hero-with-why');
       return;
     }
-  
+
     const whySection = Array.from(
       document.querySelectorAll('body[data-brand] section.features-section')
     ).find(section => {
       const title = section.querySelector(':scope > .title, :scope > h2');
       return /why\s+players\s+choose|warum\s+spieler|por\s+qu[eé]\s+los\s+jugadores/i.test(normalizeText(title?.textContent || ''));
     });
-  
+
     if (!whySection) return;
-  
+
     whySection.classList.add('brand-hero-why');
     hero.classList.add('brand-hero-with-why');
     hero.appendChild(whySection);
   };
-  
+
   const createBrandNewGamesRail = () => {
     const pageKey = normalizeText(document.body.dataset.brand || '').trim().toLowerCase();
     const games = resolveBrandNewGames(pageKey, BRAND_NEW_GAMES, normalizeBrandKey);
     if (!games.length) return null;
     const brandName = findBrandByPageKey(pageKey)?.name ||
       BRANDS.find(item => normalizeBrandKey(item.name || '') === normalizeBrandKey(pageKey))?.name || pageKey;
-  
+
     const playNowLink = document.querySelector(
       'body[data-brand] .brand-sticky-aside .hero-cta-wrapper a.cta-brands[href], body[data-brand] .hero-cta-wrapper a.cta-brands[href]'
     );
@@ -126,9 +126,9 @@ export const initBrandLayout = context => {
         </div>
         <span>${escapeHtml(game.name)}</span>
       `;
-  
+
       if (!casinoHref) return `<article class="brand-new-game-card">${cardContent}</article>`;
-  
+
       return `
         <a
           class="brand-new-game-card"
@@ -152,18 +152,15 @@ export const initBrandLayout = context => {
         </a>
       `;
     };
-  
+
     const newGamesLabel = document.querySelector('meta[name="brand-games-title"]')?.content?.trim()
       || localeText('New Games', 'Neue Spiele', 'Juegos nuevos');
-    const newGamesKicker = document.querySelector('meta[name="brand-games-kicker"]')?.content?.trim()
-      || localeText('LATEST RELEASES', 'NEUESTE VERÖFFENTLICHUNGEN', 'ÚLTIMOS LANZAMIENTOS');
     const rail = document.createElement('aside');
     rail.className = 'brand-new-games-rail';
     rail.setAttribute('aria-label', newGamesLabel);
     rail.innerHTML = `
       <div class="brand-new-games-panel">
         <div class="brand-new-games-heading">
-          <span class="brand-new-games-kicker">${escapeHtml(newGamesKicker)}</span>
           <h2>${escapeHtml(newGamesLabel)}</h2>
         </div>
         <div class="brand-new-games-list">
@@ -432,7 +429,7 @@ export const initBrandLayout = context => {
     const bonusTarget = bonusSection?.id || bonusSection?.querySelector(':scope > .title, :scope > h2')?.id;
 
     const labels = {
-      heading: localeText('At a glance', 'Auf einen Blick', 'De un vistazo', 'In breve', 'W skrócie', 'Коротко', 'Em resumo', 'En bref', 'एक नज़र में', 'Yhteenveto'),
+      heading: localeText('Casino details', 'Casino-Informationen', 'Información del casino', 'Informazioni sul casinò', 'Informacje o kasynie', 'Інформація про казино', 'Informações do casino', 'Informations sur le casino', 'कैसीनो की जानकारी', 'Kasinon tiedot'),
       bonus: localeText('Welcome offer', 'Willkommensangebot', 'Oferta de bienvenida', 'Offerta di benvenuto', 'Oferta powitalna', 'Вітальна пропозиція', 'Oferta de boas-vindas', 'Offre de bienvenue', 'वेलकम ऑफ़र', 'Tervetulotarjous'),
       markets: localeText('Available markets', 'Verfügbare Märkte', 'Mercados disponibles', 'Mercati disponibili', 'Dostępne rynki', 'Доступні ринки', 'Mercados disponíveis', 'Marchés disponibles', 'उपलब्ध बाज़ार', 'Saatavilla olevat markkinat'),
       countries: localeText(countryCount === 1 ? 'country' : 'countries', countryCount === 1 ? 'Land' : 'Länder', countryCount === 1 ? 'país' : 'países', countryCount === 1 ? 'Paese' : 'Paesi', countryCount === 1 ? 'kraj' : slavicCountryForm('krajów', 'kraje', 'krajów'), slavicCountryForm('країна', 'країни', 'країн'), countryCount === 1 ? 'país' : 'países', 'pays', 'देश', countryCount === 1 ? 'maa' : 'maata'),
@@ -442,7 +439,6 @@ export const initBrandLayout = context => {
     facts.className = 'brand-quick-facts';
     facts.setAttribute('aria-label', labels.heading);
     facts.innerHTML = `
-      <span class="brand-quick-facts__heading">${escapeHtml(labels.heading)}</span>
       ${bonus && bonusTarget ? `<a href="#${escapeHtml(bonusTarget)}"><small>${escapeHtml(labels.bonus)}</small><strong>${escapeHtml(bonus)}</strong></a>` : ''}
       ${countryCount ? `<a href="#brand-countries"><small>${escapeHtml(labels.markets)}</small><strong>${countryCount} ${escapeHtml(labels.countries)}</strong></a>` : ''}
     `;
@@ -553,7 +549,7 @@ export const initBrandLayout = context => {
     syncHighlightsPosition();
     desktopQuery.addEventListener?.('change', syncHighlightsPosition);
   };
-  
+
   const applyBrandStickyReviewLayout = () => {
     const existingLayout = document.querySelector('.brand-sticky-review-layout');
     if (existingLayout) {
@@ -578,30 +574,30 @@ export const initBrandLayout = context => {
     if (!hero || !heroContent || !allCountries) {
       return;
     }
-  
+
     const layout = document.createElement('section');
     layout.className = 'container brand-sticky-review-layout';
-  
+
     const aside = document.createElement('aside');
     aside.className = 'brand-sticky-aside';
-  
+
     const main = document.createElement('div');
     main.className = 'brand-sticky-main';
-  
+
     hero.insertAdjacentElement('beforebegin', layout);
     aside.appendChild(heroContent);
-  
+
     Array.from(hero.children).forEach(child => {
       main.appendChild(child);
     });
-  
+
     let sibling = hero.nextElementSibling;
     while (sibling && sibling !== allCountries) {
       const nextSibling = sibling.nextElementSibling;
       main.appendChild(sibling);
       sibling = nextSibling;
     }
-  
+
     layout.append(aside, main);
     const rightRail = ensureBrandRightRail(layout);
     const newGamesRail = createBrandNewGamesRail();
@@ -616,14 +612,14 @@ export const initBrandLayout = context => {
     initAdditionalRailSections(layout, aside, rightRail);
     initLowerRailSections(layout, aside, rightRail);
   };
-  
+
   const initBrandWhyPreview = () => {
     const preview = document.querySelector('body[data-brand] .brand-why-media');
     const heading = preview?.closest('.brand-why-heading');
     if (!preview || !heading || preview.dataset.bound === 'true') return;
-  
+
     preview.dataset.bound = 'true';
-  
+
     const setExpanded = expanded => {
       heading.classList.toggle('is-expanded', expanded);
       preview.setAttribute('aria-expanded', String(expanded));
@@ -632,29 +628,29 @@ export const initBrandLayout = context => {
         expanded ? 'Collapse casino screenshot' : 'Expand casino screenshot'
       );
     };
-  
+
     const mobileQuery = window.matchMedia('(max-width: 768px)');
     const syncMobilePreviewState = () => {
       const isMobile = mobileQuery.matches;
       preview.disabled = isMobile;
       preview.tabIndex = isMobile ? -1 : 0;
-  
+
       if (isMobile) setExpanded(false);
     };
-  
+
     preview.addEventListener('click', () => {
       if (mobileQuery.matches) return;
-  
+
       setExpanded(preview.getAttribute('aria-expanded') !== 'true');
     });
-  
+
     preview.addEventListener('keydown', event => {
       if (event.key !== 'Escape' || preview.getAttribute('aria-expanded') !== 'true') return;
-  
+
       setExpanded(false);
       preview.focus();
     });
-  
+
     syncMobilePreviewState();
     mobileQuery.addEventListener?.('change', syncMobilePreviewState);
   };

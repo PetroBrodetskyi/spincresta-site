@@ -53,7 +53,13 @@ The locale-specific polishers apply reviewed casino terminology, keep product an
 
 Then review new legal, affiliate, bonus, payment, and responsible-gambling copy editorially. Confirm desktop and mobile layouts, internal links, language persistence, and page-specific dynamic sections before deployment.
 
+After regenerating a homepage, run `node tools/polish-homepage-labels.mjs --apply`, followed by `--check`. This restores reviewed headings and counter labels in all ten languages and removes redundant promotional eyebrows. Keep the existing section IDs, links, counts, and H1; do not replace clear headings with slogan-style labels.
+
+After regenerating a brand review or the casino directory, run `node tools/sync-brand-availability.mjs --apply`, then `--check`. This uses unavailable states from `scripts/brands.js` and the existing Retrobet button translations to keep static casino CTAs disabled before JavaScript loads. Optional brand slugs limit the pass, for example `--apply casinobossy browinner`. Preserve internal review links and indexability.
+
 ## Plain-language editorial standard
+
+After page generation, run `node tools/polish-site-presentation.mjs --apply`, then `--check`. Do not restore decorative kicker/eyebrow labels, vertical accent bars or backdrop-blurred UI panels. Use the shared opaque surface tokens instead. Keep image-derived blur around brand hero screenshots and game artwork; it is separate from UI glass. Keep real headings, form labels, focus indicators and structural table/card borders.
 
 Write verified features directly, in the present tense. Keep bonus amounts, wagering, expiry, payment limits, eligibility and unverified claims explicit. Remove literary comparisons, speculation about operator intentions, and unsupported claims of seamless performance or guaranteed safety. Describe a game filter or reward condition rather than saying it makes the casino “more than a bonus page.”
 

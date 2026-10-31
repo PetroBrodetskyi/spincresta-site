@@ -362,7 +362,7 @@ body[data-brand] .brand-sticky-title__inner {
   border-radius: 999px;
   border: 1px solid var(--border-glass);
   background-color: var(--bg-surface);
-  backdrop-filter: var(--blur-glass);
+  backdrop-filter: none;
   box-shadow: var(--shadow-soft);
   transition:
     transform 0.2s ease,
@@ -1462,8 +1462,6 @@ body[data-brand='Leon'] .timeline p {
 .promo-copy-title:active {
   transform: translateY(1px);
   box-shadow:
-    inset 0 3px 8px rgba(0, 0, 0, 0.44),
-    inset 0 1px 0 rgba(255, 255, 255, 0.03),
     0 6px 14px rgba(0, 0, 0, 0.14);
 }
 
@@ -1697,16 +1695,14 @@ html[data-theme='light'] body.casinos-page .alpha-nav .view-all {
   border-color: rgba(15, 23, 42, 0.07);
   color: #0f172a;
   box-shadow:
-    0 10px 22px rgba(15, 23, 42, 0.08),
-    inset 0 1px 0 rgba(255, 255, 255, 0.94);
+    0 10px 22px rgba(15, 23, 42, 0.08);
 }
 
 html[data-theme='light'] body.casinos-page .alpha-nav .view-all:hover {
   background: #ffffff;
   border-color: rgba(15, 23, 42, 0.12);
   box-shadow:
-    0 14px 28px rgba(15, 23, 42, 0.12),
-    inset 0 1px 0 rgba(255, 255, 255, 0.98);
+    0 14px 28px rgba(15, 23, 42, 0.12);
 }
 
 
@@ -1779,7 +1775,6 @@ html[data-theme='light'] body[data-brand] .brand-sticky-title__brand {
     radial-gradient(circle at top right, rgba(56, 189, 248, 0.14), transparent 42%),
     linear-gradient(180deg, rgba(10, 15, 30, 0.98), rgba(20, 30, 52, 0.94));
   box-shadow:
-    inset 0 -1px 0 rgba(255, 255, 255, 0.05),
     0 8px 18px rgba(15, 23, 42, 0.12);
 }
 
@@ -2105,7 +2100,7 @@ html[data-theme='light'] .casino-card .card-img {
     radial-gradient(circle at bottom left, rgba(255, 223, 0, 0.08), transparent 36%),
     linear-gradient(180deg, rgba(10, 15, 30, 0.98), rgba(20, 30, 52, 0.96));
   border-color: rgba(15, 23, 42, 0.18);
-  box-shadow: inset 0 -1px 0 rgba(255, 255, 255, 0.06);
+  box-shadow: none;
 }
 
 html[data-theme='light'] .casino-card .card-img {
@@ -2157,7 +2152,7 @@ body.home-page .content[data-country] .top-country-title {
 }
 
 body.home-page .content[data-country] .top-country-title::before {
-  content: 'Top Casino Picks';
+  content: none;
   display: block;
   margin-bottom: 12px;
   color: var(--section-accent);
@@ -2274,7 +2269,7 @@ body[data-page='top-casinos'] .content[data-country] .top-country-title {
 }
 
 body[data-page='top-casinos'] .content[data-country] .top-country-title::before {
-  content: 'Top Casino Picks';
+  content: none;
   display: block;
   margin-bottom: 12px;
   color: var(--section-accent);
@@ -2564,12 +2559,10 @@ body[data-country] .country-new-reviews .home-insight-card {
   border: 1px solid var(--border-soft);
   border-radius: 20px;
   box-shadow:
-    0 30px 78px rgba(15, 23, 42, 0.16),
-    0 12px 30px rgba(15, 23, 42, 0.1),
-    inset 0 1px 0 rgba(255, 255, 255, 0.66);
+    0 30px 78px rgba(15, 23, 42, 0.16), 0 12px 30px rgba(15, 23, 42, 0.1);
   padding: var(--panel-padding-tight);
   gap: var(--section-gap-tight);
-  backdrop-filter: var(--blur-glass);
+  backdrop-filter: none;
 }
 
 .home-insight-new-brands .home-insight-head {
@@ -2751,8 +2744,7 @@ body[data-country] .country-new-reviews .home-insight-card {
   height: 6px;
   background: var(--text-main);
   box-shadow:
-    0 0 0 4px rgba(148, 163, 184, 0.12),
-    0 0 18px rgba(148, 163, 184, 0.16);
+    0 0 0 4px rgba(148, 163, 184, 0.12), 0 0 18px rgba(148, 163, 184, 0.16);
 }
 
 .home-new-brands-carousel.is-carousel-active .home-link-card.is-current .home-link-logo,
@@ -2815,8 +2807,7 @@ body[data-country] .country-new-reviews .home-insight-card {
     linear-gradient(180deg, rgba(255, 255, 255, 0.055), rgba(255, 255, 255, 0.012)), rgba(2, 6, 23, 0.16);
   color: var(--text-main);
   box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.14),
-    inset 0 -1px 0 rgba(2, 6, 23, 0.32);
+    none;
   cursor: pointer;
   transition:
     border-color 0.2s ease,
@@ -2876,8 +2867,7 @@ html[data-theme='light'] .home-new-brands-carousel.is-carousel-active .home-link
 html[data-theme='light'] .country-new-reviews-carousel.is-carousel-active .home-link-card.is-current::before {
   background: #0f172a;
   box-shadow:
-    0 0 0 4px rgba(100, 116, 139, 0.1),
-    0 0 18px rgba(100, 116, 139, 0.12);
+    0 0 0 4px rgba(100, 116, 139, 0.1), 0 0 18px rgba(100, 116, 139, 0.12);
 }
 
 html[data-theme='light'] .link-carousel-progress {
@@ -2893,8 +2883,6 @@ html[data-theme='light'] .link-carousel-button {
   border-color: rgba(15, 23, 42, 0.1);
   background: var(--surface-card);
   box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.92),
-    inset 0 -1px 0 rgba(15, 23, 42, 0.05),
     0 8px 16px rgba(15, 23, 42, 0.07);
 }
 
@@ -2908,7 +2896,7 @@ html[data-theme='light'] .home-link-logo {
     radial-gradient(circle at top right, rgba(56, 189, 248, 0.14), transparent 40%),
     linear-gradient(180deg, rgba(10, 15, 30, 0.98), rgba(20, 30, 52, 0.96));
   border-color: rgba(15, 23, 42, 0.18);
-  box-shadow: inset 0 -1px 0 rgba(255, 255, 255, 0.06);
+  box-shadow: none;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -3455,7 +3443,7 @@ body.home-page .all-countries > .container {
 }
 
 .all-countries .title::before {
-  content: 'BROWSE BY MARKET';
+  content: none;
   display: block;
   font-size: 11px;
   font-weight: 700;
@@ -3465,15 +3453,15 @@ body.home-page .all-countries > .container {
   text-align: center;
 }
 
-html[lang='de'] .all-countries .title::before { content: 'NACH LAND DURCHSUCHEN'; }
-html[lang='es'] .all-countries .title::before { content: 'EXPLORAR POR PAÍS'; }
-html[lang='it'] .all-countries .title::before { content: 'ESPLORA PER PAESE'; }
-html[lang='pl'] .all-countries .title::before { content: 'PRZEGLĄDAJ WEDŁUG KRAJU'; }
-html[lang='uk'] .all-countries .title::before { content: 'ПЕРЕГЛЯНУТИ ЗА КРАЇНОЮ'; }
-html[lang='pt'] .all-countries .title::before { content: 'EXPLORAR POR PAÍS'; }
-html[lang='fr'] .all-countries .title::before { content: 'PARCOURIR PAR PAYS'; }
-html[lang='hi'] .all-countries .title::before { content: 'देश के अनुसार देखें'; }
-html[lang='fi'] .all-countries .title::before { content: 'SELAA MAITTAIN'; }
+html[lang='de'] .all-countries .title::before { content: none; }
+html[lang='es'] .all-countries .title::before { content: none; }
+html[lang='it'] .all-countries .title::before { content: none; }
+html[lang='pl'] .all-countries .title::before { content: none; }
+html[lang='uk'] .all-countries .title::before { content: none; }
+html[lang='pt'] .all-countries .title::before { content: none; }
+html[lang='fr'] .all-countries .title::before { content: none; }
+html[lang='hi'] .all-countries .title::before { content: none; }
+html[lang='fi'] .all-countries .title::before { content: none; }
 
 .countries-cloud {
   display: flex;
@@ -3505,8 +3493,8 @@ html[lang='fi'] .all-countries .title::before { content: 'SELAA MAITTAIN'; }
   letter-spacing: 0;
   line-height: 1.2;
   text-decoration: none;
-  -webkit-backdrop-filter: blur(8px);
-  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
   transition:
     background 0.2s ease,
     color 0.2s ease,
@@ -4027,7 +4015,7 @@ html[data-theme='light'] .footer-newsletter-row input[type='email']:focus {
 }
 
 .footer-brand-directory::before {
-  content: 'BRANDS A TO Z';
+  content: none;
   display: block;
   font-size: 11px;
   font-weight: 700;
@@ -4821,7 +4809,7 @@ body:not(.home-page):not(.casinos-page)
     .content-article > section > h2,
     .final-cta-glass .title
   )::before {
-  content: var(--section-eyebrow);
+  content: none;
   display: block;
   margin-bottom: 12px;
   color: var(--section-accent);
@@ -6019,8 +6007,6 @@ html[data-theme='light'] .footer-settings-trigger:hover {
   background: var(--surface-graphite-gradient);
   border-color: rgba(148, 163, 184, 0.16);
   box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.18),
-    inset 0 -1px 0 rgba(2, 6, 23, 0.46),
     0 8px 18px rgba(0, 0, 0, 0.14);
 }
 
@@ -6028,8 +6014,6 @@ html[data-theme='light'] .footer-settings-trigger:hover {
   background: var(--surface-graphite-gradient-hover);
   border-color: rgba(191, 219, 254, 0.24);
   box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.23),
-    inset 0 -1px 0 rgba(2, 6, 23, 0.5),
     0 12px 24px rgba(0, 0, 0, 0.2);
   transform: translateY(-1px);
 }
@@ -6045,8 +6029,6 @@ html[data-theme='light'] .theme-settings-option {
   background: var(--surface-card);
   border-color: rgba(15, 23, 42, 0.08);
   box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.92),
-    inset 0 -1px 0 rgba(15, 23, 42, 0.05),
     0 10px 22px rgba(15, 23, 42, 0.08);
 }
 
@@ -6055,8 +6037,6 @@ html[data-theme='light'] .theme-settings-option:hover {
   background: var(--surface-card-hover);
   border-color: rgba(15, 23, 42, 0.12);
   box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.96),
-    inset 0 -1px 0 rgba(15, 23, 42, 0.06),
     0 14px 28px rgba(15, 23, 42, 0.11);
 }
 
@@ -6296,10 +6276,8 @@ body[data-brand='Leon'] .hero-content.glass-card {
   border-radius: 20px;
   background: var(--bg-surface);
   box-shadow:
-    0 30px 78px rgba(15, 23, 42, 0.16),
-    0 12px 30px rgba(15, 23, 42, 0.1),
-    inset 0 1px 0 rgba(255, 255, 255, 0.66);
-  backdrop-filter: var(--blur-glass);
+    0 30px 78px rgba(15, 23, 42, 0.16), 0 12px 30px rgba(15, 23, 42, 0.1);
+  backdrop-filter: none;
   overflow: visible;
 }
 
@@ -7925,7 +7903,6 @@ body.casinos-page .casino-list-row:nth-child(n) .casino-list-logo {
     radial-gradient(circle at bottom left, rgba(255, 223, 0, 0.08), transparent 40%),
     linear-gradient(180deg, rgba(10, 15, 30, 0.98), rgba(20, 30, 52, 0.96));
   box-shadow:
-    inset 0 -1px 0 rgba(255, 255, 255, 0.06),
     0 12px 28px rgba(0, 0, 0, 0.16);
   overflow: hidden;
 }
@@ -7938,7 +7915,6 @@ html[data-theme='light'] body.casinos-page .casino-list-logo {
     linear-gradient(180deg, rgba(10, 15, 30, 0.98), rgba(20, 30, 52, 0.96));
   border-color: rgba(15, 23, 42, 0.18);
   box-shadow:
-    inset 0 -1px 0 rgba(255, 255, 255, 0.06),
     0 12px 28px rgba(15, 23, 42, 0.12);
 }
 
@@ -8693,8 +8669,7 @@ body[data-country] .country-hero-cards .view-all {
     border-radius: 6px;
     background: #fff;
     box-shadow:
-      0 16px 34px rgba(0, 0, 0, 0.18),
-      0 0 0 1px rgba(255, 255, 255, 0.15);
+      0 16px 34px rgba(0, 0, 0, 0.18), 0 0 0 1px rgba(255, 255, 255, 0.15);
     object-fit: contain;
     pointer-events: none;
   }
@@ -8732,8 +8707,7 @@ body[data-country] .country-hero-cards .view-all {
   html[data-theme='light'] body[data-country] .country-card-flag {
     border-color: #fff;
     box-shadow:
-      0 18px 34px rgba(15, 23, 42, 0.14),
-      0 0 0 1px rgba(15, 23, 42, 0.08);
+      0 18px 34px rgba(15, 23, 42, 0.14), 0 0 0 1px rgba(15, 23, 42, 0.08);
   }
 
   body[data-country] .country-hero-cards .section-head,
@@ -8765,10 +8739,8 @@ body[data-country] .country-hero-cards .view-all {
     border: 1px solid var(--border-soft);
     border-radius: 20px;
     box-shadow:
-      0 30px 78px rgba(15, 23, 42, 0.16),
-      0 12px 30px rgba(15, 23, 42, 0.1),
-      inset 0 1px 0 rgba(255, 255, 255, 0.66);
-    backdrop-filter: var(--blur-glass);
+      0 30px 78px rgba(15, 23, 42, 0.16), 0 12px 30px rgba(15, 23, 42, 0.1);
+    backdrop-filter: none;
   }
 
   body[data-country] .country-new-reviews .home-insight-head h2 {
@@ -9022,7 +8994,7 @@ body[data-country] .expert-header::before {
   font-weight: 850;
   line-height: 1;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.24);
-  backdrop-filter: blur(10px);
+  backdrop-filter: none;
 }
 
 body[data-country] .expert-info {
@@ -9051,8 +9023,7 @@ body[data-country] .expert-avatar {
   border-radius: 50%;
   background: #11181b;
   box-shadow:
-    0 0 0 8px color-mix(in srgb, var(--expert-accent) 9%, transparent),
-    0 22px 46px rgba(0, 0, 0, 0.34);
+    0 0 0 8px color-mix(in srgb, var(--expert-accent) 9%, transparent), 0 22px 46px rgba(0, 0, 0, 0.34);
 }
 
 body[data-country] .expert-avatar img {
@@ -9153,7 +9124,6 @@ body[data-country] .expert-body {
     radial-gradient(circle at 94% 4%, color-mix(in srgb, var(--expert-accent) 17%, transparent), transparent 28%),
     linear-gradient(145deg, #17191c 0%, #0d0f12 58%, #08090b 100%);
   box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.055),
     0 24px 55px rgba(0, 0, 0, 0.16);
   text-align: left;
   isolation: isolate;
@@ -9161,7 +9131,7 @@ body[data-country] .expert-body {
 }
 
 body[data-country] .expert-body::before {
-  content: 'SpinCresta review framework  /  5-point check';
+  content: none;
   position: relative;
   z-index: 1;
   grid-column: 1 / -1;
@@ -9176,7 +9146,7 @@ body[data-country] .expert-body::before {
 }
 
 html[lang='de'] body[data-country] .expert-body::before {
-  content: 'SpinCresta-Prüfmodell  /  5-Punkte-Check';
+  content: none;
 }
 
 body[data-country] .expert-body::after {
@@ -9190,8 +9160,7 @@ body[data-country] .expert-body::after {
   border: 1px solid color-mix(in srgb, var(--expert-accent) 15%, transparent);
   border-radius: 50%;
   box-shadow:
-    0 0 0 34px color-mix(in srgb, var(--expert-accent) 3%, transparent),
-    0 0 0 68px color-mix(in srgb, var(--expert-accent) 2%, transparent);
+    0 0 0 34px color-mix(in srgb, var(--expert-accent) 3%, transparent), 0 0 0 68px color-mix(in srgb, var(--expert-accent) 2%, transparent);
 }
 
 body[data-country] .expert-body > p,
@@ -9278,7 +9247,7 @@ body[data-country] .expert-methodology li {
   font-size: 13px;
   line-height: 1.5;
   text-align: left;
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.035);
+  box-shadow: none;
   counter-increment: expert-review-step;
   overflow: hidden;
 }
@@ -9374,7 +9343,7 @@ body[data-country] .expert-body h3:nth-of-type(2) {
 }
 
 body[data-country] .expert-body h3:nth-of-type(2)::after {
-  content: 'Clear terms  /  Traceable licences  /  Market fit';
+  content: none;
   display: block;
   margin-top: 12px;
   color: var(--expert-accent);
@@ -9386,7 +9355,7 @@ body[data-country] .expert-body h3:nth-of-type(2)::after {
 }
 
 html[lang='de'] body[data-country] .expert-body h3:nth-of-type(2)::after {
-  content: 'Klare Regeln  /  Prüfbare Lizenzen  /  Marktbezug';
+  content: none;
 }
 
 body[data-country] .expert-body > p:nth-of-type(3) {
@@ -10838,7 +10807,7 @@ body.home-page .hero-content {
 }
 
 body.home-page .hero-content::before {
-  content: 'GLOBAL CASINO INTELLIGENCE';
+  content: none;
   display: block;
   color: var(--section-accent);
   font-size: 11px;
@@ -11446,7 +11415,7 @@ body[data-brand] .brand-why-heading > .title {
 }
 
 body[data-brand] .brand-why-heading > .title::before {
-  content: var(--section-eyebrow, 'BRAND HIGHLIGHTS');
+  content: none;
   display: block;
   margin-bottom: 12px;
   color: var(--section-accent);
@@ -12789,7 +12758,7 @@ body[data-page='top-casinos'] .content[data-country] .top-country-title::before 
 }
 
 body[data-page='top-casinos'][data-language='de'] .content[data-country] .top-country-title::before {
-  content: 'Top-Casino-Auswahl';
+  content: none;
 }
 
 body[data-page='top-casinos'] .top-casinos-method {
@@ -13442,8 +13411,7 @@ body.author-page {
   border-radius: 50%;
   background: #11181b;
   box-shadow:
-    0 0 0 14px color-mix(in srgb, var(--author-accent) 9%, transparent),
-    0 30px 70px rgba(0, 0, 0, 0.36);
+    0 0 0 14px color-mix(in srgb, var(--author-accent) 9%, transparent), 0 30px 70px rgba(0, 0, 0, 0.36);
 }
 
 .author-photo img {
@@ -15163,11 +15131,10 @@ body[data-brand] .brand-availability-widget > * {
 html:not([data-theme='light']) body[data-brand] .brand-availability-widget .availability-tabs {
   border: 1px solid var(--surface-border-strong);
   border-radius: var(--radius-lg);
-  background: var(--surface-section);
-  background: color-mix(in srgb, var(--surface-section) 88%, transparent);
+  background: var(--surface-panel);
   box-shadow: var(--shadow-soft);
-  -webkit-backdrop-filter: blur(18px) saturate(115%);
-  backdrop-filter: blur(18px) saturate(115%);
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
 }
 
 html[data-theme='light'] body[data-brand] .brand-availability-widget::before {
@@ -15608,8 +15575,7 @@ body[data-brand] [data-feedback-compose-toggle][hidden] {
       radial-gradient(circle at 92% 88%, rgba(255, 223, 0, 0.12), transparent 32%),
       linear-gradient(135deg, #10191d 0%, #101416 48%, #080a0b 100%);
     box-shadow:
-      0 28px 72px rgba(0, 0, 0, 0.26),
-      inset 0 1px 0 rgba(255, 255, 255, 0.08);
+      0 28px 72px rgba(0, 0, 0, 0.26);
   }
 
   body[data-country] .hero.country-hero-with-cards .country-hero-rail::before {
@@ -15683,8 +15649,7 @@ body[data-brand] [data-feedback-compose-toggle][hidden] {
     margin-top: -36px;
     background: var(--surface-card);
     box-shadow:
-      0 24px 60px rgba(0, 0, 0, 0.22),
-      inset 0 1px 0 rgba(255, 255, 255, 0.06);
+      0 24px 60px rgba(0, 0, 0, 0.22);
   }
 
   body[data-country] .country-hero-cards .section-head {
@@ -15953,7 +15918,7 @@ html[data-theme='light'] body[data-country] .country-hero-cards > .intro {
   }
 
   body[data-country] .country-hero-cards > .intro::before {
-    content: '';
+    content: none;
     flex: 0 0 4px;
     width: 4px;
     height: clamp(54px, 4vw, 68px);
@@ -15985,8 +15950,7 @@ html[data-theme='light'] body[data-country] .country-hero-cards > .intro {
       linear-gradient(180deg, rgba(255, 255, 255, 0.025), transparent 38%),
       linear-gradient(135deg, #15191c 0%, #111518 56%, #0f1214 100%);
     box-shadow:
-      0 24px 58px rgba(0, 0, 0, 0.24),
-      inset 0 1px 0 rgba(255, 255, 255, 0.055);
+      0 24px 58px rgba(0, 0, 0, 0.24);
   }
 
   html:not([data-theme='light']) body[data-country] .hero.country-hero-with-cards .country-hero-rail::before {
@@ -15999,8 +15963,7 @@ html[data-theme='light'] body[data-country] .country-hero-cards > .intro {
     border-color: rgba(255, 255, 255, 0.12);
     background: linear-gradient(145deg, #24292d, #202428 62%);
     box-shadow:
-      0 22px 52px rgba(0, 0, 0, 0.2),
-      inset 0 1px 0 rgba(255, 255, 255, 0.045);
+      0 22px 52px rgba(0, 0, 0, 0.2);
   }
 
   html:not([data-theme='light']) body[data-country] .country-hero-cards .section-head::after {
@@ -16113,7 +16076,6 @@ html[data-theme='light'] body[data-country] .country-hero-cards > .intro {
       radial-gradient(circle at 92% 8%, color-mix(in srgb, var(--expert-accent) 7%, transparent), transparent 28%),
       linear-gradient(145deg, #171a1d, #0c0f11 72%);
     box-shadow:
-      inset 0 1px 0 rgba(255, 255, 255, 0.055),
       0 24px 55px rgba(0, 0, 0, 0.16);
     overflow: hidden;
   }
@@ -16152,7 +16114,7 @@ html[data-theme='light'] body[data-country] .country-hero-cards > .intro {
     background:
       radial-gradient(circle at 50% 20%, color-mix(in srgb, var(--expert-accent) 11%, transparent), transparent 34%),
       rgba(255, 255, 255, 0.025);
-    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.04);
+    box-shadow: none;
     text-align: center;
     transform: none;
   }
@@ -16166,9 +16128,7 @@ html[data-theme='light'] body[data-country] .country-hero-cards > .intro {
     height: 118px;
     border-width: 3px;
     box-shadow:
-      0 0 0 7px color-mix(in srgb, var(--expert-accent) 9%, transparent),
-      0 0 0 8px color-mix(in srgb, var(--expert-accent) 25%, transparent),
-      0 20px 42px rgba(0, 0, 0, 0.3);
+      0 0 0 7px color-mix(in srgb, var(--expert-accent) 9%, transparent), 0 0 0 8px color-mix(in srgb, var(--expert-accent) 25%, transparent), 0 20px 42px rgba(0, 0, 0, 0.3);
   }
 
   body[data-country] .expert-card .expert-info {
@@ -16239,7 +16199,7 @@ html[data-theme='light'] body[data-country] .country-hero-cards > .intro {
     background:
       linear-gradient(145deg, rgba(255, 255, 255, 0.055), rgba(255, 255, 255, 0.018)),
       color-mix(in srgb, var(--expert-accent) 3%, transparent);
-    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.035);
+    box-shadow: none;
     overflow: hidden;
     transition:
       border-color 0.22s ease,
@@ -16248,7 +16208,7 @@ html[data-theme='light'] body[data-country] .country-hero-cards > .intro {
 
   body[data-country] .expert-card .expert-methodology > li:hover {
     border-color: color-mix(in srgb, var(--expert-accent) 32%, transparent);
-    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.055);
+    box-shadow: none;
     transform: none;
   }
 
@@ -16312,7 +16272,6 @@ html[data-theme='light'] body[data-country] .country-hero-cards > .intro {
       radial-gradient(circle at 92% 8%, rgba(53, 85, 72, 0.065), transparent 28%),
       linear-gradient(145deg, #f7f8f6, #eff2ef);
     box-shadow:
-      inset 0 1px 0 rgba(255, 255, 255, 0.9),
       0 22px 48px rgba(25, 35, 32, 0.1);
   }
 
@@ -16322,7 +16281,6 @@ html[data-theme='light'] body[data-country] .country-hero-cards > .intro {
       radial-gradient(circle at 50% 20%, rgba(53, 85, 72, 0.1), transparent 34%),
       rgba(255, 255, 255, 0.58);
     box-shadow:
-      inset 0 1px 0 #ffffff,
       0 12px 26px rgba(25, 35, 32, 0.055);
   }
 
@@ -16350,14 +16308,12 @@ html[data-theme='light'] body[data-country] .country-hero-cards > .intro {
       rgba(255, 255, 255, 0.62);
     color: #4b5952;
     box-shadow:
-      inset 0 1px 0 #ffffff,
       0 12px 26px rgba(25, 35, 32, 0.065);
   }
 
   html[data-theme='light'] body[data-country] .expert-card .expert-methodology > li:hover {
     border-color: rgba(53, 85, 72, 0.24);
     box-shadow:
-      inset 0 1px 0 #ffffff,
       0 16px 32px rgba(25, 35, 32, 0.09);
   }
 
@@ -16432,7 +16388,7 @@ html[data-theme='light'] body[data-country] .country-hero-cards > .intro {
     border: 1px solid color-mix(in srgb, var(--expert-accent) 18%, transparent);
     border-radius: 14px;
     background: rgba(255, 255, 255, 0.025);
-    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.035);
+    box-shadow: none;
   }
 
   body[data-country] .expert-card .expert-methodology li:last-child {
@@ -16833,11 +16789,10 @@ body[data-country] .hero.country-hero-with-cards .hero-content .hero-flag,
 html[data-theme='light'] body[data-country] .hero.country-hero-with-cards .hero-content .hero-flag {
   border-color: rgba(255, 255, 255, 0.58);
   background: rgba(255, 255, 255, 0.34);
-  -webkit-backdrop-filter: blur(10px) saturate(0.82);
-  backdrop-filter: blur(10px) saturate(0.82);
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
   box-shadow:
-    0 20px 44px rgba(0, 0, 0, 0.22),
-    inset 0 1px 0 rgba(255, 255, 255, 0.48);
+    0 20px 44px rgba(0, 0, 0, 0.22);
 }
 
 @media (max-width: 768px) {
@@ -16874,8 +16829,7 @@ html[data-theme='light'] body[data-country] .hero.country-hero-with-cards .hero-
     border-color: rgba(255, 255, 255, 0.2);
     border-radius: 20px;
     box-shadow:
-      0 18px 42px rgba(0, 0, 0, 0.2),
-      inset 0 1px 0 rgba(255, 255, 255, 0.1);
+      0 18px 42px rgba(0, 0, 0, 0.2);
   }
 
   body[data-country] .hero.country-hero-with-cards .hero-content {
@@ -16951,11 +16905,10 @@ html[data-theme='light'] body[data-country] .hero.country-hero-with-cards .hero-
     background:
       radial-gradient(circle at 100% 0%, color-mix(in srgb, var(--section-accent) 10%, transparent), transparent 42%),
       linear-gradient(145deg, rgba(42, 48, 52, 0.78), rgba(31, 37, 41, 0.66));
-    -webkit-backdrop-filter: blur(18px) saturate(1.08);
-    backdrop-filter: blur(18px) saturate(1.08);
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
     box-shadow:
-      0 20px 44px rgba(0, 0, 0, 0.18),
-      inset 0 1px 0 rgba(255, 255, 255, 0.055);
+      0 20px 44px rgba(0, 0, 0, 0.18);
     text-align: left;
   }
 
@@ -16992,8 +16945,8 @@ html[data-theme='light'] body[data-country] .hero.country-hero-with-cards .hero-
     border-top: 0;
     border-radius: 0 0 18px 18px;
     background: linear-gradient(145deg, rgba(36, 42, 46, 0.76), rgba(28, 34, 38, 0.64));
-    -webkit-backdrop-filter: blur(18px) saturate(1.08);
-    backdrop-filter: blur(18px) saturate(1.08);
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
     box-shadow: 0 20px 44px rgba(0, 0, 0, 0.18);
     font-size: 13.5px;
     line-height: 1.5;
@@ -17001,7 +16954,7 @@ html[data-theme='light'] body[data-country] .hero.country-hero-with-cards .hero-
   }
 
   body[data-country] .country-hero-cards > .intro::before {
-    content: '';
+    content: none;
     position: absolute;
     top: 12px;
     bottom: 24px;
@@ -17021,8 +16974,7 @@ html[data-theme='light'] body[data-country] .hero.country-hero-with-cards .hero-
       radial-gradient(circle at 100% 0%, rgba(91, 139, 116, 0.12), transparent 42%),
       linear-gradient(145deg, rgba(255, 255, 255, 0.82), rgba(240, 246, 242, 0.72));
     box-shadow:
-      0 18px 38px rgba(23, 38, 31, 0.1),
-      inset 0 1px 0 #ffffff;
+      0 18px 38px rgba(23, 38, 31, 0.1);
   }
 
   html[data-theme='light'] body[data-country] .country-hero-cards > .intro {
@@ -17048,11 +17000,10 @@ html[data-theme='light'] body[data-country] .hero.country-hero-with-cards .hero-
     margin-top: -64px;
     border-color: rgba(255, 255, 255, 0.18);
     background: linear-gradient(145deg, rgba(28, 34, 38, 0.5), rgba(17, 22, 25, 0.34));
-    -webkit-backdrop-filter: blur(14px) saturate(1.16);
-    backdrop-filter: blur(14px) saturate(1.16);
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
     box-shadow:
-      0 24px 60px rgba(0, 0, 0, 0.18),
-      inset 0 1px 0 rgba(255, 255, 255, 0.11);
+      0 24px 60px rgba(0, 0, 0, 0.18);
   }
 
   html[data-theme='light'] body[data-country] .country-hero-cards .section-head,
@@ -17063,12 +17014,10 @@ html[data-theme='light'] body[data-country] .hero.country-hero-with-cards .hero-
     margin-top: -64px;
     border-color: rgba(255, 255, 255, 0.82);
     background: linear-gradient(145deg, rgba(255, 255, 255, 0.62), rgba(244, 248, 246, 0.46));
-    -webkit-backdrop-filter: blur(15px) saturate(0.66) brightness(1.08);
-    backdrop-filter: blur(15px) saturate(0.66) brightness(1.08);
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
     box-shadow:
-      0 22px 52px rgba(22, 30, 27, 0.09),
-      inset 0 1px 0 rgba(255, 255, 255, 0.96),
-      inset 0 0 0 1px rgba(34, 48, 42, 0.055);
+      0 22px 52px rgba(22, 30, 27, 0.09);
   }
 
   html[data-theme='light'] body[data-country] .country-hero-cards .section-head::after {
@@ -17453,8 +17402,7 @@ body.home-page .hero.home-video-hero {
   border-radius: 24px;
   background: #0d1214;
   box-shadow:
-    0 28px 72px rgba(0, 0, 0, 0.26),
-    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+    0 28px 72px rgba(0, 0, 0, 0.26);
 }
 
 body.home-page .hero.home-video-hero::before {
@@ -17540,8 +17488,8 @@ body.home-page .hero.home-video-hero :is(.home-primary-action, .home-secondary-a
   border-color: rgba(255, 255, 255, 0.3);
   background: rgba(8, 12, 14, 0.42);
   color: #f8fafc;
-  -webkit-backdrop-filter: blur(10px);
-  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
 }
 
 body.home-page .hero.home-video-hero :is(.home-primary-action, .home-secondary-action):is(:hover, :focus-visible) {
@@ -17571,10 +17519,9 @@ body.home-page .hero.home-video-hero + .content-area .home-stats-card {
   border-radius: 24px;
   background: rgba(28, 33, 36, 0.9);
   box-shadow:
-    0 24px 58px rgba(0, 0, 0, 0.24),
-    inset 0 1px 0 rgba(255, 255, 255, 0.08);
-  -webkit-backdrop-filter: blur(18px) saturate(1.04);
-  backdrop-filter: blur(18px) saturate(1.04);
+    0 24px 58px rgba(0, 0, 0, 0.24);
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
 }
 
 body.home-page .hero.home-video-hero + .content-area .home-stats-card .home-insight-head {
@@ -17645,7 +17592,12 @@ body.home-page .hero.home-video-hero + .content-area .home-stat-number {
 }
 
 body.home-page .hero.home-video-hero + .content-area .home-stat-tile strong {
-  color: #a8d8bc;
+  color: var(--text-main);
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.35;
+  letter-spacing: normal;
+  text-transform: none;
 }
 
 body.home-page .hero.home-video-hero + .content-area .home-stat-tile span:last-child {
@@ -17658,8 +17610,7 @@ html[data-theme='light'] body.home-page .hero.home-video-hero + .content-area .h
   border-color: rgba(32, 48, 42, 0.18);
   background: rgba(248, 250, 249, 0.88);
   box-shadow:
-    0 24px 58px rgba(22, 30, 27, 0.12),
-    inset 0 1px 0 rgba(255, 255, 255, 0.96);
+    0 24px 58px rgba(22, 30, 27, 0.12);
 }
 
 html[data-theme='light'] body.home-page .hero.home-video-hero + .content-area .home-stats-card .home-insight-head {
@@ -17790,7 +17741,7 @@ html[data-theme='light'] body.home-page .hero.home-video-hero + .content-area .h
   body.home-page .hero.home-video-hero + .content-area .home-stats-card .home-insight-head > p {
     max-width: 44ch;
     padding-left: 14px;
-    border-left: 3px solid var(--section-accent);
+    border-left: 0;
     font-size: 12.5px;
     text-align: left;
   }
@@ -17847,17 +17798,15 @@ body[data-brand].has-brand-sticky-layout
    ============================================================= */
 :is(body.home-page, body[data-country], body[data-brand]) {
   --unified-hero-media-height: 380px;
-  --unified-hero-lower-bg: linear-gradient(145deg, rgba(28, 34, 38, 0.5), rgba(17, 22, 25, 0.34));
-  --unified-hero-lower-border: rgba(148, 163, 184, 0.3);
-  --unified-hero-lower-shadow: 0 24px 58px rgba(0, 0, 0, 0.22),
-    inset 0 1px 0 rgba(255, 255, 255, 0.07);
+  --unified-hero-lower-bg: var(--surface-panel);
+  --unified-hero-lower-border: rgba(255, 255, 255, 0.16);
+  --unified-hero-lower-shadow: 0 24px 58px rgba(0, 0, 0, 0.22);
 }
 
 html[data-theme='light'] :is(body.home-page, body[data-country], body[data-brand]) {
-  --unified-hero-lower-bg: linear-gradient(145deg, rgba(255, 255, 255, 0.62), rgba(244, 248, 246, 0.46));
+  --unified-hero-lower-bg: var(--surface-panel);
   --unified-hero-lower-border: rgba(32, 48, 42, 0.18);
-  --unified-hero-lower-shadow: 0 24px 58px rgba(22, 30, 27, 0.12),
-    inset 0 1px 0 rgba(255, 255, 255, 0.84);
+  --unified-hero-lower-shadow: 0 24px 58px rgba(22, 30, 27, 0.12);
 }
 
 body.home-page .hero.home-video-hero,
@@ -17894,8 +17843,8 @@ body[data-brand] .brand-profile-showcase__bar {
   border-color: var(--unified-hero-lower-border);
   background: var(--unified-hero-lower-bg) !important;
   box-shadow: var(--unified-hero-lower-shadow);
-  -webkit-backdrop-filter: blur(18px) saturate(1.08) !important;
-  backdrop-filter: blur(18px) saturate(1.08) !important;
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
 }
 
 body[data-brand] .brand-profile-showcase__media {
@@ -17929,11 +17878,11 @@ body[data-brand] .brand-profile-showcase .brand-why-media img {
 @media (max-width: 768px) {
   :is(body.home-page, body[data-country], body[data-brand]) {
     --unified-hero-media-height: 420px;
-    --unified-hero-lower-bg: linear-gradient(145deg, rgba(42, 48, 52, 0.78), rgba(31, 37, 41, 0.66));
+    --unified-hero-lower-bg: var(--surface-panel);
   }
 
   html[data-theme='light'] :is(body.home-page, body[data-country], body[data-brand]) {
-    --unified-hero-lower-bg: linear-gradient(145deg, rgba(255, 255, 255, 0.82), rgba(240, 246, 242, 0.72));
+    --unified-hero-lower-bg: var(--surface-panel);
   }
 
   body.home-page .hero.home-video-hero,
@@ -18027,18 +17976,16 @@ body.home-page .hero.home-video-hero + .content-area .home-stat-number {
    ============================================================= */
 body[data-page='top-rated'] {
   --unified-hero-media-height: clamp(340px, 26.4vw, 380px);
-  --unified-hero-lower-bg: linear-gradient(145deg, rgba(28, 34, 38, 0.5), rgba(17, 22, 25, 0.34));
-  --unified-hero-lower-border: rgba(148, 163, 184, 0.3);
-  --unified-hero-lower-shadow: 0 24px 58px rgba(0, 0, 0, 0.22),
-    inset 0 1px 0 rgba(255, 255, 255, 0.07);
+  --unified-hero-lower-bg: var(--surface-panel);
+  --unified-hero-lower-border: rgba(255, 255, 255, 0.16);
+  --unified-hero-lower-shadow: 0 24px 58px rgba(0, 0, 0, 0.22);
   --top-rated-hero-image: url('https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto,w_2000/v1790437606/spincresta/pages/top-rated-page/top-rated-hero_oufnpj.webp');
 }
 
 html[data-theme='light'] body[data-page='top-rated'] {
-  --unified-hero-lower-bg: linear-gradient(145deg, rgba(255, 255, 255, 0.62), rgba(244, 248, 246, 0.46));
+  --unified-hero-lower-bg: var(--surface-panel);
   --unified-hero-lower-border: rgba(32, 48, 42, 0.18);
-  --unified-hero-lower-shadow: 0 24px 58px rgba(22, 30, 27, 0.12),
-    inset 0 1px 0 rgba(255, 255, 255, 0.84);
+  --unified-hero-lower-shadow: 0 24px 58px rgba(22, 30, 27, 0.12);
 }
 
 body[data-page='top-rated'] main {
@@ -18066,8 +18013,7 @@ body[data-page='top-rated'] .hero.container {
   background-position: center center;
   background-size: cover;
   box-shadow:
-    0 28px 72px rgba(0, 0, 0, 0.26),
-    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+    0 28px 72px rgba(0, 0, 0, 0.26);
 }
 
 body[data-page='top-rated'] .hero.container::before {
@@ -18149,8 +18095,8 @@ body[data-page='top-rated'] .hero.container + .content .intro {
   border: 1px solid var(--unified-hero-lower-border);
   background: var(--unified-hero-lower-bg);
   box-shadow: var(--unified-hero-lower-shadow);
-  -webkit-backdrop-filter: blur(18px) saturate(1.08);
-  backdrop-filter: blur(18px) saturate(1.08);
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
 }
 
 body[data-page='top-rated'] .hero.container + .content .section-head {
@@ -18194,7 +18140,7 @@ body[data-page='top-rated'] .hero.container + .content .intro {
 }
 
 body[data-page='top-rated'] .hero.container + .content .intro::before {
-  content: '';
+  content: none;
   flex: 0 0 4px;
   width: 4px;
   height: clamp(54px, 4vw, 68px);
@@ -18211,11 +18157,11 @@ body[data-page='top-rated'] .hero.container + .content #top-rated-cards {
 @media (max-width: 768px) {
   body[data-page='top-rated'] {
     --unified-hero-media-height: 400px;
-    --unified-hero-lower-bg: linear-gradient(145deg, rgba(42, 48, 52, 0.78), rgba(31, 37, 41, 0.66));
+    --unified-hero-lower-bg: var(--surface-panel);
   }
 
   html[data-theme='light'] body[data-page='top-rated'] {
-    --unified-hero-lower-bg: linear-gradient(145deg, rgba(255, 255, 255, 0.82), rgba(240, 246, 242, 0.72));
+    --unified-hero-lower-bg: var(--surface-panel);
   }
 
   body[data-page='top-rated'] .hero.container {
@@ -18413,8 +18359,7 @@ body.blog-page[data-page='blog'] {
   background-position: center center;
   background-size: cover;
   box-shadow:
-    0 28px 72px rgba(0, 0, 0, 0.26),
-    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+    0 28px 72px rgba(0, 0, 0, 0.26);
 }
 
 :is(
@@ -18556,10 +18501,9 @@ body.casinos-page .hero.container::after {
   border-radius: 18px;
   background: linear-gradient(145deg, rgba(28, 34, 38, 0.72), rgba(17, 22, 25, 0.58));
   box-shadow:
-    0 22px 48px rgba(0, 0, 0, 0.2),
-    inset 0 1px 0 rgba(255, 255, 255, 0.08);
-  -webkit-backdrop-filter: blur(18px) saturate(1.08);
-  backdrop-filter: blur(18px) saturate(1.08);
+    0 22px 48px rgba(0, 0, 0, 0.2);
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
 }
 
 body.casinos-page .hero.container h1 {
@@ -18649,8 +18593,8 @@ body.casinos-page .hero.container .alpha-nav .view-all {
   border-color: rgba(255, 255, 255, 0.34);
   background: rgba(12, 17, 20, 0.34);
   color: #f8fafc;
-  -webkit-backdrop-filter: blur(12px);
-  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
 }
 
 :is(body.home-page[data-page='partners'], body.home-page[data-page='about']) .hero.container .home-insight-card {
@@ -18664,10 +18608,9 @@ body.casinos-page .hero.container .alpha-nav .view-all {
   border-radius: 18px;
   background: linear-gradient(145deg, rgba(28, 34, 38, 0.72), rgba(17, 22, 25, 0.56));
   box-shadow:
-    0 24px 58px rgba(0, 0, 0, 0.22),
-    inset 0 1px 0 rgba(255, 255, 255, 0.1);
-  -webkit-backdrop-filter: blur(18px) saturate(1.08);
-  backdrop-filter: blur(18px) saturate(1.08);
+    0 24px 58px rgba(0, 0, 0, 0.22);
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
 }
 
 :is(body.home-page[data-page='partners'], body.home-page[data-page='about']) .hero.container .home-stats-grid {
@@ -18725,8 +18668,8 @@ body.home-page[data-page='responsible-gambling'] .hero.container > .faq-grid .fa
   border-color: rgba(255, 255, 255, 0.18);
   background: rgba(20, 26, 30, 0.62);
   box-shadow: none;
-  -webkit-backdrop-filter: blur(16px);
-  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
 }
 
 body.home-page[data-page='responsible-gambling'] .hero.container > .faq-grid h3 {
@@ -18779,8 +18722,7 @@ body.blog-page[data-page='blog'] .blog-hero {
   background-repeat: no-repeat;
   background-size: cover;
   box-shadow:
-    0 28px 72px rgba(0, 0, 0, 0.26),
-    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+    0 28px 72px rgba(0, 0, 0, 0.26);
 }
 
 body.blog-page[data-page='blog'] .blog-hero :is(.blog-kicker, h1, p, .blog-hero-links) {
@@ -18834,8 +18776,8 @@ body.blog-page[data-page='blog'] .blog-hero .blog-hero-links a {
   border-color: rgba(255, 255, 255, 0.28);
   background: rgba(12, 17, 20, 0.34);
   color: #f8fafc;
-  -webkit-backdrop-filter: blur(12px);
-  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
 }
 
 @media (max-width: 768px) {
@@ -19083,8 +19025,7 @@ body[data-page='top-casinos'] .hero.container {
   background-position: center center;
   background-size: cover;
   box-shadow:
-    0 28px 72px rgba(0, 0, 0, 0.26),
-    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+    0 28px 72px rgba(0, 0, 0, 0.26);
 }
 
 body[data-page='top-casinos'] .hero.container::before,
@@ -19156,8 +19097,8 @@ body[data-page='top-casinos'] .hero.container .top-casinos-hero-actions a {
   border-color: rgba(255, 255, 255, 0.32);
   background: rgba(12, 17, 20, 0.34);
   color: #f8fafc;
-  -webkit-backdrop-filter: blur(12px);
-  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
 }
 
 body[data-page='top-casinos'] .hero.container .top-casinos-hero-primary {
@@ -19259,9 +19200,9 @@ body[data-page='top-casinos'] .hero.container .top-casinos-hero-primary:focus-vi
     body.home-page[data-page='responsible-gambling'],
     body.blog-page[data-page='blog']
   ) {
-  --editorial-hero-rail-bg: linear-gradient(145deg, rgba(30, 36, 40, 0.78), rgba(16, 22, 25, 0.64));
-  --editorial-hero-rail-border: rgba(148, 163, 184, 0.3);
-  --editorial-hero-rail-shadow: 0 24px 58px rgba(0, 0, 0, 0.23), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+  --editorial-hero-rail-bg: var(--surface-panel);
+  --editorial-hero-rail-border: rgba(255, 255, 255, 0.16);
+  --editorial-hero-rail-shadow: 0 24px 58px rgba(0, 0, 0, 0.23);
 }
 
 html[data-theme='light']
@@ -19279,9 +19220,9 @@ html[data-theme='light']
     body.home-page[data-page='responsible-gambling'],
     body.blog-page[data-page='blog']
   ) {
-  --editorial-hero-rail-bg: linear-gradient(145deg, rgba(255, 255, 255, 0.72), rgba(239, 245, 242, 0.56));
+  --editorial-hero-rail-bg: var(--surface-panel);
   --editorial-hero-rail-border: rgba(32, 48, 42, 0.18);
-  --editorial-hero-rail-shadow: 0 24px 58px rgba(22, 30, 27, 0.13), inset 0 1px 0 rgba(255, 255, 255, 0.78);
+  --editorial-hero-rail-shadow: 0 24px 58px rgba(22, 30, 27, 0.13);
 }
 
 /* Listing pages reuse their real section heading and intro as the lower rail. */
@@ -19307,8 +19248,8 @@ html[data-theme='light']
   border: 1px solid var(--editorial-hero-rail-border);
   background: var(--editorial-hero-rail-bg);
   box-shadow: var(--editorial-hero-rail-shadow);
-  -webkit-backdrop-filter: blur(18px) saturate(1.08);
-  backdrop-filter: blur(18px) saturate(1.08);
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
 }
 
 :is(body[data-page='exclusive-offers'], body[data-page='new-casinos']) .hero.container + .content .section-head {
@@ -19358,7 +19299,7 @@ html[data-theme='light']
 }
 
 :is(body[data-page='exclusive-offers'], body[data-page='new-casinos']) .hero.container + .content .intro::before {
-  content: '';
+  content: none;
   flex: 0 0 4px;
   width: 4px;
   height: 62px;
@@ -19392,8 +19333,8 @@ body[data-page='online-casinos'] .hero.container + .content > .container.content
   border-radius: 20px;
   background: var(--editorial-hero-rail-bg);
   box-shadow: var(--editorial-hero-rail-shadow);
-  -webkit-backdrop-filter: blur(18px) saturate(1.08);
-  backdrop-filter: blur(18px) saturate(1.08);
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
 }
 
 body[data-page='online-casinos'] .hero.container + .content .timeline {
@@ -19433,7 +19374,7 @@ body[data-page='online-casinos'] .hero.container + .content .timeline p {
 }
 
 body[data-page='online-casinos'] .hero.container + .content .timeline p::before {
-  content: '';
+  content: none;
   flex: 0 0 4px;
   width: 4px;
   height: 62px;
@@ -19515,8 +19456,8 @@ body[data-page='top-casinos'] .hero.container .top-casinos-hero-actions {
   border-radius: 20px;
   background: var(--editorial-hero-rail-bg);
   box-shadow: var(--editorial-hero-rail-shadow);
-  -webkit-backdrop-filter: blur(18px) saturate(1.08);
-  backdrop-filter: blur(18px) saturate(1.08);
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
 }
 
 /* Payment and privacy pages use existing copy/actions inside a lower rail. */
@@ -19551,8 +19492,8 @@ body.home-page[data-page='privacy'] .hero.container::after {
   border-radius: 20px;
   background: var(--editorial-hero-rail-bg);
   box-shadow: var(--editorial-hero-rail-shadow);
-  -webkit-backdrop-filter: blur(18px) saturate(1.08);
-  backdrop-filter: blur(18px) saturate(1.08);
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
 }
 
 body.payment-methods-page[class] .hero.container > .hero-content > p {
@@ -19567,7 +19508,7 @@ body.payment-methods-page[class] .hero.container > .hero-content > p {
   align-items: center;
   margin: 0;
   padding-left: 24px;
-  border-left: 4px solid var(--section-accent);
+  border-left: 0;
   color: var(--text-muted);
   text-shadow: none;
 }
@@ -19630,8 +19571,8 @@ body.home-page[data-page='responsible-gambling'] .hero.container > .faq-grid {
   border-radius: 20px;
   background: var(--editorial-hero-rail-bg);
   box-shadow: var(--editorial-hero-rail-shadow);
-  -webkit-backdrop-filter: blur(18px) saturate(1.08);
-  backdrop-filter: blur(18px) saturate(1.08);
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
 }
 
 body.home-page[data-page='responsible-gambling'] .hero.container > .faq-grid .faq-card {
@@ -19677,8 +19618,8 @@ body.blog-page[data-page='blog'] .blog-hero::after {
   border-radius: 20px;
   background: var(--editorial-hero-rail-bg);
   box-shadow: var(--editorial-hero-rail-shadow);
-  -webkit-backdrop-filter: blur(18px) saturate(1.08);
-  backdrop-filter: blur(18px) saturate(1.08);
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
 }
 
 body.blog-page[data-page='blog'] .blog-hero-links {
@@ -19976,8 +19917,8 @@ body.home-page[data-page='responsible-gambling'][data-page] .hero.container .hom
   border-radius: 20px;
   background: var(--editorial-hero-rail-bg);
   box-shadow: var(--editorial-hero-rail-shadow);
-  -webkit-backdrop-filter: blur(18px) saturate(1.08);
-  backdrop-filter: blur(18px) saturate(1.08);
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
 }
 
 body.home-page[data-page='responsible-gambling'] .safe-play-rules-section .home-showcase-heading {
@@ -20264,8 +20205,8 @@ body.home-page[data-page='about'][data-page] .hero.container .home-stats-grid {
 .theme-settings-backdrop {
   padding: 16px;
   background: rgba(4, 7, 9, 0.72);
-  -webkit-backdrop-filter: blur(18px) saturate(1.08);
-  backdrop-filter: blur(18px) saturate(1.08);
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
 }
 
 .theme-settings-modal {
@@ -20274,12 +20215,9 @@ body.home-page[data-page='about'][data-page] .hero.container .home-stats-grid {
   padding: 22px 18px 18px;
   border: 1px solid rgba(148, 163, 184, 0.28);
   border-radius: 20px;
-  background:
-    linear-gradient(180deg, rgba(255, 255, 255, 0.045), transparent 42%),
-    linear-gradient(145deg, rgba(32, 38, 42, 0.98), rgba(17, 22, 25, 0.98));
+  background: var(--surface-graphite-gradient);
   box-shadow:
-    0 28px 70px rgba(0, 0, 0, 0.46),
-    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+    0 28px 70px rgba(0, 0, 0, 0.46);
 }
 
 .theme-settings-modal h3 {
@@ -20380,7 +20318,6 @@ html[data-theme='light'] .theme-settings-option.is-active {
   background: linear-gradient(145deg, rgba(255, 223, 0, 0.16), rgba(255, 223, 0, 0.07));
   color: var(--text-main);
   box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.08),
     0 10px 24px rgba(0, 0, 0, 0.18);
 }
 
@@ -20396,8 +20333,8 @@ html[data-theme='light'] .theme-settings-option.is-active {
 
 html[data-theme='light'] .theme-settings-backdrop {
   background: rgba(27, 38, 34, 0.28);
-  -webkit-backdrop-filter: blur(18px) saturate(1.04);
-  backdrop-filter: blur(18px) saturate(1.04);
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
 }
 
 html[data-theme='light'] .theme-settings-modal {
@@ -20406,8 +20343,7 @@ html[data-theme='light'] .theme-settings-modal {
     linear-gradient(180deg, rgba(255, 255, 255, 0.82), rgba(255, 255, 255, 0.58)),
     rgba(239, 244, 241, 0.88);
   box-shadow:
-    0 28px 70px rgba(22, 30, 27, 0.18),
-    inset 0 1px 0 rgba(255, 255, 255, 0.9);
+    0 28px 70px rgba(22, 30, 27, 0.18);
 }
 
 html[data-theme='light'] .theme-settings-close {
@@ -20430,7 +20366,6 @@ html[data-theme='light'] .theme-settings-option.is-active {
   border-color: rgba(176, 138, 0, 0.56);
   background: linear-gradient(145deg, rgba(255, 223, 0, 0.28), rgba(255, 244, 181, 0.46));
   box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.8),
     0 10px 24px rgba(32, 48, 42, 0.1);
 }
 
@@ -20509,8 +20444,8 @@ body.author-page .author-hero.hero.container::after {
   border-radius: 20px;
   background: var(--editorial-hero-rail-bg);
   box-shadow: var(--editorial-hero-rail-shadow);
-  -webkit-backdrop-filter: blur(18px) saturate(1.08);
-  backdrop-filter: blur(18px) saturate(1.08);
+  -webkit-backdrop-filter: none;
+  backdrop-filter: none;
 }
 
 body.author-page .author-hero-copy.hero-content {
@@ -20702,4 +20637,79 @@ body[data-brand]
     display: grid;
     grid-template-columns: minmax(0, 1fr);
   }
+}
+
+/* Shared matte UI. These are content/control surfaces only: keep the
+   image-derived blur behind brand hero screenshots and game artwork. */
+html body :is(
+  .glass-card,
+  .brand-hero-panel,
+  .brand-hero-nav-panel,
+  .brand-new-games-panel,
+  .brand-quick-facts,
+  .brand-payments,
+  .brand-sticky-title__inner,
+  .availability-tabs,
+  .faq-card,
+  .expert-card,
+  .home-insight-card,
+  .home-link-card,
+  .home-stat-tile,
+  .country-directory-editorial,
+  .country-directory-info-card,
+  .account-auth-dialog,
+  .theme-settings-modal,
+  .blog-article-aside
+) {
+  background: var(--surface-panel) !important;
+  box-shadow: var(--shadow-soft);
+}
+
+html body :is(.nav-dropdown-menu, .language-switcher-menu, .site-search-results) {
+  background: var(--surface-card) !important;
+  box-shadow: var(--shadow-floating);
+}
+
+html body :is(.countries-cloud a, .countries-cloud .country-link) {
+  background: var(--surface-card) !important;
+  color: var(--text-main);
+  border-color: var(--surface-border-strong);
+  box-shadow: none;
+}
+
+html body :is(.countries-cloud a, .countries-cloud .country-link):hover {
+  background: var(--surface-card-hover) !important;
+}
+
+html body .footer {
+  background: var(--chrome-bg) !important;
+}
+
+html body :is(
+  .view-all,
+  .casino-actions .cta-secondary,
+  .countries-cloud a,
+  .home-country-jump,
+  .theme-settings-option
+)::before {
+  content: none;
+}
+
+html body .theme-settings-options {
+  background: var(--surface-card-soft);
+}
+
+html body .theme-settings-option.is-active {
+  background: var(--surface-card-hover);
+  border-color: var(--section-accent);
+  color: var(--text-main);
+  box-shadow: none;
+}
+
+body[data-brand] .brand-feedback-compose h3 {
+  margin: 0;
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.4;
+  color: var(--text-main);
 }

@@ -104,8 +104,7 @@ test('Shared gallery labels remain optional, escaped and preserve other brandsâ€
   const source=read('scripts/pages/brand-layout.js');
   assert.match(source,/meta\[name="brand-games-title"\]/);
   assert.match(source,/\|\| localeText\('New Games'/);
-  assert.match(source,/\|\| localeText\('LATEST RELEASES'/);
   assert.match(source,/escapeHtml\(newGamesLabel\)/);
-  assert.match(source,/escapeHtml\(newGamesKicker\)/);
+  assert.doesNotMatch(source,/brand-new-games-kicker|newGamesKicker/);
   assert.doesNotMatch(JSON.stringify(VEGASNOW_COPY.en),/\bprogramme\b|\blicence\b|\bcolour\b|\bcentre\b/);
 });

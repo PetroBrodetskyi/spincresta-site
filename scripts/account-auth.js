@@ -173,13 +173,13 @@ const createInterface = (copy, locale) => {
     <section class="account-auth-dialog" role="dialog" aria-modal="true" aria-labelledby="accountAuthTitle">
       <button class="account-auth-close" type="button" data-account-close aria-label="${copy.close}">&times;</button>
       <div class="account-auth-signin" data-account-view="signin">
-        <span class="account-auth-kicker">SPINCRESTA ACCOUNT</span>
+
         <h2 id="accountAuthTitle">${copy.dialogTitle}</h2>
         <p>${copy.dialogIntro}</p>
         <div class="account-google-button" data-google-button></div>
       </div>
       <form class="account-auth-completion" data-account-view="completion" hidden>
-        <span class="account-auth-kicker">SPINCRESTA ACCOUNT</span>
+
         <h2>${copy.completeTitle}</h2>
         <div class="account-auth-user-preview">
           <img alt="" data-account-avatar hidden />
@@ -191,7 +191,7 @@ const createInterface = (copy, locale) => {
         <button class="account-auth-primary" type="submit">${copy.complete}</button>
       </form>
       <div class="account-auth-profile" data-account-view="profile" hidden>
-        <span class="account-auth-kicker">SPINCRESTA ACCOUNT</span>
+
         <h2>${copy.account}</h2>
         <p class="account-auth-profile-intro">${copy.accountIntro}</p>
         <div class="account-auth-user-preview">
@@ -515,7 +515,7 @@ export const initAccountAuth = async locale => {
         if (currentAccess.representative) {
           const prefix = locale === 'en' ? '' : `/${locale}`;
           representativePanel.innerHTML = `
-            <div><span class="home-section-kicker">BRAND REPRESENTATIVE</span><h3>Your SpinCresta brands</h3><p>Open a brand page to read player reviews and publish an official response.</p></div>
+            <div><h3>Your SpinCresta brands</h3><p>Open a brand page to read player reviews and publish an official response.</p></div>
             <nav>${(currentAccess.brands || []).map(brand => `<a href="${prefix}/brands/${encodeURIComponent(brand.slug)}/">${String(brand.name).replaceAll('&', '&amp;').replaceAll('<', '&lt;')}</a>`).join('')}</nav>`;
         }
       }

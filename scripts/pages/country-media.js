@@ -19,7 +19,7 @@ export const renderCountryMedia = context => {
     const hero = main?.querySelector(':scope > .hero');
     const country = COUNTRIES.find(item => item.code.toUpperCase() === pageCountry);
     if (!main || !hero || !country || main.querySelector('.country-casino-gallery')) return;
-  
+
     const candidates = BRANDS.map((brand, index) => ({ brand, index }))
       .filter(({ brand }) => {
         const slug = getBrandDetailSlug(brand);
@@ -40,7 +40,7 @@ export const renderCountryMedia = context => {
           (brand.isNew ? 5 : 0);
         return score(b.brand) - score(a.brand) || a.index - b.index;
       });
-  
+
     const selectedBrands = [];
     const selectedSlugs = new Set();
     candidates.forEach(({ brand }) => {
@@ -49,9 +49,9 @@ export const renderCountryMedia = context => {
       selectedSlugs.add(slug);
       selectedBrands.push(brand);
     });
-  
+
     if (!selectedBrands.length) return;
-  
+
     const countryName = normalizeText(localizedCountryName(country));
     const headingId = `country-casino-gallery-${country.slug}`;
     const section = document.createElement('section');
@@ -61,7 +61,7 @@ export const renderCountryMedia = context => {
       <div class="container">
         <div class="country-casino-gallery-head">
           <div>
-            <span class="country-casino-gallery-kicker">${localeText('CASINO LOBBY PREVIEWS', 'EINBLICKE IN CASINO-LOBBYS', 'VISTAS PREVIAS DE LOBBIES')}</span>
+
             <h2 id="${headingId}">${localeText(
               `Inside casinos available in ${countryName}`,
               `Einblicke in Casinos für ${countryName}`,
@@ -103,15 +103,15 @@ export const renderCountryMedia = context => {
         </div>
       </div>
     `;
-  
+
     hero.insertAdjacentElement('afterend', section);
   };
-  
+
   const renderCountryNewGames = pageCountry => {
     const main = document.querySelector('body[data-country] main');
     const country = COUNTRIES.find(item => item.code.toUpperCase() === pageCountry);
     if (!main || !country || main.querySelector('.country-new-games')) return;
-  
+
     const countryHash = Array.from(pageCountry).reduce((total, char) => total + char.charCodeAt(0), 0);
     const candidates = BRANDS.map((brand, index) => ({
       brand,
@@ -135,38 +135,38 @@ export const renderCountryMedia = context => {
           (item.brand.isExclusive ? 5 : 0);
         return score(b) - score(a) || a.index - b.index;
       });
-  
+
     const selectedGames = [];
     const selectedNames = new Set();
     const maxCards = 12;
-  
+
     const addGame = (candidate, gameIndex) => {
       const games = BRAND_NEW_GAMES[candidate.slug] || [];
       if (!games.length) return false;
-  
+
       for (let offset = 0; offset < games.length; offset += 1) {
         const game = games[(gameIndex + offset) % games.length];
         const name = normalizeText(game?.name).trim();
         const nameKey = name.toLocaleLowerCase();
         if (!name || !game?.image || selectedNames.has(nameKey)) continue;
-  
+
         selectedNames.add(nameKey);
         selectedGames.push({ brand: candidate.brand, game });
         return true;
       }
-  
+
       return false;
     };
-  
+
     candidates.forEach(candidate => {
       if (selectedGames.length >= maxCards) return;
       const games = BRAND_NEW_GAMES[candidate.slug] || [];
       const startingIndex = games.length ? (countryHash + candidate.index) % games.length : 0;
       addGame(candidate, startingIndex);
     });
-  
+
     if (!selectedGames.length) return;
-  
+
     const countryName = normalizeText(localizedCountryName(country));
     const headingId = `country-new-games-${country.slug}`;
     const section = document.createElement('section');
@@ -177,7 +177,7 @@ export const renderCountryMedia = context => {
       <div class="container">
         <div class="country-new-games-head">
           <div>
-            <span class="country-new-games-kicker">${localeText('FRESH FROM REVIEWED LOBBIES', 'NEU IN GEPRÜFTEN LOBBYS', 'NOVEDADES DE LOBBIES REVISADOS')}</span>
+
             <h2 id="${headingId}">${localeText(
               `New games in ${countryName}`,
               `Neue Spiele im ${countryName}-Vergleich`,
@@ -224,7 +224,7 @@ export const renderCountryMedia = context => {
         </div>
       </div>
     `;
-  
+
     const gallery = main.querySelector('.country-casino-gallery');
     const hero = main.querySelector(':scope > .hero');
     (gallery || hero)?.insertAdjacentElement('afterend', section);

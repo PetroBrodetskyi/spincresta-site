@@ -231,7 +231,7 @@ const renderMain = (locale, source) => {
   return `<main>
       <section class="hero container">
         <div class="hero-content">
-          <span class="home-hero-kicker">${escapeHtml(t.eyebrow)}</span>
+
           <h1>${escapeHtml(source.title)}</h1>
           <p>${escapeHtml(source.heroLead)}</p>
           <div class="home-hero-actions">
@@ -248,7 +248,7 @@ const renderMain = (locale, source) => {
         <section class="home-showcase-section" id="safe-play-guide" aria-labelledby="safe-play-title">
           <div class="home-showcase-heading">
             <div>
-              <span class="home-section-kicker">${escapeHtml(t.basics)}</span>
+
               <h2 id="safe-play-title">${escapeHtml(definition.title)}</h2>
             </div>
             <p>${paragraphHtml(definition.body)}</p>
@@ -265,7 +265,7 @@ const renderMain = (locale, source) => {
         <section class="home-showcase-section" aria-labelledby="protection-tools-title">
           <div class="home-showcase-heading">
             <div>
-              <span class="home-section-kicker">${escapeHtml(t.tools)}</span>
+
               <h2 id="protection-tools-title">${escapeHtml(tools.title)}</h2>
             </div>
             <p>${paragraphHtml(tools.body)}</p>
@@ -277,7 +277,7 @@ const renderMain = (locale, source) => {
         <section class="home-showcase-section" aria-labelledby="warning-signs-title">
           <div class="home-showcase-heading">
             <div>
-              <span class="home-section-kicker">${escapeHtml(t.signs)}</span>
+
               <h2 id="warning-signs-title">${escapeHtml(signs.title)}</h2>
             </div>
             <p>${paragraphHtml(signs.body)}</p>
@@ -296,7 +296,7 @@ const renderMain = (locale, source) => {
         <section class="home-showcase-section" id="support-resources" aria-labelledby="support-resources-title">
           <div class="home-showcase-heading">
             <div>
-              <span class="home-section-kicker">${escapeHtml(t.support)}</span>
+
               <h2 id="support-resources-title">${escapeHtml(support.title)}</h2>
             </div>
             <p>${paragraphHtml(support.body)}</p>
@@ -308,7 +308,7 @@ const renderMain = (locale, source) => {
         <section class="home-showcase-section" id="responsible-faq" aria-labelledby="responsible-faq-title">
           <div class="home-showcase-heading">
             <div>
-              <span class="home-section-kicker">${escapeHtml(t.faq)}</span>
+
               <h2 id="responsible-faq-title">${escapeHtml(source.faqTitle)}</h2>
             </div>
           </div>

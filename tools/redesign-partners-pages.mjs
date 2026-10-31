@@ -200,7 +200,7 @@ const renderMain = (locale, faq, homeStatsGrid) => {
   return `<main>
       <section class="hero container">
         <div class="hero-content">
-          <span class="home-hero-kicker">${escapeHtml(t.eyebrow)}</span>
+
           <h1>${escapeHtml(t.title)}</h1>
           <p>${escapeHtml(t.lead)}</p>
           <div class="home-hero-actions">
@@ -218,7 +218,7 @@ const renderMain = (locale, faq, homeStatsGrid) => {
           <section class="home-showcase-section">
             <div class="home-showcase-heading">
               <div>
-                <span class="home-section-kicker">${escapeHtml(t.typesEyebrow)}</span>
+
                 <h2>${escapeHtml(t.typesTitle)}</h2>
               </div>
               <p>${escapeHtml(t.typesLead)}</p>
@@ -230,7 +230,7 @@ const renderMain = (locale, faq, homeStatsGrid) => {
           <section class="home-showcase-section">
             <div class="home-showcase-heading">
               <div>
-                <span class="home-section-kicker">${escapeHtml(t.processEyebrow)}</span>
+
                 <h2>${escapeHtml(t.processTitle)}</h2>
               </div>
             </div>
@@ -241,7 +241,7 @@ const renderMain = (locale, faq, homeStatsGrid) => {
           <section class="home-showcase-section">
             <div class="home-showcase-heading">
               <div>
-                <span class="home-section-kicker">${escapeHtml(t.standardsEyebrow)}</span>
+
                 <h2>${escapeHtml(t.standardsTitle)}</h2>
               </div>
             </div>
@@ -271,7 +271,7 @@ const renderMain = (locale, faq, homeStatsGrid) => {
           <section class="home-showcase-section">
             <div class="home-showcase-heading">
               <div>
-                <span class="home-section-kicker">FAQ</span>
+
                 <h2>${escapeHtml(t.faqTitle)}</h2>
               </div>
             </div>

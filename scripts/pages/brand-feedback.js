@@ -441,7 +441,7 @@ const createSection = (brand, copy, loadCopy) => {
   section.innerHTML = `
     <div class="brand-feedback-heading">
       <div>
-        <span class="section-kicker">${escapeHtml(copy.kicker)}</span>
+
         <h2>${escapeHtml(copy.title)}</h2>
         <p>${escapeHtml(copy.intro)}</p>
       </div>
@@ -456,7 +456,7 @@ const createSection = (brand, copy, loadCopy) => {
     </div>
     <div class="brand-feedback-compose">
       <div>
-        <span class="section-kicker">${escapeHtml(copy.rateTitle)}</span>
+        <h3>${escapeHtml(copy.rateTitle)}</h3>
         <p>${escapeHtml(copy.rateHint)}</p>
       </div>
       <button class="brand-feedback-signin" type="button" data-feedback-signin>${escapeHtml(copy.signIn)}</button>

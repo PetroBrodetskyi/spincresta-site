@@ -9,7 +9,7 @@ const main = `
     <main>
       <section class="hero container moderation-hero">
         <div class="hero-content">
-          <span class="home-hero-kicker">SPINCRESTA TEAM</span>
+
           <h1>Player review moderation</h1>
           <p>Review player submissions, keep public feedback useful and document moderation decisions.</p>
         </div>
@@ -34,7 +34,7 @@ const main = `
           <div data-moderator-panel="reviews" role="tabpanel">
             <div class="home-showcase-heading">
               <div>
-                <span class="home-section-kicker">MODERATION QUEUE</span>
+
                 <h2 id="moderation-title">Player reviews</h2>
               </div>
               <p>Pending reviews are shown oldest first. Approved feedback becomes visible on the relevant brand page.</p>
@@ -52,7 +52,7 @@ const main = `
           <div data-moderator-panel="users" role="tabpanel" hidden>
             <div class="home-showcase-heading">
               <div>
-                <span class="home-section-kicker">ACCOUNT DIRECTORY</span>
+
                 <h2>Registered users</h2>
               </div>
               <p>Private account and contact details are available only to approved SpinCresta moderators.</p>

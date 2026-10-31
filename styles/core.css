@@ -6,23 +6,25 @@
     Roboto,
     Arial,
     sans-serif;
-  --bg-main: #111417;
-  --bg-surface: #171a1d;
-  --bg-card: #15181b;
-  --chrome-bg: #22262a;
-  --section-band: #15181b;
-  --section-band-alt: #191d20;
-  --surface-section: #16191c;
-  --surface-section-alt: #1b1f23;
-  --surface-panel: #1c2024;
-  --surface-card: #202428;
-  --surface-card-soft: #15191c;
-  --surface-card-hover: #282d32;
-  --surface-contrast: #252a2f;
+  /* Neutral blacks: retain depth between the canvas, panels and cards. */
+  color-scheme: dark;
+  --bg-main: #050505;
+  --bg-surface: #090909;
+  --bg-card: #0d0d0d;
+  --chrome-bg: #0a0a0a;
+  --section-band: #080808;
+  --section-band-alt: #0c0c0c;
+  --surface-section: #0a0a0a;
+  --surface-section-alt: #101010;
+  --surface-panel: #111111;
+  --surface-card: #141414;
+  --surface-card-soft: #0d0d0d;
+  --surface-card-hover: #1c1c1c;
+  --surface-contrast: #181818;
   --surface-contrast-text: #f5f5f5;
   --surface-contrast-muted: rgba(255, 255, 255, 0.72);
-  --surface-border: rgba(255, 255, 255, 0.12);
-  --surface-border-strong: rgba(255, 255, 255, 0.22);
+  --surface-border: rgba(255, 255, 255, 0.1);
+  --surface-border-strong: rgba(255, 255, 255, 0.18);
   --surface-accent: rgba(255, 223, 0, 0.1);
   --section-accent: #9bbfa9;
 
@@ -47,11 +49,11 @@
   --split-side-column: minmax(var(--split-side-min), var(--split-side-max));
   --split-gap: clamp(18px, 2vw, 32px);
 
-  --border-soft: rgba(255, 255, 255, 0.16);
-  --border-glass: rgba(255, 255, 255, 0.12);
+  --border-soft: rgba(255, 255, 255, 0.14);
+  --border-glass: rgba(255, 255, 255, 0.1);
 
-  --text-main: #e5e7eb;
-  --text-muted: #94a3b8;
+  --text-main: #f2f2f3;
+  --text-muted: #a8a8b0;
 
   --accent: #f4c400;
   --gold: #ffdf00;
@@ -75,36 +77,37 @@
   --ui-shadow-dialog: 0 24px 54px rgba(0, 0, 0, 0.24);
   --ui-shadow-neo-outline: 0 0 0 1px rgba(15, 23, 42, 0.03);
   --ui-shadow-neo-glow: 0 0 18px rgba(15, 23, 42, 0.04);
-  --surface-graphite-gradient: linear-gradient(180deg, rgba(255, 255, 255, 0.055) 0%, rgba(13, 15, 18, 0.98) 58%, rgba(8, 9, 11, 0.98) 100%);
-  --surface-graphite-gradient-hover: linear-gradient(180deg, rgba(255, 255, 255, 0.075) 0%, rgba(18, 20, 24, 0.98) 58%, rgba(10, 11, 13, 0.98) 100%);
-  --sticker-bg: linear-gradient(180deg, rgba(255, 255, 255, 0.115) 0%, rgba(2, 6, 23, 0.2) 52%, rgba(2, 6, 23, 0.08) 100%);
-  --sticker-bg-hover: linear-gradient(180deg, rgba(255, 255, 255, 0.145) 0%, rgba(13, 15, 18, 0.46) 54%, rgba(8, 9, 11, 0.2) 100%);
-  --sticker-color: #c9ddff;
-  --sticker-border: rgba(226, 232, 240, 0.74);
-  --sticker-border-hover: rgba(255, 255, 255, 0.94);
-  --sticker-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.48), inset 0 -1px 0 rgba(2, 6, 23, 0.38);
-  --sticker-shadow-hover: inset 0 1px 0 rgba(255, 255, 255, 0.56), inset 0 -1px 0 rgba(2, 6, 23, 0.42), 0 8px 18px rgba(0, 0, 0, 0.22);
-  --sticker-primary-bg: linear-gradient(135deg, #ffe45c, #ffd000);
+  /* Retain the shared aliases while giving controls an opaque matte finish. */
+  --surface-graphite-gradient: #141414;
+  --surface-graphite-gradient-hover: #1c1c1c;
+  --sticker-bg: #141414;
+  --sticker-bg-hover: #1c1c1c;
+  --sticker-color: #e2e2e6;
+  --sticker-border: rgba(255, 255, 255, 0.24);
+  --sticker-border-hover: rgba(255, 255, 255, 0.42);
+  --sticker-shadow: 0 4px 12px rgba(0, 0, 0, 0.22);
+  --sticker-shadow-hover: 0 8px 18px rgba(0, 0, 0, 0.32);
+  --sticker-primary-bg: var(--gold);
   --sticker-primary-border: rgba(255, 223, 0, 0.64);
-  --sticker-primary-shadow: 0 14px 30px rgba(245, 196, 0, 0.28), inset 0 1px 0 rgba(255, 255, 255, 0.66);
-  --sticker-primary-shadow-hover: 0 18px 36px rgba(245, 196, 0, 0.38), inset 0 1px 0 rgba(255, 255, 255, 0.76);
+  --sticker-primary-shadow: none;
+  --sticker-primary-shadow-hover: none;
 
   --radius-lg: 14px;
   --radius-md: 10px;
 
-  --shadow-soft: 0 18px 42px rgba(0, 0, 0, 0.36), inset 0 1px 0 rgba(255, 255, 255, 0.045);
-  --shadow-hover: 0 18px 38px rgba(0, 0, 0, 0.34);
-  --shadow-card: 0 26px 64px rgba(0, 0, 0, 0.34), 0 10px 26px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.1);
-  --shadow-card-hover: 0 34px 82px rgba(0, 0, 0, 0.4), 0 14px 32px rgba(0, 0, 0, 0.24), inset 0 1px 0 rgba(255, 255, 255, 0.13);
-  --shadow-floating: 0 34px 88px rgba(0, 0, 0, 0.48), 0 14px 34px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.1);
-  --shadow-header: 0 30px 80px rgba(56, 189, 248, 0.25);
-  --shadow-control: 0 12px 28px rgba(0, 0, 0, 0.22), inset 0 1px 0 rgba(255, 255, 255, 0.12);
-  --shadow-action: 0 14px 28px rgba(245, 196, 0, 0.28), inset 0 1px 0 rgba(255, 255, 255, 0.62);
-  --shadow-action-hover: 0 18px 38px rgba(245, 196, 0, 0.38), inset 0 1px 0 rgba(255, 255, 255, 0.72);
-  --shadow-logo-surface: inset 0 1px 0 rgba(255, 255, 255, 0.12), inset 0 -1px 0 rgba(2, 6, 23, 0.42), 0 12px 28px rgba(0, 0, 0, 0.22);
-  --shadow-chip: 0 6px 14px rgba(0, 0, 0, 0.18), inset 0 1px 0 rgba(255, 255, 255, 0.18);
+  --shadow-soft: 0 4px 12px rgba(0, 0, 0, 0.2);
+  --shadow-hover: 0 6px 16px rgba(0, 0, 0, 0.24);
+  --shadow-card: 0 4px 14px rgba(0, 0, 0, 0.2);
+  --shadow-card-hover: 0 6px 18px rgba(0, 0, 0, 0.24);
+  --shadow-floating: 0 12px 32px rgba(0, 0, 0, 0.32);
+  --shadow-header: 0 24px 64px rgba(0, 0, 0, 0.5);
+  --shadow-control: 0 12px 28px rgba(0, 0, 0, 0.22);
+  --shadow-action: none;
+  --shadow-action-hover: none;
+  --shadow-logo-surface: 0 12px 28px rgba(0, 0, 0, 0.22);
+  --shadow-chip: 0 6px 14px rgba(0, 0, 0, 0.18);
 
-  --blur-glass: blur(14px);
+  --blur-glass: none;
 }
 
 /* Keep the desktop shell as fluid as the wide brand-review layout. */
@@ -144,6 +147,7 @@
   --bg-main: #ffffff;
   --bg-surface: #ffffff;
   --bg-card: #ffffff;
+  --chrome-bg: #22262a;
   --section-band: #ffffff;
   --section-band-alt: #ffffff;
   --surface-section: #ffffff;
@@ -182,28 +186,30 @@
   --ui-shadow-dialog: 0 24px 54px rgba(15, 23, 42, 0.16);
   --ui-shadow-neo-outline: 0 0 0 1px rgba(15, 23, 42, 0.03);
   --ui-shadow-neo-glow: 0 0 18px rgba(15, 23, 42, 0.04);
-  --sticker-bg: rgba(255, 255, 255, 0.95);
+  --surface-graphite-gradient: #ffffff;
+  --surface-graphite-gradient-hover: #f7f7f7;
+  --sticker-bg: #ffffff;
   --sticker-bg-hover: #ffffff;
   --sticker-color: #0f172a;
   --sticker-border: rgba(15, 23, 42, 0.07);
   --sticker-border-hover: rgba(15, 23, 42, 0.12);
-  --sticker-shadow: 0 10px 24px rgba(15, 23, 42, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.92);
-  --sticker-shadow-hover: 0 14px 28px rgba(15, 23, 42, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.96);
-  --sticker-primary-bg: linear-gradient(135deg, #ffe45c, #ffd000);
+  --sticker-shadow: 0 10px 24px rgba(15, 23, 42, 0.08);
+  --sticker-shadow-hover: 0 14px 28px rgba(15, 23, 42, 0.12);
+  --sticker-primary-bg: var(--gold);
   --sticker-primary-border: rgba(184, 134, 11, 0.18);
-  --sticker-primary-shadow: 0 12px 28px rgba(184, 134, 11, 0.18), inset 0 1px 0 rgba(255, 255, 255, 0.72);
-  --sticker-primary-shadow-hover: 0 16px 32px rgba(184, 134, 11, 0.24), inset 0 1px 0 rgba(255, 255, 255, 0.84);
-  --shadow-soft: 0 14px 32px rgba(15, 23, 42, 0.08);
-  --shadow-hover: 0 18px 38px rgba(15, 23, 42, 0.12);
-  --shadow-card: 0 28px 70px rgba(15, 23, 42, 0.13), 0 10px 26px rgba(15, 23, 42, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.78);
-  --shadow-card-hover: 0 34px 82px rgba(15, 23, 42, 0.18), 0 14px 32px rgba(15, 23, 42, 0.11), inset 0 1px 0 rgba(255, 255, 255, 0.86);
-  --shadow-floating: 0 32px 84px rgba(15, 23, 42, 0.2), 0 12px 32px rgba(15, 23, 42, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.9);
-  --shadow-header: 0 14px 34px rgba(15, 23, 42, 0.14), inset 0 -1px 0 rgba(255, 255, 255, 0.04);
-  --shadow-control: 0 10px 24px rgba(15, 23, 42, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.84);
-  --shadow-action: 0 12px 28px rgba(184, 134, 11, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.74);
-  --shadow-action-hover: 0 16px 34px rgba(184, 134, 11, 0.28), inset 0 1px 0 rgba(255, 255, 255, 0.84);
-  --shadow-logo-surface: inset 0 1px 0 rgba(255, 255, 255, 0.18), inset 0 -1px 0 rgba(2, 6, 23, 0.36), 0 12px 28px rgba(15, 23, 42, 0.12);
-  --shadow-chip: 0 6px 14px rgba(15, 23, 42, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.9);
+  --sticker-primary-shadow: none;
+  --sticker-primary-shadow-hover: none;
+  --shadow-soft: 0 4px 12px rgba(15, 23, 42, 0.06);
+  --shadow-hover: 0 6px 16px rgba(15, 23, 42, 0.08);
+  --shadow-card: 0 4px 14px rgba(15, 23, 42, 0.06);
+  --shadow-card-hover: 0 6px 18px rgba(15, 23, 42, 0.08);
+  --shadow-floating: 0 12px 32px rgba(15, 23, 42, 0.12);
+  --shadow-header: 0 14px 34px rgba(15, 23, 42, 0.14);
+  --shadow-control: 0 10px 24px rgba(15, 23, 42, 0.08);
+  --shadow-action: none;
+  --shadow-action-hover: none;
+  --shadow-logo-surface: 0 12px 28px rgba(15, 23, 42, 0.12);
+  --shadow-chip: 0 6px 14px rgba(15, 23, 42, 0.08);
 }
 
 /* =====================
@@ -269,17 +275,16 @@ textarea {
 }
 
 /* =====================
-   HEADER (GLASS)
+   HEADER
 ===================== */
 .header {
+  --surface-graphite-gradient: #141414;
+  --surface-graphite-gradient-hover: #1c1c1c;
   --header-surface:
-    linear-gradient(180deg, rgba(255, 255, 255, 0.035), transparent 44%),
-    linear-gradient(135deg, #22262a 0%, #272b2f 48%, #202428 100%);
+    var(--chrome-bg);
   --header-border: rgba(255, 255, 255, 0.16);
   --header-shadow:
-    0 18px 42px rgba(15, 18, 22, 0.22),
-    inset 0 1px 0 rgba(255, 255, 255, 0.075),
-    inset 0 -1px 0 rgba(0, 0, 0, 0.28);
+    0 18px 42px rgba(15, 18, 22, 0.22);
   --surface-section: #101010;
   --surface-border: rgba(255, 255, 255, 0.12);
   --surface-border-strong: rgba(255, 255, 255, 0.22);
@@ -290,10 +295,10 @@ textarea {
   --bg-surface: #111111;
   --surface-card: #121416;
   --surface-card-hover: #181b1d;
-  --shadow-soft: inset 0 1px 0 rgba(255, 255, 255, 0.045);
-  --shadow-floating: inset 0 1px 0 rgba(255, 255, 255, 0.08);
-  --shadow-control: 0 12px 28px rgba(0, 0, 0, 0.22), inset 0 1px 0 rgba(255, 255, 255, 0.12);
-  --shadow-card: 0 26px 64px rgba(0, 0, 0, 0.34), 0 10px 26px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  --shadow-soft: none;
+  --shadow-floating: none;
+  --shadow-control: 0 12px 28px rgba(0, 0, 0, 0.22);
+  --shadow-card: 0 26px 64px rgba(0, 0, 0, 0.34), 0 10px 26px rgba(0, 0, 0, 0.2);
   position: fixed;
   top: 10px;
   left: var(--page-gutter);
@@ -310,6 +315,18 @@ textarea {
 
 .header.hidden {
   transform: translateY(calc(-100% - 12px));
+}
+
+/* The light theme retains its existing graphite chrome. */
+html:not([data-theme='light']) .header {
+  --header-surface: var(--chrome-bg);
+  --header-border: rgba(255, 255, 255, 0.16);
+  --header-shadow: 0 18px 48px rgba(0, 0, 0, 0.48);
+  --text-main: #f2f2f3;
+  --text-muted: #a8a8b0;
+  --bg-surface: #090909;
+  --surface-card: #141414;
+  --surface-card-hover: #1c1c1c;
 }
 
 .header-container {
@@ -632,7 +649,7 @@ body.account-auth-open {
   position: absolute;
   inset: 0;
   background: rgba(0, 0, 0, 0.72);
-  backdrop-filter: blur(10px);
+  backdrop-filter: none;
 }
 
 .account-auth-dialog {
@@ -1132,8 +1149,7 @@ html[data-theme='light'] .account-auth-dialog {
     radial-gradient(circle at top right, rgba(255, 255, 255, 0.055), transparent 34%),
     linear-gradient(180deg, rgba(13, 15, 18, 0.98), rgba(8, 9, 11, 0.98));
   box-shadow:
-    0 22px 60px rgba(0, 0, 0, 0.42),
-    inset 0 1px 0 rgba(255, 255, 255, 0.08);
+    0 22px 60px rgba(0, 0, 0, 0.42);
 }
 
 .site-search--desktop .site-search-results {
@@ -1664,6 +1680,8 @@ html[data-theme='light'] .account-auth-dialog {
    FOOTER
 ===================== */
 .footer {
+  --surface-graphite-gradient: #141414;
+  --surface-graphite-gradient-hover: #1c1c1c;
   --text-main: #e5e7eb;
   --text-muted: #94a3b8;
   --section-accent: #9bbfa9;
@@ -1674,18 +1692,18 @@ html[data-theme='light'] .account-auth-dialog {
   --surface-panel: #111315;
   --surface-card: #121416;
   --surface-card-soft: #0d0f10;
-  --shadow-soft: 0 18px 42px rgba(0, 0, 0, 0.36), inset 0 1px 0 rgba(255, 255, 255, 0.045);
-  --shadow-floating: 0 34px 88px rgba(0, 0, 0, 0.48), 0 14px 34px rgba(0, 0, 0, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.1);
-  --shadow-control: 0 12px 28px rgba(0, 0, 0, 0.22), inset 0 1px 0 rgba(255, 255, 255, 0.12);
-  --shadow-action: 0 14px 28px rgba(245, 196, 0, 0.28), inset 0 1px 0 rgba(255, 255, 255, 0.62);
-  --shadow-action-hover: 0 18px 38px rgba(245, 196, 0, 0.38), inset 0 1px 0 rgba(255, 255, 255, 0.72);
-  --sticker-bg: linear-gradient(180deg, rgba(255, 255, 255, 0.115) 0%, rgba(2, 6, 23, 0.2) 52%, rgba(2, 6, 23, 0.08) 100%);
-  --sticker-bg-hover: linear-gradient(180deg, rgba(255, 255, 255, 0.145) 0%, rgba(13, 15, 18, 0.46) 54%, rgba(8, 9, 11, 0.2) 100%);
+  --shadow-soft: 0 18px 42px rgba(0, 0, 0, 0.36);
+  --shadow-floating: 0 34px 88px rgba(0, 0, 0, 0.48), 0 14px 34px rgba(0, 0, 0, 0.3);
+  --shadow-control: 0 12px 28px rgba(0, 0, 0, 0.22);
+  --shadow-action: none;
+  --shadow-action-hover: none;
+  --sticker-bg: #141414;
+  --sticker-bg-hover: #1c1c1c;
   --sticker-color: #c9ddff;
   --sticker-border: rgba(226, 232, 240, 0.74);
   --sticker-border-hover: rgba(255, 255, 255, 0.94);
-  --sticker-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.48), inset 0 -1px 0 rgba(2, 6, 23, 0.38);
-  --sticker-shadow-hover: inset 0 1px 0 rgba(255, 255, 255, 0.56), inset 0 -1px 0 rgba(2, 6, 23, 0.42), 0 8px 18px rgba(0, 0, 0, 0.22);
+  --sticker-shadow: none;
+  --sticker-shadow-hover: 0 8px 18px rgba(0, 0, 0, 0.22);
   text-align: center;
   font-size: 14px;
   color: var(--text-muted);
@@ -1696,6 +1714,21 @@ html[data-theme='light'] .account-auth-dialog {
 .footer p {
   margin: 0;
   line-height: 1.6;
+}
+
+html:not([data-theme='light']) .footer {
+  --text-main: #f2f2f3;
+  --text-muted: #a8a8b0;
+  --surface-panel: #111111;
+  --surface-card: #141414;
+  --surface-card-soft: #0d0d0d;
+  --sticker-bg: var(--surface-graphite-gradient);
+  --sticker-bg-hover: var(--surface-graphite-gradient-hover);
+  --sticker-color: #e2e2e6;
+  --sticker-border: rgba(255, 255, 255, 0.24);
+  --sticker-border-hover: rgba(255, 255, 255, 0.42);
+  --sticker-shadow: none;
+  background: var(--surface-graphite-gradient);
 }
 
 .footer p + p {
@@ -1906,10 +1939,8 @@ html[data-theme='light'] .account-auth-dialog {
   color: var(--sticker-color);
   background: var(--surface-graphite-gradient);
   border: 1px solid rgba(148, 163, 184, 0.16);
-  backdrop-filter: var(--blur-glass);
+  backdrop-filter: none;
   box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.18),
-    inset 0 -1px 0 rgba(2, 6, 23, 0.46),
     0 8px 18px rgba(0, 0, 0, 0.14);
   overflow: hidden;
   isolation: isolate;
@@ -1945,8 +1976,6 @@ html[data-theme='light'] .account-auth-dialog {
   background: var(--surface-graphite-gradient-hover);
   border-color: rgba(191, 219, 254, 0.24);
   box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.23),
-    inset 0 -1px 0 rgba(2, 6, 23, 0.5),
     0 12px 24px rgba(0, 0, 0, 0.2);
 }
 
@@ -2035,8 +2064,8 @@ html[data-theme='light'] .account-auth-dialog {
   position: absolute;
   inset: 0;
   background: rgba(0, 0, 0, 0.68);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
   opacity: 0;
   transition: opacity 0.45s ease;
   will-change: opacity;
@@ -2055,8 +2084,7 @@ html[data-theme='light'] .account-auth-dialog {
   background: var(--header-surface);
   border-left: 1px solid var(--header-border);
   box-shadow:
-    -16px 0 44px rgba(5, 8, 12, 0.42),
-    inset 1px 0 0 rgba(255, 255, 255, 0.055);
+    -16px 0 44px rgba(5, 8, 12, 0.42);
   backdrop-filter: none;
   -webkit-backdrop-filter: none;
   transform: translateX(100%);
@@ -2162,7 +2190,6 @@ html[data-theme='light'] .account-auth-dialog {
   max-height: 260px;
   margin-top: 8px;
   box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.08),
     0 14px 26px rgba(0, 0, 0, 0.22);
 }
 
@@ -2471,7 +2498,7 @@ html[data-theme='light'] .account-auth-dialog {
 ===================== */
 .bonus-card {
   background: var(--surface-card);
-  backdrop-filter: var(--blur-glass);
+  backdrop-filter: none;
   padding: 1.8rem 2rem;
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-soft);
@@ -2571,8 +2598,6 @@ html[data-theme='light'] .account-auth-dialog {
   color: var(--sticker-color);
   border: 1px solid rgba(148, 163, 184, 0.16);
   box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.18),
-    inset 0 -1px 0 rgba(2, 6, 23, 0.46),
     0 8px 18px rgba(0, 0, 0, 0.14);
   overflow: hidden;
   isolation: isolate;
@@ -2582,8 +2607,6 @@ html[data-theme='light'] .account-auth-dialog {
   background: var(--surface-graphite-gradient-hover);
   border-color: rgba(191, 219, 254, 0.24);
   box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.23),
-    inset 0 -1px 0 rgba(2, 6, 23, 0.5),
     0 12px 24px rgba(0, 0, 0, 0.2);
 }
 
@@ -2821,7 +2844,7 @@ tbody tr:hover {
     transform 0.3s ease,
     box-shadow 0.3s ease,
     border-color 0.3s ease;
-  backdrop-filter: var(--blur-glass);
+  backdrop-filter: none;
   text-align: center;
   padding: 1.5rem;
 }
@@ -2939,7 +2962,7 @@ body.theme-settings-open {
   justify-content: center;
   padding: 20px;
   background: rgba(0, 0, 0, 0.62);
-  backdrop-filter: blur(14px) saturate(1.05);
+  backdrop-filter: none;
 }
 
 .theme-settings-backdrop[hidden] {
@@ -2960,7 +2983,6 @@ body.theme-settings-open {
     radial-gradient(circle at 100% 0%, rgba(56, 189, 248, 0.08), transparent 36%),
     linear-gradient(180deg, rgba(5, 7, 13, 0.98), rgba(8, 13, 24, 0.98));
   box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.08),
     0 34px 90px rgba(0, 0, 0, 0.54);
 }
 
@@ -3036,8 +3058,6 @@ body.theme-settings-open {
   background: var(--surface-graphite-gradient);
   color: var(--sticker-color);
   box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.18),
-    inset 0 -1px 0 rgba(2, 6, 23, 0.46),
     0 8px 18px rgba(0, 0, 0, 0.14);
   font: inherit;
   font-size: 14px;
@@ -3074,8 +3094,6 @@ body.theme-settings-open {
   background: var(--surface-graphite-gradient-hover);
   border-color: rgba(191, 219, 254, 0.24);
   box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.23),
-    inset 0 -1px 0 rgba(2, 6, 23, 0.5),
     0 12px 24px rgba(0, 0, 0, 0.2);
 }
 
@@ -3798,8 +3816,6 @@ body[data-country] .content-article .timeline a[href*='/responsible-gambling/'] 
   background: var(--surface-graphite-gradient);
   border: 1px solid rgba(148, 163, 184, 0.16);
   box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.18),
-    inset 0 -1px 0 rgba(2, 6, 23, 0.46),
     0 8px 18px rgba(0, 0, 0, 0.14);
   overflow: hidden;
   isolation: isolate;
@@ -3815,8 +3831,6 @@ body[data-country] .content-article .timeline a[href*='/responsible-gambling/'] 
   background: var(--surface-graphite-gradient-hover);
   border-color: rgba(191, 219, 254, 0.24);
   box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.23),
-    inset 0 -1px 0 rgba(2, 6, 23, 0.5),
     0 12px 24px rgba(0, 0, 0, 0.2);
 }
 
@@ -4309,8 +4323,7 @@ html[data-theme='light'] .payment-chip {
   border-color: rgba(15, 23, 42, 0.06);
   color: var(--text-main);
   box-shadow:
-    0 10px 24px rgba(15, 23, 42, 0.07),
-    inset 0 1px 0 rgba(255, 255, 255, 0.9);
+    0 10px 24px rgba(15, 23, 42, 0.07);
 }
 
 html[data-theme='light'] .countries-cloud a::before {
@@ -4324,8 +4337,6 @@ html[data-theme='light'] .view-all {
   border-color: rgba(15, 23, 42, 0.08);
   color: #172033;
   box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.92),
-    inset 0 -1px 0 rgba(15, 23, 42, 0.05),
     0 10px 22px rgba(15, 23, 42, 0.08);
 }
 
@@ -4347,16 +4358,13 @@ html[data-theme='light'] .home-country-jump:hover {
   border-color: rgba(15, 23, 42, 0.1);
   color: var(--text-main);
   box-shadow:
-    0 14px 28px rgba(15, 23, 42, 0.11),
-    inset 0 1px 0 rgba(255, 255, 255, 0.96);
+    0 14px 28px rgba(15, 23, 42, 0.11);
 }
 
 html[data-theme='light'] .home-country-jump:hover {
   background: var(--surface-card-hover);
   border-color: rgba(15, 23, 42, 0.12);
   box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.96),
-    inset 0 -1px 0 rgba(15, 23, 42, 0.06),
     0 14px 28px rgba(15, 23, 42, 0.11);
 }
 
@@ -4384,20 +4392,17 @@ html[data-theme='light'] .footer-settings-trigger:hover {
 
 html[data-theme='light'] .footer-social {
   color: #c9ddff;
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.115) 0%, rgba(2, 6, 23, 0.2) 52%, rgba(2, 6, 23, 0.08) 100%);
+  background: var(--sticker-bg);
   border-color: rgba(226, 232, 240, 0.74);
   box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.48),
-    inset 0 -1px 0 rgba(2, 6, 23, 0.38);
+    none;
 }
 
 html[data-theme='light'] .footer-social:hover {
   color: #c9ddff;
-  background: linear-gradient(180deg, rgba(255, 255, 255, 0.145) 0%, rgba(15, 23, 42, 0.46) 54%, rgba(8, 13, 31, 0.2) 100%);
+  background: var(--sticker-bg-hover);
   border-color: rgba(255, 255, 255, 0.94);
   box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.56),
-    inset 0 -1px 0 rgba(2, 6, 23, 0.42),
     0 8px 18px rgba(0, 0, 0, 0.22);
 }
 
@@ -4421,8 +4426,7 @@ html[data-theme='light'] .mobile-menu-panel {
   background: var(--header-surface);
   border-left-color: var(--header-border);
   box-shadow:
-    -16px 0 44px rgba(5, 8, 12, 0.42),
-    inset 1px 0 0 rgba(255, 255, 255, 0.055);
+    -16px 0 44px rgba(5, 8, 12, 0.42);
 }
 
 html[data-theme='light'] .mobile-menu-inner > a,
@@ -4450,8 +4454,7 @@ html[data-theme='light'] .site-search-results {
   background:
     linear-gradient(180deg, rgba(255, 255, 255, 0.98), rgba(248, 250, 252, 0.98));
   box-shadow:
-    0 22px 54px rgba(15, 23, 42, 0.14),
-    inset 0 1px 0 rgba(255, 255, 255, 0.9);
+    0 22px 54px rgba(15, 23, 42, 0.14);
 }
 
 html[data-theme='light'] .site-search-result {
@@ -4590,7 +4593,6 @@ html[data-theme='light'] .casino-card .card-img {
     radial-gradient(circle at top left, rgba(255, 223, 0, 0.12), transparent 28%),
     linear-gradient(180deg, rgba(10, 15, 30, 0.98), rgba(20, 30, 52, 0.94));
   box-shadow:
-    inset 0 -1px 0 rgba(255, 255, 255, 0.06),
     0 12px 28px rgba(15, 23, 42, 0.12);
 }
 
@@ -4605,7 +4607,6 @@ html[data-theme='light'] .home-link-grid-vertical .home-link-logo {
     radial-gradient(circle at top left, rgba(255, 223, 0, 0.12), transparent 28%),
     linear-gradient(180deg, rgba(10, 15, 30, 0.98), rgba(20, 30, 52, 0.94));
   box-shadow:
-    inset 0 -1px 0 rgba(255, 255, 255, 0.06),
     0 10px 22px rgba(15, 23, 42, 0.1);
 }
 
@@ -4621,7 +4622,6 @@ html[data-theme='light'] body.casinos-page .casino-list-logo {
     radial-gradient(circle at top left, rgba(255, 223, 0, 0.12), transparent 28%),
     linear-gradient(180deg, rgba(10, 15, 30, 0.98), rgba(20, 30, 52, 0.94));
   box-shadow:
-    inset 0 -1px 0 rgba(255, 255, 255, 0.06),
     0 12px 28px rgba(15, 23, 42, 0.12);
 }
 
@@ -4639,17 +4639,14 @@ html[data-theme='light'] .home-insight .feature-card {
   background: var(--surface-card);
   border-color: var(--surface-border);
   box-shadow:
-    var(--ui-shadow-neo-outline),
-    var(--ui-shadow-neo-glow),
-    var(--shadow-soft);
+    var(--ui-shadow-neo-outline), var(--ui-shadow-neo-glow), var(--shadow-soft);
 }
 
 html[data-theme='light'] .home-stat-link:hover,
 html[data-theme='light'] .home-link-card:hover,
 html[data-theme='light'] .home-insight .feature-card:hover {
   box-shadow:
-    0 0 0 1px rgba(15, 23, 42, 0.06),
-    0 18px 42px rgba(15, 23, 42, 0.12);
+    0 0 0 1px rgba(15, 23, 42, 0.06), 0 18px 42px rgba(15, 23, 42, 0.12);
 }
 
 html[data-theme='light'] .home-stat-number {
@@ -4661,8 +4658,6 @@ html[data-theme='light'] .casino-actions .cta-secondary {
   color: #172033;
   border-color: rgba(15, 23, 42, 0.08);
   box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.92),
-    inset 0 -1px 0 rgba(15, 23, 42, 0.05),
     0 10px 22px rgba(15, 23, 42, 0.08);
 }
 
@@ -4670,8 +4665,6 @@ html[data-theme='light'] .casino-actions .cta-secondary:hover {
   background: var(--surface-card-hover);
   border-color: rgba(15, 23, 42, 0.12);
   box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.96),
-    inset 0 -1px 0 rgba(15, 23, 42, 0.06),
     0 14px 28px rgba(15, 23, 42, 0.11);
 }
 
@@ -4680,8 +4673,6 @@ html[data-theme='light'] .view-all {
   background: var(--surface-card);
   border-color: rgba(15, 23, 42, 0.08);
   box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.92),
-    inset 0 -1px 0 rgba(15, 23, 42, 0.05),
     0 10px 22px rgba(15, 23, 42, 0.08);
 }
 
@@ -4690,21 +4681,18 @@ html[data-theme='light'] .view-all:hover {
   background: var(--surface-card-hover);
   border-color: rgba(15, 23, 42, 0.12);
   box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.96),
-    inset 0 -1px 0 rgba(15, 23, 42, 0.06),
     0 14px 28px rgba(15, 23, 42, 0.11);
 }
 
 html[data-theme='light'] .theme-settings-backdrop {
   background: rgba(15, 23, 42, 0.24);
-  backdrop-filter: blur(14px) saturate(1.02);
+  backdrop-filter: none;
 }
 
 html[data-theme='light'] .theme-settings-modal {
   background: var(--surface-panel);
   border-color: rgba(15, 23, 42, 0.1);
   box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.92),
     0 26px 64px rgba(15, 23, 42, 0.18);
 }
 
@@ -4725,8 +4713,6 @@ html[data-theme='light'] .theme-settings-option {
   background: var(--surface-card);
   border-color: rgba(15, 23, 42, 0.08);
   box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.92),
-    inset 0 -1px 0 rgba(15, 23, 42, 0.05),
     0 10px 22px rgba(15, 23, 42, 0.08);
 }
 
@@ -4735,7 +4721,5 @@ html[data-theme='light'] .theme-settings-option:hover {
   background: var(--surface-card-hover);
   border-color: rgba(15, 23, 42, 0.12);
   box-shadow:
-    inset 0 1px 0 rgba(255, 255, 255, 0.96),
-    inset 0 -1px 0 rgba(15, 23, 42, 0.06),
     0 14px 28px rgba(15, 23, 42, 0.11);
 }

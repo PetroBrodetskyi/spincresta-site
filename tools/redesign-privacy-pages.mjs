@@ -380,7 +380,7 @@ const renderMain = (locale, source) => {
   return `<main>
       <section class="hero container">
         <div class="hero-content">
-          <span class="home-hero-kicker">${escapeHtml(t.eyebrow)} · ${escapeHtml(source.updated)}</span>
+
           <h1>${escapeHtml(source.title)}</h1>
           <p>${escapeHtml(t.lead)}</p>
           <div class="home-hero-actions">
@@ -394,7 +394,7 @@ const renderMain = (locale, source) => {
         <section class="home-showcase-section" id="privacy-details" aria-labelledby="privacy-details-title">
           <div class="home-showcase-heading">
             <div>
-              <span class="home-section-kicker">${escapeHtml(t.detailsEyebrow)}</span>
+
               <h2 id="privacy-details-title">${escapeHtml(t.detailsTitle)}</h2>
             </div>
             <p>${escapeHtml(t.detailsLead)}</p>
@@ -416,7 +416,7 @@ const renderMain = (locale, source) => {
         <section class="home-showcase-section" id="privacy-faq" aria-labelledby="privacy-faq-title">
           <div class="home-showcase-heading">
             <div>
-              <span class="home-section-kicker">${escapeHtml(t.faqEyebrow)}</span>
+
               <h2 id="privacy-faq-title">${escapeHtml(source.faqTitle)}</h2>
             </div>
           </div>

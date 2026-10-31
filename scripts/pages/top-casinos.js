@@ -19,11 +19,11 @@ export const initTopCasinosPage = context => {
     if (document.body.dataset.page !== 'top-casinos' || document.querySelector('.top-casino-jump-nav')) {
       return;
     }
-  
+
     const contentArea = document.querySelector('.content-area');
     const sections = Array.from(document.querySelectorAll('.content[data-country]'));
     if (!contentArea || sections.length < 2) return;
-  
+
     const sectionsByCode = new Map();
     sections.forEach(section => {
       const code = section.dataset.country?.toUpperCase();
@@ -32,7 +32,7 @@ export const initTopCasinosPage = context => {
       section.id = section.id || `top-${country.slug}`;
       sectionsByCode.set(code, section);
     });
-  
+
     const featuredCodes = new Set(['US', 'UK', 'AU', 'CA', 'BR']);
     const copy = SITE_LOCALE === 'de'
       ? {
@@ -123,7 +123,7 @@ export const initTopCasinosPage = context => {
           hide: 'Show fewer',
           label: 'Casino rankings and country guides',
         };
-  
+
     const nav = document.createElement('nav');
     nav.className = 'top-casino-jump-nav';
     nav.id = 'top-casino-markets';
@@ -131,7 +131,7 @@ export const initTopCasinosPage = context => {
     nav.innerHTML = `
       <div class="top-casino-jump-nav__head">
         <div>
-          <span class="top-casinos-section-kicker">${escapeHtml(copy.kicker)}</span>
+
           <h2>${escapeHtml(copy.title)}</h2>
           <p>${escapeHtml(copy.description)}</p>
         </div>
@@ -155,9 +155,9 @@ export const initTopCasinosPage = context => {
           .join('')}
       </div>
     `;
-  
+
     contentArea.insertAdjacentElement('beforebegin', nav);
-  
+
     const toggle = nav.querySelector('.top-casino-jump-toggle');
     toggle?.addEventListener('click', () => {
       const isExpanded = nav.classList.toggle('is-expanded');
@@ -165,25 +165,25 @@ export const initTopCasinosPage = context => {
       toggle.textContent = isExpanded ? copy.hide : copy.show;
     });
   };
-  
+
   const ensureTopCasinosCountrySections = () => {
     if (document.body.dataset.page !== 'top-casinos') return;
-  
+
     const contentArea = document.querySelector('.content-area');
     const insertionPoint = contentArea?.querySelector('.top-casinos-method');
     if (!contentArea || !insertionPoint) return;
-  
+
     const existingCodes = new Set(
       Array.from(contentArea.querySelectorAll('.content[data-country]'))
         .map(section => section.dataset.country?.toUpperCase())
         .filter(Boolean)
     );
     const fragment = document.createDocumentFragment();
-  
+
     COUNTRIES.forEach(country => {
       const code = country.code.toUpperCase();
       if (existingCodes.has(code)) return;
-  
+
       const section = document.createElement('section');
       section.className = 'content top-casinos-generated-country';
       section.dataset.country = code;
@@ -199,7 +199,7 @@ export const initTopCasinosPage = context => {
       `;
       fragment.appendChild(section);
     });
-  
+
     insertionPoint.after(fragment);
   };
 
