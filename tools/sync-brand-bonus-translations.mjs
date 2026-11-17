@@ -3,6 +3,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { BRANDS } from '../scripts/brands.js';
+import { PINUP_COPY } from './pin-up-advertiser-copy.mjs';
 
 const ROOT = process.cwd();
 const LOCALES = ['de', 'es', 'it', 'pl', 'uk', 'pt', 'fr', 'hi', 'fi'];
@@ -40,6 +41,8 @@ const BONUS_TRANSLATION_OVERRIDES = {
   fi: { [GOLDPARI_BONUS]: '100 % ensitalletusbonus + 30 ilmaiskierrosta valituilla markkinoilla', [SILVERPLAY_BONUS]: '300 % enintään 2 500 EUR + 250 ilmaiskierrosta', [CASINOVA_BONUS]: 'Enintään 2 000 € + 350 ilmaiskierrosta', [GOLDENBET_UK_BONUS]: '200 ilmaiskierrosta + 20 % cashback urheiluvedoista', [GOLDENBET_AU_BONUS]: 'A$100 käteisbonus + 300 ilmaiskierrosta viikossa', [BCGAME_BONUS]: 'Jopa 1 600 $ + 400 ilmaiskierrosta', [CASINOBOSSY_BONUS]: 'Tervetuliaispaketti enintään 2 500 EUR + 250 ilmaiskierrosta', [WINOLOT_BONUS]: '125 % enintään 1 000 € + 200 ilmaiskierrosta', [FELICEBET_BONUS]: 'Tervetuliaispaketti enintään 2 600 € + 300 ilmaiskierrosta' },
 };
 // Keep the manually reviewed Vegas Now terminology when regenerating maps.
+const PINUP_BONUS = BRANDS.find(brand => brand.name === 'Pin-Up').bonus;
+for (const locale of LOCALES) BONUS_TRANSLATION_OVERRIDES[locale][PINUP_BONUS] = PINUP_COPY[locale].short;
 BONUS_TRANSLATION_OVERRIDES.uk['Up to 8,000 €/$ + 500 free spins'] = 'До 8 000 €/$ + 500 фриспінів';
 const decodeHtml = value =>
   value

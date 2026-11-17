@@ -275,6 +275,7 @@ export const initBrandLayout = context => {
       layout.querySelectorAll('.brand-sticky-main .content-review > section.container')
     ).filter(section => {
       if (section.classList.contains('brand-sidebar-section')) return false;
+      if (section.dataset.brandRail) return false;
       if (hasTabularContent(section)) return false;
       if (['best-for', 'pros-cons', 'faq'].includes(section.id)) return false;
       const title = normalizeText(
@@ -512,6 +513,13 @@ export const initBrandLayout = context => {
 
   const initRightRailContent = (layout, rightRail) => {
     if (!layout || !rightRail) return;
+
+    // Explicit editorial sections can include tables; keep their mobile origin.
+    layout.querySelectorAll('[data-brand-rail="betting"]').forEach(section => {
+      if (section.dataset.bettingRailBound === 'true') return;
+      section.dataset.bettingRailBound = 'true';
+      bindResponsiveMove({element: section, target: rightRail, className: 'brand-sidebar-section', mediaQuery: '(min-width: 1200px)'});
+    });
 
     const payments = layout.querySelector('.brand-sticky-main .brand-payments');
     bindResponsiveMove({

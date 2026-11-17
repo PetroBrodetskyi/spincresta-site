@@ -106,7 +106,6 @@ export default {
   "First Deposit Bonus - 100% Up to R3 000": "Bono por primer depósito: 100% hasta R3 000",
   "Casino welcome package up to 450% + 500 FS across first 5 deposits": "Paquete de bienvenida del casino de hasta 450 % + 500 FS en los primeros 5 depósitos",
   "Casino up to 120% + 250 Free Spins; Sports up to 200% + Free Bet; Poker 100%": "Casino: hasta 120% + 250 giros gratis; deportes: hasta 200% + apuesta gratis; póquer: 100%",
-  "Casino 120% + 250 FS, Sports up to 125%; local caps vary": "Casino 120% + 250 FS, Deportes hasta 125%; los límites locales varían",
   "Casino Bonus 100% up to €500 + 200 FS + 1 Bonus Crab": "Bono de Casino 100% hasta 500€ + 200 FS + 1 Bono Cangrejo",
   "Up to 260k Gold Coins + 100 Free Spins on Wild Cash": "Hasta 260k monedas de oro + 100 giros gratis en Wild Cash",
   "Live Casino Welcome Package €300": "Paquete de bienvenida de casino en vivo 300 €",
@@ -148,5 +147,6 @@ export default {
   "280% Match Bonus up to R5500 + 45 Free Spins": "Bono de partido del 280% hasta R5500 + 45 giros gratis",
   "Welcome Bonus - 550% Up to €3,800 + 50 Free Spins": "Bono de bienvenida: 550 % hasta 3800 € + 50 giros gratis",
   "100% Welcome Bonus up to $5,000 on Your First Deposit": "Bono de bienvenida del 100% hasta $5,000 en su primer depósito",
-  "100% First-Deposit Bonus + 30 Free Spins in Selected Markets": "Bono del 100 % en el primer depósito + 30 giros gratis en mercados seleccionados"
+  "100% First-Deposit Bonus + 30 Free Spins in Selected Markets": "Bono del 100 % en el primer depósito + 30 giros gratis en mercados seleccionados",
+  "Casino 120% + 250 FS; Sports up to 125% + 100% Free Bet; country limits apply": "Casino: 120% + 250 giros gratis; deportes: hasta 125% + apuesta gratis del 100%; límites según el país"
 };

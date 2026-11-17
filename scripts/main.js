@@ -1,7 +1,7 @@
 ﻿// =====================
 // IMPORTS
 // =====================
-import { BRANDS } from './brands.js?v=20261027-gamblezen-1';
+import { BRANDS } from './brands.js?v=20261117-pinup-1';
 import { COUNTRIES } from './countries.js';
 import { initFooterNewsletter } from './footer-newsletter.js?v=20260826-newsletter-4';
 import { initAccountAuth } from './account-auth.js?v=20260829-local-preview-1';
@@ -25,7 +25,7 @@ const brandLayoutFallbackTimer = document.body?.dataset.brand
     }, 1500)
   : null;
 const brandLayoutModuleReady = document.body?.dataset.brand
-  ? import('./pages/brand-layout.js?v=20261027-tracking-domain-1').then(module => {
+  ? import('./pages/brand-layout.js?v=20261117-pinup-1').then(module => {
       initBrandLayoutModule = module.initBrandLayout;
     }).catch(error => {
       document.body.classList.add('brand-layout-failed');
@@ -365,7 +365,7 @@ const SITE_LOCALE = DOCUMENT_LANGUAGE.startsWith('de')
 let brandBonusTranslations = {};
 const brandBonusTranslationsReady = SITE_LOCALE === 'en'
   ? Promise.resolve()
-  : import(`./brand-bonus-translations/${SITE_LOCALE}.js?v=20261006-vegasnow-2`)
+  : import(`./brand-bonus-translations/${SITE_LOCALE}.js?v=20261117-pinup-1`)
       .then(module => {
         brandBonusTranslations = module.default || {};
       })
@@ -2204,7 +2204,7 @@ const initDesktopSiteSearch = () => {
   return search;
 };
 
-const getDefaultTheme = () => 'dark';
+const getDefaultTheme = () => 'light';
 
 const ensureFooterBlogLink = () => {
   const blogHref = localizedPagePath('/blog/');

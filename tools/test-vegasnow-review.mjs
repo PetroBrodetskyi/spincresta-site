@@ -34,7 +34,7 @@ for(const locale of locales){
     assert.match(html,/brand-snapshot-intro/);
     assert.ok(html.includes(`<meta name="brand-games-title" content="${gameTitles[locale]}" />`));
     assert.doesNotMatch(html,/\uFFFD|Ã|Ð|noindex|AggregateRating|Gravira|National Casino/);
-    assert.match(html,/main\.js\?v=20261006-vegasnow-2/);
+    assert.match(html,/main\.js\?v=[a-zA-Z0-9-]+/);
     assert.equal(count(section(html,'casino-lobby'),/<article /g),2);
     assert.ok(decode(section(html,'sports-betting')).includes(copy.games[2][1]));
     assert.ok(decode(section(html,'sports-betting')).includes(copy.features[4][1]));

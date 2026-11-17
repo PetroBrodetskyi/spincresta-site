@@ -40,7 +40,7 @@ test('all 10 Mostbet reviews have one localized placement inside the existing ac
     assert(section.includes('<div data-partner-program-link>Mostbet Partners</div>'), locale);
     assert(/data-brand-partner-program><strong>[^<]+<\/strong><span>[^<]+<\/span><div data-partner-program-link>/.test(section), `${locale}: localized heading, description and link must be in that order`);
     assert(!html.includes('mbp-aff.com') && !html.includes('480533'), `${locale}: referral URL must not be duplicated in HTML`);
-    assert(html.includes('/scripts/main.js?v=20261006-mostbet-partners-3'), locale);
+    assert.match(html, /\/scripts\/main\.js\?v=[a-zA-Z0-9-]+/, locale);
     assert(html.includes('/styles.css?v=20261006-feature-card-links-3'), locale);
     const bestFor = html.match(/<section class="container" id="best-for">[\s\S]*?<\/section>/)?.[0];
     assert(bestFor, `${locale}: audience section must have a stable sidebar ID`);

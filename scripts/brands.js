@@ -453,13 +453,13 @@ export const BRANDS = [
   },
   {
     name: 'Pin-Up',
-    bonus: 'Casino 120% + 250 FS, Sports up to 125%; local caps vary',
+    bonus: 'Casino 120% + 250 FS; Sports up to 125% + 100% Free Bet; country limits apply',
     cta: 'Play Now',
     urlDetail: 'brands/pin-up.html',
     urlCasino: 'https://offers-armada.com/click?pid=2&offer_id=257',
     image: 'images/pin-up.webp',
     bgColor: '#0D1016',
-    countries: ['AZ', 'BD', 'BO', 'CD', 'CL', 'EC', 'GT', 'HN', 'IN', 'KZ', 'KE', 'MX', 'NG', 'NI', 'UZ'],
+    countries: ['AZ', 'BD', 'BO', 'CD', 'CL', 'EC', 'GT', 'HN', 'IN', 'KZ', 'KE', 'KG', 'MX', 'NG', 'NI', 'TJ', 'UZ'],
     payments: [
       'visa',
       'mastercard',

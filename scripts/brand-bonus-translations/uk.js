@@ -106,7 +106,6 @@ export default {
   "First Deposit Bonus - 100% Up to R3 000": "Бонус на перший депозит - 100% до 3 000 рупій",
   "Casino welcome package up to 450% + 500 FS across first 5 deposits": "Вітальний пакет казино до 450% + 500 FS на перші 5 депозитів",
   "Casino up to 120% + 250 Free Spins; Sports up to 200% + Free Bet; Poker 100%": "Казино: до 120% + 250 фріспінів; спорт: до 200% + фрібет; покер: 100%",
-  "Casino 120% + 250 FS, Sports up to 125%; local caps vary": "Казино 120% + 250 FS, Спорт до 125%; місцеві обмеження відрізняються",
   "Casino Bonus 100% up to €500 + 200 FS + 1 Bonus Crab": "Бонус казино 100% до €500 + 200 FS + 1 бонус Краб",
   "Up to 260k Gold Coins + 100 Free Spins on Wild Cash": "До 260 тисяч золотих монет + 100 безкоштовних обертань на Wild Cash",
   "Live Casino Welcome Package €300": "Вітальний пакет Live Casino €300",
@@ -148,5 +147,6 @@ export default {
   "280% Match Bonus up to R5500 + 45 Free Spins": "280% бонус до R5500 + 45 безкоштовних обертань",
   "Welcome Bonus - 550% Up to €3,800 + 50 Free Spins": "Вітальний бонус - 550% до €3800 + 50 безкоштовних обертань",
   "100% Welcome Bonus up to $5,000 on Your First Deposit": "100% вітальний бонус до $5000 на ваш перший депозит",
-  "100% First-Deposit Bonus + 30 Free Spins in Selected Markets": "100% бонус на перший депозит + 30 фріспінів на вибраних ринках"
+  "100% First-Deposit Bonus + 30 Free Spins in Selected Markets": "100% бонус на перший депозит + 30 фріспінів на вибраних ринках",
+  "Casino 120% + 250 FS; Sports up to 125% + 100% Free Bet; country limits apply": "Казино: 120% + 250 фриспінів; спорт: до 125% + фрибет 100%; ліміти залежать від країни"
 };

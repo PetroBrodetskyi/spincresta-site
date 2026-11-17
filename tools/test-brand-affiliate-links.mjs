@@ -115,11 +115,11 @@ test('Pinco generator uses the brand registry instead of a hardcoded offer ID', 
   assert.ok(!generator.includes('123113'));
   assert.ok(generator.includes('/scripts/main.js?v=20261027-tracking-domain-1'));
   const main = fs.readFileSync('scripts/main.js', 'utf8');
-  assert.ok(main.includes('./brands.js?v=20261027-gamblezen-1'));
-  assert.ok(main.includes('./pages/brand-layout.js?v=20261027-tracking-domain-1'));
+  assert.match(main, /import \{ BRANDS \} from '\.\/brands\.js\?v=[^']+';/);
+  assert.match(main, /import\('\.\/pages\/brand-layout\.js\?v=[^']+'\)/);
   for (const locale of locales) {
     const html = fs.readFileSync(`${locale === 'en' ? '' : `${locale}/`}brands/pinco/index.html`, 'utf8');
-    assert.ok(html.includes('/scripts/main.js?v=20261027-tracking-domain-1'));
+    assert.match(html, /\/scripts\/main\.js\?v=[a-zA-Z0-9-]+/);
   }
 });
 

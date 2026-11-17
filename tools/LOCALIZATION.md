@@ -59,6 +59,8 @@ After regenerating a brand review or the casino directory, run `node tools/sync-
 
 ## Plain-language editorial standard
 
+After creating or regenerating public HTML pages, run `node tools/sync-default-theme.mjs`, then `node tools/sync-default-theme.mjs --check`. This restores the default light theme and the early theme initializer before styles load, while honoring an existing visitor's saved dark/light preference. Keep the runtime fallback in `scripts/main.js` set to light. Do not change an explicit saved preference or follow the system theme instead of the site's default.
+
 After page generation, run `node tools/polish-site-presentation.mjs --apply`, then `--check`. Do not restore decorative kicker/eyebrow labels, vertical accent bars or backdrop-blurred UI panels. Use the shared opaque surface tokens instead. Keep image-derived blur around brand hero screenshots and game artwork; it is separate from UI glass. Keep real headings, form labels, focus indicators and structural table/card borders.
 
 Write verified features directly, in the present tense. Keep bonus amounts, wagering, expiry, payment limits, eligibility and unverified claims explicit. Remove literary comparisons, speculation about operator intentions, and unsupported claims of seamless performance or guaranteed safety. Describe a game filter or reward condition rather than saying it makes the casino “more than a bonus page.”

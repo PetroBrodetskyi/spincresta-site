@@ -106,7 +106,6 @@ export default {
   "First Deposit Bonus - 100% Up to R3 000": "पहला जमा बोनस - 100% R3,000 तक",
   "Casino welcome package up to 450% + 500 FS across first 5 deposits": "पहले 5 डिपॉजिट पर 450% + 500 एफएस तक कैसीनो स्वागत पैकेज",
   "Casino up to 120% + 250 Free Spins; Sports up to 200% + Free Bet; Poker 100%": "कैसीनो: 120% तक + 250 मुफ़्त स्पिन; स्पोर्ट्स: 200% तक + फ्रीबेट; पोकर: 100%",
-  "Casino 120% + 250 FS, Sports up to 125%; local caps vary": "कैसीनो 120% + 250 एफएस, 125% तक खेल; स्थानीय सीमाएँ भिन्न-भिन्न होती हैं",
   "Casino Bonus 100% up to €500 + 200 FS + 1 Bonus Crab": "कैसीनो बोनस 100% €500 तक + 200 एफएस + 1 बोनस क्रैब",
   "Up to 260k Gold Coins + 100 Free Spins on Wild Cash": "260k तक सोने के सिक्के + वाइल्ड कैश पर 100 मुफ्त स्पिन",
   "Live Casino Welcome Package €300": "लाइव कैसीनो स्वागत पैकेज €300",
@@ -148,5 +147,6 @@ export default {
   "280% Match Bonus up to R5500 + 45 Free Spins": "R5500 तक 280% मैच बोनस + 45 निःशुल्क स्पिन",
   "Welcome Bonus - 550% Up to €3,800 + 50 Free Spins": "स्वागत बोनस - 550% €3,800 तक + 50 निःशुल्क स्पिन",
   "100% Welcome Bonus up to $5,000 on Your First Deposit": "आपकी पहली जमा राशि पर $5,000 तक 100% स्वागत बोनस",
-  "100% First-Deposit Bonus + 30 Free Spins in Selected Markets": "चुनिंदा बाज़ारों में पहले जमा पर 100% बोनस + 30 फ्री स्पिन"
+  "100% First-Deposit Bonus + 30 Free Spins in Selected Markets": "चुनिंदा बाज़ारों में पहले जमा पर 100% बोनस + 30 फ्री स्पिन",
+  "Casino 120% + 250 FS; Sports up to 125% + 100% Free Bet; country limits apply": "कैसीनो: 120% + 250 मुफ़्त स्पिन; स्पोर्ट्स: 125% तक + 100% फ्री बेट; देश के अनुसार सीमाएँ लागू"
 };
