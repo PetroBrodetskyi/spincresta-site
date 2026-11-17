@@ -104,7 +104,6 @@ export default {
   "Welcome Package 4000 EUR + 200 FS": "Tervetuliaispaketti 4000 EUR + 200 FS",
   "Grab Your 20 Free Spins + $7,500 Welcome Bonus": "Nappaa 20 ilmaispyöräytystäsi + 7 500 dollarin tervetuliaisbonus",
   "First Deposit Bonus - 100% Up to R3 000": "Ensitalletusbonus - 100 % aina R3 000 asti",
-  "Casino welcome package up to 450% + 500 FS across first 5 deposits": "Kasinon tervetuliaispaketti jopa 450% + 500 FS viiden ensimmäisen talletuksen aikana",
   "Casino up to 120% + 250 Free Spins; Sports up to 200% + Free Bet; Poker 100%": "Kasino: enintään 120 % + 250 ilmaiskierrosta; urheilu: enintään 200 % + ilmaisveto; pokeri: 100 %",
   "Casino Bonus 100% up to €500 + 200 FS + 1 Bonus Crab": "Kasinobonus 100 % 500 € asti + 200 FS + 1 bonusrapu",
   "Up to 260k Gold Coins + 100 Free Spins on Wild Cash": "Jopa 260 000 kultakolikkoa + 100 ilmaispyöräytystä Wild Cashille",
@@ -148,5 +147,6 @@ export default {
   "Welcome Bonus - 550% Up to €3,800 + 50 Free Spins": "Tervetuliaisbonus - 550 % Jopa 3 800 € + 50 ilmaispyöräytystä",
   "100% Welcome Bonus up to $5,000 on Your First Deposit": "100 % tervetuliaisbonus 5 000 dollariin asti ensimmäisestä talletuksestasi",
   "100% First-Deposit Bonus + 30 Free Spins in Selected Markets": "100 % ensitalletusbonus + 30 ilmaiskierrosta valituilla markkinoilla",
-  "Casino 120% + 250 FS; Sports up to 125% + 100% Free Bet; country limits apply": "Kasino: 120 % + 250 ilmaiskierrosta; urheilu: enintään 125 % + 100 %:n ilmaisveto; maakohtaiset rajat"
+  "Casino 120% + 250 FS; Sports up to 125% + 100% Free Bet; country limits apply": "Kasino: 120 % + 250 ilmaiskierrosta; urheilu: enintään 125 % + 100 %:n ilmaisveto; maakohtaiset rajat",
+  "Welcome package: 455% + 270 free spins across the first 5 deposits": "Tervetuliaispaketti: 455 % + 270 ilmaiskierrosta viidelle ensimmäiselle talletukselle"
 };

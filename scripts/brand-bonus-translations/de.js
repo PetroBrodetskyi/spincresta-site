@@ -104,7 +104,6 @@ export default {
   "Welcome Package 4000 EUR + 200 FS": "Willkommenspaket 4000 EUR + 200 FS",
   "Grab Your 20 Free Spins + $7,500 Welcome Bonus": "Sichern Sie sich Ihre 20 Freispiele + 7.500 $ Willkommensbonus",
   "First Deposit Bonus - 100% Up to R3 000": "Ersteinzahlungsbonus – 100 % bis zu R3.000",
-  "Casino welcome package up to 450% + 500 FS across first 5 deposits": "Casino-Willkommenspaket bis zu 450 % + 500 FS bei den ersten 5 Einzahlungen",
   "Casino up to 120% + 250 Free Spins; Sports up to 200% + Free Bet; Poker 100%": "Casino: bis zu 120 % + 250 Freispiele; Sport: bis zu 200 % + Freiwette; Poker: 100 %",
   "Casino Bonus 100% up to €500 + 200 FS + 1 Bonus Crab": "Casino-Bonus 100 % bis zu 500 € + 200 FS + 1 Bonuskrabbe",
   "Up to 260k Gold Coins + 100 Free Spins on Wild Cash": "Bis zu 260.000 Goldmünzen + 100 Freispiele für Wild Cash",
@@ -148,5 +147,6 @@ export default {
   "Welcome Bonus - 550% Up to €3,800 + 50 Free Spins": "Willkommensbonus – 550 % bis zu 3.800 € + 50 Freispiele",
   "100% Welcome Bonus up to $5,000 on Your First Deposit": "100 % Willkommensbonus bis zu 5.000 $ auf Ihre erste Einzahlung",
   "100% First-Deposit Bonus + 30 Free Spins in Selected Markets": "100 % Ersteinzahlungsbonus + 30 Freispiele in ausgewählten Märkten",
-  "Casino 120% + 250 FS; Sports up to 125% + 100% Free Bet; country limits apply": "Casino: 120 % + 250 Freispiele; Sportwetten: bis zu 125 % + 100 % Gratiswette; länderabhängige Limits"
+  "Casino 120% + 250 FS; Sports up to 125% + 100% Free Bet; country limits apply": "Casino: 120 % + 250 Freispiele; Sportwetten: bis zu 125 % + 100 % Gratiswette; länderabhängige Limits",
+  "Welcome package: 455% + 270 free spins across the first 5 deposits": "Willkommenspaket: 455 % + 270 Freispiele bei den ersten 5 Einzahlungen"
 };

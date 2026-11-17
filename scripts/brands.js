@@ -2008,11 +2008,11 @@ export const BRANDS = [
   },
   {
     name: 'Pampas',
-    bonus: 'Casino welcome package up to 450% + 500 FS across first 5 deposits',
+    bonus: 'Welcome package: 455% + 270 free spins across the first 5 deposits',
     cta: 'Play Now',
     urlDetail: 'brands/pampas.html',
     urlCasino: 'https://armadaapp.media-412.com/click?pid=3862&offer_id=122865',
-    image: 'images/pampas.svg',
+    image: 'images/pampas-20261117.svg',
     bgColor: '#0D0D0D',
     countries: ['AR', 'CO', 'CL', 'MX'],
     payments: ['banktransfer', 'bitcoin', 'tether'],

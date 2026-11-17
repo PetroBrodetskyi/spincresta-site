@@ -4,6 +4,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { BRANDS } from '../scripts/brands.js';
 import { PINUP_COPY } from './pin-up-advertiser-copy.mjs';
+import { PAMPAS_COPY } from './pampas-welcome-copy.mjs';
 
 const ROOT = process.cwd();
 const LOCALES = ['de', 'es', 'it', 'pl', 'uk', 'pt', 'fr', 'hi', 'fi'];
@@ -43,6 +44,8 @@ const BONUS_TRANSLATION_OVERRIDES = {
 // Keep the manually reviewed Vegas Now terminology when regenerating maps.
 const PINUP_BONUS = BRANDS.find(brand => brand.name === 'Pin-Up').bonus;
 for (const locale of LOCALES) BONUS_TRANSLATION_OVERRIDES[locale][PINUP_BONUS] = PINUP_COPY[locale].short;
+const PAMPAS_BONUS = BRANDS.find(brand => brand.name === 'Pampas').bonus;
+for (const locale of LOCALES) BONUS_TRANSLATION_OVERRIDES[locale][PAMPAS_BONUS] = PAMPAS_COPY[locale].short;
 BONUS_TRANSLATION_OVERRIDES.uk['Up to 8,000 €/$ + 500 free spins'] = 'До 8 000 €/$ + 500 фриспінів';
 const decodeHtml = value =>
   value
