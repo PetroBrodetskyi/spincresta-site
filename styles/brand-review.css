@@ -1,0 +1,854 @@
+/* Editorial surfaces for brand reviews. The masthead uses its own unchanged styles. */
+body[data-brand].has-brand-sticky-layout {
+  --review-surface: #fff;
+  --review-base: #f5f7fa;
+  --review-line: #e0e5ed;
+  --review-ink: #142238;
+  --review-muted: #4a5a70;
+  --review-accent: #795300;
+  --review-contents-active: #075ca8;
+  --review-tint: #fff5d5;
+  --review-radius: 16px;
+  --review-space: clamp(14px, 1.55vw, 23px);
+  --review-inset: clamp(16px, 2.15vw, 32px);
+}
+
+html:root body[data-brand].has-brand-sticky-layout .brand-sticky-main {
+  display: flex;
+  gap: var(--review-space);
+}
+
+body[data-brand] .brand-sticky-main :is(.content-review, .content-article) {
+  display: grid;
+  gap: var(--review-space);
+  width: 100%;
+  min-width: 0;
+  margin: 0;
+  padding: 0;
+}
+
+html:root body[data-brand].has-brand-sticky-layout .brand-sticky-main > section.container:not(:empty),
+html:root body[data-brand].has-brand-sticky-layout .brand-sticky-main :is(.content-review, .content-article) > section.container,
+html:root body[data-brand].has-brand-sticky-layout .brand-sticky-main .brand-player-feedback {
+  width: 100%;
+  min-width: 0;
+  max-width: none;
+  margin: 0;
+  padding: var(--review-inset);
+  gap: 14px;
+  border: 1px solid var(--review-line);
+  border-radius: var(--review-radius);
+  background: var(--review-surface);
+  box-shadow: none;
+}
+
+html:root body[data-brand].has-brand-sticky-layout .brand-sticky-main section.container:has(> .brand-availability-widget) {
+  padding: 0;
+}
+
+body[data-brand] :is([data-review-section][hidden], .brand-info-pair:not(:has(> [data-review-section]:not([hidden])))) {
+  display: none !important;
+}
+
+.brand-review-overview {
+  display: grid;
+  gap: 12px;
+  padding: var(--review-inset);
+  border: 1px solid var(--review-line);
+  border-radius: var(--review-radius);
+  background: var(--review-surface);
+}
+
+.brand-review-overview > h2 {
+  --heading-size: var(--type-section);
+  width: fit-content;
+  margin: 0;
+  color: var(--review-ink);
+  scroll-margin-top: calc(var(--header-height, 64px) + 24px);
+}
+
+html:root body[data-brand] .brand-review-overview > p {
+  max-width: 70ch;
+  margin: 0;
+  color: var(--review-ink);
+  font-size: var(--type-body);
+  line-height: 1.65;
+  text-align: start;
+}
+
+html:root body[data-brand] .brand-review-overview > p.editorial-meta {
+  padding-top: 10px;
+  border-top: 1px solid var(--review-line);
+  color: var(--review-muted);
+  font-size: var(--type-caption);
+  line-height: 1.5;
+}
+
+/* Give each section a single readable headline rather than a centered display banner. */
+html:root body[data-brand].has-brand-sticky-layout
+  :is(.brand-sticky-main, .brand-sticky-aside, .brand-right-rail)
+  :is(section, .brand-countries, .brand-payments, .brand-availability-widget, .brand-why-heading) > .title {
+  --heading-size: var(--type-section);
+  width: auto;
+  max-width: none;
+  margin: 0 0 8px;
+  padding: 0;
+  border: 0;
+  color: var(--review-ink);
+  text-align: start !important;
+  overflow-wrap: anywhere;
+}
+
+html:root body[data-brand].has-brand-sticky-layout
+  :is(.brand-sticky-main, .brand-sticky-aside, .brand-right-rail)
+  :is(section, .brand-countries, .brand-payments, .brand-availability-widget, .brand-why-heading) > .title::before {
+  content: none;
+}
+
+html:root body[data-brand].has-brand-sticky-layout .brand-sticky-main
+  :is(.content-review, .content-article) > section > :is(p, ul, ol) {
+  width: auto;
+  max-width: 72ch;
+  margin-inline: 0;
+  color: var(--review-muted);
+  text-align: start;
+  line-height: 1.65;
+}
+
+html:root body[data-brand].has-brand-sticky-layout .brand-sticky-main #brand-why-section .brand-why-heading {
+  padding: 0;
+  border: 0;
+  justify-content: flex-start;
+}
+
+html:root body[data-brand].has-brand-sticky-layout
+  :is(
+    .brand-sticky-main :is(#brand-why-section, .content-review > section, .content-article > section),
+    :is(.brand-sticky-aside, .brand-right-rail) .brand-sidebar-section
+  )
+  > :is(.features-grid, .premium-grid) {
+  display: grid;
+  grid-template-columns: var(--review-feature-columns, repeat(2, minmax(0, 1fr)));
+  grid-auto-flow: row;
+  grid-auto-columns: auto;
+  gap: 10px;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: visible;
+  scroll-snap-type: none;
+}
+
+html:root body[data-brand].has-brand-sticky-layout
+  :is(.brand-sticky-main, .brand-sticky-aside, .brand-right-rail) :is(.features-grid, .premium-grid) > .feature-card {
+  --surface-panel: var(--review-base);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: start;
+  width: auto;
+  min-width: 0;
+  min-height: 0;
+  gap: 8px;
+  margin: 0;
+  padding: 15px;
+  border: 1px solid var(--review-line);
+  border-radius: 11px;
+  background: var(--review-base);
+  box-shadow: none;
+  text-align: start;
+  transform: none;
+  overflow-wrap: anywhere;
+}
+
+html:root body[data-brand].has-brand-sticky-layout :is(.brand-sticky-main, .brand-right-rail) .feature-card > .icon-placeholder {
+  display: inline-grid;
+  place-content: center;
+  width: 32px;
+  min-width: 32px;
+  height: 30px;
+  min-height: 30px;
+  margin: 0;
+  border: 0;
+  border-radius: 8px;
+  background: var(--review-tint);
+  color: var(--review-accent);
+  box-shadow: none;
+}
+
+html:root body[data-brand].has-brand-sticky-layout
+  :is(.brand-sticky-main, .brand-sticky-aside, .brand-right-rail) .feature-card > :is(strong, h3, h4) {
+  margin: 0;
+  color: var(--review-ink);
+  font-size: var(--type-body);
+  font-weight: 750;
+  text-align: start;
+}
+
+html:root body[data-brand].has-brand-sticky-layout
+  :is(.brand-sticky-main, .brand-sticky-aside, .brand-right-rail) .feature-card > :is(span, p) {
+  margin: 0;
+  color: var(--review-muted);
+  font-size: var(--type-ui);
+  line-height: 1.55;
+  text-align: start;
+}
+
+html:root body[data-brand].has-brand-sticky-layout .brand-sticky-main .pros-cons-grid {
+  gap: 12px;
+}
+
+html:root body[data-brand].has-brand-sticky-layout .brand-sticky-main .pros-cons-grid > .is-pros-card {
+  --surface-panel: #f1f9f5;
+  border-color: #cfe4d9;
+  background: var(--surface-panel);
+}
+
+html:root body[data-brand].has-brand-sticky-layout .brand-sticky-main .pros-cons-grid > .is-cons-card {
+  --surface-panel: #fff7ef;
+  border-color: #ead8c4;
+  background: var(--surface-panel);
+}
+
+.brand-sticky-main .pros-cons-grid .feature-card > br {
+  display: none;
+}
+
+.brand-betting-section .brand-betting-summary {
+  --review-feature-columns: minmax(0, 1fr);
+}
+
+html:root body[data-brand].has-brand-sticky-layout .brand-betting-section .brand-betting-summary > .feature-card {
+  --surface-panel: var(--review-surface);
+  padding: 0;
+  border: 0;
+}
+
+/* Country and payment facts stay compact, with visible names and real logos. */
+html:root body[data-brand].has-brand-sticky-layout .brand-info-pair :is(.brand-countries, .brand-payments) {
+  gap: 10px;
+}
+
+html:root body[data-brand] .brand-info-pair .brand-countries .countries-container {
+  grid-template-columns: repeat(auto-fill, minmax(min(138px, 100%), 1fr));
+  gap: 7px;
+  justify-items: stretch;
+}
+
+html:root body[data-brand] .brand-info-pair .brand-countries .flag-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  width: 100%;
+  max-width: none;
+  min-height: 42px;
+  gap: 8px;
+  padding: 8px;
+  border: 1px solid var(--review-line);
+  border-radius: 8px;
+  background: var(--review-base);
+  box-shadow: none;
+  text-align: start;
+}
+
+html:root body[data-brand] .brand-info-pair .brand-countries .flag-container .hero-flag {
+  flex: 0 0 25px;
+  width: 25px;
+  height: 17px;
+  object-fit: contain;
+}
+
+html:root body[data-brand] .brand-info-pair .brand-countries .flag-container span:not(.hero-flag) {
+  color: var(--review-ink);
+  font-size: var(--type-caption);
+  line-height: 1.2;
+  text-align: start;
+  overflow-wrap: anywhere;
+}
+
+html:root body[data-brand] .brand-countries.is-country-collapsible:not(.is-country-expanded) .countries-container::after {
+  height: 17px;
+  background: linear-gradient(transparent, var(--review-surface));
+}
+
+html:root body[data-brand] .brand-countries .brand-country-toggle {
+  min-height: 40px;
+  border-color: var(--review-line);
+  border-radius: 8px;
+  background: var(--review-base);
+  color: var(--review-ink);
+  box-shadow: none;
+}
+
+html:root body[data-brand].has-brand-sticky-layout .brand-payments .payments-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(64px, 1fr));
+  justify-content: start;
+  gap: 6px;
+}
+
+html:root body[data-brand].has-brand-sticky-layout .brand-payments .payments {
+  min-height: 39px;
+  padding: 7px;
+  border: 1px solid var(--review-line);
+  border-radius: 8px;
+  background: var(--review-surface);
+  box-shadow: none;
+}
+
+html:root body[data-brand].has-brand-sticky-layout .brand-payments .payments img {
+  height: 18px;
+  max-width: 100%;
+  object-fit: contain;
+}
+
+/* Data tables stay semantic; simple rows reflow as labeled records on smaller screens. */
+.brand-review-table-frame {
+  width: 100%;
+  min-width: 0;
+  overflow-x: auto;
+  border: 1px solid var(--review-line);
+  border-radius: 12px;
+  background: var(--review-surface);
+}
+
+html:root body[data-brand] .brand-review-table-frame > table {
+  width: 100%;
+  margin: 0;
+  border: 0;
+  border-collapse: collapse;
+  border-radius: 0;
+  background: var(--review-surface);
+  box-shadow: none;
+}
+
+html:root body[data-brand] .brand-review-table-frame :is(th, td) {
+  padding: 13px 14px;
+  border: 0;
+  border-bottom: 1px solid var(--review-line);
+  color: var(--review-muted);
+  font-size: var(--type-ui);
+  line-height: 1.55;
+  text-align: start;
+  vertical-align: top;
+  overflow-wrap: anywhere;
+}
+
+html:root body[data-brand] .brand-review-table-frame thead th {
+  background: #eef2f7;
+  color: var(--review-ink);
+  font-weight: 750;
+}
+
+html:root body[data-brand] .brand-review-table-frame tbody tr:nth-child(even) {
+  background: #f8fafc;
+}
+
+html:root body[data-brand] .brand-review-table-frame tbody tr:last-child > :is(th, td) {
+  border-bottom: 0;
+}
+
+.brand-review-table__label {
+  display: none;
+}
+
+/* Keep authored headings, notes and semantic tables together behind compact tabs. */
+html:root body[data-brand].has-brand-sticky-layout .brand-sticky-main .content-review > .brand-review-details {
+  display: grid;
+  gap: 12px;
+}
+
+html:root body[data-brand].has-brand-sticky-layout
+  .brand-sticky-main .content-review > .brand-review-details > #brand-review-details.title {
+  width: auto;
+  max-width: none;
+  margin: 0;
+  padding: 0;
+}
+
+.brand-review-details__tabs {
+  display: flex;
+  min-width: 0;
+  max-width: 100%;
+  gap: clamp(10px, 1.7vw, 22px);
+  overflow-x: auto;
+  border-bottom: 1px solid var(--review-line);
+  scrollbar-width: thin;
+}
+
+.brand-review-details__tabs > button {
+  flex: 0 0 auto;
+  min-height: 44px;
+  margin: 0;
+  padding: 7px 5px 8px;
+  border: 0;
+  border-bottom: 3px solid transparent;
+  border-radius: 0;
+  background: none;
+  color: var(--review-muted);
+  font: inherit;
+  font-size: var(--type-ui);
+  font-weight: 600;
+  text-align: start;
+  cursor: pointer;
+}
+
+.brand-review-details__tabs > button[aria-selected='true'] {
+  border-bottom-color: var(--review-contents-active);
+  color: var(--review-ink);
+}
+
+.brand-review-details__tabs > button:is(:hover, :focus-visible) {
+  color: var(--review-ink);
+}
+
+.brand-review-details__panel {
+  display: grid;
+  gap: 18px;
+  min-width: 0;
+}
+
+.brand-review-details__panel[hidden] {
+  display: none;
+}
+
+html:root body[data-brand].has-brand-sticky-layout .brand-review-details__panel > section.container {
+  display: grid;
+  gap: 8px;
+  width: 100%;
+  min-width: 0;
+  max-width: none;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+html:root body[data-brand].has-brand-sticky-layout .brand-sticky-main .brand-review-details__panel > section > .title {
+  --heading-size: var(--type-subheading);
+  margin: 0;
+}
+
+.brand-review-details__panel .brand-review-table-frame {
+  border: 0;
+  border-radius: 0;
+}
+
+html:root body[data-brand] .brand-review-table-frame .brand-table-toggle {
+  width: calc(100% - 16px);
+  margin: 8px;
+  border-color: var(--review-line);
+  border-radius: 8px;
+  background: var(--review-base);
+  color: var(--review-ink);
+}
+
+/* FAQ, product tabs and reader feedback share the same panel rhythm. */
+html:root body[data-brand].has-brand-sticky-layout :is(.brand-faq-section, .brand-availability-widget)::before {
+  content: none;
+}
+
+html:root body[data-brand].has-brand-sticky-layout .brand-sticky-main .brand-availability-widget {
+  gap: 12px;
+  padding: var(--review-inset);
+  border: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+html:root body[data-brand] .brand-availability-widget .brand-availability-intro {
+  margin-inline: 0;
+  color: var(--review-muted);
+  text-align: start;
+}
+
+html:root body[data-brand] .brand-availability-widget .availability-tab-list {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: stretch;
+  justify-content: flex-start;
+  gap: 6px;
+  padding: 5px;
+  border: 1px solid var(--review-line);
+  border-radius: 10px;
+  background: var(--review-base);
+}
+
+html:root body[data-brand] .brand-availability-widget .availability-tab {
+  min-height: 37px;
+  padding: 7px 10px;
+  border: 1px solid transparent;
+  border-radius: 7px;
+  color: var(--review-muted);
+}
+
+html:root body[data-brand] .brand-availability-widget .availability-tab[aria-selected='true'] {
+  border-color: var(--review-line);
+  background: var(--review-surface);
+  color: var(--review-ink);
+  box-shadow: 0 1px 3px #1c2b3a12;
+}
+
+html:root body[data-brand] .brand-availability-widget .availability-panel {
+  padding: clamp(12px, 1.4vw, 20px);
+  border: 1px solid var(--review-line);
+  border-radius: 11px;
+  background: var(--review-surface);
+  box-shadow: none;
+}
+
+html:root body[data-brand] .brand-availability-widget .availability-item {
+  border-color: var(--review-line);
+  border-radius: 8px;
+  box-shadow: none;
+}
+
+html:root body[data-brand] .brand-faq-section :is(.timeline, .faq-grid) {
+  margin: 0;
+  padding: 0;
+  gap: 0;
+  border: 1px solid var(--review-line);
+  border-radius: 11px;
+  background: var(--review-surface);
+  box-shadow: none;
+}
+
+html:root body[data-brand].has-brand-sticky-layout .brand-faq-section .faq-card {
+  margin: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+  transform: none;
+}
+
+html:root body[data-brand].has-brand-sticky-layout .brand-faq-section .faq-card + .faq-card {
+  border-top: 1px solid var(--review-line);
+}
+
+html:root body[data-brand] .brand-faq-section .faq-accordion-trigger {
+  min-height: 55px;
+  padding: 13px 15px;
+  color: var(--review-ink);
+  text-align: start;
+}
+
+.brand-faq-section :is(.faq-question-icon, .faq-answer-icon) {
+  display: none;
+}
+
+html:root body[data-brand] .brand-faq-section .faq-card.is-open .faq-accordion-trigger {
+  background: var(--review-base);
+}
+
+html:root body[data-brand] .brand-faq-section .faq-answer-panel {
+  padding: 0 15px 14px;
+  color: var(--review-muted);
+}
+
+html:root body[data-brand] .brand-faq-section .faq-accordion-toggle {
+  border-color: var(--review-line);
+  border-radius: 8px;
+  background: var(--review-surface);
+  color: var(--review-ink);
+}
+
+html:root body[data-brand].has-brand-sticky-layout .brand-player-feedback
+  :is(.brand-feedback-score, .brand-feedback-empty, .brand-feedback-compose, .brand-feedback-card) {
+  border-color: var(--review-line);
+  border-radius: 11px;
+  background: var(--review-base);
+  box-shadow: none;
+}
+
+html:root body[data-brand] .brand-player-feedback {
+  scroll-margin-top: calc(var(--header-height, 64px) + 20px);
+}
+
+/* Contents and context rails. */
+html:root body[data-brand].has-brand-sticky-layout .brand-sticky-aside .hero-content.glass-card {
+  padding: 0;
+}
+
+html:root body[data-brand].has-brand-sticky-layout
+  :is(.brand-sidebar-section.container, .brand-quick-facts, .brand-right-payments) {
+  padding: 15px;
+  border: 1px solid var(--review-line);
+  border-radius: var(--review-radius);
+  background: var(--review-surface);
+  box-shadow: none;
+}
+
+html:root body[data-brand].has-brand-sticky-layout .brand-hero-nav-panel {
+  --surface-panel: transparent;
+  margin: 0;
+  padding: 10px 0 0;
+  border: 0;
+  border-radius: 0;
+  box-shadow: none;
+}
+
+body[data-brand] .brand-section-nav__title {
+  color: var(--review-ink);
+  margin: 0 0 4px;
+  font-size: var(--type-subheading);
+}
+
+html:root body[data-brand].has-brand-sticky-layout .brand-section-nav a {
+  min-height: 35px;
+  padding: 7px 11px;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  color: var(--review-muted);
+  font-size: var(--type-ui);
+  font-weight: 500;
+  box-shadow: none;
+}
+
+html:root body[data-brand].has-brand-sticky-layout .brand-section-nav a:is(:hover, [aria-current='location']) {
+  color: var(--review-ink);
+  background: transparent;
+}
+
+html:root body[data-brand].has-brand-sticky-layout .brand-section-nav a[aria-current='location'] {
+  font-weight: 750;
+}
+
+html:root body[data-brand] .brand-section-nav a:focus-visible {
+  outline: 2px solid var(--review-contents-active);
+  outline-offset: -2px;
+}
+
+html:root body[data-brand].has-brand-sticky-layout
+  :is(.brand-sticky-aside, .brand-right-rail)
+  :is(.brand-sidebar-section, .brand-right-payments, .brand-quick-facts) > :is(.title, h2) {
+  --heading-size: var(--type-subheading);
+  margin: 0 0 6px;
+  padding: 0 0 10px;
+  border-bottom: 1px solid var(--review-line);
+  color: var(--review-ink);
+  text-align: start;
+}
+
+html:root body[data-brand].has-brand-sticky-layout .brand-quick-facts {
+  gap: 0;
+}
+
+html:root body[data-brand].has-brand-sticky-layout .brand-quick-facts a {
+  display: grid;
+  gap: 4px;
+  padding: 9px 2px;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+}
+
+html:root body[data-brand].has-brand-sticky-layout .brand-quick-facts a + a {
+  border-top: 1px solid var(--review-line);
+}
+
+html:root body[data-brand] .brand-quick-facts a:is(:hover, :focus-visible) {
+  color: var(--review-accent);
+  text-decoration: underline;
+}
+
+.brand-new-games-panel {
+  display: grid;
+  gap: 14px;
+  min-width: 0;
+  padding: var(--review-inset);
+  border-radius: var(--review-radius);
+  background: var(--brand-games-background, var(--review-surface));
+}
+
+.brand-new-games-panel > h2 {
+  color: var(--review-ink);
+}
+
+.brand-new-games-list {
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: clamp(132px, 15.5%, 186px);
+  justify-content: start;
+  gap: 12px;
+  min-width: 0;
+  padding-block-end: 4px;
+  overflow-x: auto;
+  overscroll-behavior-x: contain;
+  scroll-snap-type: x proximity;
+  scrollbar-width: thin;
+  scrollbar-color: #939cab transparent;
+}
+
+.brand-new-game-card {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  overflow: hidden;
+  border: 1px solid var(--review-line);
+  border-radius: 9px;
+  background: var(--review-surface);
+  color: var(--review-ink);
+  text-decoration: none;
+  scroll-snap-align: start;
+}
+
+a.brand-new-game-card:is(:hover, :focus-visible) {
+  background: var(--review-base);
+}
+
+:is(.brand-new-games-list, a.brand-new-game-card):focus-visible {
+  outline: 2px solid var(--review-contents-active);
+  outline-offset: -2px;
+}
+
+.brand-new-game-media {
+  aspect-ratio: 4 / 3;
+}
+
+.brand-new-game-media > img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+.brand-new-game-card > span {
+  padding: 9px 10px;
+  font-size: var(--type-ui);
+  font-weight: 650;
+  line-height: 1.25;
+  overflow-wrap: anywhere;
+}
+
+/* The directory below an article still uses the common internal country links. */
+html:root body[data-brand].has-brand-sticky-layout > .all-countries {
+  padding-block: clamp(22px, 3vw, 40px);
+  border-top: 1px solid var(--review-line);
+  background: var(--review-base);
+}
+
+html:root body[data-brand].has-brand-sticky-layout > .all-countries .title {
+  --heading-size: var(--type-section);
+}
+
+html:root body[data-brand].has-brand-sticky-layout .brand-sticky-title__inner {
+  border: 1px solid var(--review-line);
+  border-radius: 13px;
+}
+
+@media (min-width: 901px) {
+  html:root body[data-brand].has-brand-sticky-layout .brand-sticky-review-layout > .brand-sticky-aside {
+    position: sticky;
+    top: calc(var(--header-height, 64px) + 16px);
+    max-height: calc(100dvh - var(--header-height, 64px) - 32px);
+    overflow-y: auto;
+    scrollbar-width: thin;
+  }
+
+  html:root body[data-brand].has-brand-sticky-layout .brand-sticky-aside .brand-section-nav__links {
+    gap: 0;
+    border-inline-start: 2px solid var(--review-line);
+  }
+
+  html:root body[data-brand].has-brand-sticky-layout .brand-sticky-aside .brand-section-nav__links a {
+    position: relative;
+    margin-inline-start: -2px;
+    border-inline-start: 2px solid transparent;
+    padding-inline-start: 14px;
+  }
+
+  html:root body[data-brand].has-brand-sticky-layout .brand-sticky-aside .brand-section-nav__links a[aria-current='location'] {
+    border-inline-start-color: var(--review-contents-active);
+  }
+}
+
+@media (min-width: 901px) and (max-width: 1199px) {
+  html:root body[data-brand].has-brand-sticky-layout .brand-sticky-main #brand-why-section {
+    margin: 0;
+  }
+}
+
+@media (max-width: 900px) {
+  html:root body[data-brand].has-brand-sticky-layout .brand-sticky-review-layout > :is(.brand-review-overview, .brand-sticky-main) {
+    margin-top: var(--review-space);
+  }
+
+  html:root body[data-brand].has-brand-sticky-layout .brand-hero-nav-panel {
+    padding-block: 10px 7px;
+    border-block: 1px solid var(--review-line);
+  }
+
+  html:root body[data-brand].has-brand-sticky-layout .brand-section-nav__links {
+    flex-wrap: wrap;
+    gap: 5px;
+    overflow: visible;
+  }
+
+  html:root body[data-brand].has-brand-sticky-layout .brand-section-nav a {
+    min-height: 36px;
+    padding: 6px 8px;
+    border-block-end: 2px solid transparent;
+    font-size: var(--type-ui);
+  }
+
+  html:root body[data-brand].has-brand-sticky-layout .brand-section-nav a[aria-current='location'] {
+    border-block-end-color: var(--review-contents-active);
+  }
+}
+
+@media (min-width: 1200px) {
+  body[data-brand] :is(.brand-sticky-aside, .brand-right-rail) {
+    --review-feature-columns: minmax(0, 1fr);
+  }
+}
+
+@media (max-width: 650px) {
+  body[data-brand] {
+    --review-feature-columns: minmax(0, 1fr);
+  }
+
+  html:root body[data-brand] .brand-review-table-frame .brand-review-table--stackable {
+    position: relative;
+    display: block;
+  }
+
+  .brand-review-table--stackable thead {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip-path: inset(50%);
+  }
+
+  .brand-review-table--stackable :is(tbody, tr) {
+    display: grid;
+    width: 100%;
+  }
+
+  html:root body[data-brand] .brand-review-table--stackable tbody > tr {
+    gap: 9px;
+    padding: 13px;
+  }
+
+  html:root body[data-brand] .brand-review-table--stackable tbody > tr + tr {
+    border-top: 1px solid var(--review-line);
+  }
+
+  html:root body[data-brand] .brand-review-table--stackable tbody td {
+    display: block;
+    padding: 0;
+    border: 0;
+    background: transparent;
+  }
+
+  .brand-review-table--stackable .brand-review-table__label {
+    display: block;
+    margin-bottom: 3px;
+    color: var(--review-muted);
+    font-size: var(--type-caption);
+    font-weight: 750;
+  }
+}

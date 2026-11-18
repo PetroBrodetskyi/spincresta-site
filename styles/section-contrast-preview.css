@@ -1,0 +1,104 @@
+/* Local design trial. Remove the import in styles.css to restore the previous design. */
+@import url('/fonts/inter-tight/index.css');
+@import url('/fonts/inter-tight/wght-italic.css');
+
+:root {
+  --font-main: "Inter Tight Variable", system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+  --editorial-band: #e9eaec;
+  --editorial-contrast: #303136;
+  --editorial-blue: #164586;
+  --editorial-contrast-ink: #fff;
+  --editorial-contrast-muted: #e1e2e6;
+  --editorial-band-block-padding: clamp(26px, 4vw, 52px);
+  --control-primary-bg: #0758c9;
+  --control-primary-ink: #fff;
+  --control-primary-hover-bg: #06449d;
+}
+
+/* Color separates groups; links, cards, and keyboard focus retain their affordances. */
+html:root body .top-casino-jump-nav {
+  border: 0;
+  border-radius: var(--radius-md);
+  background: var(--editorial-band);
+  box-shadow: none;
+}
+
+html:root body.home-page :is(.home-country-directory, .home-new-reviews, .home-new-games, .home-editorial-method) {
+  --home-band-color: var(--editorial-band);
+  border: 0;
+  border-radius: 0;
+  background: var(--home-band-color);
+  /* Extend only the paint, so the grid stays aligned and doesn't widen the document. */
+  border-image: linear-gradient(var(--home-band-color) 0 0) fill 0 / 0 / 0 100vmax;
+  box-shadow: none;
+}
+
+html:root body.home-page :is(.home-new-reviews, .home-new-games, .home-editorial-method) {
+  padding-block: var(--editorial-band-block-padding);
+  padding-inline: 0;
+}
+
+html:root body.home-page .home-new-games {
+  --home-band-color: var(--editorial-contrast);
+}
+
+html:root body.home-page .home-editorial-method {
+  --home-band-color: var(--editorial-blue);
+}
+
+html:root body.home-page :is(.home-new-games, .home-editorial-method) .home-showcase-heading h2 {
+  color: var(--editorial-contrast-ink);
+}
+
+html:root body.home-page :is(.home-new-games, .home-editorial-method) .home-showcase-heading > p {
+  color: var(--editorial-contrast-muted);
+}
+
+html:root body :is(
+  .cta, .cta-primary, .cta-brands, .brand-sticky-title__cta,
+  .account-auth-primary, .brand-feedback-submit, .brand-feedback-reply-form button,
+  .brand-promo-teaser, .footer-newsletter-submit, [data-account-contact-submit],
+  .filter-btn:is(.active, .is-active)
+):not(.cta-secondary, .cta-blocked, :disabled, [aria-disabled='true']) {
+  border-color: var(--control-primary-bg);
+  background: var(--control-primary-bg);
+  color: var(--control-primary-ink);
+  box-shadow: none;
+}
+
+html:root body[data-brand].has-brand-sticky-layout .brand-sticky-main > section.container:not(:empty),
+html:root body[data-brand].has-brand-sticky-layout .brand-sticky-main :is(.content-review, .content-article) > section.container,
+html:root body[data-brand].has-brand-sticky-layout :is(.brand-review-overview, .brand-sticky-main .brand-player-feedback) {
+  border: 0;
+}
+
+html:root body[data-brand].has-brand-sticky-layout .brand-sticky-main :is(.content-review, .content-article) > section.container.brand-review-details,
+html:root body[data-brand].has-brand-sticky-layout .brand-sticky-main .brand-player-feedback {
+  background: var(--editorial-band);
+}
+
+html:root body[data-brand].has-brand-sticky-layout .brand-sticky-main .brand-player-feedback
+  :is(.brand-feedback-score, .brand-feedback-empty, .brand-feedback-compose, .brand-feedback-card) {
+  background: var(--review-surface);
+}
+
+/* Let the lower review span the right rail, then paint through the page gutter. */
+html:root body[data-brand].has-brand-sticky-layout .brand-review-overview + .brand-sticky-main {
+  --brand-article-band: var(--review-base);
+  padding-block: var(--review-space);
+  background: var(--brand-article-band);
+  border-image: linear-gradient(var(--brand-article-band) 0 0) fill 0 / 0 / 0 100vmax 0 0;
+}
+
+html:root body[data-brand].has-brand-sticky-layout
+  :is(.brand-sidebar-section.container, .brand-quick-facts, .brand-right-payments) {
+  border: 0;
+  --surface-panel: var(--editorial-band);
+  background: var(--surface-panel);
+}
+
+html:root body[data-brand].has-brand-sticky-layout .brand-new-games-panel {
+  --brand-games-background: var(--editorial-band);
+  border-radius: 0;
+  border-image: linear-gradient(var(--brand-games-background) 0 0) fill 0 / 0 / 0 100vmax 0 0;
+}

@@ -2,7 +2,7 @@ import fs from 'node:fs';
 import {pathToFileURL} from 'node:url';
 import {BRANDS} from '../scripts/brands.js';
 import {PINUP_COPY, PINUP_FREEBET_CAPS, PINUP_SPORTS_COVERAGE} from './pin-up-advertiser-copy.mjs';
-import {THEME_ENTRY_VERSION} from './sync-default-theme.mjs';
+import {syncDefaultTheme} from './sync-default-theme.mjs';
 const root = new URL('../',import.meta.url);
 const brand = BRANDS.find(b=>b.name==='Pin-Up');
 const oldBonus='Casino 120% + 250 FS, Sports up to 125%; local caps vary';
@@ -71,11 +71,11 @@ export function updatePinUpReview(html,locale) {
   html=html.replace(/(<script type="application\/ld\+json">)([\s\S]*?)(<\/script>)/,(all,start,json,end)=>{
     const data=JSON.parse(json);for(const node of data['@graph']){if(node['@type']==='FAQPage')node.mainEntity=faqs;if(node['@type']==='WebPage')node.dateModified='2026-11-17';}return start+JSON.stringify(data)+end;
   });
-  return addCoverage(html.replace(/main\.js\?v=[^"\s]+/g,`main.js?v=${THEME_ENTRY_VERSION}`).replace('</body>','<!-- pinup-advertiser-update:20261117 -->\n</body>'));
+  return syncDefaultTheme(addCoverage(html.replace('</body>','<!-- pinup-advertiser-update:20261117 -->\n</body>')));
 }
 export function updatePinUpCatalog(html,locale) {
   const c=PINUP_COPY[locale];
-  return html.replace(/<article class="casino-list-row"[^>]*>[\s\S]*?<\/article>/g,row=>{
+  return syncDefaultTheme(html.replace(/<article class="casino-list-row"[^>]*>[\s\S]*?<\/article>/g,row=>{
     if(!/href="(?:\/[a-z]{2})?\/brands\/pin-up\//.test(row))return row;
     let p=0;
     return row.replace(/(<p class="casino-bonus">)([\s\S]*?)(<\/p>)/g,(all,start,body,end)=>{
@@ -84,7 +84,7 @@ export function updatePinUpCatalog(html,locale) {
       if(!label)throw Error(locale+': catalog label missing');
       return start+label+' '+esc(i===1?c.short:available(locale))+end;
     });
-  }).replace(/main\.js\?v=[^"\s]+/g,`main.js?v=${THEME_ENTRY_VERSION}`);
+  }));
 }
 if(process.argv[1]&&import.meta.url===pathToFileURL(process.argv[1]).href){
   let changed=0;const check=process.argv.includes('--check');

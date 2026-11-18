@@ -1,5 +1,15 @@
 // Brand-review module. Loaded only on body[data-brand] pages.
 
+import { isBrandSportsSection } from './brand-layout.js?v=20261118-brand-games-row';
+import { classifyReviewSection, compareReviewSections, reviewSectionLabel } from './brand-review-order.js?v=20261118-review-order';
+
+const sportsbookHeadingPattern = /^(?:sportsbook|sportwetten|apuestas deportivas|scommesse sportive|zakłady sportowe|букмекер(?:ський розділ)?|спортбук|спортивні ставки|ставки на спорт|apostas desportivas|apostas esportivas|paris sportifs|स्पोर्ट्सबुक|खेल सट्टेबाज़ी|urheiluvedonlyönti)$/iu;
+export const isSportsbookFeatureHeading = heading => sportsbookHeadingPattern.test(String(heading || '').trim());
+export const BRAND_TABLE_TOPICS = Object.freeze(['summary', 'bonuses', 'games', 'sports', 'cashier', 'trust']);
+export const belongsInReviewDetails = ({ kind, rail, hasTable }) =>
+  BRAND_TABLE_TOPICS.includes(kind) &&
+    (kind === 'sports' ? !rail || rail === 'betting' : !rail && hasTable);
+
 export const initBrandPage = context => {
   const {
     BRANDS,
@@ -146,13 +156,14 @@ export const initBrandPage = context => {
       document.querySelector('body[data-brand] .brand-sticky-aside .hero-content') ||
       document.querySelector('body[data-brand] .hero-content');
     const reviewRoot =
-      document.querySelector('body[data-brand] .brand-sticky-main') ||
+      document.querySelector('body[data-brand] .brand-sticky-review-layout') ||
       document.querySelector('body[data-brand] main.content-review') ||
       document.querySelector('body[data-brand]');
     if (!heroContent || !reviewRoot || heroContent.querySelector('.brand-section-nav')) return;
   
     const titleSelector = [
       '.brand-hero-why > .title',
+      '.brand-why-heading > .title',
       '.brand-countries > .title',
       '.brand-payments > .title',
       '.brand-availability-widget .title',
@@ -160,24 +171,25 @@ export const initBrandPage = context => {
       '.content-review > section > h2',
       '.content-article > section > .title',
       '.content-article > section > h2',
+      '.brand-sticky-aside > .brand-sidebar-section > :is(.title, h2)',
       '.final-cta-glass .title',
     ].join(', ');
   
-    const seenLabels = new Set();
     const headings = Array.from(reviewRoot.querySelectorAll(titleSelector))
       .map(heading => {
         const text = normalizeText(heading.textContent).trim();
-        const label = normalizeText(heading.dataset.navLabel || '').trim() || getShortBrandSectionLabel(text);
-        return { heading, text, label };
+        const kind = heading.closest('[data-review-section]')?.dataset.reviewSection;
+        const legacyLabel = normalizeText(heading.dataset.navLabel || '').trim() ||
+          (kind === 'sports' ? reviewSectionLabel('sports', localeText) : getShortBrandSectionLabel(text));
+        return { heading, text, kind: kind || 'more', legacyLabel };
       })
-      .filter(item => item.text && item.label && !seenLabels.has(item.label) && seenLabels.add(item.label))
-      .slice(0, 9);
+      .filter(item => item.text && !item.heading.closest('[hidden]'));
   
-    if (headings.length < 2) return;
+    if (!headings.length) return;
   
-    headings.forEach(({ heading, label }, index) => {
+    headings.forEach(({ heading, legacyLabel }, index) => {
       if (!heading.id) {
-        const baseId = slugifyText(label || heading.textContent) || `brand-section-${index + 1}`;
+        const baseId = slugifyText(legacyLabel || heading.textContent) || `brand-section-${index + 1}`;
         let nextId = baseId;
         let suffix = 2;
         while (document.getElementById(nextId)) {
@@ -187,28 +199,126 @@ export const initBrandPage = context => {
         heading.id = nextId;
       }
     });
+
+    const firstByTopic = new Map();
+    headings.forEach(item => {
+      if (!firstByTopic.has(item.kind)) firstByTopic.set(item.kind, item.heading);
+    });
+    const topics = [...firstByTopic].sort(([left], [right]) => compareReviewSections(left, right));
   
     const nav = document.createElement('nav');
     nav.className = 'brand-section-nav';
-    nav.setAttribute('aria-label', localeText('On this page', 'Auf dieser Seite', 'En esta página'));
+    const navTitle = localeText(
+      'Contents', 'Inhalt', 'Índice', 'Indice', 'Spis treści',
+      'Зміст огляду', 'Índice', 'Sommaire', 'विषय-सूची', 'Sisältö'
+    );
+    nav.setAttribute('aria-label', navTitle);
     nav.innerHTML = `
+      <p class="brand-section-nav__title" aria-hidden="true">${escapeHtml(navTitle)}</p>
       <div class="brand-section-nav__links">
-        ${headings
+        ${topics
           .map(
-            ({ heading, label }) => `
-              <a href="#${escapeHtml(heading.id)}">${escapeHtml(label)}</a>
+            ([kind, heading]) => `
+              <a href="#${escapeHtml(heading.id)}" data-review-topic="${kind}">${escapeHtml(reviewSectionLabel(kind, localeText))}</a>
             `
           )
           .join('')}
       </div>
     `;
-  
+
     const ctaWrapper = heroContent.querySelector('.hero-cta-wrapper');
     if (ctaWrapper) {
       ctaWrapper.insertAdjacentElement('afterend', nav);
     } else {
       heroContent.appendChild(nav);
     }
+    observeBrandSectionNav(nav, reviewRoot);
+  };
+
+  const observeBrandSectionNav = (nav, reviewRoot) => {
+    const header = document.querySelector('.header');
+    const main = reviewRoot.querySelector('.brand-sticky-main') || reviewRoot;
+    const links = () => Array.from(nav.querySelectorAll('a[data-review-topic]'));
+    const targetForHash = hash => {
+      try {
+        return hash && document.getElementById(decodeURIComponent(hash.slice(1)));
+      } catch {
+        return null;
+      }
+    };
+    const setCurrent = (link, candidates = links()) => candidates.forEach(candidate => {
+      if (candidate === link && candidate.getAttribute('aria-current') !== 'location') {
+        candidate.setAttribute('aria-current', 'location');
+      } else if (candidate !== link && candidate.hasAttribute('aria-current')) {
+        candidate.removeAttribute('aria-current');
+      }
+    });
+
+    let explicit = null;
+    let pendingHash = window.location.hash;
+    let frame = 0;
+    const selectHash = (hash, candidates) => {
+      const target = targetForHash(hash);
+      const block = target?.closest('[data-review-section]') || target;
+      const link = candidates.find(item => item.hash === hash) ||
+        candidates.find(item => item.dataset.reviewTopic === block?.dataset.reviewSection);
+      if (!link || !block) return;
+      const panel = block.closest('.brand-review-details__panel');
+      const readingBlock = panel?.firstElementChild === block ? panel.closest('.brand-review-details') : block;
+      explicit = { block: readingBlock, link, until: performance.now() + 1300 };
+      setCurrent(link, candidates);
+    };
+    const update = () => {
+      frame = 0;
+      const candidates = links();
+      if (pendingHash) {
+        selectHash(pendingHash, candidates);
+        pendingHash = '';
+      }
+      const readingLine = Math.max(0, header?.getBoundingClientRect().bottom || 0) + 50;
+      if (explicit) {
+        const position = explicit.block.getBoundingClientRect();
+        if (position.top <= readingLine && position.bottom > readingLine) {
+          explicit.until = 0;
+          setCurrent(explicit.link, candidates);
+          return;
+        }
+        if (performance.now() < explicit.until) return;
+        explicit = null;
+      }
+
+      let active = candidates[0];
+      let closest = -Infinity;
+      for (const block of main.querySelectorAll('[data-review-section]:not([hidden])')) {
+        const position = block.getBoundingClientRect();
+        if (position.height === 0 || position.top > readingLine || position.top < closest) continue;
+        const link = candidates.find(item => item.dataset.reviewTopic === block.dataset.reviewSection);
+        if (link) {
+          active = link;
+          closest = position.top;
+        }
+      }
+      if (active) setCurrent(active, candidates);
+    };
+    const schedule = () => { if (!frame) frame = window.requestAnimationFrame(update); };
+    nav.addEventListener('click', event => {
+      const link = event.target.closest('a[data-review-topic]');
+      if (link && !event.metaKey && !event.ctrlKey && !event.shiftKey && !event.altKey) {
+        selectHash(link.hash, links());
+      }
+    });
+    window.addEventListener('hashchange', () => {
+      pendingHash = window.location.hash;
+      if (!pendingHash) explicit = null;
+      schedule();
+    });
+    window.addEventListener('scroll', schedule, { passive: true });
+    window.addEventListener('resize', schedule, { passive: true });
+    reviewRoot.addEventListener('brand-review-tab-change', () => {
+      explicit = null;
+      schedule();
+    });
+    schedule();
   };
   
   const initBrandHeroPanels = () => {
@@ -229,43 +339,17 @@ export const initBrandPage = context => {
     const summaryNodes = Array.from(heroContent.children).filter(child => child !== logo && child !== nav);
     summaryPanel.append(...summaryNodes);
   
-    const panels = [logoPanel, summaryPanel];
+    const panels = [logoPanel];
     if (nav) {
       const navPanel = document.createElement('div');
       navPanel.className = 'brand-hero-panel brand-hero-nav-panel';
       navPanel.appendChild(nav);
       panels.push(navPanel);
     }
+    panels.push(summaryPanel);
   
     heroContent.replaceChildren(...panels);
     heroContent.dataset.panelsReady = 'true';
-  };
-
-  const positionBrandSectionNav = () => {
-    const layout = document.querySelector(
-      'body[data-brand].has-brand-sticky-layout .brand-sticky-review-layout'
-    );
-    const showcase = layout?.querySelector(':scope > .brand-profile-showcase');
-    const nav = document.querySelector('body[data-brand] .brand-section-nav');
-    const navPanel = nav?.closest('.brand-hero-nav-panel');
-    if (!layout || !showcase || !nav || !navPanel) return;
-
-    const desktopQuery = window.matchMedia('(min-width: 901px)');
-    const syncPosition = () => {
-      if (desktopQuery.matches) {
-        nav.classList.add('brand-section-nav--hero-row');
-        showcase.insertAdjacentElement('afterend', nav);
-        navPanel.hidden = true;
-        return;
-      }
-
-      nav.classList.remove('brand-section-nav--hero-row');
-      navPanel.hidden = false;
-      navPanel.appendChild(nav);
-    };
-
-    syncPosition();
-    desktopQuery.addEventListener?.('change', syncPosition);
   };
 
   const initReviewerByline = () => {
@@ -326,69 +410,6 @@ export const initBrandPage = context => {
     summaryPanel.prepend(byline);
   };
 
-  const initMobileEditorialDetails = () => {
-    const summaryPanel = document.querySelector(
-      'body[data-brand] .brand-hero-summary-panel'
-    );
-    const editorialMeta = summaryPanel?.querySelector(':scope > .editorial-meta');
-    const summary = summaryPanel?.querySelector(
-      ':scope > .hero-subtitle:not(.editorial-meta)'
-    );
-    if (!summaryPanel || !summary || !editorialMeta) return;
-    if (summaryPanel.querySelector('.brand-editorial-toggle')) return;
-
-    const detailsId =
-      editorialMeta.id || `brand-editorial-details-${normalizeBrandKey(context.brandKey || 'review')}`;
-    editorialMeta.id = detailsId;
-    summaryPanel.classList.add('is-editorial-collapsible');
-
-    const toggle = document.createElement('button');
-    toggle.type = 'button';
-    toggle.className = 'brand-editorial-toggle';
-    toggle.setAttribute('aria-controls', detailsId);
-    toggle.setAttribute('aria-expanded', 'false');
-
-    const collapsedLabel = localeText(
-      'Show review details',
-      'Details zur Bewertung anzeigen',
-      'Mostrar detalles de la reseña',
-      'Mostra i dettagli della recensione',
-      'Pokaż szczegóły recenzji',
-      'Показати деталі огляду',
-      'Mostrar detalhes da análise',
-      'Afficher les détails de l’avis',
-      'समीक्षा का विवरण दिखाएँ',
-      'Näytä arvostelun tiedot'
-    );
-    const expandedLabel = localeText(
-      'Hide review details',
-      'Details zur Bewertung ausblenden',
-      'Ocultar detalles de la reseña',
-      'Nascondi i dettagli della recensione',
-      'Ukryj szczegóły recenzji',
-      'Сховати деталі огляду',
-      'Ocultar detalhes da análise',
-      'Masquer les détails de l’avis',
-      'समीक्षा का विवरण छिपाएँ',
-      'Piilota arvostelun tiedot'
-    );
-
-    const updateToggle = isExpanded => {
-      summaryPanel.classList.toggle('is-editorial-expanded', isExpanded);
-      toggle.setAttribute('aria-expanded', isExpanded ? 'true' : 'false');
-      toggle.setAttribute('aria-label', isExpanded ? expandedLabel : collapsedLabel);
-      toggle.title = isExpanded ? expandedLabel : collapsedLabel;
-    };
-
-    toggle.innerHTML = '<span aria-hidden="true"></span>';
-    toggle.addEventListener('click', () => {
-      updateToggle(toggle.getAttribute('aria-expanded') !== 'true');
-    });
-
-    editorialMeta.insertAdjacentElement('beforebegin', toggle);
-    updateToggle(false);
-  };
-
   const initMobileTableDisclosures = () => {
     const collapsedLabel = localeText(
       'Show full table',
@@ -416,7 +437,7 @@ export const initBrandPage = context => {
     );
 
     document
-      .querySelectorAll('body[data-brand] .content-review > section.container table')
+      .querySelectorAll('body[data-brand] :is(.content-review, .content-article) > section.container table')
       .forEach((table, index) => {
         if (table.dataset.mobileDisclosureReady === 'true') {
           return;
@@ -447,6 +468,234 @@ export const initBrandPage = context => {
         table.insertAdjacentElement('afterend', toggle);
         syncToggle(false);
       });
+  };
+
+  // Separate clearly labeled sportsbook cards from mixed feature grids.
+  const splitSportsbookCards = () => {
+    const layout = document.querySelector('.brand-sticky-review-layout');
+    if (!layout) return;
+    layout.querySelectorAll('.brand-sticky-main .content-review > section:not([data-brand-rail])').forEach(section => {
+      const cards = Array.from(section.querySelectorAll(':scope > .features-grid > .feature-card, :scope > .premium-grid > .feature-card'));
+      const betting = cards.filter(card => isSportsbookFeatureHeading(
+        normalizeText(card.querySelector(':scope > :is(strong, h3, h4)')?.textContent || '').trim()
+      ));
+      if (!betting.length || betting.length === cards.length) return;
+
+      const bettingSection = document.createElement('section');
+      bettingSection.className = 'container brand-betting-section';
+      bettingSection.dataset.brandRail = 'betting';
+      const heading = document.createElement('h2');
+      heading.className = 'title';
+      heading.textContent = localeText(
+        'Sportsbook', 'Sportwetten', 'Apuestas deportivas', 'Scommesse sportive', 'Zakłady sportowe',
+        'Ставки на спорт', 'Apostas desportivas', 'Paris sportifs', 'स्पोर्ट्सबुक', 'Urheiluvedonlyönti'
+      );
+      const grid = document.createElement('div');
+      grid.className = 'features-grid';
+      if (betting.length === 1) {
+        betting[0].querySelector(':scope > :is(strong, h3, h4)')?.remove();
+        grid.classList.add('brand-betting-summary');
+      }
+      grid.append(...betting);
+      bettingSection.append(heading, grid);
+      section.after(bettingSection);
+    });
+  };
+
+  const normalizeBrandReviewBlocks = () => {
+    const layout = document.querySelector('.brand-sticky-review-layout');
+    const main = layout?.querySelector(':scope > .brand-sticky-main');
+    if (!main) return;
+    const article = main.querySelector('.content-review');
+    const mark = (element, kind) => { if (element) element.dataset.reviewSection = kind; };
+    const highlights = main.querySelector('#brand-why-section, .brand-hero-why');
+    const countries = main.querySelector('.brand-countries');
+    const payments = main.querySelector('.brand-payments');
+    mark(highlights, 'highlights');
+    mark(countries, 'countries');
+    mark(payments, 'methods');
+
+    // These blocks are generated from registry data; omit an empty group instead of
+    // adding a heading and link which do not go anywhere.
+    const brand = findBrandByPageKey(context.brandKey);
+    if (brand && countries && !brand.countries?.some(Boolean) && !countries.querySelector('#brand-countries > *')) {
+      countries.hidden = true;
+    }
+    if (brand && payments && !brand.payments?.some(Boolean) && !payments.querySelector('#brand-payments > *')) {
+      payments.hidden = true;
+    }
+
+    // The product snapshot shares the games topic, regardless of where a source placed it.
+    const snapshot = main.querySelector('.brand-availability-widget')?.closest('section');
+    if (snapshot && article) article.append(snapshot);
+    mark(snapshot, 'games');
+
+    main.querySelectorAll('.content-review, .content-article').forEach(contents => {
+      const sections = Array.from(contents.querySelectorAll(':scope > section'));
+      for (const section of sections) {
+        if (section === snapshot) continue;
+        const title = section.querySelector(':scope > :is(h2, .title)');
+        const heading = normalizeText(title?.textContent || '').trim();
+        const kind = classifyReviewSection({
+          id: section.id,
+          heading,
+          navLabel: title?.dataset.navLabel,
+          kind: section.dataset.reviewSection,
+          isSports: isBrandSportsSection({ kind: section.dataset.brandRail, id: section.id, heading }),
+          isFaq: Boolean(section.querySelector(':scope > :is(.faq-accordion-surface, .faq-grid)')),
+          isPros: Boolean(section.querySelector(':scope > .pros-cons-grid')),
+        });
+        mark(section, kind);
+        if (kind === 'sports') section.classList.add('brand-betting-section');
+      }
+      const ordered = [...sections].sort((left, right) => compareReviewSections(
+        left.dataset.reviewSection, right.dataset.reviewSection
+      ));
+      // Preserve independent children such as notices; only move actual sections.
+      for (const section of sections) section.before(document.createComment('review block slot'));
+      const slots = [...contents.childNodes].filter(node => node.nodeType === Node.COMMENT_NODE && node.data === 'review block slot');
+      slots.forEach((slot, index) => slot.replaceWith(ordered[index]));
+    });
+  };
+
+  const styleReviewTables = () => {
+    document.querySelectorAll('.brand-sticky-review-layout :is(.content-review, .content-article, .brand-betting-section) table')
+      .forEach(table => {
+        if (table.closest('.brand-review-table-frame')) return;
+        const frame = document.createElement('div');
+        frame.className = 'brand-review-table-frame';
+        const headings = Array.from(table.querySelectorAll('thead th'));
+        const rows = Array.from(table.querySelectorAll('tbody > tr'));
+        if (headings.length > 1 && table.tHead?.rows.length === 1 &&
+            !table.querySelector('[rowspan], [colspan], tfoot, colgroup, caption') &&
+            rows.length && rows.every(row => row.cells.length === headings.length &&
+              Array.from(row.cells).every(cell => cell.tagName === 'TD'))) {
+          table.classList.add('brand-review-table--stackable');
+          table.setAttribute('role', 'table');
+          const roles = { THEAD: 'rowgroup', TBODY: 'rowgroup', TR: 'row', TH: 'columnheader', TD: 'cell' };
+          table.querySelectorAll('thead, tbody, tr, th, td').forEach(cell => {
+            cell.setAttribute('role', roles[cell.tagName]);
+            if (cell.tagName === 'TD') {
+              const label = document.createElement('span');
+              label.className = 'brand-review-table__label';
+              label.setAttribute('aria-hidden', 'true');
+              label.textContent = headings[cell.cellIndex].textContent.trim();
+              cell.prepend(label);
+            }
+          });
+        } else {
+          frame.tabIndex = 0;
+          frame.setAttribute('role', 'group');
+          const heading = table.closest('section')?.querySelector(':scope > :is(h2, h3, .title)');
+          if (heading?.id) frame.setAttribute('aria-labelledby', heading.id);
+          else if (heading?.textContent.trim()) frame.setAttribute('aria-label', heading.textContent.trim());
+        }
+        const disclosure = table.nextElementSibling?.matches('.brand-table-toggle') ? table.nextElementSibling : null;
+        table.before(frame);
+        frame.append(table);
+        if (disclosure) frame.append(disclosure);
+      });
+  };
+
+  const initBrandReviewDetails = () => {
+    const article = document.querySelector('.brand-sticky-main .content-review');
+    if (!article || article.querySelector('.brand-review-details')) return;
+    const sections = Array.from(article.querySelectorAll(':scope > section[data-review-section]:not([hidden])'))
+      .filter(section => belongsInReviewDetails({
+        kind: section.dataset.reviewSection,
+        rail: section.dataset.brandRail,
+        hasTable: Boolean(section.querySelector('table')),
+      }));
+    const groups = BRAND_TABLE_TOPICS
+      .map(kind => [kind, sections.filter(section => section.dataset.reviewSection === kind)])
+      .filter(([, tableSections]) => tableSections.length);
+    if (groups.length < 2) return;
+
+    const details = document.createElement('section');
+    details.className = 'container brand-review-details';
+    const title = document.createElement('h2');
+    title.className = 'title';
+    title.id = 'brand-review-details';
+    title.textContent = localeText(
+      'Review details', 'Details zur Bewertung', 'Datos del casino', 'Dettagli del casinò',
+      'Szczegóły recenzji', 'Деталі огляду', 'Detalhes do casino', 'Informations sur le casino',
+      'कैसीनो की जानकारी', 'Kasinon tiedot'
+    );
+    details.setAttribute('aria-labelledby', title.id);
+
+    const tabList = document.createElement('div');
+    tabList.className = 'brand-review-details__tabs';
+    tabList.setAttribute('role', 'tablist');
+    tabList.setAttribute('aria-labelledby', title.id);
+    details.append(title, tabList);
+    sections[0].before(details);
+    const general = localeText('General', 'Allgemein', 'General', 'Generale', 'Ogólne', 'Загальне', 'Geral', 'Général', 'सामान्य', 'Yleistä');
+    const payment = localeText('Payments', 'Zahlungen', 'Pagos', 'Pagamenti', 'Płatności', 'Платежі', 'Pagamentos', 'Paiements', 'भुगतान', 'Maksut');
+    const entries = groups.map(([kind, tableSections]) => {
+      const tab = document.createElement('button');
+      const panel = document.createElement('div');
+      tab.id = `brand-review-tab-${kind}`;
+      tab.type = 'button';
+      tab.setAttribute('role', 'tab');
+      tab.textContent = kind === 'summary' ? general : kind === 'cashier' ? payment : reviewSectionLabel(kind, localeText);
+      panel.id = `brand-review-panel-${kind}`;
+      panel.className = 'brand-review-details__panel';
+      panel.tabIndex = 0;
+      panel.setAttribute('role', 'tabpanel');
+      panel.setAttribute('aria-labelledby', tab.id);
+      tab.setAttribute('aria-controls', panel.id);
+      panel.append(...tableSections);
+      tabList.append(tab);
+      details.append(panel);
+      return { tab, panel, kind };
+    });
+
+    const activate = (entry, { focus = false, announce = true } = {}) => {
+      details.dataset.reviewSection = entry.kind;
+      entries.forEach(({ tab, panel }) => {
+        const selected = tab === entry.tab;
+        tab.setAttribute('aria-selected', String(selected));
+        tab.tabIndex = selected ? 0 : -1;
+        panel.hidden = !selected;
+      });
+      if (focus) entry.tab.focus({ preventScroll: true });
+      const strip = tabList.getBoundingClientRect();
+      const selectedTab = entry.tab.getBoundingClientRect();
+      if (selectedTab.right > strip.right) tabList.scrollLeft += selectedTab.right - strip.right;
+      else if (selectedTab.left < strip.left) tabList.scrollLeft -= strip.left - selectedTab.left;
+      if (announce) details.dispatchEvent(new Event('brand-review-tab-change', { bubbles: true }));
+    };
+    const showFragment = hash => {
+      if (!hash) return;
+      let target;
+      try {
+        target = document.getElementById(decodeURIComponent(hash.slice(1)));
+      } catch {
+        return;
+      }
+      const panel = target?.closest('.brand-review-details__panel');
+      const entry = panel && entries.find(item => item.panel === panel);
+      if (entry && panel.hidden) activate(entry, { announce: false });
+    };
+
+    entries.forEach((entry, index) => {
+      entry.tab.addEventListener('click', () => activate(entry));
+      entry.tab.addEventListener('keydown', event => {
+        const last = entries.length - 1;
+        const next = { Home: 0, End: last, ArrowLeft: index ? index - 1 : last, ArrowRight: index === last ? 0 : index + 1 };
+        if (!Object.hasOwn(next, event.key)) return;
+        event.preventDefault();
+        activate(entries[next[event.key]], { focus: true });
+      });
+    });
+    // Make a hidden target visible before the shared anchor handler measures it.
+    document.addEventListener('click', event => {
+      if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+      showFragment(event.target.closest?.('a[href^="#"]')?.getAttribute('href'));
+    }, true);
+    window.addEventListener('hashchange', () => showFragment(window.location.hash));
+    activate(entries[0], { announce: false });
+    showFragment(window.location.hash);
   };
   
   const SNAPSHOT_DE_TRANSLATIONS = {
@@ -1120,13 +1369,14 @@ export const initBrandPage = context => {
   enhanceBrandProsCons();
   applyBrandInfoPairLayout();
   renderBrandAvailabilityWidget(brandKey);
+  splitSportsbookCards();
+  normalizeBrandReviewBlocks();
   initBrandSectionNav();
   initBrandHeroPanels();
-  positionBrandSectionNav();
-  window.requestAnimationFrame(positionBrandSectionNav);
   initReviewerByline();
-  initMobileEditorialDetails();
   initMobileTableDisclosures();
+  styleReviewTables();
+  initBrandReviewDetails();
   initBrandCountryCollapse();
   window.requestAnimationFrame(initBrandCountryCollapse);
   window.addEventListener('load', initBrandCountryCollapse, { once: true });

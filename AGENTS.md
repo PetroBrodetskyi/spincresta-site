@@ -11,9 +11,9 @@ Apply the clear-copy rules to every SpinCresta page and language, including shar
 
 ## Brand review columns
 
-- On desktop, casino and live-game information belongs in the left editorial column. Sportsbook/betting coverage and any separate sports offer must occupy their own section in the right column, not a card mixed into the left casino section.
-- Reuse the existing responsive rail behavior in `scripts/pages/brand-layout.js` and shared site styles. At the right-rail breakpoint (currently 1200px), verify that the betting section is inside `.brand-right-rail`.
-- On smaller screens, restore the sections to the normal content flow. Do not force desktop columns onto mobile or add per-brand layout styles.
+- Keep sportsbook coverage and any separate sports offer together in the main editorial column, separate from casino and live-game coverage. Use the Sports Betting tab in Review Details when other detail tabs are present; otherwise, keep it inline after games.
+- The right rail holds quick facts and payment icons. Put New Games in a horizontal row immediately below Review Overview. At the right-rail breakpoint (currently 1200px), verify that both the games row and sports content belong to `.brand-sticky-main`.
+- Keep the same editorial order on smaller screens. Do not force desktop columns onto mobile or add per-brand layout styles.
 
 ## Clear factual copy
 
@@ -28,5 +28,5 @@ Apply the clear-copy rules to every SpinCresta page and language, including shar
 ## Verification
 
 - Update both the source/generator and affected language pages so regeneration cannot restore rejected links, layouts, or wording.
-- Check public operator links against the approved brand registry and verify desktop/right-column and mobile/inline placement when changing layout.
+- Check public operator links against the approved brand registry and verify the central sportsbook placement on desktop and mobile when changing review layouts.
 - Run the relevant review tests and copy checks before handing off changes. Do not deploy unless the user requests it.

@@ -42,7 +42,6 @@ export function matteCss(source) {
       return property + (retained.join(', ') || 'none') + ';';
     })
     .replace(/(--(?:unified-hero-lower|editorial-hero-rail)-bg:\s*)[^;]+;/g, '$1var(--surface-panel);')
-    .replace(/(--header-surface:\s*)[^;]+;/g, '$1var(--chrome-bg);')
     .replace(/border-(?:left|inline-start):\s*[2-6]px solid var\(--section-accent\);/g, 'border-left: 0;')
     .replace(/([^{}]+)\{([^{}]*)\}/g, (rule, selector, body) => {
       // Accent bars only: do not affect dividers, focus indicators or table edges.

@@ -87,7 +87,7 @@ export function removeExactStyleDuplicates(css) {
 
 if (process.argv[1] && fileURLToPath(import.meta.url) === resolve(process.argv[1])) {
   const apply = process.argv.includes('--apply');
-  const files = ['styles/core.css', 'styles/pages.css', 'styles.css', 'styles/blog.css'];
+  const files = ['styles/core.css', 'styles/pages.css', 'styles/brand-review.css', 'styles.css', 'styles/blog.css', 'styles/section-contrast-preview.css'];
   const cleaned = [];
   let remaining = 0;
   for (const path of files) {

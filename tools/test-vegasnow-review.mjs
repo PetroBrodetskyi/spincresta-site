@@ -103,7 +103,7 @@ test('Vegas Now Snapshot covers verified categories, with all ten native notes',
 test('Shared gallery labels remain optional, escaped and preserve other brands’ defaults',()=>{
   const source=read('scripts/pages/brand-layout.js');
   assert.match(source,/meta\[name="brand-games-title"\]/);
-  assert.match(source,/\|\| localeText\('New Games'/);
+  assert.match(source,/\|\| localeText\(\s*'New Games'/);
   assert.match(source,/escapeHtml\(newGamesLabel\)/);
   assert.doesNotMatch(source,/brand-new-games-kicker|newGamesKicker/);
   assert.doesNotMatch(JSON.stringify(VEGASNOW_COPY.en),/\bprogramme\b|\blicence\b|\bcolour\b|\bcentre\b/);

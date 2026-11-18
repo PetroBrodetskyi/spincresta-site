@@ -1,6 +1,7 @@
 import fs from 'node:fs';
 import assert from 'node:assert/strict';
 import { BRANDS } from '../scripts/brands.js';
+import { syncDefaultTheme } from './sync-default-theme.mjs';
 
 // Keep the referral destination in the brand registry. Review pages only provide
 // a localized placement; the shared layout supplies the link at runtime.
@@ -136,10 +137,8 @@ ${cards}
           <div class="feature-card glass-card" data-brand-partner-program><strong>${esc(c.partnerTitle)}</strong><span>${esc(c.partner)}</span><div data-partner-program-link>${esc(brand.partnerProgram.name)}</div></div>
         </div>
       </section>`;
-  const updated = original.replace(previous, next)
-    .replace(bestFor, bestFor.replace(/<section\b[^>]*>/, '<section class="container" id="best-for">'))
-    .replace(/src="\/scripts\/main\.js\?v=[^"]+"/, 'src="/scripts/main.js?v=20261006-mostbet-partners-3"')
-    .replace(/href="\/styles\.css\?v=[^"]+"/, 'href="/styles.css?v=20261006-feature-card-links-3"');
+  const updated = syncDefaultTheme(original.replace(previous, next)
+    .replace(bestFor, bestFor.replace(/<section\b[^>]*>/, '<section class="container" id="best-for">')));
   fs.writeFileSync(file, updated);
   console.log(`${locale}: updated account-features section and partner-program placement`);
 }

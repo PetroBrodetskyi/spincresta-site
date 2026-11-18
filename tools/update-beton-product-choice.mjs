@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import { pathToFileURL } from 'node:url';
 
 // Product navigation is an audience/choice card, not sportsbook coverage.
-// The shared #best-for behavior moves it left at 901px and restores it inline
+// The shared context-rail marker moves it left at 901px and restores it inline
 // on mobile. Reuse the site's internal-review button without brand-specific CSS.
 export const BETON_PRODUCT_CHOICE = {
   en: {
@@ -87,7 +87,7 @@ export function updateBetonProductChoice(html, locale) {
     match[0].includes(`href="/${prefix}brands/beton-sport/"`) && match[0].includes('features-grid')
   );
   assert.equal(matches.length, 1, `${locale}: one product-choice section`);
-  const section = `<section class="container" id="best-for">
+  const section = `<section class="container" id="best-for" data-brand-rail="context">
         <h2 class="title">${escape(copy.title)}</h2>
         <div class="features-grid premium-grid">
           <div class="feature-card glass-card"><strong>${escape(copy.casino)}</strong><span>${escape(copy.casinoText)}</span></div>

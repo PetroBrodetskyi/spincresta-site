@@ -5,7 +5,8 @@ import path from 'node:path';
 
 const ROOT = process.cwd();
 const ORIGIN = 'https://spincresta.com';
-const EXCLUDED = new Set(['.git', '.vercel', 'node_modules', 'tmp']);
+// Keep non-public sources and prototypes out of the deployable route audit.
+const EXCLUDED = new Set(['.git', '.vercel', 'node_modules', 'data', 'research', 'tmp', 'tools', 'keyboard-diagnostics']);
 
 const collect = async directory => {
   const entries = await readdir(directory, { withFileTypes: true });

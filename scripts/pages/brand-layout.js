@@ -5,7 +5,7 @@ export const resolveBrandNewGames = (pageKey, registry, normalizeKey) =>
   registry[pageKey] || registry[normalizeKey(pageKey)] || [];
 
 // brands.js is authoritative even when an older review contains a stale href.
-// Run before the layout copies the hero CTA into the sticky bar and game rail.
+// Run before the layout copies the hero CTA into the sticky bar.
 export const syncBrandCasinoLinks = (root, brand) => {
   const href = typeof brand?.urlCasino === 'string' ? brand.urlCasino.trim() : '';
   if (!href || brand.notRecommended || brand.temporarilyUnavailable) return 0;
@@ -40,10 +40,21 @@ const bestForTitlePattern = /(?:\bwho\b.*\b(?:suits?|best for)\b|\bbest for\b|\b
 export const matchesBrandBestForTitle = title =>
   bestForTitlePattern.test(String(title || '').replace(/\s+/gu, ' '));
 
+const sportsSectionId = /(?:^|-)(?:sports?(?:-betting|-bonus)?|sportsbook)$/i;
+// Legacy localized reviews sometimes have a standalone sportsbook section without an ID.
+const legacySportsHeading = /^(?:sportsbook\b|sports betting\b|sports (?:welcome )?bonus\b|(?:esports|live) betting\b|cricket exchange\b|sportwetten\b|live-wetten\b|esport-wetten\b|(?:herramientas de )?apuestas deportivas\b|scommesse sportive\b|zakłady sportowe\b|ставки на (?:кібер)?спорт(?:[\s,]|$)|спортивний бонус(?:[\s,]|$)|live-ставки(?:[\s,]|$)|(?:ferramentas de )?apostas desportivas\b|(?:outils de )?paris sportifs\b|paris sur l['’]e-sport\b|स्पोर्ट्सबुक(?:[\s,]|$)|vedonlyönti(?:[\s,]|$))/iu;
+export const isBrandSportsSection = ({kind, id, heading}) => {
+  if (kind) return kind === 'betting';
+  const title = String(heading || '').trim();
+  if (/\bcasin[oaòs]|kasyn|kasino|казино|कैसीनो|\bp[oó]ker\b|покер|पोकर|tragaperr|\bslots?\b|automat|слот/iu.test(title)) return false;
+  return sportsSectionId.test(id || '') || legacySportsHeading.test(title);
+};
+
 export const initBrandLayout = context => {
   const {
     BRANDS = [],
     BRAND_NEW_GAMES,
+    finalizeReview = false,
     normalizeText,
     normalizeBrandKey,
     findBrandByPageKey = () => null,
@@ -103,17 +114,16 @@ export const initBrandLayout = context => {
     hero.appendChild(whySection);
   };
 
-  const createBrandNewGamesRail = () => {
-    const pageKey = normalizeText(document.body.dataset.brand || '').trim().toLowerCase();
-    const games = resolveBrandNewGames(pageKey, BRAND_NEW_GAMES, normalizeBrandKey);
-    if (!games.length) return null;
-    const brandName = findBrandByPageKey(pageKey)?.name ||
-      BRANDS.find(item => normalizeBrandKey(item.name || '') === normalizeBrandKey(pageKey))?.name || pageKey;
+  const initBrandNewGames = layout => {
+    const main = layout.querySelector(':scope > .brand-sticky-main');
+    if (!main || main.querySelector(':scope > .brand-new-games-panel')) return;
 
-    const playNowLink = document.querySelector(
-      'body[data-brand] .brand-sticky-aside .hero-cta-wrapper a.cta-brands[href], body[data-brand] .hero-cta-wrapper a.cta-brands[href]'
-    );
-    const casinoHref = playNowLink?.getAttribute('href') || '';
+    const gameKey = normalizeText(pageKey).trim().toLowerCase();
+    const games = resolveBrandNewGames(gameKey, BRAND_NEW_GAMES, normalizeBrandKey);
+    if (!games.length) return;
+    const brandName = pageBrand?.name || gameKey;
+    const casinoHref = !pageBrand?.notRecommended && !pageBrand?.temporarilyUnavailable &&
+      typeof pageBrand?.urlCasino === 'string' ? pageBrand.urlCasino.trim() : '';
     const cardMarkup = game => {
       const cardContent = `
         <div class="brand-new-game-media game-art-backdrop">
@@ -154,22 +164,20 @@ export const initBrandLayout = context => {
     };
 
     const newGamesLabel = document.querySelector('meta[name="brand-games-title"]')?.content?.trim()
-      || localeText('New Games', 'Neue Spiele', 'Juegos nuevos');
-    const rail = document.createElement('aside');
-    rail.className = 'brand-new-games-rail';
-    rail.setAttribute('aria-label', newGamesLabel);
-    rail.innerHTML = `
-      <div class="brand-new-games-panel">
-        <div class="brand-new-games-heading">
-          <h2>${escapeHtml(newGamesLabel)}</h2>
-        </div>
-        <div class="brand-new-games-list">
-          ${games.map(cardMarkup).join('')}
-        </div>
+      || localeText(
+        'New Games', 'Neue Spiele', 'Juegos nuevos', 'Nuovi giochi', 'Nowe gry',
+        'Нові ігри', 'Novos jogos', 'Nouveaux jeux', 'नए गेम', 'Uudet pelit'
+      );
+    const gamesSection = document.createElement('section');
+    gamesSection.className = 'brand-new-games-panel';
+    gamesSection.setAttribute('aria-labelledby', 'brand-new-games-title');
+    gamesSection.innerHTML = `
+      <h2 id="brand-new-games-title">${escapeHtml(newGamesLabel)}</h2>
+      <div class="brand-new-games-list"${casinoHref ? '' : ' tabindex="0"'}>
+        ${games.map(cardMarkup).join('')}
       </div>
     `;
-
-    return rail;
+    main.prepend(gamesSection);
   };
 
   const ensureBrandRightRail = layout => {
@@ -182,15 +190,20 @@ export const initBrandLayout = context => {
     return rightRail;
   };
 
-  const bindResponsiveMove = ({ element, target, className, mediaQuery, prepend = false }) => {
+  const bindResponsiveMove = ({ element, target, className, mediaQuery }) => {
     if (!element || !target) return;
 
+    const moveToRail = () => {
+      element.classList.add(className);
+      if (element.parentElement === target) return;
+      const priority = child => child.matches('.brand-quick-facts') ? 0
+        : child.matches('.brand-payments') ? 1 : 2;
+      const next = [...target.children].find(child => priority(child) > priority(element));
+      target.insertBefore(element, next || null);
+    };
+
     if (element.dataset.responsiveRailBound === 'true') {
-      if (window.matchMedia(mediaQuery).matches) {
-        element.classList.add(className);
-        if (prepend) target.prepend(element);
-        else target.appendChild(element);
-      }
+      if (window.matchMedia(mediaQuery).matches) moveToRail();
       return;
     }
 
@@ -201,9 +214,7 @@ export const initBrandLayout = context => {
 
     const syncPosition = () => {
       if (query.matches) {
-        element.classList.add(className);
-        if (prepend) target.prepend(element);
-        else target.appendChild(element);
+        moveToRail();
         return;
       }
 
@@ -215,189 +226,24 @@ export const initBrandLayout = context => {
     query.addEventListener?.('change', syncPosition);
   };
 
-  const prosConsTitlePattern =
-    /\bpros?\b.*\bcons?\b|\bvorzüge\b.*\bnachteile\b|\bvorteile\b.*\bnachteile\b|ventajas.*desventajas|pro.*contro|zalety.*wady|переваги.*недоліки|pr[oó]s.*contras|avantages.*inconv[eé]nients|फायदे.*नुकसान|hyv[aä]t.*huonot/i;
-  const responsibleTitlePattern =
-    /responsible|safer[\s-]+play|verantwort|juego\s+responsable|gioco\s+responsabile|odpowiedzial|відповідаль|jogo\s+respons[aá]vel|jeu\s+responsable|जिम्मेदार|vastuull/i;
-  const trustSupportTitlePattern =
-    /licen[cs]|complaint|support|lizenz|beschwer|soporte|reclam|licenz|reclami|assistenza|licenc|skarg|wspar|ліценз|скарг|підтрим|licença|réclamation|plainte|assistance|लाइसेंस|शिकायत|सहायता|lisens|valitus|valitukset|tuki/i;
-  const trustSupportIdPattern =
-    /(?:^|-)(?:regulation|licensing|licence|license|complaints?|support)(?:-|$)/i;
-  const hasTabularContent = section =>
-    Boolean(section?.querySelector('table, .brand-mobile-table, [role="table"]'));
-  const isTrustSupportSection = section => {
-    const title = normalizeText(
-      section?.querySelector(':scope > .title, :scope > h2')?.textContent || ''
-    );
-    return trustSupportIdPattern.test(section?.id || '') || trustSupportTitlePattern.test(title);
-  };
-
-  const initSidebarEditorialSections = (layout, aside) => {
-    if (!layout || !aside) return;
-
-    const sections = Array.from(
-      layout.querySelectorAll('.brand-sticky-main .content-review > section.container')
-    );
-    const bestFor =
-      sections.find(section => section.id === 'best-for') ||
-      sections.find(section => {
-        const title = section.querySelector(':scope > .title, :scope > h2');
-        return matchesBrandBestForTitle(normalizeText(title?.textContent || ''));
-      });
-    const prosCons =
-      sections.find(section => section.id === 'pros-cons') ||
-      sections.find(section => section.querySelector('.pros-cons-icon')) ||
-      sections.find(section => {
-        const title = section.querySelector(':scope > .title, :scope > h2');
-        return prosConsTitlePattern.test(normalizeText(title?.textContent || ''));
-      });
-
-    [bestFor, prosCons]
-      .filter(section => section && !hasTabularContent(section))
-      .forEach(section => {
+  // Keep full articles in the main column. Only explicitly authored context cards join the contents.
+  const initEditorialContext = (layout, aside) => {
+    layout.querySelectorAll('.brand-sticky-main [data-brand-rail="context"]').forEach(section => {
       bindResponsiveMove({
         element: section,
         target: aside,
         className: 'brand-sidebar-section',
         mediaQuery: '(min-width: 901px)',
-        });
       });
-  };
-
-  const initAdditionalRailSections = (layout, aside, rightRail) => {
-    if (!layout || !aside || !rightRail) return;
-
-    const needsLeftSection = layout.dataset.leftEditorialBound !== 'true';
-    const needsRightSection = layout.dataset.rightEditorialBound !== 'true';
-    if (!needsLeftSection && !needsRightSection) return;
-
-    const candidates = Array.from(
-      layout.querySelectorAll('.brand-sticky-main .content-review > section.container')
-    ).filter(section => {
-      if (section.classList.contains('brand-sidebar-section')) return false;
-      if (section.dataset.brandRail) return false;
-      if (hasTabularContent(section)) return false;
-      if (['best-for', 'pros-cons', 'faq'].includes(section.id)) return false;
-      const title = normalizeText(
-        section.querySelector(':scope > .title, :scope > h2')?.textContent || ''
-      );
-      if (
-        prosConsTitlePattern.test(title) ||
-        responsibleTitlePattern.test(title) ||
-        isTrustSupportSection(section)
-      ) {
-        return false;
-      }
-      if (
-        section.querySelector(
-          ':scope > .faq-accordion-surface, :scope > .faq-grid, :scope > .timeline'
-        )
-      ) {
-        return false;
-      }
-      return Boolean(
-        section.querySelector(':scope > .features-grid, :scope > .premium-grid')
-      );
     });
-
-    const leftSection = needsLeftSection
-      ? candidates.find(section => section.id === 'casino-lobby') || candidates[0]
-      : null;
-    const rightSection = needsRightSection
-      ? candidates.find(section => section !== leftSection && section.id === 'trust') ||
-        candidates.find(section => section !== leftSection)
-      : null;
-
-    if (leftSection) {
-      layout.dataset.leftEditorialBound = 'true';
-      bindResponsiveMove({
-        element: leftSection,
-        target: aside,
-        className: 'brand-sidebar-section',
-        mediaQuery: '(min-width: 901px)',
-      });
-    }
-
-    if (rightSection) {
-      layout.dataset.rightEditorialBound = 'true';
-      bindResponsiveMove({
-        element: rightSection,
-        target: rightRail,
-        className: 'brand-sidebar-section',
-        mediaQuery: '(min-width: 1200px)',
-      });
-    }
   };
 
-  const initLowerRailSections = (layout, aside, rightRail) => {
-    if (!layout || !aside || !rightRail) return;
-
-    const needsResponsibleSection = layout.dataset.responsibleRailBound !== 'true';
-    const needsTrustSupportSection = layout.dataset.trustSupportRailBound !== 'true';
-    const needsFaqDecoration = layout.dataset.faqDecorated !== 'true';
-    if (!needsResponsibleSection && !needsTrustSupportSection && !needsFaqDecoration) return;
-
-    const sections = Array.from(
-      layout.querySelectorAll('.brand-sticky-main .content-review > section.container')
-    ).filter(
-      section =>
-        !section.classList.contains('brand-sidebar-section') &&
-        !hasTabularContent(section)
-    );
-    const titleText = section =>
-      normalizeText(
-        section.querySelector(':scope > .title, :scope > h2')?.textContent || ''
-      );
-    const responsibleSection = needsResponsibleSection
-      ? sections.find(
-          section =>
-            /responsible|safer/i.test(section.id) ||
-            responsibleTitlePattern.test(titleText(section))
-        )
-      : null;
-    const trustSupportSections = needsTrustSupportSection
-      ? sections.filter(
-          section =>
-            section !== responsibleSection &&
-            isTrustSupportSection(section)
-        )
-      : [];
-    const faqSection = needsFaqDecoration
-      ? sections.find(
-          section =>
-            /faq/i.test(section.id) ||
-            Boolean(
-              section.querySelector(
-                ':scope > .faq-accordion-surface, :scope > .faq-grid, :scope > .timeline'
-              )
-            )
-        )
-      : null;
-
-    if (faqSection) {
-      faqSection.classList.add('brand-faq-section');
-      layout.dataset.faqDecorated = 'true';
-    }
-    if (responsibleSection) {
-      layout.dataset.responsibleRailBound = 'true';
-      bindResponsiveMove({
-        element: responsibleSection,
-        target: aside,
-        className: 'brand-sidebar-section',
-        mediaQuery: '(min-width: 1200px)',
-      });
-    }
-    if (trustSupportSections.length) {
-      layout.dataset.trustSupportRailBound = 'true';
-      trustSupportSections.forEach(section => {
-        bindResponsiveMove({
-          element: section,
-          target: aside,
-          className: 'brand-sidebar-section',
-          mediaQuery: '(min-width: 1200px)',
-        });
-      });
-    }
+  const decorateBrandFaq = layout => {
+    const faq = Array.from(layout.querySelectorAll('.brand-sticky-main .content-review > section.container'))
+      .find(section => /faq/i.test(section.id) || section.querySelector(
+        ':scope > .faq-accordion-surface, :scope > .faq-grid, :scope > .timeline'
+      ));
+    faq?.classList.add('brand-faq-section');
   };
 
   const createBrandQuickFacts = (layout, rightRail) => {
@@ -409,7 +255,7 @@ export const initBrandLayout = context => {
     const brand =
       findBrandByPageKey(pageKey) ||
       BRANDS.find(item => normalizeBrandKey(item.name || '') === brandKey);
-    if (!brand) return;
+    if (!brand || brand.notRecommended || brand.temporarilyUnavailable) return;
 
     const bonus = localizedBrandBonusText(brand.bonus || '');
     const countryCount = Array.isArray(brand.countries) ? brand.countries.length : 0;
@@ -418,16 +264,10 @@ export const initBrandLayout = context => {
       countryCount % 10 === 1 && countryCount % 100 !== 11 ? one :
       countryCount % 10 >= 2 && countryCount % 10 <= 4 && !(countryCount % 100 >= 12 && countryCount % 100 <= 14) ? few : many;
 
-    // Review headings receive localized IDs; #bonuses is not universal.
-    const reviewSections = Array.from(layout.querySelectorAll('.content-review > section'));
-    const bonusSection = reviewSections.find(section =>
-      /(?:^|-)(?:bonus(?:es)?|promotions?|welcome)(?:-|$)/i.test(section.id)
-    ) || reviewSections.find(section =>
-      /bonus|bono|boni|b[oóô]nus|бонус|बोनस|kierrätys|tervetulo/i.test(
-        normalizeText(section.querySelector(':scope > .title, :scope > h2')?.textContent || '')
-      )
-    );
-    const bonusTarget = bonusSection?.id || bonusSection?.querySelector(':scope > .title, :scope > h2')?.id;
+    const bonusSection = layout.querySelector('.brand-sticky-main [data-review-section="bonuses"]');
+    const bonusTarget = bonusSection?.id || bonusSection?.querySelector(':scope > :is(.title, h2)')?.id ||
+      layout.querySelector('.brand-review-overview > h2')?.id;
+    if (!countryCount && !bonusTarget) return;
 
     const labels = {
       heading: localeText('Casino details', 'Casino-Informationen', 'Información del casino', 'Informazioni sul casinò', 'Informacje o kasynie', 'Інформація про казино', 'Informações do casino', 'Informations sur le casino', 'कैसीनो की जानकारी', 'Kasinon tiedot'),
@@ -440,10 +280,42 @@ export const initBrandLayout = context => {
     facts.className = 'brand-quick-facts';
     facts.setAttribute('aria-label', labels.heading);
     facts.innerHTML = `
+      <h2 class="brand-quick-facts__heading">${escapeHtml(labels.heading)}</h2>
       ${bonus && bonusTarget ? `<a href="#${escapeHtml(bonusTarget)}"><small>${escapeHtml(labels.bonus)}</small><strong>${escapeHtml(bonus)}</strong></a>` : ''}
       ${countryCount ? `<a href="#brand-countries"><small>${escapeHtml(labels.markets)}</small><strong>${countryCount} ${escapeHtml(labels.countries)}</strong></a>` : ''}
     `;
-    rightRail.appendChild(facts);
+    rightRail.prepend(facts);
+  };
+
+  const initReviewOverview = (layout, summaryPanel) => {
+    const main = layout.querySelector(':scope > .brand-sticky-main');
+    const paragraphs = summaryPanel?.querySelectorAll(':scope > p');
+    if (!main || !paragraphs?.length) return;
+
+    const overview = document.createElement('section');
+    overview.className = 'brand-review-overview';
+    overview.dataset.reviewSection = 'overview';
+    const heading = document.createElement('h2');
+    heading.id = 'brand-review-overview';
+    heading.textContent = localeText(
+      'Review overview', 'Bewertung im Überblick', 'Resumen de la reseña', 'Panoramica della recensione',
+      'Przegląd recenzji', 'Коротко про бренд', 'Resumo da análise', 'L’essentiel de notre avis',
+      'समीक्षा का सार', 'Arvostelu lyhyesti'
+    );
+    overview.setAttribute('aria-labelledby', heading.id);
+    overview.append(heading, ...paragraphs);
+    // Keep the overview beside the right rail; the article can span that rail below it.
+    main.before(overview);
+    if (!summaryPanel.children.length) summaryPanel.remove();
+
+    const links = layout.querySelector('.brand-section-nav__links');
+    if (!links) return;
+    const link = document.createElement('a');
+    link.href = '#brand-review-overview';
+    link.dataset.reviewTopic = 'overview';
+    link.textContent = heading.textContent;
+    if (window.location.hash === link.hash) link.setAttribute('aria-current', 'location');
+    links.prepend(link);
   };
 
   const initBrandProfileShowcase = (layout, aside) => {
@@ -455,40 +327,63 @@ export const initBrandLayout = context => {
       const logo = logoPanel?.querySelector('.brand-logo-container');
       const summaryPanel = aside.querySelector('.brand-hero-summary-panel');
       const heading = summaryPanel?.querySelector('h1');
+      const reviewer = summaryPanel?.querySelector('.brand-reviewer-byline');
       const ctaWrapper = summaryPanel?.querySelector('.hero-cta-wrapper');
       const preview = layout.querySelector('#brand-why-section .brand-why-media');
-      if (!logo || !heading || !ctaWrapper || !preview) return;
+      const image = preview?.querySelector('img');
+      if (!logo || !heading) return;
 
       showcase = document.createElement('section');
       showcase.className = 'brand-profile-showcase';
+      heading.id ||= 'brand-review-title';
+      showcase.setAttribute('aria-labelledby', heading.id);
       showcase.innerHTML = `
-        <div class="brand-profile-showcase__media"></div>
         <div class="brand-profile-showcase__bar">
-          <div class="brand-profile-showcase__identity"></div>
-          <div class="brand-profile-showcase__actions"></div>
+          <div class="brand-profile-showcase__identity">
+            <div class="brand-profile-showcase__title"></div>
+          </div>
+          <div class="brand-profile-showcase__footer">
+            <div class="brand-profile-showcase__actions"></div>
+          </div>
         </div>
       `;
 
-      const media = showcase.querySelector('.brand-profile-showcase__media');
       const identity = showcase.querySelector('.brand-profile-showcase__identity');
+      const title = showcase.querySelector('.brand-profile-showcase__title');
+      const footer = showcase.querySelector('.brand-profile-showcase__footer');
       const actions = showcase.querySelector('.brand-profile-showcase__actions');
-      preview.disabled = true;
-      preview.tabIndex = -1;
-      preview.setAttribute('aria-expanded', 'true');
-      media.appendChild(preview);
-      identity.append(logo, heading);
-      actions.appendChild(ctaWrapper);
+      identity.prepend(logo);
+      title.appendChild(heading);
+      const countries = pageBrand?.notRecommended || pageBrand?.temporarilyUnavailable
+        ? 0
+        : new Set(pageBrand?.countries?.map(country => country.toUpperCase()) || []).size;
+      if (countries) {
+        const coverage = document.createElement('span');
+        coverage.className = 'brand-profile-showcase__coverage';
+        coverage.textContent = `${localeText(
+          'Available countries', 'Verfügbare Länder', 'Países disponibles',
+          'Paesi disponibili', 'Dostępne kraje', 'Доступно країн',
+          'Países disponíveis', 'Pays disponibles', 'उपलब्ध देश', 'Saatavilla olevat maat'
+        )}: ${countries}`;
+        title.appendChild(coverage);
+      }
+      if (reviewer) footer.prepend(reviewer);
+      if (ctaWrapper) actions.appendChild(ctaWrapper);
+      if (image) {
+        const figure = document.createElement('figure');
+        figure.className = 'brand-profile-showcase__preview';
+        if (!image.alt) image.alt = localeText(
+          'Site screenshot', 'Screenshot der Website', 'Captura del sitio',
+          'Schermata del sito', 'Zrzut ekranu witryny', 'Скріншот сайту',
+          'Captura do site', 'Capture d’écran du site', 'साइट का स्क्रीनशॉट', 'Kuvakaappaus sivustosta'
+        );
+        figure.appendChild(image);
+        showcase.prepend(figure);
+        preview.remove();
+      }
       logoPanel.remove();
       layout.prepend(showcase);
-    }
-
-    const showcaseImage = showcase.querySelector('.brand-profile-showcase__media img');
-    const showcaseImageUrl = showcaseImage?.currentSrc || showcaseImage?.getAttribute('src');
-    if (showcaseImageUrl) {
-      showcase.style.setProperty(
-        '--brand-showcase-image',
-        `url(${JSON.stringify(showcaseImageUrl)})`
-      );
+      initReviewOverview(layout, summaryPanel);
     }
 
     const actions = showcase.querySelector('.brand-profile-showcase__actions');
@@ -514,14 +409,7 @@ export const initBrandLayout = context => {
   const initRightRailContent = (layout, rightRail) => {
     if (!layout || !rightRail) return;
 
-    // Explicit editorial sections can include tables; keep their mobile origin.
-    layout.querySelectorAll('[data-brand-rail="betting"]').forEach(section => {
-      if (section.dataset.bettingRailBound === 'true') return;
-      section.dataset.bettingRailBound = 'true';
-      bindResponsiveMove({element: section, target: rightRail, className: 'brand-sidebar-section', mediaQuery: '(min-width: 1200px)'});
-    });
-
-    const payments = layout.querySelector('.brand-sticky-main .brand-payments');
+    const payments = layout.querySelector('.brand-sticky-main .brand-payments:not([hidden])');
     bindResponsiveMove({
       element: payments,
       target: rightRail,
@@ -532,47 +420,18 @@ export const initBrandLayout = context => {
     createBrandQuickFacts(layout, rightRail);
   };
 
-  const initSidebarHighlights = layout => {
-    const aside = layout?.querySelector('.brand-sticky-aside');
-    const whySection = layout?.querySelector('#brand-why-section, .brand-hero-why');
-    const highlights = whySection?.querySelector(
-      ':scope > .features-grid, :scope > .premium-grid'
-    );
-    if (!aside || !whySection || !highlights || highlights.dataset.sidebarBound === 'true') return;
-
-    highlights.dataset.sidebarBound = 'true';
-    const desktopQuery = window.matchMedia('(min-width: 901px)');
-
-    const syncHighlightsPosition = () => {
-      if (desktopQuery.matches) {
-        highlights.classList.add('brand-sidebar-highlights');
-        aside.appendChild(highlights);
-        return;
-      }
-
-      highlights.classList.remove('brand-sidebar-highlights');
-      whySection.appendChild(highlights);
-    };
-
-    syncHighlightsPosition();
-    desktopQuery.addEventListener?.('change', syncHighlightsPosition);
-  };
-
   const applyBrandStickyReviewLayout = () => {
     const existingLayout = document.querySelector('.brand-sticky-review-layout');
     if (existingLayout) {
       const aside = existingLayout.querySelector('.brand-sticky-aside');
       const rightRail = ensureBrandRightRail(existingLayout);
-      if (!rightRail.querySelector('.brand-new-games-rail')) {
-        const newGamesRail = createBrandNewGamesRail();
-        if (newGamesRail) rightRail.appendChild(newGamesRail);
-      }
-      initSidebarHighlights(existingLayout);
-      initSidebarEditorialSections(existingLayout, aside);
       initBrandProfileShowcase(existingLayout, aside);
-      initRightRailContent(existingLayout, rightRail);
-      initAdditionalRailSections(existingLayout, aside, rightRail);
-      initLowerRailSections(existingLayout, aside, rightRail);
+      initBrandNewGames(existingLayout);
+      if (finalizeReview) {
+        initEditorialContext(existingLayout, aside);
+        initRightRailContent(existingLayout, rightRail);
+      }
+      decorateBrandFaq(existingLayout);
       return;
     }
 
@@ -608,17 +467,16 @@ export const initBrandLayout = context => {
 
     layout.append(aside, main);
     const rightRail = ensureBrandRightRail(layout);
-    const newGamesRail = createBrandNewGamesRail();
-    if (newGamesRail) rightRail.appendChild(newGamesRail);
     hero.remove();
     document.body.classList.add('has-brand-sticky-layout');
     document.documentElement.classList.add('has-brand-sticky-layout');
-    initSidebarHighlights(layout);
-    initSidebarEditorialSections(layout, aside);
     initBrandProfileShowcase(layout, aside);
-    initRightRailContent(layout, rightRail);
-    initAdditionalRailSections(layout, aside, rightRail);
-    initLowerRailSections(layout, aside, rightRail);
+    initBrandNewGames(layout);
+    if (finalizeReview) {
+      initEditorialContext(layout, aside);
+      initRightRailContent(layout, rightRail);
+    }
+    decorateBrandFaq(layout);
   };
 
   const initBrandWhyPreview = () => {

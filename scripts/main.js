@@ -25,7 +25,7 @@ const brandLayoutFallbackTimer = document.body?.dataset.brand
     }, 1500)
   : null;
 const brandLayoutModuleReady = document.body?.dataset.brand
-  ? import('./pages/brand-layout.js?v=20261117-pinup-1').then(module => {
+  ? import('./pages/brand-layout.js?v=20261118-brand-games-row').then(module => {
       initBrandLayoutModule = module.initBrandLayout;
     }).catch(error => {
       document.body.classList.add('brand-layout-failed');
@@ -60,8 +60,8 @@ const loadPageModules = async () => {
     const [snapshotsModule, gamesModule, pageModule, feedbackModule] = await Promise.all([
       import('./brand-snapshot-configs.js?v=20261006-vegasnow-2'),
       import('./brand-new-games.js?v=20261005-gravira-1'),
-      import('./pages/brand.js?v=20261005-gravira-1'),
-      import('./pages/brand-feedback.js?v=20261004-feedback-states-1'),
+      import('./pages/brand.js?v=20261118-brand-games-row'),
+      import('./pages/brand-feedback.js?v=20261118-review-order'),
     ]);
     BRAND_SNAPSHOT_CONFIGS = snapshotsModule.BRAND_SNAPSHOT_CONFIGS || {};
     BRAND_NEW_GAMES = gamesModule.BRAND_NEW_GAMES || {};
@@ -87,8 +87,6 @@ const loadPageModules = async () => {
 // =====================
 const PLACEHOLDER_LINK = '#';
 const MOJIBAKE_FIXES = [];
-const THEME_STORAGE_KEY = 'spincresta-theme';
-const THEME_OPTIONS = ['dark', 'light'];
 const LANGUAGE_STORAGE_KEY = 'spincresta-language';
 const LANGUAGE_OPTIONS = ['en', 'de', 'es', 'it', 'pl', 'uk', 'pt', 'fr', 'hi', 'fi'];
 const BLOCKED_BRAND_ICON = '/icons/ui/stop-blocked-icon.svg';
@@ -448,7 +446,6 @@ const UI_COPY = {
     closeSearch: 'Close search',
     languageSwitcher: 'Choose language',
     countries: 'Countries',
-    settings: 'Settings',
     blog: 'Blog',
     languageEnglish: 'English',
     languageGerman: 'German',
@@ -488,7 +485,6 @@ const UI_COPY = {
     closeSearch: 'Suche schließen',
     languageSwitcher: 'Sprache auswählen',
     countries: 'Länder',
-    settings: 'Einstellungen',
     blog: 'Blog',
     languageEnglish: 'Englisch',
     languageGerman: 'Deutsch',
@@ -528,7 +524,6 @@ const UI_COPY = {
     closeSearch: 'Cerrar búsqueda',
     languageSwitcher: 'Elegir idioma',
     countries: 'Países',
-    settings: 'Ajustes',
     blog: 'Blog',
     languageEnglish: 'Inglés',
     languageGerman: 'Alemán',
@@ -568,7 +563,6 @@ const UI_COPY = {
     closeSearch: 'Chiudi ricerca',
     languageSwitcher: 'Scegli la lingua',
     countries: 'Paesi',
-    settings: 'Impostazioni',
     blog: 'Blog',
     languageEnglish: 'Inglese',
     languageGerman: 'Tedesco',
@@ -608,7 +602,6 @@ const UI_COPY = {
     closeSearch: 'Zamknij wyszukiwanie',
     languageSwitcher: 'Wybierz język',
     countries: 'Kraje',
-    settings: 'Ustawienia',
     blog: 'Blog',
     languageEnglish: 'Angielski',
     languageGerman: 'Niemiecki',
@@ -648,7 +641,6 @@ const UI_COPY = {
     closeSearch: 'Закрити пошук',
     languageSwitcher: 'Вибрати мову',
     countries: 'Країни',
-    settings: 'Налаштування',
     blog: 'Блог',
     languageEnglish: 'Англійська',
     languageGerman: 'Німецька',
@@ -688,7 +680,6 @@ const UI_COPY = {
     closeSearch: 'Fechar pesquisa',
     languageSwitcher: 'Escolher idioma',
     countries: 'Países',
-    settings: 'Definições',
     blog: 'Blog',
     languageEnglish: 'Inglês',
     languageGerman: 'Alemão',
@@ -728,7 +719,6 @@ const UI_COPY = {
     closeSearch: 'Fermer la recherche',
     languageSwitcher: 'Choisir la langue',
     countries: 'Pays',
-    settings: 'Paramètres',
     blog: 'Blog',
     languageEnglish: 'Anglais',
     languageGerman: 'Allemand',
@@ -768,7 +758,6 @@ const UI_COPY = {
     closeSearch: 'खोज बंद करें',
     languageSwitcher: 'भाषा चुनें',
     countries: 'देश',
-    settings: 'सेटिंग्स',
     blog: 'ब्लॉग',
     languageEnglish: 'अंग्रेज़ी',
     languageGerman: 'जर्मन',
@@ -808,7 +797,6 @@ const UI_COPY = {
     closeSearch: 'Sulje haku',
     languageSwitcher: 'Valitse kieli',
     countries: 'Maat',
-    settings: 'Asetukset',
     blog: 'Blogi',
     languageEnglish: 'Englanti',
     languageGerman: 'Saksa',
@@ -2200,7 +2188,6 @@ const initDesktopSiteSearch = () => {
   return search;
 };
 
-const getDefaultTheme = () => 'light';
 
 const ensureFooterBlogLink = () => {
   const blogHref = localizedPagePath('/blog/');
@@ -2312,46 +2299,6 @@ const initLanguageSwitcher = () => {
     if (!switcher.contains(event.target)) switcher.removeAttribute('open');
   });
 };
-
-const getStoredTheme = () => {
-  try {
-    const stored = window.localStorage.getItem(THEME_STORAGE_KEY);
-    return THEME_OPTIONS.includes(stored) ? stored : null;
-  } catch {
-    return null;
-  }
-};
-
-const applyTheme = theme => {
-  const root = document.documentElement;
-  if (!root) return;
-
-  if (THEME_OPTIONS.includes(theme)) {
-    root.dataset.theme = theme;
-    root.style.colorScheme = theme;
-    return;
-  }
-
-  const defaultTheme = getDefaultTheme();
-  root.dataset.theme = defaultTheme;
-  root.style.colorScheme = defaultTheme;
-};
-
-const persistTheme = theme => {
-  try {
-    if (THEME_OPTIONS.includes(theme)) {
-      window.localStorage.setItem(THEME_STORAGE_KEY, theme);
-    } else {
-      window.localStorage.removeItem(THEME_STORAGE_KEY);
-    }
-  } catch {
-    // ignore storage errors
-  }
-};
-
-const getActiveTheme = () => getStoredTheme() || getDefaultTheme();
-
-applyTheme(getActiveTheme());
 
 const renderPayments = (payments = []) => {
   const availablePayments = payments.filter(Boolean);
@@ -2687,108 +2634,6 @@ const requestPaymentIconSync = () => {
   paymentSyncFrame = window.requestAnimationFrame(() => {
     paymentSyncFrame = null;
     syncPaymentIcons();
-  });
-};
-
-const initFooterThemeSettings = () => {
-  const footerNavs = Array.from(document.querySelectorAll('.footer-nav'));
-  if (!footerNavs.length) return;
-
-  footerNavs.forEach(nav => {
-    if (nav.querySelector('.footer-settings-trigger')) return;
-
-    const button = document.createElement('button');
-    button.type = 'button';
-    button.className = 'footer-settings-trigger';
-    button.setAttribute('data-theme-settings-trigger', '');
-    button.setAttribute('aria-haspopup', 'dialog');
-    button.textContent = uiCopy.settings;
-
-    const firstSocial = nav.querySelector('.footer-social');
-    if (firstSocial) {
-      nav.insertBefore(button, firstSocial);
-    } else {
-      nav.appendChild(button);
-    }
-  });
-
-  if (document.querySelector('.theme-settings-backdrop')) return;
-
-  const backdrop = document.createElement('div');
-  backdrop.className = 'theme-settings-backdrop';
-  backdrop.hidden = true;
-  backdrop.innerHTML = `
-    <div class="theme-settings-modal" role="dialog" aria-modal="true" aria-labelledby="themeSettingsTitle">
-      <button type="button" class="theme-settings-close" aria-label="${localeText('Close settings', 'Einstellungen schließen', 'Cerrar ajustes')}"></button>
-      <h3 id="themeSettingsTitle">${localeText('Theme', 'Darstellung', 'Tema')}</h3>
-      <p>${localeText('Choose the theme you want to use on SpinCresta.', 'Wählen Sie die gewünschte Darstellung für SpinCresta.', 'Elige el tema que quieres usar en SpinCresta.')}</p>
-      <div class="theme-settings-options" role="group" aria-label="${localeText('Theme options', 'Darstellungsoptionen', 'Opciones de tema')}">
-        <button type="button" class="theme-settings-option" data-theme-choice="dark">
-          <img src="/icons/ui/moon-icon.svg" alt="" aria-hidden="true" loading="lazy" decoding="async" />
-          <span>${localeText('Dark', 'Dunkel', 'Oscuro')}</span>
-        </button>
-        <button type="button" class="theme-settings-option" data-theme-choice="light">
-          <img src="/icons/ui/day-sunny-icon.svg" alt="" aria-hidden="true" loading="lazy" decoding="async" />
-          <span>${localeText('Light', 'Hell', 'Claro')}</span>
-        </button>
-      </div>
-    </div>
-  `;
-
-  document.body.appendChild(backdrop);
-
-  const closeButton = backdrop.querySelector('.theme-settings-close');
-  const optionButtons = Array.from(backdrop.querySelectorAll('[data-theme-choice]'));
-
-  const syncThemeState = () => {
-    const activeTheme = getActiveTheme();
-
-    optionButtons.forEach(button => {
-      const isActive = button.dataset.themeChoice === activeTheme;
-      button.classList.toggle('is-active', isActive);
-      button.setAttribute('aria-pressed', isActive ? 'true' : 'false');
-    });
-  };
-
-  const openModal = () => {
-    syncThemeState();
-    backdrop.hidden = false;
-    document.body.classList.add('theme-settings-open');
-  };
-
-  const closeModal = () => {
-    backdrop.hidden = true;
-    document.body.classList.remove('theme-settings-open');
-  };
-
-  closeButton?.addEventListener('click', closeModal);
-
-  document.addEventListener('click', event => {
-    const trigger = event.target.closest('[data-theme-settings-trigger]');
-    if (!trigger) return;
-    event.preventDefault();
-    openModal();
-  });
-
-  backdrop.addEventListener('click', event => {
-    if (event.target === backdrop) closeModal();
-  });
-
-  document.addEventListener('keydown', event => {
-    if (event.key === 'Escape' && !backdrop.hidden) {
-      closeModal();
-    }
-  });
-
-  optionButtons.forEach(button => {
-    button.addEventListener('click', () => {
-      const theme = button.dataset.themeChoice;
-      if (!THEME_OPTIONS.includes(theme)) return;
-      persistTheme(theme);
-      applyTheme(theme);
-      syncThemeState();
-      closeModal();
-    });
   });
 };
 
@@ -4367,7 +4212,6 @@ export const initCasinoPage = async () => {
   if (pageType !== 'moderator') initFooterNewsletter(SITE_LOCALE);
   initAccountAuth(SITE_LOCALE);
   initAccountPageModule?.();
-  initFooterThemeSettings();
   initAffiliateClickTracking();
   window.addEventListener('resize', requestPaymentIconSync, { passive: true });
   document.fonts?.ready.then(requestPaymentIconSync);
@@ -4502,6 +4346,7 @@ export const initCasinoPage = async () => {
     initBrandLayoutModule?.({
       BRANDS,
       BRAND_NEW_GAMES,
+      finalizeReview: true,
       normalizeText,
       normalizeBrandKey,
       findBrandByPageKey,
@@ -4770,7 +4615,6 @@ export const initCasinoPage = async () => {
     <a href="${pagePath('new-casinos.html')}">${uiCopy.newCasinos}</a>
     <a href="${pagePath('top-rated.html')}">${uiCopy.topRated}</a>
     <a href="${pagePath('exclusive-offers.html')}">${uiCopy.exclusive}</a>
-    <button type="button" class="mobile-theme-settings" data-theme-settings-trigger aria-haspopup="dialog">${uiCopy.settings}</button>
   `;
 
     if (!mobileMenuInner.querySelector('.site-search')) {
@@ -4803,7 +4647,6 @@ export const initCasinoPage = async () => {
 
     mobileMenuInner.addEventListener('click', e => {
       if (e.target.closest('a')) closeMenu();
-      if (e.target.closest('[data-theme-settings-trigger]')) closeMenu();
     });
 
     document.addEventListener('keydown', e => {
@@ -4880,11 +4723,16 @@ export const initCasinoPage = async () => {
     const target = findAnchorTarget(hash);
     if (!target) return;
 
+    // Include the tab bar when a reader jumps to the first table in a group.
+    const panel = target.closest('.brand-review-details__panel');
+    const scrollTarget = panel?.firstElementChild?.contains(target)
+      ? panel.closest('.brand-review-details') || target
+      : target;
     const headerHeight = header?.offsetHeight ?? 0;
     const scrollNavHeight = casinosScrollNav?.classList.contains('is-visible')
       ? casinosScrollNav.offsetHeight
       : 0;
-    const targetY = target.getBoundingClientRect().top + window.scrollY - headerHeight - scrollNavHeight - 12;
+    const targetY = scrollTarget.getBoundingClientRect().top + window.scrollY - headerHeight - scrollNavHeight - 12;
     window.scrollTo({ top: Math.max(targetY, 0), behavior: 'smooth' });
   };
 

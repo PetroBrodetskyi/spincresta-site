@@ -7,7 +7,7 @@ for (const [locale, copy] of Object.entries(BETON_PRODUCT_CHOICE)) {
   test(`${locale}: BetOn product choice uses the shared left sidebar and internal-review button`, () => {
     const prefix = locale === 'en' ? '' : `${locale}/`;
     const html = fs.readFileSync(`${prefix}brands/beton/index.html`, 'utf8');
-    const section = html.match(/<section class="container" id="best-for">[\s\S]*?<\/section>/)?.[0];
+    const section = html.match(/<section class="container" id="best-for" data-brand-rail="context">[\s\S]*?<\/section>/)?.[0];
     assert.ok(section);
     assert.equal([...html.matchAll(/id="best-for"/g)].length, 1);
     assert.equal([...section.matchAll(/class="feature-card glass-card"/g)].length, 2);
@@ -21,8 +21,7 @@ for (const [locale, copy] of Object.entries(BETON_PRODUCT_CHOICE)) {
 
 test('Product choice reuses the existing responsive binding and button styles', () => {
   const layout = fs.readFileSync('scripts/pages/brand-layout.js', 'utf8');
-  assert.ok(layout.includes("sections.find(section => section.id === 'best-for')"));
-  assert.match(layout, /\[bestFor, prosCons\][\s\S]*?target: aside,[\s\S]*?className: 'brand-sidebar-section',[\s\S]*?mediaQuery: '\(min-width: 901px\)'/);
+  assert.match(layout, /data-brand-rail="context"[\s\S]*?target: aside,[\s\S]*?className: 'brand-sidebar-section',[\s\S]*?mediaQuery: '\(min-width: 901px\)'/);
   assert.ok(layout.includes('placeholder.after(element)'));
   const css = fs.readFileSync('styles/pages.css', 'utf8');
   assert.match(css, /\.view-all\s*\{[^}]*text-decoration:\s*none/);

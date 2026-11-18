@@ -526,7 +526,17 @@ export const initBrandFeedback = async ({ brand, brandName = '', brandImage = ''
   const replyCopy = REPLY_COPY[locale] || REPLY_COPY.en;
   const voteCopy = VOTE_COPY[locale] || VOTE_COPY.en;
   const section = createSection(brand, copy, loadCopy);
+  section.dataset.reviewSection = 'reviews';
   main.append(section);
+  const contents = document.querySelector('.brand-section-nav__links');
+  if (contents && !contents.querySelector('[data-review-topic="reviews"]')) {
+    const link = document.createElement('a');
+    link.href = '#player-reviews';
+    link.dataset.reviewTopic = 'reviews';
+    link.textContent = copy.title;
+    if (window.location.hash === link.hash) link.setAttribute('aria-current', 'location');
+    contents.append(link);
+  }
   if (['127.0.0.1', 'localhost', '[::1]'].includes(window.location.hostname)) {
     // The production API intentionally does not trust local preview origins.
     // Do not present a blocked request as either zero reviews or a live outage.

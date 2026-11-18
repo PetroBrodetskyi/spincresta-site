@@ -101,10 +101,11 @@ test('unknown, blocked and temporarily unavailable brands never re-enable CTAs',
   assert.equal(blocked.getAttribute('href'), null);
 });
 
-test('synchronization runs before layout-derived game and sticky links', () => {
+test('game and sticky links use the approved registry destination', () => {
   const layout = fs.readFileSync('scripts/pages/brand-layout.js', 'utf8');
   assert.ok(layout.indexOf('syncBrandCasinoLinks(document.body, pageBrand)') < layout.indexOf('applyBrandStickyReviewLayout();'));
-  assert.ok(layout.includes("const casinoHref = playNowLink?.getAttribute('href') || ''"));
+  assert.match(layout, /const casinoHref = !pageBrand\?\.notRecommended && !pageBrand\?\.temporarilyUnavailable &&\s*typeof pageBrand\?\.urlCasino === 'string' \? pageBrand\.urlCasino\.trim\(\) : ''/);
+  assert.match(layout, /if \(!casinoHref\) return `<article class="brand-new-game-card">/);
   const page = fs.readFileSync('scripts/pages/brand.js', 'utf8');
   assert.ok(page.includes("const casinoHref = heroCta?.getAttribute('href')?.trim() || ''"));
 });

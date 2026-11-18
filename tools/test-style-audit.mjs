@@ -24,7 +24,7 @@ test('stylesheet audit preserves queries, layers, keyframes, and quoted selector
 
 test('shared stylesheets are free of exact duplicate rules and no longer reference country hero files', () => {
   const shared = [];
-  for (const path of ['styles/core.css', 'styles/pages.css', 'styles.css', 'styles/blog.css']) {
+  for (const path of ['styles/core.css', 'styles/pages.css', 'styles/brand-review.css', 'styles.css', 'styles/blog.css']) {
     const css = fs.readFileSync(new URL(`../${path}`, import.meta.url), 'utf8');
     shared.push(css);
     assert.equal(removeExactStyleDuplicates(css).removed, 0, path);

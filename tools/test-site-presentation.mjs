@@ -69,7 +69,8 @@ test('all shared UI CSS stays matte after regeneration', () => {
       assert.match(value.trim(), /^(?:#[\da-f]+|var\(--[\w-]+\))$/i, name);
     }
   }
-  assert.match(css[1], /\.brand-profile-showcase__media::before\s*\{[^}]*background-image: var\(--brand-showcase-image\);[^}]*filter: blur\(24px\)/);
+  assert.doesNotMatch(css[1], /brand-showcase-image|\.brand-profile-showcase__media::before/);
+  assert.match(css[1], /\.brand-profile-showcase__preview img\s*\{[^}]*object-fit: contain;/);
   assert.match(css[1], /\.game-art-backdrop::before\s*\{[^}]*background-image: var\(--game-art\);[^}]*filter: blur\(20px\)/);
 });
 
@@ -102,4 +103,22 @@ test('functional feedback rating label is a heading, not an eyebrow', () => {
   const feedback = fs.readFileSync(path.join(root, 'scripts/pages/brand-feedback.js'), 'utf8');
   assert.match(feedback, /<h3>\$\{[^}]*rateTitle[^}]*\}<\/h3>/);
   assert.doesNotMatch(feedback, /class="section-kicker"/);
+});
+
+test('brand masthead reuses the actual review title, original CTA and optional preview', () => {
+  const layout = fs.readFileSync(path.join(root, 'scripts/pages/brand-layout.js'), 'utf8');
+  const masthead = layout.slice(layout.indexOf('const initBrandProfileShowcase'), layout.indexOf('const initRightRailContent'));
+  assert.match(masthead, /if \(!logo \|\| !heading\) return/);
+  assert.match(masthead, /title\.appendChild\(heading\)/);
+  assert.match(masthead, /if \(ctaWrapper\) actions\.appendChild\(ctaWrapper\)/);
+  assert.match(masthead, /if \(image\) \{\s*const figure = document\.createElement\('figure'\)/);
+  assert.match(masthead, /figure\.appendChild\(image\);\s*showcase\.prepend\(figure\)/);
+  assert.match(masthead, /actions\.prepend\(teaser\)/);
+  assert.doesNotMatch(masthead, /brand-showcase-image|preview\.disabled/);
+});
+
+test('review identity overlaps only when the real screenshot is present', () => {
+  assert.match(css[1], /\.brand-profile-showcase__preview \+ \.brand-profile-showcase__bar > \.brand-profile-showcase__identity\s*\{[^}]*margin-block-start:\s*calc\(-1 \*/);
+  const layout = fs.readFileSync(path.join(root, 'scripts/pages/brand-layout.js'), 'utf8');
+  assert.match(layout, /pageBrand\?\.notRecommended \|\| pageBrand\?\.temporarilyUnavailable\s*\? 0\s*: new Set\(pageBrand\?\.countries/);
 });
