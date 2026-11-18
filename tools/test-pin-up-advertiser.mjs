@@ -7,6 +7,7 @@ import {BRANDS} from '../scripts/brands.js';
 import {PINUP_COPY, PINUP_FREEBET_CAPS} from './pin-up-advertiser-copy.mjs';
 import {plain, updatePinUpReview, updatePinUpCatalog} from './update-pin-up-advertiser.mjs';
 import {syncDefaultTheme} from './sync-default-theme.mjs';
+import {syncCountryHeader} from './sync-country-header.mjs';
 const read=p=>fs.readFileSync(new URL('../'+p,import.meta.url),'utf8');
 const brand=BRANDS.find(b=>b.name==='Pin-Up');
 test('approved 17 markets, destination and logo retained',()=>{
@@ -43,7 +44,7 @@ for(const [locale,c] of Object.entries(PINUP_COPY)){
   });
   test(locale+': regeneration from the previous page preserves all bonus rows',()=>{
     const previous=execFileSync('git',['show',`HEAD:${prefix}brands/pin-up/index.html`],{maxBuffer:1000000}).toString();
-    const fresh=syncDefaultTheme(updatePinUpReview(previous,locale));
+    const fresh=syncCountryHeader(syncDefaultTheme(updatePinUpReview(previous,locale)),'/'+prefix);
     assert.equal(fresh,html);
     assert.equal((fresh.match(/<table>/g)||[]).length,4);
     assert.match(fresh,/class="pinup-sports-coverage"/);

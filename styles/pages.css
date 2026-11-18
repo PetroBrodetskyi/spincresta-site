@@ -3771,14 +3771,6 @@ html[data-theme='light'] .countries-cloud .country-link:hover {
   transition: background 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
 }
 
-.footer-newsletter-submit:hover {
-  color: #1a1300;
-  background: #ffe45c;
-  border-color: #ffe45c;
-  box-shadow: var(--shadow-action-hover);
-  transform: translateY(-1px);
-}
-
 .footer-newsletter-submit:disabled {
   cursor: wait;
   opacity: 0.62;
@@ -4945,15 +4937,6 @@ body[data-brand] .brand-country-toggle {
     transform 0.2s ease;
 }
 
-body[data-brand] .brand-country-toggle:hover,
-body[data-brand] .brand-country-toggle:focus-visible {
-  border-color: var(--gold, #ffdf00);
-  background: rgba(255, 255, 255, 0.035);
-  color: var(--gold, #ffdf00);
-  outline: none;
-  transform: translateY(-1px);
-}
-
 body[data-brand] .brand-country-toggle__icon {
   width: 7px;
   height: 7px;
@@ -4969,13 +4952,6 @@ body[data-brand] .brand-countries.is-country-expanded .brand-country-toggle__ico
 
 html[data-theme='light'] body[data-brand] .brand-country-toggle {
   border-color: rgba(15, 23, 42, 0.2);
-}
-
-html[data-theme='light'] body[data-brand] .brand-country-toggle:hover,
-html[data-theme='light'] body[data-brand] .brand-country-toggle:focus-visible {
-  border-color: var(--gold, #ffdf00);
-  background: rgba(15, 23, 42, 0.025);
-  color: #8a5e1f;
 }
 
 @media (max-width: 768px) {
@@ -7561,7 +7537,6 @@ body[data-brand] .availability-tab-list {
   }
 
   .casino-card .card-img,
-  html[data-theme='light'] .casino-card .card-img,
   html[data-theme='light'] .casino-card .card-img {
     width: 104px;
     height: 82px;
@@ -7651,7 +7626,6 @@ body[data-brand] .availability-tab-list {
   }
 
   .casino-card .card-img,
-  html[data-theme='light'] .casino-card .card-img,
   html[data-theme='light'] .casino-card .card-img {
     width: 92px;
     height: 72px;
@@ -7880,7 +7854,6 @@ body.casinos-page .casino-list-row:hover {
   transform: none;
 }
 
-html[data-theme='light'] body.casinos-page .casino-list-row:hover,
 html[data-theme='light'] body.casinos-page .casino-list-row:hover {
   background: rgba(15, 23, 42, 0.03);
 }
@@ -7907,7 +7880,6 @@ body.casinos-page .casino-list-row:nth-child(n) .casino-list-logo {
   overflow: hidden;
 }
 
-html[data-theme='light'] body.casinos-page .casino-list-logo,
 html[data-theme='light'] body.casinos-page .casino-list-logo {
   background:
     radial-gradient(circle at top right, rgba(56, 189, 248, 0.14), transparent 40%),
@@ -8138,7 +8110,6 @@ html:not([data-theme='light']) body.casinos-page .casino-scroll-nav .alpha-nav .
   box-shadow: var(--shadow-control);
 }
 
-html[data-theme='light'] .casino-scroll-nav,
 html[data-theme='light'] .casino-scroll-nav {
   border-bottom-color: rgba(15, 23, 42, 0.08);
   background: rgba(255, 255, 255, 0.96);
@@ -8693,17 +8664,10 @@ body[data-country] .country-hero-cards .view-all {
     margin-top: clamp(16px, 2vw, 28px);
   }
 
-  body[data-country] .country-hero-cards > .casino-grid {
-    grid-column: 1 / -1;
-    grid-row: 4;
-  }
 
-  body[data-country] .country-hero-cards > .load-more-wrapper {
-    grid-column: 1 / -1;
-    grid-row: 5;
-  }
 
-  html[data-theme='light'] body[data-country] .country-card-flag,
+
+
   html[data-theme='light'] body[data-country] .country-card-flag {
     border-color: #fff;
     box-shadow:
@@ -8954,9 +8918,7 @@ body[data-country] .expert-card {
   overflow: visible;
 }
 
-body[data-country] .expert-card::before {
-  display: none;
-}
+
 
 body[data-country] .expert-header {
   position: relative;
@@ -9536,8 +9498,6 @@ body[data-page='account'] .account-representative-panel a {
   border: 1px solid var(--surface-border-strong); border-radius: 5px;
   color: var(--text-main); font-size: 13px; font-weight: 700; text-decoration: none;
 }
-body[data-page='account'] .account-representative-panel a:hover { border-color: var(--gold, #ffdf00); color: var(--gold, #ffdf00); }
-
 body[data-brand] .brand-feedback-official-reply {
   width: calc(100% - clamp(32px, 8vw, 120px));
   margin: 24px 0 0 clamp(32px, 8vw, 120px);
@@ -9713,12 +9673,10 @@ body[data-country] .country-hero-cards .casino-card:hover {
   transform: none;
 }
 
-html[data-theme='light'] body[data-country] .country-hero-cards .casino-card,
 html[data-theme='light'] body[data-country] .country-hero-cards .casino-card {
   background: rgba(255, 255, 255, 0.74);
 }
 
-html[data-theme='light'] body[data-country] .country-hero-cards .casino-card:hover,
 html[data-theme='light'] body[data-country] .country-hero-cards .casino-card:hover {
   background: rgba(255, 255, 255, 0.9);
 }
@@ -9943,26 +9901,20 @@ body[data-brand] .brand-sticky-title__inner,
 }
 
 .mobile-menu-inner > a,
-.submenu-toggle,
-.mobile-theme-settings,
-.mobile-submenu a {
+.mobile-theme-settings {
   box-shadow: var(--shadow-control);
 }
 
 .mobile-menu-inner > a:hover,
-.submenu-toggle:hover,
 .mobile-theme-settings:hover,
-.mobile-theme-settings:focus-visible,
-.mobile-submenu a:hover {
+.mobile-theme-settings:focus-visible {
   box-shadow: var(--shadow-card);
 }
 
 .casino-card .card-img,
 html[data-theme='light'] .casino-card .card-img,
-html[data-theme='light'] .casino-card .card-img,
 body.casinos-page .casino-list-logo,
 body.casinos-page .casino-list-row:nth-child(n) .casino-list-logo,
-html[data-theme='light'] body.casinos-page .casino-list-logo,
 html[data-theme='light'] body.casinos-page .casino-list-logo {
   box-shadow: var(--shadow-logo-surface);
 }
@@ -10028,8 +9980,6 @@ body:not(.home-page) .promo-copy-title:hover {
   }
 
   html[data-theme='light'] .casino-card:hover,
-  html[data-theme='light'] .casino-card:hover,
-  html[data-theme='light'] body.casinos-page .casino-list-row:hover,
   html[data-theme='light'] body.casinos-page .casino-list-row:hover {
     background: rgba(15, 23, 42, 0.026);
   }
@@ -10050,10 +10000,6 @@ html[data-theme='light'] .header .site-search:focus-within .site-search-shell {
   border-color: var(--gold, #ffdf00);
 }
 
-html[data-theme='light'] .casino-card .casino-status-badge,
-html[data-theme='light'] .casino-card .top-rated-badge,
-html[data-theme='light'] .casino-card .exclusive-badge,
-html[data-theme='light'] .casino-card .new-badge,
 html[data-theme='light'] .casino-card .casino-status-badge,
 html[data-theme='light'] .casino-card .top-rated-badge,
 html[data-theme='light'] .casino-card .exclusive-badge,
@@ -10227,14 +10173,6 @@ body[data-brand] .brand-sticky-title:hover .brand-sticky-title__inner {
     border-color 0.2s ease;
 }
 
-.top-casino-jump-nav a:hover,
-.top-casino-jump-nav a:focus-visible {
-  border-color: var(--gold, #ffdf00);
-  color: var(--gold, #ffdf00);
-  background: rgba(255, 255, 255, 0.04);
-  outline: none;
-}
-
 .top-casino-jump-nav .flag {
   width: 18px;
   height: 13px;
@@ -10302,25 +10240,14 @@ body[data-brand]
   outline: none;
 }
 
-html[data-theme='light'] .top-casino-jump-nav,
 html[data-theme='light'] .top-casino-jump-nav {
   background: transparent;
 }
 
-html[data-theme='light'] .top-casino-jump-nav a,
 html[data-theme='light'] .top-casino-jump-nav a {
   border-color: rgba(15, 23, 42, 0.12);
   color: var(--text-main);
   background: transparent;
-}
-
-html[data-theme='light'] .top-casino-jump-nav a:hover,
-html[data-theme='light'] .top-casino-jump-nav a:hover,
-html[data-theme='light'] .top-casino-jump-nav a:focus-visible,
-html[data-theme='light'] .top-casino-jump-nav a:focus-visible {
-  border-color: var(--gold, #ffdf00);
-  color: #8a5e1f;
-  background: rgba(15, 23, 42, 0.03);
 }
 
 @media (max-width: 768px) {
@@ -10711,7 +10638,6 @@ html[data-theme='light'] .brand-risk-inline.is-temporarily-unavailable .brand-ri
   font-size: 9.5px;
 }
 
-html[data-theme='light'] .brand-risk-inline-grid .casino-card,
 html[data-theme='light'] .brand-risk-inline-grid .casino-card {
   background: rgba(255, 255, 255, 0.82);
 }
@@ -11804,13 +11730,13 @@ body.home-page .home-recommendation-grid .casino-actions.has-single-action {
   grid-template-columns: minmax(0, 1fr);
 }
 
-body.home-page .home-new-reviews-grid {
+body:is(.home-page, [data-country]) .home-new-reviews-grid {
   display: grid;
   grid-template-columns: repeat(12, minmax(0, 1fr));
   gap: 12px;
 }
 
-body.home-page .home-new-review-card {
+body:is(.home-page, [data-country]) .home-new-review-card {
   display: grid;
   min-width: 0;
   grid-template-rows: 82px auto;
@@ -11825,14 +11751,14 @@ body.home-page .home-new-review-card {
   transition: transform 180ms ease, border-color 180ms ease, box-shadow 180ms ease;
 }
 
-body.home-page .home-new-review-card:hover {
+body:is(.home-page, [data-country]) .home-new-review-card:hover {
   border-color: var(--section-accent);
   box-shadow: var(--shadow-hover);
   transform: translateY(-3px);
 }
 
-body.home-page .home-new-review-logo,
-html[data-theme='light'] body.home-page .home-new-review-logo {
+body:is(.home-page, [data-country]) .home-new-review-logo,
+html[data-theme='light'] body:is(.home-page, [data-country]) .home-new-review-logo {
   display: grid;
   min-width: 0;
   place-items: center;
@@ -11848,7 +11774,7 @@ html[data-theme='light'] body.home-page .home-new-review-logo {
     );
 }
 
-body.home-page .home-new-review-logo img {
+body:is(.home-page, [data-country]) .home-new-review-logo img {
   display: block;
   width: auto;
   max-width: 88%;
@@ -11857,7 +11783,7 @@ body.home-page .home-new-review-logo img {
   object-fit: contain;
 }
 
-body.home-page .home-new-review-card > strong {
+body:is(.home-page, [data-country]) .home-new-review-card > strong {
   display: flex;
   min-width: 0;
   min-height: 42px;
@@ -12219,7 +12145,7 @@ html[data-theme='light'] body.home-page .home-secondary-action {
 }
 
 html[data-theme='light'] body.home-page .home-recommendation-card,
-html[data-theme='light'] body.home-page .home-new-review-card,
+html[data-theme='light'] body:is(.home-page, [data-country]) .home-new-review-card,
 html[data-theme='light'] body.home-page .home-game-card,
 html[data-theme='light'] .home-method-grid article,
 html[data-theme='light'] body.home-page .home-casino-shot {
@@ -12227,7 +12153,7 @@ html[data-theme='light'] body.home-page .home-casino-shot {
 }
 
 @media (max-width: 1024px) {
-  body.home-page .home-new-reviews-grid {
+  body:is(.home-page, [data-country]) .home-new-reviews-grid {
     grid-template-columns: none;
     grid-template-rows: repeat(2, auto);
     grid-auto-flow: column;
@@ -12351,19 +12277,19 @@ html[data-theme='light'] body.home-page .home-casino-shot {
 }
 
 @media (max-width: 560px) {
-  body.home-page .home-new-reviews-grid {
+  body:is(.home-page, [data-country]) .home-new-reviews-grid {
     grid-auto-columns: 132px;
   }
 
-  body.home-page .home-new-review-card {
+  body:is(.home-page, [data-country]) .home-new-review-card {
     grid-template-rows: 74px auto;
   }
 
-  body.home-page .home-new-review-logo {
+  body:is(.home-page, [data-country]) .home-new-review-logo {
     padding: 11px 10px;
   }
 
-  body.home-page .home-new-review-logo img {
+  body:is(.home-page, [data-country]) .home-new-review-logo img {
     max-height: 43px;
   }
 
@@ -12697,13 +12623,10 @@ body[data-page='top-casinos'] .top-casino-jump-nav__links {
   grid-template-columns: repeat(6, minmax(0, 1fr));
   gap: 8px;
   width: 100%;
-  max-height: 96px;
-  overflow: hidden;
-  transition: max-height 0.3s ease;
 }
 
-body[data-page='top-casinos'] .top-casino-jump-nav.is-expanded .top-casino-jump-nav__links {
-  max-height: 720px;
+.top-casino-jump-nav:not(.is-expanded) .top-casino-jump-link:nth-child(n + 13) {
+  display: none;
 }
 
 body[data-page='top-casinos'] .top-casino-jump-nav a {
@@ -12724,15 +12647,6 @@ body[data-page='top-casinos'] .top-casino-jump-nav a {
 body[data-page='top-casinos'] .top-casino-jump-nav a[data-featured='true'] {
   border-color: var(--surface-border-strong);
   background: var(--surface-card-hover);
-}
-
-body[data-page='top-casinos'] .top-casino-jump-nav a:hover,
-body[data-page='top-casinos'] .top-casino-jump-nav a:focus-visible {
-  border-color: var(--gold, #ffdf00);
-  background: var(--surface-card-hover);
-  color: var(--gold, #ffdf00);
-  outline: none;
-  transform: translateY(-1px);
 }
 
 body[data-page='top-casinos'] .top-casino-jump-nav .flag {
@@ -12898,8 +12812,8 @@ html[data-theme='light'] body[data-page='top-casinos'] .top-casino-jump-toggle {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 
-  body[data-page='top-casinos'] .top-casino-jump-nav.is-expanded .top-casino-jump-nav__links {
-    max-height: 1180px;
+  .top-casino-jump-nav:not(.is-expanded) .top-casino-jump-link:nth-child(n + 7) {
+    display: none;
   }
 
   body[data-page='top-casinos'] .top-casinos-method-grid {
@@ -12960,11 +12874,6 @@ html[data-theme='light'] body[data-page='top-casinos'] .top-casino-jump-toggle {
 
   body[data-page='top-casinos'] .top-casino-jump-nav__links {
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    max-height: 148px;
-  }
-
-  body[data-page='top-casinos'] .top-casino-jump-nav.is-expanded .top-casino-jump-nav__links {
-    max-height: 2200px;
   }
 
   body[data-page='top-casinos'] .top-casinos-method-grid {
@@ -13690,111 +13599,6 @@ html[data-theme='light'] body.author-page .author-standard {
   .author-actions {
     align-items: stretch;
     flex-direction: column;
-  }
-}
-
-/* =============================================================
-   Unified heading hierarchy
-   ============================================================= */
-:root {
-  --heading-display-size: clamp(48px, 4.6vw, 64px);
-  --heading-home-section-size: clamp(40px, 3.2vw, 48px);
-  --heading-content-section-size: clamp(32px, 2.7vw, 40px);
-  --heading-subsection-size: clamp(22px, 1.8vw, 26px);
-}
-
-body .hero h1,
-body.home-page .hero h1,
-body:not(.home-page) .hero h1,
-body[data-page='top-casinos'] .hero h1,
-body[data-country] .hero h1,
-body[data-brand] .hero h1,
-body[data-brand] .brand-sticky-aside h1,
-body[data-brand].has-brand-sticky-layout .brand-sticky-aside h1,
-body.author-page .author-hero h1 {
-  font-size: var(--heading-display-size) !important;
-  line-height: 0.98;
-  letter-spacing: -0.045em;
-}
-
-body[data-brand] .brand-sticky-aside h1,
-body[data-brand].has-brand-sticky-layout .brand-sticky-aside h1 {
-  font-size: clamp(28px, 2.2vw, 34px) !important;
-  line-height: 1.06;
-  letter-spacing: -0.03em;
-}
-
-body[data-brand] .brand-new-games-heading h2 {
-  font-size: clamp(22px, 1.5vw, 28px) !important;
-  line-height: 1.08;
-  letter-spacing: -0.02em;
-}
-
-body.home-page main h2,
-body.home-page .home-showcase-heading h2,
-body.home-page .home-insight-head h2,
-body.home-page .section-head h2 {
-  font-size: var(--heading-home-section-size) !important;
-  line-height: 1.04;
-  letter-spacing: -0.035em;
-}
-
-body:not(.home-page) main h2,
-body:not(.home-page) .section-head h2,
-body:not(.home-page) .content-review > section > h2,
-body:not(.home-page) .content-article > section > h2,
-body:not(.home-page) .brand-countries > h2,
-body:not(.home-page) .brand-payments > h2,
-body.author-page main h2 {
-  font-size: var(--heading-content-section-size) !important;
-  line-height: 1.08;
-  letter-spacing: -0.03em;
-}
-
-:where(
-    .content-review,
-    .content-article,
-    .timeline,
-    .faq-grid,
-    .expert-review,
-    .home-method-grid,
-    .top-casinos-method-grid,
-    .author-page main
-  ) h3:not(.casino-name) {
-  font-size: var(--heading-subsection-size) !important;
-  line-height: 1.18;
-  letter-spacing: -0.02em;
-}
-
-@media (max-width: 768px) {
-  :root {
-    --heading-display-size: clamp(36px, 10.5vw, 48px);
-    --heading-home-section-size: clamp(30px, 8.6vw, 38px);
-    --heading-content-section-size: clamp(28px, 7.8vw, 34px);
-    --heading-subsection-size: clamp(20px, 5.8vw, 23px);
-  }
-
-  body .hero h1,
-  body.home-page .hero h1,
-  body:not(.home-page) .hero h1,
-  body[data-page='top-casinos'] .hero h1,
-  body[data-country] .hero h1,
-  body[data-brand] .hero h1,
-  body[data-brand] .brand-sticky-aside h1,
-  body[data-brand].has-brand-sticky-layout .brand-sticky-aside h1,
-  body.author-page .author-hero h1 {
-    line-height: 1;
-    letter-spacing: -0.04em;
-  }
-
-  body[data-brand] .brand-sticky-aside h1,
-  body[data-brand].has-brand-sticky-layout .brand-sticky-aside h1 {
-    font-size: clamp(27px, 8vw, 32px) !important;
-    line-height: 1.06;
-  }
-
-  body[data-brand] .brand-new-games-heading h2 {
-    font-size: clamp(22px, 6.2vw, 26px) !important;
   }
 }
 
@@ -16443,703 +16247,6 @@ html[data-theme='light'] body[data-country] .country-hero-cards > .intro {
   }
 }
 
-/* Country hero photography. */
-body[data-country='IN'] {
-  --country-hero-photo: url('https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto,w_2000/spincresta/countries/india/india-hero_qnasqx.webp');
-  --country-hero-photo-position: center center;
-}
-
-body[data-country='ID'] {
-  --country-hero-photo: url('https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto,w_2000/spincresta/countries/indonesia/indonesia-hero_pbgzxd.webp');
-  --country-hero-photo-position: center center;
-}
-
-body[data-country='UK'] {
-  --country-hero-photo: url('https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto,w_2000/spincresta/countries/united-kingdom/united-kingdom-hero_wuzscu.webp');
-  --country-hero-photo-position: center center;
-}
-
-body[data-country='US'] {
-  --country-hero-photo: url('https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto,w_2000/spincresta/countries/united-states/united-states-hero_ufaahw.webp');
-  --country-hero-photo-position: center center;
-}
-
-body[data-country='DE'] {
-  --country-hero-photo: url('https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto,w_2000/spincresta/countries/germany/germany-hero_gsmg4r.webp');
-  --country-hero-photo-position: center center;
-}
-
-body[data-country='CA'] {
-  --country-hero-photo: url('https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto,w_2000/spincresta/countries/canada/canada-hero_udkalw.webp');
-  --country-hero-photo-position: center center;
-}
-
-body[data-country='AU'] {
-  --country-hero-photo: url('https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto,w_2000/spincresta/countries/australia/australia-hero_dhf3e2.webp');
-  --country-hero-photo-position: center center;
-}
-
-body[data-country='FR'] {
-  --country-hero-photo: url('https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto,w_2000/spincresta/countries/france/france-hero_untvug.webp');
-  --country-hero-photo-position: center center;
-}
-
-body[data-country='EG'] {
-  --country-hero-photo: url('https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto,w_2000/spincresta/countries/egypt/egypt-hero_rkd0vj.webp');
-  --country-hero-photo-position: center center;
-}
-
-body[data-country='KE'] {
-  --country-hero-photo: url('https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto,w_2000/spincresta/countries/kenya/kenya-hero_vlysht.webp');
-  --country-hero-photo-position: center center;
-}
-
-body[data-country='BD'] {
-  --country-hero-photo: url('https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto,w_2000/spincresta/countries/bangladesh/bangladesh-hero_yvhvz8.webp');
-  --country-hero-photo-position: center center;
-}
-
-body[data-country='AZ'] {
-  --country-hero-photo: url('https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto,w_2000/spincresta/countries/azerbaijan/azerbaijan-hero_k2tae2.webp');
-  --country-hero-photo-position: center center;
-}
-
-body[data-country='AT'] {
-  --country-hero-photo: url('https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto,w_2000/spincresta/countries/austria/austria-hero_mmpgxi.webp');
-  --country-hero-photo-position: center center;
-}
-
-body[data-country='AR'] {
-  --country-hero-photo: url('https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto,w_2000/spincresta/countries/argentina/argentina-hero_jtaj1n.webp');
-  --country-hero-photo-position: center center;
-}
-
-body[data-country='BE'] {
-  --country-hero-photo: url('https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto,w_2000/spincresta/countries/belgium/belgium-hero_hnlkuz.webp');
-  --country-hero-photo-position: center center;
-}
-
-body[data-country='BR'] {
-  --country-hero-photo: url('https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto,w_2000/spincresta/countries/brazil/brazil-hero_tkxgrm.webp');
-  --country-hero-photo-position: center center;
-}
-
-body[data-country='BG'] {
-  --country-hero-photo: url('https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto,w_2000/spincresta/countries/bulgaria/bulgaria-hero_m0t5bq.webp');
-  --country-hero-photo-position: center center;
-}
-
-body[data-country='CL'] {
-  --country-hero-photo: url('https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto,w_2000/spincresta/countries/chile/chile-hero_ajyj55.webp');
-  --country-hero-photo-position: center center;
-}
-
-body[data-country='CO'] {
-  --country-hero-photo: url('https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto,w_2000/spincresta/countries/colombia/colombia-hero_eicevv.webp');
-  --country-hero-photo-position: center center;
-}
-
-body[data-country='HR'] {
-  --country-hero-photo: url('https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto,w_2000/spincresta/countries/croatia/croatia-hero_b0ivdv.webp');
-  --country-hero-photo-position: center center;
-}
-
-body[data-country='CZ'] {
-  --country-hero-photo: url('https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto,w_2000/spincresta/countries/czech-republic/czech-republic-hero_dubpme.webp');
-  --country-hero-photo-position: center center;
-}
-
-body[data-country='DK'] {
-  --country-hero-photo: url('https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto,w_2000/spincresta/countries/denmark/denmark-hero_gdzsoz.webp');
-  --country-hero-photo-position: center center;
-}
-
-body[data-country='EE'] {
-  --country-hero-photo: url('https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto,w_2000/spincresta/countries/estonia/estonia-hero_q6sded.webp');
-  --country-hero-photo-position: center center;
-}
-
-body[data-country='FI'] {
-  --country-hero-photo: url('https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto,w_2000/spincresta/countries/finland/finland-hero_r2rmuy.webp');
-  --country-hero-photo-position: center center;
-}
-
-body[data-country='GH'] {
-  --country-hero-photo: url('https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto,w_2000/spincresta/countries/ghana/ghana-hero_lbvdp3.webp');
-  --country-hero-photo-position: center center;
-}
-
-body[data-country='GR'] {
-  --country-hero-photo: url('https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto,w_2000/spincresta/countries/greece/greece-hero_ii3k28.webp');
-  --country-hero-photo-position: center center;
-}
-
-body[data-country='HU'] {
-  --country-hero-photo: url('https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto,w_2000/spincresta/countries/hungary/hungary-hero_uucg1g.webp');
-  --country-hero-photo-position: center center;
-}
-
-body[data-country='IS'] {
-  --country-hero-photo: url('https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto,w_2000/spincresta/countries/iceland/iceland-hero_nt7ave.webp');
-  --country-hero-photo-position: center center;
-}
-
-body[data-country='IE'] {
-  --country-hero-photo: url('https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto,w_2000/spincresta/countries/ireland/ireland-hero_kbbqbf.webp');
-  --country-hero-photo-position: center center;
-}
-
-body[data-country='IT'] {
-  --country-hero-photo: url('https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto,w_2000/spincresta/countries/italy/italy-hero_gbknqf.webp');
-  --country-hero-photo-position: center center;
-}
-
-body[data-country='JP'] {
-  --country-hero-photo: url('https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto,w_2000/spincresta/countries/japan/japan-hero_hr095t.webp');
-  --country-hero-photo-position: center center;
-}
-
-body[data-country='KZ'] {
-  --country-hero-photo: url('https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto,w_2000/spincresta/countries/kazakhstan/kazakhstan-hero_ggd96h.webp');
-  --country-hero-photo-position: center center;
-}
-
-body[data-country='KG'] {
-  --country-hero-photo: url('https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto,w_2000/spincresta/countries/kyrgyzstan/kyrgyzstan-hero_hymopc.webp');
-  --country-hero-photo-position: center center;
-}
-
-body[data-country='LV'] {
-  --country-hero-photo: url('https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto,w_2000/spincresta/countries/latvia/latvia-hero_dx45xb.webp');
-  --country-hero-photo-position: center center;
-}
-
-body[data-country='LT'] {
-  --country-hero-photo: url('https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto,w_2000/spincresta/countries/lithuania/lithuania-hero_xnw5mj.webp');
-  --country-hero-photo-position: center center;
-}
-
-body[data-country='LU'] {
-  --country-hero-photo: url('https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto,w_2000/spincresta/countries/luxembourg/luxembourg-hero_llit0f.webp');
-  --country-hero-photo-position: center center;
-}
-
-body[data-country='MY'] {
-  --country-hero-photo: url('https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto,w_2000/spincresta/countries/malaysia/malaysia-hero_rlclmh.webp');
-  --country-hero-photo-position: center center;
-}
-
-body[data-country='MX'] {
-  --country-hero-photo: url('https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto,w_2000/spincresta/countries/mexico/mexico-hero_prgutp.webp');
-  --country-hero-photo-position: center center;
-}
-
-body[data-country='NP'] {
-  --country-hero-photo: url('https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto,w_2000/spincresta/countries/nepal/nepal-hero_su2znl.webp');
-  --country-hero-photo-position: center center;
-}
-
-body[data-country='NL'] {
-  --country-hero-photo: url('https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto,w_2000/spincresta/countries/netherlands/netherlands-hero_psfijz.webp');
-  --country-hero-photo-position: center center;
-}
-
-body[data-country='NZ'] {
-  --country-hero-photo: url('https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto,w_2000/spincresta/countries/new-zealand/new-zealand-hero_y2swlf.webp');
-  --country-hero-photo-position: center center;
-}
-
-body[data-country='NG'] {
-  --country-hero-photo: url('https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto,w_2000/spincresta/countries/nigeria/nigeria-hero_u5fetu.webp');
-  --country-hero-photo-position: center center;
-}
-
-body[data-country='NO'] {
-  --country-hero-photo: url('https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto,w_2000/spincresta/countries/norway/norway-hero_btlsw9.webp');
-  --country-hero-photo-position: center center;
-}
-
-body[data-country='PH'] {
-  --country-hero-photo: url('https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto,w_2000/spincresta/countries/philippines/philippines-hero_kurqnu.webp');
-  --country-hero-photo-position: center center;
-}
-
-body[data-country='PL'] {
-  --country-hero-photo: url('https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto,w_2000/spincresta/countries/poland/poland-hero_lpxf0w.webp');
-  --country-hero-photo-position: center center;
-}
-
-body[data-country='PT'] {
-  --country-hero-photo: url('https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto,w_2000/spincresta/countries/portugal/portugal-hero_sxbxth.webp');
-  --country-hero-photo-position: center center;
-}
-
-body[data-country='PE'] {
-  --country-hero-photo: url('https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto,w_2000/spincresta/countries/peru/peru-hero_gtxkxt.webp');
-  --country-hero-photo-position: center center;
-}
-
-body[data-country='RU'] {
-  --country-hero-photo: url('https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto,w_2000/spincresta/countries/russia/russia-hero_mphg50.webp');
-  --country-hero-photo-position: center center;
-}
-
-body[data-country='RO'] {
-  --country-hero-photo: url('https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto,w_2000/spincresta/countries/romania/romania-hero_hinqyh.webp');
-  --country-hero-photo-position: center center;
-}
-
-body[data-country='SG'] {
-  --country-hero-photo: url('https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto,w_2000/spincresta/countries/singapore/singapore-hero_kl7i5c.webp');
-  --country-hero-photo-position: center center;
-}
-
-body[data-country='SK'] {
-  --country-hero-photo: url('https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto,w_2000/spincresta/countries/slovakia/slovakia-hero_kgcmua.webp');
-  --country-hero-photo-position: center center;
-}
-
-body[data-country='SI'] {
-  --country-hero-photo: url('https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto,w_2000/spincresta/countries/slovenia/slovenia-hero_cwpdq1.webp');
-  --country-hero-photo-position: center center;
-}
-
-body[data-country='ZA'] {
-  --country-hero-photo: url('https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto,w_2000/spincresta/countries/south-africa/south-africa-hero_t6a5u7.webp');
-  --country-hero-photo-position: center center;
-}
-
-body[data-country='KR'] {
-  --country-hero-photo: url('https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto,w_2000/spincresta/countries/south-korea/south-korea-hero_yzfjqy.webp');
-  --country-hero-photo-position: center center;
-}
-
-body[data-country='ES'] {
-  --country-hero-photo: url('https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto,w_2000/spincresta/countries/spain/spain-hero_av9tjv.webp');
-  --country-hero-photo-position: center center;
-}
-
-body[data-country='SE'] {
-  --country-hero-photo: url('https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto,w_2000/spincresta/countries/sweden/sweden-hero_xrbonv.webp');
-  --country-hero-photo-position: center center;
-}
-
-body[data-country='CH'] {
-  --country-hero-photo: url('https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto,w_2000/spincresta/countries/switzerland/switzerland-hero_ldkaaq.webp');
-  --country-hero-photo-position: center center;
-}
-
-body[data-country='TH'] {
-  --country-hero-photo: url('https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto,w_2000/spincresta/countries/thailand/thailand-hero_ppsedg.webp');
-  --country-hero-photo-position: center center;
-}
-
-body[data-country='TR'] {
-  --country-hero-photo: url('https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto,w_2000/spincresta/countries/turkey/turkey-hero_pifpon.webp');
-  --country-hero-photo-position: center center;
-}
-
-body[data-country='TZ'] {
-  --country-hero-photo: url('https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto,w_2000/spincresta/countries/tanzania/tanzania-hero_r6vbhm.webp');
-  --country-hero-photo-position: center center;
-}
-
-body[data-country='UG'] {
-  --country-hero-photo: url('https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto,w_2000/spincresta/countries/uganda/uganda-hero_cszufz.webp');
-  --country-hero-photo-position: center center;
-}
-
-body[data-country='UA'] {
-  --country-hero-photo: url('https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto,w_2000/spincresta/countries/ukraine/ukraine-hero_cofeau.webp');
-  --country-hero-photo-position: center center;
-}
-
-body[data-country='UZ'] {
-  --country-hero-photo: url('https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto,w_2000/spincresta/countries/uzbekistan/uzbekistan-hero_vgynod.webp');
-  --country-hero-photo-position: center center;
-}
-
-body[data-country='VN'] {
-  --country-hero-photo: url('https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto,w_2000/spincresta/countries/vietnam/vietnam-hero_rbrebu.webp');
-  --country-hero-photo-position: center center;
-}
-
-body:is([data-country='IN'], [data-country='ID'], [data-country='UK'], [data-country='US'], [data-country='DE'], [data-country='CA'], [data-country='AU'], [data-country='FR'], [data-country='EG'], [data-country='KE'], [data-country='BD'], [data-country='AZ'], [data-country='AT'], [data-country='AR'], [data-country='BE'], [data-country='BR']) .hero.country-hero-with-cards .country-hero-rail,
-html[data-theme='light'] body:is([data-country='IN'], [data-country='ID'], [data-country='UK'], [data-country='US'], [data-country='DE'], [data-country='CA'], [data-country='AU'], [data-country='FR'], [data-country='EG'], [data-country='KE'], [data-country='BD'], [data-country='AZ'], [data-country='AT'], [data-country='AR'], [data-country='BE'], [data-country='BR']) .hero.country-hero-with-cards .country-hero-rail,
-html:not([data-theme='light']) body:is([data-country='IN'], [data-country='ID'], [data-country='UK'], [data-country='US'], [data-country='DE'], [data-country='CA'], [data-country='AU'], [data-country='FR'], [data-country='EG'], [data-country='KE'], [data-country='BD'], [data-country='AZ'], [data-country='AT'], [data-country='AR'], [data-country='BE'], [data-country='BR']) .hero.country-hero-with-cards .country-hero-rail {
-  background-color: #0d1214;
-  background-image: var(--country-hero-photo);
-  background-repeat: no-repeat;
-  background-position: var(--country-hero-photo-position);
-  background-size: cover;
-}
-
-body:is([data-country='IN'], [data-country='ID'], [data-country='UK'], [data-country='US'], [data-country='DE'], [data-country='CA'], [data-country='AU'], [data-country='FR'], [data-country='EG'], [data-country='KE'], [data-country='BD'], [data-country='AZ'], [data-country='AT'], [data-country='AR'], [data-country='BE'], [data-country='BR']) .hero.country-hero-with-cards .country-hero-rail::before,
-html:not([data-theme='light']) body:is([data-country='IN'], [data-country='ID'], [data-country='UK'], [data-country='US'], [data-country='DE'], [data-country='CA'], [data-country='AU'], [data-country='FR'], [data-country='EG'], [data-country='KE'], [data-country='BD'], [data-country='AZ'], [data-country='AT'], [data-country='AR'], [data-country='BE'], [data-country='BR']) .hero.country-hero-with-cards .country-hero-rail::before {
-  inset: 0;
-  background:
-    linear-gradient(90deg, rgba(7, 11, 13, 0.94) 0%, rgba(7, 11, 13, 0.78) 43%, rgba(7, 11, 13, 0.22) 72%, rgba(7, 11, 13, 0.07) 100%),
-    linear-gradient(180deg, rgba(5, 8, 10, 0.12), rgba(5, 8, 10, 0.26));
-  filter: none;
-  opacity: 1;
-  transform: none;
-}
-
-body[data-country] .hero.country-hero-with-cards .hero-content .hero-flag,
-html[data-theme='light'] body[data-country] .hero.country-hero-with-cards .hero-content .hero-flag {
-  border-color: rgba(255, 255, 255, 0.58);
-  background: rgba(255, 255, 255, 0.34);
-  -webkit-backdrop-filter: none;
-  backdrop-filter: none;
-  box-shadow:
-    0 20px 44px rgba(0, 0, 0, 0.22);
-}
-
-@media (max-width: 768px) {
-  body:is([data-country='IN'], [data-country='ID'], [data-country='UK'], [data-country='US'], [data-country='DE'], [data-country='CA'], [data-country='AU'], [data-country='FR'], [data-country='EG'], [data-country='KE'], [data-country='BD'], [data-country='AZ'], [data-country='AT'], [data-country='AR'], [data-country='BE'], [data-country='BR']) .hero.country-hero-with-cards .country-hero-rail,
-  html[data-theme='light'] body:is([data-country='IN'], [data-country='ID'], [data-country='UK'], [data-country='US'], [data-country='DE'], [data-country='CA'], [data-country='AU'], [data-country='FR'], [data-country='EG'], [data-country='KE'], [data-country='BD'], [data-country='AZ'], [data-country='AT'], [data-country='AR'], [data-country='BE'], [data-country='BR']) .hero.country-hero-with-cards .country-hero-rail,
-  html:not([data-theme='light']) body:is([data-country='IN'], [data-country='ID'], [data-country='UK'], [data-country='US'], [data-country='DE'], [data-country='CA'], [data-country='AU'], [data-country='FR'], [data-country='EG'], [data-country='KE'], [data-country='BD'], [data-country='AZ'], [data-country='AT'], [data-country='AR'], [data-country='BE'], [data-country='BR']) .hero.country-hero-with-cards .country-hero-rail {
-    background-image:
-      linear-gradient(180deg, rgba(7, 11, 13, 0.76), rgba(7, 11, 13, 0.88)),
-      var(--country-hero-photo);
-  }
-
-  body:is([data-country='IN'], [data-country='ID'], [data-country='UK'], [data-country='US'], [data-country='DE'], [data-country='CA'], [data-country='AU'], [data-country='FR'], [data-country='EG'], [data-country='KE'], [data-country='BD'], [data-country='AZ'], [data-country='AT'], [data-country='AR'], [data-country='BE'], [data-country='BR']) .hero.country-hero-with-cards .country-hero-rail::before,
-  html:not([data-theme='light']) body:is([data-country='IN'], [data-country='ID'], [data-country='UK'], [data-country='US'], [data-country='DE'], [data-country='CA'], [data-country='AU'], [data-country='FR'], [data-country='EG'], [data-country='KE'], [data-country='BD'], [data-country='AZ'], [data-country='AT'], [data-country='AR'], [data-country='BE'], [data-country='BR']) .hero.country-hero-with-cards .country-hero-rail::before {
-    display: none;
-  }
-
-  body:is([data-country='IN'], [data-country='ID'], [data-country='UK'], [data-country='US'], [data-country='DE'], [data-country='CA'], [data-country='AU'], [data-country='FR'], [data-country='EG'], [data-country='KE'], [data-country='BD'], [data-country='AZ'], [data-country='AT'], [data-country='AR'], [data-country='BE'], [data-country='BR']) .hero.country-hero-with-cards .hero-content > p {
-    color: #e2e8f0;
-    text-shadow: 0 2px 16px rgba(0, 0, 0, 0.9);
-  }
-}
-
-/* Country mobile hero — a compact echo of the desktop composition. */
-@media (max-width: 768px) {
-  body[data-country] .hero.country-hero-with-cards {
-    gap: 14px;
-    padding-bottom: 0;
-  }
-
-  body[data-country] .hero.country-hero-with-cards .country-hero-rail {
-    min-height: 264px;
-    justify-content: center;
-    padding: 24px 20px 22px;
-    border-color: rgba(255, 255, 255, 0.2);
-    border-radius: 20px;
-    box-shadow:
-      0 18px 42px rgba(0, 0, 0, 0.2);
-  }
-
-  body[data-country] .hero.country-hero-with-cards .hero-content {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) auto;
-    grid-template-areas:
-      'title title'
-      'copy flag';
-    align-items: end;
-    gap: 16px 14px;
-    width: 100%;
-    text-align: left;
-  }
-
-  body[data-country] .hero.country-hero-with-cards h1 {
-    grid-area: title;
-    max-width: 16ch;
-    margin: 0;
-    font-size: clamp(31px, 8.6vw, 37px) !important;
-    line-height: 0.98;
-    text-align: left;
-    text-shadow: 0 3px 24px rgba(0, 0, 0, 0.82);
-  }
-
-  body[data-country] .hero.country-hero-with-cards .hero-content > p {
-    grid-area: copy;
-    align-self: center;
-    max-width: 34ch;
-    margin: 0;
-    font-size: 13.5px;
-    line-height: 1.48;
-    text-align: left;
-  }
-
-  body[data-country] .hero.country-hero-with-cards .hero-content .hero-flag {
-    grid-area: flag;
-    align-self: end;
-    width: 66px;
-    max-height: 48px;
-    margin: 0;
-    padding: 5px;
-    border-color: rgba(255, 255, 255, 0.34);
-    border-radius: 9px;
-    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.24);
-  }
-
-  body[data-country] .country-hero-cards {
-    position: relative;
-    z-index: 3;
-    width: calc(100% - 20px);
-    margin: -44px auto 0;
-    padding: 0 0 20px;
-    border: 0;
-    border-radius: 0;
-    background: transparent;
-    box-shadow: none;
-  }
-
-  body[data-country] .country-hero-cards .section-head,
-  body[data-country] .country-hero-cards > .intro {
-    width: 100%;
-    margin-right: auto;
-    margin-left: auto;
-    border-color: color-mix(in srgb, var(--surface-border) 76%, var(--section-accent) 24%);
-  }
-
-  body[data-country] .country-hero-cards .section-head {
-    align-items: flex-start;
-    margin-top: 0;
-    padding: 20px 20px 10px;
-    border-bottom: 0;
-    border-radius: 18px 18px 0 0;
-    background:
-      radial-gradient(circle at 100% 0%, color-mix(in srgb, var(--section-accent) 10%, transparent), transparent 42%),
-      linear-gradient(145deg, rgba(42, 48, 52, 0.78), rgba(31, 37, 41, 0.66));
-    -webkit-backdrop-filter: none;
-    backdrop-filter: none;
-    box-shadow:
-      0 20px 44px rgba(0, 0, 0, 0.18);
-    text-align: left;
-  }
-
-  body[data-country] .country-hero-cards .section-head::before {
-    display: inline-flex;
-    width: max-content;
-    min-height: 24px;
-    align-items: center;
-    margin: 0 0 12px;
-    padding: 5px 9px;
-    border: 1px solid color-mix(in srgb, var(--section-accent) 34%, transparent);
-    border-radius: 999px;
-    background: color-mix(in srgb, var(--section-accent) 9%, transparent);
-    color: var(--section-accent);
-    font-size: 9px;
-    letter-spacing: 0.13em;
-  }
-
-  body[data-country] .country-hero-cards .section-head h2 {
-    max-width: 18ch;
-    margin: 0;
-    padding: 0;
-    border: 0;
-    font-size: clamp(24px, 6.8vw, 29px) !important;
-    line-height: 1.04;
-    text-align: left;
-  }
-
-  body[data-country] .country-hero-cards > .intro {
-    position: relative;
-    max-width: none;
-    margin-bottom: 18px;
-    padding: 10px 20px 22px 36px;
-    border-top: 0;
-    border-radius: 0 0 18px 18px;
-    background: linear-gradient(145deg, rgba(36, 42, 46, 0.76), rgba(28, 34, 38, 0.64));
-    -webkit-backdrop-filter: none;
-    backdrop-filter: none;
-    box-shadow: 0 20px 44px rgba(0, 0, 0, 0.18);
-    font-size: 13.5px;
-    line-height: 1.5;
-    text-align: left;
-  }
-
-  body[data-country] .country-hero-cards > .intro::before {
-    content: none;
-    position: absolute;
-    top: 12px;
-    bottom: 24px;
-    left: 20px;
-    width: 3px;
-    border-radius: 999px;
-    background: linear-gradient(180deg, var(--section-accent), var(--gold));
-  }
-
-  body[data-country] .country-hero-cards > .country-filter-bar {
-    margin-top: 0;
-  }
-
-  html[data-theme='light'] body[data-country] .country-hero-cards .section-head {
-    border-color: rgba(28, 45, 38, 0.13);
-    background:
-      radial-gradient(circle at 100% 0%, rgba(91, 139, 116, 0.12), transparent 42%),
-      linear-gradient(145deg, rgba(255, 255, 255, 0.82), rgba(240, 246, 242, 0.72));
-    box-shadow:
-      0 18px 38px rgba(23, 38, 31, 0.1);
-  }
-
-  html[data-theme='light'] body[data-country] .country-hero-cards > .intro {
-    border-color: rgba(28, 45, 38, 0.13);
-    background: linear-gradient(145deg, rgba(247, 250, 248, 0.82), rgba(255, 255, 255, 0.72));
-    box-shadow: 0 18px 38px rgba(23, 38, 31, 0.1);
-  }
-
-  body:is([data-country='IN'], [data-country='ID'], [data-country='UK'], [data-country='US'], [data-country='DE'], [data-country='CA'], [data-country='AU'], [data-country='FR'], [data-country='EG'], [data-country='KE'], [data-country='BD'], [data-country='AZ'], [data-country='AT'], [data-country='AR'], [data-country='BE'], [data-country='BR']) .hero.country-hero-with-cards .country-hero-rail,
-  html[data-theme='light'] body:is([data-country='IN'], [data-country='ID'], [data-country='UK'], [data-country='US'], [data-country='DE'], [data-country='CA'], [data-country='AU'], [data-country='FR'], [data-country='EG'], [data-country='KE'], [data-country='BD'], [data-country='AZ'], [data-country='AT'], [data-country='AR'], [data-country='BE'], [data-country='BR']) .hero.country-hero-with-cards .country-hero-rail,
-  html:not([data-theme='light']) body:is([data-country='IN'], [data-country='ID'], [data-country='UK'], [data-country='US'], [data-country='DE'], [data-country='CA'], [data-country='AU'], [data-country='FR'], [data-country='EG'], [data-country='KE'], [data-country='BD'], [data-country='AZ'], [data-country='AT'], [data-country='AR'], [data-country='BE'], [data-country='BR']) .hero.country-hero-with-cards .country-hero-rail {
-    background-image:
-      linear-gradient(90deg, rgba(7, 11, 13, 0.68) 0%, rgba(7, 11, 13, 0.46) 58%, rgba(7, 11, 13, 0.22) 100%),
-      linear-gradient(0deg, rgba(5, 8, 10, 0.48) 0%, rgba(5, 8, 10, 0.08) 68%),
-      var(--country-hero-photo);
-    background-size: cover, cover, cover;
-  }
-}
-
-@media (min-width: 1121px) {
-  html:not([data-theme='light']) body[data-country] .country-hero-cards .section-head,
-  html:not([data-theme='light']) body[data-country] .country-hero-cards > .intro {
-    margin-top: -64px;
-    border-color: rgba(255, 255, 255, 0.18);
-    background: linear-gradient(145deg, rgba(28, 34, 38, 0.5), rgba(17, 22, 25, 0.34));
-    -webkit-backdrop-filter: none;
-    backdrop-filter: none;
-    box-shadow:
-      0 24px 60px rgba(0, 0, 0, 0.18);
-  }
-
-  html[data-theme='light'] body[data-country] .country-hero-cards .section-head,
-  html[data-theme='light'] body[data-country] .country-hero-cards > .intro {
-    position: relative;
-    isolation: isolate;
-    overflow: hidden;
-    margin-top: -64px;
-    border-color: rgba(255, 255, 255, 0.82);
-    background: linear-gradient(145deg, rgba(255, 255, 255, 0.62), rgba(244, 248, 246, 0.46));
-    -webkit-backdrop-filter: none;
-    backdrop-filter: none;
-    box-shadow:
-      0 22px 52px rgba(22, 30, 27, 0.09);
-  }
-
-  html[data-theme='light'] body[data-country] .country-hero-cards .section-head::after {
-    content: none;
-  }
-}
-
-/* Additional Cloudinary country photography. */
-body:is([data-country='BG'], [data-country='CL'], [data-country='CO'], [data-country='HR'], [data-country='CZ'], [data-country='DK'], [data-country='EE'], [data-country='FI'], [data-country='GH'], [data-country='GR'], [data-country='HU'], [data-country='IS'], [data-country='IE'], [data-country='IT'], [data-country='JP'], [data-country='KZ'], [data-country='KG'], [data-country='LV'], [data-country='LT'], [data-country='LU'], [data-country='MY'], [data-country='MX'], [data-country='NP'], [data-country='NL'], [data-country='NZ'], [data-country='NG'], [data-country='NO'], [data-country='PH'], [data-country='PL'], [data-country='PT'], [data-country='PE'], [data-country='RU'], [data-country='RO'], [data-country='SG']) .hero.country-hero-with-cards .country-hero-rail,
-html[data-theme='light'] body:is([data-country='BG'], [data-country='CL'], [data-country='CO'], [data-country='HR'], [data-country='CZ'], [data-country='DK'], [data-country='EE'], [data-country='FI'], [data-country='GH'], [data-country='GR'], [data-country='HU'], [data-country='IS'], [data-country='IE'], [data-country='IT'], [data-country='JP'], [data-country='KZ'], [data-country='KG'], [data-country='LV'], [data-country='LT'], [data-country='LU'], [data-country='MY'], [data-country='MX'], [data-country='NP'], [data-country='NL'], [data-country='NZ'], [data-country='NG'], [data-country='NO'], [data-country='PH'], [data-country='PL'], [data-country='PT'], [data-country='PE'], [data-country='RU'], [data-country='RO'], [data-country='SG']) .hero.country-hero-with-cards .country-hero-rail,
-html:not([data-theme='light']) body:is([data-country='BG'], [data-country='CL'], [data-country='CO'], [data-country='HR'], [data-country='CZ'], [data-country='DK'], [data-country='EE'], [data-country='FI'], [data-country='GH'], [data-country='GR'], [data-country='HU'], [data-country='IS'], [data-country='IE'], [data-country='IT'], [data-country='JP'], [data-country='KZ'], [data-country='KG'], [data-country='LV'], [data-country='LT'], [data-country='LU'], [data-country='MY'], [data-country='MX'], [data-country='NP'], [data-country='NL'], [data-country='NZ'], [data-country='NG'], [data-country='NO'], [data-country='PH'], [data-country='PL'], [data-country='PT'], [data-country='PE'], [data-country='RU'], [data-country='RO'], [data-country='SG']) .hero.country-hero-with-cards .country-hero-rail {
-  background-color: #0d1214;
-  background-image: var(--country-hero-photo);
-  background-repeat: no-repeat;
-  background-position: var(--country-hero-photo-position);
-  background-size: cover;
-}
-
-body:is([data-country='BG'], [data-country='CL'], [data-country='CO'], [data-country='HR'], [data-country='CZ'], [data-country='DK'], [data-country='EE'], [data-country='FI'], [data-country='GH'], [data-country='GR'], [data-country='HU'], [data-country='IS'], [data-country='IE'], [data-country='IT'], [data-country='JP'], [data-country='KZ'], [data-country='KG'], [data-country='LV'], [data-country='LT'], [data-country='LU'], [data-country='MY'], [data-country='MX'], [data-country='NP'], [data-country='NL'], [data-country='NZ'], [data-country='NG'], [data-country='NO'], [data-country='PH'], [data-country='PL'], [data-country='PT'], [data-country='PE'], [data-country='RU'], [data-country='RO'], [data-country='SG']) .hero.country-hero-with-cards .country-hero-rail::before,
-html:not([data-theme='light']) body:is([data-country='BG'], [data-country='CL'], [data-country='CO'], [data-country='HR'], [data-country='CZ'], [data-country='DK'], [data-country='EE'], [data-country='FI'], [data-country='GH'], [data-country='GR'], [data-country='HU'], [data-country='IS'], [data-country='IE'], [data-country='IT'], [data-country='JP'], [data-country='KZ'], [data-country='KG'], [data-country='LV'], [data-country='LT'], [data-country='LU'], [data-country='MY'], [data-country='MX'], [data-country='NP'], [data-country='NL'], [data-country='NZ'], [data-country='NG'], [data-country='NO'], [data-country='PH'], [data-country='PL'], [data-country='PT'], [data-country='PE'], [data-country='RU'], [data-country='RO'], [data-country='SG']) .hero.country-hero-with-cards .country-hero-rail::before {
-  inset: 0;
-  background:
-    linear-gradient(90deg, rgba(7, 11, 13, 0.94) 0%, rgba(7, 11, 13, 0.78) 43%, rgba(7, 11, 13, 0.22) 72%, rgba(7, 11, 13, 0.07) 100%),
-    linear-gradient(180deg, rgba(5, 8, 10, 0.12), rgba(5, 8, 10, 0.26));
-  filter: none;
-  opacity: 1;
-  transform: none;
-}
-
-@media (max-width: 768px) {
-  body:is([data-country='BG'], [data-country='CL'], [data-country='CO'], [data-country='HR'], [data-country='CZ'], [data-country='DK'], [data-country='EE'], [data-country='FI'], [data-country='GH'], [data-country='GR'], [data-country='HU'], [data-country='IS'], [data-country='IE'], [data-country='IT'], [data-country='JP'], [data-country='KZ'], [data-country='KG'], [data-country='LV'], [data-country='LT'], [data-country='LU'], [data-country='MY'], [data-country='MX'], [data-country='NP'], [data-country='NL'], [data-country='NZ'], [data-country='NG'], [data-country='NO'], [data-country='PH'], [data-country='PL'], [data-country='PT'], [data-country='PE'], [data-country='RU'], [data-country='RO'], [data-country='SG']) .hero.country-hero-with-cards .country-hero-rail,
-  html[data-theme='light'] body:is([data-country='BG'], [data-country='CL'], [data-country='CO'], [data-country='HR'], [data-country='CZ'], [data-country='DK'], [data-country='EE'], [data-country='FI'], [data-country='GH'], [data-country='GR'], [data-country='HU'], [data-country='IS'], [data-country='IE'], [data-country='IT'], [data-country='JP'], [data-country='KZ'], [data-country='KG'], [data-country='LV'], [data-country='LT'], [data-country='LU'], [data-country='MY'], [data-country='MX'], [data-country='NP'], [data-country='NL'], [data-country='NZ'], [data-country='NG'], [data-country='NO'], [data-country='PH'], [data-country='PL'], [data-country='PT'], [data-country='PE'], [data-country='RU'], [data-country='RO'], [data-country='SG']) .hero.country-hero-with-cards .country-hero-rail,
-  html:not([data-theme='light']) body:is([data-country='BG'], [data-country='CL'], [data-country='CO'], [data-country='HR'], [data-country='CZ'], [data-country='DK'], [data-country='EE'], [data-country='FI'], [data-country='GH'], [data-country='GR'], [data-country='HU'], [data-country='IS'], [data-country='IE'], [data-country='IT'], [data-country='JP'], [data-country='KZ'], [data-country='KG'], [data-country='LV'], [data-country='LT'], [data-country='LU'], [data-country='MY'], [data-country='MX'], [data-country='NP'], [data-country='NL'], [data-country='NZ'], [data-country='NG'], [data-country='NO'], [data-country='PH'], [data-country='PL'], [data-country='PT'], [data-country='PE'], [data-country='RU'], [data-country='RO'], [data-country='SG']) .hero.country-hero-with-cards .country-hero-rail {
-    background-image:
-      linear-gradient(90deg, rgba(7, 11, 13, 0.68) 0%, rgba(7, 11, 13, 0.46) 58%, rgba(7, 11, 13, 0.22) 100%),
-      linear-gradient(0deg, rgba(5, 8, 10, 0.48) 0%, rgba(5, 8, 10, 0.08) 68%),
-      var(--country-hero-photo);
-    background-size: cover, cover, cover;
-  }
-
-  body:is([data-country='BG'], [data-country='CL'], [data-country='CO'], [data-country='HR'], [data-country='CZ'], [data-country='DK'], [data-country='EE'], [data-country='FI'], [data-country='GH'], [data-country='GR'], [data-country='HU'], [data-country='IS'], [data-country='IE'], [data-country='IT'], [data-country='JP'], [data-country='KZ'], [data-country='KG'], [data-country='LV'], [data-country='LT'], [data-country='LU'], [data-country='MY'], [data-country='MX'], [data-country='NP'], [data-country='NL'], [data-country='NZ'], [data-country='NG'], [data-country='NO'], [data-country='PH'], [data-country='PL'], [data-country='PT'], [data-country='PE'], [data-country='RU'], [data-country='RO'], [data-country='SG']) .hero.country-hero-with-cards .country-hero-rail::before,
-  html:not([data-theme='light']) body:is([data-country='BG'], [data-country='CL'], [data-country='CO'], [data-country='HR'], [data-country='CZ'], [data-country='DK'], [data-country='EE'], [data-country='FI'], [data-country='GH'], [data-country='GR'], [data-country='HU'], [data-country='IS'], [data-country='IE'], [data-country='IT'], [data-country='JP'], [data-country='KZ'], [data-country='KG'], [data-country='LV'], [data-country='LT'], [data-country='LU'], [data-country='MY'], [data-country='MX'], [data-country='NP'], [data-country='NL'], [data-country='NZ'], [data-country='NG'], [data-country='NO'], [data-country='PH'], [data-country='PL'], [data-country='PT'], [data-country='PE'], [data-country='RU'], [data-country='RO'], [data-country='SG']) .hero.country-hero-with-cards .country-hero-rail::before {
-    display: none;
-  }
-}
-
-/* Let the country photography breathe a little more in the light theme. */
-html[data-theme='light'] body:is([data-country='IN'], [data-country='ID'], [data-country='UK'], [data-country='US'], [data-country='DE'], [data-country='CA'], [data-country='AU'], [data-country='FR'], [data-country='EG'], [data-country='KE'], [data-country='BD'], [data-country='AZ'], [data-country='AT'], [data-country='AR'], [data-country='BE'], [data-country='BR']) .hero.country-hero-with-cards .country-hero-rail::before,
-html[data-theme='light'] body:is([data-country='BG'], [data-country='CL'], [data-country='CO'], [data-country='HR'], [data-country='CZ'], [data-country='DK'], [data-country='EE'], [data-country='FI'], [data-country='GH'], [data-country='GR'], [data-country='HU'], [data-country='IS'], [data-country='IE'], [data-country='IT'], [data-country='JP'], [data-country='KZ'], [data-country='KG'], [data-country='LV'], [data-country='LT'], [data-country='LU'], [data-country='MY'], [data-country='MX'], [data-country='NP'], [data-country='NL'], [data-country='NZ'], [data-country='NG'], [data-country='NO'], [data-country='PH'], [data-country='PL'], [data-country='PT'], [data-country='PE'], [data-country='RU'], [data-country='RO'], [data-country='SG']) .hero.country-hero-with-cards .country-hero-rail::before {
-  background:
-    linear-gradient(90deg, rgba(7, 11, 13, 0.88) 0%, rgba(7, 11, 13, 0.66) 43%, rgba(7, 11, 13, 0.16) 72%, rgba(7, 11, 13, 0.04) 100%),
-    linear-gradient(180deg, rgba(5, 8, 10, 0.08), rgba(5, 8, 10, 0.2));
-}
-
-@media (max-width: 768px) {
-  html[data-theme='light'] body:is([data-country='IN'], [data-country='ID'], [data-country='UK'], [data-country='US'], [data-country='DE'], [data-country='CA'], [data-country='AU'], [data-country='FR'], [data-country='EG'], [data-country='KE'], [data-country='BD'], [data-country='AZ'], [data-country='AT'], [data-country='AR'], [data-country='BE'], [data-country='BR']) .hero.country-hero-with-cards .country-hero-rail,
-  html[data-theme='light'] body:is([data-country='BG'], [data-country='CL'], [data-country='CO'], [data-country='HR'], [data-country='CZ'], [data-country='DK'], [data-country='EE'], [data-country='FI'], [data-country='GH'], [data-country='GR'], [data-country='HU'], [data-country='IS'], [data-country='IE'], [data-country='IT'], [data-country='JP'], [data-country='KZ'], [data-country='KG'], [data-country='LV'], [data-country='LT'], [data-country='LU'], [data-country='MY'], [data-country='MX'], [data-country='NP'], [data-country='NL'], [data-country='NZ'], [data-country='NG'], [data-country='NO'], [data-country='PH'], [data-country='PL'], [data-country='PT'], [data-country='PE'], [data-country='RU'], [data-country='RO'], [data-country='SG']) .hero.country-hero-with-cards .country-hero-rail {
-    background-image:
-      linear-gradient(90deg, rgba(7, 11, 13, 0.6) 0%, rgba(7, 11, 13, 0.38) 58%, rgba(7, 11, 13, 0.18) 100%),
-      linear-gradient(0deg, rgba(5, 8, 10, 0.4) 0%, rgba(5, 8, 10, 0.05) 68%),
-      var(--country-hero-photo);
-  }
-}
-
-/* Latest Cloudinary country photography. */
-body:is([data-country='SK'], [data-country='SI'], [data-country='ZA'], [data-country='KR'], [data-country='ES'], [data-country='SE'], [data-country='CH'], [data-country='TH']) .hero.country-hero-with-cards .country-hero-rail,
-html[data-theme='light'] body:is([data-country='SK'], [data-country='SI'], [data-country='ZA'], [data-country='KR'], [data-country='ES'], [data-country='SE'], [data-country='CH'], [data-country='TH']) .hero.country-hero-with-cards .country-hero-rail,
-html:not([data-theme='light']) body:is([data-country='SK'], [data-country='SI'], [data-country='ZA'], [data-country='KR'], [data-country='ES'], [data-country='SE'], [data-country='CH'], [data-country='TH']) .hero.country-hero-with-cards .country-hero-rail,
-body:is([data-country='TR'], [data-country='TZ'], [data-country='UG'], [data-country='UA'], [data-country='UZ'], [data-country='VN']) .hero.country-hero-with-cards .country-hero-rail,
-html[data-theme='light'] body:is([data-country='TR'], [data-country='TZ'], [data-country='UG'], [data-country='UA'], [data-country='UZ'], [data-country='VN']) .hero.country-hero-with-cards .country-hero-rail,
-html:not([data-theme='light']) body:is([data-country='TR'], [data-country='TZ'], [data-country='UG'], [data-country='UA'], [data-country='UZ'], [data-country='VN']) .hero.country-hero-with-cards .country-hero-rail {
-  background-color: #0d1214;
-  background-image: var(--country-hero-photo);
-  background-repeat: no-repeat;
-  background-position: var(--country-hero-photo-position);
-  background-size: cover;
-}
-
-body:is([data-country='SK'], [data-country='SI'], [data-country='ZA'], [data-country='KR'], [data-country='ES'], [data-country='SE'], [data-country='CH'], [data-country='TH']) .hero.country-hero-with-cards .country-hero-rail::before,
-html:not([data-theme='light']) body:is([data-country='SK'], [data-country='SI'], [data-country='ZA'], [data-country='KR'], [data-country='ES'], [data-country='SE'], [data-country='CH'], [data-country='TH']) .hero.country-hero-with-cards .country-hero-rail::before,
-body:is([data-country='TR'], [data-country='TZ'], [data-country='UG'], [data-country='UA'], [data-country='UZ'], [data-country='VN']) .hero.country-hero-with-cards .country-hero-rail::before,
-html:not([data-theme='light']) body:is([data-country='TR'], [data-country='TZ'], [data-country='UG'], [data-country='UA'], [data-country='UZ'], [data-country='VN']) .hero.country-hero-with-cards .country-hero-rail::before {
-  inset: 0;
-  background:
-    linear-gradient(90deg, rgba(7, 11, 13, 0.94) 0%, rgba(7, 11, 13, 0.78) 43%, rgba(7, 11, 13, 0.22) 72%, rgba(7, 11, 13, 0.07) 100%),
-    linear-gradient(180deg, rgba(5, 8, 10, 0.12), rgba(5, 8, 10, 0.26));
-  filter: none;
-  opacity: 1;
-  transform: none;
-}
-
-html[data-theme='light'] body:is([data-country='SK'], [data-country='SI'], [data-country='ZA'], [data-country='KR'], [data-country='ES'], [data-country='SE'], [data-country='CH'], [data-country='TH']) .hero.country-hero-with-cards .country-hero-rail::before,
-html[data-theme='light'] body:is([data-country='TR'], [data-country='TZ'], [data-country='UG'], [data-country='UA'], [data-country='UZ'], [data-country='VN']) .hero.country-hero-with-cards .country-hero-rail::before {
-  background:
-    linear-gradient(90deg, rgba(7, 11, 13, 0.88) 0%, rgba(7, 11, 13, 0.66) 43%, rgba(7, 11, 13, 0.16) 72%, rgba(7, 11, 13, 0.04) 100%),
-    linear-gradient(180deg, rgba(5, 8, 10, 0.08), rgba(5, 8, 10, 0.2));
-}
-
-@media (max-width: 768px) {
-  body:is([data-country='SK'], [data-country='SI'], [data-country='ZA'], [data-country='KR'], [data-country='ES'], [data-country='SE'], [data-country='CH'], [data-country='TH']) .hero.country-hero-with-cards .country-hero-rail,
-  body:is([data-country='TR'], [data-country='TZ'], [data-country='UG'], [data-country='UA'], [data-country='UZ'], [data-country='VN']) .hero.country-hero-with-cards .country-hero-rail {
-    background-image:
-      linear-gradient(90deg, rgba(7, 11, 13, 0.68) 0%, rgba(7, 11, 13, 0.46) 58%, rgba(7, 11, 13, 0.22) 100%),
-      linear-gradient(0deg, rgba(5, 8, 10, 0.48) 0%, rgba(5, 8, 10, 0.08) 68%),
-      var(--country-hero-photo);
-    background-size: cover, cover, cover;
-  }
-
-  html[data-theme='light'] body:is([data-country='SK'], [data-country='SI'], [data-country='ZA'], [data-country='KR'], [data-country='ES'], [data-country='SE'], [data-country='CH'], [data-country='TH']) .hero.country-hero-with-cards .country-hero-rail,
-  html[data-theme='light'] body:is([data-country='TR'], [data-country='TZ'], [data-country='UG'], [data-country='UA'], [data-country='UZ'], [data-country='VN']) .hero.country-hero-with-cards .country-hero-rail {
-    background-image:
-      linear-gradient(90deg, rgba(7, 11, 13, 0.6) 0%, rgba(7, 11, 13, 0.38) 58%, rgba(7, 11, 13, 0.18) 100%),
-      linear-gradient(0deg, rgba(5, 8, 10, 0.4) 0%, rgba(5, 8, 10, 0.05) 68%),
-      var(--country-hero-photo);
-  }
-
-  body:is([data-country='SK'], [data-country='SI'], [data-country='ZA'], [data-country='KR'], [data-country='ES'], [data-country='SE'], [data-country='CH'], [data-country='TH']) .hero.country-hero-with-cards .country-hero-rail::before,
-  body:is([data-country='TR'], [data-country='TZ'], [data-country='UG'], [data-country='UA'], [data-country='UZ'], [data-country='VN']) .hero.country-hero-with-cards .country-hero-rail::before {
-    display: none;
-  }
-}
-
 /* Country Expert Review — one profile rail and two editorial panels. */
 @media (min-width: 1001px) {
   body[data-country] .expert-card {
@@ -17498,142 +16605,8 @@ body.home-page .hero.home-video-hero :is(.home-primary-action, .home-secondary-a
   color: var(--gold, #ffdf00);
 }
 
-body.home-page .hero.home-video-hero + .content-area {
-  position: relative;
-  z-index: 3;
-}
-
-body.home-page .hero.home-video-hero + .content-area > .home-stats {
-  width: min(100%, 1220px);
-  margin: -68px auto 0;
-}
-
-body.home-page .hero.home-video-hero + .content-area .home-stats-card {
-  display: grid;
-  grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.25fr);
-  gap: 0;
-  align-items: stretch;
-  padding: 0;
-  overflow: hidden;
-  border: 1px solid rgba(148, 163, 184, 0.3);
-  border-radius: 24px;
-  background: rgba(28, 33, 36, 0.9);
-  box-shadow:
-    0 24px 58px rgba(0, 0, 0, 0.24);
-  -webkit-backdrop-filter: none;
-  backdrop-filter: none;
-}
-
-body.home-page .hero.home-video-hero + .content-area .home-stats-card .home-insight-head {
-  display: flex;
-  grid-column: 1;
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: center;
-  gap: 10px;
-  min-width: 0;
-  margin: 0;
-  padding: clamp(24px, 2.6vw, 34px);
-  border: 0;
-  border-right: 1px solid rgba(148, 163, 184, 0.18);
-  text-align: left;
-}
-
-body.home-page .hero.home-video-hero + .content-area .home-stats-card .home-insight-head h2 {
-  width: 100%;
-  max-width: 17ch;
-  margin: 0;
-  color: #f8fafc;
-  font-size: clamp(27px, 2.35vw, 38px) !important;
-  line-height: 1.02;
-}
-
-body.home-page .hero.home-video-hero + .content-area .home-stats-card .home-section-kicker {
-  color: #a8d8bc;
-}
-
-body.home-page .hero.home-video-hero + .content-area .home-stats-card .home-insight-head > p {
-  width: 100%;
-  max-width: 54ch;
-  margin: 0;
-  color: rgba(203, 213, 225, 0.78);
-  font-size: 12.5px;
-  line-height: 1.5;
-}
-
-body.home-page .hero.home-video-hero + .content-area .home-stats-grid {
-  display: grid;
-  min-width: 0;
-  grid-column: 2;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 0;
-}
-
-body.home-page .hero.home-video-hero + .content-area .home-stat-tile,
-body.home-page .hero.home-video-hero + .content-area .home-stats-grid > .home-stat-tile:first-child {
-  min-height: 100%;
-  align-content: center;
-  gap: 7px;
-  padding: clamp(22px, 2.5vw, 34px);
-  border: 0;
-  border-radius: 0;
-  background: rgba(255, 255, 255, 0.025);
-  box-shadow: none;
-}
-
-body.home-page .hero.home-video-hero + .content-area .home-stats-grid > .home-stat-tile + .home-stat-tile {
-  border-left: 1px solid rgba(148, 163, 184, 0.18);
-}
-
-body.home-page .hero.home-video-hero + .content-area .home-stat-number {
-  color: #f8fafc;
-  font-size: clamp(44px, 4.4vw, 64px);
-  line-height: 0.95;
-}
-
-body.home-page .hero.home-video-hero + .content-area .home-stat-tile strong {
-  color: var(--text-main);
-  font-size: 14px;
-  font-weight: 500;
-  line-height: 1.35;
-  letter-spacing: normal;
-  text-transform: none;
-}
-
-body.home-page .hero.home-video-hero + .content-area .home-stat-tile span:last-child {
-  color: rgba(203, 213, 225, 0.72);
-  font-size: 12px;
-  line-height: 1.42;
-}
-
-html[data-theme='light'] body.home-page .hero.home-video-hero + .content-area .home-stats-card {
-  border-color: rgba(32, 48, 42, 0.18);
-  background: rgba(248, 250, 249, 0.88);
-  box-shadow:
-    0 24px 58px rgba(22, 30, 27, 0.12);
-}
-
-html[data-theme='light'] body.home-page .hero.home-video-hero + .content-area .home-stats-card .home-insight-head {
-  border-right-color: rgba(32, 48, 42, 0.13);
-}
-
-html[data-theme='light'] body.home-page .hero.home-video-hero + .content-area .home-stats-card .home-insight-head h2,
-html[data-theme='light'] body.home-page .hero.home-video-hero + .content-area .home-stat-number {
-  color: #0f1b30;
-}
-
-html[data-theme='light'] body.home-page .hero.home-video-hero + .content-area .home-stats-card .home-insight-head > p,
-html[data-theme='light'] body.home-page .hero.home-video-hero + .content-area .home-stat-tile span:last-child {
-  color: #53627a;
-}
-
-html[data-theme='light'] body.home-page .hero.home-video-hero + .content-area .home-stat-tile,
-html[data-theme='light'] body.home-page .hero.home-video-hero + .content-area .home-stats-grid > .home-stat-tile:first-child {
-  background: rgba(255, 255, 255, 0.34);
-}
-
-html[data-theme='light'] body.home-page .hero.home-video-hero + .content-area .home-stats-grid > .home-stat-tile + .home-stat-tile {
-  border-left-color: rgba(32, 48, 42, 0.13);
+body.home-page .home-country-hero + .content-area {
+  padding-block-start: clamp(12px, 1.8vw, 24px);
 }
 
 @media (max-width: 1024px) {
@@ -17649,10 +16622,6 @@ html[data-theme='light'] body.home-page .hero.home-video-hero + .content-area .h
     width: min(70%, 620px);
   }
 
-  body.home-page .hero.home-video-hero + .content-area > .home-stats {
-    width: calc(100% - 20px);
-    margin-top: -52px;
-  }
 }
 
 @media (max-width: 768px) {
@@ -17709,66 +16678,6 @@ html[data-theme='light'] body.home-page .hero.home-video-hero + .content-area .h
 
   body.home-page .hero.home-video-hero :is(.home-primary-action, .home-secondary-action) {
     width: 100%;
-  }
-
-  body.home-page .hero.home-video-hero + .content-area > .home-stats {
-    width: calc(100% - 20px);
-    margin-top: -34px;
-  }
-
-  body.home-page .hero.home-video-hero + .content-area .home-stats-card {
-    grid-template-columns: minmax(0, 1fr);
-    border-radius: 20px;
-  }
-
-  body.home-page .hero.home-video-hero + .content-area .home-stats-card .home-insight-head {
-    display: flex;
-    grid-column: 1;
-    align-items: center;
-    gap: 10px;
-    padding: 24px 20px 20px;
-    border-right: 0;
-    border-bottom: 1px solid rgba(148, 163, 184, 0.18);
-    text-align: center;
-  }
-
-  body.home-page .hero.home-video-hero + .content-area .home-stats-card .home-insight-head h2 {
-    max-width: 17ch;
-    font-size: clamp(26px, 8vw, 34px) !important;
-    text-align: center;
-  }
-
-  body.home-page .hero.home-video-hero + .content-area .home-stats-card .home-insight-head > p {
-    max-width: 44ch;
-    padding-left: 14px;
-    border-left: 0;
-    font-size: 12.5px;
-    text-align: left;
-  }
-
-  body.home-page .hero.home-video-hero + .content-area .home-stats-grid {
-    grid-column: 1;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
-  body.home-page .hero.home-video-hero + .content-area .home-stat-tile,
-  body.home-page .hero.home-video-hero + .content-area .home-stats-grid > .home-stat-tile:first-child {
-    min-height: 118px;
-    justify-items: center;
-    padding: 18px 12px;
-    text-align: center;
-  }
-
-  body.home-page .hero.home-video-hero + .content-area .home-stat-number {
-    font-size: 40px;
-  }
-
-  body.home-page .hero.home-video-hero + .content-area .home-stat-tile span:last-child {
-    display: none;
-  }
-
-  html[data-theme='light'] body.home-page .hero.home-video-hero + .content-area .home-stats-card .home-insight-head {
-    border-bottom-color: rgba(32, 48, 42, 0.13);
   }
 
   body.home-page .content-area {
@@ -17836,7 +16745,6 @@ body.home-page .home-hero-video video {
   filter: brightness(1.06) saturate(1.1) contrast(1.02);
 }
 
-body.home-page .hero.home-video-hero + .content-area .home-stats-card,
 body[data-country] .country-hero-cards .section-head,
 body[data-country] .country-hero-cards > .intro,
 body[data-brand] .brand-profile-showcase__bar {
@@ -17924,48 +16832,6 @@ body[data-brand] .brand-profile-showcase .brand-why-media img {
 
   body[data-brand] .brand-profile-showcase .brand-why-media {
     border-radius: 0 0 14px 14px;
-  }
-}
-
-/* Keep the homepage discovery panel closer to the compact country-hero rail. */
-body.home-page .hero.home-video-hero + .content-area .home-stats-card .home-insight-head {
-  gap: 7px;
-  padding: 20px clamp(22px, 2.2vw, 28px);
-}
-
-body.home-page .hero.home-video-hero + .content-area .home-stats-card .home-insight-head h2 {
-  font-size: clamp(26px, 2.05vw, 34px) !important;
-  line-height: 1;
-}
-
-body.home-page .hero.home-video-hero + .content-area .home-stats-card .home-insight-head > p {
-  font-size: 12px;
-  line-height: 1.4;
-}
-
-body.home-page .hero.home-video-hero + .content-area .home-stat-tile,
-body.home-page .hero.home-video-hero + .content-area .home-stats-grid > .home-stat-tile:first-child {
-  gap: 5px;
-  padding: 20px clamp(22px, 2.2vw, 28px);
-}
-
-body.home-page .hero.home-video-hero + .content-area .home-stat-number {
-  font-size: clamp(42px, 3.8vw, 56px);
-}
-
-@media (max-width: 768px) {
-  body.home-page .hero.home-video-hero + .content-area .home-stats-card .home-insight-head {
-    padding: 20px 18px 16px;
-  }
-
-  body.home-page .hero.home-video-hero + .content-area .home-stat-tile,
-  body.home-page .hero.home-video-hero + .content-area .home-stats-grid > .home-stat-tile:first-child {
-    min-height: 100px;
-    padding: 14px 10px;
-  }
-
-  body.home-page .hero.home-video-hero + .content-area .home-stat-number {
-    font-size: 36px;
   }
 }
 
@@ -18976,9 +17842,7 @@ body.blog-page[data-page='blog'] .blog-hero .blog-hero-links a {
     scroll-snap-align: start;
   }
 
-  body.home-page[data-page='responsible-gambling'] .hero.container > .faq-grid p {
-    display: none;
-  }
+
 
   body.blog-page[data-page='blog'] .blog-hero {
     justify-content: center;
@@ -20665,7 +19529,7 @@ html body :is(
   box-shadow: var(--shadow-soft);
 }
 
-html body :is(.nav-dropdown-menu, .language-switcher-menu, .site-search-results) {
+html body :is(.language-switcher-menu, .site-search-results) {
   background: var(--surface-card) !important;
   box-shadow: var(--shadow-floating);
 }
@@ -20712,4 +19576,447 @@ body[data-brand] .brand-feedback-compose h3 {
   font-weight: 600;
   line-height: 1.4;
   color: var(--text-main);
+}
+
+html body :is(.content[data-country] .casino-grid, .casino-grid, .brand-risk-inline-grid):is(.casino-catalog-grid, :has(> .casino-catalog-card)) {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(10px, 1.2vw, 18px);
+  border: 0;
+}
+
+@media (min-width: 768px) {
+  html body :is(.content[data-country] .casino-grid, .casino-grid, .brand-risk-inline-grid):is(.casino-catalog-grid, :has(> .casino-catalog-card)) {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1024px) {
+  html body :is(.content[data-country] .casino-grid, .casino-grid, .brand-risk-inline-grid):is(.casino-catalog-grid, :has(> .casino-catalog-card)) {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1280px) {
+  html body :is(.content[data-country] .casino-grid, .casino-grid, .brand-risk-inline-grid):is(.casino-catalog-grid, :has(> .casino-catalog-card)) {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+  }
+}
+
+html[data-theme] body :is(.casino-grid, .brand-risk-inline-grid) > .casino-card.casino-catalog-card {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  height: auto;
+  min-height: 0;
+  min-width: 0;
+  gap: 0;
+  padding: 0;
+  background: var(--surface-card);
+  border: 1px solid var(--surface-border);
+  border-radius: 10px;
+  box-shadow: none;
+  overflow: hidden;
+}
+
+html[data-theme] body :is(.casino-grid, .brand-risk-inline-grid) > .casino-card.casino-catalog-card:hover {
+  background: var(--surface-card);
+  border-color: var(--surface-border-strong);
+  box-shadow: none;
+  transform: none;
+}
+
+.casino-card.casino-catalog-card::before {
+  content: none;
+}
+
+body:is(.home-page, [data-country]) .home-country-hero {
+  padding-block:
+    calc(var(--header-collapsed-height, 68px) + clamp(22px, 2.4vw, 34px))
+    clamp(10px, 1.3vw, 18px);
+}
+
+.home-country-hero-heading {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px 24px;
+  margin-bottom: clamp(16px, 2vw, 26px);
+}
+
+.home-country-hero-heading h1 {
+  color: var(--text-main);
+  line-height: 1.12;
+  font-weight: 750;
+  overflow-wrap: anywhere;
+}
+
+#home-country-title {
+  scroll-margin-top: calc(var(--header-collapsed-height, 68px) + 20px);
+}
+
+.country-catalog-title {
+  display: flex;
+  align-items: flex-start;
+  gap: clamp(10px, 1.2vw, 18px);
+  font-size: var(--heading-display-size);
+}
+
+.country-catalog-title > h1 {
+  min-width: 0;
+}
+
+.country-catalog-title > img {
+  flex: 0 0 auto;
+  width: max(38px, 1.12em);
+  height: auto;
+  margin-top: 0.17em;
+  object-fit: contain;
+}
+
+body[data-country] .country-catalog-heading {
+  padding-bottom: 4px;
+}
+
+.country-catalog-results > .container {
+  padding-top: 0;
+}
+
+.country-catalog-reviews h2 {
+  margin-bottom: 16px;
+  line-height: 1.2;
+}
+
+.country-catalog-reviews .home-new-reviews-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(106px, 1fr));
+  gap: 10px;
+}
+
+.home-market-bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px 20px;
+  margin-bottom: 16px;
+}
+
+.home-market-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+}
+
+:is(.home-market-actions > a, .home-market-actions > button, .home-market-more, .home-country-return) {
+  display: inline-flex;
+  min-height: 42px;
+  align-items: center;
+  padding: 8px 12px;
+  border: 1px solid var(--surface-border-strong);
+  border-radius: 7px;
+  background: var(--surface-card);
+  color: var(--text-main);
+  font-size: 13px;
+  font-weight: 650;
+  line-height: 1.2;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+:is(.home-market-actions > a, .home-market-actions > button, .home-market-more, .home-country-return):is(:hover, :focus-visible) {
+  border-color: var(--section-accent);
+  background: var(--surface-card-hover);
+}
+
+.home-market-more {
+  display: flex;
+  margin: 18px auto 0;
+}
+
+.home-market-empty {
+  grid-column: 1 / -1;
+}
+
+:is(.home-market-bar, .home-market-actions > a, .home-market-more, .home-new-reviews)[hidden],
+.home-recommendations[data-selected-country] > .home-section-cta {
+  display: none;
+}
+
+.home-country-hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+body.home-page .home-country-hero-actions > a {
+  min-height: 42px;
+  padding: 8px 12px;
+  border-radius: 7px;
+  font-size: 13px;
+  text-align: center;
+}
+
+.home-country-directory {
+  padding: clamp(10px, 2vw, 24px);
+  border: 1px solid var(--surface-border);
+  border-radius: var(--radius-lg);
+  background: var(--surface-card-soft);
+}
+
+.home-country-directory .countries-cloud {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 7px;
+  margin: 0;
+  padding: 0;
+  overflow: visible;
+}
+
+html body .home-country-directory .countries-cloud .country-link {
+  width: auto;
+  max-width: 100%;
+  min-height: 37px;
+  gap: 8px;
+  padding: 8px 12px;
+  border-radius: 7px;
+  color: var(--text-main);
+  font-size: 13px;
+  font-weight: 600;
+  overflow-wrap: anywhere;
+}
+
+.home-country-directory .country-link:focus-visible,
+.home-country-hero-actions > a:focus-visible,
+.home-country-toggle:focus-visible {
+  outline: 2px solid var(--text-main);
+  outline-offset: 2px;
+}
+
+.home-country-directory .countries-cloud .flag {
+  width: 19px;
+  height: 14px;
+  object-fit: contain;
+}
+
+.home-country-toggle {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .home-country-hero-actions,
+  .home-country-directory .countries-cloud.is-collapsed > .home-country-extra {
+    display: none;
+  }
+
+  html body .home-country-directory .countries-cloud .country-link {
+    min-height: 44px;
+    padding-inline: 9px;
+  }
+
+  .home-country-toggle {
+    display: block;
+    min-height: 44px;
+    margin: 10px auto 0;
+    padding: 8px 12px;
+    border: 1px solid var(--surface-border-strong);
+    border-radius: 7px;
+    background: var(--surface-card);
+    color: var(--text-main);
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+  }
+}
+
+.casino-card-preview {
+  position: relative;
+  display: grid;
+  grid-template-rows: minmax(0, 1fr);
+  place-items: center;
+  aspect-ratio: 2 / 1;
+  overflow: hidden;
+  background: var(--brand-bg-color, var(--surface-card-soft));
+}
+
+.casino-catalog-card .casino-card-preview > img {
+  display: block;
+  width: 62%;
+  height: 70%;
+  max-width: 100%;
+  object-fit: contain;
+}
+
+.casino-catalog-card .casino-card-preview.has-screenshot > img {
+  width: 100%;
+  height: 100%;
+}
+
+.casino-card-content {
+  --catalog-card-padding: clamp(8px, 1.1vw, 16px);
+  --catalog-logo-size: clamp(32px, 3vw, 44px);
+  --catalog-identity-overlap: calc(var(--catalog-logo-size) / 2 + 5px);
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 10px;
+  min-width: 0;
+  padding: var(--catalog-card-padding);
+}
+
+.casino-card-identity {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-self: flex-start;
+  align-items: center;
+  gap: 8px;
+  max-width: 100%;
+  /* Anchor the center to the screenshot edge even when the label wraps. */
+  margin-block-start: calc(-1 * var(--catalog-card-padding));
+  margin-block-end: calc(-1 * var(--catalog-identity-overlap));
+  transform: translateY(-50%);
+  padding: 4px 8px 4px 4px;
+  border: 1px solid var(--surface-border);
+  border-radius: 9px;
+  background: var(--surface-card);
+  box-shadow: 0 2px 8px rgb(0 0 0 / 14%);
+}
+
+.casino-card-logo {
+  display: grid;
+  place-items: center;
+  flex: 0 0 auto;
+  width: var(--catalog-logo-size);
+  aspect-ratio: 1;
+  padding: 4px;
+  border-radius: 7px;
+  background: var(--brand-bg-color, var(--surface-card-soft));
+}
+
+.casino-catalog-card .casino-card-logo > img {
+  width: 100%;
+  height: 100%;
+  max-width: 100%;
+  object-fit: contain;
+}
+
+.casino-card-brand {
+  flex: 1;
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+html[data-theme] body .casino-catalog-card .casino-card-brand h3 {
+  font-size: clamp(13px, 1.12vw, 17px);
+  line-height: 1.2;
+  margin: 0;
+}
+
+.casino-card-coverage {
+  margin-top: 3px;
+  color: var(--text-muted);
+  font-size: 11px;
+  line-height: 1.3;
+  font-variant-numeric: tabular-nums;
+}
+
+html[data-theme] body .casino-catalog-card .casino-card-preview .casino-status-badge {
+  position: absolute;
+  inset-block-start: clamp(5px, 0.65vw, 9px);
+  inset-inline-end: 0;
+  display: flex;
+  width: fit-content;
+  max-width: calc(100% - 5px);
+  height: auto;
+  min-height: 22px;
+  box-sizing: border-box;
+  padding: 3px 9px 3px 15px;
+  border: 0;
+  border-radius: 0;
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%, 7px 50%);
+  background: var(--catalog-badge-fill);
+  color: var(--catalog-badge-text, #fff);
+  box-shadow: none;
+  font-size: clamp(9px, 0.72vw, 10.5px);
+  font-weight: 750;
+  letter-spacing: 0.02em;
+  line-height: 1.15;
+  text-align: center;
+  overflow-wrap: anywhere;
+}
+
+.casino-catalog-card .exclusive-badge {
+  --catalog-badge-fill: #601fb0;
+}
+
+.casino-catalog-card .top-rated-badge {
+  --catalog-badge-fill: #f7bd39;
+  --catalog-badge-text: #251a06;
+}
+
+.casino-catalog-card .new-badge {
+  --catalog-badge-fill: #14634b;
+}
+
+html[data-theme] body .casino-catalog-card .casino-card-content p.casino-bonus {
+  display: block;
+  min-height: 0;
+  margin: 0;
+  color: var(--text-main);
+  font-size: clamp(12px, 0.93vw, 14px);
+  font-weight: 600;
+  line-height: 1.45;
+  overflow-wrap: anywhere;
+}
+
+html[data-theme] body .casino-catalog-card .casino-card-content .payment-icons {
+  min-height: 25px;
+  margin-top: auto;
+  gap: 4px;
+}
+
+html[data-theme] body .casino-catalog-card .payment-icons img {
+  width: clamp(24px, 2.55vw, 36px);
+  height: 24px;
+  max-width: none;
+  padding: 2px;
+  border: 1px solid #e4e5df;
+  border-radius: 4px;
+  background: #fff;
+}
+
+html[data-theme] body .casino-catalog-card .payment-icons img:is([data-src$='/applepay.svg'], [src$='/applepay.svg']) {
+  background: #292929;
+}
+
+html[data-theme] body .casino-catalog-card .casino-card-content .casino-actions {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  width: 100%;
+  gap: 6px;
+  margin-top: auto;
+  align-items: stretch;
+}
+
+html[data-theme] body .casino-catalog-card .casino-card-content .payment-icons + .casino-actions {
+  margin-top: 0;
+}
+
+html[data-theme] body .casino-catalog-card .casino-card-content .casino-actions:is(.has-single-action, :has(.cta-blocked)) {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+html[data-theme] body .casino-catalog-card .casino-card-content .casino-actions .cta {
+  min-width: 0;
+  min-height: 38px;
+  width: 100%;
+  padding: 7px 4px;
+  font-size: clamp(10px, 0.9vw, 13px);
+  line-height: 1.15;
+  text-align: center;
+  white-space: normal;
+  overflow-wrap: anywhere;
 }

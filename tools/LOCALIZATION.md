@@ -53,7 +53,13 @@ The locale-specific polishers apply reviewed casino terminology, keep product an
 
 Then review new legal, affiliate, bonus, payment, and responsible-gambling copy editorially. Confirm desktop and mobile layouts, internal links, language persistence, and page-specific dynamic sections before deployment.
 
-After regenerating a homepage, run `node tools/polish-homepage-labels.mjs --apply`, followed by `--check`. This restores reviewed headings and counter labels in all ten languages and removes redundant promotional eyebrows. Keep the existing section IDs, links, counts, and H1; do not replace clear headings with slogan-style labels.
+After regenerating a homepage, run `node tools/polish-homepage-labels.mjs --apply`, followed by `--check`. This restores reviewed headings and removes the old statistics panel, recommendation introduction, and standalone screenshot gallery. Keep the country links, recommendation and review section IDs, and H1.
+
+After regenerating country guides, run `node tools/simplify-country-catalogs.mjs --apply`, followed by `--check`. Keep the compact country heading, brand grid, localized guide and FAQ, and the existing canonical URLs. Do not restore the old hero image or generic market introduction.
+
+After regenerating other editorial or catalog pages, run `node tools/simplify-page-intros.mjs --apply`, followed by `--check`. Use compact text introductions and preserve H1s, navigation, and SEO metadata. Keep the illustrated banners on brand reviews.
+
+The header’s Countries link leads to the localized homepage cloud. Run `node tools/build-crawlable-navigation.mjs --country-header-only` to remove the old dropdown from any regenerated headers without rebuilding the directories.
 
 After regenerating a brand review or the casino directory, run `node tools/sync-brand-availability.mjs --apply`, then `--check`. This uses unavailable states from `scripts/brands.js` and the existing Retrobet button translations to keep static casino CTAs disabled before JavaScript loads. Optional brand slugs limit the pass, for example `--apply casinobossy browinner`. Preserve internal review links and indexability.
 

@@ -2,8 +2,10 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { BRANDS } from '../scripts/brands.js';
 import { COUNTRIES } from '../scripts/countries.js';
+import { syncCountryHeader } from './sync-country-header.mjs';
 
 const root = process.cwd();
+const countryHeaderOnly = process.argv.includes('--country-header-only');
 const locales = ['en', 'de', 'es', 'it', 'pl', 'uk', 'pt', 'fr', 'hi', 'fi'];
 const labels = {
   en: 'Browse casino reviews', de: 'Casino-Bewertungen ansehen', es: 'Ver reseñas de casinos',
@@ -24,9 +26,9 @@ let updated = 0;
 for (const [url, page] of pages) {
   const locale = locales.find(lang => lang !== 'en' && url.startsWith(`/${lang}/`)) || 'en';
   const prefix = locale === 'en' ? '/' : `/${locale}/`;
-  let html = page.html.replace(/(<a\b[^>]*href=)["']#["'](?=[^>]*class=["']nav-dropdown-link["'])/g, `$1"${prefix}online-casinos/"`);
+  let html = syncCountryHeader(page.html, prefix);
   // Home and country hubs expose the complete directory before JS executes.
-  if (url === prefix || url === `${prefix}online-casinos/`) {
+  if (!countryHeaderOnly && (url === prefix || url === `${prefix}online-casinos/`)) {
     const names = new Intl.DisplayNames([locale], { type: 'region' });
     const links = COUNTRIES.filter(c => indexable(`${prefix}online-casinos/${c.slug}/`)).map(c => {
       const code = c.code.toUpperCase() === 'UK' ? 'GB' : c.code.toUpperCase();
@@ -36,7 +38,7 @@ for (const [url, page] of pages) {
     html = html.replace(/(<div class="countries-cloud">)[\s\S]*?(<\/div>)/, `$1\n${links}\n$2`);
   }
   const country = COUNTRIES.find(c => url === `${prefix}online-casinos/${c.slug}/`);
-  if (country && html.includes('id="brand-cards"')) {
+  if (!countryHeaderOnly && country && html.includes('id="brand-cards"')) {
     const seen = new Set();
     const brands = BRANDS.filter(b => b.hasDetailPage && b.countries?.includes(country.code.toUpperCase()))
       .sort((a, b) => (a.countryPagePriority || 999) - (b.countryPagePriority || 999) || a.name.localeCompare(b.name, locale))

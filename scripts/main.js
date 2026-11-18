@@ -37,27 +37,23 @@ const loadPageModules = async () => {
   const isHomePage = document.body.classList.contains('home-page') && !document.body.dataset.page;
   const isCountryPage = Boolean(document.body.dataset.country);
   const isBrandPage = Boolean(document.body.dataset.brand);
+  const hasCasinoCards = isHomePage || isCountryPage || document.querySelector('.casino-grid') ||
+    (isBrandPage && findBrandByPageKey(document.body.dataset.brand)?.notRecommended);
+  const cardScreenshotsReady = hasCasinoCards
+    ? import('./brand-homepage-screenshots.js?v=20261005-gravira-1').then(module => {
+        BRAND_HOMEPAGE_SCREENSHOTS = module.BRAND_HOMEPAGE_SCREENSHOTS || {};
+      }).catch(() => {})
+    : Promise.resolve();
 
-  if (isHomePage) {
-    const [screenshotsModule, gamesModule, pageModule] = await Promise.all([
-      import('./brand-homepage-screenshots.js?v=20261005-gravira-1'),
+  if (isHomePage || isCountryPage) {
+    const [gamesModule, homeModule, mediaModule] = await Promise.all([
       import('./brand-new-games.js?v=20261005-gravira-1'),
-      import('./pages/home.js?v=20260829-mobile-density-1'),
+      import('./pages/home.js?v=20261118-country-catalog-3'),
+      isCountryPage ? import('./pages/country-media.js?v=20261118-country-catalog-1') : null,
     ]);
-    BRAND_HOMEPAGE_SCREENSHOTS = screenshotsModule.BRAND_HOMEPAGE_SCREENSHOTS || {};
     BRAND_NEW_GAMES = gamesModule.BRAND_NEW_GAMES || {};
-    initHomePageModule = pageModule.initHomePage;
-  }
-
-  if (isCountryPage) {
-    const [screenshotsModule, gamesModule, pageModule] = await Promise.all([
-      import('./brand-homepage-screenshots.js?v=20261005-gravira-1'),
-      import('./brand-new-games.js?v=20261005-gravira-1'),
-      import('./pages/country-media.js?v=20260930-global-game-blur-1'),
-    ]);
-    BRAND_HOMEPAGE_SCREENSHOTS = screenshotsModule.BRAND_HOMEPAGE_SCREENSHOTS || {};
-    BRAND_NEW_GAMES = gamesModule.BRAND_NEW_GAMES || {};
-    renderCountryMediaModule = pageModule.renderCountryMedia;
+    initHomePageModule = homeModule.initHomePage;
+    renderCountryMediaModule = mediaModule?.renderCountryMedia;
   }
 
   if (isBrandPage) {
@@ -83,6 +79,7 @@ const loadPageModules = async () => {
     initAccountPageModule = pageModule.initAccountPage;
   }
 
+  await cardScreenshotsReady;
 };
 
 // =====================
@@ -1816,8 +1813,7 @@ const syncHeaderFlowMetrics = header => {
   if (!header) return;
 
   const height = Math.ceil(header.offsetHeight || 0);
-  const isExpanded =
-    header.classList.contains('search-expanded') || header.classList.contains('countries-expanded');
+  const isExpanded = header.classList.contains('search-expanded');
 
   document.documentElement.style.setProperty('--header-height', `${height}px`);
 
@@ -2366,7 +2362,7 @@ const renderPayments = (payments = []) => {
       ${availablePayments
         .map(
           method =>
-            `<img src="${paymentPath(method)}" alt="${normalizeText(method)} payment method" loading="lazy" decoding="async"/>`
+            `<img data-src="${paymentPath(method)}" alt="${normalizeText(method)} payment method" loading="lazy" decoding="async" hidden/>`
         )
         .join('')}
       <span class="payment-more" hidden aria-hidden="true"></span>
@@ -2615,23 +2611,21 @@ const syncPaymentIcons = (root = document) => {
     const more = row.querySelector('.payment-more');
     if (!icons.length || !more) return;
 
-    icons.forEach(icon => setPaymentIconVisibility(icon, false));
-    more.hidden = true;
-    more.style.visibility = '';
-    more.setAttribute('aria-hidden', 'true');
-
-    const availableWidth = Math.floor(row.getBoundingClientRect().width);
+    const availableWidth = row.getBoundingClientRect().width;
     if (!availableWidth) return;
 
     const styles = window.getComputedStyle(row);
     const gap = parseFloat(styles.columnGap || styles.gap) || 0;
-    const iconWidths = icons.map(icon => Math.ceil(icon.getBoundingClientRect().width) || 24);
-    const sumIconWidths = count => iconWidths.slice(0, count).reduce((total, width) => total + width, 0);
+    // Catalog payment chips have identical, fixed CSS dimensions.
+    setPaymentIconVisibility(icons[0], false);
+    const iconWidth = icons[0].getBoundingClientRect().width;
 
+    const totalPayments = Number(row.dataset.paymentCount) || icons.length;
     let visibleCount = icons.length;
+    const maxWithoutCounter = Math.floor((availableWidth + gap) / (iconWidth + gap));
 
-    for (let count = icons.length; count >= 0; count -= 1) {
-      const hiddenCount = icons.length - count;
+    for (let count = Math.min(maxWithoutCounter, icons.length); count >= 0; count -= 1) {
+      const hiddenCount = totalPayments - count;
       let itemCount = count;
       let moreWidth = 0;
 
@@ -2639,14 +2633,14 @@ const syncPaymentIcons = (root = document) => {
         more.textContent = `+${hiddenCount}`;
         more.hidden = false;
         more.style.visibility = 'hidden';
-        moreWidth = Math.ceil(more.getBoundingClientRect().width) || 24;
+        moreWidth = more.getBoundingClientRect().width;
         itemCount += 1;
       } else {
         more.hidden = true;
       }
 
       const totalWidth =
-        sumIconWidths(count) + moreWidth + gap * Math.max(0, itemCount - 1);
+        iconWidth * count + moreWidth + gap * Math.max(0, itemCount - 1);
 
       if (totalWidth <= availableWidth || count === 0) {
         visibleCount = count;
@@ -2654,8 +2648,15 @@ const syncPaymentIcons = (root = document) => {
       }
     }
 
-    const hiddenCount = icons.length - visibleCount;
-    icons.forEach((icon, index) => setPaymentIconVisibility(icon, index >= visibleCount));
+    const hiddenCount = totalPayments - visibleCount;
+    icons.forEach((icon, index) => {
+      const isHidden = index >= visibleCount;
+      setPaymentIconVisibility(icon, isHidden);
+      if (!isHidden && icon.dataset.src) {
+        icon.src = icon.dataset.src;
+        delete icon.dataset.src;
+      }
+    });
 
     if (hiddenCount > 0) {
       more.textContent = `+${hiddenCount}`;
@@ -2844,6 +2845,10 @@ const syncFooterBrandDirectory = () => {
   });
 };
 
+const cardCountryNames = typeof Intl.DisplayNames === 'function'
+  ? new Intl.DisplayNames(['en'], { type: 'region', fallback: 'none' })
+  : null;
+
 const createCasinoCard = ({
   name,
   bonus,
@@ -2852,6 +2857,7 @@ const createCasinoCard = ({
   urlCasino,
   image,
   payments = [],
+  countries = [],
   bgColor,
   isNew = false,
   isExclusive = false,
@@ -2861,7 +2867,7 @@ const createCasinoCard = ({
   hasDetailPage = false,
 }) => {
   const article = document.createElement('article');
-  article.className = 'casino-card';
+  article.className = 'casino-card casino-catalog-card';
 
   const safeUrl = urlCasino || PLACEHOLDER_LINK;
   const safeName = normalizeText(name);
@@ -2870,6 +2876,15 @@ const createCasinoCard = ({
   const primaryCtaText = localeText('Play', 'Spielen', 'Jugar', 'Gioca', 'Zagraj', 'Грати', 'Jogar', 'Jouer', 'खेलें');
   const detailUrl = brandPagePath(urlDetail ?? '');
   const imageUrl = normalizeAssetPath(image ?? '');
+  const screenshot = BRAND_HOMEPAGE_SCREENSHOTS[getBrandDetailSlug({ urlDetail })];
+  const screenshotUrl = screenshot?.replace(/\/image\/upload\/(f_[^/]+)\//, (_, transform) =>
+    `/image/upload/${transform.replace(/,w_\d+/, '')},w_640,c_limit/`
+  );
+  const countryCodes = countries.map(code => String(code).trim().toUpperCase()).map(code => code === 'UK' ? 'GB' : code);
+  const countryCount = new Set(countryCodes.filter(code =>
+    /^[A-Z]{2}$/.test(code) && (!cardCountryNames || cardCountryNames.of(code))
+  )).size;
+  const countryLabel = SITE_LOCALE === 'uk' ? 'Доступно країн' : uiCopy.availableCountries;
   const isBlocked = Boolean(notRecommended);
   const isUnavailable = Boolean(temporarilyUnavailable);
   const showReviewAction = Boolean(hasDetailPage && detailUrl);
@@ -2883,23 +2898,21 @@ const createCasinoCard = ({
   setBrandBackground(article, bgColor);
 
   article.innerHTML = `
-    <div class="card-img">
-      <img src="${imageUrl}" alt="${safeName}" loading="lazy" decoding="async" class="casino-image"/>
-    </div>
-    <div class="casino-card-heading">
-      <h3 class="casino-name">${safeName}</h3>
-      ${
-        isBlocked
-          ? `<img class="casino-card-risk-icon" src="${
-              isUnavailable ? UNAVAILABLE_BRAND_ICON : BLOCKED_BRAND_ICON
-            }" alt="" aria-hidden="true" loading="lazy" decoding="async" />`
-          : ''
-      }
+    <div class="casino-card-preview${screenshotUrl ? ' has-screenshot' : ''}">
+      <img src="${escapeHtml(screenshotUrl || imageUrl)}" alt="" loading="lazy" decoding="async" />
       ${createBadge({ isTopRated, isExclusive, isNew })}
     </div>
-    ${safeBonus ? `<p class="casino-bonus">${safeBonus}</p>` : ''}
-    ${renderPayments(payments)}
-    <div class="casino-footer">
+    <div class="casino-card-content">
+      <div class="casino-card-identity">
+        <div class="casino-card-logo"><img src="${escapeHtml(imageUrl)}" alt="" loading="lazy" decoding="async" /></div>
+        <div class="casino-card-brand">
+          <h3 class="casino-name">${escapeHtml(safeName)}</h3>
+          ${isBlocked ? `<img class="casino-card-risk-icon" src="${isUnavailable ? UNAVAILABLE_BRAND_ICON : BLOCKED_BRAND_ICON}" alt="" aria-hidden="true" loading="lazy" decoding="async" />` : ''}
+          ${!isBlocked && countryCount ? `<div class="casino-card-coverage">${escapeHtml(countryLabel)}: ${countryCount}</div>` : ''}
+        </div>
+      </div>
+      ${safeBonus ? `<p class="casino-bonus">${escapeHtml(safeBonus)}</p>` : ''}
+      ${renderPayments(payments)}
       <div class="casino-actions ${showReviewAction && showPlayAction ? 'has-two-actions' : 'has-single-action'}">
         ${
           showReviewAction
@@ -2918,6 +2931,15 @@ const createCasinoCard = ({
       </div>
     </div>
   `;
+
+  if (screenshotUrl) {
+    const preview = article.querySelector('.casino-card-preview');
+    const previewImage = preview.querySelector('img');
+    previewImage.addEventListener('error', () => {
+      preview.classList.remove('has-screenshot');
+      previewImage.src = imageUrl;
+    }, { once: true });
+  }
 
   article.addEventListener('click', e => {
     if (e.target.closest('.cta')) return;
@@ -2977,7 +2999,7 @@ const getGridColumnCount = container => {
 
 const getBrandListBatchSize = container => {
   const isCountryHeroGrid = Boolean(
-    document.body.dataset.country && container?.closest('.country-hero-cards')
+    document.body.dataset.country && container?.closest('.country-catalog-results')
   );
 
   if (
@@ -3022,6 +3044,7 @@ const renderBrandList = (brands, containerSelector, emptyText) => {
   const container = document.querySelector(containerSelector);
   if (!container) return;
   const { loadMoreBtn, loadMoreWrapper } = getLoadMoreControls(container);
+  container.classList.toggle('casino-catalog-grid', brands.length > 0);
 
   if (!brands.length) {
     container.innerHTML = `<p>${emptyText}</p>`;
@@ -3792,147 +3815,6 @@ const initCountryGuideCarousels = () => {
   });
 };
 
-const ensureCountryBrandStage = pageCountry => {
-  const brandCards = document.getElementById('brand-cards');
-  if (!brandCards) return;
-
-  const existingStage = document.querySelector('.country-brand-stage');
-  if (existingStage) return;
-
-  const container = brandCards.closest('.container');
-  if (!container) return;
-
-  const sectionHead = container.querySelector('.section-head');
-  const intro = container.querySelector('.intro');
-  const loadMoreWrapper = container.querySelector('.load-more-wrapper');
-  const reviewDirectory = container.querySelector('.country-review-directory');
-
-  const stage = document.createElement('div');
-  stage.className = 'country-brand-stage';
-  stage.innerHTML = `
-    <div class="country-brand-main"></div>
-  `;
-
-  const main = stage.querySelector('.country-brand-main');
-  const insertionPoint = sectionHead || intro || brandCards;
-  container.insertBefore(stage, insertionPoint ?? null);
-
-  [sectionHead, intro, brandCards, loadMoreWrapper, reviewDirectory].forEach(node => {
-    if (node) {
-      main.appendChild(node);
-    }
-  });
-};
-
-const applyCountryHeroConcept = () => {
-  const hero = document.querySelector('body[data-country] .hero');
-  let heroContent = hero?.querySelector(':scope > .hero-content');
-  if (!heroContent) {
-    const legacyHeroCopy = hero?.querySelector(':scope > .container > .hero-copy');
-    if (legacyHeroCopy) {
-      const legacyContainer = legacyHeroCopy.parentElement;
-      legacyHeroCopy.classList.remove('hero-copy');
-      legacyHeroCopy.classList.add('hero-content');
-      hero.classList.remove('content-hero');
-      hero.classList.add('container');
-      hero.appendChild(legacyHeroCopy);
-      legacyContainer?.remove();
-      heroContent = legacyHeroCopy;
-    }
-  }
-  const stage = document.querySelector('.country-brand-stage');
-  const brandMain = stage?.querySelector('.country-brand-main');
-  const brandSide = stage?.querySelector('.country-brand-side');
-  if (!hero || !heroContent || !stage || !brandMain) return;
-
-  const inlineFlag = heroContent.querySelector('.hero-flag');
-  document.querySelectorAll('.country-brand-summary').forEach(summary => summary.remove());
-
-  let rail = hero.querySelector(':scope > .country-hero-rail');
-  if (!rail) {
-    rail = document.createElement('div');
-    rail.className = 'country-hero-rail';
-    hero.prepend(rail);
-  }
-
-  if (inlineFlag instanceof HTMLImageElement && inlineFlag.src) {
-    rail.style.setProperty('--country-hero-flag-image', `url(${JSON.stringify(inlineFlag.src)})`);
-  }
-
-  hero.classList.add('country-hero-with-cards');
-  brandMain.classList.add('country-hero-cards');
-  brandMain.querySelector('.country-card-flag')?.remove();
-
-  if (inlineFlag) {
-    const cardFlag = inlineFlag.cloneNode(true);
-    cardFlag.classList.remove('hero-flag');
-    cardFlag.classList.add('country-card-flag');
-    cardFlag.setAttribute('aria-hidden', 'true');
-    cardFlag.alt = '';
-    brandMain.prepend(cardFlag);
-  }
-
-  rail.appendChild(heroContent);
-
-  if (brandSide) {
-    brandSide.classList.add('country-hero-side');
-    rail.appendChild(brandSide);
-  }
-
-  hero.appendChild(brandMain);
-
-  const contentSection = stage.closest('section.content');
-  const contentContainer = contentSection?.querySelector(':scope > .container');
-  stage.remove();
-
-  if (contentSection && (!contentContainer || !contentContainer.children.length)) {
-    contentSection.remove();
-  } else {
-    contentSection?.classList.add('country-brand-content-empty');
-  }
-};
-
-const renderCountryNewReviews = pageCountry => {
-  const container = document.getElementById('country-new-reviews');
-  if (!container || !pageCountry) return;
-
-  const sidebar = container.closest('.country-new-reviews');
-  const matchingBrands = BRANDS.filter(
-    brand =>
-      brand.hasDetailPage &&
-      brand.urlDetail &&
-      brand.image &&
-      brand.countries?.some(code => code.toUpperCase() === pageCountry)
-  );
-
-  const reviewBrands = [...matchingBrands].reverse();
-
-  if (!reviewBrands.length) {
-    sidebar?.remove();
-    return;
-  }
-
-  container.innerHTML = reviewBrands
-    .map(brand => {
-      const detailUrl = brandPagePath(brand);
-      const imageUrl = normalizeAssetPath(brand.image);
-      const countryBonus = brand.bonusByCountry?.[pageCountry];
-      const bonus = countryBonus?.[SITE_LOCALE] || countryBonus?.en || localizedBrandBonusText(brand.bonus || 'Fresh review with updated bonus and payment details.');
-      const compactBonus = bonus.replace(/\s+/g, ' ').trim();
-
-      return `
-        <a class="home-link-card" href="${detailUrl}">
-          <span class="home-link-brand">
-            <img class="home-link-logo" src="${imageUrl}" alt="${normalizeText(brand.name)} logo" loading="lazy" decoding="async"${getBrandBackgroundStyle(brand)} />
-            <strong>${normalizeText(brand.name)}</strong>
-          </span>
-          <span>${compactBonus}</span>
-        </a>
-      `;
-    })
-    .join('');
-};
-
 const enhanceFaqBlocks = () => {
   const addQuestionIcon = question => {
     if (question.querySelector('.faq-question-icon')) return;
@@ -4310,7 +4192,7 @@ const reuseEditorialMethodGrid = () => {
 const initCasinosScrollNav = () => {
   if (!document.body.classList.contains('casinos-page')) return null;
 
-  const alphaNav = document.querySelector('.hero .alpha-nav');
+  const alphaNav = document.querySelector(':is(.page-intro, .hero) .alpha-nav');
   if (!alphaNav) return null;
 
   const existingNav = document.querySelector('.casino-scroll-nav');
@@ -4425,7 +4307,7 @@ const initAffiliateClickTracking = () => {
 const relocateResponsibleGamblingRules = () => {
   if (document.body.dataset.page !== 'responsible-gambling') return;
 
-  const rules = document.querySelector('.hero.container > .faq-grid');
+  const rules = document.querySelector(':is(.page-intro, .hero).container > .faq-grid');
   const guide = document.getElementById('safe-play-guide');
   if (!rules || !guide || rules.dataset.relocated === 'true') return;
 
@@ -4488,15 +4370,7 @@ export const initCasinoPage = async () => {
   initFooterThemeSettings();
   initAffiliateClickTracking();
   window.addEventListener('resize', requestPaymentIconSync, { passive: true });
-  document.addEventListener(
-    'load',
-    event => {
-      if (event.target instanceof HTMLImageElement && event.target.closest('.payment-icons')) {
-        requestPaymentIconSync();
-      }
-    },
-    true
-  );
+  document.fonts?.ready.then(requestPaymentIconSync);
 
   if (siteCountryCountEl) {
     siteCountryCountEl.textContent = COUNTRIES.length.toString();
@@ -4511,8 +4385,9 @@ export const initCasinoPage = async () => {
 
   initHomePageModule?.({
     BRANDS,
-    BRAND_HOMEPAGE_SCREENSHOTS,
+    COUNTRIES,
     BRAND_NEW_GAMES,
+    pageCountry,
     SITE_LOCALE,
     normalizeText,
     normalizeAssetPath,
@@ -4522,6 +4397,7 @@ export const initCasinoPage = async () => {
     brandPagePath,
     localeText,
     setBrandBackground,
+    noCountryCasinos: uiCopy.noCountryCasinos,
   });
   initHomeNewBrandsCarousel();
   applyBrandLogoBackgrounds();
@@ -4538,9 +4414,7 @@ export const initCasinoPage = async () => {
   });
 
   if (pageCountry) {
-    ensureCountryBrandStage(pageCountry);
     initCountryGuideCarousels();
-    applyCountryHeroConcept();
     const brands = sortCountryBrands(
       BRANDS.filter(b => b.countries?.some(c => c.toUpperCase() === pageCountry))
     );
@@ -4556,7 +4430,6 @@ export const initCasinoPage = async () => {
       pageCountry,
       BRANDS,
       COUNTRIES,
-      BRAND_HOMEPAGE_SCREENSHOTS,
       BRAND_NEW_GAMES,
       normalizeText,
       localizedCountryName,
@@ -4771,42 +4644,8 @@ export const initCasinoPage = async () => {
     });
   }
 
-  const countriesDropdown = document.getElementById('countriesDropdown');
-  if (countriesDropdown) {
-    countriesDropdown.innerHTML = COUNTRIES.map(
-      c => `
-        <a href="${countryPagePath(c.slug)}">
-          <img class="flag" data-country-flag-src="${iconPath(c.slug)}" alt="${normalizeText(localizedCountryName(c))}" loading="lazy" decoding="async"/>
-          ${normalizeText(localizedCountryName(c))}
-        </a>
-      `
-    ).join('');
-
-    const syncCountriesDropdownFlow = () => {
-      const columnGap = Number.parseFloat(getComputedStyle(countriesDropdown).columnGap) || 0;
-      const minimumColumnWidth = 136;
-      const columnCount = Math.max(
-        1,
-        Math.floor(
-          (countriesDropdown.clientWidth + columnGap) / (minimumColumnWidth + columnGap)
-        )
-      );
-      const rowCount = Math.ceil(COUNTRIES.length / Math.max(columnCount, 1));
-
-      countriesDropdown.style.setProperty('--countries-dropdown-rows', rowCount);
-    };
-
-    requestAnimationFrame(syncCountriesDropdownFlow);
-    window.addEventListener('resize', syncCountriesDropdownFlow, { passive: true });
-  }
-
-  const navDropdown = document.querySelector('.nav-dropdown');
-  const navDropdownLink = navDropdown?.querySelector('.nav-dropdown-link');
-  const navDropdownMenu = navDropdown?.querySelector('.nav-dropdown-menu');
   const desktopNavHeader = document.querySelector('.header');
   const desktopNavHeaderInner = document.querySelector('.header-inner');
-
-  navDropdownLink?.querySelector('.nav-dropdown-icon')?.remove();
 
   initDesktopSiteSearch();
   if (pageType !== 'moderator') initLanguageSwitcher();
@@ -4816,7 +4655,6 @@ export const initCasinoPage = async () => {
   const desktopSearchInput = desktopSearch?.querySelector('.site-search-input');
   syncFooterBrandDirectory();
 
-  let closeDesktopCountries = () => {};
   let closeDesktopSearch = () => {};
 
   if (
@@ -4844,7 +4682,6 @@ export const initCasinoPage = async () => {
     const syncSearchState = isOpen => {
       const nextOpen = Boolean(isOpen && desktopSearchMedia.matches);
       window.clearTimeout(searchFocusTimerId);
-      if (nextOpen) closeDesktopCountries();
       desktopNavHeader.classList.toggle('search-expanded', nextOpen);
       desktopNavHeaderInner.classList.toggle('search-expanded', nextOpen);
       desktopSearchTrigger.classList.toggle('is-active', nextOpen);
@@ -4902,120 +4739,6 @@ export const initCasinoPage = async () => {
     }
   }
 
-  if (
-    navDropdown &&
-    navDropdownLink &&
-    navDropdownMenu &&
-    desktopNavHeader &&
-    desktopNavHeaderInner &&
-    typeof window.matchMedia === 'function'
-  ) {
-    const desktopDropdownMedia = window.matchMedia('(min-width: 1025px)');
-    let headerHeightTimerId = null;
-    let expandedSettleTimerId = null;
-
-    navDropdownLink.removeAttribute('href');
-    navDropdownLink.setAttribute('role', 'button');
-    navDropdownLink.setAttribute('tabindex', '0');
-    navDropdownLink.setAttribute('aria-controls', navDropdownMenu.id || 'countriesDropdown');
-    navDropdownMenu.classList.add('nav-dropdown-menu--expanded-header');
-
-    if (navDropdownMenu.parentElement !== desktopNavHeaderInner) {
-      desktopNavHeaderInner.append(navDropdownMenu);
-    }
-
-    const syncExpandedHeaderHeight = () => {
-      window.clearTimeout(headerHeightTimerId);
-      window.requestAnimationFrame(() => {
-        syncHeaderFlowMetrics(desktopNavHeader);
-      });
-      headerHeightTimerId = window.setTimeout(() => {
-        syncHeaderFlowMetrics(desktopNavHeader);
-      }, 320);
-    };
-
-    const syncDropdownState = isOpen => {
-      const nextOpen = Boolean(isOpen && desktopDropdownMedia.matches);
-      window.clearTimeout(expandedSettleTimerId);
-      if (nextOpen) closeDesktopSearch();
-      navDropdown.classList.toggle('is-open', nextOpen);
-      desktopNavHeader.classList.toggle('countries-expanded', nextOpen);
-      desktopNavHeader.classList.remove('countries-expanded-settled');
-      desktopNavHeaderInner.classList.toggle('countries-expanded', nextOpen);
-      navDropdownLink.setAttribute('aria-expanded', nextOpen ? 'true' : 'false');
-      navDropdownMenu.setAttribute('aria-hidden', nextOpen ? 'false' : 'true');
-      if (nextOpen) {
-        loadDeferredCountryFlags(navDropdownMenu);
-        expandedSettleTimerId = window.setTimeout(() => {
-          desktopNavHeader.classList.add('countries-expanded-settled');
-        }, 380);
-      }
-      syncExpandedHeaderHeight();
-    };
-
-    const toggleDropdown = () => {
-      syncDropdownState(!desktopNavHeader.classList.contains('countries-expanded'));
-    };
-
-    const closeDropdown = () => {
-      syncDropdownState(false);
-    };
-
-    closeDesktopCountries = closeDropdown;
-    syncDropdownState(false);
-
-    navDropdownLink.addEventListener('click', event => {
-      event.preventDefault();
-      if (!desktopDropdownMedia.matches) return;
-      toggleDropdown();
-    });
-
-    navDropdownLink.addEventListener('keydown', event => {
-      if (event.key !== 'Enter' && event.key !== ' ') return;
-      event.preventDefault();
-      if (!desktopDropdownMedia.matches) return;
-      toggleDropdown();
-    });
-
-    document.addEventListener('click', event => {
-      if (!desktopNavHeader.classList.contains('countries-expanded')) return;
-      if (event.target instanceof Node && desktopNavHeader.contains(event.target)) return;
-      closeDropdown();
-    });
-
-    document.addEventListener('keydown', event => {
-      if (event.key === 'Escape') closeDropdown();
-    });
-
-    navDropdownMenu.addEventListener('click', event => {
-      if (event.target instanceof Element && event.target.closest('a')) closeDropdown();
-    });
-
-    navDropdownMenu.addEventListener('transitionend', syncExpandedHeaderHeight);
-
-    window.addEventListener('scroll', () => {
-      if (desktopNavHeader.classList.contains('countries-expanded')) closeDropdown();
-    }, { passive: true });
-
-    window.addEventListener('resize', syncExpandedHeaderHeight);
-
-    window.addEventListener('load', syncExpandedHeaderHeight, { once: true });
-
-    if (document.fonts?.ready) {
-      document.fonts.ready.then(syncExpandedHeaderHeight).catch(() => {});
-    }
-
-    if (typeof desktopDropdownMedia.addEventListener === 'function') {
-      desktopDropdownMedia.addEventListener('change', () => {
-        syncDropdownState(false);
-      });
-    } else if (typeof desktopDropdownMedia.addListener === 'function') {
-      desktopDropdownMedia.addListener(() => {
-        syncDropdownState(false);
-      });
-    }
-  }
-
   const countriesCloud = document.querySelector('.all-countries .countries-cloud');
   countriesCloud?.replaceChildren(
     ...COUNTRIES.map(c => {
@@ -5042,7 +4765,7 @@ export const initCasinoPage = async () => {
     if (!mobileMenuInner) return;
 
     mobileMenuInner.innerHTML = `
-    <button class="submenu-toggle" aria-expanded="false">${uiCopy.countries}</button>
+    <a class="nav-countries-link" href="${pagePath('/')}#home-country-title">${uiCopy.countries}</a>
     <a href="${pagePath('top-casinos.html')}">${uiCopy.topCasinos}</a>
     <a href="${pagePath('new-casinos.html')}">${uiCopy.newCasinos}</a>
     <a href="${pagePath('top-rated.html')}">${uiCopy.topRated}</a>
@@ -5050,33 +4773,9 @@ export const initCasinoPage = async () => {
     <button type="button" class="mobile-theme-settings" data-theme-settings-trigger aria-haspopup="dialog">${uiCopy.settings}</button>
   `;
 
-    const submenuToggle = mobileMenuInner.querySelector('.submenu-toggle');
-    if (!submenuToggle) return;
-
     if (!mobileMenuInner.querySelector('.site-search')) {
       mobileMenuInner.prepend(createSiteSearch('mobile'));
     }
-
-    const countriesSubmenu = document.createElement('div');
-    countriesSubmenu.className = 'mobile-submenu';
-    countriesSubmenu.innerHTML = COUNTRIES.map(
-      c => `
-    <a href="${countryPagePath(c.slug)}">
-      <img class="flag" data-country-flag-src="${iconPath(c.slug)}" alt="${normalizeText(localizedCountryName(c))}" loading="lazy" decoding="async"/>
-      ${normalizeText(localizedCountryName(c))}
-    </a>
-  `
-    ).join('');
-
-    mobileMenuInner.insertBefore(countriesSubmenu, submenuToggle.nextSibling);
-
-    submenuToggle.addEventListener('click', () => {
-      const expanded = submenuToggle.getAttribute('aria-expanded') !== 'true';
-      if (expanded) loadDeferredCountryFlags(countriesSubmenu);
-      submenuToggle.setAttribute('aria-expanded', String(expanded));
-      submenuToggle.classList.toggle('active', expanded);
-      countriesSubmenu.style.maxHeight = expanded ? `${countriesSubmenu.scrollHeight}px` : '0px';
-    });
 
     function openMenu() {
       mobileMenu.classList.add('open');
@@ -5092,10 +4791,6 @@ export const initCasinoPage = async () => {
       body.classList.remove('menu-open');
       burger.setAttribute('aria-expanded', 'false');
       mobileMenu.setAttribute('aria-hidden', 'true');
-
-      submenuToggle.classList.remove('active');
-      submenuToggle.setAttribute('aria-expanded', 'false');
-      countriesSubmenu.style.maxHeight = '0px';
     }
 
     burger.addEventListener('click', () => {
@@ -5107,7 +4802,6 @@ export const initCasinoPage = async () => {
     closeButtons?.forEach(btn => btn.addEventListener('click', closeMenu));
 
     mobileMenuInner.addEventListener('click', e => {
-      if (e.target.closest('.mobile-submenu')) return;
       if (e.target.closest('a')) closeMenu();
       if (e.target.closest('[data-theme-settings-trigger]')) closeMenu();
     });

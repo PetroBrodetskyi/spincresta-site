@@ -83,10 +83,7 @@
 
         <!-- DESKTOP NAV -->
         <nav class="nav" aria-label="Main navigation">
-          <div class="nav-dropdown">
-            <a href="/online-casinos/" class="nav-dropdown-link" aria-haspopup="true" aria-expanded="false">Countries</a>
-            <div class="nav-dropdown-menu" id="countriesDropdown"></div>
-          </div>
+          <a class="nav-countries-link" href="/#home-country-title">Countries</a>
           <a href="/top-casinos/">Top Casinos</a>
           <a href="/new-casinos/">New Casinos</a>
           <a href="/top-rated/">Top Rated</a>
@@ -119,159 +116,15 @@
 
     <main>
       <!-- HERO -->
-      <section class="hero container home-video-hero">
-        <div class="hero-content">
-          <h1>Best Online Casinos in 2026</h1>
-          <p>
-            Data-led recommendations, detailed brand reviews, real casino lobby previews, and fresh game
-            discoveries across global markets.
-          </p>
-          <div class="home-hero-actions">
-            <a class="home-primary-action" href="#recommended-brands">Explore our recommendations</a>
+      <section class="home-country-hero container" aria-labelledby="home-country-title">
+        <div class="home-country-hero-heading">
+          <h1 id="home-country-title">Best Online Casinos in 2026</h1>
+          <div class="home-country-hero-actions">
             <a class="home-secondary-action" href="/top-casinos/">View all casino rankings</a>
           </div>
         </div>
-
-        <div class="home-hero-video" aria-hidden="true">
-          <video
-            autoplay
-            muted
-            loop
-            playsinline
-            preload="metadata"
-            poster="https://res.cloudinary.com/drj61gmd2/video/upload/so_0,f_auto,q_auto,w_1600/v1790432036/spincresta/pages/home-page/home-hero_d0lzo1.jpg"
-          >
-            <source
-              src="https://res.cloudinary.com/drj61gmd2/video/upload/q_auto:good,vc_auto/v1790432036/spincresta/pages/home-page/home-hero_d0lzo1.mp4"
-              type="video/mp4"
-            />
-          </video>
-        </div>
-      </section>
-
-      <!-- <section>
-        <div class="container">
-          <div class="hero-main" id="heroCountries"></div>
-        </div>
-      </section> -->
-      <div class="content-area container">
-        <section class="home-stats" aria-label="SpinCresta coverage">
-          <div class="home-stats-card">
-            <div class="home-insight-head">
-              <h2>Find casinos in your country</h2>
-              <p>
-                Use our country guides to compare local options, then open a brand review for bonus terms,
-                payments, games and withdrawal details before registering.
-              </p>
-            </div>
-            <div class="home-stats-grid">
-              <a class="home-stat-tile home-stat-link" href="/online-casinos/">
-                <span class="home-stat-number" id="siteCountryCount">0</span>
-                <strong>Countries</strong>
-                <span>Casino availability, local payment methods, market rules, and country-specific options.</span>
-              </a>
-              <a class="home-stat-tile home-stat-link" href="/casinos-and-betting/">
-                <span class="home-stat-number" id="siteBrandCount">0</span>
-                <strong>Casino reviews</strong>
-                <span>Bonus terms, payments, games, support, reliability checks, and practical account details.</span>
-              </a>
-            </div>
-          </div>
-        </section>
-
-        <section class="home-showcase-section home-recommendations" id="recommended-brands">
-          <div class="home-showcase-heading">
-            <div>
-              <h2>Compare online casinos</h2>
-            </div>
-            <p>
-              We compare bonus terms, payment methods, game selection, mobile experience, customer support and
-              key withdrawal rules. Availability and offers vary by country, so check the casino's current terms
-              before registering.
-            </p>
-          </div>
-
-          <div class="casino-grid home-featured-casino-grid home-recommendation-grid">
-          </div>
-
-          <div class="home-section-cta">
-            <div><strong>Looking for the complete rankings?</strong><span>Find all country-specific casino rankings on one dedicated page.</span></div>
-            <a href="/top-casinos/">Explore all top casinos</a>
-          </div>
-        </section>
-
-        <section class="home-showcase-section home-new-reviews" aria-labelledby="new-reviews-title">
-          <div class="home-showcase-heading">
-            <div>
-              <h2 id="new-reviews-title">Latest casino reviews</h2>
-            </div>
-            <p>Browse our latest brand reviews for availability, payment methods, bonus terms, games and safety information.</p>
-          </div>
-          <div class="home-new-reviews-grid" aria-label="New casino reviews"></div>
-        </section>
-
-        <section class="home-showcase-section home-casino-gallery" aria-labelledby="casino-gallery-title">
-          <div class="home-showcase-heading">
-            <div><h2 id="casino-gallery-title">Casino screenshots</h2></div>
-            <p>Screenshots of reviewed casino homepages show how each lobby is organized, which products stand out and how easy it is to navigate.</p>
-          </div>
-          <div class="home-casino-gallery-grid">
-            <a class="home-casino-shot" href="/brands/fraga-tr/"><img src="https://res.cloudinary.com/drj61gmd2/image/upload/f_webp,q_auto/v1785006662/spincresta/brands/fraga-tr/main-page/fraga-page_ejcymv.webp" alt="Fraga casino and sportsbook homepage" width="3024" height="1570" loading="lazy" decoding="async" /><span><strong>Fraga</strong><small>Casino and sportsbook overview</small></span></a>
-            <a class="home-casino-shot" href="/brands/55bet/"><img src="https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto/v1784923027/spincresta/brands/55bet/main-page/55bet-page_mhdvfl.webp" alt="55Bet casino and sportsbook homepage" width="3024" height="1574" loading="lazy" decoding="async" /><span><strong>55Bet</strong><small>Casino and sports lobby</small></span></a>
-            <a class="home-casino-shot" href="/brands/zarbet/"><img src="https://res.cloudinary.com/drj61gmd2/image/upload/f_webp,q_auto/v1785089353/spincresta/brands/zarbet/main-page/zarbet-page_ftjqga.webp" alt="ZarBet casino homepage" width="3024" height="1574" loading="lazy" decoding="async" /><span><strong>ZarBet</strong><small>Casino and sportsbook homepage</small></span></a>
-            <a class="home-casino-shot" href="/brands/lizaro/"><img src="https://res.cloudinary.com/drj61gmd2/image/upload/f_webp,q_auto/v1785071365/spincresta/brands/lizaro/main-page/lizaro-page_yg3nve.webp" alt="Lizaro casino homepage" width="3024" height="1570" loading="lazy" decoding="async" /><span><strong>Lizaro</strong><small>Casino lobby preview</small></span></a>
-            <a class="home-casino-shot" href="/brands/flagman/"><img src="https://res.cloudinary.com/drj61gmd2/image/upload/f_webp,q_auto/v1785005454/spincresta/brands/flagman/main-page/flagman-page_zfqhqq.webp" alt="Flagman casino and sportsbook homepage" width="3024" height="1572" loading="lazy" decoding="async" /><span><strong>Flagman</strong><small>Casino and sports layout</small></span></a>
-            <a class="home-casino-shot" href="/brands/dragonia/"><img src="https://res.cloudinary.com/drj61gmd2/image/upload/f_webp,q_auto/v1785004503/spincresta/brands/dragonia/main-page/dragonia-page_s2df87.webp" alt="Dragonia casino and sportsbook homepage" width="3024" height="1578" loading="lazy" decoding="async" /><span><strong>Dragonia</strong><small>Casino lobby and game categories</small></span></a>
-            <a class="home-casino-shot" href="/brands/onluck/"><img src="https://res.cloudinary.com/drj61gmd2/image/upload/f_webp,q_auto/v1785075037/spincresta/brands/onluck/main-page/onluck-page_sa1aku.webp" alt="OnLuck casino homepage" width="3024" height="1576" loading="lazy" decoding="async" /><span><strong>OnLuck</strong><small>Casino homepage preview</small></span></a>
-            <a class="home-casino-shot" href="/brands/sunpalace/"><img src="https://res.cloudinary.com/drj61gmd2/image/upload/f_webp,q_auto/v1785086747/spincresta/brands/sunpalace/main-page/sunpalace-page_gkq52v.webp" alt="Sun Palace casino homepage" width="3024" height="1574" loading="lazy" decoding="async" /><span><strong>Sun Palace</strong><small>Casino interface preview</small></span></a>
-            <a class="home-casino-shot" href="/brands/stonevegas/"><img src="https://res.cloudinary.com/drj61gmd2/image/upload/f_webp,q_auto/v1785086556/spincresta/brands/stonevegas/main-page/stonevegas-page_ddnojg.webp" alt="StoneVegas casino homepage" width="3024" height="1574" loading="lazy" decoding="async" /><span><strong>StoneVegas</strong><small>Casino lobby preview</small></span></a>
-          </div>
-        </section>
-
-        <section class="home-showcase-section home-new-games" aria-labelledby="new-games-title">
-          <div class="home-showcase-heading">
-            <div><h2 id="new-games-title">New games</h2></div>
-            <p>Explore 18 games available across different reviewed casinos. Availability varies by country and account.</p>
-          </div>
-          <div class="home-games-grid">
-            <a class="home-game-card" href="/brands/10bet/"><img src="https://res.cloudinary.com/drj61gmd2/image/upload/c_crop,g_north_west,x_1080,y_1130,w_390,h_390/f_auto,q_auto/v1784918333/spincresta/brands/10bet/main-page/10bet-page_u4vkbe.webp" alt="Majestic Panda game artwork" loading="lazy" decoding="async" /><span><strong>Majestic Panda</strong><small>at 10Bet</small></span></a>
-            <a class="home-game-card" href="/brands/1red/"><img src="https://res.cloudinary.com/drj61gmd2/image/upload/c_crop,g_north_west,x_812,y_1305,w_265,h_265/f_auto,q_auto/v1784918450/spincresta/brands/1red/main-page/1red-page_cpvuxm.webp" alt="Elvis Frog game artwork" loading="lazy" decoding="async" /><span><strong>Elvis Frog</strong><small>at 1Red</small></span></a>
-            <a class="home-game-card" href="/brands/1redbet/"><img src="https://res.cloudinary.com/drj61gmd2/image/upload/c_crop,g_north_west,x_1220,y_1038,w_325,h_325/f_auto,q_auto/v1784918574/spincresta/brands/1redbet/main-page/1redbet-page_oa4jdn.webp" alt="100 Zombies game artwork" loading="lazy" decoding="async" /><span><strong>100 Zombies</strong><small>at 1RedBet</small></span></a>
-            <a class="home-game-card" href="/brands/allwin/"><img src="https://res.cloudinary.com/drj61gmd2/image/upload/c_crop,g_north_west,x_943,y_944,w_415,h_415/f_auto,q_auto/v1784923304/spincresta/brands/allwin/main-page/allwin-page_pomqye.webp" alt="Locomotor game artwork" loading="lazy" decoding="async" /><span><strong>Locomotor</strong><small>at AllWin</small></span></a>
-            <a class="home-game-card" href="/brands/amunra/"><img src="https://res.cloudinary.com/drj61gmd2/image/upload/c_crop,g_north_west,x_2150,y_1055,w_350,h_513/f_auto,q_auto/v1784923979/spincresta/brands/amunra/main-page/amunra-page_aeuxda.webp" alt="Royal Strike game artwork" loading="lazy" decoding="async" /><span><strong>Royal Strike</strong><small>at AmunRa</small></span></a>
-            <a class="home-game-card" href="/brands/britsino/"><img src="https://res.cloudinary.com/drj61gmd2/image/upload/c_crop,g_north_west,x_470,y_1224,w_320,h_354/f_webp,q_auto/v1785002809/spincresta/brands/britsino/main-page/britsino-page_pkbgaz.webp" alt="Penalty Duel game artwork" loading="lazy" decoding="async" /><span><strong>Penalty Duel</strong><small>at Britsino</small></span></a>
-            <a class="home-game-card" href="/brands/casinoinfinity/"><img src="https://res.cloudinary.com/drj61gmd2/image/upload/c_crop,g_north_west,x_1400,y_1082,w_340,h_494/f_webp,q_auto/v1785002983/spincresta/brands/casinoinfinity/main-page/casinoinfinity-page_bv8bfo.webp" alt="100 Super Hot game artwork" loading="lazy" decoding="async" /><span><strong>100 Super Hot</strong><small>at Casino Infinity</small></span></a>
-            <a class="home-game-card" href="/brands/coolzino/"><img src="https://res.cloudinary.com/drj61gmd2/image/upload/c_crop,g_north_west,x_210,y_856,w_170,h_170/c_fill,w_500,h_500/f_webp,q_auto/v1785003515/spincresta/brands/coolzino/main-page/coolzino-page_gwcbso.webp" alt="5 Lions Megaways game artwork" loading="lazy" decoding="async" /><span><strong>5 Lions Megaways</strong><small>at Coolzino</small></span></a>
-            <a class="home-game-card" href="/brands/dragonia/"><img src="https://res.cloudinary.com/drj61gmd2/image/upload/v1784457102/spincresta/brands/dragonia/new-games/dragonia-new-game-lightning-cash-strike_o4sun9.webp" alt="Lightning Cash Strike game artwork" loading="lazy" decoding="async" /><span><strong>Lightning Cash Strike</strong><small>at Dragonia</small></span></a>
-            <a class="home-game-card" href="/brands/fraga-tr/"><img src="https://res.cloudinary.com/drj61gmd2/image/upload/c_crop,g_north_west,x_738,y_970,w_205,h_205/f_webp,q_auto/v1785006662/spincresta/brands/fraga-tr/main-page/fraga-page_ejcymv.webp" alt="3 Super Hot Chillies game artwork" loading="lazy" decoding="async" /><span><strong>3 Super Hot Chillies</strong><small>at Fraga</small></span></a>
-            <a class="home-game-card" href="/brands/lasvegasusa/"><img src="https://res.cloudinary.com/drj61gmd2/image/upload/c_crop,g_north_west,x_695,y_1248,w_303,h_326/f_webp,q_auto/v1785069943/spincresta/brands/lasvegasusa/main-page/lasvegasusa-page_vfbjbg.webp" alt="Plinko Beyond game artwork" loading="lazy" decoding="async" /><span><strong>Plinko Beyond</strong><small>at Las Vegas USA</small></span></a>
-            <a class="home-game-card" href="/brands/leon-casino/"><img src="https://res.cloudinary.com/drj61gmd2/image/upload/c_crop,g_north_west,x_902,y_1115,w_260,h_400/f_webp,q_auto/v1785070490/spincresta/brands/leon-casino/main-page/leon-casino-page_xxujay.webp" alt="Coin UP Hot Fire game artwork" loading="lazy" decoding="async" /><span><strong>Coin UP: Hot Fire</strong><small>at Leon</small></span></a>
-            <a class="home-game-card" href="/brands/lizaro/"><img src="https://res.cloudinary.com/drj61gmd2/image/upload/v1784457194/spincresta/brands/lizaro/new-games/lizaro-four-chili-pots-hold-win_nkxagm.webp" alt="4 Chili Pots game artwork" loading="lazy" decoding="async" /><span><strong>4 Chili Pots</strong><small>at Lizaro</small></span></a>
-            <a class="home-game-card" href="/brands/spinboss/"><img src="https://res.cloudinary.com/drj61gmd2/image/upload/c_crop,g_north_west,x_2460,y_1168,w_330,h_408/f_webp,q_auto/v1785085881/spincresta/brands/spinboss/main-page/spinboss-page_gasp2x.webp" alt="Bonbon Pop x1000 game artwork" loading="lazy" decoding="async" /><span><strong>Bonbon Pop x1000</strong><small>at SpinBoss</small></span></a>
-            <a class="home-game-card" href="/brands/stonevegas/"><img src="https://res.cloudinary.com/drj61gmd2/image/upload/c_crop,g_north_west,x_503,y_1170,w_330,h_408/f_webp,q_auto/v1785086556/spincresta/brands/stonevegas/main-page/stonevegas-page_ddnojg.webp" alt="Crack the Piggy Bank Express game artwork" loading="lazy" decoding="async" /><span><strong>Crack the Piggy Bank Express</strong><small>at StoneVegas</small></span></a>
-            <a class="home-game-card" href="/brands/sunpalace/"><img src="https://res.cloudinary.com/drj61gmd2/image/upload/c_crop,g_north_west,x_378,y_1250,w_303,h_328/f_webp,q_auto/v1785086747/spincresta/brands/sunpalace/main-page/sunpalace-page_gkq52v.webp" alt="Liberty Rockets game artwork" loading="lazy" decoding="async" /><span><strong>Liberty Rockets</strong><small>at Sun Palace</small></span></a>
-            <a class="home-game-card" href="/brands/zarbet/"><img src="https://res.cloudinary.com/drj61gmd2/image/upload/v1784457325/spincresta/brands/zarbet/new-games/zarbet-new-game-7-chakras_gcu79x.webp" alt="7 Chakras game artwork" loading="lazy" decoding="async" /><span><strong>7 Chakras</strong><small>at ZarBet</small></span></a>
-            <a class="home-game-card" href="/brands/22casino/"><img src="https://res.cloudinary.com/drj61gmd2/image/upload/c_crop,g_north_west,x_520,y_916,w_485,h_290/f_auto,q_auto/v1784921992/spincresta/brands/22casino/main-page/22casino-page_hrgwsm.webp" alt="Big Bass Splash game artwork" loading="lazy" decoding="async" /><span><strong>Big Bass Splash</strong><small>at 22Casino</small></span></a>
-          </div>
-        </section>
-
-        <section class="home-showcase-section home-editorial-method" aria-labelledby="editorial-method-title">
-          <div class="home-showcase-heading">
-            <div><h2 id="editorial-method-title">How we review casinos</h2></div>
-            <p>Each review focuses on the details that affect everyday play, not just the advertised bonus.</p>
-          </div>
-          <div class="home-method-grid">
-            <article><span>01</span><h3>Safety and availability</h3><p>Operator details, license information, country availability, account security, and responsible gambling tools.</p></article>
-            <article><span>02</span><h3>Real bonus value</h3><p>Wagering requirements, game contribution, limits, expiry, and other terms that affect the offer's real value.</p></article>
-            <article><span>03</span><h3>Payments and withdrawals</h3><p>Available methods, verification, withdrawal conditions, and support for local payment options.</p></article>
-            <article><span>04</span><h3>Games and usability</h3><p>Lobby structure, providers, live casino, sportsbook depth, mobile navigation, and support access.</p></article>
-          </div>
-        </section>
-
-        <section class="all-countries">
-          <div class="container">
-            <h2 class="title">Online Casinos by Country</h2>
-            <div class="countries-cloud">
+        <nav class="home-country-directory" aria-label="Online Casinos by Country">
+          <div class="countries-cloud">
 <a class="country-link" href="/online-casinos/argentina/"><img class="flag" src="/icons/argentina-flag-icon.svg" alt="" loading="lazy" decoding="async"><span>Argentina</span></a>
 <a class="country-link" href="/online-casinos/australia/"><img class="flag" src="/icons/australia-flag-icon.svg" alt="" loading="lazy" decoding="async"><span>Australia</span></a>
 <a class="country-link" href="/online-casinos/austria/"><img class="flag" src="/icons/austria-flag-icon.svg" alt="" loading="lazy" decoding="async"><span>Austria</span></a>
@@ -336,9 +189,70 @@
 <a class="country-link" href="/online-casinos/united-states/"><img class="flag" src="/icons/united-states-flag-icon.svg" alt="" loading="lazy" decoding="async"><span>United States</span></a>
 <a class="country-link" href="/online-casinos/uzbekistan/"><img class="flag" src="/icons/uzbekistan-flag-icon.svg" alt="" loading="lazy" decoding="async"><span>Uzbekistan</span></a>
 <a class="country-link" href="/online-casinos/vietnam/"><img class="flag" src="/icons/vietnam-flag-icon.svg" alt="" loading="lazy" decoding="async"><span>Vietnam</span></a>
-</div>
+          </div>
+        </nav>
+      </section>
+      <div class="content-area container">
+        <section class="home-showcase-section home-recommendations" id="recommended-brands" aria-label="Casino recommendations">
+          <div class="casino-grid home-featured-casino-grid home-recommendation-grid">
+          </div>
+
+          <div class="home-section-cta">
+            <div><strong>Looking for the complete rankings?</strong><span>Find all country-specific casino rankings on one dedicated page.</span></div>
+            <a href="/top-casinos/">Explore all top casinos</a>
           </div>
         </section>
+
+        <section class="home-showcase-section home-new-reviews" aria-labelledby="new-reviews-title">
+          <div class="home-showcase-heading">
+            <div>
+              <h2 id="new-reviews-title">Latest casino reviews</h2>
+            </div>
+            <p>Browse our latest brand reviews for availability, payment methods, bonus terms, games and safety information.</p>
+          </div>
+          <div class="home-new-reviews-grid" aria-label="New casino reviews"></div>
+        </section>
+
+        <section class="home-showcase-section home-new-games" aria-labelledby="new-games-title">
+          <div class="home-showcase-heading">
+            <div><h2 id="new-games-title">New games</h2></div>
+            <p>Explore 18 games available across different reviewed casinos. Availability varies by country and account.</p>
+          </div>
+          <div class="home-games-grid">
+            <a class="home-game-card" href="/brands/10bet/"><img src="https://res.cloudinary.com/drj61gmd2/image/upload/c_crop,g_north_west,x_1080,y_1130,w_390,h_390/f_auto,q_auto/v1784918333/spincresta/brands/10bet/main-page/10bet-page_u4vkbe.webp" alt="Majestic Panda game artwork" loading="lazy" decoding="async" /><span><strong>Majestic Panda</strong><small>at 10Bet</small></span></a>
+            <a class="home-game-card" href="/brands/1red/"><img src="https://res.cloudinary.com/drj61gmd2/image/upload/c_crop,g_north_west,x_812,y_1305,w_265,h_265/f_auto,q_auto/v1784918450/spincresta/brands/1red/main-page/1red-page_cpvuxm.webp" alt="Elvis Frog game artwork" loading="lazy" decoding="async" /><span><strong>Elvis Frog</strong><small>at 1Red</small></span></a>
+            <a class="home-game-card" href="/brands/1redbet/"><img src="https://res.cloudinary.com/drj61gmd2/image/upload/c_crop,g_north_west,x_1220,y_1038,w_325,h_325/f_auto,q_auto/v1784918574/spincresta/brands/1redbet/main-page/1redbet-page_oa4jdn.webp" alt="100 Zombies game artwork" loading="lazy" decoding="async" /><span><strong>100 Zombies</strong><small>at 1RedBet</small></span></a>
+            <a class="home-game-card" href="/brands/allwin/"><img src="https://res.cloudinary.com/drj61gmd2/image/upload/c_crop,g_north_west,x_943,y_944,w_415,h_415/f_auto,q_auto/v1784923304/spincresta/brands/allwin/main-page/allwin-page_pomqye.webp" alt="Locomotor game artwork" loading="lazy" decoding="async" /><span><strong>Locomotor</strong><small>at AllWin</small></span></a>
+            <a class="home-game-card" href="/brands/amunra/"><img src="https://res.cloudinary.com/drj61gmd2/image/upload/c_crop,g_north_west,x_2150,y_1055,w_350,h_513/f_auto,q_auto/v1784923979/spincresta/brands/amunra/main-page/amunra-page_aeuxda.webp" alt="Royal Strike game artwork" loading="lazy" decoding="async" /><span><strong>Royal Strike</strong><small>at AmunRa</small></span></a>
+            <a class="home-game-card" href="/brands/britsino/"><img src="https://res.cloudinary.com/drj61gmd2/image/upload/c_crop,g_north_west,x_470,y_1224,w_320,h_354/f_webp,q_auto/v1785002809/spincresta/brands/britsino/main-page/britsino-page_pkbgaz.webp" alt="Penalty Duel game artwork" loading="lazy" decoding="async" /><span><strong>Penalty Duel</strong><small>at Britsino</small></span></a>
+            <a class="home-game-card" href="/brands/casinoinfinity/"><img src="https://res.cloudinary.com/drj61gmd2/image/upload/c_crop,g_north_west,x_1400,y_1082,w_340,h_494/f_webp,q_auto/v1785002983/spincresta/brands/casinoinfinity/main-page/casinoinfinity-page_bv8bfo.webp" alt="100 Super Hot game artwork" loading="lazy" decoding="async" /><span><strong>100 Super Hot</strong><small>at Casino Infinity</small></span></a>
+            <a class="home-game-card" href="/brands/coolzino/"><img src="https://res.cloudinary.com/drj61gmd2/image/upload/c_crop,g_north_west,x_210,y_856,w_170,h_170/c_fill,w_500,h_500/f_webp,q_auto/v1785003515/spincresta/brands/coolzino/main-page/coolzino-page_gwcbso.webp" alt="5 Lions Megaways game artwork" loading="lazy" decoding="async" /><span><strong>5 Lions Megaways</strong><small>at Coolzino</small></span></a>
+            <a class="home-game-card" href="/brands/dragonia/"><img src="https://res.cloudinary.com/drj61gmd2/image/upload/v1784457102/spincresta/brands/dragonia/new-games/dragonia-new-game-lightning-cash-strike_o4sun9.webp" alt="Lightning Cash Strike game artwork" loading="lazy" decoding="async" /><span><strong>Lightning Cash Strike</strong><small>at Dragonia</small></span></a>
+            <a class="home-game-card" href="/brands/fraga-tr/"><img src="https://res.cloudinary.com/drj61gmd2/image/upload/c_crop,g_north_west,x_738,y_970,w_205,h_205/f_webp,q_auto/v1785006662/spincresta/brands/fraga-tr/main-page/fraga-page_ejcymv.webp" alt="3 Super Hot Chillies game artwork" loading="lazy" decoding="async" /><span><strong>3 Super Hot Chillies</strong><small>at Fraga</small></span></a>
+            <a class="home-game-card" href="/brands/lasvegasusa/"><img src="https://res.cloudinary.com/drj61gmd2/image/upload/c_crop,g_north_west,x_695,y_1248,w_303,h_326/f_webp,q_auto/v1785069943/spincresta/brands/lasvegasusa/main-page/lasvegasusa-page_vfbjbg.webp" alt="Plinko Beyond game artwork" loading="lazy" decoding="async" /><span><strong>Plinko Beyond</strong><small>at Las Vegas USA</small></span></a>
+            <a class="home-game-card" href="/brands/leon-casino/"><img src="https://res.cloudinary.com/drj61gmd2/image/upload/c_crop,g_north_west,x_902,y_1115,w_260,h_400/f_webp,q_auto/v1785070490/spincresta/brands/leon-casino/main-page/leon-casino-page_xxujay.webp" alt="Coin UP Hot Fire game artwork" loading="lazy" decoding="async" /><span><strong>Coin UP: Hot Fire</strong><small>at Leon</small></span></a>
+            <a class="home-game-card" href="/brands/lizaro/"><img src="https://res.cloudinary.com/drj61gmd2/image/upload/v1784457194/spincresta/brands/lizaro/new-games/lizaro-four-chili-pots-hold-win_nkxagm.webp" alt="4 Chili Pots game artwork" loading="lazy" decoding="async" /><span><strong>4 Chili Pots</strong><small>at Lizaro</small></span></a>
+            <a class="home-game-card" href="/brands/spinboss/"><img src="https://res.cloudinary.com/drj61gmd2/image/upload/c_crop,g_north_west,x_2460,y_1168,w_330,h_408/f_webp,q_auto/v1785085881/spincresta/brands/spinboss/main-page/spinboss-page_gasp2x.webp" alt="Bonbon Pop x1000 game artwork" loading="lazy" decoding="async" /><span><strong>Bonbon Pop x1000</strong><small>at SpinBoss</small></span></a>
+            <a class="home-game-card" href="/brands/stonevegas/"><img src="https://res.cloudinary.com/drj61gmd2/image/upload/c_crop,g_north_west,x_503,y_1170,w_330,h_408/f_webp,q_auto/v1785086556/spincresta/brands/stonevegas/main-page/stonevegas-page_ddnojg.webp" alt="Crack the Piggy Bank Express game artwork" loading="lazy" decoding="async" /><span><strong>Crack the Piggy Bank Express</strong><small>at StoneVegas</small></span></a>
+            <a class="home-game-card" href="/brands/sunpalace/"><img src="https://res.cloudinary.com/drj61gmd2/image/upload/c_crop,g_north_west,x_378,y_1250,w_303,h_328/f_webp,q_auto/v1785086747/spincresta/brands/sunpalace/main-page/sunpalace-page_gkq52v.webp" alt="Liberty Rockets game artwork" loading="lazy" decoding="async" /><span><strong>Liberty Rockets</strong><small>at Sun Palace</small></span></a>
+            <a class="home-game-card" href="/brands/zarbet/"><img src="https://res.cloudinary.com/drj61gmd2/image/upload/v1784457325/spincresta/brands/zarbet/new-games/zarbet-new-game-7-chakras_gcu79x.webp" alt="7 Chakras game artwork" loading="lazy" decoding="async" /><span><strong>7 Chakras</strong><small>at ZarBet</small></span></a>
+            <a class="home-game-card" href="/brands/22casino/"><img src="https://res.cloudinary.com/drj61gmd2/image/upload/c_crop,g_north_west,x_520,y_916,w_485,h_290/f_auto,q_auto/v1784921992/spincresta/brands/22casino/main-page/22casino-page_hrgwsm.webp" alt="Big Bass Splash game artwork" loading="lazy" decoding="async" /><span><strong>Big Bass Splash</strong><small>at 22Casino</small></span></a>
+          </div>
+        </section>
+
+        <section class="home-showcase-section home-editorial-method" aria-labelledby="editorial-method-title">
+          <div class="home-showcase-heading">
+            <div><h2 id="editorial-method-title">How we review casinos</h2></div>
+            <p>Each review focuses on the details that affect everyday play, not just the advertised bonus.</p>
+          </div>
+          <div class="home-method-grid">
+            <article><span>01</span><h3>Safety and availability</h3><p>Operator details, license information, country availability, account security, and responsible gambling tools.</p></article>
+            <article><span>02</span><h3>Real bonus value</h3><p>Wagering requirements, game contribution, limits, expiry, and other terms that affect the offer's real value.</p></article>
+            <article><span>03</span><h3>Payments and withdrawals</h3><p>Available methods, verification, withdrawal conditions, and support for local payment options.</p></article>
+            <article><span>04</span><h3>Games and usability</h3><p>Lobby structure, providers, live casino, sportsbook depth, mobile navigation, and support access.</p></article>
+          </div>
+        </section>
+
       </div>
     </main>
 

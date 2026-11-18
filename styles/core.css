@@ -377,10 +377,6 @@ html:not([data-theme='light']) .header {
   row-gap: 0;
 }
 
-.header.countries-expanded .header-container {
-  box-shadow: var(--shadow-floating);
-}
-
 .logo {
   display: flex;
   align-items: center;
@@ -1273,136 +1269,6 @@ html[data-theme='light'] .account-auth-dialog {
   padding: 13px 12px;
 }
 
-.nav-dropdown {
-  position: static;
-}
-
-.nav-dropdown-link {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  min-height: 44px;
-  line-height: 1;
-  cursor: pointer;
-}
-
-.nav-dropdown-icon {
-  width: 14px;
-  height: 14px;
-  flex: 0 0 14px;
-  object-fit: contain;
-  opacity: 0.82;
-  transform: translateY(1px);
-  transition:
-    transform 0.22s ease,
-    opacity 0.22s ease;
-}
-
-.nav-dropdown:hover .nav-dropdown-icon,
-.nav-dropdown.is-open .nav-dropdown-icon,
-.nav-dropdown-link:hover .nav-dropdown-icon,
-.nav-dropdown-link:focus-visible .nav-dropdown-icon {
-  opacity: 1;
-  transform: translateY(1px) rotate(180deg);
-}
-
-.nav-dropdown-btn {
-  background: none;
-  border: none;
-  color: var(--text-muted);
-  font-weight: 500;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  font-size: 16px;
-}
-
-.nav-dropdown-btn:hover {
-  color: var(--accent);
-}
-
-.nav-dropdown-menu {
-  order: 20;
-  flex: 0 0 100%;
-  width: 100%;
-  max-height: 0;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(136px, 1fr));
-  grid-template-rows: repeat(var(--countries-dropdown-rows, 8), minmax(32px, auto));
-  grid-auto-flow: column;
-  gap: 8px 16px;
-  overflow: hidden;
-  padding: 0;
-  border-top: 0;
-  opacity: 0;
-  visibility: hidden;
-  pointer-events: none;
-  transition:
-    max-height 0.34s ease,
-    padding 0.34s ease,
-    opacity 0.25s ease,
-    visibility 0.25s ease;
-  z-index: 1;
-}
-
-.nav-dropdown-menu::before {
-  content: none;
-}
-
-.nav-dropdown-menu a {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  min-width: 0;
-  min-height: 32px;
-  margin: 0;
-  padding: 6px 9px;
-  border: 1px solid transparent;
-  border-radius: 8px;
-  text-decoration: none;
-  color: #e5e7eb;
-  font-size: 13.5px;
-  line-height: 1.1;
-  transition:
-    background 0.18s ease,
-    border-color 0.18s ease,
-    color 0.18s ease;
-}
-
-.nav-dropdown-menu a::after {
-  content: none;
-}
-
-.nav-dropdown-menu a:hover,
-.nav-dropdown-menu a:focus-visible {
-  background: rgba(255, 255, 255, 0.055);
-  border-color: rgba(255, 223, 0, 0.18);
-  color: #ffffff;
-}
-
-.nav-dropdown-menu .flag {
-  width: 20px;
-  height: 15px;
-  flex: 0 0 20px;
-  object-fit: cover;
-  border-radius: 3px;
-  box-shadow: 0 0 0 1px rgba(226, 232, 240, 0.2);
-}
-
-.header.countries-expanded .nav-dropdown-menu {
-  max-height: min(440px, calc(100vh - 84px));
-  overflow: hidden;
-  padding: 13px 0 7px;
-  opacity: 1;
-  visibility: visible;
-  pointer-events: auto;
-}
-
-.header.countries-expanded.countries-expanded-settled .nav-dropdown-menu {
-  overflow-y: auto;
-}
-
 /* =====================
    HERO
 ===================== */
@@ -2194,9 +2060,7 @@ html:not([data-theme='light']) .footer {
 }
 
 .mobile-menu-inner > a,
-.submenu-toggle,
-.mobile-theme-settings,
-.mobile-submenu a {
+.mobile-theme-settings {
   position: relative;
   display: flex;
   align-items: center;
@@ -2227,10 +2091,8 @@ html:not([data-theme='light']) .footer {
 }
 
 .mobile-menu-inner > a:hover,
-.submenu-toggle:hover,
 .mobile-theme-settings:hover,
-.mobile-theme-settings:focus-visible,
-.mobile-submenu a:hover {
+.mobile-theme-settings:focus-visible {
   background: rgba(255, 255, 255, 0.035);
   color: var(--gold);
   border-color: var(--gold);
@@ -2240,42 +2102,6 @@ html:not([data-theme='light']) .footer {
 
 .mobile-theme-settings {
   outline: none;
-}
-
-.mobile-submenu {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-  padding: 0 0 0 18px;
-  max-height: 0;
-  overflow: hidden;
-  transition:
-    max-height 0.4s ease,
-    padding 0.3s ease;
-}
-
-.submenu-toggle.active + .mobile-submenu {
-  max-height: 600px;
-  padding: 8px 0 8px 18px;
-}
-
-.mobile-submenu a {
-  min-height: 44px;
-  font-size: 0.95rem;
-  padding: 9px 14px;
-  justify-content: flex-start;
-  text-transform: none;
-}
-
-.mobile-submenu a:hover {
-  transform: translateY(-1px);
-}
-
-.mobile-submenu .flag {
-  width: 24px;
-  height: 24px;
-  border-radius: 4px;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
 }
 
 .mobile-menu-inner > *:not(.mobile-menu-header) {
@@ -4005,12 +3831,6 @@ body[data-country] .content-article .timeline a[href*='/responsible-gambling/'] 
   }
 }
 
-@media (max-width: 768px) {
-  .home-global-guide-grid {
-    grid-template-columns: 1fr;
-  }
-}
-
 .home-link-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
@@ -4289,30 +4109,17 @@ html[data-theme='light'] .logo {
   color: #e5e7eb;
 }
 
-html[data-theme='light'] .nav a,
-html[data-theme='light'] .nav-dropdown-btn,
-html[data-theme='light'] .nav-dropdown-link {
+html[data-theme='light'] .nav a {
   color: #94a3b8;
 }
 
 html[data-theme='light'] .nav a:hover,
-html[data-theme='light'] .nav-dropdown-btn:hover,
-html[data-theme='light'] .nav-dropdown-link:hover,
-html[data-theme='light'] .nav-dropdown-link:focus-visible {
+html[data-theme='light'] .nav a:focus-visible {
   color: #e5e7eb;
 }
 
 html[data-theme='light'] .burger span {
   background: #e5e7eb;
-}
-
-html[data-theme='light'] .nav-dropdown-menu {
-  background: transparent;
-  border-color: rgba(255, 255, 255, 0.08);
-}
-
-html[data-theme='light'] .nav-dropdown-menu a {
-  color: #e5e7eb;
 }
 
 html[data-theme='light'] .countries-cloud a,
@@ -4430,9 +4237,7 @@ html[data-theme='light'] .mobile-menu-panel {
 }
 
 html[data-theme='light'] .mobile-menu-inner > a,
-html[data-theme='light'] .submenu-toggle,
-html[data-theme='light'] .mobile-theme-settings,
-html[data-theme='light'] .mobile-submenu a {
+html[data-theme='light'] .mobile-theme-settings {
   background: rgba(255, 255, 255, 0.025);
   border-color: rgba(255, 255, 255, 0.14);
   color: #e5e7eb;
@@ -4440,8 +4245,6 @@ html[data-theme='light'] .mobile-submenu a {
 }
 
 html[data-theme='light'] .mobile-menu-inner > a:hover,
-html[data-theme='light'] .submenu-toggle:hover,
-html[data-theme='light'] .mobile-submenu a:hover,
 html[data-theme='light'] .mobile-theme-settings:hover,
 html[data-theme='light'] .mobile-theme-settings:focus-visible {
   background: rgba(255, 255, 255, 0.055);
@@ -4535,15 +4338,6 @@ html[data-theme='light'] .site-search--mobile .site-search-input {
 
 html[data-theme='light'] .site-search--mobile .site-search-input::placeholder {
   color: #94a3b8;
-}
-
-html[data-theme='light'] .mobile-submenu a:hover {
-  background: rgba(255, 255, 255, 0.055);
-  border-color: var(--gold);
-}
-
-html[data-theme='light'] .mobile-submenu .flag {
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
 }
 
 html[data-theme='light'] #globalLoader {
@@ -4706,20 +4500,4 @@ html[data-theme='light'] .theme-settings-close:hover {
   color: #8a5e1f;
   background: transparent;
   border-color: transparent;
-}
-
-html[data-theme='light'] .theme-settings-option {
-  color: #172033;
-  background: var(--surface-card);
-  border-color: rgba(15, 23, 42, 0.08);
-  box-shadow:
-    0 10px 22px rgba(15, 23, 42, 0.08);
-}
-
-html[data-theme='light'] .theme-settings-option:hover {
-  color: #172033;
-  background: var(--surface-card-hover);
-  border-color: rgba(15, 23, 42, 0.12);
-  box-shadow:
-    0 14px 28px rgba(15, 23, 42, 0.11);
 }

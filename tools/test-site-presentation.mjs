@@ -73,6 +73,31 @@ test('all shared UI CSS stays matte after regeneration', () => {
   assert.match(css[1], /\.game-art-backdrop::before\s*\{[^}]*background-image: var\(--game-art\);[^}]*filter: blur\(20px\)/);
 });
 
+test('published headers link directly to their localized homepage country cloud', () => {
+  const locales = new Set(['de', 'es', 'it', 'pl', 'uk', 'pt', 'fr', 'hi', 'fi']);
+  const visited = new Set();
+  const visit = directory => {
+    for (const entry of fs.readdirSync(directory, { withFileTypes: true })) {
+      if (entry.name.startsWith('.') || ['node_modules', 'tmp', 'tools'].includes(entry.name)) continue;
+      const file = path.join(directory, entry.name);
+      if (entry.isDirectory()) visit(file);
+      else if (entry.name === 'index.html') {
+        const relative = path.relative(root, file);
+        const locale = relative.split(path.sep)[0];
+        const prefix = locales.has(locale) ? `/${locale}/` : '/';
+        const html = fs.readFileSync(file, 'utf8');
+        const header = html.match(/<header\b[^>]*class="header"[^>]*>[\s\S]*?<\/header>/)?.[0];
+        if (!header) continue;
+        assert.ok(header.includes(`class="nav-countries-link" href="${prefix}#home-country-title"`), relative);
+        assert.doesNotMatch(header, /countriesDropdown|nav-dropdown/, relative);
+        visited.add(prefix);
+      }
+    }
+  };
+  visit(root);
+  assert.equal(visited.size, 10);
+});
+
 test('functional feedback rating label is a heading, not an eyebrow', () => {
   const feedback = fs.readFileSync(path.join(root, 'scripts/pages/brand-feedback.js'), 'utf8');
   assert.match(feedback, /<h3>\$\{[^}]*rateTitle[^}]*\}<\/h3>/);

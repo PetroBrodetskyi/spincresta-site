@@ -3,8 +3,9 @@
 export const initHomePage = context => {
   const {
     BRANDS,
-    BRAND_HOMEPAGE_SCREENSHOTS,
+    COUNTRIES,
     BRAND_NEW_GAMES,
+    pageCountry,
     SITE_LOCALE,
     normalizeText,
     normalizeAssetPath,
@@ -14,7 +15,47 @@ export const initHomePage = context => {
     brandPagePath,
     localeText,
     setBrandBackground,
+    noCountryCasinos,
   } = context;
+
+  const initHomeCountryCloud = () => {
+    const directory = document.querySelector('.home-country-directory');
+    const cloud = directory?.querySelector('.countries-cloud');
+    if (!cloud) return;
+    const extraCountries = [...cloud.children].slice(18);
+    if (!extraCountries.length) return;
+    extraCountries.forEach(link => link.classList.add('home-country-extra'));
+
+    const showAll = localeText(
+      'Show all countries', 'Alle Länder anzeigen', 'Mostrar todos los países',
+      'Mostra tutti i paesi', 'Pokaż wszystkie kraje', 'Показати всі країни',
+      'Mostrar todos os países', 'Voir tous les pays', 'सभी देश दिखाएँ', 'Näytä kaikki maat'
+    );
+    const showFewer = localeText(
+      'Show fewer countries', 'Weniger Länder anzeigen', 'Mostrar menos países',
+      'Mostra meno paesi', 'Pokaż mniej krajów', 'Згорнути список країн',
+      'Mostrar menos países', 'Afficher moins de pays', 'कम देश दिखाएँ', 'Näytä vähemmän maita'
+    );
+    const toggle = document.createElement('button');
+    toggle.type = 'button';
+    toggle.className = 'home-country-toggle';
+    cloud.id = 'home-country-cloud';
+    toggle.setAttribute('aria-controls', cloud.id);
+
+    const setExpanded = expanded => {
+      cloud.classList.toggle('is-collapsed', !expanded);
+      toggle.setAttribute('aria-expanded', String(expanded));
+      toggle.textContent = expanded ? showFewer : `${showAll} (${cloud.children.length})`;
+    };
+
+    toggle.addEventListener('click', () => {
+      const expanded = toggle.getAttribute('aria-expanded') !== 'true';
+      setExpanded(expanded);
+      if (expanded) extraCountries[0].focus();
+    });
+    setExpanded(false);
+    directory.append(toggle);
+  };
 
   const HOME_RECOMMENDATION_SLUGS = [
     'fraga-tr',
@@ -67,6 +108,7 @@ export const initHomePage = context => {
           brand.urlDetail &&
           brand.image &&
           !brand.notRecommended &&
+          !brand.temporarilyUnavailable &&
           brand.countries?.some(code => code.toUpperCase() === countryCode)
         )
       );
@@ -100,28 +142,29 @@ export const initHomePage = context => {
     });
   };
   
-  const renderHomeRecommendationCards = () => {
+  const getHomeRecommendationBrands = (countryCode, limit = 18) => {
+    if (countryCode) {
+      return selectUniqueHomeBrands(getHomeRecommendationCandidates(countryCode), limit).map(({ brand }) => brand);
+    }
+    const brandBySlug = new Map(BRANDS.filter(brand =>
+      brand.hasDetailPage && brand.urlDetail && !brand.notRecommended && !brand.temporarilyUnavailable
+    ).map(brand => [getBrandDetailSlug(brand), brand]));
+    return HOME_RECOMMENDATION_SLUGS.map(slug => brandBySlug.get(slug)).filter(Boolean);
+  };
+
+  const renderHomeRecommendationCards = (brands = getHomeRecommendationBrands(getHomeGeoCode()), append = false) => {
     const grid = document.querySelector('.home-recommendation-grid');
     if (!grid) return;
-  
-    const homeGeo = getHomeGeoCode();
     const fragment = document.createDocumentFragment();
-  
-    if (homeGeo) {
-      selectUniqueHomeBrands(getHomeRecommendationCandidates(homeGeo), 18).forEach(({ brand }) => {
-        fragment.appendChild(createCasinoCard(brand));
-      });
-    } else {
-      const brandBySlug = new Map(
-        BRANDS.filter(brand => brand.hasDetailPage && brand.urlDetail).map(brand => [getBrandDetailSlug(brand), brand])
-      );
-      HOME_RECOMMENDATION_SLUGS.forEach(slug => {
-        const brand = brandBySlug.get(slug);
-        if (brand) fragment.appendChild(createCasinoCard(brand));
-      });
+    brands.forEach(brand => fragment.appendChild(createCasinoCard(brand)));
+    if (!brands.length && !append) {
+      const empty = document.createElement('p');
+      empty.className = 'home-market-empty';
+      empty.textContent = noCountryCasinos;
+      fragment.appendChild(empty);
     }
-  
-    grid.replaceChildren(fragment);
+    if (append) grid.appendChild(fragment);
+    else grid.replaceChildren(fragment);
     applyBrandLogoBackgrounds();
     requestPaymentIconSync();
   };
@@ -153,13 +196,18 @@ export const initHomePage = context => {
     'viperwin',
   ];
   
-  const renderHomeNewReviews = () => {
+  const latestReviewsLabel = localeText(
+    'Latest casino reviews', 'Neue Casino-Bewertungen', 'Últimas reseñas de casinos', 'Nuove recensioni di casinò',
+    'Najnowsze recenzje kasyn', 'Нові огляди казино', 'Novas avaliações de casinos', 'Avis récents sur les casinos',
+    'नई कैसीनो समीक्षाएँ', 'Uudet kasinoarvostelut'
+  );
+
+  const renderHomeNewReviews = (homeGeo = getHomeGeoCode()) => {
     const grid = document.querySelector('.home-new-reviews-grid');
     if (!grid) return;
-  
-    const homeGeo = getHomeGeoCode();
+
     const brandBySlug = new Map(
-      BRANDS.filter(brand => brand.hasDetailPage && brand.urlDetail && brand.image && !brand.notRecommended).map(
+      BRANDS.filter(brand => brand.hasDetailPage && brand.urlDetail && brand.image && !brand.notRecommended && !brand.temporarilyUnavailable).map(
         brand => [getBrandDetailSlug(brand), brand]
       )
     );
@@ -195,15 +243,16 @@ export const initHomePage = context => {
           `Leggi la recensione di ${name}`,
           `Przeczytaj recenzję ${name}`,
           `Прочитати огляд ${name}`,
-          null,
-          null,
-          `${name} की समीक्षा पढ़ें`
+          `Ler a avaliação de ${name}`,
+          `Lire l’avis sur ${name}`,
+          `${name} की समीक्षा पढ़ें`,
+          `Lue ${name}-arvostelu`
         )
       );
       logo.className = 'home-new-review-logo';
       setBrandBackground(logo, brand.bgColor);
       image.src = normalizeAssetPath(brand.image);
-      image.alt = `${name} logo`;
+      image.alt = '';
       image.loading = 'lazy';
       image.decoding = 'async';
       title.textContent = name;
@@ -214,65 +263,119 @@ export const initHomePage = context => {
     });
   
     grid.replaceChildren(fragment);
+    grid.closest('.home-new-reviews').hidden = !reviewCandidates.length;
   };
   
-  const renderLocalizedHomeCasinoGallery = () => {
-    const homeGeo = getHomeGeoCode();
-    const grid = document.querySelector('.home-casino-gallery-grid');
-    if (!homeGeo || !grid) return;
-  
-    const candidates = getHomeRecommendationCandidates(homeGeo).filter(candidate =>
-      Boolean(BRAND_HOMEPAGE_SCREENSHOTS[candidate.slug])
+  const initHomeMarketFilter = () => {
+    const directory = document.querySelector('.home-country-directory');
+    const section = document.getElementById('recommended-brands');
+    const grid = section?.querySelector('.home-recommendation-grid');
+    if (!directory || !section || !grid) return;
+
+    const countries = new Map(COUNTRIES.map(country => [country.slug, country.code.toUpperCase()]));
+    const batchSize = 20;
+    let selectedLink = null;
+    let brands = [];
+    let visibleCount = 0;
+
+    const bar = document.createElement('div');
+    const title = document.createElement('h2');
+    const actions = document.createElement('div');
+    const reviews = document.createElement('a');
+    const guide = document.createElement('a');
+    const reset = document.createElement('button');
+    const more = document.createElement('button');
+    bar.className = 'home-market-bar';
+    actions.className = 'home-market-actions';
+    title.setAttribute('aria-live', 'polite');
+    reviews.href = '#new-reviews-title';
+    reviews.textContent = latestReviewsLabel;
+    guide.textContent = localeText(
+      'Country guide', 'Länder-Guide', 'Guía del país', 'Guida del paese', 'Przewodnik po kraju',
+      'Гід країни', 'Guia do país', 'Guide du pays', 'देश की गाइड', 'Maaopas'
     );
-    const fragment = document.createDocumentFragment();
-  
-    selectUniqueHomeBrands(candidates, 9).forEach(({ brand, slug }) => {
-      const name = normalizeText(brand.name);
-      const link = document.createElement('a');
-      const image = document.createElement('img');
-      const copy = document.createElement('span');
-      const title = document.createElement('strong');
-      const detail = document.createElement('small');
-  
-      link.className = 'home-casino-shot';
-      link.href = brandPagePath(brand);
-      image.src = BRAND_HOMEPAGE_SCREENSHOTS[slug];
-      image.alt = localeText(
-        `${name} casino homepage`,
-        `${name} Casino-Startseite`,
-        `Página de inicio del casino ${name}`,
-        `Home page del casinò ${name}`,
-        `Strona główna kasyna ${name}`,
-        `Головна сторінка казино ${name}`,
-        null,
-        null,
-        `${name} कैसीनो होमपेज`
-      );
-      image.width = 3024;
-      image.height = 1574;
-      image.loading = 'lazy';
-      image.decoding = 'async';
-      title.textContent = name;
-      detail.textContent = localeText(
-        'Casino review and current details',
-        'Casino-Test und aktuelle Details',
-        'Reseña y datos actuales',
-        'Recensione e dettagli aggiornati',
-        'Recenzja i aktualne informacje',
-        'Огляд та актуальна інформація',
-        null,
-        null,
-        'समीक्षा और नवीनतम जानकारी'
-      );
-  
-      copy.append(title, detail);
-      link.append(image, copy);
-      fragment.appendChild(link);
+    reset.type = more.type = 'button';
+    reset.textContent = localeText(
+      'Reset filter', 'Filter zurücksetzen', 'Quitar filtro', 'Azzera filtro', 'Wyczyść filtr',
+      'Скинути фільтр', 'Limpar filtro', 'Réinitialiser le filtre', 'फ़िल्टर हटाएँ', 'Tyhjennä suodatin'
+    );
+    more.className = 'home-market-more';
+    more.textContent = localeText(
+      'Show more casinos', 'Mehr Casinos anzeigen', 'Ver más casinos', 'Mostra altri casinò', 'Pokaż więcej kasyn',
+      'Показати більше казино', 'Ver mais casinos', 'Voir plus de casinos', 'और कैसीनो दिखाएँ', 'Näytä lisää kasinoita'
+    );
+    bar.hidden = more.hidden = true;
+    actions.append(reviews, guide, reset);
+    bar.append(title, actions);
+    grid.before(bar);
+    grid.after(more);
+
+    const renderBatch = (append = false) => {
+      const next = brands.slice(visibleCount, visibleCount + batchSize);
+      renderHomeRecommendationCards(next, append);
+      visibleCount += next.length;
+      more.hidden = visibleCount >= brands.length;
+    };
+
+    more.addEventListener('click', () => {
+      const firstNewCard = visibleCount;
+      renderBatch(true);
+      grid.children[firstNewCard]?.querySelector('.cta')?.focus();
     });
-  
-    grid.replaceChildren(fragment);
+
+    reset.addEventListener('click', () => {
+      const previous = selectedLink;
+      previous?.removeAttribute('aria-current');
+      selectedLink = null;
+      delete section.dataset.selectedCountry;
+      bar.hidden = more.hidden = true;
+      renderHomeRecommendationCards();
+      renderHomeNewReviews();
+      previous?.focus();
+    });
+
+    directory.addEventListener('click', event => {
+      const link = event.target.closest('.countries-cloud a.country-link');
+      if (!link || event.defaultPrevented || event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+      const slug = link.pathname.split('/').filter(Boolean).at(-1);
+      const code = countries.get(slug);
+      if (!code) return;
+
+      event.preventDefault();
+      selectedLink?.removeAttribute('aria-current');
+      selectedLink = link;
+      selectedLink.setAttribute('aria-current', 'true');
+      section.dataset.selectedCountry = slug;
+      title.textContent = link.textContent.trim();
+      guide.href = link.href;
+      brands = getHomeRecommendationBrands(code, Infinity);
+      visibleCount = 0;
+      bar.hidden = false;
+      reviews.hidden = !brands.length;
+      renderBatch();
+      renderHomeNewReviews(code);
+    });
   };
-  
+
+  const initCountryCatalogReviews = () => {
+    const catalog = document.querySelector('.country-catalog-results');
+    if (!catalog) return;
+    const section = document.createElement('section');
+    const content = document.createElement('div');
+    const title = document.createElement('h2');
+    const grid = document.createElement('div');
+    section.className = 'home-new-reviews country-catalog-reviews';
+    section.setAttribute('aria-labelledby', 'new-reviews-title');
+    content.className = 'container';
+    title.id = 'new-reviews-title';
+    title.textContent = latestReviewsLabel;
+    grid.className = 'home-new-reviews-grid';
+    content.append(title, grid);
+    section.append(content);
+    catalog.after(section);
+    renderHomeNewReviews(pageCountry);
+  };
+
   const renderLocalizedHomeGames = () => {
     const homeGeo = getHomeGeoCode();
     const grid = document.querySelector('.home-games-grid');
@@ -398,9 +501,14 @@ export const initHomePage = context => {
     });
   };
 
+  if (pageCountry) {
+    initCountryCatalogReviews();
+    return;
+  }
+  initHomeCountryCloud();
+  initHomeMarketFilter();
   renderHomeRecommendationCards();
   renderHomeNewReviews();
-  renderLocalizedHomeCasinoGallery();
   renderLocalizedHomeGames();
   initMobileEditorialMethod();
 };

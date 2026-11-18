@@ -209,14 +209,6 @@ const textOnly = value => String(value)
   .replace(/\s+/g, ' ')
   .trim();
 
-const getHomeStatsGrid = locale => {
-  const homeFile = locale === 'en' ? path.join(ROOT, 'index.html') : path.join(ROOT, locale, 'index.html');
-  const homeHtml = fs.readFileSync(homeFile, 'utf8');
-  const match = homeHtml.match(/<div class="home-stats-grid">[\s\S]*?<\/div>/i);
-  if (!match) throw new Error(`No homepage statistics grid found in ${path.relative(ROOT, homeFile)}`);
-  return match[0];
-};
-
 const extractAboutContent = html => {
   const legacySection = html.match(/<section class="content container content-article">([\s\S]*?)<\/section>/i)?.[1];
   if (!legacySection) {
@@ -288,7 +280,7 @@ const renderPrinciples = entries => entries.map((entry, index) => `
                 ${renderCardBody(entry.body)}
               </article>`).join('');
 
-const renderMain = (locale, source, homeStatsGrid) => {
+const renderMain = (locale, source, statsGrid) => {
   const t = copy[locale];
   const prefix = locale === 'en' ? '' : `/${locale}`;
   const [mission, ...principles] = source.timeline;
@@ -296,8 +288,8 @@ const renderMain = (locale, source, homeStatsGrid) => {
   const [verifyText, currentText, transparencyText] = source.paragraphs;
 
   return `<main>
-      <section class="hero container">
-        <div class="hero-content">
+      <section class="page-intro container">
+        <div class="page-intro-copy">
 
           <h1>${escapeHtml(t.title)}</h1>
           <p>${escapeHtml(t.lead)}</p>
@@ -307,9 +299,9 @@ const renderMain = (locale, source, homeStatsGrid) => {
           </div>
         </div>
 
-        <div class="home-insight-card">
-          ${homeStatsGrid}
-        </div>
+        ${statsGrid ? `<div class="home-insight-card">
+          ${statsGrid}
+        </div>` : ''}
       </section>
 
       <div class="content-area container">
@@ -382,7 +374,7 @@ for (const locale of Object.keys(copy)) {
   const file = locale === 'en' ? path.join(ROOT, 'about', 'index.html') : path.join(ROOT, locale, 'about', 'index.html');
   let html = fs.readFileSync(file, 'utf8');
   const source = extractAboutContent(html);
-  const homeStatsGrid = getHomeStatsGrid(locale);
+  const statsGrid = html.match(/<div class="home-stats-grid">[\s\S]*?<\/div>/i)?.[0] ?? '';
 
   html = html
     .replace(/<body([^>]*)>/i, (_, attrs) => {
@@ -391,7 +383,7 @@ for (const locale of Object.keys(copy)) {
         .replace(/\sdata-page="[^"]*"/gi, '');
       return `<body class="home-page" data-page="about"${cleaned}>`;
     })
-    .replace(/<main\b[^>]*>[\s\S]*?<\/main>/i, renderMain(locale, source, homeStatsGrid));
+    .replace(/<main\b[^>]*>[\s\S]*?<\/main>/i, renderMain(locale, source, statsGrid));
 
   fs.writeFileSync(file, html);
   changed += 1;

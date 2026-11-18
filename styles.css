@@ -1,5 +1,253 @@
-﻿@import url('/styles/core.css?v=20261031-matte-ui-1');
-@import url('/styles/pages.css?v=20261031-matte-ui-1');
+﻿@import url('/styles/core.css?v=20261118-compact-controls');
+@import url('/styles/pages.css?v=20261118-compact-controls');
+
+:root {
+  --heading-display-size: clamp(22px, 3vw, 38px);
+  --heading-content-section-size: clamp(19px, 2vw, 27px);
+  --heading-subsection-size: clamp(15px, 1.45vw, 20px);
+}
+
+/* One scale for semantic headings. The layer takes precedence over old page-local overrides. */
+@layer heading-scale {
+  h1 { --heading-size: var(--heading-display-size); }
+  h2 { --heading-size: var(--heading-content-section-size); }
+  h3 { --heading-size: var(--heading-subsection-size); }
+  h4 { --heading-size: clamp(14px, 1.2vw, 17px); }
+  :is(h5, h6) { --heading-size: clamp(13px, 1.05vw, 15px); }
+
+  :is(.brand-sticky-aside, .brand-profile-showcase) h1 { --heading-size: clamp(21px, 2.3vw, 29px); }
+  .casino-card h3 { --heading-size: clamp(13px, 1.06vw, 16px); }
+  :is(.home-game-card, .home-new-game-card, .country-new-game-card, .top-slot-card, .blog-country-card) h3 {
+    --heading-size: clamp(13px, 1.15vw, 16px);
+  }
+
+  :is(h1, h2, h3, h4, h5, h6) {
+    font-size: var(--heading-size) !important;
+    line-height: 1.2 !important;
+  }
+}
+
+.page-intro {
+  display: grid;
+  gap: clamp(14px, 2.2vw, 28px);
+  align-items: start;
+  padding-block:
+    calc(var(--header-collapsed-height, 68px) + clamp(18px, 2.4vw, 34px))
+    clamp(16px, 2vw, 28px);
+}
+
+.page-intro-copy {
+  display: grid;
+  min-width: 0;
+  gap: 10px;
+  justify-items: start;
+}
+
+.page-intro h1 {
+  max-width: 34ch;
+  margin: 0;
+  color: var(--text-main);
+  font-weight: 750;
+  line-height: 1.12;
+  overflow-wrap: anywhere;
+  text-wrap: balance;
+}
+
+.page-intro > p,
+.page-intro-copy > p:not(.author-role) {
+  max-width: 76ch;
+  margin: 0;
+  color: var(--text-muted);
+  font-size: clamp(15px, 1.3vw, 18px);
+  line-height: 1.55;
+}
+
+.page-intro :is(.top-casinos-hero-actions, .home-hero-actions, .author-actions, .blog-hero-links) {
+  position: static;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  gap: 8px;
+  min-height: 0;
+  margin: 4px 0 0;
+}
+
+.page-intro :is(.top-casinos-hero-actions, .home-hero-actions, .author-actions, .blog-hero-links) > a {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 42px;
+  padding: 8px 12px;
+  border: 1px solid var(--surface-border-strong);
+  border-radius: var(--control-radius);
+  background: var(--surface-card);
+  color: var(--text-main);
+  box-shadow: none;
+  font-size: 13px;
+  font-weight: 650;
+  line-height: 1.2;
+  text-align: center;
+  text-decoration: none;
+  text-transform: none;
+}
+
+body.home-page .page-intro .home-insight-card {
+  padding: 10px;
+  box-shadow: none;
+}
+
+body.home-page .page-intro .home-stat-tile {
+  min-height: 0;
+  padding: clamp(12px, 2vw, 20px);
+  box-shadow: none;
+}
+
+body.home-page .page-intro .home-stat-number {
+  font-size: clamp(26px, 3vw, 42px);
+}
+
+.page-intro-author {
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+}
+
+.page-intro-author .page-intro-copy { grid-area: 1 / 1; }
+
+body.author-page .page-intro-author .author-photo {
+  position: relative;
+  inset: auto;
+  width: clamp(76px, 12vw, 144px);
+  transform: none;
+  box-shadow: none;
+}
+
+body.author-page .page-intro-author .author-actions {
+  position: static;
+  flex-wrap: wrap;
+  overflow: visible;
+}
+
+body.blog-page[data-page='blog'] .blog-shell,
+body.blog-page.blog-article-page .blog-shell {
+  padding-top: 0;
+}
+
+.page-intro-blog,
+.page-intro-article {
+  gap: 12px;
+}
+
+.page-intro-blog {
+  max-width: calc(var(--site-max-width) - 2 * var(--section-padding-x));
+  margin-inline: auto;
+}
+
+.page-intro-article {
+  width: min(calc(100% - 2 * var(--page-gutter)), 1280px);
+  padding-inline: 0;
+}
+
+.page-intro-article .blog-article-meta { margin-top: 4px; }
+
+@media (max-width: 768px) {
+  .page-intro-article { width: calc(100% - 2 * var(--page-gutter-mobile)); }
+}
+
+/* Shared interaction states. Keep the yellow fill for primary actions. */
+:root {
+  --control-radius: 8px;
+  --control-focus: #aabbd2;
+  --control-hover-bg: color-mix(in srgb, var(--surface-card) 94%, var(--text-main));
+  --control-hover-border: color-mix(in srgb, var(--surface-border-strong) 72%, var(--text-main));
+  --control-chrome-text: #f1f3f6;
+  --control-chrome-bg: rgba(255, 255, 255, 0.09);
+  --control-chrome-border: rgba(255, 255, 255, 0.35);
+}
+
+:root[data-theme='light'] { --control-focus: #596e88; }
+
+html[data-theme] body :is(
+  .cta, .cta-brands, .cta-primary, .cta-secondary, .view-all, .filter-btn, .availability-tab,
+  .countries-cloud .country-link, .brand-countries .flag-container, .home-country-jump,
+  .home-primary-action, .home-secondary-action, .home-section-cta > a,
+  .home-market-actions > :is(a, button), .home-country-return, .home-market-more, .home-country-toggle,
+  .top-casinos-hero-actions > a, .top-casino-jump-toggle, .blog-hero-links > a, .author-actions > a,
+  .account-auth-control, .account-auth-primary, .account-auth-secondary,
+  .language-switcher-current, .site-search-trigger, .mobile-theme-settings, .theme-settings-option, .footer-settings-trigger,
+  .brand-editorial-toggle, .country-faq-question-button, .link-carousel-button,
+  .brand-promo-teaser, .brand-feedback-signin, .brand-feedback-submit, .brand-sticky-title__cta,
+  .top-casino-jump-link, .brand-country-toggle, .footer-newsletter-submit,
+  .account-representative-panel a, .moderation-toolbar button, .moderation-view-tabs button,
+  .moderation-user-toolbar button, .moderation-access button, .moderation-action,
+  [data-account-contact-submit]
+) {
+  border-radius: var(--control-radius);
+  transition: background-color 140ms ease, border-color 140ms ease, color 140ms ease;
+}
+
+@media (hover: hover) {
+  html[data-theme] body :is(
+    .view-all, .cta-secondary, .filter-btn, .availability-tab,
+    .countries-cloud a, .brand-countries .flag-container, .home-country-jump,
+    .home-primary-action, .home-secondary-action, .home-section-cta > a,
+    .home-market-actions > :is(a, button), .home-country-return, .home-market-more, .home-country-toggle,
+    .top-casinos-hero-actions > a, .top-casino-jump-toggle, .blog-hero-links > a, .author-actions > a,
+    .account-auth-secondary, .theme-settings-option, .brand-editorial-toggle, .country-faq-question-button,
+    .brand-feedback-signin, .link-carousel-button, .top-casino-jump-link, .brand-country-toggle,
+    .account-representative-panel a, .moderation-toolbar button, .moderation-view-tabs button,
+    .moderation-user-toolbar button, .moderation-access button, .moderation-action:not(.moderation-action-delete)
+  ):hover:not(:disabled, [aria-disabled='true'], .cta-blocked, .active, .is-active, [aria-selected='true'], [aria-pressed='true'], [aria-current='true']) {
+    border-color: var(--control-hover-border);
+    background: var(--control-hover-bg) !important;
+    color: var(--text-main);
+    box-shadow: none;
+    transform: none;
+  }
+
+  html[data-theme] body :is(.cta, .cta-brands, .cta-primary, .account-auth-primary,
+    .brand-promo-teaser, .brand-feedback-submit, .brand-sticky-title__cta, .footer-newsletter-submit,
+    [data-account-contact-submit],
+    .filter-btn:is(.active, .is-active)
+  ):hover:not(.cta-secondary, .cta-blocked, :disabled, [aria-disabled='true']) {
+    border-color: transparent;
+    background: color-mix(in srgb, var(--gold) 92%, #221900);
+    color: #191400;
+    box-shadow: none;
+    transform: none;
+  }
+
+  html[data-theme] body :is(.header, .footer, .mobile-menu-panel) :is(.account-auth-control,
+    .language-switcher-current, .site-search-trigger, .mobile-theme-settings, .footer-settings-trigger
+  ):hover {
+    border-color: var(--control-chrome-border);
+    background: var(--control-chrome-bg);
+    color: var(--control-chrome-text);
+    box-shadow: none;
+  }
+}
+
+html[data-theme] body .home-country-directory .countries-cloud .country-link[aria-current='true'] {
+  border-color: var(--text-muted);
+  background: var(--control-hover-bg) !important;
+  color: var(--text-main);
+  box-shadow: none;
+}
+
+html[data-theme] body :is(button, [role='button'], .countries-cloud a, .brand-countries .flag-container,
+  .cta, .cta-brands, .cta-primary, .cta-secondary, .view-all, .home-primary-action, .home-secondary-action,
+  .home-section-cta > a, .home-market-actions > a, .home-country-return,
+  .top-casinos-hero-actions > a, .blog-hero-links > a, .author-actions > a,
+  .top-casino-jump-link, .account-representative-panel a,
+  .brand-feedback-signin, .brand-promo-teaser, .brand-sticky-title__cta):focus-visible {
+  outline: 2px solid var(--control-focus);
+  outline-offset: 2px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html body :is(button, .cta, .cta-brands, .cta-secondary, .view-all, .countries-cloud a, .top-casino-jump-link, .page-intro a) {
+    transition: none;
+  }
+}
 
 /* Persistent review links also work before the interactive cards load. */
 .country-review-directory { width: 100%; max-width: none; margin: 24px 0 0; border-top: 1px solid var(--surface-border-strong); text-align: left; }

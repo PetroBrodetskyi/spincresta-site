@@ -3,21 +3,21 @@ import path from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 
 // Reviewed homepage headings. Keep these after locale/page regeneration.
-// Order: country introduction, two counters, comparison, reviews, gallery, games, method.
+// Order: recommendations region label, then reviews, games, method headings.
 export const HOME_LABELS = {
-  en: ['Find casinos in your country', 'Countries', 'Casino reviews', 'Compare online casinos', 'Latest casino reviews', 'Casino screenshots', 'New games', 'How we review casinos'],
-  de: ['Casinos für Ihr Land', 'Länder', 'Casino-Bewertungen', 'Online-Casinos vergleichen', 'Neue Casino-Bewertungen', 'Casino-Screenshots', 'Neue Spiele', 'So prüfen wir Casinos'],
-  es: ['Casinos para tu país', 'Países', 'Reseñas de casinos', 'Compara casinos online', 'Últimas reseñas de casinos', 'Capturas de los casinos', 'Nuevos juegos', 'Cómo analizamos los casinos'],
-  it: ['Trova i casinò nel tuo paese', 'Paesi', 'Recensioni di casinò', 'Confronta i casinò online', 'Nuove recensioni di casinò', 'Immagini dei casinò', 'Nuovi giochi', 'Come valutiamo i casinò'],
-  pl: ['Kasyna w Twoim kraju', 'Kraje', 'Recenzje kasyn', 'Porównaj kasyna online', 'Najnowsze recenzje kasyn', 'Zrzuty ekranu kasyn', 'Nowe gry', 'Jak oceniamy kasyna'],
-  uk: ['Казино для вашої країни', 'Країни', 'Огляди казино', 'Порівняйте онлайн-казино', 'Нові огляди казино', 'Скриншоти казино', 'Нові ігри', 'Як ми перевіряємо казино'],
-  pt: ['Casinos no seu país', 'Países', 'Avaliações de casinos', 'Compare casinos online', 'Novas avaliações de casinos', 'Imagens dos casinos', 'Novos jogos', 'Como avaliamos os casinos'],
-  fr: ['Trouvez un casino dans votre pays', 'Pays', 'Avis sur les casinos', 'Comparez les casinos en ligne', 'Avis récents sur les casinos', 'Captures d’écran des casinos', 'Nouveaux jeux', 'Comment nous évaluons les casinos'],
-  hi: ['अपने देश के लिए कैसीनो खोजें', 'देश', 'कैसीनो समीक्षाएँ', 'ऑनलाइन कैसीनो की तुलना करें', 'नई कैसीनो समीक्षाएँ', 'कैसीनो के स्क्रीनशॉट', 'नए गेम', 'हम कैसीनो की समीक्षा कैसे करते हैं'],
-  fi: ['Kasinot maittain', 'Maata', 'Kasinoarvostelua', 'Vertaa nettikasinoita', 'Uudet kasinoarvostelut', 'Kasinoiden kuvakaappaukset', 'Uudet pelit', 'Näin arvioimme kasinot'],
+  en: ['Casino recommendations', 'Latest casino reviews', 'New games', 'How we review casinos'],
+  de: ['Casino-Empfehlungen', 'Neue Casino-Bewertungen', 'Neue Spiele', 'So prüfen wir Casinos'],
+  es: ['Casinos recomendados', 'Últimas reseñas de casinos', 'Nuevos juegos', 'Cómo analizamos los casinos'],
+  it: ['Casinò consigliati', 'Nuove recensioni di casinò', 'Nuovi giochi', 'Come valutiamo i casinò'],
+  pl: ['Polecane kasyna', 'Najnowsze recenzje kasyn', 'Nowe gry', 'Jak oceniamy kasyna'],
+  uk: ['Рекомендовані казино', 'Нові огляди казино', 'Нові ігри', 'Як ми перевіряємо казино'],
+  pt: ['Casinos recomendados', 'Novas avaliações de casinos', 'Novos jogos', 'Como avaliamos os casinos'],
+  fr: ['Casinos recommandés', 'Avis récents sur les casinos', 'Nouveaux jeux', 'Comment nous évaluons les casinos'],
+  hi: ['सुझाए गए कैसीनो', 'नई कैसीनो समीक्षाएँ', 'नए गेम', 'हम कैसीनो की समीक्षा कैसे करते हैं'],
+  fi: ['Suositellut kasinot', 'Uudet kasinoarvostelut', 'Uudet pelit', 'Näin arvioimme kasinot'],
 };
 
-const escapeHtml = text => text.replaceAll('&', '&amp;').replaceAll('<', '&lt;').replaceAll('>', '&gt;');
+const escapeHtml = text => text.replaceAll('&', '&amp;').replaceAll('<', '&lt;').replaceAll('>', '&gt;').replaceAll('"', '&quot;');
 const replaceOne = (html, pattern, replacement, label) => {
   if ([...html.matchAll(new RegExp(pattern.source, 'g'))].length !== 1) {
     throw new Error(`Expected one homepage ${label}`);
@@ -34,20 +34,17 @@ export function polishHomepageLabels(html, locale) {
 
   // The h2 already explains the section. Remove redundant promotional eyebrows
   // from the published markup rather than merely hiding them with CSS.
-  let result = html.replace(/^[ \t]*<span class="home-section-kicker">[^<]*<\/span>\r?\n/gm, '');
+  let result = html.replace(/^[ \t]*<section class="home-stats"[^>]*>[\s\S]*?<\/section>\r?\n(?:\r?\n)?/gm, '');
+  result = result.replace(/^[ \t]*<section class="home-showcase-section home-casino-gallery"[^>]*>[\s\S]*?<\/section>\r?\n(?:\r?\n)?/gm, '');
+  result = result.replace(/^[ \t]*<a class="home-primary-action" href="#recommended-brands">[^<]*<\/a>\r?\n/gm, '');
+  result = result.replace(/^[ \t]*<span class="home-section-kicker">[^<]*<\/span>\r?\n/gm, '');
   result = result.replace(/<span class="home-section-kicker">[^<]*<\/span>/g, '');
-  result = replaceOne(result, /(<div class="home-insight-head">\s*<h2>)[^<]*(<\/h2>)/,
-    (_, start, end) => start + escapeHtml(copy[0]) + end, 'country introduction');
-
-  for (const [id, text] of [['siteCountryCount', copy[1]], ['siteBrandCount', copy[2]]]) {
-    result = replaceOne(result, new RegExp(`(<span class="home-stat-number" id="${id}">[^<]*<\\/span>\\s*<strong>)[^<]*(<\\/strong>)`),
-      (_, start, end) => start + escapeHtml(text) + end, id);
-  }
-  result = replaceOne(result, /(<section class="home-showcase-section home-recommendations"[^>]*>[\s\S]*?<h2>)[^<]*(<\/h2>)/,
-    (_, start, end) => start + escapeHtml(copy[3]) + end, 'comparison heading');
-  for (const [index, id] of ['new-reviews-title', 'casino-gallery-title', 'new-games-title', 'editorial-method-title'].entries()) {
+  result = replaceOne(result,
+    /(<section class="home-showcase-section home-recommendations" id="recommended-brands")(?: aria-label="[^"]*")?>(?:\s*<div class="home-showcase-heading">\s*<div>\s*<h2>[^<]*<\/h2>\s*<\/div>\s*<p>[\s\S]*?<\/p>\s*<\/div>)?\s*(?=<div class="casino-grid\b)/,
+    (_, start) => `${start} aria-label="${escapeHtml(copy[0])}">\n          `, 'recommendations grid');
+  for (const [index, id] of ['new-reviews-title', 'new-games-title', 'editorial-method-title'].entries()) {
     result = replaceOne(result, new RegExp(`(<h2 id="${id}">)[^<]*(<\\/h2>)`),
-      (_, start, end) => start + escapeHtml(copy[index + 4]) + end, id);
+      (_, start, end) => start + escapeHtml(copy[index + 1]) + end, id);
   }
   if (locale === 'en') {
     result = result.replace('lobby is organised', 'lobby is organized')

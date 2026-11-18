@@ -143,14 +143,6 @@ const getFaq = html => {
   return [];
 };
 
-const getHomeStatsGrid = locale => {
-  const homeFile = locale === 'en' ? path.join(ROOT, 'index.html') : path.join(ROOT, locale, 'index.html');
-  const homeHtml = fs.readFileSync(homeFile, 'utf8');
-  const match = homeHtml.match(/<div class="home-stats-grid">[\s\S]*?<\/div>/i);
-  if (!match) throw new Error(`No homepage statistics grid found in ${path.relative(ROOT, homeFile)}`);
-  return match[0];
-};
-
 const updateStructuredData = (html, pageTitle, pageDescription) => html.replace(
   /<script type="application\/ld\+json">([\s\S]*?)<\/script>/gi,
   (full, source) => {
@@ -194,12 +186,12 @@ const renderSteps = steps => steps.map(([title, text], index) => `
 const renderList = items => items.map(item => `• ${escapeHtml(item)}`).join('<br />');
 const renderFaq = items => items.map(([question, answer]) => `<article class="faq-card"><h3>${escapeHtml(question)}</h3><p>${escapeHtml(answer)}</p></article>`).join('');
 
-const renderMain = (locale, faq, homeStatsGrid) => {
+const renderMain = (locale, faq, statsGrid) => {
   const t = copy[locale];
   const prefix = locale === 'en' ? '' : `/${locale}`;
   return `<main>
-      <section class="hero container">
-        <div class="hero-content">
+      <section class="page-intro container">
+        <div class="page-intro-copy">
 
           <h1>${escapeHtml(t.title)}</h1>
           <p>${escapeHtml(t.lead)}</p>
@@ -209,9 +201,9 @@ const renderMain = (locale, faq, homeStatsGrid) => {
           </div>
         </div>
 
-        <div class="home-insight-card">
-          ${homeStatsGrid}
-        </div>
+        ${statsGrid ? `<div class="home-insight-card">
+          ${statsGrid}
+        </div>` : ''}
       </section>
 
       <div class="content-area container">
@@ -295,7 +287,7 @@ for (const locale of Object.keys(copy)) {
   const file = locale === 'en' ? path.join(ROOT, 'partners', 'index.html') : path.join(ROOT, locale, 'partners', 'index.html');
   let html = fs.readFileSync(file, 'utf8');
   const faq = getFaq(html);
-  const homeStatsGrid = getHomeStatsGrid(locale);
+  const statsGrid = html.match(/<div class="home-stats-grid">[\s\S]*?<\/div>/i)?.[0] ?? '';
   if (!faq.length) throw new Error(`No FAQ schema found in ${path.relative(ROOT, file)}`);
   const pageTitle = `SpinCresta | ${copy[locale].title}`;
   const pageDescription = copy[locale].lead;
@@ -307,7 +299,7 @@ for (const locale of Object.keys(copy)) {
         .replace(/\sdata-page="[^"]*"/gi, '');
       return `<body class="home-page" data-page="partners"${cleaned}>`;
     })
-    .replace(/<main\b[^>]*>[\s\S]*?<\/main>/i, renderMain(locale, faq, homeStatsGrid))
+    .replace(/<main\b[^>]*>[\s\S]*?<\/main>/i, renderMain(locale, faq, statsGrid))
     .replace(/\s*<style>\s*\.partners-listing-title\s*\{[\s\S]*?<\/style>/i, '')
     .replace(/<title>[\s\S]*?<\/title>/i, `<title>${escapeHtml(pageTitle)}</title>`)
     .replace(/<meta\s+name="description"\s+content="[\s\S]*?"\s*\/>/i, `<meta name="description" content="${escapeHtml(pageDescription)}" />`)

@@ -4,7 +4,6 @@ export const renderCountryMedia = context => {
   const {
     BRANDS,
     COUNTRIES,
-    BRAND_HOMEPAGE_SCREENSHOTS,
     BRAND_NEW_GAMES,
     normalizeText,
     localizedCountryName,
@@ -13,99 +12,6 @@ export const renderCountryMedia = context => {
     localeText,
     escapeHtml,
   } = context;
-
-  const renderCountryCasinoGallery = pageCountry => {
-    const main = document.querySelector('body[data-country] main');
-    const hero = main?.querySelector(':scope > .hero');
-    const country = COUNTRIES.find(item => item.code.toUpperCase() === pageCountry);
-    if (!main || !hero || !country || main.querySelector('.country-casino-gallery')) return;
-
-    const candidates = BRANDS.map((brand, index) => ({ brand, index }))
-      .filter(({ brand }) => {
-        const slug = getBrandDetailSlug(brand);
-        return (
-          brand.hasDetailPage &&
-          brand.urlDetail &&
-          !brand.notRecommended &&
-          brand.countries?.some(code => code.toUpperCase() === pageCountry) &&
-          Boolean(BRAND_HOMEPAGE_SCREENSHOTS[slug])
-        );
-      })
-      .sort((a, b) => {
-        const score = brand =>
-          (Number.isFinite(brand.countryPagePriority) ? 1000 - brand.countryPagePriority : 0) +
-          (brand.top?.some(code => code.toUpperCase() === pageCountry) ? 100 : 0) +
-          (brand.isTopRated ? 30 : 0) +
-          (brand.isExclusive ? 10 : 0) +
-          (brand.isNew ? 5 : 0);
-        return score(b.brand) - score(a.brand) || a.index - b.index;
-      });
-
-    const selectedBrands = [];
-    const selectedSlugs = new Set();
-    candidates.forEach(({ brand }) => {
-      const slug = getBrandDetailSlug(brand);
-      if (selectedBrands.length >= 6 || selectedSlugs.has(slug)) return;
-      selectedSlugs.add(slug);
-      selectedBrands.push(brand);
-    });
-
-    if (!selectedBrands.length) return;
-
-    const countryName = normalizeText(localizedCountryName(country));
-    const headingId = `country-casino-gallery-${country.slug}`;
-    const section = document.createElement('section');
-    section.className = 'content country-casino-gallery';
-    section.setAttribute('aria-labelledby', headingId);
-    section.innerHTML = `
-      <div class="container">
-        <div class="country-casino-gallery-head">
-          <div>
-
-            <h2 id="${headingId}">${localeText(
-              `Inside casinos available in ${countryName}`,
-              `Einblicke in Casinos für ${countryName}`,
-              `Así son los casinos disponibles en ${countryName}`
-            )}</h2>
-          </div>
-          <p>${
-            localeText(
-              `Real homepage captures from brands included in our ${countryName} comparison. Open any preview for the complete review and current details.`,
-              `Echte Startseiten-Aufnahmen von Marken, die in unserem ${countryName}-Vergleich vertreten sind. Öffnen Sie eine Vorschau für den vollständigen Test.`,
-              `Capturas reales de las páginas principales de marcas incluidas en nuestra comparativa de ${countryName}. Abre cualquier vista previa para consultar la reseña completa y los datos actuales.`
-            )
-          }</p>
-        </div>
-        <div class="country-casino-gallery-grid">
-          ${selectedBrands
-            .map(brand => {
-              const slug = getBrandDetailSlug(brand);
-              const name = normalizeText(brand.name);
-              const source = BRAND_HOMEPAGE_SCREENSHOTS[slug].replace(
-                '/image/upload/',
-                '/image/upload/c_fill,g_north,w_900,h_506/'
-              );
-              return `
-                <a class="country-casino-shot" href="${brandPagePath(brand)}">
-                  <img src="${source}" alt="${localeText(
-                    `${name} casino homepage for ${countryName}`,
-                    `${name} Casino-Startseite für ${countryName}`,
-                    `Página principal de ${name} para ${countryName}`
-                  )}" width="900" height="506" loading="lazy" decoding="async" />
-                  <span>
-                    <strong>${name}</strong>
-                    <small>${localeText('Review and current details', 'Test und aktuelle Details', 'Reseña y datos actuales')}</small>
-                  </span>
-                </a>
-              `;
-            })
-            .join('')}
-        </div>
-      </div>
-    `;
-
-    hero.insertAdjacentElement('afterend', section);
-  };
 
   const renderCountryNewGames = pageCountry => {
     const main = document.querySelector('body[data-country] main');
@@ -225,11 +131,9 @@ export const renderCountryMedia = context => {
       </div>
     `;
 
-    const gallery = main.querySelector('.country-casino-gallery');
-    const hero = main.querySelector(':scope > .hero');
-    (gallery || hero)?.insertAdjacentElement('afterend', section);
+    const catalog = main.querySelector('.country-catalog-reviews') || main.querySelector('.country-catalog-results');
+    catalog?.insertAdjacentElement('afterend', section);
   };
 
-  renderCountryCasinoGallery(context.pageCountry);
   renderCountryNewGames(context.pageCountry);
 };

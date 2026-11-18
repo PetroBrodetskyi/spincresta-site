@@ -279,7 +279,7 @@ const extractCards = (source, tag = 'div') => [...source.matchAll(new RegExp(
 ))].map(match => ({ title: textOnly(match[1]), body: match[2].trim() }));
 
 const extractSource = html => {
-  const hero = html.match(/<section class="hero container">([\s\S]*?)<\/section>/i)?.[1];
+  const hero = html.match(/<section class="(?:page-intro|hero) container">([\s\S]*?)<\/section>/i)?.[1];
   const title = textOnly(hero?.match(/<h1>([\s\S]*?)<\/h1>/i)?.[1] ?? '');
   const redesignedKicker = textOnly(hero?.match(/<span class="home-hero-kicker">([\s\S]*?)<\/span>/i)?.[1] ?? '');
   const updated = redesignedKicker.includes(' · ')
@@ -378,8 +378,8 @@ const updateStructuredFaq = (html, answer) => html.replace(
 const renderMain = (locale, source) => {
   const t = copy[locale];
   return `<main>
-      <section class="hero container">
-        <div class="hero-content">
+      <section class="page-intro container">
+        <div class="page-intro-copy">
 
           <h1>${escapeHtml(source.title)}</h1>
           <p>${escapeHtml(t.lead)}</p>

@@ -169,7 +169,7 @@ const extractSource = html => {
     throw new Error('Responsible Gambling pages have already been redesigned. Restore a legacy page before rerunning this generator.');
   }
 
-  const hero = html.match(/<section class="hero container">([\s\S]*?)<\/section>/i)?.[1] ?? '';
+  const hero = html.match(/<section class="(?:page-intro|hero) container">([\s\S]*?)<\/section>/i)?.[1] ?? '';
   const title = textOnly(hero.match(/<h1>([\s\S]*?)<\/h1>/i)?.[1] ?? '');
   const heroLead = textOnly(hero.match(/<p>([\s\S]*?)<\/p>/i)?.[1] ?? '');
 
@@ -229,8 +229,8 @@ const renderMain = (locale, source) => {
   const selfCheck = extractListItems(rules.body)[4];
 
   return `<main>
-      <section class="hero container">
-        <div class="hero-content">
+      <section class="page-intro container">
+        <div class="page-intro-copy">
 
           <h1>${escapeHtml(source.title)}</h1>
           <p>${escapeHtml(source.heroLead)}</p>
