@@ -22,6 +22,14 @@ test('review detail tabs group existing editorial tables and central sportsbook 
   assert.match(css, /\.brand-review-details__panel\[hidden\]\s*\{\s*display: none/);
 });
 
+test('the selected review and snapshot tabs share a filled treatment without an underline', () => {
+  const panels = read('styles/brand-review.css');
+  assert.doesNotMatch(read('styles/pages.css'), /\.availability-tab[^,{]*::after/);
+  assert.doesNotMatch(panels, /\.brand-review-details__tabs > button[^{}]*\{[^{}]*border-bottom/);
+  assert.match(panels, /:is\(\.brand-availability-widget \.availability-tab, \.brand-review-details__tabs > button\)\[aria-selected='true'\]\s*\{[^}]*background: var\(--review-surface\);/);
+  assert.match(panels, /\.brand-review-details__tabs > button:focus-visible\s*\{[^}]*outline:/);
+});
+
 test('Lizaro has exactly one separately labeled sportsbook card in all ten languages', () => {
   for (const prefix of ['', 'de/', 'es/', 'it/', 'pl/', 'uk/', 'pt/', 'fr/', 'hi/', 'fi/']) {
     const html = read(`${prefix}brands/lizaro/index.html`);

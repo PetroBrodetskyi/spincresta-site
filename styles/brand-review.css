@@ -380,10 +380,9 @@ html:root body[data-brand].has-brand-sticky-layout
   flex: 0 0 auto;
   min-height: 44px;
   margin: 0;
-  padding: 7px 5px 8px;
-  border: 0;
-  border-bottom: 3px solid transparent;
-  border-radius: 0;
+  padding: 7px 10px;
+  border: 1px solid transparent;
+  border-radius: 7px;
   background: none;
   color: var(--review-muted);
   font: inherit;
@@ -393,13 +392,13 @@ html:root body[data-brand].has-brand-sticky-layout
   cursor: pointer;
 }
 
-.brand-review-details__tabs > button[aria-selected='true'] {
-  border-bottom-color: var(--review-contents-active);
+.brand-review-details__tabs > button:is(:hover, :focus-visible) {
   color: var(--review-ink);
 }
 
-.brand-review-details__tabs > button:is(:hover, :focus-visible) {
-  color: var(--review-ink);
+.brand-review-details__tabs > button:focus-visible {
+  outline: 2px solid var(--control-focus);
+  outline-offset: -2px;
 }
 
 .brand-review-details__panel {
@@ -483,7 +482,7 @@ html:root body[data-brand] .brand-availability-widget .availability-tab {
   color: var(--review-muted);
 }
 
-html:root body[data-brand] .brand-availability-widget .availability-tab[aria-selected='true'] {
+html:root body[data-brand] :is(.brand-availability-widget .availability-tab, .brand-review-details__tabs > button)[aria-selected='true'] {
   border-color: var(--review-line);
   background: var(--review-surface);
   color: var(--review-ink);

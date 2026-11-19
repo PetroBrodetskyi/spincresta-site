@@ -1,9 +1,6 @@
-/* Local design trial. Remove the import in styles.css to restore the previous design. */
-@import url('/fonts/inter-tight/index.css');
-@import url('/fonts/inter-tight/wght-italic.css');
+/* Section surfaces and primary action colors. Typography lives in the site shell. */
 
 :root {
-  --font-main: "Inter Tight Variable", system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
   --editorial-band: #e9eaec;
   --editorial-contrast: #303136;
   --editorial-blue: #164586;

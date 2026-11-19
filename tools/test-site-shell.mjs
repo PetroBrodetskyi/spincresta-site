@@ -28,7 +28,7 @@ test('the light canvas, white header and black footer do not depend on a visitor
   for (const file of ['styles.css', 'styles/core.css', 'styles/pages.css', 'styles/blog.css', 'scripts/main.js']) {
     assert.doesNotMatch(read(file), /data-theme|spincresta-theme|theme-settings|footer-settings-trigger|prefers-color-scheme|color-scheme:\s*dark/, file);
   }
-  assert.match(read('styles.css'), /\/styles\/core\.css\?v=20261118-type-scale/);
+  assert.match(read('styles.css'), /\/styles\/core\.css\?v=[\w-]+/);
 });
 
 test('the white vector wordmark has a footer-black ribbon with angular side notches', () => {

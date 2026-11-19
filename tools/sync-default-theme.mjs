@@ -3,7 +3,7 @@ import path from 'node:path';
 import {pathToFileURL} from 'node:url';
 
 const SITE_ENTRY_VERSION = '20261118-brand-games-row';
-const SITE_STYLE_VERSION = '20261118-brand-games-row-light';
+const SITE_STYLE_VERSION = '20261119-clean-tabs';
 const WORDMARK_VERSION = '20261118-padded-wordmark';
 const excluded = new Set(['.git','.vercel','node_modules','tools','research','data','tmp','keyboard-diagnostics']);
 export function publicThemePages(directory=process.cwd()) {

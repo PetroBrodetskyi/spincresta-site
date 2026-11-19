@@ -1,5 +1,6 @@
 ﻿:root {
   --font-main:
+    "Inter Tight Variable",
     system-ui,
     -apple-system,
     "Segoe UI",
@@ -158,6 +159,7 @@ li {
 }
 
 html {
+  font-family: var(--font-main);
   overflow-x: hidden;
 }
 
@@ -165,7 +167,6 @@ html {
    BASE
 ===================== */
 body {
-  font-family: var(--font-main);
   font-size: var(--type-body);
   background: var(--bg-main);
   color: var(--text-main);
@@ -188,6 +189,12 @@ input,
 select,
 textarea {
   font: inherit;
+}
+
+/* Browsers otherwise give native option labels and inline codes separate fonts. */
+:where(code, kbd, pre, samp, optgroup, option),
+input::file-selector-button {
+  font-family: inherit;
 }
 
 .container {
