@@ -1,3 +1,5 @@
+import { siteIconMarkup } from '../site-icons.js?v=20261119-site-icons';
+
 const DEFAULT_FEEDBACK_ENDPOINT = 'https://api.spincresta.com/api/brand-feedback';
 const DEFAULT_REPLIES_ENDPOINT = 'https://api.spincresta.com/api/brand-replies';
 const DEFAULT_VOTES_ENDPOINT = 'https://api.spincresta.com/api/feedback-votes';
@@ -434,7 +436,15 @@ const waitForAccountBridge = () => new Promise(resolve => {
   window.setTimeout(() => resolve(accountBridge()), 5000);
 });
 
-const createSection = (brand, copy, loadCopy) => {
+export const renderRatingOptions = copy => [1, 2, 3, 4, 5].map(value => {
+  const label = escapeHtml(starLabel(copy, value));
+  return `<input id="brand-rating-${value}" name="rating" type="radio" value="${value}" aria-label="${label}" />
+          <label for="brand-rating-${value}" title="${label}" aria-hidden="true">${siteIconMarkup('star', 'site-icon', 22)}</label>`;
+}).join('');
+
+export const createBrandFeedbackSection = (brand, locale = 'en') => {
+  const copy = COPY[locale] || COPY.en;
+  const loadCopy = FEEDBACK_LOAD_COPY[locale] || FEEDBACK_LOAD_COPY.en;
   const section = document.createElement('section');
   section.className = 'brand-player-feedback';
   section.id = 'player-reviews';
@@ -455,20 +465,16 @@ const createSection = (brand, copy, loadCopy) => {
       <p class="brand-feedback-empty">${escapeHtml(loadCopy.loading)}</p>
     </div>
     <div class="brand-feedback-compose">
-      <div>
-        <h3>${escapeHtml(copy.rateTitle)}</h3>
-        <p>${escapeHtml(copy.rateHint)}</p>
+      <div class="brand-feedback-compose-intro">
+        <h3 id="brand-feedback-compose-title">${siteIconMarkup('star', 'site-icon site-icon--heading')} ${escapeHtml(copy.rateTitle)}</h3>
+        <p id="brand-feedback-rating-hint">${escapeHtml(copy.rateHint)}</p>
       </div>
       <button class="brand-feedback-signin" type="button" data-feedback-signin>${escapeHtml(copy.signIn)}</button>
-      <button class="brand-feedback-compose-toggle" type="button" data-feedback-compose-toggle hidden></button>
-      <form data-feedback-form hidden>
-        <fieldset class="brand-feedback-rating">
-          <legend>${escapeHtml(copy.rateTitle)}</legend>
+      <button class="brand-feedback-compose-toggle" type="button" data-feedback-compose-toggle aria-controls="brand-feedback-form" hidden></button>
+      <form id="brand-feedback-form" data-feedback-form hidden>
+        <fieldset class="brand-feedback-rating" aria-labelledby="brand-feedback-compose-title" aria-describedby="brand-feedback-rating-hint">
           <div class="brand-feedback-rating-options">
-            ${[5, 4, 3, 2, 1].map(value => `
-              <input id="brand-rating-${value}" name="rating" type="radio" value="${value}" />
-              <label for="brand-rating-${value}" aria-label="${escapeHtml(starLabel(copy, value))}" title="${escapeHtml(starLabel(copy, value))}">★</label>
-            `).join('')}
+            ${renderRatingOptions(copy)}
           </div>
         </fieldset>
         <label>
@@ -477,9 +483,9 @@ const createSection = (brand, copy, loadCopy) => {
         </label>
         <label>
           <span>${escapeHtml(copy.bodyLabel)}</span>
-          <textarea name="body" rows="5" maxlength="5000" placeholder="${escapeHtml(copy.bodyPlaceholder)}"></textarea>
-          <small>${escapeHtml(copy.bodyHint)}</small>
+          <textarea name="body" rows="4" maxlength="5000" aria-describedby="brand-feedback-body-hint" placeholder="${escapeHtml(copy.bodyPlaceholder)}"></textarea>
         </label>
+        <small id="brand-feedback-body-hint">${escapeHtml(copy.bodyHint)}</small>
         <button class="brand-feedback-submit" type="submit">${escapeHtml(copy.submit)}</button>
       </form>
       <p class="brand-feedback-status" data-feedback-status role="status" aria-live="polite"></p>
@@ -505,7 +511,7 @@ const renderReviews = (section, payload, copy, teaserCopy, locale, teaserLink, c
   list.dataset.state = 'ready';
   const reviews = Array.isArray(payload.reviews) ? payload.reviews : [];
   if (!reviews.length) {
-    list.innerHTML = `<p class="brand-feedback-empty">${escapeHtml(copy.noReviews)}</p>`;
+    list.innerHTML = `<p class="brand-feedback-empty">${siteIconMarkup('chat', 'site-icon site-icon--inline')} ${escapeHtml(copy.noReviews)}</p>`;
     return;
   }
 
@@ -525,7 +531,7 @@ export const initBrandFeedback = async ({ brand, brandName = '', brandImage = ''
   const reviewStatusCopy = REVIEW_STATUS_COPY[locale] || REVIEW_STATUS_COPY.en;
   const replyCopy = REPLY_COPY[locale] || REPLY_COPY.en;
   const voteCopy = VOTE_COPY[locale] || VOTE_COPY.en;
-  const section = createSection(brand, copy, loadCopy);
+  const section = createBrandFeedbackSection(brand, locale);
   section.dataset.reviewSection = 'reviews';
   main.append(section);
   const contents = document.querySelector('.brand-section-nav__links');
@@ -759,6 +765,7 @@ export const initBrandFeedback = async ({ brand, brandName = '', brandImage = ''
     if (!rating) {
       status.textContent = copy.selectRating;
       status.dataset.state = 'error';
+      form.querySelector('input[name="rating"]')?.focus();
       return;
     }
     if ((title && !body) || (body && body.length < 20)) {

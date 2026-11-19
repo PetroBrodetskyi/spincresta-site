@@ -554,7 +554,7 @@ html:root body[data-brand] .brand-faq-section .faq-accordion-toggle {
 }
 
 html:root body[data-brand].has-brand-sticky-layout .brand-player-feedback
-  :is(.brand-feedback-score, .brand-feedback-empty, .brand-feedback-compose, .brand-feedback-card) {
+  :is(.brand-feedback-score, .brand-feedback-compose, .brand-feedback-card) {
   border-color: var(--review-line);
   border-radius: 11px;
   background: var(--review-base);
@@ -663,6 +663,7 @@ html:root body[data-brand] .brand-quick-facts a:is(:hover, :focus-visible) {
 }
 
 .brand-new-games-panel > h2 {
+  --site-icon-heading-ink: var(--review-muted);
   color: var(--review-ink);
 }
 

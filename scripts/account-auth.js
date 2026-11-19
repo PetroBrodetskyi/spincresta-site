@@ -1,4 +1,5 @@
 import { COUNTRIES } from './countries.js';
+import { initBrandFavorites, persistBrandFavorite, readFavoriteBrands } from './brand-favorites.js?v=20261119-site-icons';
 
 const DEFAULT_CONFIG_ENDPOINT = 'https://api.spincresta.com/api/auth-config';
 const DEFAULT_NEWSLETTER_ENDPOINT = 'https://api.spincresta.com/api/subscribe';
@@ -218,7 +219,7 @@ const createInterface = (copy, locale) => {
   return { control, modal };
 };
 
-export const initAccountAuth = async locale => {
+export const initAccountAuth = async (locale, favoriteOptions = {}) => {
   const copy = COPY[locale] || COPY.en;
   const contactCopy = CONTACT_COPY[locale] || CONTACT_COPY.en;
   const accountReviewsCopy = ACCOUNT_REVIEWS_COPY[locale] || ACCOUNT_REVIEWS_COPY.en;
@@ -242,6 +243,7 @@ export const initAccountAuth = async locale => {
   let currentProfile = null;
   let currentAccess = { role: 'user', representative: false, brands: [] };
   let autoCloseTimer = 0;
+  let favoriteWrite = Promise.resolve();
 
   const countrySelect = contactForm?.querySelector('[data-account-country]');
   if (countrySelect) {
@@ -306,6 +308,22 @@ export const initAccountAuth = async locale => {
     window.clearTimeout(autoCloseTimer);
     modal.hidden = true;
     document.body.classList.remove('account-auth-open');
+  };
+
+  const openSignIn = () => {
+    if (!modal.isConnected) {
+      if (!control.isConnected || control.disabled) return false;
+      control.click();
+      return true;
+    }
+    if (currentUser && !currentProfile?.registration_completed_at) {
+      populateUser('account', currentUser, currentProfile);
+      openModal('completion');
+    } else {
+      openModal(currentUser ? 'profile' : 'signin');
+    }
+    modal.querySelector('.account-auth-close')?.focus();
+    return true;
   };
 
   const updateControl = () => {
@@ -789,6 +807,29 @@ export const initAccountAuth = async locale => {
     }
   });
 
+  const getFavoriteUserId = () => currentProfile?.registration_completed_at ? currentUser?.id : undefined;
+  initBrandFavorites({
+    locale,
+    ...favoriteOptions,
+    account: {
+      hasRegisteredUser: () => Boolean(getFavoriteUserId()),
+      favorites: () => getFavoriteUserId() ? readFavoriteBrands(currentUser) : [],
+      openSignIn,
+      saveFavorite: (slug, selected) => {
+        const expectedUserId = getFavoriteUserId();
+        const task = favoriteWrite.then(async () => {
+          if (!expectedUserId || !supabase || expectedUserId !== getFavoriteUserId()) {
+            throw new Error('favorite_unavailable');
+          }
+          currentUser = await persistBrandFavorite(supabase.auth, getFavoriteUserId, slug, selected);
+          publishAccountState();
+        });
+        favoriteWrite = task.catch(() => {});
+        return task;
+      },
+    },
+  });
+
   try {
     const configResponse = await fetch(
       document.documentElement.dataset.authConfigEndpoint || DEFAULT_CONFIG_ENDPOINT,
@@ -837,14 +878,7 @@ export const initAccountAuth = async locale => {
           },
         };
       },
-      openSignIn: () => {
-        if (currentUser && !currentProfile?.registration_completed_at) {
-          populateUser('account', currentUser, currentProfile);
-          openModal('completion');
-          return;
-        }
-        openModal(currentUser ? 'profile' : 'signin');
-      },
+      openSignIn,
     };
 
     await syncSession({ openIncomplete: true });

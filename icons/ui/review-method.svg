@@ -1,0 +1,76 @@
+<svg xmlns="http://www.w3.org/2000/svg">
+  <symbol id="safety" viewBox="0 0 24 24">
+    <path d="M12 22c-4.5-2.5-8-5.5-8-10V5l8-3 8 3v7c0 4.5-3.5 7.5-8 10Z"/>
+    <path d="m8.5 12 2.5 2.5 4.5-5"/>
+  </symbol>
+  <symbol id="bonus" viewBox="0 0 24 24">
+    <path d="M4 11v9a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-9M12 7v14"/>
+    <rect x="2" y="7" width="20" height="4" rx="1"/>
+    <path d="M12 7H7.5A2.5 2.5 0 1 1 10 4.5L12 7Zm0 0h4.5A2.5 2.5 0 1 0 14 4.5L12 7Z"/>
+  </symbol>
+  <symbol id="payments" viewBox="0 0 24 24">
+    <rect x="2" y="4.5" width="20" height="15" rx="3"/>
+    <path d="M2 9h20M6 15h4"/>
+  </symbol>
+  <symbol id="games" viewBox="0 0 24 24">
+    <path d="M8 6h8a5 5 0 0 1 4.8 3.6l1.2 4.6a2.9 2.9 0 0 1-4.8 2.8l-2.1-1.9H8.9l-2.1 1.9A2.9 2.9 0 0 1 2 14.2l1.2-4.6A5 5 0 0 1 8 6Z"/>
+    <path d="M8 9v4m-2-2h4m5 1h.01M18 10h.01"/>
+  </symbol>
+  <symbol id="globe" viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="9"/><ellipse cx="12" cy="12" rx="4" ry="9"/><path d="M3 12h18"/>
+  </symbol>
+  <symbol id="review" viewBox="0 0 24 24">
+    <rect x="5" y="3" width="14" height="18" rx="2"/><path d="M9 7h6M9 11h6m-6 5 1.5 1.5L14 14"/>
+  </symbol>
+  <symbol id="star" viewBox="0 0 24 24">
+    <path d="m12 3 2.8 5.7 6.2.9-4.5 4.4 1.1 6.2-5.6-2.9-5.6 2.9 1.1-6.2L3 9.6l6.2-.9L12 3Z"/>
+  </symbol>
+  <symbol id="sparkles" viewBox="0 0 24 24">
+    <path d="M10 3c0 4.4-2.4 7-7 7 4.6 0 7 2.6 7 7 0-4.4 2.4-7 7-7-4.6 0-7-2.6-7-7Zm8 11c0 2.5-1.2 4-4 4 2.8 0 4 1.5 4 4 0-2.5 1.2-4 4-4-2.8 0-4-1.5-4-4Z"/>
+  </symbol>
+  <symbol id="sports" viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="9"/><path d="m12 8 4 2.8-1.6 4.7H9.6L8 10.8 12 8ZM12 8V3m4 7.8 4.6-1.5m-6.2 6.2 2.9 4.1m-7.7-4.1-2.9 4.1m1.3-8.8L3.4 9.3"/>
+  </symbol>
+  <symbol id="trophy" viewBox="0 0 24 24">
+    <path d="M7 4h10v7a5 5 0 0 1-10 0V4Zm0 2H3v2a4 4 0 0 0 4 4m10-6h4v2a4 4 0 0 1-4 4m-5 4v4m-4 1h8"/>
+  </symbol>
+  <symbol id="wallet" viewBox="0 0 24 24">
+    <path d="M19 8V6a2 2 0 0 0-2-2L5 7a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-2m0-5V9a1 1 0 0 0-1-1H5"/><path d="M21 11h-5a2.5 2.5 0 0 0 0 5h5v-5Zm-4 2.5h.01"/>
+  </symbol>
+  <symbol id="balance" viewBox="0 0 24 24">
+    <path d="M12 3v17M8 21h8M4 7h16M6 7l-3 7h6L6 7Zm12 0-3 7h6l-3-7Z"/>
+  </symbol>
+  <symbol id="help" viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="9"/><path d="M9.1 9a3 3 0 0 1 5.8 1c0 2.2-2.9 2.1-2.9 4m0 3h.01"/>
+  </symbol>
+  <symbol id="chat" viewBox="0 0 24 24">
+    <path d="M20 15a2 2 0 0 1-2 2H9l-5 4V6a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v9ZM8 9h8m-8 4h5"/>
+  </symbol>
+  <symbol id="mail" viewBox="0 0 24 24">
+    <rect x="3" y="5" width="18" height="14" rx="2"/><path d="m4 7 8 6 8-6"/>
+  </symbol>
+  <symbol id="lock" viewBox="0 0 24 24">
+    <rect x="5" y="10" width="14" height="11" rx="2"/><path d="M8 10V7a4 4 0 1 1 8 0v3m-4 4v3"/>
+  </symbol>
+  <symbol id="book" viewBox="0 0 24 24">
+    <path d="M12 6a9 9 0 0 0-9-2v14a9 9 0 0 1 9 2 9 9 0 0 1 9-2V4a9 9 0 0 0-9 2Zm0 0v14"/>
+  </symbol>
+  <symbol id="link" viewBox="0 0 24 24">
+    <path d="M10 13.5a3.5 3.5 0 0 0 5 0l4-4a3.5 3.5 0 1 0-5-5L12 6.5m0 11-2 2a3.5 3.5 0 0 1-5-5l4-4a3.5 3.5 0 0 1 5 0"/>
+  </symbol>
+  <symbol id="user" viewBox="0 0 24 24">
+    <circle cx="12" cy="8" r="4"/><path d="M4 21v-1a6 6 0 0 1 6-5h4a6 6 0 0 1 6 5v1"/>
+  </symbol>
+  <symbol id="calendar" viewBox="0 0 24 24">
+    <rect x="4" y="5" width="16" height="16" rx="2"/><path d="M8 3v4m8-4v4M4 10h16m-12 4h2m4 0h2m-8 3h2"/>
+  </symbol>
+  <symbol id="clock" viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>
+  </symbol>
+  <symbol id="warning" viewBox="0 0 24 24">
+    <path d="M10.3 4.8a2 2 0 0 1 3.4 0l7.5 13.1A2 2 0 0 1 19.5 21h-15a2 2 0 0 1-1.7-3.1l7.5-13.1ZM12 9v4m0 4h.01"/>
+  </symbol>
+  <symbol id="heart" viewBox="0 0 24 24">
+    <path d="M20.8 4.9a5.1 5.1 0 0 0-7.2 0L12 6.5l-1.6-1.6a5.1 5.1 0 0 0-7.2 7.2l1.6 1.6L12 21l7.2-7.3 1.6-1.6a5.1 5.1 0 0 0 0-7.2Z"/>
+  </symbol>
+</svg>

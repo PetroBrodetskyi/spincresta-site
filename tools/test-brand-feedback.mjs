@@ -1,10 +1,20 @@
 import assert from 'node:assert/strict';
 import { afterEach, test } from 'node:test';
-import { fetchPublicFeedback, fetchFeedbackVotes, buildFeedbackStructuredData } from '../scripts/pages/brand-feedback.js';
+import { fetchPublicFeedback, fetchFeedbackVotes, buildFeedbackStructuredData, renderRatingOptions } from '../scripts/pages/brand-feedback.js';
 
 const originalFetch = globalThis.fetch;
 afterEach(() => { globalThis.fetch = originalFetch; });
 const empty = { ok: true, summary: { averageRating: 0, ratingCount: 0, reviewCount: 0 }, reviews: [] };
+
+test('rating options follow left-to-right keyboard order and have localized accessible names', () => {
+  const markup = renderRatingOptions({ star: 'estrella', stars: 'estrellas' });
+  const radios = [...markup.matchAll(/id="brand-rating-(\d)" name="rating" type="radio" value="(\d)" aria-label="([^"]+)"/g)];
+  assert.deepEqual(radios.map(([, id, value, label]) => [id, value, label]), [
+    ['1', '1', '1 estrella'], ['2', '2', '2 estrellas'], ['3', '3', '3 estrellas'], ['4', '4', '4 estrellas'], ['5', '5', '5 estrellas'],
+  ]);
+  assert.deepEqual([...markup.matchAll(/for="brand-rating-(\d)"/g)].map(([, id]) => id), ['1', '2', '3', '4', '5']);
+  assert.equal([...markup.matchAll(/aria-hidden="true" focusable="false"/g)].length, 5);
+});
 
 test('a successful empty response is a genuine empty state, without a fabricated rating', async () => {
   globalThis.fetch = async () => Response.json(empty);

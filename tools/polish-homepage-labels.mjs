@@ -1,6 +1,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
+import { SITE_ICON_SPRITE, siteIconMarkup } from '../scripts/site-icons.js';
 
 // Reviewed homepage headings. Keep these after locale/page regeneration.
 // Order: recommendations region label, then reviews, games, method headings.
@@ -18,6 +19,7 @@ export const HOME_LABELS = {
 };
 
 const escapeHtml = text => text.replaceAll('&', '&amp;').replaceAll('<', '&lt;').replaceAll('>', '&gt;').replaceAll('"', '&quot;');
+const methodIcons = ['safety', 'bonus', 'payments', 'games'];
 const replaceOne = (html, pattern, replacement, label) => {
   if ([...html.matchAll(new RegExp(pattern.source, 'g'))].length !== 1) {
     throw new Error(`Expected one homepage ${label}`);
@@ -46,6 +48,13 @@ export function polishHomepageLabels(html, locale) {
     result = replaceOne(result, new RegExp(`(<h2 id="${id}">)[^<]*(<\\/h2>)`),
       (_, start, end) => start + escapeHtml(copy[index + 1]) + end, id);
   }
+  result = replaceOne(result,
+    /<section class="home-showcase-section home-editorial-method"[^>]*>[\s\S]*?<\/section>/,
+    section => section
+      .replace(/<span>0([1-4])<\/span>(?=\s*<h3>)/g, (_, number) =>
+        siteIconMarkup(methodIcons[Number(number) - 1], 'home-method-icon', 40))
+      .replace(/(?<=href=")\/icons\/ui\/review-method\.svg(?:\?[^"#]*)?(?=#)/g, SITE_ICON_SPRITE),
+    'editorial method section');
   if (locale === 'en') {
     result = result.replace('lobby is organised', 'lobby is organized')
       .replace('licence information', 'license information');

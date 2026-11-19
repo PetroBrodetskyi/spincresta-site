@@ -52,6 +52,22 @@ test('homepage copy pass cannot edit other pages or unknown locales', () => {
   assert.throws(() => polishHomepageLabels(html.replace('class="home-page"', 'class="home-page" data-page="about"'), 'en'), /Expected the homepage/);
 });
 
+test('all homepage methodology cards use the same four decorative icons after regeneration', () => {
+  const sprite = fs.readFileSync(new URL('icons/ui/review-method.svg', root), 'utf8');
+  const symbols = [...sprite.matchAll(/<symbol id="([^"]+)"/g)].map(([, id]) => id);
+  const methodology = ['safety', 'bonus', 'payments', 'games'];
+  assert.ok(methodology.every(icon => symbols.includes(icon)));
+  for (const locale of Object.keys(HOME_LABELS)) {
+    const html = fs.readFileSync(new URL(locale === 'en' ? 'index.html' : `${locale}/index.html`, root), 'utf8');
+    const section = html.match(/<section class="home-showcase-section home-editorial-method"[^>]*>[\s\S]*?<\/section>/)[0];
+    const icons = /<svg class="home-method-icon"[^>]*aria-hidden="true"[^>]*><use href="\/icons\/ui\/review-method\.svg\?v=[^"#]+#([^"]+)"><\/use><\/svg>/g;
+    assert.deepEqual([...section.matchAll(icons)].map(([, id]) => id), methodology, locale);
+    let number = 0;
+    const original = section.replace(icons, () => `<span>0${++number}</span>`);
+    assert.equal(polishHomepageLabels(html.replace(section, original), locale), html, locale);
+  }
+});
+
 test('homepage copy pass removes the old stats block after regeneration', () => {
   const html = fs.readFileSync(new URL('index.html', root), 'utf8');
   const fixture = html.replace('      <div class="content-area container">\n',

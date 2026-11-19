@@ -4,7 +4,8 @@
 import { BRANDS } from './brands.js?v=20261117-pinup-1';
 import { COUNTRIES } from './countries.js';
 import { initFooterNewsletter } from './footer-newsletter.js?v=20260826-newsletter-4';
-import { initAccountAuth } from './account-auth.js?v=20260829-local-preview-1';
+import { initAccountAuth } from './account-auth.js?v=20261119-site-icons';
+import { initSiteIcons, siteIconMarkup } from './site-icons.js?v=20261119-site-icons';
 
 let BRAND_SNAPSHOT_CONFIGS = {};
 let BRAND_NEW_GAMES = {};
@@ -61,7 +62,7 @@ const loadPageModules = async () => {
       import('./brand-snapshot-configs.js?v=20261006-vegasnow-2'),
       import('./brand-new-games.js?v=20261005-gravira-1'),
       import('./pages/brand.js?v=20261118-brand-games-row'),
-      import('./pages/brand-feedback.js?v=20261118-review-order'),
+      import('./pages/brand-feedback.js?v=20261119-context-icons'),
     ]);
     BRAND_SNAPSHOT_CONFIGS = snapshotsModule.BRAND_SNAPSHOT_CONFIGS || {};
     BRAND_NEW_GAMES = gamesModule.BRAND_NEW_GAMES || {};
@@ -3666,12 +3667,7 @@ const enhanceFaqBlocks = () => {
 
     question.classList.add('faq-question');
 
-    const icon = document.createElement('img');
-    icon.className = 'faq-question-icon';
-    icon.src = '/icons/ui/question-mark-circle-icon.svg';
-    icon.alt = '';
-    icon.setAttribute('aria-hidden', 'true');
-    question.prepend(icon);
+    question.insertAdjacentHTML('afterbegin', siteIconMarkup('help', 'site-icon faq-question-icon'));
   };
 
   const addAnswerIcon = answer => {
@@ -3729,11 +3725,7 @@ const enhanceFaqBlocks = () => {
       button.setAttribute('aria-selected', 'false');
       button.tabIndex = -1;
 
-      const questionIcon = document.createElement('img');
-      questionIcon.className = 'country-faq-question-icon';
-      questionIcon.src = '/icons/ui/question-mark-circle-icon.svg';
-      questionIcon.alt = '';
-      questionIcon.setAttribute('aria-hidden', 'true');
+      button.insertAdjacentHTML('afterbegin', siteIconMarkup('help', 'site-icon country-faq-question-icon', 30));
 
       const questionLabel = document.createElement('span');
       questionLabel.className = 'country-faq-question-label';
@@ -3743,7 +3735,7 @@ const enhanceFaqBlocks = () => {
       arrow.className = 'country-faq-question-arrow';
       arrow.setAttribute('aria-hidden', 'true');
 
-      button.append(questionIcon, questionLabel, arrow);
+      button.append(questionLabel, arrow);
 
       const panel = document.createElement('article');
       panel.className = 'country-faq-answer-item';
@@ -4210,7 +4202,13 @@ export const initCasinoPage = async () => {
   await Promise.all([pageModulesReady, brandBonusTranslationsReady]);
 
   if (pageType !== 'moderator') initFooterNewsletter(SITE_LOCALE);
-  initAccountAuth(SITE_LOCALE);
+  const initPageAccount = brand => initAccountAuth(SITE_LOCALE, {
+    slug: getBrandDetailSlug(brand),
+    findBrand: findBrandByPageKey,
+    getBrandSlug: getBrandDetailSlug,
+    brandPagePath,
+  });
+  if (!isBrandPage) initPageAccount();
   initAccountPageModule?.();
   initAffiliateClickTracking();
   window.addEventListener('resize', requestPaymentIconSync, { passive: true });
@@ -4355,6 +4353,7 @@ export const initCasinoPage = async () => {
       localizedBrandBonusText,
     });
     const brand = findBrandByPageKey(brandKey);
+    initPageAccount(brand);
     initBrandFeedbackModule?.({
       brand: brand ? getBrandDetailSlug(brand) : brandKey,
       brandName: brand?.name || brandKey,
@@ -4787,6 +4786,7 @@ export const initCasinoPage = async () => {
 
   initGameArtworkBackdrops();
   applyBrandLogoBackgrounds();
+  initSiteIcons();
   requestPaymentIconSync();
 };
 

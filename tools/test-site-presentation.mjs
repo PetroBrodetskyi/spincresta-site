@@ -101,7 +101,8 @@ test('published headers link directly to their localized homepage country cloud'
 
 test('functional feedback rating label is a heading, not an eyebrow', () => {
   const feedback = fs.readFileSync(path.join(root, 'scripts/pages/brand-feedback.js'), 'utf8');
-  assert.match(feedback, /<h3>\$\{[^}]*rateTitle[^}]*\}<\/h3>/);
+  assert.match(feedback, /<h3 id="brand-feedback-compose-title">[^\n]*\$\{[^}]*rateTitle[^}]*\}<\/h3>/);
+  assert.match(feedback, /<fieldset[^>]*aria-labelledby="brand-feedback-compose-title"/);
   assert.doesNotMatch(feedback, /class="section-kicker"/);
 });
 

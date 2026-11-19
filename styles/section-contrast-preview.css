@@ -89,7 +89,7 @@ html:root body[data-brand].has-brand-sticky-layout .brand-sticky-main
 }
 
 html:root body[data-brand].has-brand-sticky-layout .brand-sticky-main .brand-player-feedback
-  :is(.brand-feedback-score, .brand-feedback-empty, .brand-feedback-compose, .brand-feedback-card) {
+  :is(.brand-feedback-score, .brand-feedback-compose, .brand-feedback-card) {
   background: var(--review-surface);
 }
 
