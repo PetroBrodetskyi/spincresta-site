@@ -659,7 +659,7 @@ html:root body[data-brand] .brand-quick-facts a:is(:hover, :focus-visible) {
   min-width: 0;
   padding: var(--review-inset);
   border-radius: var(--review-radius);
-  background: var(--brand-games-background, var(--review-surface));
+  background: var(--review-surface);
 }
 
 .brand-new-games-panel > h2 {

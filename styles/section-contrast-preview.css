@@ -63,15 +63,29 @@ html:root body :is(
   box-shadow: none;
 }
 
+/* Stack the editorial sections as bands. Only the band paint crosses the page gutter. */
+html:root body[data-brand].has-brand-sticky-layout .brand-sticky-main,
+html:root body[data-brand].has-brand-sticky-layout .brand-sticky-main :is(.content-review, .content-article) {
+  gap: 0;
+}
+
 html:root body[data-brand].has-brand-sticky-layout .brand-sticky-main > section.container:not(:empty),
 html:root body[data-brand].has-brand-sticky-layout .brand-sticky-main :is(.content-review, .content-article) > section.container,
-html:root body[data-brand].has-brand-sticky-layout :is(.brand-review-overview, .brand-sticky-main .brand-player-feedback) {
+html:root body[data-brand].has-brand-sticky-layout .brand-sticky-main :is(.brand-new-games-panel, .brand-player-feedback) {
+  --brand-section-paint: var(--brand-section-background, var(--review-surface));
+  border: 0;
+  border-radius: 0;
+  background: var(--brand-section-paint);
+  border-image: linear-gradient(var(--brand-section-paint) 0 0) fill 0 / 0 / 0 100vmax 0 0;
+}
+
+html:root body[data-brand].has-brand-sticky-layout .brand-review-overview {
   border: 0;
 }
 
-html:root body[data-brand].has-brand-sticky-layout .brand-sticky-main :is(.content-review, .content-article) > section.container.brand-review-details,
-html:root body[data-brand].has-brand-sticky-layout .brand-sticky-main .brand-player-feedback {
-  background: var(--editorial-band);
+html:root body[data-brand].has-brand-sticky-layout .brand-sticky-main
+  :is(.brand-new-games-panel, .brand-review-details, .brand-player-feedback) {
+  --brand-section-background: var(--editorial-band);
 }
 
 html:root body[data-brand].has-brand-sticky-layout .brand-sticky-main .brand-player-feedback
@@ -79,12 +93,10 @@ html:root body[data-brand].has-brand-sticky-layout .brand-sticky-main .brand-pla
   background: var(--review-surface);
 }
 
-/* Let the lower review span the right rail, then paint through the page gutter. */
+/* No second tinted surface behind the bands; keep the upper review separate. */
 html:root body[data-brand].has-brand-sticky-layout .brand-review-overview + .brand-sticky-main {
-  --brand-article-band: var(--review-base);
-  padding-block: var(--review-space);
-  background: var(--brand-article-band);
-  border-image: linear-gradient(var(--brand-article-band) 0 0) fill 0 / 0 / 0 100vmax 0 0;
+  padding-block: 0;
+  background: var(--review-surface);
 }
 
 html:root body[data-brand].has-brand-sticky-layout
@@ -92,10 +104,4 @@ html:root body[data-brand].has-brand-sticky-layout
   border: 0;
   --surface-panel: var(--editorial-band);
   background: var(--surface-panel);
-}
-
-html:root body[data-brand].has-brand-sticky-layout .brand-new-games-panel {
-  --brand-games-background: var(--editorial-band);
-  border-radius: 0;
-  border-image: linear-gradient(var(--brand-games-background) 0 0) fill 0 / 0 / 0 100vmax 0 0;
 }

@@ -71,8 +71,9 @@ test('the article below the overview spans the former right rail without moving 
   const layout = read('scripts/pages/brand-layout.js');
   assert.match(layout, /main\.before\(overview\)/);
   assert.match(layout, /heading\.id = 'brand-review-overview'/);
-  assert.match(read('styles/section-contrast-preview.css'),
-    /\.brand-review-overview \+ \.brand-sticky-main\s*\{[^}]*fill 0 \/ 0 \/ 0 100vmax 0 0/);
+  const surfaces = read('styles/section-contrast-preview.css');
+  assert.match(surfaces, /--brand-section-paint:[^}]*border-radius: 0;[^}]*fill 0 \/ 0 \/ 0 100vmax 0 0/);
+  assert.match(surfaces, /\.brand-review-overview \+ \.brand-sticky-main\s*\{[^}]*background: var\(--review-surface\);/);
 });
 
 test('new game cards open the review body in a single horizontal, scrollable row', () => {

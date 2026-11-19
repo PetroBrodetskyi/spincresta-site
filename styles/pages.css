@@ -11618,9 +11618,94 @@ body.home-page .home-casino-shot:hover img {
 }
 
 body.home-page .home-games-grid {
-  display: grid;
-  grid-template-columns: repeat(6, minmax(0, 1fr));
-  gap: 14px;
+  display: flex;
+  gap: clamp(10px, 1.1vw, 16px);
+  min-width: 0;
+  padding-block: 5px 8px;
+  overflow-x: auto;
+  overscroll-behavior-inline: contain;
+  scroll-behavior: auto;
+  scrollbar-width: none;
+}
+
+body.home-page .home-games-grid::-webkit-scrollbar {
+  display: none;
+}
+
+body.home-page .home-games-grid > .home-game-card {
+  flex: 0 0 clamp(150px, 17vw, 220px);
+}
+
+body.home-page .home-games-grid > [hidden] {
+  display: none;
+}
+
+body.home-page .home-games-grid:focus-visible,
+body.home-page .home-games-grid > .home-game-card:focus-visible {
+  outline: 2px solid #78abf8;
+  outline-offset: -2px;
+}
+
+body.home-page .home-new-games .home-showcase-heading {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+body.home-page .home-games-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px 14px;
+}
+
+body.home-page .home-games-toolbar h2 {
+  margin-block-start: 0;
+}
+
+.home-games-controls {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.home-games-control {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  min-width: 44px;
+  min-height: 44px;
+  padding: 6px 10px;
+  border: 1px solid #a2aab9;
+  border-radius: var(--control-radius);
+  background: transparent;
+  color: var(--editorial-contrast-ink, #fff);
+  font-size: var(--type-ui);
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.home-games-control:hover:not(:disabled) {
+  background: #ffffff1a;
+}
+
+.home-games-control:focus-visible {
+  outline: 2px solid #78abf8;
+  outline-offset: 2px;
+}
+
+.home-games-control:disabled {
+  opacity: 0.45;
+  cursor: default;
+}
+
+.home-games-arrow .home-games-control-icon {
+  font-size: var(--type-subheading);
+  line-height: 1;
+}
+
+:is(.home-games-controls, .home-games-control)[hidden] {
+  display: none;
 }
 
 body.home-page .home-game-card {
@@ -11736,8 +11821,7 @@ html:root body.home-page .home-casino-shot {
     scrollbar-width: thin;
   }
 
-  body.home-page .home-recommendation-grid,
-  body.home-page .home-games-grid {
+  body.home-page .home-recommendation-grid {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 
@@ -11870,17 +11954,12 @@ html:root body.home-page .home-casino-shot {
     grid-column: auto;
   }
 
-  body.home-page .home-recommendation-grid,
-  body.home-page .home-games-grid {
+  body.home-page .home-recommendation-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   body.home-page .home-casino-gallery-grid {
     grid-template-columns: minmax(0, 1fr);
-  }
-
-  body.home-page .home-games-grid {
-    gap: 9px;
   }
 
   body.home-page .home-game-card > span {

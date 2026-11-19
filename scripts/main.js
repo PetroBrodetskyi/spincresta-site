@@ -48,7 +48,7 @@ const loadPageModules = async () => {
   if (isHomePage || isCountryPage) {
     const [gamesModule, homeModule, mediaModule] = await Promise.all([
       import('./brand-new-games.js?v=20261005-gravira-1'),
-      import('./pages/home.js?v=20261118-country-catalog-3'),
+      import('./pages/home.js?v=20261119-games-autoplay'),
       isCountryPage ? import('./pages/country-media.js?v=20261118-country-catalog-1') : null,
     ]);
     BRAND_NEW_GAMES = gamesModule.BRAND_NEW_GAMES || {};
