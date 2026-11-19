@@ -6381,7 +6381,7 @@ body[data-brand] .brand-profile-showcase__preview {
   margin: 0;
   overflow: hidden;
   border-radius: calc(var(--radius-lg) - 1px) calc(var(--radius-lg) - 1px) 0 0;
-  background: var(--surface-card-soft);
+  background: var(--preview-placeholder);
 }
 
 body[data-brand] .brand-profile-showcase__preview img {
@@ -6389,9 +6389,53 @@ body[data-brand] .brand-profile-showcase__preview img {
   width: 100%;
   height: auto;
   max-height: 392px;
-  aspect-ratio: auto 2 / 1;
   object-fit: contain;
   object-position: center top;
+}
+
+body[data-brand] .brand-profile-showcase__preview img:not([width][height]) {
+  aspect-ratio: auto 2 / 1;
+}
+
+/* A solid surface fills the screenshot box until the image is ready. */
+:is(.brand-profile-showcase__preview, .brand-why-media, .casino-card-preview) {
+  --preview-placeholder: #edf0f3;
+}
+
+[data-preview-state='loading'] > img,
+[data-preview-state='error'] > img {
+  opacity: 0;
+}
+
+[data-preview-state='loading']::before,
+[data-preview-state='error']::before {
+  position: absolute;
+  inset: 0;
+  background: var(--preview-placeholder);
+  content: '';
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  [data-preview-state='loading'][data-preview-visible='true']::after {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    inline-size: var(--preview-loader-size, 26px);
+    block-size: var(--preview-loader-size, 26px);
+    box-sizing: border-box;
+    margin: auto;
+    border: 2px solid #c4cfdc;
+    border-inline-end-color: #657c97;
+    border-radius: 50%;
+    content: '';
+    pointer-events: none;
+    animation: preview-loader-spin 850ms linear infinite;
+  }
+}
+
+@keyframes preview-loader-spin {
+  to { transform: rotate(360deg); }
 }
 
 .brand-favorite-control {
@@ -11073,6 +11117,7 @@ body[data-brand] #player-reviews {
 
 body[data-brand] .brand-why-media {
   appearance: none;
+  position: relative;
   display: block;
   width: 100%;
   aspect-ratio: auto;
@@ -11081,7 +11126,7 @@ body[data-brand] .brand-why-media {
   overflow: hidden;
   border: 1px solid var(--surface-border);
   border-radius: var(--radius-md);
-  background: var(--surface-card-soft);
+  background: var(--preview-placeholder);
   box-shadow: var(--shadow-soft);
   color: inherit;
   font: inherit;
@@ -19403,6 +19448,7 @@ html body .home-country-directory .countries-cloud .country-link {
 }
 
 .casino-card-preview {
+  --preview-loader-size: 20px;
   position: relative;
   display: grid;
   grid-template-rows: minmax(0, 1fr);
@@ -19410,6 +19456,10 @@ html body .home-country-directory .countries-cloud .country-link {
   aspect-ratio: 2 / 1;
   overflow: hidden;
   background: var(--brand-bg-color, var(--surface-card-soft));
+}
+
+.casino-card-preview.has-screenshot {
+  background: var(--preview-placeholder);
 }
 
 .casino-catalog-card .casino-card-preview > img {
@@ -19496,6 +19546,7 @@ html:root body .casino-catalog-card .casino-card-brand h3 {
 
 html:root body .casino-catalog-card .casino-card-preview .casino-status-badge {
   position: absolute;
+  z-index: 2;
   inset-block-start: clamp(5px, 0.65vw, 9px);
   inset-inline-end: 0;
   display: flex;

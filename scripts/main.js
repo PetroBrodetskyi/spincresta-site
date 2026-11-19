@@ -6,6 +6,7 @@ import { COUNTRIES } from './countries.js';
 import { initFooterNewsletter } from './footer-newsletter.js?v=20260826-newsletter-4';
 import { initAccountAuth } from './account-auth.js?v=20261119-site-icons';
 import { initSiteIcons, siteIconMarkup } from './site-icons.js?v=20261119-site-icons';
+import { bindImagePreview } from './image-preview.js?v=20261119-preview-loader';
 
 let BRAND_SNAPSHOT_CONFIGS = {};
 let BRAND_NEW_GAMES = {};
@@ -26,7 +27,7 @@ const brandLayoutFallbackTimer = document.body?.dataset.brand
     }, 1500)
   : null;
 const brandLayoutModuleReady = document.body?.dataset.brand
-  ? import('./pages/brand-layout.js?v=20261118-brand-games-row').then(module => {
+  ? import('./pages/brand-layout.js?v=20261119-preview-loader').then(module => {
       initBrandLayoutModule = module.initBrandLayout;
     }).catch(error => {
       document.body.classList.add('brand-layout-failed');
@@ -2780,11 +2781,10 @@ const createCasinoCard = ({
 
   if (screenshotUrl) {
     const preview = article.querySelector('.casino-card-preview');
-    const previewImage = preview.querySelector('img');
-    previewImage.addEventListener('error', () => {
-      preview.classList.remove('has-screenshot');
-      previewImage.src = imageUrl;
-    }, { once: true });
+    bindImagePreview(preview, preview.querySelector('img'), {
+      fallback: imageUrl,
+      onFallback: () => preview.classList.remove('has-screenshot'),
+    });
   }
 
   article.addEventListener('click', e => {

@@ -1,4 +1,5 @@
 // Brand layout module. Loaded only on body[data-brand] pages.
+import { bindImagePreview } from '../image-preview.js?v=20261119-preview-loader';
 
 // Registries use canonical slugs; older entries may use punctuation-free keys.
 export const resolveBrandNewGames = (pageKey, registry, normalizeKey) =>
@@ -378,6 +379,7 @@ export const initBrandLayout = context => {
           'Captura do site', 'Capture d’écran du site', 'साइट का स्क्रीनशॉट', 'Kuvakaappaus sivustosta'
         );
         figure.appendChild(image);
+        bindImagePreview(figure, image);
         showcase.prepend(figure);
         preview.remove();
       }
@@ -484,6 +486,7 @@ export const initBrandLayout = context => {
     const heading = preview?.closest('.brand-why-heading');
     if (!preview || !heading || preview.dataset.bound === 'true') return;
 
+    bindImagePreview(preview, preview.querySelector('img'));
     preview.dataset.bound = 'true';
 
     const setExpanded = expanded => {

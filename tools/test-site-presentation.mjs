@@ -113,7 +113,7 @@ test('brand masthead reuses the actual review title, original CTA and optional p
   assert.match(masthead, /title\.appendChild\(heading\)/);
   assert.match(masthead, /if \(ctaWrapper\) actions\.appendChild\(ctaWrapper\)/);
   assert.match(masthead, /if \(image\) \{\s*const figure = document\.createElement\('figure'\)/);
-  assert.match(masthead, /figure\.appendChild\(image\);\s*showcase\.prepend\(figure\)/);
+  assert.match(masthead, /figure\.appendChild\(image\);\s*bindImagePreview\(figure, image\);\s*showcase\.prepend\(figure\)/);
   assert.match(masthead, /actions\.prepend\(teaser\)/);
   assert.doesNotMatch(masthead, /brand-showcase-image|preview\.disabled/);
 });
