@@ -2,6 +2,7 @@
 
 import fs from 'node:fs';
 import path from 'node:path';
+import { REVIEW_DIRECTORY_COPY } from './sync-casino-directory-layout.mjs';
 
 const ROOT = process.cwd();
 const updates = {
@@ -9,7 +10,7 @@ const updates = {
     description: 'SpinCresta की संपादकीय प्रक्रिया, समीक्षा मानदंड, स्रोत, विशेषज्ञ जांच और कैसीनो जानकारी को अपडेट करने का तरीका जानें।',
   },
   'hi/casinos-and-betting/index.html': {
-    description: 'कैसीनो और सट्टेबाजी ब्रांड A-Z देखें। उपलब्ध देश, बोनस, भुगतान विधियां, विस्तृत समीक्षाएं और आधिकारिक ऑफर लिंक की तुलना करें।',
+    description: REVIEW_DIRECTORY_COPY.hi,
   },
   'hi/brands/fortunica-es/index.html': {
     description: 'स्पेन के लिए Fortunica की समीक्षा: बोनस, गेम, भुगतान, निकासी, KYC, मोबाइल अनुभव और उपलब्धता की जानकारी देखें।',

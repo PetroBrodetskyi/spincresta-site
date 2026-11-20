@@ -106,6 +106,24 @@ test('functional feedback rating label is a heading, not an eyebrow', () => {
   assert.doesNotMatch(feedback, /class="section-kicker"/);
 });
 
+test('text actions, icon buttons, and tabs follow one rounded shape, leaving screenshot controls alone', () => {
+  const shared = fs.readFileSync(path.join(root, 'styles.css'), 'utf8');
+  assert.match(shared, /--control-radius:\s*999px;/);
+  const [shapes] = shared.match(/html:root body :is\(\s*button, [\s\S]*?\):not\(\.brand-why-media\) \{[^}]*\}/);
+  for (const selector of ['.cta-primary', '.home-brand-view-all', '.home-brand-arrow', '.brand-favorite-button']) {
+    assert.ok(shapes.includes(selector), selector);
+  }
+  assert.match(shapes, /border-radius:\s*var\(--control-radius\)\s*!important/);
+});
+
+test('primary buttons invert on dark surfaces and secondary buttons use the shared monochrome palette', () => {
+  const shared = fs.readFileSync(path.join(root, 'styles.css'), 'utf8');
+  assert.match(shared, /--control-primary-bg:\s*#000;\s*--control-primary-ink:\s*#fff;/);
+  assert.match(shared, /--control-secondary-bg:\s*#fff;\s*--control-secondary-ink:\s*#111;/);
+  assert.match(shared, /:where\(\.footer, \.home-new-games, \.home-editorial-method\)\s*\{[^}]*--control-primary-bg:\s*#fff;\s*--control-primary-ink:\s*#111;/);
+  assert.match(shared, /background:\s*var\(--action-bg, var\(--button-bg, var\(--control-secondary-bg\)\)\)\s*!important/);
+});
+
 test('brand masthead reuses the actual review title, original CTA and optional preview', () => {
   const layout = fs.readFileSync(path.join(root, 'scripts/pages/brand-layout.js'), 'utf8');
   const masthead = layout.slice(layout.indexOf('const initBrandProfileShowcase'), layout.indexOf('const initRightRailContent'));

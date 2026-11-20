@@ -39,6 +39,8 @@ export function polishHomepageLabels(html, locale) {
   let result = html.replace(/^[ \t]*<section class="home-stats"[^>]*>[\s\S]*?<\/section>\r?\n(?:\r?\n)?/gm, '');
   result = result.replace(/^[ \t]*<section class="home-showcase-section home-casino-gallery"[^>]*>[\s\S]*?<\/section>\r?\n(?:\r?\n)?/gm, '');
   result = result.replace(/^[ \t]*<a class="home-primary-action" href="#recommended-brands">[^<]*<\/a>\r?\n/gm, '');
+  result = result.replace(/^[ \t]*<a class="home-secondary-action" href="\/(?:[a-z]{2}\/)?top-casinos\/">[^<]*<\/a>\r?\n/gm, '');
+  result = result.replace(/^[ \t]*<div class="home-country-hero-actions">\s*<\/div>\r?\n/gm, '');
   result = result.replace(/^[ \t]*<span class="home-section-kicker">[^<]*<\/span>\r?\n/gm, '');
   result = result.replace(/<span class="home-section-kicker">[^<]*<\/span>/g, '');
   result = replaceOne(result,

@@ -3,6 +3,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { BRANDS } from '../scripts/brands.js';
+import { REVIEW_DIRECTORY_COPY } from './sync-casino-directory-layout.mjs';
 
 const ROOT = process.cwd();
 const FR_ROOT = path.join(ROOT, 'fr');
@@ -53,7 +54,7 @@ const serviceDescriptions = {
   '/fr/': 'Comparez les casinos en ligne, les bonus, les paiements, les retraits et les guides par pays. Vérifiez les conditions avant de vous inscrire.',
   '/fr/about/': 'Découvrez la méthode éditoriale de SpinCresta, nos critères de comparaison, nos sources et la façon dont nous actualisons les avis.',
   '/fr/blog/': 'Guides pratiques sur les casinos, les bonus, les paiements, les retraits, la vérification et les marchés locaux.',
-  '/fr/casinos-and-betting/': 'Parcourez les casinos et sites de paris de A à Z avec leurs pays disponibles, offres, moyens de paiement et avis détaillés.',
+  '/fr/casinos-and-betting/': REVIEW_DIRECTORY_COPY.fr,
   '/fr/online-casinos/': 'Explorez les casinos en ligne par pays et comparez disponibilité, bonus, paiements, retraits et jeu responsable.',
   '/fr/partners/': 'Découvrez les partenaires sélectionnés de SpinCresta et notre approche des collaborations dans le secteur des jeux en ligne.',
   '/fr/payment-methods/': 'Comparez cartes, portefeuilles électroniques, virements, paiements mobiles et cryptomonnaies pour dépôts et retraits.',

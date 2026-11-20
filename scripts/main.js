@@ -3,9 +3,12 @@
 // =====================
 import { BRANDS } from './brands.js?v=20261117-pinup-1';
 import { COUNTRIES } from './countries.js';
+import { getFeaturedHomeBrands } from './featured-brands.js?v=20261119-shared-search';
+import { initFaqSections } from './faq.js?v=20261119-faq-layout';
 import { initFooterNewsletter } from './footer-newsletter.js?v=20260826-newsletter-4';
-import { initAccountAuth } from './account-auth.js?v=20261119-site-icons';
-import { initSiteIcons, siteIconMarkup } from './site-icons.js?v=20261119-site-icons';
+import { initAccountAuth } from './account-auth.js?v=20261119-account-dashboard';
+import { initSiteIcons, siteIconMarkup } from './site-icons.js?v=20261119-catalog-partners';
+import { initSectionNavigation } from './section-navigation.js?v=20261119-light-editorial';
 import { bindImagePreview } from './image-preview.js?v=20261119-preview-loader';
 
 let BRAND_SNAPSHOT_CONFIGS = {};
@@ -18,6 +21,8 @@ let initBrandFeedbackModule = null;
 let initTopCasinosPageModule = null;
 let initBrandLayoutModule = null;
 let initAccountPageModule = null;
+let initCatalogDirectoryModule = null;
+let initCountryHubModule = null;
 
 const brandLayoutFallbackTimer = document.body?.dataset.brand
   ? window.setTimeout(() => {
@@ -27,7 +32,7 @@ const brandLayoutFallbackTimer = document.body?.dataset.brand
     }, 1500)
   : null;
 const brandLayoutModuleReady = document.body?.dataset.brand
-  ? import('./pages/brand-layout.js?v=20261119-preview-loader').then(module => {
+  ? import('./pages/brand-layout.js?v=20261119-editorial-bands').then(module => {
       initBrandLayoutModule = module.initBrandLayout;
     }).catch(error => {
       document.body.classList.add('brand-layout-failed');
@@ -50,7 +55,7 @@ const loadPageModules = async () => {
   if (isHomePage || isCountryPage) {
     const [gamesModule, homeModule, mediaModule] = await Promise.all([
       import('./brand-new-games.js?v=20261005-gravira-1'),
-      import('./pages/home.js?v=20261119-games-autoplay'),
+      import('./pages/home.js?v=20261119-shared-search'),
       isCountryPage ? import('./pages/country-media.js?v=20261118-country-catalog-1') : null,
     ]);
     BRAND_NEW_GAMES = gamesModule.BRAND_NEW_GAMES || {};
@@ -62,7 +67,7 @@ const loadPageModules = async () => {
     const [snapshotsModule, gamesModule, pageModule, feedbackModule] = await Promise.all([
       import('./brand-snapshot-configs.js?v=20261006-vegasnow-2'),
       import('./brand-new-games.js?v=20261005-gravira-1'),
-      import('./pages/brand.js?v=20261118-brand-games-row'),
+      import('./pages/brand.js?v=20261119-editorial-bands'),
       import('./pages/brand-feedback.js?v=20261119-context-icons'),
     ]);
     BRAND_SNAPSHOT_CONFIGS = snapshotsModule.BRAND_SNAPSHOT_CONFIGS || {};
@@ -72,13 +77,23 @@ const loadPageModules = async () => {
   }
 
   if (document.body.dataset.page === 'top-casinos') {
-    const pageModule = await import('./pages/top-casinos.js?v=20260927-country-brand-order-1');
+    const pageModule = await import('./pages/top-casinos.js?v=20261119-top-casinos-layout');
     initTopCasinosPageModule = pageModule.initTopCasinosPage;
   }
 
   if (document.body.dataset.page === 'account') {
-    const pageModule = await import('./pages/account.js?v=20260827-moderation-1');
+    const pageModule = await import('./pages/account.js?v=20261119-catalog-partners');
     initAccountPageModule = pageModule.initAccountPage;
+  }
+
+  if (document.body.classList.contains('casinos-page')) {
+    const pageModule = await import('./pages/catalog-directory.js?v=20261119-catalog-tiles');
+    initCatalogDirectoryModule = pageModule.initCatalogDirectory;
+  }
+
+  if (document.querySelector('[data-country-hub-grid]')) {
+    const pageModule = await import('./pages/country-hub.js?v=20261119-country-hub').catch(() => null);
+    initCountryHubModule = pageModule?.initCountryHub;
   }
 
   await cardScreenshotsReady;
@@ -362,7 +377,7 @@ const SITE_LOCALE = DOCUMENT_LANGUAGE.startsWith('de')
 let brandBonusTranslations = {};
 const brandBonusTranslationsReady = SITE_LOCALE === 'en'
   ? Promise.resolve()
-  : import(`./brand-bonus-translations/${SITE_LOCALE}.js?v=20261117-pinup-1`)
+  : import(`./brand-bonus-translations/${SITE_LOCALE}.js?v=20261119-fraga-ar`)
       .then(module => {
         brandBonusTranslations = module.default || {};
       })
@@ -441,7 +456,7 @@ const brandPagePath = brandOrPath => {
 const UI_COPY = {
   en: {
     searchLabel: 'Search SpinCresta',
-    searchPlaceholder: 'Search',
+    searchAction: 'Search',
     availableCountries: 'Available countries',
     noMatches: 'No matches found',
     openSearch: 'Open search',
@@ -480,7 +495,7 @@ const UI_COPY = {
   },
   de: {
     searchLabel: 'SpinCresta durchsuchen',
-    searchPlaceholder: 'Suchen',
+    searchAction: 'Suchen',
     availableCountries: 'Verfügbare Länder',
     noMatches: 'Keine Treffer gefunden',
     openSearch: 'Suche öffnen',
@@ -519,7 +534,7 @@ const UI_COPY = {
   },
   es: {
     searchLabel: 'Buscar en SpinCresta',
-    searchPlaceholder: 'Buscar',
+    searchAction: 'Buscar',
     availableCountries: 'Países disponibles',
     noMatches: 'No se encontraron resultados',
     openSearch: 'Abrir búsqueda',
@@ -558,7 +573,7 @@ const UI_COPY = {
   },
   it: {
     searchLabel: 'Cerca su SpinCresta',
-    searchPlaceholder: 'Cerca',
+    searchAction: 'Cerca',
     availableCountries: 'Paesi disponibili',
     noMatches: 'Nessun risultato trovato',
     openSearch: 'Apri ricerca',
@@ -597,7 +612,7 @@ const UI_COPY = {
   },
   pl: {
     searchLabel: 'Szukaj w SpinCresta',
-    searchPlaceholder: 'Szukaj',
+    searchAction: 'Szukaj',
     availableCountries: 'Dostępne kraje',
     noMatches: 'Nie znaleziono wyników',
     openSearch: 'Otwórz wyszukiwanie',
@@ -636,7 +651,7 @@ const UI_COPY = {
   },
   uk: {
     searchLabel: 'Пошук на SpinCresta',
-    searchPlaceholder: 'Пошук',
+    searchAction: 'Шукати',
     availableCountries: 'Доступні країни',
     noMatches: 'Нічого не знайдено',
     openSearch: 'Відкрити пошук',
@@ -675,7 +690,7 @@ const UI_COPY = {
   },
   pt: {
     searchLabel: 'Pesquisar no SpinCresta',
-    searchPlaceholder: 'Pesquisar',
+    searchAction: 'Pesquisar',
     availableCountries: 'Países disponíveis',
     noMatches: 'Não foram encontrados resultados',
     openSearch: 'Abrir pesquisa',
@@ -714,7 +729,7 @@ const UI_COPY = {
   },
   fr: {
     searchLabel: 'Rechercher sur SpinCresta',
-    searchPlaceholder: 'Rechercher',
+    searchAction: 'Rechercher',
     availableCountries: 'Pays disponibles',
     noMatches: 'Aucun résultat trouvé',
     openSearch: 'Ouvrir la recherche',
@@ -753,7 +768,7 @@ const UI_COPY = {
   },
   hi: {
     searchLabel: 'SpinCresta पर खोजें',
-    searchPlaceholder: 'खोजें',
+    searchAction: 'खोजें',
     availableCountries: 'उपलब्ध देश',
     noMatches: 'कोई परिणाम नहीं मिला',
     openSearch: 'खोज खोलें',
@@ -792,7 +807,7 @@ const UI_COPY = {
   },
   fi: {
     searchLabel: 'Hae SpinCrestasta',
-    searchPlaceholder: 'Hae',
+    searchAction: 'Hae',
     availableCountries: 'Saatavilla olevat maat',
     noMatches: 'Ei hakutuloksia',
     openSearch: 'Avaa haku',
@@ -1988,7 +2003,9 @@ const isFastPayment = method =>
     normalizeText(method)
   );
 
+let siteSearchItems;
 const getSiteSearchItems = () => {
+  if (siteSearchItems) return siteSearchItems;
   const countryByCode = new Map(COUNTRIES.map(country => [country.code.toUpperCase(), country]));
   const items = new Map();
 
@@ -1997,7 +2014,7 @@ const getSiteSearchItems = () => {
     const haystack = normalizeSearchValue(
       [item.label, item.type, item.summary, item.keywords].filter(Boolean).join(' ')
     );
-    items.set(item.href, { ...item, haystack });
+    items.set(item.href, { ...item, haystack, searchTitle: normalizeSearchValue(item.label) });
   };
 
   STATIC_SEARCH_ITEMS.forEach(item => addItem({
@@ -2039,9 +2056,6 @@ const getSiteSearchItems = () => {
   });
 
   BRANDS.filter(brand => brand.hasDetailPage && brand.urlDetail).forEach(brand => {
-    const brandCountries = (brand.countries || [])
-      .map(code => countryByCode.get(code.toUpperCase()))
-      .filter(Boolean);
     const countries = (brand.countries || [])
       .map(code => countryByCode.get(code.toUpperCase())?.name || code)
       .join(' ');
@@ -2051,29 +2065,35 @@ const getSiteSearchItems = () => {
       type: uiCopy.brandReview,
       href: brandPagePath(brand),
       summary: localizedBrandBonusText(brand.bonus) || uiCopy.casinoReview,
+      image: normalizeAssetPath(brand.image || ''),
+      background: brand.bgColor,
       keywords: [countries, brand.payments?.join(' ')].filter(Boolean).join(' '),
-      flags: brandCountries.map(country => ({
-        name: localizedCountryName(country),
-        slug: country.slug,
-      })),
     });
   });
 
-  return Array.from(items.values());
+  siteSearchItems = Array.from(items.values());
+  return siteSearchItems;
 };
 
 const createSiteSearch = variant => {
   const searchItems = getSiteSearchItems();
+  const featuredBrands = getFeaturedHomeBrands(BRANDS).slice(0, 5);
+  const placeholder = localeText(
+    'Search brands and guides', 'Marken und Ratgeber suchen', 'Busca marcas y guías',
+    'Cerca marchi e guide', 'Szukaj marek i poradników', 'Шукайте бренди й гіди',
+    'Pesquise marcas e guias', 'Rechercher des marques et des guides', 'ब्रांड और गाइड खोजें', 'Hae brändejä ja oppaita'
+  );
   const form = document.createElement('form');
   const id = `site-search-${variant}`;
   form.className = `site-search site-search--${variant}`;
   form.setAttribute('role', 'search');
-  form.setAttribute('aria-label', uiCopy.searchLabel);
+  form.setAttribute('aria-label', variant === 'home' ? placeholder : uiCopy.searchLabel);
   form.innerHTML = `
     <label class="site-search-label" for="${id}">${uiCopy.searchLabel}</label>
     <div class="site-search-shell">
       <img class="site-search-icon" src="/icons/ui/search-icon.svg" alt="" aria-hidden="true" loading="lazy" decoding="async" />
-      <input id="${id}" class="site-search-input" type="search" placeholder="${uiCopy.searchPlaceholder}" autocomplete="off" spellcheck="false" />
+      <input id="${id}" class="site-search-input" type="search" placeholder="${placeholder}" autocomplete="off" spellcheck="false" />
+      <button class="site-search-submit" type="submit">${uiCopy.searchAction}</button>
     </div>
     <div class="site-search-results" hidden></div>
   `;
@@ -2089,70 +2109,83 @@ const createSiteSearch = variant => {
   };
 
   const renderResultLink = item => {
-    const flagsHtml = item.flags?.length
-      ? `
-        <span class="site-search-flags" aria-label="${uiCopy.availableCountries}">
-          ${item.flags
-            .map(
-              flag => `
-                <img
-                  class="site-search-flag"
-                  src="${iconPath(flag.slug)}"
-                  alt="${escapeHtml(flag.name)}"
-                  loading="lazy"
-                  decoding="async"
-                />
-              `
-            )
-            .join('')}
-        </span>
-      `
-      : '';
-
-    return `
-      <a class="site-search-result" href="${escapeHtml(item.href)}">
-        <span class="site-search-result-type">${escapeHtml(item.type)}</span>
-        <span class="site-search-result-title">
-          <strong>${escapeHtml(item.label)}</strong>
-          ${flagsHtml}
-        </span>
-        <span>${escapeHtml(item.summary || '')}</span>
-      </a>
-    `;
+    const background = /^#[\da-f]{3,8}$/i.test(item.background) ? item.background : '#212121';
+    const image = item.image ? `<span class="site-search-logo" style="--search-logo-bg:${background}">
+      <img src="${escapeHtml(item.image)}" alt="" width="44" height="36" decoding="async" />
+    </span>` : '';
+    return `<a class="site-search-result" href="${escapeHtml(item.href)}">
+      ${image}
+      <strong>${escapeHtml(item.label)}</strong>
+      ${item.type ? `<small>${escapeHtml(item.type)}</small>` : ''}
+    </a>`;
   };
 
   const renderResults = () => {
     const query = normalizeSearchValue(input.value);
     if (!query) {
       closeResults();
+      if (!input.value.trim() && featuredBrands.length) {
+        const label = localeText(
+          'Featured casino reviews', 'Ausgewählte Casinotests', 'Reseñas de casinos destacadas',
+          'Recensioni di casinò in evidenza', 'Polecane recenzje kasyn', 'Добірка оглядів казино',
+          'Análises de casinos em destaque', 'Avis de casinos à découvrir', 'चुनिंदा कैसीनो समीक्षाएं', 'Poimintoja kasinoarvosteluista'
+        );
+        const suggestions = featuredBrands.map(brand => {
+          const item = searchItems.find(result => result.href === brandPagePath(brand));
+          return item ? renderResultLink({ ...item, type: '' }) : '';
+        }).join('');
+        resultsEl.hidden = false;
+        resultsEl.innerHTML = `<p class="site-search-suggestion-title">${label}</p>
+          <div class="site-search-suggestions">${suggestions}</div>`;
+      }
       return;
     }
 
     const terms = query.split(/\s+/).filter(Boolean);
+    const rank = item => item.searchTitle === query ? 0 : item.searchTitle.startsWith(query) ? 1 : item.searchTitle.includes(query) ? 2 : 3;
     activeResults = searchItems
       .filter(item => terms.every(term => item.haystack.includes(term)))
+      .sort((a, b) => rank(a) - rank(b))
       .slice(0, 8);
 
     resultsEl.hidden = false;
     resultsEl.innerHTML = activeResults.length
       ? activeResults.map(renderResultLink).join('')
-      : `<div class="site-search-empty">${uiCopy.noMatches}</div>`;
+      : `<div class="site-search-empty" role="status">${uiCopy.noMatches}</div>`;
   };
 
   form.addEventListener('submit', event => {
     event.preventDefault();
     if (activeResults[0]?.href) {
       window.location.href = activeResults[0].href;
+    } else {
+      input.focus();
+      renderResults();
     }
   });
 
   input.addEventListener('input', renderResults);
   input.addEventListener('focus', renderResults);
-  input.addEventListener('keydown', event => {
+  input.addEventListener('click', () => {
+    if (resultsEl.hidden) renderResults();
+  });
+  form.addEventListener('keydown', event => {
+    if (resultsEl.hidden || event.isComposing) return;
     if (event.key === 'Escape') {
-      input.blur();
+      event.preventDefault();
+      if (resultsEl.contains(event.target)) input.focus();
       closeResults();
+    } else if (['ArrowDown', 'ArrowUp'].includes(event.key)) {
+      const links = [...resultsEl.querySelectorAll('a')];
+      if (!links.length) return;
+      const index = links.indexOf(event.target);
+      const next = event.key === 'ArrowDown' ? links[index + 1] : links[index - 1];
+      event.preventDefault();
+      (next || (index < 0 ? links.at(-1) : input)).focus();
     }
+  });
+  form.addEventListener('focusout', event => {
+    if (!form.contains(event.relatedTarget)) closeResults();
   });
 
   document.addEventListener('click', event => {
@@ -2160,6 +2193,11 @@ const createSiteSearch = variant => {
   });
 
   return form;
+};
+
+const initHomeSiteSearch = () => {
+  const heading = document.querySelector('body.home-page:not([data-page], [data-country]) .home-country-hero-heading');
+  if (heading && !heading.querySelector('.site-search--home')) heading.append(createSiteSearch('home'));
 };
 
 const initDesktopSiteSearch = () => {
@@ -2501,7 +2539,7 @@ const applyNotRecommendedCasinoRows = () => {
   );
 
   document.querySelectorAll('body.casinos-page .casino-list-row').forEach(row => {
-    const detailLink = row.querySelector('.casino-name a[href], .casino-list-logo a[href]');
+    const detailLink = row.querySelector('.home-new-review-card[href], .casino-name a[href], .casino-list-logo a[href]');
     const brand = blockedByPath.get(normalizePagePath(detailLink?.getAttribute('href') || ''));
     if (!brand) return;
 
@@ -2712,7 +2750,7 @@ const createCasinoCard = ({
   notRecommended = false,
   temporarilyUnavailable = false,
   hasDetailPage = false,
-}) => {
+}, { favorite = false } = {}) => {
   const article = document.createElement('article');
   article.className = 'casino-card casino-catalog-card';
 
@@ -2723,7 +2761,8 @@ const createCasinoCard = ({
   const primaryCtaText = localeText('Play', 'Spielen', 'Jugar', 'Gioca', 'Zagraj', 'Грати', 'Jogar', 'Jouer', 'खेलें');
   const detailUrl = brandPagePath(urlDetail ?? '');
   const imageUrl = normalizeAssetPath(image ?? '');
-  const screenshot = BRAND_HOMEPAGE_SCREENSHOTS[getBrandDetailSlug({ urlDetail })];
+  const slug = getBrandDetailSlug({ urlDetail });
+  const screenshot = BRAND_HOMEPAGE_SCREENSHOTS[slug];
   const screenshotUrl = screenshot?.replace(/\/image\/upload\/(f_[^/]+)\//, (_, transform) =>
     `/image/upload/${transform.replace(/,w_\d+/, '')},w_640,c_limit/`
   );
@@ -2745,7 +2784,7 @@ const createCasinoCard = ({
   setBrandBackground(article, bgColor);
 
   article.innerHTML = `
-    <div class="casino-card-preview${screenshotUrl ? ' has-screenshot' : ''}">
+    <div class="casino-card-preview${screenshotUrl ? ' has-screenshot' : ''}"${favorite && showReviewAction ? ` data-favorite-brand="${escapeHtml(slug)}"` : ''}>
       <img src="${escapeHtml(screenshotUrl || imageUrl)}" alt="" loading="lazy" decoding="async" />
       ${createBadge({ isTopRated, isExclusive, isNew })}
     </div>
@@ -2788,7 +2827,7 @@ const createCasinoCard = ({
   }
 
   article.addEventListener('click', e => {
-    if (e.target.closest('.cta')) return;
+    if (e.target.closest('.cta, .brand-favorite-control')) return;
 
     if (hasDetailPage && detailUrl) {
       window.location.href = detailUrl;
@@ -3661,373 +3700,72 @@ const initCountryGuideCarousels = () => {
   });
 };
 
-const enhanceFaqBlocks = () => {
-  const addQuestionIcon = question => {
-    if (question.querySelector('.faq-question-icon')) return;
-
-    question.classList.add('faq-question');
-
-    question.insertAdjacentHTML('afterbegin', siteIconMarkup('help', 'site-icon faq-question-icon'));
-  };
-
-  const addAnswerIcon = answer => {
-    if (answer.querySelector('.faq-answer-icon')) return;
-
-    answer.classList.add('faq-answer');
-
-    const icon = document.createElement('img');
-    icon.className = 'faq-answer-icon';
-    icon.src = '/icons/ui/answer-correct-icon.svg';
-    icon.alt = '';
-    icon.setAttribute('aria-hidden', 'true');
-    answer.prepend(icon);
-  };
-
-  const enhanceFaqSplit = faqGrid => {
-    if (faqGrid.dataset.faqSplitBound === 'true') return;
-
-    const sourceCards = Array.from(faqGrid.querySelectorAll(':scope > .faq-card'));
-    const entries = sourceCards
-      .map(card => ({
-        question: card.querySelector(':scope > h3'),
-        answers: Array.from(card.querySelectorAll(':scope > p')),
-      }))
-      .filter(({ question, answers }) => question && answers.length);
-
-    if (!entries.length) return;
-
-    const splitIndex = document.querySelectorAll('[data-faq-split-bound="true"]').length + 1;
-
-    faqGrid.dataset.faqSplitBound = 'true';
-    faqGrid.classList.add('country-faq-split');
-
-    const questionList = document.createElement('div');
-    questionList.className = 'country-faq-question-list';
-    questionList.setAttribute('role', 'tablist');
-
-    const answerStage = document.createElement('div');
-    answerStage.className = 'country-faq-answer-stage';
-
-    const buttons = [];
-    const panels = [];
-
-    entries.forEach(({ question, answers }, index) => {
-      const label = normalizeText(question.textContent).trim();
-      const buttonId = `faq-split-${splitIndex}-question-${index + 1}`;
-      const panelId = `faq-split-${splitIndex}-answer-${index + 1}`;
-
-      const button = document.createElement('button');
-      button.type = 'button';
-      button.className = 'country-faq-question-button';
-      button.id = buttonId;
-      button.setAttribute('role', 'tab');
-      button.setAttribute('aria-controls', panelId);
-      button.setAttribute('aria-selected', 'false');
-      button.tabIndex = -1;
-
-      button.insertAdjacentHTML('afterbegin', siteIconMarkup('help', 'site-icon country-faq-question-icon', 30));
-
-      const questionLabel = document.createElement('span');
-      questionLabel.className = 'country-faq-question-label';
-      questionLabel.textContent = label;
-
-      const arrow = document.createElement('span');
-      arrow.className = 'country-faq-question-arrow';
-      arrow.setAttribute('aria-hidden', 'true');
-
-      button.append(questionLabel, arrow);
-
-      const panel = document.createElement('article');
-      panel.className = 'country-faq-answer-item';
-      panel.id = panelId;
-      panel.setAttribute('role', 'tabpanel');
-      panel.setAttribute('aria-labelledby', buttonId);
-      panel.setAttribute('aria-hidden', 'true');
-
-      const answerTitle = document.createElement('h3');
-      answerTitle.textContent = label;
-
-      const answerBody = document.createElement('div');
-      answerBody.className = 'country-faq-answer-body';
-      answers.forEach(answer => {
-        addAnswerIcon(answer);
-        answerBody.append(answer);
-      });
-
-      panel.append(answerTitle, answerBody);
-      questionList.append(button);
-      answerStage.append(panel);
-      buttons.push(button);
-      panels.push(panel);
-    });
-
-    const activate = activeIndex => {
-      buttons.forEach((button, index) => {
-        const isActive = index === activeIndex;
-        button.classList.toggle('is-active', isActive);
-        button.setAttribute('aria-selected', String(isActive));
-        button.tabIndex = isActive ? 0 : -1;
-
-        panels[index].classList.toggle('is-active', isActive);
-        panels[index].setAttribute('aria-hidden', String(!isActive));
-      });
-    };
-
-    buttons.forEach((button, index) => {
-      button.addEventListener('click', () => activate(index));
-      button.addEventListener('keydown', event => {
-        if (!['ArrowDown', 'ArrowRight', 'ArrowUp', 'ArrowLeft', 'Home', 'End'].includes(event.key)) return;
-
-        event.preventDefault();
-        let nextIndex = index;
-        if (event.key === 'Home') nextIndex = 0;
-        else if (event.key === 'End') nextIndex = buttons.length - 1;
-        else if (event.key === 'ArrowDown' || event.key === 'ArrowRight') {
-          nextIndex = (index + 1) % buttons.length;
-        } else {
-          nextIndex = (index - 1 + buttons.length) % buttons.length;
-        }
-
-        activate(nextIndex);
-        buttons[nextIndex].focus();
-      });
-    });
-
-    faqGrid.replaceChildren(questionList, answerStage);
-    activate(0);
-  };
-
-  const enhanceBrandFaqTimeline = timeline => {
-    if (timeline.dataset.faqAccordionBound === 'true') return;
-
-    timeline.dataset.faqAccordionBound = 'true';
-    timeline.classList.add('faq-accordion-surface');
-
-    const groups = [];
-    let currentGroup = null;
-
-    Array.from(timeline.children).forEach(child => {
-      if (child.matches('h3')) {
-        currentGroup = { question: child, answers: [] };
-        groups.push(currentGroup);
-        return;
-      }
-
-      if (currentGroup && child.matches('p')) currentGroup.answers.push(child);
-    });
-
-    groups.forEach((group, index) => {
-      if (!group.answers.length) return;
-
-      const { question, answers } = group;
-      addQuestionIcon(question);
-      answers.forEach(addAnswerIcon);
-
-      const card = document.createElement('div');
-      card.className = 'faq-card faq-card--accordion';
-
-      const trigger = document.createElement('button');
-      trigger.className = 'faq-question faq-accordion-trigger';
-      trigger.type = 'button';
-      trigger.setAttribute('aria-expanded', 'false');
-
-      const questionIcon = question.querySelector(':scope > .faq-question-icon');
-      const questionLabel = document.createElement('span');
-      questionLabel.className = 'faq-question-label';
-
-      Array.from(question.childNodes).forEach(node => {
-        if (node !== questionIcon) questionLabel.append(node);
-      });
-
-      if (questionIcon) trigger.append(questionIcon);
-      trigger.append(questionLabel);
-
-      const toggle = document.createElement('span');
-      toggle.className = 'faq-accordion-toggle';
-      toggle.setAttribute('aria-hidden', 'true');
-      trigger.append(toggle);
-
-      const answerPanel = document.createElement('div');
-      answerPanel.className = 'faq-answer-panel';
-      answerPanel.id = `brand-faq-answer-${index + 1}`;
-      answerPanel.hidden = true;
-      trigger.setAttribute('aria-controls', answerPanel.id);
-
-      question.replaceWith(card);
-      card.append(trigger, answerPanel);
-      answers.forEach(answer => answerPanel.append(answer));
-
-      const closeOpenCards = () => {
-        timeline.querySelectorAll('.faq-accordion-trigger[aria-expanded="true"]').forEach(openTrigger => {
-          openTrigger.setAttribute('aria-expanded', 'false');
-          openTrigger.closest('.faq-card')?.classList.remove('is-open');
-
-          const openPanel = document.getElementById(openTrigger.getAttribute('aria-controls'));
-          if (openPanel) openPanel.hidden = true;
-        });
-      };
-
-      trigger.addEventListener('click', () => {
-        const isOpening = trigger.getAttribute('aria-expanded') !== 'true';
-        if (isOpening) closeOpenCards();
-
-        trigger.setAttribute('aria-expanded', String(isOpening));
-        card.classList.toggle('is-open', isOpening);
-        answerPanel.hidden = !isOpening;
-      });
-    });
-  };
-
-  const enhanceCountryDirectoryEditorial = () => {
-    if (!document.body.matches('[data-page="online-casinos"]')) return;
-
-    const leadSection = document.querySelector('#seo-editorial-guide');
-    const leadArticle = leadSection?.querySelector(':scope > .content-article');
-    const mainTitle = leadArticle?.querySelector(':scope > h2.title');
-    if (!leadSection || !leadArticle || !mainTitle || leadSection.dataset.editorialCardsBound === 'true') {
-      return;
-    }
-
-    leadSection.dataset.editorialCardsBound = 'true';
-    leadSection.classList.add('country-directory-editorial-section');
-    leadArticle.classList.add('country-directory-editorial');
-
-    const intro = mainTitle.nextElementSibling?.matches('p') ? mainTitle.nextElementSibling : null;
-    if (intro) intro.classList.add('section-intro', 'country-directory-editorial-intro');
-
-    const cards = [];
-    let currentCard = null;
-    Array.from(leadArticle.children).forEach(child => {
-      if (child === mainTitle || child === intro) return;
-
-      if (child.matches('h2, h3')) {
-        currentCard = document.createElement('article');
-        currentCard.className = 'country-directory-info-card';
-        const heading = document.createElement('h3');
-        heading.innerHTML = child.innerHTML;
-        currentCard.appendChild(heading);
-        cards.push(currentCard);
-        child.remove();
-        return;
-      }
-
-      if (currentCard && child.matches('p, ul, ol')) currentCard.appendChild(child);
-    });
-
-    let sibling = leadSection.nextElementSibling;
-    while (sibling?.matches('section.content')) {
-      const nextSibling = sibling.nextElementSibling;
-      const article = sibling.querySelector(':scope > .content-article');
-      const title = article?.querySelector(':scope > h2.title, :scope > h2');
-      if (!article || !title || article.querySelector('.faq-grid, .timeline')) break;
-
-      const card = document.createElement('article');
-      card.className = 'country-directory-info-card';
-      const heading = document.createElement('h3');
-      heading.innerHTML = title.innerHTML;
-      card.appendChild(heading);
-      Array.from(article.children).forEach(child => {
-        if (child !== title) card.appendChild(child);
-      });
-      cards.push(card);
-      sibling.remove();
-      sibling = nextSibling;
-    }
-
-    if (!cards.length) return;
-    const grid = document.createElement('div');
-    grid.className = 'timeline country-directory-info-grid';
-    grid.append(...cards);
-    leadArticle.appendChild(grid);
-  };
-
-  enhanceCountryDirectoryEditorial();
-
-  document.querySelectorAll(
-    '.content-article, section:has(> .faq-grid), body[data-brand] .content-review > section:has(> .timeline)'
-  ).forEach(section => {
-    const title = section.querySelector('h2.title, h2');
-    const kicker = section.querySelector('.home-section-kicker');
-    const timeline = section.querySelector('.timeline');
-    const faqGrid = section.querySelector('.faq-grid');
-    if (!title || (!timeline && !faqGrid)) return;
-
-    const titleText = normalizeText(`${kicker?.textContent || ''} ${title.textContent}`).trim().toLowerCase();
-    const isFaqTitle =
-      /(?:^|-)faq(?:-|$)/i.test(section.id) ||
-      titleText.includes('faq') ||
-      titleText.includes('häufige fragen') ||
-      titleText.includes('pregunta') ||
-      titleText.includes('pergunt') ||
-      titleText.includes('question') ||
-      titleText.includes('domand') ||
-      titleText.includes('pytan') ||
-      titleText.includes('питан') ||
-      titleText.includes('ukk') ||
-      titleText.includes('kysym') ||
-      titleText.includes('usein kysytt') ||
-      titleText.includes('सवाल') ||
-      titleText.includes('पूछे जाने वाले प्रश्न') ||
-      titleText.includes('प्रश्नोत्तर');
-    if (!isFaqTitle) return;
-
-    if (document.body.matches('[data-brand]') && timeline) {
-      enhanceBrandFaqTimeline(timeline);
-      return;
-    }
-
-    if (!document.body.matches('[data-brand]') && faqGrid) {
-      const faqShell = section.closest('section.content') || section;
-      faqShell.classList.add('site-faq-section');
-      section.classList.add('site-faq-content');
-
-      if (document.body.matches('[data-country]')) {
-        faqShell.classList.add('country-faq-section');
-        section.classList.add('country-faq-content');
-      }
-
-      enhanceFaqSplit(faqGrid);
-      return;
-    }
-
-    timeline?.querySelectorAll(':scope > h3').forEach(addQuestionIcon);
-    timeline?.querySelectorAll(':scope > p').forEach(addAnswerIcon);
-
-    faqGrid?.querySelectorAll('.faq-card').forEach(card => {
-      const question = card.querySelector(':scope > h3');
-      const answers = card.querySelectorAll(':scope > p');
-
-      if (question) addQuestionIcon(question);
-      answers.forEach(addAnswerIcon);
-    });
-  });
-};
-
-const reuseEditorialMethodGrid = () => {
-  if (!document.body.matches("[data-page='new-casinos'], [data-page='top-rated'], [data-page='exclusive-offers']")) {
+const enhanceCountryDirectoryEditorial = () => {
+  if (!document.body.matches('[data-page="online-casinos"]')) return;
+
+  const leadSection = document.querySelector('#seo-editorial-guide');
+  const leadArticle = leadSection?.querySelector(':scope > .content-article');
+  const mainTitle = leadArticle?.querySelector(':scope > h2.title');
+  if (!leadSection || !leadArticle || !mainTitle || leadSection.dataset.editorialCardsBound === 'true') {
     return;
   }
 
-  document.querySelectorAll('.content-article > .timeline').forEach(timeline => {
-    const sourceCards = Array.from(timeline.querySelectorAll(':scope > div'));
-    if (!sourceCards.length) return;
+  leadSection.dataset.editorialCardsBound = 'true';
+  leadSection.classList.add('country-directory-editorial-section');
+  leadArticle.classList.add('country-directory-editorial');
 
-    timeline.classList.add('home-method-grid');
+  const intro = mainTitle.nextElementSibling?.matches('p') ? mainTitle.nextElementSibling : null;
+  if (intro) intro.classList.add('section-intro', 'country-directory-editorial-intro');
 
-    sourceCards.forEach((sourceCard, index) => {
-      const card = document.createElement('article');
-      Array.from(sourceCard.attributes).forEach(attribute => card.setAttribute(attribute.name, attribute.value));
+  const cards = [];
+  let currentCard = null;
+  Array.from(leadArticle.children).forEach(child => {
+    if (child === mainTitle || child === intro) return;
 
-      const cardIndex = document.createElement('span');
-      cardIndex.textContent = String(index + 1).padStart(2, '0');
-      card.append(cardIndex, ...Array.from(sourceCard.childNodes));
-      sourceCard.replaceWith(card);
-    });
+    if (child.matches('h2, h3')) {
+      currentCard = document.createElement('article');
+      currentCard.className = 'country-directory-info-card';
+      const heading = document.createElement('h3');
+      heading.innerHTML = child.innerHTML;
+      currentCard.appendChild(heading);
+      cards.push(currentCard);
+      child.remove();
+      return;
+    }
+
+    if (currentCard && child.matches('p, ul, ol')) currentCard.appendChild(child);
   });
+
+  let sibling = leadSection.nextElementSibling;
+  while (sibling?.matches('section.content')) {
+    const nextSibling = sibling.nextElementSibling;
+    const article = sibling.querySelector(':scope > .content-article');
+    const title = article?.querySelector(':scope > h2.title, :scope > h2');
+    if (!article || !title || article.querySelector('.faq-grid, .timeline')) break;
+
+    const card = document.createElement('article');
+    card.className = 'country-directory-info-card';
+    const heading = document.createElement('h3');
+    heading.innerHTML = title.innerHTML;
+    card.appendChild(heading);
+    Array.from(article.children).forEach(child => {
+      if (child !== title) card.appendChild(child);
+    });
+    cards.push(card);
+    sibling.remove();
+    sibling = nextSibling;
+  }
+
+  if (!cards.length) return;
+  const grid = document.createElement('div');
+  grid.className = 'timeline country-directory-info-grid';
+  grid.append(...cards);
+  leadArticle.appendChild(grid);
 };
 
 const initCasinosScrollNav = () => {
   if (!document.body.classList.contains('casinos-page')) return null;
+  if (document.querySelector('.catalog-toolbar')) return null;
 
   const alphaNav = document.querySelector(':is(.page-intro, .hero) .alpha-nav');
   if (!alphaNav) return null;
@@ -4083,11 +3821,11 @@ const applyBrandLogoBackgrounds = () => {
   });
 
   document.querySelectorAll('body.casinos-page .casino-list-row').forEach(row => {
-    const detailLink = row.querySelector('.casino-name a[href], .casino-list-logo a[href]');
+    const detailLink = row.querySelector('.home-new-review-card[href], .casino-name a[href], .casino-list-logo a[href]');
     const name = row.querySelector('.casino-name')?.textContent || '';
     const brand = findBrandByLinkOrName(detailLink, name);
     setBrandBackground(row, brand?.bgColor);
-    setBrandBackground(row.querySelector('.casino-list-logo'), brand?.bgColor);
+    setBrandBackground(row.querySelector('.home-new-review-logo, .casino-list-logo'), brand?.bgColor);
   });
 
   document.querySelectorAll('.home-link-card').forEach(card => {
@@ -4210,6 +3948,39 @@ export const initCasinoPage = async () => {
   });
   if (!isBrandPage) initPageAccount();
   initAccountPageModule?.();
+  initCatalogDirectoryModule?.();
+  initCountryHubModule?.();
+  if (pageType === 'partners') {
+    initSectionNavigation(document.querySelector('[data-partners-dashboard]'), { name: 'partners', revealOnSelect: true });
+  }
+  if (pageType === 'about') {
+    initSectionNavigation(document.querySelector('[data-about-dashboard]'), {
+      name: 'about',
+      revealOnSelect: true,
+      resolve: hash => document.getElementById(hash.slice(1))?.closest('[data-about-panel]')?.dataset.aboutPanel || 'about-overview',
+    });
+  }
+  const editorialDashboard = document.querySelector('[data-editorial-dashboard]');
+  initSectionNavigation(editorialDashboard, {
+    name: 'editorial',
+    revealOnSelect: true,
+    linkShortcuts: true,
+    resolve: hash => document.getElementById(hash.slice(1))?.closest('[data-editorial-panel]')?.dataset.editorialPanel ||
+      editorialDashboard.querySelector('[data-editorial-nav]').dataset.editorialNav,
+  });
+  const articleContents = document.querySelector('[data-editorial-contents]');
+  if (articleContents) {
+    const links = [...articleContents.querySelectorAll('a[href^="#"]')];
+    const syncCurrentAnchor = () => {
+      const active = links.find(link => link.hash === window.location.hash) || links[0];
+      for (const link of links) {
+        if (link === active) link.setAttribute('aria-current', 'location');
+        else link.removeAttribute('aria-current');
+      }
+    };
+    window.addEventListener('hashchange', syncCurrentAnchor);
+    syncCurrentAnchor();
+  }
   initAffiliateClickTracking();
   window.addEventListener('resize', requestPaymentIconSync, { passive: true });
   document.fonts?.ready.then(requestPaymentIconSync);
@@ -4306,8 +4077,8 @@ export const initCasinoPage = async () => {
     );
   }
 
-  reuseEditorialMethodGrid();
-  enhanceFaqBlocks();
+  enhanceCountryDirectoryEditorial();
+  initFaqSections();
   initTopCasinosPageModule?.({
     COUNTRIES,
     BRANDS,
@@ -4492,6 +4263,7 @@ export const initCasinoPage = async () => {
   const desktopNavHeaderInner = document.querySelector('.header-inner');
 
   initDesktopSiteSearch();
+  initHomeSiteSearch();
   if (pageType !== 'moderator') initLanguageSwitcher();
   ensureFooterBlogLink();
   const desktopSearch = desktopNavHeaderInner?.querySelector('.site-search--desktop');
@@ -4563,7 +4335,11 @@ export const initCasinoPage = async () => {
     });
 
     document.addEventListener('keydown', event => {
-      if (event.key === 'Escape') closeDesktopSearch();
+      if (event.key !== 'Escape' || !desktopNavHeader.classList.contains('search-expanded')) return;
+      if (event.defaultPrevented && !desktopSearch.contains(event.target)) return;
+      const returnFocus = desktopSearch.contains(document.activeElement);
+      closeDesktopSearch();
+      if (returnFocus) desktopSearchTrigger.focus({ preventScroll: true });
     });
 
     window.addEventListener('scroll', () => {
@@ -4583,7 +4359,7 @@ export const initCasinoPage = async () => {
     }
   }
 
-  const countriesCloud = document.querySelector('.all-countries .countries-cloud');
+  const countriesCloud = document.querySelector('.all-countries .countries-cloud, .about-country-list .countries-cloud');
   countriesCloud?.replaceChildren(
     ...COUNTRIES.map(c => {
       const a = document.createElement('a');
@@ -4649,7 +4425,10 @@ export const initCasinoPage = async () => {
     });
 
     document.addEventListener('keydown', e => {
-      if (e.key === 'Escape' && mobileMenu.classList.contains('open')) closeMenu();
+      if (e.key === 'Escape' && !e.defaultPrevented && mobileMenu.classList.contains('open')) {
+        closeMenu();
+        burger.focus({ preventScroll: true });
+      }
     });
 
     window.addEventListener('resize', () => {
@@ -4672,6 +4451,7 @@ export const initCasinoPage = async () => {
 
   const header = document.querySelector('.header');
   const casinosScrollNav = initCasinosScrollNav();
+  const catalogToolbar = document.querySelector('.catalog-toolbar');
   const syncHeaderHeight = () => {
     syncHeaderFlowMetrics(header);
   };
@@ -4731,12 +4511,17 @@ export const initCasinoPage = async () => {
     const scrollNavHeight = casinosScrollNav?.classList.contains('is-visible')
       ? casinosScrollNav.offsetHeight
       : 0;
-    const targetY = scrollTarget.getBoundingClientRect().top + window.scrollY - headerHeight - scrollNavHeight - 12;
+    const toolbarHeight = catalogToolbar && getComputedStyle(catalogToolbar).position === 'sticky'
+      ? catalogToolbar.offsetHeight
+      : 0;
+    const targetY = scrollTarget.getBoundingClientRect().top + window.scrollY - headerHeight - scrollNavHeight - toolbarHeight - 12;
     window.scrollTo({ top: Math.max(targetY, 0), behavior: 'smooth' });
   };
 
-  document.querySelectorAll('a[href^="#"]:not([href="#"])').forEach(link => {
+  document.querySelectorAll('a[href^="#"]:not([href="#"], [data-account-nav], [data-partners-nav], [data-about-nav], [data-editorial-nav], [data-editorial-jump])').forEach(link => {
+    if (articleContents?.contains(link)) return;
     link.addEventListener('click', event => {
+      if (event.defaultPrevented) return;
       const hash = link.getAttribute('href');
       if (!hash) return;
       const target = findAnchorTarget(hash);
@@ -4747,7 +4532,7 @@ export const initCasinoPage = async () => {
     });
   });
 
-  if (window.location.hash) {
+  if (window.location.hash && !articleContents && !editorialDashboard && !['account', 'partners', 'about'].includes(pageType)) {
     requestAnimationFrame(() => scrollToAnchor(window.location.hash));
   }
 

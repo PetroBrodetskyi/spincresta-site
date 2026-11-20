@@ -128,11 +128,12 @@ for (const [locale, page] of Object.entries(pages)) {
   }
 
   if (!html.includes('data-newsletter-privacy')) {
-    const sectionFive = /(\s*<article class="faq-card">\s*<h3>5\.[\s\S]*?<\/article>)/;
+    const sectionFive = /(\s*<article(?: class="faq-card")?>\s*<h3>5\.[\s\S]*?<\/article>)/;
     const match = html.match(sectionFive);
     if (!match) throw new Error(`${locale}: section 5 was not found`);
 
-    const card = `\n            <article class="faq-card" data-newsletter-privacy>\n              <h3>${page.heading}</h3>\n${page.paragraphs.map(paragraph => `              <p>${paragraph}</p>`).join('\n')}\n            </article>`;
+    const cardClass = html.includes('data-editorial-dashboard') ? '' : ' class="faq-card"';
+    const card = `\n            <article${cardClass} data-newsletter-privacy>\n              <h3>${page.heading}</h3>\n${page.paragraphs.map(paragraph => `              <p>${paragraph}</p>`).join('\n')}\n            </article>`;
     html = html.replace(sectionFive, `$1${card}`);
   }
 

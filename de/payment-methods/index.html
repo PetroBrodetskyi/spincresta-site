@@ -53,7 +53,7 @@
     />
     <meta name="twitter:image" content="https://spincresta.com/favicon.png" />
 
-    <link rel="stylesheet" href="/styles.css?v=20261119-preview-solid" />
+    <link rel="stylesheet" href="/styles.css?v=20261119-light-editorial" />
 <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://spincresta.com/#organization","name":"SpinCresta","url":"https://spincresta.com/","logo":{"@type":"ImageObject","url":"https://spincresta.com/favicon.png"}},{"@type":"WebPage","@id":"https://spincresta.com/de/payment-methods/#webpage","url":"https://spincresta.com/de/payment-methods/","name":"Casino-Zahlungsmethoden | Karten, E-Wallets & Krypto","description":"Vergleichen Sie Karten, E-Wallets, Banküberweisungen und Krypto für Casino-Einzahlungen und Auszahlungen, inklusive Gebühren, KYC und Limits.","inLanguage":"de","isPartOf":{"@id":"https://spincresta.com/#website"}},{"@type":"WebSite","@id":"https://spincresta.com/#website","name":"SpinCresta","url":"https://spincresta.com/","inLanguage":"de","publisher":{"@id":"https://spincresta.com/#organization"}},{"@type":"BreadcrumbList","@id":"https://spincresta.com/de/payment-methods/#breadcrumb","itemListElement":[{"@type":"ListItem","position":1,"name":"Startseite","item":"https://spincresta.com/de/"},{"@type":"ListItem","position":2,"name":"Zahlungsmethoden","item":"https://spincresta.com/de/payment-methods/"}]}]}</script>
   <link rel="icon" type="image/png" href="/favicon.png" />
 </head>
@@ -95,53 +95,75 @@
       </nav>
     </header>
 
-    <main>
-      <section class="page-intro container">
-        <div class="page-intro-copy">
-          <h1>Zahlungsmethoden</h1>
-          <p>
-            Karten, Geldbörsen, Krypto- und Transfersysteme, die häufig von Online-Casino-Spielern verwendet werden, mit offiziellen Anbieterlinks.
-          </p>
+    <main class="account-dashboard editorial-dashboard editorial-dashboard--payment-methods container" data-editorial-dashboard>
+      <header class="account-dashboard-heading">
+        <h1 id="payment-methods-heading">Zahlungsmethoden</h1>
+        <p>Karten, Geldbörsen, Krypto- und Transfersysteme, die häufig von Online-Casino-Spielern verwendet werden, mit offiziellen Anbieterlinks.</p>
+      </header>
+      <div class="account-layout">
+        <aside class="account-sidebar">
+          <nav class="account-menu" aria-labelledby="payment-methods-heading">
+            <a href="#payment-cards" data-editorial-nav="payment-cards" aria-current="location"><svg class="site-icon" width="20" height="20" aria-hidden="true" focusable="false"><use href="/icons/ui/review-method.svg?v=20261119-catalog-partners#payments"></use></svg><span>Karten</span></a>
+            <a href="#payment-wallets" data-editorial-nav="payment-wallets"><svg class="site-icon" width="20" height="20" aria-hidden="true" focusable="false"><use href="/icons/ui/review-method.svg?v=20261119-catalog-partners#wallet"></use></svg><span>Digitale Geldbörsen</span></a>
+            <a href="#payment-vouchers" data-editorial-nav="payment-vouchers"><svg class="site-icon" width="20" height="20" aria-hidden="true" focusable="false"><use href="/icons/ui/review-method.svg?v=20261119-catalog-partners#bonus"></use></svg><span>Prepaid-Gutscheine</span></a>
+            <a href="#payment-transfers" data-editorial-nav="payment-transfers"><svg class="site-icon" width="20" height="20" aria-hidden="true" focusable="false"><use href="/icons/ui/review-method.svg?v=20261119-catalog-partners#balance"></use></svg><span>Überweisungen und weitere Methoden</span></a>
+            <a href="#payment-crypto" data-editorial-nav="payment-crypto"><svg class="site-icon" width="20" height="20" aria-hidden="true" focusable="false"><use href="/icons/ui/review-method.svg?v=20261119-catalog-partners#globe"></use></svg><span>Kryptowährungen</span></a>
+          </nav>
+        </aside>
+        <div class="account-workspace">
+          <section class="account-panel" id="payment-cards" data-editorial-panel="payment-cards" aria-labelledby="payment-cards-title">
+            <h2 id="payment-cards-title" tabindex="-1">Karten</h2>
+            <ul class="editorial-panel-rows" role="list">
+              <li><span class="editorial-payment-logo"><img src="/icons/payments/visa.svg" alt="" loading="lazy" /></span><div><h3>Visa</h3><p>Globales Debit- und Kreditkartennetzwerk für Online-Einzahlungen und alltägliche Zahlungen.</p><a href="https://www.visa.com/" target="_blank" rel="noopener noreferrer nofollow">Offizielle Website<span class="editorial-provider-name"> — Visa</span></a></div></li>
+              <li><span class="editorial-payment-logo"><img src="/icons/payments/mastercard.svg" alt="" loading="lazy" /></span><div><h3>Mastercard</h3><p>Weltweites Kartenzahlungsnetzwerk, das von Casinos, Händlern und Apps akzeptiert wird.</p><a href="https://www.mastercard.com/" target="_blank" rel="noopener noreferrer nofollow">Offizielle Website<span class="editorial-provider-name"> — Mastercard</span></a></div></li>
+              <li><span class="editorial-payment-logo"><img src="/icons/payments/maestro.svg" alt="" loading="lazy" /></span><div><h3>Maestro</h3><p>Die Debitkartenmarke Mastercard ist in mehreren Regionen für direkte Bankzahlungen verfügbar.</p><a href="https://www.mastercard.us/en-us/personal/find-a-card/maestro-cards.html" target="_blank" rel="noopener noreferrer nofollow">Offizielle Website<span class="editorial-provider-name"> — Maestro</span></a></div></li>
+              <li><span class="editorial-payment-logo"><img src="/icons/payments/americanexpress.svg" alt="" loading="lazy" /></span><div><h3>American Express</h3><p>Internationaler Kartenherausgeber mit strengen Sicherheitskontrollen und Premium-Kartenprogrammen.</p><a href="https://www.americanexpress.com/" target="_blank" rel="noopener noreferrer nofollow">Offizielle Website<span class="editorial-provider-name"> — American Express</span></a></div></li>
+            </ul>
+          </section>
+          <section class="account-panel" id="payment-wallets" data-editorial-panel="payment-wallets" aria-labelledby="payment-wallets-title">
+            <h2 id="payment-wallets-title" tabindex="-1">Digitale Geldbörsen</h2>
+            <ul class="editorial-panel-rows" role="list">
+              <li><span class="editorial-payment-logo"><img src="/icons/payments/applepay.svg" alt="" loading="lazy" /></span><div><h3>Apple Pay</h3><p>Digitale Geldbörse für schnelle kontaktlose und In-App-Zahlungen auf Apple-Geräten.</p><a href="https://www.apple.com/apple-pay/" target="_blank" rel="noopener noreferrer nofollow">Offizielle Website<span class="editorial-provider-name"> — Apple Pay</span></a></div></li>
+              <li><span class="editorial-payment-logo"><img src="/icons/payments/googlepay.svg" alt="" loading="lazy" /></span><div><h3>Google Pay</h3><p>Google Wallet für Online- und Mobilzahlungen mit tokenisierter Kartensicherheit.</p><a href="https://pay.google.com/" target="_blank" rel="noopener noreferrer nofollow">Offizielle Website<span class="editorial-provider-name"> — Google Pay</span></a></div></li>
+              <li><span class="editorial-payment-logo"><img src="/icons/payments/paypal.svg" alt="" loading="lazy" /></span><div><h3>PayPal</h3><p>E-Wallet für Online-Checkout, Guthabenübertragungen und kartengebundene Transaktionen.</p><a href="https://www.paypal.com/" target="_blank" rel="noopener noreferrer nofollow">Offizielle Website<span class="editorial-provider-name"> — PayPal</span></a></div></li>
+              <li><span class="editorial-payment-logo"><img src="/icons/payments/skrill.svg" alt="" loading="lazy" /></span><div><h3>Skrill</h3><p>E-Wallet konzentrierte sich auf Online-Glücksspiele und internationale Geldtransfers.</p><a href="https://www.skrill.com/" target="_blank" rel="noopener noreferrer nofollow">Offizielle Website<span class="editorial-provider-name"> — Skrill</span></a></div></li>
+              <li><span class="editorial-payment-logo"><img src="/icons/payments/neteller.svg" alt="" loading="lazy" /></span><div><h3>Neteller</h3><p>Digitale Geldbörse für Einzahlungen, Auszahlungen und grenzüberschreitende Zahlungen.</p><a href="https://www.neteller.com/" target="_blank" rel="noopener noreferrer nofollow">Offizielle Website<span class="editorial-provider-name"> — Neteller</span></a></div></li>
+              <li><span class="editorial-payment-logo"><img src="/icons/payments/ecopayz.svg" alt="" loading="lazy" /></span><div><h3>ecoPayz</h3><p>E-Wallet-Dienst mit mehreren Währungen, der häufig auf Wett- und Casino-Plattformen verwendet wird.</p><a href="https://www.ecopayz.com/" target="_blank" rel="noopener noreferrer nofollow">Offizielle Website<span class="editorial-provider-name"> — ecoPayz</span></a></div></li>
+              <li><span class="editorial-payment-logo"><img src="/icons/payments/jeton.svg" alt="" loading="lazy" /></span><div><h3>Jeton</h3><p>Wallet-App und Zahlungsökosystem mit Karten- und Überweisungsfunktionalität.</p><a href="https://www.jeton.com/" target="_blank" rel="noopener noreferrer nofollow">Offizielle Website<span class="editorial-provider-name"> — Jeton</span></a></div></li>
+              <li><span class="editorial-payment-logo"><img src="/icons/payments/mifinity.svg" alt="" loading="lazy" /></span><div><h3>MiFinity</h3><p>Globales E-Wallet und Zahlungsgateway für Online-Händler.</p><a href="https://mifinity.com/" target="_blank" rel="noopener noreferrer nofollow">Offizielle Website<span class="editorial-provider-name"> — MiFinity</span></a></div></li>
+              <li><span class="editorial-payment-logo"><img src="/icons/payments/webmoney.svg" alt="" loading="lazy" /></span><div><h3>WebMoney</h3><p>Elektronisches Geldbörsensystem für Peer-to-Peer- und Händlerzahlungen.</p><a href="https://www.wmtransfer.com/" target="_blank" rel="noopener noreferrer nofollow">Offizielle Website<span class="editorial-provider-name"> — WebMoney</span></a></div></li>
+            </ul>
+          </section>
+          <section class="account-panel" id="payment-vouchers" data-editorial-panel="payment-vouchers" aria-labelledby="payment-vouchers-title">
+            <h2 id="payment-vouchers-title" tabindex="-1">Prepaid-Gutscheine</h2>
+            <ul class="editorial-panel-rows" role="list">
+              <li><span class="editorial-payment-logo"><img src="/icons/payments/paysafecard.svg" alt="" loading="lazy" /></span><div><h3>PaysafeCard</h3><p>Prepaid-Gutschein-Zahlungssystem für sichere Online-Ausgaben ohne gemeinsame Nutzung von Karten.</p><a href="https://www.paysafecard.com/" target="_blank" rel="noopener noreferrer nofollow">Offizielle Website<span class="editorial-provider-name"> — PaysafeCard</span></a></div></li>
+              <li><span class="editorial-payment-logo"><img src="/icons/payments/neosurf.svg" alt="" loading="lazy" /></span><div><h3>Neosurf</h3><p>Prepaid-Bargeldgutschein-Methode für Online-Dienste und Gaming-Websites.</p><a href="https://www.neosurf.com/" target="_blank" rel="noopener noreferrer nofollow">Offizielle Website<span class="editorial-provider-name"> — Neosurf</span></a></div></li>
+              <li><span class="editorial-payment-logo"><img src="/icons/payments/flexepin.svg" alt="" loading="lazy" /></span><div><h3>Flexepin</h3><p>Von ausgewählten Betreibern akzeptierte Cash-to-Online-Gutscheinzahlungslösung.</p><a href="https://www.flexepin.com/" target="_blank" rel="noopener noreferrer nofollow">Offizielle Website<span class="editorial-provider-name"> — Flexepin</span></a></div></li>
+            </ul>
+          </section>
+          <section class="account-panel" id="payment-transfers" data-editorial-panel="payment-transfers" aria-labelledby="payment-transfers-title">
+            <h2 id="payment-transfers-title" tabindex="-1">Überweisungen und weitere Methoden</h2>
+            <ul class="editorial-panel-rows" role="list">
+              <li><span class="editorial-payment-logo"><img src="/icons/payments/banktransfer.svg" alt="" loading="lazy" /></span><div><h3>Banküberweisung</h3><p>Direkte Überweisung zwischen Bankkonten, oft über lokale Bahnen oder SWIFT.</p><a href="https://www.swift.com/" target="_blank" rel="noopener noreferrer nofollow">Offizielle Website<span class="editorial-provider-name"> — Banküberweisung</span></a></div></li>
+              <li><span class="editorial-payment-logo"><img src="/icons/payments/bci.svg" alt="" loading="lazy" /></span><div><h3>BCI</h3><p>Online-Zahlungen und Karten-/Bankoptionen der Banco BCI für in Chile ansässige Benutzer.</p><a href="https://www.bci.cl/" target="_blank" rel="noopener noreferrer nofollow">Offizielle Website<span class="editorial-provider-name"> — BCI</span></a></div></li>
+              <li><span class="editorial-payment-logo"><img src="/icons/payments/wirecard.svg" alt="" loading="lazy" /></span><div><h3>Wirecard</h3><p>Legacy-Zahlungsmarke, die zuvor für die Online-Verarbeitung und Prepaid-Karten verwendet wurde.</p><a href="https://www.wirecard.com/" target="_blank" rel="noopener noreferrer nofollow">Offizielle Website<span class="editorial-provider-name"> — Wirecard</span></a></div></li>
+            </ul>
+          </section>
+          <section class="account-panel" id="payment-crypto" data-editorial-panel="payment-crypto" aria-labelledby="payment-crypto-title">
+            <h2 id="payment-crypto-title" tabindex="-1">Kryptowährungen</h2>
+            <ul class="editorial-panel-rows" role="list">
+              <li><span class="editorial-payment-logo"><img src="/icons/payments/bitcoin.svg" alt="" loading="lazy" /></span><div><h3>Bitcoin</h3><p>Dezentrale Kryptowährung, die für Peer-to-Peer-Überweisungen und Casino-Zahlungen verwendet wird.</p><a href="https://bitcoin.org/" target="_blank" rel="noopener noreferrer nofollow">Offizielle Website<span class="editorial-provider-name"> — Bitcoin</span></a></div></li>
+              <li><span class="editorial-payment-logo"><img src="/icons/payments/bitcoincash.svg" alt="" loading="lazy" /></span><div><h3>Bitcoin Cash</h3><p>Der Schwerpunkt der Bitcoin-Abspaltung lag auf einer schnelleren Bestätigung und niedrigeren Übertragungskosten.</p><a href="https://bitcoincash.org/" target="_blank" rel="noopener noreferrer nofollow">Offizielle Website<span class="editorial-provider-name"> — Bitcoin Cash</span></a></div></li>
+              <li><span class="editorial-payment-logo"><img src="/icons/payments/ethereum.svg" alt="" loading="lazy" /></span><div><h3>Ethereum</h3><p>Blockchain-Netzwerk und Kryptowährung für Überweisungen und Smart Contracts.</p><a href="https://ethereum.org/" target="_blank" rel="noopener noreferrer nofollow">Offizielle Website<span class="editorial-provider-name"> — Ethereum</span></a></div></li>
+              <li><span class="editorial-payment-logo"><img src="/icons/payments/litecoin.svg" alt="" loading="lazy" /></span><div><h3>Litecoin</h3><p>Digitale Währung mit niedrigen Gebühren und schnellen Überweisungen für Online-Transaktionen.</p><a href="https://litecoin.org/" target="_blank" rel="noopener noreferrer nofollow">Offizielle Website<span class="editorial-provider-name"> — Litecoin</span></a></div></li>
+              <li><span class="editorial-payment-logo"><img src="/icons/payments/cardano.svg" alt="" loading="lazy" /></span><div><h3>Cardano</h3><p>Proof-of-Stake-Blockchain-Plattform mit ADA-Token für Netzwerktransaktionen.</p><a href="https://cardano.org/" target="_blank" rel="noopener noreferrer nofollow">Offizielle Website<span class="editorial-provider-name"> — Cardano</span></a></div></li>
+              <li><span class="editorial-payment-logo"><img src="/icons/payments/tether.svg" alt="" loading="lazy" /></span><div><h3>Tether (USDT)</h3><p>USD-gebundener Stablecoin, der häufig für Ein- und Auszahlungen in Kryptowährungen verwendet wird.</p><a href="https://tether.to/" target="_blank" rel="noopener noreferrer nofollow">Offizielle Website<span class="editorial-provider-name"> — Tether (USDT)</span></a></div></li>
+              <li><span class="editorial-payment-logo"><img src="/icons/payments/tron.svg" alt="" loading="lazy" /></span><div><h3>TRON</h3><p>Blockchain-Netzwerk, das häufig für schnelle und kostengünstige USDT-Überweisungen verwendet wird.</p><a href="https://tron.network/" target="_blank" rel="noopener noreferrer nofollow">Offizielle Website<span class="editorial-provider-name"> — TRON</span></a></div></li>
+            </ul>
+          </section>
         </div>
-      </section>
-
-      <section class="container">
-        <div class="payment-methods-grid">
-          <article class="payment-method-card"><img src="/icons/payments/visa.svg" alt="Visa-Logo" loading="lazy" /><h2>Visum</h2><p>Globales Debit- und Kreditkartennetzwerk für Online-Einzahlungen und alltägliche Zahlungen.</p><a href="https://www.visa.com/" target="_blank" rel="noopener noreferrer nofollow">Offizielle Website</a></article>
-          <article class="payment-method-card"><img src="/icons/payments/mastercard.svg" alt="Mastercard-Logo" loading="lazy" /><h2>MasterCard</h2><p>Weltweites Kartenzahlungsnetzwerk, das von Casinos, Händlern und Apps akzeptiert wird.</p><a href="https://www.mastercard.com/" target="_blank" rel="noopener noreferrer nofollow">Offizielle Website</a></article>
-          <article class="payment-method-card"><img src="/icons/payments/maestro.svg" alt="Maestro-Logo" loading="lazy" /><h2>Maestro</h2><p>Die Debitkartenmarke Mastercard ist in mehreren Regionen für direkte Bankzahlungen verfügbar.</p><a href="https://www.mastercard.us/en-us/personal/find-a-card/maestro-cards.html" target="_blank" rel="noopener noreferrer nofollow">Offizielle Website</a></article>
-          <article class="payment-method-card"><img src="/icons/payments/americanexpress.svg" alt="American Express-Logo" loading="lazy" /><h2>American Express</h2><p>Internationaler Kartenherausgeber mit strengen Sicherheitskontrollen und Premium-Kartenprogrammen.</p><a href="https://www.americanexpress.com/" target="_blank" rel="noopener noreferrer nofollow">Offizielle Website</a></article>
-          <article class="payment-method-card"><img src="/icons/payments/applepay.svg" alt="Apple Pay-Logo" loading="lazy" /><h2>Apple Pay</h2><p>Digitale Geldbörse für schnelle kontaktlose und In-App-Zahlungen auf Apple-Geräten.</p><a href="https://www.apple.com/apple-pay/" target="_blank" rel="noopener noreferrer nofollow">Offizielle Website</a></article>
-          <article class="payment-method-card"><img src="/icons/payments/googlepay.svg" alt="Google Pay-Logo" loading="lazy" /><h2>Google Pay</h2><p>Google Wallet für Online- und Mobilzahlungen mit tokenisierter Kartensicherheit.</p><a href="https://pay.google.com/" target="_blank" rel="noopener noreferrer nofollow">Offizielle Website</a></article>
-          <article class="payment-method-card"><img src="/icons/payments/paypal.svg" alt="PayPal-Logo" loading="lazy" /><h2>PayPal</h2><p>E-Wallet für Online-Checkout, Guthabenübertragungen und kartengebundene Transaktionen.</p><a href="https://www.paypal.com/" target="_blank" rel="noopener noreferrer nofollow">Offizielle Website</a></article>
-          <article class="payment-method-card"><img src="/icons/payments/skrill.svg" alt="Skrill-Logo" loading="lazy" /><h2>Skrill</h2><p>E-Wallet konzentrierte sich auf Online-Glücksspiele und internationale Geldtransfers.</p><a href="https://www.skrill.com/" target="_blank" rel="noopener noreferrer nofollow">Offizielle Website</a></article>
-          <article class="payment-method-card"><img src="/icons/payments/neteller.svg" alt="Neteller-Logo" loading="lazy" /><h2>Neteller</h2><p>Digitale Geldbörse für Einzahlungen, Auszahlungen und grenzüberschreitende Zahlungen.</p><a href="https://www.neteller.com/" target="_blank" rel="noopener noreferrer nofollow">Offizielle Website</a></article>
-          <article class="payment-method-card"><img src="/icons/payments/ecopayz.svg" alt="ecoPayz-Logo" loading="lazy" /><h2>ecoPayz</h2><p>E-Wallet-Dienst mit mehreren Währungen, der häufig auf Wett- und Casino-Plattformen verwendet wird.</p><a href="https://www.ecopayz.com/" target="_blank" rel="noopener noreferrer nofollow">Offizielle Website</a></article>
-          <article class="payment-method-card"><img src="/icons/payments/jeton.svg" alt="Jeton-Logo" loading="lazy" /><h2>Jeton</h2><p>Wallet-App und Zahlungsökosystem mit Karten- und Überweisungsfunktionalität.</p><a href="https://www.jeton.com/" target="_blank" rel="noopener noreferrer nofollow">Offizielle Website</a></article>
-          <article class="payment-method-card"><img src="/icons/payments/mifinity.svg" alt="MiFinity-Logo" loading="lazy" /><h2>MiFinity</h2><p>Globales E-Wallet und Zahlungsgateway für Online-Händler.</p><a href="https://mifinity.com/" target="_blank" rel="noopener noreferrer nofollow">Offizielle Website</a></article>
-          <article class="payment-method-card"><img src="/icons/payments/paysafecard.svg" alt="PaysafeCard-Logo" loading="lazy" /><h2>PaysafeCard</h2><p>Prepaid-Gutschein-Zahlungssystem für sichere Online-Ausgaben ohne gemeinsame Nutzung von Karten.</p><a href="https://www.paysafecard.com/" target="_blank" rel="noopener noreferrer nofollow">Offizielle Website</a></article>
-          <article class="payment-method-card"><img src="/icons/payments/neosurf.svg" alt="Neosurf-Logo" loading="lazy" /><h2>Neosurf</h2><p>Prepaid-Bargeldgutschein-Methode für Online-Dienste und Gaming-Websites.</p><a href="https://www.neosurf.com/" target="_blank" rel="noopener noreferrer nofollow">Offizielle Website</a></article>
-          <article class="payment-method-card"><img src="/icons/payments/flexepin.svg" alt="Flexepin-Logo" loading="lazy" /><h2>Flexepin</h2><p>Von ausgewählten Betreibern akzeptierte Cash-to-Online-Gutscheinzahlungslösung.</p><a href="https://www.flexepin.com/" target="_blank" rel="noopener noreferrer nofollow">Offizielle Website</a></article>
-          <article class="payment-method-card"><img src="/icons/payments/webmoney.svg" alt="WebMoney-Logo" loading="lazy" /><h2>WebMoney</h2><p>Elektronisches Geldbörsensystem für Peer-to-Peer- und Händlerzahlungen.</p><a href="https://www.wmtransfer.com/" target="_blank" rel="noopener noreferrer nofollow">Offizielle Website</a></article>
-          <article class="payment-method-card"><img src="/icons/payments/banktransfer.svg" alt="Banküberweisungslogo" loading="lazy" /><h2>Banküberweisung</h2><p>Direkte Überweisung zwischen Bankkonten, oft über lokale Bahnen oder SWIFT.</p><a href="https://www.swift.com/" target="_blank" rel="noopener noreferrer nofollow">Offizielle Website</a></article>
-          <article class="payment-method-card"><img src="/icons/payments/bci.svg" alt="BCI-Logo" loading="lazy" /><h2>BCI</h2><p>Online-Zahlungen und Karten-/Bankoptionen der Banco BCI für in Chile ansässige Benutzer.</p><a href="https://www.bci.cl/" target="_blank" rel="noopener noreferrer nofollow">Offizielle Website</a></article>
-          <article class="payment-method-card"><img src="/icons/payments/bitcoin.svg" alt="Bitcoin-Logo" loading="lazy" /><h2>Bitcoin</h2><p>Dezentrale Kryptowährung, die für Peer-to-Peer-Überweisungen und Casino-Zahlungen verwendet wird.</p><a href="https://bitcoin.org/" target="_blank" rel="noopener noreferrer nofollow">Offizielle Website</a></article>
-          <article class="payment-method-card"><img src="/icons/payments/bitcoincash.svg" alt="Bitcoin Cash-Logo" loading="lazy" /><h2>Bitcoin-Bargeld</h2><p>Der Schwerpunkt der Bitcoin-Abspaltung lag auf einer schnelleren Bestätigung und niedrigeren Übertragungskosten.</p><a href="https://bitcoincash.org/" target="_blank" rel="noopener noreferrer nofollow">Offizielle Website</a></article>
-          <article class="payment-method-card"><img src="/icons/payments/ethereum.svg" alt="Ethereum-Logo" loading="lazy" /><h2>Ethereum</h2><p>Blockchain-Netzwerk und Kryptowährung für Überweisungen und Smart Contracts.</p><a href="https://ethereum.org/" target="_blank" rel="noopener noreferrer nofollow">Offizielle Website</a></article>
-          <article class="payment-method-card"><img src="/icons/payments/litecoin.svg" alt="Litecoin-Logo" loading="lazy" /><h2>Litecoin</h2><p>Digitale Währung mit niedrigen Gebühren und schnellen Überweisungen für Online-Transaktionen.</p><a href="https://litecoin.org/" target="_blank" rel="noopener noreferrer nofollow">Offizielle Website</a></article>
-          <article class="payment-method-card"><img src="/icons/payments/cardano.svg" alt="Cardano-Logo" loading="lazy" /><h2>Cardano</h2><p>Proof-of-Stake-Blockchain-Plattform mit ADA-Token für Netzwerktransaktionen.</p><a href="https://cardano.org/" target="_blank" rel="noopener noreferrer nofollow">Offizielle Website</a></article>
-          <article class="payment-method-card"><img src="/icons/payments/tether.svg" alt="Tether-Logo" loading="lazy" /><h2>Tether (USDT)</h2><p>USD-gebundener Stablecoin, der häufig für Ein- und Auszahlungen in Kryptowährungen verwendet wird.</p><a href="https://tether.to/" target="_blank" rel="noopener noreferrer nofollow">Offizielle Website</a></article>
-          <article class="payment-method-card"><img src="/icons/payments/tron.svg" alt="TRON-Logo" loading="lazy" /><h2>TRON</h2><p>Blockchain-Netzwerk, das häufig für schnelle und kostengünstige USDT-Überweisungen verwendet wird.</p><a href="https://tron.network/" target="_blank" rel="noopener noreferrer nofollow">Offizielle Website</a></article>
-          <article class="payment-method-card"><img src="/icons/payments/wirecard.svg" alt="Wirecard-Logo" loading="lazy" /><h2>Wirecard</h2><p>Legacy-Zahlungsmarke, die zuvor für die Online-Verarbeitung und Prepaid-Karten verwendet wurde.</p><a href="https://www.wirecard.com/" target="_blank" rel="noopener noreferrer nofollow">Offizielle Website</a></article>
-        </div>
-      </section>
-
-      <section class="all-countries">
-        <div class="container">
-          <h2 class="title">Online-Casinos nach Land</h2>
-          <div class="countries-cloud"></div>
-        </div>
-      </section>
+      </div>
     </main>
 
     <footer class="footer">
@@ -187,7 +209,7 @@
 </div>
     </footer>
 
-    <script type="module" src="/scripts/main.js?v=20261119-preview-loader"></script>
+    <script type="module" src="/scripts/main.js?v=20261119-light-editorial"></script>
   </body>
 </html>
 

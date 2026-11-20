@@ -48,7 +48,7 @@
   <meta property="og:site_name" content="SpinCresta" />
   <meta name="twitter:card" content="summary_large_image" />
 
-      <link rel="stylesheet" href="/styles.css?v=20261119-preview-solid" />
+      <link rel="stylesheet" href="/styles.css?v=20261119-catalog-partners" />
 </head>
   <body class="home-page" data-page="account" data-language="pt">
     <header class="header">
@@ -84,85 +84,88 @@
       </nav>
     </header>
 
-    <main>
-      <section class="hero container">
-        <div class="hero-content">
-
-          <h1>A sua conta num só lugar</h1>
-          <p>Consulte os dados do perfil e utilize as funcionalidades disponíveis para a sua conta.</p>
-        </div>
-        <aside class="account-review-history" data-account-review-history aria-labelledby="account-review-history-title">
-
-          <div class="account-review-history-heading">
-            <h2 id="account-review-history-title">As suas opiniões</h2>
-            <p>Abra uma opinião para a ver na página do casino.</p>
+    <main class="account-dashboard container" data-account-page data-account-active="profile">
+      <header class="account-dashboard-heading">
+        <h1 id="account-title">A minha conta</h1>
+      </header>
+      <div class="account-layout">
+        <aside class="account-sidebar">
+          <nav class="account-menu" aria-labelledby="account-title">
+            <a href="#profile" data-account-nav="profile" aria-current="location"><svg class="site-icon" width="20" height="20" aria-hidden="true" focusable="false"><use href="/icons/ui/review-method.svg?v=20261119-editorial-bands#user"></use></svg><span>Perfil</span></a>
+            <a href="#favorites" data-account-nav="favorites"><svg class="site-icon" width="20" height="20" aria-hidden="true" focusable="false"><use href="/icons/ui/review-method.svg?v=20261119-editorial-bands#heart"></use></svg><span>Favoritos</span></a>
+            <a href="#reviews" data-account-nav="reviews"><svg class="site-icon" width="20" height="20" aria-hidden="true" focusable="false"><use href="/icons/ui/review-method.svg?v=20261119-editorial-bands#chat"></use></svg><span>Opiniões</span></a>
+            <a href="#support" data-account-nav="support"><svg class="site-icon" width="20" height="20" aria-hidden="true" focusable="false"><use href="/icons/ui/review-method.svg?v=20261119-editorial-bands#help"></use></svg><span>Ajuda e privacidade</span></a>
+          </nav>
+          <div class="account-menu-actions">
+            <a href="/moderator/" data-moderator-link hidden>Painel de moderação</a>
+            <button type="button" data-account-page-signout hidden>Terminar sessão</button>
           </div>
-          <p class="account-review-history-state" data-account-reviews-loading>A carregar as suas opiniões…</p>
-          <p class="account-review-history-state" data-account-reviews-empty hidden>Ainda não escreveu nenhuma opinião.</p>
-          <div class="account-review-history-list" data-account-reviews-list hidden></div>
         </aside>
-      </section>
-
-      <div class="content-area container">
-        <section class="home-showcase-section" data-account-page aria-labelledby="account-overview-title">
-          <div class="home-showcase-heading">
-            <div>
-
-              <h2 id="account-overview-title">Perfil e dados da conta</h2>
-            </div>
-            <p>O seu perfil Google é utilizado para identificar a conta SpinCresta de forma segura.</p>
-          </div>
-
+        <div class="account-workspace">
           <p class="account-auth-status" data-account-page-notice role="status" aria-live="polite" hidden></p>
-          <p data-account-page-loading>A carregar a sua conta…</p>
-
-          <div class="home-section-cta" data-account-page-signed-out hidden>
-            <div>
-              <strong>Inicie sessão para abrir a sua conta</strong>
-              <span>Utilize a conta Google associada à SpinCresta.</span>
-            </div>
-            <a href="/pt/account/" data-account-page-signin>Entrar com o Google</a>
+          <p class="account-loading" data-account-page-loading role="status">A carregar a sua conta…</p>
+          <div class="account-panel account-signin-panel" data-account-page-signed-out hidden>
+            <svg class="site-icon account-signin-icon" width="24" height="24" aria-hidden="true" focusable="false"><use href="/icons/ui/review-method.svg?v=20261119-editorial-bands#lock"></use></svg>
+            <h2 tabindex="-1">Inicie sessão para abrir a sua conta</h2>
+            <p>Entre com o Google para ver o seu perfil, os favoritos e as opiniões.</p>
+            <button class="account-dashboard-signin" type="button" data-account-page-signin>Entrar com o Google</button>
           </div>
 
           <div data-account-page-signed-in hidden>
-            <div class="account-auth-user-preview">
-              <img alt="" data-account-page-avatar hidden />
-              <div><small>Sessão iniciada como</small><strong data-account-page-name></strong><span data-account-page-email></span></div>
-            </div>
-
-            <div class="home-method-grid">
-              <article><span>01</span><h3>Estado da conta</h3><p data-account-page-status>Ativa</p></article>
-              <article><span>02</span><h3>Idioma do site</h3><p data-account-page-locale></p></article>
-              <article><span>03</span><h3>Membro desde</h3><p data-account-page-created></p></article>
-              <article><span>04</span><h3>Entrar com o Google</h3><p>Google</p></article>
-            </div>
-
-            <form class="account-contact-form" data-account-contact-form>
-              <div class="account-contact-heading">
-
-                <h3>Os seus contactos</h3>
-                <p>O país selecionado pode aparecer como bandeira junto das opiniões publicadas. O telefone e o Telegram permanecem privados.</p>
+            <section id="profile" data-account-panel="profile" aria-labelledby="account-overview-title">
+              <div class="account-panel">
+                <h2 id="account-overview-title" tabindex="-1">Perfil</h2>
+                <div class="account-auth-user-preview">
+                  <span class="account-profile-avatar">
+                    <svg class="site-icon" width="24" height="24" aria-hidden="true" focusable="false"><use href="/icons/ui/review-method.svg?v=20261119-editorial-bands#user"></use></svg>
+                    <img alt="" data-account-page-avatar hidden />
+                  </span>
+                  <div><strong data-account-page-name></strong><span data-account-page-email></span></div>
+                </div>
+                <dl class="account-profile-facts">
+                  <div><dt>Estado da conta</dt><dd data-account-page-status>Ativa</dd></div>
+                  <div><dt>Idioma do site</dt><dd data-account-page-locale></dd></div>
+                  <div><dt>Membro desde</dt><dd data-account-page-created></dd></div>
+                </dl>
               </div>
-              <div class="account-contact-fields">
-                <label><span>País de residência</span><select name="countryCode" data-account-country><option value="">Escolha um país</option></select></label>
-                <label><span>Número de telefone</span><input name="phoneNumber" type="tel" maxlength="32" autocomplete="tel" placeholder="+351 912 345 678" /></label>
-                <label><span>Nome de utilizador do Telegram</span><input name="telegramUsername" type="text" maxlength="33" autocomplete="off" placeholder="@utilizador" /></label>
-              </div>
-              <div class="account-contact-actions">
-                <button type="submit" data-account-contact-submit>Guardar dados</button>
-                <p class="account-auth-status" data-account-contact-status role="status" aria-live="polite" hidden></p>
-              </div>
-            </form>
-
-            <div class="home-section-cta">
-              <div><strong>Informações essenciais</strong><span>Consulte como tratamos os dados da conta e aceda às informações sobre jogo responsável quando quiser.</span></div>
-              <a href="/pt/privacy-policy/">Política de Privacidade</a>
-              <a href="/pt/responsible-gambling/">Jogo responsável</a>
-              <a href="/moderator/" data-moderator-link hidden>Painel de moderação</a>
-              <a href="/pt/account/" data-account-page-signout>Terminar sessão</a>
-            </div>
+              <form class="account-contact-form account-panel" data-account-contact-form>
+                <div class="account-contact-heading">
+                  <h3>Os seus contactos</h3>
+                  <p>O país selecionado pode aparecer como bandeira junto das opiniões publicadas. O telefone e o Telegram permanecem privados.</p>
+                </div>
+                <div class="account-contact-fields">
+                  <label><span>País de residência</span><select name="countryCode" data-account-country><option value="">Escolha um país</option></select></label>
+                  <label><span>Número de telefone</span><input name="phoneNumber" type="tel" maxlength="32" autocomplete="tel" placeholder="+351 912 345 678" /></label>
+                  <label><span>Nome de utilizador do Telegram</span><input name="telegramUsername" type="text" maxlength="33" autocomplete="off" placeholder="@utilizador" /></label>
+                </div>
+                <div class="account-contact-actions">
+                  <button type="submit" data-account-contact-submit>Guardar dados</button>
+                  <p class="account-auth-status" data-account-contact-status role="status" aria-live="polite" hidden></p>
+                </div>
+              </form>
+            </section>
+            <section id="favorites" class="account-panel account-favorites" data-account-panel="favorites" aria-labelledby="account-favorites-title" hidden>
+              <h2 id="account-favorites-title" tabindex="-1">Favoritos</h2>
+              <p>Selecione o coração na página de análise para guardar um casino.</p>
+              <div data-account-favorites-mount></div>
+              <a class="account-browse-link" href="/pt/top-casinos/">Ver análises de casinos</a>
+            </section>
+            <section id="reviews" class="account-panel account-review-history" data-account-panel="reviews" data-account-review-history aria-labelledby="account-review-history-title" hidden>
+              <h2 id="account-review-history-title" tabindex="-1">As suas opiniões</h2>
+              <p>Abra uma opinião para a ver na página do casino.</p>
+              <p class="account-review-history-state" data-account-reviews-loading role="status">A carregar as suas opiniões…</p>
+              <p class="account-review-history-state" data-account-reviews-empty role="status" hidden>Ainda não escreveu nenhuma opinião.</p>
+              <div class="account-review-history-list" data-account-reviews-list hidden></div>
+            </section>
           </div>
-        </section>
+          <section id="support" class="account-panel" data-account-panel="support" aria-labelledby="account-support-title" hidden>
+            <h2 id="account-support-title" tabindex="-1">Ajuda e privacidade</h2>
+            <div class="account-support-links">
+              <a href="/pt/privacy-policy/"><svg class="site-icon" width="20" height="20" aria-hidden="true" focusable="false"><use href="/icons/ui/review-method.svg?v=20261119-editorial-bands#lock"></use></svg><span>Política de privacidade</span></a>
+              <a href="/pt/responsible-gambling/"><svg class="site-icon" width="20" height="20" aria-hidden="true" focusable="false"><use href="/icons/ui/review-method.svg?v=20261119-editorial-bands#safety"></use></svg><span>Jogo responsável</span></a>
+            </div>
+          </section>
+        </div>
       </div>
     </main>
 
@@ -209,6 +212,6 @@
 </div>
     </footer>
 
-    <script type="module" src="/scripts/main.js?v=20261119-preview-loader"></script>
+    <script type="module" src="/scripts/main.js?v=20261119-catalog-partners"></script>
   </body>
 </html>

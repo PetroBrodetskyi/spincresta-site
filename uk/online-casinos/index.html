@@ -53,7 +53,7 @@
       content="Переглядайте онлайн-казино за країнами та порівнюйте доступність, бонуси, способи оплати, виплати й інструменти відповідальної гри."
     />
 
-    <link rel="stylesheet" href="/styles.css?v=20261119-preview-solid" />
+    <link rel="stylesheet" href="/styles.css?v=20261119-country-hub" />
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -158,99 +158,108 @@
       </nav>
     </header>
 
-    <main>
-      <section class="page-intro container">
-        <div class="page-intro-copy">
-          <h1>Онлайн казино за країнами</h1>
-          <p>Порівняйте правовий контекст, місцеві способи оплати та вибір надійних казино для вашого регіону.</p>
+    <main class="account-dashboard editorial-dashboard editorial-dashboard--country-hub container" data-editorial-dashboard>
+      <header class="account-dashboard-heading">
+        <h1 id="country-hub-heading">Онлайн казино за країнами</h1>
+        <p>Знайдіть гід для своєї країни й порівняйте доступність казино, місцеві способи оплати, умови бонусів та інструменти відповідальної гри.</p>
+      </header>
+      <div class="account-layout">
+        <aside class="account-sidebar">
+          <nav class="account-menu" aria-labelledby="country-hub-heading">
+            <a href="#country-guides" data-editorial-nav="country-guides" aria-current="location"><svg class="site-icon" width="20" height="20" aria-hidden="true" focusable="false"><use href="/icons/ui/review-method.svg?v=20261119-catalog-partners#globe"></use></svg><span>Гіди за країнами</span></a>
+            <a href="#seo-editorial-guide" data-editorial-nav="seo-editorial-guide"><svg class="site-icon" width="20" height="20" aria-hidden="true" focusable="false"><use href="/icons/ui/review-method.svg?v=20261119-catalog-partners#review"></use></svg><span>Що ми порівнюємо</span></a>
+            <a href="#before-registration" data-editorial-nav="before-registration"><svg class="site-icon" width="20" height="20" aria-hidden="true" focusable="false"><use href="/icons/ui/review-method.svg?v=20261119-catalog-partners#book"></use></svg><span>Перед реєстрацією</span></a>
+          </nav>
+        </aside>
+        <div class="account-workspace">
+          <section class="account-panel" id="country-guides" data-editorial-panel="country-guides" aria-labelledby="country-guides-title">
+            <h2 id="country-guides-title" tabindex="-1">Гіди за країнами</h2>
+            <div class="country-hub-search" data-country-hub-search role="search" hidden>
+              <label for="country-hub-query"><svg class="site-icon" width="20" height="20" aria-hidden="true" focusable="false"><use href="/icons/ui/review-method.svg?v=20261119-catalog-partners#search"></use></svg><span class="country-hub-search-label">Знайти країну</span></label>
+              <input type="search" id="country-hub-query" placeholder="Знайти країну" autocomplete="off" aria-controls="country-hub-results" />
+            </div>
+            <p class="country-hub-empty" data-country-hub-empty role="status" hidden>За вашим запитом країн не знайдено.</p>
+            <div id="country-hub-results">
+              <div class="country-hub-grid" data-country-hub-grid>
+              <a class="country-hub-link" href="/uk/online-casinos/australia/" data-country-keywords="Australia au"><img src="/icons/australia-flag-icon.svg" alt="" width="32" height="24" loading="lazy" decoding="async"><span>Австралія</span></a>
+              <a class="country-hub-link" href="/uk/online-casinos/austria/" data-country-keywords="Austria at"><img src="/icons/austria-flag-icon.svg" alt="" width="32" height="24" loading="lazy" decoding="async"><span>Австрія</span></a>
+              <a class="country-hub-link" href="/uk/online-casinos/azerbaijan/" data-country-keywords="Azerbaijan az"><img src="/icons/azerbaijan-flag-icon.svg" alt="" width="32" height="24" loading="lazy" decoding="async"><span>Азербайджан</span></a>
+              <a class="country-hub-link" href="/uk/online-casinos/argentina/" data-country-keywords="Argentina ar"><img src="/icons/argentina-flag-icon.svg" alt="" width="32" height="24" loading="lazy" decoding="async"><span>Аргентина</span></a>
+              <a class="country-hub-link" href="/uk/online-casinos/bangladesh/" data-country-keywords="Bangladesh bd"><img src="/icons/bangladesh-flag-icon.svg" alt="" width="32" height="24" loading="lazy" decoding="async"><span>Бангладеш</span></a>
+              <a class="country-hub-link" href="/uk/online-casinos/belgium/" data-country-keywords="Belgium be"><img src="/icons/belgium-flag-icon.svg" alt="" width="32" height="24" loading="lazy" decoding="async"><span>Бельгія</span></a>
+              <a class="country-hub-link" href="/uk/online-casinos/bulgaria/" data-country-keywords="Bulgaria bg"><img src="/icons/bulgaria-flag-icon.svg" alt="" width="32" height="24" loading="lazy" decoding="async"><span>Болгарія</span></a>
+              <a class="country-hub-link" href="/uk/online-casinos/brazil/" data-country-keywords="Brazil br"><img src="/icons/brazil-flag-icon.svg" alt="" width="32" height="24" loading="lazy" decoding="async"><span>Бразилія</span></a>
+              <a class="country-hub-link" href="/uk/online-casinos/united-kingdom/" data-country-keywords="United Kingdom uk GB Great Britain Britain"><img src="/icons/united-kingdom-flag-icon.svg" alt="" width="32" height="24" loading="lazy" decoding="async"><span>Велика Британія</span></a>
+              <a class="country-hub-link" href="/uk/online-casinos/vietnam/" data-country-keywords="Vietnam vn Viet Nam"><img src="/icons/vietnam-flag-icon.svg" alt="" width="32" height="24" loading="lazy" decoding="async"><span>Вʼєтнам</span></a>
+              <a class="country-hub-link" href="/uk/online-casinos/ghana/" data-country-keywords="Ghana gh"><img src="/icons/ghana-flag-icon.svg" alt="" width="32" height="24" loading="lazy" decoding="async"><span>Гана</span></a>
+              <a class="country-hub-link" href="/uk/online-casinos/greece/" data-country-keywords="Greece gr"><img src="/icons/greece-flag-icon.svg" alt="" width="32" height="24" loading="lazy" decoding="async"><span>Греція</span></a>
+              <a class="country-hub-link" href="/uk/online-casinos/denmark/" data-country-keywords="Denmark dk"><img src="/icons/denmark-flag-icon.svg" alt="" width="32" height="24" loading="lazy" decoding="async"><span>Данія</span></a>
+              <a class="country-hub-link" href="/uk/online-casinos/estonia/" data-country-keywords="Estonia ee"><img src="/icons/estonia-flag-icon.svg" alt="" width="32" height="24" loading="lazy" decoding="async"><span>Естонія</span></a>
+              <a class="country-hub-link" href="/uk/online-casinos/egypt/" data-country-keywords="Egypt eg"><img src="/icons/egypt-flag-icon.svg" alt="" width="32" height="24" loading="lazy" decoding="async"><span>Єгипет</span></a>
+              <a class="country-hub-link" href="/uk/online-casinos/india/" data-country-keywords="India in"><img src="/icons/india-flag-icon.svg" alt="" width="32" height="24" loading="lazy" decoding="async"><span>Індія</span></a>
+              <a class="country-hub-link" href="/uk/online-casinos/indonesia/" data-country-keywords="Indonesia id"><img src="/icons/indonesia-flag-icon.svg" alt="" width="32" height="24" loading="lazy" decoding="async"><span>Індонезія</span></a>
+              <a class="country-hub-link" href="/uk/online-casinos/ireland/" data-country-keywords="Ireland ie"><img src="/icons/ireland-flag-icon.svg" alt="" width="32" height="24" loading="lazy" decoding="async"><span>Ірландія</span></a>
+              <a class="country-hub-link" href="/uk/online-casinos/iceland/" data-country-keywords="Iceland is"><img src="/icons/iceland-flag-icon.svg" alt="" width="32" height="24" loading="lazy" decoding="async"><span>Ісландія</span></a>
+              <a class="country-hub-link" href="/uk/online-casinos/spain/" data-country-keywords="Spain es"><img src="/icons/spain-flag-icon.svg" alt="" width="32" height="24" loading="lazy" decoding="async"><span>Іспанія</span></a>
+              <a class="country-hub-link" href="/uk/online-casinos/italy/" data-country-keywords="Italy it"><img src="/icons/italy-flag-icon.svg" alt="" width="32" height="24" loading="lazy" decoding="async"><span>Італія</span></a>
+              <a class="country-hub-link" href="/uk/online-casinos/kazakhstan/" data-country-keywords="Kazakhstan kz"><img src="/icons/kazakhstan-flag-icon.svg" alt="" width="32" height="24" loading="lazy" decoding="async"><span>Казахстан</span></a>
+              <a class="country-hub-link" href="/uk/online-casinos/canada/" data-country-keywords="Canada ca"><img src="/icons/canada-flag-icon.svg" alt="" width="32" height="24" loading="lazy" decoding="async"><span>Канада</span></a>
+              <a class="country-hub-link" href="/uk/online-casinos/kenya/" data-country-keywords="Kenya ke"><img src="/icons/kenya-flag-icon.svg" alt="" width="32" height="24" loading="lazy" decoding="async"><span>Кенія</span></a>
+              <a class="country-hub-link" href="/uk/online-casinos/kyrgyzstan/" data-country-keywords="Kyrgyzstan kg"><img src="/icons/kyrgyzstan-flag-icon.svg" alt="" width="32" height="24" loading="lazy" decoding="async"><span>Киргизстан</span></a>
+              <a class="country-hub-link" href="/uk/online-casinos/colombia/" data-country-keywords="Colombia co"><img src="/icons/colombia-flag-icon.svg" alt="" width="32" height="24" loading="lazy" decoding="async"><span>Колумбія</span></a>
+              <a class="country-hub-link" href="/uk/online-casinos/latvia/" data-country-keywords="Latvia lv"><img src="/icons/latvia-flag-icon.svg" alt="" width="32" height="24" loading="lazy" decoding="async"><span>Латвія</span></a>
+              <a class="country-hub-link" href="/uk/online-casinos/lithuania/" data-country-keywords="Lithuania lt"><img src="/icons/lithuania-flag-icon.svg" alt="" width="32" height="24" loading="lazy" decoding="async"><span>Литва</span></a>
+              <a class="country-hub-link" href="/uk/online-casinos/luxembourg/" data-country-keywords="Luxembourg lu"><img src="/icons/luxembourg-flag-icon.svg" alt="" width="32" height="24" loading="lazy" decoding="async"><span>Люксембург</span></a>
+              <a class="country-hub-link" href="/uk/online-casinos/malaysia/" data-country-keywords="Malaysia my"><img src="/icons/malaysia-flag-icon.svg" alt="" width="32" height="24" loading="lazy" decoding="async"><span>Малайзія</span></a>
+              <a class="country-hub-link" href="/uk/online-casinos/mexico/" data-country-keywords="Mexico mx"><img src="/icons/mexico-flag-icon.svg" alt="" width="32" height="24" loading="lazy" decoding="async"><span>Мексика</span></a>
+              <a class="country-hub-link" href="/uk/online-casinos/nepal/" data-country-keywords="Nepal np"><img src="/icons/nepal-flag-icon.svg" alt="" width="32" height="24" loading="lazy" decoding="async"><span>Непал</span></a>
+              <a class="country-hub-link" href="/uk/online-casinos/nigeria/" data-country-keywords="Nigeria ng"><img src="/icons/nigeria-flag-icon.svg" alt="" width="32" height="24" loading="lazy" decoding="async"><span>Нігерія</span></a>
+              <a class="country-hub-link" href="/uk/online-casinos/netherlands/" data-country-keywords="Netherlands nl"><img src="/icons/netherlands-flag-icon.svg" alt="" width="32" height="24" loading="lazy" decoding="async"><span>Нідерланди</span></a>
+              <a class="country-hub-link" href="/uk/online-casinos/germany/" data-country-keywords="Germany de"><img src="/icons/germany-flag-icon.svg" alt="" width="32" height="24" loading="lazy" decoding="async"><span>Німеччина</span></a>
+              <a class="country-hub-link" href="/uk/online-casinos/new-zealand/" data-country-keywords="New Zealand nz"><img src="/icons/new-zealand-flag-icon.svg" alt="" width="32" height="24" loading="lazy" decoding="async"><span>Нова Зеландія</span></a>
+              <a class="country-hub-link" href="/uk/online-casinos/norway/" data-country-keywords="Norway no"><img src="/icons/norway-flag-icon.svg" alt="" width="32" height="24" loading="lazy" decoding="async"><span>Норвегія</span></a>
+              <a class="country-hub-link" href="/uk/online-casinos/peru/" data-country-keywords="Peru pe"><img src="/icons/peru-flag-icon.svg" alt="" width="32" height="24" loading="lazy" decoding="async"><span>Перу</span></a>
+              <a class="country-hub-link" href="/uk/online-casinos/south-korea/" data-country-keywords="South Korea kr Republic of Korea"><img src="/icons/south-korea-flag-icon.svg" alt="" width="32" height="24" loading="lazy" decoding="async"><span>Південна Корея</span></a>
+              <a class="country-hub-link" href="/uk/online-casinos/south-africa/" data-country-keywords="South Africa za"><img src="/icons/south-africa-flag-icon.svg" alt="" width="32" height="24" loading="lazy" decoding="async"><span>Південно-Африканська Республіка</span></a>
+              <a class="country-hub-link" href="/uk/online-casinos/poland/" data-country-keywords="Poland pl"><img src="/icons/poland-flag-icon.svg" alt="" width="32" height="24" loading="lazy" decoding="async"><span>Польща</span></a>
+              <a class="country-hub-link" href="/uk/online-casinos/portugal/" data-country-keywords="Portugal pt"><img src="/icons/portugal-flag-icon.svg" alt="" width="32" height="24" loading="lazy" decoding="async"><span>Португалія</span></a>
+              <a class="country-hub-link" href="/uk/online-casinos/russia/" data-country-keywords="Russia ru"><img src="/icons/russia-flag-icon.svg" alt="" width="32" height="24" loading="lazy" decoding="async"><span>Росія</span></a>
+              <a class="country-hub-link" href="/uk/online-casinos/romania/" data-country-keywords="Romania ro"><img src="/icons/romania-flag-icon.svg" alt="" width="32" height="24" loading="lazy" decoding="async"><span>Румунія</span></a>
+              <a class="country-hub-link" href="/uk/online-casinos/singapore/" data-country-keywords="Singapore sg"><img src="/icons/singapore-flag-icon.svg" alt="" width="32" height="24" loading="lazy" decoding="async"><span>Сінгапур</span></a>
+              <a class="country-hub-link" href="/uk/online-casinos/slovakia/" data-country-keywords="Slovakia sk"><img src="/icons/slovakia-flag-icon.svg" alt="" width="32" height="24" loading="lazy" decoding="async"><span>Словаччина</span></a>
+              <a class="country-hub-link" href="/uk/online-casinos/slovenia/" data-country-keywords="Slovenia si"><img src="/icons/slovenia-flag-icon.svg" alt="" width="32" height="24" loading="lazy" decoding="async"><span>Словенія</span></a>
+              <a class="country-hub-link" href="/uk/online-casinos/united-states/" data-country-keywords="United States us USA United States of America"><img src="/icons/united-states-flag-icon.svg" alt="" width="32" height="24" loading="lazy" decoding="async"><span>Сполучені Штати</span></a>
+              <a class="country-hub-link" href="/uk/online-casinos/thailand/" data-country-keywords="Thailand th"><img src="/icons/thailand-flag-icon.svg" alt="" width="32" height="24" loading="lazy" decoding="async"><span>Таїланд</span></a>
+              <a class="country-hub-link" href="/uk/online-casinos/tanzania/" data-country-keywords="Tanzania tz"><img src="/icons/tanzania-flag-icon.svg" alt="" width="32" height="24" loading="lazy" decoding="async"><span>Танзанія</span></a>
+              <a class="country-hub-link" href="/uk/online-casinos/turkey/" data-country-keywords="Turkey tr"><img src="/icons/turkey-flag-icon.svg" alt="" width="32" height="24" loading="lazy" decoding="async"><span>Туреччина</span></a>
+              <a class="country-hub-link" href="/uk/online-casinos/uganda/" data-country-keywords="Uganda ug"><img src="/icons/uganda-flag-icon.svg" alt="" width="32" height="24" loading="lazy" decoding="async"><span>Уганда</span></a>
+              <a class="country-hub-link" href="/uk/online-casinos/hungary/" data-country-keywords="Hungary hu"><img src="/icons/hungary-flag-icon.svg" alt="" width="32" height="24" loading="lazy" decoding="async"><span>Угорщина</span></a>
+              <a class="country-hub-link" href="/uk/online-casinos/uzbekistan/" data-country-keywords="Uzbekistan uz"><img src="/icons/uzbekistan-flag-icon.svg" alt="" width="32" height="24" loading="lazy" decoding="async"><span>Узбекистан</span></a>
+              <a class="country-hub-link" href="/uk/online-casinos/ukraine/" data-country-keywords="Ukraine ua"><img src="/icons/ukraine-flag-icon.svg" alt="" width="32" height="24" loading="lazy" decoding="async"><span>Україна</span></a>
+              <a class="country-hub-link" href="/uk/online-casinos/philippines/" data-country-keywords="Philippines ph"><img src="/icons/philippines-flag-icon.svg" alt="" width="32" height="24" loading="lazy" decoding="async"><span>Філіппіни</span></a>
+              <a class="country-hub-link" href="/uk/online-casinos/finland/" data-country-keywords="Finland fi"><img src="/icons/finland-flag-icon.svg" alt="" width="32" height="24" loading="lazy" decoding="async"><span>Фінляндія</span></a>
+              <a class="country-hub-link" href="/uk/online-casinos/france/" data-country-keywords="France fr"><img src="/icons/france-flag-icon.svg" alt="" width="32" height="24" loading="lazy" decoding="async"><span>Франція</span></a>
+              <a class="country-hub-link" href="/uk/online-casinos/croatia/" data-country-keywords="Croatia hr"><img src="/icons/croatia-flag-icon.svg" alt="" width="32" height="24" loading="lazy" decoding="async"><span>Хорватія</span></a>
+              <a class="country-hub-link" href="/uk/online-casinos/czech-republic/" data-country-keywords="Czech Republic cz Czechia"><img src="/icons/czech-republic-flag-icon.svg" alt="" width="32" height="24" loading="lazy" decoding="async"><span>Чехія</span></a>
+              <a class="country-hub-link" href="/uk/online-casinos/chile/" data-country-keywords="Chile cl"><img src="/icons/chile-flag-icon.svg" alt="" width="32" height="24" loading="lazy" decoding="async"><span>Чилі</span></a>
+              <a class="country-hub-link" href="/uk/online-casinos/switzerland/" data-country-keywords="Switzerland ch"><img src="/icons/switzerland-flag-icon.svg" alt="" width="32" height="24" loading="lazy" decoding="async"><span>Швейцарія</span></a>
+              <a class="country-hub-link" href="/uk/online-casinos/sweden/" data-country-keywords="Sweden se"><img src="/icons/sweden-flag-icon.svg" alt="" width="32" height="24" loading="lazy" decoding="async"><span>Швеція</span></a>
+              <a class="country-hub-link" href="/uk/online-casinos/japan/" data-country-keywords="Japan jp"><img src="/icons/japan-flag-icon.svg" alt="" width="32" height="24" loading="lazy" decoding="async"><span>Японія</span></a>
+            </div>
+            </div>
+          </section>
+          <section class="account-panel" id="seo-editorial-guide" data-editorial-panel="seo-editorial-guide" aria-labelledby="seo-editorial-guide-title">
+            <h2 id="seo-editorial-guide-title" tabindex="-1">Що порівнюють наші путівники країнами</h2>
+            <div class="country-hub-prose"><p>Доступ до онлайн-казино, способи оплати та захист споживачів залежать від країни. Тому кожен путівник аналізує важливу для гравця інформацію до й після реєстрації: оператора та ліцензію, регіональні обмеження, доступні валюти, депозити й виплати, перевірку особи, умови бонусів та інструменти відповідальної гри.</p><h3>Спочатку перевірте доступність і правові умови</h3><p>Міжнародна або офшорна ліцензія не означає автоматично, що оператор може законно працювати в кожній країні. Правила також можуть відрізнятися для казино, ставок на спорт і лотерей. Використовуйте путівник як відправну точку, перевірте актуальну офіційну інформацію та підтвердьте можливість реєстрації в оператора.</p><h3>Порівнюйте касу, а не лише бонус</h3><p>Картки, банківські перекази, електронні гаманці, мобільні платежі та криптовалюти можуть мати різні комісії, ліміти й строки обробки. Перевірте, чи підтримує обраний спосіб і депозити, і виплати, чи застосовується конвертація валюти та які документи потрібні для KYC. Для бонусів уточніть вимоги щодо відіграшу, максимальну ставку, виключені ігри, строк дії та ліміти виплат.</p><p>Доступність і умови можуть змінитися після публікації. SpinCresta звертає увагу на практичні перевірки та інструменти відповідальної гри, але завжди діють актуальні умови акаунта й каси оператора. Грати можуть лише повнолітні особи відповідно до законодавства за місцем проживання.</p></div>
+          </section>
+          <section class="account-panel" id="before-registration" data-editorial-panel="before-registration" aria-labelledby="before-registration-title">
+            <h2 id="before-registration-title" tabindex="-1">Перед реєстрацією</h2>
+            <div class="editorial-prose-sections"><article><h3>Від путівника країною до огляду оператора</h3><p>Відкрийте потрібний путівник зі списку країн, а потім порівняйте огляди окремих брендів, щоб докладніше перевірити бонуси, ігри, способи оплати та правила акаунта. Розмежування загального контексту ринку й умов конкретного оператора робить порівняння зрозумілішим.</p>
+            <p>Також перевірте місцеві служби допомоги та системи самовиключення. Інструменти оператора корисні, але вони не замінюють незалежну підтримку, якщо гра спричиняє фінансові або особисті проблеми.</p></article>
+            <article><h3>Перед реєстрацією</h3><p>Запишіть важливі для себе параметри й порівняйте кількох операторів: доступну країну, валюту рахунку, мінімальний депозит і виплату, комісії, заявлений час обробки та необхідні документи. Великий бонус не компенсує незручні способи оплати або нечіткі правила виплат.</p></article></div>
+          </section>
         </div>
-      </section>
-
-      <section class="content">
-        <div class="container content-article">
-          <div class="timeline">
-            <h2>Знайдіть путівник по країні</h2>
-            <p>
-              Кожен ринок має різні закони, варіанти оплати та переваги гравців. Використовуйте сторінки країн, щоб швидко знайти надійних операторів, відповідні типи бонусів і практичні поради з безпеки.
-            </p>
-          </div>
-        </div>
-      </section>
-
-      <section class="all-countries">
-        <div class="container">
-          <h2 class="title">Усі гіди за країнами</h2>
-          <div class="countries-cloud">
-<a class="country-link" href="/uk/online-casinos/argentina/"><img class="flag" src="/icons/argentina-flag-icon.svg" alt="" loading="lazy" decoding="async"><span>Аргентина</span></a>
-<a class="country-link" href="/uk/online-casinos/australia/"><img class="flag" src="/icons/australia-flag-icon.svg" alt="" loading="lazy" decoding="async"><span>Австралія</span></a>
-<a class="country-link" href="/uk/online-casinos/austria/"><img class="flag" src="/icons/austria-flag-icon.svg" alt="" loading="lazy" decoding="async"><span>Австрія</span></a>
-<a class="country-link" href="/uk/online-casinos/azerbaijan/"><img class="flag" src="/icons/azerbaijan-flag-icon.svg" alt="" loading="lazy" decoding="async"><span>Азербайджан</span></a>
-<a class="country-link" href="/uk/online-casinos/bangladesh/"><img class="flag" src="/icons/bangladesh-flag-icon.svg" alt="" loading="lazy" decoding="async"><span>Бангладеш</span></a>
-<a class="country-link" href="/uk/online-casinos/belgium/"><img class="flag" src="/icons/belgium-flag-icon.svg" alt="" loading="lazy" decoding="async"><span>Бельгія</span></a>
-<a class="country-link" href="/uk/online-casinos/brazil/"><img class="flag" src="/icons/brazil-flag-icon.svg" alt="" loading="lazy" decoding="async"><span>Бразилія</span></a>
-<a class="country-link" href="/uk/online-casinos/bulgaria/"><img class="flag" src="/icons/bulgaria-flag-icon.svg" alt="" loading="lazy" decoding="async"><span>Болгарія</span></a>
-<a class="country-link" href="/uk/online-casinos/canada/"><img class="flag" src="/icons/canada-flag-icon.svg" alt="" loading="lazy" decoding="async"><span>Канада</span></a>
-<a class="country-link" href="/uk/online-casinos/chile/"><img class="flag" src="/icons/chile-flag-icon.svg" alt="" loading="lazy" decoding="async"><span>Чилі</span></a>
-<a class="country-link" href="/uk/online-casinos/colombia/"><img class="flag" src="/icons/colombia-flag-icon.svg" alt="" loading="lazy" decoding="async"><span>Колумбія</span></a>
-<a class="country-link" href="/uk/online-casinos/croatia/"><img class="flag" src="/icons/croatia-flag-icon.svg" alt="" loading="lazy" decoding="async"><span>Хорватія</span></a>
-<a class="country-link" href="/uk/online-casinos/czech-republic/"><img class="flag" src="/icons/czech-republic-flag-icon.svg" alt="" loading="lazy" decoding="async"><span>Чехія</span></a>
-<a class="country-link" href="/uk/online-casinos/denmark/"><img class="flag" src="/icons/denmark-flag-icon.svg" alt="" loading="lazy" decoding="async"><span>Данія</span></a>
-<a class="country-link" href="/uk/online-casinos/egypt/"><img class="flag" src="/icons/egypt-flag-icon.svg" alt="" loading="lazy" decoding="async"><span>Єгипет</span></a>
-<a class="country-link" href="/uk/online-casinos/estonia/"><img class="flag" src="/icons/estonia-flag-icon.svg" alt="" loading="lazy" decoding="async"><span>Естонія</span></a>
-<a class="country-link" href="/uk/online-casinos/finland/"><img class="flag" src="/icons/finland-flag-icon.svg" alt="" loading="lazy" decoding="async"><span>Фінляндія</span></a>
-<a class="country-link" href="/uk/online-casinos/france/"><img class="flag" src="/icons/france-flag-icon.svg" alt="" loading="lazy" decoding="async"><span>Франція</span></a>
-<a class="country-link" href="/uk/online-casinos/germany/"><img class="flag" src="/icons/germany-flag-icon.svg" alt="" loading="lazy" decoding="async"><span>Німеччина</span></a>
-<a class="country-link" href="/uk/online-casinos/ghana/"><img class="flag" src="/icons/ghana-flag-icon.svg" alt="" loading="lazy" decoding="async"><span>Гана</span></a>
-<a class="country-link" href="/uk/online-casinos/greece/"><img class="flag" src="/icons/greece-flag-icon.svg" alt="" loading="lazy" decoding="async"><span>Греція</span></a>
-<a class="country-link" href="/uk/online-casinos/hungary/"><img class="flag" src="/icons/hungary-flag-icon.svg" alt="" loading="lazy" decoding="async"><span>Угорщина</span></a>
-<a class="country-link" href="/uk/online-casinos/iceland/"><img class="flag" src="/icons/iceland-flag-icon.svg" alt="" loading="lazy" decoding="async"><span>Ісландія</span></a>
-<a class="country-link" href="/uk/online-casinos/india/"><img class="flag" src="/icons/india-flag-icon.svg" alt="" loading="lazy" decoding="async"><span>Індія</span></a>
-<a class="country-link" href="/uk/online-casinos/indonesia/"><img class="flag" src="/icons/indonesia-flag-icon.svg" alt="" loading="lazy" decoding="async"><span>Індонезія</span></a>
-<a class="country-link" href="/uk/online-casinos/ireland/"><img class="flag" src="/icons/ireland-flag-icon.svg" alt="" loading="lazy" decoding="async"><span>Ірландія</span></a>
-<a class="country-link" href="/uk/online-casinos/italy/"><img class="flag" src="/icons/italy-flag-icon.svg" alt="" loading="lazy" decoding="async"><span>Італія</span></a>
-<a class="country-link" href="/uk/online-casinos/japan/"><img class="flag" src="/icons/japan-flag-icon.svg" alt="" loading="lazy" decoding="async"><span>Японія</span></a>
-<a class="country-link" href="/uk/online-casinos/kazakhstan/"><img class="flag" src="/icons/kazakhstan-flag-icon.svg" alt="" loading="lazy" decoding="async"><span>Казахстан</span></a>
-<a class="country-link" href="/uk/online-casinos/kenya/"><img class="flag" src="/icons/kenya-flag-icon.svg" alt="" loading="lazy" decoding="async"><span>Кенія</span></a>
-<a class="country-link" href="/uk/online-casinos/kyrgyzstan/"><img class="flag" src="/icons/kyrgyzstan-flag-icon.svg" alt="" loading="lazy" decoding="async"><span>Киргизстан</span></a>
-<a class="country-link" href="/uk/online-casinos/latvia/"><img class="flag" src="/icons/latvia-flag-icon.svg" alt="" loading="lazy" decoding="async"><span>Латвія</span></a>
-<a class="country-link" href="/uk/online-casinos/lithuania/"><img class="flag" src="/icons/lithuania-flag-icon.svg" alt="" loading="lazy" decoding="async"><span>Литва</span></a>
-<a class="country-link" href="/uk/online-casinos/luxembourg/"><img class="flag" src="/icons/luxembourg-flag-icon.svg" alt="" loading="lazy" decoding="async"><span>Люксембург</span></a>
-<a class="country-link" href="/uk/online-casinos/malaysia/"><img class="flag" src="/icons/malaysia-flag-icon.svg" alt="" loading="lazy" decoding="async"><span>Малайзія</span></a>
-<a class="country-link" href="/uk/online-casinos/mexico/"><img class="flag" src="/icons/mexico-flag-icon.svg" alt="" loading="lazy" decoding="async"><span>Мексика</span></a>
-<a class="country-link" href="/uk/online-casinos/netherlands/"><img class="flag" src="/icons/netherlands-flag-icon.svg" alt="" loading="lazy" decoding="async"><span>Нідерланди</span></a>
-<a class="country-link" href="/uk/online-casinos/nepal/"><img class="flag" src="/icons/nepal-flag-icon.svg" alt="" loading="lazy" decoding="async"><span>Непал</span></a>
-<a class="country-link" href="/uk/online-casinos/new-zealand/"><img class="flag" src="/icons/new-zealand-flag-icon.svg" alt="" loading="lazy" decoding="async"><span>Нова Зеландія</span></a>
-<a class="country-link" href="/uk/online-casinos/nigeria/"><img class="flag" src="/icons/nigeria-flag-icon.svg" alt="" loading="lazy" decoding="async"><span>Нігерія</span></a>
-<a class="country-link" href="/uk/online-casinos/norway/"><img class="flag" src="/icons/norway-flag-icon.svg" alt="" loading="lazy" decoding="async"><span>Норвегія</span></a>
-<a class="country-link" href="/uk/online-casinos/philippines/"><img class="flag" src="/icons/philippines-flag-icon.svg" alt="" loading="lazy" decoding="async"><span>Філіппіни</span></a>
-<a class="country-link" href="/uk/online-casinos/poland/"><img class="flag" src="/icons/poland-flag-icon.svg" alt="" loading="lazy" decoding="async"><span>Польща</span></a>
-<a class="country-link" href="/uk/online-casinos/portugal/"><img class="flag" src="/icons/portugal-flag-icon.svg" alt="" loading="lazy" decoding="async"><span>Португалія</span></a>
-<a class="country-link" href="/uk/online-casinos/peru/"><img class="flag" src="/icons/peru-flag-icon.svg" alt="" loading="lazy" decoding="async"><span>Перу</span></a>
-<a class="country-link" href="/uk/online-casinos/russia/"><img class="flag" src="/icons/russia-flag-icon.svg" alt="" loading="lazy" decoding="async"><span>Росія</span></a>
-<a class="country-link" href="/uk/online-casinos/romania/"><img class="flag" src="/icons/romania-flag-icon.svg" alt="" loading="lazy" decoding="async"><span>Румунія</span></a>
-<a class="country-link" href="/uk/online-casinos/singapore/"><img class="flag" src="/icons/singapore-flag-icon.svg" alt="" loading="lazy" decoding="async"><span>Сінгапур</span></a>
-<a class="country-link" href="/uk/online-casinos/slovakia/"><img class="flag" src="/icons/slovakia-flag-icon.svg" alt="" loading="lazy" decoding="async"><span>Словаччина</span></a>
-<a class="country-link" href="/uk/online-casinos/slovenia/"><img class="flag" src="/icons/slovenia-flag-icon.svg" alt="" loading="lazy" decoding="async"><span>Словенія</span></a>
-<a class="country-link" href="/uk/online-casinos/south-africa/"><img class="flag" src="/icons/south-africa-flag-icon.svg" alt="" loading="lazy" decoding="async"><span>Південно-Африканська Республіка</span></a>
-<a class="country-link" href="/uk/online-casinos/south-korea/"><img class="flag" src="/icons/south-korea-flag-icon.svg" alt="" loading="lazy" decoding="async"><span>Південна Корея</span></a>
-<a class="country-link" href="/uk/online-casinos/spain/"><img class="flag" src="/icons/spain-flag-icon.svg" alt="" loading="lazy" decoding="async"><span>Іспанія</span></a>
-<a class="country-link" href="/uk/online-casinos/sweden/"><img class="flag" src="/icons/sweden-flag-icon.svg" alt="" loading="lazy" decoding="async"><span>Швеція</span></a>
-<a class="country-link" href="/uk/online-casinos/switzerland/"><img class="flag" src="/icons/switzerland-flag-icon.svg" alt="" loading="lazy" decoding="async"><span>Швейцарія</span></a>
-<a class="country-link" href="/uk/online-casinos/thailand/"><img class="flag" src="/icons/thailand-flag-icon.svg" alt="" loading="lazy" decoding="async"><span>Таїланд</span></a>
-<a class="country-link" href="/uk/online-casinos/turkey/"><img class="flag" src="/icons/turkey-flag-icon.svg" alt="" loading="lazy" decoding="async"><span>Туреччина</span></a>
-<a class="country-link" href="/uk/online-casinos/tanzania/"><img class="flag" src="/icons/tanzania-flag-icon.svg" alt="" loading="lazy" decoding="async"><span>Танзанія</span></a>
-<a class="country-link" href="/uk/online-casinos/uganda/"><img class="flag" src="/icons/uganda-flag-icon.svg" alt="" loading="lazy" decoding="async"><span>Уганда</span></a>
-<a class="country-link" href="/uk/online-casinos/ukraine/"><img class="flag" src="/icons/ukraine-flag-icon.svg" alt="" loading="lazy" decoding="async"><span>Україна</span></a>
-<a class="country-link" href="/uk/online-casinos/united-kingdom/"><img class="flag" src="/icons/united-kingdom-flag-icon.svg" alt="" loading="lazy" decoding="async"><span>Велика Британія</span></a>
-<a class="country-link" href="/uk/online-casinos/united-states/"><img class="flag" src="/icons/united-states-flag-icon.svg" alt="" loading="lazy" decoding="async"><span>Сполучені Штати</span></a>
-<a class="country-link" href="/uk/online-casinos/uzbekistan/"><img class="flag" src="/icons/uzbekistan-flag-icon.svg" alt="" loading="lazy" decoding="async"><span>Узбекистан</span></a>
-<a class="country-link" href="/uk/online-casinos/vietnam/"><img class="flag" src="/icons/vietnam-flag-icon.svg" alt="" loading="lazy" decoding="async"><span>Вʼєтнам</span></a>
-</div>
-        </div>
-      </section>
-      <section class="content" id="seo-editorial-guide"><div class="container content-article"><h2 class="title">Що порівнюють наші путівники країнами</h2><p>Доступ до онлайн-казино, способи оплати та захист споживачів залежать від країни. Тому кожен путівник аналізує важливу для гравця інформацію до й після реєстрації: оператора та ліцензію, регіональні обмеження, доступні валюти, депозити й виплати, перевірку особи, умови бонусів та інструменти відповідальної гри.</p><h2>Спочатку перевірте доступність і правові умови</h2><p>Міжнародна або офшорна ліцензія не означає автоматично, що оператор може законно працювати в кожній країні. Правила також можуть відрізнятися для казино, ставок на спорт і лотерей. Використовуйте путівник як відправну точку, перевірте актуальну офіційну інформацію та підтвердьте можливість реєстрації в оператора.</p><h2>Порівнюйте касу, а не лише бонус</h2><p>Картки, банківські перекази, електронні гаманці, мобільні платежі та криптовалюти можуть мати різні комісії, ліміти й строки обробки. Перевірте, чи підтримує обраний спосіб і депозити, і виплати, чи застосовується конвертація валюти та які документи потрібні для KYC. Для бонусів уточніть вимоги щодо відіграшу, максимальну ставку, виключені ігри, строк дії та ліміти виплат.</p><p>Доступність і умови можуть змінитися після публікації. SpinCresta звертає увагу на практичні перевірки та інструменти відповідальної гри, але завжди діють актуальні умови акаунта й каси оператора. Грати можуть лише повнолітні особи відповідно до законодавства за місцем проживання.</p></div></section>
-      <section class="content"><div class="container content-article"><h2 class="title">Від путівника країною до огляду оператора</h2><p>Відкрийте потрібний путівник зі списку країн, а потім порівняйте огляди окремих брендів, щоб докладніше перевірити бонуси, ігри, способи оплати та правила акаунта. Розмежування загального контексту ринку й умов конкретного оператора робить порівняння зрозумілішим.</p><p>Також перевірте місцеві служби допомоги та системи самовиключення. Інструменти оператора корисні, але вони не замінюють незалежну підтримку, якщо гра спричиняє фінансові або особисті проблеми.</p></div></section>
-      <section class="content"><div class="container content-article"><h2 class="title">Перед реєстрацією</h2><p>Запишіть важливі для себе параметри й порівняйте кількох операторів: доступну країну, валюту рахунку, мінімальний депозит і виплату, комісії, заявлений час обробки та необхідні документи. Великий бонус не компенсує незручні способи оплати або нечіткі правила виплат.</p></div></section>
+      </div>
     </main>
 
     <footer class="footer">
@@ -296,7 +305,7 @@
 </div>
     </footer>
 
-    <script type="module" src="/scripts/main.js?v=20261119-preview-loader"></script>
+    <script type="module" src="/scripts/main.js?v=20261119-country-hub"></script>
   </body>
 </html>
 

@@ -59,7 +59,7 @@ export default {
   "Fortunica Casino features slots, fast payouts, and attractive bonuses": "Fortunica Casino tarjoaa kolikkopelejä, nopeita voittoja ja houkuttelevia bonuksia",
   "Welcome Bonus 25,000 TRY + 500 Free Spins": "Tervetuliaisbonus 25 000 € + 500 ilmaiskierrosta",
   "Welcome Bonus 3,000 AZN + 500 Free Spins": "Tervetuliaisbonus 25 000 € + 500 ilmaiskierrosta",
-  "Welcome Bonus 860,000 ARS + 500 Free Spins": "Tervetuliaisbonus 25 000 € + 500 ilmaiskierrosta",
+  "Welcome Bonus 860,000 ARS + 500 Free Spins": "Tervetuliaisbonus 860 000 ARS + 500 ilmaiskierrosta",
   "Welcome Bonus 500,000 CLP + 500 Free Spins": "Tervetuliaisbonus 25 000 € + 500 ilmaiskierrosta",
   "Welcome Bonus 100% Up To €500 + 200 Free Spins + 1 Wild Crab Bonus": "Tervetuliaisbonus 100 % aina 500 € asti + 200 ilmaiskierrosta + 1 villirapubonus",
   "Sign up and get a welcome bonus up to 250% + 500 FS": "Rekisteröidy ja saat tervetuliaisbonuksen jopa 250% + 500 FS",
@@ -104,7 +104,9 @@ export default {
   "Welcome Package 4000 EUR + 200 FS": "Tervetuliaispaketti 4000 EUR + 200 FS",
   "Grab Your 20 Free Spins + $7,500 Welcome Bonus": "Nappaa 20 ilmaispyöräytystäsi + 7 500 dollarin tervetuliaisbonus",
   "First Deposit Bonus - 100% Up to R3 000": "Ensitalletusbonus - 100 % aina R3 000 asti",
+  "Welcome package: 455% + 270 free spins across the first 5 deposits": "Tervetuliaispaketti: 455 % + 270 ilmaiskierrosta viidelle ensimmäiselle talletukselle",
   "Casino up to 120% + 250 Free Spins; Sports up to 200% + Free Bet; Poker 100%": "Kasino: enintään 120 % + 250 ilmaiskierrosta; urheilu: enintään 200 % + ilmaisveto; pokeri: 100 %",
+  "Casino 120% + 250 FS; Sports up to 125% + 100% Free Bet; country limits apply": "Kasino: 120 % + 250 ilmaiskierrosta; urheilu: enintään 125 % + 100 %:n ilmaisveto; maakohtaiset rajat",
   "Casino Bonus 100% up to €500 + 200 FS + 1 Bonus Crab": "Kasinobonus 100 % 500 € asti + 200 FS + 1 bonusrapu",
   "Up to 260k Gold Coins + 100 Free Spins on Wild Cash": "Jopa 260 000 kultakolikkoa + 100 ilmaispyöräytystä Wild Cashille",
   "Live Casino Welcome Package €300": "Live Casinon tervetulopaketti 300 €",
@@ -146,7 +148,5 @@ export default {
   "280% Match Bonus up to R5500 + 45 Free Spins": "280 % Match Bonus R5500 asti + 45 ilmaispyöräytystä",
   "Welcome Bonus - 550% Up to €3,800 + 50 Free Spins": "Tervetuliaisbonus - 550 % Jopa 3 800 € + 50 ilmaispyöräytystä",
   "100% Welcome Bonus up to $5,000 on Your First Deposit": "100 % tervetuliaisbonus 5 000 dollariin asti ensimmäisestä talletuksestasi",
-  "100% First-Deposit Bonus + 30 Free Spins in Selected Markets": "100 % ensitalletusbonus + 30 ilmaiskierrosta valituilla markkinoilla",
-  "Casino 120% + 250 FS; Sports up to 125% + 100% Free Bet; country limits apply": "Kasino: 120 % + 250 ilmaiskierrosta; urheilu: enintään 125 % + 100 %:n ilmaisveto; maakohtaiset rajat",
-  "Welcome package: 455% + 270 free spins across the first 5 deposits": "Tervetuliaispaketti: 455 % + 270 ilmaiskierrosta viidelle ensimmäiselle talletukselle"
+  "100% First-Deposit Bonus + 30 Free Spins in Selected Markets": "100 % ensitalletusbonus + 30 ilmaiskierrosta valituilla markkinoilla"
 };

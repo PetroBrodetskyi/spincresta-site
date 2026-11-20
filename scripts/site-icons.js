@@ -1,4 +1,4 @@
-export const SITE_ICON_SPRITE = '/icons/ui/review-method.svg?v=20261119-site-icons';
+export const SITE_ICON_SPRITE = '/icons/ui/review-method.svg?v=20261119-catalog-partners';
 
 export const TOPIC_ICONS = Object.freeze({
   overview: 'review', highlights: 'sparkles', countries: 'globe', methods: 'payments',
@@ -30,18 +30,12 @@ const SECTION_ICONS = [
   ['.home-new-reviews #new-reviews-title', 'review'],
   ['.home-new-games #new-games-title, .brand-new-games-panel h2, .country-new-games-head h2', 'games'],
   ['.expert-review h2', 'review'],
-  ['.site-faq-content > h2', 'help'],
-  ['#about-purpose-title', 'globe'],
+  ['.site-faq-content > h2, .site-faq-content > .home-showcase-heading h2', 'help'],
   ['#transparency-title, #editorial-standard-title', 'review'],
   ['#safe-play-title, #protection-tools-title', 'safety'],
-  ['#warning-signs-title', 'warning'],
   ['#support-resources-title', 'chat'],
   ['#privacy-details-title', 'lock'],
   ['#privacy-faq-title', 'help'],
-  ['#author-work-title', 'review'],
-  ['#account-overview-title', 'user'],
-  ['#account-review-history-title', 'chat'],
-  ['#account-favorites-title', 'heart'],
   ['.account-contact-heading h3', 'mail'],
   ['.brand-quick-facts__heading, #brand-review-details', 'review'],
   ['.brand-right-payments h2', 'payments'],
@@ -49,10 +43,6 @@ const SECTION_ICONS = [
 ];
 
 const NUMBERED_CARDS = [
-  ['.top-casinos-method-grid > article', ['safety', 'games', 'bonus', 'payments', 'clock']],
-  ['[aria-labelledby="about-purpose-title"] .home-method-grid > article', ['review', 'globe', 'safety', 'star']],
-  ['body[data-page="partners"] .content-area > .home-showcase-section:first-child .home-method-grid > article', ['games', 'link', 'payments', 'book']],
-  ['.author-focus-grid > article', ['safety', 'bonus', 'payments', 'lock']],
   ['[data-account-page-signed-in] .home-method-grid > article', ['safety', 'globe', 'calendar', 'lock']],
 ];
 

@@ -59,7 +59,7 @@ export default {
   "Fortunica Casino features slots, fast payouts, and attractive bonuses": "Казино Fortunica пропонує слоти, швидкі виплати та привабливі бонуси",
   "Welcome Bonus 25,000 TRY + 500 Free Spins": "Вітальний бонус €25 000 + 500 безкоштовних обертань",
   "Welcome Bonus 3,000 AZN + 500 Free Spins": "Вітальний бонус €25 000 + 500 безкоштовних обертань",
-  "Welcome Bonus 860,000 ARS + 500 Free Spins": "Вітальний бонус €25 000 + 500 безкоштовних обертань",
+  "Welcome Bonus 860,000 ARS + 500 Free Spins": "Вітальний бонус 860 000 ARS + 500 безкоштовних обертань",
   "Welcome Bonus 500,000 CLP + 500 Free Spins": "Вітальний бонус €25 000 + 500 безкоштовних обертань",
   "Welcome Bonus 100% Up To €500 + 200 Free Spins + 1 Wild Crab Bonus": "Вітальний бонус 100% до €500 + 200 безкоштовних обертань + 1 бонус дикого краба",
   "Sign up and get a welcome bonus up to 250% + 500 FS": "Зареєструйтеся та отримайте вітальний бонус до 250% + 500 FS",
@@ -104,7 +104,9 @@ export default {
   "Welcome Package 4000 EUR + 200 FS": "Вітальний пакет 4000 євро + 200 FS",
   "Grab Your 20 Free Spins + $7,500 Welcome Bonus": "Візьміть 20 безкоштовних обертань + вітальний бонус у розмірі $7500",
   "First Deposit Bonus - 100% Up to R3 000": "Бонус на перший депозит - 100% до 3 000 рупій",
+  "Welcome package: 455% + 270 free spins across the first 5 deposits": "Вітальний пакет: 455% + 270 фриспінів на перші 5 депозитів",
   "Casino up to 120% + 250 Free Spins; Sports up to 200% + Free Bet; Poker 100%": "Казино: до 120% + 250 фріспінів; спорт: до 200% + фрібет; покер: 100%",
+  "Casino 120% + 250 FS; Sports up to 125% + 100% Free Bet; country limits apply": "Казино: 120% + 250 фриспінів; спорт: до 125% + фрибет 100%; ліміти залежать від країни",
   "Casino Bonus 100% up to €500 + 200 FS + 1 Bonus Crab": "Бонус казино 100% до €500 + 200 FS + 1 бонус Краб",
   "Up to 260k Gold Coins + 100 Free Spins on Wild Cash": "До 260 тисяч золотих монет + 100 безкоштовних обертань на Wild Cash",
   "Live Casino Welcome Package €300": "Вітальний пакет Live Casino €300",
@@ -146,7 +148,5 @@ export default {
   "280% Match Bonus up to R5500 + 45 Free Spins": "280% бонус до R5500 + 45 безкоштовних обертань",
   "Welcome Bonus - 550% Up to €3,800 + 50 Free Spins": "Вітальний бонус - 550% до €3800 + 50 безкоштовних обертань",
   "100% Welcome Bonus up to $5,000 on Your First Deposit": "100% вітальний бонус до $5000 на ваш перший депозит",
-  "100% First-Deposit Bonus + 30 Free Spins in Selected Markets": "100% бонус на перший депозит + 30 фріспінів на вибраних ринках",
-  "Casino 120% + 250 FS; Sports up to 125% + 100% Free Bet; country limits apply": "Казино: 120% + 250 фриспінів; спорт: до 125% + фрибет 100%; ліміти залежать від країни",
-  "Welcome package: 455% + 270 free spins across the first 5 deposits": "Вітальний пакет: 455% + 270 фриспінів на перші 5 депозитів"
+  "100% First-Deposit Bonus + 30 Free Spins in Selected Markets": "100% бонус на перший депозит + 30 фріспінів на вибраних ринках"
 };

@@ -59,7 +59,7 @@ export default {
   "Fortunica Casino features slots, fast payouts, and attractive bonuses": "O Fortunica Casino oferece slots, pagamentos rápidos e bónus atraentes",
   "Welcome Bonus 25,000 TRY + 500 Free Spins": "Bónus de boas-vindas de € 25.000 + 500 jogadas grátis",
   "Welcome Bonus 3,000 AZN + 500 Free Spins": "Bónus de boas-vindas de € 25.000 + 500 jogadas grátis",
-  "Welcome Bonus 860,000 ARS + 500 Free Spins": "Bónus de boas-vindas de € 25.000 + 500 jogadas grátis",
+  "Welcome Bonus 860,000 ARS + 500 Free Spins": "Bónus de boas-vindas de 860.000 ARS + 500 jogadas grátis",
   "Welcome Bonus 500,000 CLP + 500 Free Spins": "Bónus de boas-vindas de € 25.000 + 500 jogadas grátis",
   "Welcome Bonus 100% Up To €500 + 200 Free Spins + 1 Wild Crab Bonus": "Bónus de boas-vindas de 100% até € 500 + 200 jogadas grátis + 1 bónus de caranguejo selvagem",
   "Sign up and get a welcome bonus up to 250% + 500 FS": "Cadastre-se e receba um bónus de boas-vindas de até 250% + 500 jogadas grátis",
@@ -104,7 +104,9 @@ export default {
   "Welcome Package 4000 EUR + 200 FS": "Pacote de boas-vindas 4000 EUR + 200 jogadas grátis",
   "Grab Your 20 Free Spins + $7,500 Welcome Bonus": "Ganhe 20 jogadas grátis + bónus de boas-vindas de US$ 7.500",
   "First Deposit Bonus - 100% Up to R3 000": "Bónus de primeiro depósito - 100% até R3 000",
+  "Welcome package: 455% + 270 free spins across the first 5 deposits": "Pacote de boas-vindas: 455% + 270 jogadas grátis nos primeiros 5 depósitos",
   "Casino up to 120% + 250 Free Spins; Sports up to 200% + Free Bet; Poker 100%": "Casino: até 120% + 250 jogadas grátis; desporto: até 200% + aposta grátis; póquer: 100%",
+  "Casino 120% + 250 FS; Sports up to 125% + 100% Free Bet; country limits apply": "Casino: 120% + 250 jogadas grátis; desporto: até 125% + aposta grátis de 100%; limites por país",
   "Casino Bonus 100% up to €500 + 200 FS + 1 Bonus Crab": "Bónus de Casino 100% até € 500 + 200 jogadas grátis + 1 Bónus Caranguejo",
   "Up to 260k Gold Coins + 100 Free Spins on Wild Cash": "Até 260 mil moedas de ouro + 100 jogadas grátis em Wild Cash",
   "Live Casino Welcome Package €300": "Pacote de Boas-Vindas ao Casino ao Vivo €300",
@@ -146,7 +148,5 @@ export default {
   "280% Match Bonus up to R5500 + 45 Free Spins": "Bónus de partida de 280% até R5500 + 45 jogadas grátis",
   "Welcome Bonus - 550% Up to €3,800 + 50 Free Spins": "Bónus de boas-vindas - 550% até € 3.800 + 50 jogadas grátis",
   "100% Welcome Bonus up to $5,000 on Your First Deposit": "Bónus de boas-vindas de 100% até US$ 5.000 no seu primeiro depósito",
-  "100% First-Deposit Bonus + 30 Free Spins in Selected Markets": "Bónus de 100% no primeiro depósito + 30 jogadas grátis em mercados selecionados",
-  "Casino 120% + 250 FS; Sports up to 125% + 100% Free Bet; country limits apply": "Casino: 120% + 250 jogadas grátis; desporto: até 125% + aposta grátis de 100%; limites por país",
-  "Welcome package: 455% + 270 free spins across the first 5 deposits": "Pacote de boas-vindas: 455% + 270 jogadas grátis nos primeiros 5 depósitos"
+  "100% First-Deposit Bonus + 30 Free Spins in Selected Markets": "Bónus de 100% no primeiro depósito + 30 jogadas grátis em mercados selecionados"
 };

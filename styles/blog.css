@@ -16,6 +16,97 @@ body.blog-article-page main {
   overflow-x: clip;
 }
 
+body.blog-page main:is(.editorial-dashboard--blog, .editorial-reading-page) {
+  padding-top: calc(var(--header-collapsed-height, 68px) + clamp(20px, 4vw, 48px));
+  overflow-x: visible;
+}
+
+body.blog-article-page:has(.editorial-reading-page) {
+  overflow-x: clip;
+}
+
+.editorial-reading-heading .blog-article-meta {
+  gap: 6px 18px;
+  margin-top: 16px;
+}
+
+html:root .editorial-reading-heading .blog-article-meta > span {
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--text-muted);
+  overflow-wrap: anywhere;
+}
+
+.editorial-reading-heading .blog-meta-label {
+  margin-inline-end: .25em;
+  color: var(--text-main);
+  letter-spacing: normal;
+  text-transform: none;
+}
+
+.editorial-contents > p {
+  margin: 0 0 12px;
+  color: var(--text-main);
+  font-size: var(--type-subheading);
+  font-weight: 750;
+}
+
+.editorial-article-prose.account-panel {
+  gap: clamp(20px, 3vw, 32px);
+}
+
+.editorial-article-prose section {
+  display: grid;
+  gap: 12px;
+}
+
+.editorial-article-prose section + section {
+  padding-top: clamp(18px, 2.5vw, 26px);
+  border-top: 1px solid var(--surface-border);
+}
+
+.editorial-article-prose h2 {
+  scroll-margin-block-start: calc(var(--header-height, 68px) + 16px);
+  font-size: var(--type-section);
+}
+
+.editorial-article-prose :is(ol, ul) {
+  margin: 0;
+  padding-inline-start: 1.25em;
+  color: var(--text-muted);
+  line-height: 1.55;
+}
+
+.editorial-article-prose ul {
+  list-style: disc;
+}
+
+.editorial-article-prose ol {
+  list-style: decimal;
+}
+
+.editorial-article-prose li + li {
+  margin-top: 5px;
+}
+
+.editorial-article-prose .blog-callout {
+  margin: 0;
+  border: 1px solid var(--surface-border);
+  border-radius: 10px;
+  background: var(--surface-card-hover);
+}
+
+.editorial-article-prose .blog-article-footer {
+  margin: 0;
+  border-top: 1px solid var(--surface-border);
+}
+
+.editorial-article-prose a {
+  color: var(--editorial-blue);
+  text-decoration-color: currentColor;
+}
+
 .blog-shell {
   width: min(100%, var(--site-max-width));
   margin: 0 auto;

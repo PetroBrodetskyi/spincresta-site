@@ -526,32 +526,6 @@ html:root body[data-brand].has-brand-sticky-layout .brand-faq-section .faq-card 
   border-top: 1px solid var(--review-line);
 }
 
-html:root body[data-brand] .brand-faq-section .faq-accordion-trigger {
-  min-height: 55px;
-  padding: 13px 15px;
-  color: var(--review-ink);
-  text-align: start;
-}
-
-.brand-faq-section :is(.faq-question-icon, .faq-answer-icon) {
-  display: none;
-}
-
-html:root body[data-brand] .brand-faq-section .faq-card.is-open .faq-accordion-trigger {
-  background: var(--review-base);
-}
-
-html:root body[data-brand] .brand-faq-section .faq-answer-panel {
-  padding: 0 15px 14px;
-  color: var(--review-muted);
-}
-
-html:root body[data-brand] .brand-faq-section .faq-accordion-toggle {
-  border-color: var(--review-line);
-  border-radius: 8px;
-  background: var(--review-surface);
-  color: var(--review-ink);
-}
 
 html:root body[data-brand].has-brand-sticky-layout .brand-player-feedback
   :is(.brand-feedback-score, .brand-feedback-compose, .brand-feedback-card) {
@@ -736,7 +710,7 @@ html:root body[data-brand].has-brand-sticky-layout > .all-countries .title {
 
 html:root body[data-brand].has-brand-sticky-layout .brand-sticky-title__inner {
   border: 1px solid var(--review-line);
-  border-radius: 13px;
+  border-radius: var(--control-radius, 999px);
 }
 
 @media (min-width: 901px) {

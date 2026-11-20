@@ -3,6 +3,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { BRANDS } from '../scripts/brands.js';
+import { REVIEW_DIRECTORY_COPY } from './sync-casino-directory-layout.mjs';
 
 const ROOT = process.cwd();
 const FI_ROOT = path.join(ROOT, 'fi');
@@ -54,7 +55,7 @@ const serviceDescriptions = {
   '/fi/': 'Vertaile nettikasinoita, bonuksia, maksutapoja, kotiutuksia ja maaoppaita. Tarkista ehdot ja saatavuus ennen rekisteröitymistä.',
   '/fi/about/': 'Tutustu SpinCrestan toimitukselliseen menetelmään, vertailukriteereihin, lähteisiin ja tapaan, jolla pidämme arvostelut ajan tasalla.',
   '/fi/blog/': 'Käytännön oppaita nettikasinoista, bonuksista, maksuista, kotiutuksista, tunnistautumisesta ja paikallisista markkinoista.',
-  '/fi/casinos-and-betting/': 'Selaa kasinoita ja vedonlyöntisivustoja aakkosjärjestyksessä. Vertaa saatavuutta, tarjouksia, maksutapoja ja arvosteluja.',
+  '/fi/casinos-and-betting/': REVIEW_DIRECTORY_COPY.fi,
   '/fi/online-casinos/': 'Tutustu nettikasinoihin maittain ja vertaile saatavuutta, bonuksia, maksutapoja, kotiutuksia ja vastuullisen pelaamisen työkaluja.',
   '/fi/partners/': 'Tutustu SpinCrestan valittuihin kumppaneihin, yhteistyöperiaatteisiin ja tapaan, jolla kaupalliset suhteet pidetään erillään toimituksellisista arvioista.',
   '/fi/payment-methods/': 'Vertaile kortteja, e-lompakoita, pankkisiirtoja, mobiilimaksuja ja kryptovaluuttoja talletuksiin ja kotiutuksiin.',

@@ -1,5 +1,7 @@
 // Top-casinos module. Loaded only on body[data-page="top-casinos"].
 
+export const TOP_CASINOS_PREVIEW_LIMIT = 5;
+
 export const initTopCasinosPage = context => {
   const {
     COUNTRIES,
@@ -191,7 +193,7 @@ export const initTopCasinosPage = context => {
       section.innerHTML = `
         <div class="cards-main">
           <h2 class="top-country-title">${escapeHtml(localizedCountryName(country))}</h2>
-          <div class="casino-grid" data-limit="6"></div>
+          <div class="casino-grid"></div>
           <div class="view-all-wrapper" hidden>
             <a class="view-all" href="${countryPagePath(country.slug)}"></a>
           </div>
@@ -216,7 +218,6 @@ export const initTopCasinosPage = context => {
     if (!titleEl || !grid) return;
 
     const country = COUNTRIES.find(item => item.code.toUpperCase() === code);
-    const limit = Number(grid.dataset.limit) || 4;
     titleEl.textContent = localizedCountryTitle(country || { slug: '', name: code });
 
     const eligibleBrands = BRANDS.filter(brand => brand.countries?.includes(code));
@@ -238,7 +239,7 @@ export const initTopCasinosPage = context => {
           a.index - b.index
       )
       .map(({ brand }) => brand);
-    const renderedBrands = rankedBrands.slice(0, limit);
+    const renderedBrands = rankedBrands.slice(0, TOP_CASINOS_PREVIEW_LIMIT);
 
     if (!renderedBrands.length) {
       grid.innerHTML = '<p>' + localeText('No top casinos available.', 'Keine Top-Casinos verfügbar.', 'No hay casinos destacados disponibles.') + '</p>';

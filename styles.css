@@ -1,9 +1,11 @@
 ﻿@import url('/fonts/inter-tight/index.css');
 @import url('/fonts/inter-tight/wght-italic.css');
-@import url('/styles/core.css?v=20261119-inter-tight');
-@import url('/styles/pages.css?v=20261119-preview-solid');
-@import url('/styles/brand-review.css?v=20261119-context-icons');
-@import url('/styles/section-contrast-preview.css?v=20261119-feedback-form');
+@import url('/styles/core.css?v=20261119-account-dashboard');
+@import url('/styles/pages.css?v=20261119-catalog-tiles');
+@import url('/styles/brand-review.css?v=20261120-sticky-pill');
+@import url('/styles/section-contrast-preview.css?v=20261119-top-casinos-layout');
+@import url('/styles/account.css?v=20261119-account-dashboard');
+@import url('/styles/editorial-directories.css?v=20261119-country-hub');
 
 :root {
   --type-caption: .75rem;
@@ -159,88 +161,99 @@ body.blog-page.blog-article-page .blog-shell {
   .page-intro-article { width: calc(100% - 2 * var(--page-gutter-mobile)); }
 }
 
-/* Shared interaction states. The visual preset can supply primary action colors. */
+/* Shared button palette. Dark surfaces invert primary actions; secondary controls stay white. */
 :root {
-  --control-radius: 8px;
-  --control-focus: #596e88;
-  --control-hover-bg: color-mix(in srgb, var(--surface-card) 94%, var(--text-main));
-  --control-hover-border: color-mix(in srgb, var(--surface-border-strong) 72%, var(--text-main));
-  --control-chrome-text: #f1f3f6;
-  --control-chrome-bg: rgba(255, 255, 255, 0.09);
-  --control-chrome-border: rgba(255, 255, 255, 0.35);
+  --control-radius: 999px;
+  --pill-field-height: 56px;
+  --pill-action-height: 44px;
+  --control-focus: #111;
+  --control-primary-bg: #000;
+  --control-primary-ink: #fff;
+  --control-primary-hover-bg: #262626;
+  --control-secondary-bg: #fff;
+  --control-secondary-ink: #111;
+  --control-secondary-border: #c6c6c6;
+  --control-secondary-hover-bg: #f2f2f2;
+  --control-secondary-hover-border: #737373;
 }
 
+:where(.footer, .home-new-games, .home-editorial-method) {
+  --control-focus: #fff;
+  --control-primary-bg: #fff;
+  --control-primary-ink: #111;
+  --control-primary-hover-bg: #eee;
+}
+
+:where(.home-editorial-method .home-method-grid article) {
+  --control-focus: #111;
+}
+
+/* Keep the same shape across legacy and generated buttons without touching media or fields. */
 html:root body :is(
+  button, [role='button'], [role='tab'], input:is([type='button'], [type='submit'], [type='reset']),
   .cta, .cta-brands, .cta-primary, .cta-secondary, .view-all, .filter-btn, .availability-tab,
   .countries-cloud .country-link, .brand-countries .flag-container, .home-country-jump,
   .home-primary-action, .home-secondary-action, .home-section-cta > a,
+  .home-brand-view-all, .home-brand-arrow, .brand-favorite-button,
+  .brand-feedback-rating-options label,
   .home-market-actions > :is(a, button), .home-country-return, .home-market-more, .home-country-toggle,
   .top-casinos-hero-actions > a, .top-casino-jump-toggle, .blog-hero-links > a, .author-actions > a,
   .account-auth-control, .account-auth-primary, .account-auth-secondary,
   .language-switcher-current, .site-search-trigger,
-  .brand-editorial-toggle, .country-faq-question-button, .link-carousel-button,
+  .brand-editorial-toggle, .link-carousel-button,
   .brand-promo-teaser, .brand-feedback-signin, .brand-feedback-submit, .brand-sticky-title__cta,
   .top-casino-jump-link, .brand-country-toggle, .footer-newsletter-submit,
   .account-representative-panel a, .moderation-toolbar button, .moderation-view-tabs button,
   .moderation-user-toolbar button, .moderation-access button, .moderation-action,
   [data-account-contact-submit]
-) {
-  border-radius: var(--control-radius);
+):not(.brand-why-media) {
+  border-radius: var(--control-radius) !important;
+  background: var(--action-bg, var(--button-bg, var(--control-secondary-bg))) !important;
+  border-color: var(--action-border, var(--button-border, var(--control-secondary-border))) !important;
+  color: var(--button-ink, var(--control-secondary-ink)) !important;
   transition: background-color 140ms ease, border-color 140ms ease, color 140ms ease;
 }
 
+/* Primary actions and selected controls share the same high-contrast treatment. */
+html:root body[data-page='top-casinos'] .content[data-country] .view-all-wrapper > a.view-all,
+html:root body :is(
+  .cta:not(.cta-secondary, .cta-blocked), .cta-primary:not(.cta-blocked), .cta-brands:not(.cta-blocked),
+  .home-primary-action, .home-brand-view-all, .site-search-submit, .home-section-cta > a, .brand-sticky-title__cta:not(.cta-blocked),
+  .account-auth-primary, .account-dashboard-signin, .footer-newsletter-submit, [data-account-contact-submit],
+  .brand-feedback-submit, .brand-feedback-reply-form button, .brand-promo-teaser,
+  .moderation-action-approve, .filter-btn:is(.active, .is-active),
+  :is([role='tab'], .availability-tab)[aria-selected='true'],
+  .countries-cloud .country-link[aria-current='true'], .brand-feedback-vote.is-active,
+  .brand-feedback-rating-options :is(input:checked + label, label:has(~ input:checked))
+) {
+  --button-bg: var(--control-primary-bg);
+  --button-ink: var(--control-primary-ink);
+  --button-border: var(--control-primary-bg);
+  --button-hover-bg: var(--control-primary-hover-bg);
+  --button-hover-border: var(--control-primary-hover-bg);
+  box-shadow: none;
+}
+
 @media (hover: hover) {
-  html:root body :is(
-    .view-all, .cta-secondary, .filter-btn, .availability-tab,
-    .countries-cloud a, .brand-countries .flag-container, .home-country-jump,
-    .home-primary-action, .home-secondary-action, .home-section-cta > a,
-    .home-market-actions > :is(a, button), .home-country-return, .home-market-more, .home-country-toggle,
-    .top-casinos-hero-actions > a, .top-casino-jump-toggle, .blog-hero-links > a, .author-actions > a,
-    .account-auth-secondary, .brand-editorial-toggle, .country-faq-question-button,
-    .brand-feedback-signin, .link-carousel-button, .top-casino-jump-link, .brand-country-toggle,
-    .account-representative-panel a, .moderation-toolbar button, .moderation-view-tabs button,
-    .moderation-user-toolbar button, .moderation-access button, .moderation-action:not(.moderation-action-delete)
-  ):hover:not(:disabled, [aria-disabled='true'], .cta-blocked, .active, .is-active, [aria-selected='true'], [aria-pressed='true'], [aria-current='true']) {
-    border-color: var(--control-hover-border);
-    background: var(--control-hover-bg) !important;
-    color: var(--text-main);
-    box-shadow: none;
-    transform: none;
-  }
-
-  html:root body :is(.cta, .cta-brands, .cta-primary, .account-auth-primary,
-    .brand-promo-teaser, .brand-feedback-submit, .brand-feedback-reply-form button,
-    .brand-sticky-title__cta, .footer-newsletter-submit,
-    [data-account-contact-submit],
-    .filter-btn:is(.active, .is-active)
-  ):hover:not(.cta-secondary, .cta-blocked, :disabled, [aria-disabled='true']) {
-    border-color: transparent;
-    background: var(--control-primary-hover-bg, color-mix(in srgb, var(--gold) 92%, #221900));
-    color: var(--control-primary-ink, #191400);
-    box-shadow: none;
-    transform: none;
-  }
-
-  html:root body :is(.header, .footer, .mobile-menu-panel) :is(.account-auth-control,
-    .language-switcher-current, .site-search-trigger
-  ):hover {
-    border-color: var(--control-chrome-border);
-    background: var(--control-chrome-bg);
-    color: var(--control-chrome-text);
-    box-shadow: none;
+  html:root body :where(
+    button, summary, input, label, [role='button'], [role='tab'], .cta, .cta-brands, .view-all,
+    .home-brand-view-all, .home-primary-action, .home-secondary-action, .home-section-cta > a,
+    .home-market-actions > a, .home-country-return, .countries-cloud a, .brand-countries a,
+    .home-country-jump, .top-casinos-hero-actions > a, .blog-hero-links > a, .author-actions > a,
+    .top-casino-jump-link, .account-representative-panel a
+  ):hover:not(:disabled, [aria-disabled='true'], .cta-blocked) {
+    --action-bg: var(--button-hover-bg, var(--control-secondary-hover-bg));
+    --action-border: var(--button-hover-border, var(--control-secondary-hover-border));
   }
 }
 
-html:root body .home-country-directory .countries-cloud .country-link[aria-current='true'] {
-  border-color: var(--text-muted);
-  background: var(--control-hover-bg) !important;
-  color: var(--text-main);
-  box-shadow: none;
+html:root body :is(button, .cta-blocked):is(:disabled, [aria-disabled='true']):not(.account-auth-control, .brand-why-media) {
+  opacity: .55;
 }
 
 html:root body :is(button, [role='button'], .countries-cloud a, .brand-countries .flag-container,
   .cta, .cta-brands, .cta-primary, .cta-secondary, .view-all, .home-primary-action, .home-secondary-action,
-  .home-section-cta > a, .home-market-actions > a, .home-country-return,
+  .home-section-cta > a, .home-brand-view-all, .home-market-actions > a, .home-country-return,
   .top-casinos-hero-actions > a, .blog-hero-links > a, .author-actions > a,
   .top-casino-jump-link, .account-representative-panel a,
   .brand-feedback-signin, .brand-promo-teaser, .brand-sticky-title__cta):focus-visible {
@@ -249,7 +262,7 @@ html:root body :is(button, [role='button'], .countries-cloud a, .brand-countries
 }
 
 @media (prefers-reduced-motion: reduce) {
-  html body :is(button, .cta, .cta-brands, .cta-secondary, .view-all, .countries-cloud a, .top-casino-jump-link, .page-intro a) {
+  html body :is(button, .cta, .cta-brands, .cta-secondary, .view-all, .countries-cloud a, .top-casino-jump-link, .page-intro a, .home-brand-view-all) {
     transition: none;
   }
 }

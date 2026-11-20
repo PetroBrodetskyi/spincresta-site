@@ -43,10 +43,10 @@ const COPY = {
 };
 
 export function initBrandFavorites({ locale, slug, findBrand, getBrandSlug, brandPagePath, account }) {
-  const [heading, emptyCopy, signIn, favoriteLabel, removeLabel, added, removed, failed, limitCopy] = COPY[locale] || COPY.en;
+  const [, emptyCopy, signIn, favoriteLabel, removeLabel, added, removed, failed, limitCopy] = COPY[locale] || COPY.en;
   const preview = document.querySelector('.brand-profile-showcase__preview');
   const target = isBrandSlug(slug) && (preview || document.querySelector('.brand-profile-showcase__actions'));
-  const accountContent = document.querySelector('[data-account-page-signed-in]');
+  const favoritesMount = document.querySelector('[data-account-favorites-mount]');
   const status = () => {
     const el = document.createElement('p');
     el.className = 'favorite-status';
@@ -59,22 +59,25 @@ export function initBrandFavorites({ locale, slug, findBrand, getBrandSlug, bran
   };
   const errorCopy = error => error?.message === 'favorites_limit' ? limitCopy : failed;
 
-  if (target && !target.querySelector('.brand-favorite-control')) {
+  const heartSyncs = new Map();
+  const addHeart = (surface, key, isOverPreview, name = '') => {
+    if (!surface || !isBrandSlug(key) || heartSyncs.has(surface)) return;
     const control = document.createElement('div');
     control.className = 'brand-favorite-control';
-    if (preview) control.classList.add('is-over-preview');
+    if (isOverPreview) control.classList.add('is-over-preview');
     const heart = document.createElement('button');
     heart.type = 'button';
     heart.className = 'brand-favorite-button';
     heart.innerHTML = siteIconMarkup('heart', 'site-icon', 22);
     const message = status();
     control.append(heart, message);
-    target.append(control);
+    surface.append(control);
 
     const sync = () => {
       const registered = account.hasRegisteredUser();
-      const selected = registered && account.favorites().includes(slug);
-      heart.setAttribute('aria-label', registered ? favoriteLabel : signIn);
+      const selected = registered && account.favorites().includes(key);
+      const label = registered ? favoriteLabel : signIn;
+      heart.setAttribute('aria-label', name ? `${label}: ${name}` : label);
       if (registered) heart.setAttribute('aria-pressed', String(selected));
       else heart.removeAttribute('aria-pressed');
       heart.title = registered ? favoriteLabel : signIn;
@@ -85,11 +88,11 @@ export function initBrandFavorites({ locale, slug, findBrand, getBrandSlug, bran
         if (!account.openSignIn()) showMessage(message, failed, true);
         return;
       }
-      const selected = !account.favorites().includes(slug);
+      const selected = !account.favorites().includes(key);
       if (heart.getAttribute('aria-busy') === 'true') return;
       heart.setAttribute('aria-busy', 'true');
       try {
-        await account.saveFavorite(slug, selected);
+        await account.saveFavorite(key, selected);
         showMessage(message, selected ? added : removed);
       } catch (error) {
         showMessage(message, errorCopy(error), true);
@@ -98,26 +101,41 @@ export function initBrandFavorites({ locale, slug, findBrand, getBrandSlug, bran
         sync();
       }
     });
-    window.addEventListener('spincresta:account-state', sync);
+    heartSyncs.set(surface, sync);
     sync();
+  };
+
+  const syncHearts = () => {
+    for (const [surface, sync] of heartSyncs) {
+      if (surface.isConnected) sync();
+      else heartSyncs.delete(surface);
+    }
+  };
+  addHeart(target, slug, Boolean(preview));
+  const homeCards = document.querySelector('.home-recommendation-grid');
+  if (homeCards) {
+    const syncCards = () => {
+      syncHearts();
+      for (const surface of homeCards.querySelectorAll('[data-favorite-brand]')) {
+        const name = surface.closest('article')?.querySelector('h3')?.textContent?.trim();
+        addHeart(surface, surface.dataset.favoriteBrand, true, name);
+      }
+    };
+    syncCards();
+    new MutationObserver(syncCards).observe(homeCards, { childList: true });
+  }
+  if (target || homeCards) {
+    window.addEventListener('spincresta:account-state', syncHearts);
   }
 
-  if (!accountContent || accountContent.querySelector('.account-favorites')) return;
-  const section = document.createElement('section');
-  section.className = 'account-favorites';
-  section.setAttribute('aria-labelledby', 'account-favorites-title');
-  const title = document.createElement('h3');
-  title.id = 'account-favorites-title';
-  title.tabIndex = -1;
-  title.textContent = heading;
+  if (!favoritesMount) return;
+  const title = favoritesMount.closest('.account-favorites')?.querySelector('h2');
   const empty = document.createElement('p');
+  empty.className = 'account-empty-state';
   empty.textContent = emptyCopy;
   const list = document.createElement('ul');
   const message = status();
-  section.append(title, empty, list, message);
-  const contactForm = accountContent.querySelector('[data-account-contact-form]');
-  if (contactForm) contactForm.before(section);
-  else accountContent.append(section);
+  favoritesMount.replaceChildren(empty, list, message);
 
   const render = () => {
     list.replaceChildren();
@@ -139,7 +157,7 @@ export function initBrandFavorites({ locale, slug, findBrand, getBrandSlug, bran
         try {
           await account.saveFavorite(key, false);
           showMessage(message, removed);
-          title.focus({ preventScroll: true });
+          title?.focus({ preventScroll: true });
         } catch (error) {
           showMessage(message, errorCopy(error), true);
           button.disabled = false;

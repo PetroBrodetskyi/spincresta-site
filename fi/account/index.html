@@ -48,7 +48,7 @@
   <meta property="og:site_name" content="SpinCresta" />
   <meta name="twitter:card" content="summary_large_image" />
 
-      <link rel="stylesheet" href="/styles.css?v=20261119-preview-solid" />
+      <link rel="stylesheet" href="/styles.css?v=20261119-catalog-partners" />
 </head>
   <body class="home-page" data-page="account" data-language="fi">
     <header class="header">
@@ -84,85 +84,88 @@
       </nav>
     </header>
 
-    <main>
-      <section class="hero container">
-        <div class="hero-content">
-
-          <h1>Tilisi yhdessä paikassa</h1>
-          <p>Näytä profiilisi tiedot ja käytä tilillesi saatavilla olevia toimintoja.</p>
-        </div>
-        <aside class="account-review-history" data-account-review-history aria-labelledby="account-review-history-title">
-
-          <div class="account-review-history-heading">
-            <h2 id="account-review-history-title">Kokemuksesi</h2>
-            <p>Avaa kokemus nähdäksesi sen kasinon sivulla.</p>
+    <main class="account-dashboard container" data-account-page data-account-active="profile">
+      <header class="account-dashboard-heading">
+        <h1 id="account-title">Oma tilini</h1>
+      </header>
+      <div class="account-layout">
+        <aside class="account-sidebar">
+          <nav class="account-menu" aria-labelledby="account-title">
+            <a href="#profile" data-account-nav="profile" aria-current="location"><svg class="site-icon" width="20" height="20" aria-hidden="true" focusable="false"><use href="/icons/ui/review-method.svg?v=20261119-editorial-bands#user"></use></svg><span>Profiili</span></a>
+            <a href="#favorites" data-account-nav="favorites"><svg class="site-icon" width="20" height="20" aria-hidden="true" focusable="false"><use href="/icons/ui/review-method.svg?v=20261119-editorial-bands#heart"></use></svg><span>Suosikit</span></a>
+            <a href="#reviews" data-account-nav="reviews"><svg class="site-icon" width="20" height="20" aria-hidden="true" focusable="false"><use href="/icons/ui/review-method.svg?v=20261119-editorial-bands#chat"></use></svg><span>Arvostelut</span></a>
+            <a href="#support" data-account-nav="support"><svg class="site-icon" width="20" height="20" aria-hidden="true" focusable="false"><use href="/icons/ui/review-method.svg?v=20261119-editorial-bands#help"></use></svg><span>Ohjeet ja tietosuoja</span></a>
+          </nav>
+          <div class="account-menu-actions">
+            <a href="/moderator/" data-moderator-link hidden>Moderaattorin hallintapaneeli</a>
+            <button type="button" data-account-page-signout hidden>Kirjaudu ulos</button>
           </div>
-          <p class="account-review-history-state" data-account-reviews-loading>Kokemuksiasi ladataan…</p>
-          <p class="account-review-history-state" data-account-reviews-empty hidden>Et ole vielä kirjoittanut kokemuksia.</p>
-          <div class="account-review-history-list" data-account-reviews-list hidden></div>
         </aside>
-      </section>
-
-      <div class="content-area container">
-        <section class="home-showcase-section" data-account-page aria-labelledby="account-overview-title">
-          <div class="home-showcase-heading">
-            <div>
-
-              <h2 id="account-overview-title">Profiili ja tilin tiedot</h2>
-            </div>
-            <p>Google-profiiliasi käytetään SpinCresta-tilisi turvalliseen tunnistamiseen.</p>
-          </div>
-
+        <div class="account-workspace">
           <p class="account-auth-status" data-account-page-notice role="status" aria-live="polite" hidden></p>
-          <p data-account-page-loading>Tiliäsi ladataan…</p>
-
-          <div class="home-section-cta" data-account-page-signed-out hidden>
-            <div>
-              <strong>Avaa tilisi kirjautumalla sisään</strong>
-              <span>Käytä SpinCrestaan yhdistettyä Google-tiliä.</span>
-            </div>
-            <a href="/fi/account/" data-account-page-signin>Kirjaudu Googlella</a>
+          <p class="account-loading" data-account-page-loading role="status">Tiliäsi ladataan…</p>
+          <div class="account-panel account-signin-panel" data-account-page-signed-out hidden>
+            <svg class="site-icon account-signin-icon" width="24" height="24" aria-hidden="true" focusable="false"><use href="/icons/ui/review-method.svg?v=20261119-editorial-bands#lock"></use></svg>
+            <h2 tabindex="-1">Avaa tilisi kirjautumalla sisään</h2>
+            <p>Kirjaudu Googlella, niin näet profiilisi, suosikkisi ja arvostelusi.</p>
+            <button class="account-dashboard-signin" type="button" data-account-page-signin>Kirjaudu Googlella</button>
           </div>
 
           <div data-account-page-signed-in hidden>
-            <div class="account-auth-user-preview">
-              <img alt="" data-account-page-avatar hidden />
-              <div><small>Kirjautuneena käyttäjänä</small><strong data-account-page-name></strong><span data-account-page-email></span></div>
-            </div>
-
-            <div class="home-method-grid">
-              <article><span>01</span><h3>Tilin tila</h3><p data-account-page-status>Aktiivinen</p></article>
-              <article><span>02</span><h3>Sivuston kieli</h3><p data-account-page-locale></p></article>
-              <article><span>03</span><h3>Jäsen alkaen</h3><p data-account-page-created></p></article>
-              <article><span>04</span><h3>Kirjaudu Googlella</h3><p>Google</p></article>
-            </div>
-
-            <form class="account-contact-form" data-account-contact-form>
-              <div class="account-contact-heading">
-
-                <h3>Yhteystietosi</h3>
-                <p>Valittu maa voidaan näyttää lippuna julkaistun kokemuksen vieressä. Puhelin ja Telegram pysyvät yksityisinä.</p>
+            <section id="profile" data-account-panel="profile" aria-labelledby="account-overview-title">
+              <div class="account-panel">
+                <h2 id="account-overview-title" tabindex="-1">Profiili</h2>
+                <div class="account-auth-user-preview">
+                  <span class="account-profile-avatar">
+                    <svg class="site-icon" width="24" height="24" aria-hidden="true" focusable="false"><use href="/icons/ui/review-method.svg?v=20261119-editorial-bands#user"></use></svg>
+                    <img alt="" data-account-page-avatar hidden />
+                  </span>
+                  <div><strong data-account-page-name></strong><span data-account-page-email></span></div>
+                </div>
+                <dl class="account-profile-facts">
+                  <div><dt>Tilin tila</dt><dd data-account-page-status>Aktiivinen</dd></div>
+                  <div><dt>Sivuston kieli</dt><dd data-account-page-locale></dd></div>
+                  <div><dt>Jäsen alkaen</dt><dd data-account-page-created></dd></div>
+                </dl>
               </div>
-              <div class="account-contact-fields">
-                <label><span>Asuinmaa</span><select name="countryCode" data-account-country><option value="">Valitse maa</option></select></label>
-                <label><span>Puhelinnumero</span><input name="phoneNumber" type="tel" maxlength="32" autocomplete="tel" placeholder="+358 40 123 4567" /></label>
-                <label><span>Telegram-käyttäjänimi</span><input name="telegramUsername" type="text" maxlength="33" autocomplete="off" placeholder="@kayttajanimi" /></label>
-              </div>
-              <div class="account-contact-actions">
-                <button type="submit" data-account-contact-submit>Tallenna tiedot</button>
-                <p class="account-auth-status" data-account-contact-status role="status" aria-live="polite" hidden></p>
-              </div>
-            </form>
-
-            <div class="home-section-cta">
-              <div><strong>Tilin tärkeät tiedot</strong><span>Tarkista, miten tilisi tietoja käsitellään, ja avaa vastuullisen pelaamisen tiedot milloin tahansa.</span></div>
-              <a href="/fi/privacy-policy/">Tietosuojakäytäntö</a>
-              <a href="/fi/responsible-gambling/">Vastuullinen pelaaminen</a>
-              <a href="/moderator/" data-moderator-link hidden>Moderaattorin hallintapaneeli</a>
-              <a href="/fi/account/" data-account-page-signout>Kirjaudu ulos</a>
-            </div>
+              <form class="account-contact-form account-panel" data-account-contact-form>
+                <div class="account-contact-heading">
+                  <h3>Yhteystietosi</h3>
+                  <p>Valittu maa voidaan näyttää lippuna julkaistun kokemuksen vieressä. Puhelin ja Telegram pysyvät yksityisinä.</p>
+                </div>
+                <div class="account-contact-fields">
+                  <label><span>Asuinmaa</span><select name="countryCode" data-account-country><option value="">Valitse maa</option></select></label>
+                  <label><span>Puhelinnumero</span><input name="phoneNumber" type="tel" maxlength="32" autocomplete="tel" placeholder="+358 40 123 4567" /></label>
+                  <label><span>Telegram-käyttäjänimi</span><input name="telegramUsername" type="text" maxlength="33" autocomplete="off" placeholder="@kayttajanimi" /></label>
+                </div>
+                <div class="account-contact-actions">
+                  <button type="submit" data-account-contact-submit>Tallenna tiedot</button>
+                  <p class="account-auth-status" data-account-contact-status role="status" aria-live="polite" hidden></p>
+                </div>
+              </form>
+            </section>
+            <section id="favorites" class="account-panel account-favorites" data-account-panel="favorites" aria-labelledby="account-favorites-title" hidden>
+              <h2 id="account-favorites-title" tabindex="-1">Suosikit</h2>
+              <p>Tallenna kasino painamalla arvostelusivun sydäntä.</p>
+              <div data-account-favorites-mount></div>
+              <a class="account-browse-link" href="/fi/top-casinos/">Selaa kasinoarvosteluja</a>
+            </section>
+            <section id="reviews" class="account-panel account-review-history" data-account-panel="reviews" data-account-review-history aria-labelledby="account-review-history-title" hidden>
+              <h2 id="account-review-history-title" tabindex="-1">Kokemuksesi</h2>
+              <p>Avaa kokemus nähdäksesi sen kasinon sivulla.</p>
+              <p class="account-review-history-state" data-account-reviews-loading role="status">Kokemuksiasi ladataan…</p>
+              <p class="account-review-history-state" data-account-reviews-empty role="status" hidden>Et ole vielä kirjoittanut kokemuksia.</p>
+              <div class="account-review-history-list" data-account-reviews-list hidden></div>
+            </section>
           </div>
-        </section>
+          <section id="support" class="account-panel" data-account-panel="support" aria-labelledby="account-support-title" hidden>
+            <h2 id="account-support-title" tabindex="-1">Ohjeet ja tietosuoja</h2>
+            <div class="account-support-links">
+              <a href="/fi/privacy-policy/"><svg class="site-icon" width="20" height="20" aria-hidden="true" focusable="false"><use href="/icons/ui/review-method.svg?v=20261119-editorial-bands#lock"></use></svg><span>Tietosuojakäytäntö</span></a>
+              <a href="/fi/responsible-gambling/"><svg class="site-icon" width="20" height="20" aria-hidden="true" focusable="false"><use href="/icons/ui/review-method.svg?v=20261119-editorial-bands#safety"></use></svg><span>Vastuullinen pelaaminen</span></a>
+            </div>
+          </section>
+        </div>
       </div>
     </main>
 
@@ -209,6 +212,6 @@
 </div>
     </footer>
 
-    <script type="module" src="/scripts/main.js?v=20261119-preview-loader"></script>
+    <script type="module" src="/scripts/main.js?v=20261119-catalog-partners"></script>
   </body>
 </html>

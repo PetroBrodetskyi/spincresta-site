@@ -2,6 +2,7 @@
 
 import fs from 'node:fs';
 import path from 'node:path';
+import { syncLightEditorialPage } from './sync-light-editorial-pages.mjs';
 
 const ROOT = process.cwd();
 
@@ -327,6 +328,14 @@ for (const locale of Object.keys(copy)) {
     ? path.join(ROOT, 'responsible-gambling', 'index.html')
     : path.join(ROOT, locale, 'responsible-gambling', 'index.html');
   let html = fs.readFileSync(file, 'utf8');
+  if (html.includes('id="safe-play-guide"')) {
+    const updated = syncLightEditorialPage(html, 'responsible-gambling', locale);
+    if (updated !== html) {
+      fs.writeFileSync(file, updated);
+      changed++;
+    }
+    continue;
+  }
   const source = extractSource(html);
 
   html = html
@@ -338,7 +347,7 @@ for (const locale of Object.keys(copy)) {
     })
     .replace(/<main\b[^>]*>[\s\S]*?<\/main>/i, renderMain(locale, source));
 
-  fs.writeFileSync(file, html);
+  fs.writeFileSync(file, syncLightEditorialPage(html, 'responsible-gambling', locale));
   changed += 1;
 }
 

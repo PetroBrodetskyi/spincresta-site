@@ -242,7 +242,7 @@ export const initBrandLayout = context => {
   const decorateBrandFaq = layout => {
     const faq = Array.from(layout.querySelectorAll('.brand-sticky-main .content-review > section.container'))
       .find(section => /faq/i.test(section.id) || section.querySelector(
-        ':scope > .faq-accordion-surface, :scope > .faq-grid, :scope > .timeline'
+        ':scope > :is(.site-faq-list, .faq-grid, .timeline)'
       ));
     faq?.classList.add('brand-faq-section');
   };

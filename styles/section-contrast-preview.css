@@ -1,4 +1,4 @@
-/* Section surfaces and primary action colors. Typography lives in the site shell. */
+/* Section surfaces. Typography and button colors live in the site shell. */
 
 :root {
   --editorial-band: #e9eaec;
@@ -7,20 +7,17 @@
   --editorial-contrast-ink: #fff;
   --editorial-contrast-muted: #e1e2e6;
   --editorial-band-block-padding: clamp(26px, 4vw, 52px);
-  --control-primary-bg: #0758c9;
-  --control-primary-ink: #fff;
-  --control-primary-hover-bg: #06449d;
 }
 
 /* Color separates groups; links, cards, and keyboard focus retain their affordances. */
 html:root body .top-casino-jump-nav {
   border: 0;
-  border-radius: var(--radius-md);
+  border-radius: 0;
   background: var(--editorial-band);
   box-shadow: none;
 }
 
-html:root body.home-page :is(.home-country-directory, .home-new-reviews, .home-new-games, .home-editorial-method) {
+html:root body.home-page :is(.home-country-directory, .home-new-reviews, .home-new-games) {
   --home-band-color: var(--editorial-band);
   border: 0;
   border-radius: 0;
@@ -30,7 +27,7 @@ html:root body.home-page :is(.home-country-directory, .home-new-reviews, .home-n
   box-shadow: none;
 }
 
-html:root body.home-page :is(.home-new-reviews, .home-new-games, .home-editorial-method) {
+html:root body.home-page :is(.home-new-reviews, .home-new-games) {
   padding-block: var(--editorial-band-block-padding);
   padding-inline: 0;
 }
@@ -39,28 +36,388 @@ html:root body.home-page .home-new-games {
   --home-band-color: var(--editorial-contrast);
 }
 
-html:root body.home-page .home-editorial-method {
-  --home-band-color: var(--editorial-blue);
+/* Shared editorial bands: only the blue paint crosses the normal content gutter. */
+html:root body :is(.home-editorial-method, .editorial-card-band) {
+  --editorial-card-pad: clamp(18px, 2vw, 24px);
+  padding-block: var(--editorial-band-block-padding);
+  padding-inline: 0;
+  border: 0;
+  border-radius: 0;
+  background: var(--editorial-blue);
+  border-image: linear-gradient(var(--editorial-blue) 0 0) fill 0 / 0 / 0 100vmax;
+  box-shadow: none;
 }
 
-html:root body.home-page :is(.home-new-games, .home-editorial-method) .home-showcase-heading h2 {
+html:root body :is(.home-new-games, .home-editorial-method, .editorial-card-band) .home-showcase-heading h2 {
   color: var(--editorial-contrast-ink);
 }
 
-html:root body.home-page :is(.home-new-games, .home-editorial-method) .home-showcase-heading > p {
+html:root body :is(.home-new-games, .home-editorial-method, .editorial-card-band) .home-showcase-heading > p {
   color: var(--editorial-contrast-muted);
 }
 
-html:root body :is(
-  .cta, .cta-primary, .cta-brands, .brand-sticky-title__cta,
-  .account-auth-primary, .brand-feedback-submit, .brand-feedback-reply-form button,
-  .brand-promo-teaser, .footer-newsletter-submit, [data-account-contact-submit],
-  .filter-btn:is(.active, .is-active)
-):not(.cta-secondary, .cta-blocked, :disabled, [aria-disabled='true']) {
-  border-color: var(--control-primary-bg);
-  background: var(--control-primary-bg);
-  color: var(--control-primary-ink);
+.editorial-card-inner {
+  padding-block: 0;
+}
+
+.editorial-card-band .home-showcase-heading {
+  display: grid;
+  grid-template-columns: minmax(0, .85fr) minmax(0, .7fr);
+  align-items: end;
+  gap: clamp(18px, 3vw, 56px);
+  margin-bottom: clamp(20px, 3vw, 38px);
+}
+
+.editorial-card-band .home-showcase-heading > :only-child {
+  grid-column: 1 / -1;
+}
+
+html:root body .editorial-card-band .home-showcase-heading h2 {
+  max-width: none;
+  margin: 0;
+  font-size: var(--type-title);
+  font-weight: 650;
+  line-height: 1.12;
+}
+
+.editorial-card-band .home-showcase-heading > p {
+  max-width: 64ch;
+  margin: 0;
+  font-size: var(--type-body);
+  line-height: 1.68;
+}
+
+html:root body :is(.home-editorial-method, .editorial-card-band) .home-method-grid > article {
+  position: relative;
+  align-content: start;
+  min-height: 0;
+  padding: var(--editorial-card-pad);
+  border: 0;
+  border-radius: var(--radius-md);
+  background: #fff;
+}
+
+/* The icon is part of the edge, with the same inward cuts as the wordmark. */
+html:root body :is(.home-editorial-method, .editorial-card-band) .home-method-icon {
+  width: 58px;
+  height: 55px;
+  margin-block-start: calc(-1 * var(--editorial-card-pad));
+  padding: 14px 16px;
+  border-radius: 0 0 10px 10px;
+  background: var(--editorial-blue);
+  color: #fff;
+  clip-path: polygon(0 0, 100% 0, calc(100% - 8px) 50%, 100% 100%, 0 100%, 8px 50%);
+}
+
+html:root body :is(.home-editorial-method, .editorial-card-band) .home-method-grid h3 {
+  margin: 16px 0 8px;
+  color: var(--text-main);
+}
+
+.editorial-card-band .home-method-grid a {
+  color: var(--editorial-blue);
+  text-decoration: underline;
+  text-underline-offset: .14em;
+}
+
+.editorial-card-band .home-method-grid .editorial-card-step {
+  position: absolute;
+  inset-block-start: 14px;
+  inset-inline-end: var(--editorial-card-pad);
+  color: var(--editorial-blue);
+}
+
+@media (min-width: 1025px) {
+  .editorial-card-band[data-editorial-columns="6"] .home-method-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  .editorial-card-band[data-editorial-columns="5"] .home-method-grid {
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1025px) and (max-width: 1240px) {
+  .editorial-card-band[data-editorial-columns="5"] .home-method-grid {
+    grid-template-columns: repeat(6, minmax(0, 1fr));
+  }
+
+  .editorial-card-band[data-editorial-columns="5"] .home-method-grid > article {
+    grid-column: span 2;
+  }
+
+  .editorial-card-band[data-editorial-columns="5"] .home-method-grid > article:nth-last-child(-n + 2) {
+    grid-column: span 3;
+  }
+}
+
+@media (max-width: 768px) {
+  html:root body .editorial-card-band .home-showcase-heading {
+    grid-template-columns: minmax(0, 1fr);
+    align-items: start;
+    gap: 12px;
+  }
+}
+
+@media (max-width: 560px) {
+  html:root body :is(.home-editorial-method, .editorial-card-band) .home-method-grid > article {
+    display: grid;
+    grid-template-columns: 38px minmax(0, 1fr);
+    align-items: center;
+    column-gap: 10px;
+    padding: 14px 16px;
+  }
+
+  html:root body .home-editorial-method .home-method-grid > article:has(.home-method-toggle),
+  html:root body .editorial-card-band .home-method-grid > article:has(.editorial-card-step) {
+    padding-inline-end: 50px;
+  }
+
+  html:root body :is(.home-editorial-method, .editorial-card-band) .home-method-icon {
+    width: 38px;
+    height: 36px;
+    margin: 0;
+    padding: 7px 8px;
+    border-radius: 6px;
+    clip-path: polygon(0 0, 100% 0, calc(100% - 4px) 50%, 100% 100%, 0 100%, 4px 50%);
+  }
+
+  html:root body :is(.home-editorial-method, .editorial-card-band) .home-method-grid h3 {
+    margin: 0;
+  }
+
+  .editorial-card-band .home-method-grid > article > p {
+    grid-column: 1 / -1;
+    margin-top: 10px;
+  }
+}
+
+/* FAQ: a question rail and answer panel on desktop; inline answers on narrow screens. */
+html:root body:not([data-brand]) .site-faq-section {
+  padding-block: var(--editorial-band-block-padding);
+  border: 0;
+  background: var(--editorial-band);
+  border-image: linear-gradient(var(--editorial-band) 0 0) fill 0 / 0 / 0 100vmax;
   box-shadow: none;
+}
+
+html:root body .site-faq-section > .site-faq-content:not(.site-faq-section) {
+  /* Centered flex children otherwise shrink to the currently visible answer. */
+  inline-size: 100%;
+  min-inline-size: 0;
+  margin-block: 0;
+  padding-block: 0;
+}
+
+.site-faq-list,
+.site-faq-content > :is(h2, .home-showcase-heading) {
+  width: min(100%, 900px);
+  margin-inline: auto;
+}
+
+html:root body .site-faq-content > :is(h2, .home-showcase-heading) {
+  max-width: 900px;
+  margin-block: 0 clamp(16px, 2vw, 26px);
+  padding: 0;
+  border: 0;
+  text-align: start;
+}
+
+html:root body .site-faq-content > .home-showcase-heading {
+  display: block;
+}
+
+html:root body .site-faq-content > .home-showcase-heading h2 {
+  max-width: none;
+  margin: 0;
+}
+
+.site-faq-list {
+  --faq-row-pad: clamp(16px, 3vw, 28px);
+  overflow: hidden;
+  border: 1px solid var(--surface-border-strong);
+  border-radius: 16px;
+  background: #fff;
+}
+
+.site-faq-item + .site-faq-item {
+  border-top: 1px solid var(--surface-border);
+}
+
+.site-faq-item > summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  min-height: 60px;
+  padding: 12px var(--faq-row-pad);
+  color: var(--text-main);
+  font-size: var(--type-body);
+  font-weight: 650;
+  line-height: 1.3;
+  overflow-wrap: anywhere;
+  list-style: none;
+  cursor: pointer;
+}
+
+.site-faq-item > summary::-webkit-details-marker {
+  display: none;
+}
+
+.site-faq-item > summary::after {
+  content: '';
+  flex: 0 0 32px;
+  height: 32px;
+  border: 1px solid var(--surface-border-strong);
+  border-radius: 50%;
+  color: var(--text-main);
+  background:
+    linear-gradient(currentColor, currentColor) center / 12px 2px no-repeat,
+    linear-gradient(currentColor, currentColor) center / 2px 12px no-repeat;
+}
+
+.site-faq-item > summary:hover {
+  background: #f5f6f7;
+}
+
+.site-faq-item > summary:focus-visible {
+  outline: 2px solid var(--editorial-blue);
+  outline-offset: -3px;
+}
+
+.site-faq-item[open] > summary::after {
+  border-color: var(--editorial-blue);
+  color: #fff;
+  background: linear-gradient(currentColor, currentColor) center / 12px 2px no-repeat var(--editorial-blue);
+}
+
+.site-faq-answer {
+  padding: 0 var(--faq-row-pad) clamp(16px, 2vw, 24px);
+  color: var(--text-muted);
+  font-size: var(--type-body);
+  line-height: 1.6;
+  text-align: start;
+}
+
+html:root body .site-faq-answer > :first-child {
+  margin-block-start: 0;
+}
+
+html:root body .site-faq-answer > :last-child {
+  margin-block-end: 0;
+}
+
+.site-faq-answer a {
+  color: var(--editorial-blue);
+  text-decoration: underline;
+  text-underline-offset: .14em;
+}
+
+.site-faq-content:has(.site-faq-list--split) {
+  --faq-split-width: 1180px;
+}
+
+html:root body .site-faq-content:has(.site-faq-list--split) > :is(h2, .home-showcase-heading),
+.site-faq-list--split {
+  width: min(100%, var(--faq-split-width));
+  max-width: var(--faq-split-width);
+}
+
+.site-faq-list--split {
+  display: grid;
+  grid-template-columns: minmax(0, 2fr) minmax(0, 3fr);
+  align-items: start;
+  gap: clamp(16px, 2.3vw, 32px);
+  overflow: visible;
+  border: 0;
+  background: transparent;
+}
+
+.site-faq-tabs,
+.site-faq-panels {
+  min-width: 0;
+  border: 1px solid var(--surface-border-strong);
+  border-radius: 16px;
+  background: #fff;
+}
+
+.site-faq-tabs {
+  --control-primary-bg: #eaf1fa;
+  --control-primary-ink: var(--editorial-blue);
+  --control-primary-hover-bg: #e2ecf9;
+  --control-secondary-border: transparent;
+  --control-secondary-hover-bg: #f5f6f7;
+  --control-secondary-hover-border: transparent;
+  --control-focus: var(--editorial-blue);
+  display: grid;
+  gap: 4px;
+  padding: 8px;
+}
+
+.site-faq-tab {
+  --control-radius: 9px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  width: 100%;
+  min-height: 50px;
+  padding: 10px 16px;
+  border: 1px solid transparent;
+  font: inherit;
+  font-size: var(--type-ui);
+  font-weight: 650;
+  line-height: 1.32;
+  text-align: start;
+  overflow-wrap: anywhere;
+  cursor: pointer;
+}
+
+.site-faq-tab::after {
+  content: '';
+  flex: 0 0 6px;
+  width: 6px;
+  height: 6px;
+  border: solid currentColor;
+  border-width: 2px 2px 0 0;
+  opacity: .5;
+  transform: rotate(45deg);
+}
+
+.site-faq-tab[aria-selected='true']::before {
+  content: '';
+  position: absolute;
+  inset-block: 11px;
+  inset-inline-start: 0;
+  width: 3px;
+  border-radius: 2px;
+  background: currentColor;
+}
+
+.site-faq-tab[aria-selected='true']::after {
+  opacity: 1;
+}
+
+.site-faq-panel {
+  padding: clamp(22px, 3vw, 36px);
+  border-radius: inherit;
+}
+
+.site-faq-panel:focus-visible {
+  outline: 2px solid var(--editorial-blue);
+  outline-offset: -3px;
+}
+
+.site-faq-panel > h3 {
+  margin: 0 0 12px;
+  color: var(--text-main);
+  font-size: var(--type-section);
+  line-height: 1.2;
+}
+
+.site-faq-panel .site-faq-answer {
+  padding: 0;
 }
 
 /* Stack the editorial sections as bands. Only the band paint crosses the page gutter. */
@@ -84,7 +441,7 @@ html:root body[data-brand].has-brand-sticky-layout .brand-review-overview {
 }
 
 html:root body[data-brand].has-brand-sticky-layout .brand-sticky-main
-  :is(.brand-new-games-panel, .brand-review-details, .brand-player-feedback) {
+  :is(.brand-new-games-panel, .brand-review-details, .brand-player-feedback, .site-faq-section) {
   --brand-section-background: var(--editorial-band);
 }
 

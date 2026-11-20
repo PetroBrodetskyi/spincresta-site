@@ -36,7 +36,7 @@ if (process.argv[1] && fileURLToPath(import.meta.url) === resolve(process.argv[1
       const file = new URL(`../${locale}${route}/index.html`, import.meta.url);
       const html = fs.readFileSync(file, 'utf8');
       const next = simplifyPageIntro(html);
-      if (!/class="page-intro\b/.test(next)) throw new Error(`Missing intro: ${file.pathname}`);
+      if (!/class="(?:page-intro\b|account-dashboard-heading\b)/.test(next)) throw new Error(`Missing intro: ${file.pathname}`);
       if (html === next) continue;
       if (apply) fs.writeFileSync(file, next);
       changes++;

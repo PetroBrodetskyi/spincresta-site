@@ -35,7 +35,9 @@ for (const [locale, copy] of Object.entries(HOME_LABELS)) {
     assert.equal([...html.matchAll(/class="countries-cloud"/g)].length, 1, 'country links are not duplicated at the bottom');
     assert.doesNotMatch(html, /home-video-hero|home-hero_d0lzo1/);
     assert.doesNotMatch(hero, /href="#recommended-brands"/);
-    assert.ok(hero.includes(`href="/${prefix}top-casinos/"`), 'rankings link remains available');
+    assert.ok(!hero.includes(`href="/${prefix}top-casinos/"`), 'no duplicate rankings button above the country list');
+    const recommendations = html.match(/<section[^>]*id="recommended-brands"[^>]*>[\s\S]*?<\/section>/)?.[0];
+    assert.ok(recommendations?.includes(`href="/${prefix}top-casinos/"`), 'rankings link remains available alongside the cards');
     assert.doesNotMatch(html, /home-casino-gallery|casino-gallery-title/);
     assert.doesNotMatch(html, /class="home-stats"|id="site(?:Country|Brand)Count"/);
     assert.match(html, /<\/nav>\s*<\/section>\s*<div class="content-area container">\s*<section class="home-showcase-section home-recommendations" id="recommended-brands" aria-label="[^"]+">\s*<div class="casino-grid home-featured-casino-grid home-recommendation-grid">/);
@@ -86,8 +88,8 @@ test('homepage copy pass removes the recommendation introduction without touchin
 
 test('homepage copy pass removes the redundant recommendation shortcut but keeps the rankings link', () => {
   const html = fs.readFileSync(new URL('index.html', root), 'utf8');
-  const fixture = html.replace('<div class="home-country-hero-actions">\n',
-    '<div class="home-country-hero-actions">\n            <a class="home-primary-action" href="#recommended-brands">Explore our recommendations</a>\n');
+  const fixture = html.replace('</h1>\n        </div>\n        <nav class="home-country-directory"',
+    '</h1>\n          <div class="home-country-hero-actions">\n            <a class="home-primary-action" href="#recommended-brands">Explore our recommendations</a>\n            <a class="home-secondary-action" href="/top-casinos/">View all casino rankings</a>\n          </div>\n        </div>\n        <nav class="home-country-directory"');
   assert.notEqual(fixture, html);
   assert.equal(polishHomepageLabels(fixture, 'en'), html);
 });

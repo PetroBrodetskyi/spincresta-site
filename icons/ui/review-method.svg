@@ -12,6 +12,13 @@
     <rect x="2" y="4.5" width="20" height="15" rx="3"/>
     <path d="M2 9h20M6 15h4"/>
   </symbol>
+  <symbol id="phone" viewBox="0 0 24 24">
+    <rect x="6" y="2.5" width="12" height="19" rx="2.5"/>
+    <path d="M10 18.5h4"/>
+  </symbol>
+  <symbol id="search" viewBox="0 0 24 24">
+    <circle cx="10.5" cy="10.5" r="6.5"/><path d="m15.5 15.5 4.5 4.5"/>
+  </symbol>
   <symbol id="games" viewBox="0 0 24 24">
     <path d="M8 6h8a5 5 0 0 1 4.8 3.6l1.2 4.6a2.9 2.9 0 0 1-4.8 2.8l-2.1-1.9H8.9l-2.1 1.9A2.9 2.9 0 0 1 2 14.2l1.2-4.6A5 5 0 0 1 8 6Z"/>
     <path d="M8 9v4m-2-2h4m5 1h.01M18 10h.01"/>

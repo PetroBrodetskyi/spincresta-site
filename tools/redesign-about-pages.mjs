@@ -2,6 +2,8 @@
 
 import fs from 'node:fs';
 import path from 'node:path';
+import { syncDefaultTheme } from './sync-default-theme.mjs';
+import { siteIconMarkup } from '../scripts/site-icons.js';
 
 const ROOT = process.cwd();
 
@@ -206,30 +208,32 @@ const escapeHtml = value => String(value)
 
 const textOnly = value => String(value)
   .replace(/<[^>]+>/g, ' ')
+  .replace(/&(amp|quot|lt|gt|apos|#39);/g, (_, entity) =>
+    ({ amp: '&', quot: '"', lt: '<', gt: '>', apos: "'", '#39': "'" })[entity])
   .replace(/\s+/g, ' ')
   .trim();
 
 const extractAboutContent = html => {
   const legacySection = html.match(/<section class="content container content-article">([\s\S]*?)<\/section>/i)?.[1];
   if (!legacySection) {
-    const purposeSection = html.match(/<section class="home-showcase-section" aria-labelledby="about-purpose-title">([\s\S]*?)<\/section>/i)?.[1];
-    const editorialSection = html.match(/<section class="home-showcase-section" id="editorial-method"[\s\S]*?<\/section>/i)?.[0];
-    const transparencySection = html.match(/<section class="home-showcase-section" aria-labelledby="transparency-title">([\s\S]*?)<\/section>/i)?.[1];
-    const countries = html.match(/<section class="all-countries">[\s\S]*?<\/section>/i)?.[0];
+    const purposeSection = html.match(/<section\b[^>]*aria-labelledby="about-purpose-title"[^>]*>([\s\S]*?)<\/section>/i)?.[1];
+    const editorialSection = html.match(/<section\b[^>]*id="editorial-method"[^>]*>([\s\S]*?)<\/section>/i)?.[1];
+    const transparencySection = html.match(/<section\b[^>]*aria-labelledby="transparency-title"[^>]*>([\s\S]*?)<\/section>/i)?.[1];
+    const countries = html.match(/<section\b[^>]*(?:class="all-countries"|id="about-countries")[^>]*>[\s\S]*?<\/section>/i)?.[0];
     if (!purposeSection || !editorialSection || !transparencySection || !countries) {
       throw new Error('About content was not found in either the legacy or redesigned structure.');
     }
 
     const purposeTitle = textOnly(purposeSection.match(/<h2[^>]*>([\s\S]*?)<\/h2>/i)?.[1] ?? '');
-    const purposeBody = purposeSection.match(/<div class="home-showcase-heading">[\s\S]*?<\/div>\s*(<p>[\s\S]*?<\/p>)/i)?.[1] ?? '';
-    const principles = [...purposeSection.matchAll(/<article>\s*<span>[\s\S]*?<\/span>\s*<h3>([\s\S]*?)<\/h3>\s*(<p>[\s\S]*?<\/p>)\s*<\/article>/gi)]
-      .map(match => ({ title: textOnly(match[1]), body: match[2] }));
+    const purposeBody = purposeSection.match(/(<p>[\s\S]*?<\/p>)/i)?.[1] ?? '';
+    const principles = [...purposeSection.matchAll(/<(article|li)>\s*<(span|svg)\b[^>]*>[\s\S]*?<\/\2>\s*(?:<div>)?\s*<h3>([\s\S]*?)<\/h3>\s*(<p>[\s\S]*?<\/p>)\s*(?:<\/div>)?\s*<\/\1>/gi)]
+      .map(match => ({ title: textOnly(match[3]), body: match[4] }));
 
     const editorialTitle = textOnly(editorialSection.match(/<h2[^>]*id="editorial-method-title"[^>]*>([\s\S]*?)<\/h2>/i)?.[1] ?? '');
-    const editorialCards = [...editorialSection.matchAll(/<article class="faq-card">\s*<h3>[\s\S]*?<\/h3>\s*<p>([\s\S]*?)<\/p>\s*<\/article>/gi)]
+    const editorialCards = [...editorialSection.matchAll(/<h3>[\s\S]*?<\/h3>\s*<p>([\s\S]*?)<\/p>/gi)]
       .map(match => match[1].trim());
     const transparencyTitle = textOnly(transparencySection.match(/<h2[^>]*id="transparency-title"[^>]*>([\s\S]*?)<\/h2>/i)?.[1] ?? '');
-    const transparencyText = transparencySection.match(/<div class="home-showcase-heading">[\s\S]*?<\/div>\s*<p>([\s\S]*?)<\/p>/i)?.[1]?.trim() ?? '';
+    const transparencyText = transparencySection.match(/<p>([\s\S]*?)<\/p>/i)?.[1]?.trim() ?? '';
 
     if (!purposeTitle || !purposeBody || principles.length < 4 || !editorialTitle || editorialCards.length < 2 || !transparencyTitle || !transparencyText) {
       throw new Error('The redesigned About page has an unexpected structure.');
@@ -273,120 +277,123 @@ const renderCardBody = body => {
   return `<p>${paragraph.trim()}</p>`;
 };
 
-const renderPrinciples = entries => entries.map((entry, index) => `
-              <article>
-                <span>0${index + 1}</span>
-                <h3>${escapeHtml(entry.title)}</h3>
-                ${renderCardBody(entry.body)}
-              </article>`).join('');
+const menuCopy = {
+  en: ['Overview', 'Transparency', 'Country guides', 'Browse brand reviews'],
+  de: ['Überblick', 'Transparenz', 'Länderguides', 'Markentests ansehen'],
+  es: ['Resumen', 'Transparencia', 'Guías por país', 'Ver reseñas de marcas'],
+  it: ['Panoramica', 'Trasparenza', 'Guide per paese', 'Consulta le recensioni dei marchi'],
+  pl: ['O serwisie', 'Przejrzystość', 'Przewodniki po krajach', 'Przeglądaj recenzje marek'],
+  uk: ['Про проєкт', 'Прозорість', 'Гіди за країнами', 'Переглянути огляди брендів'],
+  pt: ['Visão geral', 'Transparência', 'Guias por país', 'Ver análises de marcas'],
+  fr: ['Présentation', 'Transparence', 'Guides par pays', 'Consulter les avis sur les marques'],
+  hi: ['परिचय', 'पारदर्शिता', 'देश गाइड', 'ब्रांड समीक्षाएँ देखें'],
+  fi: ['Yleiskatsaus', 'Avoimuus', 'Maaoppaat', 'Selaa brändiarvosteluja'],
+};
 
-const renderMain = (locale, source, statsGrid) => {
+const renderRow = (icon, title, body) => `
+              <li>
+                ${siteIconMarkup(icon, 'site-icon', 22)}
+                <div><h3>${escapeHtml(title)}</h3>${renderCardBody(body)}</div>
+              </li>`;
+
+const renderMain = (locale, source) => {
   const t = copy[locale];
   const prefix = locale === 'en' ? '' : `/${locale}`;
   const [mission, ...principles] = source.timeline;
   const [editorialTitle, transparencyTitle] = source.headings;
   const [verifyText, currentText, transparencyText] = source.paragraphs;
+  const [overview, transparency, countryGuides, browseReviews] = menuCopy[locale];
+  const countriesHeading = textOnly(source.countries.match(/<h2\b[^>]*>([\s\S]*?)<\/h2>/i)?.[1] ?? '');
+  if (!countriesHeading) throw new Error(`Missing country heading for ${locale}`);
+  const menu = [
+    ['about-overview', 'book', overview], ['editorial-method', 'review', t.primary],
+    ['about-author', 'user', t.secondary], ['about-transparency', 'link', transparency],
+    ['about-countries', 'globe', countryGuides],
+  ];
+  const heading = (id, title) => `<h2 id="${id}" tabindex="-1">${escapeHtml(title)}</h2>`;
+  const icons = ['review', 'globe', 'safety', 'star'];
+  const countryBody = locale === 'en'
+    ? 'Our country guides cover local payment methods, casino availability, and restrictions. Check the guide for your location before registering.'
+    : principles[1].body;
+  const reviewBody = locale === 'en' ? verifyText.html.replace(/\blicence\b/g, 'license') : verifyText.html;
 
-  return `<main>
-      <section class="page-intro container">
-        <div class="page-intro-copy">
-
-          <h1>${escapeHtml(t.title)}</h1>
-          <p>${escapeHtml(t.lead)}</p>
-          <div class="home-hero-actions">
-            <a class="home-primary-action" href="#editorial-method">${escapeHtml(t.primary)}</a>
-            <a class="home-secondary-action" href="${prefix}/authors/odri-chambers/">${escapeHtml(t.secondary)}</a>
-          </div>
-        </div>
-
-        ${statsGrid ? `<div class="home-insight-card">
-          ${statsGrid}
-        </div>` : ''}
-      </section>
-
-      <div class="content-area container">
-        <section class="home-showcase-section" aria-labelledby="about-purpose-title">
-          <div class="home-showcase-heading">
-            <div>
-
-              <h2 id="about-purpose-title">${escapeHtml(mission.title)}</h2>
-            </div>
+  return `<main class="account-dashboard editorial-dashboard about-dashboard container" data-about-dashboard>
+      <header class="account-dashboard-heading">
+        <h1 id="about-title">${escapeHtml(t.eyebrow)}</h1>
+        <p>${escapeHtml(t.lead)}</p>
+      </header>
+      <div class="account-layout">
+        <aside class="account-sidebar">
+          <nav class="account-menu" aria-labelledby="about-title">
+            ${menu.map(([id, icon, label], index) =>
+              `<a href="#${id}" data-about-nav="${id}"${index === 0 ? ' aria-current="location"' : ''}>${siteIconMarkup(icon, 'site-icon', 20)}<span>${escapeHtml(label)}</span></a>`
+            ).join('\n            ')}
+          </nav>
+        </aside>
+        <div class="account-workspace">
+          <section class="account-panel" id="about-overview" data-about-panel="about-overview" aria-labelledby="about-purpose-title">
+            ${heading('about-purpose-title', mission.title)}
             ${renderCardBody(mission.body)}
-          </div>
-          <div class="home-method-grid" aria-label="${escapeHtml(t.principlesEyebrow)}">${renderPrinciples(principles.slice(0, 4))}
-          </div>
-        </section>
-
-        <section class="home-showcase-section" id="editorial-method" aria-labelledby="editorial-method-title">
-          <div class="home-showcase-heading">
-            <div>
-
-              <h2 id="editorial-method-title">${escapeHtml(editorialTitle.text)}</h2>
+            <ul class="editorial-panel-rows" role="list" aria-label="${escapeHtml(t.principlesEyebrow)}">${principles.slice(0, 4).map((entry, index) =>
+              renderRow(icons[index], entry.title, index === 1 ? countryBody : entry.body)).join('')}
+            </ul>
+            <div class="account-support-links">
+              <a href="${prefix}/casinos-and-betting/">${siteIconMarkup('book', 'site-icon', 20)}<span>${escapeHtml(browseReviews)}</span></a>
             </div>
+          </section>
+          <section class="account-panel" id="editorial-method" data-about-panel="editorial-method" aria-labelledby="editorial-method-title">
+            ${heading('editorial-method-title', editorialTitle.text)}
             <p>${escapeHtml(t.editorialLead)}</p>
-          </div>
-          <div class="faq-grid">
-            <article class="faq-card">
-              <h3>${escapeHtml(t.verifyTitle)}</h3>
-              <p>${verifyText.html}</p>
-            </article>
-            <article class="faq-card">
-              <h3>${escapeHtml(t.currentTitle)}</h3>
-              <p>${currentText.html}</p>
-            </article>
-          </div>
-        </section>
-
-        <section class="home-showcase-section" aria-label="${escapeHtml(t.expertTitle)}">
-          <div class="home-section-cta">
-            <div>
-              <strong>${escapeHtml(t.expertTitle)}</strong>
-              <span>${escapeHtml(t.expertLead)}</span>
+            <ul class="editorial-panel-rows" role="list">${renderRow('review', t.verifyTitle, reviewBody)}${renderRow('calendar', t.currentTitle, currentText.html)}
+            </ul>
+          </section>
+          <section class="account-panel" id="about-author" data-about-panel="about-author" aria-labelledby="about-author-title">
+            ${heading('about-author-title', t.expertTitle)}
+            <p>${escapeHtml(t.expertLead)}</p>
+            <div class="account-support-links">
+              <a href="${prefix}/authors/odri-chambers/">${siteIconMarkup('user', 'site-icon', 20)}<span>${escapeHtml(t.expertButton)}</span></a>
             </div>
-            <a href="${prefix}/authors/odri-chambers/">${escapeHtml(t.expertButton)}</a>
-          </div>
-        </section>
-
-        <section class="home-showcase-section" aria-labelledby="transparency-title">
-          <div class="home-showcase-heading">
-            <div>
-
-              <h2 id="transparency-title">${escapeHtml(transparencyTitle.text)}</h2>
-            </div>
+          </section>
+          <section class="account-panel" id="about-transparency" data-about-panel="about-transparency" aria-labelledby="transparency-title">
+            ${heading('transparency-title', transparencyTitle.text)}
             <p>${transparencyText.html}</p>
-          </div>
-          <div class="home-section-cta">
-            <div>
-              <strong>${escapeHtml(t.partnersTitle)}</strong>
-              <span>${escapeHtml(t.partnersLead)}</span>
+            <div class="account-support-links">
+              <a href="${prefix}/partners/">${siteIconMarkup('link', 'site-icon', 20)}<span>${escapeHtml(t.partnersButton)}</span></a>
             </div>
-            <a href="${prefix}/partners/">${escapeHtml(t.partnersButton)}</a>
-          </div>
-        </section>
-
-        ${source.countries}
+          </section>
+          <section class="account-panel about-country-list" id="about-countries" data-about-panel="about-countries" aria-labelledby="about-countries-title">
+            ${heading('about-countries-title', countriesHeading)}
+            <div class="account-support-links">
+              <a href="${prefix}/online-casinos/">${siteIconMarkup('globe', 'site-icon', 20)}<span>${escapeHtml(countryGuides)}</span></a>
+            </div>
+            <div class="countries-cloud"></div>
+          </section>
+        </div>
       </div>
     </main>`;
 };
 
+const check = process.argv.includes('--check');
 let changed = 0;
 for (const locale of Object.keys(copy)) {
   const file = locale === 'en' ? path.join(ROOT, 'about', 'index.html') : path.join(ROOT, locale, 'about', 'index.html');
-  let html = fs.readFileSync(file, 'utf8');
-  const source = extractAboutContent(html);
-  const statsGrid = html.match(/<div class="home-stats-grid">[\s\S]*?<\/div>/i)?.[0] ?? '';
+  const original = fs.readFileSync(file, 'utf8');
+  const source = extractAboutContent(original);
 
-  html = html
+  const html = original
     .replace(/<body([^>]*)>/i, (_, attrs) => {
       const cleaned = attrs
         .replace(/\sclass="[^"]*"/gi, '')
         .replace(/\sdata-page="[^"]*"/gi, '');
       return `<body class="home-page" data-page="about"${cleaned}>`;
     })
-    .replace(/<main\b[^>]*>[\s\S]*?<\/main>/i, renderMain(locale, source, statsGrid));
+    .replace(/<main\b[^>]*>[\s\S]*?<\/main>/i, renderMain(locale, source));
 
-  fs.writeFileSync(file, html);
+  const updated = syncDefaultTheme(html);
+  if (updated === original) continue;
+  if (!check) fs.writeFileSync(file, updated);
   changed += 1;
 }
 
-console.log(`Redesigned ${changed} About pages with existing site components.`);
+console.log(`About layout: ${changed} pages ${check ? 'pending' : 'updated'}.`);
+if (check && changed) process.exitCode = 1;

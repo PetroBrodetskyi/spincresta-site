@@ -2,6 +2,7 @@
 
 import fs from 'node:fs';
 import path from 'node:path';
+import { syncLightEditorialPage } from './sync-light-editorial-pages.mjs';
 
 const ROOT = process.cwd();
 const CONTACT_EMAIL = 'affiliates@armadaapp.com';
@@ -434,8 +435,16 @@ for (const locale of Object.keys(copy)) {
   const file = locale === 'en'
     ? path.join(ROOT, 'privacy-policy', 'index.html')
     : path.join(ROOT, locale, 'privacy-policy', 'index.html');
-  let html = fs.readFileSync(file, 'utf8')
-    .replaceAll('privacy@spincresta.com', CONTACT_EMAIL);
+  const original = fs.readFileSync(file, 'utf8');
+  let html = original.replaceAll('privacy@spincresta.com', CONTACT_EMAIL);
+  if (html.includes('id="privacy-details"')) {
+    const updated = syncLightEditorialPage(html, 'privacy-policy', locale);
+    if (updated !== original) {
+      fs.writeFileSync(file, updated);
+      changed++;
+    }
+    continue;
+  }
   const source = applyPolicyUpdate(locale, extractSource(html));
 
   html = html
@@ -451,7 +460,7 @@ for (const locale of Object.keys(copy)) {
     )
     .replace(/<main\b[^>]*>[\s\S]*?<\/main>/i, renderMain(locale, source));
 
-  fs.writeFileSync(file, html);
+  fs.writeFileSync(file, syncLightEditorialPage(html, 'privacy-policy', locale));
   changed += 1;
 }
 

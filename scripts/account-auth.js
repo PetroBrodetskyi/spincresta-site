@@ -1,5 +1,5 @@
 import { COUNTRIES } from './countries.js';
-import { initBrandFavorites, persistBrandFavorite, readFavoriteBrands } from './brand-favorites.js?v=20261119-site-icons';
+import { initBrandFavorites, persistBrandFavorite, readFavoriteBrands } from './brand-favorites.js?v=20261119-account-dashboard';
 
 const DEFAULT_CONFIG_ENDPOINT = 'https://api.spincresta.com/api/auth-config';
 const DEFAULT_NEWSLETTER_ENDPOINT = 'https://api.spincresta.com/api/subscribe';
@@ -384,10 +384,10 @@ export const initAccountAuth = async (locale, favoriteOptions = {}) => {
     const avatar = root.querySelector(`[data-${prefix}-avatar]`);
     if (nameElement) nameElement.textContent = name;
     if (emailElement) emailElement.textContent = user.email || '';
-    if (avatar && avatarUrl) {
-      avatar.src = avatarUrl;
-      avatar.alt = '';
-      avatar.hidden = false;
+    if (avatar) {
+      if (avatarUrl) avatar.src = avatarUrl;
+      else avatar.removeAttribute('src');
+      avatar.hidden = !avatarUrl;
     }
   };
 
@@ -497,9 +497,11 @@ export const initAccountAuth = async (locale, favoriteOptions = {}) => {
     const signedOut = accountPage.querySelector('[data-account-page-signed-out]');
     const signedIn = accountPage.querySelector('[data-account-page-signed-in]');
     const notice = accountPage.querySelector('[data-account-page-notice]');
+    const signOutControl = accountPage.querySelector('[data-account-page-signout]');
     if (loading) loading.hidden = true;
     if (signedOut) signedOut.hidden = Boolean(currentUser);
     if (signedIn) signedIn.hidden = !currentUser;
+    if (signOutControl) signOutControl.hidden = !currentUser;
 
     if (currentUser) {
       populateUser('account-page', currentUser, currentProfile, accountPage);
@@ -748,7 +750,7 @@ export const initAccountAuth = async (locale, favoriteOptions = {}) => {
   modal.querySelector('[data-account-signout]').addEventListener('click', signOut);
   accountPage?.querySelector('[data-account-page-signin]')?.addEventListener('click', event => {
     event.preventDefault();
-    openModal('signin');
+    openSignIn();
   });
   accountPage?.querySelector('[data-account-page-signout]')?.addEventListener('click', event => {
     event.preventDefault();
@@ -890,6 +892,18 @@ export const initAccountAuth = async (locale, favoriteOptions = {}) => {
     });
   } catch {
     const isLocalPreview = ['127.0.0.1', 'localhost'].includes(window.location.hostname);
+    const loading = accountPage?.querySelector('[data-account-page-loading]');
+    if (loading && (!loading.hidden || !currentUser)) {
+      loading.hidden = true;
+      accountPage.querySelector('[data-account-page-signed-out]').hidden = false;
+      if (!isLocalPreview) {
+        accountPage.querySelector('[data-account-page-signin]').disabled = true;
+        const notice = accountPage.querySelector('[data-account-page-notice]');
+        notice.textContent = copy.failed;
+        notice.dataset.state = 'error';
+        notice.hidden = false;
+      }
+    }
 
     if (isLocalPreview) {
       // Google Identity and the API only trust the production origin. Keep the

@@ -542,7 +542,7 @@ export const initBrandPage = context => {
           navLabel: title?.dataset.navLabel,
           kind: section.dataset.reviewSection,
           isSports: isBrandSportsSection({ kind: section.dataset.brandRail, id: section.id, heading }),
-          isFaq: Boolean(section.querySelector(':scope > :is(.faq-accordion-surface, .faq-grid)')),
+          isFaq: Boolean(section.querySelector(':scope > :is(.site-faq-list, .faq-grid)')),
           isPros: Boolean(section.querySelector(':scope > .pros-cons-grid')),
         });
         mark(section, kind);

@@ -22,7 +22,7 @@ test('illustrated editorial mastheads become compact headings without losing the
 
 test('public blog header has no decorative image and still has its article metadata', () => {
   const html = read('blog/how-to-choose-an-online-casino');
-  assert.match(html, /<header class="page-intro page-intro-article container">/);
+  assert.match(html, /<header class="account-dashboard-heading editorial-reading-heading">/);
   assert.match(html, /class="blog-article-meta"/);
   assert.match(html, /property="og:image"/);
   assert.doesNotMatch(html, /--blog-article-hero-image/);

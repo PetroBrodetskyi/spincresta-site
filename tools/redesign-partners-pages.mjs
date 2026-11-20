@@ -2,6 +2,8 @@
 
 import fs from 'node:fs';
 import path from 'node:path';
+import { syncDefaultTheme } from './sync-default-theme.mjs';
+import { siteIconMarkup } from '../scripts/site-icons.js';
 
 const ROOT = process.cwd();
 const PARTNERSHIP_EMAIL = 'affiliates@armadaapp.com';
@@ -31,7 +33,7 @@ const copy = {
       ['We keep it accurate', 'Partners can send material updates. Outdated or unavailable information is corrected or removed.'],
     ],
     standardsEyebrow: 'Before we publish', standardsTitle: 'What makes a strong proposal',
-    needTitle: 'Please include', need: ['Official domain and legal operator name', 'Supported countries and restricted markets', 'Current bonus terms and payment options', 'Licence, KYC, and responsible-gambling information'],
+    needTitle: 'Please include', need: ['Official domain and legal operator name', 'Supported countries and restricted markets', 'Current bonus terms and payment options', 'License, KYC, and responsible-gambling information'],
     expectTitle: 'What you can expect', expect: ['An editorial check before publication', 'Sponsored and affiliate links marked correctly', 'No guaranteed positive review or paid ranking', 'A clear route for corrections and product updates'],
     contactEyebrow: 'Start a conversation', contactTitle: 'Have a partnership idea?',
     contactLead: 'Tell us what you are building, which markets matter, and what would be useful for SpinCresta readers. We will suggest the most suitable format.',
@@ -169,125 +171,97 @@ const updateStructuredData = (html, pageTitle, pageDescription) => html.replace(
   },
 );
 
+const formatIcons = ['games', 'link', 'payments', 'book'];
 const renderCards = cards => cards.map(([title, text], index) => `
-              <article>
-                <span>0${index + 1}</span>
-                <h3>${escapeHtml(title)}</h3>
-                <p>${escapeHtml(text)}</p>
-              </article>`).join('');
+              <li>
+                ${siteIconMarkup(formatIcons[index], 'site-icon', 22)}
+                <div><h3>${escapeHtml(title)}</h3><p>${escapeHtml(text)}</p></div>
+              </li>`).join('');
 
 const renderSteps = steps => steps.map(([title, text], index) => `
-              <article>
-                <span>0${index + 1}</span>
-                <h3>${escapeHtml(title)}</h3>
-                <p>${escapeHtml(text)}</p>
-              </article>`).join('');
+              <li>
+                <span class="editorial-panel-step" aria-hidden="true">${index + 1}.</span>
+                <div><h3>${escapeHtml(title)}</h3><p>${escapeHtml(text)}</p></div>
+              </li>`).join('');
 
-const renderList = items => items.map(item => `• ${escapeHtml(item)}`).join('<br />');
+const renderList = items => `<ul>${items.map(item => `<li>${escapeHtml(item)}</li>`).join('')}</ul>`;
 const renderFaq = items => items.map(([question, answer]) => `<article class="faq-card"><h3>${escapeHtml(question)}</h3><p>${escapeHtml(answer)}</p></article>`).join('');
 
-const renderMain = (locale, faq, statsGrid) => {
+const menuCopy = {
+  en: ['Formats', 'How it works', 'Requirements', 'Contact', 'FAQ'],
+  de: ['Formate', 'Ablauf', 'Voraussetzungen', 'Kontakt', 'FAQ'],
+  es: ['Formatos', 'Cómo funciona', 'Requisitos', 'Contacto', 'Preguntas frecuentes'],
+  it: ['Formati', 'Come funziona', 'Requisiti', 'Contatti', 'Domande frequenti'],
+  pl: ['Formy współpracy', 'Jak to działa', 'Wymagania', 'Kontakt', 'FAQ'],
+  uk: ['Формати співпраці', 'Як це працює', 'Вимоги', 'Контакти', 'Запитання'],
+  pt: ['Formatos', 'Como funciona', 'Requisitos', 'Contactos', 'Perguntas frequentes'],
+  fr: ['Formats', 'Fonctionnement', 'Prérequis', 'Contact', 'Questions fréquentes'],
+  hi: ['साझेदारी के प्रकार', 'प्रक्रिया', 'ज़रूरी जानकारी', 'संपर्क', 'आम सवाल'],
+  fi: ['Yhteistyömuodot', 'Näin se toimii', 'Vaatimukset', 'Yhteystiedot', 'Usein kysyttyä'],
+};
+
+const renderMain = (locale, faq) => {
   const t = copy[locale];
   const prefix = locale === 'en' ? '' : `/${locale}`;
-  return `<main>
-      <section class="page-intro container">
-        <div class="page-intro-copy">
-
-          <h1>${escapeHtml(t.title)}</h1>
-          <p>${escapeHtml(t.lead)}</p>
-          <div class="home-hero-actions">
-            <a class="home-primary-action" href="${PARTNERSHIP_TELEGRAM_URL}" target="_blank" rel="noopener noreferrer nofollow">${escapeHtml(t.primary)}</a>
-            <a class="home-secondary-action" href="${prefix}/about/">${escapeHtml(t.secondary)}</a>
-          </div>
+  const menu = [['formats', 'link'], ['process', 'review'], ['requirements', 'book'], ['contact', 'mail'], ['faq', 'help']];
+  const heading = (id, label) => `<h2 id="partners-${id}-title" tabindex="-1">${escapeHtml(label)}</h2>`;
+  return `<main class="account-dashboard editorial-dashboard partners-dashboard container" data-partners-dashboard>
+      <header class="account-dashboard-heading">
+        <h1 id="partners-title">${escapeHtml(t.eyebrow)}</h1>
+        <p>${escapeHtml(t.lead)}</p>
+      </header>
+      <div class="account-layout">
+        <aside class="account-sidebar">
+          <nav class="account-menu" aria-labelledby="partners-title">
+            ${menu.map(([key, icon], index) =>
+              `<a href="#partners-${key}" data-partners-nav="partners-${key}"${index === 0 ? ' aria-current="location"' : ''}>${siteIconMarkup(icon, 'site-icon', 20)}<span>${escapeHtml(menuCopy[locale][index])}</span></a>`
+            ).join('\n            ')}
+          </nav>
+        </aside>
+        <div class="account-workspace partners-workspace">
+          <section class="account-panel partners-panel" id="partners-formats" data-partners-panel="partners-formats" aria-labelledby="partners-formats-title">
+            ${heading('formats', t.typesTitle)}
+            <p>${escapeHtml(t.typesLead)}</p>
+            <ul class="editorial-panel-rows" role="list">${renderCards(t.cards)}
+            </ul>
+          </section>
+          <section class="account-panel partners-panel" id="partners-process" data-partners-panel="partners-process" aria-labelledby="partners-process-title">
+            ${heading('process', t.processTitle)}
+            <ol class="editorial-panel-rows" role="list">${renderSteps(t.steps)}
+            </ol>
+          </section>
+          <section class="account-panel partners-panel" id="partners-requirements" data-partners-panel="partners-requirements" aria-labelledby="partners-requirements-title">
+            ${heading('requirements', t.standardsTitle)}
+            <div class="editorial-panel-subsections">
+              <article><h3>${escapeHtml(t.needTitle)}</h3>${renderList(t.need)}</article>
+              <article><h3>${escapeHtml(t.expectTitle)}</h3>${renderList(t.expect)}</article>
+            </div>
+          </section>
+          <section class="account-panel partners-panel" id="partners-contact" data-partners-panel="partners-contact" aria-labelledby="partners-contact-title">
+            ${heading('contact', t.contactTitle)}
+            <p>${escapeHtml(t.contactLead)}</p>
+            <div class="account-support-links">
+              <a href="mailto:${PARTNERSHIP_EMAIL}">${siteIconMarkup('mail', 'site-icon', 20)}<span>${PARTNERSHIP_EMAIL}</span></a>
+              <a href="${PARTNERSHIP_TELEGRAM_URL}" target="_blank" rel="noopener noreferrer nofollow" aria-label="Telegram: ${PARTNERSHIP_TELEGRAM_HANDLE}"><span class="partners-telegram-icon" aria-hidden="true"></span><span>${PARTNERSHIP_TELEGRAM_HANDLE}</span></a>
+              <a href="${prefix}/about/">${siteIconMarkup('book', 'site-icon', 20)}<span>${escapeHtml(t.secondary)}</span></a>
+            </div>
+          </section>
+          <section class="account-panel partners-panel" id="partners-faq" data-partners-panel="partners-faq" aria-labelledby="partners-faq-title">
+            ${heading('faq', t.faqTitle)}
+            <div class="faq-grid">${renderFaq(faq)}</div>
+          </section>
         </div>
-
-        ${statsGrid ? `<div class="home-insight-card">
-          ${statsGrid}
-        </div>` : ''}
-      </section>
-
-      <div class="content-area container">
-          <section class="home-showcase-section">
-            <div class="home-showcase-heading">
-              <div>
-
-                <h2>${escapeHtml(t.typesTitle)}</h2>
-              </div>
-              <p>${escapeHtml(t.typesLead)}</p>
-            </div>
-            <div class="home-method-grid">${renderCards(t.cards)}
-            </div>
-          </section>
-
-          <section class="home-showcase-section">
-            <div class="home-showcase-heading">
-              <div>
-
-                <h2>${escapeHtml(t.processTitle)}</h2>
-              </div>
-            </div>
-            <div class="home-method-grid">${renderSteps(t.steps)}
-            </div>
-          </section>
-
-          <section class="home-showcase-section">
-            <div class="home-showcase-heading">
-              <div>
-
-                <h2>${escapeHtml(t.standardsTitle)}</h2>
-              </div>
-            </div>
-            <div class="faq-grid">
-              <article class="faq-card">
-                <h3>${escapeHtml(t.needTitle)}</h3>
-                <p>${renderList(t.need)}</p>
-              </article>
-              <article class="faq-card">
-                <h3>${escapeHtml(t.expectTitle)}</h3>
-                <p>${renderList(t.expect)}</p>
-              </article>
-            </div>
-          </section>
-
-          <section class="home-showcase-section">
-            <div class="home-section-cta">
-              <div>
-                <strong>${escapeHtml(t.contactTitle)}</strong>
-                <span>${escapeHtml(t.contactLead)}</span>
-              </div>
-              <a href="mailto:${PARTNERSHIP_EMAIL}">${PARTNERSHIP_EMAIL}</a>
-              <a href="${PARTNERSHIP_TELEGRAM_URL}" target="_blank" rel="noopener noreferrer nofollow">${PARTNERSHIP_TELEGRAM_HANDLE}</a>
-            </div>
-          </section>
-
-          <section class="home-showcase-section">
-            <div class="home-showcase-heading">
-              <div>
-
-                <h2>${escapeHtml(t.faqTitle)}</h2>
-              </div>
-            </div>
-            <div class="faq-grid">${renderFaq(faq)}
-            </div>
-          </section>
       </div>
     </main>`;
 };
 
-const removeLegacyPartnersCss = () => {
-  const cssPath = path.join(ROOT, 'styles', 'pages.css');
-  const css = fs.readFileSync(cssPath, 'utf8');
-  const marker = '/* =============================================================\n   PARTNERS PAGE\n   ============================================================= */';
-  const markerIndex = css.indexOf(marker);
-  if (markerIndex !== -1) fs.writeFileSync(cssPath, `${css.slice(0, markerIndex).trimEnd()}\n`);
-};
-
+const check = process.argv.includes('--check');
 let changed = 0;
 for (const locale of Object.keys(copy)) {
   const file = locale === 'en' ? path.join(ROOT, 'partners', 'index.html') : path.join(ROOT, locale, 'partners', 'index.html');
-  let html = fs.readFileSync(file, 'utf8');
+  const original = fs.readFileSync(file, 'utf8');
+  let html = original;
   const faq = getFaq(html);
-  const statsGrid = html.match(/<div class="home-stats-grid">[\s\S]*?<\/div>/i)?.[0] ?? '';
   if (!faq.length) throw new Error(`No FAQ schema found in ${path.relative(ROOT, file)}`);
   const pageTitle = `SpinCresta | ${copy[locale].title}`;
   const pageDescription = copy[locale].lead;
@@ -299,22 +273,20 @@ for (const locale of Object.keys(copy)) {
         .replace(/\sdata-page="[^"]*"/gi, '');
       return `<body class="home-page" data-page="partners"${cleaned}>`;
     })
-    .replace(/<main\b[^>]*>[\s\S]*?<\/main>/i, renderMain(locale, faq, statsGrid))
+    .replace(/<main\b[^>]*>[\s\S]*?<\/main>/i, renderMain(locale, faq))
     .replace(/\s*<style>\s*\.partners-listing-title\s*\{[\s\S]*?<\/style>/i, '')
     .replace(/<title>[\s\S]*?<\/title>/i, `<title>${escapeHtml(pageTitle)}</title>`)
     .replace(/<meta\s+name="description"\s+content="[\s\S]*?"\s*\/>/i, `<meta name="description" content="${escapeHtml(pageDescription)}" />`)
     .replace(/<meta\s+property="og:title"\s+content="[\s\S]*?"\s*\/>/i, `<meta property="og:title" content="${escapeHtml(pageTitle)}" />`)
     .replace(/<meta\s+property="og:description"\s+content="[\s\S]*?"\s*\/>/i, `<meta property="og:description" content="${escapeHtml(pageDescription)}" />`)
     .replace(/<meta\s+name="twitter:title"\s+content="[\s\S]*?"\s*\/>/i, `<meta name="twitter:title" content="${escapeHtml(pageTitle)}" />`)
-    .replace(/<meta\s+name="twitter:description"\s+content="[\s\S]*?"\s*\/>/i, `<meta name="twitter:description" content="${escapeHtml(pageDescription)}" />`)
-    .replace(/\/styles\.css\?v=[^"]+/i, '/styles.css?v=20260827-account-page-3');
+    .replace(/<meta\s+name="twitter:description"\s+content="[\s\S]*?"\s*\/>/i, `<meta name="twitter:description" content="${escapeHtml(pageDescription)}" />`);
 
-  html = updateStructuredData(html, pageTitle, pageDescription);
-
-  fs.writeFileSync(file, html);
+  html = syncDefaultTheme(updateStructuredData(html, pageTitle, pageDescription));
+  if (html === original) continue;
+  if (!check) fs.writeFileSync(file, html);
   changed += 1;
 }
 
-removeLegacyPartnersCss();
-
-console.log(`Redesigned ${changed} Partners pages.`);
+console.log(`Partners layout: ${changed} pages ${check ? 'pending' : 'updated'}.`);
+if (check && changed) process.exitCode = 1;

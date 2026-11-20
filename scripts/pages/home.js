@@ -1,7 +1,47 @@
 // Page-specific module. Loaded dynamically by scripts/main.js.
 
+import { getBrandDetailSlug, getFeaturedHomeBrands } from '../featured-brands.js?v=20261119-shared-search';
+
 const HOME_GAMES_PX_PER_SECOND = 24;
 const HOME_GAMES_SCROLL_IDLE_MS = 950;
+
+export const homeBrandScrollStep = (viewport, card, gap) => {
+  const column = card + gap;
+  return column > 0 ? column * Math.max(1, Math.floor((viewport + gap) / column)) : viewport;
+};
+
+function bindHomeBrandTrack(grid, controls, previous, next) {
+  const sync = () => {
+    const end = Math.max(0, grid.scrollWidth - grid.clientWidth);
+    const canAdvance = grid.scrollLeft < end - 2;
+    controls.hidden = end < 3;
+    previous.setAttribute('aria-disabled', String(grid.scrollLeft < 2));
+    next.setAttribute('aria-disabled', String(!canAdvance));
+    grid.tabIndex = controls.hidden ? -1 : 0;
+    grid.classList.toggle('has-more-columns', canAdvance);
+  };
+  const step = direction => {
+    const button = direction < 0 ? previous : next;
+    if (controls.hidden || button.getAttribute('aria-disabled') === 'true') return;
+    const card = grid.querySelector('.casino-catalog-card');
+    if (!card) return;
+    const gap = parseFloat(getComputedStyle(grid).columnGap) || 0;
+    const distance = homeBrandScrollStep(grid.clientWidth, card.getBoundingClientRect().width, gap);
+    const behavior = window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth';
+    grid.scrollBy({ left: direction * distance, behavior });
+  };
+  previous.addEventListener('click', () => step(-1));
+  next.addEventListener('click', () => step(1));
+  grid.addEventListener('keydown', event => {
+    if (event.target !== grid || !['ArrowLeft', 'ArrowRight'].includes(event.key)) return;
+    event.preventDefault();
+    step(event.key === 'ArrowLeft' ? -1 : 1);
+  });
+  grid.addEventListener('scroll', sync, { passive: true });
+  if (window.ResizeObserver) new ResizeObserver(sync).observe(grid);
+  else window.addEventListener('resize', sync, { passive: true });
+  return sync;
+}
 
 export const advanceHomeGames = (position, elapsed, distance) =>
   distance > 0 ? (position + Math.min(elapsed, 64) * HOME_GAMES_PX_PER_SECOND / 1000) % distance : 0;
@@ -250,7 +290,8 @@ export const initHomePage = context => {
     directory.append(toggle);
   };
 
-  const HOME_RECOMMENDATION_SLUGS = [
+  // Follow the existing market priority for localized results and their games.
+  const HOME_MARKET_PRIORITY_SLUGS = [
     'fraga-tr',
     '55bet',
     'zarbet',
@@ -284,12 +325,6 @@ export const initHomePage = context => {
   
   const getHomeGeoCode = () => HOME_GEO_BY_LOCALE[SITE_LOCALE] || '';
   
-  const getBrandDetailSlug = brand =>
-    String(brand?.urlDetail || '')
-      .replace(/^\/?brands\//i, '')
-      .replace(/\.html$/i, '')
-      .replace(/^\/+|\/+$/g, '');
-  
   const getHomeGeoBrands = countryCode => {
     if (!countryCode) return [];
   
@@ -322,7 +357,7 @@ export const initHomePage = context => {
   
   const getHomeRecommendationCandidates = countryCode => {
     const candidates = getHomeGeoBrands(countryCode);
-    const priority = new Map(HOME_RECOMMENDATION_SLUGS.map((slug, index) => [slug, index]));
+    const priority = new Map(HOME_MARKET_PRIORITY_SLUGS.map((slug, index) => [slug, index]));
   
     return candidates.sort((a, b) => {
       const score = candidate =>
@@ -339,17 +374,16 @@ export const initHomePage = context => {
     if (countryCode) {
       return selectUniqueHomeBrands(getHomeRecommendationCandidates(countryCode), limit).map(({ brand }) => brand);
     }
-    const brandBySlug = new Map(BRANDS.filter(brand =>
-      brand.hasDetailPage && brand.urlDetail && !brand.notRecommended && !brand.temporarilyUnavailable
-    ).map(brand => [getBrandDetailSlug(brand), brand]));
-    return HOME_RECOMMENDATION_SLUGS.map(slug => brandBySlug.get(slug)).filter(Boolean);
+    return getFeaturedHomeBrands(BRANDS);
   };
 
+  let syncHomeBrandTrack = () => {};
+  let homeBrandResetFrame = 0;
   const renderHomeRecommendationCards = (brands = getHomeRecommendationBrands(getHomeGeoCode()), append = false) => {
     const grid = document.querySelector('.home-recommendation-grid');
     if (!grid) return;
     const fragment = document.createDocumentFragment();
-    brands.forEach(brand => fragment.appendChild(createCasinoCard(brand)));
+    brands.forEach(brand => fragment.appendChild(createCasinoCard(brand, { favorite: true })));
     if (!brands.length && !append) {
       const empty = document.createElement('p');
       empty.className = 'home-market-empty';
@@ -357,7 +391,19 @@ export const initHomePage = context => {
       fragment.appendChild(empty);
     }
     if (append) grid.appendChild(fragment);
-    else grid.replaceChildren(fragment);
+    else {
+      cancelAnimationFrame(homeBrandResetFrame);
+      grid.classList.add('is-resetting');
+      grid.replaceChildren(fragment);
+      grid.scrollTo({ left: 0, behavior: 'instant' });
+      // Don't let an old snap point or an in-flight arrow scroll affect the next market.
+      homeBrandResetFrame = requestAnimationFrame(() => {
+        grid.scrollTo({ left: 0, behavior: 'instant' });
+        grid.classList.remove('is-resetting');
+        syncHomeBrandTrack();
+      });
+    }
+    syncHomeBrandTrack();
     applyBrandLogoBackgrounds();
     requestPaymentIconSync();
   };
@@ -474,13 +520,35 @@ export const initHomePage = context => {
     const bar = document.createElement('div');
     const title = document.createElement('h2');
     const actions = document.createElement('div');
+    const toolbar = document.createElement('div');
+    const controls = document.createElement('div');
+    const all = section.querySelector('.home-section-cta > a');
     const reviews = document.createElement('a');
     const guide = document.createElement('a');
     const reset = document.createElement('button');
     const more = document.createElement('button');
-    bar.className = 'home-market-bar';
+    const defaultTitle = section.getAttribute('aria-label');
+    bar.className = 'home-market-bar home-brand-toolbar';
     actions.className = 'home-market-actions';
+    toolbar.className = 'home-brand-toolbar-actions';
+    controls.className = 'home-brand-carousel-controls';
+    controls.hidden = true;
+    title.id = 'home-brand-carousel-title';
+    title.textContent = defaultTitle;
     title.setAttribute('aria-live', 'polite');
+    grid.id = 'home-brand-carousel';
+    grid.setAttribute('role', 'group');
+    grid.setAttribute('aria-labelledby', title.id);
+    const arrow = (direction, label) => {
+      const button = document.createElement('button');
+      button.type = 'button';
+      button.className = `home-brand-arrow home-brand-arrow--${direction}`;
+      button.setAttribute('aria-controls', grid.id);
+      button.setAttribute('aria-label', label);
+      return button;
+    };
+    const previous = arrow('previous', localeText('Previous brands', 'Vorherige Anbieter', 'Marcas anteriores', 'Marchi precedenti', 'Poprzednie marki', 'Попередні бренди', 'Marcas anteriores', 'Marques précédentes', 'पिछले ब्रांड', 'Edelliset brändit'));
+    const next = arrow('next', localeText('Next brands', 'Nächste Anbieter', 'Marcas siguientes', 'Marchi successivi', 'Następne marki', 'Наступні бренди', 'Próximas marcas', 'Marques suivantes', 'अगले ब्रांड', 'Seuraavat brändit'));
     reviews.href = '#new-reviews-title';
     reviews.textContent = latestReviewsLabel;
     guide.textContent = localeText(
@@ -497,11 +565,21 @@ export const initHomePage = context => {
       'Show more casinos', 'Mehr Casinos anzeigen', 'Ver más casinos', 'Mostra altri casinò', 'Pokaż więcej kasyn',
       'Показати більше казино', 'Ver mais casinos', 'Voir plus de casinos', 'और कैसीनो दिखाएँ', 'Näytä lisää kasinoita'
     );
-    bar.hidden = more.hidden = true;
+    actions.hidden = more.hidden = true;
     actions.append(reviews, guide, reset);
-    bar.append(title, actions);
+    if (all) {
+      const original = all.closest('.home-section-cta');
+      all.className = 'home-brand-view-all';
+      all.textContent = localeText('Show all casinos', 'Alle Casinos anzeigen', 'Ver todos los casinos', 'Mostra tutti i casinò', 'Pokaż wszystkie kasyna', 'Усі казино', 'Ver todos os casinos', 'Voir tous les casinos', 'सभी कैसीनो दिखाएँ', 'Näytä kaikki kasinot');
+      toolbar.append(all);
+      original.remove();
+    }
+    controls.append(previous, next);
+    toolbar.append(actions, controls);
+    bar.append(title, toolbar);
     grid.before(bar);
     grid.after(more);
+    syncHomeBrandTrack = bindHomeBrandTrack(grid, controls, previous, next);
 
     const renderBatch = (append = false) => {
       const next = brands.slice(visibleCount, visibleCount + batchSize);
@@ -521,7 +599,9 @@ export const initHomePage = context => {
       previous?.removeAttribute('aria-current');
       selectedLink = null;
       delete section.dataset.selectedCountry;
-      bar.hidden = more.hidden = true;
+      actions.hidden = more.hidden = true;
+      if (all) all.hidden = false;
+      title.textContent = defaultTitle;
       renderHomeRecommendationCards();
       renderHomeNewReviews();
       previous?.focus();
@@ -543,7 +623,8 @@ export const initHomePage = context => {
       guide.href = link.href;
       brands = getHomeRecommendationBrands(code, Infinity);
       visibleCount = 0;
-      bar.hidden = false;
+      actions.hidden = false;
+      if (all) all.hidden = true;
       reviews.hidden = !brands.length;
       renderBatch();
       renderHomeNewReviews(code);

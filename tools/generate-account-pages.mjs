@@ -1,10 +1,10 @@
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { siteIconMarkup } from '../scripts/site-icons.js';
+import { syncDefaultTheme } from './sync-default-theme.mjs';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
-const ACCOUNT_ASSET_VERSION = '20260828-account-reviews-1';
-const MAIN_ASSET_VERSION = '20260828-account-reviews-1';
 
 const locales = {
   en: {
@@ -125,6 +125,19 @@ const reviewCopy = {
   fi: { kicker: 'TOIMINTASI', title: 'Kokemuksesi', intro: 'Avaa kokemus nähdäksesi sen kasinon sivulla.', loading: 'Kokemuksiasi ladataan…', empty: 'Et ole vielä kirjoittanut kokemuksia.' },
 };
 
+const dashboardCopy = {
+  en: ['My account', 'Profile', 'Favorites', 'Reviews', 'Help & privacy', 'Sign in with Google to view your profile, favorites, and reviews.', 'Save a casino using the heart on its review page.', 'Browse casino reviews'],
+  de: ['Mein Konto', 'Profil', 'Favoriten', 'Erfahrungsberichte', 'Hilfe und Datenschutz', 'Melden Sie sich mit Google an, um Ihr Profil, Ihre Favoriten und Ihre Erfahrungsberichte zu sehen.', 'Speichern Sie ein Casino über das Herzsymbol auf der jeweiligen Testseite.', 'Casinotests ansehen'],
+  es: ['Mi cuenta', 'Perfil', 'Favoritos', 'Reseñas', 'Ayuda y privacidad', 'Inicia sesión con Google para ver tu perfil, tus favoritos y tus reseñas.', 'Pulsa el corazón en la reseña de un casino para guardarlo.', 'Ver reseñas de casinos'],
+  it: ['Il mio account', 'Profilo', 'Preferiti', 'Recensioni', 'Aiuto e privacy', 'Accedi con Google per vedere il profilo, i preferiti e le recensioni.', 'Usa il cuore nella pagina di recensione per salvare un casinò.', 'Sfoglia le recensioni'],
+  pl: ['Moje konto', 'Profil', 'Ulubione', 'Recenzje', 'Pomoc i prywatność', 'Zaloguj się przez Google, aby zobaczyć profil, ulubione i recenzje.', 'Kliknij serce na stronie recenzji, aby zapisać kasyno.', 'Przeglądaj recenzje kasyn'],
+  uk: ['Мій акаунт', 'Профіль', 'Обране', 'Відгуки', 'Допомога й приватність', 'Увійдіть через Google, щоб переглянути свій профіль, обране та відгуки.', 'Натисніть сердечко на сторінці огляду, щоб зберегти казино.', 'Переглянути огляди казино'],
+  pt: ['A minha conta', 'Perfil', 'Favoritos', 'Opiniões', 'Ajuda e privacidade', 'Entre com o Google para ver o seu perfil, os favoritos e as opiniões.', 'Selecione o coração na página de análise para guardar um casino.', 'Ver análises de casinos'],
+  fr: ['Mon compte', 'Profil', 'Favoris', 'Avis', 'Aide et confidentialité', 'Connectez-vous avec Google pour voir votre profil, vos favoris et vos avis.', 'Cliquez sur le cœur dans un avis pour enregistrer le casino.', 'Consulter les avis sur les casinos'],
+  hi: ['मेरा खाता', 'प्रोफ़ाइल', 'पसंदीदा', 'समीक्षाएँ', 'सहायता और गोपनीयता', 'अपनी प्रोफ़ाइल, पसंदीदा और समीक्षाएँ देखने के लिए Google से साइन इन करें।', 'कैसीनो को सहेजने के लिए उसके समीक्षा पेज पर दिल का आइकन दबाएँ।', 'कैसीनो समीक्षाएँ देखें'],
+  fi: ['Oma tilini', 'Profiili', 'Suosikit', 'Arvostelut', 'Ohjeet ja tietosuoja', 'Kirjaudu Googlella, niin näet profiilisi, suosikkisi ja arvostelusi.', 'Tallenna kasino painamalla arvostelusivun sydäntä.', 'Selaa kasinoarvosteluja'],
+};
+
 const escapeHtml = value => String(value)
   .replaceAll('&', '&amp;')
   .replaceAll('<', '&lt;')
@@ -136,86 +149,90 @@ const pagePath = (locale, slug) => locale.base ? `/${locale.base}/${slug}/` : `/
 const renderMain = (locale, language) => {
   const contact = contactCopy[language] || contactCopy.en;
   const reviews = reviewCopy[language] || reviewCopy.en;
+  const [account, profile, favorites, reviewLabel, help, signInIntro, favoritesIntro, browse] = dashboardCopy[language];
+  const menu = [['profile', profile, 'user'], ['favorites', favorites, 'heart'], ['reviews', reviewLabel, 'chat'], ['support', help, 'help']];
   return `
-    <main>
-      <section class="hero container">
-        <div class="hero-content">
-
-          <h1>${escapeHtml(locale.heading)}</h1>
-          <p>${escapeHtml(locale.intro)}</p>
-        </div>
-        <aside class="account-review-history" data-account-review-history aria-labelledby="account-review-history-title">
-
-          <div class="account-review-history-heading">
-            <h2 id="account-review-history-title">${escapeHtml(reviews.title)}</h2>
-            <p>${escapeHtml(reviews.intro)}</p>
+    <main class="account-dashboard container" data-account-page data-account-active="profile">
+      <header class="account-dashboard-heading">
+        <h1 id="account-title">${escapeHtml(account)}</h1>
+      </header>
+      <div class="account-layout">
+        <aside class="account-sidebar">
+          <nav class="account-menu" aria-labelledby="account-title">
+            ${menu.map(([id, title, icon]) =>
+              `<a href="#${id}" data-account-nav="${id}"${id === 'profile' ? ' aria-current="location"' : ''}>${siteIconMarkup(icon, 'site-icon', 20)}<span>${escapeHtml(title)}</span></a>`
+            ).join('\n            ')}
+          </nav>
+          <div class="account-menu-actions">
+            <a href="/moderator/" data-moderator-link hidden>${escapeHtml(locale.moderator)}</a>
+            <button type="button" data-account-page-signout hidden>${escapeHtml(locale.signOut)}</button>
           </div>
-          <p class="account-review-history-state" data-account-reviews-loading>${escapeHtml(reviews.loading)}</p>
-          <p class="account-review-history-state" data-account-reviews-empty hidden>${escapeHtml(reviews.empty)}</p>
-          <div class="account-review-history-list" data-account-reviews-list hidden></div>
         </aside>
-      </section>
-
-      <div class="content-area container">
-        <section class="home-showcase-section" data-account-page aria-labelledby="account-overview-title">
-          <div class="home-showcase-heading">
-            <div>
-
-              <h2 id="account-overview-title">${escapeHtml(locale.overviewTitle)}</h2>
-            </div>
-            <p>${escapeHtml(locale.overviewIntro)}</p>
-          </div>
-
+        <div class="account-workspace">
           <p class="account-auth-status" data-account-page-notice role="status" aria-live="polite" hidden></p>
-          <p data-account-page-loading>${escapeHtml(locale.loading)}</p>
-
-          <div class="home-section-cta" data-account-page-signed-out hidden>
-            <div>
-              <strong>${escapeHtml(locale.signedOutTitle)}</strong>
-              <span>${escapeHtml(locale.signedOutIntro)}</span>
-            </div>
-            <a href="${pagePath(locale, 'account')}" data-account-page-signin>${escapeHtml(locale.signIn)}</a>
+          <p class="account-loading" data-account-page-loading role="status">${escapeHtml(locale.loading)}</p>
+          <div class="account-panel account-signin-panel" data-account-page-signed-out hidden>
+            ${siteIconMarkup('lock', 'site-icon account-signin-icon', 24)}
+            <h2 tabindex="-1">${escapeHtml(locale.signedOutTitle)}</h2>
+            <p>${escapeHtml(signInIntro)}</p>
+            <button class="account-dashboard-signin" type="button" data-account-page-signin>${escapeHtml(locale.signIn)}</button>
           </div>
 
           <div data-account-page-signed-in hidden>
-            <div class="account-auth-user-preview">
-              <img alt="" data-account-page-avatar hidden />
-              <div><small>${escapeHtml(locale.signedInAs)}</small><strong data-account-page-name></strong><span data-account-page-email></span></div>
-            </div>
-
-            <div class="home-method-grid">
-              <article><span>01</span><h3>${escapeHtml(locale.status)}</h3><p data-account-page-status>${escapeHtml(locale.active)}</p></article>
-              <article><span>02</span><h3>${escapeHtml(locale.language)}</h3><p data-account-page-locale></p></article>
-              <article><span>03</span><h3>${escapeHtml(locale.memberSince)}</h3><p data-account-page-created></p></article>
-              <article><span>04</span><h3>${escapeHtml(locale.signIn)}</h3><p>Google</p></article>
-            </div>
-
-            <form class="account-contact-form" data-account-contact-form>
-              <div class="account-contact-heading">
-
-                <h3>${escapeHtml(contact.title)}</h3>
-                <p>${escapeHtml(contact.intro)}</p>
+            <section id="profile" data-account-panel="profile" aria-labelledby="account-overview-title">
+              <div class="account-panel">
+                <h2 id="account-overview-title" tabindex="-1">${escapeHtml(profile)}</h2>
+                <div class="account-auth-user-preview">
+                  <span class="account-profile-avatar">
+                    ${siteIconMarkup('user', 'site-icon', 24)}
+                    <img alt="" data-account-page-avatar hidden />
+                  </span>
+                  <div><strong data-account-page-name></strong><span data-account-page-email></span></div>
+                </div>
+                <dl class="account-profile-facts">
+                  <div><dt>${escapeHtml(locale.status)}</dt><dd data-account-page-status>${escapeHtml(locale.active)}</dd></div>
+                  <div><dt>${escapeHtml(locale.language)}</dt><dd data-account-page-locale></dd></div>
+                  <div><dt>${escapeHtml(locale.memberSince)}</dt><dd data-account-page-created></dd></div>
+                </dl>
               </div>
-              <div class="account-contact-fields">
-                <label><span>${escapeHtml(contact.country)}</span><select name="countryCode" data-account-country><option value="">${escapeHtml(contact.chooseCountry)}</option></select></label>
-                <label><span>${escapeHtml(contact.phone)}</span><input name="phoneNumber" type="tel" maxlength="32" autocomplete="tel" placeholder="${escapeHtml(contact.phonePlaceholder)}" /></label>
-                <label><span>${escapeHtml(contact.telegram)}</span><input name="telegramUsername" type="text" maxlength="33" autocomplete="off" placeholder="${escapeHtml(contact.telegramPlaceholder)}" /></label>
-              </div>
-              <div class="account-contact-actions">
-                <button type="submit" data-account-contact-submit>${escapeHtml(contact.save)}</button>
-                <p class="account-auth-status" data-account-contact-status role="status" aria-live="polite" hidden></p>
-              </div>
-            </form>
-
-            <div class="home-section-cta">
-              <div><strong>${escapeHtml(locale.quickTitle)}</strong><span>${escapeHtml(locale.quickText)}</span></div>
-              <a href="${pagePath(locale, 'privacy-policy')}">${escapeHtml(locale.privacy)}</a>
-              <a href="${pagePath(locale, 'responsible-gambling')}">${escapeHtml(locale.responsible)}</a>
-              <a href="/moderator/" data-moderator-link hidden>${escapeHtml(locale.moderator)}</a>
-              <a href="${pagePath(locale, 'account')}" data-account-page-signout>${escapeHtml(locale.signOut)}</a>
-            </div>
+              <form class="account-contact-form account-panel" data-account-contact-form>
+                <div class="account-contact-heading">
+                  <h3>${escapeHtml(contact.title)}</h3>
+                  <p>${escapeHtml(contact.intro)}</p>
+                </div>
+                <div class="account-contact-fields">
+                  <label><span>${escapeHtml(contact.country)}</span><select name="countryCode" data-account-country><option value="">${escapeHtml(contact.chooseCountry)}</option></select></label>
+                  <label><span>${escapeHtml(contact.phone)}</span><input name="phoneNumber" type="tel" maxlength="32" autocomplete="tel" placeholder="${escapeHtml(contact.phonePlaceholder)}" /></label>
+                  <label><span>${escapeHtml(contact.telegram)}</span><input name="telegramUsername" type="text" maxlength="33" autocomplete="off" placeholder="${escapeHtml(contact.telegramPlaceholder)}" /></label>
+                </div>
+                <div class="account-contact-actions">
+                  <button type="submit" data-account-contact-submit>${escapeHtml(contact.save)}</button>
+                  <p class="account-auth-status" data-account-contact-status role="status" aria-live="polite" hidden></p>
+                </div>
+              </form>
+            </section>
+            <section id="favorites" class="account-panel account-favorites" data-account-panel="favorites" aria-labelledby="account-favorites-title" hidden>
+              <h2 id="account-favorites-title" tabindex="-1">${escapeHtml(favorites)}</h2>
+              <p>${escapeHtml(favoritesIntro)}</p>
+              <div data-account-favorites-mount></div>
+              <a class="account-browse-link" href="${pagePath(locale, 'top-casinos')}">${escapeHtml(browse)}</a>
+            </section>
+            <section id="reviews" class="account-panel account-review-history" data-account-panel="reviews" data-account-review-history aria-labelledby="account-review-history-title" hidden>
+              <h2 id="account-review-history-title" tabindex="-1">${escapeHtml(reviews.title)}</h2>
+              <p>${escapeHtml(reviews.intro)}</p>
+              <p class="account-review-history-state" data-account-reviews-loading role="status">${escapeHtml(reviews.loading)}</p>
+              <p class="account-review-history-state" data-account-reviews-empty role="status" hidden>${escapeHtml(reviews.empty)}</p>
+              <div class="account-review-history-list" data-account-reviews-list hidden></div>
+            </section>
           </div>
-        </section>
+          <section id="support" class="account-panel" data-account-panel="support" aria-labelledby="account-support-title" hidden>
+            <h2 id="account-support-title" tabindex="-1">${escapeHtml(help)}</h2>
+            <div class="account-support-links">
+              <a href="${pagePath(locale, 'privacy-policy')}">${siteIconMarkup('lock', 'site-icon', 20)}<span>${escapeHtml(locale.privacy)}</span></a>
+              <a href="${pagePath(locale, 'responsible-gambling')}">${siteIconMarkup('safety', 'site-icon', 20)}<span>${escapeHtml(locale.responsible)}</span></a>
+            </div>
+          </section>
+        </div>
       </div>
     </main>`;
 };
@@ -223,9 +240,13 @@ const renderMain = (locale, language) => {
 for (const [language, locale] of Object.entries(locales)) {
   const source = path.join(root, locale.base, 'about', 'index.html');
   const targetDir = path.join(root, locale.base, 'account');
-  let html = await readFile(source, 'utf8');
+  const target = path.join(targetDir, 'index.html');
+  let html = await readFile(target, 'utf8').catch(error => {
+    if (error.code !== 'ENOENT') throw error;
+    return readFile(source, 'utf8');
+  });
 
-  html = html
+  if (!html.includes('data-page="account"')) html = html
     .replace(/<title>[\s\S]*?<\/title>/, `<title>${escapeHtml(locale.title)} | SpinCresta</title>`)
     .replace(/<meta\s+name="description"\s+content="[^"]*"\s*\/>/, `<meta name="description" content="${escapeHtml(locale.description)}" />`)
     .replace(/<meta name="robots" content="[^"]*"\s*\/>/, '<meta name="robots" content="noindex, nofollow" />')
@@ -234,14 +255,12 @@ for (const [language, locale] of Object.entries(locales)) {
     .replace(/\s*<script type="application\/ld\+json">[\s\S]*?<\/script>/g, '')
     .replace(/<meta name="twitter:(?:title|description)"[^>]*\/>/g, '')
     .replace(/<meta property="og:(?:title|description|url)"[^>]*\/>/g, '')
-    .replace('data-page="about"', 'data-page="account"')
-    .replace(/\/styles\.css\?v=[^"']+/g, `/styles.css?v=${ACCOUNT_ASSET_VERSION}`)
-    .replace(/\/scripts\/main\.js\?v=[^"']+/g, `/scripts/main.js?v=${MAIN_ASSET_VERSION}`)
-    .replace(/\s*<main>[\s\S]*?<\/main>/, `\n${renderMain(locale, language)}`);
+    .replace('data-page="about"', 'data-page="account"');
+  html = syncDefaultTheme(html.replace(/\s*<main\b[^>]*>[\s\S]*?<\/main>/, `\n${renderMain(locale, language)}`));
 
   html = `${html.split('\n').map(line => line.trimEnd()).join('\n').trimEnd()}\n`;
 
   await mkdir(targetDir, { recursive: true });
-  await writeFile(path.join(targetDir, 'index.html'), html);
+  await writeFile(target, html);
   console.log(`Generated ${language}: ${path.relative(root, targetDir)}/index.html`);
 }

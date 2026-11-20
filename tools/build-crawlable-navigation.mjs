@@ -3,6 +3,7 @@ import path from 'node:path';
 import { BRANDS } from '../scripts/brands.js';
 import { COUNTRIES } from '../scripts/countries.js';
 import { syncCountryHeader } from './sync-country-header.mjs';
+import { syncCountryHubLinks } from './country-hub-links.mjs';
 
 const root = process.cwd();
 const countryHeaderOnly = process.argv.includes('--country-header-only');
@@ -28,7 +29,9 @@ for (const [url, page] of pages) {
   const prefix = locale === 'en' ? '/' : `/${locale}/`;
   let html = syncCountryHeader(page.html, prefix);
   // Home and country hubs expose the complete directory before JS executes.
-  if (!countryHeaderOnly && (url === prefix || url === `${prefix}online-casinos/`)) {
+  if (!countryHeaderOnly && url === `${prefix}online-casinos/` && html.includes('data-country-hub-grid')) {
+    html = syncCountryHubLinks(html, locale, indexable);
+  } else if (!countryHeaderOnly && (url === prefix || url === `${prefix}online-casinos/`)) {
     const names = new Intl.DisplayNames([locale], { type: 'region' });
     const links = COUNTRIES.filter(c => indexable(`${prefix}online-casinos/${c.slug}/`)).map(c => {
       const code = c.code.toUpperCase() === 'UK' ? 'GB' : c.code.toUpperCase();

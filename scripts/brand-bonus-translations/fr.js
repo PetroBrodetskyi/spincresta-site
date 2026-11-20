@@ -59,7 +59,7 @@ export default {
   "Fortunica Casino features slots, fast payouts, and attractive bonuses": "Fortunica Casino propose des machines à sous, des paiements rapides et des bonus attractifs",
   "Welcome Bonus 25,000 TRY + 500 Free Spins": "Bonus de bienvenue 25 000 € + 500 tours gratuits",
   "Welcome Bonus 3,000 AZN + 500 Free Spins": "Bonus de bienvenue 25 000 € + 500 tours gratuits",
-  "Welcome Bonus 860,000 ARS + 500 Free Spins": "Bonus de bienvenue 25 000 € + 500 tours gratuits",
+  "Welcome Bonus 860,000 ARS + 500 Free Spins": "Bonus de bienvenue de 860 000 ARS + 500 tours gratuits",
   "Welcome Bonus 500,000 CLP + 500 Free Spins": "Bonus de bienvenue 25 000 € + 500 tours gratuits",
   "Welcome Bonus 100% Up To €500 + 200 Free Spins + 1 Wild Crab Bonus": "Bonus de bienvenue 100 % jusqu'à 500 € + 200 tours gratuits + 1 bonus Wild Crab",
   "Sign up and get a welcome bonus up to 250% + 500 FS": "Inscrivez-vous et obtenez un bonus de bienvenue jusqu'à 250% + 500 FS",
@@ -104,7 +104,9 @@ export default {
   "Welcome Package 4000 EUR + 200 FS": "Forfait de bienvenue 4000 EUR + 200 FS",
   "Grab Your 20 Free Spins + $7,500 Welcome Bonus": "Obtenez vos 20 tours gratuits + 7 500 $ de bonus de bienvenue",
   "First Deposit Bonus - 100% Up to R3 000": "Bonus de premier dépôt - 100 % jusqu'à R3 000",
+  "Welcome package: 455% + 270 free spins across the first 5 deposits": "Pack de bienvenue : 455 % + 270 tours gratuits sur les 5 premiers dépôts",
   "Casino up to 120% + 250 Free Spins; Sports up to 200% + Free Bet; Poker 100%": "Casino : jusqu’à 120 % + 250 tours gratuits ; sport : jusqu’à 200 % + pari gratuit ; poker : 100 %",
+  "Casino 120% + 250 FS; Sports up to 125% + 100% Free Bet; country limits apply": "Casino : 120 % + 250 tours gratuits ; sport : jusqu’à 125 % + pari gratuit de 100 % ; plafonds selon le pays",
   "Casino Bonus 100% up to €500 + 200 FS + 1 Bonus Crab": "Bonus Casino 100% jusqu'à 500 € + 200 FS + 1 Crabe Bonus",
   "Up to 260k Gold Coins + 100 Free Spins on Wild Cash": "Jusqu'à 260 000 pièces d'or + 100 tours gratuits sur Wild Cash",
   "Live Casino Welcome Package €300": "Forfait de bienvenue du casino en direct 300 €",
@@ -146,7 +148,5 @@ export default {
   "280% Match Bonus up to R5500 + 45 Free Spins": "280 % de bonus de match jusqu'à R5500 + 45 tours gratuits",
   "Welcome Bonus - 550% Up to €3,800 + 50 Free Spins": "Bonus de bienvenue - 550 % jusqu'à 3 800 € + 50 tours gratuits",
   "100% Welcome Bonus up to $5,000 on Your First Deposit": "Bonus de bienvenue de 100 % jusqu'à 5 000 $ sur votre premier dépôt",
-  "100% First-Deposit Bonus + 30 Free Spins in Selected Markets": "Bonus de 100 % sur le premier dépôt + 30 tours gratuits dans certains marchés",
-  "Casino 120% + 250 FS; Sports up to 125% + 100% Free Bet; country limits apply": "Casino : 120 % + 250 tours gratuits ; sport : jusqu’à 125 % + pari gratuit de 100 % ; plafonds selon le pays",
-  "Welcome package: 455% + 270 free spins across the first 5 deposits": "Pack de bienvenue : 455 % + 270 tours gratuits sur les 5 premiers dépôts"
+  "100% First-Deposit Bonus + 30 Free Spins in Selected Markets": "Bonus de 100 % sur le premier dépôt + 30 tours gratuits dans certains marchés"
 };

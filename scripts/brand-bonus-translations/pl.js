@@ -59,7 +59,7 @@ export default {
   "Fortunica Casino features slots, fast payouts, and attractive bonuses": "Fortunica Casino oferuje automaty, szybkie wypłaty i atrakcyjne bonusy",
   "Welcome Bonus 25,000 TRY + 500 Free Spins": "Bonus powitalny 25 000 € + 500 darmowych spinów",
   "Welcome Bonus 3,000 AZN + 500 Free Spins": "Bonus powitalny 25 000 € + 500 darmowych spinów",
-  "Welcome Bonus 860,000 ARS + 500 Free Spins": "Bonus powitalny 25 000 € + 500 darmowych spinów",
+  "Welcome Bonus 860,000 ARS + 500 Free Spins": "Bonus powitalny 860 000 ARS + 500 darmowych spinów",
   "Welcome Bonus 500,000 CLP + 500 Free Spins": "Bonus powitalny 25 000 € + 500 darmowych spinów",
   "Welcome Bonus 100% Up To €500 + 200 Free Spins + 1 Wild Crab Bonus": "Bonus powitalny 100% aż do 500 € + 200 darmowych spinów + 1 bonus Wild Crab",
   "Sign up and get a welcome bonus up to 250% + 500 FS": "Zarejestruj się i otrzymaj bonus powitalny do 250% + 500 FS",
@@ -104,7 +104,9 @@ export default {
   "Welcome Package 4000 EUR + 200 FS": "Pakiet powitalny 4000 EUR + 200 FS",
   "Grab Your 20 Free Spins + $7,500 Welcome Bonus": "Zgarnij 20 darmowych spinów + bonus powitalny o wartości 7500 $",
   "First Deposit Bonus - 100% Up to R3 000": "Bonus za pierwszy depozyt - 100% do 3 000 R",
+  "Welcome package: 455% + 270 free spins across the first 5 deposits": "Pakiet powitalny: 455% + 270 darmowych spinów przy pierwszych 5 wpłatach",
   "Casino up to 120% + 250 Free Spins; Sports up to 200% + Free Bet; Poker 100%": "Kasyno: do 120% + 250 darmowych spinów; sport: do 200% + freebet; poker: 100%",
+  "Casino 120% + 250 FS; Sports up to 125% + 100% Free Bet; country limits apply": "Kasyno: 120% + 250 darmowych spinów; sport: do 125% + freebet 100%; limity zależne od kraju",
   "Casino Bonus 100% up to €500 + 200 FS + 1 Bonus Crab": "Bonus w kasynie 100% aż do 500 € + 200 FS + 1 bonusowy krab",
   "Up to 260k Gold Coins + 100 Free Spins on Wild Cash": "Do 260 tys. złotych monet + 100 darmowych spinów na Wild Cash",
   "Live Casino Welcome Package €300": "Pakiet powitalny kasyna na żywo 300 €",
@@ -146,7 +148,5 @@ export default {
   "280% Match Bonus up to R5500 + 45 Free Spins": "280% bonusu meczowego do R5500 + 45 darmowych spinów",
   "Welcome Bonus - 550% Up to €3,800 + 50 Free Spins": "Bonus powitalny - 550% Do 3800 € + 50 darmowych spinów",
   "100% Welcome Bonus up to $5,000 on Your First Deposit": "100% bonusu powitalnego do 5000 $ przy pierwszym depozycie",
-  "100% First-Deposit Bonus + 30 Free Spins in Selected Markets": "100% bonusu od pierwszej wpłaty + 30 darmowych spinów na wybranych rynkach",
-  "Casino 120% + 250 FS; Sports up to 125% + 100% Free Bet; country limits apply": "Kasyno: 120% + 250 darmowych spinów; sport: do 125% + freebet 100%; limity zależne od kraju",
-  "Welcome package: 455% + 270 free spins across the first 5 deposits": "Pakiet powitalny: 455% + 270 darmowych spinów przy pierwszych 5 wpłatach"
+  "100% First-Deposit Bonus + 30 Free Spins in Selected Markets": "100% bonusu od pierwszej wpłaty + 30 darmowych spinów na wybranych rynkach"
 };
