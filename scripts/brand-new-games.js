@@ -1,4 +1,12 @@
 export const BRAND_NEW_GAMES = {
+  magneticslots: [
+    ['Lucky Coin Coyote', 'v1795278918', 'lucky-coin-coyote_l4nutp'],
+    ['Burning Fleet Treasures: Hold & Win', 'v1795278903', 'burning-fleet-treasures_z7xmyc'],
+    ['Grand Hustle', 'v1795278910', 'grand-hustle_e7bk7f'],
+    ['Piggy Party XL', 'v1795278933', 'piggy-party-xl_xmuyup'],
+    ['New Year Royale', 'v1795278925', 'new-year-royale_k5ywuv'],
+    ['777 Hell Streak', 'v1795278897', '777-hell-streak_mqwce6'],
+  ].map(([name, version, id]) => ({ name, image: `https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto/${version}/spincresta/brands/magneticslots/new-games/magneticslots-new-game-${id}` })),
   betonwin: [
     ['Coin Up Volcano', 'v1791721606', 'coin-up-volcano_qfc8h6'],
     ['Lucky Apple X2500', 'v1791721604', 'lucky-apple-x2500_i1qw7d'],

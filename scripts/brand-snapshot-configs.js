@@ -116,6 +116,19 @@ const createBettingConfig = bettingAvailable => ({
   ],
 });
 
+const publicCatalogueNotes = {
+  en: 'Categories checked in the public catalogue; country and provider restrictions may apply.',
+  de: 'Kategorien aus dem öffentlichen Katalog; Länder- und Anbieterbeschränkungen sind möglich.',
+  es: 'Categorías revisadas en el catálogo público; pueden aplicarse restricciones de país y proveedor.',
+  it: 'Categorie verificate nel catalogo pubblico; possono esserci restrizioni per paese e fornitore.',
+  pl: 'Kategorie sprawdzone w publicznym katalogu; możliwe ograniczenia kraju i dostawcy.',
+  uk: 'Категорії перевірені у відкритому каталозі; можливі обмеження за країною та провайдером.',
+  pt: 'Categorias verificadas no catálogo público; podem aplicar-se restrições de país e fornecedor.',
+  fr: 'Catégories vérifiées dans le catalogue public ; restrictions de pays ou de fournisseur possibles.',
+  hi: 'सार्वजनिक सूची में जाँचे गए प्रकार; देश और प्रदाता के प्रतिबंध लागू हो सकते हैं।',
+  fi: 'Kategoriat tarkistettiin julkisesta valikoimasta; maa- ja tarjoajarajoituksia voi olla.',
+};
+
 const mapSnapshotConfig = (keys, config) =>
   Object.fromEntries(keys.map(key => [key.toLowerCase(), config]));
 
@@ -587,7 +600,45 @@ const BETONWIN_SPORT_LABELS=Object.fromEntries(Object.entries(betonwinSportNames
  return [lang,Object.fromEntries(betonwinBettingCategories.map((key,i)=>[key,values[i]]))];
 }));
 
+const magneticCollections = ['Instant win', 'Original games', 'Bonus buy', 'Book slots', 'Table games', 'New games', 'Top games'];
+const magneticCollectionLabels = {
+  de: 'Schnellspiele|Hauseigene Spiele|Bonuskauf|Book-Slots|Tischspiele|Neue Spiele|Beliebte Spiele',
+  es: 'Juegos instantáneos|Juegos originales|Compra de bono|Tragamonedas de la serie Book|Juegos de mesa|Novedades|Juegos populares',
+  it: 'Giochi istantanei|Giochi originali|Acquisto del bonus|Slot della serie Book|Giochi da tavolo|Nuovi giochi|Giochi popolari',
+  pl: 'Gry błyskawiczne|Gry autorskie|Kupno rundy bonusowej|Automaty typu Book|Gry stołowe|Nowe gry|Popularne gry',
+  uk: 'Миттєві ігри|Ігри Magnetic Slots|Купівля бонусу|Слоти серії Book|Настільні ігри|Нові ігри|Популярні ігри',
+  pt: 'Jogos instantâneos|Jogos originais|Compra de bónus|Slots da série Book|Jogos de mesa|Jogos novos|Jogos populares',
+  fr: 'Jeux instantanés|Jeux originaux|Achat de bonus|Machines à sous de la série Book|Jeux de table|Nouveaux jeux|Jeux populaires',
+  hi: 'इंस्टेंट गेम|ओरिजिनल गेम|बोनस राउंड की खरीद|बुक सीरीज़ के स्लॉट|टेबल गेम|नए गेम|लोकप्रिय गेम',
+  fi: 'Pikapelit|Kasinon omat pelit|Bonuksen osto|Book-sarjan kolikkopelit|Pöytäpelit|Uudet pelit|Suositut pelit',
+};
+const magneticCategoryStatuses = {
+  en: 'Not listed:', de: 'Nicht aufgeführt:', es: 'No figuran:', it: 'Non presenti nel catalogo:',
+  pl: 'Brak w wykazie:', uk: 'Не представлено:', pt: 'Não constam da lista:',
+  fr: 'Non répertoriés :', hi: 'सूची में नहीं:', fi: 'Ei listattu:',
+};
+
 export const BRAND_SNAPSHOT_CONFIGS = {
+  magneticslots: {
+    tabs: [
+      createCategoryTab('Games', [...GAME_CATEGORIES, ...magneticCollections], [
+        'Slots', 'Roulette', 'Blackjack', 'Bingo', 'Jackpot games', 'Live games', 'Scratch cards',
+        ...magneticCollections,
+      ]),
+      createCategoryTab('Live games', LIVE_GAME_CATEGORIES, ['Live roulette', 'Live blackjack', 'Live shows']),
+      createSnapshotTab('Betting', ['Football', 'Tennis', 'Basketball', 'Ice hockey', 'Cricket', 'Martial arts', 'eSports', 'Volleyball', 'Baseball', 'Darts', 'Rugby']),
+    ],
+    notes: { ...publicCatalogueNotes, en: 'Categories from the public catalog. Availability can vary by country and provider.' },
+    labels: {
+      en: { 'Instant win': 'Instant games', 'Not surfaced:': magneticCategoryStatuses.en },
+      ...Object.fromEntries(Object.entries(magneticCollectionLabels).map(([locale, names]) => [locale, {
+        ...Object.fromEntries(magneticCollections.map((key, index) => [key, names.split('|')[index]])),
+        Darts: BETONWIN_SPORT_LABELS[locale].Darts,
+        Rugby: BETONWIN_SPORT_LABELS[locale].Rugby,
+        'Not surfaced:': magneticCategoryStatuses[locale],
+      }])),
+    },
+  },
   betonwin: {
     ...createGamesLiveBettingConfig(BETONWIN_GAMES, BETONWIN_LIVE_GAMES, betonwinBettingCategories, {
       games: [...BETONWIN_GAMES, ...BETONWIN_GAMES_NOT_LISTED],
@@ -729,18 +780,7 @@ export const BRAND_SNAPSHOT_CONFIGS = {
   'pin-up': pinUpConfig,
   pinco: {
     ...pincoConfig,
-    notes: {
-      en: 'Categories checked in the public catalogue; country and provider restrictions may apply.',
-      de: 'Kategorien aus dem öffentlichen Katalog; Länder- und Anbieterbeschränkungen sind möglich.',
-      es: 'Categorías revisadas en el catálogo público; pueden aplicarse restricciones de país y proveedor.',
-      it: 'Categorie verificate nel catalogo pubblico; possono esserci restrizioni per paese e fornitore.',
-      pl: 'Kategorie sprawdzone w publicznym katalogu; możliwe ograniczenia kraju i dostawcy.',
-      uk: 'Категорії перевірені у відкритому каталозі; можливі обмеження за країною та провайдером.',
-      pt: 'Categorias verificadas no catálogo público; podem aplicar-se restrições de país e fornecedor.',
-      fr: 'Catégories vérifiées dans le catalogue public ; restrictions de pays ou de fournisseur possibles.',
-      hi: 'सार्वजनिक सूची में जाँचे गए प्रकार; देश और प्रदाता के प्रतिबंध लागू हो सकते हैं।',
-      fi: 'Kategoriat tarkistettiin julkisesta valikoimasta; maa- ja tarjoajarajoituksia voi olla.',
-    },
+    notes: publicCatalogueNotes,
   },
   gamblezen: gamblezenConfig,
   first: firstConfig,

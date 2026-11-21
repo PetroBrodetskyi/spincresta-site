@@ -2700,7 +2700,7 @@ export const BRANDS = [
   },
   {
     name: 'Magnetic Slots',
-    bonus: 'Fast payouts for players',
+    bonus: 'Casino promotion: up to €2,500 + 250 free spins',
     cta: 'Play Now',
     urlDetail: 'brands/magneticslots.html',
     urlCasino: 'https://armadaapp.media-412.com/click?pid=3862&offer_id=120784',
@@ -2724,7 +2724,7 @@ export const BRANDS = [
       'CA',
       'AU',
     ],
-    payments: ['visa', 'mastercard', 'googlepay', 'applepay', 'bitcoin', 'ethereum'],
+    payments: ['visa', 'mastercard', 'googlepay', 'applepay', 'bitcoin'],
     hasDetailPage: true,
   },
   {

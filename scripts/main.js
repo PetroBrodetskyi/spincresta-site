@@ -1,7 +1,7 @@
 ﻿// =====================
 // IMPORTS
 // =====================
-import { BRANDS } from './brands.js?v=20261121-betonwin';
+import { BRANDS } from './brands.js?v=20261121-magneticslots';
 import { COUNTRIES } from './countries.js';
 import { getFeaturedHomeBrands } from './featured-brands.js?v=20261119-shared-search';
 import { initFaqSections } from './faq.js?v=20261119-faq-layout';
@@ -54,7 +54,7 @@ const loadPageModules = async () => {
 
   if (isHomePage || isCountryPage) {
     const [gamesModule, homeModule, mediaModule] = await Promise.all([
-      import('./brand-new-games.js?v=20261120-betonwin'),
+      import('./brand-new-games.js?v=20261121-magneticslots'),
       import('./pages/home.js?v=20261119-shared-search'),
       isCountryPage ? import('./pages/country-media.js?v=20261118-country-catalog-1') : null,
     ]);
@@ -65,9 +65,9 @@ const loadPageModules = async () => {
 
   if (isBrandPage) {
     const [snapshotsModule, gamesModule, pageModule, feedbackModule] = await Promise.all([
-      import('./brand-snapshot-configs.js?v=20261121-snapshot-registry'),
-      import('./brand-new-games.js?v=20261120-betonwin'),
-      import('./pages/brand.js?v=20261121-snapshot-template'),
+      import('./brand-snapshot-configs.js?v=20261121-magnetic-review-copy'),
+      import('./brand-new-games.js?v=20261121-magneticslots'),
+      import('./pages/brand.js?v=20261121-review-detail-labels'),
       import('./pages/brand-feedback.js?v=20261121-feedback-availability'),
     ]);
     BRAND_SNAPSHOT_CONFIGS = snapshotsModule.BRAND_SNAPSHOT_CONFIGS || {};
@@ -377,7 +377,7 @@ const SITE_LOCALE = DOCUMENT_LANGUAGE.startsWith('de')
 let brandBonusTranslations = {};
 const brandBonusTranslationsReady = SITE_LOCALE === 'en'
   ? Promise.resolve()
-  : import(`./brand-bonus-translations/${SITE_LOCALE}.js?v=20261120-betonwin-template`)
+  : import(`./brand-bonus-translations/${SITE_LOCALE}.js?v=20261121-magneticslots`)
       .then(module => {
         brandBonusTranslations = module.default || {};
       })

@@ -6,9 +6,12 @@ import { classifyReviewSection, compareReviewSections, reviewSectionLabel } from
 const sportsbookHeadingPattern = /^(?:sportsbook|sportwetten|apuestas deportivas|scommesse sportive|zakłady sportowe|букмекер(?:ський розділ)?|спортбук|спортивні ставки|ставки на спорт|apostas desportivas|apostas esportivas|paris sportifs|स्पोर्ट्सबुक|खेल सट्टेबाज़ी|urheiluvedonlyönti)$/iu;
 export const isSportsbookFeatureHeading = heading => sportsbookHeadingPattern.test(String(heading || '').trim());
 export const BRAND_TABLE_TOPICS = Object.freeze(['summary', 'bonuses', 'games', 'sports', 'cashier', 'trust']);
-export const belongsInReviewDetails = ({ kind, rail, hasTable }) =>
-  BRAND_TABLE_TOPICS.includes(kind) &&
-    (kind === 'sports' ? !rail || rail === 'betting' : !rail && hasTable);
+const BRAND_DETAIL_TOPICS = [...BRAND_TABLE_TOPICS, 'rewards'].sort(compareReviewSections);
+export const belongsInReviewDetails = ({ kind, rail, hasTable, explicit = false }) => {
+  if (!BRAND_DETAIL_TOPICS.includes(kind)) return false;
+  if (kind === 'sports') return !rail || rail === 'betting';
+  return !rail && (explicit || (hasTable && BRAND_TABLE_TOPICS.includes(kind)));
+};
 
 export const initBrandPage = context => {
   const {
@@ -605,10 +608,11 @@ export const initBrandPage = context => {
         kind: section.dataset.reviewSection,
         rail: section.dataset.brandRail,
         hasTable: Boolean(section.querySelector('table')),
+        explicit: section.hasAttribute('data-review-details'),
       }));
-    const groups = BRAND_TABLE_TOPICS
+    const groups = BRAND_DETAIL_TOPICS
       .map(kind => [kind, sections.filter(section => section.dataset.reviewSection === kind)])
-      .filter(([, tableSections]) => tableSections.length);
+      .filter(([, topicSections]) => topicSections.length);
     if (groups.length < 2) return;
 
     const details = document.createElement('section');
@@ -617,9 +621,9 @@ export const initBrandPage = context => {
     title.className = 'title';
     title.id = 'brand-review-details';
     title.textContent = localeText(
-      'Review details', 'Details zur Bewertung', 'Datos del casino', 'Dettagli del casinò',
-      'Szczegóły recenzji', 'Деталі огляду', 'Detalhes do casino', 'Informations sur le casino',
-      'कैसीनो की जानकारी', 'Kasinon tiedot'
+      'Review details', 'Details zur Bewertung', 'Detalles de la reseña', 'Dettagli della recensione',
+      'Szczegóły recenzji', 'Деталі огляду', 'Detalhes da análise', 'Détails de l’avis',
+      'समीक्षा की जानकारी', 'Arvostelun tiedot'
     );
     details.setAttribute('aria-labelledby', title.id);
 
@@ -631,7 +635,7 @@ export const initBrandPage = context => {
     sections[0].before(details);
     const general = localeText('General', 'Allgemein', 'General', 'Generale', 'Ogólne', 'Загальне', 'Geral', 'Général', 'सामान्य', 'Yleistä');
     const payment = localeText('Payments', 'Zahlungen', 'Pagos', 'Pagamenti', 'Płatności', 'Платежі', 'Pagamentos', 'Paiements', 'भुगतान', 'Maksut');
-    const entries = groups.map(([kind, tableSections]) => {
+    const entries = groups.map(([kind, topicSections]) => {
       const tab = document.createElement('button');
       const panel = document.createElement('div');
       tab.id = `brand-review-tab-${kind}`;
@@ -644,7 +648,7 @@ export const initBrandPage = context => {
       panel.setAttribute('role', 'tabpanel');
       panel.setAttribute('aria-labelledby', tab.id);
       tab.setAttribute('aria-controls', panel.id);
-      panel.append(...tableSections);
+      panel.append(...topicSections);
       tabList.append(tab);
       details.append(panel);
       return { tab, panel, kind };
@@ -1143,9 +1147,10 @@ export const initBrandPage = context => {
         { buttons: [], panels: [] }
       );
   
+    const snapshotTitle = normalizeText(snapshotLabel('Games & Betting Snapshot'));
     section.innerHTML = `
       <div class="brand-availability-widget glass-section">
-        <h2 class="title">${normalizeText(snapshotLabel('Games & Betting Snapshot'))}</h2>
+        <h2 class="title">${escapeHtml(snapshotTitle)}</h2>
         <p class="brand-availability-intro">
           ${normalizeText(
             snapshotIntro ||
@@ -1158,7 +1163,7 @@ export const initBrandPage = context => {
         </p>
   
         <div class="availability-tabs" data-tabs>
-          <div class="availability-tab-list" role="tablist" aria-label="${localeText(`${normalizeText(brandName)} product snapshot`, `${normalizeText(brandName)} Produktüberblick`, `Resumen de productos de ${normalizeText(brandName)}`)}">
+          <div class="availability-tab-list" role="tablist" aria-label="${escapeHtml(snapshotTitle)}">
             ${tabsMarkup.buttons.join('')}
           </div>
           ${tabsMarkup.panels.join('')}

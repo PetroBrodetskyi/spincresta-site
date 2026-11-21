@@ -13,9 +13,15 @@ test('review detail tabs group existing editorial tables and central sportsbook 
   assert.ok(belongsInReviewDetails({ kind: 'games', hasTable: true }));
   assert.ok(!belongsInReviewDetails({ kind: 'games', hasTable: false }));
   assert.ok(!belongsInReviewDetails({ kind: 'faq', hasTable: true }));
+  assert.ok(belongsInReviewDetails({ kind: 'cashier', explicit: true, hasTable: false }));
+  assert.ok(belongsInReviewDetails({ kind: 'rewards', explicit: true, hasTable: true }));
+  assert.ok(!belongsInReviewDetails({ kind: 'rewards', hasTable: true }));
+  assert.ok(!belongsInReviewDetails({ kind: 'cashier', explicit: true, rail: 'payments' }));
+  assert.ok(!belongsInReviewDetails({ kind: 'faq', explicit: true }));
   const runtime = read('scripts/pages/brand.js');
   assert.match(runtime, /if \(groups\.length < 2\) return/);
-  assert.match(runtime, /panel\.append\(\.\.\.tableSections\)/);
+  assert.match(runtime, /panel\.append\(\.\.\.topicSections\)/);
+  assert.match(runtime, /explicit: section\.hasAttribute\('data-review-details'\)/);
   assert.match(runtime, /styleReviewTables\(\);\s*initBrandReviewDetails\(\);/);
   assert.match(read('scripts/main.js'), /panel\?\.firstElementChild\?\.contains\(target\)/);
   const css = read('styles/brand-review.css');

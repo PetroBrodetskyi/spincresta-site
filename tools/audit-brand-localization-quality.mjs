@@ -100,10 +100,10 @@ for (const locale of locales) {
 
     const sourceHasPros = /<strong>Pros<\/strong>/i.test(source);
     const sourceHasCons = /<strong>Cons<\/strong>/i.test(source);
-    if (sourceHasPros && !/<strong>(?:Pros|Vorteile|Ventajas|Pro|Plusy|Переваги|плюси|Prós|Avantages|फ़ायदे|फायदे|Plussat)<\/strong>/i.test(html)) {
+    if (sourceHasPros && !/<strong>(?:Pros|Vorteile|Ventajas|Pro|Plusy|Zalety|Переваги|плюси|Prós|Avantages|फ़ायदे|फायदे|Plussat)<\/strong>/i.test(html)) {
       errors.push(`${label}: missing localized pros section`);
     }
-    if (sourceHasCons && !/<strong>(?:Cons|Nachteile|Contras|Contro|Wady|Недоліки|мінуси|Inconvénients|नुकसान|Miinukset)<\/strong>/i.test(html)) {
+    if (sourceHasCons && !/<strong>(?:Cons|Nachteile|Contras|Desventajas|Contro|Wady|Недоліки|мінуси|Inconvénients|नुकसान|Miinukset)<\/strong>/i.test(html)) {
       errors.push(`${label}: missing localized cons section`);
     }
   }
