@@ -1,3 +1,5 @@
+import { LOCALIZED_EDITORIAL_CORRECTIONS } from './localized-editorial-corrections.mjs';
+
 // Reviewed editorial copy, not machine translation. These replacements explain
 // what to check without asserting untested performance, safety or availability.
 export const CLEAR_COPY = {
@@ -307,7 +309,6 @@ export function presentCatalog(text, locale) {
   for (const [pattern, replacement] of rules[locale] || []) result = result.replace(pattern, replacement);
   return result;
 }
-
 export function countryHeader(text, locale) {
   const prefixes = {
     en:['Trusted reviews, licensed platforms, and exclusive offers for ', 'Casino reviews, games and bonus terms for '],
@@ -378,19 +379,34 @@ export const INLINE_RULES = {
     [/колекції, керовані провайдером/g, 'добірки за провайдерами'],
     [/електронного спорту/g, 'кіберспорту'],
     [/бонуси для покупки/g, 'купівлю бонусних функцій'],
+    [/букмекерська книга/gu, 'розділ ставок на спорт'],
+    [/букмекерську книгу/gu, 'розділ ставок на спорт'],
+    [/сторона казино/gu, 'розділ казино'],
+    [/довгий хвіст (цифрових і спеціалізованих ринків|новіших студій|нових провайдерів)/gu, 'широкий вибір $1'],
+    [/ставки на спорт правила/gu, 'правила ставок на спорт'],
+    [/загальнодоступна букмекерський розділ/giu, 'відкритий букмекерський розділ'],
+    [/змішаний акаунт казино та ставок на спорт/gu, 'один акаунт для казино й ставок на спорт'],
+    [/створено як змішаний акаунт/gu, 'поєднує казино й ставки на спорт в одному акаунті'],
+    [/повторюваних рекламних гачків/gu, 'регулярних акцій'],
+    [/промо-шарів/gu, 'акцій'],
+    [/AmonBet публічно просуває більше ніж один гачок для отримання\. /gu, ''],
   ],
   de: [[/Das ist wichtig, weil /g, ''], [/Dies ist wichtig, weil /g, '']],
-  es: [[/Esto es importante porque /g, ''], [/Esto importa porque /g, '']],
+  es: [[/Esto es importante porque /g, ''], [/Esto importa porque /g, ''], [/un ángulo de apuestas deportivas/gu, 'una sección de apuestas deportivas']],
   it: [[/Ciò è importante perché /g, ''], [/Questo è importante perché /g, '']],
   pl: [[/Jest to ważne, ponieważ /g, ''], [/To ważne, ponieważ /g, '']],
   pt: [[/Isto é importante porque /g, ''], [/Isso é importante porque /g, ''], [/rodadas (?:grátis|gratuitas|livres)/g, 'jogadas grátis']],
-  fr: [[/Cela est important car /g, ''], [/Ceci est important car /g, '']],
+  fr: [[/Cela est important car /g, ''], [/Ceci est important car /g, ''], [/une longue queue de marchés spécialisés/gu, 'un large choix de paris spécialisés'], [/un angle de paris sportifs/gu, 'une rubrique de paris sportifs']],
   hi: [[/यह मायने रखता है क्योंकि /g, ''], [/यह महत्वपूर्ण है क्योंकि /g, '']],
-  fi: [[/Tällä on merkitystä, koska /g, ''], [/Tämä on tärkeää, koska /g, ''], [/vakiopaikat/g, 'tavalliset kolikkopelit'], [/omistettua VIP-osiota/g, 'omaa VIP-osiota'], [/käyttöehdot sivun/g, 'käyttöehtosivun'], [/itsensä sulkemisen/g, 'pelieston']],
+  fi: [[/Tällä on merkitystä, koska /g, ''], [/Tämä on tärkeää, koska /g, ''], [/vakiopaikat/g, 'tavalliset kolikkopelit'], [/omistettua VIP-osiota/g, 'omaa VIP-osiota'], [/käyttöehdot sivun/g, 'käyttöehtosivun'], [/itsensä sulkemisen/g, 'pelieston'],
+    [/Tarkka markkinasyvyys vaihtelee tapahtuman ja alueen mukaan\./gu, 'Vedonlyöntikohteet vaihtelevat tapahtuman ja maan mukaan.'],
+    [/laaja salausluettelo/gu, 'useat kryptovaluutat'],
+  ],
 };
 
 export function polishInlineText(text, locale) {
-  let result = text;
+  let result = Object.hasOwn(LOCALIZED_EDITORIAL_CORRECTIONS[locale] || {}, text)
+    ? LOCALIZED_EDITORIAL_CORRECTIONS[locale][text] : text;
   for (const [pattern, replacement] of INLINE_RULES[locale] || []) {
     pattern.lastIndex = 0;
     const startsWithRemovedLead = replacement === '' && pattern.exec(result)?.index === 0;

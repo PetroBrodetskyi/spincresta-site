@@ -55,8 +55,8 @@ const loadPageModules = async () => {
   if (isHomePage || isCountryPage) {
     const [gamesModule, homeModule, mediaModule] = await Promise.all([
       import('./brand-new-games.js?v=20261121-magneticslots'),
-      import('./pages/home.js?v=20261119-shared-search'),
-      isCountryPage ? import('./pages/country-media.js?v=20261118-country-catalog-1') : null,
+      import('./pages/home.js?v=20261121-localized-games'),
+      isCountryPage ? import('./pages/country-media.js?v=20261121-localized-games') : null,
     ]);
     BRAND_NEW_GAMES = gamesModule.BRAND_NEW_GAMES || {};
     initHomePageModule = homeModule.initHomePage;
@@ -67,7 +67,7 @@ const loadPageModules = async () => {
     const [snapshotsModule, gamesModule, pageModule, feedbackModule] = await Promise.all([
       import('./brand-snapshot-configs.js?v=20261121-magnetic-review-copy'),
       import('./brand-new-games.js?v=20261121-magneticslots'),
-      import('./pages/brand.js?v=20261121-review-detail-labels'),
+      import('./pages/brand.js?v=20261121-site-copy'),
       import('./pages/brand-feedback.js?v=20261121-feedback-availability'),
     ]);
     BRAND_SNAPSHOT_CONFIGS = snapshotsModule.BRAND_SNAPSHOT_CONFIGS || {};
@@ -2758,7 +2758,7 @@ const createCasinoCard = ({
   const safeName = normalizeText(name);
   const countryBonus = bonusByCountry[document.body.dataset.country?.toUpperCase()];
   const safeBonus = normalizeText(countryBonus?.[SITE_LOCALE] || countryBonus?.en || localizedBrandBonusText(bonus));
-  const primaryCtaText = localeText('Play', 'Spielen', 'Jugar', 'Gioca', 'Zagraj', 'Грати', 'Jogar', 'Jouer', 'खेलें');
+  const primaryCtaText = localeText('Play', 'Spielen', 'Jugar', 'Gioca', 'Zagraj', 'Грати', 'Jogar', 'Jouer', 'खेलें', 'Pelaa');
   const detailUrl = brandPagePath(urlDetail ?? '');
   const imageUrl = normalizeAssetPath(image ?? '');
   const slug = getBrandDetailSlug({ urlDetail });
@@ -2771,10 +2771,14 @@ const createCasinoCard = ({
     /^[A-Z]{2}$/.test(code) && (!cardCountryNames || cardCountryNames.of(code))
   )).size;
   const countryLabel = SITE_LOCALE === 'uk' ? 'Доступно країн' : uiCopy.availableCountries;
-  const isBlocked = Boolean(notRecommended);
   const isUnavailable = Boolean(temporarilyUnavailable);
-  const showReviewAction = Boolean(hasDetailPage && detailUrl);
+  const isBlocked = Boolean(notRecommended || isUnavailable);
+  const hasReview = Boolean(hasDetailPage && detailUrl);
+  const showReviewAction = hasReview && !isBlocked;
   const showPlayAction = safeUrl !== PLACEHOLDER_LINK || isBlocked;
+  const brandTitle = isBlocked && hasReview
+    ? `<a class="casino-card-review-link" href="${escapeHtml(detailUrl)}">${escapeHtml(safeName)}</a>`
+    : escapeHtml(safeName);
 
   article.dataset.page = detailUrl;
   article.classList.toggle('is-not-recommended', isBlocked);
@@ -2784,7 +2788,7 @@ const createCasinoCard = ({
   setBrandBackground(article, bgColor);
 
   article.innerHTML = `
-    <div class="casino-card-preview${screenshotUrl ? ' has-screenshot' : ''}"${favorite && showReviewAction ? ` data-favorite-brand="${escapeHtml(slug)}"` : ''}>
+    <div class="casino-card-preview${screenshotUrl ? ' has-screenshot' : ''}"${favorite && hasReview ? ` data-favorite-brand="${escapeHtml(slug)}"` : ''}>
       <img src="${escapeHtml(screenshotUrl || imageUrl)}" alt="" loading="lazy" decoding="async" />
       ${createBadge({ isTopRated, isExclusive, isNew })}
     </div>
@@ -2792,7 +2796,7 @@ const createCasinoCard = ({
       <div class="casino-card-identity">
         <div class="casino-card-logo"><img src="${escapeHtml(imageUrl)}" alt="" loading="lazy" decoding="async" /></div>
         <div class="casino-card-brand">
-          <h3 class="casino-name">${escapeHtml(safeName)}</h3>
+          <h3 class="casino-name">${brandTitle}</h3>
           ${isBlocked ? `<img class="casino-card-risk-icon" src="${isUnavailable ? UNAVAILABLE_BRAND_ICON : BLOCKED_BRAND_ICON}" alt="" aria-hidden="true" loading="lazy" decoding="async" />` : ''}
           ${!isBlocked && countryCount ? `<div class="casino-card-coverage">${escapeHtml(countryLabel)}: ${countryCount}</div>` : ''}
         </div>
@@ -2827,9 +2831,9 @@ const createCasinoCard = ({
   }
 
   article.addEventListener('click', e => {
-    if (e.target.closest('.cta, .brand-favorite-control')) return;
+    if (e.target.closest('a, .cta, .brand-favorite-control')) return;
 
-    if (hasDetailPage && detailUrl) {
+    if (hasReview) {
       window.location.href = detailUrl;
       return;
     }

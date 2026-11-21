@@ -688,21 +688,11 @@ export const initHomePage = context => {
       link.className = 'home-game-card';
       link.href = brandPagePath(brand);
       image.src = game.image;
-      image.alt = localeText(
-        `${gameName} game artwork`,
-        `${gameName} Spielgrafik`,
-        `Imagen del juego ${gameName}`,
-        `Immagine del gioco ${gameName}`,
-        `Grafika gry ${gameName}`,
-        `Зображення гри ${gameName}`,
-        null,
-        null,
-        `${gameName} गेम का चित्र`
-      );
+      image.alt = ''; // Game and casino names are already part of the link's text.
       image.loading = 'lazy';
       image.decoding = 'async';
       title.textContent = gameName;
-      detail.textContent = `${localeText('at', 'bei', 'en', 'su', 'w', 'у', 'no', 'chez', 'पर')} ${brandName}`;
+      detail.textContent = brandName;
   
       copy.append(title, detail);
       link.append(image, copy);

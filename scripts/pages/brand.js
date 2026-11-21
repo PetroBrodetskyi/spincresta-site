@@ -65,7 +65,7 @@ export const initBrandPage = context => {
           <img
             class="brand-sticky-title__brand-logo"
             src="${brandLogoSrc}"
-            alt="${titleText} logo"
+            alt=""
           />
         </span>
       `
@@ -1055,7 +1055,7 @@ export const initBrandPage = context => {
           <div class="availability-item ${isAvailable ? 'is-available' : 'is-unavailable'}">
             <img
               src="${isAvailable ? '/icons/ui/confirm-icon.svg' : '/icons/ui/remove-close-round-grey-icon.svg'}"
-              alt="${isAvailable ? 'Available section' : 'Unavailable section'}"
+              alt=""
               aria-hidden="true"
             />
             <span>${normalizeText(snapshotLabel(item))}</span>
@@ -1120,11 +1120,11 @@ export const initBrandPage = context => {
               <div class="availability-summary">
                 <div class="availability-counts">
                   <span class="is-available">
-                    <img src="/icons/ui/confirm-icon.svg" alt="Available sections" aria-hidden="true" />
+                    <img src="/icons/ui/confirm-icon.svg" alt="" aria-hidden="true" />
                     ${snapshotLabel('Visible now:')} ${availableCount}
                   </span>
                   ${unavailableCount > 0 ? `<span class="is-unavailable">
-                    <img src="/icons/ui/remove-close-round-grey-icon.svg" alt="Unavailable sections" aria-hidden="true" />
+                    <img src="/icons/ui/remove-close-round-grey-icon.svg" alt="" aria-hidden="true" />
                     ${snapshotLabel('Not surfaced:')} ${unavailableCount}
                   </span>` : ''}
                 </div>
@@ -1155,9 +1155,16 @@ export const initBrandPage = context => {
           ${normalizeText(
             snapshotIntro ||
               localeText(
-                `This section shows which game, live-casino, and betting categories ${brandName} currently highlights, so you can quickly check whether it covers the types of games and betting options you want before you deposit.`,
-                `Dieser Abschnitt zeigt, welche Spiele-, Live-Casino- und Wettkategorien ${brandName} aktuell hervorhebt, damit Sie das Angebot vor einer Einzahlung prüfen können.`,
-                `Esta sección muestra las categorías de juegos, casino en vivo y apuestas que ${brandName} destaca actualmente para que puedas comprobar la oferta antes de depositar.`
+                `Game and betting categories at ${brandName}. Availability can vary by country.`,
+                `Spiele und Wettmärkte bei ${brandName}. Das Angebot kann je nach Land variieren.`,
+                `Categorías de juegos y apuestas de ${brandName}. La oferta puede variar según el país.`,
+                `Categorie di giochi e scommesse di ${brandName}. L’offerta può variare in base al paese.`,
+                `Kategorie gier i zakładów w ${brandName}. Oferta może się różnić w zależności od kraju.`,
+                `Категорії ігор і ставок у ${brandName}. Вибір може залежати від країни.`,
+                `Categorias de jogos e apostas da ${brandName}. A oferta pode variar consoante o país.`,
+                `Catégories de jeux et de paris chez ${brandName}. L’offre peut varier selon le pays.`,
+                `${brandName} पर गेम और बेटिंग की श्रेणियाँ। विकल्प देश के अनुसार बदल सकते हैं।`,
+                `Peli- ja vedonlyöntiluokat kasinolla ${brandName}. Tarjonta voi vaihdella maittain.`
               )
           )}
         </p>

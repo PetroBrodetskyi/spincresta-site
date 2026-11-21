@@ -5,6 +5,7 @@ import assert from 'node:assert/strict';
 import { pathToFileURL } from 'node:url';
 import { CLEAR_COPY, classifyFiller, polishInlineText, trimIntent, productIntro, presentCatalog, offerQuestions, removeImmersive, countryHeader, removeComparisonTail } from './clear-copy-rules.mjs';
 import { DIRECTORY_COPY, DIRECTORY_META, directoryKind } from './clear-directory-copy.mjs';
+import { localizedImageLabel } from './localized-editorial-corrections.mjs';
 import { BRANDS } from '../scripts/brands.js';
 
 const locales = Object.keys(CLEAR_COPY);
@@ -89,27 +90,29 @@ export function editPage(html, locale, plan = [], page = '') {
     }
   }
   result = result.replace(/<script\b([^>]*\btype=["']application\/ld\+json["'][^>]*)>([\s\S]*?)<\/script>/gi, (whole, attrs, json) => {
-    const graph = JSON.parse(json);
-    let changed = false;
-    const visit = value => {
-      if (typeof value === 'string') {
-        if (/^(?:https?:\/\/|\/|mailto:)/i.test(value)) return value;
-        const replacement = map.get(normalize(value)) ?? polishInlineText(value, locale);
-        if (replacement !== value) changed = true;
-        return replacement;
-      }
-      if (Array.isArray(value)) return value.map(visit);
-      if (value && typeof value === 'object') return Object.fromEntries(Object.entries(value).map(([k, v]) => [k, visit(v)]));
-      return value;
-    };
-    const updated = visit(graph);
-    return changed ? `<script${attrs}>${JSON.stringify(updated)}</script>` : whole;
+    JSON.parse(json);
+    const updated = json.replace(/"(?:[^"\\]|\\.)*"/g, (token, index) => {
+      if (/^\s*:/.test(json.slice(index + token.length))) return token; // JSON field name.
+      const value = JSON.parse(token);
+      if (/^(?:https?:\/\/|\/|mailto:)/i.test(value)) return token;
+      const replacement = map.get(normalize(value)) ?? polishInlineText(value, locale);
+      return replacement === value ? token : JSON.stringify(replacement).replaceAll('<', '\\u003c');
+    });
+    return updated === json ? whole : `<script${attrs}>${updated}</script>`;
   });
   result = result.replace(/(<meta\b[^>]*\bcontent=")([^"]*)("[^>]*>)/gi, (whole, a, content, b) => {
     const text = decode(content);
     const replacement = map.get(normalize(text)) ?? polishInlineText(text, locale);
     return replacement === text ? whole : a + encode(replacement).replaceAll('"', '&quot;') + b;
   });
+  result = result.replace(/<img\b[^>]*>/gi, tag =>
+    tag.replace(/(\balt=)(["'])(.*?)\2/i, (whole, prefix, quote, value) => {
+      const text = decode(value);
+      const replacement = localizedImageLabel(text, locale);
+      if (text === replacement) return whole;
+      const escaped = encode(replacement).replaceAll(quote, quote === '"' ? '&quot;' : '&#39;');
+      return prefix + quote + escaped + quote;
+    }));
   // Editorial rewrites must not alter URLs, assets, IDs or class structure.
   const attrs = source => [...source.matchAll(/\b(?:href|src|id|class)=["']([^"']*)["']/gi)].map(m => m[0]);
   assert.deepEqual(attrs(result), attrs(html), `Protected markup changed (${locale})`);
@@ -160,12 +163,19 @@ export function run({root = process.cwd(), apply = false, check = false} = {}) {
   // Keep literal text in review generators/copy modules synchronized. Other
   // tools stay untouched; all generators must also run this editorial pass.
   let sourceCount = 0;
+  const conflicting = new Set();
+  const replacementsByText = new Map();
+  for (const { old, new: replacement } of copyMaps.values()) {
+    if (replacementsByText.has(old) && replacementsByText.get(old) !== replacement) conflicting.add(old);
+    else replacementsByText.set(old, replacement);
+  }
   const sources = fs.globSync('tools/{*review-copy.mjs,build-*review*.mjs,redesign-*-pages.mjs}', {cwd: root});
   for (const relative of sources) {
     const file = path.join(root, relative);
     const before = fs.readFileSync(file, 'utf8');
     let after = before;
     for (const {old, new: replacement, oldRaw, newRaw} of copyMaps.values()) {
+      if (conflicting.has(old)) continue; // An English fragment can need different wording in different locales.
       for (const [a, b] of [[old, replacement], [oldRaw, newRaw], [JSON.stringify(old).slice(1, -1), JSON.stringify(replacement).slice(1, -1)], [old.replaceAll("'", "\\'"), replacement.replaceAll("'", "\\'")]]) {
         if (a && a !== b) after = after.replaceAll(a, b);
       }

@@ -85,22 +85,28 @@ export const renderCountryMedia = context => {
           <div>
 
             <h2 id="${headingId}">${localeText(
-              `New games in ${countryName}`,
-              `Neue Spiele im ${countryName}-Vergleich`,
-              `Juegos nuevos en ${countryName}`
+              `New games: ${countryName}`, `Neue Spiele: ${countryName}`, `Juegos nuevos: ${countryName}`,
+              `Nuovi giochi: ${countryName}`, `Nowe gry: ${countryName}`, `Нові ігри: ${countryName}`,
+              `Novos jogos: ${countryName}`, `Nouveaux jeux : ${countryName}`, `नए गेम: ${countryName}`,
+              `Uudet pelit: ${countryName}`
             )}</h2>
           </div>
           <p>${
             localeText(
-              `Recent releases from casino brands included in our ${countryName} comparison. Each card opens the relevant review; availability can vary by region and account.`,
-              `Aktuelle Neuerscheinungen aus Casino-Marken unseres ${countryName}-Vergleichs. Jede Karte führt zum passenden Test; die Verfügbarkeit kann je nach Region und Konto variieren.`,
-              `Lanzamientos recientes de marcas incluidas en nuestra comparativa de ${countryName}. Cada tarjeta abre la reseña correspondiente; la disponibilidad puede variar según la región y la cuenta.`
+              'Recent releases from casinos in this comparison. Select a game to read the casino review. Availability can vary by region and account.',
+              'Spielneuheiten der Casinos im Vergleich. Jede Karte führt zur Bewertung des Casinos. Die Verfügbarkeit kann je nach Region und Konto variieren.',
+              'Lanzamientos recientes de los casinos de esta comparativa. Cada juego lleva a la reseña del casino. La disponibilidad puede variar según la región y la cuenta.',
+              'Novità dei casinò a confronto. Ogni gioco rimanda alla recensione del casinò. La disponibilità può variare in base alla regione e al conto.',
+              'Nowości w porównywanych kasynach. Każda gra prowadzi do recenzji kasyna. Dostępność może zależeć od regionu i konta.',
+              'Новинки казино з цього порівняння. Кожна картка веде до огляду казино. Доступність ігор може залежати від регіону й акаунта.',
+              'Novidades dos casinos desta comparação. Cada jogo leva à análise do casino. A disponibilidade pode variar consoante a região e a conta.',
+              'Nouveautés des casinos de ce comparatif. Chaque jeu mène à l’avis sur le casino. La disponibilité peut varier selon la région et le compte.',
+              'इस तुलना में शामिल कैसीनो के नए गेम। हर गेम का कार्ड उस कैसीनो की समीक्षा खोलता है। उपलब्धता क्षेत्र और खाते पर निर्भर हो सकती है।',
+              'Vertailun kasinoiden uutuuspelejä. Pelikortista pääset kasinon arvosteluun. Saatavuus voi vaihdella alueen ja pelitilin mukaan.'
             )
           }</p>
         </div>
-        <div class="country-new-games-grid" aria-label="${
-          localeText(`New games for ${countryName}`, `Neue Spiele für ${countryName}`, `Juegos nuevos para ${countryName}`)
-        }">
+        <div class="country-new-games-grid" aria-labelledby="${headingId}">
           ${selectedGames
             .map(({ brand, game }) => {
               const brandName = normalizeText(brand.name);
@@ -110,18 +116,14 @@ export const renderCountryMedia = context => {
                   <span class="country-new-game-art game-art-backdrop">
                     <img
                       src="${escapeHtml(game.image)}"
-                      alt="${localeText(
-                        `${escapeHtml(gameName)} game artwork at ${escapeHtml(brandName)}`,
-                        `${escapeHtml(gameName)} Spielgrafik bei ${escapeHtml(brandName)}`,
-                        `Imagen del juego ${escapeHtml(gameName)} en ${escapeHtml(brandName)}`
-                      )}"
+                      alt=""
                       loading="lazy"
                       decoding="async"
                     />
                   </span>
                   <span class="country-new-game-copy">
                     <strong>${escapeHtml(gameName)}</strong>
-                    <small>${localeText('at', 'bei', 'en')} ${escapeHtml(brandName)}</small>
+                    <small>${escapeHtml(brandName)}</small>
                   </span>
                 </a>
               `;

@@ -3,6 +3,7 @@ import path from 'node:path';
 import { NATIONAL_COPY } from './national-casino-review-copy.mjs';
 import { BRANDS } from '../scripts/brands.js';
 import { BRAND_HOMEPAGE_SCREENSHOTS } from '../scripts/brand-homepage-screenshots.js';
+import { REVIEW_IMAGE_LABELS } from './localized-editorial-corrections.mjs';
 
 // Reuse the established layout, replacing every template fact with researched copy.
 // Verification boundaries: tools/research/national-casino-2026-10-04.md. No account/payment testing.
@@ -26,6 +27,7 @@ for (const locale of locales) {
   let html = fs.readFileSync(`${prefix(locale)}brands/20bet/index.html`, 'utf8')
     .replaceAll(BRAND_HOMEPAGE_SCREENSHOTS['20bet'], screenshot)
     .replaceAll('20Bet', 'National Casino').replaceAll('20bet', 'national-casino')
+    .replaceAll('alt="National Casino logo"', `alt="${esc(REVIEW_IMAGE_LABELS[locale].logo('National Casino'))}"`)
     .replaceAll('images/national-casino.webp', 'images/national-casino.svg')
     .replaceAll('offer_id=127265', 'offer_id=127266')
     .replaceAll('20261004-20bet-1', '20261004-national-casino-1');

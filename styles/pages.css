@@ -18782,6 +18782,15 @@ html:root body .casino-catalog-card .casino-card-brand h3 {
   margin: 0;
 }
 
+.casino-card-brand .casino-card-review-link {
+  color: inherit;
+  text-decoration: none;
+}
+
+.casino-card-brand .casino-card-review-link:is(:hover, :focus-visible) {
+  text-decoration: underline;
+}
+
 .casino-card-coverage {
   margin-top: 3px;
   color: var(--text-muted);

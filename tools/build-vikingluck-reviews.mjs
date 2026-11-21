@@ -247,7 +247,7 @@ const copy = {
     currencies: 'Julkaistuihin bonusrajoihin kuuluvat 750 CAD, 750 AUD ja 1 000 NZD, kaikki 200 ilmaiskierroksen kanssa. Minimitalletus riippuu tilin valuutasta.',
     games: [
       ['Kolikkopelit, jackpotit ja pikapelit', 'Tarkistushetkellä julkisessa luettelossa oli 11 032 kolikkopeliä ja yhteensä 13 707 peliä. Uutuuksilla, yksinoikeuspeleillä, pikapeleillä ja jackpoteilla on omat osionsa. Muuttuvat luetteloluvut eivät takaa kaikkien pelien saatavuutta jokaisessa maassa.'],
-      ['Live-pöydät ja game show -pelit', 'Live-luokat kattavat ruletin, blackjackin, baccaratin ja nopat, pokerin sekä game show -pelit. Myös kansainväliset pöydät ja Gold Saloon on listattu. Pöytäpeleissä näkyivät Jacks or Better ja Texas Holdem Bonus.'],
+      ['Livepöydät ja pelishow’t', 'Live-luokat kattavat ruletin, blackjackin, baccaratin ja nopat, pokerin sekä game show -pelit. Myös kansainväliset pöydät ja Gold Saloon on listattu. Pöytäpeleissä näkyivät Jacks or Better ja Texas Holdem Bonus.'],
       ['Peliyhtiöt', 'Listalla ovat Pragmatic Play, Pragmatic Live, Hacksaw Gaming, Playtech, Playson, Amusnet, Novomatic, BGaming, Betsoft, Yggdrasil ja Thunderkick. Yksittäisten yhtiöiden ja pelien saatavuus voi vaihdella maittain.'],
       ['Uusien pelien kuvagalleria', `Kuusi kuvattua peliä ovat ${newGames}. Kuvat esittelevät gallerian pelejä eivätkä tarkoita, että SpinCresta olisi testannut niitä oikealla rahalla.`],
     ],

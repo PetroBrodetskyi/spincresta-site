@@ -56,6 +56,49 @@ test('availability synchronization preserves active brands and internal review l
   assert.equal(syncUnavailableBrandMarkup(fixture, { ...brand, temporarilyUnavailable: false }, 'en'), fixture);
 });
 
+test('unavailable grid cards omit the Review button but still open their brand page', () => {
+  const source = fs.readFileSync('scripts/main.js', 'utf8')
+    .match(/const createCasinoCard = \([\s\S]*?\n};(?=\n\nconst ITEMS_PER_BATCH)/)?.[0];
+  assert.ok(source);
+  const location = { href: '' };
+  const cardFor = vm.runInNewContext(source + '\ncreateCasinoCard;', {
+    document: {
+      body: { dataset: {} },
+      createElement: () => ({
+        dataset: {}, classList: { toggle() {} }, events: {},
+        addEventListener(type, listener) { this.events[type] = listener; },
+        querySelectorAll: () => [],
+      }),
+    },
+    window: { location, open: () => assert.fail('Card must not open the casino') },
+    PLACEHOLDER_LINK: '#', SITE_LOCALE: 'en', uiCopy: { review: 'Review' },
+    cardCountryNames: null, BRAND_HOMEPAGE_SCREENSHOTS: {},
+    BLOCKED_BRAND_ICON: '/blocked.svg', UNAVAILABLE_BRAND_ICON: '/unavailable.svg',
+    normalizeText: String, escapeHtml: String, normalizeAssetPath: String,
+    localizedBrandBonusText: String, localeText: first => first,
+    brandPagePath: url => '/' + url.replace('.html', '/'),
+    getBrandDetailSlug: ({ urlDetail }) => urlDetail.split('/').at(-1).replace('.html', ''),
+    getBlockedCtaMarkup: () => '<span>Currently unavailable</span>',
+    setBrandBackground() {}, createBadge: () => '', renderPayments: () => '',
+  });
+
+  for (const brand of [brandFor('fugu'), { ...reference, notRecommended: false }]) {
+    const card = cardFor(brand);
+    const reviewPath = '/' + brand.urlDetail.replace('.html', '/');
+    assert.match(card.innerHTML, /casino-actions has-single-action/);
+    assert.doesNotMatch(card.innerHTML, /cta-secondary/);
+    assert.match(card.innerHTML, /<button[^>]*cta-blocked[^>]* disabled/);
+    assert.equal(anchors(card.innerHTML).length, 1);
+    assert.ok(card.innerHTML.includes(`class="casino-card-review-link" href="${reviewPath}"`));
+    card.events.click({ target: { closest: () => null } });
+    assert.equal(location.href, reviewPath);
+  }
+  const active = cardFor(brandFor('onlywin'));
+  assert.match(active.innerHTML, /casino-actions has-two-actions/);
+  assert.match(active.innerHTML, /<a class="cta cta-secondary" href="\/brands\/onlywin\/">Review<\/a>/);
+  assert.doesNotMatch(active.innerHTML, /cta-blocked/);
+});
+
 test('Casinobossy generation cannot restore old or empty casino links', () => {
   const source = fs.readFileSync('tools/build-casinobossy-reviews.mjs', 'utf8').replace(/^import .*;\r?\n/gm, '');
   assert(!source.includes('offer_id=124533'), 'generator uses the registry, not a hardcoded destination');

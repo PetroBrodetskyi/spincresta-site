@@ -106,3 +106,17 @@ test('Country headlines retain the market without claiming every listing is lice
   assert.equal(countryHeader('Надійні огляди, ліцензовані платформи та ексклюзивні пропозиції для латвійських гравців.','uk'),'Огляди казино, ігри та умови бонусів для латвійських гравців.');
   assert.equal(polishInlineText('каталог казино та ставок','uk'),'каталог казино та ставок');
 });
+
+test('Legacy translation corrections preserve game names, financial values and image URLs', () => {
+  const html = '<h2>Game Mix, Live Dealer &amp; Crypto-First Player Fit</h2>' +
+    '<p>€120.</p><p>World\'s Best Boss</p>' +
+    '<img src="/assets/casino.jpg" alt="BC.Game casino and sportsbook homepage" />' +
+    '<script type="application/ld+json">{"name":"Game Mix, Live Dealer & Crypto-First Player Fit"}</script>';
+  const edited = editPage(html, 'fi').html;
+  assert.match(edited, /<h2>Kasinopelit, livejakajat ja kryptomaksut<\/h2>/);
+  assert.match(edited, /<p>€120\.<\/p><p>World's Best Boss<\/p>/);
+  assert.match(edited, /src="\/assets\/casino.jpg" alt="BC.Gamen kasinon ja vedonlyönnin etusivu"/);
+  assert.match(edited, /"name":"Kasinopelit, livejakajat ja kryptomaksut"/);
+  assert.equal(editPage(edited, 'fi').html, edited);
+  assert.equal(polishInlineText('Nopeus: 24 tuntia.', 'fi'), 'Nopeus: 24 tuntia.');
+});
