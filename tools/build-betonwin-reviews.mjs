@@ -22,14 +22,22 @@ const origin = 'https://spincresta.com';
 const locales = Object.keys(betonwinCopy);
 for (const lang of locales) {
   const { title, intro, games, gamesText, bonusShop, sports, banking } = betonwinCopy[lang];
-  // Reuse navigation and footer chrome only; the review has its own localized copy.
-  const shell = fs.readFileSync(prefix(lang) + 'brands/viperwin/index.html', 'utf8');
-  const take = re => {
-    const match = shell.match(re);
-    if (!match) throw new Error(lang + ': missing shared review shell fragment: ' + re);
+  // Use StoneVegas's review shell and put only BetonWin data in its slots.
+  const shell = fs.readFileSync(prefix(lang) + 'brands/stonevegas/index.html', 'utf8');
+  // Preserve the same shared navigation, footer and comparison labels as before.
+  const shared = fs.readFileSync(prefix(lang) + 'brands/viperwin/index.html', 'utf8');
+  const take = (re, source = shell) => {
+    const match = source.match(re);
+    if (!match) throw new Error(lang + ': missing review template fragment: ' + re);
     return match[1];
   };
-  const link = `<a href="${esc(brand.urlCasino)}" class="cta-brands" target="_blank" rel="noopener noreferrer nofollow sponsored">${take(/class="cta-brands"[^>]*>([^<>]+)<\/a>/)}</a>`;
+  const replaceSlot = (source, re, replacement) => {
+    if (!re.test(source)) throw new Error(lang + ': missing review template slot: ' + re);
+    return source.replace(re, () => replacement);
+  };
+  const casinoAnchor = /<a\b[^>]*class="cta-brands"[\s\S]*?<\/a>/;
+  const link = take(/(<a\b[^>]*class="cta-brands"[\s\S]*?<\/a>)/)
+    .replace(/href="[^"]+"/, `href="${esc(brand.urlCasino)}"`);
   const canonical = origin + route(lang);
   const ar = argentinaCopy[lang];
   const d = detailCopy[lang];
@@ -80,7 +88,7 @@ for (const lang of locales) {
     ['BTC · LTC · ETH','Bitcoin · Litecoin · Ethereum','—'],
     ['USDT','TRC20 · ERC20','—'],
   ]);
-  const prosLabels = [...take(/id="pros-cons">([\s\S]*?)<\/section>/).matchAll(/<strong>([^<]+)<\/strong>/g)].map(m=>m[1]);
+  const prosLabels = [...take(/id="pros-cons">([\s\S]*?)<\/section>/, shared).matchAll(/<strong>([^<]+)<\/strong>/g)].map(m=>m[1]);
   if(prosLabels.length!==2) throw Error('Missing comparison labels for '+lang);
   const prosCons = reviewCards([
     [prosLabels[0],prosConsCopy[lang].pros],
@@ -94,7 +102,6 @@ for (const lang of locales) {
     [label('methods'),'Mercado Pago · NaranjaX · AstroPay · ARS'],
     [label('rewards'),'15 · Bonus Shop · Triple Spin'],
   ];
-  const highlights = `<div class="features-grid premium-grid">${highlightRows.map(([name,val],i)=>`<div class="feature-card glass-card"><div class="icon-placeholder">0${i+1}</div><strong>${esc(name)}</strong><span>${esc(val)}</span></div>`).join('')}</div>`;
   const facts = reviewTable([ui.detail,ui.value,ui.note],[
     [label('countries'),new Intl.DisplayNames([lang],{type:'region'}).of('AR'),sentences(ar.overview)[0]],
     [label('bonuses'),offerAmount,'25× · 3 '+short.days],
@@ -136,7 +143,30 @@ for (const lang of locales) {
   ]));
   const section = (id, kind, heading, content) => `<section class="container" id="betonwin-${id}" data-review-section="${kind}"><h2 class="title">${esc(heading)}</h2>${content}</section>`;
   const reviewDate = new Intl.DateTimeFormat(lang,{dateStyle:'long',timeZone:'UTC'}).format(new Date(date));
-  const html = `${take(/^([\s\S]*?)<title>/)}<title>${esc(title)}</title>
+  const reviewMeta = `<p class="hero-subtitle editorial-meta">${esc(c.reviewed)}: <time datetime="${date}">${esc(reviewDate)}</time>${reviewDate.endsWith('.')?'':'.'} ${esc(t[7])}</p>`;
+  const hero = [
+    [/<img\b[^>]*class="brand-logo"[^>]*>/, `<img class="brand-logo" src="/${brand.image}" alt="${brand.name}" loading="lazy" />`],
+    [/<h1>[\s\S]*?<\/h1>/, `<h1>${esc(title)}</h1>`],
+    [/<p class="hero-subtitle">[\s\S]*?<\/p>/, `<p class="hero-subtitle">${esc(intro)}</p>`],
+    [/<p class="hero-subtitle editorial-meta">[\s\S]*?<\/p>/, reviewMeta],
+    [casinoAnchor, link],
+  ].reduce((markup, [re, value]) => replaceSlot(markup, re, value), take(/(<section class="hero container">[\s\S]*?<\/section>)/));
+  let highlightSection = take(/(<section[^>]*id="brand-why-section">[\s\S]*?<\/section>)/);
+  highlightSection = replaceSlot(highlightSection, /<h2 class="title">[\s\S]*?<\/h2>/, `<h2 class="title">${esc(label('highlights'))}</h2>`);
+  highlightSection = replaceSlot(highlightSection, /<img\b[^>]*>/,
+    `<img src="${esc(image)}" alt="${brand.name}" width="3024" height="1660" loading="eager" fetchpriority="high" decoding="async" />`);
+  let cardIndex = 0;
+  highlightSection = highlightSection.replace(/(<strong>)[^<]*(<\/strong>\s*<span>)[\s\S]*?(<\/span>)/g, (_, start, middle, end) => {
+    const row = highlightRows[cardIndex++];
+    if (!row) throw new Error(lang + ': too many highlight cards in template');
+    return start + esc(row[0]) + middle + esc(row[1]) + end;
+  });
+  if (cardIndex !== highlightRows.length) throw new Error(lang + ': missing highlight cards in template');
+  const finalTitle = take(/class="final-cta-glass"><h2 class="title">([^<]+)<\/h2>/, shared).replaceAll('ViperWin', brand.name);
+  let finalCta = take(/(<section class="container">\s*<div class="final-cta-glass">[\s\S]*?<\/section>)/);
+  finalCta = replaceSlot(finalCta, /<h2 class="title">[\s\S]*?<\/h2>/, `<h2 class="title">${finalTitle}</h2>`);
+  finalCta = replaceSlot(finalCta, casinoAnchor, link);
+  const html = `${take(/^([\s\S]*?)<title>/, shared)}<title>${esc(title)}</title>
     <meta name="description" content="${esc(intro)}" />
     <meta name="brand-snapshot-intro" content="${esc(snapshotIntro[lang])}" />
     <link rel="canonical" href="${canonical}" />
@@ -145,20 +175,15 @@ for (const lang of locales) {
     <meta property="og:type" content="article" /><meta property="og:url" content="${canonical}" />
     <meta name="twitter:card" content="summary_large_image" />
     ${[['title',title],['description',intro],['image',image]].map(([key,val])=>`<meta property="og:${key}" content="${esc(val)}" /><meta name="twitter:${key}" content="${esc(val)}" />`).join('\n    ')}
-    ${take(/(<link rel="stylesheet"[^>]*>)/)}
+    ${take(/(<link rel="stylesheet"[^>]*>)/, shared)}
     <script type="application/ld+json">${JSON.stringify(schema)}</script>
   </head>
   <body data-brand="betonwin" data-language="${lang}">
-    ${take(/(<header class="header">[\s\S]*?<\/header>)/)}
-    <section class="hero container"><div class="hero-content glass-card">
-      <div class="brand-logo-container hero-logo" style="background-color: ${brand.bgColor}"><img class="brand-logo" src="/${brand.image}" alt="BetonWin" width="140" height="20" /></div>
-      <h1>${esc(title)}</h1><p class="hero-subtitle">${esc(intro)}</p><p class="hero-subtitle editorial-meta">${esc(c.reviewed)}: <time datetime="${date}">${esc(reviewDate)}</time>${reviewDate.endsWith('.')?'':'.'} ${esc(t[7])}</p>
-      <div class="hero-cta-wrapper">${link}</div>
-    </div></section>
-    <section class="container features-section glass-section" id="brand-why-section"><div class="brand-why-heading"><h2 class="title">${esc(label('highlights'))}</h2>
-      <button type="button" class="brand-why-media" aria-expanded="false" aria-controls="brand-why-section" aria-label="BetonWin"><img src="${image}" alt="BetonWin" width="3024" height="1660" decoding="async" /></button></div>${highlights}</section>
-    ${take(/(<section class="container"><div class="brand-countries">[\s\S]*?<\/section>)/)}
-    ${take(/(<section class="container"><div class="brand-payments">[\s\S]*?<\/section>)/)}
+    ${take(/(<header class="header">[\s\S]*?<\/header>)/, shared)}
+    ${hero}
+    ${highlightSection}
+    ${take(/(<section class="container">\s*<div class="brand-countries">[\s\S]*?<\/section>)/)}
+    ${take(/(<section class="container">\s*<div class="brand-payments">[\s\S]*?<\/section>)/)}
     <main class="content-review">
       ${section('verdict','summary',label('summary'),facts)}
       ${section('bonus','bonuses','BetonWin · '+label('bonuses'),bonusTable)}
@@ -179,9 +204,9 @@ for (const lang of locales) {
       ${section('pros-cons','pros',label('pros'),prosCons)}
       ${section('best-for','suitability',label('suitability'),cards([[ui.fit,short.goodFit],[ui.caution,short.caution]]))}
       <section class="container" id="faq" data-review-section="faq"><h2 class="title">${esc(d.faqTitle)}</h2><div class="timeline">${faq.map(([q,a])=>`<h3>${esc(q)}</h3><p>${esc(a)}</p>`).join('')}</div></section>
-      <section class="container"><div class="final-cta-glass"><h2 class="title">${take(/class="final-cta-glass"><h2 class="title">([^<]+)<\/h2>/).replaceAll('ViperWin','BetonWin')}</h2><div class="view-all-wrapper">${link}</div></div></section>
+      ${finalCta}
     </main>
-    ${take(/(<section class="all-countries">[\s\S]*$)/)}`;
+    ${take(/(<section class="all-countries">[\s\S]*$)/, shared).trimEnd()}\n`;
   const dir = prefix(lang) + 'brands/betonwin';
   fs.mkdirSync(dir, {recursive:true});
   fs.writeFileSync(dir + '/index.html', html);

@@ -68,7 +68,7 @@ const loadPageModules = async () => {
       import('./brand-snapshot-configs.js?v=20261121-snapshot-registry'),
       import('./brand-new-games.js?v=20261120-betonwin'),
       import('./pages/brand.js?v=20261121-snapshot-template'),
-      import('./pages/brand-feedback.js?v=20261121-review-rating'),
+      import('./pages/brand-feedback.js?v=20261121-feedback-availability'),
     ]);
     BRAND_SNAPSHOT_CONFIGS = snapshotsModule.BRAND_SNAPSHOT_CONFIGS || {};
     BRAND_NEW_GAMES = gamesModule.BRAND_NEW_GAMES || {};

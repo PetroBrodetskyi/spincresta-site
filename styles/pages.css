@@ -717,6 +717,7 @@ body[data-brand] .brand-feedback-compose input[type='text'] {
 body[data-brand] .brand-feedback-compose textarea {
   min-height: 104px;
   padding: 10px 12px;
+  border-radius: var(--radius-md);
   resize: vertical;
 }
 
@@ -10705,16 +10706,6 @@ body[data-brand] .brand-rating-teaser-score strong {
   color: var(--text-main);
   font-size: var(--type-subheading);
   font-weight: 750;
-}
-
-body[data-brand] .brand-rating-teaser-action {
-  color: var(--section-accent);
-  font-weight: 650;
-}
-
-body[data-brand] .brand-rating-teaser:is(:hover, :focus-visible) .brand-rating-teaser-action {
-  text-decoration: underline;
-  text-underline-offset: 2px;
 }
 
 body[data-brand] #player-reviews {

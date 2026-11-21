@@ -18,6 +18,9 @@ const countedSpinPhrases={de:'50 Freispiele',fi:'50 ilmaiskierrosta',pl:'50 darm
 for(const lang of locales) {
  test(`BetonWin ${lang}: complete standard review components and six functional detail topics`,()=>{
   const html=read(lang,'betonwin');
+  const hero=source=>source.match(/<section class="hero container">([\s\S]*?)<\/section>/)[1];
+  const classStructure=markup=>Array.from(markup.matchAll(/<(\w+)\b[^>]*\bclass="([^"]+)"/g),([,tag,classes])=>[tag,classes]);
+  assert.deepEqual(classStructure(hero(html)),classStructure(hero(read(lang,'stonevegas'))),'reuse StoneVegas hero markup');
   const labels=reviewLabels[lang];
   const number=new Intl.NumberFormat(lang,{useGrouping:'always'});
   assert.match(html,new RegExp(`<body data-brand="betonwin" data-language="${lang}">`));
@@ -76,7 +79,7 @@ for(const lang of locales) {
   assert.doesNotMatch(html,/\.<\/time>\./,'do not double the date’s locale-specific period');
   assert.doesNotMatch(html,/\b50 FS\b/,'spell out free spins in the page language');
   assert.doesNotMatch(html,/Palcoscenico|Safer-Play-ohjaimet|ठंडा बंद करना|поточне відкриття гри|Sterowanie bezpieczniejszą grą/);
-  assert.doesNotMatch(html,/Spinrise|OnlyWin|ViperWin|Tobique|Metlait|119 Active|13,901|5,555|support@spinrise/i);
+  assert.doesNotMatch(html,/Spinrise|OnlyWin|ViperWin|StoneVegas|Tobique|Metlait|119 Active|13,901|5,555|support@spinrise/i);
   assert.doesNotMatch(html,/https?:\/\/(?:www\.)?(?:betonwin\.casino|beton\.win)/i);
   for(const m of html.matchAll(/<a href="([^"]+)" class="cta-brands"/g)) assert.equal(m[1],brand.urlCasino.replaceAll('&','&amp;'));
  });

@@ -71,29 +71,29 @@ const FEEDBACK_LOAD_COPY = {
 };
 
 const FORM_TOGGLE_COPY = {
-  en: { open: 'Write a review', close: 'Close review form' },
-  de: { open: 'Bewertung schreiben', close: 'Bewertungsformular schließen' },
-  es: { open: 'Escribir una reseña', close: 'Cerrar el formulario' },
-  it: { open: 'Scrivi una recensione', close: 'Chiudi il modulo' },
-  pl: { open: 'Napisz recenzję', close: 'Zamknij formularz' },
-  uk: { open: 'Написати відгук', close: 'Закрити форму' },
-  pt: { open: 'Escrever uma opinião', close: 'Fechar o formulário' },
-  fr: { open: 'Écrire un avis', close: 'Fermer le formulaire' },
-  hi: { open: 'समीक्षा लिखें', close: 'समीक्षा फ़ॉर्म बंद करें' },
-  fi: { open: 'Kirjoita kokemus', close: 'Sulje lomake' },
+  en: { open: 'Review form', close: 'Hide form' },
+  de: { open: 'Bewertungsformular', close: 'Formular ausblenden' },
+  es: { open: 'Formulario de reseña', close: 'Ocultar formulario' },
+  it: { open: 'Modulo per la recensione', close: 'Nascondi modulo' },
+  pl: { open: 'Formularz opinii', close: 'Ukryj formularz' },
+  uk: { open: 'Форма відгуку', close: 'Згорнути форму' },
+  pt: { open: 'Formulário de opinião', close: 'Ocultar formulário' },
+  fr: { open: 'Formulaire d’avis', close: 'Masquer le formulaire' },
+  hi: { open: 'समीक्षा फ़ॉर्म', close: 'फ़ॉर्म छिपाएँ' },
+  fi: { open: 'Arviointilomake', close: 'Piilota lomake' },
 };
 
 const TEASER_COPY = {
-  en: { read: 'Read reviews', write: 'Write a review', empty: 'No ratings yet', ratings: 'Ratings', reviews: 'Reviews' },
-  de: { read: 'Berichte lesen', write: 'Bewertung abgeben', empty: 'Noch keine Bewertungen', ratings: 'Bewertungen', reviews: 'Erfahrungsberichte' },
-  es: { read: 'Leer reseñas', write: 'Escribir una reseña', empty: 'Aún no hay valoraciones', ratings: 'Valoraciones', reviews: 'Reseñas' },
-  it: { read: 'Leggi le recensioni', write: 'Scrivi una recensione', empty: 'Ancora nessuna valutazione', ratings: 'Valutazioni', reviews: 'Recensioni' },
-  pl: { read: 'Czytaj opinie', write: 'Dodaj opinię', empty: 'Brak ocen', ratings: 'Oceny', reviews: 'Recenzje' },
-  uk: { read: 'Читати відгуки', write: 'Залишити відгук', empty: 'Оцінок ще немає', ratings: 'Оцінки', reviews: 'Відгуки' },
-  pt: { read: 'Ler opiniões', write: 'Escrever uma opinião', empty: 'Ainda sem avaliações', ratings: 'Avaliações', reviews: 'Opiniões' },
-  fr: { read: 'Lire les avis', write: 'Donner un avis', empty: 'Pas encore de notes', ratings: 'Notes', reviews: 'Avis' },
-  hi: { read: 'समीक्षाएँ पढ़ें', write: 'समीक्षा लिखें', empty: 'अभी कोई रेटिंग नहीं है', ratings: 'रेटिंग', reviews: 'समीक्षाएँ' },
-  fi: { read: 'Lue kokemuksia', write: 'Kirjoita kokemuksestasi', empty: 'Ei vielä arvioita', ratings: 'Arviot', reviews: 'Kokemukset' },
+  en: { read: 'Read reviews', empty: 'No ratings yet', ratings: 'Ratings', reviews: 'Reviews' },
+  de: { read: 'Berichte lesen', empty: 'Noch keine Bewertungen', ratings: 'Bewertungen', reviews: 'Erfahrungsberichte' },
+  es: { read: 'Leer reseñas', empty: 'Aún no hay valoraciones', ratings: 'Valoraciones', reviews: 'Reseñas' },
+  it: { read: 'Leggi le recensioni', empty: 'Ancora nessuna valutazione', ratings: 'Valutazioni', reviews: 'Recensioni' },
+  pl: { read: 'Czytaj opinie', empty: 'Brak ocen', ratings: 'Oceny', reviews: 'Recenzje' },
+  uk: { read: 'Читати відгуки', empty: 'Оцінок ще немає', ratings: 'Оцінки', reviews: 'Відгуки' },
+  pt: { read: 'Ler opiniões', empty: 'Ainda sem avaliações', ratings: 'Avaliações', reviews: 'Opiniões' },
+  fr: { read: 'Lire les avis', empty: 'Pas encore de notes', ratings: 'Notes', reviews: 'Avis' },
+  hi: { read: 'समीक्षाएँ पढ़ें', empty: 'अभी कोई रेटिंग नहीं है', ratings: 'रेटिंग', reviews: 'समीक्षाएँ' },
+  fi: { read: 'Lue kokemuksia', empty: 'Ei vielä arvioita', ratings: 'Arviot', reviews: 'Kokemukset' },
 };
 
 const REVIEW_STATUS_COPY = {
@@ -358,7 +358,6 @@ export function renderRatingTeaser(summary, locale) {
   const format = new Intl.NumberFormat(locale || 'en', { minimumFractionDigits: 1, maximumFractionDigits: 1 });
   const status = !summary ? copy.average : average === null && !summary.reviewCount
     ? teaser.empty : formatFeedbackCounts(summary.ratingCount || 0, summary.reviewCount || 0, teaser);
-  const action = !summary || summary.reviewCount > 0 ? teaser.read : teaser.write;
   const path = '<path d="m12 2.7 2.85 5.78 6.38.93-4.61 4.5 1.09 6.35L12 17.26l-5.71 3 1.09-6.35-4.61-4.5 6.38-.93L12 2.7Z"/>';
   const stars = Array.from({length: 5}, (_, index) => {
     const fill = Math.round(100 * Math.min(1, Math.max(0, (average ?? 0) - index)));
@@ -370,10 +369,7 @@ export function renderRatingTeaser(summary, locale) {
       <span class="brand-rating-teaser-stars" aria-hidden="true">${stars}</span>
       ${average === null ? '' : `<span class="brand-rating-teaser-score"><strong>${escapeHtml(format.format(average))}</strong><span> / 5</span></span>`}
     </span>
-    <span class="brand-rating-teaser-meta">
-      <span>${escapeHtml(status)}</span>
-      <span class="brand-rating-teaser-action">${escapeHtml(action)}</span>
-    </span>
+    <span class="brand-rating-teaser-meta">${escapeHtml(status)}</span>
   `;
 }
 
@@ -559,6 +555,7 @@ export const initBrandFeedback = async ({ brand, brandName = '', brandImage = ''
     return;
   }
   const teaserLink = createWhyRatingLink(locale);
+  const compose = section.querySelector('.brand-feedback-compose');
   const form = section.querySelector('[data-feedback-form]');
   const signIn = section.querySelector('[data-feedback-signin]');
   const composeToggle = section.querySelector('[data-feedback-compose-toggle]');
@@ -609,7 +606,18 @@ export const initBrandFeedback = async ({ brand, brandName = '', brandImage = ''
       cache: fresh ? 'no-store' : 'default',
       headers: { Accept: 'application/json' },
     });
-    if (!payload) return false;
+    const list = section.querySelector('[data-feedback-list]');
+    if (!payload) {
+      // A missing catalogue entry is not a zero rating. Keep the review
+      // section and its anchor, but don't invite a submission the API can't save.
+      if (list.dataset.state !== 'ready') {
+        list.dataset.state = 'unavailable';
+        list.innerHTML = `<p class="brand-feedback-empty">${escapeHtml(copy.unavailable)}</p>`;
+        compose.remove();
+      }
+      return;
+    }
+    if (!compose.isConnected) section.append(compose);
     updateFeedbackStructuredData(payload, {
       brandName: brandName || brand,
       brandImage,
@@ -654,7 +662,6 @@ export const initBrandFeedback = async ({ brand, brandName = '', brandImage = ''
         voteCopy
       ));
     }
-    return true;
   };
 
   section.addEventListener('submit', async event => {
@@ -736,7 +743,7 @@ export const initBrandFeedback = async ({ brand, brandName = '', brandImage = ''
 
   const showFeedbackLoadError = () => {
     const list = section.querySelector('[data-feedback-list]');
-    if (list.dataset.state === 'ready') return;
+    if (list.dataset.state === 'ready' || list.dataset.state === 'unavailable') return;
     list.dataset.state = 'error';
     list.innerHTML = `<p class="brand-feedback-empty">${escapeHtml(loadCopy.failed)}</p>`;
   };
@@ -746,12 +753,7 @@ export const initBrandFeedback = async ({ brand, brandName = '', brandImage = ''
   }, { once: true });
 
   try {
-    const brandAvailable = await loadFeedback();
-    if (!brandAvailable) {
-      teaserLink?.remove();
-      section.remove();
-      return;
-    }
+    await loadFeedback();
   } catch {
     showFeedbackLoadError();
   }
