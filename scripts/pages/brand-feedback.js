@@ -7,52 +7,52 @@ const DEFAULT_VOTES_ENDPOINT = 'https://api.spincresta.com/api/feedback-votes';
 const COPY = {
   en: {
     kicker: 'PLAYER FEEDBACK', title: 'Player ratings and reviews', intro: 'Ratings come from registered SpinCresta players. Written reviews are checked before publication.',
-    average: 'Average rating', ratings: 'ratings', reviews: 'published reviews', noReviews: 'No published player reviews yet. Be the first to share a useful experience.',
+    average: 'Average rating', ratings: 'ratings', reviews: 'published reviews', noReviews: 'No player reviews yet.',
     rateTitle: 'Rate this casino', rateHint: 'Choose from 1 to 5 stars. You can also add a written review.', titleLabel: 'Review title (optional)', titlePlaceholder: 'A short summary', bodyLabel: 'Your experience (optional)', bodyPlaceholder: 'What worked well? What should other players know?', bodyHint: 'At least 20 characters when you add a written review.', submit: 'Submit rating', submitting: 'Submitting…', signIn: 'Sign in to rate this casino', pending: 'Thank you. Your rating was saved and your review is awaiting moderation.', ratingSaved: 'Thank you. Your rating was saved.', selectRating: 'Choose a star rating before submitting.', invalidReview: 'Write at least 20 characters or leave the written review empty.', failed: 'We could not submit your feedback. Please try again.', unavailable: 'Player feedback is temporarily unavailable.', anonymous: 'SpinCresta player', star: 'star', stars: 'stars',
   },
   de: {
     kicker: 'SPIELERFEEDBACK', title: 'Bewertungen und Erfahrungen von Spielern', intro: 'Die Bewertungen stammen von registrierten SpinCresta-Nutzern. Schriftliche Beiträge werden vor der Veröffentlichung geprüft.',
-    average: 'Durchschnitt', ratings: 'Bewertungen', reviews: 'veröffentlichte Erfahrungsberichte', noReviews: 'Noch keine veröffentlichten Spielerberichte. Teilen Sie als Erste oder Erster eine hilfreiche Erfahrung.',
+    average: 'Durchschnitt', ratings: 'Bewertungen', reviews: 'veröffentlichte Erfahrungsberichte', noReviews: 'Noch keine Erfahrungsberichte.',
     rateTitle: 'Casino bewerten', rateHint: 'Wählen Sie 1 bis 5 Sterne. Optional können Sie einen Erfahrungsbericht ergänzen.', titleLabel: 'Titel (optional)', titlePlaceholder: 'Kurze Zusammenfassung', bodyLabel: 'Ihre Erfahrung (optional)', bodyPlaceholder: 'Was war gut? Was sollten andere Spieler wissen?', bodyHint: 'Mindestens 20 Zeichen, wenn Sie einen Text hinzufügen.', submit: 'Bewertung senden', submitting: 'Wird gesendet…', signIn: 'Anmelden und Casino bewerten', pending: 'Vielen Dank. Ihre Bewertung wurde gespeichert; der Erfahrungsbericht wartet auf die Prüfung.', ratingSaved: 'Vielen Dank. Ihre Bewertung wurde gespeichert.', selectRating: 'Wählen Sie vor dem Absenden eine Sternebewertung.', invalidReview: 'Schreiben Sie mindestens 20 Zeichen oder lassen Sie den Text leer.', failed: 'Ihr Feedback konnte nicht gesendet werden. Versuchen Sie es erneut.', unavailable: 'Spielerfeedback ist vorübergehend nicht verfügbar.', anonymous: 'SpinCresta-Spieler', star: 'Stern', stars: 'Sterne',
   },
   es: {
     kicker: 'OPINIONES DE JUGADORES', title: 'Valoraciones y reseñas de jugadores', intro: 'Las valoraciones proceden de usuarios registrados de SpinCresta. Las reseñas escritas se revisan antes de publicarse.',
-    average: 'Valoración media', ratings: 'valoraciones', reviews: 'reseñas publicadas', noReviews: 'Todavía no hay reseñas publicadas. Sé la primera persona en compartir una experiencia útil.',
+    average: 'Valoración media', ratings: 'valoraciones', reviews: 'reseñas publicadas', noReviews: 'Aún no hay reseñas de jugadores.',
     rateTitle: 'Valora este casino', rateHint: 'Elige de 1 a 5 estrellas. También puedes añadir una reseña.', titleLabel: 'Título (opcional)', titlePlaceholder: 'Resumen breve', bodyLabel: 'Tu experiencia (opcional)', bodyPlaceholder: '¿Qué funcionó bien? ¿Qué deberían saber otros jugadores?', bodyHint: 'Mínimo 20 caracteres si añades una reseña escrita.', submit: 'Enviar valoración', submitting: 'Enviando…', signIn: 'Inicia sesión para valorar', pending: 'Gracias. Guardamos tu valoración y la reseña está pendiente de moderación.', ratingSaved: 'Gracias. Tu valoración se ha guardado.', selectRating: 'Elige una valoración antes de enviar.', invalidReview: 'Escribe al menos 20 caracteres o deja vacía la reseña.', failed: 'No pudimos enviar tu opinión. Inténtalo de nuevo.', unavailable: 'Las opiniones de jugadores no están disponibles temporalmente.', anonymous: 'Jugador de SpinCresta', star: 'estrella', stars: 'estrellas',
   },
   it: {
     kicker: 'OPINIONI DEI GIOCATORI', title: 'Valutazioni e recensioni dei giocatori', intro: 'Le valutazioni provengono da utenti SpinCresta registrati. Le recensioni scritte vengono controllate prima della pubblicazione.',
-    average: 'Valutazione media', ratings: 'valutazioni', reviews: 'recensioni pubblicate', noReviews: 'Non ci sono ancora recensioni pubblicate. Condividi per primo un’esperienza utile.',
+    average: 'Valutazione media', ratings: 'valutazioni', reviews: 'recensioni pubblicate', noReviews: 'Non ci sono ancora recensioni dei giocatori.',
     rateTitle: 'Valuta questo casinò', rateHint: 'Scegli da 1 a 5 stelle. Puoi anche aggiungere una recensione.', titleLabel: 'Titolo (facoltativo)', titlePlaceholder: 'Breve riepilogo', bodyLabel: 'La tua esperienza (facoltativa)', bodyPlaceholder: 'Cosa ha funzionato bene? Cosa dovrebbero sapere gli altri giocatori?', bodyHint: 'Almeno 20 caratteri se aggiungi una recensione.', submit: 'Invia valutazione', submitting: 'Invio…', signIn: 'Accedi per valutare', pending: 'Grazie. La valutazione è stata salvata e la recensione attende la moderazione.', ratingSaved: 'Grazie. La valutazione è stata salvata.', selectRating: 'Scegli una valutazione prima di inviare.', invalidReview: 'Scrivi almeno 20 caratteri oppure lascia vuota la recensione.', failed: 'Non è stato possibile inviare il feedback. Riprova.', unavailable: 'Le opinioni dei giocatori non sono temporaneamente disponibili.', anonymous: 'Giocatore SpinCresta', star: 'stella', stars: 'stelle',
   },
   pl: {
     kicker: 'OPINIE GRACZY', title: 'Oceny i recenzje graczy', intro: 'Oceny pochodzą od zarejestrowanych użytkowników SpinCresta. Recenzje tekstowe sprawdzamy przed publikacją.',
-    average: 'Średnia ocena', ratings: 'ocen', reviews: 'opublikowanych recenzji', noReviews: 'Nie ma jeszcze opublikowanych recenzji graczy. Podziel się pierwszą pomocną opinią.',
+    average: 'Średnia ocena', ratings: 'ocen', reviews: 'opublikowanych recenzji', noReviews: 'Nie ma jeszcze opinii graczy.',
     rateTitle: 'Oceń to kasyno', rateHint: 'Wybierz od 1 do 5 gwiazdek. Możesz również dodać recenzję.', titleLabel: 'Tytuł recenzji (opcjonalnie)', titlePlaceholder: 'Krótkie podsumowanie', bodyLabel: 'Twoje doświadczenie (opcjonalnie)', bodyPlaceholder: 'Co działało dobrze? Co powinni wiedzieć inni gracze?', bodyHint: 'Co najmniej 20 znaków, jeśli dodajesz recenzję.', submit: 'Wyślij ocenę', submitting: 'Wysyłanie…', signIn: 'Zaloguj się, aby ocenić', pending: 'Dziękujemy. Ocena została zapisana, a recenzja oczekuje na moderację.', ratingSaved: 'Dziękujemy. Ocena została zapisana.', selectRating: 'Przed wysłaniem wybierz ocenę.', invalidReview: 'Napisz co najmniej 20 znaków albo pozostaw recenzję pustą.', failed: 'Nie udało się wysłać opinii. Spróbuj ponownie.', unavailable: 'Opinie graczy są chwilowo niedostępne.', anonymous: 'Gracz SpinCresta', star: 'gwiazdka', stars: 'gwiazdki',
   },
   uk: {
     kicker: 'ВІДГУКИ ГРАВЦІВ', title: 'Оцінки та відгуки гравців', intro: 'Оцінки залишають зареєстровані користувачі SpinCresta. Текстові відгуки проходять перевірку перед публікацією.',
-    average: 'Середня оцінка', ratings: 'оцінок', reviews: 'опублікованих відгуків', noReviews: 'Відгуків гравців поки немає. Поділіться своїм досвідом.',
+    average: 'Середня оцінка', ratings: 'оцінок', reviews: 'опублікованих відгуків', noReviews: 'Відгуків гравців ще немає.',
     rateTitle: 'Оцініть це казино', rateHint: 'Оберіть від 1 до 5 зірок. За бажанням додайте текстовий відгук.', titleLabel: 'Заголовок відгуку (необов’язково)', titlePlaceholder: 'Короткий підсумок', bodyLabel: 'Ваш досвід (необов’язково)', bodyPlaceholder: 'Що працювало добре? Що варто знати іншим гравцям?', bodyHint: 'Якщо додаєте текст, напишіть щонайменше 20 символів.', submit: 'Надіслати оцінку', submitting: 'Надсилаємо…', signIn: 'Увійдіть, щоб оцінити казино', pending: 'Дякуємо. Оцінку збережено, а відгук очікує на модерацію.', ratingSaved: 'Дякуємо. Вашу оцінку збережено.', selectRating: 'Перед надсиланням оберіть оцінку.', invalidReview: 'Напишіть щонайменше 20 символів або залиште текст відгуку порожнім.', failed: 'Не вдалося надіслати відгук. Спробуйте ще раз.', unavailable: 'Відгуки гравців тимчасово недоступні.', anonymous: 'Гравець SpinCresta', star: 'зірка', stars: 'зірки',
   },
   pt: {
     kicker: 'OPINIÕES DOS JOGADORES', title: 'Avaliações e opiniões dos jogadores', intro: 'As avaliações são de utilizadores registados na SpinCresta. As opiniões escritas são verificadas antes da publicação.',
-    average: 'Avaliação média', ratings: 'avaliações', reviews: 'opiniões publicadas', noReviews: 'Ainda não existem opiniões publicadas. Seja a primeira pessoa a partilhar uma experiência útil.',
+    average: 'Avaliação média', ratings: 'avaliações', reviews: 'opiniões publicadas', noReviews: 'Ainda não há opiniões de jogadores.',
     rateTitle: 'Avalie este casino', rateHint: 'Escolha entre 1 e 5 estrelas. Também pode acrescentar uma opinião.', titleLabel: 'Título (opcional)', titlePlaceholder: 'Resumo breve', bodyLabel: 'A sua experiência (opcional)', bodyPlaceholder: 'O que funcionou bem? O que devem saber os outros jogadores?', bodyHint: 'Pelo menos 20 caracteres se adicionar uma opinião.', submit: 'Enviar avaliação', submitting: 'A enviar…', signIn: 'Inicie sessão para avaliar', pending: 'Obrigado. A avaliação foi guardada e a opinião aguarda moderação.', ratingSaved: 'Obrigado. A avaliação foi guardada.', selectRating: 'Escolha uma avaliação antes de enviar.', invalidReview: 'Escreva pelo menos 20 caracteres ou deixe a opinião vazia.', failed: 'Não foi possível enviar a sua opinião. Tente novamente.', unavailable: 'As opiniões dos jogadores estão temporariamente indisponíveis.', anonymous: 'Jogador SpinCresta', star: 'estrela', stars: 'estrelas',
   },
   fr: {
     kicker: 'AVIS DES JOUEURS', title: 'Notes et avis des joueurs', intro: 'Les notes proviennent de membres SpinCresta inscrits. Les avis écrits sont vérifiés avant leur publication.',
-    average: 'Note moyenne', ratings: 'notes', reviews: 'avis publiés', noReviews: 'Aucun avis de joueur n’est encore publié. Soyez la première personne à partager une expérience utile.',
+    average: 'Note moyenne', ratings: 'notes', reviews: 'avis publiés', noReviews: 'Pas encore d’avis de joueurs.',
     rateTitle: 'Noter ce casino', rateHint: 'Choisissez de 1 à 5 étoiles. Vous pouvez également ajouter un avis.', titleLabel: 'Titre (facultatif)', titlePlaceholder: 'Résumé court', bodyLabel: 'Votre expérience (facultatif)', bodyPlaceholder: 'Qu’est-ce qui a bien fonctionné ? Que doivent savoir les autres joueurs ?', bodyHint: 'Au moins 20 caractères si vous ajoutez un avis.', submit: 'Envoyer la note', submitting: 'Envoi…', signIn: 'Connectez-vous pour noter', pending: 'Merci. Votre note a été enregistrée et l’avis attend sa modération.', ratingSaved: 'Merci. Votre note a été enregistrée.', selectRating: 'Choisissez une note avant l’envoi.', invalidReview: 'Écrivez au moins 20 caractères ou laissez l’avis vide.', failed: 'Votre avis n’a pas pu être envoyé. Réessayez.', unavailable: 'Les avis des joueurs sont temporairement indisponibles.', anonymous: 'Joueur SpinCresta', star: 'étoile', stars: 'étoiles',
   },
   hi: {
     kicker: 'खिलाड़ियों की राय', title: 'खिलाड़ियों की रेटिंग और समीक्षाएँ', intro: 'रेटिंग पंजीकृत SpinCresta उपयोगकर्ताओं से आती हैं। लिखित समीक्षा प्रकाशित होने से पहले जाँची जाती है।',
-    average: 'औसत रेटिंग', ratings: 'रेटिंग', reviews: 'प्रकाशित समीक्षाएँ', noReviews: 'अभी कोई खिलाड़ी समीक्षा प्रकाशित नहीं हुई है। उपयोगी अनुभव साझा करने वाले पहले व्यक्ति बनें।',
+    average: 'औसत रेटिंग', ratings: 'रेटिंग', reviews: 'प्रकाशित समीक्षाएँ', noReviews: 'अभी खिलाड़ियों की कोई समीक्षा नहीं है।',
     rateTitle: 'इस कैसीनो को रेट करें', rateHint: '1 से 5 सितारे चुनें। चाहें तो लिखित समीक्षा भी जोड़ें।', titleLabel: 'समीक्षा का शीर्षक (वैकल्पिक)', titlePlaceholder: 'छोटा सार', bodyLabel: 'आपका अनुभव (वैकल्पिक)', bodyPlaceholder: 'क्या अच्छा रहा? दूसरे खिलाड़ियों को क्या जानना चाहिए?', bodyHint: 'लिखित समीक्षा जोड़ने पर कम से कम 20 अक्षर लिखें।', submit: 'रेटिंग भेजें', submitting: 'भेजा जा रहा है…', signIn: 'रेटिंग देने के लिए साइन इन करें', pending: 'धन्यवाद। आपकी रेटिंग सहेज ली गई है और समीक्षा मॉडरेशन की प्रतीक्षा में है।', ratingSaved: 'धन्यवाद। आपकी रेटिंग सहेज ली गई है।', selectRating: 'भेजने से पहले स्टार रेटिंग चुनें।', invalidReview: 'कम से कम 20 अक्षर लिखें या समीक्षा खाली छोड़ दें।', failed: 'आपकी प्रतिक्रिया भेजी नहीं जा सकी। फिर कोशिश करें।', unavailable: 'खिलाड़ियों की प्रतिक्रिया अभी उपलब्ध नहीं है।', anonymous: 'SpinCresta खिलाड़ी', star: 'सितारा', stars: 'सितारे',
   },
   fi: {
     kicker: 'PELAAJIEN PALAUTE', title: 'Pelaajien arviot ja kokemukset', intro: 'Arviot ovat rekisteröityneiltä SpinCresta-käyttäjiltä. Kirjalliset kokemukset tarkistetaan ennen julkaisua.',
-    average: 'Keskiarvo', ratings: 'arviota', reviews: 'julkaistua kokemusta', noReviews: 'Julkaistuja pelaajakokemuksia ei vielä ole. Jaa ensimmäinen hyödyllinen kokemus.',
+    average: 'Keskiarvo', ratings: 'arviota', reviews: 'julkaistua kokemusta', noReviews: 'Pelaajien kokemuksia ei ole vielä julkaistu.',
     rateTitle: 'Arvioi tämä kasino', rateHint: 'Valitse 1–5 tähteä. Voit halutessasi lisätä kirjallisen kokemuksen.', titleLabel: 'Otsikko (valinnainen)', titlePlaceholder: 'Lyhyt yhteenveto', bodyLabel: 'Kokemuksesi (valinnainen)', bodyPlaceholder: 'Mikä toimi hyvin? Mitä muiden pelaajien tulisi tietää?', bodyHint: 'Vähintään 20 merkkiä, jos lisäät tekstin.', submit: 'Lähetä arvio', submitting: 'Lähetetään…', signIn: 'Kirjaudu sisään ja arvioi', pending: 'Kiitos. Arviosi tallennettiin ja kirjoitus odottaa tarkistusta.', ratingSaved: 'Kiitos. Arviosi tallennettiin.', selectRating: 'Valitse tähtiarvio ennen lähettämistä.', invalidReview: 'Kirjoita vähintään 20 merkkiä tai jätä teksti tyhjäksi.', failed: 'Palautetta ei voitu lähettää. Yritä uudelleen.', unavailable: 'Pelaajien palaute ei ole juuri nyt käytettävissä.', anonymous: 'SpinCresta-pelaaja', star: 'tähti', stars: 'tähteä',
   },
 };
@@ -84,16 +84,16 @@ const FORM_TOGGLE_COPY = {
 };
 
 const TEASER_COPY = {
-  en: { read: 'Read player reviews', first: 'Be the first to review', ratings: 'Ratings', reviews: 'Reviews' },
-  de: { read: 'Spielerbewertungen lesen', first: 'Erste Bewertung abgeben', ratings: 'Bewertungen', reviews: 'Erfahrungsberichte' },
-  es: { read: 'Leer reseñas de jugadores', first: 'Escribe la primera reseña', ratings: 'Valoraciones', reviews: 'Reseñas' },
-  it: { read: 'Leggi le recensioni dei giocatori', first: 'Scrivi la prima recensione', ratings: 'Valutazioni', reviews: 'Recensioni' },
-  pl: { read: 'Przeczytaj opinie graczy', first: 'Dodaj pierwszą opinię', ratings: 'Oceny', reviews: 'Recenzje' },
-  uk: { read: 'Читати відгуки гравців', first: 'Залишити перший відгук', ratings: 'Оцінки', reviews: 'Відгуки' },
-  pt: { read: 'Ler opiniões dos jogadores', first: 'Escrever a primeira opinião', ratings: 'Avaliações', reviews: 'Opiniões' },
-  fr: { read: 'Lire les avis des joueurs', first: 'Publier le premier avis', ratings: 'Notes', reviews: 'Avis' },
-  hi: { read: 'खिलाड़ियों की समीक्षाएँ पढ़ें', first: 'पहली समीक्षा लिखें', ratings: 'रेटिंग', reviews: 'समीक्षाएँ' },
-  fi: { read: 'Lue pelaajien kokemuksia', first: 'Kirjoita ensimmäinen kokemus', ratings: 'Arviot', reviews: 'Kokemukset' },
+  en: { read: 'Read reviews', write: 'Write a review', empty: 'No ratings yet', ratings: 'Ratings', reviews: 'Reviews' },
+  de: { read: 'Berichte lesen', write: 'Bewertung abgeben', empty: 'Noch keine Bewertungen', ratings: 'Bewertungen', reviews: 'Erfahrungsberichte' },
+  es: { read: 'Leer reseñas', write: 'Escribir una reseña', empty: 'Aún no hay valoraciones', ratings: 'Valoraciones', reviews: 'Reseñas' },
+  it: { read: 'Leggi le recensioni', write: 'Scrivi una recensione', empty: 'Ancora nessuna valutazione', ratings: 'Valutazioni', reviews: 'Recensioni' },
+  pl: { read: 'Czytaj opinie', write: 'Dodaj opinię', empty: 'Brak ocen', ratings: 'Oceny', reviews: 'Recenzje' },
+  uk: { read: 'Читати відгуки', write: 'Залишити відгук', empty: 'Оцінок ще немає', ratings: 'Оцінки', reviews: 'Відгуки' },
+  pt: { read: 'Ler opiniões', write: 'Escrever uma opinião', empty: 'Ainda sem avaliações', ratings: 'Avaliações', reviews: 'Opiniões' },
+  fr: { read: 'Lire les avis', write: 'Donner un avis', empty: 'Pas encore de notes', ratings: 'Notes', reviews: 'Avis' },
+  hi: { read: 'समीक्षाएँ पढ़ें', write: 'समीक्षा लिखें', empty: 'अभी कोई रेटिंग नहीं है', ratings: 'रेटिंग', reviews: 'समीक्षाएँ' },
+  fi: { read: 'Lue kokemuksia', write: 'Kirjoita kokemuksestasi', empty: 'Ei vielä arvioita', ratings: 'Arviot', reviews: 'Kokemukset' },
 };
 
 const REVIEW_STATUS_COPY = {
@@ -351,7 +351,33 @@ const renderReviewCard = (review, copy, locale, statusCopy, canReply = false, re
   `;
 };
 
-const createWhyRatingLink = (copy, teaserCopy) => {
+export function renderRatingTeaser(summary, locale) {
+  const copy = COPY[locale] || COPY.en;
+  const teaser = TEASER_COPY[locale] || TEASER_COPY.en;
+  const average = Number(summary?.ratingCount) > 0 ? validRating(summary.averageRating) : null;
+  const format = new Intl.NumberFormat(locale || 'en', { minimumFractionDigits: 1, maximumFractionDigits: 1 });
+  const status = !summary ? copy.average : average === null && !summary.reviewCount
+    ? teaser.empty : formatFeedbackCounts(summary.ratingCount || 0, summary.reviewCount || 0, teaser);
+  const action = !summary || summary.reviewCount > 0 ? teaser.read : teaser.write;
+  const path = '<path d="m12 2.7 2.85 5.78 6.38.93-4.61 4.5 1.09 6.35L12 17.26l-5.71 3 1.09-6.35-4.61-4.5 6.38-.93L12 2.7Z"/>';
+  const stars = Array.from({length: 5}, (_, index) => {
+    const fill = Math.round(100 * Math.min(1, Math.max(0, (average ?? 0) - index)));
+    return `<span class="brand-rating-star"><svg viewBox="0 0 24 24" focusable="false">${path}</svg>${fill ? `<svg class="brand-rating-star__fill" viewBox="0 0 24 24" focusable="false" style="--rating-fill: ${fill}%">${path}</svg>` : ''}</span>`;
+  }).join('');
+
+  return `
+    <span class="brand-rating-teaser-summary">
+      <span class="brand-rating-teaser-stars" aria-hidden="true">${stars}</span>
+      ${average === null ? '' : `<span class="brand-rating-teaser-score"><strong>${escapeHtml(format.format(average))}</strong><span> / 5</span></span>`}
+    </span>
+    <span class="brand-rating-teaser-meta">
+      <span>${escapeHtml(status)}</span>
+      <span class="brand-rating-teaser-action">${escapeHtml(action)}</span>
+    </span>
+  `;
+}
+
+const createWhyRatingLink = (locale) => {
   const whySection = document.querySelector(
     'body[data-brand] #brand-why-section, body[data-brand] .brand-hero-why'
   );
@@ -364,35 +390,10 @@ const createWhyRatingLink = (copy, teaserCopy) => {
   const link = document.createElement('a');
   link.className = 'brand-rating-teaser';
   link.href = '#player-reviews';
-  link.setAttribute('aria-label', teaserCopy.first);
-  link.innerHTML = `
-    <strong data-rating-teaser-average>—</strong>
-    <span class="brand-rating-teaser-summary">
-      <span class="brand-rating-teaser-stars" data-rating-teaser-stars aria-hidden="true">${renderStars(0)}</span>
-      <span data-rating-teaser-counts>${escapeHtml(copy.average)}</span>
-    </span>
-    <span class="brand-rating-teaser-action" data-rating-teaser-action>${escapeHtml(teaserCopy.first)}</span>
-  `;
+  link.innerHTML = renderRatingTeaser(null, locale);
 
   title.insertAdjacentElement('afterend', link);
   return link;
-};
-
-const updateWhyRatingLink = (link, payload, copy, teaserCopy) => {
-  if (!link) return;
-  const average = Number(payload.summary?.averageRating || 0);
-  const ratingCount = Number(payload.summary?.ratingCount || 0);
-  const reviewCount = Number(payload.summary?.reviewCount || 0);
-  const action = reviewCount > 0 ? teaserCopy.read : teaserCopy.first;
-
-  link.querySelector('[data-rating-teaser-average]').textContent = ratingCount
-    ? average.toFixed(1)
-    : '—';
-  link.querySelector('[data-rating-teaser-stars]').innerHTML = renderStars(average);
-  link.querySelector('[data-rating-teaser-counts]').textContent =
-    formatFeedbackCounts(ratingCount, reviewCount, teaserCopy);
-  link.querySelector('[data-rating-teaser-action]').textContent = action;
-  link.setAttribute('aria-label', action);
 };
 
 const feedbackEndpoint = () =>
@@ -456,7 +457,7 @@ export const createBrandFeedbackSection = (brand, locale = 'en') => {
         <p>${escapeHtml(copy.intro)}</p>
       </div>
       <div class="brand-feedback-score" aria-live="polite">
-        <strong data-feedback-average>—</strong>
+        <strong data-feedback-average hidden></strong>
         <div class="brand-feedback-stars" data-feedback-stars aria-hidden="true">${renderStars(0)}</div>
         <span data-feedback-counts>${escapeHtml(copy.average)}</span>
       </div>
@@ -499,13 +500,15 @@ const renderReviews = (section, payload, copy, teaserCopy, locale, teaserLink, c
   const average = Number(payload.summary?.averageRating || 0);
   const ratingCount = Number(payload.summary?.ratingCount || 0);
   const reviewCount = Number(payload.summary?.reviewCount || 0);
-  section.querySelector('[data-feedback-average]').textContent = ratingCount
-    ? average.toFixed(1)
-    : '—';
+  const score = section.querySelector('[data-feedback-average]');
+  score.hidden = !ratingCount;
+  score.textContent = ratingCount ? new Intl.NumberFormat(locale, {
+    minimumFractionDigits: 1, maximumFractionDigits: 1,
+  }).format(average) : '';
   section.querySelector('[data-feedback-stars]').innerHTML = renderStars(average);
   section.querySelector('[data-feedback-counts]').textContent =
-    formatFeedbackCounts(ratingCount, reviewCount, teaserCopy);
-  updateWhyRatingLink(teaserLink, payload, copy, teaserCopy);
+    ratingCount || reviewCount ? formatFeedbackCounts(ratingCount, reviewCount, teaserCopy) : teaserCopy.empty;
+  if (teaserLink) teaserLink.innerHTML = renderRatingTeaser(payload.summary, locale);
 
   const list = section.querySelector('[data-feedback-list]');
   list.dataset.state = 'ready';
@@ -555,7 +558,7 @@ export const initBrandFeedback = async ({ brand, brandName = '', brandImage = ''
     section.querySelector('.brand-feedback-compose').remove();
     return;
   }
-  const teaserLink = createWhyRatingLink(copy, teaserCopy);
+  const teaserLink = createWhyRatingLink(locale);
   const form = section.querySelector('[data-feedback-form]');
   const signIn = section.querySelector('[data-feedback-signin]');
   const composeToggle = section.querySelector('[data-feedback-compose-toggle]');

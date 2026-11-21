@@ -1,7 +1,7 @@
 ﻿// =====================
 // IMPORTS
 // =====================
-import { BRANDS } from './brands.js?v=20261117-pinup-1';
+import { BRANDS } from './brands.js?v=20261121-betonwin';
 import { COUNTRIES } from './countries.js';
 import { getFeaturedHomeBrands } from './featured-brands.js?v=20261119-shared-search';
 import { initFaqSections } from './faq.js?v=20261119-faq-layout';
@@ -47,14 +47,14 @@ const loadPageModules = async () => {
   const hasCasinoCards = isHomePage || isCountryPage || document.querySelector('.casino-grid') ||
     (isBrandPage && findBrandByPageKey(document.body.dataset.brand)?.notRecommended);
   const cardScreenshotsReady = hasCasinoCards
-    ? import('./brand-homepage-screenshots.js?v=20261005-gravira-1').then(module => {
+    ? import('./brand-homepage-screenshots.js?v=20261120-betonwin').then(module => {
         BRAND_HOMEPAGE_SCREENSHOTS = module.BRAND_HOMEPAGE_SCREENSHOTS || {};
       }).catch(() => {})
     : Promise.resolve();
 
   if (isHomePage || isCountryPage) {
     const [gamesModule, homeModule, mediaModule] = await Promise.all([
-      import('./brand-new-games.js?v=20261005-gravira-1'),
+      import('./brand-new-games.js?v=20261120-betonwin'),
       import('./pages/home.js?v=20261119-shared-search'),
       isCountryPage ? import('./pages/country-media.js?v=20261118-country-catalog-1') : null,
     ]);
@@ -65,10 +65,10 @@ const loadPageModules = async () => {
 
   if (isBrandPage) {
     const [snapshotsModule, gamesModule, pageModule, feedbackModule] = await Promise.all([
-      import('./brand-snapshot-configs.js?v=20261006-vegasnow-2'),
-      import('./brand-new-games.js?v=20261005-gravira-1'),
-      import('./pages/brand.js?v=20261119-editorial-bands'),
-      import('./pages/brand-feedback.js?v=20261119-context-icons'),
+      import('./brand-snapshot-configs.js?v=20261121-snapshot-registry'),
+      import('./brand-new-games.js?v=20261120-betonwin'),
+      import('./pages/brand.js?v=20261121-snapshot-template'),
+      import('./pages/brand-feedback.js?v=20261121-review-rating'),
     ]);
     BRAND_SNAPSHOT_CONFIGS = snapshotsModule.BRAND_SNAPSHOT_CONFIGS || {};
     BRAND_NEW_GAMES = gamesModule.BRAND_NEW_GAMES || {};
@@ -377,7 +377,7 @@ const SITE_LOCALE = DOCUMENT_LANGUAGE.startsWith('de')
 let brandBonusTranslations = {};
 const brandBonusTranslationsReady = SITE_LOCALE === 'en'
   ? Promise.resolve()
-  : import(`./brand-bonus-translations/${SITE_LOCALE}.js?v=20261119-fraga-ar`)
+  : import(`./brand-bonus-translations/${SITE_LOCALE}.js?v=20261120-betonwin-template`)
       .then(module => {
         brandBonusTranslations = module.default || {};
       })

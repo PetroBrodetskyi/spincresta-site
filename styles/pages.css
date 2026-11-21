@@ -378,7 +378,7 @@ body[data-brand] .brand-sticky-title__brand {
   min-width: 56px;
   height: 40px;
   padding: 5px 10px;
-  border-radius: 999px;
+  border-radius: 8px;
   overflow: hidden;
 }
 
@@ -511,7 +511,7 @@ body[data-brand] .brand-feedback-score {
   text-align: left;
 }
 
-body[data-brand] .brand-feedback-score > strong {
+body[data-brand] .brand-feedback-score > strong:not([hidden]) {
   display: block;
   grid-area: average;
   color: var(--text-main);
@@ -6017,7 +6017,7 @@ body[data-brand].has-brand-sticky-layout .brand-profile-showcase .brand-logo-con
   aspect-ratio: 2.4;
   margin: 0;
   padding: 8px 12px;
-  border-radius: var(--control-radius);
+  border-radius: 8px;
   background: var(--brand-bg-color, var(--surface-card-soft));
   box-shadow: none;
 }
@@ -6037,10 +6037,12 @@ body[data-brand].has-brand-sticky-layout .brand-profile-showcase img.brand-logo 
 }
 
 body[data-brand] .brand-profile-showcase h1 {
+  --heading-size: calc(var(--type-title) - .25rem);
   min-width: 0;
   margin: 0;
   color: var(--text-main);
   text-align: start;
+  text-wrap: balance;
   overflow-wrap: anywhere;
 }
 
@@ -6116,33 +6118,8 @@ body[data-brand] .brand-profile-showcase .hero-cta-wrapper .cta-brands {
 }
 
 body[data-brand] .brand-profile-showcase .brand-profile-rating {
-  grid-template-columns: auto minmax(0, 1fr);
-  gap: 4px 9px;
   width: auto;
-  min-width: 0;
-  min-height: 44px;
-  padding: 8px 10px;
-  border-radius: var(--control-radius);
-  background: var(--surface-card);
-  box-shadow: none;
-  transform: none;
-}
-
-body[data-brand] .brand-profile-showcase .brand-profile-rating > strong {
-  grid-row: 1 / 3;
-  min-width: 0;
-  font-size: var(--type-section);
-}
-
-body[data-brand] .brand-profile-showcase .brand-rating-teaser-summary { gap: 3px; }
-
-body[data-brand] .brand-profile-showcase .brand-rating-teaser-stars { font-size: var(--type-ui); }
-
-body[data-brand] .brand-profile-showcase .brand-rating-teaser-action {
-  grid-column: 2;
-  letter-spacing: 0;
-  text-align: start;
-  text-transform: none;
+  max-width: 100%;
 }
 
 body[data-brand] .brand-profile-showcase__preview {
@@ -10644,26 +10621,23 @@ body[data-brand] .brand-why-heading > .title::before {
 
 body[data-brand] .brand-rating-teaser {
   display: grid;
-  grid-template-columns: auto minmax(0, 1fr) auto;
-  gap: 8px 16px;
-  align-items: center;
-  min-height: 72px;
-  padding: 14px 16px;
+  gap: 5px;
+  min-width: 0;
+  min-height: 44px;
+  padding: 8px 12px 9px;
   border: 1px solid var(--surface-border);
-  border-radius: var(--radius-md);
+  border-radius: 8px;
   background: var(--surface-card);
-  box-shadow: var(--shadow-soft);
   color: var(--text-main);
   text-decoration: none;
-  transition: border-color 180ms ease, box-shadow 180ms ease, transform 180ms ease;
+  transition: border-color 180ms ease, background-color 180ms ease;
 }
 
 body[data-brand] .brand-rating-teaser:hover,
 body[data-brand] .brand-rating-teaser:focus-visible {
   border-color: var(--section-accent);
-  box-shadow: var(--shadow-hover);
+  background: var(--surface-card-soft);
   color: var(--text-main);
-  transform: translateY(-2px);
 }
 
 body[data-brand] .brand-rating-teaser:focus-visible {
@@ -10671,44 +10645,76 @@ body[data-brand] .brand-rating-teaser:focus-visible {
   outline-offset: 3px;
 }
 
-body[data-brand] .brand-rating-teaser > strong {
-  min-width: 56px;
-  color: var(--text-main);
-  font-size: var(--type-title);
-  font-weight: 650;
-  line-height: 1;
-  letter-spacing: -0.04em;
+body[data-brand] .brand-rating-teaser-summary {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px 10px;
 }
 
-body[data-brand] .brand-rating-teaser-summary {
-  display: grid;
-  min-width: 0;
-  gap: 6px;
+body[data-brand] .brand-rating-teaser-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 2px 12px;
   color: var(--text-muted);
   font-size: var(--type-caption);
   line-height: 1.3;
+  overflow-wrap: anywhere;
 }
 
 body[data-brand] .brand-rating-teaser-stars {
   display: flex;
   gap: 3px;
-  color: var(--surface-border-strong);
-  font-size: var(--type-subheading);
-  line-height: 1;
+  color: #818c9b;
 }
 
-body[data-brand] .brand-rating-teaser-stars .is-filled {
-  color: var(--gold);
+body[data-brand] .brand-rating-star {
+  position: relative;
+  display: block;
+  width: 23px;
+  height: 23px;
+}
+
+body[data-brand] .brand-rating-star svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.45;
+  stroke-linejoin: round;
+}
+
+body[data-brand] .brand-rating-star .brand-rating-star__fill {
+  position: absolute;
+  inset: 0;
+  fill: #f4b942;
+  stroke: #a96406;
+  clip-path: inset(0 calc(100% - var(--rating-fill)) 0 0);
+}
+
+body[data-brand] .brand-rating-teaser-score {
+  color: var(--text-muted);
+  font-size: var(--type-caption);
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+body[data-brand] .brand-rating-teaser-score strong {
+  color: var(--text-main);
+  font-size: var(--type-subheading);
+  font-weight: 750;
 }
 
 body[data-brand] .brand-rating-teaser-action {
   color: var(--section-accent);
-  font-size: var(--type-caption);
-  font-weight: 800;
-  letter-spacing: 0.06em;
-  line-height: 1.35;
-  text-align: right;
-  text-transform: uppercase;
+  font-weight: 650;
+}
+
+body[data-brand] .brand-rating-teaser:is(:hover, :focus-visible) .brand-rating-teaser-action {
+  text-decoration: underline;
+  text-underline-offset: 2px;
 }
 
 body[data-brand] #player-reviews {
@@ -10805,20 +10811,6 @@ body[data-brand] .brand-why-heading.is-expanded .brand-why-media {
   body[data-brand] .brand-why-heading > .title::before {
     margin-bottom: 8px;
     font-size: var(--type-caption);
-  }
-
-  body[data-brand] .brand-rating-teaser {
-    grid-template-columns: auto minmax(0, 1fr);
-    gap: 8px 12px;
-    min-height: 68px;
-    padding: 13px 14px;
-  }
-
-  body[data-brand] .brand-rating-teaser-action {
-    grid-column: 1 / -1;
-    padding-top: 10px;
-    border-top: 1px solid var(--border-soft);
-    text-align: left;
   }
 
   body[data-brand] .brand-why-media {

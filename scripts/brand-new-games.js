@@ -1,4 +1,12 @@
 export const BRAND_NEW_GAMES = {
+  betonwin: [
+    ['Coin Up Volcano', 'v1791721606', 'coin-up-volcano_qfc8h6'],
+    ['Lucky Apple X2500', 'v1791721604', 'lucky-apple-x2500_i1qw7d'],
+    ['Diamond Slam Super Wheel', 'v1791721602', 'diamond-slam-super-wheel_fidl9w'],
+    ['Diamond Slam Xtra Power', 'v1791721600', 'diamond-slam-xtra-power_pk6efk'],
+    ['4 Express Trains Hold & Win', 'v1791721598', '4-express-trains-holdwin_hbiqet'],
+    ['4 Supercharged Clovers Super Wheel', 'v1791721596', '4-supercharged-clovers-super-wheel_e7grth'],
+  ].map(([name, version, id]) => ({ name, image: `https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto/${version}/spincresta/brands/betonwin/new-games/betonwin-new-game-${id}` })),
   gravira: [
     { name: 'Toothrot Tilly', image: 'https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto/v1791229304/spincresta/brands/gravira/new-games/gravira-new-game-toothrot-tilly_t1bgxq' },
     { name: 'Prosperity Lanterns', image: 'https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto/v1791229303/spincresta/brands/gravira/new-games/gravira-new-game-prosperity-lanterns_mmmity' },

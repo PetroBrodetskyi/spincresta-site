@@ -2,6 +2,7 @@
 
 import fs from 'node:fs';
 import path from 'node:path';
+import { isFaqSection } from '../scripts/faq.js';
 
 const ROOT = process.cwd();
 const LOCALE_ROOT = path.join(ROOT, 'fi');
@@ -68,10 +69,9 @@ for (const file of files) {
   }
 }
 
-const mainSource = fs.readFileSync(path.join(ROOT, 'scripts', 'main.js'), 'utf8');
 const brandSource = fs.readFileSync(path.join(ROOT, 'scripts', 'pages', 'brand.js'), 'utf8');
-if (!/titleText\.includes\(['"]ukk['"]\)/.test(mainSource) || !/titleText\.includes\(['"]kysym['"]\)/.test(mainSource)) {
-  errors.push('scripts/main.js: Finnish FAQ headings are not recognized by the accordion enhancer');
+if (!['UKK', 'Usein kysytyt kysymykset', 'Usein kysyttyä'].every(title => isFaqSection('', title))) {
+  errors.push('scripts/faq.js: Finnish FAQ headings are not recognized by the accordion enhancer');
 }
 if (!/label === ['"]plussat['"]/.test(brandSource) || !/label === ['"]miinukset['"]/.test(brandSource)) {
   errors.push('scripts/pages/brand.js: Finnish pros-and-cons labels are not recognized by the icon enhancer');

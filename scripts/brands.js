@@ -1,5 +1,17 @@
 export const BRANDS = [
   {
+    name: 'BetonWin',
+    bonus: 'Account offer: 100% up to 300,000 ARS + 50 Free Spins',
+    cta: 'Play Now',
+    urlDetail: 'brands/betonwin.html',
+    urlCasino: 'https://armadaapp.media-412.com/click?pid=3862&offer_id=127264',
+    image: 'images/betonwin.svg',
+    bgColor: '#04242D',
+    countries: ['AR'],
+    payments: ['mercadopago', 'banktransfer', 'naranjax', 'astropay', 'bitcoin', 'litecoin', 'ethereum', 'tether'],
+    hasDetailPage: true,
+  },
+  {
     name: 'Fortunica',
     bonus: 'Fortunica Casino features slots, fast payouts, and attractive bonuses',
     cta: 'Play now',

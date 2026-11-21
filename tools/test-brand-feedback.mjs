@@ -1,10 +1,31 @@
 import assert from 'node:assert/strict';
 import { afterEach, test } from 'node:test';
-import { fetchPublicFeedback, fetchFeedbackVotes, buildFeedbackStructuredData, renderRatingOptions } from '../scripts/pages/brand-feedback.js';
+import { fetchPublicFeedback, fetchFeedbackVotes, buildFeedbackStructuredData, renderRatingOptions, renderRatingTeaser } from '../scripts/pages/brand-feedback.js';
 
 const originalFetch = globalThis.fetch;
 afterEach(() => { globalThis.fetch = originalFetch; });
 const empty = { ok: true, summary: { averageRating: 0, ratingCount: 0, reviewCount: 0 }, reviews: [] };
+
+test('empty review masthead has outlined stars, plain copy and no numeric placeholder', () => {
+  const markup = renderRatingTeaser(empty.summary, 'en');
+  assert.equal((markup.match(/class="brand-rating-star"/g) || []).length, 5);
+  assert.match(markup, /No ratings yet/);
+  assert.match(markup, /Write a review/);
+  assert.doesNotMatch(markup, /—|0\.0|Ratings: 0|brand-rating-teaser-score|Be the first|--rating-fill/);
+  assert.doesNotMatch(renderRatingTeaser(null, 'en'), /No ratings yet|Write a review/);
+});
+
+test('a populated masthead shows the actual localized score and fractional stars', () => {
+  const summary = { averageRating: 4.3, ratingCount: 3, reviewCount: 2 };
+  const markup = renderRatingTeaser(summary, 'uk');
+  assert.match(markup, /<strong>4,3<\/strong><span> \/ 5/);
+  assert.equal((markup.match(/--rating-fill: 100%/g) || []).length, 4);
+  assert.match(markup, /--rating-fill: 30%/);
+  assert.match(markup, /Оцінки: 3 · Відгуки: 2/);
+  assert.match(markup, /Читати відгуки/);
+  assert.match(renderRatingTeaser({...summary, reviewCount: 0}, 'uk'), /Залишити відгук/);
+  assert.doesNotMatch(renderRatingTeaser({...empty.summary, averageRating: 5}, 'en'), /--rating-fill/);
+});
 
 test('rating options follow left-to-right keyboard order and have localized accessible names', () => {
   const markup = renderRatingOptions({ star: 'estrella', stars: 'estrellas' });

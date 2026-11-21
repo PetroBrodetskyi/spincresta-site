@@ -79,23 +79,26 @@ const createGamesLiveConfig = (gamesAvailable, liveAvailable) => ({
   ],
 });
 
-const createGamesLiveBettingConfig = (gamesAvailable, liveAvailable, bettingAvailable) => ({
+const createGamesLiveBettingConfig = (
+  gamesAvailable, liveAvailable, bettingAvailable,
+  { games = GAME_CATEGORIES, live = LIVE_GAME_CATEGORIES, betting = BETTING_CATEGORIES } = {},
+) => ({
   tabs: [
     createCategoryTab(
       'Games',
-      GAME_CATEGORIES,
+      games,
       gamesAvailable,
       'These are the main game categories currently visible in the account.'
     ),
     createCategoryTab(
       'Live games',
-      LIVE_GAME_CATEGORIES,
+      live,
       liveAvailable,
       'These are the live-dealer categories currently visible in the account.'
     ),
     createCategoryTab(
       'Betting',
-      BETTING_CATEGORIES,
+      betting,
       bettingAvailable,
       'These are the main betting categories currently visible in the account.'
     ),
@@ -539,7 +542,63 @@ const billyBillionConfig = createGamesLiveConfig(
   ['Live baccarat', 'Live blackjack', 'Other live games', 'Live poker', 'Live roulette']
 );
 
+// Verified casino categories and slot collections; these are not title counts.
+const BETONWIN_GAMES = ['Slots','Roulette','Blackjack','Baccarat','Jackpot games','Live games','Poker','Crash games','Bonus buy','Hold and Win','Megaways','Drops & Wins'];
+const BETONWIN_LIVE_GAMES = ['Live baccarat','Live roulette','Live blackjack','Live poker','Live shows','Other live games','Spanish-language tables','VIP live casino'];
+// Compared with the standard Snapshot categories. Gray entries mean no dedicated
+// category in the Argentine lobby we reviewed, not that individual games are absent.
+const BETONWIN_GAMES_NOT_LISTED = ['Video poker','Bingo','Keno','Scratch cards'];
+const BETONWIN_LIVE_GAMES_NOT_LISTED = ['Live bingo','Live dice games'];
+const betonwinExtraGameKeys = ['Bonus buy','Hold and Win','Megaways','Drops & Wins','Spanish-language tables','VIP live casino'];
+const betonwinGameNames = {
+  en:['Bonus buy','Hold and Win','Megaways','Drops & Wins','Spanish-language tables','VIP live casino'],
+  de:['Bonuskauf','Hold and Win','Megaways','Drops & Wins','Spanischsprachige Tische','VIP-Live-Casino'],
+  es:['Compra de bono','Hold and Win','Megaways','Drops & Wins','Mesas en español','Casino en vivo VIP'],
+  it:['Acquisto bonus','Hold and Win','Megaways','Drops & Wins','Tavoli in spagnolo','Casinò live VIP'],
+  pl:['Zakup bonusu','Hold and Win','Megaways','Drops & Wins','Stoły po hiszpańsku','Kasyno na żywo VIP'],
+  uk:['Купівля бонусу','Hold and Win','Megaways','Drops & Wins','Іспаномовні столи','VIP live-казино'],
+  pt:['Compra de bónus','Hold and Win','Megaways','Drops & Wins','Mesas em espanhol','Casino ao vivo VIP'],
+  fr:['Achat de bonus','Hold and Win','Megaways','Drops & Wins','Tables en espagnol','Casino en direct VIP'],
+  hi:['बोनस खरीद','Hold and Win','Megaways','Drops & Wins','स्पेनिश भाषा की टेबल','VIP लाइव कैसीनो'],
+  fi:['Bonuksen osto','Hold and Win','Megaways','Drops & Wins','Espanjankieliset pöydät','VIP-livekasino'],
+};
+const BETONWIN_GAME_LABELS = Object.fromEntries(Object.entries(betonwinGameNames).map(([lang,values])=>[lang,Object.fromEntries(betonwinExtraGameKeys.map((key,i)=>[key,values[i]]))]));
+
+// Confirmed in the ARS account's prematch navigation, 2026-11-20.
+// Politics and Other are betting sections, not sports disciplines.
+const BETONWIN_SPORTS = ['Football','Basketball','Tennis','Darts','eSports','Baseball','Handball','Futsal','Ice hockey','Volleyball','Boxing','Table tennis','Cricket','MMA','Badminton','Snooker','Motorsport','Biathlon','American football','Rugby','Chess'];
+export const BETONWIN_SPECIAL_MARKETS = ['Politics','Other'];
+const betonwinSportNames = {
+en:'Soccer|Basketball|Tennis|Darts|Esports|Baseball|Handball|Futsal|Ice hockey|Volleyball|Boxing|Table tennis|Cricket|MMA|Badminton|Snooker|Motorsports|Biathlon|American football|Rugby|Chess|Politics|Other',
+de:'Fußball|Basketball|Tennis|Darts|E-Sport|Baseball|Handball|Futsal|Eishockey|Volleyball|Boxen|Tischtennis|Cricket|MMA|Badminton|Snooker|Motorsport|Biathlon|American Football|Rugby|Schach|Politik|Sonstige',
+es:'Fútbol|Básquet|Tenis|Dardos|Esports|Béisbol|Balonmano|Futsal|Hockey sobre hielo|Vóley|Boxeo|Tenis de mesa|Críquet|MMA|Bádminton|Snooker|Automovilismo y motociclismo|Biatlón|Fútbol americano|Rugby|Ajedrez|Política|Otros',
+it:'Calcio|Basket|Tennis|Freccette|Esport|Baseball|Pallamano|Calcio a 5|Hockey su ghiaccio|Pallavolo|Pugilato|Tennis tavolo|Cricket|MMA|Badminton|Snooker|Motori|Biathlon|Football americano|Rugby|Scacchi|Politica|Altro',
+pl:'Piłka nożna|Koszykówka|Tenis|Dart|Esport|Baseball|Piłka ręczna|Futsal|Hokej na lodzie|Siatkówka|Boks|Tenis stołowy|Krykiet|MMA|Badminton|Snooker|Sporty motorowe|Biathlon|Futbol amerykański|Rugby|Szachy|Polityka|Inne',
+uk:'Футбол|Баскетбол|Теніс|Дартс|Кіберспорт|Бейсбол|Гандбол|Футзал|Хокей|Волейбол|Бокс|Настільний теніс|Крикет|MMA|Бадмінтон|Снукер|Авто- й мотоспорт|Біатлон|Американський футбол|Регбі|Шахи|Політика|Інше',
+pt:'Futebol|Basquetebol|Ténis|Dardos|Desportos eletrónicos|Basebol|Andebol|Futsal|Hóquei no gelo|Voleibol|Boxe|Ténis de mesa|Críquete|MMA|Badminton|Snooker|Desportos motorizados|Biatlo|Futebol americano|Râguebi|Xadrez|Política|Outros',
+fr:'Football|Basket|Tennis|Fléchettes|Esport|Baseball|Handball|Futsal|Hockey sur glace|Volley|Boxe|Tennis de table|Cricket|MMA|Badminton|Snooker|Sports mécaniques|Biathlon|Football américain|Rugby|Échecs|Politique|Autres',
+hi:'फ़ुटबॉल|बास्केटबॉल|टेनिस|डार्ट्स|ईस्पोर्ट्स|बेसबॉल|हैंडबॉल|फ़ुटसाल|आइस हॉकी|वॉलीबॉल|मुक्केबाज़ी|टेबल टेनिस|क्रिकेट|MMA|बैडमिंटन|स्नूकर|मोटरस्पोर्ट्स|बायथलॉन|अमेरिकी फ़ुटबॉल|रग्बी|शतरंज|राजनीति|अन्य',
+fi:'Jalkapallo|Koripallo|Tennis|Darts|E-urheilu|Baseball|Käsipallo|Futsal|Jääkiekko|Lentopallo|Nyrkkeily|Pöytätennis|Kriketti|MMA|Sulkapallo|Snooker|Moottoriurheilu|Ampumahiihto|Amerikkalainen jalkapallo|Rugby|Shakki|Politiikka|Muut',
+};
+const betonwinBettingCategories=[...BETONWIN_SPORTS,...BETONWIN_SPECIAL_MARKETS];
+const BETONWIN_SPORT_LABELS=Object.fromEntries(Object.entries(betonwinSportNames).map(([lang,text])=>{
+ const values=text.split('|');
+ if(values.length!==betonwinBettingCategories.length)throw Error('Incomplete sports labels: '+lang);
+ return [lang,Object.fromEntries(betonwinBettingCategories.map((key,i)=>[key,values[i]]))];
+}));
+
 export const BRAND_SNAPSHOT_CONFIGS = {
+  betonwin: {
+    ...createGamesLiveBettingConfig(BETONWIN_GAMES, BETONWIN_LIVE_GAMES, betonwinBettingCategories, {
+      games: [...BETONWIN_GAMES, ...BETONWIN_GAMES_NOT_LISTED],
+      live: [...BETONWIN_LIVE_GAMES, ...BETONWIN_LIVE_GAMES_NOT_LISTED],
+      betting: betonwinBettingCategories,
+    }),
+    labels: Object.fromEntries(Object.keys(BETONWIN_SPORT_LABELS).map(lang=>[lang,{
+      ...BETONWIN_SPORT_LABELS[lang],
+      ...BETONWIN_GAME_LABELS[lang],
+    }])),
+  },
   vegasnow: {
     ...createGamesLiveBettingConfig(
       ['Slots', 'Roulette', 'Blackjack', 'Baccarat', 'Jackpot games', 'Live games', 'Poker'],

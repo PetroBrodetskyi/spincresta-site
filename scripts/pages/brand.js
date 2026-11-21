@@ -1023,7 +1023,8 @@ export const initBrandPage = context => {
   };
   
   const snapshotLabel = value =>
-    SITE_LOCALE === 'de'
+    BRAND_SNAPSHOT_CONFIGS[document.body.dataset.brand]?.labels?.[SITE_LOCALE]?.[value] ||
+    (SITE_LOCALE === 'de'
       ? SNAPSHOT_DE_TRANSLATIONS[value] || value
       : SITE_LOCALE === 'es'
         ? SNAPSHOT_ES_TRANSLATIONS[value] || value
@@ -1041,7 +1042,7 @@ export const initBrandPage = context => {
                     ? SNAPSHOT_HI_TRANSLATIONS[value] || value
                     : SITE_LOCALE === 'fi'
                       ? SNAPSHOT_FI_TRANSLATIONS[value] || value
-          : value;
+          : value);
   
   const renderSnapshotItems = (items, isAvailable) =>
     items
@@ -1118,10 +1119,10 @@ export const initBrandPage = context => {
                     <img src="/icons/ui/confirm-icon.svg" alt="Available sections" aria-hidden="true" />
                     ${snapshotLabel('Visible now:')} ${availableCount}
                   </span>
-                  <span class="is-unavailable">
+                  ${unavailableCount > 0 ? `<span class="is-unavailable">
                     <img src="/icons/ui/remove-close-round-grey-icon.svg" alt="Unavailable sections" aria-hidden="true" />
                     ${snapshotLabel('Not surfaced:')} ${unavailableCount}
-                  </span>
+                  </span>` : ''}
                 </div>
                 <p>${normalizeText(
                   snapshotLabel(
