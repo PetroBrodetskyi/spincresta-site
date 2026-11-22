@@ -8984,8 +8984,8 @@ body[data-page='moderator'] .moderation-user-table { min-width: 1420px; }
 body[data-page='moderator'] .moderation-user-labels em.is-representative { color: var(--gold, #ffdf00); }
 body[data-page='moderator'] .moderation-user-access { display: grid; min-width: 250px; gap: 7px; }
 body[data-page='moderator'] .moderation-user-access select {
-  width: 100%; min-height: 36px; padding: 7px 10px; border: 1px solid var(--surface-border-strong);
-  border-radius: 4px; background: var(--surface-card-soft); color: var(--text-main); font: inherit; font-size: var(--type-caption);
+  width: 100%; min-height: 36px; padding-block: 7px; border: 1px solid var(--surface-border-strong);
+  border-radius: 4px; background-color: var(--surface-card-soft); color: var(--text-main); font: inherit; font-size: var(--type-caption);
 }
 body[data-page='moderator'] .moderation-brand-picker {
   position: relative;
@@ -18582,6 +18582,7 @@ html:root body.home-page #home-brand-carousel {
   padding: 3px;
   overflow-anchor: none;
   overflow-x: auto;
+  overflow-y: hidden;
   overscroll-behavior-inline: contain;
   scroll-snap-type: inline mandatory;
   scroll-padding-inline: 3px;
@@ -18629,7 +18630,7 @@ html:root body.home-page #home-brand-carousel.is-resetting { scroll-snap-type: n
   background: var(--surface-card-soft);
 }
 
-.home-country-directory .countries-cloud {
+:is(.home-country-directory, .market-country-picker) .countries-cloud {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
@@ -18639,7 +18640,7 @@ html:root body.home-page #home-brand-carousel.is-resetting { scroll-snap-type: n
   overflow: visible;
 }
 
-html body .home-country-directory .countries-cloud .country-link {
+html body :is(.home-country-directory, .market-country-picker) .countries-cloud .country-link {
   width: auto;
   max-width: 100%;
   min-height: 37px;
@@ -18652,33 +18653,75 @@ html body .home-country-directory .countries-cloud .country-link {
   overflow-wrap: anywhere;
 }
 
-.home-country-directory .country-link:focus-visible,
-.home-country-toggle:focus-visible {
+:is(.home-country-directory, .market-country-picker) .country-link:focus-visible,
+.country-cloud-toggle:focus-visible {
   outline: 2px solid var(--text-main);
   outline-offset: 2px;
 }
 
-.home-country-directory .countries-cloud .flag {
+:is(.home-country-directory, .market-country-picker) .countries-cloud .flag {
   width: 19px;
   height: 14px;
   object-fit: contain;
 }
 
-.home-country-toggle {
+.country-cloud-toggle {
   display: none;
 }
 
+.market-country-picker {
+  padding-block: clamp(20px, 3vw, 36px);
+  padding-inline: max(var(--page-gutter), calc((100% - var(--site-max-width)) / 2 + var(--page-gutter)));
+  scroll-margin-block-start: calc(var(--header-height, 64px) + 12px);
+}
+
+.market-country-picker h2 {
+  margin: 0 0 8px;
+  text-align: center;
+}
+
+.market-country-picker > p {
+  max-width: 66ch;
+  margin: 0 auto 18px;
+  color: var(--text-muted);
+  line-height: 1.5;
+  text-align: center;
+}
+
+.top-casino-results,
+.top-casino-ranking {
+  scroll-margin-block-start: calc(var(--header-height, 64px) + 16px);
+}
+
+.top-casino-rankings {
+  display: grid;
+  gap: clamp(40px, 6vw, 78px);
+  min-width: 0;
+}
+
+.top-casino-reset {
+  min-height: 42px;
+  margin-block-end: 12px;
+  padding: 8px 14px;
+  border: 1px solid var(--surface-border-strong);
+  font-size: var(--type-ui);
+  font-weight: 650;
+  cursor: pointer;
+}
+
+.top-casino-ranking .top-casino-empty { grid-column: 1 / -1; }
+
 @media (max-width: 768px) {
-  .home-country-directory .countries-cloud.is-collapsed > .home-country-extra {
+  :is(.home-country-directory, .market-country-picker) .countries-cloud.is-collapsed > .country-cloud-extra {
     display: none;
   }
 
-  html body .home-country-directory .countries-cloud .country-link {
+  html body :is(.home-country-directory, .market-country-picker) .countries-cloud .country-link {
     min-height: 44px;
     padding-inline: 9px;
   }
 
-  .home-country-toggle {
+  .country-cloud-toggle {
     display: block;
     min-height: 44px;
     margin: 10px auto 0;

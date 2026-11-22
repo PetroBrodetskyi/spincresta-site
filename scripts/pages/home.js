@@ -1,6 +1,7 @@
 // Page-specific module. Loaded dynamically by scripts/main.js.
 
 import { getBrandDetailSlug, getFeaturedHomeBrands } from '../featured-brands.js?v=20261119-shared-search';
+import { bindCompactCountryCloud } from '../country-cloud.js?v=20261122-market-cloud';
 
 const HOME_GAMES_PX_PER_SECOND = 24;
 const HOME_GAMES_SCROLL_IDLE_MS = 950;
@@ -8,6 +9,25 @@ const HOME_GAMES_SCROLL_IDLE_MS = 950;
 export const homeBrandScrollStep = (viewport, card, gap) => {
   const column = card + gap;
   return column > 0 ? column * Math.max(1, Math.floor((viewport + gap) / column)) : viewport;
+};
+
+export const forwardHomeBrandVerticalWheel = (event, page = window) => {
+  if (!event.cancelable || event.defaultPrevented || event.shiftKey || event.ctrlKey || event.metaKey || event.altKey) return;
+  // Read the units before the deltas; some browsers normalize deltas based on this access.
+  const mode = event.deltaMode;
+  const { deltaX, deltaY } = event;
+  if (!deltaY || Math.abs(deltaY) <= Math.abs(deltaX)) return;
+
+  const root = page.document.scrollingElement;
+  if (!root) return;
+  const current = root.scrollTop;
+  const limit = root.scrollHeight - root.clientHeight;
+  if (limit <= 0 || (deltaY < 0 ? current <= 0 : current >= limit)) return;
+
+  const unit = mode === 1 ? parseFloat(page.getComputedStyle(root).lineHeight) || 16
+    : mode === 2 ? root.clientHeight : 1;
+  event.preventDefault();
+  page.scrollBy({ top: deltaY * unit, behavior: 'instant' });
 };
 
 function bindHomeBrandTrack(grid, controls, previous, next) {
@@ -37,6 +57,11 @@ function bindHomeBrandTrack(grid, controls, previous, next) {
     event.preventDefault();
     step(event.key === 'ArrowLeft' ? -1 : 1);
   });
+  grid.addEventListener('wheel', event => {
+    // A wheel sequence can stay latched to the track after its direction changes.
+    // Route each vertical event independently; horizontal wheel and touch remain native.
+    if (!controls.hidden) forwardHomeBrandVerticalWheel(event);
+  }, { passive: false });
   grid.addEventListener('scroll', sync, { passive: true });
   if (window.ResizeObserver) new ResizeObserver(sync).observe(grid);
   else window.addEventListener('resize', sync, { passive: true });
@@ -252,42 +277,10 @@ export const initHomePage = context => {
   } = context;
 
   const initHomeCountryCloud = () => {
-    const directory = document.querySelector('.home-country-directory');
-    const cloud = directory?.querySelector('.countries-cloud');
+    const cloud = document.querySelector('.home-country-directory .countries-cloud');
     if (!cloud) return;
-    const extraCountries = [...cloud.children].slice(18);
-    if (!extraCountries.length) return;
-    extraCountries.forEach(link => link.classList.add('home-country-extra'));
-
-    const showAll = localeText(
-      'Show all countries', 'Alle Länder anzeigen', 'Mostrar todos los países',
-      'Mostra tutti i paesi', 'Pokaż wszystkie kraje', 'Показати всі країни',
-      'Mostrar todos os países', 'Voir tous les pays', 'सभी देश दिखाएँ', 'Näytä kaikki maat'
-    );
-    const showFewer = localeText(
-      'Show fewer countries', 'Weniger Länder anzeigen', 'Mostrar menos países',
-      'Mostra meno paesi', 'Pokaż mniej krajów', 'Згорнути список країн',
-      'Mostrar menos países', 'Afficher moins de pays', 'कम देश दिखाएँ', 'Näytä vähemmän maita'
-    );
-    const toggle = document.createElement('button');
-    toggle.type = 'button';
-    toggle.className = 'home-country-toggle';
     cloud.id = 'home-country-cloud';
-    toggle.setAttribute('aria-controls', cloud.id);
-
-    const setExpanded = expanded => {
-      cloud.classList.toggle('is-collapsed', !expanded);
-      toggle.setAttribute('aria-expanded', String(expanded));
-      toggle.textContent = expanded ? showFewer : `${showAll} (${cloud.children.length})`;
-    };
-
-    toggle.addEventListener('click', () => {
-      const expanded = toggle.getAttribute('aria-expanded') !== 'true';
-      setExpanded(expanded);
-      if (expanded) extraCountries[0].focus();
-    });
-    setExpanded(false);
-    directory.append(toggle);
+    bindCompactCountryCloud(cloud, localeText);
   };
 
   // Follow the existing market priority for localized results and their games.

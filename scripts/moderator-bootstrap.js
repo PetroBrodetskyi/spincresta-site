@@ -1,4 +1,4 @@
-import { initModeratorPage } from './pages/moderator.js?v=20261122-moderator-contacts';
+import { initModeratorPage } from './pages/moderator.js?v=20261122-select-controls';
 
 const startModerator = () => {
   initModeratorPage().catch(() => {

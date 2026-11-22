@@ -1,266 +1,113 @@
 // Top-casinos module. Loaded only on body[data-page="top-casinos"].
+import { bindCompactCountryCloud } from '../country-cloud.js?v=20261122-market-cloud';
 
 export const TOP_CASINOS_PREVIEW_LIMIT = 5;
 
-export const initTopCasinosPage = context => {
-  const {
-    COUNTRIES,
-    BRANDS,
-    SITE_LOCALE,
-    localeText,
-    escapeHtml,
-    localizedCountryName,
-    localizedCountryTitle,
-    countryPagePath,
-    iconPath,
-    createCasinoCard,
-    requestPaymentIconSync,
-  } = context;
+export const topCasinosForCountry = (brands, code) => {
+  const priority = brand => Number.isFinite(brand.countryPagePriority)
+    ? brand.countryPagePriority : Number.MAX_SAFE_INTEGER;
+  return brands.filter(brand => brand.countries?.includes(code))
+    .map((brand, index) => ({
+      brand,
+      index,
+      blocked: Number(Boolean(brand.notRecommended || brand.temporarilyUnavailable)),
+      tier: Number.isFinite(brand.countryPagePriority) ? 0 : brand.top?.includes(code) ? 1 : 2,
+    }))
+    .sort((a, b) => a.blocked - b.blocked || a.tier - b.tier ||
+      priority(a.brand) - priority(b.brand) || a.index - b.index)
+    .slice(0, TOP_CASINOS_PREVIEW_LIMIT)
+    .map(({ brand }) => brand);
+};
 
-  const initTopCasinosJumpNav = () => {
-    if (document.body.dataset.page !== 'top-casinos' || document.querySelector('.top-casino-jump-nav')) {
-      return;
-    }
+export const initTopCasinosPage = ({
+  COUNTRIES, BRANDS, localeText, localizedCountryTitle, createCasinoCard, requestPaymentIconSync,
+}) => {
+  const cloud = document.querySelector('[data-top-casino-markets]');
+  const results = document.querySelector('[data-top-casino-results]');
+  if (!cloud || !results) return;
 
-    const contentArea = document.querySelector('.content-area');
-    const sections = Array.from(document.querySelectorAll('.content[data-country]'));
-    if (!contentArea || sections.length < 2) return;
+  const countries = new Map(COUNTRIES.map(country => [country.slug, country]));
+  const markets = new Map([...cloud.querySelectorAll('[data-top-casino-country]')].map(link =>
+    ['#top-' + link.dataset.topCasinoCountry, link]));
+  const compactCloud = bindCompactCountryCloud(cloud, localeText);
+  const template = results.querySelector('[data-top-casino-ranking-template]');
+  const stack = results.querySelector('[data-top-casino-rankings]');
+  const reset = results.querySelector('[data-top-casino-reset]');
+  const featured = ['united-states', 'united-kingdom', 'australia', 'canada', 'brazil'];
+  const allLinks = [...new Set([...featured.map(slug => markets.get('#top-' + slug)), ...markets.values()])]
+    .filter(link => link && countries.has(link.dataset.topCasinoCountry));
+  const rankings = new Map();
+  let currentLink;
 
-    const sectionsByCode = new Map();
-    sections.forEach(section => {
-      const code = section.dataset.country?.toUpperCase();
-      const country = COUNTRIES.find(item => item.code.toUpperCase() === code);
-      if (!code || !country) return;
-      section.id = section.id || `top-${country.slug}`;
-      sectionsByCode.set(code, section);
-    });
+  const rankingFor = link => {
+    const country = countries.get(link.dataset.topCasinoCountry);
+    if (rankings.has(country.slug)) return rankings.get(country.slug);
 
-    const featuredCodes = new Set(['US', 'UK', 'AU', 'CA', 'BR']);
-    const copy = SITE_LOCALE === 'de'
-      ? {
-          kicker: `${COUNTRIES.length} LÄNDER-GUIDES`,
-          title: 'Wählen Sie Ihren Markt',
-          description: 'Öffnen Sie eine hervorgehobene Rangliste oder wechseln Sie direkt zum vollständigen Länder-Guide.',
-          show: 'Alle Länder anzeigen',
-          hide: 'Weniger anzeigen',
-          label: 'Casino-Rankings und Länder-Guides',
-        }
-      : SITE_LOCALE === 'es'
-        ? {
-            kicker: `${COUNTRIES.length} GUÍAS POR PAÍS`,
-            title: 'Elige tu mercado',
-            description: 'Abre una clasificación destacada o accede directamente a la guía completa de tu país.',
-            show: 'Mostrar todos los países',
-            hide: 'Mostrar menos',
-            label: 'Clasificaciones de casinos y guías por país',
-          }
-        : SITE_LOCALE === 'it'
-          ? {
-              kicker: `${COUNTRIES.length} GUIDE PER PAESE`,
-              title: 'Scegli il tuo mercato',
-              description: 'Apri una classifica in evidenza oppure vai direttamente alla guida completa per il tuo paese.',
-              show: 'Mostra tutti i paesi',
-              hide: 'Mostra meno',
-              label: 'Classifiche dei casinò e guide per paese',
-            }
-          : SITE_LOCALE === 'pl'
-            ? {
-                kicker: `${COUNTRIES.length} PRZEWODNIKI PO KRAJACH`,
-                title: 'Wybierz swój rynek',
-                description: 'Otwórz wyróżniony ranking lub przejdź bezpośrednio do pełnego przewodnika po swoim kraju.',
-                show: 'Pokaż wszystkie kraje',
-                hide: 'Pokaż mniej',
-                label: 'Rankingi kasyn i przewodniki po krajach',
-              }
-            : SITE_LOCALE === 'uk'
-              ? {
-                  kicker: `${COUNTRIES.length} ГІДИ ЗА КРАЇНАМИ`,
-                  title: 'Оберіть свій ринок',
-                  description: 'Відкрийте вибраний рейтинг або перейдіть до повного гіда для своєї країни.',
-                  show: 'Показати всі країни',
-                  hide: 'Показати менше',
-                  label: 'Рейтинги казино та гіди за країнами',
-                }
-              : SITE_LOCALE === 'pt'
-                ? {
-                    kicker: `${COUNTRIES.length} GUIAS POR PAÍS`,
-                    title: 'Escolha o seu mercado',
-                    description: 'Abra uma classificação em destaque ou aceda diretamente ao guia completo do seu país.',
-                    show: 'Mostrar todos os países',
-                    hide: 'Mostrar menos',
-                    label: 'Classificações de casinos e guias por país',
-                  }
-                : SITE_LOCALE === 'fr'
-                  ? {
-                      kicker: `${COUNTRIES.length} GUIDES PAR PAYS`,
-                      title: 'Choisissez votre marché',
-                      description: 'Ouvrez un classement mis en avant ou accédez directement au guide complet de votre pays.',
-                      show: 'Afficher tous les pays',
-                      hide: 'Afficher moins de pays',
-                      label: 'Classements de casinos et guides par pays',
-                    }
-                  : SITE_LOCALE === 'hi'
-                    ? {
-                        kicker: `${COUNTRIES.length} देश गाइड`,
-                        title: 'अपना बाज़ार चुनें',
-                        description: 'चुनिंदा रैंकिंग खोलें या सीधे अपने देश की पूरी गाइड देखें।',
-                        show: 'सभी देश दिखाएं',
-                        hide: 'कम देश दिखाएं',
-                        label: 'कैसीनो रैंकिंग और देश गाइड',
-                      }
-                    : SITE_LOCALE === 'fi'
-                      ? {
-                          kicker: `${COUNTRIES.length} MAAOPASTA`,
-                          title: 'Valitse markkinasi',
-                          description: 'Avaa suositeltu ranking tai siirry suoraan oman maasi kattavaan oppaaseen.',
-                          show: 'Näytä kaikki maat',
-                          hide: 'Näytä vähemmän',
-                          label: 'Kasinorankingit ja maaoppaat',
-                        }
-          : {
-          kicker: `${COUNTRIES.length} COUNTRY GUIDES`,
-          title: 'Choose your market',
-          description: 'Open a featured ranking below or go directly to the complete guide for your country.',
-          show: 'Show all countries',
-          hide: 'Show fewer',
-          label: 'Casino rankings and country guides',
-        };
-
-    const nav = document.createElement('nav');
-    nav.className = 'top-casino-jump-nav';
-    nav.id = 'top-casino-markets';
-    nav.setAttribute('aria-label', copy.label);
-    nav.innerHTML = `
-      <div class="top-casino-jump-nav__head">
-        <div>
-
-          <h2>${escapeHtml(copy.title)}</h2>
-          <p>${escapeHtml(copy.description)}</p>
-        </div>
-        <button class="top-casino-jump-toggle" type="button" aria-expanded="false" aria-controls="top-casino-country-links">
-          ${escapeHtml(copy.show)}
-        </button>
-      </div>
-      <div class="top-casino-jump-nav__links" id="top-casino-country-links">
-        ${COUNTRIES.map(country => {
-            const code = country.code.toUpperCase();
-            const section = sectionsByCode.get(code);
-            const title = localizedCountryName(country);
-            const href = section ? `#${section.id}` : countryPagePath(country.slug);
-            return `
-              <a class="top-casino-jump-link" href="${escapeHtml(href)}" data-featured="${featuredCodes.has(code) ? 'true' : 'false'}">
-                <img class="flag" src="${iconPath(country.slug)}" alt="" aria-hidden="true" loading="lazy" decoding="async" />
-                <span>${escapeHtml(title)}</span>
-              </a>
-            `;
-          })
-          .join('')}
-      </div>
-    `;
-
-    contentArea.insertAdjacentElement('beforebegin', nav);
-
-    const toggle = nav.querySelector('.top-casino-jump-toggle');
-    toggle?.addEventListener('click', () => {
-      const isExpanded = nav.classList.toggle('is-expanded');
-      toggle.setAttribute('aria-expanded', String(isExpanded));
-      toggle.textContent = isExpanded ? copy.hide : copy.show;
-    });
-  };
-
-  const ensureTopCasinosCountrySections = () => {
-    if (document.body.dataset.page !== 'top-casinos') return;
-
-    const contentArea = document.querySelector('.content-area');
-    const insertionPoint = contentArea?.querySelector('.top-casinos-method');
-    if (!contentArea || !insertionPoint) return;
-
-    const existingCodes = new Set(
-      Array.from(contentArea.querySelectorAll('.content[data-country]'))
-        .map(section => section.dataset.country?.toUpperCase())
-        .filter(Boolean)
-    );
-    const fragment = document.createDocumentFragment();
-
-    COUNTRIES.forEach(country => {
-      const code = country.code.toUpperCase();
-      if (existingCodes.has(code)) return;
-
-      const section = document.createElement('section');
-      section.className = 'content top-casinos-generated-country';
-      section.dataset.country = code;
-      section.id = `top-${country.slug}`;
-      section.innerHTML = `
-        <div class="cards-main">
-          <h2 class="top-country-title">${escapeHtml(localizedCountryName(country))}</h2>
-          <div class="casino-grid"></div>
-          <div class="view-all-wrapper" hidden>
-            <a class="view-all" href="${countryPagePath(country.slug)}"></a>
-          </div>
-        </div>
-      `;
-      fragment.appendChild(section);
-    });
-
-    insertionPoint.after(fragment);
-  };
-
-  ensureTopCasinosCountrySections();
-
-  document.querySelectorAll('.content[data-country]').forEach(section => {
-    const code = section.dataset.country?.toUpperCase();
-    if (!code) return;
-
-    const titleEl = section.querySelector('.top-country-title');
+    const section = template.content.firstElementChild.cloneNode(true);
+    section.id = 'top-' + country.slug;
+    section.dataset.country = country.code.toUpperCase();
+    const title = section.querySelector('.top-country-title');
+    title.id = section.id + '-title';
+    title.textContent = localizedCountryTitle(country);
+    section.setAttribute('aria-labelledby', title.id);
+    section.querySelector('.view-all').href = link.href;
     const grid = section.querySelector('.casino-grid');
-    const viewAllWrapper = section.querySelector('.view-all-wrapper');
-    const viewAllLink = section.querySelector('.view-all');
-    if (!titleEl || !grid) return;
-
-    const country = COUNTRIES.find(item => item.code.toUpperCase() === code);
-    titleEl.textContent = localizedCountryTitle(country || { slug: '', name: code });
-
-    const eligibleBrands = BRANDS.filter(brand => brand.countries?.includes(code));
-    const isBlocked = brand => Boolean(brand.notRecommended || brand.temporarilyUnavailable);
-    const priority = brand =>
-      Number.isFinite(brand.countryPagePriority) ? brand.countryPagePriority : Number.MAX_SAFE_INTEGER;
-    const rankedBrands = eligibleBrands
-      .map((brand, index) => ({
-        brand,
-        index,
-        blocked: isBlocked(brand) ? 1 : 0,
-        tier: Number.isFinite(brand.countryPagePriority) ? 0 : brand.top?.includes(code) ? 1 : 2,
-      }))
-      .sort(
-        (a, b) =>
-          a.blocked - b.blocked ||
-          a.tier - b.tier ||
-          priority(a.brand) - priority(b.brand) ||
-          a.index - b.index
-      )
-      .map(({ brand }) => brand);
-    const renderedBrands = rankedBrands.slice(0, TOP_CASINOS_PREVIEW_LIMIT);
-
-    if (!renderedBrands.length) {
-      grid.innerHTML = '<p>' + localeText('No top casinos available.', 'Keine Top-Casinos verfügbar.', 'No hay casinos destacados disponibles.') + '</p>';
+    const ranked = topCasinosForCountry(BRANDS, section.dataset.country);
+    if (ranked.length) {
+      grid.append(...ranked.map(brand => createCasinoCard(brand)));
     } else {
-      const fragment = document.createDocumentFragment();
-      renderedBrands.forEach(brand => fragment.appendChild(createCasinoCard(brand)));
-      grid.replaceChildren(fragment);
+      const empty = document.createElement('p');
+      empty.className = 'top-casino-empty';
+      empty.textContent = localeText(
+        'No casinos are listed for this country.', 'Für dieses Land sind keine Casinos gelistet.',
+        'No hay casinos en la lista de este país.', 'Non ci sono casinò nell’elenco per questo paese.',
+        'Na liście dla tego kraju nie ma kasyn.', 'У списку для цієї країни немає казино.',
+        'Não há casinos na lista para este país.', 'Aucun casino ne figure dans la liste pour ce pays.',
+        'इस देश के लिए सूची में कोई कैसीनो नहीं है।', 'Tämän maan listalla ei ole kasinoita.'
+      );
+      grid.append(empty);
+    }
+    rankings.set(country.slug, section);
+    return section;
+  };
+
+  const showRankings = (link, { focus = false } = {}) => {
+    if (currentLink !== link) {
+      currentLink?.removeAttribute('aria-current');
+      currentLink = link;
+      if (link) {
+        link.setAttribute('aria-current', 'true');
+        compactCloud.reveal(link);
+      }
+      stack.replaceChildren(...(link ? [link] : allLinks).map(rankingFor));
+      reset.hidden = !link;
       requestPaymentIconSync();
     }
 
-    if (country && viewAllWrapper && viewAllLink) {
-      const countryName = localizedCountryName(country);
-      viewAllWrapper.hidden = false;
-      viewAllLink.href = countryPagePath(country.slug);
-      viewAllLink.textContent = localeText(
-        'View all ' + countryName + ' casinos',
-        'Alle Casinos in ' + countryName + ' anzeigen',
-        'Ver todos los casinos de ' + countryName
-      );
+    if (focus) {
+      stack.querySelector('.top-country-title')?.focus({ preventScroll: true });
+      results.scrollIntoView({ block: 'start', behavior: 'instant' });
     }
+  };
+
+  cloud.addEventListener('click', event => {
+    const link = event.target.closest('[data-top-casino-country]');
+    if (!link || event.defaultPrevented || event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+    const hash = '#top-' + link.dataset.topCasinoCountry;
+    if (!markets.has(hash) || !countries.has(link.dataset.topCasinoCountry)) return;
+    event.preventDefault();
+    if (window.location.hash !== hash) history.pushState(null, '', hash);
+    showRankings(link, { focus: true });
   });
 
-  initTopCasinosJumpNav();
+  reset.addEventListener('click', () => {
+    history.pushState(null, '', window.location.pathname + window.location.search);
+    showRankings(null, { focus: true });
+  });
+  const readHash = () => {
+    const link = markets.get(window.location.hash);
+    showRankings(allLinks.includes(link) ? link : null);
+  };
+  window.addEventListener('hashchange', readHash);
+  readHash();
 };

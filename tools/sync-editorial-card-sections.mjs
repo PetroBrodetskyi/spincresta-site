@@ -2,6 +2,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import { pathToFileURL } from 'node:url';
 import { siteIconMarkup } from '../scripts/site-icons.js';
+import { syncTopCasinoEditorial } from './top-casino-markets.mjs';
 
 const locales = ['', 'de', 'es', 'it', 'pl', 'uk', 'pt', 'fr', 'hi', 'fi'];
 const listingIcons = {
@@ -10,36 +11,9 @@ const listingIcons = {
   'exclusive-offers': ['wallet', 'review', 'bonus', 'clock', 'link'],
 };
 
-const guideTitles = {
-  en: ['What we compare', 'Check your country', 'Set limits'],
-  de: ['Was wir vergleichen', 'Land prüfen', 'Limits festlegen'],
-  es: ['Qué comparamos', 'Consulta tu país', 'Fija límites'],
-  it: ['Che cosa confrontiamo', 'Verifica il tuo paese', 'Imposta dei limiti'],
-  pl: ['Co porównujemy', 'Sprawdź swój kraj', 'Ustal limity'],
-  uk: ['Що ми порівнюємо', 'Перевірте умови для своєї країни', 'Встановіть ліміти'],
-  pt: ['O que comparamos', 'Consulte o seu país', 'Defina limites'],
-  fr: ['Ce que nous comparons', 'Vérifiez les conditions dans votre pays', 'Fixez des limites'],
-  hi: ['हम किन बातों की तुलना करते हैं', 'अपने देश के नियम देखें', 'सीमाएँ तय करें'],
-  fi: ['Mitä vertailemme', 'Tarkista maakohtaiset ehdot', 'Aseta rajat'],
-};
-
-const guidePreviewPhrases = {
-  en: ['the six current choices shown', 'the choices shown'],
-  de: ['die sechs aktuell angezeigten Empfehlungen', 'die angezeigten Empfehlungen'],
-  es: ['las seis opciones actuales que se muestran', 'las opciones que se muestran'],
-  it: ['le sei scelte attuali mostrate', 'le opzioni mostrate'],
-  pl: ['sześć aktualnych opcji pokazanych', 'opcje pokazane'],
-  uk: ['шість поточних варіантів, показаних', 'варіанти, показані'],
-  pt: ['as seis opções atuais mostradas', 'as opções mostradas'],
-  fr: ['les six choix actuels présentés', 'les options présentées'],
-  hi: ['छह मौजूदा विकल्पों', 'विकल्पों'],
-  fi: ['kuutta nykyistä vaihtoehtoa', 'vaihtoehtoja'],
-};
-
 const sections = {
   'top-casinos': [
     ['class="top-casinos-method-grid"', ['safety', 'games', 'bonus', 'payments', 'clock']],
-    ['class="content top-casinos-reading-guide"', ['review', 'globe', 'safety']],
   ],
 };
 
@@ -61,34 +35,14 @@ function replaceCards(html, icons, ordered = false) {
   return result;
 }
 
-function formatReadingGuide(section, icons, locale) {
-  const titles = guideTitles[locale];
-  const heading = section.match(/<h2 class="title">([\s\S]*?)<\/h2>/)?.[1];
-  const paragraphs = [...section.matchAll(/<p>[\s\S]*?<\/p>/g)].map(match => match[0]);
-  if (!heading || paragraphs.length !== icons.length || titles.length !== icons.length) {
-    throw new Error('Unexpected Top Casinos reading guide structure');
-  }
-  paragraphs[1] = paragraphs[1].replace(...guidePreviewPhrases[locale]);
-  const cards = paragraphs.map((paragraph, i) => `            <article>
-              ${siteIconMarkup(icons[i], 'home-method-icon', 40)}
-              <h3>${titles[i]}</h3>
-              ${paragraph}
-            </article>`).join('\n');
-  return `<section class="editorial-card-band" id="seo-editorial-guide" aria-labelledby="reading-guide-title" data-editorial-columns="${paragraphs.length}">
-        <div class="container editorial-card-inner">
-          <div class="home-showcase-heading"><div><h2 id="reading-guide-title">${heading}</h2></div></div>
-          <div class="home-method-grid">
-${cards}
-          </div>
-        </div>
-      </section>`;
-}
-
 export function syncEditorialCardSections(html, page) {
+  const topCasinos = page === 'top-casinos';
+  const locale = html.match(/<html\b[^>]*\blang="([a-z]{2})/i)?.[1]?.toLowerCase() || 'en';
+  const content = topCasinos ? syncTopCasinoEditorial(html, locale) : html;
   let index = 0;
   const listing = Object.hasOwn(listingIcons, page) ? listingIcons[page] : null;
   const knownSections = Object.hasOwn(sections, page) ? sections[page] : [];
-  const updated = html.replace(/<section\b[^>]*>[\s\S]*?<\/section>/g, section => {
+  const updated = content.replace(/<section\b[^>]*>[\s\S]*?<\/section>/g, section => {
     if (section.startsWith('<section') && section.match(/^<section[^>]*\bdata-editorial-columns=/)) {
       index++;
       return section;
@@ -113,10 +67,6 @@ export function syncEditorialCardSections(html, page) {
     if (!config || !section.includes(config[0])) return section;
     const [, icons, ordered] = config;
     index++;
-    if (page === 'top-casinos' && config[0] === 'class="content top-casinos-reading-guide"') {
-      const locale = html.match(/<html\b[^>]*\blang="([a-z]{2})/i)?.[1]?.toLowerCase() || 'en';
-      return formatReadingGuide(section, icons, Object.hasOwn(guideTitles, locale) ? locale : 'en');
-    }
     let replacement = section
       .replace(/^<section class="([^"]+)"/, `<section class="$1 editorial-card-band" data-editorial-columns="${icons.length}"`)
       .replace('class="top-casinos-method-panel"', 'class="editorial-card-inner"')
@@ -126,8 +76,8 @@ export function syncEditorialCardSections(html, page) {
   });
   const expected = listing ? 1 : knownSections.length;
   if (index !== expected) throw new Error(`Expected ${expected} editorial sections on ${page}, found ${index}`);
-  return page === 'top-casinos'
-    ? updated.replace(/(<div class="casino-grid") data-limit="\d+"/g, '$1')
+  return topCasinos
+    ? syncTopCasinoEditorial(updated, locale).replace(/(<div class="casino-grid") data-limit="\d+"/g, '$1')
     : updated;
 }
 

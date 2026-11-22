@@ -55,7 +55,7 @@ const loadPageModules = async () => {
   if (isHomePage || isCountryPage) {
     const [gamesModule, homeModule, mediaModule] = await Promise.all([
       import('./brand-new-games.js?v=20261121-magneticslots'),
-      import('./pages/home.js?v=20261121-localized-games'),
+      import('./pages/home.js?v=20261122-market-cloud'),
       isCountryPage ? import('./pages/country-media.js?v=20261121-localized-games') : null,
     ]);
     BRAND_NEW_GAMES = gamesModule.BRAND_NEW_GAMES || {};
@@ -77,7 +77,7 @@ const loadPageModules = async () => {
   }
 
   if (document.body.dataset.page === 'top-casinos') {
-    const pageModule = await import('./pages/top-casinos.js?v=20261119-top-casinos-layout');
+    const pageModule = await import('./pages/top-casinos.js?v=20261122-market-cloud');
     initTopCasinosPageModule = pageModule.initTopCasinosPage;
   }
 
@@ -4087,13 +4087,8 @@ export const initCasinoPage = async () => {
   initTopCasinosPageModule?.({
     COUNTRIES,
     BRANDS,
-    SITE_LOCALE,
     localeText,
-    escapeHtml,
-    localizedCountryName,
     localizedCountryTitle,
-    countryPagePath,
-    iconPath,
     createCasinoCard,
     requestPaymentIconSync,
   });

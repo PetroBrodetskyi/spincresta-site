@@ -6,7 +6,7 @@ import { dashboardLoading } from './dashboard-loading-markup.mjs';
 import { siteIconMarkup } from '../scripts/site-icons.js';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
-const assetVersion = '20261122-moderator-contacts';
+const assetVersion = '20261122-select-controls';
 const icon = name => siteIconMarkup(name, 'site-icon', 18);
 
 const main = `

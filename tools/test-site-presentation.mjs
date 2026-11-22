@@ -106,10 +106,11 @@ test('functional feedback rating label is a heading, not an eyebrow', () => {
   assert.doesNotMatch(feedback, /class="section-kicker"/);
 });
 
-test('text actions, icon buttons, and tabs follow one rounded shape, leaving screenshot controls alone', () => {
+test('actions and tabs share a rounded shape except for screenshot controls and account navigation', () => {
   const shared = fs.readFileSync(path.join(root, 'styles.css'), 'utf8');
   assert.match(shared, /--control-radius:\s*999px;/);
-  const [shapes] = shared.match(/html:root body :is\(\s*button, [\s\S]*?\):not\(\.brand-why-media\) \{[^}]*\}/);
+  const shapes = shared.match(/html:root body :is\(\s*button, [\s\S]*?\):not\(\.brand-why-media\):not\(:where\(\.account-menu > button\[role='tab'\]\)\) \{[^}]*\}/)?.[0];
+  assert.ok(shapes, 'The shared palette must leave screenshot controls and account navigation unchanged.');
   for (const selector of ['.cta-primary', '.home-brand-view-all', '.home-brand-arrow', '.brand-favorite-button']) {
     assert.ok(shapes.includes(selector), selector);
   }

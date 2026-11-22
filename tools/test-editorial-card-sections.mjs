@@ -13,7 +13,7 @@ test('all localized editorial bands have accessible topic icons without decorati
   for (const { page, file } of editorialCardPages()) {
     const html = read(file);
     const sections = bands(html);
-    assert.equal(sections.length, page === 'top-casinos' ? 2 : 1, file);
+    assert.equal(sections.length, 1, file);
     assert.equal(syncEditorialCardSections(html, page), html, file);
     for (const [section, columns] of sections) {
       const icons = [...section.matchAll(/<svg class="home-method-icon"[^>]*aria-hidden="true"[^>]*focusable="false"><use href="[^"]+#([^"]+)"/g)];
@@ -43,14 +43,26 @@ test('listing conversion leaves existing content and FAQ markup intact', () => {
   assert.equal(syncEditorialCardSections(result, 'new-casinos'), result);
 });
 
-test('Top Casinos uses one five-brand preview limit and localized reading-guide cards', () => {
+test('Top Casinos uses one five-brand preview limit and one localized five-card methodology', () => {
   assert.equal(TOP_CASINOS_PREVIEW_LIMIT, 5);
   for (const { file } of editorialCardPages().filter(({ page }) => page === 'top-casinos')) {
     const html = read(file);
     const guide = bands(html).find(([section]) => section.includes('id="seo-editorial-guide"'));
-    assert.equal(guide[1], '3', file);
-    assert.match(guide[0], /aria-labelledby="reading-guide-title"/, file);
-    assert.equal([...guide[0].matchAll(/<p>/g)].length, 3, file);
+    assert.equal(guide[1], '5', file);
+    assert.match(guide[0], /aria-labelledby="top-casinos-method-title"/, file);
+    assert.match(guide[0], /href="\/(?:[a-z]{2}\/)?responsible-gambling\/"/, file);
+    assert.match(html, /<p id="top-casino-market-hint">[^<]+<\/p>/, file);
+    assert.doesNotMatch(html, /reading-guide-title|top-casinos-reading-guide/, file);
     assert.doesNotMatch(html, /\bdata-limit=/, file);
   }
+});
+
+test('regenerating the Top Casinos editorial cards removes an old extra reading guide', () => {
+  const file = 'top-casinos/index.html';
+  const html = read(file);
+  const previous = html.replace(
+    '</main>',
+    '<section class="content top-casinos-reading-guide" id="seo-editorial-guide"><h2>Legacy guide</h2></section>\n    </main>'
+  );
+  assert.equal(syncEditorialCardSections(previous, 'top-casinos'), html);
 });

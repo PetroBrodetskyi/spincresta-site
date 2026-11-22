@@ -62,11 +62,8 @@ for (const file of htmlFiles.sort()) {
   }
 
   if (/data-page=["']top-casinos["']/i.test(html)) {
-    generatedIds.add('top-casino-markets');
-    for (const match of html.matchAll(/<section\b[^>]*\bdata-country=["']([^"']+)["']/gi)) {
-      const code = match[1].toUpperCase();
-      const slug = ({ US: 'united-states', UK: 'united-kingdom', AU: 'australia', CA: 'canada', BR: 'brazil' })[code];
-      if (slug) generatedIds.add(`top-${slug}`);
+    for (const [, slug] of html.matchAll(/\bdata-top-casino-country=["']([a-z0-9-]+)["']/gi)) {
+      generatedIds.add(`top-${slug}`);
     }
   }
 

@@ -364,7 +364,6 @@ const userCard = (user, brands, onSaveRole) => {
   roleSelect.innerHTML = '<option value="user">Player</option><option value="brand_representative">Brand representative</option>';
   roleSelect.value = user.representativeBrands?.length ? 'brand_representative' : 'user';
   roleField.append(roleSelect);
-  roleField.insertAdjacentHTML('beforeend', icon('chevron-down'));
   const brandPicker = document.createElement('details');
   brandPicker.className = 'moderation-brand-picker';
   const brandSummary = document.createElement('summary');
@@ -455,6 +454,8 @@ export const initModeratorPage = async () => {
   const signIn = root.querySelector('[data-moderator-signin]');
   const filters = Array.from(root.querySelectorAll('[data-moderator-status]'));
   const viewButtons = Array.from(root.querySelectorAll('[data-moderator-view]'));
+  const viewMenu = root.querySelector('.account-menu[role="tablist"]');
+  const compactMenu = window.matchMedia('(max-width: 820px)');
   const panels = Array.from(root.querySelectorAll('[data-moderator-panel]'));
   const usersLoading = root.querySelector('[data-moderator-users-loading]');
   const usersEmpty = root.querySelector('[data-moderator-users-empty]');
@@ -737,11 +738,16 @@ export const initModeratorPage = async () => {
   filters.forEach(button => {
     button.addEventListener('click', () => loadReviews(button.dataset.moderatorStatus));
   });
+  const syncMenuOrientation = () => viewMenu.setAttribute('aria-orientation', compactMenu.matches ? 'horizontal' : 'vertical');
+  syncMenuOrientation();
+  compactMenu.addEventListener('change', syncMenuOrientation);
   viewButtons.forEach((button, index) => {
     button.addEventListener('click', () => openView(button.dataset.moderatorView));
     button.addEventListener('keydown', event => {
       const last = viewButtons.length - 1;
-      const target = { Home: 0, End: last, ArrowUp: index ? index - 1 : last, ArrowDown: index === last ? 0 : index + 1 }[event.key];
+      const previous = compactMenu.matches ? 'ArrowLeft' : 'ArrowUp';
+      const next = compactMenu.matches ? 'ArrowRight' : 'ArrowDown';
+      const target = { Home: 0, End: last, [previous]: index ? index - 1 : last, [next]: index === last ? 0 : index + 1 }[event.key];
       if (target === undefined) return;
       event.preventDefault();
       viewButtons[target].focus();

@@ -3,7 +3,7 @@ import { existsSync } from 'node:fs';
 import { test } from 'node:test';
 import { BRANDS } from '../scripts/brands.js';
 import { getFeaturedHomeBrands } from '../scripts/featured-brands.js';
-import { homeBrandScrollStep } from '../scripts/pages/home.js';
+import { forwardHomeBrandVerticalWheel, homeBrandScrollStep } from '../scripts/pages/home.js';
 
 const featuredSlugs = [
   'onlywin', 'fraga-ar', 'spinboss', 'stonevegas', 'lizaro',
@@ -43,6 +43,45 @@ test('carousel arrows advance full columns and still move on narrow viewports', 
   assert.equal(homeBrandScrollStep(340, 240, 12), 252);
   assert.equal(homeBrandScrollStep(240, 265, 12), 277);
   assert.equal(homeBrandScrollStep(340, 0, 0), 340);
+});
+
+const scrollHarness = () => {
+  const root = { scrollTop: 150, scrollHeight: 1800, clientHeight: 700 };
+  const calls = [];
+  const page = {
+    document: { scrollingElement: root },
+    getComputedStyle: () => ({ lineHeight: '20px' }),
+    scrollBy(options) { calls.push(options); root.scrollTop += options.top; },
+  };
+  const wheel = (deltaX, deltaY, options = {}) => {
+    const event = { deltaX, deltaY, cancelable: true, preventDefault() { this.defaultPrevented = true; }, ...options };
+    forwardHomeBrandVerticalWheel(event, page);
+    return Boolean(event.defaultPrevented);
+  };
+  return { root, calls, wheel };
+};
+
+test('vertical wheel reaches the page immediately after horizontal movement over cards', () => {
+  const { wheel, calls } = scrollHarness();
+  assert.equal(wheel(60, 5), false);
+  assert.equal(wheel(5, 50), true);
+  assert.equal(wheel(0, -2, { deltaMode: 1 }), true);
+  assert.deepEqual(calls, [{ top: 50, behavior: 'instant' }, { top: -40, behavior: 'instant' }]);
+});
+
+test('carousel keeps sideways wheel, browser shortcuts and behavior at the page edges native', () => {
+  const { root, calls, wheel } = scrollHarness();
+  for (const options of [{ shiftKey: true }, { ctrlKey: true }, { metaKey: true }, { altKey: true }, { cancelable: false }]) {
+    assert.equal(wheel(0, 50, options), false);
+  }
+  assert.equal(wheel(20, 20), false);
+  root.scrollTop = 0;
+  assert.equal(wheel(0, -50), false);
+  root.scrollTop = 1100;
+  assert.equal(wheel(0, 50), false);
+  assert.deepEqual(calls, []);
+  assert.equal(wheel(0, -1, { deltaMode: 2 }), true);
+  assert.deepEqual(calls, [{ top: -700, behavior: 'instant' }]);
 });
 
 test('localized Fraga Argentina cards keep the registry amount and currency', async () => {

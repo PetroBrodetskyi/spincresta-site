@@ -10,7 +10,7 @@
 }
 
 /* Color separates groups; links, cards, and keyboard focus retain their affordances. */
-html:root body .top-casino-jump-nav {
+html:root body .market-country-picker {
   border: 0;
   border-radius: 0;
   background: var(--editorial-band);
@@ -441,13 +441,14 @@ html:root body[data-brand].has-brand-sticky-layout .brand-review-overview {
 }
 
 html:root body[data-brand].has-brand-sticky-layout .brand-sticky-main
-  :is(.brand-new-games-panel, .brand-review-details, .brand-player-feedback, .site-faq-section) {
+  :is(.brand-new-games-panel, .brand-review-details, .site-faq-section, [data-review-section='faq']) {
   --brand-section-background: var(--editorial-band);
 }
 
-html:root body[data-brand].has-brand-sticky-layout .brand-sticky-main .brand-player-feedback
-  :is(.brand-feedback-score, .brand-feedback-compose, .brand-feedback-card) {
-  background: var(--review-surface);
+/* Reader feedback starts a new white band after the tinted editorial FAQ. */
+html:root body[data-brand].has-brand-sticky-layout .brand-sticky-main .brand-player-feedback {
+  --brand-section-background: var(--review-surface);
+  padding-block: var(--editorial-band-block-padding);
 }
 
 /* No second tinted surface behind the bands; keep the upper review separate. */

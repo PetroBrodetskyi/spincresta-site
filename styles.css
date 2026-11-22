@@ -1,10 +1,10 @@
 ﻿@import url('/fonts/inter-tight/index.css');
 @import url('/fonts/inter-tight/wght-italic.css');
 @import url('/styles/core.css?v=20261122-account-loading');
-@import url('/styles/pages.css?v=20261121-review-form');
+@import url('/styles/pages.css?v=20261122-ranking-guide');
 @import url('/styles/brand-review.css?v=20261120-sticky-pill');
-@import url('/styles/section-contrast-preview.css?v=20261119-top-casinos-layout');
-@import url('/styles/account.css?v=20261122-moderator-contacts');
+@import url('/styles/section-contrast-preview.css?v=20261122-market-cloud');
+@import url('/styles/account.css?v=20261122-select-controls');
 @import url('/styles/editorial-directories.css?v=20261119-country-hub');
 
 :root {
@@ -14,6 +14,31 @@
   --type-subheading: 1.125rem;
   --type-section: clamp(1.25rem, 1.7vw, 1.5rem);
   --type-title: clamp(1.625rem, 2.3vw, 2rem);
+}
+
+/* Keep native select behavior, with one inset chevron for collapsed dropdowns. */
+select:not([multiple], [size]:not([size='1'])) {
+  -webkit-appearance: none;
+  appearance: none;
+  padding-inline-end: 38px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='m6 9 6 6 6-6' fill='none' stroke='%230f172a' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+  background-position: right 12px center;
+  background-repeat: no-repeat;
+  background-size: 16px 16px;
+  text-overflow: ellipsis;
+}
+
+select:not([multiple], [size]:not([size='1'])):dir(rtl) {
+  background-position: left 12px center;
+}
+
+@media (forced-colors: active) {
+  select:not([multiple], [size]:not([size='1'])) {
+    -webkit-appearance: auto;
+    appearance: auto;
+    background-image: none;
+    padding-inline-end: 4px;
+  }
 }
 
 /* Component labels share the scale; semantic headings keep a clear reading order. */
@@ -188,7 +213,7 @@ body.blog-page.blog-article-page .blog-shell {
   --control-focus: #111;
 }
 
-/* Keep the same shape across legacy and generated buttons without touching media or fields. */
+/* Account navigation tabs use the same sidebar treatment as account links. */
 html:root body :is(
   button, [role='button'], [role='tab'], input:is([type='button'], [type='submit'], [type='reset']),
   .cta, .cta-brands, .cta-primary, .cta-secondary, .view-all, .filter-btn, .availability-tab,
@@ -196,7 +221,7 @@ html:root body :is(
   .home-primary-action, .home-secondary-action, .home-section-cta > a,
   .home-brand-view-all, .home-brand-arrow, .brand-favorite-button,
   .brand-feedback-rating-options label,
-  .home-market-actions > :is(a, button), .home-country-return, .home-market-more, .home-country-toggle,
+  .home-market-actions > :is(a, button), .home-country-return, .home-market-more, .country-cloud-toggle,
   .top-casinos-hero-actions > a, .top-casino-jump-toggle, .blog-hero-links > a, .author-actions > a,
   .account-auth-control, .account-auth-primary, .account-auth-secondary,
   .language-switcher-current, .site-search-trigger,
@@ -206,7 +231,7 @@ html:root body :is(
   .account-representative-panel a, .moderation-toolbar button, .moderation-view-tabs button,
   .moderation-user-toolbar button, .moderation-access button, .moderation-action,
   [data-account-contact-submit]
-):not(.brand-why-media) {
+):not(.brand-why-media):not(:where(.account-menu > button[role='tab'])) {
   border-radius: var(--control-radius) !important;
   background: var(--action-bg, var(--button-bg, var(--control-secondary-bg))) !important;
   border-color: var(--action-border, var(--button-border, var(--control-secondary-border))) !important;
@@ -222,7 +247,7 @@ html:root body :is(
   .account-auth-primary, .account-dashboard-signin, .footer-newsletter-submit, [data-account-contact-submit],
   .brand-feedback-submit, .brand-feedback-reply-form button, .brand-promo-teaser,
   .moderation-action-approve, .filter-btn:is(.active, .is-active),
-  :is([role='tab'], .availability-tab)[aria-selected='true'],
+  :is([role='tab'], .availability-tab)[aria-selected='true']:not(:where(.account-menu > button)),
   .countries-cloud .country-link[aria-current='true'], .brand-feedback-vote.is-active,
   .brand-feedback-rating-options :is(input:checked + label, label:has(~ input:checked))
 ) {
@@ -256,7 +281,7 @@ html:root body :is(button, [role='button'], .countries-cloud a, .brand-countries
   .home-section-cta > a, .home-brand-view-all, .home-market-actions > a, .home-country-return,
   .top-casinos-hero-actions > a, .blog-hero-links > a, .author-actions > a,
   .top-casino-jump-link, .account-representative-panel a,
-  .brand-feedback-signin, .brand-promo-teaser, .brand-sticky-title__cta):focus-visible {
+  .brand-feedback-signin, .brand-promo-teaser, .brand-sticky-title__cta):not(:where(.account-menu > button[role='tab'])):focus-visible {
   outline: 2px solid var(--control-focus);
   outline-offset: 2px;
 }
@@ -268,10 +293,62 @@ html:root body :is(button, [role='button'], .countries-cloud a, .brand-countries
 }
 
 /* Persistent review links also work before the interactive cards load. */
-.country-review-directory { width: 100%; max-width: none; margin: 24px 0 0; border-top: 1px solid var(--surface-border-strong); text-align: left; }
-.country-review-directory summary { padding: 16px 4px; cursor: pointer; color: var(--section-accent); font-weight: 600; }
-.country-review-directory summary span { color: var(--text-muted); }
-.country-review-directory nav { display: flex; flex-wrap: wrap; gap: 10px 20px; padding: 0 4px 18px; }
-.country-review-directory nav a { color: var(--text-main); text-underline-offset: 4px; font-size: var(--type-body); }
-.country-review-directory nav a:hover { color: var(--section-accent); }
-.country-review-directory a:focus-visible, .country-review-directory summary:focus-visible { outline: 2px solid var(--gold); outline-offset: 4px; }
+.country-review-directory {
+  width: 100%;
+  max-width: none;
+  margin-block-start: clamp(16px, 2vw, 24px);
+  border: 1px solid var(--surface-border);
+  border-radius: 12px;
+  background: var(--surface-card-soft);
+  text-align: start;
+}
+
+.country-review-directory summary {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  min-height: 48px;
+  padding: 10px 16px;
+  border-radius: inherit;
+  color: var(--text-main);
+  font-weight: 700;
+  list-style: none;
+  cursor: pointer;
+}
+
+.country-review-directory summary::-webkit-details-marker { display: none; }
+.country-review-directory summary::marker { content: ''; }
+.country-review-directory summary span { color: var(--text-muted); font-size: var(--type-ui); }
+.country-review-directory summary::after {
+  content: '';
+  flex: 0 0 8px;
+  height: 8px;
+  margin-inline-start: auto;
+  margin-inline-end: 3px;
+  border: solid currentColor;
+  border-width: 0 2px 2px 0;
+  transform: translateY(-2px) rotate(45deg);
+}
+
+.country-review-directory[open] summary::after { transform: translateY(2px) rotate(225deg); }
+.country-review-directory summary:hover { background: var(--surface-card-hover); }
+.country-review-directory nav { display: flex; flex-wrap: wrap; gap: 8px; padding: 0 16px 16px; }
+.country-review-directory nav a {
+  display: inline-flex;
+  align-items: center;
+  min-height: 40px;
+  max-width: 100%;
+  padding: 6px 12px;
+  border: 1px solid var(--surface-border);
+  border-radius: var(--control-radius);
+  background: var(--surface-card);
+  color: var(--text-main);
+  font-size: var(--type-ui);
+  font-weight: 650;
+  overflow-wrap: anywhere;
+  text-decoration: none;
+}
+
+.country-review-directory nav a:hover { border-color: var(--surface-border-strong); text-decoration: underline; }
+.country-review-directory :is(a, summary):focus-visible { outline: 2px solid var(--control-focus); outline-offset: 2px; }

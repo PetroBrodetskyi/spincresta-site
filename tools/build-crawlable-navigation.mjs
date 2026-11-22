@@ -4,9 +4,11 @@ import { BRANDS } from '../scripts/brands.js';
 import { COUNTRIES } from '../scripts/countries.js';
 import { syncCountryHeader } from './sync-country-header.mjs';
 import { syncCountryHubLinks } from './country-hub-links.mjs';
+import { syncTopCasinoMarkets } from './top-casino-markets.mjs';
 
 const root = process.cwd();
 const countryHeaderOnly = process.argv.includes('--country-header-only');
+const topCasinosOnly = process.argv.includes('--top-casinos-only');
 const locales = ['en', 'de', 'es', 'it', 'pl', 'uk', 'pt', 'fr', 'hi', 'fi'];
 const labels = {
   en: 'Browse casino reviews', de: 'Casino-Bewertungen ansehen', es: 'Ver reseñas de casinos',
@@ -23,21 +25,28 @@ const pages = new Map(walk(root).map(file => [
   '/' + path.relative(root, file).replace(/index\.html$/, ''), { file, html: fs.readFileSync(file, 'utf8') },
 ]));
 const indexable = url => pages.has(url) && !/<meta\b[^>]*name=["']robots["'][^>]*content=["'][^"']*noindex/i.test(pages.get(url).html);
+const countryLinks = (locale, prefix, rankings = false) => {
+  const names = new Intl.DisplayNames([locale], { type: 'region' });
+  return COUNTRIES.filter(country => indexable(`${prefix}online-casinos/${country.slug}/`)).map(country => {
+    const code = country.code.toUpperCase() === 'UK' ? 'GB' : country.code.toUpperCase();
+    const name = escape(locale === 'en' ? country.name : names.of(code));
+    const picker = rankings ? ` data-top-casino-country="${country.slug}"` : '';
+    return `<a class="country-link" href="${prefix}online-casinos/${country.slug}/"${picker}><img class="flag" src="/icons/${country.slug}-flag-icon.svg" alt="" loading="lazy" decoding="async"><span>${name}</span></a>`;
+  }).join('\n');
+};
 let updated = 0;
 for (const [url, page] of pages) {
   const locale = locales.find(lang => lang !== 'en' && url.startsWith(`/${lang}/`)) || 'en';
   const prefix = locale === 'en' ? '/' : `/${locale}/`;
+  if (topCasinosOnly && url !== `${prefix}top-casinos/`) continue;
   let html = syncCountryHeader(page.html, prefix);
   // Home and country hubs expose the complete directory before JS executes.
-  if (!countryHeaderOnly && url === `${prefix}online-casinos/` && html.includes('data-country-hub-grid')) {
+  if (!countryHeaderOnly && url === `${prefix}top-casinos/`) {
+    html = syncTopCasinoMarkets(html, locale, countryLinks(locale, prefix, true));
+  } else if (!countryHeaderOnly && url === `${prefix}online-casinos/` && html.includes('data-country-hub-grid')) {
     html = syncCountryHubLinks(html, locale, indexable);
   } else if (!countryHeaderOnly && (url === prefix || url === `${prefix}online-casinos/`)) {
-    const names = new Intl.DisplayNames([locale], { type: 'region' });
-    const links = COUNTRIES.filter(c => indexable(`${prefix}online-casinos/${c.slug}/`)).map(c => {
-      const code = c.code.toUpperCase() === 'UK' ? 'GB' : c.code.toUpperCase();
-      const name = escape(locale === 'en' ? c.name : names.of(code));
-      return `<a class="country-link" href="${prefix}online-casinos/${c.slug}/"><img class="flag" src="/icons/${c.slug}-flag-icon.svg" alt="" loading="lazy" decoding="async"><span>${name}</span></a>`;
-    }).join('\n');
+    const links = countryLinks(locale, prefix);
     html = html.replace(/(<div class="countries-cloud">)[\s\S]*?(<\/div>)/, `$1\n${links}\n$2`);
   }
   const country = COUNTRIES.find(c => url === `${prefix}online-casinos/${c.slug}/`);

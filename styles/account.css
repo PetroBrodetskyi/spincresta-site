@@ -262,11 +262,16 @@
   width: 100%;
   min-width: 0;
   min-height: 44px;
-  padding: 10px 12px;
+  padding-block: 10px;
+  padding-inline-start: 12px;
   border: 1px solid var(--surface-border-strong);
   border-radius: 8px;
-  background: var(--surface-card);
+  background-color: var(--surface-card);
   color: var(--text-main);
+}
+
+.account-contact-fields input {
+  padding-inline-end: 12px;
 }
 
 .account-contact-actions {
@@ -553,26 +558,15 @@ body[data-page='moderator'] .moderation-user-card .moderation-user-access {
 }
 
 .moderation-role-field {
-  position: relative;
   flex: 0 1 11.5rem;
   min-width: 0;
 }
 
 body[data-page='moderator'] .moderation-role-field select {
-  appearance: none;
   min-height: 44px;
-  padding-inline: 12px 38px;
-  background-image: none;
+  padding-inline-start: 12px;
   border-radius: 8px;
   font-size: var(--type-ui);
-}
-
-.moderation-role-field .site-icon {
-  position: absolute;
-  inset-inline-end: 12px;
-  inset-block-start: 50%;
-  transform: translateY(-50%);
-  pointer-events: none;
 }
 
 body[data-page='moderator'] .moderation-user-toolbar {
@@ -686,7 +680,7 @@ body[data-page='moderator'] .moderation-dashboard :is(.moderation-toolbar button
   cursor: pointer;
 }
 
-.moderation-dashboard :is(.moderation-button, .moderation-copy-email, .moderation-role-field, .moderation-user-facts dt, .moderation-panel-heading h2) .site-icon {
+.moderation-dashboard :is(.moderation-button, .moderation-copy-email, .moderation-user-facts dt, .moderation-panel-heading h2) .site-icon {
   flex-shrink: 0;
 }
 

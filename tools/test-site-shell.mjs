@@ -31,6 +31,23 @@ test('the light canvas, white header and black footer do not depend on a visitor
   assert.match(read('styles.css'), /\/styles\/core\.css\?v=[\w-]+/);
 });
 
+test('native dropdowns share an inset chevron, with a system arrow in forced colors', () => {
+  const css = read('styles.css');
+  const dropdown = "select:not([multiple], [size]:not([size='1']))";
+  const block = css.split(dropdown + ' {')[1]?.split('}')[0] || '';
+  assert.match(block, /appearance: none;/);
+  assert.match(block, /padding-inline-end: 38px;/);
+  assert.match(block, /background-position: right 12px center;/);
+  assert.match(block, /background-size: 16px 16px;/);
+  assert.match(css.split('@media (forced-colors: active) {')[1]?.split('}\n}')[0] || '', /appearance: auto;[^}]*background-image: none;/);
+  assert.doesNotMatch(read('scripts/pages/moderator.js'), /roleField\.insertAdjacentHTML/);
+});
+
+test('account navigation shares the selected appearance across links and tabs', () => {
+  const account = read('styles/account.css');
+  assert.match(account, /\.account-menu :is\(a\[aria-current='location'\], button\[aria-selected='true'\]\) \{[^}]*background: var\(--account-selected\)/);
+});
+
 test('the white vector wordmark has a footer-black ribbon with angular side notches', () => {
   const svg = read('images/spincresta-wordmark.svg');
   assert.match(svg, /viewBox="0 -5 258 60"/);
@@ -74,6 +91,13 @@ test('the article below the overview spans the former right rail without moving 
   const surfaces = read('styles/section-contrast-preview.css');
   assert.match(surfaces, /--brand-section-paint:[^}]*border-radius: 0;[^}]*fill 0 \/ 0 \/ 0 100vmax 0 0/);
   assert.match(surfaces, /\.brand-review-overview \+ \.brand-sticky-main\s*\{[^}]*background: var\(--review-surface\);/);
+});
+
+test('brand FAQ keeps its tinted surface and player feedback starts a white band', () => {
+  const css = read('styles/section-contrast-preview.css');
+  assert.match(css, /:is\([^)]*\.site-faq-section[^)]*\) \{\s*--brand-section-background: var\(--editorial-band\);/);
+  assert.match(css, /\.brand-sticky-main \.brand-player-feedback \{\s*--brand-section-background: var\(--review-surface\);\s*padding-block: var\(--editorial-band-block-padding\);/);
+  assert.doesNotMatch(css, /:is\([^)]*\.brand-player-feedback[^)]*\) \{\s*--brand-section-background: var\(--editorial-band\);/);
 });
 
 test('new game cards open the review body in a single horizontal, scrollable row', () => {
