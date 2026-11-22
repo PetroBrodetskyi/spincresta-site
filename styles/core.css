@@ -191,37 +191,14 @@ body {
   text-decoration-thickness: .12em;
 }
 
-.editorial-resource-link:any-link {
-  display: inline-flex;
-  align-items: center;
-  gap: 8px;
-  min-height: 44px;
-  max-width: 100%;
-  padding: 8px 14px;
-  border: 1px solid var(--surface-border-strong);
-  border-radius: 999px;
-  background: var(--surface-card);
-  color: var(--editorial-blue, #164586);
-  font-size: var(--type-ui);
-  font-weight: 650;
-  line-height: 1.3;
-  text-align: start;
-  text-decoration: none;
+.cta-secondary.editorial-resource-link {
+  min-height: var(--pill-action-height);
+  max-inline-size: 100%;
   overflow-wrap: anywhere;
 }
 
 .editorial-resource-link > svg {
   flex: 0 0 auto;
-}
-
-.editorial-resource-link:is(:hover, :focus-visible) {
-  border-color: currentColor;
-  background: var(--surface-card-hover);
-}
-
-.editorial-resource-link:focus-visible {
-  outline: 2px solid currentColor;
-  outline-offset: 3px;
 }
 
 @media (min-width: 1025px) {

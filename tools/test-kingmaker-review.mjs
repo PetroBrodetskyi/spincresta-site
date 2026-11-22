@@ -69,7 +69,7 @@ for (const lang of locales) {
     assert.equal((suitability.match(/class="feature-card glass-card"/g) || []).length, 2);
     assert.doesNotMatch(suitability, /<a\b/);
     if (lang === 'uk') assert.match(suitability, /<h2 class="title">Кому найкраще підходить<\/h2>/);
-    assert.ok(html.includes(`class="editorial-resource-link" href="/${lang === 'en' ? '' : lang + '/'}responsible-gambling/"`));
+    assert.ok(html.includes(`class="cta-secondary editorial-resource-link" href="/${lang === 'en' ? '' : lang + '/'}responsible-gambling/"`));
     assert.doesNotMatch(html, /36 Coins x3000 · Bass Riches · Raptor Doublemax/);
     for (const kind of ['countries', 'payments']) {
       const panel = html.match(new RegExp(`class="brand-${kind}"[\\s\\S]*?<\\/section>`))[0];

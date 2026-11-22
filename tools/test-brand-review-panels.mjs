@@ -70,11 +70,15 @@ test('review contents use a line marker without numbered chips', () => {
   assert.match(runtime, /window\.addEventListener\('scroll', schedule, \{ passive: true \}\)/);
 });
 
-test('shared editorial links keep their color in visited state and give resource links visible keyboard focus', () => {
+test('inline editorial links keep their visited color and standalone resources use the shared secondary action', () => {
   const css = read('styles/core.css');
+  const shared = read('styles.css');
   assert.match(css, /a:any-link:not\(\[class\], nav \*, header \*, footer \*\)\)\s*\{[^}]*color: var\(--editorial-blue/);
-  assert.match(css, /\.editorial-resource-link:any-link\s*\{[^}]*min-height: 44px;[^}]*color: var\(--editorial-blue/);
-  assert.match(css, /\.editorial-resource-link:focus-visible\s*\{[^}]*outline: 2px solid currentColor/);
+  const resource = css.match(/\.cta-secondary\.editorial-resource-link\s*\{([^}]+)\}/)?.[1] || '';
+  assert.match(resource, /min-height: var\(--pill-action-height\)/);
+  assert.doesNotMatch(resource, /color|background|border|font/);
+  assert.match(shared, /:where\([\s\S]*?\.cta-secondary[\s\S]*?\):hover:not\([^)]*\)\s*\{[^}]*--control-secondary-hover-bg/);
+  assert.match(shared, /:is\(button, \[role='button'\],[\s\S]*?\.cta-secondary[\s\S]*?:focus-visible\s*\{[^}]*outline: 2px solid var\(--control-focus\)/);
   assert.equal(reviewSectionLabel('suitability', (...labels) => labels[5]), 'Кому найкраще підходить');
 });
 

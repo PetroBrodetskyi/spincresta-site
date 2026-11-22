@@ -81,7 +81,7 @@ for (const [i, lang] of locales.entries()) {
     .replaceAll('BetonWin', 'Kingmaker')
     .replace(ctaPattern, () => cta);
   const footer = take(/(<section class="all-countries">[\s\S]*$)/).trimEnd();
-  const saferPlayLink = `<a class="editorial-resource-link" href="/${prefix(lang)}responsible-gambling/">${siteIconMarkup('safety', 'site-icon site-icon--inline', 18)}<span>${esc(saferLabel)}</span></a>`;
+  const saferPlayLink = `<a class="cta-secondary editorial-resource-link" href="/${prefix(lang)}responsible-gambling/">${siteIconMarkup('safety', 'site-icon site-icon--inline', 18)}<span>${esc(saferLabel)}</span></a>`;
 
   const org = { '@id': origin + '/#organization' };
   const schema = { '@context': 'https://schema.org', '@graph': [

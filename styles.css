@@ -1,6 +1,6 @@
 ﻿@import url('/fonts/inter-tight/index.css');
 @import url('/fonts/inter-tight/wght-italic.css');
-@import url('/styles/core.css?v=20261122-editorial-links');
+@import url('/styles/core.css?v=20261122-resource-actions');
 @import url('/styles/pages.css?v=20261122-ranking-guide');
 @import url('/styles/brand-review.css?v=20261120-sticky-pill');
 @import url('/styles/section-contrast-preview.css?v=20261122-market-cloud');
@@ -261,7 +261,7 @@ html:root body :is(
 
 @media (hover: hover) {
   html:root body :where(
-    button, summary, input, label, [role='button'], [role='tab'], .cta, .cta-brands, .view-all,
+    button, summary, input, label, [role='button'], [role='tab'], .cta, .cta-brands, .cta-secondary, .view-all,
     .home-brand-view-all, .home-primary-action, .home-secondary-action, .home-section-cta > a,
     .home-market-actions > a, .home-country-return, .countries-cloud a, .brand-countries a,
     .home-country-jump, .top-casinos-hero-actions > a, .blog-hero-links > a, .author-actions > a,
