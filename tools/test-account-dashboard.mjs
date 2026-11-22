@@ -2,9 +2,9 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import test from 'node:test';
 import { getAccountSection } from '../scripts/pages/account.js';
-import { accountHeaderPreview } from '../scripts/account-auth.js';
+import { accountHeaderPreview, createAccountSessionSync } from '../scripts/account-auth.js';
 import { favoriteLogoPath } from '../scripts/brand-favorites.js';
-import { newsletterStatusLabel } from '../scripts/pages/moderator.js';
+import { collectModeratorContacts, contactsCsv, newsletterStatusLabel } from '../scripts/pages/moderator.js';
 
 const locales = ['', 'de/', 'es/', 'it/', 'pl/', 'uk/', 'pt/', 'fr/', 'hi/', 'fi/'];
 
@@ -54,6 +54,45 @@ test('header previews are time-limited presentation data, not session state', ()
   assert.equal(accountHeaderPreview('broken JSON', now), null);
 });
 
+test('a late sign-in refresh failure cannot replace a confirmed session', async () => {
+  const user = { id: 'demo' };
+  const profile = { registration_completed_at: '2026-11-22T00:00:00Z' };
+  const access = { role: 'user' };
+  let rejectFirstProfile, markStarted;
+  const firstProfile = new Promise((_, reject) => { rejectFirstProfile = reject; });
+  const started = new Promise(resolve => { markStarted = resolve; });
+  const applied = [];
+  let requests = 0;
+  const sync = createAccountSessionSync({
+    readSession: async () => ({ data: { session: { user, access_token: 'example' } } }),
+    loadProfile: () => {
+      if (++requests !== 1) return profile;
+      markStarted();
+      return firstProfile;
+    },
+    loadAccess: () => access,
+    apply: value => applied.push(value),
+  });
+  const callback = sync.refresh();
+  await started;
+  await sync.refresh();
+  rejectFirstProfile(new Error('temporary profile error'));
+  await callback;
+  assert.deepEqual(applied, [{ user, profile, access }]);
+});
+
+test('the newest session error still surfaces and a canceled refresh applies nothing', async () => {
+  const error = new Error('session unavailable');
+  const sync = createAccountSessionSync({
+    readSession: async () => ({ data: null, error }),
+    apply: () => assert.fail('An unconfirmed session must not update the account'),
+  });
+  await assert.rejects(sync.refresh(), error);
+  const late = sync.refresh();
+  sync.cancel();
+  await late;
+});
+
 test('favorite images use local brand assets and reject external or traversal paths', () => {
   assert.equal(favoriteLogoPath('images/britsino.webp'), '/images/britsino.webp');
   for (const invalid of ['images/../other.png', '/images//logo.webp', 'https://other.test/logo.png', 'data:image/svg+xml,foo', '//other.test/logo.png']) {
@@ -71,7 +110,51 @@ test('moderation has two accessible panels, real loading states and plain status
   }
   assert.match(html, /class="dashboard-skeleton" data-moderator-loading/);
   assert.match(html, /class="dashboard-skeleton" data-moderator-users-loading/);
+  assert.match(html, /class="cta-secondary moderation-button" href="\/account\/"[^]*?#arrow-left/);
+  assert.match(html, /data-moderator-user-export disabled hidden/);
   assert.doesNotMatch(html, /0 users|moderation-user-table/);
   assert.equal(newsletterStatusLabel('PENDING_CONFIRMATION'), 'Pending confirmation');
   assert.equal(newsletterStatusLabel(null), 'Not subscribed');
+});
+
+test('contact CSV preserves international text and protects user-entered spreadsheet cells', () => {
+  const csv = contactsCsv([{
+    userId: 'private-id',
+    displayName: 'Леся, "Demo"',
+    email: 'lesya@example.test',
+    phoneNumber: '+380 555 0100',
+    telegramUsername: '@demo',
+    countryCode: 'UA',
+    locale: 'uk',
+    newsletterStatus: 'pending_confirmation',
+  }, { displayName: '  =1+1', email: '\r\n+2', telegramUsername: 'none' }]);
+  assert.equal(csv.charCodeAt(0), 0xfeff);
+  assert.ok(csv.includes('"Леся, ""Demo""","lesya@example.test","\'+380 555 0100","\'@demo","UA","uk","Pending confirmation"\r\n'));
+  assert.ok(csv.includes('"\'  =1+1","\'\r\n+2"'));
+  assert.doesNotMatch(csv, /private-id/);
+});
+
+test('contact export requests every page, and rejects an incomplete or interrupted result', async () => {
+  const users = Array.from({ length: 201 }, (_, index) => ({ userId: String(index) }));
+  const offsets = [];
+  const page = (offset, limit) => ({
+    users: users.slice(offset, offset + limit),
+    pagination: { total: users.length, hasMore: offset + limit < users.length },
+  });
+  const all = await collectModeratorContacts(async (offset, limit) => {
+    offsets.push(offset);
+    return page(offset, limit);
+  });
+  assert.deepEqual(all, users);
+  assert.deepEqual(offsets, [0, 100, 200]);
+  await assert.rejects(collectModeratorContacts(async (offset, limit) => {
+    const result = page(offset, limit);
+    if (offset) result.users[0] = users[0];
+    return result;
+  }), /incomplete_contacts/);
+  const controller = new AbortController();
+  await assert.rejects(collectModeratorContacts(async (offset, limit) => {
+    controller.abort();
+    return page(offset, limit);
+  }, controller.signal), { name: 'AbortError' });
 });

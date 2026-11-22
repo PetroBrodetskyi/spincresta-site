@@ -6,13 +6,14 @@ import { dashboardLoading } from './dashboard-loading-markup.mjs';
 import { siteIconMarkup } from '../scripts/site-icons.js';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
-const assetVersion = '20261122-moderator-dashboard';
+const assetVersion = '20261122-moderator-contacts';
+const icon = name => siteIconMarkup(name, 'site-icon', 18);
 
 const main = `
     <main class="account-dashboard moderation-dashboard container" data-moderator-page>
       <header class="account-dashboard-heading moderation-dashboard-heading">
         <h1 id="moderation-title">Moderator dashboard</h1>
-        <a href="/account/">Back to my account</a>
+        <a class="cta-secondary moderation-button" href="/account/">${icon('arrow-left')}<span>Back to my account</span></a>
       </header>
       <div class="account-layout">
         <aside class="account-sidebar">
@@ -34,7 +35,7 @@ const main = `
 
           <section id="moderator-reviews-panel" class="account-panel moderation-panel" data-moderator-panel="reviews" role="tabpanel" aria-labelledby="moderator-reviews-tab">
             <header class="moderation-panel-heading">
-              <h2>Player reviews</h2>
+              <h2>${icon('chat')} Player reviews</h2>
               <p>Pending reviews are listed oldest first. Approved reviews appear on the brand page.</p>
             </header>
             <div class="moderation-toolbar" role="group" aria-label="Filter reviews by status">
@@ -49,14 +50,18 @@ const main = `
 
           <section id="moderator-users-panel" class="account-panel moderation-panel" data-moderator-panel="users" role="tabpanel" aria-labelledby="moderator-users-tab" hidden>
             <header class="moderation-panel-heading">
-              <h2>Registered users</h2>
+              <h2>${icon('user')} Registered users</h2>
               <p>Contact details are visible only to approved moderators.</p>
             </header>
             <div class="moderation-user-toolbar">
               <label><span>Search users</span><input type="search" data-moderator-user-search placeholder="Name, email, phone or Telegram" /></label>
               <strong data-moderator-user-total aria-live="polite"></strong>
-              <button type="button" data-moderator-user-refresh>Refresh</button>
+              <div class="moderation-user-tools">
+                <button class="moderation-button" type="button" data-moderator-user-refresh>${icon('refresh')}<span>Refresh</span></button>
+                <button class="moderation-button" type="button" data-moderator-user-export disabled hidden>${icon('download')}<span>Export contacts (CSV)</span></button>
+              </div>
             </div>
+            <p class="moderation-export-status" data-moderator-export-status role="status" hidden></p>
             ${dashboardLoading('data-moderator-users-loading', 'Loading registered users…')}
             <p class="moderation-empty" data-moderator-users-empty hidden>No registered users found.</p>
             <div class="moderation-user-list" data-moderator-users-list hidden></div>

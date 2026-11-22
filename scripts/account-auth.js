@@ -22,6 +22,32 @@ export function accountHeaderPreview(raw, now = Date.now()) {
   return null;
 }
 
+// Both the Google callback and auth-state events can refresh the same session.
+// Only the newest refresh may update the UI or report an error.
+export function createAccountSessionSync({ readSession, loadProfile, loadAccess, apply }) {
+  let latest = 0;
+  return {
+    cancel: () => { latest += 1; },
+    async refresh(options = {}) {
+      const request = ++latest;
+      const isCurrent = () => request === latest;
+      try {
+        const { data, error } = await readSession();
+        if (!isCurrent()) return;
+        if (error) throw error;
+        const user = data?.session?.user || null;
+        const [profile, access] = await Promise.all([
+          user ? loadProfile(user) : null,
+          loadAccess(user ? data.session.access_token : ''),
+        ]);
+        if (isCurrent()) apply({ user, profile, access }, options, isCurrent);
+      } catch (error) {
+        if (isCurrent()) throw error;
+      }
+    },
+  };
+}
+
 const readHeaderPreview = () => {
   try { return accountHeaderPreview(sessionStorage.getItem(HEADER_PREVIEW_KEY)); }
   catch { return null; }
@@ -304,7 +330,8 @@ export const initAccountAuth = async (locale, favoriteOptions = {}) => {
   let autoCloseTimer = 0;
   let favoriteWrite = Promise.resolve();
   let reviewRequest = 0;
-  let sessionRequest = 0;
+  let modalView = 'signin';
+  let googleSigningIn = false;
 
   const countrySelect = contactForm?.querySelector('[data-account-country]');
   if (countrySelect) {
@@ -354,6 +381,7 @@ export const initAccountAuth = async (locale, favoriteOptions = {}) => {
   };
 
   const showView = name => {
+    modalView = name;
     views.forEach(view => { view.hidden = view.dataset.accountView !== name; });
   };
 
@@ -367,8 +395,14 @@ export const initAccountAuth = async (locale, favoriteOptions = {}) => {
 
   const closeModal = () => {
     window.clearTimeout(autoCloseTimer);
+    setStatus(modal, '');
     modal.hidden = true;
     document.body.classList.remove('account-auth-open');
+  };
+
+  const isSignInOpen = () => !modal.hidden && modalView === 'signin';
+  const showSignInError = (message = copy.failed) => {
+    if (!currentUser && isSignInOpen()) setStatus(modal, message, 'error');
   };
 
   const openSignIn = () => {
@@ -383,8 +417,8 @@ export const initAccountAuth = async (locale, favoriteOptions = {}) => {
     } else {
       openModal(currentUser ? 'profile' : 'signin');
       if (!currentUser) {
-        if (authUnavailable) setStatus(modal, copy.failed, 'error');
-        else if (authConfig) prepareGoogle(authConfig).catch(() => setStatus(modal, copy.failed, 'error'));
+        if (authUnavailable) showSignInError();
+        else if (authConfig) prepareGoogle(authConfig).catch(() => showSignInError());
       }
     }
     modal.querySelector('.account-auth-close')?.focus();
@@ -631,45 +665,50 @@ export const initAccountAuth = async (locale, favoriteOptions = {}) => {
     }
   };
 
-  const syncSession = async ({ openIncomplete = false } = {}) => {
-    const request = ++sessionRequest;
-    const { data } = await supabase.auth.getSession();
-    if (request !== sessionRequest) return;
-    const user = data.session?.user || null;
-    const [profile, access] = user ? await Promise.all([
-      loadProfile(user),
-      loadAccountAccess(data.session?.access_token || ''),
-    ]) : [null, { role: 'user', representative: false, brands: [] }];
-    if (request !== sessionRequest) return;
-    currentUser = user;
-    currentProfile = profile;
-    currentAccess = access;
-    updateControl();
-    renderAccountPage();
-    publishAccountState();
-    renderAccountReviews().catch(() => setReviewHistoryState('error', accountReviewsCopy.failed));
-    if (profile?.registration_completed_at) {
-      syncProfileLocale(profile).then(localized => {
-        if (request !== sessionRequest || currentProfile !== profile || localized === profile) return;
-        currentProfile = localized;
-        populateProfileSummary(currentProfile, modal, 'profile');
-        if (accountPage) populateProfileSummary(currentProfile, accountPage, 'account-page');
-      }).catch(() => {});
-    }
+  const sessionSync = createAccountSessionSync({
+    readSession: () => supabase.auth.getSession(),
+    loadProfile,
+    loadAccess: loadAccountAccess,
+    apply({ user, profile, access }, { openIncomplete = false }, isCurrent) {
+      const accountChanged = user?.id !== currentUser?.id;
+      currentUser = user;
+      currentProfile = profile;
+      currentAccess = access;
 
-    if (currentUser && googleReady) {
-      window.google?.accounts?.id?.cancel();
-    }
+      // Always reconcile an open sign-in dialog with the confirmed session, no
+      // matter which of the two auth flows refreshed it.
+      if (user && profile?.registration_completed_at && isSignInOpen()) {
+        const restoreFocus = modal.contains(document.activeElement);
+        closeModal();
+        if (restoreFocus) control.focus();
+      } else if (user && !profile?.registration_completed_at && (isSignInOpen() || (openIncomplete && accountChanged))) {
+        populateUser('account', user, profile);
+        openModal('completion');
+      }
 
-    if (currentUser && !currentProfile?.registration_completed_at && openIncomplete) {
-      populateUser('account', currentUser, currentProfile);
-      openModal('completion');
-    }
-  };
+      updateControl();
+      renderAccountPage();
+      publishAccountState();
+      renderAccountReviews().catch(() => setReviewHistoryState('error', accountReviewsCopy.failed));
+      if (profile?.registration_completed_at) {
+        syncProfileLocale(profile).then(localized => {
+          if (!isCurrent() || currentProfile !== profile || localized === profile) return;
+          currentProfile = localized;
+          populateProfileSummary(currentProfile, modal, 'profile');
+          if (accountPage) populateProfileSummary(currentProfile, accountPage, 'account-page');
+        }).catch(() => {});
+      }
+
+      if (user && googleReady) {
+        try { window.google?.accounts?.id?.cancel?.(); } catch { /* Session is already confirmed. */ }
+      }
+    },
+  });
 
   const handleGoogleCredential = async response => {
-    if (!response?.credential || !nonce?.raw) return;
-    setStatus(modal, '');
+    if (!response?.credential || !nonce?.raw || currentUser || googleSigningIn) return;
+    googleSigningIn = true;
+    if (isSignInOpen()) setStatus(modal, '');
     try {
       const { error } = await supabase.auth.signInWithIdToken({
         provider: 'google',
@@ -677,11 +716,11 @@ export const initAccountAuth = async (locale, favoriteOptions = {}) => {
         nonce: nonce.raw,
       });
       if (error) throw error;
-      await syncSession({ openIncomplete: true });
-      if (currentProfile?.registration_completed_at) closeModal();
+      await sessionSync.refresh({ openIncomplete: true }).catch(() => showSignInError(copy.profileFailed));
     } catch {
-      openModal('signin');
-      setStatus(modal, copy.failed, 'error');
+      showSignInError();
+    } finally {
+      googleSigningIn = false;
     }
   };
 
@@ -831,7 +870,7 @@ export const initAccountAuth = async (locale, favoriteOptions = {}) => {
 
   const signOut = async () => {
     await supabase.auth.signOut();
-    sessionRequest += 1;
+    sessionSync.cancel();
     currentUser = null;
     currentProfile = null;
     currentAccess = { role: 'user', representative: false, brands: [] };
@@ -979,20 +1018,18 @@ export const initAccountAuth = async (locale, favoriteOptions = {}) => {
       openSignIn,
     };
 
-    await syncSession({ openIncomplete: true });
+    await sessionSync.refresh({ openIncomplete: true });
     window.dispatchEvent(new CustomEvent('spincresta:account-ready'));
-    if (!currentUser) prepareGoogle(config).catch(() => {
-      if (!modal.hidden) setStatus(modal, copy.failed, 'error');
-    });
+    if (!currentUser) prepareGoogle(config).catch(() => showSignInError());
     supabase.auth.onAuthStateChange(() => {
-      window.setTimeout(() => syncSession({ openIncomplete: true }).catch(() => {}), 0);
+      window.setTimeout(() => sessionSync.refresh({ openIncomplete: true }).catch(() => showSignInError(copy.profileFailed)), 0);
     });
     window.addEventListener('pageshow', event => {
-      if (event.persisted) syncSession().catch(() => {});
+      if (event.persisted) sessionSync.refresh().catch(() => {});
     });
   } catch {
     authUnavailable = true;
-    sessionRequest += 1;
+    sessionSync.cancel();
     currentUser = null;
     currentProfile = null;
     currentAccess = { role: 'user', representative: false, brands: [] };

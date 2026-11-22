@@ -78,7 +78,7 @@
     <main class="account-dashboard moderation-dashboard container" data-moderator-page>
       <header class="account-dashboard-heading moderation-dashboard-heading">
         <h1 id="moderation-title">Moderator dashboard</h1>
-        <a href="/account/">Back to my account</a>
+        <a class="cta-secondary moderation-button" href="/account/"><svg class="site-icon" width="18" height="18" aria-hidden="true" focusable="false"><use href="/icons/ui/review-method.svg?v=20261122-moderator-contacts#arrow-left"></use></svg><span>Back to my account</span></a>
       </header>
       <div class="account-layout">
         <aside class="account-sidebar">
@@ -100,7 +100,7 @@
 
           <section id="moderator-reviews-panel" class="account-panel moderation-panel" data-moderator-panel="reviews" role="tabpanel" aria-labelledby="moderator-reviews-tab">
             <header class="moderation-panel-heading">
-              <h2>Player reviews</h2>
+              <h2><svg class="site-icon" width="18" height="18" aria-hidden="true" focusable="false"><use href="/icons/ui/review-method.svg?v=20261119-catalog-partners#chat"></use></svg> Player reviews</h2>
               <p>Pending reviews are listed oldest first. Approved reviews appear on the brand page.</p>
             </header>
             <div class="moderation-toolbar" role="group" aria-label="Filter reviews by status">
@@ -118,14 +118,18 @@
 
           <section id="moderator-users-panel" class="account-panel moderation-panel" data-moderator-panel="users" role="tabpanel" aria-labelledby="moderator-users-tab" hidden>
             <header class="moderation-panel-heading">
-              <h2>Registered users</h2>
+              <h2><svg class="site-icon" width="18" height="18" aria-hidden="true" focusable="false"><use href="/icons/ui/review-method.svg?v=20261119-catalog-partners#user"></use></svg> Registered users</h2>
               <p>Contact details are visible only to approved moderators.</p>
             </header>
             <div class="moderation-user-toolbar">
               <label><span>Search users</span><input type="search" data-moderator-user-search placeholder="Name, email, phone or Telegram" /></label>
               <strong data-moderator-user-total aria-live="polite"></strong>
-              <button type="button" data-moderator-user-refresh>Refresh</button>
+              <div class="moderation-user-tools">
+                <button class="moderation-button" type="button" data-moderator-user-refresh><svg class="site-icon" width="18" height="18" aria-hidden="true" focusable="false"><use href="/icons/ui/review-method.svg?v=20261122-moderator-contacts#refresh"></use></svg><span>Refresh</span></button>
+                <button class="moderation-button" type="button" data-moderator-user-export disabled hidden><svg class="site-icon" width="18" height="18" aria-hidden="true" focusable="false"><use href="/icons/ui/review-method.svg?v=20261122-moderator-contacts#download"></use></svg><span>Export contacts (CSV)</span></button>
+              </div>
             </div>
+            <p class="moderation-export-status" data-moderator-export-status role="status" hidden></p>
             <div class="dashboard-skeleton" data-moderator-users-loading role="status">
     <span class="dashboard-skeleton-status">Loading registered users…</span>
     <div aria-hidden="true"><div class="dashboard-skeleton-list"><div class="dashboard-skeleton-row"><span class="dashboard-skeleton-line is-avatar"></span><div><span class="dashboard-skeleton-line is-medium"></span><span class="dashboard-skeleton-line is-long"></span></div><span class="dashboard-skeleton-line is-chip"></span></div><div class="dashboard-skeleton-row"><span class="dashboard-skeleton-line is-avatar"></span><div><span class="dashboard-skeleton-line is-medium"></span><span class="dashboard-skeleton-line is-long"></span></div><span class="dashboard-skeleton-line is-chip"></span></div><div class="dashboard-skeleton-row"><span class="dashboard-skeleton-line is-avatar"></span><div><span class="dashboard-skeleton-line is-medium"></span><span class="dashboard-skeleton-line is-long"></span></div><span class="dashboard-skeleton-line is-chip"></span></div></div></div>
@@ -181,6 +185,6 @@
     </footer>
 
     <script type="module" src="/scripts/main.js?v=20261119-catalog-partners"></script>
-      <script type="module" src="/scripts/moderator-bootstrap.js?v=20261122-moderator-dashboard"></script>
+      <script type="module" src="/scripts/moderator-bootstrap.js?v=20261122-moderator-contacts"></script>
   </body>
 </html>

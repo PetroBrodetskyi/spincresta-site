@@ -501,12 +501,11 @@
 .moderation-dashboard-heading {
   display: flex;
   flex-wrap: wrap;
-  align-items: baseline;
+  align-items: center;
   justify-content: space-between;
   gap: 10px;
 }
 
-.moderation-dashboard-heading a,
 .moderation-user-card a {
   color: var(--account-accent);
   text-underline-offset: 3px;
@@ -538,24 +537,121 @@ body[data-page='moderator'] .moderation-user-card .moderation-user-access {
 }
 
 body[data-page='moderator'] .moderation-user-card .moderation-user-access {
-  grid-template-columns: minmax(0, 1fr) auto;
-  align-items: start;
-  justify-self: start;
-  max-width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
 }
 
 .moderation-user-card .moderation-brand-picker,
 .moderation-user-card .moderation-user-access small {
-  grid-column: 1 / -1;
+  flex-basis: 100%;
 }
 
 .moderation-user-card .moderation-user-access small:empty {
   display: none;
 }
 
-body[data-page='moderator'] .moderation-user-card .moderation-user-access button {
-  grid-column: 2;
-  grid-row: 1;
+.moderation-role-field {
+  position: relative;
+  flex: 0 1 11.5rem;
+  min-width: 0;
+}
+
+body[data-page='moderator'] .moderation-role-field select {
+  appearance: none;
+  min-height: 44px;
+  padding-inline: 12px 38px;
+  background-image: none;
+  border-radius: 8px;
+  font-size: var(--type-ui);
+}
+
+.moderation-role-field .site-icon {
+  position: absolute;
+  inset-inline-end: 12px;
+  inset-block-start: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+}
+
+body[data-page='moderator'] .moderation-user-toolbar {
+  grid-template-columns: minmax(0, 1fr) auto;
+}
+
+.moderation-user-toolbar label,
+.moderation-user-toolbar input {
+  min-width: 0;
+}
+
+.moderation-user-tools {
+  grid-column: 1 / -1;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.moderation-export-status {
+  margin: 0;
+  color: var(--text-muted);
+  font-size: var(--type-ui);
+}
+
+.moderation-user-card .moderation-user-identity > div {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.moderation-user-card .moderation-user-labels {
+  flex-wrap: wrap;
+  gap: 4px 10px;
+  color: var(--text-muted);
+  font-size: var(--type-ui);
+  font-weight: 400;
+}
+
+.moderation-user-email {
+  display: grid;
+  grid-template-columns: minmax(0, max-content) 36px;
+  align-items: center;
+  gap: 3px 8px;
+}
+
+.moderation-user-email a {
+  min-width: 0;
+}
+
+.moderation-copy-email {
+  display: inline-grid;
+  place-items: center;
+  min-height: 36px;
+  padding: 0;
+  border: 1px solid var(--surface-border-strong);
+  cursor: pointer;
+}
+
+.moderation-copy-status {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+}
+
+.moderation-copy-status.is-error {
+  position: static;
+  grid-column: 1 / -1;
+  width: auto;
+  height: auto;
+  clip-path: none;
+  color: #9c2834;
+}
+
+.moderation-user-facts dt,
+.moderation-panel-heading h2 {
+  display: flex;
+  align-items: center;
+  gap: 6px;
 }
 
 body[data-page='moderator'] .moderation-panel :is(.moderation-toolbar, .moderation-user-toolbar) {
@@ -563,19 +659,35 @@ body[data-page='moderator'] .moderation-panel :is(.moderation-toolbar, .moderati
   padding-block: 4px 12px;
 }
 
-body[data-page='moderator'] .moderation-user-card .is-representative,
-body[data-page='moderator'] .moderation-user-card .is-moderator,
 body[data-page='moderator'] .moderation-brand-link:hover,
 body[data-page='moderator'] .moderation-rating {
   color: var(--account-accent);
 }
 
-body[data-page='moderator'] .moderation-dashboard :is(.moderation-toolbar, .moderation-user-toolbar, .moderation-access) button,
-body[data-page='moderator'] .moderation-dashboard .moderation-action {
+body[data-page='moderator'] .moderation-dashboard :is(.moderation-toolbar button, .moderation-access button, .moderation-action, .moderation-button) {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  min-width: 0;
   min-height: 44px;
-  border-radius: 8px;
+  padding: 8px 16px;
+  border: 1px solid var(--surface-border-strong);
+  font-size: var(--type-ui);
+  font-weight: 700;
+  line-height: 1.2;
+  text-align: center;
+  text-decoration: none;
   text-transform: none;
   letter-spacing: normal;
+}
+
+.moderation-dashboard button:not(:disabled) {
+  cursor: pointer;
+}
+
+.moderation-dashboard :is(.moderation-button, .moderation-copy-email, .moderation-role-field, .moderation-user-facts dt, .moderation-panel-heading h2) .site-icon {
+  flex-shrink: 0;
 }
 
 body[data-page='moderator'] .moderation-dashboard .moderation-toolbar button[aria-pressed='true'] {
@@ -608,7 +720,11 @@ body[data-page='moderator'] .moderation-dashboard :is(button, select, input, tex
 
 @media (max-width: 560px) {
   .moderation-user-facts { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-  .moderation-user-card .moderation-user-labels { flex-wrap: wrap; }
+  body[data-page='moderator'] .moderation-user-toolbar {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 8px;
+  }
+  body[data-page='moderator'] .moderation-user-toolbar strong { min-height: 0; }
 }
 
 @media (max-width: 560px) {

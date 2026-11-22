@@ -1,6 +1,9 @@
+import { siteIconMarkup } from '../site-icons.js?v=20261122-moderator-contacts';
+
 const DEFAULT_MODERATION_ENDPOINT = 'https://api.spincresta.com/api/moderation-reviews';
 const DEFAULT_USERS_ENDPOINT = 'https://api.spincresta.com/api/moderation-users';
 const STATUSES = ['pending', 'approved', 'rejected'];
+const USERS_PAGE_SIZE = 100;
 
 const waitForAccount = () => {
   if (window.SpinCrestaAccount) return Promise.resolve(window.SpinCrestaAccount);
@@ -212,6 +215,98 @@ export const newsletterStatusLabel = status => {
   return text ? text[0].toUpperCase() + text.slice(1) : 'Not subscribed';
 };
 
+const icon = name => siteIconMarkup(name, 'site-icon', 16);
+
+const csvCell = value => {
+  const text = String(value ?? '');
+  // Keep user-entered values literal in spreadsheets, including + phone prefixes.
+  const literal = /^[\u0000-\u0020\s]*[=+\-@＝＋－＠]|^[\t\r\n]/u.test(text) ? "'" + text : text;
+  return '"' + literal.replaceAll('"', '""') + '"';
+};
+
+export const contactsCsv = users => {
+  const header = ['Name', 'Email', 'Phone', 'Telegram', 'Country', 'Language', 'Newsletter status'];
+  const rows = users.map(user => [
+    user.displayName,
+    user.email,
+    user.phoneNumber,
+    user.telegramUsername ? '@' + String(user.telegramUsername).replace(/^@+/, '') : '',
+    user.countryCode,
+    user.locale,
+    newsletterStatusLabel(user.newsletterStatus),
+  ]);
+  return '\uFEFF' + [header, ...rows].map(row => row.map(csvCell).join(',')).join('\r\n') + '\r\n';
+};
+
+export const collectModeratorContacts = async (fetchPage, signal) => {
+  const contacts = [];
+  const ids = new Set();
+  let expectedTotal;
+  for (let offset = 0; ; offset += USERS_PAGE_SIZE) {
+    signal?.throwIfAborted();
+    const { users, pagination } = await fetchPage(offset, USERS_PAGE_SIZE, signal);
+    signal?.throwIfAborted();
+    const total = pagination?.total;
+    if (!Number.isSafeInteger(total) || total < 0 || (expectedTotal !== undefined && total !== expectedTotal)
+      || !Array.isArray(users) || users.length !== Math.min(USERS_PAGE_SIZE, total - offset)
+      || pagination.hasMore !== (offset + USERS_PAGE_SIZE < total)) {
+      throw new Error('incomplete_contacts');
+    }
+    expectedTotal = total;
+    for (const user of users) {
+      if (!user?.userId || ids.has(user.userId)) throw new Error('incomplete_contacts');
+      ids.add(user.userId);
+      contacts.push(user);
+    }
+    if (!pagination.hasMore) return contacts;
+  }
+};
+
+const downloadContacts = contacts => {
+  const url = URL.createObjectURL(new Blob([contactsCsv(contacts)], { type: 'text/csv;charset=utf-8' }));
+  const link = document.createElement('a');
+  link.href = url;
+  link.download = 'spincresta-contacts-' + new Date().toISOString().slice(0, 10) + '.csv';
+  document.body.append(link);
+  link.click();
+  link.remove();
+  window.setTimeout(() => URL.revokeObjectURL(url), 1000);
+};
+
+const emailContact = email => {
+  const contact = createElement('div', 'moderation-user-email');
+  const link = createElement('a', '', email);
+  link.href = 'mailto:' + encodeURIComponent(email).replace('%40', '@');
+  const copy = createElement('button', 'moderation-copy-email');
+  copy.type = 'button';
+  copy.setAttribute('aria-label', 'Copy email address: ' + email);
+  copy.title = 'Copy email address';
+  copy.innerHTML = icon('copy');
+  const status = createElement('small', 'moderation-copy-status');
+  status.setAttribute('role', 'status');
+  let reset;
+  copy.addEventListener('click', async () => {
+    window.clearTimeout(reset);
+    try {
+      await navigator.clipboard.writeText(email);
+      copy.innerHTML = icon('check');
+      copy.title = 'Email copied';
+      status.textContent = 'Email copied.';
+      status.classList.remove('is-error');
+      reset = window.setTimeout(() => {
+        copy.innerHTML = icon('copy');
+        copy.title = 'Copy email address';
+        status.textContent = '';
+      }, 2000);
+    } catch {
+      status.textContent = 'Could not copy. Select the address to copy it manually.';
+      status.classList.add('is-error');
+    }
+  });
+  contact.append(link, copy, status);
+  return contact;
+};
+
 const userCard = (user, brands, onSaveRole) => {
   const row = createElement('article', 'moderation-user-card');
   const identityCell = createElement('header', 'moderation-user-card-heading');
@@ -225,32 +320,33 @@ const userCard = (user, brands, onSaveRole) => {
   }
   const identityText = createElement('div');
   identityText.append(createElement('strong', '', user.displayName || 'SpinCresta player'));
-  identityText.append(createElement('a', '', user.email));
-  identityText.lastElementChild.href = `mailto:${user.email}`;
+  if (user.email) identityText.append(emailContact(user.email));
   const labels = createElement('span', 'moderation-user-labels');
-  labels.append(createElement('em', '', (user.locale || 'en').toUpperCase()));
-  if (user.role === 'moderator') labels.append(createElement('em', 'is-moderator', 'Moderator'));
-  if (Array.isArray(user.representativeBrands) && user.representativeBrands.length) labels.append(createElement('em', 'is-representative', 'Brand representative'));
+  labels.append(createElement('span', '', (user.locale || 'en').toUpperCase()));
+  if (user.role === 'moderator') labels.append(createElement('span', '', 'Moderator'));
+  if (Array.isArray(user.representativeBrands) && user.representativeBrands.length) labels.append(createElement('span', '', 'Brand representative'));
   identityText.append(labels);
   identity.append(identityText);
   identityCell.append(identity);
 
   const facts = createElement('dl', 'account-profile-facts moderation-user-facts');
-  const fact = (label, value = '') => {
+  const fact = (label, iconName, value = '') => {
     const item = createElement('div');
+    const term = createElement('dt', '', label);
+    term.insertAdjacentHTML('afterbegin', icon(iconName));
     const details = createElement('dd', '', value);
-    item.append(createElement('dt', '', label), details);
+    item.append(term, details);
     facts.append(item);
     return details;
   };
-  fact('Country', user.countryCode || '—');
-  const phone = fact('Phone');
+  fact('Country', 'globe', user.countryCode || '—');
+  const phone = fact('Phone', 'phone');
   if (user.phoneNumber) {
     const phoneLink = createElement('a', '', user.phoneNumber);
     phoneLink.href = `tel:${user.phoneNumber.replace(/[^+\d]/g, '')}`;
     phone.append(phoneLink);
   } else phone.textContent = '—';
-  const telegram = fact('Telegram');
+  const telegram = fact('Telegram', 'chat');
   if (user.telegramUsername) {
     const telegramLink = createElement('a', '', `@${user.telegramUsername}`);
     telegramLink.href = `https://t.me/${user.telegramUsername}`;
@@ -258,14 +354,17 @@ const userCard = (user, brands, onSaveRole) => {
     telegramLink.rel = 'noopener';
     telegram.append(telegramLink);
   } else telegram.textContent = '—';
-  fact('Registered', formatDate(user.registeredAt));
-  fact('Last sign-in', formatDate(user.lastSignInAt));
-  fact('Newsletter', newsletterStatusLabel(user.newsletterStatus));
+  fact('Registered', 'calendar', formatDate(user.registeredAt));
+  fact('Last sign-in', 'clock', formatDate(user.lastSignInAt));
+  fact('Newsletter', 'mail', newsletterStatusLabel(user.newsletterStatus));
   const accessCell = createElement('div', 'moderation-user-access');
+  const roleField = createElement('div', 'moderation-role-field');
   const roleSelect = document.createElement('select');
   roleSelect.setAttribute('aria-label', `Brand access: ${user.displayName || 'SpinCresta player'}`);
   roleSelect.innerHTML = '<option value="user">Player</option><option value="brand_representative">Brand representative</option>';
   roleSelect.value = user.representativeBrands?.length ? 'brand_representative' : 'user';
+  roleField.append(roleSelect);
+  roleField.insertAdjacentHTML('beforeend', icon('chevron-down'));
   const brandPicker = document.createElement('details');
   brandPicker.className = 'moderation-brand-picker';
   const brandSummary = document.createElement('summary');
@@ -317,7 +416,7 @@ const userCard = (user, brands, onSaveRole) => {
     brandPicker.hidden = roleSelect.value !== 'brand_representative';
     if (brandPicker.hidden) brandPicker.open = false;
   });
-  const save = createElement('button', '', 'Save role');
+  const save = createElement('button', 'moderation-button', 'Save role');
   save.type = 'button';
   const message = createElement('small');
   save.addEventListener('click', async () => {
@@ -331,7 +430,7 @@ const userCard = (user, brands, onSaveRole) => {
       message.textContent = 'Saved';
     } catch { message.textContent = 'Could not save'; save.disabled = false; }
   });
-  accessCell.append(roleSelect, brandPicker, save, message);
+  accessCell.append(roleField, save, brandPicker, message);
   row.append(identityCell, facts, accessCell);
   row.dataset.search = [user.displayName, user.email, user.countryCode, user.phoneNumber, user.telegramUsername]
     .filter(Boolean).join(' ').toLowerCase();
@@ -363,6 +462,8 @@ export const initModeratorPage = async () => {
   const userSearch = root.querySelector('[data-moderator-user-search]');
   const userTotal = root.querySelector('[data-moderator-user-total]');
   const userRefresh = root.querySelector('[data-moderator-user-refresh]');
+  const userExport = root.querySelector('[data-moderator-user-export]');
+  const exportStatus = root.querySelector('[data-moderator-export-status]');
   const endpoint = document.documentElement.dataset.moderationEndpoint
     || DEFAULT_MODERATION_ENDPOINT;
   const usersEndpoint = document.documentElement.dataset.moderationUsersEndpoint
@@ -376,6 +477,8 @@ export const initModeratorPage = async () => {
   let accessRequest = 0;
   let usersRequest = 0;
   let reviewsRequest = 0;
+  let exporting = null;
+  let directoryCount = 0;
 
   const showNotice = (message, state = '') => {
     notice.textContent = message;
@@ -383,10 +486,29 @@ export const initModeratorPage = async () => {
     notice.hidden = !message;
   };
 
+  const showExportStatus = message => {
+    exportStatus.textContent = message;
+    exportStatus.hidden = !message;
+  };
+
+  const syncExportControl = () => {
+    userExport.hidden = !usersLoaded || !accessToken;
+    userExport.disabled = userExport.hidden || !directoryCount || Boolean(exporting);
+  };
+
+  const cancelExport = () => {
+    exporting?.abort();
+    exporting = null;
+    showExportStatus('');
+  };
+
   const showAccess = message => {
     accessToken = '';
     usersLoaded = false;
     availableBrands = [];
+    directoryCount = 0;
+    cancelExport();
+    syncExportControl();
     showNotice('');
     usersList.replaceChildren();
     usersList.hidden = true;
@@ -427,6 +549,7 @@ export const initModeratorPage = async () => {
     const generation = accessRequest;
     const isCurrent = () => request === usersRequest && generation === accessRequest && token === accessToken;
     usersLoaded = false;
+    syncExportControl();
     usersLoading.hidden = false;
     const panel = usersLoading.closest('[data-moderator-panel]');
     panel.setAttribute('aria-busy', 'true');
@@ -436,7 +559,7 @@ export const initModeratorPage = async () => {
     usersList.replaceChildren();
     let response, body;
     try {
-      response = await fetch(`${usersEndpoint}?limit=100&offset=0`, {
+      response = await fetch(`${usersEndpoint}?limit=${USERS_PAGE_SIZE}&offset=0`, {
         headers: { Accept: 'application/json', Authorization: `Bearer ${token}` },
       });
       body = await response.json().catch(() => ({}));
@@ -470,8 +593,45 @@ export const initModeratorPage = async () => {
     const count = body.pagination?.total ?? users.length;
     userTotal.textContent = `${count} ${count === 1 ? 'user' : 'users'}`;
     usersEmpty.textContent = 'No registered users found.';
+    directoryCount = count;
     usersLoaded = true;
+    syncExportControl();
     filterUsers();
+  };
+
+  const exportContacts = async () => {
+    const token = accessToken;
+    const generation = accessRequest;
+    if (!token || !usersLoaded || !directoryCount || exporting) return;
+
+    const controller = new AbortController();
+    exporting = controller;
+    syncExportControl();
+    showExportStatus('Preparing all contacts…');
+    try {
+      const contacts = await collectModeratorContacts(async (offset, limit, signal) => {
+        const response = await fetch(`${usersEndpoint}?limit=${limit}&offset=${offset}`, {
+          headers: { Accept: 'application/json', Authorization: `Bearer ${token}` },
+          cache: 'no-store',
+          signal,
+        });
+        if (!response.ok) throw Object.assign(new Error('export_failed'), { status: response.status });
+        return response.json();
+      }, controller.signal);
+      if (exporting !== controller || generation !== accessRequest || token !== accessToken) return;
+      if (contacts.length) downloadContacts(contacts);
+      showExportStatus(contacts.length ? 'Contacts exported.' : 'No contacts to export.');
+    } catch (error) {
+      if (exporting !== controller || controller.signal.aborted) return;
+      if (error?.status === 401 || error?.status === 403) {
+        showAccess('Sign in with an approved moderator account to continue.');
+        return;
+      }
+      showExportStatus('Could not export all contacts. Try again.');
+    } finally {
+      if (exporting === controller) exporting = null;
+      syncExportControl();
+    }
   };
 
   const openView = async view => {
@@ -590,10 +750,15 @@ export const initModeratorPage = async () => {
   });
   userSearch.addEventListener('input', filterUsers);
   userRefresh.addEventListener('click', () => loadUsers({ force: true }));
+  userExport.addEventListener('click', exportContacts);
 
   const syncAccess = async () => {
     const request = ++accessRequest;
     accessToken = '';
+    cancelExport();
+    usersList.hidden = true;
+    usersList.replaceChildren();
+    syncExportControl();
     if (!account?.getState().signedIn) {
       showAccess('Sign in with an approved moderator account to continue.');
       return;

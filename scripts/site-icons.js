@@ -23,7 +23,10 @@ export function linkIconFor(href, base) {
 }
 
 export function siteIconMarkup(icon, classes = 'site-icon', size = 24) {
-  return `<svg class="${classes}" width="${size}" height="${size}" aria-hidden="true" focusable="false"><use href="${SITE_ICON_SPRITE}#${icon}"></use></svg>`;
+  const sprite = ['arrow-left', 'chevron-down', 'copy', 'check', 'download', 'refresh'].includes(icon)
+    ? '/icons/ui/review-method.svg?v=20261122-moderator-contacts'
+    : SITE_ICON_SPRITE;
+  return `<svg class="${classes}" width="${size}" height="${size}" aria-hidden="true" focusable="false"><use href="${sprite}#${icon}"></use></svg>`;
 }
 
 const SECTION_ICONS = [

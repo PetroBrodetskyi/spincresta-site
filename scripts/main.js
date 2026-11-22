@@ -6,7 +6,7 @@ import { COUNTRIES } from './countries.js';
 import { getFeaturedHomeBrands } from './featured-brands.js?v=20261119-shared-search';
 import { initFaqSections } from './faq.js?v=20261119-faq-layout';
 import { initFooterNewsletter } from './footer-newsletter.js?v=20260826-newsletter-4';
-import { initAccountAuth, prepareAccountHeader } from './account-auth.js?v=20261122-account-loading';
+import { initAccountAuth, prepareAccountHeader } from './account-auth.js?v=20261122-account-dialog-sync';
 import { initSiteIcons, siteIconMarkup } from './site-icons.js?v=20261119-catalog-partners';
 import { initSectionNavigation } from './section-navigation.js?v=20261119-light-editorial';
 import { bindImagePreview } from './image-preview.js?v=20261119-preview-loader';

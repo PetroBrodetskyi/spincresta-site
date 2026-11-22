@@ -1,4 +1,4 @@
-import { initModeratorPage } from './pages/moderator.js?v=20261122-moderator-dashboard';
+import { initModeratorPage } from './pages/moderator.js?v=20261122-moderator-contacts';
 
 const startModerator = () => {
   initModeratorPage().catch(() => {
