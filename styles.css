@@ -1,10 +1,10 @@
 ﻿@import url('/fonts/inter-tight/index.css');
 @import url('/fonts/inter-tight/wght-italic.css');
-@import url('/styles/core.css?v=20261119-account-dashboard');
+@import url('/styles/core.css?v=20261122-account-loading');
 @import url('/styles/pages.css?v=20261121-review-form');
 @import url('/styles/brand-review.css?v=20261120-sticky-pill');
 @import url('/styles/section-contrast-preview.css?v=20261119-top-casinos-layout');
-@import url('/styles/account.css?v=20261119-account-dashboard');
+@import url('/styles/account.css?v=20261122-account-loading');
 @import url('/styles/editorial-directories.css?v=20261119-country-hub');
 
 :root {

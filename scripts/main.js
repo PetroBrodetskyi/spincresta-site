@@ -6,7 +6,7 @@ import { COUNTRIES } from './countries.js';
 import { getFeaturedHomeBrands } from './featured-brands.js?v=20261119-shared-search';
 import { initFaqSections } from './faq.js?v=20261119-faq-layout';
 import { initFooterNewsletter } from './footer-newsletter.js?v=20260826-newsletter-4';
-import { initAccountAuth } from './account-auth.js?v=20261119-account-dashboard';
+import { initAccountAuth, prepareAccountHeader } from './account-auth.js?v=20261122-account-loading';
 import { initSiteIcons, siteIconMarkup } from './site-icons.js?v=20261119-catalog-partners';
 import { initSectionNavigation } from './section-navigation.js?v=20261119-light-editorial';
 import { bindImagePreview } from './image-preview.js?v=20261119-preview-loader';
@@ -3914,9 +3914,17 @@ const relocateResponsibleGamblingRules = () => {
 // INIT FUNCTION
 // =====================
 export const initCasinoPage = async () => {
+  prepareAccountHeader(SITE_LOCALE);
+  const initPageAccount = brand => initAccountAuth(SITE_LOCALE, {
+    slug: getBrandDetailSlug(brand),
+    findBrand: findBrandByPageKey,
+    getBrandSlug: getBrandDetailSlug,
+    brandPagePath,
+  });
   const pageType = document.body.dataset.page;
   const pageCountry = document.body.dataset.country?.toUpperCase();
   const isBrandPage = Boolean(document.body.dataset.brand);
+  if (!isBrandPage) initPageAccount();
   const siteCountryCountEl = document.getElementById('siteCountryCount');
   const siteBrandCountEl = document.getElementById('siteBrandCount');
 
@@ -3944,13 +3952,6 @@ export const initCasinoPage = async () => {
   await Promise.all([pageModulesReady, brandBonusTranslationsReady]);
 
   if (pageType !== 'moderator') initFooterNewsletter(SITE_LOCALE);
-  const initPageAccount = brand => initAccountAuth(SITE_LOCALE, {
-    slug: getBrandDetailSlug(brand),
-    findBrand: findBrandByPageKey,
-    getBrandSlug: getBrandDetailSlug,
-    brandPagePath,
-  });
-  if (!isBrandPage) initPageAccount();
   initAccountPageModule?.();
   initCatalogDirectoryModule?.();
   initCountryHubModule?.();

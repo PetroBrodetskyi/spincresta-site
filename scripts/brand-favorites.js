@@ -3,6 +3,11 @@ import { siteIconMarkup } from './site-icons.js?v=20261119-site-icons';
 const FAVORITES_KEY = 'spincresta_favorite_brands';
 const LIMIT = 80; // Keep the preference small because Auth includes user metadata in the session.
 const isBrandSlug = slug => typeof slug === 'string' && /^[a-z0-9][a-z0-9-]{0,39}$/.test(slug);
+export const favoriteLogoPath = image =>
+  typeof image === 'string' && /^\/?images\/[a-z0-9_./-]+\.(?:avif|gif|jpe?g|png|svg|webp)$/i.test(image) &&
+  !image.replace(/^\//, '').split('/').some(segment => !segment || segment === '.' || segment === '..')
+    ? `/${image.replace(/^\//, '')}`
+    : '';
 
 export const readFavoriteBrands = user => {
   const data = user?.user_metadata?.[FAVORITES_KEY];
@@ -144,8 +149,29 @@ export function initBrandFavorites({ locale, slug, findBrand, getBrandSlug, bran
       if (!brand || getBrandSlug(brand) !== key) continue;
       const item = document.createElement('li');
       const link = document.createElement('a');
+      link.className = 'account-favorite-brand';
       link.href = brandPagePath(brand);
-      link.textContent = brand.name;
+      const logo = document.createElement('span');
+      logo.className = 'account-favorite-logo';
+      logo.setAttribute('aria-hidden', 'true');
+      if (/^#[\da-f]{3}(?:[\da-f]{3})?$/i.test(brand.bgColor)) logo.style.backgroundColor = brand.bgColor;
+      const logoPath = favoriteLogoPath(brand.image);
+      const showInitial = () => {
+        logo.style.removeProperty('background-color');
+        logo.textContent = Array.from(brand.name)[0]?.toLocaleUpperCase(locale) || '';
+      };
+      if (logoPath) {
+        const image = document.createElement('img');
+        image.alt = '';
+        image.loading = 'lazy';
+        image.decoding = 'async';
+        image.addEventListener('error', showInitial, { once: true });
+        image.src = logoPath;
+        logo.append(image);
+      } else showInitial();
+      const name = document.createElement('span');
+      name.textContent = brand.name;
+      link.append(logo, name);
       const button = document.createElement('button');
       button.type = 'button';
       button.className = 'account-favorite-remove';

@@ -207,9 +207,14 @@ const reviewCard = (review, onModerate) => {
   return article;
 };
 
-const userRow = (user, brands, onSaveRole) => {
-  const row = document.createElement('tr');
-  const identityCell = document.createElement('td');
+export const newsletterStatusLabel = status => {
+  const text = typeof status === 'string' ? status.replace(/[_-]+/g, ' ').trim().toLowerCase() : '';
+  return text ? text[0].toUpperCase() + text.slice(1) : 'Not subscribed';
+};
+
+const userCard = (user, brands, onSaveRole) => {
+  const row = createElement('article', 'moderation-user-card');
+  const identityCell = createElement('header', 'moderation-user-card-heading');
   const identity = createElement('div', 'moderation-user-identity');
   if (user.avatarUrl) {
     const avatar = document.createElement('img');
@@ -230,14 +235,22 @@ const userRow = (user, brands, onSaveRole) => {
   identity.append(identityText);
   identityCell.append(identity);
 
-  const country = createElement('td', '', user.countryCode || '—');
-  const phone = createElement('td');
+  const facts = createElement('dl', 'account-profile-facts moderation-user-facts');
+  const fact = (label, value = '') => {
+    const item = createElement('div');
+    const details = createElement('dd', '', value);
+    item.append(createElement('dt', '', label), details);
+    facts.append(item);
+    return details;
+  };
+  fact('Country', user.countryCode || '—');
+  const phone = fact('Phone');
   if (user.phoneNumber) {
     const phoneLink = createElement('a', '', user.phoneNumber);
     phoneLink.href = `tel:${user.phoneNumber.replace(/[^+\d]/g, '')}`;
     phone.append(phoneLink);
   } else phone.textContent = '—';
-  const telegram = createElement('td');
+  const telegram = fact('Telegram');
   if (user.telegramUsername) {
     const telegramLink = createElement('a', '', `@${user.telegramUsername}`);
     telegramLink.href = `https://t.me/${user.telegramUsername}`;
@@ -245,10 +258,12 @@ const userRow = (user, brands, onSaveRole) => {
     telegramLink.rel = 'noopener';
     telegram.append(telegramLink);
   } else telegram.textContent = '—';
-  const newsletter = createElement('td');
-  newsletter.append(createElement('span', `moderation-status-pill is-${user.newsletterStatus || 'not-subscribed'}`, user.newsletterStatus || 'Not subscribed'));
-  const accessCell = createElement('td', 'moderation-user-access');
+  fact('Registered', formatDate(user.registeredAt));
+  fact('Last sign-in', formatDate(user.lastSignInAt));
+  fact('Newsletter', newsletterStatusLabel(user.newsletterStatus));
+  const accessCell = createElement('div', 'moderation-user-access');
   const roleSelect = document.createElement('select');
+  roleSelect.setAttribute('aria-label', `Brand access: ${user.displayName || 'SpinCresta player'}`);
   roleSelect.innerHTML = '<option value="user">Player</option><option value="brand_representative">Brand representative</option>';
   roleSelect.value = user.representativeBrands?.length ? 'brand_representative' : 'user';
   const brandPicker = document.createElement('details');
@@ -317,7 +332,7 @@ const userRow = (user, brands, onSaveRole) => {
     } catch { message.textContent = 'Could not save'; save.disabled = false; }
   });
   accessCell.append(roleSelect, brandPicker, save, message);
-  row.append(identityCell, country, phone, telegram, newsletter, createElement('td', '', formatDate(user.registeredAt)), createElement('td', '', formatDate(user.lastSignInAt)), accessCell);
+  row.append(identityCell, facts, accessCell);
   row.dataset.search = [user.displayName, user.email, user.countryCode, user.phoneNumber, user.telegramUsername]
     .filter(Boolean).join(' ').toLowerCase();
   return row;
@@ -344,7 +359,6 @@ export const initModeratorPage = async () => {
   const panels = Array.from(root.querySelectorAll('[data-moderator-panel]'));
   const usersLoading = root.querySelector('[data-moderator-users-loading]');
   const usersEmpty = root.querySelector('[data-moderator-users-empty]');
-  const usersTable = root.querySelector('[data-moderator-users-table]');
   const usersList = root.querySelector('[data-moderator-users-list]');
   const userSearch = root.querySelector('[data-moderator-user-search]');
   const userTotal = root.querySelector('[data-moderator-user-total]');
@@ -359,6 +373,9 @@ export const initModeratorPage = async () => {
   let currentView = 'reviews';
   let usersLoaded = false;
   let availableBrands = [];
+  let accessRequest = 0;
+  let usersRequest = 0;
+  let reviewsRequest = 0;
 
   const showNotice = (message, state = '') => {
     notice.textContent = message;
@@ -367,10 +384,22 @@ export const initModeratorPage = async () => {
   };
 
   const showAccess = message => {
+    accessToken = '';
+    usersLoaded = false;
+    availableBrands = [];
+    showNotice('');
+    usersList.replaceChildren();
+    usersList.hidden = true;
+    userTotal.textContent = '';
+    list.replaceChildren();
     loading.hidden = true;
     usersLoading.hidden = true;
     list.hidden = true;
     empty.hidden = true;
+    panels.forEach(panel => {
+      panel.hidden = true;
+      panel.removeAttribute('aria-busy');
+    });
     access.querySelector('p').textContent = message;
     signIn.textContent = account?.getState().signedIn
       ? 'Open account / switch user'
@@ -379,6 +408,7 @@ export const initModeratorPage = async () => {
   };
 
   const filterUsers = () => {
+    if (!usersLoaded) return;
     const query = userSearch.value.trim().toLowerCase();
     const rows = Array.from(usersList.children);
     let visible = 0;
@@ -387,38 +417,59 @@ export const initModeratorPage = async () => {
       if (!row.hidden) visible += 1;
     });
     usersEmpty.hidden = visible !== 0;
-    usersTable.hidden = visible === 0;
+    usersList.hidden = visible === 0;
   };
 
   const loadUsers = async ({ force = false } = {}) => {
-    if (usersLoaded && !force) return;
+    const token = accessToken;
+    if (!token || usersLoaded && !force) return;
+    const request = ++usersRequest;
+    const generation = accessRequest;
+    const isCurrent = () => request === usersRequest && generation === accessRequest && token === accessToken;
+    usersLoaded = false;
     usersLoading.hidden = false;
+    const panel = usersLoading.closest('[data-moderator-panel]');
+    panel.setAttribute('aria-busy', 'true');
     usersEmpty.hidden = true;
-    usersTable.hidden = true;
+    usersList.hidden = true;
+    userTotal.textContent = '';
     usersList.replaceChildren();
-    const response = await fetch(`${usersEndpoint}?limit=100&offset=0`, {
-      headers: { Accept: 'application/json', Authorization: `Bearer ${accessToken}` },
-    });
-    const body = await response.json().catch(() => ({}));
+    let response, body;
+    try {
+      response = await fetch(`${usersEndpoint}?limit=100&offset=0`, {
+        headers: { Accept: 'application/json', Authorization: `Bearer ${token}` },
+      });
+      body = await response.json().catch(() => ({}));
+    } catch { /* show a retryable error below */ }
+    if (!isCurrent()) return;
     usersLoading.hidden = true;
+    panel.removeAttribute('aria-busy');
+    if (!response) {
+      usersEmpty.textContent = 'Could not load registered users. Select Refresh to try again.';
+      usersEmpty.hidden = false;
+      return;
+    }
     if (response.status === 401) return showAccess('Sign in with an approved moderator account to continue.');
     if (response.status === 403) return showAccess('This account does not have moderator access.');
     if (!response.ok) return showAccess('The registered-user directory is temporarily unavailable. Please try again.');
     const users = Array.isArray(body.users) ? body.users : [];
     availableBrands = Array.isArray(body.brands) ? body.brands : [];
     const saveRole = async (userId, role, brandSlugs) => {
+      if (!isCurrent()) throw new Error('role_request_expired');
       const roleResponse = await fetch(usersEndpoint, {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${accessToken}` },
+        headers: { 'Content-Type': 'application/json', Authorization: `Bearer ${token}` },
         body: JSON.stringify({ userId, role, brandSlugs }),
       });
-      if (!roleResponse.ok) throw new Error('role_update_failed');
+      if (!roleResponse.ok || !isCurrent()) throw new Error('role_update_failed');
       usersLoaded = false;
       await loadUsers({ force: true });
       showNotice('Brand representative access updated.', 'success');
     };
-    users.forEach(user => usersList.append(userRow(user, availableBrands, saveRole)));
-    userTotal.textContent = `${body.pagination?.total ?? users.length} users`;
+    users.forEach(user => usersList.append(userCard(user, availableBrands, saveRole)));
+    const count = body.pagination?.total ?? users.length;
+    userTotal.textContent = `${count} ${count === 1 ? 'user' : 'users'}`;
+    usersEmpty.textContent = 'No registered users found.';
     usersLoaded = true;
     filterUsers();
   };
@@ -429,8 +480,9 @@ export const initModeratorPage = async () => {
       const active = button.dataset.moderatorView === currentView;
       button.classList.toggle('is-active', active);
       button.setAttribute('aria-selected', String(active));
+      button.tabIndex = active ? 0 : -1;
     });
-    panels.forEach(panel => { panel.hidden = panel.dataset.moderatorPanel !== currentView; });
+    panels.forEach(panel => { panel.hidden = !access.hidden || panel.dataset.moderatorPanel !== currentView; });
     if (!accessToken) return;
     if (currentView === 'users') await loadUsers();
     else await loadReviews(currentStatus);
@@ -463,6 +515,10 @@ export const initModeratorPage = async () => {
   };
 
   const loadReviews = async status => {
+    const token = accessToken;
+    if (!token) return;
+    const request = ++reviewsRequest;
+    const generation = accessRequest;
     currentStatus = STATUSES.includes(status) ? status : 'pending';
     filters.forEach(button => {
       const active = button.dataset.moderatorStatus === currentStatus;
@@ -470,20 +526,30 @@ export const initModeratorPage = async () => {
       button.setAttribute('aria-pressed', String(active));
     });
     loading.hidden = false;
+    const panel = loading.closest('[data-moderator-panel]');
+    panel.setAttribute('aria-busy', 'true');
     access.hidden = true;
     empty.hidden = true;
     list.hidden = true;
     list.replaceChildren();
     showNotice('');
 
-    const response = await fetch(`${endpoint}?status=${currentStatus}&limit=50`, {
-      headers: {
-        Accept: 'application/json',
-        Authorization: `Bearer ${accessToken}`,
-      },
-    });
-    const body = await response.json().catch(() => ({}));
+    let response, body;
+    try {
+      response = await fetch(`${endpoint}?status=${currentStatus}&limit=50`, {
+        headers: { Accept: 'application/json', Authorization: `Bearer ${token}` },
+      });
+      body = await response.json().catch(() => ({}));
+    } catch { /* show a retryable error below */ }
+    if (request !== reviewsRequest || generation !== accessRequest || token !== accessToken) return;
     loading.hidden = true;
+    panel.removeAttribute('aria-busy');
+
+    if (!response) {
+      empty.textContent = 'Could not load reviews. Select a status to try again.';
+      empty.hidden = false;
+      return;
+    }
 
     if (response.status === 401) {
       showAccess('Sign in with an approved moderator account to continue.');
@@ -511,31 +577,45 @@ export const initModeratorPage = async () => {
   filters.forEach(button => {
     button.addEventListener('click', () => loadReviews(button.dataset.moderatorStatus));
   });
-  viewButtons.forEach(button => button.addEventListener('click', () => openView(button.dataset.moderatorView)));
+  viewButtons.forEach((button, index) => {
+    button.addEventListener('click', () => openView(button.dataset.moderatorView));
+    button.addEventListener('keydown', event => {
+      const last = viewButtons.length - 1;
+      const target = { Home: 0, End: last, ArrowUp: index ? index - 1 : last, ArrowDown: index === last ? 0 : index + 1 }[event.key];
+      if (target === undefined) return;
+      event.preventDefault();
+      viewButtons[target].focus();
+      openView(viewButtons[target].dataset.moderatorView);
+    });
+  });
   userSearch.addEventListener('input', filterUsers);
   userRefresh.addEventListener('click', () => loadUsers({ force: true }));
 
   const syncAccess = async () => {
+    const request = ++accessRequest;
     accessToken = '';
     if (!account?.getState().signedIn) {
       showAccess('Sign in with an approved moderator account to continue.');
       return;
     }
-    accessToken = await account.getAccessToken();
+    const token = await account.getAccessToken();
+    if (request !== accessRequest) return;
+    accessToken = token;
     if (!accessToken) {
       showAccess('Your session has expired. Sign in again to continue.');
       return;
     }
     access.hidden = true;
-    if (currentView === 'users') await loadUsers({ force: true });
-    else await loadReviews(currentStatus);
+    usersLoaded = false;
+    await openView(currentView);
   };
 
   account = await waitForAccount();
-  await syncAccess();
   window.addEventListener('spincresta:account-state', () => {
+    if (!account) account = window.SpinCrestaAccount || null;
     syncAccess().catch(() => {
       showAccess('The moderation queue is temporarily unavailable. Please try again.');
     });
   });
+  await syncAccess();
 };

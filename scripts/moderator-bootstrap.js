@@ -1,10 +1,9 @@
-import { initModeratorPage } from './pages/moderator.js?v=20260829-moderation-delete-1';
+import { initModeratorPage } from './pages/moderator.js?v=20261122-moderator-dashboard';
 
 const startModerator = () => {
   initModeratorPage().catch(() => {
-    const loading = document.querySelector('[data-moderator-loading]');
     const access = document.querySelector('[data-moderator-access]');
-    if (loading) loading.hidden = true;
+    document.querySelectorAll('[data-moderator-panel]').forEach(panel => { panel.hidden = true; });
     if (access) {
       access.hidden = false;
       const message = access.querySelector('p');

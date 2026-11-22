@@ -1,11 +1,42 @@
 import { COUNTRIES } from './countries.js';
-import { initBrandFavorites, persistBrandFavorite, readFavoriteBrands } from './brand-favorites.js?v=20261119-account-dashboard';
+import { initBrandFavorites, persistBrandFavorite, readFavoriteBrands } from './brand-favorites.js?v=20261122-favorite-logos';
 
 const DEFAULT_CONFIG_ENDPOINT = 'https://api.spincresta.com/api/auth-config';
 const DEFAULT_NEWSLETTER_ENDPOINT = 'https://api.spincresta.com/api/subscribe';
 const DEFAULT_ACCOUNT_ACCESS_ENDPOINT = 'https://api.spincresta.com/api/account-access';
 const SUPABASE_MODULE_URL = 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm';
 const GOOGLE_SCRIPT_URL = 'https://accounts.google.com/gsi/client';
+const HEADER_PREVIEW_KEY = 'spincresta:account-header:v1';
+const HEADER_PREVIEW_TTL = 30 * 60 * 1000;
+
+// A short-lived visual hint for this tab only. It must not influence any
+// session state, account access, tokens, or data exposed by the auth bridge.
+export function accountHeaderPreview(raw, now = Date.now()) {
+  try {
+    const cached = JSON.parse(raw);
+    if (!Number.isFinite(cached?.expires) || cached.expires <= now || cached.expires > now + HEADER_PREVIEW_TTL) return null;
+    const name = typeof cached.name === 'string' ? cached.name.trim().slice(0, 80) : '';
+    if (cached.kind === 'guest') return { kind: 'guest' };
+    if (cached.kind === 'account' && !name.includes('@')) return { kind: 'account', name };
+  } catch { /* storage may be unavailable or contain old data */ }
+  return null;
+}
+
+const readHeaderPreview = () => {
+  try { return accountHeaderPreview(sessionStorage.getItem(HEADER_PREVIEW_KEY)); }
+  catch { return null; }
+};
+
+const saveHeaderPreview = (user, name) => {
+  try {
+    const safeName = name.includes('@') ? '' : name.trim().slice(0, 80);
+    sessionStorage.setItem(HEADER_PREVIEW_KEY, JSON.stringify({
+      kind: user ? 'account' : 'guest',
+      ...(user ? { name: safeName } : {}),
+      expires: Date.now() + HEADER_PREVIEW_TTL,
+    }));
+  } catch { /* optional optimization */ }
+};
 
 const COPY = {
   en: {
@@ -149,14 +180,21 @@ const setStatus = (modal, message, state = '') => {
   status.dataset.state = state;
 };
 
-const createInterface = (copy, locale) => {
+export const prepareAccountHeader = locale => {
   const headerInner = document.querySelector('.header-inner');
-  if (!headerInner || headerInner.querySelector('.account-auth-control')) return null;
+  if (!headerInner) return null;
+  const existing = headerInner.querySelector('.account-auth-control');
+  if (existing) return existing;
 
+  const copy = COPY[locale] || COPY.en;
+  const preview = readHeaderPreview();
   const control = document.createElement('button');
   control.type = 'button';
   control.disabled = true;
   control.className = 'account-auth-control';
+  control.classList.toggle('is-signed-in', preview?.kind === 'account');
+  control.classList.toggle('is-placeholder', !preview);
+  if (!preview) control.setAttribute('aria-busy', 'true');
   control.setAttribute('aria-haspopup', 'dialog');
   control.setAttribute('aria-label', copy.signIn);
   control.innerHTML = `
@@ -165,6 +203,25 @@ const createInterface = (copy, locale) => {
     </span>
     <span class="account-auth-label">${copy.signIn}</span>
   `;
+  if (preview?.kind === 'account') {
+    control.querySelector('.account-auth-label').textContent = preview.name || copy.account;
+    control.setAttribute('aria-label', copy.account);
+    if (preview.name) {
+      const initial = document.createElement('span');
+      initial.className = 'account-auth-avatar account-auth-avatar--initial';
+      initial.setAttribute('aria-hidden', 'true');
+      initial.textContent = Array.from(preview.name)[0].toLocaleUpperCase(locale);
+      control.prepend(initial);
+    }
+  }
+  headerInner.append(control);
+  return control;
+};
+
+const createInterface = (copy, locale) => {
+  const control = prepareAccountHeader(locale);
+  if (!control || control.dataset.accountConnected) return null;
+  control.dataset.accountConnected = 'true';
 
   const modal = document.createElement('div');
   modal.className = 'account-auth-modal';
@@ -214,7 +271,6 @@ const createInterface = (copy, locale) => {
     </section>
   `;
 
-  headerInner.append(control);
   document.body.append(modal);
   return { control, modal };
 };
@@ -238,12 +294,17 @@ export const initAccountAuth = async (locale, favoriteOptions = {}) => {
   const originalCompleteLabel = completionForm.querySelector('.account-auth-primary').textContent;
   let supabase;
   let googleReady = false;
+  let googlePending;
+  let authConfig;
+  let authUnavailable = false;
   let nonce;
   let currentUser = null;
   let currentProfile = null;
   let currentAccess = { role: 'user', representative: false, brands: [] };
   let autoCloseTimer = 0;
   let favoriteWrite = Promise.resolve();
+  let reviewRequest = 0;
+  let sessionRequest = 0;
 
   const countrySelect = contactForm?.querySelector('[data-account-country]');
   if (countrySelect) {
@@ -321,6 +382,10 @@ export const initAccountAuth = async (locale, favoriteOptions = {}) => {
       openModal('completion');
     } else {
       openModal(currentUser ? 'profile' : 'signin');
+      if (!currentUser) {
+        if (authUnavailable) setStatus(modal, copy.failed, 'error');
+        else if (authConfig) prepareGoogle(authConfig).catch(() => setStatus(modal, copy.failed, 'error'));
+      }
     }
     modal.querySelector('.account-auth-close')?.focus();
     return true;
@@ -334,6 +399,10 @@ export const initAccountAuth = async (locale, favoriteOptions = {}) => {
       : copy.signIn;
     control.setAttribute('aria-label', currentUser ? copy.account : copy.signIn);
     control.classList.toggle('is-signed-in', Boolean(currentUser));
+    control.classList.remove('is-placeholder');
+    control.removeAttribute('aria-busy');
+    control.disabled = false;
+    if (!authUnavailable) saveHeaderPreview(currentUser, label.textContent);
     const existingAvatar = control.querySelector('.account-auth-avatar');
     existingAvatar?.remove();
     if (currentUser && avatarUrl) {
@@ -415,6 +484,7 @@ export const initAccountAuth = async (locale, favoriteOptions = {}) => {
 
   const setReviewHistoryState = (state, message = '') => {
     if (!reviewHistory) return;
+    reviewHistory.setAttribute('aria-busy', String(state === 'loading'));
     const loading = reviewHistory.querySelector('[data-account-reviews-loading]');
     const empty = reviewHistory.querySelector('[data-account-reviews-empty]');
     const list = reviewHistory.querySelector('[data-account-reviews-list]');
@@ -429,6 +499,7 @@ export const initAccountAuth = async (locale, favoriteOptions = {}) => {
 
   const renderAccountReviews = async () => {
     if (!reviewHistory) return;
+    const request = ++reviewRequest;
     const list = reviewHistory.querySelector('[data-account-reviews-list]');
     if (!list) return;
     list.replaceChildren();
@@ -439,11 +510,13 @@ export const initAccountAuth = async (locale, favoriteOptions = {}) => {
     }
 
     setReviewHistoryState('loading');
+    const userId = currentUser.id;
     const { data, error } = await supabase
       .from('reviews')
       .select('id,title,body,status,language,created_at,brands!inner(slug,name)')
-      .eq('user_id', currentUser.id)
+      .eq('user_id', userId)
       .order('created_at', { ascending: false });
+    if (request !== reviewRequest || currentUser?.id !== userId) return;
 
     if (error) {
       setReviewHistoryState('error', accountReviewsCopy.failed);
@@ -559,17 +632,30 @@ export const initAccountAuth = async (locale, favoriteOptions = {}) => {
   };
 
   const syncSession = async ({ openIncomplete = false } = {}) => {
+    const request = ++sessionRequest;
     const { data } = await supabase.auth.getSession();
-    currentUser = data.session?.user || null;
-    currentProfile = currentUser ? await loadProfile(currentUser) : null;
-    currentProfile = await syncProfileLocale(currentProfile);
-    currentAccess = currentUser
-      ? await loadAccountAccess(data.session?.access_token || '')
-      : { role: 'user', representative: false, brands: [] };
+    if (request !== sessionRequest) return;
+    const user = data.session?.user || null;
+    const [profile, access] = user ? await Promise.all([
+      loadProfile(user),
+      loadAccountAccess(data.session?.access_token || ''),
+    ]) : [null, { role: 'user', representative: false, brands: [] }];
+    if (request !== sessionRequest) return;
+    currentUser = user;
+    currentProfile = profile;
+    currentAccess = access;
     updateControl();
     renderAccountPage();
-    await renderAccountReviews();
     publishAccountState();
+    renderAccountReviews().catch(() => setReviewHistoryState('error', accountReviewsCopy.failed));
+    if (profile?.registration_completed_at) {
+      syncProfileLocale(profile).then(localized => {
+        if (request !== sessionRequest || currentProfile !== profile || localized === profile) return;
+        currentProfile = localized;
+        populateProfileSummary(currentProfile, modal, 'profile');
+        if (accountPage) populateProfileSummary(currentProfile, accountPage, 'account-page');
+      }).catch(() => {});
+    }
 
     if (currentUser && googleReady) {
       window.google?.accounts?.id?.cancel();
@@ -599,7 +685,15 @@ export const initAccountAuth = async (locale, favoriteOptions = {}) => {
     }
   };
 
-  const prepareGoogle = async config => {
+  const prepareGoogle = config => {
+    if (!googlePending) googlePending = mountGoogle(config).catch(error => {
+      googlePending = undefined;
+      throw error;
+    });
+    return googlePending;
+  };
+
+  const mountGoogle = async config => {
     if (googleReady) return;
     const google = await loadGoogleIdentity();
     nonce = await createNonce();
@@ -636,7 +730,7 @@ export const initAccountAuth = async (locale, favoriteOptions = {}) => {
       }
       return;
     }
-    openModal('signin');
+    openSignIn();
   });
 
   modal.querySelectorAll('[data-account-close]').forEach(button => {
@@ -737,6 +831,7 @@ export const initAccountAuth = async (locale, favoriteOptions = {}) => {
 
   const signOut = async () => {
     await supabase.auth.signOut();
+    sessionRequest += 1;
     currentUser = null;
     currentProfile = null;
     currentAccess = { role: 'user', representative: false, brands: [] };
@@ -745,6 +840,7 @@ export const initAccountAuth = async (locale, favoriteOptions = {}) => {
     await renderAccountReviews();
     publishAccountState();
     closeModal();
+    if (authConfig) prepareGoogle(authConfig).catch(() => {});
   };
 
   modal.querySelector('[data-account-signout]').addEventListener('click', signOut);
@@ -838,7 +934,7 @@ export const initAccountAuth = async (locale, favoriteOptions = {}) => {
       { headers: { Accept: 'application/json' } }
     );
     if (!configResponse.ok) throw new Error('auth_config_unavailable');
-    const config = await configResponse.json();
+    const config = authConfig = await configResponse.json();
     const { createClient } = await import(SUPABASE_MODULE_URL);
     supabase = createClient(config.supabaseUrl, config.supabaseAnonKey, {
       auth: { persistSession: true, autoRefreshToken: true, detectSessionInUrl: true },
@@ -884,13 +980,25 @@ export const initAccountAuth = async (locale, favoriteOptions = {}) => {
     };
 
     await syncSession({ openIncomplete: true });
-    await prepareGoogle(config);
-    control.disabled = false;
     window.dispatchEvent(new CustomEvent('spincresta:account-ready'));
+    if (!currentUser) prepareGoogle(config).catch(() => {
+      if (!modal.hidden) setStatus(modal, copy.failed, 'error');
+    });
     supabase.auth.onAuthStateChange(() => {
       window.setTimeout(() => syncSession({ openIncomplete: true }).catch(() => {}), 0);
     });
+    window.addEventListener('pageshow', event => {
+      if (event.persisted) syncSession().catch(() => {});
+    });
   } catch {
+    authUnavailable = true;
+    sessionRequest += 1;
+    currentUser = null;
+    currentProfile = null;
+    currentAccess = { role: 'user', representative: false, brands: [] };
+    updateControl();
+    renderAccountPage();
+    publishAccountState();
     const isLocalPreview = ['127.0.0.1', 'localhost'].includes(window.location.hostname);
     const loading = accountPage?.querySelector('[data-account-page-loading]');
     if (loading && (!loading.hidden || !currentUser)) {
@@ -909,17 +1017,17 @@ export const initAccountAuth = async (locale, favoriteOptions = {}) => {
       // Google Identity and the API only trust the production origin. Keep the
       // header consistent in Live Server previews and continue registration on
       // the real site instead of silently removing the account control.
-      control.disabled = false;
       control.addEventListener('click', event => {
         event.preventDefault();
         event.stopImmediatePropagation();
         window.location.assign(new URL(accountPath(locale), 'https://spincresta.com').href);
       }, { capture: true });
       modal.remove();
+      window.dispatchEvent(new CustomEvent('spincresta:account-ready'));
       return;
     }
 
-    control.remove();
-    modal.remove();
+    // Keep a usable sign-in affordance even after a network failure.
+    window.dispatchEvent(new CustomEvent('spincresta:account-ready'));
   }
 };

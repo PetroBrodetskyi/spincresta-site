@@ -481,9 +481,35 @@ input::file-selector-button {
 }
 
 .account-auth-control:disabled {
+  cursor: default;
+}
+
+/* Reserve a real header slot even before the page's module is evaluated. */
+.header-inner:not(:has(.account-auth-control))::after,
+.account-auth-control.is-placeholder {
+  flex: 0 0 108px;
+  min-width: 0;
+  height: 44px;
+  border: 1px solid var(--header-border);
+  border-radius: 999px;
+  background: var(--surface-card-hover);
+}
+
+.header-inner:not(:has(.account-auth-control))::after {
+  content: '';
+  order: 3;
+  margin-inline-start: auto;
+}
+
+.account-auth-control.is-placeholder > * {
   visibility: hidden;
-  opacity: 0;
-  pointer-events: none;
+}
+
+.account-auth-avatar--initial {
+  display: grid;
+  place-items: center;
+  background: var(--surface-card-hover);
+  color: var(--text-main);
 }
 
 .account-auth-icon {
@@ -2002,6 +2028,16 @@ html:root .account-auth-dialog {
     padding: 0;
   }
 
+  .header-inner:not(:has(.account-auth-control))::after,
+  .account-auth-control.is-placeholder {
+    order: 1;
+    flex-basis: 44px;
+  }
+
+  .header-inner:not(:has(.account-auth-control))::after {
+    margin-inline-end: 10px;
+  }
+
   .account-auth-label {
     position: absolute;
     width: 1px;
@@ -2027,6 +2063,7 @@ html:root .account-auth-dialog {
   }
 
   .language-switcher,
+  .header-inner:not(:has(.account-auth-control))::after,
   .account-auth-control {
     margin-inline-end: 6px;
   }

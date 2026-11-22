@@ -91,10 +91,10 @@
       <div class="account-layout">
         <aside class="account-sidebar">
           <nav class="account-menu" aria-labelledby="account-title">
-            <a href="#profile" data-account-nav="profile" aria-current="location"><svg class="site-icon" width="20" height="20" aria-hidden="true" focusable="false"><use href="/icons/ui/review-method.svg?v=20261119-editorial-bands#user"></use></svg><span>Profil</span></a>
-            <a href="#favorites" data-account-nav="favorites"><svg class="site-icon" width="20" height="20" aria-hidden="true" focusable="false"><use href="/icons/ui/review-method.svg?v=20261119-editorial-bands#heart"></use></svg><span>Favoriten</span></a>
-            <a href="#reviews" data-account-nav="reviews"><svg class="site-icon" width="20" height="20" aria-hidden="true" focusable="false"><use href="/icons/ui/review-method.svg?v=20261119-editorial-bands#chat"></use></svg><span>Erfahrungsberichte</span></a>
-            <a href="#support" data-account-nav="support"><svg class="site-icon" width="20" height="20" aria-hidden="true" focusable="false"><use href="/icons/ui/review-method.svg?v=20261119-editorial-bands#help"></use></svg><span>Hilfe und Datenschutz</span></a>
+            <a href="#profile" data-account-nav="profile" aria-current="location"><svg class="site-icon" width="20" height="20" aria-hidden="true" focusable="false"><use href="/icons/ui/review-method.svg?v=20261119-catalog-partners#user"></use></svg><span>Profil</span></a>
+            <a href="#favorites" data-account-nav="favorites"><svg class="site-icon" width="20" height="20" aria-hidden="true" focusable="false"><use href="/icons/ui/review-method.svg?v=20261119-catalog-partners#heart"></use></svg><span>Favoriten</span></a>
+            <a href="#reviews" data-account-nav="reviews"><svg class="site-icon" width="20" height="20" aria-hidden="true" focusable="false"><use href="/icons/ui/review-method.svg?v=20261119-catalog-partners#chat"></use></svg><span>Erfahrungsberichte</span></a>
+            <a href="#support" data-account-nav="support"><svg class="site-icon" width="20" height="20" aria-hidden="true" focusable="false"><use href="/icons/ui/review-method.svg?v=20261119-catalog-partners#help"></use></svg><span>Hilfe und Datenschutz</span></a>
           </nav>
           <div class="account-menu-actions">
             <a href="/moderator/" data-moderator-link hidden>Moderationsbereich</a>
@@ -103,9 +103,15 @@
         </aside>
         <div class="account-workspace">
           <p class="account-auth-status" data-account-page-notice role="status" aria-live="polite" hidden></p>
-          <p class="account-loading" data-account-page-loading role="status">Ihr Konto wird geladen…</p>
+          <div class="dashboard-skeleton" data-account-page-loading role="status">
+    <span class="dashboard-skeleton-status">Ihr Konto wird geladen…</span>
+    <div aria-hidden="true"><div data-account-loading-preview="profile">
+    <div class="account-panel"><span class="dashboard-skeleton-line is-heading"></span><div class="dashboard-skeleton-row"><span class="dashboard-skeleton-line is-avatar"></span><div><span class="dashboard-skeleton-line is-medium"></span><span class="dashboard-skeleton-line is-long"></span></div></div><div class="dashboard-skeleton-facts"><span class="dashboard-skeleton-line is-field"></span><span class="dashboard-skeleton-line is-field"></span><span class="dashboard-skeleton-line is-field"></span></div></div>
+    <div class="account-panel"><span class="dashboard-skeleton-line is-heading"></span><span class="dashboard-skeleton-line is-long"></span><div class="dashboard-skeleton-facts"><span class="dashboard-skeleton-line is-field"></span><span class="dashboard-skeleton-line is-field"></span><span class="dashboard-skeleton-line is-field"></span></div><span class="dashboard-skeleton-line is-chip"></span></div>
+  </div><div class="dashboard-skeleton-list account-panel" data-account-loading-preview="list"><div class="dashboard-skeleton-row"><span class="dashboard-skeleton-line is-avatar"></span><div><span class="dashboard-skeleton-line is-medium"></span><span class="dashboard-skeleton-line is-long"></span></div><span class="dashboard-skeleton-line is-chip"></span></div><div class="dashboard-skeleton-row"><span class="dashboard-skeleton-line is-avatar"></span><div><span class="dashboard-skeleton-line is-medium"></span><span class="dashboard-skeleton-line is-long"></span></div><span class="dashboard-skeleton-line is-chip"></span></div><div class="dashboard-skeleton-row"><span class="dashboard-skeleton-line is-avatar"></span><div><span class="dashboard-skeleton-line is-medium"></span><span class="dashboard-skeleton-line is-long"></span></div><span class="dashboard-skeleton-line is-chip"></span></div></div></div>
+  </div>
           <div class="account-panel account-signin-panel" data-account-page-signed-out hidden>
-            <svg class="site-icon account-signin-icon" width="24" height="24" aria-hidden="true" focusable="false"><use href="/icons/ui/review-method.svg?v=20261119-editorial-bands#lock"></use></svg>
+            <svg class="site-icon account-signin-icon" width="24" height="24" aria-hidden="true" focusable="false"><use href="/icons/ui/review-method.svg?v=20261119-catalog-partners#lock"></use></svg>
             <h2 tabindex="-1">Melden Sie sich an, um Ihr Konto zu öffnen</h2>
             <p>Melden Sie sich mit Google an, um Ihr Profil, Ihre Favoriten und Ihre Erfahrungsberichte zu sehen.</p>
             <button class="account-dashboard-signin" type="button" data-account-page-signin>Mit Google anmelden</button>
@@ -117,7 +123,7 @@
                 <h2 id="account-overview-title" tabindex="-1">Profil</h2>
                 <div class="account-auth-user-preview">
                   <span class="account-profile-avatar">
-                    <svg class="site-icon" width="24" height="24" aria-hidden="true" focusable="false"><use href="/icons/ui/review-method.svg?v=20261119-editorial-bands#user"></use></svg>
+                    <svg class="site-icon" width="24" height="24" aria-hidden="true" focusable="false"><use href="/icons/ui/review-method.svg?v=20261119-catalog-partners#user"></use></svg>
                     <img alt="" data-account-page-avatar hidden />
                   </span>
                   <div><strong data-account-page-name></strong><span data-account-page-email></span></div>
@@ -153,7 +159,10 @@
             <section id="reviews" class="account-panel account-review-history" data-account-panel="reviews" data-account-review-history aria-labelledby="account-review-history-title" hidden>
               <h2 id="account-review-history-title" tabindex="-1">Ihre Erfahrungsberichte</h2>
               <p>Öffnen Sie einen Beitrag, um ihn auf der Casino-Seite anzusehen.</p>
-              <p class="account-review-history-state" data-account-reviews-loading role="status">Ihre Erfahrungsberichte werden geladen…</p>
+              <div class="dashboard-skeleton" data-account-reviews-loading role="status">
+    <span class="dashboard-skeleton-status">Ihre Erfahrungsberichte werden geladen…</span>
+    <div aria-hidden="true"><div class="dashboard-skeleton-list"><div class="dashboard-skeleton-row"><span class="dashboard-skeleton-line is-avatar"></span><div><span class="dashboard-skeleton-line is-medium"></span><span class="dashboard-skeleton-line is-long"></span></div><span class="dashboard-skeleton-line is-chip"></span></div><div class="dashboard-skeleton-row"><span class="dashboard-skeleton-line is-avatar"></span><div><span class="dashboard-skeleton-line is-medium"></span><span class="dashboard-skeleton-line is-long"></span></div><span class="dashboard-skeleton-line is-chip"></span></div><div class="dashboard-skeleton-row"><span class="dashboard-skeleton-line is-avatar"></span><div><span class="dashboard-skeleton-line is-medium"></span><span class="dashboard-skeleton-line is-long"></span></div><span class="dashboard-skeleton-line is-chip"></span></div></div></div>
+  </div>
               <p class="account-review-history-state" data-account-reviews-empty role="status" hidden>Sie haben noch keine Erfahrungsberichte geschrieben.</p>
               <div class="account-review-history-list" data-account-reviews-list hidden></div>
             </section>
@@ -161,8 +170,8 @@
           <section id="support" class="account-panel" data-account-panel="support" aria-labelledby="account-support-title" hidden>
             <h2 id="account-support-title" tabindex="-1">Hilfe und Datenschutz</h2>
             <div class="account-support-links">
-              <a href="/de/privacy-policy/"><svg class="site-icon" width="20" height="20" aria-hidden="true" focusable="false"><use href="/icons/ui/review-method.svg?v=20261119-editorial-bands#lock"></use></svg><span>Datenschutzerklärung</span></a>
-              <a href="/de/responsible-gambling/"><svg class="site-icon" width="20" height="20" aria-hidden="true" focusable="false"><use href="/icons/ui/review-method.svg?v=20261119-editorial-bands#safety"></use></svg><span>Verantwortungsvolles Spielen</span></a>
+              <a href="/de/privacy-policy/"><svg class="site-icon" width="20" height="20" aria-hidden="true" focusable="false"><use href="/icons/ui/review-method.svg?v=20261119-catalog-partners#lock"></use></svg><span>Datenschutzerklärung</span></a>
+              <a href="/de/responsible-gambling/"><svg class="site-icon" width="20" height="20" aria-hidden="true" focusable="false"><use href="/icons/ui/review-method.svg?v=20261119-catalog-partners#safety"></use></svg><span>Verantwortungsvolles Spielen</span></a>
             </div>
           </section>
         </div>

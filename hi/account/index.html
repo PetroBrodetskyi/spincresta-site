@@ -91,10 +91,10 @@
       <div class="account-layout">
         <aside class="account-sidebar">
           <nav class="account-menu" aria-labelledby="account-title">
-            <a href="#profile" data-account-nav="profile" aria-current="location"><svg class="site-icon" width="20" height="20" aria-hidden="true" focusable="false"><use href="/icons/ui/review-method.svg?v=20261119-editorial-bands#user"></use></svg><span>प्रोफ़ाइल</span></a>
-            <a href="#favorites" data-account-nav="favorites"><svg class="site-icon" width="20" height="20" aria-hidden="true" focusable="false"><use href="/icons/ui/review-method.svg?v=20261119-editorial-bands#heart"></use></svg><span>पसंदीदा</span></a>
-            <a href="#reviews" data-account-nav="reviews"><svg class="site-icon" width="20" height="20" aria-hidden="true" focusable="false"><use href="/icons/ui/review-method.svg?v=20261119-editorial-bands#chat"></use></svg><span>समीक्षाएँ</span></a>
-            <a href="#support" data-account-nav="support"><svg class="site-icon" width="20" height="20" aria-hidden="true" focusable="false"><use href="/icons/ui/review-method.svg?v=20261119-editorial-bands#help"></use></svg><span>सहायता और गोपनीयता</span></a>
+            <a href="#profile" data-account-nav="profile" aria-current="location"><svg class="site-icon" width="20" height="20" aria-hidden="true" focusable="false"><use href="/icons/ui/review-method.svg?v=20261119-catalog-partners#user"></use></svg><span>प्रोफ़ाइल</span></a>
+            <a href="#favorites" data-account-nav="favorites"><svg class="site-icon" width="20" height="20" aria-hidden="true" focusable="false"><use href="/icons/ui/review-method.svg?v=20261119-catalog-partners#heart"></use></svg><span>पसंदीदा</span></a>
+            <a href="#reviews" data-account-nav="reviews"><svg class="site-icon" width="20" height="20" aria-hidden="true" focusable="false"><use href="/icons/ui/review-method.svg?v=20261119-catalog-partners#chat"></use></svg><span>समीक्षाएँ</span></a>
+            <a href="#support" data-account-nav="support"><svg class="site-icon" width="20" height="20" aria-hidden="true" focusable="false"><use href="/icons/ui/review-method.svg?v=20261119-catalog-partners#help"></use></svg><span>सहायता और गोपनीयता</span></a>
           </nav>
           <div class="account-menu-actions">
             <a href="/moderator/" data-moderator-link hidden>मॉडरेटर पैनल</a>
@@ -103,9 +103,15 @@
         </aside>
         <div class="account-workspace">
           <p class="account-auth-status" data-account-page-notice role="status" aria-live="polite" hidden></p>
-          <p class="account-loading" data-account-page-loading role="status">आपका खाता लोड हो रहा है…</p>
+          <div class="dashboard-skeleton" data-account-page-loading role="status">
+    <span class="dashboard-skeleton-status">आपका खाता लोड हो रहा है…</span>
+    <div aria-hidden="true"><div data-account-loading-preview="profile">
+    <div class="account-panel"><span class="dashboard-skeleton-line is-heading"></span><div class="dashboard-skeleton-row"><span class="dashboard-skeleton-line is-avatar"></span><div><span class="dashboard-skeleton-line is-medium"></span><span class="dashboard-skeleton-line is-long"></span></div></div><div class="dashboard-skeleton-facts"><span class="dashboard-skeleton-line is-field"></span><span class="dashboard-skeleton-line is-field"></span><span class="dashboard-skeleton-line is-field"></span></div></div>
+    <div class="account-panel"><span class="dashboard-skeleton-line is-heading"></span><span class="dashboard-skeleton-line is-long"></span><div class="dashboard-skeleton-facts"><span class="dashboard-skeleton-line is-field"></span><span class="dashboard-skeleton-line is-field"></span><span class="dashboard-skeleton-line is-field"></span></div><span class="dashboard-skeleton-line is-chip"></span></div>
+  </div><div class="dashboard-skeleton-list account-panel" data-account-loading-preview="list"><div class="dashboard-skeleton-row"><span class="dashboard-skeleton-line is-avatar"></span><div><span class="dashboard-skeleton-line is-medium"></span><span class="dashboard-skeleton-line is-long"></span></div><span class="dashboard-skeleton-line is-chip"></span></div><div class="dashboard-skeleton-row"><span class="dashboard-skeleton-line is-avatar"></span><div><span class="dashboard-skeleton-line is-medium"></span><span class="dashboard-skeleton-line is-long"></span></div><span class="dashboard-skeleton-line is-chip"></span></div><div class="dashboard-skeleton-row"><span class="dashboard-skeleton-line is-avatar"></span><div><span class="dashboard-skeleton-line is-medium"></span><span class="dashboard-skeleton-line is-long"></span></div><span class="dashboard-skeleton-line is-chip"></span></div></div></div>
+  </div>
           <div class="account-panel account-signin-panel" data-account-page-signed-out hidden>
-            <svg class="site-icon account-signin-icon" width="24" height="24" aria-hidden="true" focusable="false"><use href="/icons/ui/review-method.svg?v=20261119-editorial-bands#lock"></use></svg>
+            <svg class="site-icon account-signin-icon" width="24" height="24" aria-hidden="true" focusable="false"><use href="/icons/ui/review-method.svg?v=20261119-catalog-partners#lock"></use></svg>
             <h2 tabindex="-1">अपना खाता खोलने के लिए साइन इन करें</h2>
             <p>अपनी प्रोफ़ाइल, पसंदीदा और समीक्षाएँ देखने के लिए Google से साइन इन करें।</p>
             <button class="account-dashboard-signin" type="button" data-account-page-signin>Google से साइन इन करें</button>
@@ -117,7 +123,7 @@
                 <h2 id="account-overview-title" tabindex="-1">प्रोफ़ाइल</h2>
                 <div class="account-auth-user-preview">
                   <span class="account-profile-avatar">
-                    <svg class="site-icon" width="24" height="24" aria-hidden="true" focusable="false"><use href="/icons/ui/review-method.svg?v=20261119-editorial-bands#user"></use></svg>
+                    <svg class="site-icon" width="24" height="24" aria-hidden="true" focusable="false"><use href="/icons/ui/review-method.svg?v=20261119-catalog-partners#user"></use></svg>
                     <img alt="" data-account-page-avatar hidden />
                   </span>
                   <div><strong data-account-page-name></strong><span data-account-page-email></span></div>
@@ -153,7 +159,10 @@
             <section id="reviews" class="account-panel account-review-history" data-account-panel="reviews" data-account-review-history aria-labelledby="account-review-history-title" hidden>
               <h2 id="account-review-history-title" tabindex="-1">आपकी समीक्षाएँ</h2>
               <p>कैसीनो पेज पर समीक्षा देखने के लिए उसे खोलें।</p>
-              <p class="account-review-history-state" data-account-reviews-loading role="status">आपकी समीक्षाएँ लोड हो रही हैं…</p>
+              <div class="dashboard-skeleton" data-account-reviews-loading role="status">
+    <span class="dashboard-skeleton-status">आपकी समीक्षाएँ लोड हो रही हैं…</span>
+    <div aria-hidden="true"><div class="dashboard-skeleton-list"><div class="dashboard-skeleton-row"><span class="dashboard-skeleton-line is-avatar"></span><div><span class="dashboard-skeleton-line is-medium"></span><span class="dashboard-skeleton-line is-long"></span></div><span class="dashboard-skeleton-line is-chip"></span></div><div class="dashboard-skeleton-row"><span class="dashboard-skeleton-line is-avatar"></span><div><span class="dashboard-skeleton-line is-medium"></span><span class="dashboard-skeleton-line is-long"></span></div><span class="dashboard-skeleton-line is-chip"></span></div><div class="dashboard-skeleton-row"><span class="dashboard-skeleton-line is-avatar"></span><div><span class="dashboard-skeleton-line is-medium"></span><span class="dashboard-skeleton-line is-long"></span></div><span class="dashboard-skeleton-line is-chip"></span></div></div></div>
+  </div>
               <p class="account-review-history-state" data-account-reviews-empty role="status" hidden>आपने अभी तक कोई समीक्षा नहीं लिखी है।</p>
               <div class="account-review-history-list" data-account-reviews-list hidden></div>
             </section>
@@ -161,8 +170,8 @@
           <section id="support" class="account-panel" data-account-panel="support" aria-labelledby="account-support-title" hidden>
             <h2 id="account-support-title" tabindex="-1">सहायता और गोपनीयता</h2>
             <div class="account-support-links">
-              <a href="/hi/privacy-policy/"><svg class="site-icon" width="20" height="20" aria-hidden="true" focusable="false"><use href="/icons/ui/review-method.svg?v=20261119-editorial-bands#lock"></use></svg><span>गोपनीयता नीति</span></a>
-              <a href="/hi/responsible-gambling/"><svg class="site-icon" width="20" height="20" aria-hidden="true" focusable="false"><use href="/icons/ui/review-method.svg?v=20261119-editorial-bands#safety"></use></svg><span>जिम्मेदार जुआ</span></a>
+              <a href="/hi/privacy-policy/"><svg class="site-icon" width="20" height="20" aria-hidden="true" focusable="false"><use href="/icons/ui/review-method.svg?v=20261119-catalog-partners#lock"></use></svg><span>गोपनीयता नीति</span></a>
+              <a href="/hi/responsible-gambling/"><svg class="site-icon" width="20" height="20" aria-hidden="true" focusable="false"><use href="/icons/ui/review-method.svg?v=20261119-catalog-partners#safety"></use></svg><span>जिम्मेदार जुआ</span></a>
             </div>
           </section>
         </div>

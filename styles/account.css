@@ -40,7 +40,7 @@
   border-inline-start: 2px solid var(--surface-border-strong);
 }
 
-.account-menu a {
+.account-menu :is(a, button[role='tab']) {
   display: flex;
   align-items: center;
   gap: 10px;
@@ -58,20 +58,29 @@
   text-decoration: none;
 }
 
-.account-menu a:hover,
+.account-menu button[role='tab'] {
+  border: 0;
+  border-inline-start: 2px solid transparent;
+  background: transparent;
+  font-family: inherit;
+  text-align: start;
+  cursor: pointer;
+}
+
+.account-menu :is(a, button[role='tab']):hover,
 .account-support-links a:hover {
   background: var(--surface-card-hover);
   color: var(--account-accent);
 }
 
-.account-menu a[aria-current='location'] {
+.account-menu :is(a[aria-current='location'], button[aria-selected='true']) {
   border-inline-start-color: var(--account-accent);
   background: var(--account-selected);
   color: var(--account-accent);
   font-weight: 750;
 }
 
-.account-dashboard :is(.account-menu a, .account-support-links a, .account-menu-actions a, .account-review-history-item, .account-favorites li a, .account-browse-link, .account-contact-fields :is(input, select)):focus-visible {
+.account-dashboard :is(.account-menu a, .account-menu button, .account-support-links a, .account-menu-actions a, .account-review-history-item, .account-favorites li a, .account-browse-link, .account-contact-fields :is(input, select)):focus-visible {
   outline: 2px solid var(--account-accent);
   outline-offset: 2px;
 }
@@ -319,6 +328,105 @@
   font-weight: 650;
 }
 
+.account-favorite-brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  min-width: 0;
+}
+
+.account-favorite-logo {
+  display: grid;
+  flex: 0 0 72px;
+  height: 42px;
+  padding: 5px;
+  place-items: center;
+  border-radius: 8px;
+  background: var(--surface-card-hover);
+  text-decoration: none;
+}
+
+.account-favorite-logo img {
+  display: block;
+  width: 100%;
+  height: 32px;
+  object-fit: contain;
+}
+
+.dashboard-skeleton {
+  position: relative;
+  min-width: 0;
+}
+
+.dashboard-skeleton-status {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+.dashboard-skeleton [data-account-loading-preview='profile'] {
+  display: grid;
+  gap: var(--account-gap);
+}
+
+[data-account-active='profile'] [data-account-loading-preview='list'],
+.account-dashboard:not([data-account-active='profile']) [data-account-loading-preview='profile'] {
+  display: none;
+}
+
+.dashboard-skeleton-list {
+  display: grid;
+  gap: 0;
+}
+
+.dashboard-skeleton-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  min-height: 68px;
+}
+
+.dashboard-skeleton-list .dashboard-skeleton-row + .dashboard-skeleton-row {
+  border-block-start: 1px solid var(--surface-border);
+}
+
+.dashboard-skeleton-row > div {
+  display: grid;
+  flex: 1;
+  gap: 8px;
+  min-width: 0;
+}
+
+.dashboard-skeleton-facts {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+  padding-block-start: 14px;
+  border-block-start: 1px solid var(--surface-border);
+}
+
+.dashboard-skeleton-line {
+  display: block;
+  height: 11px;
+  max-width: 100%;
+  border-radius: 6px;
+  background: var(--surface-card-hover);
+}
+
+.dashboard-skeleton-line.is-heading { width: 148px; height: 24px; }
+.dashboard-skeleton-line.is-medium { width: 35%; min-width: min(60px, 100%); }
+.dashboard-skeleton-line.is-long { width: min(340px, 82%); }
+.dashboard-skeleton-line.is-field { height: 42px; }
+.dashboard-skeleton-line.is-chip { width: 72px; height: 32px; }
+.dashboard-skeleton-line.is-avatar { width: 44px; height: 44px; flex: 0 0 44px; border-radius: 50%; }
+
+@media (max-width: 560px) {
+  .dashboard-skeleton-facts { grid-template-columns: minmax(0, 1fr); }
+}
+
 .account-favorites li a {
   color: var(--text-main);
   text-underline-offset: 3px;
@@ -373,16 +481,134 @@
     border: 0;
   }
 
-  .account-menu a {
+  .account-menu :is(a, button[role='tab']) {
     margin: 0;
     border: 1px solid var(--surface-border);
     border-radius: 8px;
     font-size: var(--type-ui);
   }
 
-  .account-menu a[aria-current='location'] {
+  .account-menu :is(a[aria-current='location'], button[aria-selected='true']) {
     border-color: var(--account-accent);
   }
+}
+
+.moderation-dashboard {
+  max-width: 1360px;
+  padding-block-end: clamp(28px, 6vw, 72px);
+}
+
+.moderation-dashboard-heading {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.moderation-dashboard-heading a,
+.moderation-user-card a {
+  color: var(--account-accent);
+  text-underline-offset: 3px;
+}
+
+.moderation-panel-heading {
+  display: grid;
+  gap: 5px;
+}
+
+.moderation-user-list {
+  display: grid;
+  gap: 14px;
+}
+
+.moderation-user-card {
+  display: grid;
+  gap: 12px;
+  padding: clamp(12px, 2vw, 20px);
+  border: 1px solid var(--surface-border);
+  border-radius: 12px;
+  background: var(--surface-card);
+  min-width: 0;
+}
+
+body[data-page='moderator'] .moderation-user-card .moderation-user-identity,
+body[data-page='moderator'] .moderation-user-card .moderation-user-access {
+  min-width: 0;
+}
+
+body[data-page='moderator'] .moderation-user-card .moderation-user-access {
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: start;
+  justify-self: start;
+  max-width: 100%;
+}
+
+.moderation-user-card .moderation-brand-picker,
+.moderation-user-card .moderation-user-access small {
+  grid-column: 1 / -1;
+}
+
+.moderation-user-card .moderation-user-access small:empty {
+  display: none;
+}
+
+body[data-page='moderator'] .moderation-user-card .moderation-user-access button {
+  grid-column: 2;
+  grid-row: 1;
+}
+
+body[data-page='moderator'] .moderation-panel :is(.moderation-toolbar, .moderation-user-toolbar) {
+  margin: 0;
+  padding-block: 4px 12px;
+}
+
+body[data-page='moderator'] .moderation-user-card .is-representative,
+body[data-page='moderator'] .moderation-user-card .is-moderator,
+body[data-page='moderator'] .moderation-brand-link:hover,
+body[data-page='moderator'] .moderation-rating {
+  color: var(--account-accent);
+}
+
+body[data-page='moderator'] .moderation-dashboard :is(.moderation-toolbar, .moderation-user-toolbar, .moderation-access) button,
+body[data-page='moderator'] .moderation-dashboard .moderation-action {
+  min-height: 44px;
+  border-radius: 8px;
+  text-transform: none;
+  letter-spacing: normal;
+}
+
+body[data-page='moderator'] .moderation-dashboard .moderation-toolbar button[aria-pressed='true'] {
+  border-color: var(--account-accent);
+  background: var(--account-selected);
+  color: var(--account-accent);
+}
+
+body[data-page='moderator'] .moderation-dashboard :is(.moderation-toolbar, .moderation-user-toolbar, .moderation-access) button:is(:hover, :focus-visible),
+body[data-page='moderator'] .moderation-dashboard .moderation-action:not(.moderation-action-delete):is(:hover, :focus-visible) {
+  border-color: var(--account-accent);
+  background: var(--account-selected);
+  color: var(--account-accent);
+}
+
+body[data-page='moderator'] .moderation-dashboard .moderation-action-approve {
+  border-color: var(--surface-border-strong);
+}
+
+body[data-page='moderator'] .moderation-dashboard .moderation-action-delete,
+body[data-page='moderator'] .moderation-dashboard .moderation-action-delete:hover {
+  border-color: #bd7a81;
+  color: #9c2834;
+}
+
+body[data-page='moderator'] .moderation-dashboard :is(button, select, input, textarea, a):focus-visible {
+  outline: 2px solid var(--account-accent);
+  outline-offset: 2px;
+}
+
+@media (max-width: 560px) {
+  .moderation-user-facts { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .moderation-user-card .moderation-user-labels { flex-wrap: wrap; }
 }
 
 @media (max-width: 560px) {

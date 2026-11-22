@@ -3,6 +3,7 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { siteIconMarkup } from '../scripts/site-icons.js';
 import { syncDefaultTheme } from './sync-default-theme.mjs';
+import { dashboardLoading } from './dashboard-loading-markup.mjs';
 
 const root = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 
@@ -170,7 +171,7 @@ const renderMain = (locale, language) => {
         </aside>
         <div class="account-workspace">
           <p class="account-auth-status" data-account-page-notice role="status" aria-live="polite" hidden></p>
-          <p class="account-loading" data-account-page-loading role="status">${escapeHtml(locale.loading)}</p>
+          ${dashboardLoading('data-account-page-loading', locale.loading, { account: true })}
           <div class="account-panel account-signin-panel" data-account-page-signed-out hidden>
             ${siteIconMarkup('lock', 'site-icon account-signin-icon', 24)}
             <h2 tabindex="-1">${escapeHtml(locale.signedOutTitle)}</h2>
@@ -220,7 +221,7 @@ const renderMain = (locale, language) => {
             <section id="reviews" class="account-panel account-review-history" data-account-panel="reviews" data-account-review-history aria-labelledby="account-review-history-title" hidden>
               <h2 id="account-review-history-title" tabindex="-1">${escapeHtml(reviews.title)}</h2>
               <p>${escapeHtml(reviews.intro)}</p>
-              <p class="account-review-history-state" data-account-reviews-loading role="status">${escapeHtml(reviews.loading)}</p>
+              ${dashboardLoading('data-account-reviews-loading', reviews.loading)}
               <p class="account-review-history-state" data-account-reviews-empty role="status" hidden>${escapeHtml(reviews.empty)}</p>
               <div class="account-review-history-list" data-account-reviews-list hidden></div>
             </section>
