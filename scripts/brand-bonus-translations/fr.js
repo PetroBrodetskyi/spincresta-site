@@ -80,6 +80,7 @@ export default {
   "5,000 €/$ + 400 free spins, Nothing but Casino": "5 000 €/$ + 400 tours gratuits, Nothing but Casino",
   "Welcome Package 225% up to EUR 5,000 + 500 Free Spins": "Package de bienvenue 225 % jusqu'à 5 000 EUR + 500 tours gratuits",
   "Get Up to 2700$ + 200 FS for a Great Start": "Obtenez jusqu'à 2700$ + 200 FS pour un bon départ",
+  "100% Casino Welcome Bonus up to €500": "Bonus casino de 100 % jusqu’à 500 € sur le premier dépôt",
   "$20 Free Welcome Bonus": "Bonus de bienvenue gratuit de 20 $",
   "Regional welcome pack: 150% up to €60,000 + 100 Free Spins": "Pack de bienvenue régional : 150 % jusqu'à 60 000 € + 100 tours gratuits",
   "100% Welcome Bonus up to €4,000 on Your First Deposit": "Bonus de bienvenue de 100 % jusqu'à 4 000 € sur votre premier dépôt",

@@ -80,6 +80,7 @@ export default {
   "5,000 €/$ + 400 free spins, Nothing but Casino": "5000 €/$ + 400 ilmaispyöräytystä, vain kasino",
   "Welcome Package 225% up to EUR 5,000 + 500 Free Spins": "Tervetuliaispaketti 225 % aina 5 000 euroon asti + 500 ilmaispyöräytystä",
   "Get Up to 2700$ + 200 FS for a Great Start": "Ansaitse jopa 2700 $ + 200 FS loistavasta aloituksesta",
+  "100% Casino Welcome Bonus up to €500": "100 % kasinobonus ensitalletukseen, enintään 500 €",
   "$20 Free Welcome Bonus": "20 dollarin ilmainen tervetuliaisbonus",
   "Regional welcome pack: 150% up to €60,000 + 100 Free Spins": "Alueellinen tervetuliaispaketti: 150 % aina 60 000 € asti + 100 ilmaiskierrosta",
   "100% Welcome Bonus up to €4,000 on Your First Deposit": "100 % tervetuliaisbonus 4 000 € asti ensimmäiselle talletuksellesi",

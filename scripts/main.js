@@ -1,7 +1,7 @@
 ﻿// =====================
 // IMPORTS
 // =====================
-import { BRANDS } from './brands.js?v=20261121-magneticslots';
+import { BRANDS } from './brands.js?v=20261122-kingmaker';
 import { COUNTRIES } from './countries.js';
 import { getFeaturedHomeBrands } from './featured-brands.js?v=20261119-shared-search';
 import { initFaqSections } from './faq.js?v=20261119-faq-layout';
@@ -47,14 +47,14 @@ const loadPageModules = async () => {
   const hasCasinoCards = isHomePage || isCountryPage || document.querySelector('.casino-grid') ||
     (isBrandPage && findBrandByPageKey(document.body.dataset.brand)?.notRecommended);
   const cardScreenshotsReady = hasCasinoCards
-    ? import('./brand-homepage-screenshots.js?v=20261120-betonwin').then(module => {
+    ? import('./brand-homepage-screenshots.js?v=20261122-kingmaker').then(module => {
         BRAND_HOMEPAGE_SCREENSHOTS = module.BRAND_HOMEPAGE_SCREENSHOTS || {};
       }).catch(() => {})
     : Promise.resolve();
 
   if (isHomePage || isCountryPage) {
     const [gamesModule, homeModule, mediaModule] = await Promise.all([
-      import('./brand-new-games.js?v=20261121-magneticslots'),
+      import('./brand-new-games.js?v=20261122-kingmaker'),
       import('./pages/home.js?v=20261122-market-cloud'),
       isCountryPage ? import('./pages/country-media.js?v=20261121-localized-games') : null,
     ]);
@@ -65,9 +65,9 @@ const loadPageModules = async () => {
 
   if (isBrandPage) {
     const [snapshotsModule, gamesModule, pageModule, feedbackModule] = await Promise.all([
-      import('./brand-snapshot-configs.js?v=20261121-magnetic-review-copy'),
-      import('./brand-new-games.js?v=20261121-magneticslots'),
-      import('./pages/brand.js?v=20261121-site-copy'),
+      import('./brand-snapshot-configs.js?v=20261122-kingmaker'),
+      import('./brand-new-games.js?v=20261122-kingmaker'),
+      import('./pages/brand.js?v=20261122-suitability-label'),
       import('./pages/brand-feedback.js?v=20261121-feedback-availability'),
     ]);
     BRAND_SNAPSHOT_CONFIGS = snapshotsModule.BRAND_SNAPSHOT_CONFIGS || {};

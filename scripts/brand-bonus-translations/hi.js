@@ -80,6 +80,7 @@ export default {
   "5,000 €/$ + 400 free spins, Nothing but Casino": "5,000 €/$ + 400 मुफ्त स्पिन, कैसीनो के अलावा कुछ नहीं",
   "Welcome Package 225% up to EUR 5,000 + 500 Free Spins": "वेलकम पैकेज 225% EUR 5,000 तक + 500 मुफ्त स्पिन",
   "Get Up to 2700$ + 200 FS for a Great Start": "शानदार शुरुआत के लिए 2700$ + 200 एफएस तक प्राप्त करें",
+  "100% Casino Welcome Bonus up to €500": "पहले कैसीनो जमा पर €500 तक 100% बोनस",
   "$20 Free Welcome Bonus": "$20 निःशुल्क स्वागत बोनस",
   "Regional welcome pack: 150% up to €60,000 + 100 Free Spins": "क्षेत्रीय स्वागत पैक: 150% €60,000 तक + 100 निःशुल्क स्पिन",
   "100% Welcome Bonus up to €4,000 on Your First Deposit": "आपकी पहली जमा राशि पर €4,000 तक 100% स्वागत बोनस",

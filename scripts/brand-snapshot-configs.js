@@ -618,7 +618,41 @@ const magneticCategoryStatuses = {
   fr: 'Non répertoriés :', hi: 'सूची में नहीं:', fi: 'Ei listattu:',
 };
 
+const kingmakerSportsLabels = ['MMA', 'Rugby', 'Darts', 'Badminton', 'Snooker', 'Futsal', 'Biathlon', 'Chess'];
+
 export const BRAND_SNAPSHOT_CONFIGS = {
+  kingmaker: {
+    tabs: [
+      createSnapshotTab('Games', [
+        'Slots', 'Roulette', 'Blackjack', 'Baccarat', 'Jackpot games', 'Live games', 'Poker',
+        'Bonus buy', 'Instant win', 'Table games', 'Bingo', 'Scratch cards', 'Crash games',
+        'Keno', 'Video poker', 'Craps and dice',
+      ], ['Slingo']),
+      createSnapshotTab('Live games', [
+        'Live roulette', 'Live blackjack', 'Live baccarat', 'Live poker', 'Live dice games', 'Live shows', 'International tables',
+      ], ['Live bingo']),
+      createSnapshotTab('Betting', [
+        'Football', 'Tennis', 'Table tennis', 'Basketball', 'Ice hockey', 'American football', 'Baseball',
+        'Virtual sports', 'Motorsport', 'eSports', 'Volleyball', 'Handball', 'Cricket', 'Boxing', 'Horse racing',
+        'MMA', 'Rugby', 'Darts', 'Badminton', 'Snooker', 'Futsal', 'Biathlon',
+      ], ['Chess']),
+    ],
+    notes: { ...publicCatalogueNotes, en: 'Categories from the public catalog. Availability can vary by country and provider.' },
+    labels: Object.fromEntries(Object.entries({
+      en: ['Instant games', 'Table games', 'International tables'], de: ['Sofortspiele', 'Tischspiele', 'Internationale Tische'],
+      es: ['Juegos instantáneos', 'Juegos de mesa', 'Mesas internacionales'], it: ['Giochi istantanei', 'Giochi da tavolo', 'Tavoli internazionali'],
+      pl: ['Gry natychmiastowe', 'Gry stołowe', 'Stoły międzynarodowe'], uk: ['Миттєві ігри', 'Настільні ігри', 'Міжнародні столи'],
+      pt: ['Jogos instantâneos', 'Jogos de mesa', 'Mesas internacionais'], fr: ['Jeux instantanés', 'Jeux de table', 'Tables internationales'],
+      hi: ['इंस्टेंट गेम', 'टेबल गेम', 'अंतरराष्ट्रीय टेबल'], fi: ['Pikapelit', 'Pöytäpelit', 'Kansainväliset pöydät'],
+    }).map(([locale, [instant, table, international]]) => [locale, {
+      ...BETONWIN_GAME_LABELS[locale],
+      ...Object.fromEntries(kingmakerSportsLabels.map(key => [key, BETONWIN_SPORT_LABELS[locale][key]])),
+      'Instant win': instant,
+      'Table games': table,
+      'International tables': international,
+      'Not surfaced:': locale === 'en' ? 'Not surfaced:' : magneticCategoryStatuses[locale],
+    }])),
+  },
   magneticslots: {
     tabs: [
       createCategoryTab('Games', [...GAME_CATEGORIES, ...magneticCollections], [

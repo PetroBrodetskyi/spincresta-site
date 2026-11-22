@@ -2,6 +2,7 @@
 // Keys match the review slug used by BRANDS.urlDetail.
 export const BRAND_HOMEPAGE_SCREENSHOTS = Object.freeze(
 {
+  "kingmaker": "https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto,w_1600/v1795344660/spincresta/brands/kingmaker/main-page/kingmaker-page_iz6cej",
   "betonwin": "https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto,w_1600/v1791721627/spincresta/brands/betonwin/main-page/betonwin-page_cisxfh",
   "gravira": "https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto,w_1600/v1791228941/spincresta/brands/gravira/main-page/gravira-page_duucwo",
   "national-casino": "https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto,w_1600/v1791115685/spincresta/brands/national-casino/main-page/national-casino_kpay7y",

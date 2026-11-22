@@ -13,7 +13,7 @@ const LABELS = {
   trust: ['Licensing & player protection', 'Lizenz und Spielerschutz', 'Licencia y protección', 'Licenza e tutela', 'Licencja i ochrona graczy', 'Ліцензія та захист гравців', 'Licença e proteção', 'Licence et protection', 'लाइसेंस और खिलाड़ी सुरक्षा', 'Lisenssi ja pelaajansuoja'],
   more: ['Other details', 'Weitere Details', 'Otros detalles', 'Altri dettagli', 'Inne informacje', 'Інші деталі', 'Outros detalhes', 'Autres détails', 'अन्य जानकारी', 'Muut tiedot'],
   pros: ['Pros & cons', 'Vor- und Nachteile', 'Ventajas y desventajas', 'Pro e contro', 'Zalety i wady', 'Переваги й недоліки', 'Prós e contras', 'Avantages et inconvénients', 'फायदे और नुकसान', 'Plussat ja miinukset'],
-  suitability: ['Who it suits', 'Für wen es geeignet ist', 'Para quién es', 'A chi si rivolge', 'Dla kogo', 'Кому підійде', 'A quem se destina', 'À qui il convient', 'किसके लिए उपयुक्त है', 'Kenelle se sopii'],
+  suitability: ['Who it suits', 'Für wen es geeignet ist', 'Para quién es', 'A chi si rivolge', 'Dla kogo', 'Кому найкраще підходить', 'A quem se destina', 'À qui il convient', 'किसके लिए उपयुक्त है', 'Kenelle se sopii'],
   faq: ['FAQ', 'Häufige Fragen', 'Preguntas frecuentes', 'Domande frequenti', 'Częste pytania', 'Поширені запитання', 'Perguntas frequentes', 'Questions fréquentes', 'अक्सर पूछे जाने वाले प्रश्न', 'Usein kysytyt kysymykset'],
   reviews: ['Player reviews', 'Spielerbewertungen', 'Opiniones de jugadores', 'Recensioni dei giocatori', 'Opinie graczy', 'Відгуки гравців', 'Avaliações de jogadores', 'Avis des joueurs', 'खिलाड़ियों की समीक्षाएँ', 'Pelaajien arvostelut'],
 };

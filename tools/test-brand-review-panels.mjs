@@ -70,6 +70,14 @@ test('review contents use a line marker without numbered chips', () => {
   assert.match(runtime, /window\.addEventListener\('scroll', schedule, \{ passive: true \}\)/);
 });
 
+test('shared editorial links keep their color in visited state and give resource links visible keyboard focus', () => {
+  const css = read('styles/core.css');
+  assert.match(css, /a:any-link:not\(\[class\], nav \*, header \*, footer \*\)\)\s*\{[^}]*color: var\(--editorial-blue/);
+  assert.match(css, /\.editorial-resource-link:any-link\s*\{[^}]*min-height: 44px;[^}]*color: var\(--editorial-blue/);
+  assert.match(css, /\.editorial-resource-link:focus-visible\s*\{[^}]*outline: 2px solid currentColor/);
+  assert.equal(reviewSectionLabel('suitability', (...labels) => labels[5]), 'Кому найкраще підходить');
+});
+
 test('the masthead uses a wider logo surface without stretching the brand image', () => {
   const shared = read('styles/pages.css');
   assert.match(shared, /\.brand-profile-showcase \.brand-logo-container\.hero-logo\s*\{[^}]*aspect-ratio:\s*2\.4;/);

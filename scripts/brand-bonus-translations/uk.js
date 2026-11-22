@@ -80,6 +80,7 @@ export default {
   "5,000 €/$ + 400 free spins, Nothing but Casino": "5000 €/$ + 400 безкоштовних обертань, Ніщо, крім казино",
   "Welcome Package 225% up to EUR 5,000 + 500 Free Spins": "Вітальний пакет 225% до 5000 євро + 500 безкоштовних обертань",
   "Get Up to 2700$ + 200 FS for a Great Start": "Отримайте до 2700 $ + 200 FS для чудового старту",
+  "100% Casino Welcome Bonus up to €500": "100% на перший депозит у казино до 500 €",
   "$20 Free Welcome Bonus": "Безкоштовний бонус у розмірі $20",
   "Regional welcome pack: 150% up to €60,000 + 100 Free Spins": "Регіональний вітальний пакет: 150% до €60 000 + 100 безкоштовних обертань",
   "100% Welcome Bonus up to €4,000 on Your First Deposit": "100% вітальний бонус до 4000 євро на ваш перший депозит",

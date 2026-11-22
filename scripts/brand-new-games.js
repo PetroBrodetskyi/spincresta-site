@@ -1,4 +1,12 @@
 export const BRAND_NEW_GAMES = {
+  kingmaker: [
+    ['36 Coins x3000', 'v1795344682', '36-coins-x-3000_xn9nzv'],
+    ['Bass Riches', 'v1795344683', 'bass-riches_kgrc8w'],
+    ['Raptor Doublemax', 'v1795344684', 'raptor_sst6xw'],
+    ['Diamond Slam: Super Wheel', 'v1795344685', 'super-wheel-diamond-slam_v8di9v'],
+    ['Viva La Mummy', 'v1795344686', 'vivala-mummy_gyhiv1'],
+    ['Ze Zeus', 'v1795344687', 'zeus_sz5cco'],
+  ].map(([name, version, id]) => ({ name, image: `https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto/${version}/spincresta/brands/kingmaker/new-games/kingmaker-new-game-${id}` })),
   magneticslots: [
     ['Lucky Coin Coyote', 'v1795278918', 'lucky-coin-coyote_l4nutp'],
     ['Burning Fleet Treasures: Hold & Win', 'v1795278903', 'burning-fleet-treasures_z7xmyc'],

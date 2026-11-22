@@ -405,14 +405,14 @@ export const BRANDS = [
   },
   {
     name: 'Kingmaker',
-    bonus: '',
+    bonus: '100% Casino Welcome Bonus up to €500',
     cta: 'Play Now',
     urlDetail: 'brands/kingmaker.html',
     urlCasino: 'https://armadaapp.media-412.com/click?pid=3862&offer_id=124846',
     image: 'images/kingmaker.svg',
     bgColor: '#430F71',
     countries: ['ES', 'DE', 'AT', 'NO', 'FI', 'IE', 'HU', 'PL', 'SI', 'SK', 'CZ', 'IT', 'CH', 'BE', 'CA', 'AU', 'NZ'],
-    payments: [],
+    payments: ['skrill', 'litecoin', 'tron', 'dogecoin', 'cardano'],
     hasDetailPage: true,
   },
   {

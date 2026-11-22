@@ -1,0 +1,171 @@
+// Evidence for the figures lives in the ignored Kingmaker research notes.
+// All locales share the numerical tables. These are offer currencies, not country eligibility.
+export const casinoWelcomeByCurrency = [
+  ['EUR', 20, 500], ['AUD', 30, 750], ['CAD', 30, 750], ['CHF', 22, 550],
+  ['CZK', 500, 12500], ['HUF', 6000, 200000], ['NOK', 200, 5000],
+  ['NZD', 40, 1000], ['PLN', 90, 2250],
+];
+
+export const cashierExamples = [
+  ['CA', 'CAD', 'Interac', 10, 9000, 10, 3000],
+  ['CA', 'CAD', 'LTC / TRX / ADA', 20, 8000, 35, 8000],
+  ['CA', 'CAD', 'DOGE', 20, 7800, 35, 7800],
+  ['PL', 'PLN', 'Skrill', 50, 22100, 50, 22100],
+  ['PL', 'PLN', 'LTC / TRX / DOGE / ADA', 45, 20000, 100, 20000],
+];
+
+export const dailyCasinoCashback = [[2, 3, 100], [3, 5, 200], [4, 10, 300], [5, 15, 400]];
+
+// Brief copy is placed inside the existing details tabs, not as extra blocks under the summary.
+export const reviewedDetails = {
+  en: {
+    headers: ['Currency', 'Minimum deposit', 'Maximum bonus', 'Market and method', 'Deposit per transaction', 'Withdrawal per transaction', 'Daily casino cashback', 'Daily cap'],
+    currencies: 'The 100% casino welcome match has different minimums and caps by account currency. The table lists the published offer amounts, not where it can be claimed.',
+    reload: 'With weekly opt-in, the first qualifying deposit from Monday through Thursday gives 50 spins on a selected slot from €20. Use the spins within seven days. Eligible winnings require 40× within 10 days of activation; at most €50 can be released.',
+    weekend: ['Weekend casino reload', 'From Friday through Sunday UTC, eligible players who opt in get a 50% match up to €700 on the first qualifying deposit of the period, from €20. A deposit of at least €50 adds 50 spins on a selected slot. The match requires 35× on the deposit plus bonus; spin winnings require 40× and have a €50 release cap for 50 spins. Wagering is due 10 days after activation.'],
+    shows: 'The game-show lobby includes Sweet Bonanza Candyland, Gravity Wheel, and Adventures Beyond Wonderland Live.',
+    boost: ['Accumulator Boost', 'The boost applies to a winning real-money accumulator with at least three selections at odds of 1.40 or higher each. It adds 3% to net winnings for three selections, up to 100% for 21 or more. Bonus-funded bets do not qualify.'],
+    cash: 'Daily casino cashback applies to eligible real-money losses and starts at €1 for VIP levels 2–5. A separate weekly live-casino promotion pays 25% on eligible losses, from €1 to €200, at VIP levels 1–5. Both require opt-in and 1× wagering.',
+    banking: 'The public cashier lists these examples for Canada in CAD and Poland in PLN. These are method ranges, not VIP limits or guarantees of access. The options and caps in a signed-in cashier can differ.',
+    support: ['Support and complaints', 'Kingmaker lists 24/7 live chat and support@kingmaker.com. If support does not resolve an issue, the terms direct players to complaints@kingmaker.com. The complaints team normally reports the outcome within 10 days after receiving the complaint; complex cases can take longer.'],
+    faq: [
+      ['Does Kingmaker support Interac in Canada?', 'The public CAD table shows Interac deposits from CAD 10 to 9,000 and withdrawals from CAD 10 to 3,000 per transaction. Account limits and eligibility still apply.'],
+      ['How can I contact Kingmaker or request self-exclusion?', 'Kingmaker lists 24/7 live chat and support@kingmaker.com. Use the support email to request self-exclusion.'],
+    ],
+  },
+  de: {
+    headers: ['Währung', 'Mindesteinzahlung', 'Höchstbonus', 'Markt und Methode', 'Einzahlung je Transaktion', 'Auszahlung je Transaktion', 'Tägliches Casino-Cashback', 'Tageslimit'],
+    currencies: 'Die Mindesteinzahlung und der Höchstbetrag für den 100-%-Casinobonus richten sich nach der Kontowährung. Die Beträge sagen nichts darüber aus, in welchen Ländern das Angebot verfügbar ist.',
+    reload: 'Nach der Anmeldung zur Wochenaktion gibt es für die erste qualifizierte Einzahlung ab 20 € von Montag bis Donnerstag 50 Freispiele auf einem ausgewählten Slot. Die Spiele verfallen nach sieben Tagen. Anrechenbare Gewinne müssen innerhalb von 10 Tagen nach Aktivierung 40-mal umgesetzt werden. Höchstens 50 € lassen sich freispielen.',
+    weekend: ['Casino-Wochenendbonus', 'Von Freitag bis Sonntag (UTC) gibt es nach Anmeldung 50 % bis zu 700 € auf die erste qualifizierte Einzahlung ab 20 €. Ab 50 € kommen 50 Freispiele für einen ausgewählten Slot hinzu. Einzahlung und Bonus müssen 35-mal, Freispielgewinne 40-mal umgesetzt werden. Aus den 50 Freispielen sind höchstens 50 € freispielbar. Die Frist beträgt 10 Tage ab Aktivierung.'],
+    shows: 'Zu den Spielshows gehören Sweet Bonanza Candyland, Gravity Wheel und Adventures Beyond Wonderland Live.',
+    boost: ['Bonus auf Kombiwetten', 'Der Zuschlag gilt für gewonnene Kombiwetten mit Echtgeld ab drei Auswahlen und einer Quote von mindestens 1,40 je Auswahl. Bei drei Auswahlen kommen 3 % auf den Nettogewinn, ab 21 Auswahlen 100 %. Bonuswetten zählen nicht.'],
+    cash: 'Das tägliche Casino-Cashback gilt für anrechenbare Echtgeldverluste und beträgt ab VIP-Stufe 2 mindestens 1 €. Für VIP-Stufen 1–5 gibt es separat wöchentlich 25 % Live-Cashback, mindestens 1 € und höchstens 200 €. Beide Aktionen erfordern eine Anmeldung und 1× Umsatz.',
+    banking: 'Die öffentliche Zahlungstabelle zeigt diese Beispiele für Kanada in CAD und Polen in PLN. Es sind Grenzen der Zahlungsmethode, keine VIP-Grenzen oder Zusagen zur Verfügbarkeit. Die Kasse des Kontos kann andere Methoden und Beträge anzeigen.',
+    support: ['Kundenservice und Beschwerden', 'Kingmaker nennt einen Live-Chat rund um die Uhr sowie support@kingmaker.com. Ist ein Anliegen danach nicht geklärt, verweisen die AGB auf complaints@kingmaker.com. Das Beschwerdeteam teilt das Ergebnis normalerweise innerhalb von 10 Tagen nach Eingang mit. Komplexe Fälle können länger dauern.'],
+    faq: [
+      ['Bietet Kingmaker in Kanada Interac an?', 'Die öffentliche CAD-Tabelle nennt für Interac Einzahlungen von 10 bis 9.000 CAD und Auszahlungen von 10 bis 3.000 CAD je Transaktion. Es gelten die Kontolimits und Teilnahmebedingungen.'],
+      ['Wie erreiche ich Kingmaker oder beantrage einen Selbstausschluss?', 'Kingmaker nennt einen Live-Chat rund um die Uhr und support@kingmaker.com. Den Selbstausschluss beantragst du per E-Mail an den Kundenservice.'],
+    ],
+  },
+  es: {
+    headers: ['Moneda', 'Depósito mínimo', 'Bono máximo', 'Mercado y método', 'Depósito por operación', 'Retiro por operación', 'Reembolso diario de casino', 'Tope diario'],
+    currencies: 'El mínimo y el tope del bono del 100 % dependen de la moneda de la cuenta. Las cifras publicadas no indican en qué países se puede reclamar.',
+    reload: 'Con la inscripción semanal, el primer depósito válido de lunes a jueves, desde 20 €, da 50 giros en una tragamonedas seleccionada. Los giros caducan a los siete días. Las ganancias válidas requieren 40× en 10 días desde la activación y solo se pueden liberar hasta 50 €.',
+    weekend: ['Recarga de casino del fin de semana', 'Del viernes al domingo en horario UTC, quienes activen la promoción reciben el 50 % hasta 700 € en el primer depósito válido desde 20 €. Con al menos 50 € se suman 50 giros en una tragamonedas seleccionada. Hay que apostar 35× el depósito más el bono y 40× las ganancias de los giros, que se pueden liberar hasta 50 €. El plazo es de 10 días desde la activación.'],
+    shows: 'Entre los juegos con presentador figuran Sweet Bonanza Candyland, Gravity Wheel y Adventures Beyond Wonderland Live.',
+    boost: ['Aumento de premio para combinadas', 'Se aplica a combinadas ganadoras con dinero real, al menos tres selecciones y cuota mínima de 1,40 en cada una. Añade un 3 % a la ganancia neta con tres selecciones y hasta un 100 % con 21 o más. Las apuestas con fondos de bono no cuentan.'],
+    cash: 'El reembolso diario de casino se calcula sobre pérdidas válidas en dinero real y parte de 1 € para los niveles VIP 2 a 5. El casino en vivo ofrece un reembolso semanal separado del 25 %, de 1 € a 200 €, para los niveles 1 a 5. Ambos requieren inscripción y un requisito de apuesta de 1×.',
+    banking: 'La tabla pública muestra estos ejemplos para Canadá en CAD y Polonia en PLN. Los intervalos corresponden al método, no al nivel VIP, y no garantizan su disponibilidad. La caja de cada cuenta puede mostrar otros métodos o límites.',
+    support: ['Atención al cliente y reclamaciones', 'Kingmaker indica que el chat funciona las 24 horas y publica support@kingmaker.com. Si el equipo no resuelve el problema, las condiciones remiten a complaints@kingmaker.com. El equipo de reclamaciones suele comunicar la resolución en 10 días desde que recibe la queja; un caso complejo puede llevar más tiempo.'],
+    faq: [
+      ['¿Kingmaker acepta Interac en Canadá?', 'La tabla pública en CAD indica depósitos con Interac de 10 a 9.000 CAD y retiros de 10 a 3.000 CAD por operación. Siguen vigentes los límites y requisitos de la cuenta.'],
+      ['¿Cómo contacto con Kingmaker o solicito la autoexclusión?', 'Kingmaker indica que el chat funciona las 24 horas y publica support@kingmaker.com. Para solicitar la autoexclusión, escribe a esa dirección.'],
+    ],
+  },
+  it: {
+    headers: ['Valuta', 'Deposito minimo', 'Bonus massimo', 'Mercato e metodo', 'Deposito per operazione', 'Prelievo per operazione', 'Cashback giornaliero del casinò', 'Limite giornaliero'],
+    currencies: 'Il deposito minimo e il tetto del bonus casinò del 100% cambiano con la valuta del conto. Gli importi pubblicati non dicono in quali paesi si possa richiedere il bonus.',
+    reload: 'Da lunedì a giovedì, il primo deposito idoneo da 20 € dà 50 giri su una slot selezionata, previa adesione. I giri scadono dopo sette giorni. Le vincite idonee richiedono 40× entro 10 giorni dall’attivazione; si possono sbloccare fino a 50 €.',
+    weekend: ['Ricarica del fine settimana', 'Da venerdì a domenica in orario UTC, chi aderisce riceve il 50% fino a 700 € sul primo deposito idoneo da 20 €. Con almeno 50 € si aggiungono 50 giri su una slot selezionata. Il requisito è 35× su deposito e bonus e 40× sulle vincite dei giri, sbloccabili fino a 50 €. Il termine è di 10 giorni dall’attivazione.'],
+    shows: 'Tra i game show ci sono Sweet Bonanza Candyland, Gravity Wheel e Adventures Beyond Wonderland Live.',
+    boost: ['Maggiorazione sulle multiple', 'Vale per le multiple vincenti piazzate con denaro reale: almeno tre selezioni, con quota minima di 1,40 ciascuna. Aggiunge il 3% alla vincita netta con tre selezioni e fino al 100% con almeno 21. Le puntate con denaro bonus non valgono.'],
+    cash: 'Il cashback giornaliero del casinò si calcola sulle perdite idonee in denaro reale; la soglia è di 1 € per i livelli VIP 2–5. Il casinò dal vivo ha un cashback settimanale distinto del 25%, da 1 a 200 €, per i livelli VIP 1–5. Entrambi richiedono adesione e un requisito di puntata di 1×.',
+    banking: 'Esempi pubblici per Canada in CAD e Polonia in PLN. Gli intervalli riguardano il metodo, non il livello VIP, e non ne garantiscono la disponibilità. La cassa del conto può mostrare opzioni e limiti diversi.',
+    support: ['Assistenza e reclami', 'Kingmaker indica una chat attiva 24 ore su 24 e l’indirizzo support@kingmaker.com. Se il problema non si risolve, le condizioni rimandano a complaints@kingmaker.com. L’esito è comunicato di norma entro 10 giorni dalla ricezione del reclamo, salvo casi più complessi.'],
+    faq: [
+      ['Kingmaker accetta Interac in Canada?', 'La tabella pubblica in CAD indica depositi Interac da 10 a 9.000 CAD e prelievi da 10 a 3.000 CAD per operazione. Si applicano i limiti e i requisiti del conto.'],
+      ['Come contatto Kingmaker o chiedo l’autoesclusione?', 'Kingmaker indica una chat attiva 24 ore su 24 e support@kingmaker.com. Per l’autoesclusione occorre scrivere all’assistenza.'],
+    ],
+  },
+  pl: {
+    headers: ['Waluta', 'Minimalna wpłata', 'Maksymalny bonus', 'Rynek i metoda', 'Wpłata na transakcję', 'Wypłata na transakcję', 'Dzienny zwrot w kasynie', 'Limit dzienny'],
+    currencies: 'Minimalna wpłata i maksymalny bonus 100% zależą od waluty konta. Tabela pokazuje opublikowane kwoty, a nie kraje, w których można skorzystać z oferty.',
+    reload: 'Po zgłoszeniu udziału pierwsza wpłata spełniająca warunki od poniedziałku do czwartku, od 20 €, daje 50 obrotów na wybranym automacie. Obroty wygasają po siedmiu dniach. Wygrane trzeba obrócić 40 razy w ciągu 10 dni od aktywacji. Można odblokować do 50 €.',
+    weekend: ['Weekendowy bonus za wpłatę', 'Od piątku do niedzieli (UTC) po zgłoszeniu udziału pierwsza kwalifikująca się wpłata od 20 € daje 50% do 700 €. Wpłata od 50 € dodaje 50 obrotów na wybranym automacie. Wymóg to 35× dla wpłaty i bonusu oraz 40× dla wygranych z obrotów, z limitem 50 €. Termin to 10 dni od aktywacji.'],
+    shows: 'W sekcji teleturniejów są między innymi Sweet Bonanza Candyland, Gravity Wheel i Adventures Beyond Wonderland Live.',
+    boost: ['Podwyższenie wygranej w zakładach AKO', 'Dotyczy wygranych zakładów za prawdziwe pieniądze z co najmniej trzema zdarzeniami i kursem przynajmniej 1,40 na każde zdarzenie. Zwiększa wygraną netto o 3% przy trzech zdarzeniach i do 100% przy co najmniej 21. Zakłady z bonusem nie uprawniają do podwyżki.'],
+    cash: 'Dzienny zwrot w kasynie dotyczy kwalifikujących się strat w grze za prawdziwe pieniądze i zaczyna się od 1 € dla VIP 2–5. Kasyno na żywo ma osobny tygodniowy zwrot 25%, od 1 do 200 €, dla VIP 1–5. Obie akcje wymagają zgłoszenia udziału i obrotu 1×.',
+    banking: 'Przykłady z publicznej tabeli: Kanada w CAD i Polska w PLN. Są to limity metody płatności, nie limity VIP ani gwarancja dostępności. Kasa danego konta może pokazywać inne metody i kwoty.',
+    support: ['Kontakt i reklamacje', 'Kingmaker podaje całodobowy czat i adres support@kingmaker.com. Gdy obsługa nie rozwiąże sprawy, regulamin wskazuje complaints@kingmaker.com. Wynik rozpatrzenia reklamacji jest zwykle podawany w ciągu 10 dni od jej otrzymania, chyba że sprawa wymaga więcej czasu.'],
+    faq: [
+      ['Czy Kingmaker obsługuje Interac w Kanadzie?', 'Publiczna tabela CAD podaje wpłaty przez Interac od 10 do 9 000 CAD i wypłaty od 10 do 3 000 CAD na transakcję. Nadal obowiązują limity i warunki danego konta.'],
+      ['Jak skontaktować się z Kingmaker lub złożyć wniosek o samowykluczenie?', 'Kingmaker podaje całodobowy czat i support@kingmaker.com. Wniosek o samowykluczenie można wysłać na ten adres.'],
+    ],
+  },
+  uk: {
+    headers: ['Валюта', 'Мінімальний депозит', 'Максимальний бонус', 'Ринок і спосіб оплати', 'Депозит за операцію', 'Виплата за операцію', 'Денний кешбек у казино', 'Денний ліміт'],
+    currencies: 'Мінімальний депозит і максимальна сума бонусу 100% залежать від валюти рахунку. У таблиці наведено опубліковані суми, а не країни, де доступна акція.',
+    reload: 'З понеділка по четвер перший відповідний депозит від 20 € після підключення акції дає 50 обертань у вибраному слоті. Обертання діють сім днів. Виграш треба відіграти 40 разів за 10 днів від активації. На реальний баланс можна перевести до 50 €.',
+    weekend: ['Бонус казино на вихідні', 'З п’ятниці по неділю за UTC після підключення акції на перший відповідний депозит від 20 € нараховують 50% до 700 €. Депозит від 50 € також дає 50 обертань у вибраному слоті. Вейджер — 35× на депозит із бонусом і 40× на виграші з обертань. З обертань можна перевести на реальний баланс до 50 €. Строк відіграшу — 10 днів від активації.'],
+    shows: 'Серед ігрових шоу є Sweet Bonanza Candyland, Gravity Wheel і Adventures Beyond Wonderland Live.',
+    boost: ['Доплата за виграшний експрес', 'Доплата діє для виграшного експреса за реальні гроші з трьома або більше подіями та коефіцієнтом від 1,40 на кожну. За три події додають 3% до чистого виграшу, за 21 і більше — 100%. Ставки за бонусні кошти не зараховуються.'],
+    cash: 'Денний кешбек у казино нараховують на відповідні збитки за реальні гроші, від 1 € для VIP-рівнів 2–5. У live-казино діє окремий тижневий кешбек 25%, від 1 до 200 €, для VIP-рівнів 1–5. Обидві акції треба підключити, а кешбек відіграти один раз.',
+    banking: 'Нижче — приклади для Канади в CAD і Польщі в PLN з відкритого платіжного довідника. Це ліміти способів оплати, а не VIP-рівнів. У касі вашого акаунта способи й суми можуть відрізнятися.',
+    support: ['Підтримка та скарги', 'Kingmaker вказує цілодобовий чат і адресу support@kingmaker.com. Якщо питання не вирішено, правила радять подати скаргу на complaints@kingmaker.com. Зазвичай результат повідомляють упродовж 10 днів після отримання скарги. Складні випадки можуть тривати довше.'],
+    faq: [
+      ['Чи є в Kingmaker Interac для Канади?', 'У відкритій таблиці для CAD зазначено депозит від 10 до 9 000 CAD і виплату від 10 до 3 000 CAD за операцію через Interac. Окремо діють ліміти та правила для вашого акаунта.'],
+      ['Як звернутися до Kingmaker або подати запит на самовиключення?', 'Kingmaker вказує цілодобовий чат і support@kingmaker.com. Запит на самовиключення можна подати електронною поштою.'],
+    ],
+  },
+  pt: {
+    headers: ['Moeda', 'Depósito mínimo', 'Bónus máximo', 'Mercado e método', 'Depósito por operação', 'Levantamento por operação', 'Reembolso diário de casino', 'Limite diário'],
+    currencies: 'O depósito mínimo e o limite do bónus de casino de 100% dependem da moeda da conta. A tabela mostra os valores publicados, não os países em que a oferta está disponível.',
+    reload: 'Após adesão, o primeiro depósito elegível de segunda a quinta, a partir de 20 €, dá 50 jogadas numa slot selecionada. As jogadas expiram em sete dias. Os ganhos elegíveis exigem 40× nos 10 dias após a ativação. Podem ser libertados até 50 €.',
+    weekend: ['Recarga de casino de fim de semana', 'De sexta a domingo, em horário UTC, a recarga dá 50% até 700 € no primeiro depósito elegível a partir de 20 €, após adesão. Um depósito de pelo menos 50 € dá também 50 jogadas numa slot selecionada. É preciso apostar 35× o depósito mais o bónus e 40× os ganhos das jogadas. Destes ganhos, podem ser libertados até 50 €. O prazo é de 10 dias após a ativação.'],
+    shows: 'Entre os concursos com apresentador estão Sweet Bonanza Candyland, Gravity Wheel e Adventures Beyond Wonderland Live.',
+    boost: ['Reforço do prémio em múltiplas', 'Aplica-se a apostas múltiplas ganhas com dinheiro real, pelo menos três seleções e odds de 1,40 ou superiores em cada uma. Acrescenta 3% ao ganho líquido com três seleções e até 100% com 21 ou mais. Apostas com fundos de bónus não contam.'],
+    cash: 'O reembolso diário de casino aplica-se às perdas elegíveis em dinheiro real e começa em 1 € para os níveis VIP 2 a 5. O casino ao vivo tem um reembolso semanal distinto de 25%, de 1 € a 200 €, para os níveis 1 a 5. As duas ofertas exigem adesão e um requisito de aposta de 1×.',
+    banking: 'A tabela pública mostra estes exemplos para o Canadá em CAD e a Polónia em PLN. Os intervalos são do método de pagamento, não do nível VIP, e não garantem disponibilidade. A caixa da conta pode mostrar outros métodos ou limites.',
+    support: ['Apoio e reclamações', 'O Kingmaker indica um chat disponível 24 horas por dia e o endereço support@kingmaker.com. Se o problema não ficar resolvido, as condições remetem para complaints@kingmaker.com. Normalmente, a equipa responde com a decisão até 10 dias após a receção da reclamação; casos complexos podem demorar mais.'],
+    faq: [
+      ['O Kingmaker aceita Interac no Canadá?', 'A tabela pública em CAD indica depósitos por Interac de 10 a 9 000 CAD e levantamentos de 10 a 3 000 CAD por operação. Mantêm-se os limites e os requisitos da conta.'],
+      ['Como posso contactar o Kingmaker ou pedir autoexclusão?', 'O Kingmaker indica um chat disponível 24 horas por dia e support@kingmaker.com. Para pedir autoexclusão, escreva para esse endereço.'],
+    ],
+  },
+  fr: {
+    headers: ['Devise', 'Dépôt minimum', 'Bonus maximum', 'Marché et mode de paiement', 'Dépôt par transaction', 'Retrait par transaction', 'Remboursement quotidien du casino', 'Plafond quotidien'],
+    currencies: 'Le dépôt minimum et le plafond du bonus casino de 100 % dépendent de la devise du compte. Les montants publiés ne disent pas dans quels pays l’offre est accessible.',
+    reload: 'Après inscription à l’offre, le premier dépôt éligible du lundi au jeudi, dès 20 €, donne 50 tours sur une machine sélectionnée. Les tours expirent après sept jours. Les gains éligibles doivent être misés 40× dans les 10 jours qui suivent l’activation. Jusqu’à 50 € peuvent être transférés au solde réel.',
+    weekend: ['Bonus de recharge du week-end', 'Du vendredi au dimanche en horaire UTC, l’offre donne 50 % jusqu’à 700 € sur le premier dépôt éligible dès 20 €, après inscription. Un dépôt d’au moins 50 € ajoute 50 tours sur une machine sélectionnée. Il faut miser 35× le dépôt et le bonus réunis, puis 40× les gains des tours pour libérer jusqu’à 50 €. Le délai est de 10 jours après activation.'],
+    shows: 'La rubrique des jeux avec animateur propose notamment Sweet Bonanza Candyland, Gravity Wheel et Adventures Beyond Wonderland Live.',
+    boost: ['Majoration des gains sur les combinés', 'La majoration s’applique à un combiné gagnant en argent réel avec au moins trois sélections et une cote d’au moins 1,40 chacune. Elle ajoute 3 % aux gains nets avec trois sélections, et jusqu’à 100 % avec 21 ou plus. Les paris financés par un bonus ne comptent pas.'],
+    cash: 'Le remboursement quotidien du casino porte sur les pertes éligibles en argent réel, à partir de 1 € pour les niveaux VIP 2 à 5. Le casino en direct propose un remboursement hebdomadaire distinct de 25 %, de 1 à 200 €, pour les niveaux 1 à 5. Dans les deux cas, il faut s’inscrire et miser une fois la somme remboursée.',
+    banking: 'Ces exemples viennent du tableau public pour le Canada en CAD et la Pologne en PLN. Ils correspondent au mode de paiement, pas au niveau VIP, et ne garantissent pas sa disponibilité. La caisse du compte peut afficher d’autres options et plafonds.',
+    support: ['Assistance et réclamations', 'Kingmaker indique un chat disponible 24 h/24 et l’adresse support@kingmaker.com. Si le problème persiste, les conditions renvoient à complaints@kingmaker.com. L’équipe communique généralement sa décision dans les 10 jours suivant la réception de la réclamation. Un dossier complexe peut prendre plus de temps.'],
+    faq: [
+      ['Kingmaker accepte-t-il Interac au Canada ?', 'Le tableau public en CAD indique des dépôts Interac de 10 à 9 000 CAD et des retraits de 10 à 3 000 CAD par transaction. Les limites et conditions du compte s’appliquent.'],
+      ['Comment contacter Kingmaker ou demander une auto-exclusion ?', 'Kingmaker indique un chat disponible 24 h/24 et support@kingmaker.com. Envoyez la demande d’auto-exclusion à cette adresse.'],
+    ],
+  },
+  hi: {
+    headers: ['मुद्रा', 'न्यूनतम जमा', 'अधिकतम बोनस', 'देश और भुगतान का तरीका', 'प्रति लेनदेन जमा', 'प्रति लेनदेन निकासी', 'कैसीनो का दैनिक कैशबैक', 'दैनिक सीमा'],
+    currencies: 'कैसीनो के 100% बोनस की न्यूनतम जमा और अधिकतम राशि खाते की मुद्रा पर निर्भर करती है। तालिका में प्रकाशित रकम हैं, उन देशों की सूची नहीं जहाँ ऑफ़र उपलब्ध है।',
+    reload: 'ऑफ़र चुनने के बाद सोमवार से गुरुवार तक €20 या उससे अधिक की पहली पात्र जमा पर चुने हुए स्लॉट में 50 स्पिन मिलते हैं। स्पिन सात दिन में समाप्त हो जाते हैं। पात्र जीत को बोनस चालू होने के 10 दिन के भीतर 40 बार दाँव पर लगाना होता है। असली बैलेंस में €50 तक जा सकते हैं।',
+    weekend: ['सप्ताहांत का कैसीनो रीलोड', 'ऑफ़र चुनने पर शुक्रवार से रविवार (UTC) के बीच €20 या उससे अधिक की पहली पात्र जमा पर €700 तक 50% बोनस मिलता है। €50 या उससे अधिक जमा करने पर चुने हुए स्लॉट में 50 स्पिन भी मिलते हैं। जमा और बोनस की कुल रकम पर 35× और स्पिन की जीत पर 40× की शर्त है। स्पिन की जीत से €50 तक असली बैलेंस में जा सकते हैं। शर्तें बोनस चालू करने के 10 दिन के भीतर पूरी करनी हैं।'],
+    shows: 'लाइव गेम शो में Sweet Bonanza Candyland, Gravity Wheel और Adventures Beyond Wonderland Live शामिल हैं।',
+    boost: ['मल्टीबेट की जीत पर अतिरिक्त रकम', 'यह ऑफ़र असली पैसे से लगाए गए जीतने वाले मल्टीबेट पर लागू होता है। उसमें कम से कम तीन चयन होने चाहिए और हर चयन का ऑड्स 1.40 या अधिक होना चाहिए। तीन चयन पर शुद्ध जीत में 3% जुड़ता है और 21 या उससे अधिक पर 100% तक। बोनस की रकम से लगाए दाँव नहीं गिने जाते।'],
+    cash: 'दैनिक कैसीनो कैशबैक असली पैसे की पात्र हार पर मिलता है। VIP स्तर 2 से 5 के लिए इसकी शुरुआत €1 से होती है। VIP स्तर 1 से 5 के लिए लाइव कैसीनो में अलग साप्ताहिक 25% कैशबैक है, €1 से €200 तक। दोनों के लिए ऑफ़र चुनना और कैशबैक की रकम एक बार दाँव पर लगाना ज़रूरी है।',
+    banking: 'सार्वजनिक तालिका में कनाडा के लिए CAD और पोलैंड के लिए PLN के ये उदाहरण हैं। ये भुगतान के तरीके की सीमाएँ हैं, VIP सीमाएँ नहीं। खाते में उपलब्ध तरीके और रकम अलग हो सकती हैं।',
+    support: ['सहायता और शिकायतें', 'Kingmaker के मुताबिक लाइव चैट चौबीसों घंटे उपलब्ध है। सहायता का ईमेल support@kingmaker.com है। समस्या न सुलझे तो शर्तों में complaints@kingmaker.com पर शिकायत भेजने को कहा गया है। टीम आम तौर पर शिकायत मिलने के 10 दिन में फ़ैसला बताती है। मुश्किल मामलों में अधिक समय लग सकता है।'],
+    faq: [
+      ['क्या Kingmaker कनाडा में Interac स्वीकार करता है?', 'सार्वजनिक CAD तालिका में Interac से 10 से 9,000 CAD तक जमा और प्रति लेनदेन 10 से 3,000 CAD तक निकासी दिखाई गई है। खाते की सीमाएँ और पात्रता की शर्तें भी लागू होती हैं।'],
+      ['Kingmaker से संपर्क या खेलने पर खुद रोक लगाने का अनुरोध कैसे करें?', 'Kingmaker के मुताबिक लाइव चैट चौबीसों घंटे उपलब्ध है। खेलने से खुद को रोकने का अनुरोध support@kingmaker.com पर भेजें।'],
+    ],
+  },
+  fi: {
+    headers: ['Valuutta', 'Vähimmäistalletus', 'Enimmäisbonus', 'Maa ja maksutapa', 'Talletus tapahtumaa kohti', 'Kotiutus tapahtumaa kohti', 'Kasinon päivähyvitys', 'Päiväkohtainen yläraja'],
+    currencies: 'Kasinon 100 % ensitalletusbonuksen talletusraja ja enimmäismäärä riippuvat tilin valuutasta. Taulukossa ovat julkaistut summat, eivät maat, joissa tarjouksen voi lunastaa.',
+    reload: 'Kun tarjoukseen liittyy, maanantain ja torstain välinen ensimmäinen ehdot täyttävä vähintään 20 €:n talletus antaa 50 kierrosta valittuun peliin. Kierrokset vanhenevat seitsemässä päivässä. Hyväksyttävät voitot on kierrätettävä 40 kertaa 10 päivässä aktivoinnista. Oikean rahan saldoon voi siirtää enintään 50 €.',
+    weekend: ['Kasinon viikonlopputarjous', 'Perjantaista sunnuntaihin UTC-aikaa saa liittymisen jälkeen 50 % bonuksen enintään 700 euroon asti ensimmäisestä ehdot täyttävästä vähintään 20 €:n talletuksesta. Vähintään 50 €:n talletus tuo 50 kierrosta valittuun peliin. Talletuksen ja bonuksen kierrätys on 35× ja kierrosvoittojen 40×. Kierrosvoitoista voi vapauttaa enintään 50 €. Aikaa on 10 päivää aktivoinnista.'],
+    shows: 'Pelishow-valikoimaan kuuluvat Sweet Bonanza Candyland, Gravity Wheel ja Adventures Beyond Wonderland Live.',
+    boost: ['Voittolisä yhdistelmävedoille', 'Voittolisä koskee oikealla rahalla pelattua voittavaa yhdistelmävetoa, jossa on vähintään kolme kohdetta ja kussakin vähintään 1,40:n kerroin. Kolmella kohteella nettovoitto kasvaa 3 % ja vähintään 21 kohteella 100 %. Bonusrahalla pelatut vedot eivät kelpaa.'],
+    cash: 'Kasinon päivähyvitys lasketaan hyvitykseen oikeuttavista oikean rahan tappioista. VIP-tasoilla 2–5 hyvitys alkaa 1 eurosta. Livekasinolla on erillinen 25 %:n viikkohyvitys, 1–200 €, VIP-tasoille 1–5. Kumpaankin tarjoukseen on liityttävä, ja hyvitys on kierrätettävä kerran.',
+    banking: 'Julkisessa taulukossa nämä esimerkit koskevat Kanadaa (CAD) ja Puolaa (PLN). Ne ovat maksutapakohtaisia rajoja, eivät VIP-rajoja tai lupaus saatavuudesta. Oman tilin kassalla voi olla eri vaihtoehtoja ja rajoja.',
+    support: ['Asiakaspalvelu ja valitukset', 'Kingmaker ilmoittaa chatin päivystävän vuorokauden ympäri ja antaa osoitteen support@kingmaker.com. Ellei asia ratkea, ehtojen mukainen valitusosoite on complaints@kingmaker.com. Päätöksestä ilmoitetaan yleensä 10 päivän kuluessa valituksen saapumisesta. Monimutkainen asia voi kestää kauemmin.'],
+    faq: [
+      ['Käykö Interac Kingmakerissa Kanadassa?', 'Julkisen CAD-taulukon mukaan Interacilla voi tallettaa 10–9 000 CAD ja kotiuttaa 10–3 000 CAD tapahtumaa kohti. Tilin rajoitukset ja ehdot ovat silti voimassa.'],
+      ['Miten otan yhteyttä Kingmakeriin tai pyydän omaehtoista pelikieltoa?', 'Kingmaker ilmoittaa chatin päivystävän ympäri vuorokauden. Pyydä omaehtoista pelikieltoa sähköpostitse osoitteesta support@kingmaker.com.'],
+    ],
+  },
+};
