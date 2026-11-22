@@ -621,6 +621,25 @@ const magneticCategoryStatuses = {
 const kingmakerSportsLabels = ['MMA', 'Rugby', 'Darts', 'Badminton', 'Snooker', 'Futsal', 'Biathlon', 'Chess'];
 
 export const BRAND_SNAPSHOT_CONFIGS = {
+  betrepublic: {
+    tabs: [
+      createSnapshotTab('Games', ['Slots', 'Live games', 'Bonus buy', 'Instant win', 'Table games', 'Jackpot games'], ['Slingo', 'Scratch cards']),
+      createSnapshotTab('Live games', ['Live roulette', 'Live blackjack', 'Live baccarat', 'Live dice games', 'Live poker', 'Live shows', 'International tables'], ['Live bingo']),
+      createSnapshotTab('Betting', ['Football', 'Tennis', 'Basketball', 'Table tennis', 'Ice hockey', 'American football', 'Baseball', 'Horse racing', 'Virtual sports'], ['Chess']),
+    ],
+    notes: publicCatalogueNotes,
+    labels: Object.fromEntries(Object.entries({
+      en: ['Instant games', 'Table games', 'International tables'], de: ['Sofortspiele', 'Tischspiele', 'Internationale Tische'],
+      es: ['Juegos instantáneos', 'Juegos de mesa', 'Mesas internacionales'], it: ['Giochi istantanei', 'Giochi da tavolo', 'Tavoli internazionali'],
+      pl: ['Gry natychmiastowe', 'Gry stołowe', 'Stoły międzynarodowe'], uk: ['Миттєві ігри', 'Настільні ігри', 'Міжнародні столи'],
+      pt: ['Jogos instantâneos', 'Jogos de mesa', 'Mesas internacionais'], fr: ['Jeux instantanés', 'Jeux de table', 'Tables internationales'],
+      hi: ['इंस्टेंट गेम', 'टेबल गेम', 'अंतरराष्ट्रीय टेबल'], fi: ['Pikapelit', 'Pöytäpelit', 'Kansainväliset pöydät'],
+    }).map(([locale, [instant, table, international]]) => [locale, {
+      ...BETONWIN_GAME_LABELS[locale],
+      'Instant win': instant, 'Table games': table, 'International tables': international,
+      'Not surfaced:': locale === 'en' ? 'Not surfaced:' : magneticCategoryStatuses[locale],
+    }])),
+  },
   kingmaker: {
     tabs: [
       createSnapshotTab('Games', [

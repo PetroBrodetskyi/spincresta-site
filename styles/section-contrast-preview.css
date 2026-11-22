@@ -9,6 +9,268 @@
   --editorial-band-block-padding: clamp(26px, 4vw, 52px);
 }
 
+/* Country catalogs can retain a legacy stage without its sidebar. */
+html:root body[data-country] .country-catalog-results > .container {
+  width: 100%;
+}
+
+html:root body[data-country] .country-catalog-results .country-brand-stage:not(:has(> .country-brand-side)) {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+html:root body[data-country] .country-catalog-results .country-brand-main {
+  width: 100%;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: none;
+  box-shadow: none;
+}
+
+html:root body[data-country] :is(.country-catalog-reviews, .country-new-games) {
+  padding-block: var(--editorial-band-block-padding);
+  background: var(--country-band, var(--editorial-band));
+}
+
+html:root body[data-country] .country-new-games {
+  --country-band: var(--editorial-contrast);
+}
+
+html:root body[data-country] .country-new-games h2 {
+  margin: 0;
+  color: var(--editorial-contrast-ink);
+}
+
+html:root body[data-country] .country-new-games-head {
+  margin-block-end: 16px;
+}
+
+html:root body[data-country] .country-new-games .home-game-card small {
+  display: block;
+  font-size: var(--type-caption);
+}
+
+html:root body[data-country] .content-article:has(> .country-guide-carousel) {
+  --guide-card-pad: clamp(16px, 2vw, 24px);
+  padding-block: var(--editorial-band-block-padding);
+  border: 0;
+  border-radius: 0;
+  background: var(--editorial-blue);
+  border-image: linear-gradient(var(--editorial-blue) 0 0) fill 0 / 0 / 0 100vmax;
+  box-shadow: none;
+}
+
+html:root body[data-country] .content-article:has(> .country-guide-carousel) > .title {
+  max-width: none;
+  color: #fff;
+}
+
+html:root body[data-country] .content-article .country-guide-carousel {
+  scrollbar-color: #fff8 transparent;
+  touch-action: auto;
+}
+
+html:root body[data-country] .content-article .country-guide-carousel > div {
+  min-height: auto;
+  padding: var(--guide-card-pad);
+  border: 0;
+  border-radius: var(--radius-md);
+  background: #fff;
+}
+
+html:root body[data-country] .country-guide-carousel > div .home-method-icon {
+  display: grid;
+  width: 58px;
+  height: 55px;
+  margin-block-start: calc(-1 * var(--guide-card-pad));
+  place-items: center;
+  border-radius: 0 0 10px 10px;
+  background: var(--editorial-blue);
+  color: white;
+  clip-path: polygon(0 0, 100% 0, calc(100% - 8px) 50%, 100% 100%, 0 100%, 8px 50%);
+}
+
+html:root body[data-country] .country-guide-carousel > div h3 {
+  margin: 16px 0 8px;
+}
+
+html:root body[data-country] .expert-review {
+  --expert-accent: var(--editorial-blue);
+  padding-block: var(--editorial-band-block-padding);
+  background: #f1f4f9;
+}
+
+html:root body[data-country] .expert-review .expert-card {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 0;
+  padding: clamp(16px, 2.6vw, 36px);
+  border: 1px solid var(--surface-border);
+  border-radius: var(--radius-lg);
+  background: #fff;
+  box-shadow: none;
+}
+
+html:root body[data-country] .expert-review .expert-card > .expert-header {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 14px;
+  max-width: none;
+  min-height: 0;
+  margin: 0 0 20px;
+  padding: 0 0 20px;
+  border: 0;
+  border-bottom: 1px solid var(--surface-border);
+  border-radius: 0;
+  background: none;
+  box-shadow: none;
+  text-align: left;
+}
+
+html:root body[data-country] .expert-review .expert-header::before,
+html:root body[data-country] .expert-review .expert-header::after {
+  display: none;
+}
+
+html:root body[data-country] .expert-review .expert-avatar {
+  width: 70px;
+  height: 70px;
+  flex: 0 0 70px;
+  margin: 0;
+  border: 0;
+  box-shadow: none;
+}
+
+html:root body[data-country] .expert-review .expert-info {
+  flex: 1 1 175px;
+  align-items: start;
+  max-width: 100%;
+  text-align: left;
+}
+
+html:root body[data-country] .expert-review .expert-avatar img {
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  transform: none;
+}
+
+html:root body[data-country] .expert-review .expert-meta {
+  max-width: none;
+  text-align: left;
+}
+
+html:root body[data-country] .expert-review .expert-role {
+  color: var(--editorial-blue);
+}
+
+html:root body[data-country] .expert-review .expert-card > .expert-body {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 12px;
+  padding: 0;
+  border: 0;
+  background: none;
+}
+
+html:root body[data-country] .expert-review .expert-card > .expert-body > :is(p, h3, .expert-methodology) {
+  position: static;
+  grid-area: auto;
+  order: 0;
+  width: auto;
+  max-width: none;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  text-align: left;
+}
+
+html:root body[data-country] .expert-review .expert-card > .expert-body > h3 {
+  margin-block-start: 8px;
+  color: var(--text-main);
+}
+
+html:root body[data-country] .expert-review .expert-card > .expert-body > .expert-methodology {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 8px 16px;
+  list-style: none;
+}
+
+html:root body[data-country] .expert-review .expert-methodology > li:nth-child(n) {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  grid-area: auto;
+  min-height: 0;
+  max-width: none;
+  margin: 0;
+  padding: 9px 12px;
+  border: 0;
+  border-radius: 8px;
+  background: #f1f4f9;
+  box-shadow: none;
+}
+
+html:root body[data-country] .expert-review .expert-methodology > li::before,
+html:root body[data-country] .expert-review .expert-methodology > li::after {
+  content: none;
+}
+
+.expert-methodology > li > .site-icon {
+  flex: none;
+  margin-block-start: .18em;
+  color: var(--editorial-blue);
+}
+
+html:root body[data-country] .expert-review .expert-card > .expert-body > .expert-disclaimer {
+  padding-block-start: 12px;
+  border-top: 1px solid var(--surface-border);
+  font-size: var(--type-ui);
+}
+
+html:root body :is(.brand-related-reviews, .country-new-games) .home-games-toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px 18px;
+}
+
+html:root body[data-brand] .content-review > .brand-related-reviews {
+  margin-block: clamp(20px, 3vw, 38px);
+  border: 0;
+  border-radius: var(--radius-lg);
+  background: var(--editorial-band);
+}
+
+html:root body[data-brand] .brand-related-reviews .title {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  text-align: left;
+}
+
+.brand-related-reviews .home-games-grid {
+  margin-block-start: 10px;
+}
+
+.brand-related-reviews .home-new-review-card:focus-visible {
+  outline: 2px solid var(--editorial-blue);
+  outline-offset: -2px;
+}
+
+@media (max-width: 640px) {
+  html:root body[data-country] .expert-review .expert-card > .expert-body > .expert-methodology {
+    grid-template-columns: minmax(0, 1fr);
+  }
+}
+
 /* Color separates groups; links, cards, and keyboard focus retain their affordances. */
 html:root body .market-country-picker {
   border: 0;

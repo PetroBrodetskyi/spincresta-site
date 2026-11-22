@@ -33,6 +33,7 @@ export default {
   "350% up to $15,200 + 210 Free Spins": "350 % bis zu 15.200 $ + 210 Freispiele",
   "Up to $1,600 + 400 Free Spins": "Bis zu 1.600 $ + 400 Freispiele",
   "Welcome Package up to EUR 2,500 + 250 Free Spins": "Willkommenspaket bis zu 2.500 EUR + 250 Freispiele",
+  "Up to €2,000 + 200 Free Spins": "Bis zu 2.000 € + 200 Freispiele",
   "Welcome Bonus: 10% Cashback on your first deposit": "Willkommensbonus: 10 % Cashback auf Ihre erste Einzahlung",
   "Welcome offer get an Extra 100% in Coins": "Willkommensangebot: Erhalten Sie zusätzliche 100 % in Münzen",
   "Get up to 70 Free Sweep Coins + 100 Free Spins": "Erhalten Sie bis zu 70 kostenlose Sweep-Münzen + 100 Freispiele",

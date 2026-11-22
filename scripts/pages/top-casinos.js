@@ -50,7 +50,7 @@ export const initTopCasinosPage = ({
     title.id = section.id + '-title';
     title.textContent = localizedCountryTitle(country);
     section.setAttribute('aria-labelledby', title.id);
-    section.querySelector('.view-all').href = link.href;
+    section.querySelector('.home-brand-view-all').href = link.href;
     const grid = section.querySelector('.casino-grid');
     const ranked = topCasinosForCountry(BRANDS, section.dataset.country);
     if (ranked.length) {

@@ -8429,11 +8429,8 @@ body[data-country] .expert-avatar img {
 
 body[data-country] .expert-byline-label {
   color: rgba(226, 232, 240, 0.58);
-  font-size: var(--type-caption);
-  font-weight: 800;
-  letter-spacing: 0.12em;
-  line-height: 1.2;
-  text-transform: uppercase;
+  font-size: var(--type-ui);
+  font-weight: 400;
 }
 
 body[data-country] .expert-info h3 {
@@ -10981,13 +10978,18 @@ body.home-page .home-recommendation-grid .casino-actions.has-single-action {
   grid-template-columns: minmax(0, 1fr);
 }
 
+.home-new-reviews-grid {
+  --review-card-compact-width: 106px;
+  --review-card-compact-gap: 10px;
+}
+
 body:is(.home-page, [data-country]) .home-new-reviews-grid {
   display: grid;
   grid-template-columns: repeat(12, minmax(0, 1fr));
   gap: 12px;
 }
 
-body:is(.home-page, [data-country], .casinos-page) .home-new-review-card {
+:is(body:is(.home-page, [data-country], .casinos-page), .brand-related-reviews) .home-new-review-card {
   display: grid;
   min-width: 0;
   grid-template-rows: 82px auto;
@@ -11002,14 +11004,14 @@ body:is(.home-page, [data-country], .casinos-page) .home-new-review-card {
   transition: transform 180ms ease, border-color 180ms ease, box-shadow 180ms ease;
 }
 
-body:is(.home-page, [data-country], .casinos-page) .home-new-review-card:hover {
+:is(body:is(.home-page, [data-country], .casinos-page), .brand-related-reviews) .home-new-review-card:hover {
   border-color: var(--section-accent);
   box-shadow: var(--shadow-hover);
   transform: translateY(-3px);
 }
 
-body:is(.home-page, [data-country], .casinos-page) .home-new-review-logo,
-html:root body:is(.home-page, [data-country], .casinos-page) .home-new-review-logo {
+:is(body:is(.home-page, [data-country], .casinos-page), .brand-related-reviews) .home-new-review-logo,
+html:root :is(body:is(.home-page, [data-country], .casinos-page), .brand-related-reviews) .home-new-review-logo {
   display: grid;
   min-width: 0;
   place-items: center;
@@ -11025,7 +11027,7 @@ html:root body:is(.home-page, [data-country], .casinos-page) .home-new-review-lo
     );
 }
 
-body:is(.home-page, [data-country], .casinos-page) .home-new-review-logo img {
+:is(body:is(.home-page, [data-country], .casinos-page), .brand-related-reviews) .home-new-review-logo img {
   display: block;
   width: auto;
   max-width: 88%;
@@ -11034,7 +11036,7 @@ body:is(.home-page, [data-country], .casinos-page) .home-new-review-logo img {
   object-fit: contain;
 }
 
-body:is(.home-page, [data-country], .casinos-page) .home-new-review-card > strong {
+:is(body:is(.home-page, [data-country], .casinos-page), .brand-related-reviews) .home-new-review-card > strong {
   display: flex;
   min-width: 0;
   min-height: 42px;
@@ -11299,7 +11301,7 @@ body.home-page .home-casino-shot:hover img {
   filter: saturate(1.08);
 }
 
-body.home-page .home-games-grid {
+:is(body.home-page, .country-new-games, .brand-related-reviews) .home-games-grid {
   display: flex;
   gap: clamp(10px, 1.1vw, 16px);
   min-width: 0;
@@ -11310,20 +11312,28 @@ body.home-page .home-games-grid {
   scrollbar-width: none;
 }
 
-body.home-page .home-games-grid::-webkit-scrollbar {
+:is(body.home-page, .country-new-games, .brand-related-reviews) .home-games-grid::-webkit-scrollbar {
   display: none;
 }
 
-body.home-page .home-games-grid > .home-game-card {
+:is(body.home-page, .country-new-games, .brand-related-reviews) .home-games-grid > .home-game-card {
   flex: 0 0 clamp(150px, 17vw, 220px);
 }
 
-body.home-page .home-games-grid > [hidden] {
+.home-games-grid.home-new-reviews-grid {
+  gap: var(--review-card-compact-gap);
+}
+
+.home-games-grid.home-new-reviews-grid > .home-new-review-card {
+  flex: 0 0 var(--review-card-compact-width);
+}
+
+:is(body.home-page, .country-new-games, .brand-related-reviews) .home-games-grid > [hidden] {
   display: none;
 }
 
-body.home-page .home-games-grid:focus-visible,
-body.home-page .home-games-grid > .home-game-card:focus-visible {
+:is(body.home-page, .country-new-games, .brand-related-reviews) .home-games-grid:focus-visible,
+:is(body.home-page, .country-new-games, .brand-related-reviews) .home-games-grid > .home-game-card:focus-visible {
   outline: 2px solid #78abf8;
   outline-offset: -2px;
 }
@@ -11332,7 +11342,7 @@ body.home-page .home-new-games .home-showcase-heading {
   grid-template-columns: minmax(0, 1fr);
 }
 
-body.home-page .home-games-toolbar {
+:is(body.home-page, .country-new-games, .brand-related-reviews) .home-games-toolbar {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
@@ -11340,7 +11350,7 @@ body.home-page .home-games-toolbar {
   gap: 8px 14px;
 }
 
-body.home-page .home-games-toolbar h2 {
+:is(body.home-page, .country-new-games, .brand-related-reviews) .home-games-toolbar h2 {
   margin-block-start: 0;
 }
 
@@ -11390,7 +11400,7 @@ body.home-page .home-games-toolbar h2 {
   display: none;
 }
 
-body.home-page .home-game-card {
+:is(body.home-page, .country-new-games, .brand-related-reviews) .home-game-card {
   display: grid;
   min-width: 0;
   overflow: hidden;
@@ -11403,32 +11413,32 @@ body.home-page .home-game-card {
   transition: transform 200ms ease, border-color 200ms ease;
 }
 
-body.home-page .home-game-card:hover {
+:is(body.home-page, .country-new-games, .brand-related-reviews) .home-game-card:hover {
   transform: translateY(-4px);
   border-color: var(--section-accent);
 }
 
-body.home-page .home-game-art {
+:is(body.home-page, .country-new-games, .brand-related-reviews) .home-game-art {
   display: block;
   width: 100%;
   aspect-ratio: 1 / 1;
 }
 
-body.home-page .home-game-card img {
+:is(body.home-page, .country-new-games, .brand-related-reviews) .home-game-card img {
   display: block;
   width: 100%;
   height: 100%;
   object-fit: contain;
 }
 
-body.home-page .home-game-card > span:not(.home-game-art) {
+:is(body.home-page, .country-new-games, .brand-related-reviews) .home-game-card > span:not(.home-game-art) {
   display: grid;
   gap: 4px;
   min-width: 0;
   padding: 14px;
 }
 
-body.home-page .home-game-card strong {
+:is(body.home-page, .country-new-games, .brand-related-reviews) .home-game-card strong {
   overflow: hidden;
   font-size: var(--type-ui);
   line-height: 1.25;
@@ -11436,7 +11446,7 @@ body.home-page .home-game-card strong {
   white-space: nowrap;
 }
 
-body.home-page .home-game-card small {
+:is(body.home-page, .country-new-games, .brand-related-reviews) .home-game-card small {
   color: var(--text-muted);
   font-size: var(--type-caption);
 }
@@ -11562,11 +11572,15 @@ html:root body.home-page .home-casino-shot {
 }
 
 @media (max-width: 1024px) {
+  .home-new-reviews-grid {
+    --review-card-compact-width: 150px;
+  }
+
   body:is(.home-page, [data-country]) .home-new-reviews-grid {
     grid-template-columns: none;
     grid-template-rows: repeat(2, auto);
     grid-auto-flow: column;
-    grid-auto-columns: 150px;
+    grid-auto-columns: var(--review-card-compact-width);
     gap: 10px;
     padding: 2px 0 10px;
     overflow-x: auto;
@@ -11685,19 +11699,19 @@ html:root body.home-page .home-casino-shot {
 }
 
 @media (max-width: 560px) {
-  body:is(.home-page, [data-country]) .home-new-reviews-grid {
-    grid-auto-columns: 132px;
+  .home-new-reviews-grid {
+    --review-card-compact-width: 132px;
   }
 
-  body:is(.home-page, [data-country], .casinos-page) .home-new-review-card {
+  :is(body:is(.home-page, [data-country], .casinos-page), .brand-related-reviews) .home-new-review-card {
     grid-template-rows: 74px auto;
   }
 
-  body:is(.home-page, [data-country], .casinos-page) .home-new-review-logo {
+  :is(body:is(.home-page, [data-country], .casinos-page), .brand-related-reviews) .home-new-review-logo {
     padding: 11px 10px;
   }
 
-  body:is(.home-page, [data-country], .casinos-page) .home-new-review-logo img {
+  :is(body:is(.home-page, [data-country], .casinos-page), .brand-related-reviews) .home-new-review-logo img {
     max-height: 43px;
   }
 
@@ -11717,7 +11731,7 @@ html:root body.home-page .home-casino-shot {
     grid-template-columns: minmax(0, 1fr);
   }
 
-  body.home-page .home-game-card > span {
+  :is(body.home-page, .country-new-games, .brand-related-reviews) .home-game-card > span {
     padding: 11px;
   }
 
@@ -18470,8 +18484,8 @@ body[data-country] .country-catalog-heading {
 
 .country-catalog-reviews .home-new-reviews-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(106px, 1fr));
-  gap: 10px;
+  grid-template-columns: repeat(auto-fill, minmax(min(100%, var(--review-card-compact-width)), 1fr));
+  gap: var(--review-card-compact-gap);
 }
 
 .home-market-bar {

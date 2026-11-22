@@ -13,9 +13,12 @@ test('the homepage games advance at a steady rate and wrap to the same offset', 
 test('wheel and hover pauses are temporary; only the button leaves the strip paused', () => {
   const node = (left = 0) => ({
     children: [],
+    dataset: {},
     events: {},
+    attrs: {},
     classList: { add() {} },
-    setAttribute() {},
+    setAttribute(name, value) { this.attrs[name] = value; },
+    hasAttribute() { return false; },
     addEventListener(name, fn) { this.events[name] = fn; },
     append(...items) { this.children.push(...items); },
     get firstElementChild() { return this.children[0]; },
@@ -51,14 +54,17 @@ test('wheel and hover pauses are temporary; only the button leaves the strip pau
     Object.assign(globalThis, globals);
     initHomeGamesMotion(english => english);
     const toggle = controlsHost.children[0].children[0];
-    const label = toggle.children[1];
     const settle = () => { const pending = [...timers.values()]; timers.clear(); pending.forEach(fn => fn()); };
     intersect([{ isIntersecting: true }]);
     assert.equal(frames.size, 1);
     grid.events.wheel({ deltaX: 3, deltaY: 40 });
     assert.equal(frames.size, 0);
-    assert.equal(label.textContent, 'Pause');
+    assert.equal(toggle.attrs['aria-label'], 'Pause');
+    assert.match(toggle.innerHTML, /#pause"/);
+    assert.equal(toggle.children.length, 0);
     settle();
+    assert.equal(frames.size, 1);
+    grid.events.wheel({ deltaX: 0, deltaY: 80, preventDefault: () => assert.fail('vertical scrolling was intercepted') });
     assert.equal(frames.size, 1);
     grid.events.pointermove({ pointerType: 'mouse', movementX: 0, movementY: 0 });
     assert.equal(frames.size, 1);
@@ -69,7 +75,8 @@ test('wheel and hover pauses are temporary; only the button leaves the strip pau
     toggle.events.click();
     grid.events.wheel({ deltaX: 3 });
     settle();
-    assert.equal(label.textContent, 'Resume');
+    assert.equal(toggle.attrs['aria-label'], 'Resume');
+    assert.match(toggle.innerHTML, /#play"/);
     assert.equal(frames.size, 0);
     toggle.events.click();
     assert.equal(frames.size, 1);
@@ -83,14 +90,19 @@ test('wheel and hover pauses are temporary; only the button leaves the strip pau
 
 test('the enhanced strip keeps its original internal links and supports motion preferences', () => {
   const read = name => readFileSync(new URL(`../${name}`, import.meta.url), 'utf8');
-  const source = read('scripts/pages/home.js');
-  assert.match(source, /renderLocalizedHomeGames\(\);\s*initHomeGamesMotion\(localeText\);/);
+  const source = read('scripts/scrolling-card-strip.js');
+  assert.match(read('scripts/pages/home.js'), /renderLocalizedHomeGames\(\);\s*initHomeGamesMotion\(localeText\);/);
   assert.match(source, /copy\.setAttribute\('aria-hidden', 'true'\);\s*copy\.tabIndex = -1;/);
   assert.match(source, /distance = !reduced\.matches && hasOverflow/);
   assert.match(source, /grid\.addEventListener\('wheel', event => \{\s*if \([^\n]*\) waitForScrollIdle\(\);/);
   assert.match(source, /pointermove'[\s\S]*?hovering = true;[\s\S]*?pointerleave'[\s\S]*?hovering = false;/);
   assert.match(source, /previous\.addEventListener\('click', \(\) => stepByCard\(-1\)\);\s*next\.addEventListener\('click', \(\) => stepByCard\(1\)\);/);
   assert.match(read('styles/pages.css'), /\.home-games-grid\s*\{[^}]*display: flex;[^}]*overflow-x: auto;[^}]*scrollbar-width: none;/);
+  const countryHeading = read('scripts/pages/country-media.js').split('<div class="country-new-games-head')[1].split('<div class="home-games-grid"')[0];
+  assert.doesNotMatch(countryHeading, /<p\b/);
+  const related = read('scripts/pages/related-brand-reviews.js');
+  assert.match(related, /createReviewCard\(candidate, context\)/);
+  assert.match(read('scripts/pages/home.js'), /createReviewCard\(brand, context\)/);
   for (const prefix of ['', 'de/', 'es/', 'it/', 'pl/', 'uk/', 'pt/', 'fr/', 'hi/', 'fi/']) {
     const html = read(`${prefix}index.html`);
     const heading = html.match(/class="home-showcase-section home-new-games"[\s\S]*?(?=<div class="home-games-grid")/)?.[0] || '';

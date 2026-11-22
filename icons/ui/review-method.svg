@@ -1,4 +1,10 @@
 <svg xmlns="http://www.w3.org/2000/svg">
+  <symbol id="pause" viewBox="0 0 24 24">
+    <path d="M9 5v14m6-14v14"/>
+  </symbol>
+  <symbol id="play" viewBox="0 0 24 24">
+    <path d="M8 5v14l11-7Z"/>
+  </symbol>
   <symbol id="safety" viewBox="0 0 24 24">
     <path d="M12 22c-4.5-2.5-8-5.5-8-10V5l8-3 8 3v7c0 4.5-3.5 7.5-8 10Z"/>
     <path d="m8.5 12 2.5 2.5 4.5-5"/>

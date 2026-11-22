@@ -23,7 +23,9 @@ export function linkIconFor(href, base) {
 }
 
 export function siteIconMarkup(icon, classes = 'site-icon', size = 24) {
-  const sprite = ['arrow-left', 'chevron-down', 'copy', 'check', 'download', 'refresh'].includes(icon)
+  const sprite = ['play', 'pause'].includes(icon)
+    ? '/icons/ui/review-method.svg?v=20261122-compact-reviews'
+    : ['arrow-left', 'chevron-down', 'copy', 'check', 'download', 'refresh'].includes(icon)
     ? '/icons/ui/review-method.svg?v=20261122-moderator-contacts'
     : SITE_ICON_SPRITE;
   return `<svg class="${classes}" width="${size}" height="${size}" aria-hidden="true" focusable="false"><use href="${sprite}#${icon}"></use></svg>`;
@@ -53,6 +55,8 @@ const INFORMATION_CARDS = [
   ['.safe-play-rules-grid > article', ['wallet', 'warning', 'games', 'balance']],
   ['[aria-labelledby="protection-tools-title"] .faq-grid > article', ['payments', 'wallet', 'clock', 'help', 'calendar', 'lock']],
 ];
+
+const EXPERT_CRITERIA_ICONS = ['balance', 'payments', 'bonus', 'lock', 'safety'];
 
 const DIRECTORY_PAGES = {
   'top-casinos': 'trophy', 'new-casinos': 'sparkles', 'top-rated': 'star', 'exclusive-offers': 'bonus',
@@ -90,6 +94,12 @@ export function initSiteIcons(doc = document) {
     if (cards.length !== icons.length) continue;
     cards.forEach((card, index) => decorate(card.querySelector('h3'), icons[index]));
   }
+
+  doc.querySelectorAll('body[data-country] .expert-review .expert-methodology').forEach(list => {
+    const criteria = [...list.querySelectorAll(':scope > li')];
+    if (criteria.length !== EXPERT_CRITERIA_ICONS.length) return;
+    criteria.forEach((item, index) => decorate(item, EXPERT_CRITERIA_ICONS[index], 'inline'));
+  });
 
   doc.querySelectorAll('.brand-sticky-review-layout [data-review-section]:not(.brand-review-details)').forEach(section => {
     const topic = section.dataset.reviewSection;

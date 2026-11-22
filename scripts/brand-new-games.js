@@ -1,4 +1,12 @@
 export const BRAND_NEW_GAMES = {
+  betrepublic: [
+    ['Vault Blitz', 'v1795353172', 'vault-blitz_um3o2a'],
+    ['Tower Rush 2', 'v1795353170', 'tower-rush-2_en9f4m'],
+    ['Sakura Ninja', 'v1795353168', 'sakura-ninja_prnbkh'],
+    ['Rune Beasts! Sharp Peaks', 'v1795353166', 'rune-beasts_-sharp-peaks_ldftps'],
+    ['Pharaon Thunder', 'v1795353164', 'pharaon-thunder_ddhlhq'],
+    ['Crazy Chilli Jackpots', 'v1795353162', 'crazy-chilli-jackpots_pwjq6m'],
+  ].map(([name, version, id]) => ({ name, image: `https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto/${version}/spincresta/brands/betrepublic/new-games/betrepublic-new-game-${id}` })),
   kingmaker: [
     ['36 Coins x3000', 'v1795344682', '36-coins-x-3000_xn9nzv'],
     ['Bass Riches', 'v1795344683', 'bass-riches_kgrc8w'],

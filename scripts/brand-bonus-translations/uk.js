@@ -33,6 +33,7 @@ export default {
   "350% up to $15,200 + 210 Free Spins": "350% до $15 200 + 210 безкоштовних обертань",
   "Up to $1,600 + 400 Free Spins": "До 1 600 $ + 400 фріспінів",
   "Welcome Package up to EUR 2,500 + 250 Free Spins": "Вітальний пакет до 2 500 EUR + 250 фріспінів",
+  "Up to €2,000 + 200 Free Spins": "До 2 000 € + 200 фріспінів",
   "Welcome Bonus: 10% Cashback on your first deposit": "Вітальний бонус: 10% кешбеку від вашого першого депозиту",
   "Welcome offer get an Extra 100% in Coins": "Ласкаво просимо отримати додаткові 100% у монетах",
   "Get up to 70 Free Sweep Coins + 100 Free Spins": "Отримайте до 70 безкоштовних монет + 100 безкоштовних обертань",

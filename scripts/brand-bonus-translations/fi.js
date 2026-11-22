@@ -33,6 +33,7 @@ export default {
   "350% up to $15,200 + 210 Free Spins": "350 % aina $15 200 asti + 210 ilmaiskierrosta",
   "Up to $1,600 + 400 Free Spins": "Jopa 1 600 $ + 400 ilmaiskierrosta",
   "Welcome Package up to EUR 2,500 + 250 Free Spins": "Tervetuliaispaketti enintään 2 500 EUR + 250 ilmaiskierrosta",
+  "Up to €2,000 + 200 Free Spins": "Jopa 2 000 € + 200 ilmaiskierrosta",
   "Welcome Bonus: 10% Cashback on your first deposit": "Tervetuliaisbonus: 10% Cashback ensimmäisestä talletuksestasi",
   "Welcome offer get an Extra 100% in Coins": "Tervetuliaistarjous saat ylimääräisen 100 % kolikoista",
   "Get up to 70 Free Sweep Coins + 100 Free Spins": "Saat jopa 70 ilmaista pyyhkäisykolikkoa + 100 ilmaispyöräytystä",

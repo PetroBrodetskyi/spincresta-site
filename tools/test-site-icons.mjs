@@ -17,6 +17,27 @@ test('review topics use unique sprite definitions and decorative, unfocusable in
   }
 });
 
+test('country expert criteria use distinct decorative icons and motion buttons have sprite icons', () => {
+  const items = Array.from({ length: 5 }, () => ({
+    textContent: 'Criterion',
+    markup: '',
+    querySelector() { return this.markup || null; },
+    insertAdjacentHTML(position, markup) { assert.equal(position, 'afterbegin'); this.markup += markup; },
+  }));
+  const doc = {
+    body: { dataset: { country: 'PL' }, matches: () => false },
+    querySelector: () => null,
+    querySelectorAll: selector => selector.endsWith('.expert-methodology') ? [{ querySelectorAll: () => items }] : [],
+  };
+  initSiteIcons(doc);
+  initSiteIcons(doc);
+  assert.deepEqual(items.map(item => item.markup.match(/#([\w-]+)"/g)), [['#balance"'], ['#payments"'], ['#bonus"'], ['#lock"'], ['#safety"']]);
+  for (const icon of ['pause', 'play']) {
+    assert.ok(symbols.includes(icon));
+    assert.match(siteIconMarkup(icon), /aria-hidden="true" focusable="false"/);
+  }
+});
+
 test('navigation icons follow localized internal destinations, not visible label text', () => {
   const base = 'https://spincresta.com/uk/brands/spinboss/';
   const routes = {

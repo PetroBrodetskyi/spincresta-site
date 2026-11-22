@@ -64,7 +64,7 @@ ${links}
                 <h2 class="top-country-title" tabindex="-1"></h2>
                 <div class="casino-grid"></div>
                 <div class="view-all-wrapper">
-                  <a class="view-all">${guide}</a>
+                  <a class="home-brand-view-all">${guide}</a>
                 </div>
               </div>
             </section>

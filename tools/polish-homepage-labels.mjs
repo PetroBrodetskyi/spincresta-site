@@ -20,6 +20,12 @@ export const HOME_LABELS = {
 
 const escapeHtml = text => text.replaceAll('&', '&amp;').replaceAll('<', '&lt;').replaceAll('>', '&gt;').replaceAll('"', '&quot;');
 const methodIcons = ['safety', 'bonus', 'payments', 'games'];
+const topCasinoLabels = {
+  en: 'Show top casinos', de: 'Top-Casinos anzeigen', es: 'Ver los mejores casinos',
+  it: 'Mostra i migliori casinò', pl: 'Pokaż najlepsze kasyna', uk: 'Показати топ казино',
+  pt: 'Ver os melhores casinos', fr: 'Voir les meilleurs casinos', hi: 'टॉप कैसीनो दिखाएँ',
+  fi: 'Näytä parhaat kasinot',
+};
 const replaceOne = (html, pattern, replacement, label) => {
   if ([...html.matchAll(new RegExp(pattern.source, 'g'))].length !== 1) {
     throw new Error(`Expected one homepage ${label}`);
@@ -46,6 +52,9 @@ export function polishHomepageLabels(html, locale) {
   result = replaceOne(result,
     /(<section class="home-showcase-section home-recommendations" id="recommended-brands")(?: aria-label="[^"]*")?>(?:\s*<div class="home-showcase-heading">\s*<div>\s*<h2>[^<]*<\/h2>\s*<\/div>\s*<p>[\s\S]*?<\/p>\s*<\/div>)?\s*(?=<div class="casino-grid\b)/,
     (_, start) => `${start} aria-label="${escapeHtml(copy[0])}">\n          `, 'recommendations grid');
+  result = replaceOne(result,
+    /(<div class="home-section-cta">[\s\S]*?<a href="\/(?:[a-z]{2}\/)?top-casinos\/">)[^<]*(<\/a>)/,
+    (_, start, end) => start + escapeHtml(topCasinoLabels[locale]) + end, 'top-casinos button');
   for (const [index, id] of ['new-reviews-title', 'new-games-title', 'editorial-method-title'].entries()) {
     result = replaceOne(result, new RegExp(`(<h2 id="${id}">)[^<]*(<\\/h2>)`),
       (_, start, end) => start + escapeHtml(copy[index + 1]) + end, id);

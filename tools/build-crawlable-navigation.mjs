@@ -9,6 +9,9 @@ import { syncTopCasinoMarkets } from './top-casino-markets.mjs';
 const root = process.cwd();
 const countryHeaderOnly = process.argv.includes('--country-header-only');
 const topCasinosOnly = process.argv.includes('--top-casinos-only');
+const brandSlug = process.argv.find(arg => arg.startsWith('--brand='))?.slice('--brand='.length);
+const onlyBrand = brandSlug && BRANDS.find(brand => brand.urlDetail === `brands/${brandSlug}.html`);
+if (brandSlug && !onlyBrand) throw new Error(`Unknown brand: ${brandSlug}`);
 const locales = ['en', 'de', 'es', 'it', 'pl', 'uk', 'pt', 'fr', 'hi', 'fi'];
 const labels = {
   en: 'Browse casino reviews', de: 'Casino-Bewertungen ansehen', es: 'Ver reseñas de casinos',
@@ -38,7 +41,9 @@ let updated = 0;
 for (const [url, page] of pages) {
   const locale = locales.find(lang => lang !== 'en' && url.startsWith(`/${lang}/`)) || 'en';
   const prefix = locale === 'en' ? '/' : `/${locale}/`;
+  const country = COUNTRIES.find(c => url === `${prefix}online-casinos/${c.slug}/`);
   if (topCasinosOnly && url !== `${prefix}top-casinos/`) continue;
+  if (onlyBrand && (!country || !onlyBrand.countries?.includes(country.code.toUpperCase()))) continue;
   let html = syncCountryHeader(page.html, prefix);
   // Home and country hubs expose the complete directory before JS executes.
   if (!countryHeaderOnly && url === `${prefix}top-casinos/`) {
@@ -49,7 +54,6 @@ for (const [url, page] of pages) {
     const links = countryLinks(locale, prefix);
     html = html.replace(/(<div class="countries-cloud">)[\s\S]*?(<\/div>)/, `$1\n${links}\n$2`);
   }
-  const country = COUNTRIES.find(c => url === `${prefix}online-casinos/${c.slug}/`);
   if (!countryHeaderOnly && country && html.includes('id="brand-cards"')) {
     const seen = new Set();
     const brands = BRANDS.filter(b => b.hasDetailPage && b.countries?.includes(country.code.toUpperCase()))
@@ -62,6 +66,18 @@ for (const [url, page] of pages) {
       });
     const start = '<!-- crawlable-reviews:start -->';
     const end = '<!-- crawlable-reviews:end -->';
+    const current = html.match(/<!-- crawlable-reviews:start -->[\s\S]*?<!-- crawlable-reviews:end -->/)?.[0];
+    if (onlyBrand && current) {
+      const href = `${prefix}brands/${brandSlug}/`;
+      const link = brands.find(row => row.includes(`href="${href}"`));
+      if (link && !current.includes(`href="${href}"`)) {
+        const count = [...current.matchAll(/<a\b/g)].length + 1;
+        html = html.replace(current, current.replace(/<span>\(\d+\)<\/span>/, `<span>(${count})</span>`)
+          .replace('</nav></details>', `${link}\n</nav></details>`));
+      }
+      if (html !== page.html) { fs.writeFileSync(page.file, html); updated++; }
+      continue;
+    }
     html = html.replace(/\n?<!-- crawlable-reviews:start -->[\s\S]*?<!-- crawlable-reviews:end -->/g, '');
     if (brands.length) {
       const directory = `\n${start}\n<details class="country-review-directory"><summary>${labels[locale]} <span>(${brands.length})</span></summary><nav aria-label="${labels[locale]}">\n${brands.join('\n')}\n</nav></details>\n${end}`;

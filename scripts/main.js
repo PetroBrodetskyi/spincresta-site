@@ -1,13 +1,13 @@
 ﻿// =====================
 // IMPORTS
 // =====================
-import { BRANDS } from './brands.js?v=20261122-kingmaker';
+import { BRANDS } from './brands.js?v=20261122-betrepublic';
 import { COUNTRIES } from './countries.js';
 import { getFeaturedHomeBrands } from './featured-brands.js?v=20261119-shared-search';
 import { initFaqSections } from './faq.js?v=20261119-faq-layout';
 import { initFooterNewsletter } from './footer-newsletter.js?v=20260826-newsletter-4';
 import { initAccountAuth, prepareAccountHeader } from './account-auth.js?v=20261122-account-dialog-sync';
-import { initSiteIcons, siteIconMarkup } from './site-icons.js?v=20261119-catalog-partners';
+import { initSiteIcons, siteIconMarkup } from './site-icons.js?v=20261122-compact-reviews';
 import { initSectionNavigation } from './section-navigation.js?v=20261119-light-editorial';
 import { bindImagePreview } from './image-preview.js?v=20261119-preview-loader';
 
@@ -18,6 +18,7 @@ let initHomePageModule = null;
 let renderCountryMediaModule = null;
 let initBrandPageModule = null;
 let initBrandFeedbackModule = null;
+let initRelatedReviewsModule = null;
 let initTopCasinosPageModule = null;
 let initBrandLayoutModule = null;
 let initAccountPageModule = null;
@@ -47,16 +48,16 @@ const loadPageModules = async () => {
   const hasCasinoCards = isHomePage || isCountryPage || document.querySelector('.casino-grid') ||
     (isBrandPage && findBrandByPageKey(document.body.dataset.brand)?.notRecommended);
   const cardScreenshotsReady = hasCasinoCards
-    ? import('./brand-homepage-screenshots.js?v=20261122-kingmaker').then(module => {
+    ? import('./brand-homepage-screenshots.js?v=20261122-betrepublic').then(module => {
         BRAND_HOMEPAGE_SCREENSHOTS = module.BRAND_HOMEPAGE_SCREENSHOTS || {};
       }).catch(() => {})
     : Promise.resolve();
 
   if (isHomePage || isCountryPage) {
     const [gamesModule, homeModule, mediaModule] = await Promise.all([
-      import('./brand-new-games.js?v=20261122-kingmaker'),
-      import('./pages/home.js?v=20261122-market-cloud'),
-      isCountryPage ? import('./pages/country-media.js?v=20261121-localized-games') : null,
+      import('./brand-new-games.js?v=20261122-betrepublic'),
+      import('./pages/home.js?v=20261122-compact-reviews'),
+      isCountryPage ? import('./pages/country-media.js?v=20261122-compact-reviews') : null,
     ]);
     BRAND_NEW_GAMES = gamesModule.BRAND_NEW_GAMES || {};
     initHomePageModule = homeModule.initHomePage;
@@ -64,20 +65,22 @@ const loadPageModules = async () => {
   }
 
   if (isBrandPage) {
-    const [snapshotsModule, gamesModule, pageModule, feedbackModule] = await Promise.all([
-      import('./brand-snapshot-configs.js?v=20261122-kingmaker'),
-      import('./brand-new-games.js?v=20261122-kingmaker'),
+    const [snapshotsModule, gamesModule, pageModule, feedbackModule, relatedModule] = await Promise.all([
+      import('./brand-snapshot-configs.js?v=20261122-betrepublic'),
+      import('./brand-new-games.js?v=20261122-betrepublic'),
       import('./pages/brand.js?v=20261122-suitability-label'),
       import('./pages/brand-feedback.js?v=20261121-feedback-availability'),
+      import('./pages/related-brand-reviews.js?v=20261122-compact-reviews'),
     ]);
     BRAND_SNAPSHOT_CONFIGS = snapshotsModule.BRAND_SNAPSHOT_CONFIGS || {};
     BRAND_NEW_GAMES = gamesModule.BRAND_NEW_GAMES || {};
     initBrandPageModule = pageModule.initBrandPage;
     initBrandFeedbackModule = feedbackModule.initBrandFeedback;
+    initRelatedReviewsModule = relatedModule.initRelatedBrandReviews;
   }
 
   if (document.body.dataset.page === 'top-casinos') {
-    const pageModule = await import('./pages/top-casinos.js?v=20261122-market-cloud');
+    const pageModule = await import('./pages/top-casinos.js?v=20261122-card-strips');
     initTopCasinosPageModule = pageModule.initTopCasinosPage;
   }
 
@@ -377,7 +380,7 @@ const SITE_LOCALE = DOCUMENT_LANGUAGE.startsWith('de')
 let brandBonusTranslations = {};
 const brandBonusTranslationsReady = SITE_LOCALE === 'en'
   ? Promise.resolve()
-  : import(`./brand-bonus-translations/${SITE_LOCALE}.js?v=20261121-magneticslots`)
+  : import(`./brand-bonus-translations/${SITE_LOCALE}.js?v=20261122-betrepublic`)
       .then(module => {
         brandBonusTranslations = module.default || {};
       })
@@ -3611,7 +3614,7 @@ const initCountryGuideCarousels = () => {
     const guideLabel = normalizeText(title?.textContent || 'Gambling Guide').trim();
 
     carousel.setAttribute('role', 'region');
-    carousel.setAttribute('aria-label', `${guideLabel} carousel`);
+    carousel.setAttribute('aria-label', guideLabel);
 
     let pointerId = null;
     let startX = 0;
@@ -3619,14 +3622,10 @@ const initCountryGuideCarousels = () => {
     let dragged = false;
     let suppressClick = false;
 
+    const guideIcons = ['globe', 'safety', 'games', 'bonus', 'phone', 'payments', 'clock'];
     cards.forEach((card, index) => {
-      if (card.querySelector(':scope > .guide-card-index')) return;
-
-      const indexLabel = document.createElement('span');
-      indexLabel.className = 'guide-card-index';
-      indexLabel.textContent = String(index + 1).padStart(2, '0');
-      indexLabel.setAttribute('aria-hidden', 'true');
-      card.prepend(indexLabel);
+      card.querySelector(':scope > .guide-card-index')?.remove();
+      card.insertAdjacentHTML('afterbegin', `<span class="home-method-icon">${siteIconMarkup(guideIcons[index] || 'review', 'site-icon', 24)}</span>`);
     });
 
     const releasePointer = event => {
@@ -3650,7 +3649,7 @@ const initCountryGuideCarousels = () => {
     };
 
     carousel.addEventListener('pointerdown', event => {
-      if (event.pointerType === 'mouse' && event.button !== 0) return;
+      if (event.pointerType !== 'mouse' || event.button !== 0) return;
       if (event.target.closest('a, button, input, select, textarea')) return;
 
       pointerId = event.pointerId;
@@ -4130,6 +4129,9 @@ export const initCasinoPage = async () => {
       brandName: brand?.name || brandKey,
       brandImage: brand ? normalizeAssetPath(brand.image) : '',
       locale: SITE_LOCALE,
+    });
+    initRelatedReviewsModule?.({
+      brand, brands: BRANDS, localeText, getBrandDetailSlug, brandPagePath, normalizeText, normalizeAssetPath, setBrandBackground,
     });
 
     if (brand) {

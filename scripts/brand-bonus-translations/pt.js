@@ -33,6 +33,7 @@ export default {
   "350% up to $15,200 + 210 Free Spins": "350% até US$ 15.200 + 210 jogadas grátis",
   "Up to $1,600 + 400 Free Spins": "Até 1 600 $ + 400 jogadas grátis",
   "Welcome Package up to EUR 2,500 + 250 Free Spins": "Pacote de boas-vindas até 2 500 EUR + 250 jogadas grátis",
+  "Up to €2,000 + 200 Free Spins": "Até 2 000 € + 200 jogadas grátis",
   "Welcome Bonus: 10% Cashback on your first deposit": "Bónus de Boas-Vindas: 10% de Cashback no seu primeiro depósito",
   "Welcome offer get an Extra 100% in Coins": "Oferta de boas-vindas e ganhe 100% extra em moedas",
   "Get up to 70 Free Sweep Coins + 100 Free Spins": "Ganhe até 70 moedas de varredura grátis + 100 jogadas grátis",

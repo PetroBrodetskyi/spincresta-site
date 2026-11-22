@@ -33,6 +33,7 @@ export default {
   "350% up to $15,200 + 210 Free Spins": "$15,200 तक 350% + 210 निःशुल्क स्पिन",
   "Up to $1,600 + 400 Free Spins": "1,600 $ तक + 400 मुफ़्त स्पिन",
   "Welcome Package up to EUR 2,500 + 250 Free Spins": "2,500 EUR तक का वेलकम पैकेज + 250 मुफ़्त स्पिन",
+  "Up to €2,000 + 200 Free Spins": "€2,000 तक और 200 फ़्री स्पिन",
   "Welcome Bonus: 10% Cashback on your first deposit": "स्वागत बोनस: आपकी पहली जमा राशि पर 10% कैशबैक",
   "Welcome offer get an Extra 100% in Coins": "स्वागत प्रस्ताव में सिक्कों में अतिरिक्त 100% प्राप्त करें",
   "Get up to 70 Free Sweep Coins + 100 Free Spins": "70 निःशुल्क स्वीप सिक्के + 100 निःशुल्क स्पिन तक प्राप्त करें",
