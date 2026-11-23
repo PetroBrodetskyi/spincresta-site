@@ -68,7 +68,7 @@ const loadPageModules = async () => {
     const [snapshotsModule, gamesModule, pageModule, feedbackModule, relatedModule] = await Promise.all([
       import('./brand-snapshot-configs.js?v=20261123-britsino-catalog'),
       import('./brand-new-games.js?v=20261122-coldbet'),
-      import('./pages/brand.js?v=20261123-britsino-row-headers'),
+      import('./pages/brand.js?v=20261123-review-mobile'),
       import('./pages/brand-feedback.js?v=20261121-feedback-availability'),
       import('./pages/related-brand-reviews.js?v=20261123-full-width'),
     ]);

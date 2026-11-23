@@ -5,7 +5,7 @@ import { BRANDS } from '../scripts/brands.js';
 import { BRAND_NEW_GAMES } from '../scripts/brand-new-games.js';
 import { getReviewProviders } from '../scripts/brand-review-providers.js';
 import { BRAND_SNAPSHOT_CONFIGS } from '../scripts/brand-snapshot-configs.js';
-import { copy, headlines, keys, rewards, welcome } from './britsino-review-copy.mjs';
+import { copy, headlines, keys, reviewTitles, rewards, welcome } from './britsino-review-copy.mjs';
 import { tableCopy } from './britsino-review-tables.mjs';
 import { escapeReview as esc } from './brand-review-template.mjs';
 
@@ -48,6 +48,8 @@ test('all ten reviews and catalog cards use localized current copy and approved 
     const html = read(path + 'index.html');
     assert.equal(values.length, keys.length, lang);
     assert.ok(html.includes('<link rel="canonical" href="' + url + '"'), lang);
+    assert.ok(html.includes('<h1>' + esc(reviewTitles[lang]) + '</h1>'), lang);
+    assert.ok(html.includes('<title>' + esc(values[keys.indexOf('title')]) + '</title>'), lang);
     assert.equal((html.match(/rel="alternate" hreflang/g) || []).length, 11, lang);
     assert.ok(sitemap.includes('<loc>' + url + '</loc>\n    <lastmod>2026-11-23</lastmod>'), lang);
     assert.doesNotMatch(html, /ColdBet|320\s*%|https?:\/\/(?:www\.)?britsino\.com|data-review-section="sports"|AggregateRating/i, lang);

@@ -7,6 +7,15 @@ import { initBrandProviderStrips, insertBrandProviderSection } from './brand-pro
 const sportsbookHeadingPattern = /^(?:sportsbook|sportwetten|apuestas deportivas|scommesse sportive|zakłady sportowe|букмекер(?:ський розділ)?|спортбук|спортивні ставки|ставки на спорт|apostas desportivas|apostas esportivas|paris sportifs|स्पोर्ट्सबुक|खेल सट्टेबाज़ी|urheiluvedonlyönti)$/iu;
 export const isSportsbookFeatureHeading = heading => sportsbookHeadingPattern.test(String(heading || '').trim());
 export const BRAND_TABLE_TOPICS = Object.freeze(['summary', 'bonuses', 'games', 'sports', 'cashier', 'trust']);
+export function mobileReviewTableMode(rows, columnCount) {
+  if (!rows.length) return 'stack';
+  if (columnCount === 2 && rows.every(row => row.cells[0].matches('th[scope="row"]'))) return 'key-value';
+  if (columnCount !== 3) return 'stack';
+  const texts = rows.map(row => Array.from(row.cells, cell => cell.textContent.trim()));
+  const concise = texts.every(row => row.every(value => value.length <= 30));
+  const numeric = texts.every(row => row.filter(value => /\p{N}/u.test(value)).length >= 2);
+  return concise && numeric ? 'matrix' : 'stack';
+}
 const BRAND_DETAIL_TOPICS = [...BRAND_TABLE_TOPICS, 'rewards'].sort(compareReviewSections);
 export const belongsInReviewDetails = ({ kind, rail, hasTable, explicit = false }) => {
   if (!BRAND_DETAIL_TOPICS.includes(kind)) return false;
@@ -578,6 +587,7 @@ export const initBrandPage = context => {
               Array.from(row.cells).every((cell, index) => cell.tagName === 'TD' ||
                 (index === 0 && cell.matches('th[scope="row"]'))))) {
           table.classList.add('brand-review-table--stackable');
+          table.dataset.mobileTableMode = mobileReviewTableMode(rows, headings.length);
           table.setAttribute('role', 'table');
           const roles = { THEAD: 'rowgroup', TBODY: 'rowgroup', TR: 'row', TH: 'columnheader', TD: 'cell' };
           table.querySelectorAll('thead, tbody, tr, th, td').forEach(cell => {

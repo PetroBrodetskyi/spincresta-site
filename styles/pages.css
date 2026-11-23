@@ -6060,6 +6060,28 @@ body[data-brand] .brand-profile-showcase__coverage {
   overflow-wrap: anywhere;
 }
 
+/* Compact review masthead on phones; the desktop showcase stays unchanged. */
+@media (max-width: 650px) {
+  body[data-brand] .brand-profile-showcase {
+    --brand-masthead-inset: 10px;
+  }
+
+  body[data-brand] .brand-profile-showcase__preview + .brand-profile-showcase__bar > .brand-profile-showcase__identity {
+    gap: 8px;
+    padding: 5px 8px 5px 5px;
+  }
+
+  body[data-brand] .brand-profile-showcase h1 {
+    --heading-size: var(--type-section);
+    line-height: 1.18;
+    text-wrap: pretty;
+  }
+
+  body[data-brand] .brand-profile-showcase__coverage {
+    font-size: var(--type-caption);
+  }
+}
+
 body[data-brand] .brand-profile-showcase__footer {
   display: flex;
   flex-wrap: wrap;

@@ -254,6 +254,18 @@ html:root body[data-brand] .brand-related-reviews .title {
   text-align: left;
 }
 
+.brand-related-reviews .home-games-controls {
+  margin-inline-start: auto;
+}
+
+@media (max-width: 650px) {
+  html:root body[data-brand] .brand-related-reviews .home-games-toolbar > .title {
+    flex: 1 1 10rem;
+    min-width: 0;
+    overflow-wrap: anywhere;
+  }
+}
+
 .brand-related-reviews .home-games-grid {
   margin-block-start: 10px;
 }

@@ -4,7 +4,7 @@ import { BRAND_HOMEPAGE_SCREENSHOTS } from '../scripts/brand-homepage-screenshot
 import { getReviewProviders } from '../scripts/brand-review-providers.js';
 import { reviewSectionLabel } from '../scripts/pages/brand-review-order.js';
 import { siteIconMarkup } from '../scripts/site-icons.js';
-import { copy, headlines, keys, rewards, verdict, welcome } from './britsino-review-copy.mjs';
+import { copy, headlines, keys, reviewTitles, rewards, verdict, welcome } from './britsino-review-copy.mjs';
 import { snapshotIntro, tableCopy } from './britsino-review-tables.mjs';
 import { escapeReview as esc, reviewCards, reviewProviderStrip, reviewTable } from './brand-review-template.mjs';
 import { syncDefaultTheme } from './sync-default-theme.mjs';
@@ -89,7 +89,7 @@ for (const [i, lang] of locales.entries()) {
   const cta = take(/(<a\b[^>]*class="cta-brands"[\s\S]*?<\/a>)/).replace(/href="[^"]+"/, 'href="' + esc(brand.urlCasino) + '"');
   const hero = take(/(<section class="hero container">[\s\S]*?<\/section>)/)
     .replace(/<img\b[^>]*class="brand-logo"[^>]*>/, '<img class="brand-logo" src="/' + brand.image + '" alt="Britsino" width="640" height="320" decoding="async" />')
-    .replace(/<h1>[^<]+<\/h1>/, '<h1>' + esc(c.title) + '</h1>')
+    .replace(/<h1>[^<]+<\/h1>/, '<h1>' + esc(reviewTitles[lang]) + '</h1>')
     .replace(/<p class="hero-subtitle">[\s\S]*?<\/p>/, '<p class="hero-subtitle">' + esc(c.overview) + '</p>')
     .replace(/<p class="hero-subtitle editorial-meta">[\s\S]*?<\/p>/, '<p class="hero-subtitle editorial-meta">' + esc(reviewed) + ': <time datetime="' + updated + '">' + esc(date) + '</time></p>')
     .replace(ctaPattern, () => cta);
@@ -115,7 +115,7 @@ for (const [i, lang] of locales.entries()) {
   const final = take(/(<section class="container">\s*<div class="final-cta-glass">[\s\S]*?<\/section>)/)
     .replaceAll('ColdBet', 'Britsino').replace(ctaPattern, () => cta);
   const footer = take(/(<section class="all-countries">[\s\S]*$)/)
-    .replace(/\/scripts\/main\.js\?v=[^"]+/, '/scripts/main.js?v=20261123-britsino-catalog').trimEnd();
+    .replace(/\/scripts\/main\.js\?v=[^"]+/, '/scripts/main.js?v=20261123-review-mobile').trimEnd();
   const safety = '<p class="section-intro"><a class="cta-secondary editorial-resource-link" href="/' + prefix(lang) +
     'responsible-gambling/">' + siteIconMarkup('safety', 'site-icon site-icon--inline', 18) + '<span>' + esc(safer) + '</span></a></p>';
   const faq = questions.map((q, j) => [q, [c.offer, c.wagering, c.prizes, c.rewards, c.banking, c.kyc, c.live + ' ' + liveExtras, c.license][j]]);
@@ -149,7 +149,7 @@ for (const [i, lang] of locales.entries()) {
     '<meta property="og:image:alt" content="' + esc(imageAlt) + '" />',
     '<meta name="twitter:card" content="summary_large_image" />',
     ...meta,
-    take(/(<link rel="stylesheet"[^>]*>)/).replace(/\/styles\.css\?v=[^"]+/, '/styles.css?v=20261123-britsino-catalog'),
+    take(/(<link rel="stylesheet"[^>]*>)/).replace(/\/styles\.css\?v=[^"]+/, '/styles.css?v=20261123-review-mobile'),
     '<script type="application/ld+json">' + JSON.stringify(schema).replaceAll('<', '\\u003c') + '</script>',
   ].join('\n    ') + '\n  </head>\n  <body data-brand="britsino" data-language="' + lang + '" data-review-market-label="' + esc(market) + '">\n    ' + [
     take(/(<header class="header">[\s\S]*?<\/header>)/),

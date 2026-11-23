@@ -184,12 +184,6 @@ html:root body[data-brand].has-brand-sticky-layout :is(.brand-sticky-main, .bran
 
 @media (max-width: 650px) {
   html:root body[data-brand].has-brand-sticky-layout .brand-sticky-main #brand-why-section.brand-highlights--compact
-    > .features-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 8px;
-  }
-
-  html:root body[data-brand].has-brand-sticky-layout .brand-sticky-main #brand-why-section.brand-highlights--compact
     > .features-grid > .feature-card {
     display: grid;
     grid-template-columns: 18px minmax(0, 1fr);
@@ -827,12 +821,12 @@ html:root body[data-brand].has-brand-sticky-layout .brand-sticky-title__inner {
     --review-feature-columns: minmax(0, 1fr);
   }
 
-  html:root body[data-brand] .brand-review-table-frame .brand-review-table--stackable {
+  html:root body[data-brand] .brand-review-table-frame .brand-review-table--stackable:not([data-mobile-table-mode='matrix']) {
     position: relative;
     display: block;
   }
 
-  .brand-review-table--stackable thead {
+  .brand-review-table--stackable:not([data-mobile-table-mode='matrix']) thead {
     position: absolute;
     width: 1px;
     height: 1px;
@@ -840,21 +834,21 @@ html:root body[data-brand].has-brand-sticky-layout .brand-sticky-title__inner {
     clip-path: inset(50%);
   }
 
-  .brand-review-table--stackable :is(tbody, tr) {
+  .brand-review-table--stackable:not([data-mobile-table-mode='matrix']) :is(tbody, tr) {
     display: grid;
     width: 100%;
   }
 
-  html:root body[data-brand] .brand-review-table--stackable tbody > tr {
-    gap: 9px;
-    padding: 13px;
+  html:root body[data-brand] .brand-review-table--stackable:not([data-mobile-table-mode='matrix']) tbody > tr {
+    gap: 5px;
+    padding: 9px 10px;
   }
 
   html:root body[data-brand] .brand-review-table--stackable tbody > tr + tr {
     border-top: 1px solid var(--review-line);
   }
 
-  html:root body[data-brand] .brand-review-table--stackable tbody :is(td, th[scope='row']) {
+  html:root body[data-brand] .brand-review-table--stackable:not([data-mobile-table-mode='matrix']) tbody :is(td, th[scope='row']) {
     display: block;
     padding: 0;
     border: 0;
@@ -867,5 +861,58 @@ html:root body[data-brand].has-brand-sticky-layout .brand-sticky-title__inner {
     color: var(--review-muted);
     font-size: var(--type-caption);
     font-weight: 750;
+  }
+
+  .brand-review-table--stackable:is([data-mobile-table-mode='matrix'], [data-mobile-table-mode='key-value']) .brand-review-table__label {
+    display: none;
+  }
+
+  html:root body[data-brand] .brand-review-table-frame .brand-review-table--stackable :is(th, td) {
+    font-size: var(--type-ui);
+    line-height: 1.4;
+  }
+
+  .brand-review-table--stackable[data-mobile-table-mode='matrix'] {
+    table-layout: fixed;
+  }
+
+  html:root body[data-brand] .brand-review-table-frame [data-mobile-table-mode='matrix'] :is(th, td) {
+    padding: 6px;
+    font-variant-numeric: tabular-nums;
+  }
+
+  html:root body[data-brand] .brand-review-table-frame [data-mobile-table-mode='matrix'] thead th:first-child {
+    width: 33% !important;
+  }
+
+  html:root body[data-brand] .brand-review-table-frame [data-mobile-table-mode='key-value'] th[scope='row'] {
+    color: var(--review-ink);
+    font-weight: 750;
+  }
+
+  /* Retain both cards in one row and hide legacy ordinal badges on narrow screens. */
+  html:root body[data-brand].has-brand-sticky-layout .brand-sticky-main
+    :is(#brand-why-section, .brand-hero-why, [data-review-section='pros'], [data-review-section='suitability'])
+    > :is(.features-grid, .premium-grid) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px;
+  }
+
+  html:root body[data-brand].has-brand-sticky-layout .brand-sticky-main
+    :is(#brand-why-section, .brand-hero-why, [data-review-section='pros'], [data-review-section='suitability'])
+    > :is(.features-grid, .premium-grid) > .feature-card {
+    padding: 10px;
+    gap: 5px;
+  }
+
+  html:root body[data-brand].has-brand-sticky-layout .brand-sticky-main
+    :is(#brand-why-section, .brand-hero-why) .feature-card > .icon-placeholder {
+    display: none;
+  }
+
+  html:root body[data-brand].has-brand-sticky-layout .brand-sticky-main
+    :is([data-review-section='pros'], [data-review-section='suitability']) .feature-card > :is(strong, span, p) {
+    font-size: var(--type-ui);
+    line-height: 1.4;
   }
 }

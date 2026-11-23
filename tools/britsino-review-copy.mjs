@@ -24,6 +24,19 @@ export const headlines = {
   fi: 'Enintään 2 000 £ + 700 ilmaiskierrosta',
 };
 
+export const reviewTitles = {
+  en: 'Britsino Casino Review',
+  de: 'Britsino Casino im Test',
+  es: 'Reseña del casino Britsino',
+  it: 'Recensione del casinò Britsino',
+  pl: 'Recenzja kasyna Britsino',
+  uk: 'Огляд казино Britsino',
+  pt: 'Análise do casino Britsino',
+  fr: 'Avis sur le casino Britsino',
+  hi: 'Britsino कैसीनो समीक्षा',
+  fi: 'Britsino-kasinon arvostelu',
+};
+
 // Short review verdicts: bonus limit, deposit rule, and audience.
 export const verdict = {
   en: ['35× cash bonus wagering with a £5 maximum qualifying bet.', '3× deposit wagering under the general terms.', 'Britsino’s catalog is geared toward slots and live tables. If a local license is a requirement, choose an operator you can verify in the relevant register.'],
