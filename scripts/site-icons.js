@@ -3,7 +3,7 @@ export const SITE_ICON_SPRITE = '/icons/ui/review-method.svg?v=20261119-catalog-
 export const TOPIC_ICONS = Object.freeze({
   overview: 'review', highlights: 'sparkles', countries: 'globe', methods: 'payments',
   summary: 'review', bonuses: 'bonus', games: 'games', sports: 'sports', rewards: 'trophy',
-  cashier: 'wallet', trust: 'safety', pros: 'balance', suitability: 'user', faq: 'help', reviews: 'chat',
+  cashier: 'wallet', trust: 'safety', providers: 'layers', pros: 'balance', suitability: 'user', faq: 'help', reviews: 'chat',
 });
 
 const LINK_ICONS = Object.freeze({
@@ -27,7 +27,7 @@ export function siteIconMarkup(icon, classes = 'site-icon', size = 24) {
     ? '/icons/ui/review-method.svg?v=20261122-compact-reviews'
     : ['arrow-left', 'chevron-down', 'copy', 'check', 'download', 'refresh'].includes(icon)
     ? '/icons/ui/review-method.svg?v=20261122-moderator-contacts'
-    : SITE_ICON_SPRITE;
+    : icon === 'layers' ? '/icons/ui/review-method.svg?v=20261123-brand-providers' : SITE_ICON_SPRITE;
   return `<svg class="${classes}" width="${size}" height="${size}" aria-hidden="true" focusable="false"><use href="${sprite}#${icon}"></use></svg>`;
 }
 
@@ -43,6 +43,7 @@ const SECTION_ICONS = [
   ['#privacy-faq-title', 'help'],
   ['.account-contact-heading h3', 'mail'],
   ['.brand-quick-facts__heading, #brand-review-details', 'review'],
+  ['.brand-availability-widget > h2', 'games'],
   ['.brand-right-payments h2', 'payments'],
   ['.brand-feedback-heading h2', 'chat'],
 ];

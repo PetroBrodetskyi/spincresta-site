@@ -6,6 +6,40 @@ const HOME_GAMES_SCROLL_IDLE_MS = 950;
 export const advanceHomeGames = (position, elapsed, distance) =>
   distance > 0 ? (position + Math.min(elapsed, 64) * HOME_GAMES_PX_PER_SECOND / 1000) % distance : 0;
 
+// Keep the native touch and trackpad behavior; only buttons and explicit horizontal
+// keyboard navigation move the strip programmatically.
+export function bindManualCardStrip({ grid, controls }) {
+  const previous = controls?.querySelector('[data-strip-previous]');
+  const next = controls?.querySelector('[data-strip-next]');
+  if (!grid?.firstElementChild || !previous || !next || grid.hasAttribute('data-manual-strip')) return;
+  grid.dataset.manualStrip = '';
+
+  const sync = () => {
+    const max = grid.scrollWidth - grid.clientWidth;
+    controls.hidden = max <= 1;
+    grid.tabIndex = controls.hidden ? -1 : 0;
+    previous.disabled = grid.scrollLeft < 1;
+    next.disabled = grid.scrollLeft >= max - 1;
+  };
+  const step = direction => {
+    const width = grid.firstElementChild.getBoundingClientRect().width;
+    const gap = parseFloat(getComputedStyle(grid).columnGap) || 0;
+    grid.scrollBy({ left: direction * (width + gap),
+      behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
+  };
+  previous.addEventListener('click', () => step(-1));
+  next.addEventListener('click', () => step(1));
+  grid.addEventListener('keydown', event => {
+    if (event.target !== grid || controls.hidden || !['ArrowLeft', 'ArrowRight'].includes(event.key)) return;
+    event.preventDefault();
+    step(event.key === 'ArrowLeft' ? -1 : 1);
+  });
+  grid.addEventListener('scroll', sync, { passive: true });
+  if (window.ResizeObserver) new window.ResizeObserver(sync).observe(grid);
+  else window.addEventListener('resize', sync, { passive: true });
+  sync();
+}
+
 export const bindMovingCardStrip = ({ grid, toolbar, id, headingId, localeText, labels }) => {
   const cards = [...grid?.children || []];
   if (!toolbar || cards.length < 2 || grid.hasAttribute('data-moving-strip') ||

@@ -463,7 +463,7 @@ export const initBrandLayout = context => {
     let sibling = hero.nextElementSibling;
     while (sibling && sibling !== allCountries) {
       const nextSibling = sibling.nextElementSibling;
-      main.appendChild(sibling);
+      if (!sibling.classList.contains('brand-related-reviews')) main.appendChild(sibling);
       sibling = nextSibling;
     }
 

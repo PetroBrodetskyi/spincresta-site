@@ -1,4 +1,12 @@
 export const BRAND_NEW_GAMES = {
+  coldbet: [
+    ['Pharaon Thunder', 'v1795368811', 'pharaon-thunder_h1a11b'],
+    ['Jewels of Ra', 'v1795368722', 'jewels-of-ra_mrtpgo'],
+    ['Hell Hot Volcano', 'v1795368719', 'hell-hot-volcano_cbd6aj'],
+    ['Fishing Duel: Twin Reels', 'v1795368716', 'fishing-duel-twin-reels_yllcsx'],
+    ['4 Hot Chillies', 'v1795368712', '4-hot-chillies_xgjd64'],
+    ['Deluxe Cats Plus', 'v1795368709', 'deluxe-cats-plus_wynoo7'],
+  ].map(([name, version, id]) => ({ name, image: `https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto/${version}/spincresta/brands/coldbet/new-games/coldbet-new-game-${id}` })),
   betrepublic: [
     ['Vault Blitz', 'v1795353172', 'vault-blitz_um3o2a'],
     ['Tower Rush 2', 'v1795353170', 'tower-rush-2_en9f4m'],

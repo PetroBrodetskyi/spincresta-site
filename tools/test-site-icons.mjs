@@ -11,7 +11,9 @@ test('review topics use unique sprite definitions and decorative, unfocusable in
   for (const icon of [...Object.values(TOPIC_ICONS), 'heart', 'mail', 'clock', 'calendar', 'lock', 'book', 'link', 'warning']) {
     assert.ok(symbols.includes(icon), icon);
     const markup = siteIconMarkup(icon);
-    assert.ok(markup.includes(`href="${SITE_ICON_SPRITE}#${icon}"`));
+    const href = markup.match(/<use href="([^"]+)"/)?.[1] || '';
+    assert.equal(href.split('?')[0], SITE_ICON_SPRITE.split('?')[0]);
+    assert.equal(href.split('#')[1], icon);
     assert.match(markup, /aria-hidden="true" focusable="false"/);
     assert.doesNotMatch(markup, /\baria-label=|\btabindex=/);
   }

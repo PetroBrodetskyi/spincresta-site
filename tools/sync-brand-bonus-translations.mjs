@@ -9,6 +9,7 @@ import { accountHeadline } from './betonwin-review-copy.mjs';
 import { magneticHeadlines } from './magneticslots-review-copy.mjs';
 import { kingmakerHeadlines } from './kingmaker-review-copy.mjs';
 import betrepublicReview from './betrepublic-review-copy.mjs';
+import { headlines as coldbetHeadlines } from './coldbet-review-copy.mjs';
 
 const ROOT = process.cwd();
 const LOCALES = ['de', 'es', 'it', 'pl', 'uk', 'pt', 'fr', 'hi', 'fi'];
@@ -64,6 +65,7 @@ for (const locale of LOCALES) BONUS_TRANSLATION_OVERRIDES[locale][accountHeadlin
 for (const locale of LOCALES) BONUS_TRANSLATION_OVERRIDES[locale][magneticHeadlines.en] = magneticHeadlines[locale];
 for (const locale of LOCALES) BONUS_TRANSLATION_OVERRIDES[locale][kingmakerHeadlines.en] = kingmakerHeadlines[locale];
 for (const locale of LOCALES) BONUS_TRANSLATION_OVERRIDES[locale][betrepublicReview.en[2]] = betrepublicReview[locale][2];
+for (const locale of LOCALES) BONUS_TRANSLATION_OVERRIDES[locale][coldbetHeadlines.en] = coldbetHeadlines[locale];
 for (const locale of LOCALES) BONUS_TRANSLATION_OVERRIDES[locale][PAMPAS_BONUS] = PAMPAS_COPY[locale].short;
 BONUS_TRANSLATION_OVERRIDES.uk['Up to 8,000 €/$ + 500 free spins'] = 'До 8 000 €/$ + 500 фриспінів';
 const decodeHtml = value =>

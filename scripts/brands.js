@@ -420,15 +420,14 @@ export const BRANDS = [
   },
   {
     name: 'ColdBet',
-    bonus: '',
+    bonus: 'Up to €1,500 + 150 Free Spins Across 4 Deposits',
     cta: 'Play Now',
     urlDetail: 'brands/coldbet.html',
-    reviewComingSoon: true,
     urlCasino: 'https://armadaapp.media-412.com/click?pid=3862&offer_id=124847',
     image: 'images/coldbet.svg',
     bgColor: '#012F3C',
     countries: ['PT', 'PL', 'GE'],
-    payments: [],
+    payments: ['visa', 'mastercard', 'googlepay', 'banktransfer', 'bitcoin', 'ethereum', 'tron', 'dogecoin', 'tether', 'litecoin', 'usdc', 'cardano', 'solana', 'bitcoincash'],
     hasDetailPage: true,
   },
   {

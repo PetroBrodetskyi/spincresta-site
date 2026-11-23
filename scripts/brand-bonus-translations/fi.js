@@ -48,6 +48,7 @@ export default {
   "Up to CA$5,500 + 400 Free Spins": "Enintään CA$5 500 + 400 ilmaiskierrosta",
   "100% up to €120 + 120 Free Spins": "100 % enintään 120 € + 120 ilmaiskierrosta",
   "Up to €2,000 + 350 Free Spins": "Enintään 2 000 € + 350 ilmaiskierrosta",
+  "Up to €1,500 + 150 Free Spins Across 4 Deposits": "Jopa 1 500 € ja 150 ilmaiskierrosta neljällä talletuksella",
   "250% Welcome Bonus up to €1,000": "250 % tervetuliaisbonus 1000 € asti",
   "Welcome Package - 225% Up to €1,000": "Tervetuliaispaketti - 225 % 1 000 € asti",
   "Casino Welcome Bonus - 100% up to €500 + 200 Free Spins": "Kasinon tervetuliaisbonus - 100 % aina 500 € asti + 200 ilmaiskierrosta",

@@ -1,4 +1,5 @@
 // Standard brand-review components, matching the OnlyWin/Spinrise source markup.
+export { reviewProviderStrip } from '../scripts/pages/brand-provider-strip.js';
 export const escapeReview = value => String(value).replaceAll('&','&amp;').replaceAll('"','&quot;').replaceAll('<','&lt;');
 export const reviewCards = (rows, {comparison=false}={}) => `<div class="features-grid premium-grid${comparison?' pros-cons-grid':''}">${rows.map(([title,paragraphs],i)=>`<div class="feature-card glass-card${comparison?(i===0?' is-pros-card':' is-cons-card'):''}"><strong>${escapeReview(title)}</strong>${(Array.isArray(paragraphs)?paragraphs:[paragraphs]).map(text=>`<span>${comparison?'- ':''}${escapeReview(text)}</span>`).join('<br />')}</div>`).join('')}</div>`;
 export const reviewTable = (headers, rows) => {

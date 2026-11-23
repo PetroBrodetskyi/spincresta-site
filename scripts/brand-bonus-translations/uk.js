@@ -48,6 +48,7 @@ export default {
   "Up to CA$5,500 + 400 Free Spins": "До CA$5 500 + 400 фріспінів",
   "100% up to €120 + 120 Free Spins": "100% до 120 € + 120 фріспінів",
   "Up to €2,000 + 350 Free Spins": "До 2 000 € + 350 фріспінів",
+  "Up to €1,500 + 150 Free Spins Across 4 Deposits": "До 1 500 € і 150 фріспінів за чотири депозити",
   "250% Welcome Bonus up to €1,000": "Вітальний бонус 250% до €1000",
   "Welcome Package - 225% Up to €1,000": "Вітальний пакет - 225% до 1000 євро",
   "Casino Welcome Bonus - 100% up to €500 + 200 Free Spins": "Вітальний бонус казино - 100% до €500 + 200 безкоштовних обертань",

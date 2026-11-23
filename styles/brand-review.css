@@ -106,7 +106,7 @@ html:root body[data-brand].has-brand-sticky-layout
 }
 
 html:root body[data-brand].has-brand-sticky-layout .brand-sticky-main
-  :is(.content-review, .content-article) > section > :is(p, ul, ol) {
+  :is(.content-review, .content-article) > section > :is(p, ul, ol):where(:not(.review-provider-strip)) {
   width: auto;
   max-width: 72ch;
   margin-inline: 0;

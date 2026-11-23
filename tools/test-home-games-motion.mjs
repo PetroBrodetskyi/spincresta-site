@@ -102,6 +102,9 @@ test('the enhanced strip keeps its original internal links and supports motion p
   assert.doesNotMatch(countryHeading, /<p\b/);
   const related = read('scripts/pages/related-brand-reviews.js');
   assert.match(related, /createReviewCard\(candidate, context\)/);
+  assert.match(related, /body\[data-brand\] > \.all-countries/);
+  assert.match(related, /countries\.before\(section\)/);
+  assert.match(read('scripts/pages/brand-layout.js'), /if \(!sibling\.classList\.contains\('brand-related-reviews'\)\) main\.appendChild\(sibling\)/);
   assert.match(read('scripts/pages/home.js'), /createReviewCard\(brand, context\)/);
   for (const prefix of ['', 'de/', 'es/', 'it/', 'pl/', 'uk/', 'pt/', 'fr/', 'hi/', 'fi/']) {
     const html = read(`${prefix}index.html`);

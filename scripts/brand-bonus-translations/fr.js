@@ -48,6 +48,7 @@ export default {
   "Up to CA$5,500 + 400 Free Spins": "Jusqu’à 5 500 $ CA + 400 tours gratuits",
   "100% up to €120 + 120 Free Spins": "100 % jusqu’à 120 € + 120 tours gratuits",
   "Up to €2,000 + 350 Free Spins": "Jusqu’à 2 000 € + 350 tours gratuits",
+  "Up to €1,500 + 150 Free Spins Across 4 Deposits": "Jusqu’à 1 500 € et 150 tours gratuits sur quatre dépôts",
   "250% Welcome Bonus up to €1,000": "Bonus de bienvenue de 250 % jusqu'à 1 000 €",
   "Welcome Package - 225% Up to €1,000": "Package de bienvenue - 225% jusqu'à 1 000 €",
   "Casino Welcome Bonus - 100% up to €500 + 200 Free Spins": "Bonus de bienvenue du casino - 100 % jusqu'à 500 € + 200 tours gratuits",

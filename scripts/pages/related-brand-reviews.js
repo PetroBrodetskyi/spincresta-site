@@ -22,16 +22,16 @@ export function relatedBrandReviews(brand, brands, getSlug) {
 
 export function initRelatedBrandReviews(context) {
   const { brand, brands, localeText, getBrandDetailSlug } = context;
-  const reviews = document.querySelector('body[data-brand] .content-review > #player-reviews');
-  if (!brand || brand.reviewComingSoon || !reviews || document.getElementById('related-brand-reviews')) return;
+  const countries = document.querySelector('body[data-brand] > .all-countries');
+  if (!brand || brand.reviewComingSoon || !countries || document.getElementById('related-brand-reviews')) return;
   const related = relatedBrandReviews(brand, brands, getBrandDetailSlug);
   if (!related.length) return;
 
   const section = document.createElement('section');
   section.id = 'related-brand-reviews';
-  section.className = 'container brand-related-reviews';
+  section.className = 'brand-related-reviews';
   section.setAttribute('aria-labelledby', 'related-brand-reviews-title');
-  section.innerHTML = '<div class="home-games-toolbar"><h2 id="related-brand-reviews-title" class="title"></h2></div><div class="home-games-grid home-new-reviews-grid"></div>';
+  section.innerHTML = '<div class="container"><div class="home-games-toolbar"><h2 id="related-brand-reviews-title" class="title"></h2></div><div class="home-games-grid home-new-reviews-grid"></div></div>';
   const heading = section.querySelector('h2');
   heading.innerHTML = siteIconMarkup('review', 'site-icon site-icon--heading', 22);
   heading.append(localeText(
@@ -42,7 +42,7 @@ export function initRelatedBrandReviews(context) {
   ));
   const grid = section.querySelector('.home-games-grid');
   grid.append(...related.map(candidate => createReviewCard(candidate, context)));
-  reviews.after(section);
+  countries.before(section);
   bindMovingCardStrip({
     grid,
     toolbar: section.querySelector('.home-games-toolbar'),

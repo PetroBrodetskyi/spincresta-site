@@ -18,6 +18,8 @@ test('review detail tabs group existing editorial tables and central sportsbook 
   assert.ok(!belongsInReviewDetails({ kind: 'rewards', hasTable: true }));
   assert.ok(!belongsInReviewDetails({ kind: 'cashier', explicit: true, rail: 'payments' }));
   assert.ok(!belongsInReviewDetails({ kind: 'faq', explicit: true }));
+  assert.ok(!belongsInReviewDetails({ kind: 'providers', explicit: true }));
+  assert.ok(compareReviewSections('trust', 'providers') < 0 && compareReviewSections('providers', 'pros') < 0);
   const runtime = read('scripts/pages/brand.js');
   assert.match(runtime, /if \(groups\.length < 2\) return/);
   assert.match(runtime, /panel\.append\(\.\.\.topicSections\)/);

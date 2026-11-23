@@ -2,6 +2,7 @@
 // Keys match the review slug used by BRANDS.urlDetail.
 export const BRAND_HOMEPAGE_SCREENSHOTS = Object.freeze(
 {
+  "coldbet": "https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto,w_1600/v1795368823/spincresta/brands/coldbet/main-page/coldbet-page_rvg4co",
   "betrepublic": "https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto,w_1600/v1795353144/spincresta/brands/betrepublic/main-page/betrepublic-page_x8pi68",
   "kingmaker": "https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto,w_1600/v1795344660/spincresta/brands/kingmaker/main-page/kingmaker-page_iz6cej",
   "betonwin": "https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto,w_1600/v1791721627/spincresta/brands/betonwin/main-page/betonwin-page_cisxfh",

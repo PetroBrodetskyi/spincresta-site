@@ -1,13 +1,13 @@
 ﻿// =====================
 // IMPORTS
 // =====================
-import { BRANDS } from './brands.js?v=20261122-betrepublic';
+import { BRANDS } from './brands.js?v=20261122-coldbet-cashier';
 import { COUNTRIES } from './countries.js';
 import { getFeaturedHomeBrands } from './featured-brands.js?v=20261119-shared-search';
 import { initFaqSections } from './faq.js?v=20261119-faq-layout';
 import { initFooterNewsletter } from './footer-newsletter.js?v=20260826-newsletter-4';
 import { initAccountAuth, prepareAccountHeader } from './account-auth.js?v=20261122-account-dialog-sync';
-import { initSiteIcons, siteIconMarkup } from './site-icons.js?v=20261122-compact-reviews';
+import { initSiteIcons, siteIconMarkup } from './site-icons.js?v=20261123-brand-providers';
 import { initSectionNavigation } from './section-navigation.js?v=20261119-light-editorial';
 import { bindImagePreview } from './image-preview.js?v=20261119-preview-loader';
 
@@ -33,7 +33,7 @@ const brandLayoutFallbackTimer = document.body?.dataset.brand
     }, 1500)
   : null;
 const brandLayoutModuleReady = document.body?.dataset.brand
-  ? import('./pages/brand-layout.js?v=20261119-editorial-bands').then(module => {
+  ? import('./pages/brand-layout.js?v=20261123-review-bands').then(module => {
       initBrandLayoutModule = module.initBrandLayout;
     }).catch(error => {
       document.body.classList.add('brand-layout-failed');
@@ -48,14 +48,14 @@ const loadPageModules = async () => {
   const hasCasinoCards = isHomePage || isCountryPage || document.querySelector('.casino-grid') ||
     (isBrandPage && findBrandByPageKey(document.body.dataset.brand)?.notRecommended);
   const cardScreenshotsReady = hasCasinoCards
-    ? import('./brand-homepage-screenshots.js?v=20261122-betrepublic').then(module => {
+    ? import('./brand-homepage-screenshots.js?v=20261122-coldbet').then(module => {
         BRAND_HOMEPAGE_SCREENSHOTS = module.BRAND_HOMEPAGE_SCREENSHOTS || {};
       }).catch(() => {})
     : Promise.resolve();
 
   if (isHomePage || isCountryPage) {
     const [gamesModule, homeModule, mediaModule] = await Promise.all([
-      import('./brand-new-games.js?v=20261122-betrepublic'),
+      import('./brand-new-games.js?v=20261122-coldbet'),
       import('./pages/home.js?v=20261122-compact-reviews'),
       isCountryPage ? import('./pages/country-media.js?v=20261122-compact-reviews') : null,
     ]);
@@ -66,11 +66,11 @@ const loadPageModules = async () => {
 
   if (isBrandPage) {
     const [snapshotsModule, gamesModule, pageModule, feedbackModule, relatedModule] = await Promise.all([
-      import('./brand-snapshot-configs.js?v=20261122-betrepublic'),
-      import('./brand-new-games.js?v=20261122-betrepublic'),
-      import('./pages/brand.js?v=20261122-suitability-label'),
+      import('./brand-snapshot-configs.js?v=20261122-coldbet'),
+      import('./brand-new-games.js?v=20261122-coldbet'),
+      import('./pages/brand.js?v=20261123-brand-providers'),
       import('./pages/brand-feedback.js?v=20261121-feedback-availability'),
-      import('./pages/related-brand-reviews.js?v=20261122-compact-reviews'),
+      import('./pages/related-brand-reviews.js?v=20261123-full-width'),
     ]);
     BRAND_SNAPSHOT_CONFIGS = snapshotsModule.BRAND_SNAPSHOT_CONFIGS || {};
     BRAND_NEW_GAMES = gamesModule.BRAND_NEW_GAMES || {};
@@ -380,7 +380,7 @@ const SITE_LOCALE = DOCUMENT_LANGUAGE.startsWith('de')
 let brandBonusTranslations = {};
 const brandBonusTranslationsReady = SITE_LOCALE === 'en'
   ? Promise.resolve()
-  : import(`./brand-bonus-translations/${SITE_LOCALE}.js?v=20261122-betrepublic`)
+  : import(`./brand-bonus-translations/${SITE_LOCALE}.js?v=20261122-coldbet`)
       .then(module => {
         brandBonusTranslations = module.default || {};
       })

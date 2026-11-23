@@ -1,7 +1,8 @@
 // Brand-review module. Loaded only on body[data-brand] pages.
 
 import { isBrandSportsSection } from './brand-layout.js?v=20261118-brand-games-row';
-import { classifyReviewSection, compareReviewSections, reviewSectionLabel } from './brand-review-order.js?v=20261122-suitability-label';
+import { classifyReviewSection, compareReviewSections, reviewSectionLabel } from './brand-review-order.js?v=20261123-provider-strip';
+import { initBrandProviderStrips, insertBrandProviderSection } from './brand-provider-strip.js?v=20261123-brand-providers';
 
 const sportsbookHeadingPattern = /^(?:sportsbook|sportwetten|apuestas deportivas|scommesse sportive|zakłady sportowe|букмекер(?:ський розділ)?|спортбук|спортивні ставки|ставки на спорт|apostas desportivas|apostas esportivas|paris sportifs|स्पोर्ट्सबुक|खेल सट्टेबाज़ी|urheiluvedonlyönti)$/iu;
 export const isSportsbookFeatureHeading = heading => sportsbookHeadingPattern.test(String(heading || '').trim());
@@ -1383,6 +1384,11 @@ export const initBrandPage = context => {
   applyBrandInfoPairLayout();
   renderBrandAvailabilityWidget(brandKey);
   splitSportsbookCards();
+  insertBrandProviderSection({
+    article: document.querySelector('.brand-sticky-main :is(.content-review, .content-article)'),
+    brand: findBrandByPageKey(brandKey),
+    localeText,
+  });
   normalizeBrandReviewBlocks();
   initBrandSectionNav();
   initBrandHeroPanels();
@@ -1390,6 +1396,7 @@ export const initBrandPage = context => {
   initMobileTableDisclosures();
   styleReviewTables();
   initBrandReviewDetails();
+  initBrandProviderStrips();
   initBrandCountryCollapse();
   window.requestAnimationFrame(initBrandCountryCollapse);
   window.addEventListener('load', initBrandCountryCollapse, { once: true });
