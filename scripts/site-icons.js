@@ -2,7 +2,7 @@ export const SITE_ICON_SPRITE = '/icons/ui/review-method.svg?v=20261119-catalog-
 
 export const TOPIC_ICONS = Object.freeze({
   overview: 'review', highlights: 'sparkles', countries: 'globe', methods: 'payments',
-  summary: 'review', bonuses: 'bonus', games: 'games', sports: 'sports', rewards: 'trophy',
+  summary: 'review', bonuses: 'bonus', 'bonus-terms': 'book', games: 'games', sports: 'sports', rewards: 'trophy',
   cashier: 'wallet', trust: 'safety', providers: 'layers', pros: 'balance', suitability: 'user', faq: 'help', reviews: 'chat',
 });
 

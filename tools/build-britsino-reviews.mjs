@@ -158,7 +158,8 @@ for (const [i, lang] of locales.entries()) {
     '  ' + section('britsino-bonus', 'bonuses', paragraph(c.offer) + reviewTable(
       [deposit + ' · ' + minimum, match, spins],
       welcome.map(([n, min, rate, cap, count]) => [number(n) + ' · ' + gbp(min), percent(rate) + ' · ' + gbp(cap), number(count)]),
-    ) + detailsTable([[wagering, c.wagering], [prizes, c.prizes]]), true),
+    ), true),
+    '  ' + section('britsino-bonus-terms', 'bonus-terms', detailsTable([[wagering, c.wagering], [prizes, c.prizes]]), true),
     '  ' + section('britsino-games', 'games', paragraph(c.games) + reviewTable([gameType, examples], [
       [roulette, 'European Roulette (True Labs) · American Roulette (KA Gaming)'],
       [cardGames, 'Classic Multihand Blackjack (BGaming) · Triple Edge Poker (Betsoft)'],

@@ -90,31 +90,6 @@ export const initBrandLayout = context => {
     });
   };
 
-  const applyBrandHeroConcept = () => {
-    const hero = document.querySelector('body[data-brand] .hero');
-    const heroContent = hero?.querySelector(':scope > .hero-content');
-    if (!hero || !heroContent) return;
-
-    const existingWhy = hero.querySelector(':scope > .brand-hero-why');
-    if (existingWhy) {
-      hero.classList.add('brand-hero-with-why');
-      return;
-    }
-
-    const whySection = Array.from(
-      document.querySelectorAll('body[data-brand] section.features-section')
-    ).find(section => {
-      const title = section.querySelector(':scope > .title, :scope > h2');
-      return /why\s+players\s+choose|warum\s+spieler|por\s+qu[eé]\s+los\s+jugadores/i.test(normalizeText(title?.textContent || ''));
-    });
-
-    if (!whySection) return;
-
-    whySection.classList.add('brand-hero-why');
-    hero.classList.add('brand-hero-with-why');
-    hero.appendChild(whySection);
-  };
-
   const initBrandNewGames = layout => {
     const main = layout.querySelector(':scope > .brand-sticky-main');
     if (!main || main.querySelector(':scope > .brand-new-games-panel')) return;
@@ -525,7 +500,6 @@ export const initBrandLayout = context => {
   };
 
   initBrandPartnerProgram();
-  applyBrandHeroConcept();
   applyBrandStickyReviewLayout();
   initBrandWhyPreview();
 };

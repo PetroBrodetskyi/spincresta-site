@@ -1,14 +1,14 @@
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import test from 'node:test';
-import { BRAND_TABLE_TOPICS, belongsInReviewDetails, isSportsbookFeatureHeading } from '../scripts/pages/brand.js';
+import { BRAND_TABLE_TOPICS, belongsInReviewDetails, findSeparateBonusTerms, isSportsbookFeatureHeading } from '../scripts/pages/brand.js';
 import { isBrandSportsSection } from '../scripts/pages/brand-layout.js';
 import { BRAND_REVIEW_ORDER, classifyReviewSection, compareReviewSections, reviewSectionLabel } from '../scripts/pages/brand-review-order.js';
 
 const read = path => fs.readFileSync(new URL(`../${path}`, import.meta.url), 'utf8');
 
 test('review detail tabs group existing editorial tables and central sportsbook coverage', () => {
-  assert.deepEqual(BRAND_TABLE_TOPICS, ['summary', 'bonuses', 'games', 'sports', 'cashier', 'trust']);
+  assert.deepEqual(BRAND_TABLE_TOPICS, ['summary', 'bonuses', 'bonus-terms', 'games', 'sports', 'cashier', 'trust']);
   assert.ok(belongsInReviewDetails({ kind: 'sports', rail: 'betting', hasTable: false }));
   assert.ok(belongsInReviewDetails({ kind: 'games', hasTable: true }));
   assert.ok(!belongsInReviewDetails({ kind: 'games', hasTable: false }));
@@ -28,6 +28,27 @@ test('review detail tabs group existing editorial tables and central sportsbook 
   assert.match(read('scripts/main.js'), /panel\?\.firstElementChild\?\.contains\(target\)/);
   const css = read('styles/brand-review.css');
   assert.match(css, /\.brand-review-details__panel\[hidden\]\s*\{\s*display: none/);
+});
+
+test('substantial bonus tables get a neighboring terms tab only for separately authored conditions', () => {
+  const offer = { kind: 'bonuses', id: 'welcome', heading: 'Welcome offers', rows: 4 };
+  const rules = { kind: 'bonuses', id: 'casino-bonus-rules', heading: 'Payment and bonus rules', rows: 2 };
+  assert.deepEqual(findSeparateBonusTerms([offer, rules]), [rules]);
+  assert.deepEqual(findSeparateBonusTerms([offer, { ...rules, rows: 1 }]), []);
+  assert.deepEqual(findSeparateBonusTerms([rules]), []);
+  assert.deepEqual(findSeparateBonusTerms([offer, { ...rules, id: 'extra-offer', heading: 'Third deposit offer' }]), []);
+  for (const prefix of ['', 'de/', 'es/', 'it/', 'pl/', 'uk/', 'pt/', 'fr/', 'hi/', 'fi/']) {
+    const sections = [...read(prefix + 'brands/gamblezen/index.html').matchAll(/(<section[^>]*>)([^]*?)<[/]section>/g)]
+      .map(([, tag, html]) => {
+        const id = tag.match(/id="([^"]+)"/)?.[1] || '';
+        const heading = html.match(/<h2[^>]*>([^<]+)<[/]h2>/)?.[1] || '';
+        return {
+          kind: classifyReviewSection({ id, heading, kind: tag.match(/data-review-section="([^"]+)"/)?.[1] }),
+          id, heading, rows: (html.match(/<tr>/g) || []).length - 1,
+        };
+      });
+    assert.equal(findSeparateBonusTerms(sections).length, 1, prefix || 'en');
+  }
 });
 
 test('the selected review and snapshot tabs share a filled treatment without an underline', () => {

@@ -1,12 +1,25 @@
 // Brand-review module. Loaded only on body[data-brand] pages.
 
 import { isBrandSportsSection } from './brand-layout.js?v=20261118-brand-games-row';
-import { classifyReviewSection, compareReviewSections, reviewSectionLabel } from './brand-review-order.js?v=20261123-provider-strip';
+import { classifyReviewSection, compareReviewSections, reviewSectionLabel } from './brand-review-order.js?v=20261123-single-row';
+import { initBrandReviewStrips } from './brand-review-strips.js?v=20261123-single-row';
 import { initBrandProviderStrips, insertBrandProviderSection } from './brand-provider-strip.js?v=20261123-coolzino';
 
 const sportsbookHeadingPattern = /^(?:sportsbook|sportwetten|apuestas deportivas|scommesse sportive|zakłady sportowe|букмекер(?:ський розділ)?|спортбук|спортивні ставки|ставки на спорт|apostas desportivas|apostas esportivas|paris sportifs|स्पोर्ट्सबुक|खेल सट्टेबाज़ी|urheiluvedonlyönti)$/iu;
 export const isSportsbookFeatureHeading = heading => sportsbookHeadingPattern.test(String(heading || '').trim());
-export const BRAND_TABLE_TOPICS = Object.freeze(['summary', 'bonuses', 'games', 'sports', 'cashier', 'trust']);
+export const BRAND_TABLE_TOPICS = Object.freeze(['summary', 'bonuses', 'bonus-terms', 'games', 'sports', 'cashier', 'trust']);
+const bonusTermsId = /(?:^|-)(?:bonus-(?:terms|rules)|wagering)$/i;
+const bonusTermsHeading = /^(?:(?:important |casino )?bonus (?:terms|rules)|wagering requirements|wichtige bonusbedingungen|condiciones del bono importantes|termini importanti del bonus|ważne warunki bonusu|важливі бонусні умови|termos importantes de b[oó]nus|conditions importantes des bonus|महत्वपूर्ण बोनस शर्तें|tärkeät bonusehdot)(?:$|[\s:–&])/iu;
+
+// Legacy pages may already have separate terms tables under the Bonuses topic.
+// Split only terms-only sections, never arbitrary rows from an offer table.
+export function findSeparateBonusTerms(sections) {
+  const tables = sections.filter(section => section.kind === 'bonuses' && section.rows > 0);
+  const conditions = tables.filter(({ id, heading }) => bonusTermsId.test(id) || bonusTermsHeading.test(heading.normalize('NFC').trim()));
+  if (conditions.length === 0 || conditions.length === tables.length ||
+      tables.reduce((sum, section) => sum + section.rows, 0) < 6) return [];
+  return conditions;
+}
 export function mobileReviewTableMode(rows, columnCount) {
   if (!rows.length) return 'stack';
   if (columnCount === 2 && rows.every(row => row.cells[0].matches('th[scope="row"]'))) return 'key-value';
@@ -179,6 +192,7 @@ export const initBrandPage = context => {
     const titleSelector = [
       '.brand-hero-why > .title',
       '.brand-why-heading > .title',
+      '[data-review-strip] > .title',
       '.brand-countries > .title',
       '.brand-payments > .title',
       '.brand-availability-widget .title',
@@ -563,6 +577,13 @@ export const initBrandPage = context => {
         mark(section, kind);
         if (kind === 'sports') section.classList.add('brand-betting-section');
       }
+      const bonusSections = sections.filter(section => section.dataset.reviewSection === 'bonuses')
+        .map(section => ({
+          section, kind: section.dataset.reviewSection, id: section.id,
+          heading: normalizeText(section.querySelector(':scope > :is(h2, .title)')?.textContent || ''),
+          rows: section.querySelectorAll('tbody > tr').length,
+        }));
+      findSeparateBonusTerms(bonusSections).forEach(({ section }) => mark(section, 'bonus-terms'));
       const ordered = [...sections].sort((left, right) => compareReviewSections(
         left.dataset.reviewSection, right.dataset.reviewSection
       ));
@@ -1403,6 +1424,7 @@ export const initBrandPage = context => {
     localeText,
   });
   normalizeBrandReviewBlocks();
+  initBrandReviewStrips(document.querySelector('.brand-sticky-main'), localeText);
   initBrandSectionNav();
   initBrandHeroPanels();
   initReviewerByline();

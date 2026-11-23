@@ -126,7 +126,7 @@ html:root body[data-brand].has-brand-sticky-layout
     .brand-sticky-main :is(#brand-why-section, .content-review > section, .content-article > section),
     :is(.brand-sticky-aside, .brand-right-rail) .brand-sidebar-section
   )
-  > :is(.features-grid, .premium-grid) {
+  > :is(.features-grid, .premium-grid):not(.brand-review-strip) {
   display: grid;
   grid-template-columns: var(--review-feature-columns, repeat(2, minmax(0, 1fr)));
   grid-auto-flow: row;
@@ -182,31 +182,6 @@ html:root body[data-brand].has-brand-sticky-layout :is(.brand-sticky-main, .bran
   color: var(--review-muted);
 }
 
-@media (max-width: 650px) {
-  html:root body[data-brand].has-brand-sticky-layout .brand-sticky-main #brand-why-section.brand-highlights--compact
-    > .features-grid > .feature-card {
-    display: grid;
-    grid-template-columns: 18px minmax(0, 1fr);
-    align-content: start;
-    align-items: start;
-    gap: 6px 8px;
-    padding: 10px;
-  }
-
-  .brand-highlights--compact .feature-card > .brand-highlight-icon {
-    align-self: start;
-  }
-
-  html:root body[data-brand].has-brand-sticky-layout .brand-sticky-main .brand-highlights--compact .feature-card > strong {
-    font-size: var(--type-ui);
-    line-height: 1.3;
-  }
-
-  .brand-highlights--compact .feature-card > span {
-    grid-column: 1 / -1;
-  }
-}
-
 html:root body[data-brand].has-brand-sticky-layout
   :is(.brand-sticky-main, .brand-sticky-aside, .brand-right-rail) .feature-card > :is(strong, h3, h4) {
   margin: 0;
@@ -243,6 +218,81 @@ html:root body[data-brand].has-brand-sticky-layout .brand-sticky-main .pros-cons
 
 .brand-sticky-main .pros-cons-grid .feature-card > br {
   display: none;
+}
+
+/* Highlights and comparison cards share a single swipeable row. */
+html:root body[data-brand].has-brand-sticky-layout .brand-sticky-main [data-review-strip] {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 10px;
+}
+
+html:root body[data-brand].has-brand-sticky-layout .brand-sticky-main [data-review-strip] > * {
+  min-width: 0;
+  grid-column: 1 / -1;
+}
+
+html:root body[data-brand].has-brand-sticky-layout .brand-sticky-main [data-review-strip] > :is(h2, .title, .brand-why-heading) {
+  grid-column: 1;
+  grid-row: 1;
+  margin: 0;
+}
+
+html:root body[data-brand].has-brand-sticky-layout .brand-sticky-main [data-review-strip] > .brand-review-strip-controls {
+  grid-column: 2;
+  grid-row: 1;
+  justify-self: end;
+}
+
+.brand-review-strip-controls .home-games-control {
+  border-color: var(--review-line);
+  background: var(--review-surface);
+  color: var(--review-ink);
+}
+
+html:root body[data-brand].has-brand-sticky-layout .brand-sticky-main [data-review-strip] > .brand-review-strip {
+  display: flex;
+  flex-wrap: nowrap;
+  align-items: stretch;
+  gap: 10px;
+  overflow: auto hidden;
+  padding: 2px 2px 7px;
+  scroll-snap-type: x proximity;
+  overscroll-behavior-inline: contain;
+}
+
+html:root body[data-brand].has-brand-sticky-layout .brand-sticky-main [data-review-strip] > .brand-review-strip > .feature-card {
+  display: flex;
+  flex: 0 0 min(82%, 260px);
+  flex-direction: column;
+  gap: 6px;
+  height: auto;
+  padding: 12px;
+  scroll-snap-align: start;
+  overflow-wrap: break-word;
+}
+
+html:root body[data-brand].has-brand-sticky-layout .brand-sticky-main
+  :is([data-review-strip='pros'], [data-review-strip='suitability']) > .brand-review-strip > .feature-card {
+  flex-basis: min(84%, 420px);
+}
+
+@media (max-width: 560px) {
+  html:root body[data-brand].has-brand-sticky-layout .brand-sticky-main
+    [data-review-strip] > .brand-review-strip > .feature-card {
+    /* Leave enough of the next card visible to show the track can scroll. */
+    flex-basis: calc(100% - 44px);
+  }
+}
+
+html:root body[data-brand].has-brand-sticky-layout .brand-sticky-main [data-review-strip='highlights'] .feature-card > .icon-placeholder {
+  display: none;
+}
+
+.brand-review-strip:focus-visible {
+  outline: 2px solid var(--review-contents-active);
+  outline-offset: 1px;
 }
 
 .brand-betting-section .brand-betting-summary {
@@ -888,26 +938,6 @@ html:root body[data-brand].has-brand-sticky-layout .brand-sticky-title__inner {
   html:root body[data-brand] .brand-review-table-frame [data-mobile-table-mode='key-value'] th[scope='row'] {
     color: var(--review-ink);
     font-weight: 750;
-  }
-
-  /* Retain both cards in one row and hide legacy ordinal badges on narrow screens. */
-  html:root body[data-brand].has-brand-sticky-layout .brand-sticky-main
-    :is(#brand-why-section, .brand-hero-why, [data-review-section='pros'], [data-review-section='suitability'])
-    > :is(.features-grid, .premium-grid) {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 8px;
-  }
-
-  html:root body[data-brand].has-brand-sticky-layout .brand-sticky-main
-    :is(#brand-why-section, .brand-hero-why, [data-review-section='pros'], [data-review-section='suitability'])
-    > :is(.features-grid, .premium-grid) > .feature-card {
-    padding: 10px;
-    gap: 5px;
-  }
-
-  html:root body[data-brand].has-brand-sticky-layout .brand-sticky-main
-    :is(#brand-why-section, .brand-hero-why) .feature-card > .icon-placeholder {
-    display: none;
   }
 
   html:root body[data-brand].has-brand-sticky-layout .brand-sticky-main

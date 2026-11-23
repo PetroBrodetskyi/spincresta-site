@@ -7,7 +7,7 @@ import { getFeaturedHomeBrands } from './featured-brands.js?v=20261119-shared-se
 import { initFaqSections } from './faq.js?v=20261119-faq-layout';
 import { initFooterNewsletter } from './footer-newsletter.js?v=20260826-newsletter-4';
 import { initAccountAuth, prepareAccountHeader } from './account-auth.js?v=20261122-account-dialog-sync';
-import { initSiteIcons, siteIconMarkup } from './site-icons.js?v=20261123-brand-providers';
+import { initSiteIcons, siteIconMarkup } from './site-icons.js?v=20261123-single-row';
 import { initSectionNavigation } from './section-navigation.js?v=20261119-light-editorial';
 import { bindImagePreview } from './image-preview.js?v=20261119-preview-loader';
 
@@ -33,7 +33,7 @@ const brandLayoutFallbackTimer = document.body?.dataset.brand
     }, 1500)
   : null;
 const brandLayoutModuleReady = document.body?.dataset.brand
-  ? import('./pages/brand-layout.js?v=20261123-coolzino').then(module => {
+  ? import('./pages/brand-layout.js?v=20261123-single-row').then(module => {
       initBrandLayoutModule = module.initBrandLayout;
     }).catch(error => {
       document.body.classList.add('brand-layout-failed');
@@ -68,7 +68,7 @@ const loadPageModules = async () => {
     const [snapshotsModule, gamesModule, pageModule, feedbackModule, relatedModule] = await Promise.all([
       import('./brand-snapshot-configs.js?v=20261123-britsino-catalog'),
       import('./brand-new-games.js?v=20261122-coldbet'),
-      import('./pages/brand.js?v=20261123-review-mobile'),
+      import('./pages/brand.js?v=20261123-single-row'),
       import('./pages/brand-feedback.js?v=20261121-feedback-availability'),
       import('./pages/related-brand-reviews.js?v=20261123-full-width'),
     ]);

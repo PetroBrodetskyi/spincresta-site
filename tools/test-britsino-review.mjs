@@ -62,7 +62,7 @@ test('all ten reviews and catalog cards use localized current copy and approved 
     const topics = [...html.matchAll(/<section[^>]*data-review-section="([^"]+)"[^>]*>([^]*?)<[/]section>/g)]
       .map(([, kind, content]) => [kind, (content.match(/<table>/g) || []).length]).filter(([, tables]) => tables);
     assert.deepEqual(topics, [
-      ['bonuses', 2], ['games', 1], ['rewards', 1], ['cashier', 1], ['trust', 1],
+      ['bonuses', 1], ['bonus-terms', 1], ['games', 1], ['rewards', 1], ['cashier', 1], ['trust', 1],
     ], lang);
     const suitability = html.match(/<section class="container" id="britsino-best-for"[^>]*>[^]*?<[/]section>/)?.[0];
     assert.equal((suitability?.match(/class="feature-card glass-card"/g) || []).length, 2, lang);
