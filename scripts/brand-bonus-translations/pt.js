@@ -18,7 +18,7 @@ export default {
   "Welcome Package 250% up to €1,500 + 250 Free Spins": "Pacote de boas-vindas 250% até € 1.500 + 250 jogadas grátis",
   "Cricket exchange, slots, live casino and local payment routes": "Troca de críquete, slots, casino ao vivo e métodos de pagamento locais",
   "Welcome Bonus - Up to €10,000 + 675 FS": "Bónus de boas-vindas - até € 10.000 + 675 jogadas grátis",
-  "Welcome Package - 320% up to £2,200 + 2,000 FS": "Pacote de boas-vindas - 320% até £ 2.200 + 2.000 jogadas grátis",
+  "Up to £2,000 + 700 Free Spins": "Até 2 000 £ + 700 jogadas grátis",
   "Welcome Pack up to 600% and 190,000 KES across the first 5 deposits": "Pacote de boas-vindas de até 600% e 190.000 KES nos primeiros 5 depósitos",
   "Welcome Pack up to 600% and 700,000 NGN across the first 5 deposits": "Pacote de boas-vindas de até 600% e 700.000 NGN nos primeiros 5 depósitos",
   "Welcome Bonus - ₴150,000 + 750 FS": "Bónus de boas-vindas - ₴150.000 + 750 jogadas grátis",

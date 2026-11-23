@@ -1,0 +1,86 @@
+// Labels and short notes for the published tables and standard suitability cards.
+export const snapshotIntro = {
+  en: 'The Games tab covers slots and electronic table games. Live Games lists the formats in the separate live lobby.',
+  de: 'Unter „Spiele“ stehen Slots und digitale Tischspiele. „Live-Spiele“ zeigt die Formate der separaten Live-Lobby.',
+  es: 'La pestaña de juegos incluye tragamonedas y mesas electrónicas. La de juegos en vivo muestra los formatos de la sección en directo.',
+  it: 'La scheda dei giochi comprende slot e giochi da tavolo digitali. Quella dei giochi dal vivo mostra i formati della lobby dedicata.',
+  pl: 'Karta gier obejmuje automaty i elektroniczne gry stołowe. Karta gier na żywo pokazuje formaty z osobnego katalogu.',
+  uk: 'У вкладці «Ігри» — слоти й електронні настільні ігри. «Ігри наживо» показує формати з окремого live-лобі.',
+  pt: 'O separador de jogos inclui slots e jogos de mesa eletrónicos. O separador ao vivo mostra os formatos da respetiva secção.',
+  fr: 'L’onglet Jeux couvre les machines à sous et les jeux de table électroniques. L’onglet Jeux en direct présente les formats de la rubrique dédiée.',
+  hi: 'गेम टैब में स्लॉट और इलेक्ट्रॉनिक टेबल गेम हैं। लाइव गेम टैब अलग लाइव लॉबी के फ़ॉर्मैट दिखाता है।',
+  fi: 'Pelit-välilehti kattaa kolikkopelit ja digitaaliset pöytäpelit. Livepelit-välilehti näyttää erillisen liveaulan pelimuodot.',
+};
+
+export const tableCopy = {
+  en: [
+    'Topic|Details|Game type|Examples|Roulette|Card games|Lottery & bingo|Scratch cards|Keno|Dice games|Live poker, shows & dice|Loot boxes, scratch cards & free spins|Minimum deposit and withdrawal|Daily withdrawal cap|Weekly withdrawal cap|Monthly withdrawal cap|Pending withdrawals|Great Britain license|Who may find it suitable|What to consider',
+    'Withdrawal caps are in the account currency. Methods vary by account and market; we did not test the signed-in cashier. The terms do not guarantee a 24-hour payout.',
+    'The lobby also includes live poker, game shows, and dice games such as Gravity Sic Bo.',
+    'The catalog is relevant if you want to compare electronic table games, live dealer tables, and games such as keno and scratch cards in one lobby.',
+    'The 35× cash bonus wagering and 3× deposit wagering affect when you can withdraw. A GBP offer does not establish British authorization; choose an operator whose local license you can verify.',
+  ],
+  de: [
+    'Thema|Details|Spielart|Beispiele|Roulette|Kartenspiele|Lotterie und Bingo|Rubbellose|Keno|Würfelspiele|Live-Poker, Shows und Würfelspiele|Lootboxen, Rubbellose und Freispiele|Mindestein- und -auszahlung|Tägliches Auszahlungslimit|Wöchentliches Auszahlungslimit|Monatliches Auszahlungslimit|Offene Auszahlungen|Lizenz in Großbritannien|Für wen es passen kann|Was zu beachten ist',
+    'Die Auszahlungslimits gelten in der Kontowährung. Zahlungsmethoden hängen von Konto und Markt ab; wir haben die Kasse nicht eingeloggt getestet. Die Bedingungen garantieren keine Auszahlung in 24 Stunden.',
+    'Die Lobby bietet außerdem Live-Poker, Spielshows und Würfelspiele wie Gravity Sic Bo.',
+    'Im selben Katalog lassen sich digitale Tischspiele, Live-Tische, Keno und Rubbellose vergleichen.',
+    'Der Geldbonus erfordert 35-fachen, die Einzahlung dreifachen Umsatz. Das beeinflusst, wann eine Auszahlung möglich ist. Ein Angebot in Pfund weist keine britische Zulassung nach. Wählen Sie einen Anbieter mit überprüfbarer lokaler Lizenz.',
+  ],
+  es: [
+    'Tema|Detalles|Tipo de juego|Ejemplos|Ruleta|Juegos de cartas|Lotería y bingo|Tarjetas rasca|Keno|Juegos de dados|Póquer, concursos y dados en vivo|Cajas, tarjetas rasca y tiradas gratis|Depósito y retiro mínimos|Límite diario de retiro|Límite semanal de retiro|Límite mensual de retiro|Retiros pendientes|Licencia en Gran Bretaña|A quién le puede convenir|Qué considerar',
+    'Los límites de retiro se expresan en la moneda de la cuenta. Los métodos dependen de la cuenta y del mercado; no probamos la caja tras iniciar sesión. Las condiciones no garantizan pagos en 24 horas.',
+    'También hay póquer, concursos y juegos de dados en vivo, como Gravity Sic Bo.',
+    'El catálogo permite comparar juegos de mesa electrónicos, mesas en vivo, keno y tarjetas rasca en un mismo sitio.',
+    'El requisito de apuesta de 35× del bono y el de 3× del depósito afectan cuándo puedes retirar. Una oferta en libras no demuestra autorización británica. Elige un operador con licencia local verificable.',
+  ],
+  it: [
+    'Voce|Dettagli|Tipo di gioco|Esempi|Roulette|Giochi di carte|Lotteria e bingo|Gratta e vinci|Keno|Giochi di dadi|Poker, show e dadi dal vivo|Loot box, gratta e vinci e giri gratis|Deposito e prelievo minimi|Limite giornaliero di prelievo|Limite settimanale di prelievo|Limite mensile di prelievo|Prelievi in sospeso|Licenza in Gran Bretagna|A chi può interessare|Cosa considerare',
+    'I limiti di prelievo sono nella valuta del conto. I metodi variano in base al conto e al mercato; non abbiamo testato la cassa dopo l’accesso. Le condizioni non garantiscono un pagamento entro 24 ore.',
+    'Il catalogo comprende anche poker, show e giochi di dadi dal vivo come Gravity Sic Bo.',
+    'Nel catalogo si possono confrontare giochi da tavolo digitali, tavoli dal vivo, keno e gratta e vinci in un unico posto.',
+    'I requisiti di puntata di 35× sul bonus in denaro e 3× sul deposito incidono sui prelievi. Un’offerta in sterline non prova l’autorizzazione britannica. Scegli un operatore con una licenza locale verificabile.',
+  ],
+  pl: [
+    'Temat|Szczegóły|Rodzaj gry|Przykłady|Ruletka|Gry karciane|Loteria i bingo|Zdrapki|Keno|Gry w kości|Poker, teleturnieje i kości na żywo|Skrzynki, zdrapki i darmowe spiny|Minimalna wpłata i wypłata|Dzienny limit wypłat|Tygodniowy limit wypłat|Miesięczny limit wypłat|Oczekujące wypłaty|Licencja w Wielkiej Brytanii|Komu może odpowiadać|Na co zwrócić uwagę',
+    'Limity wypłat podano w walucie konta. Metody zależą od konta i rynku; nie testowaliśmy kasy po zalogowaniu. Regulamin nie gwarantuje wypłaty w 24 godziny.',
+    'Katalog obejmuje też pokera, teleturnieje i gry w kości na żywo, w tym Gravity Sic Bo.',
+    'W jednym katalogu można porównać elektroniczne gry stołowe, stoły na żywo, keno i zdrapki.',
+    'Obrót bonusem gotówkowym 35× i wpłatą 3× wpływa na możliwość wypłaty. Oferta w funtach nie potwierdza brytyjskiego zezwolenia. Wybierz operatora z lokalną licencją, którą możesz zweryfikować.',
+  ],
+  uk: [
+    'Пункт|Деталі|Тип ігор|Приклади|Рулетка|Карткові ігри|Лотереї та бінго|Скретч-картки|Кено|Ігри в кості|Покер, шоу й кості наживо|Лутбокси, скретч-картки та фріспіни|Мінімальний депозит і виплата|Денний ліміт виплат|Тижневий ліміт виплат|Місячний ліміт виплат|Активні заявки на виплату|Ліцензія у Великій Британії|Кому може підійти|Що варто врахувати',
+    'Ліміти виплат наведено у валюті акаунта. Методи залежать від акаунта й ринку; касу після входу ми не тестували. Правила не гарантують виплату за 24 години.',
+    'У каталозі наживо також є покер, ігрові шоу й ігри в кості, зокрема Gravity Sic Bo.',
+    'Тим, хто хоче порівняти в одному каталозі електронні настільні ігри, столи з дилерами, кено та скретч-картки.',
+    'Відіграш грошового бонусу 35× і депозиту 3× впливає на можливість виплати. Пропозиція у фунтах не підтверджує британської ліцензії. Обирайте оператора, ліцензію якого можна перевірити в місцевому реєстрі.',
+  ],
+  pt: [
+    'Tema|Detalhes|Tipo de jogo|Exemplos|Roleta|Jogos de cartas|Lotaria e bingo|Raspadinhas|Keno|Jogos de dados|Póquer, concursos e dados ao vivo|Caixas, raspadinhas e jogadas grátis|Depósito e levantamento mínimos|Limite diário de levantamento|Limite semanal de levantamento|Limite mensal de levantamento|Levantamentos pendentes|Licença na Grã-Bretanha|A quem pode interessar|O que considerar',
+    'Os limites de levantamento são na moeda da conta. Os métodos dependem da conta e do mercado; não testámos a caixa após iniciar sessão. As condições não garantem pagamentos em 24 horas.',
+    'O catálogo também inclui póquer, concursos e jogos de dados ao vivo, como Gravity Sic Bo.',
+    'É possível comparar jogos de mesa eletrónicos, mesas ao vivo, keno e raspadinhas no mesmo catálogo.',
+    'Os requisitos de aposta de 35× para o bónus em dinheiro e 3× para o depósito afetam os levantamentos. Uma oferta em libras não comprova autorização britânica. Escolha um operador com uma licença local verificável.',
+  ],
+  fr: [
+    'Sujet|Détails|Type de jeu|Exemples|Roulette|Jeux de cartes|Loterie et bingo|Jeux à gratter|Keno|Jeux de dés|Poker, jeux télévisés et dés en direct|Coffres, cartes à gratter et tours gratuits|Dépôt et retrait minimums|Plafond de retrait quotidien|Plafond de retrait hebdomadaire|Plafond de retrait mensuel|Retraits en cours|Licence en Grande-Bretagne|À qui il peut convenir|À prendre en compte',
+    'Les plafonds de retrait sont indiqués dans la devise du compte. Les moyens de paiement varient selon le compte et le marché ; nous n’avons pas testé la caisse après connexion. Les conditions ne garantissent pas de paiement en 24 heures.',
+    'Le casino en direct propose aussi du poker, des jeux télévisés et des jeux de dés comme Gravity Sic Bo.',
+    'Le même catalogue permet de comparer les jeux de table électroniques, les tables en direct, le keno et les jeux à gratter.',
+    'Les conditions de mise de 35× sur le bonus en argent et 3× sur le dépôt influent sur les retraits. Une offre en livres ne prouve pas une autorisation en Grande-Bretagne. Choisissez un opérateur dont la licence locale est vérifiable.',
+  ],
+  hi: [
+    'विषय|जानकारी|गेम का प्रकार|उदाहरण|रूलेट|ताश के खेल|लॉटरी और बिंगो|स्क्रैच कार्ड|केनो|पासे के खेल|लाइव पोकर, गेम शो और पासे|लूट बॉक्स, स्क्रैच कार्ड और मुफ़्त स्पिन|न्यूनतम जमा और निकासी|दैनिक निकासी सीमा|साप्ताहिक निकासी सीमा|मासिक निकासी सीमा|लंबित निकासी|ग्रेट ब्रिटेन का लाइसेंस|किसके काम आ सकता है|ध्यान देने की बातें',
+    'निकासी की सीमाएँ खाते की मुद्रा में हैं। भुगतान के तरीके खाते और बाज़ार पर निर्भर हैं। हमने लॉग इन करके कैशियर नहीं जाँचा। नियम 24 घंटे में भुगतान की गारंटी नहीं देते।',
+    'लॉबी में लाइव पोकर, गेम शो और Gravity Sic Bo जैसे पासे के खेल भी हैं।',
+    'एक ही कैटलॉग में इलेक्ट्रॉनिक टेबल गेम, लाइव टेबल, केनो और स्क्रैच कार्ड की तुलना की जा सकती है।',
+    'नकद बोनस पर 35× और जमा पर 3× वेजरिंग से निकासी की शर्तें प्रभावित होती हैं। पाउंड में ऑफ़र ब्रिटिश अनुमति का प्रमाण नहीं है। ऐसा संचालक चुनें जिसका स्थानीय लाइसेंस सत्यापित हो सके।',
+  ],
+  fi: [
+    'Aihe|Tiedot|Pelityyppi|Esimerkkejä|Ruletti|Korttipelit|Arvontapelit ja bingo|Raaputusarvat|Keno|Noppapelit|Livepokeri, pelishow’t ja noppapelit|Yllätyslaatikot, raaputusarvat ja ilmaiskierrokset|Talletuksen ja kotiutuksen vähimmäismäärä|Päivittäinen kotiutusraja|Viikoittainen kotiutusraja|Kuukausittainen kotiutusraja|Avoimet kotiutukset|Pelilupa Isossa-Britanniassa|Kenelle voi sopia|Mitä kannattaa huomioida',
+    'Kotiutusrajat ovat tilin valuutassa. Maksutavat riippuvat tilistä ja markkinasta. Emme testanneet kassaa kirjautuneena. Ehdoissa ei luvata maksua 24 tunnissa.',
+    'Liveaulassa on myös pokeria, pelishow’ta ja noppapelejä, kuten Gravity Sic Bo.',
+    'Samassa aulassa voi vertailla digitaalisia pöytäpelejä, livepöytiä, kenoa ja raaputusarpoja.',
+    'Rahabonuksen 35× ja talletuksen 3× kierrätysvaatimus vaikuttavat kotiuttamiseen. Puntatarjous ei osoita pelilupaa Isossa-Britanniassa. Valitse toimija, jonka paikallisen peliluvan voit tarkistaa.',
+  ],
+};

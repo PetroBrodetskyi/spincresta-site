@@ -18,7 +18,7 @@ export default {
   "Welcome Package 250% up to €1,500 + 250 Free Spins": "Вітальний пакет 250% до 1500 євро + 250 безкоштовних обертань",
   "Cricket exchange, slots, live casino and local payment routes": "Обмін крикету, слоти, live-казино та місцеві способи оплати",
   "Welcome Bonus - Up to €10,000 + 675 FS": "Вітальний бонус - до €10 000 + 675 FS",
-  "Welcome Package - 320% up to £2,200 + 2,000 FS": "Вітальний пакет - 320% до £2200 + 2000 FS",
+  "Up to £2,000 + 700 Free Spins": "До £2 000 + 700 фріспінів",
   "Welcome Pack up to 600% and 190,000 KES across the first 5 deposits": "Вітальний пакет до 600% і 190 000 KES на перші 5 депозитів",
   "Welcome Pack up to 600% and 700,000 NGN across the first 5 deposits": "Вітальний пакет до 600% і 700 000 NGN на перші 5 депозитів",
   "Welcome Bonus - ₴150,000 + 750 FS": "Вітальний бонус - ₴150 000 + 750 FS",

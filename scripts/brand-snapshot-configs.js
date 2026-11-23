@@ -620,7 +620,40 @@ const magneticCategoryStatuses = {
 
 const kingmakerSportsLabels = ['MMA', 'Rugby', 'Darts', 'Badminton', 'Snooker', 'Futsal', 'Biathlon', 'Chess'];
 
+const britsinoExtraCategories = ['Card games', 'Lottery', 'Live keno', 'Games & Betting Snapshot'];
+const britsinoCategoryNames = {
+  en: ['Card games', 'Lottery', 'Live keno', 'Game Catalog Snapshot'],
+  de: ['Kartenspiele', 'Lotterie', 'Live-Keno', 'Spieleangebot im Überblick'],
+  es: ['Juegos de cartas', 'Lotería', 'Keno en vivo', 'Resumen del catálogo de juegos'],
+  it: ['Giochi di carte', 'Lotteria', 'Keno dal vivo', 'Panoramica del catalogo giochi'],
+  pl: ['Gry karciane', 'Loteria', 'Keno na żywo', 'Przegląd katalogu gier'],
+  uk: ['Карткові ігри', 'Лотереї', 'Кено наживо', 'Огляд каталогу ігор'],
+  pt: ['Jogos de cartas', 'Lotaria', 'Keno ao vivo', 'Resumo do catálogo de jogos'],
+  fr: ['Jeux de cartes', 'Loterie', 'Keno en direct', 'Aperçu du catalogue de jeux'],
+  hi: ['ताश के खेल', 'लॉटरी', 'लाइव केनो', 'गेम कैटलॉग की झलक'],
+  fi: ['Korttipelit', 'Arvontapelit', 'Livekeno', 'Pelivalikoima lyhyesti'],
+};
+
 export const BRAND_SNAPSHOT_CONFIGS = {
+  britsino: {
+    tabs: [
+      createSnapshotTab('Games', [
+        'Slots', 'Instant win', 'Bonus buy', 'Jackpot games', 'Table games', 'Roulette', 'Blackjack', 'Card games',
+        'Poker', 'Lottery', 'Bingo', 'Scratch cards', 'Keno', 'Craps and dice',
+      ], ['Slingo']),
+      createSnapshotTab('Live games', [
+        'Live roulette', 'Live blackjack', 'Live baccarat', 'Live poker', 'Live shows', 'Live dice games', 'Other live games',
+      ], ['Live keno']),
+    ],
+    notes: publicCatalogueNotes,
+    labels: Object.fromEntries(Object.entries(BETONWIN_GAME_LABELS).map(([locale, labels]) => [locale, {
+      ...labels,
+      ...Object.fromEntries(britsinoExtraCategories.map((key, i) => [key, britsinoCategoryNames[locale][i]])),
+      'Instant win': locale === 'en' ? 'Instant games' : magneticCollectionLabels[locale].split('|')[0],
+      'Table games': locale === 'en' ? 'Table games' : magneticCollectionLabels[locale].split('|')[4],
+      'Not surfaced:': locale === 'en' ? 'Not surfaced:' : magneticCategoryStatuses[locale],
+    }])),
+  },
   coolzino: {
     tabs: [
       createSnapshotTab('Games', ['Slots', 'Jackpot games', 'Live games'], ['Bingo', 'Slingo']),

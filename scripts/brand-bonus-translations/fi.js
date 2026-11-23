@@ -18,7 +18,7 @@ export default {
   "Welcome Package 250% up to €1,500 + 250 Free Spins": "Tervetuliaispaketti 250 % aina 1500 € asti + 250 ilmaiskierrosta",
   "Cricket exchange, slots, live casino and local payment routes": "Krikettipörssi, kolikkopelit, livekasino ja paikalliset maksutavat",
   "Welcome Bonus - Up to €10,000 + 675 FS": "Tervetuliaisbonus - Jopa 10 000 € + 675 FS",
-  "Welcome Package - 320% up to £2,200 + 2,000 FS": "Tervetuliaispaketti - 320 % aina 2 200 £ + 2 000 FS",
+  "Up to £2,000 + 700 Free Spins": "Enintään 2 000 £ + 700 ilmaiskierrosta",
   "Welcome Pack up to 600% and 190,000 KES across the first 5 deposits": "Tervetuliaispaketti jopa 600 % ja 190 000 KES viiden ensimmäisen talletuksen aikana",
   "Welcome Pack up to 600% and 700,000 NGN across the first 5 deposits": "Tervetuliaispaketti jopa 600 % ja 700 000 NGN viiden ensimmäisen talletuksen aikana",
   "Welcome Bonus - ₴150,000 + 750 FS": "Tervetuliaisbonus - ₴150 000 + 750 FS",

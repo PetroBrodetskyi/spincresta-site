@@ -2161,7 +2161,7 @@ export const BRANDS = [
   },
   {
     name: 'Britsino',
-    bonus: 'Welcome Package - 320% up to £2,200 + 2,000 FS',
+    bonus: 'Up to £2,000 + 700 Free Spins',
     cta: 'Play Now',
     urlDetail: 'brands/britsino.html',
     urlCasino: 'https://armadaapp.media-412.com/click?pid=3862&offer_id=122325',

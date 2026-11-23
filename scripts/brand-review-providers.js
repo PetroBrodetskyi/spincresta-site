@@ -14,6 +14,7 @@ const byReview = Object.freeze({
   beton: 'pragmatic-play 3-oaks playson endorphina egt-digital',
   betonwin: 'pragmatic-play evolution nolimit-city bgaming playson pg-soft 3-oaks spribe',
   betrepublic: 'playson hacksaw-gaming spinomenal yggdrasil amusnet gamomat bgaming egt-digital gamebeat evoplay ct-interactive 1x2gaming ruby-play tada-gaming mancala winfinity aviatrix platipus onetouch amatic oryx iron-dog inout popiplay apollo-games zillion-games tom-horn caleta-gaming mascot solidicon pateplay barbara-bang 100hp-gaming spinthon fugaso riddec-games spade-gaming betgames',
+  britsino: 'bgaming true-labs gamzix ka-gaming fugaso 1spin4win 100hp-gaming tada-gaming betsoft-gaming platipus mascot inout belatra evoplay betgames',
   browinner: 'pragmatic-play evolution play-n-go netent yggdrasil red-tiger playtech bgaming playson',
   casinado: 'pragmatic-play hacksaw-gaming playtech playson amusnet betsoft-gaming',
   coolzino: 'pragmatic-play evolution bgaming playson endorphina evoplay gamzix gamebeat novomatic felix-gaming mascot',

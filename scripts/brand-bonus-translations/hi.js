@@ -18,7 +18,7 @@ export default {
   "Welcome Package 250% up to €1,500 + 250 Free Spins": "स्वागत पैकेज 250% €1,500 तक + 250 निःशुल्क स्पिन",
   "Cricket exchange, slots, live casino and local payment routes": "क्रिकेट एक्सचेंज, स्लॉट, लाइव कैसीनो और स्थानीय भुगतान विधियां",
   "Welcome Bonus - Up to €10,000 + 675 FS": "स्वागत बोनस - €10,000 + 675 एफएस तक",
-  "Welcome Package - 320% up to £2,200 + 2,000 FS": "स्वागत पैकेज - 320% £2,200 + 2,000 एफएस तक",
+  "Up to £2,000 + 700 Free Spins": "अधिकतम £2,000 + 700 मुफ़्त स्पिन",
   "Welcome Pack up to 600% and 190,000 KES across the first 5 deposits": "600% तक वेलकम पैक और पहली 5 जमाओं पर 190,000 केईएस",
   "Welcome Pack up to 600% and 700,000 NGN across the first 5 deposits": "प्रथम 5 जमाओं में 600% तक वेलकम पैक और 700,000 एनजीएन",
   "Welcome Bonus - ₴150,000 + 750 FS": "स्वागत बोनस - ₴150,000 + 750 एफएस",

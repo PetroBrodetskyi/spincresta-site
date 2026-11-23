@@ -327,7 +327,7 @@ html:root body[data-brand] :is(.content-review, .content-article) > section.cont
   min-height: 62px;
   place-items: center;
   padding: 8px;
-  background: #172740;
+  background: #000;
 }
 
 .review-provider-logo img {

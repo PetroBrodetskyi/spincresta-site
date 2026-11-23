@@ -575,13 +575,14 @@ export const initBrandPage = context => {
         if (headings.length > 1 && table.tHead?.rows.length === 1 &&
             !table.querySelector('[rowspan], [colspan], tfoot, colgroup, caption') &&
             rows.length && rows.every(row => row.cells.length === headings.length &&
-              Array.from(row.cells).every(cell => cell.tagName === 'TD'))) {
+              Array.from(row.cells).every((cell, index) => cell.tagName === 'TD' ||
+                (index === 0 && cell.matches('th[scope="row"]'))))) {
           table.classList.add('brand-review-table--stackable');
           table.setAttribute('role', 'table');
           const roles = { THEAD: 'rowgroup', TBODY: 'rowgroup', TR: 'row', TH: 'columnheader', TD: 'cell' };
           table.querySelectorAll('thead, tbody, tr, th, td').forEach(cell => {
-            cell.setAttribute('role', roles[cell.tagName]);
-            if (cell.tagName === 'TD') {
+            cell.setAttribute('role', cell.matches('th[scope="row"]') ? 'rowheader' : roles[cell.tagName]);
+            if (cell.matches('td, th[scope="row"]')) {
               const label = document.createElement('span');
               label.className = 'brand-review-table__label';
               label.setAttribute('aria-hidden', 'true');

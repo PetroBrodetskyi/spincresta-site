@@ -176,6 +176,43 @@ html:root body[data-brand].has-brand-sticky-layout :is(.brand-sticky-main, .bran
   box-shadow: none;
 }
 
+/* Topic icons and a short two-column summary for compact review highlights. */
+.brand-highlights--compact .feature-card > .brand-highlight-icon {
+  flex: none;
+  color: var(--review-muted);
+}
+
+@media (max-width: 650px) {
+  html:root body[data-brand].has-brand-sticky-layout .brand-sticky-main #brand-why-section.brand-highlights--compact
+    > .features-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px;
+  }
+
+  html:root body[data-brand].has-brand-sticky-layout .brand-sticky-main #brand-why-section.brand-highlights--compact
+    > .features-grid > .feature-card {
+    display: grid;
+    grid-template-columns: 18px minmax(0, 1fr);
+    align-content: start;
+    align-items: start;
+    gap: 6px 8px;
+    padding: 10px;
+  }
+
+  .brand-highlights--compact .feature-card > .brand-highlight-icon {
+    align-self: start;
+  }
+
+  html:root body[data-brand].has-brand-sticky-layout .brand-sticky-main .brand-highlights--compact .feature-card > strong {
+    font-size: var(--type-ui);
+    line-height: 1.3;
+  }
+
+  .brand-highlights--compact .feature-card > span {
+    grid-column: 1 / -1;
+  }
+}
+
 html:root body[data-brand].has-brand-sticky-layout
   :is(.brand-sticky-main, .brand-sticky-aside, .brand-right-rail) .feature-card > :is(strong, h3, h4) {
   margin: 0;
@@ -346,6 +383,12 @@ html:root body[data-brand] .brand-review-table-frame tbody tr:nth-child(even) {
 
 html:root body[data-brand] .brand-review-table-frame tbody tr:last-child > :is(th, td) {
   border-bottom: 0;
+}
+
+@media (min-width: 651px) {
+  html:root body[data-brand] .brand-review-table-frame tr > :is(th, td):first-child {
+    overflow-wrap: break-word;
+  }
 }
 
 .brand-review-table__label {
@@ -811,7 +854,7 @@ html:root body[data-brand].has-brand-sticky-layout .brand-sticky-title__inner {
     border-top: 1px solid var(--review-line);
   }
 
-  html:root body[data-brand] .brand-review-table--stackable tbody td {
+  html:root body[data-brand] .brand-review-table--stackable tbody :is(td, th[scope='row']) {
     display: block;
     padding: 0;
     border: 0;

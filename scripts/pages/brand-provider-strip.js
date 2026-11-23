@@ -1,4 +1,4 @@
-import { getReviewProviders } from '../brand-review-providers.js?v=20261123-coolzino';
+import { getReviewProviders } from '../brand-review-providers.js?v=20261123-britsino-catalog';
 import { siteIconMarkup } from '../site-icons.js?v=20261123-brand-providers';
 import { bindManualCardStrip } from '../scrolling-card-strip.js?v=20261123-provider-strip';
 import { reviewSectionLabel } from './brand-review-order.js?v=20261123-provider-strip';

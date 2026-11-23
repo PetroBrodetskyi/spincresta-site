@@ -1,7 +1,7 @@
 ﻿// =====================
 // IMPORTS
 // =====================
-import { BRANDS } from './brands.js?v=20261123-coldbet-de-coolzino-unavailable';
+import { BRANDS } from './brands.js?v=20261123-britsino-catalog';
 import { COUNTRIES } from './countries.js';
 import { getFeaturedHomeBrands } from './featured-brands.js?v=20261119-shared-search';
 import { initFaqSections } from './faq.js?v=20261119-faq-layout';
@@ -66,9 +66,9 @@ const loadPageModules = async () => {
 
   if (isBrandPage) {
     const [snapshotsModule, gamesModule, pageModule, feedbackModule, relatedModule] = await Promise.all([
-      import('./brand-snapshot-configs.js?v=20261123-coolzino'),
+      import('./brand-snapshot-configs.js?v=20261123-britsino-catalog'),
       import('./brand-new-games.js?v=20261122-coldbet'),
-      import('./pages/brand.js?v=20261123-coolzino'),
+      import('./pages/brand.js?v=20261123-britsino-row-headers'),
       import('./pages/brand-feedback.js?v=20261121-feedback-availability'),
       import('./pages/related-brand-reviews.js?v=20261123-full-width'),
     ]);
@@ -380,7 +380,7 @@ const SITE_LOCALE = DOCUMENT_LANGUAGE.startsWith('de')
 let brandBonusTranslations = {};
 const brandBonusTranslationsReady = SITE_LOCALE === 'en'
   ? Promise.resolve()
-  : import(`./brand-bonus-translations/${SITE_LOCALE}.js?v=20261122-coldbet`)
+  : import(`./brand-bonus-translations/${SITE_LOCALE}.js?v=20261123-britsino`)
       .then(module => {
         brandBonusTranslations = module.default || {};
       })
