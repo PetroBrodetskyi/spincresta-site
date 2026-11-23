@@ -13,7 +13,7 @@ const read = path => readFileSync(new URL('../' + path, import.meta.url), 'utf8'
 const brand = BRANDS.find(item => item.name === 'ColdBet');
 
 test('ColdBet retains every approved market and uses the approved affiliate endpoint', () => {
-  assert.deepEqual(brand.countries, ['PT', 'PL', 'GE']);
+  assert.deepEqual(brand.countries, ['PT', 'PL', 'GE', 'DE']);
   assert.equal(brand.urlCasino, 'https://armadaapp.media-412.com/click?pid=3862&offer_id=124847');
   assert.equal(brand.reviewComingSoon, undefined);
   assert.deepEqual(brand.payments, paymentIcons);
@@ -91,7 +91,13 @@ test('each localized review has indexable metadata, verified offer figures and m
     assert.match(cashier, /25/);
     const perks = html.match(/<section[^>]+id="coldbet-rewards"[\s\S]*?<\/section>/)?.[0];
     for (const [tier] of vipRows) assert.ok(perks.includes(`<th scope="row">${esc(tier)}</th>`), lang);
-    for (const country of ['poland', 'portugal']) {
+    const germany = new Intl.DisplayNames([locale], { type: 'region' }).of('DE');
+    assert.ok(html.includes(esc(germany)), lang);
+    assert.match(html, /data-review-market-label="[^"]+"/);
+    const catalog = read(prefix + 'casinos-and-betting/index.html');
+    const row = catalog.match(/<article class="casino-list-row"[^>]*data-brand-slug="coldbet"[^>]*>[\s\S]*?<\/article>/)?.[0];
+    assert.ok(row?.includes(esc(germany)), lang);
+    for (const country of ['poland', 'portugal', 'germany']) {
       assert.ok(read(`${prefix}online-casinos/${country}/index.html`).includes(`href="${path}"`), `${lang}/${country}`);
     }
   }

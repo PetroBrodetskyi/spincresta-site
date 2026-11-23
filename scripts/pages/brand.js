@@ -2,7 +2,7 @@
 
 import { isBrandSportsSection } from './brand-layout.js?v=20261118-brand-games-row';
 import { classifyReviewSection, compareReviewSections, reviewSectionLabel } from './brand-review-order.js?v=20261123-provider-strip';
-import { initBrandProviderStrips, insertBrandProviderSection } from './brand-provider-strip.js?v=20261123-brand-providers';
+import { initBrandProviderStrips, insertBrandProviderSection } from './brand-provider-strip.js?v=20261123-coolzino';
 
 const sportsbookHeadingPattern = /^(?:sportsbook|sportwetten|apuestas deportivas|scommesse sportive|zakłady sportowe|букмекер(?:ський розділ)?|спортбук|спортивні ставки|ставки на спорт|apostas desportivas|apostas esportivas|paris sportifs|स्पोर्ट्सबुक|खेल सट्टेबाज़ी|urheiluvedonlyönti)$/iu;
 export const isSportsbookFeatureHeading = heading => sportsbookHeadingPattern.test(String(heading || '').trim());
@@ -33,6 +33,8 @@ export const initBrandPage = context => {
   } = context;
 
   const getBrandSnapshotName = () => {
+    const registryName = findBrandByPageKey(context.brandKey)?.name;
+    if (registryName) return registryName;
     const heading = document.querySelector('.hero h1, .hero-content h1, h1');
     if (!heading) return 'This brand';
     return normalizeText(heading.textContent).replace(/\s+Review$/i, '').trim() || 'This brand';

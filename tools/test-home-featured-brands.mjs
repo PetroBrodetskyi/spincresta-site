@@ -8,13 +8,14 @@ import { forwardHomeBrandVerticalWheel, homeBrandScrollStep } from '../scripts/p
 const featuredSlugs = [
   'onlywin', 'fraga-ar', 'spinboss', 'stonevegas', 'lizaro',
   'zarbet', 'trino', 'gamblezen', '10bet', 'spinrise',
-  'pinco', 'ybets', 'dazard', 'coolzino', '22bet',
+  'pinco', 'ybets', 'dazard', '22bet',
   'casinado', 'magneticslots', 'goldenstar', 'moonwin', 'mrpunter',
 ];
 
-test('the default homepage uses the 20 approved registry entries in editorial order', () => {
+test('the default homepage keeps available entries in editorial order and excludes Coolzino', () => {
   const featured = getFeaturedHomeBrands([...BRANDS].reverse());
   assert.deepEqual(featured.map(brand => brand.urlDetail), featuredSlugs.map(slug => `brands/${slug}.html`));
+  assert.ok(!featured.some(brand => brand.name === 'Coolzino'));
   assert.deepEqual(featured[1].countries, ['AR']);
   for (const brand of featured) {
     assert.equal(brand, BRANDS.find(entry => entry.urlDetail === brand.urlDetail));
@@ -33,7 +34,7 @@ test('a brand becomes ineligible for homepage recommendations if it or its revie
   for (const flags of offlineFlags) {
     const registry = BRANDS.map(brand => brand.urlDetail === 'brands/fraga-ar.html' ? { ...brand, ...flags } : brand);
     const featured = getFeaturedHomeBrands(registry);
-    assert.equal(featured.length, 19);
+    assert.equal(featured.length, featuredSlugs.length - 1);
     assert.ok(!featured.some(brand => brand.name === 'Fraga'));
   }
 });

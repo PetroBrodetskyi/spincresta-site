@@ -56,6 +56,41 @@ test('availability synchronization preserves active brands and internal review l
   assert.equal(syncUnavailableBrandMarkup(fixture, { ...brand, temporarilyUnavailable: false }, 'en'), fixture);
 });
 
+test('localized A–Z review tiles display the unavailable status outside the searchable brand name', () => {
+  const source = fs.readFileSync('scripts/main.js', 'utf8')
+    .match(/const applyNotRecommendedCasinoRows = \(\) => \{[\s\S]*?\n};/)?.[0];
+  assert.ok(source);
+  const href = '/uk/brands/coolzino/';
+  let status;
+  const name = {
+    textContent: 'Coolzino',
+    querySelector: () => ({}),
+    after: node => { status = node; },
+  };
+  const tile = { getAttribute: () => href, contains: node => node === name, querySelector: () => status };
+  const row = {
+    classList: { add() {}, toggle() {} }, dataset: {},
+    querySelector: selector => selector === '.casino-name' ? name : tile,
+    querySelectorAll: () => [],
+  };
+  const run = vm.runInNewContext(source + '\napplyNotRecommendedCasinoRows;', {
+    BRANDS,
+    normalizePagePath: String,
+    getBrandDetailPath: brand => '/' + brand.urlDetail.replace('.html', '/'),
+    brandPagePath: brand => '/uk/' + brand.urlDetail.replace('.html', '/'),
+    document: { querySelectorAll: () => [row], createElement: () => ({}) },
+    getDisabledBrandCopy: () => ({ cta: 'Наразі недоступне' }),
+  });
+  run();
+  assert.equal(row.dataset.temporarilyUnavailable, 'true');
+  assert.equal(status.className, 'catalog-tile-availability');
+  assert.equal(status.textContent, 'Наразі недоступне');
+  assert.equal(name.textContent, 'Coolzino');
+  const existing = status;
+  run();
+  assert.equal(status, existing);
+});
+
 test('unavailable grid cards omit the Review button but still open their brand page', () => {
   const source = fs.readFileSync('scripts/main.js', 'utf8')
     .match(/const createCasinoCard = \([\s\S]*?\n};(?=\n\nconst ITEMS_PER_BATCH)/)?.[0];

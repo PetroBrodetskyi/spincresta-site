@@ -273,7 +273,7 @@ export const initBrandLayout = context => {
     const labels = {
       heading: localeText('Casino details', 'Casino-Informationen', 'Información del casino', 'Informazioni sul casinò', 'Informacje o kasynie', 'Інформація про казино', 'Informações do casino', 'Informations sur le casino', 'कैसीनो की जानकारी', 'Kasinon tiedot'),
       bonus: localeText('Welcome offer', 'Willkommensangebot', 'Oferta de bienvenida', 'Offerta di benvenuto', 'Oferta powitalna', 'Вітальна пропозиція', 'Oferta de boas-vindas', 'Offre de bienvenue', 'वेलकम ऑफ़र', 'Tervetulotarjous'),
-      markets: localeText('Available markets', 'Verfügbare Märkte', 'Mercados disponibles', 'Mercati disponibili', 'Dostępne rynki', 'Доступні ринки', 'Mercados disponíveis', 'Marchés disponibles', 'उपलब्ध बाज़ार', 'Saatavilla olevat markkinat'),
+      markets: document.body.dataset.reviewMarketLabel || localeText('Available markets', 'Verfügbare Märkte', 'Mercados disponibles', 'Mercati disponibili', 'Dostępne rynki', 'Доступні ринки', 'Mercados disponíveis', 'Marchés disponibles', 'उपलब्ध बाज़ार', 'Saatavilla olevat markkinat'),
       countries: localeText(countryCount === 1 ? 'country' : 'countries', countryCount === 1 ? 'Land' : 'Länder', countryCount === 1 ? 'país' : 'países', countryCount === 1 ? 'Paese' : 'Paesi', countryCount === 1 ? 'kraj' : slavicCountryForm('krajów', 'kraje', 'krajów'), slavicCountryForm('країна', 'країни', 'країн'), countryCount === 1 ? 'país' : 'países', 'pays', 'देश', countryCount === 1 ? 'maa' : 'maata'),
     };
 
@@ -361,7 +361,7 @@ export const initBrandLayout = context => {
       if (countries) {
         const coverage = document.createElement('span');
         coverage.className = 'brand-profile-showcase__coverage';
-        coverage.textContent = `${localeText(
+        coverage.textContent = `${document.body.dataset.reviewMarketLabel || localeText(
           'Available countries', 'Verfügbare Länder', 'Países disponibles',
           'Paesi disponibili', 'Dostępne kraje', 'Доступно країн',
           'Países disponíveis', 'Pays disponibles', 'उपलब्ध देश', 'Saatavilla olevat maat'

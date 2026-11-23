@@ -108,7 +108,8 @@ for (const [i, lang] of locales.entries()) {
     .replace(/(<strong>)[^<]*(<\/strong>\s*<span>)[\s\S]*?(<\/span>)/g, (_, start, body, end) =>
       start + esc(facts[row][0]) + body + esc(facts[row++][1]) + end);
   if (row !== facts.length) throw new Error(`Invalid highlight shell: ${lang}`);
-  const geo = take(/(<section class="container">\s*<div class="brand-countries">[\s\S]*?<\/section>)/);
+  const geo = take(/(<section class="container">\s*<div class="brand-countries">[\s\S]*?<\/section>)/)
+    .replace(/(<h2 class="title">)[^<]+/, (_, opening) => opening + esc(markets));
   const banking = take(/(<section class="container">\s*<div class="brand-payments">[\s\S]*?<\/section>)/);
   const final = take(/(<section class="container">\s*<div class="final-cta-glass">[\s\S]*?<\/section>)/)
     .replaceAll('BetRepublic', 'ColdBet').replace(ctaPattern, () => cta);
@@ -154,7 +155,7 @@ for (const [i, lang] of locales.entries()) {
     ${take(/(<link rel="stylesheet"[^>]*>)/)}
     <script type="application/ld+json">${JSON.stringify(schema).replaceAll('<', '\\u003c')}</script>
   </head>
-  <body data-brand="${slug}" data-language="${lang}">
+  <body data-brand="${slug}" data-language="${lang}" data-review-market-label="${esc(markets)}">
     ${take(/(<header class="header">[\s\S]*?<\/header>)/)}
     ${hero}
     ${highlights}

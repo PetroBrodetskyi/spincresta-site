@@ -1,7 +1,7 @@
 ﻿// =====================
 // IMPORTS
 // =====================
-import { BRANDS } from './brands.js?v=20261122-coldbet-cashier';
+import { BRANDS } from './brands.js?v=20261123-coldbet-de-coolzino-unavailable';
 import { COUNTRIES } from './countries.js';
 import { getFeaturedHomeBrands } from './featured-brands.js?v=20261119-shared-search';
 import { initFaqSections } from './faq.js?v=20261119-faq-layout';
@@ -33,7 +33,7 @@ const brandLayoutFallbackTimer = document.body?.dataset.brand
     }, 1500)
   : null;
 const brandLayoutModuleReady = document.body?.dataset.brand
-  ? import('./pages/brand-layout.js?v=20261123-review-bands').then(module => {
+  ? import('./pages/brand-layout.js?v=20261123-coolzino').then(module => {
       initBrandLayoutModule = module.initBrandLayout;
     }).catch(error => {
       document.body.classList.add('brand-layout-failed');
@@ -66,9 +66,9 @@ const loadPageModules = async () => {
 
   if (isBrandPage) {
     const [snapshotsModule, gamesModule, pageModule, feedbackModule, relatedModule] = await Promise.all([
-      import('./brand-snapshot-configs.js?v=20261122-coldbet'),
+      import('./brand-snapshot-configs.js?v=20261123-coolzino'),
       import('./brand-new-games.js?v=20261122-coldbet'),
-      import('./pages/brand.js?v=20261123-brand-providers'),
+      import('./pages/brand.js?v=20261123-coolzino'),
       import('./pages/brand-feedback.js?v=20261121-feedback-availability'),
       import('./pages/related-brand-reviews.js?v=20261123-full-width'),
     ]);
@@ -2535,9 +2535,9 @@ const applyNotRecommendedBrandPage = brand => {
 
 const applyNotRecommendedCasinoRows = () => {
   const blockedByPath = new Map(
-    BRANDS.filter(brand => brand.notRecommended && brand.urlDetail).map(brand => [
-      getBrandDetailPath(brand),
-      brand,
+    BRANDS.filter(brand => brand.notRecommended && brand.urlDetail).flatMap(brand => [
+      [getBrandDetailPath(brand), brand],
+      [brandPagePath(brand), brand],
     ])
   );
 
@@ -2555,6 +2555,16 @@ const applyNotRecommendedCasinoRows = () => {
     const name = row.querySelector('.casino-name');
     if (name && !name.querySelector('.casino-list-risk-icon')) {
       name.appendChild(createBlockedBrandIcon('casino-list-risk-icon', brand));
+    }
+    // A-Z tiles keep the play action in an inert template. Show the status
+    // on the review link itself, without changing the name used by search.
+    const tile = row.querySelector('.home-new-review-card[href]');
+    if (brand.temporarilyUnavailable && name && tile?.contains(name) &&
+        !tile.querySelector('.catalog-tile-availability')) {
+      const status = document.createElement('small');
+      status.className = 'catalog-tile-availability';
+      status.textContent = getDisabledBrandCopy(brand).cta;
+      name.after(status);
     }
   });
 };

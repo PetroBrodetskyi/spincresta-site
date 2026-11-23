@@ -195,6 +195,16 @@ html:root body.casinos-page .catalog-directory .home-new-review-card > .casino-n
   font-size: var(--type-caption);
 }
 
+.catalog-directory .catalog-tile-availability {
+  display: block;
+  padding: 0 8px 10px;
+  color: var(--ink-muted, #475569);
+  font-size: var(--type-caption);
+  line-height: 1.25;
+  text-align: center;
+  overflow-wrap: anywhere;
+}
+
 html:root body.casinos-page .catalog-directory .all-countries {
   margin-top: 40px;
   background: var(--editorial-band);

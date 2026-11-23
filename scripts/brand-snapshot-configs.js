@@ -621,6 +621,18 @@ const magneticCategoryStatuses = {
 const kingmakerSportsLabels = ['MMA', 'Rugby', 'Darts', 'Badminton', 'Snooker', 'Futsal', 'Biathlon', 'Chess'];
 
 export const BRAND_SNAPSHOT_CONFIGS = {
+  coolzino: {
+    tabs: [
+      createSnapshotTab('Games', ['Slots', 'Jackpot games', 'Live games'], ['Bingo', 'Slingo']),
+      createSnapshotTab('Live games', ['Live roulette', 'Live blackjack', 'Live baccarat'], ['Live bingo']),
+      createSnapshotTab('Betting', ['Football', 'Basketball', 'eSports', 'Virtual sports'], ['Chess']),
+    ],
+    notes: publicCatalogueNotes,
+    labels: Object.fromEntries(Object.entries(BETONWIN_GAME_LABELS).map(([locale, labels]) => [locale, {
+      ...labels,
+      'Not surfaced:': locale === 'en' ? 'Not surfaced:' : magneticCategoryStatuses[locale],
+    }])),
+  },
   coldbet: {
     tabs: [
       createSnapshotTab('Games', ['Slots', 'Crash games', 'Jackpot games', 'Live games', 'Bonus buy', 'Instant win', 'Table games', 'Bingo'], ['Slingo', 'Video poker']),
