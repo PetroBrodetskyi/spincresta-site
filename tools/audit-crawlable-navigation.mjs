@@ -28,6 +28,18 @@ for (const lang of locales) {
   console.log(`${lang}: ${visited.size} reachable; ${unreachable.length} unreachable`, unreachable.length ? unreachable : '');
   errors += unreachable.length;
 }
+const linkedFromHome = new Set(['/']);
+const crossLanguageQueue = ['/'];
+for (let i = 0; i < crossLanguageQueue.length; i++) {
+  for (const link of edges.get(crossLanguageQueue[i]) || []) {
+    if (linkedFromHome.has(link)) continue;
+    linkedFromHome.add(link);
+    crossLanguageQueue.push(link);
+  }
+}
+const unreachableFromHome = [...paths].filter(url => !linkedFromHome.has(url));
+console.log(`From the English homepage across languages: ${linkedFromHome.size} reachable; ${unreachableFromHome.length} unreachable.`, unreachableFromHome.slice(0, 20));
+errors += unreachableFromHome.length;
 for (const [, value] of sitemap.matchAll(/<lastmod>([^<]+)<\/lastmod>/g)) {
   assert.match(value, /^\d{4}-\d{2}-\d{2}$/);
   assert.ok(value <= new Date().toISOString().slice(0, 10), `Future lastmod: ${value}`);

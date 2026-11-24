@@ -1,6 +1,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import {pathToFileURL} from 'node:url';
+import { HOME_LANGUAGE_ENTRY_VERSION } from './sync-home-language-switcher.mjs';
 
 const SITE_ENTRY_VERSION = '20261119-catalog-partners';
 const SITE_STYLE_VERSION = '20261119-catalog-partners';
@@ -21,6 +22,7 @@ export function publicThemePages(directory=process.cwd()) {
 }
 export function syncDefaultTheme(html) {
   if(!html.includes('/styles.css'))return html;
+  const entryVersion = html.includes('data-static-language-switcher') ? HOME_LANGUAGE_ENTRY_VERSION : SITE_ENTRY_VERSION;
   const styleVersion = /<body\b[^>]*\bdata-brand=/.test(html) ? BRAND_STYLE_VERSION : SITE_STYLE_VERSION;
   const pageVersion = html.includes('data-country-hub-grid') || html.includes('class="partners-telegram-icon"') ? COUNTRY_HUB_VERSION
     : /<main\b[^>]*(?:\beditorial-dashboard--author\b|\bdata-editorial-reading\b)/.test(html) ? PROFILE_AND_ARTICLE_VERSION
@@ -36,7 +38,7 @@ export function syncDefaultTheme(html) {
         `src="/images/spincresta-wordmark.svg?v=${WORDMARK_VERSION}" width="258" height="60"`)
     )
     .replace(/(\/(?:scripts\/main\.js|styles\.css|styles\/blog\.css))(?:\?v=[^"\s]+)?(?=")/g,
-      (_, asset) => `${asset}?v=${pageVersion || (asset === '/styles.css' ? styleVersion : SITE_ENTRY_VERSION)}`);
+      (_, asset) => `${asset}?v=${pageVersion || (asset === '/styles.css' ? styleVersion : entryVersion)}`);
 }
 if(process.argv[1]&&import.meta.url===pathToFileURL(process.argv[1]).href){
   const check=process.argv.includes('--check');let changed=0;const files=publicThemePages();

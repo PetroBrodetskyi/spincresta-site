@@ -2244,20 +2244,18 @@ const ensureFooterBlogLink = () => {
   });
 };
 
-const initLanguageSwitcher = () => {
-  const headerInner = document.querySelector('.header-inner');
-  if (!headerInner || headerInner.querySelector('.language-switcher')) return;
+const getLocaleSwitchPath = locale => {
+  const currentPath = window.location.pathname;
+  const englishPath = currentPath.replace(/^\/(?:de|es|it|pl|uk|pt|fr|hi|fi)(?=\/|$)/, '') || '/';
+  const localizedPath = locale === 'en'
+    ? englishPath
+    : englishPath === '/'
+      ? `/${locale}/`
+      : `/${locale}${englishPath}`;
+  return `${localizedPath}${window.location.search}${window.location.hash}`;
+};
 
-  const getLocaleSwitchPath = locale => {
-    const currentPath = window.location.pathname;
-    const englishPath = currentPath.replace(/^\/(?:de|es|it|pl|uk|pt|fr|hi|fi)(?=\/|$)/, '') || '/';
-    const localizedPath = locale === 'en'
-      ? englishPath
-      : englishPath === '/'
-        ? `/${locale}/`
-        : `/${locale}${englishPath}`;
-    return `${localizedPath}${window.location.search}${window.location.hash}`;
-  };
+const createLanguageSwitcher = () => {
   const localeDisplay = {
     en: { code: 'EN', flag: 'united-kingdom', label: uiCopy.languageEnglish },
     de: { code: 'DE', flag: 'germany', label: uiCopy.languageGerman },
@@ -2322,7 +2320,27 @@ const initLanguageSwitcher = () => {
       </a>
     </div>
   `;
-  headerInner.append(switcher);
+  return switcher;
+};
+
+const initLanguageSwitcher = () => {
+  const headerInner = document.querySelector('.header-inner');
+  if (!headerInner) return;
+
+  const existing = headerInner.querySelector('.language-switcher');
+  if (existing?.dataset.languageSwitcherReady) return;
+
+  const switcher = existing || createLanguageSwitcher();
+  if (!existing) {
+    headerInner.append(switcher);
+  } else if (window.location.search || window.location.hash) {
+    // The static links stay canonical in the delivered HTML. Carry visitor state only with JS.
+    const suffix = `${window.location.search}${window.location.hash}`;
+    for (const option of switcher.querySelectorAll('.language-switcher-option[href]')) {
+      option.setAttribute('href', `${option.getAttribute('href')}${suffix}`);
+    }
+  }
+  switcher.dataset.languageSwitcherReady = 'true';
 
   // Keep the visual and keyboard order consistent: language first, account second.
   // Account auth is initialized before the language switcher, so move its control

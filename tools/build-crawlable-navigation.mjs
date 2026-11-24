@@ -5,6 +5,7 @@ import { COUNTRIES } from '../scripts/countries.js';
 import { syncCountryHeader } from './sync-country-header.mjs';
 import { syncCountryHubLinks } from './country-hub-links.mjs';
 import { syncTopCasinoMarkets } from './top-casino-markets.mjs';
+import { syncHomeLanguageSwitcher } from './sync-home-language-switcher.mjs';
 
 const root = process.cwd();
 const countryHeaderOnly = process.argv.includes('--country-header-only');
@@ -45,6 +46,7 @@ for (const [url, page] of pages) {
   if (topCasinosOnly && url !== `${prefix}top-casinos/`) continue;
   if (onlyBrand && (!country || !onlyBrand.countries?.includes(country.code.toUpperCase()))) continue;
   let html = syncCountryHeader(page.html, prefix);
+  if (!countryHeaderOnly && url === prefix) html = syncHomeLanguageSwitcher(html, locale);
   // Home and country hubs expose the complete directory before JS executes.
   if (!countryHeaderOnly && url === `${prefix}top-casinos/`) {
     html = syncTopCasinoMarkets(html, locale, countryLinks(locale, prefix, true));

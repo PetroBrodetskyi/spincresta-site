@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 import fs from 'node:fs';
 import path from 'node:path';
+import { syncHomeLanguageSwitcher } from './sync-home-language-switcher.mjs';
 
 const root = process.cwd();
 const supportedLocales = ['en', 'de', 'es', 'it', 'pl', 'uk', 'pt', 'fr', 'hi', 'fi'];
@@ -247,6 +248,7 @@ for (const sourceFile of sourceFiles) {
     const localized = localizeInternalHref(value);
     return `href=${quote}${localized}${quote}`;
   });
+  if (route === '/') html = syncHomeLanguageSwitcher(html, locale);
   fs.mkdirSync(path.dirname(targetFile), { recursive: true });
   fs.writeFileSync(targetFile, html);
 }
