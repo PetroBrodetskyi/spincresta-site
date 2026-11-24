@@ -72,10 +72,17 @@ for (const [url, page] of pages) {
     if (onlyBrand && current) {
       const href = `${prefix}brands/${brandSlug}/`;
       const link = brands.find(row => row.includes(`href="${href}"`));
-      if (link && !current.includes(`href="${href}"`)) {
-        const count = [...current.matchAll(/<a\b/g)].length + 1;
-        html = html.replace(current, current.replace(/<span>\(\d+\)<\/span>/, `<span>(${count})</span>`)
-          .replace('</nav></details>', `${link}\n</nav></details>`));
+      if (link) {
+        if (current.includes(`href="${href}"`)) {
+          const renamed = current.split('\n').map(row =>
+            row.startsWith(`<a href="${href}">`) ? link : row
+          ).join('\n');
+          html = html.replace(current, renamed);
+        } else {
+          const count = [...current.matchAll(/<a\b/g)].length + 1;
+          html = html.replace(current, current.replace(/<span>\(\d+\)<\/span>/, `<span>(${count})</span>`)
+            .replace('</nav></details>', `${link}\n</nav></details>`));
+        }
       }
       if (html !== page.html) { fs.writeFileSync(page.file, html); updated++; }
       continue;

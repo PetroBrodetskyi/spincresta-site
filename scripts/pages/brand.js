@@ -3,7 +3,7 @@
 import { isBrandSportsSection } from './brand-layout.js?v=20261118-brand-games-row';
 import { classifyReviewSection, compareReviewSections, reviewSectionLabel } from './brand-review-order.js?v=20261123-single-row';
 import { initBrandReviewStrips } from './brand-review-strips.js?v=20261123-single-row';
-import { initBrandProviderStrips, insertBrandProviderSection } from './brand-provider-strip.js?v=20261123-coolzino';
+import { initBrandProviderStrips, insertBrandProviderSection } from './brand-provider-strip.js?v=20261124-provider-cards';
 
 const sportsbookHeadingPattern = /^(?:sportsbook|sportwetten|apuestas deportivas|scommesse sportive|zakłady sportowe|букмекер(?:ський розділ)?|спортбук|спортивні ставки|ставки на спорт|apostas desportivas|apostas esportivas|paris sportifs|स्पोर्ट्सबुक|खेल सट्टेबाज़ी|urheiluvedonlyönti)$/iu;
 export const isSportsbookFeatureHeading = heading => sportsbookHeadingPattern.test(String(heading || '').trim());
@@ -30,10 +30,18 @@ export function mobileReviewTableMode(rows, columnCount) {
   return concise && numeric ? 'matrix' : 'stack';
 }
 const BRAND_DETAIL_TOPICS = [...BRAND_TABLE_TOPICS, 'rewards'].sort(compareReviewSections);
+const REVIEW_DETAIL_ORDER = [...BRAND_DETAIL_TOPICS, 'suitability', 'more'];
 export const belongsInReviewDetails = ({ kind, rail, hasTable, explicit = false }) => {
-  if (!BRAND_DETAIL_TOPICS.includes(kind)) return false;
+  if (!REVIEW_DETAIL_ORDER.includes(kind)) return false;
   if (kind === 'sports') return !rail || rail === 'betting';
-  return !rail && (explicit || (hasTable && BRAND_TABLE_TOPICS.includes(kind)));
+  return !rail && (hasTable || (explicit && BRAND_DETAIL_TOPICS.includes(kind)));
+};
+
+export const groupBrandReviewDetails = sections => {
+  const eligible = sections.filter(belongsInReviewDetails);
+  if (!eligible.some(section => section.hasTable || section.explicit)) return [];
+  return REVIEW_DETAIL_ORDER.map(kind => [kind, eligible.filter(section => section.kind === kind)])
+    .filter(([, entries]) => entries.length);
 };
 
 export const initBrandPage = context => {
@@ -248,7 +256,7 @@ export const initBrandPage = context => {
         ${topics
           .map(
             ([kind, heading]) => `
-              <a href="#${escapeHtml(heading.id)}" data-review-topic="${kind}">${escapeHtml(reviewSectionLabel(kind, localeText))}</a>
+              <a href="#${escapeHtml(heading.id)}" data-review-topic="${kind}">${escapeHtml(heading.closest('[data-review-tab-label]')?.dataset.reviewTabLabel || reviewSectionLabel(kind, localeText))}</a>
             `
           )
           .join('')}
@@ -636,19 +644,18 @@ export const initBrandPage = context => {
   };
 
   const initBrandReviewDetails = () => {
-    const article = document.querySelector('.brand-sticky-main .content-review');
+    const article = document.querySelector('.brand-sticky-main :is(.content-review, .content-article)');
     if (!article || article.querySelector('.brand-review-details')) return;
-    const sections = Array.from(article.querySelectorAll(':scope > section[data-review-section]:not([hidden])'))
-      .filter(section => belongsInReviewDetails({
+    const sections = Array.from(article.querySelectorAll(':scope > section[data-review-section]:not([hidden])'),
+      section => ({
+        section,
         kind: section.dataset.reviewSection,
         rail: section.dataset.brandRail,
         hasTable: Boolean(section.querySelector('table')),
         explicit: section.hasAttribute('data-review-details'),
       }));
-    const groups = BRAND_DETAIL_TOPICS
-      .map(kind => [kind, sections.filter(section => section.dataset.reviewSection === kind)])
-      .filter(([, topicSections]) => topicSections.length);
-    if (groups.length < 2) return;
+    const groups = groupBrandReviewDetails(sections);
+    if (!groups.length) return;
 
     const details = document.createElement('section');
     details.className = 'container brand-review-details';
@@ -661,29 +668,43 @@ export const initBrandPage = context => {
       'समीक्षा की जानकारी', 'Arvostelun tiedot'
     );
     details.setAttribute('aria-labelledby', title.id);
+    details.append(title);
+    sections.find(belongsInReviewDetails).section.before(details);
+    if (groups.length === 1) {
+      const [kind, topicSections] = groups[0];
+      const panel = document.createElement('div');
+      panel.className = 'brand-review-details__panel';
+      panel.append(...topicSections.map(({ section }) => section));
+      details.dataset.reviewSection = kind;
+      details.append(panel);
+      return;
+    }
 
     const tabList = document.createElement('div');
     tabList.className = 'brand-review-details__tabs';
     tabList.setAttribute('role', 'tablist');
     tabList.setAttribute('aria-labelledby', title.id);
-    details.append(title, tabList);
-    sections[0].before(details);
+    details.append(tabList);
     const general = localeText('General', 'Allgemein', 'General', 'Generale', 'Ogólne', 'Загальне', 'Geral', 'Général', 'सामान्य', 'Yleistä');
     const payment = localeText('Payments', 'Zahlungen', 'Pagos', 'Pagamenti', 'Płatności', 'Платежі', 'Pagamentos', 'Paiements', 'भुगतान', 'Maksut');
+    const checklist = localeText('Before you register', 'Vor der Registrierung', 'Antes de registrarte', 'Prima di registrarti',
+      'Przed rejestracją', 'Перед реєстрацією', 'Antes de te registares', 'Avant de vous inscrire', 'पंजीकरण से पहले', 'Ennen rekisteröitymistä');
     const entries = groups.map(([kind, topicSections]) => {
       const tab = document.createElement('button');
       const panel = document.createElement('div');
       tab.id = `brand-review-tab-${kind}`;
       tab.type = 'button';
       tab.setAttribute('role', 'tab');
-      tab.textContent = kind === 'summary' ? general : kind === 'cashier' ? payment : reviewSectionLabel(kind, localeText);
+      tab.textContent = topicSections.find(({ section }) => section.dataset.reviewTabLabel)?.section.dataset.reviewTabLabel ||
+        (kind === 'summary' ? general : kind === 'cashier' ? payment
+          : kind === 'suitability' ? checklist : reviewSectionLabel(kind, localeText));
       panel.id = `brand-review-panel-${kind}`;
       panel.className = 'brand-review-details__panel';
       panel.tabIndex = 0;
       panel.setAttribute('role', 'tabpanel');
       panel.setAttribute('aria-labelledby', tab.id);
       tab.setAttribute('aria-controls', panel.id);
-      panel.append(...topicSections);
+      panel.append(...topicSections.map(({ section }) => section));
       tabList.append(tab);
       details.append(panel);
       return { tab, panel, kind };

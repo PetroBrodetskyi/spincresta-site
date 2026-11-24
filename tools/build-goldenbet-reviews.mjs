@@ -1,4 +1,5 @@
 import fs from 'node:fs';
+import { BRAND_HOMEPAGE_SCREENSHOTS } from '../scripts/brand-homepage-screenshots.js';
 
 // Goldenbet public website, promotion pages and general terms reviewed on 2026-09-27.
 // UK licensing was checked against the UK Gambling Commission public register.
@@ -6,7 +7,6 @@ import fs from 'node:fs';
 // and licensed interactive wagering register. These are editorial reviews, not offers.
 
 const base = fs.readFileSync('brands/onlywin/index.html', 'utf8');
-const screenshot = 'https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto,w_1600/v1790519366/spincresta/brands/goldenbet/main-page/goldenbet-page_ppsutu';
 const logo = '/images/goldenbet.svg';
 const reviewed = '27 September 2026';
 const affiliateUrls = {
@@ -190,6 +190,7 @@ const markets = {
 };
 
 const buildPage = market => {
+  const screenshot = BRAND_HOMEPAGE_SCREENSHOTS[market.slug];
   const url = `https://spincresta.com/brands/${market.slug}/`;
   const faqGraph = market.faq.map(([question, answer]) => ({
     '@type': 'Question',

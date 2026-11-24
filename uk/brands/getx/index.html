@@ -46,7 +46,7 @@
     <meta name="twitter:description" content="GETX: бонуси, ігри, способи оплати, виплати, KYC, мобільна версія та доступність. Перед грою перевірте актуальні умови." />
     <meta name="twitter:image" content="https://res.cloudinary.com/drj61gmd2/image/upload/f_webp,q_auto/v1785067624/spincresta/brands/getx/main-page/getx-page_n6hxr0.webp" />
     <link rel="icon" type="image/png" href="/favicon.png" />
-    <link rel="stylesheet" href="/styles.css?v=20261120-sticky-pill" />
+    <link rel="stylesheet" href="/styles.css?v=20261124-provider-cards" />
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -215,10 +215,10 @@
     </section>
 
     <section class="container"><div class="brand-countries"><h2 class="title">Доступні країни</h2><div class="countries-container" id="brand-countries"></div></div></section>
-    <section class="container"><div class="brand-payments"><h2 class="title">Способи оплати</h2><p class="brand-availability-intro">GETX підтримує регіональні валюти рахунків, включаючи UZS, KGS, AZN і RUB. Можуть бути доступні картки та банківські платежі, тоді як каса після входу в акаунт, визначає точні методи депозиту, способи виплат, комісії та ліміти для кожної країни.</p><div class="payments-container" id="brand-payments"></div></div></section>
+    <section class="container"><div class="brand-payments"><h2 class="title">Способи оплати</h2><div class="payments-container" id="brand-payments"></div></div></section>
 
     <main class="content-review">
-      <section class="container">
+      <section class="container" data-review-section="summary">
         <h2 class="title">Короткий огляд</h2>
         <table>
           <thead><tr><th>Категорія</th><th>Ключові деталі</th><th>Перевірка гравця</th></tr></thead>
@@ -233,7 +233,7 @@
         </table>
       </section>
 
-      <section class="container">
+      <section class="container" data-review-section="bonuses">
         <h2 class="title">Вітальний бонус: 350% + 250 фриспінів</h2>
         <p>GETX рекламує комбінований бонус 350% плюс 250 безкоштовних обертань на перші депозити нового гравця. Великий назва корисний лише тоді, коли окремі етапи відповідають звичайному розміру депозиту та ігровим уподобанням гравця. GETX може змінювати кампанії залежно від країни, валюти, акаунта та дати, тому пропозиція, яка відображається після реєстрації, є важливою версією.</p>
         <table>
@@ -248,7 +248,7 @@
         </table>
       </section>
 
-      <section class="container">
+      <section class="container" data-review-section="games">
         <h2 class="title">Лобі казино та поточний вибір ігор</h2>
         <table>
           <thead><tr><th>Вестибюль</th><th>Що ви можете знайти</th><th>Цінність гравця</th></tr></thead>
@@ -261,7 +261,7 @@
         </table>
       </section>
 
-      <section class="container">
+      <section class="container" data-review-section="games" data-review-details>
         <h2 class="title">Ігри та швидкі формати</h2>
         <div class="features-grid premium-grid">
           <div class="feature-card glass-card"><strong>Збій і GetmaX</strong><span>Ігри зі швидким множником ставлять хронометраж у центрі кожного раунду. Їх легко ввести, але вони можуть створювати дуже високу частоту ставок.</span></div>
@@ -271,12 +271,12 @@
         </div>
       </section>
 
-      <section class="container">
+      <section class="container" data-review-section="games" data-review-details>
         <h2 class="title">Live-казино</h2>
         <p>GETX відокремлює live-ігри від основного лобі слотів і пропонує спеціальні розділи для живої рулетки, живого блекджеку, баккара, покеру, ігрових шоу та інших форматів дилерів. Вибір достатньо широкий як для класичних столів, так і для розважальних шоу. Перш ніж приєднатися, перевірте валюту столу, мінімальні та максимальні ставки, додаткові ставки, мову, швидкість і чи сприяє стіл активному бонусу.</p>
       </section>
 
-      <section class="container">
+      <section class="container" data-review-section="sports">
         <h2 class="title">Ставки на спорт, live-ставки і Чемпіонат світу з футболу 2026 року</h2>
         <table>
           <thead><tr><th>Зона ставок</th><th>Покриття</th><th>Що перевірити</th></tr></thead>
@@ -289,7 +289,7 @@
         </table>
       </section>
 
-      <section class="container">
+      <section class="container" data-review-section="sports">
         <h2 class="title">Ставки на кіберспорт</h2>
         <div class="features-grid premium-grid">
           <div class="feature-card glass-card"><strong>Counter-Strike</strong><span>Спеціалізовані ринки Counter-Strike знаходяться поруч із загальним висвітленням кіберспорту та ставками на живі події.</span></div>
@@ -299,7 +299,7 @@
         </div>
       </section>
 
-      <section class="container">
+      <section class="container" data-review-section="rewards">
         <h2 class="title">VIP, преміум, кешбек і турніри</h2>
         <table>
           <thead><tr><th>Винагорода</th><th>Опублікована структура</th><th>Примітка гравця</th></tr></thead>
@@ -312,8 +312,9 @@
         </table>
       </section>
 
-      <section class="container">
+      <section class="container" data-review-section="cashier">
         <h2 class="title">Платежі, виплати та KYC</h2>
+        <p class="section-intro">GETX підтримує регіональні валюти рахунків, включаючи UZS, KGS, AZN і RUB. Можуть бути доступні картки та банківські платежі, тоді як каса після входу в акаунт, визначає точні методи депозиту, способи виплат, комісії та ліміти для кожної країни.</p>
         <table>
           <thead><tr><th>Категорія</th><th>Правило GETX</th><th>Практичні поради</th></tr></thead>
           <tbody>
@@ -326,7 +327,7 @@
         </table>
       </section>
 
-      <section class="container">
+      <section class="container" data-review-section="trust" data-review-details>
         <h2 class="title">Анжуанська ліцензія, безпека та оцінка ризиків</h2>
         <div class="features-grid premium-grid">
           <div class="feature-card glass-card"><strong>Анжуанська ліцензія</strong><span>GETX працює за ліцензією Anjouan і публікує окремі юридичні документи, документи KYC, AML, конфіденційності та відповідальних ігор.</span></div>
@@ -336,7 +337,7 @@
         </div>
       </section>
 
-      <section class="container">
+      <section class="container" data-review-section="trust">
         <h2 class="title">Відповідальне ставлення до азартних ігор і контроль акаунтів</h2>
         <table>
           <thead><tr><th>КОНТРОЛЬ</th><th>Опублікована деталь</th><th>Найкраща практика</th></tr></thead>
@@ -382,7 +383,8 @@
 </main>
 
     <section class="all-countries"><div class="container"><h2 class="title">Онлайн-казино за країнами</h2><div class="countries-cloud"></div></div></section>
-    <footer class="footer"><div class="container"><p>© 2026 SpinCresta.com. Усі права захищені.</p><p>18+ | Азартні ігри можуть викликати залежність. Будь ласка, грайте відповідально. Перед грою перевірте місцеві закони.</p><nav class="footer-nav"><a href="/uk/responsible-gambling/">Відповідальна гра в азартні ігри</a><a href="/uk/privacy-policy/">Політика конфіденційності</a><a href="/uk/casinos-and-betting/">Казино та ставки</a><a href="/uk/payment-methods/">Способи оплати</a><a href="/uk/partners/">Партнери</a><a href="/uk/about/">Про нас</a><a href="https://t.me/spincresta" target="_blank" rel="noopener noreferrer nofollow" class="footer-social" aria-label="Канал SpinCresta Telegram"><img src="/icons/telegram-white-icon.svg" alt="Telegram" width="18" height="18" loading="lazy" /><span>Telegram</span></a><a href="https://x.com/SpinCresta" target="_blank" rel="noopener noreferrer nofollow" class="footer-social" aria-label="SpinCresta на X"><img src="/icons/x-social-media-round-icon.svg" alt="X" width="18" height="18" loading="lazy" /><span>X</span></a></nav></div></footer>
-    <script type="module" src="/scripts/main.js?v=20261119-catalog-partners"></script>
+    <footer class="footer"><div class="container"><p>© 2026 SpinCresta.com. Усі права захищені.</p><p>18+ | Азартні ігри можуть викликати залежність. Будь ласка, грайте відповідально. Перед грою перевірте місцеві закони.</p><nav class="footer-nav">
+          <a href="/uk/game-providers/"><svg class="site-icon site-icon--inline" width="24" height="24" aria-hidden="true" focusable="false"><use href="/icons/ui/review-method.svg?v=20261123-brand-providers#layers"></use></svg> Провайдери ігор</a><a href="/uk/responsible-gambling/">Відповідальна гра в азартні ігри</a><a href="/uk/privacy-policy/">Політика конфіденційності</a><a href="/uk/casinos-and-betting/">Казино та ставки</a><a href="/uk/payment-methods/">Способи оплати</a><a href="/uk/partners/">Партнери</a><a href="/uk/about/">Про нас</a><a href="https://t.me/spincresta" target="_blank" rel="noopener noreferrer nofollow" class="footer-social" aria-label="Канал SpinCresta Telegram"><img src="/icons/telegram-white-icon.svg" alt="Telegram" width="18" height="18" loading="lazy" /><span>Telegram</span></a><a href="https://x.com/SpinCresta" target="_blank" rel="noopener noreferrer nofollow" class="footer-social" aria-label="SpinCresta на X"><img src="/icons/x-social-media-round-icon.svg" alt="X" width="18" height="18" loading="lazy" /><span>X</span></a></nav></div></footer>
+    <script type="module" src="/scripts/main.js?v=20261124-provider-cards"></script>
   </body>
 </html>

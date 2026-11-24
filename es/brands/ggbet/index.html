@@ -46,7 +46,7 @@
     <meta name="twitter:description" content="GGbet: bonos, juegos, pagos, retiros, verificación KYC, acceso móvil y disponibilidad. Consulta las condiciones actuales antes de jugar." />
     <meta name="twitter:image" content="https://res.cloudinary.com/drj61gmd2/image/upload/f_webp,q_auto/v1785067733/spincresta/brands/ggbet/main-page/ggbet-page_ruq6kz.webp" />
     <link rel="icon" type="image/png" href="/favicon.png" />
-    <link rel="stylesheet" href="/styles.css?v=20261120-sticky-pill" />
+    <link rel="stylesheet" href="/styles.css?v=20261124-provider-cards" />
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -218,10 +218,10 @@
     </section>
 
     <section class="container"><div class="brand-countries"><h2 class="title">Países disponibles</h2><div class="countries-container" id="brand-countries"></div></div></section>
-    <section class="container"><div class="brand-payments"><h2 class="title">Métodos de pago</h2><p class="brand-availability-intro">GG.BET admite tarjetas, billeteras electrónicas y métodos de pago regionales que dependen del país. El área de pagos controla los métodos, monedas, límites, tarifas y disponibilidad de retiro que se muestran en cada cuenta.</p><div class="payments-container" id="brand-payments"></div></div></section>
+    <section class="container"><div class="brand-payments"><h2 class="title">Métodos de pago</h2><div class="payments-container" id="brand-payments"></div></div></section>
 
     <main class="content-review">
-      <section class="container">
+      <section class="container" data-review-section="summary">
         <h2 class="title">Resumen de GG.BET</h2>
         <table>
           <thead><tr><th>Área</th><th>Detalles clave</th><th>Verificación de jugador</th></tr></thead>
@@ -236,7 +236,7 @@
         </table>
       </section>
 
-      <section class="container">
+      <section class="container" data-review-section="bonuses">
         <h2 class="title">Bonos, torneos y misiones de GG.BET</h2>
         <table>
           <thead><tr><th>Capa de recompensa</th><th>Qué está disponible</th><th>Qué verificar</th></tr></thead>
@@ -250,7 +250,7 @@
         </table>
       </section>
 
-      <section class="container">
+      <section class="container" data-review-section="sports">
         <h2 class="title">Apuestas en deportes electrónicos</h2>
         <div class="features-grid premium-grid">
           <div class="feature-card glass-card"><strong>Deportes electrónicos principales</strong><span>Counter-Strike, Dota 2, League of Legends, StarCraft 2, Valorant, Rainbow Six, Overwatch, Call of Duty y PUBG se encuentran entre las secciones oficiales de deportes electrónicos.</span></div>
@@ -260,7 +260,7 @@
         </div>
       </section>
 
-      <section class="container">
+      <section class="container" data-review-section="sports">
         <h2 class="title">Apuestas deportivas tradicionales, apuestas en vivo y resultados finales</h2>
         <table>
           <thead><tr><th>Área de apuestas</th><th>Cobertura</th><th>Nota del jugador</th></tr></thead>
@@ -274,7 +274,7 @@
         </table>
       </section>
 
-      <section class="container">
+      <section class="container" data-review-section="games">
         <h2 class="title">Lobby de casino, tragamonedas y proveedores</h2>
         <table>
           <thead><tr><th>Área de Casino</th><th>Lo que puedes encontrar</th><th>Por qué es importante</th></tr></thead>
@@ -288,7 +288,7 @@
         </table>
       </section>
 
-      <section class="container">
+      <section class="container" data-review-section="games" data-review-details>
         <h2 class="title">Casino en vivo y GG.Leagues</h2>
         <div class="features-grid premium-grid">
           <div class="feature-card glass-card"><strong>Casino en vivo</strong><span>La información de marca enumera más de 500 juegos de casino en vivo, con mesas en vivo y formatos de marca como Gates of Olympus Roulette representados en el lobby.</span></div>
@@ -298,7 +298,7 @@
         </div>
       </section>
 
-      <section class="container">
+      <section class="container" data-review-section="cashier">
         <h2 class="title">Pagos, retiros y KYC</h2>
         <table>
           <thead><tr><th>Método o comprobación</th><th>Orientación oficial</th><th>Consejos prácticos</th></tr></thead>
@@ -312,7 +312,7 @@
         </table>
       </section>
 
-      <section class="container">
+      <section class="container" data-review-section="trust" data-review-details>
         <h2 class="title">Licencia, seguridad y evaluación SpinCresta</h2>
         <div class="features-grid premium-grid">
           <div class="feature-card glass-card"><strong>Operador y Licencia</strong><span>Los términos actuales identifican a River Entertainment B.V., número de registro de Curazao 158146 y licencia de la Junta de Control de Juegos de Curazao OGL/2024/688/0234.</span></div>
@@ -322,7 +322,7 @@
         </div>
       </section>
 
-      <section class="container">
+      <section class="container" data-review-section="trust">
         <h2 class="title">Soporte y juego responsable</h2>
         <table>
           <thead><tr><th>Característica</th><th>Qué está disponible</th><th>Mejores prácticas</th></tr></thead>
@@ -369,7 +369,8 @@
 </main>
 
     <section class="all-countries"><div class="container"><h2 class="title">Casinos en línea por país</h2><div class="countries-cloud"></div></div></section>
-    <footer class="footer"><div class="container"><p>Copyright 2026 SpinCresta.com. Reservados todos los derechos.</p><p>18+ | El juego puede ser adictivo. Juegue de forma responsable. Consulte las leyes locales antes de jugar.</p><nav class="footer-nav"><a href="/es/responsible-gambling/">Juego responsable</a><a href="/es/privacy-policy/">Política de privacidad</a><a href="/es/casinos-and-betting/">Casinos y apuestas</a><a href="/es/payment-methods/">Métodos de pago</a><a href="/es/partners/">Socios</a><a href="/es/about/">Acerca de</a><a href="https://t.me/spincresta" target="_blank" rel="noopener noreferrer nofollow" class="footer-social" aria-label="Canal de Telegram SpinCresta"><img src="/icons/telegram-white-icon.svg" alt="Telegram" width="18" height="18" loading="lazy" /><span>Telegram</span></a><a href="https://x.com/SpinCresta" target="_blank" rel="noopener noreferrer nofollow" class="footer-social" aria-label="SpinCresta en X"><img src="/icons/x-social-media-round-icon.svg" alt="X" width="18" height="18" loading="lazy" /><span>X</span></a></nav></div></footer>
-    <script type="module" src="/scripts/main.js?v=20261119-catalog-partners"></script>
+    <footer class="footer"><div class="container"><p>Copyright 2026 SpinCresta.com. Reservados todos los derechos.</p><p>18+ | El juego puede ser adictivo. Juegue de forma responsable. Consulte las leyes locales antes de jugar.</p><nav class="footer-nav">
+          <a href="/es/game-providers/"><svg class="site-icon site-icon--inline" width="24" height="24" aria-hidden="true" focusable="false"><use href="/icons/ui/review-method.svg?v=20261123-brand-providers#layers"></use></svg> Proveedores de juegos</a><a href="/es/responsible-gambling/">Juego responsable</a><a href="/es/privacy-policy/">Política de privacidad</a><a href="/es/casinos-and-betting/">Casinos y apuestas</a><a href="/es/payment-methods/">Métodos de pago</a><a href="/es/partners/">Socios</a><a href="/es/about/">Acerca de</a><a href="https://t.me/spincresta" target="_blank" rel="noopener noreferrer nofollow" class="footer-social" aria-label="Canal de Telegram SpinCresta"><img src="/icons/telegram-white-icon.svg" alt="Telegram" width="18" height="18" loading="lazy" /><span>Telegram</span></a><a href="https://x.com/SpinCresta" target="_blank" rel="noopener noreferrer nofollow" class="footer-social" aria-label="SpinCresta en X"><img src="/icons/x-social-media-round-icon.svg" alt="X" width="18" height="18" loading="lazy" /><span>X</span></a></nav></div></footer>
+    <script type="module" src="/scripts/main.js?v=20261124-provider-cards"></script>
   </body>
 </html>

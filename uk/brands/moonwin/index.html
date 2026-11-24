@@ -52,7 +52,7 @@
     />
     <meta name="twitter:image" content="https://res.cloudinary.com/drj61gmd2/image/upload/f_webp,q_auto/v1785074584/spincresta/brands/moonwin/main-page/moonwin-page_goauav.webp" />
     <link rel="icon" type="image/png" href="/favicon.png" />
-    <link rel="stylesheet" href="/styles.css?v=20261120-sticky-pill" />
+    <link rel="stylesheet" href="/styles.css?v=20261124-provider-cards" />
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -284,15 +284,12 @@
     <section class="container">
       <div class="brand-payments">
         <h2 class="title">Способи оплати</h2>
-        <p class="brand-availability-intro">
-          MoonWin підтримує картки, банківські перекази, електронні гаманці, ваучери, місцеві платіжні служби та криптовалюти. Visa, Mastercard, MiFinity, Neosurf, Jeton, ecoPayz, Flexepin, Interac, MuchBetter, AstroPay, PayID і крипто-розділи з’являються в охопленні каси. Точні методи, ліміти та валюти залежать від місця розташування.
-        </p>
         <div class="payments-container" id="brand-payments"></div>
       </div>
     </section>
 
     <main class="content-review">
-      <section class="container">
+      <section class="container" data-review-section="summary">
         <h2 class="title">Короткий огляд</h2>
         <table>
           <thead>
@@ -333,7 +330,7 @@
         </table>
       </section>
 
-      <section class="container">
+      <section class="container" data-review-section="bonuses">
         <h2 class="title">Вітальний пакет: до 6500 євро + 180 фриспінів</h2>
         <table>
           <thead>
@@ -372,7 +369,7 @@
         </p>
       </section>
 
-      <section class="container">
+      <section class="container" data-review-section="games">
         <h2 class="title">Ігри та провайдери</h2>
         <table>
           <thead>
@@ -403,7 +400,7 @@
         </table>
       </section>
 
-      <section class="container">
+      <section class="container" data-review-section="games" data-review-details>
         <h2 class="title">Оригінали та швидкі ігри</h2>
         <div class="features-grid premium-grid">
           <div class="feature-card glass-card">
@@ -425,7 +422,7 @@
         </div>
       </section>
 
-      <section class="container">
+      <section class="container" data-review-section="games">
         <h2 class="title">Live-казино, столи та джекпоти</h2>
         <table>
           <thead>
@@ -456,7 +453,7 @@
         </table>
       </section>
 
-      <section class="container">
+      <section class="container" data-review-section="rewards">
         <h2 class="title">Щоденний запуск барабанів, місії та лотерея</h2>
         <table>
           <thead>
@@ -487,7 +484,7 @@
         </table>
       </section>
 
-      <section class="container">
+      <section class="container" data-review-section="rewards">
         <h2 class="title">Програма лояльності: 2320 фриспінів</h2>
         <table>
           <thead>
@@ -518,7 +515,7 @@
         </table>
       </section>
 
-      <section class="container">
+      <section class="container" data-review-section="rewards">
         <h2 class="title">VIP-програма: п'ять місячних рангів</h2>
         <table>
           <thead>
@@ -557,8 +554,11 @@
         </p>
       </section>
 
-      <section class="container">
+      <section class="container" data-review-section="cashier">
         <h2 class="title">Платежі, виплати та KYC</h2>
+        <p class="section-intro">
+          MoonWin підтримує картки, банківські перекази, електронні гаманці, ваучери, місцеві платіжні служби та криптовалюти. Visa, Mastercard, MiFinity, Neosurf, Jeton, ecoPayz, Flexepin, Interac, MuchBetter, AstroPay, PayID і крипто-розділи з’являються в охопленні каси. Точні методи, ліміти та валюти залежать від місця розташування.
+        </p>
         <table>
           <thead>
             <tr><th>Категорія</th><th>Поточне правило</th><th>Практичні поради</th></tr>
@@ -598,7 +598,7 @@
         </table>
       </section>
 
-      <section class="container">
+      <section class="container" data-review-section="trust" data-review-details>
         <h2 class="title">Ліцензія, скарги та відповідальна гра</h2>
         <div class="features-grid premium-grid">
           <div class="feature-card glass-card">
@@ -712,6 +712,7 @@
         <p>© 2026 SpinCresta.com. Усі права захищені.</p>
         <p>18+ | Азартні ігри можуть викликати залежність. Будь ласка, грайте відповідально. Перед грою перевірте місцеві закони.</p>
         <nav class="footer-nav">
+          <a href="/uk/game-providers/"><svg class="site-icon site-icon--inline" width="24" height="24" aria-hidden="true" focusable="false"><use href="/icons/ui/review-method.svg?v=20261123-brand-providers#layers"></use></svg> Провайдери ігор</a>
           <a href="/uk/responsible-gambling/">Відповідальна гра в азартні ігри</a><a href="/uk/privacy-policy/">Політика конфіденційності</a>
           <a href="/uk/casinos-and-betting/">Казино та ставки</a><a href="/uk/payment-methods/">Способи оплати</a>
           <a href="/uk/partners/">Партнери</a><a href="/uk/about/">Про нас</a>
@@ -719,6 +720,6 @@
 
       </div>
     </footer>
-    <script type="module" src="/scripts/main.js?v=20261119-catalog-partners"></script>
+    <script type="module" src="/scripts/main.js?v=20261124-provider-cards"></script>
   </body>
 </html>

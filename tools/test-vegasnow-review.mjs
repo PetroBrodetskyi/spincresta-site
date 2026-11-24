@@ -14,7 +14,7 @@ const ids=['vegasnow-verdict','vegasnow-bonus','vegasnow-wagering','casino-lobby
 const root=new URL('../',import.meta.url);
 const read=file=>fs.readFileSync(new URL(file,root),'utf8');
 const exists=file=>fs.existsSync(new URL(file,root));
-const section=(html,id)=>html.match(new RegExp(`<section class="container" id="${id}">([\\s\\S]*?)<\\/section>`))?.[1];
+const section=(html,id)=>html.match(new RegExp(`<section class="container" id="${id}"[^>]*>([\\s\\S]*?)<\\/section>`))?.[1];
 const count=(value,pattern)=>[...value.matchAll(pattern)].length;
 
 for(const locale of locales){
@@ -30,7 +30,7 @@ for(const locale of locales){
     assert.equal(count(html,/<h1>/g),1);
     assert.equal(decode(html.match(/<title>(.*?)<\/title>/)[1]),copy.title);
     assert.equal(decode(html.match(/<h1>(.*?)<\/h1>/)[1]),copy.h1);
-    assert.deepEqual([...html.matchAll(/<section class="container" id="([^"]+)">/g)].map(m=>m[1]),ids);
+    assert.deepEqual([...html.matchAll(/<section class="container" id="([^"]+)"[^>]*>/g)].map(m=>m[1]),ids);
     assert.match(html,/brand-snapshot-intro/);
     assert.ok(html.includes(`<meta name="brand-games-title" content="${gameTitles[locale]}" />`));
     assert.doesNotMatch(html,/\uFFFD|Ã|Ð|noindex|AggregateRating|Gravira|National Casino/);

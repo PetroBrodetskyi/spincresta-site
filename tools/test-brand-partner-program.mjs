@@ -34,7 +34,7 @@ test('unsafe, insecure, malformed or credential-bearing URLs are not rendered', 
 test('all 10 Mostbet reviews have one localized placement inside the existing account-features grid', () => {
   for (const locale of ['en', 'de', 'es', 'it', 'pl', 'uk', 'pt', 'fr', 'hi', 'fi']) {
     const html = fs.readFileSync(`${locale === 'en' ? '' : `${locale}/`}brands/mostbet/index.html`, 'utf8');
-    const section = html.match(/<section class="container" id="mostbet-account-features">[\s\S]*?<\/section>/)?.[0];
+    const section = html.match(/<section\b[^>]*\bid="mostbet-account-features"[^>]*>[\s\S]*?<\/section>/)?.[0];
     assert(section, locale);
     assert.equal([...html.matchAll(/data-brand-partner-program/g)].length, 1, locale);
     assert.equal([...section.matchAll(/class="feature-card glass-card"/g)].length, 5, locale);

@@ -45,12 +45,14 @@ for (const locale of locales) {
   assert.deepEqual(sections,expectedSections,`${file}: section parity`);
   for (const id of ['verdict','bonus','games','sports','payments','safety']) assert(sections.includes(`pinco-${id}`),file);
   assert(html.includes(esc(c.snapshot)),`${file}: public Snapshot introduction`);
-  assert(!html.match(/<section class="container" id="pinco-payments">[\s\S]*?<\/section>/)[0].includes('class="section-intro"'),`${file}: removed payment introduction returned`);
+  const payments = html.match(/<section\b[^>]*\sid="pinco-payments"[^>]*>[\s\S]*?<\/section>/)?.[0];
+  assert(payments && !payments.includes('class="section-intro"'),`${file}: payment section is missing or its removed introduction returned`);
   assert(/id="brand-payments"><\/div><\/div><\/section>/.test(html),`${file}: payment logos must remain without the removed paragraph`);
   assert.equal(BRAND_SNAPSHOT_CONFIGS.pinco.notes[locale],c.note);
   for (const phrase of ['support@pinco.win','responsiblegaming@pinco.win','OGL/2024/1516/0841','Carlitta N.V.','720','120','250','96','180','25']) assert(html.includes(phrase),`${file}: missing ${phrase}`);
   assert(/50x|x50/.test(html),`${file}: detailed wagering requirement missing`);
-  const faqSection=html.match(/<section class="container" id="faq">[\s\S]*?<\/section>/)[0];
+  const faqSection=html.match(/<section\b[^>]*\sid="faq"[^>]*>[\s\S]*?<\/section>/)?.[0];
+  assert(faqSection, `${file}: FAQ section missing`);
   const faq=[...faqSection.matchAll(/<h3>(.*?)<\/h3><p>(.*?)<\/p>/g)].map(([,q,a]) => [decode(q),decode(a)]);
   assert.deepEqual(faq,c.faq,file);
   assert.equal(faq.length,8,file);

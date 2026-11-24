@@ -59,7 +59,7 @@
       name="twitter:image"
       content="https://res.cloudinary.com/drj61gmd2/image/upload/f_webp,q_auto/v1785610103/spincresta/brands/mostbet/main-page/mostbet-page_gws2cu.webp"
     />
-    <link rel="stylesheet" href="/styles.css?v=20261120-sticky-pill" />
+    <link rel="stylesheet" href="/styles.css?v=20261124-provider-cards" />
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -278,13 +278,12 @@
     <section class="container">
       <div class="brand-payments">
         <h2 class="title">भुगतान के तरीके</h2>
-        <p class="brand-availability-intro">Mostbet द्वारा बताए गए भुगतान तरीकों में वीज़ा, मास्टरकार्ड, बैंक ट्रांसफर, टीथर, बिटकॉइन और एथेरियम शामिल हैं। उपलब्ध विकल्प देश और खाते के अनुसार बदलते हैं। जमा करने से पहले भुगतान अनुभाग में मुद्राएं, शुल्क, सीमाएं, सत्यापन की आवश्यकताएं और प्रसंस्करण समय जांच लें।</p>
         <div class="payments-container" id="brand-payments"></div>
       </div>
     </section>
 
     <main class="content-review">
-      <section class="container">
+      <section class="container" data-review-section="summary">
         <h2 class="title">Mostbet समीक्षा सारांश</h2>
         <table>
           <thead><tr><th>क्षेत्र</th><th>वर्तमान जानकारी क्या दर्शाती है</th><th>प्लेयर चेक</th></tr></thead>
@@ -299,7 +298,7 @@
         </table>
       </section>
 
-      <section class="container">
+      <section class="container" data-review-section="bonuses">
         <h2 class="title">Mostbet बोनस, प्रचार और प्रोमो कोड</h2>
         <table>
           <thead><tr><th>प्रस्ताव स्तर</th><th>सार्वजनिक रूप से दृश्यमान विवरण</th><th>दावा करने से पहले क्या जांचें?</th></tr></thead>
@@ -313,7 +312,7 @@
         </table>
       </section>
 
-      <section class="container">
+      <section class="container" data-review-section="games">
         <h2 class="title">कैसीनो, लाइव कैसीनो और नए गेम</h2>
         <table>
           <thead><tr><th>क्षेत्र</th><th>खिलाड़ी क्या ब्राउज़ कर सकते हैं</th><th>यह क्यों महत्वपूर्ण है</th></tr></thead>
@@ -327,7 +326,7 @@
         </table>
       </section>
 
-      <section class="container">
+      <section class="container" data-review-section="sports">
         <h2 class="title">स्पोर्ट्सबुक, लाइव बेटिंग और ईस्पोर्ट्स</h2>
         <div class="features-grid premium-grid">
           <div class="feature-card glass-card"><strong>फुटबॉल और मुख्य खेल</strong><span>फुटबॉल, बास्केटबॉल, टेनिस, वॉलीबॉल, टेबल टेनिस, आइस हॉकी, हैंडबॉल, क्रिकेट, बेसबॉल और अमेरिकी फुटबॉल सार्वजनिक खेल नेविगेशन में सामने आए हैं।</span></div>
@@ -337,7 +336,7 @@
         </div>
       </section>
 
-      <section class="container">
+      <section class="container" data-review-section="cashier">
         <h2 class="title">भुगतान, निकासी और सत्यापन</h2>
         <table>
           <thead><tr><th>क्षेत्र</th><th>खिलाड़ियों को क्या उम्मीद करनी चाहिए</th><th>व्यावहारिक जांच</th></tr></thead>
@@ -351,7 +350,7 @@
         </table>
       </section>
 
-      <section class="container" id="mostbet-account-features">
+      <section class="container" id="mostbet-account-features" data-review-section="rewards" data-review-details>
         <h2 class="title">Mostbet: लॉयल्टी, VIP और अन्य सुविधाएँ</h2>
         <div class="features-grid premium-grid">
           <div class="feature-card glass-card"><strong>लॉयल्टी कार्यक्रम</strong><span>डिपॉज़िट बोनस और प्रमोशन के अलावा Mostbet में लॉयल्टी कार्यक्रम भी है। अपने खाते में उपलब्ध पुरस्कार और भाग लेने की शर्तें देखें।</span></div>
@@ -362,7 +361,7 @@
         </div>
       </section>
 
-      <section class="container">
+      <section class="container" data-review-section="trust">
         <h2 class="title">ज़िम्मेदारी से खेलना एवं खिलाड़ी सुरक्षा</h2>
         <table>
           <thead><tr><th>संकेत</th><th>जो दिख रहा है</th><th>यह क्यों महत्वपूर्ण है</th></tr></thead>
@@ -437,6 +436,7 @@
           <a href="/hi/privacy-policy/">गोपनीयता नीति</a>
           <a href="/hi/casinos-and-betting/">कैसीनो और सट्टेबाजी</a>
           <a href="/hi/payment-methods/">भुगतान के तरीके</a>
+          <a href="/hi/game-providers/"><svg class="site-icon site-icon--inline" width="24" height="24" aria-hidden="true" focusable="false"><use href="/icons/ui/review-method.svg?v=20261123-brand-providers#layers"></use></svg> गेम प्रदाता</a>
           <a href="/hi/partners/">पार्टनर</a>
           <a href="/hi/about/">हमारे बारे में</a>
           <a href="https://t.me/spincresta" target="_blank" rel="noopener noreferrer nofollow" class="footer-social" aria-label="SpinCresta Telegram चैनल"><img src="/icons/telegram-white-icon.svg" alt="Telegram" width="18" height="18" loading="lazy" /><span>Telegram</span></a>
@@ -446,6 +446,6 @@
       </div>
     </footer>
 
-    <script type="module" src="/scripts/main.js?v=20261119-catalog-partners"></script>
+    <script type="module" src="/scripts/main.js?v=20261124-provider-cards"></script>
   </body>
 </html>

@@ -318,7 +318,7 @@ html:root body[data-brand] :is(.content-review, .content-article) > section.cont
 .review-provider-strip > li {
   flex: 0 0 106px;
   display: grid;
-  align-content: start;
+  grid-template-rows: auto 1fr;
   min-width: 0;
   border: 1px solid var(--surface-border);
   border-radius: var(--radius-md);
@@ -329,7 +329,26 @@ html:root body[data-brand] :is(.content-review, .content-article) > section.cont
   font-weight: 700;
 }
 
-.review-provider-strip > li > span:last-child {
+.review-provider-card-link {
+  grid-row: 1 / -1;
+  display: grid;
+  grid-template-rows: auto 1fr;
+  color: var(--text-main);
+  text-decoration: none;
+}
+
+.review-provider-card-link:hover {
+  background: var(--surface-card-hover);
+}
+
+.review-provider-card-link:focus-visible {
+  outline: 2px solid var(--editorial-blue);
+  outline-offset: -2px;
+  border-radius: inherit;
+}
+
+.review-provider-strip > li > span:last-child,
+.review-provider-card-link > span:last-child {
   padding: 8px 6px;
   overflow-wrap: anywhere;
 }

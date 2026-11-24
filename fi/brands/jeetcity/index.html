@@ -52,7 +52,7 @@
     />
     <meta name="twitter:image" content="https://res.cloudinary.com/drj61gmd2/image/upload/f_webp,q_auto/v1785069185/spincresta/brands/jeetcity/main-page/jeetcity-page_psn2mw.webp" />
     <link rel="icon" type="image/png" href="/favicon.png" />
-    <link rel="stylesheet" href="/styles.css?v=20261120-sticky-pill" />
+    <link rel="stylesheet" href="/styles.css?v=20261124-provider-cards" />
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -284,15 +284,12 @@
     <section class="container">
       <div class="brand-payments">
         <h2 class="title">Maksutavat</h2>
-        <p class="brand-availability-intro">
-          JeetCity tukee kortteja, pankkisiirtoja, sähköisiä lompakoita, tositteita, paikallisia maksupalveluita ja merkittäviä kryptovaluuttoja. Visa, Mastercard, MiFinity, Neosurf, Jeton, Skrill, Neteller, ecoPayz, Paysafecard, Flexepin ja kryptovaihtoehdot ovat saatavilla olevia vaihtoehtoja, kun taas tarkka kassa riippuu maasta ja valuutasta.
-        </p>
         <div class="payments-container" id="brand-payments"></div>
       </div>
     </section>
 
     <main class="content-review">
-      <section class="container">
+      <section class="container" data-review-section="summary">
         <h2 class="title">Palvelun yleiskuva</h2>
         <table>
           <thead>
@@ -333,7 +330,7 @@
         </table>
       </section>
 
-      <section class="container">
+      <section class="container" data-review-section="bonuses">
         <h2 class="title">Tervetuliaispaketti: Jopa 6 500 euroa + 180 ilmaiskierrosta</h2>
         <table>
           <thead>
@@ -367,7 +364,7 @@
         </p>
       </section>
 
-      <section class="container">
+      <section class="container" data-review-section="games">
         <h2 class="title">Kasinopelit ja palveluntarjoajat</h2>
         <table>
           <thead>
@@ -398,7 +395,7 @@
         </table>
       </section>
 
-      <section class="container">
+      <section class="container" data-review-section="games" data-review-details>
         <h2 class="title">JeetCityn omat pelit ja pikapelit</h2>
         <div class="features-grid premium-grid">
           <div class="feature-card glass-card">
@@ -420,7 +417,7 @@
         </div>
       </section>
 
-      <section class="container">
+      <section class="container" data-review-section="games">
         <h2 class="title">Livekasino, pöydät ja jättipotit</h2>
         <table>
           <thead>
@@ -451,7 +448,7 @@
         </table>
       </section>
 
-      <section class="container">
+      <section class="container" data-review-section="bonuses">
         <h2 class="title">Kampanjat, turnaukset, tehtävät ja arpajaiset</h2>
         <table>
           <thead>
@@ -482,7 +479,7 @@
         </table>
       </section>
 
-      <section class="container">
+      <section class="container" data-review-section="rewards">
         <h2 class="title">Kanta-asiakasohjelma: 26 kaupunkiasemaa</h2>
         <table>
           <thead>
@@ -513,7 +510,7 @@
         </table>
       </section>
 
-      <section class="container">
+      <section class="container" data-review-section="rewards">
         <h2 class="title">VIP-klubi: viisi tasoa</h2>
         <table>
           <thead>
@@ -544,8 +541,11 @@
         </table>
       </section>
 
-      <section class="container">
+      <section class="container" data-review-section="cashier">
         <h2 class="title">Maksut, nostot ja KYC</h2>
+        <p class="section-intro">
+          JeetCity tukee kortteja, pankkisiirtoja, sähköisiä lompakoita, tositteita, paikallisia maksupalveluita ja merkittäviä kryptovaluuttoja. Visa, Mastercard, MiFinity, Neosurf, Jeton, Skrill, Neteller, ecoPayz, Paysafecard, Flexepin ja kryptovaihtoehdot ovat saatavilla olevia vaihtoehtoja, kun taas tarkka kassa riippuu maasta ja valuutasta.
+        </p>
         <table>
           <thead>
             <tr><th>Alue</th><th>Nykyinen sääntö</th><th>Käytännön neuvoja</th></tr>
@@ -585,7 +585,7 @@
         </table>
       </section>
 
-      <section class="container">
+      <section class="container" data-review-section="trust" data-review-details>
         <h2 class="title">Lisenssi, valitukset ja vastuullinen pelaaminen</h2>
         <div class="features-grid premium-grid">
           <div class="feature-card glass-card">
@@ -699,6 +699,7 @@
         <p>Tekijänoikeus 2026 SpinCresta.com. Kaikki oikeudet pidätetään.</p>
         <p>18+ | Uhkapeli voi aiheuttaa riippuvuutta. Ole hyvä ja pelaa vastuullisesti. Tarkista paikalliset lait ennen pelaamista.</p>
         <nav class="footer-nav">
+          <a href="/fi/game-providers/"><svg class="site-icon site-icon--inline" width="24" height="24" aria-hidden="true" focusable="false"><use href="/icons/ui/review-method.svg?v=20261123-brand-providers#layers"></use></svg> Pelintarjoajat</a>
           <a href="/fi/responsible-gambling/">Vastuullinen pelaaminen</a><a href="/fi/privacy-policy/">Tietosuojakäytäntö</a>
           <a href="/fi/casinos-and-betting/">Kasinot ja vedonlyönti</a><a href="/fi/payment-methods/">Maksutavat</a>
           <a href="/fi/partners/">Yhteistyökumppanit</a><a href="/fi/about/">Tietoa meistä</a>
@@ -706,6 +707,6 @@
 
       </div>
     </footer>
-    <script type="module" src="/scripts/main.js?v=20261119-catalog-partners"></script>
+    <script type="module" src="/scripts/main.js?v=20261124-provider-cards"></script>
   </body>
 </html>

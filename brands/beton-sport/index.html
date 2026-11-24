@@ -50,7 +50,7 @@
     />
     <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://spincresta.com/#organization","name":"SpinCresta","url":"https://spincresta.com/","logo":{"@type":"ImageObject","url":"https://spincresta.com/favicon.png"}},{"@type":"WebSite","@id":"https://spincresta.com/#website","name":"SpinCresta","url":"https://spincresta.com/","inLanguage":"en","publisher":{"@id":"https://spincresta.com/#organization"}},{"@type":"WebPage","@id":"https://spincresta.com/brands/beton-sport/#webpage","url":"https://spincresta.com/brands/beton-sport/","name":"BetOn Sport Review 2026 | Bonus, Games & Payouts","description":"BetOn Sport review: compare bonus terms, games, payments, withdrawal and KYC rules, regional availability, and safer-play tools for 2026.","inLanguage":"en","isPartOf":{"@id":"https://spincresta.com/#website"},"breadcrumb":{"@id":"https://spincresta.com/brands/beton-sport/#breadcrumb"},"dateModified":"2026-10-07"},{"@type":"BreadcrumbList","@id":"https://spincresta.com/brands/beton-sport/#breadcrumb","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://spincresta.com/"},{"@type":"ListItem","position":2,"name":"Casino Reviews","item":"https://spincresta.com/casinos-and-betting/"},{"@type":"ListItem","position":3,"name":"BetOn Sport Review","item":"https://spincresta.com/brands/beton-sport/"}]},{"@type":"FAQPage","@id":"https://spincresta.com/brands/beton-sport/#faq","mainEntity":[{"@type":"Question","name":"What is the BetOn document verification bonus?","acceptedAnswer":{"@type":"Answer","text":"BetOn offers a 500 UAH bonus for completing document verification within the first hour."}},{"@type":"Question","name":"What is the BetOn Sport welcome package?","acceptedAnswer":{"@type":"Answer","text":"BetOn Sport advertises a welcome package up to 200,000 ₴. Check the live promotion for qualifying odds, wagering, expiry, and excluded markets."}},{"@type":"Question","name":"Is BetOn Sport licensed in Ukraine?","acceptedAnswer":{"@type":"Answer","text":"BetOn lists CITYCODE LLC and a Ukrainian sportsbook license valid from October 10, 2025 to October 10, 2030."}},{"@type":"Question","name":"Does BetOn Sport offer live betting?","acceptedAnswer":{"@type":"Answer","text":"Yes. Live betting sits alongside prematch coverage across football, basketball, hockey, tennis, esports, and other sports."}},{"@type":"Question","name":"Which payment methods are available?","acceptedAnswer":{"@type":"Answer","text":"Listed methods include Visa, Mastercard, Google Pay, Apple Pay, and IBAN transfers. The minimum deposit is 100 ₴ and the minimum withdrawal is 200 ₴."}},{"@type":"Question","name":"Does BetOn Sport share an account with BetOn Casino?","acceptedAnswer":{"@type":"Answer","text":"Yes. Both products use the same BetOn platform, but their offers, licenses, rules, and player needs differ, so SpinCresta reviews them separately."}}]}]}</script>
     <link rel="icon" type="image/png" href="/favicon.png" />
-    <link rel="stylesheet" href="/styles.css?v=20261120-sticky-pill" />
+    <link rel="stylesheet" href="/styles.css?v=20261124-provider-cards" />
   </head>
   <body data-brand="beton-sport">
     <header class="header">
@@ -107,13 +107,12 @@
     <section class="container">
       <div class="brand-payments">
         <h2 class="title">Payment Methods</h2>
-        <p class="brand-availability-intro">BetOn Sport works in UAH and lists Visa, Mastercard, Google Pay, Apple Pay, and IBAN transfers. Payments must use accounts registered to the player.</p>
         <div class="payments-container" id="brand-payments"></div>
       </div>
     </section>
 
     <main class="content-review">
-      <section class="container">
+      <section class="container" data-review-section="summary">
         <h2 class="title">BetOn Sport Snapshot</h2>
         <table>
           <thead><tr><th>Area</th><th>Key Details</th><th>Player Check</th></tr></thead>
@@ -127,7 +126,7 @@
         </table>
       </section>
 
-      <section class="container">
+      <section class="container" data-review-section="rewards" data-review-details>
         <h2 class="title">Football &amp; Major Tournaments</h2>
         <div class="features-grid premium-grid">
           <div class="feature-card glass-card"><strong>Football Focus</strong><span>Dedicated football routes include major competitions and a World Cup section for tournament-led betting.</span></div>
@@ -137,7 +136,7 @@
         </div>
       </section>
 
-      <section class="container">
+      <section class="container" data-review-section="sports">
         <h2 class="title">Live Betting, Markets &amp; Settlement</h2>
         <table>
           <thead><tr><th>Betting Area</th><th>What It Offers</th><th>What To Check</th></tr></thead>
@@ -151,7 +150,7 @@
         </table>
       </section>
 
-      <section class="container">
+      <section class="container" data-review-section="bonuses" data-review-details>
         <h2 class="title">Sports Promotions</h2>
         <div class="features-grid premium-grid">
           <div class="feature-card glass-card"><strong>Weekly Deposit Boosts</strong><span>Sports promotions can include 100% deposit boosts up to 5,000 &#8372; on selected weekdays.</span></div>
@@ -161,7 +160,7 @@
         </div>
       </section>
 
-      <section class="container">
+      <section class="container" data-review-section="cashier">
         <h2 class="title">Payments, Verification &amp; License</h2>
         <table>
           <thead><tr><th>Check</th><th>How BetOn Handles It</th><th>Practical Advice</th></tr></thead>
@@ -183,7 +182,7 @@
         </div>
       </section>
 
-      <section class="container">
+      <section class="container" data-review-section="games" data-review-details>
         <h2 class="title">Sportsbook or Casino?</h2>
         <div class="features-grid premium-grid">
           <div class="feature-card glass-card"><strong>Choose BetOn Sport</strong><span>This page is the better fit for prematch odds, live betting, tournament coverage, esports, and sports promotions.</span></div>
@@ -211,10 +210,11 @@
       <div class="container">
         <p>Copyright 2026 SpinCresta.com. All rights reserved.</p>
         <p>21+ | Gambling can be addictive. Please play responsibly. Check local laws before playing.</p>
-        <nav class="footer-nav"><a href="/responsible-gambling/">Responsible Gambling</a><a href="/privacy-policy/">Privacy Policy</a><a href="/casinos-and-betting/">Casinos &amp; Betting</a><a href="/payment-methods/">Payment Methods</a><a href="/partners/">Partners</a><a href="/about/">About</a><a href="https://t.me/spincresta" target="_blank" rel="noopener noreferrer nofollow" class="footer-social" aria-label="SpinCresta Telegram Channel"><img src="/icons/telegram-white-icon.svg" alt="Telegram" width="18" height="18" loading="lazy" /><span>Telegram</span></a><a href="https://x.com/SpinCresta" target="_blank" rel="noopener noreferrer nofollow" class="footer-social" aria-label="SpinCresta on X"><img src="/icons/x-social-media-round-icon.svg" alt="X" width="18" height="18" loading="lazy" /><span>X</span></a></nav>
+        <nav class="footer-nav">
+          <a href="/game-providers/"><svg class="site-icon site-icon--inline" width="24" height="24" aria-hidden="true" focusable="false"><use href="/icons/ui/review-method.svg?v=20261123-brand-providers#layers"></use></svg> Game Providers</a><a href="/responsible-gambling/">Responsible Gambling</a><a href="/privacy-policy/">Privacy Policy</a><a href="/casinos-and-betting/">Casinos &amp; Betting</a><a href="/payment-methods/">Payment Methods</a><a href="/partners/">Partners</a><a href="/about/">About</a><a href="https://t.me/spincresta" target="_blank" rel="noopener noreferrer nofollow" class="footer-social" aria-label="SpinCresta Telegram Channel"><img src="/icons/telegram-white-icon.svg" alt="Telegram" width="18" height="18" loading="lazy" /><span>Telegram</span></a><a href="https://x.com/SpinCresta" target="_blank" rel="noopener noreferrer nofollow" class="footer-social" aria-label="SpinCresta on X"><img src="/icons/x-social-media-round-icon.svg" alt="X" width="18" height="18" loading="lazy" /><span>X</span></a></nav>
 
       </div>
     </footer>
-    <script type="module" src="/scripts/main.js?v=20261119-catalog-partners"></script>
+    <script type="module" src="/scripts/main.js?v=20261124-provider-cards"></script>
   </body>
 </html>

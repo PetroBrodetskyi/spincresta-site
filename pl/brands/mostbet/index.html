@@ -59,7 +59,7 @@
       name="twitter:image"
       content="https://res.cloudinary.com/drj61gmd2/image/upload/f_webp,q_auto/v1785610103/spincresta/brands/mostbet/main-page/mostbet-page_gws2cu.webp"
     />
-    <link rel="stylesheet" href="/styles.css?v=20261120-sticky-pill" />
+    <link rel="stylesheet" href="/styles.css?v=20261124-provider-cards" />
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -278,13 +278,12 @@
     <section class="container">
       <div class="brand-payments">
         <h2 class="title">Metody płatności</h2>
-        <p class="brand-availability-intro">Visa, Mastercard, przelew bankowy, Tether, Bitcoin i Ethereum należą do metod płatności publikowanych przez Mostbet. Faktyczna dostępność zależy od kraju i konta. Przed wpłatą sprawdź w sekcji płatności waluty, opłaty, limity, wymagania weryfikacyjne i czas realizacji.</p>
         <div class="payments-container" id="brand-payments"></div>
       </div>
     </section>
 
     <main class="content-review">
-      <section class="container">
+      <section class="container" data-review-section="summary">
         <h2 class="title">Mostbet w skrócie</h2>
         <table>
           <thead><tr><th>Obszar</th><th>Co wynika z aktualnych informacji</th><th>Kontrola gracza</th></tr></thead>
@@ -299,7 +298,7 @@
         </table>
       </section>
 
-      <section class="container">
+      <section class="container" data-review-section="bonuses">
         <h2 class="title">Mostbet Bonus, promocje i kod promocyjny</h2>
         <table>
           <thead><tr><th>Warstwa oferty</th><th>Szczegóły widoczne publicznie</th><th>Co sprawdzić przed złożeniem reklamacji</th></tr></thead>
@@ -313,7 +312,7 @@
         </table>
       </section>
 
-      <section class="container">
+      <section class="container" data-review-section="games">
         <h2 class="title">Kasyno, kasyno live i nowe gry</h2>
         <table>
           <thead><tr><th>Obszar</th><th>Co gracze mogą przeglądać</th><th>Dlaczego to ma znaczenie</th></tr></thead>
@@ -327,7 +326,7 @@
         </table>
       </section>
 
-      <section class="container">
+      <section class="container" data-review-section="sports">
         <h2 class="title">Zakłady sportowe, zakłady na żywo i e-sport</h2>
         <div class="features-grid premium-grid">
           <div class="feature-card glass-card"><strong>Piłka nożna i sporty podstawowe</strong><span>Piłka nożna, koszykówka, tenis, siatkówka, tenis stołowy, hokej na lodzie, piłka ręczna, krykiet, baseball i futbol amerykański pojawiają się w publicznej nawigacji sportowej.</span></div>
@@ -337,7 +336,7 @@
         </div>
       </section>
 
-      <section class="container">
+      <section class="container" data-review-section="cashier">
         <h2 class="title">Płatności, wypłaty i weryfikacja</h2>
         <table>
           <thead><tr><th>Obszar</th><th>Czego gracze powinni się spodziewać</th><th>Kontrola praktyczna</th></tr></thead>
@@ -351,7 +350,7 @@
         </table>
       </section>
 
-      <section class="container" id="mostbet-account-features">
+      <section class="container" id="mostbet-account-features" data-review-section="rewards" data-review-details>
         <h2 class="title">Mostbet: program lojalnościowy, VIP i dodatkowe możliwości</h2>
         <div class="features-grid premium-grid">
           <div class="feature-card glass-card"><strong>Program lojalnościowy</strong><span>Oprócz bonusów od wpłat i promocji Mostbet ma program lojalnościowy. Sprawdź na swoim koncie dostępne nagrody oraz warunki udziału.</span></div>
@@ -362,7 +361,7 @@
         </div>
       </section>
 
-      <section class="container">
+      <section class="container" data-review-section="trust">
         <h2 class="title">Odpowiedzialny hazard i bezpieczeństwo graczy</h2>
         <table>
           <thead><tr><th>Sygnał</th><th>Co widać</th><th>Dlaczego to ma znaczenie</th></tr></thead>
@@ -437,6 +436,7 @@
           <a href="/pl/privacy-policy/">Polityka prywatności</a>
           <a href="/pl/casinos-and-betting/">Kasyna i zakłady</a>
           <a href="/pl/payment-methods/">Metody płatności</a>
+          <a href="/pl/game-providers/"><svg class="site-icon site-icon--inline" width="24" height="24" aria-hidden="true" focusable="false"><use href="/icons/ui/review-method.svg?v=20261123-brand-providers#layers"></use></svg> Dostawcy gier</a>
           <a href="/pl/partners/">Partnerzy</a>
           <a href="/pl/about/">O nas</a>
           <a href="https://t.me/spincresta" target="_blank" rel="noopener noreferrer nofollow" class="footer-social" aria-label="SpinCresta Telegram Kanał"><img src="/icons/telegram-white-icon.svg" alt="Telegram" width="18" height="18" loading="lazy" /><span>Telegram</span></a>
@@ -446,6 +446,6 @@
       </div>
     </footer>
 
-    <script type="module" src="/scripts/main.js?v=20261119-catalog-partners"></script>
+    <script type="module" src="/scripts/main.js?v=20261124-provider-cards"></script>
   </body>
 </html>

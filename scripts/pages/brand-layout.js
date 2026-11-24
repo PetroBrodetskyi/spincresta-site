@@ -234,8 +234,9 @@ export const initBrandLayout = context => {
     if (!brand || brand.notRecommended || brand.temporarilyUnavailable) return;
 
     const bonus = localizedBrandBonusText(brand.bonus || '');
+    const editorialFact = layout.querySelector('.brand-sticky-main [id][data-review-fact-label][data-review-fact-value]');
     const countryCount = Array.isArray(brand.countries) ? brand.countries.length : 0;
-    if (!bonus && !countryCount) return;
+    if (!bonus && !countryCount && !editorialFact) return;
     const slavicCountryForm = (one, few, many) =>
       countryCount % 10 === 1 && countryCount % 100 !== 11 ? one :
       countryCount % 10 >= 2 && countryCount % 10 <= 4 && !(countryCount % 100 >= 12 && countryCount % 100 <= 14) ? few : many;
@@ -243,7 +244,7 @@ export const initBrandLayout = context => {
     const bonusSection = layout.querySelector('.brand-sticky-main [data-review-section="bonuses"]');
     const bonusTarget = bonusSection?.id || bonusSection?.querySelector(':scope > :is(.title, h2)')?.id ||
       layout.querySelector('.brand-review-overview > h2')?.id;
-    if (!countryCount && !bonusTarget) return;
+    if (!countryCount && !bonusTarget && !editorialFact) return;
 
     const labels = {
       heading: localeText('Casino details', 'Casino-Informationen', 'Información del casino', 'Informazioni sul casinò', 'Informacje o kasynie', 'Інформація про казино', 'Informações do casino', 'Informations sur le casino', 'कैसीनो की जानकारी', 'Kasinon tiedot'),
@@ -258,7 +259,8 @@ export const initBrandLayout = context => {
     facts.innerHTML = `
       <h2 class="brand-quick-facts__heading">${escapeHtml(labels.heading)}</h2>
       ${bonus && bonusTarget ? `<a href="#${escapeHtml(bonusTarget)}"><small>${escapeHtml(labels.bonus)}</small><strong>${escapeHtml(bonus)}</strong></a>` : ''}
-      ${countryCount ? `<a href="#brand-countries"><small>${escapeHtml(labels.markets)}</small><strong>${countryCount} ${escapeHtml(labels.countries)}</strong></a>` : ''}
+      ${editorialFact ? `<a href="#${escapeHtml(editorialFact.id)}"><small>${escapeHtml(editorialFact.dataset.reviewFactLabel)}</small><strong>${escapeHtml(editorialFact.dataset.reviewFactValue)}</strong></a>` : ''}
+      ${countryCount ? `<a href="#brand-countries"><small>${escapeHtml(labels.markets)}</small><strong>${escapeHtml(document.body.dataset.reviewMarketName || `${countryCount} ${labels.countries}`)}</strong></a>` : ''}
     `;
     rightRail.prepend(facts);
   };
@@ -340,7 +342,7 @@ export const initBrandLayout = context => {
           'Available countries', 'Verfügbare Länder', 'Países disponibles',
           'Paesi disponibili', 'Dostępne kraje', 'Доступно країн',
           'Países disponíveis', 'Pays disponibles', 'उपलब्ध देश', 'Saatavilla olevat maat'
-        )}: ${countries}`;
+        )}: ${document.body.dataset.reviewMarketName || countries}`;
         title.appendChild(coverage);
       }
       if (reviewer) footer.prepend(reviewer);

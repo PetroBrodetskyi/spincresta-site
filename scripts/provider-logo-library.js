@@ -134,6 +134,15 @@ const textOnlyProviderNames = Object.freeze({
   'novomatic': 'Novomatic', 'play-n-go': 'Play’n GO', 'playtech': 'Playtech',
   'push-gaming': 'Push Gaming', 'quickspin': 'Quickspin', 'relax-gaming': 'Relax Gaming',
   'spribe': 'SPRIBE', 'thunderkick': 'Thunderkick', 'wazdan': 'Wazdan',
+  '4theplayer': '4ThePlayer', '7777-gaming': '7777 Gaming', 'avatarux': 'AvatarUX',
+  'betsolutions': 'Betsolutions', 'bitgames': 'BitGames', 'ebaka': 'Ebaka', 'elcasino': 'Elcasino',
+  'fbastards': 'Fbastards', 'galaxsys': 'Galaxsys', 'iconic21': 'ICONIC21', 'imagine-live': 'Imagine Live',
+  'jacktop': 'Jacktop', 'jdb': 'JDB', 'kingmidas': 'Kingmidas', 'koala': 'Koala',
+  'maxwin-gaming': 'Maxwin Gaming', 'nards': 'Nards', 'nucleus-gaming': 'Nucleus Gaming',
+  'phantomspins': 'Phantomspins', 'retro-games': 'Retro Games', 'shady-lady': 'Shady Lady',
+  'slotmill': 'Slotmill', 'smartsoft': 'Smartsoft', 'sneaky-slots': 'Sneaky Slots',
+  'swipegames': 'Swipegames', 'tvbet': 'TVBet', 'viperroyale': 'Viperroyale',
+  'vortex': 'Vortex', 'wickedgames': 'Wickedgames',
 });
 
 export const resolveReviewProviders = ids => {

@@ -142,7 +142,7 @@ for (const [i, lang] of locales.entries()) {
       ${section('coolzino-games', 'games', paragraph(c.games) + reviewCards([[live, c.live]]), true)}
       ${section('coolzino-sports', 'sports', paragraph(c.sports) + sport + paragraph(c.sportsRules), true)}
       ${section('coolzino-cashback', 'rewards', paragraph(c.cashback) + rewards + paragraph(c.cashbackRules), true)}
-      ${section('coolzino-cashier', 'cashier', paragraph(c.methods) + reviewCards([[label('cashier'), c.withdrawals], [verification, c.verification]]))}
+      ${section('coolzino-cashier', 'cashier', paragraph(c.methods) + reviewCards([[label('cashier'), c.withdrawals], [verification, c.verification]]), true)}
       ${section('coolzino-trust', 'trust', reviewCards([[label('trust'), c.license], [protection, c.safer]]) + safety, true)}
       ${reviewProviderStrip({ id: 'coolzino-providers', heading: label('providers'), providers, previous, next })}
       ${section('coolzino-pros-cons', 'pros', reviewCards(comparisons[lang].map((items, j) => [[pros, cons][j], items.split('|')]), { comparison: true }))}

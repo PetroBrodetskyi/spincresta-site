@@ -52,7 +52,7 @@
       content="Dazard: bonusy, gry, płatności, wypłaty, weryfikacja KYC, wersja mobilna i dostępność. Przed grą sprawdź aktualne warunki."
     />
     <meta name="twitter:image" content="https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto/v1785663697/spincresta/brands/dazard/main-page/dazard-page_b8iulz" />
-    <link rel="stylesheet" href="/styles.css?v=20261120-sticky-pill" />
+    <link rel="stylesheet" href="/styles.css?v=20261124-provider-cards" />
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -240,13 +240,12 @@
     <section class="container">
       <div class="brand-payments">
         <h2 class="title">Metody płatności</h2>
-        <p class="brand-availability-intro">Dazard publicznie prezentuje karty, przelewy bankowe, bankowość internetową, portfele elektroniczne, metody płatności mobilnych, kupony, Skrill Quick Checkout i przetwarzanie kryptowalut. sekcja płatności decyduje, które metody, waluty, opłaty, limity i metody wypłat są dostępne dla każdego kraju i konta.</p>
         <div class="payments-container" id="brand-payments"></div>
       </div>
     </section>
 
     <main class="content-review">
-      <section class="container">
+      <section class="container" data-review-section="summary">
         <h2 class="title">Dazard w skrócie</h2>
         <table>
           <thead><tr><th>Obszar</th><th>Co wynika z aktualnych informacji</th><th>Kontrola gracza</th></tr></thead>
@@ -261,7 +260,7 @@
         </table>
       </section>
 
-      <section class="container">
+      <section class="container" data-review-section="bonuses">
         <h2 class="title">Dazard Etapy dodatkowe</h2>
         <table>
           <thead><tr><th>Scena</th><th>Oferta</th><th>Warunki do sprawdzenia</th></tr></thead>
@@ -275,7 +274,7 @@
         </table>
       </section>
 
-      <section class="container">
+      <section class="container" data-review-section="games">
         <h2 class="title">Kasyno, kasyno live i nowe gry</h2>
         <table>
           <thead><tr><th>Obszar</th><th>Co gracze mogą przeglądać</th><th>Dlaczego to ma znaczenie</th></tr></thead>
@@ -289,7 +288,7 @@
         </table>
       </section>
 
-      <section class="container">
+      <section class="container" data-review-section="sports">
         <h2 class="title">Zakłady sportowe i zakłady na żywo</h2>
         <div class="features-grid premium-grid">
           <div class="feature-card glass-card"><strong>Piłka nożna i najważniejsze sporty</strong><span>Piłka nożna, tenis, koszykówka, piłka ręczna, hokej na lodzie i futbol amerykański należą do wyraźnie wymienionych kierunków bukmacherskich.</span></div>
@@ -299,8 +298,9 @@
         </div>
       </section>
 
-      <section class="container">
+      <section class="container" data-review-section="cashier">
         <h2 class="title">Płatności, wypłaty i weryfikacja</h2>
+        <p class="section-intro">Dazard publicznie prezentuje karty, przelewy bankowe, bankowość internetową, portfele elektroniczne, metody płatności mobilnych, kupony, Skrill Quick Checkout i przetwarzanie kryptowalut. sekcja płatności decyduje, które metody, waluty, opłaty, limity i metody wypłat są dostępne dla każdego kraju i konta.</p>
         <table>
           <thead><tr><th>Obszar</th><th>Co pokazują informacje o płatnościach publicznych</th><th>Kontrola praktyczna</th></tr></thead>
           <tbody>
@@ -313,7 +313,7 @@
         </table>
       </section>
 
-      <section class="container">
+      <section class="container" data-review-section="rewards" data-review-details>
         <h2 class="title">Dazard Nagrody, statusy i narzędzia konta</h2>
         <div class="features-grid premium-grid">
           <div class="feature-card glass-card"><strong>Turnieje</strong><span>Turnieje w kasynie i sekcje z ofertami specjalnymi dają aktywnym graczom możliwość porównania nagród wykraczających poza bonusy od depozytu.</span></div>
@@ -323,7 +323,7 @@
         </div>
       </section>
 
-      <section class="container">
+      <section class="container" data-review-section="trust">
         <h2 class="title">Odpowiedzialny hazard i bezpieczeństwo graczy</h2>
         <table>
           <thead><tr><th>Sygnał</th><th>Co widać</th><th>Dlaczego to ma znaczenie</th></tr></thead>
@@ -396,6 +396,7 @@
           <a href="/pl/privacy-policy/">Polityka prywatności</a>
           <a href="/pl/casinos-and-betting/">Kasyna i zakłady</a>
           <a href="/pl/payment-methods/">Metody płatności</a>
+          <a href="/pl/game-providers/"><svg class="site-icon site-icon--inline" width="24" height="24" aria-hidden="true" focusable="false"><use href="/icons/ui/review-method.svg?v=20261123-brand-providers#layers"></use></svg> Dostawcy gier</a>
           <a href="/pl/partners/">Partnerzy</a>
           <a href="/pl/about/">O nas</a>
           <a href="https://t.me/spincresta" target="_blank" rel="noopener noreferrer nofollow" class="footer-social" aria-label="SpinCresta Telegram Kanał"><img src="/icons/telegram-white-icon.svg" alt="Telegram" width="18" height="18" loading="lazy" /><span>Telegram</span></a>
@@ -405,6 +406,6 @@
       </div>
     </footer>
 
-    <script type="module" src="/scripts/main.js?v=20261119-catalog-partners"></script>
+    <script type="module" src="/scripts/main.js?v=20261124-provider-cards"></script>
   </body>
 </html>

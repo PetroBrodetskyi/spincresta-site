@@ -1,4 +1,4 @@
-import { resolveReviewProviders } from './provider-logo-library.js?v=20261123-brand-providers';
+import { resolveReviewProviders } from './provider-logo-library.js?v=20261124-bitgames-providers';
 
 // Selected names from each brand's own review or operator catalog, not a global list.
 // A studio in the logo library is not automatically attributed to any casino.
@@ -14,6 +14,17 @@ const byReview = Object.freeze({
   beton: 'pragmatic-play 3-oaks playson endorphina egt-digital',
   betonwin: 'pragmatic-play evolution nolimit-city bgaming playson pg-soft 3-oaks spribe',
   betrepublic: 'playson hacksaw-gaming spinomenal yggdrasil amusnet gamomat bgaming egt-digital gamebeat evoplay ct-interactive 1x2gaming ruby-play tada-gaming mancala winfinity aviatrix platipus onetouch amatic oryx iron-dog inout popiplay apollo-games zillion-games tom-horn caleta-gaming mascot solidicon pateplay barbara-bang 100hp-gaming spinthon fugaso riddec-games spade-gaming betgames',
+  bitgames: [
+    'pragmatic-play evolution pg-soft hacksaw-gaming endorphina 3-oaks',
+    '100hp-gaming 155 1spin4win 4theplayer 7777-gaming amatic amigo avatarux aviatrix barbara-bang belatra',
+    'betsoft-gaming betsolutions bf-games bgaming big-time-gaming bitgames booming-games caleta-gaming clawbuster cq9',
+    'ebaka elcasino evoplay ezugi fa-chai-gaming fbastards formula-spin fugaso galaxsys gameart gamebeat gamzix',
+    'iconic21 imagine-live inout iron-dog jacktop jdb kalamba-games kingmidas koala mascot maxwin-gaming nards',
+    'netent netgame novomatic nucleus-gaming onetouch onlyplay oryx phantomspins pixmove platipus playson',
+    'poggiplay popiplay red-tiger retro-games ruby-play shady-lady slotmill slotopia smartsoft sneaky-slots',
+    'spade-gaming spinomenal spribe swintt swipegames thunderkick tom-horn turbo-games tvbet viperroyale',
+    'voltent vortex wickedgames yggdrasil zillion-games',
+  ].join(' '),
   britsino: 'bgaming true-labs gamzix ka-gaming fugaso 1spin4win 100hp-gaming tada-gaming betsoft-gaming platipus mascot inout belatra evoplay betgames',
   browinner: 'pragmatic-play evolution play-n-go netent yggdrasil red-tiger playtech bgaming playson',
   casinado: 'pragmatic-play hacksaw-gaming playtech playson amusnet betsoft-gaming',

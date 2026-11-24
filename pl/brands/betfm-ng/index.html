@@ -40,7 +40,7 @@
     <meta name="twitter:description" content="BetFM Nigeria: bonusy, gry, płatności, wypłaty, weryfikacja KYC, wersja mobilna i dostępność. Przed grą sprawdź aktualne warunki." />
     <meta name="twitter:image" content="https://res.cloudinary.com/drj61gmd2/image/upload/f_webp,q_auto/v1784994975/spincresta/brands/betfm-ng/main-page/betfm-page_li498p.webp" />
     <link rel="icon" type="image/png" href="/favicon.png" />
-    <link rel="stylesheet" href="/styles.css?v=20261120-sticky-pill" />
+    <link rel="stylesheet" href="/styles.css?v=20261124-provider-cards" />
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -209,10 +209,10 @@
     </section>
 
     <section class="container"><div class="brand-countries"><h2 class="title">Dostępny kraj</h2><div class="countries-container" id="brand-countries"></div></div></section>
-    <section class="container"><div class="brand-payments"><h2 class="title">Metody płatności w Nigerii</h2><p class="brand-availability-intro">BetFM Nigeria obsługuje przelewy bankowe, Palmpay, karty bankowe i depozyty OPay, a wypłaty są dostępne za pośrednictwem kont bankowych i OPay. Sprawdź sekcji płatności na żywo pod kątem aktualnych limitów, opłat i czasu przetwarzania.</p><div class="payments-container" id="brand-payments"></div></div></section>
+    <section class="container"><div class="brand-payments"><h2 class="title">Metody płatności w Nigerii</h2><div class="payments-container" id="brand-payments"></div></div></section>
 
     <main class="content-review">
-      <section class="container">
+      <section class="container" data-review-section="summary">
         <h2 class="title">BetFM Nigeria przegląd</h2>
         <table><thead><tr><th>Obszar</th><th>Kluczowe szczegóły</th><th>Kontrola gracza</th></tr></thead><tbody>
           <tr><td>Waluta i dostęp</td><td>NGN; przeglądarka komputerowa, mobilna i plik APK na Androida; Interfejs angielski.</td><td>Potwierdź źródło APK i uprawnienia przed instalacją poza oficjalnym sklepem z aplikacjami.</td></tr>
@@ -224,7 +224,7 @@
         </tbody></table>
       </section>
 
-      <section class="container">
+      <section class="container" data-review-section="bonuses">
         <h2 class="title">Pakiet powitalny, doładowania i zwrot pieniędzy</h2>
         <table><thead><tr><th>Oferta</th><th>Szczegóły Nigerii</th><th>Co zweryfikować</th></tr></thead><tbody>
           <tr><td>Depozyty powitalne 1-5</td><td>100%, 110%, 120%, 130% i 140%; łącznie do 600% / 700 000 NGN.</td><td>Każdy krok zawiera listę wymogu obrotu x35 i siedem dni; potwierdź minimalny depozyt, maksymalny zakład, wykluczone gry i limity wypłat.</td></tr>
@@ -235,7 +235,7 @@
         </tbody></table>
       </section>
 
-      <section class="container">
+      <section class="container" data-review-section="games">
         <h2 class="title">Kasyno, krupierzy na żywo i gry błyskawiczne</h2>
         <table><thead><tr><th>Obszar</th><th>Zakres i przykłady</th><th>Uwaga gracza</th></tr></thead><tbody>
           <tr><td>Automaty i najlepsze gry</td><td>Gates of Olympus 1000, Wolf Gold, Bigger Bass Splash, 777 Strike, 3 Magic Eggs oraz Hold & Win.</td><td>Popularność gier jest sygnałem przeglądania, a nie dowodem na lepsze oczekiwane zyski.</td></tr>
@@ -246,7 +246,7 @@
         </tbody></table>
       </section>
 
-      <section class="container">
+      <section class="container" data-review-section="sports">
         <h2 class="title">Zakłady sportowe i zakłady na żywo</h2>
         <div class="features-grid premium-grid">
           <div class="feature-card glass-card"><strong>Podstawowe sporty</strong><span>Piłka nożna, koszykówka, tenis, hokej na lodzie, siatkówka, piłka ręczna, baseball, krykiet i futsal mają sekcje na żywo.</span></div>
@@ -256,7 +256,7 @@
         </div>
       </section>
 
-      <section class="container">
+      <section class="container" data-review-section="cashier">
         <h2 class="title">OPay, Palmpay, banki i wypłaty</h2>
         <table><thead><tr><th>Metoda</th><th>Opublikowano Limity Nigerii</th><th>Praktyczne porady</th></tr></thead><tbody>
           <tr><td>Depozyt przelewem bankowym</td><td>500 NGN do 2 000 000 NGN.</td><td>Użyj konta bankowego zarejestrowanego na tę samą osobę, co konto BetFM.</td></tr>
@@ -269,7 +269,7 @@
         </tbody></table>
       </section>
 
-      <section class="container">
+      <section class="container" data-review-section="cashier" data-review-details>
         <h2 class="title">KYC, licencja i ocena SpinCresta</h2>
         <div class="features-grid premium-grid">
           <div class="feature-card glass-card"><strong>Kontrole KYC</strong><span>BetFM może poprosić o tożsamość, adres, dowód płatności, selfie i rozmowę weryfikacyjną. Dokończ weryfikację wcześniej i podaj dokładne dane konta.</span></div>
@@ -279,7 +279,7 @@
         </div>
       </section>
 
-      <section class="container">
+      <section class="container" data-review-section="trust">
         <h2 class="title">Wsparcie i odpowiedzialna gra</h2>
         <table><thead><tr><th>Funkcja</th><th>Dostępna sekcjia</th><th>Najlepsza praktyka</th></tr></thead><tbody>
           <tr><td>Wsparcie Nigerii</td><td>Czat na żywo, ngcs@betfm.club i @BetfmNGCS_bot na Telegram.</td><td>W przypadku szczegółowych spraw korzystaj z poczty elektronicznej oraz przechowuj zrzuty ekranu i referencje transakcji.</td></tr>
@@ -322,7 +322,8 @@
 </main>
 
     <section class="all-countries"><div class="container"><h2 class="title">Kasyna online według kraju</h2><div class="countries-cloud"></div></div></section>
-    <footer class="footer"><div class="container"><p>© 2026 SpinCresta.com. Wszelkie prawa zastrzeżone.</p><p>18+ | Hazard może uzależniać. Proszę grać odpowiedzialnie. Przed rozpoczęciem gry sprawdź lokalne przepisy.</p><nav class="footer-nav"><a href="/pl/responsible-gambling/">Odpowiedzialna gra</a><a href="/pl/privacy-policy/">Polityka prywatności</a><a href="/pl/casinos-and-betting/">Kasyna i zakłady</a><a href="/pl/payment-methods/">Metody płatności</a><a href="/pl/partners/">Partnerzy</a><a href="/pl/about/">O nas</a><a href="https://t.me/spincresta" target="_blank" rel="noopener noreferrer nofollow" class="footer-social" aria-label="SpinCresta Telegram Kanał"><img src="/icons/telegram-white-icon.svg" alt="Telegram" width="18" height="18" loading="lazy" /><span>Telegram</span></a><a href="https://x.com/SpinCresta" target="_blank" rel="noopener noreferrer nofollow" class="footer-social" aria-label="SpinCresta na X"><img src="/icons/x-social-media-round-icon.svg" alt="X" width="18" height="18" loading="lazy" /><span>X</span></a></nav></div></footer>
-    <script type="module" src="/scripts/main.js?v=20261119-catalog-partners"></script>
+    <footer class="footer"><div class="container"><p>© 2026 SpinCresta.com. Wszelkie prawa zastrzeżone.</p><p>18+ | Hazard może uzależniać. Proszę grać odpowiedzialnie. Przed rozpoczęciem gry sprawdź lokalne przepisy.</p><nav class="footer-nav">
+          <a href="/pl/game-providers/"><svg class="site-icon site-icon--inline" width="24" height="24" aria-hidden="true" focusable="false"><use href="/icons/ui/review-method.svg?v=20261123-brand-providers#layers"></use></svg> Dostawcy gier</a><a href="/pl/responsible-gambling/">Odpowiedzialna gra</a><a href="/pl/privacy-policy/">Polityka prywatności</a><a href="/pl/casinos-and-betting/">Kasyna i zakłady</a><a href="/pl/payment-methods/">Metody płatności</a><a href="/pl/partners/">Partnerzy</a><a href="/pl/about/">O nas</a><a href="https://t.me/spincresta" target="_blank" rel="noopener noreferrer nofollow" class="footer-social" aria-label="SpinCresta Telegram Kanał"><img src="/icons/telegram-white-icon.svg" alt="Telegram" width="18" height="18" loading="lazy" /><span>Telegram</span></a><a href="https://x.com/SpinCresta" target="_blank" rel="noopener noreferrer nofollow" class="footer-social" aria-label="SpinCresta na X"><img src="/icons/x-social-media-round-icon.svg" alt="X" width="18" height="18" loading="lazy" /><span>X</span></a></nav></div></footer>
+    <script type="module" src="/scripts/main.js?v=20261124-provider-cards"></script>
   </body>
 </html>

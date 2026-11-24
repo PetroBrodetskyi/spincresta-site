@@ -1,9 +1,11 @@
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
+import { execFileSync } from 'node:child_process';
 import test from 'node:test';
-import { BRAND_TABLE_TOPICS, belongsInReviewDetails, findSeparateBonusTerms, isSportsbookFeatureHeading } from '../scripts/pages/brand.js';
+import { BRAND_TABLE_TOPICS, belongsInReviewDetails, findSeparateBonusTerms, groupBrandReviewDetails, isSportsbookFeatureHeading } from '../scripts/pages/brand.js';
 import { isBrandSportsSection } from '../scripts/pages/brand-layout.js';
 import { BRAND_REVIEW_ORDER, classifyReviewSection, compareReviewSections, reviewSectionLabel } from '../scripts/pages/brand-review-order.js';
+import { parseBrandDetailSource, planBrandDetailSections, syncBrandDetailSections } from './sync-brand-review-details.mjs';
 
 const read = path => fs.readFileSync(new URL(`../${path}`, import.meta.url), 'utf8');
 
@@ -15,19 +17,42 @@ test('review detail tabs group existing editorial tables and central sportsbook 
   assert.ok(!belongsInReviewDetails({ kind: 'faq', hasTable: true }));
   assert.ok(belongsInReviewDetails({ kind: 'cashier', explicit: true, hasTable: false }));
   assert.ok(belongsInReviewDetails({ kind: 'rewards', explicit: true, hasTable: true }));
-  assert.ok(!belongsInReviewDetails({ kind: 'rewards', hasTable: true }));
+  assert.ok(belongsInReviewDetails({ kind: 'rewards', hasTable: true }));
+  assert.ok(belongsInReviewDetails({ kind: 'suitability', hasTable: true }));
+  assert.ok(!belongsInReviewDetails({ kind: 'suitability', hasTable: false }));
+  assert.ok(belongsInReviewDetails({ kind: 'more', hasTable: true }));
   assert.ok(!belongsInReviewDetails({ kind: 'cashier', explicit: true, rail: 'payments' }));
   assert.ok(!belongsInReviewDetails({ kind: 'faq', explicit: true }));
   assert.ok(!belongsInReviewDetails({ kind: 'providers', explicit: true }));
   assert.ok(compareReviewSections('trust', 'providers') < 0 && compareReviewSections('providers', 'pros') < 0);
   const runtime = read('scripts/pages/brand.js');
-  assert.match(runtime, /if \(groups\.length < 2\) return/);
-  assert.match(runtime, /panel\.append\(\.\.\.topicSections\)/);
+  assert.deepEqual(groupBrandReviewDetails([{ kind: 'sports' }]), [], 'sports stays inline when there are no other details');
+  assert.equal(groupBrandReviewDetails([{ kind: 'cashier', hasTable: true, rail: 'payments' }]).length, 0);
+  assert.match(runtime, /if \(groups\.length === 1\)/);
+  assert.match(runtime, /panel\.append\(\.\.\.topicSections\.map\(\(\{ section \}\) => section\)\)/);
   assert.match(runtime, /explicit: section\.hasAttribute\('data-review-details'\)/);
   assert.match(runtime, /styleReviewTables\(\);\s*initBrandReviewDetails\(\);/);
   assert.match(read('scripts/main.js'), /panel\?\.firstElementChild\?\.contains\(target\)/);
   const css = read('styles/brand-review.css');
   assert.match(css, /\.brand-review-details__panel\[hidden\]\s*\{\s*display: none/);
+});
+
+test('legacy tables and related sections use the same topics in all ten languages', () => {
+  execFileSync(process.execPath, ['tools/sync-brand-review-details.mjs', '--check']);
+  const prefixes = ['', 'de/', 'es/', 'it/', 'pl/', 'uk/', 'pt/', 'fr/', 'hi/', 'fi/'];
+  for (const [slug, expected] of [
+    ['britsino', ['bonuses', 'bonus-terms', 'games', 'rewards', 'cashier', 'trust']],
+    ['kingmaker', ['summary', 'bonuses', 'games', 'sports', 'rewards', 'cashier', 'trust']],
+  ]) {
+    for (const prefix of prefixes) {
+      const path = `${prefix}brands/${slug}/index.html`;
+      const source = parseBrandDetailSource(read(path));
+      const groups = groupBrandReviewDetails(source.map(section => ({ ...section, hasTable: Boolean(section.tables) })));
+      assert.deepEqual(groups.map(([kind]) => kind), expected, path);
+      assert.equal(groups.flatMap(([, entries]) => entries).reduce((count, section) => count + section.tables, 0),
+        source.reduce((count, section) => count + section.tables, 0), path);
+    }
+  }
 });
 
 test('substantial bonus tables get a neighboring terms tab only for separately authored conditions', () => {
@@ -49,6 +74,16 @@ test('substantial bonus tables get a neighboring terms tab only for separately a
       });
     assert.equal(findSeparateBonusTerms(sections).length, 1, prefix || 'en');
   }
+});
+
+test('topic synchronization does not rewrite authored tables, links or IDs', () => {
+  const original = '<main class="content-review"><section id="payments"><h2>Payments</h2><table><tr><td>€50</td></tr></table></section><section><h2>Sportsbook</h2><a href="#payments">Details</a></section></main>';
+  const source = parseBrandDetailSource(original);
+  const output = syncBrandDetailSections(original, source, planBrandDetailSections(source));
+  assert.match(output, /id="payments" data-review-section="cashier"/);
+  assert.match(output, /<section data-review-section="sports">/);
+  assert.equal(output.replace(/ data-review-section="[^"]+"/g, ''), original);
+  assert.throws(() => syncBrandDetailSections(original.replace('id="payments"', 'id="different"'), source, planBrandDetailSections(source)));
 });
 
 test('the selected review and snapshot tabs share a filled treatment without an underline', () => {

@@ -52,7 +52,7 @@
     />
     <meta name="twitter:image" content="https://res.cloudinary.com/drj61gmd2/image/upload/f_webp,q_auto/v1785085881/spincresta/brands/spinboss/main-page/spinboss-page_gasp2x.webp" />
     <link rel="icon" type="image/png" href="/favicon.png" />
-    <link rel="stylesheet" href="/styles.css?v=20261120-sticky-pill" />
+    <link rel="stylesheet" href="/styles.css?v=20261124-provider-cards" />
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -221,10 +221,10 @@
     </section>
 
     <section class="container"><div class="brand-countries"><h2 class="title">Доступні країни</h2><div class="countries-container" id="brand-countries"></div></div></section>
-    <section class="container"><div class="brand-payments"><h2 class="title">Способи оплати</h2><p class="brand-availability-intro">SpinBoss відображає підтримку Visa, Mastercard і Interac і приймає кілька криптовалют для своїх криптовалютних пропозицій. Каса після входу в акаунт визначає локальні методи депозиту та виплати, валюти, ліміти та розділи обробки.</p><div class="payments-container" id="brand-payments"></div></div></section>
+    <section class="container"><div class="brand-payments"><h2 class="title">Способи оплати</h2><div class="payments-container" id="brand-payments"></div></div></section>
 
     <main class="content-review">
-      <section class="container">
+      <section class="container" data-review-section="summary">
         <h2 class="title">Короткий огляд</h2>
         <table>
           <thead><tr><th>Категорія</th><th>Перевірена деталь</th><th>Що перевірити</th></tr></thead>
@@ -239,7 +239,7 @@
         </table>
       </section>
 
-      <section class="container">
+      <section class="container" data-review-section="bonuses">
         <h2 class="title">Вітальний пакет казино</h2>
         <table>
           <thead><tr><th>Депозит</th><th>Опублікована пропозиція</th><th>Ключова умова</th></tr></thead>
@@ -254,7 +254,7 @@
         <p>Чотири етапи додають рекламовані 15 000 євро та 400 безкоштовних обертань. Оскільки вимога 20x застосовується до депозиту плюс бонус, депозит у 100 євро разом із 100 євро створює необхідну ставку в розмірі 4000 євро. Виграші, отримані від бонусів, також обмежуються опублікованими правилами максимального випуску.</p>
       </section>
 
-      <section class="container">
+      <section class="container" data-review-section="bonuses">
         <h2 class="title">Вітальні пропозиції щодо спорту та криптовалюти</h2>
         <table>
           <thead><tr><th>Пропозиція</th><th>Назва</th><th>Важлива деталь</th></tr></thead>
@@ -268,7 +268,7 @@
         <p>Виберіть запланований розділ вітальної пропозиції перед внесенням депозиту. SpinBoss стверджує, що ставки до активації, запит на виплату або використання невідповідного способу оплати можуть позбавити права на бонус.</p>
       </section>
 
-      <section class="container">
+      <section class="container" data-review-section="games">
         <h2 class="title">Ігри та провайдери</h2>
         <table>
           <thead><tr><th>Категорія</th><th>Охоплення та приклади</th><th>Чому це важливо</th></tr></thead>
@@ -281,7 +281,7 @@
         </table>
       </section>
 
-      <section class="container">
+      <section class="container" data-review-section="games" data-review-details>
         <h2 class="title">Джекпоти та live-казино</h2>
         <div class="features-grid premium-grid">
           <div class="feature-card glass-card"><strong>Відкриття джекпоту</strong><span>Hot, Lucky, New, Daily, Jackpot Play і розділи з усіма джекпотами полегшують порівняння ігор із прогресивним і фіксованим джекпотом.</span></div>
@@ -291,7 +291,7 @@
         </div>
       </section>
 
-      <section class="container">
+      <section class="container" data-review-section="sports">
         <h2 class="title">Ставки на спорт, live-ставки та кінні перегони</h2>
         <table>
           <thead><tr><th>Категорія</th><th>Покриття</th><th>Примітка гравця</th></tr></thead>
@@ -304,7 +304,7 @@
         </table>
       </section>
 
-      <section class="container">
+      <section class="container" data-review-section="rewards">
         <h2 class="title">Нагороди, турніри та кешбек</h2>
         <table>
           <thead><tr><th>Особливість</th><th>Поточна структура</th><th>Важливе правило</th></tr></thead>
@@ -317,7 +317,7 @@
         </table>
       </section>
 
-      <section class="container">
+      <section class="container" data-review-section="rewards">
         <h2 class="title">VIP-клуб: 25 рівнів</h2>
         <table>
           <thead><tr><th>Рівень</th><th>Рівні та кешбек</th><th>Зазначений ліміт виплат</th></tr></thead>
@@ -332,7 +332,7 @@
         <p>Один VIP-бал нараховується за кожні €2 ставок у казино, на спорт, у P2P-іграх або лотереях, а також за кожні €4 ставок у live-казино. Умови також прив’язують ліміти виплати до останніх дій, тому статус і переваги не слід вважати постійними.</p>
       </section>
 
-      <section class="container">
+      <section class="container" data-review-section="cashier">
         <h2 class="title">Платежі, виплати та KYC</h2>
         <table>
           <thead><tr><th>Категорія</th><th>Перевірена деталь</th><th>Практичні поради</th></tr></thead>
@@ -346,7 +346,7 @@
         </table>
       </section>
 
-      <section class="container">
+      <section class="container" data-review-section="trust" data-review-details>
         <h2 class="title">Ліцензія, скарги та відповідальна гра</h2>
         <div class="features-grid premium-grid">
           <div class="feature-card glass-card"><strong>Дані ліцензії Anjouan</strong><span>На сайті відображається знак перевірки Anjouan Gaming з UUID 68e7afdb-cdf6-4d36-8fe1-b0a813bb9105. Перед внесенням депозиту відкрийте сторінку перевірки ліцензії та перевірте її актуальний статус.</span></div>
@@ -389,7 +389,8 @@
 </main>
 
     <section class="all-countries"><div class="container"><h2 class="title">Онлайн-казино за країнами</h2><div class="countries-cloud"></div></div></section>
-    <footer class="footer"><div class="container"><p>© 2026 SpinCresta.com. Усі права захищені.</p><p>18+ | Азартні ігри можуть викликати залежність. Будь ласка, грайте відповідально. Перед грою перевірте місцеві закони.</p><nav class="footer-nav"><a href="/uk/responsible-gambling/">Відповідальна гра в азартні ігри</a><a href="/uk/privacy-policy/">Політика конфіденційності</a><a href="/uk/casinos-and-betting/">Казино та ставки</a><a href="/uk/payment-methods/">Способи оплати</a><a href="/uk/partners/">Партнери</a><a href="/uk/about/">Про нас</a><a href="https://t.me/spincresta" target="_blank" rel="noopener noreferrer nofollow" class="footer-social" aria-label="Канал SpinCresta Telegram"><img src="/icons/telegram-white-icon.svg" alt="Telegram" width="18" height="18" loading="lazy" /><span>Telegram</span></a><a href="https://x.com/SpinCresta" target="_blank" rel="noopener noreferrer nofollow" class="footer-social" aria-label="SpinCresta на X"><img src="/icons/x-social-media-round-icon.svg" alt="X" width="18" height="18" loading="lazy" /><span>X</span></a></nav></div></footer>
-    <script type="module" src="/scripts/main.js?v=20261119-catalog-partners"></script>
+    <footer class="footer"><div class="container"><p>© 2026 SpinCresta.com. Усі права захищені.</p><p>18+ | Азартні ігри можуть викликати залежність. Будь ласка, грайте відповідально. Перед грою перевірте місцеві закони.</p><nav class="footer-nav">
+          <a href="/uk/game-providers/"><svg class="site-icon site-icon--inline" width="24" height="24" aria-hidden="true" focusable="false"><use href="/icons/ui/review-method.svg?v=20261123-brand-providers#layers"></use></svg> Провайдери ігор</a><a href="/uk/responsible-gambling/">Відповідальна гра в азартні ігри</a><a href="/uk/privacy-policy/">Політика конфіденційності</a><a href="/uk/casinos-and-betting/">Казино та ставки</a><a href="/uk/payment-methods/">Способи оплати</a><a href="/uk/partners/">Партнери</a><a href="/uk/about/">Про нас</a><a href="https://t.me/spincresta" target="_blank" rel="noopener noreferrer nofollow" class="footer-social" aria-label="Канал SpinCresta Telegram"><img src="/icons/telegram-white-icon.svg" alt="Telegram" width="18" height="18" loading="lazy" /><span>Telegram</span></a><a href="https://x.com/SpinCresta" target="_blank" rel="noopener noreferrer nofollow" class="footer-social" aria-label="SpinCresta на X"><img src="/icons/x-social-media-round-icon.svg" alt="X" width="18" height="18" loading="lazy" /><span>X</span></a></nav></div></footer>
+    <script type="module" src="/scripts/main.js?v=20261124-provider-cards"></script>
   </body>
 </html>

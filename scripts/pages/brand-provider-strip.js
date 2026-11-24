@@ -1,7 +1,8 @@
-import { getReviewProviders } from '../brand-review-providers.js?v=20261123-britsino-catalog';
+import { getReviewProviders } from '../brand-review-providers.js?v=20261124-bitgames-providers';
 import { siteIconMarkup } from '../site-icons.js?v=20261123-brand-providers';
 import { bindManualCardStrip } from '../scrolling-card-strip.js?v=20261123-provider-strip';
 import { reviewSectionLabel } from './brand-review-order.js?v=20261123-provider-strip';
+import { providerDirectoryKey } from '../provider-directory-key.js';
 
 const escape = value => String(value).replaceAll('&', '&amp;').replaceAll('"', '&quot;').replaceAll('<', '&lt;');
 
@@ -53,8 +54,28 @@ export function insertBrandProviderSection({ article, brand, localeText }) {
 }
 
 export function initBrandProviderStrips(root = document) {
-  root.querySelectorAll('.review-providers').forEach(section => bindManualCardStrip({
+  const strips = [...root.querySelectorAll('.review-providers')];
+  strips.forEach(section => bindManualCardStrip({
     grid: section.querySelector('.review-provider-strip'),
     controls: section.querySelector('[data-strip-controls]'),
   }));
+  if (!strips.length) return;
+  import('../provider-directory-index.js?v=20261124-game-providers').then(({ providerDirectoryIndex }) => {
+    for (const section of strips) {
+      const doc = section.ownerDocument;
+      const lang = doc.body.dataset.language || doc.documentElement.lang.split('-')[0] || 'en';
+      const directory = lang === 'en' ? '/game-providers/' : `/${lang}/game-providers/`;
+      for (const card of section.querySelectorAll('.review-provider-strip > li')) {
+        const label = card.querySelector(':scope > span:last-child');
+        if (!label || card.querySelector('a')) continue;
+        const name = providerDirectoryKey(label.textContent);
+        if (!Object.hasOwn(providerDirectoryIndex, name)) continue;
+        const link = doc.createElement('a');
+        link.className = 'review-provider-card-link';
+        link.href = directory + '#provider-' + providerDirectoryIndex[name];
+        link.append(...card.childNodes);
+        card.append(link);
+      }
+    }
+  }).catch(() => { /* Keep the original carousel if the directory index is unavailable. */ });
 }

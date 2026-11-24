@@ -38,7 +38,7 @@
     <meta name="twitter:title" content="GoldPari-arvostelu 2026: bonukset ja maksut maittain" />
     <meta name="twitter:description" content="Riippumaton GoldPari-arvostelu: maakohtaiset bonukset, minimitalletukset ja paikalliset maksutavat 22 markkinalla sekä pelit, kotiutukset ja KYC." />
     <meta name="twitter:image" content="https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto/v1787410332/spincresta/brands/goldpari/main-page/goldpari-page_iicb86" />
-    <link rel="stylesheet" href="/styles.css?v=20261120-sticky-pill" />
+    <link rel="stylesheet" href="/styles.css?v=20261124-provider-cards" />
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -208,7 +208,7 @@
     <section class="container"><div class="brand-payments"><h2 class="title">Maksutavat</h2><div class="payments-container" id="brand-payments"></div></div></section>
 
     <main class="content-review">
-      <section class="container" id="goldpari-regional-guide">
+      <section class="container" id="goldpari-regional-guide" data-review-section="cashier">
         <h2 class="title">Bonukset ja paikalliset maksutavat maittain</h2>
         <p>Nykyiset aluekohtaiset asetukset kattavat 22 markkinaa. Taulukossa verrataan ensitalletustarjousta ja kussakin maassa julkaistuja paikallisia talletustapoja. Summat ja saatavuus voivat muuttua tilikohtaisesti, joten tarkista ajantasainen kampanja ja kassa ennen maksua.</p>
         <table>
@@ -240,7 +240,7 @@
         </table>
       </section>
 
-      <section class="container">
+      <section class="container" data-review-section="games">
         <h2 class="title">Kasino, livepöydät ja pelivalmistajat</h2>
         <table>
           <thead><tr><th>Alue</th><th>Mitä Löysimme</th><th>Miksi sillä on merkitystä</th></tr></thead>
@@ -264,7 +264,7 @@
         </div>
       </section>
 
-      <section class="container">
+      <section class="container" data-review-section="cashier">
         <h2 class="title">Talletukset, kotiutukset ja vahvistukset</h2>
         <p>Maksutavat riippuvat maasta, tilin valuutasta ja maksuosiossa näkyvistä vaihtoehdoista. Julkisissa tiedoissa mainitaan kortit, pankkisiirto, OPay ja useita kryptovaluuttoja; alla on yhteenveto operaattorin yleisistä ehdoista.</p>
         <table>
@@ -280,7 +280,7 @@
         </table>
       </section>
 
-      <section class="container">
+      <section class="container" data-review-section="trust" data-review-details>
         <h2 class="title">Lisenssi, tuki ja mobiilikäyttö</h2>
         <div class="features-grid premium-grid">
           <div class="feature-card glass-card"><strong>Operaattori ja lisenssi</strong><span>Live-alatunniste tunnistaa BRAVECO LLC:n, rekisteröinti FSC/200/LLC 2488/25 ja Anjouanin lisenssin ALSI-192407047-FI3. Tarkista linkitetty julkinen rekisteri uudelleen ennen rekisteröitymistä, koska lisenssin tila voi muuttua.</span></div>
@@ -290,7 +290,7 @@
         </div>
       </section>
 
-      <section class="container">
+      <section class="container" data-review-section="trust">
         <h2 class="title">Vastuullinen pelaaminen ja pelaajien turvallisuus</h2>
         <table>
           <thead><tr><th>Kohta</th><th>Julkaistu tieto</th><th>Miksi sillä on merkitystä</th></tr></thead>
@@ -338,7 +338,8 @@
     </main>
 
     <section class="all-countries"><div class="container"><h2 class="title">Nettikasinot maittain</h2><div class="countries-cloud"></div></div></section>
-    <footer class="footer"><div class="container"><p>Tekijänoikeus 2026 SpinCresta.com. Kaikki oikeudet pidätetään.</p><p>18+ | Uhkapelit voivat aiheuttaa riippuvuutta. Ole hyvä ja pelaa vastuullisesti. Tarkista paikalliset lait ennen pelaamista.</p><nav class="footer-nav"><a href="/fi/responsible-gambling/">Vastuullinen pelaaminen</a><a href="/fi/privacy-policy/">Tietosuojakäytäntö</a><a href="/fi/casinos-and-betting/">Kasinot ja vedonlyönti</a><a href="/fi/payment-methods/">Maksutavat</a><a href="/fi/partners/">Yhteistyökumppanit</a><a href="/fi/about/">Tietoa meistä</a><a href="https://t.me/spincresta" target="_blank" rel="noopener noreferrer nofollow" class="footer-social" aria-label="SpinCresta Telegram Kanava"><img src="/icons/telegram-white-icon.svg" alt="Telegram" width="18" height="18" loading="lazy" /><span>Telegram</span></a><a href="https://x.com/SpinCresta" target="_blank" rel="noopener noreferrer nofollow" class="footer-social" aria-label="SpinCresta X:ssä"><img src="/icons/x-social-media-round-icon.svg" alt="X" width="18" height="18" loading="lazy" /><span>X</span></a></nav></div></footer>
-    <script type="module" src="/scripts/main.js?v=20261119-catalog-partners"></script>
+    <footer class="footer"><div class="container"><p>Tekijänoikeus 2026 SpinCresta.com. Kaikki oikeudet pidätetään.</p><p>18+ | Uhkapelit voivat aiheuttaa riippuvuutta. Ole hyvä ja pelaa vastuullisesti. Tarkista paikalliset lait ennen pelaamista.</p><nav class="footer-nav">
+          <a href="/fi/game-providers/"><svg class="site-icon site-icon--inline" width="24" height="24" aria-hidden="true" focusable="false"><use href="/icons/ui/review-method.svg?v=20261123-brand-providers#layers"></use></svg> Pelintarjoajat</a><a href="/fi/responsible-gambling/">Vastuullinen pelaaminen</a><a href="/fi/privacy-policy/">Tietosuojakäytäntö</a><a href="/fi/casinos-and-betting/">Kasinot ja vedonlyönti</a><a href="/fi/payment-methods/">Maksutavat</a><a href="/fi/partners/">Yhteistyökumppanit</a><a href="/fi/about/">Tietoa meistä</a><a href="https://t.me/spincresta" target="_blank" rel="noopener noreferrer nofollow" class="footer-social" aria-label="SpinCresta Telegram Kanava"><img src="/icons/telegram-white-icon.svg" alt="Telegram" width="18" height="18" loading="lazy" /><span>Telegram</span></a><a href="https://x.com/SpinCresta" target="_blank" rel="noopener noreferrer nofollow" class="footer-social" aria-label="SpinCresta X:ssä"><img src="/icons/x-social-media-round-icon.svg" alt="X" width="18" height="18" loading="lazy" /><span>X</span></a></nav></div></footer>
+    <script type="module" src="/scripts/main.js?v=20261124-provider-cards"></script>
   </body>
 </html>

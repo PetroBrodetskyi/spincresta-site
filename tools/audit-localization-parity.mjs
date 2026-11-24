@@ -80,8 +80,12 @@ for (const sourceFile of sourceFiles.sort()) {
   const localizedIds = multiset(attributes(localized, 'id'));
   if (!sameMultiset(sourceIds, localizedIds)) errors.push(`${relative}: id structure differs`);
 
-  const sourceImages = multiset([...source.matchAll(/<img\b[^>]*\bsrc=["']([^"']+)/gi)].map(match => match[1]));
-  const localizedImages = multiset([...localized.matchAll(/<img\b[^>]*\bsrc=["']([^"']+)/gi)].map(match => match[1]));
+  // The currently selected language flag is the only intentionally localized image.
+  const images = html => multiset([...html
+    .replace(/<summary class="language-switcher-current"[^>]*>[\s\S]*?<\/summary>/g, '')
+    .matchAll(/<img\b[^>]*\bsrc=["']([^"']+)/gi)].map(match => match[1]));
+  const sourceImages = images(source);
+  const localizedImages = images(localized);
   if (!sameMultiset(sourceImages, localizedImages)) errors.push(`${relative}: image sources differ`);
 
   const sourceFaqQuestions = count(source, /<h3\b[^>]*>[\s\S]*?<\/h3>\s*<p\b/gi);

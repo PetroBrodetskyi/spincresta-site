@@ -52,7 +52,7 @@
       content="Slott combina um amplo lobby de casino com jogos ao vivo e uma ampla gama de apostas desportivas, tornando-o adequado para jogadores que desejam ambos os produtos numa única conta."
     />
     <link rel="icon" type="image/png" href="/favicon.png" />
-    <link rel="stylesheet" href="/styles.css?v=20261120-sticky-pill" />
+    <link rel="stylesheet" href="/styles.css?v=20261124-provider-cards" />
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -219,13 +219,12 @@
     <section class="container">
       <div class="brand-payments">
         <h2 class="title">Métodos de pagamento</h2>
-        <p class="brand-availability-intro">Slott lista opções de cartão, carteira eletrónica e criptomoedas. Os métodos exatos, limites, taxas, moedas e tempos de processamento dependem do seu país e da conta verificada.</p>
         <div class="payments-container" id="brand-payments"></div>
       </div>
     </section>
 
     <main class="content-review">
-      <section class="container">
+      <section class="container" data-review-section="summary">
         <h2 class="title">Resumo do produto Slott</h2>
         <table>
           <thead><tr><th>Área</th><th>O que Slott oferece</th><th>Verificação do jogador</th></tr></thead>
@@ -240,7 +239,7 @@
         </table>
       </section>
 
-      <section class="container">
+      <section class="container" data-review-section="games" data-review-details>
         <h2 class="title">Lobby de casino, fornecedores e descoberta de jogos</h2>
         <div class="features-grid premium-grid">
           <div class="feature-card glass-card"><strong>Slots e jogos em destaque</strong><span>Títulos populares incluem Gates of Olympus, Sweet Bonanza, Starburst, Big Bass Splash, Sugar Rush, Chicken Road e Aviator.</span></div>
@@ -251,7 +250,7 @@
         </div>
       </section>
 
-      <section class="container">
+      <section class="container" data-review-section="sports">
         <h2 class="title">Cobertura de apostas desportivas e ferramentas de apostas</h2>
         <table>
           <thead><tr><th>Área Desportiva</th><th>Cobertura</th><th>Por que é importante</th></tr></thead>
@@ -264,7 +263,7 @@
         </table>
       </section>
 
-      <section class="container">
+      <section class="container" data-review-section="rewards" data-review-details>
         <h2 class="title">Clube VIP, Fidelidade e Torneios</h2>
         <div class="features-grid premium-grid">
           <div class="feature-card glass-card"><strong>Cashback de até 30%</strong><span>O Clube VIP promove cashback aprimorado, pagamentos prioritários, bónus de subida de nível e acesso mais rápido aos ganhos.</span></div>
@@ -274,7 +273,7 @@
         </div>
       </section>
 
-      <section class="container">
+      <section class="container" data-review-section="cashier">
         <h2 class="title">Pagamentos, verificação e segurança da conta</h2>
         <table>
           <thead><tr><th>Verificar</th><th>Como Slott lida com isso</th><th>Conselhos práticos</th></tr></thead>
@@ -288,7 +287,7 @@
         </table>
       </section>
 
-      <section class="container">
+      <section class="container" data-review-section="trust" data-review-details>
         <h2 class="title">Licença e Jogo responsável</h2>
         <div class="features-grid premium-grid">
           <div class="feature-card glass-card"><strong>Operador e Licença</strong><span>Slott é operado pela Bluewave Interactive NV e Stola Limited. Bluewave Interactive N.V. é regulamentada pela Curaçao Gaming Authority sob licença OGL/2024/1161/0454.</span></div>
@@ -336,10 +335,11 @@
       <div class="container">
         <p>© 2026 SpinCresta.com. Todos os direitos reservados.</p>
         <p>18+ | Os jogos de azar podem causar dependência. Jogue de forma responsável. Verifique as leis locais antes de jogar.</p>
-        <nav class="footer-nav"><a href="/pt/responsible-gambling/">Jogo responsável</a><a href="/pt/privacy-policy/">Política de Privacidade</a><a href="/pt/casinos-and-betting/">Casinos e Apostas</a><a href="/pt/payment-methods/">Métodos de pagamento</a><a href="/pt/partners/">Parceiros</a><a href="/pt/about/">Sobre</a><a href="https://t.me/spincresta" target="_blank" rel="noopener noreferrer nofollow" class="footer-social" aria-label="Canal SpinCresta Telegram"><img src="/icons/telegram-white-icon.svg" alt="Telegram" width="18" height="18" loading="lazy" /><span>Telegram</span></a><a href="https://x.com/SpinCresta" target="_blank" rel="noopener noreferrer nofollow" class="footer-social" aria-label="SpinCresta em X"><img src="/icons/x-social-media-round-icon.svg" alt="X" width="18" height="18" loading="lazy" /><span>X</span></a></nav>
+        <nav class="footer-nav">
+          <a href="/pt/game-providers/"><svg class="site-icon site-icon--inline" width="24" height="24" aria-hidden="true" focusable="false"><use href="/icons/ui/review-method.svg?v=20261123-brand-providers#layers"></use></svg> Fornecedores de jogos</a><a href="/pt/responsible-gambling/">Jogo responsável</a><a href="/pt/privacy-policy/">Política de Privacidade</a><a href="/pt/casinos-and-betting/">Casinos e Apostas</a><a href="/pt/payment-methods/">Métodos de pagamento</a><a href="/pt/partners/">Parceiros</a><a href="/pt/about/">Sobre</a><a href="https://t.me/spincresta" target="_blank" rel="noopener noreferrer nofollow" class="footer-social" aria-label="Canal SpinCresta Telegram"><img src="/icons/telegram-white-icon.svg" alt="Telegram" width="18" height="18" loading="lazy" /><span>Telegram</span></a><a href="https://x.com/SpinCresta" target="_blank" rel="noopener noreferrer nofollow" class="footer-social" aria-label="SpinCresta em X"><img src="/icons/x-social-media-round-icon.svg" alt="X" width="18" height="18" loading="lazy" /><span>X</span></a></nav>
 
       </div>
     </footer>
-    <script type="module" src="/scripts/main.js?v=20261119-catalog-partners"></script>
+    <script type="module" src="/scripts/main.js?v=20261124-provider-cards"></script>
   </body>
 </html>

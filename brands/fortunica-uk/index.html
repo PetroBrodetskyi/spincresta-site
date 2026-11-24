@@ -49,7 +49,7 @@
     />
     <meta name="twitter:image" content="https://res.cloudinary.com/drj61gmd2/image/upload/f_webp,q_auto/v1785005842/spincresta/brands/fortunica-uk/main-page/fortunica-page_bxz4pw.webp" />
     <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://spincresta.com/#organization","name":"SpinCresta","url":"https://spincresta.com/","logo":{"@type":"ImageObject","url":"https://spincresta.com/favicon.png"},"sameAs":["https://t.me/spincresta","https://x.com/SpinCresta"]},{"@type":"WebSite","@id":"https://spincresta.com/#website","name":"SpinCresta","url":"https://spincresta.com/","inLanguage":"en","publisher":{"@id":"https://spincresta.com/#organization"}},{"@type":"WebPage","@id":"https://spincresta.com/brands/fortunica-uk/#webpage","url":"https://spincresta.com/brands/fortunica-uk/","name":"Fortunica Casino & Betting UK Review 2026 | Bonus & Payouts","description":"Fortunica Casino & Betting UK review: compare bonus terms, games, payments, withdrawal and KYC rules, regional availability, and safer-play tools for 2026.","inLanguage":"en","isPartOf":{"@id":"https://spincresta.com/#website"},"breadcrumb":{"@id":"https://spincresta.com/brands/fortunica-uk/#breadcrumb"}},{"@type":"BreadcrumbList","@id":"https://spincresta.com/brands/fortunica-uk/#breadcrumb","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://spincresta.com/"},{"@type":"ListItem","position":2,"name":"Casino Reviews","item":"https://spincresta.com/casinos-and-betting/"},{"@type":"ListItem","position":3,"name":"Fortunica Review","item":"https://spincresta.com/brands/fortunica-uk/"}]},{"@type":"FAQPage","@id":"https://spincresta.com/brands/fortunica-uk/#faq","mainEntity":[{"@type":"Question","name":"What can you play at Fortunica?","acceptedAnswer":{"@type":"Answer","text":"Fortunica shows sportsbook, live betting, slots, live casino, crash games, plinko, roulettes, blackjack, baccarat, and other table-game sections in the official navigation."}},{"@type":"Question","name":"Which casino filters are useful before you deposit?","acceptedAnswer":{"@type":"Answer","text":"Fortunica separates popular, new, buy-feature, megaways, slots, crash, plinko, roulettes, blackjack, baccarat, and live-casino categories, which helps players narrow the lobby by style instead of browsing blindly."}},{"@type":"Question","name":"Does Fortunica include live betting and live casino?","acceptedAnswer":{"@type":"Answer","text":"Yes. The official site has a dedicated live betting area for sports and a separate live casino section for table and dealer-led play."}},{"@type":"Question","name":"How do Wheel of Fortune, Hall of Fame, tournaments, and VIP Club affect repeat play?","acceptedAnswer":{"@type":"Answer","text":"These sections suggest Fortunica is built to keep regular players active after the welcome stage, but players should still read event and reward terms before valuing them as real long-term benefits."}},{"@type":"Question","name":"What should you check in the Fortunica bonus terms?","acceptedAnswer":{"@type":"Answer","text":"Players should review wagering, eligible games, maximum-bet rules, expiry windows, and how sportsbook, slots, crash, plinko, or buy-feature games count toward any active promotion."}},{"@type":"Question","name":"Does Fortunica show licensing and trust information?","acceptedAnswer":{"@type":"Answer","text":"Fortunica presents Curacao and Costa Rica licensing references alongside About Us, terms, bonus-terms, and support materials, which are the first reliability indicators players should review before deposit."}},{"@type":"Question","name":"How can you contact Fortunica support?","acceptedAnswer":{"@type":"Answer","text":"The official support contact shown in the materials is support@fortunica.casino."}}]}]}</script>
-    <link rel="stylesheet" href="/styles.css?v=20261120-sticky-pill" />
+    <link rel="stylesheet" href="/styles.css?v=20261124-provider-cards" />
     <link rel="icon" type="image/png" href="/favicon.png" />
 </head>
   <body data-brand="fortunica-uk">
@@ -113,7 +113,7 @@
     <section class="container"><div class="brand-countries"><h2 class="title">Available Countries</h2><div class="countries-container" id="brand-countries"></div></div></section>
     <section class="container"><div class="brand-payments"><h2 class="title">Payment Methods</h2><div class="payments-container" id="brand-payments"></div></div></section>
     <main class="content-review">
-      <section class="container">
+      <section class="container" data-review-section="bonuses">
         <h2 class="title">Bonuses &amp; Promotion Snapshot</h2>
         <table>
           <thead><tr><th>Bonus Layer</th><th>What players get</th><th>What to check first</th></tr></thead>
@@ -124,7 +124,7 @@
           </tbody>
         </table>
       </section>
-      <section class="container">
+      <section class="container" data-review-section="cashier" data-review-details>
         <h2 class="title">Payments, Verification &amp; Cashout Flow</h2>
         <div class="features-grid premium-grid">
           <div class="feature-card glass-card"><strong>Complete Your Profile</strong><span>Use real account data from the start so identity review does not become the first problem at withdrawal time.</span></div>
@@ -133,7 +133,7 @@
           <div class="feature-card glass-card"><strong>Prepare for Withdrawal</strong><span>Payment ownership, verification timing, and promo compliance still decide how smooth the first cashout feels.</span></div>
         </div>
       </section>
-      <section class="container">
+      <section class="container" data-review-section="suitability">
         <h2 class="title">Player Checklist Before Registration</h2>
         <table>
           <thead><tr><th>Check</th><th>What to review</th><th>Why it matters</th></tr></thead>
@@ -145,7 +145,7 @@
           </tbody>
         </table>
       </section>
-      <section class="container">
+      <section class="container" data-review-section="trust" data-review-details>
         <h2 class="title">Licensing, Terms &amp; reliability indicators</h2>
         <div class="features-grid premium-grid">
           <div class="feature-card glass-card"><strong>Licensing References</strong><span>Fortunica shows Curacao and Costa Rica references in the official materials, which is exactly the kind of legitimacy check many players search for before depositing.</span></div>
@@ -154,7 +154,7 @@
           <div class="feature-card glass-card"><strong>Support Contact</strong><span>The official support contact shown in the materials is support@fortunica.casino, which gives players a direct route for account and rule questions.</span></div>
         </div>
       </section>
-      <section class="container">
+      <section class="container" data-review-section="games">
         <h2 class="title">How Fortunica Organizes Slots, Live Betting &amp; Repeat-Play Content</h2>
         <table>
           <thead>
@@ -248,6 +248,7 @@
           <a href="/privacy-policy/">Privacy Policy</a>
           <a href="/casinos-and-betting/">Casinos &amp; Betting</a>
           <a href="/payment-methods/">Payment Methods</a>
+          <a href="/game-providers/"><svg class="site-icon site-icon--inline" width="24" height="24" aria-hidden="true" focusable="false"><use href="/icons/ui/review-method.svg?v=20261123-brand-providers#layers"></use></svg> Game Providers</a>
           <a href="/partners/">Partners</a>
           <a href="/about/">About</a>
           <a
@@ -281,7 +282,7 @@
         </nav>
 </div>
     </footer>
-    <script type="module" src="/scripts/main.js?v=20261119-catalog-partners"></script>
+    <script type="module" src="/scripts/main.js?v=20261124-provider-cards"></script>
   </body>
 </html>
 

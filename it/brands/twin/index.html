@@ -42,7 +42,7 @@
     <meta name="twitter:description" content="Twin: bonus, giochi, pagamenti, prelievi, verifica KYC, accesso mobile e disponibilità. Controlla le condizioni aggiornate prima di giocare." />
     <meta name="twitter:image" content="https://res.cloudinary.com/drj61gmd2/image/upload/f_webp,q_auto/v1785086947/spincresta/brands/twin/main-page/twin-page_uirgin.webp" />
     <link rel="icon" type="image/png" href="/favicon.png" />
-    <link rel="stylesheet" href="/styles.css?v=20261120-sticky-pill" />
+    <link rel="stylesheet" href="/styles.css?v=20261124-provider-cards" />
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -249,13 +249,12 @@
     <section class="container">
       <div class="brand-payments">
         <h2 class="title">Metodi di pagamento</h2>
-        <p class="brand-availability-intro">Twin supporta carte, portafogli elettronici e sezioni crittografici in mercati selezionati. Controlla alla cassa le opzioni locali di deposito e prelievo, i limiti, le commissioni e i requisiti di verifica.</p>
         <div class="payments-container" id="brand-payments"></div>
       </div>
     </section>
 
     <main class="content-review">
-      <section class="container">
+      <section class="container" data-review-section="summary">
         <h2 class="title">Twin Panoramica del prodotto</h2>
         <table>
           <thead><tr><th>Zona</th><th>Cosa offre Twin</th><th>Controllo del giocatore</th></tr></thead>
@@ -270,7 +269,7 @@
         </table>
       </section>
 
-      <section class="container">
+      <section class="container" data-review-section="games" data-review-details>
         <h2 class="title">Lobby del casinò, slot e scoperta dei giochi</h2>
         <div class="features-grid premium-grid">
           <div class="feature-card glass-card"><strong>Giochi popolari e nuovi</strong><span>Twin separa i giochi migliori, le nuove uscite, le anteprime, i consigli e i migliori vincitori in modo che i giocatori possano trovare rapidamente i titoli attivi.</span></div>
@@ -282,7 +281,7 @@
         </div>
       </section>
 
-      <section class="container">
+      <section class="container" data-review-section="games">
         <h2 class="title">Giochi e fornitori di casinò dal vivo</h2>
         <table>
           <thead><tr><th>Zona dal vivo</th><th>Esempi</th><th>Cosa ottengono i giocatori</th></tr></thead>
@@ -296,7 +295,7 @@
         </table>
       </section>
 
-      <section class="container">
+      <section class="container" data-review-section="sports">
         <h2 class="title">Scommesse sportive, scommesse live e scommesse veloci</h2>
         <table>
           <thead><tr><th>Area scommesse</th><th>Copertura</th><th>Funzionalità utili</th></tr></thead>
@@ -309,7 +308,7 @@
         </table>
       </section>
 
-      <section class="container">
+      <section class="container" data-review-section="bonuses" data-review-details>
         <h2 class="title">Promozioni, fedeltà e VIP</h2>
         <div class="features-grid premium-grid">
           <div class="feature-card glass-card"><strong>Offerte di casinò e sport</strong><span>Twin separa bonus di benvenuto, bonus del casinò, campagne di scommesse sportive, cashback, offerte speciali e promozioni archiviate.</span></div>
@@ -321,7 +320,7 @@
         </div>
       </section>
 
-      <section class="container">
+      <section class="container" data-review-section="cashier">
         <h2 class="title">Pagamenti, verifica e sicurezza dell'account</h2>
         <table>
           <thead><tr><th>Controllo</th><th>Come lo gestisce Twin</th><th>Consigli pratici</th></tr></thead>
@@ -336,7 +335,7 @@
         </table>
       </section>
 
-      <section class="container">
+      <section class="container" data-review-section="trust" data-review-details>
         <h2 class="title">Licenza e gioco responsabile</h2>
         <div class="features-grid premium-grid">
           <div class="feature-card glass-card"><strong>Operatore e licenza</strong><span>Twin è di proprietà e gestito da Jade Reef Ventures Corp. e opera con licenza Anjouan ALSI-202410001-FI1. Chessmate Limited è elencato come agente di pagamento.</span></div>
@@ -427,6 +426,7 @@
           <a href="/it/privacy-policy/">Informativa sulla privacy</a>
           <a href="/it/casinos-and-betting/">Casinò e scommesse</a>
           <a href="/it/payment-methods/">Metodi di pagamento</a>
+          <a href="/it/game-providers/"><svg class="site-icon site-icon--inline" width="24" height="24" aria-hidden="true" focusable="false"><use href="/icons/ui/review-method.svg?v=20261123-brand-providers#layers"></use></svg> Fornitori di giochi</a>
           <a href="/it/partners/">Partner</a>
           <a href="/it/about/">Chi siamo</a>
           <a
@@ -461,7 +461,7 @@
 </div>
     </footer>
 
-    <script type="module" src="/scripts/main.js?v=20261119-catalog-partners"></script>
+    <script type="module" src="/scripts/main.js?v=20261124-provider-cards"></script>
   </body>
 </html>
 

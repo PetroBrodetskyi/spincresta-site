@@ -15637,14 +15637,6 @@ body[data-brand].has-brand-sticky-layout
     grid-template-rows: max-content max-content minmax(0, 1fr);
   }
 
-  body[data-brand].has-brand-sticky-layout .brand-sticky-review-layout:has(> .brand-review-overview) > .brand-right-rail {
-    /* The rail may scroll, but it must not push the overview or article down. */
-    align-self: stretch;
-    contain: size;
-    overflow-y: auto;
-    scrollbar-width: thin;
-  }
-
 }
 
 /* =============================================================

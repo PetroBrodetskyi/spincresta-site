@@ -52,7 +52,7 @@
     />
     <meta name="twitter:image" content="https://res.cloudinary.com/drj61gmd2/image/upload/f_webp,q_auto/v1785074584/spincresta/brands/moonwin/main-page/moonwin-page_goauav.webp" />
     <link rel="icon" type="image/png" href="/favicon.png" />
-    <link rel="stylesheet" href="/styles.css?v=20261120-sticky-pill" />
+    <link rel="stylesheet" href="/styles.css?v=20261124-provider-cards" />
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -284,15 +284,12 @@
     <section class="container">
       <div class="brand-payments">
         <h2 class="title">MoonWin भुगतान के तरीके</h2>
-        <p class="brand-availability-intro">
-          MoonWin कार्ड, बैंक हस्तांतरण, ई-वॉलेट, वाउचर, स्थानीय भुगतान सेवाओं और क्रिप्टोकरेंसी का समर्थन करता है। वीज़ा, मास्टरकार्ड, मिफिनिटी, नियोसर्फ, जेटन, इकोपेज़, फ्लेक्सपिन, इंटरैक, मुचबेटर, एस्ट्रोपे, पेआईडी और क्रिप्टो भुगतान विकल्प इसके भुगतान अनुभाग कवरेज में दिखाई देते हैं। सटीक विधियाँ, सीमाएँ और मुद्राएँ स्थान पर निर्भर करती हैं।
-        </p>
         <div class="payments-container" id="brand-payments"></div>
       </div>
     </section>
 
     <main class="content-review">
-      <section class="container">
+      <section class="container" data-review-section="summary">
         <h2 class="title">MoonWin सारांश</h2>
         <table>
           <thead>
@@ -333,7 +330,7 @@
         </table>
       </section>
 
-      <section class="container">
+      <section class="container" data-review-section="bonuses">
         <h2 class="title">स्वागत पैकेज: 6,500 यूरो तक + 180 मुफ्त स्पिन</h2>
         <table>
           <thead>
@@ -372,7 +369,7 @@
         </p>
       </section>
 
-      <section class="container">
+      <section class="container" data-review-section="games">
         <h2 class="title">कैसीनो खेल और प्रदाता</h2>
         <table>
           <thead>
@@ -403,7 +400,7 @@
         </table>
       </section>
 
-      <section class="container">
+      <section class="container" data-review-section="games" data-review-details>
         <h2 class="title">MoonWin मूल और तेज़ गेम</h2>
         <div class="features-grid premium-grid">
           <div class="feature-card glass-card">
@@ -425,7 +422,7 @@
         </div>
       </section>
 
-      <section class="container">
+      <section class="container" data-review-section="games">
         <h2 class="title">लाइव कैसीनो, टेबल और जैकपॉट</h2>
         <table>
           <thead>
@@ -456,7 +453,7 @@
         </table>
       </section>
 
-      <section class="container">
+      <section class="container" data-review-section="rewards">
         <h2 class="title">दैनिक रील रन, मिशन और लॉटरी</h2>
         <table>
           <thead>
@@ -487,7 +484,7 @@
         </table>
       </section>
 
-      <section class="container">
+      <section class="container" data-review-section="rewards">
         <h2 class="title">वफादारी यात्रा: 2,320 निःशुल्क स्पिन</h2>
         <table>
           <thead>
@@ -518,7 +515,7 @@
         </table>
       </section>
 
-      <section class="container">
+      <section class="container" data-review-section="rewards">
         <h2 class="title">वीआईपी कार्यक्रम: पांच चंद्र रैंक</h2>
         <table>
           <thead>
@@ -557,8 +554,11 @@
         </p>
       </section>
 
-      <section class="container">
+      <section class="container" data-review-section="cashier">
         <h2 class="title">भुगतान, निकासी और केवाईसी</h2>
+        <p class="section-intro">
+          MoonWin कार्ड, बैंक हस्तांतरण, ई-वॉलेट, वाउचर, स्थानीय भुगतान सेवाओं और क्रिप्टोकरेंसी का समर्थन करता है। वीज़ा, मास्टरकार्ड, मिफिनिटी, नियोसर्फ, जेटन, इकोपेज़, फ्लेक्सपिन, इंटरैक, मुचबेटर, एस्ट्रोपे, पेआईडी और क्रिप्टो भुगतान विकल्प इसके भुगतान अनुभाग कवरेज में दिखाई देते हैं। सटीक विधियाँ, सीमाएँ और मुद्राएँ स्थान पर निर्भर करती हैं।
+        </p>
         <table>
           <thead>
             <tr><th>क्षेत्र</th><th>वर्तमान नियम</th><th>व्यावहारिक सलाह</th></tr>
@@ -598,7 +598,7 @@
         </table>
       </section>
 
-      <section class="container">
+      <section class="container" data-review-section="trust" data-review-details>
         <h2 class="title">लाइसेंस, शिकायतें और सुरक्षित खेल</h2>
         <div class="features-grid premium-grid">
           <div class="feature-card glass-card">
@@ -712,6 +712,7 @@
         <p>© 2026 SpinCresta.com। सर्वाधिकार सुरक्षित।</p>
         <p>18+ | जुए की लत लग सकती है। कृपया ज़िम्मेदारी से खेलें। खेलने से पहले स्थानीय कानूनों की जांच करें।</p>
         <nav class="footer-nav">
+          <a href="/hi/game-providers/"><svg class="site-icon site-icon--inline" width="24" height="24" aria-hidden="true" focusable="false"><use href="/icons/ui/review-method.svg?v=20261123-brand-providers#layers"></use></svg> गेम प्रदाता</a>
           <a href="/hi/responsible-gambling/">ज़िम्मेदारी से खेलना</a><a href="/hi/privacy-policy/">गोपनीयता नीति</a>
           <a href="/hi/casinos-and-betting/">कैसीनो और सट्टेबाजी</a><a href="/hi/payment-methods/">भुगतान के तरीके</a>
           <a href="/hi/partners/">पार्टनर</a><a href="/hi/about/">हमारे बारे में</a>
@@ -719,6 +720,6 @@
 
       </div>
     </footer>
-    <script type="module" src="/scripts/main.js?v=20261119-catalog-partners"></script>
+    <script type="module" src="/scripts/main.js?v=20261124-provider-cards"></script>
   </body>
 </html>

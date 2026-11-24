@@ -1,7 +1,8 @@
-// Generated from the canonical Open Graph captures on English brand review pages.
+// Keep these site captures aligned with the Open Graph images on English brand reviews.
 // Keys match the review slug used by BRANDS.urlDetail.
 export const BRAND_HOMEPAGE_SCREENSHOTS = Object.freeze(
 {
+  "bitgames": "https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto,w_1600/v1795470589/spincresta/brands/bitgames/main-page/bitgames-page_wa7rqa",
   "coldbet": "https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto,w_1600/v1795368823/spincresta/brands/coldbet/main-page/coldbet-page_rvg4co",
   "betrepublic": "https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto,w_1600/v1795353144/spincresta/brands/betrepublic/main-page/betrepublic-page_x8pi68",
   "kingmaker": "https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto,w_1600/v1795344660/spincresta/brands/kingmaker/main-page/kingmaker-page_iz6cej",
@@ -18,6 +19,9 @@ export const BRAND_HOMEPAGE_SCREENSHOTS = Object.freeze(
   "winolot": "https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto,w_1600/spincresta/brands/winolot/main-page/winolot-page_fkwzvn",
   "casinobossy": "https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto,w_1600/spincresta/brands/casinobossy/main-page/casinobossy-page_uni4tq",
   "casinova": "https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto,w_1600/v1789301229/spincresta/brands/casinova/main-page/casinova-page_yp7nkk",
+  "bcgame": "https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto,w_1600/v1790674519/spincresta/brands/bcgame/main-page/bcgame-page_y1spuj",
+  "goldenbet-uk": "https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto,w_1600/v1790519366/spincresta/brands/goldenbet/main-page/goldenbet-page_ppsutu",
+  "goldenbet-au": "https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto,w_1600/v1790519366/spincresta/brands/goldenbet/main-page/goldenbet-page_ppsutu",
   "silverplay": "https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto/v1788687510/spincresta/brands/silverplay/main-page/silverplay-page_nglrsy",
   "goldpari": "https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto/v1787410332/spincresta/brands/goldpari/main-page/goldpari-page_iicb86",
   "browinner": "https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto/v1786475672/spincresta/brands/browinner/main-page/browinner-page_wevvz1",
@@ -174,6 +178,7 @@ export const BRAND_HOMEPAGE_SCREENSHOTS = Object.freeze(
   "winhero": "https://res.cloudinary.com/drj61gmd2/image/upload/f_webp,q_auto/v1785088782/spincresta/brands/winhero/main-page/winhero-page_qqh7ei.webp",
   "wonaco": "https://res.cloudinary.com/drj61gmd2/image/upload/f_webp,q_auto/v1785088840/spincresta/brands/wonaco/main-page/wonaco-page_upuo0j.webp",
   "ybets": "https://res.cloudinary.com/drj61gmd2/image/upload/f_webp,q_auto/v1785089011/spincresta/brands/ybets/main-page/ybets-page_cvd5ig.webp",
+  "yepcasino": "https://res.cloudinary.com/drj61gmd2/image/upload/f_webp,q_auto/v1785089144/spincresta/brands/yepcasino/main-page/yepcasino-page_zqzjyq.webp",
   "zarbet": "https://res.cloudinary.com/drj61gmd2/image/upload/f_webp,q_auto/v1785089353/spincresta/brands/zarbet/main-page/zarbet-page_ftjqga.webp",
   "zizobet": "https://res.cloudinary.com/drj61gmd2/image/upload/f_webp,q_auto/v1785089444/spincresta/brands/zizobet/main-page/zizobet-page_q39nbo.webp",
   "zumibet": "https://res.cloudinary.com/drj61gmd2/image/upload/f_webp,q_auto/v1785089656/spincresta/brands/zumibet/main-page/zumibet-page_fgqsfd.webp"

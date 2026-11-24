@@ -55,7 +55,7 @@
     />
 
     <link rel="icon" type="image/png" href="/favicon.png" />
-    <link rel="stylesheet" href="/styles.css?v=20261120-sticky-pill" />
+    <link rel="stylesheet" href="/styles.css?v=20261124-provider-cards" />
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -283,15 +283,12 @@
     <section class="container">
       <div class="brand-payments">
         <h2 class="title">Méthodes de paiement</h2>
-        <p class="brand-availability-intro">
-          Spininio prend en charge les cartes, les portefeuilles électroniques, les bons d'achat, les cryptomonnaies, les pièces stables et les options bancaires locaux. Les options locales incluent Interac au Canada, Pix au Brésil, Pay N Play en Finlande et les options bancaires sur plusieurs marchés européens. Les options exactes du paiements peuvent toujours dépendre du statut du compte, du pays, de la devise et de la vérification.
-        </p>
         <div class="payments-container" id="brand-payments"></div>
       </div>
     </section>
 
     <main class="content-review">
-      <section class="container">
+      <section class="container" data-review-section="summary">
         <h2 class="title">Spininio Aperçu du produit</h2>
         <table>
           <thead>
@@ -336,7 +333,7 @@
         </table>
       </section>
 
-      <section class="container">
+      <section class="container" data-review-section="games" data-review-details>
         <h2 class="title">Lobby du casino et sections de casino en direct</h2>
         <div class="features-grid premium-grid">
           <div class="feature-card glass-card">
@@ -358,7 +355,7 @@
         </div>
       </section>
 
-      <section class="container">
+      <section class="container" data-review-section="sports">
         <h2 class="title">Paris sportifs, Esports et paris en direct</h2>
         <table>
           <thead>
@@ -393,7 +390,7 @@
         </table>
       </section>
 
-      <section class="container">
+      <section class="container" data-review-section="cashier">
         <h2 class="title">Paiements, vérifications de licence et de compte</h2>
         <table>
           <thead>
@@ -559,6 +556,7 @@
           <a href="/fr/privacy-policy/">Politique de confidentialité</a>
           <a href="/fr/casinos-and-betting/">Casinos et paris</a>
           <a href="/fr/payment-methods/">Méthodes de paiement</a>
+          <a href="/fr/game-providers/"><svg class="site-icon site-icon--inline" width="24" height="24" aria-hidden="true" focusable="false"><use href="/icons/ui/review-method.svg?v=20261123-brand-providers#layers"></use></svg> Fournisseurs de jeux</a>
           <a href="/fr/partners/">Partenaires</a>
           <a href="/fr/about/">À propos</a>
           <a
@@ -582,6 +580,6 @@
       </div>
     </footer>
 
-    <script type="module" src="/scripts/main.js?v=20261119-catalog-partners"></script>
+    <script type="module" src="/scripts/main.js?v=20261124-provider-cards"></script>
   </body>
 </html>

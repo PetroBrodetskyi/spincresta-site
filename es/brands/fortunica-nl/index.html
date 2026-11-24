@@ -48,7 +48,7 @@
       content="Fortunica en Países Bajos: bonos, juegos, pagos, retiros, KYC y disponibilidad. Consulta las condiciones actuales antes de jugar."
     />
     <meta name="twitter:image" content="https://res.cloudinary.com/drj61gmd2/image/upload/f_webp,q_auto/v1785005827/spincresta/brands/fortunica-nl/main-page/fortunica-page_ykqdaz.webp" />
-    <link rel="stylesheet" href="/styles.css?v=20261120-sticky-pill" />
+    <link rel="stylesheet" href="/styles.css?v=20261124-provider-cards" />
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -241,7 +241,7 @@
     <section class="container"><div class="brand-countries"><h2 class="title">Países disponibles</h2><div class="countries-container" id="brand-countries"></div></div></section>
     <section class="container"><div class="brand-payments"><h2 class="title">Métodos de pago</h2><div class="payments-container" id="brand-payments"></div></div></section>
     <main class="content-review">
-      <section class="container">
+      <section class="container" data-review-section="bonuses">
         <h2 class="title">Resumen de bonificaciones y promociones</h2>
         <table>
           <thead><tr><th>Capa de bonificación</th><th>Lo que obtienen los jugadores</th><th>Qué comprobar primero</th></tr></thead>
@@ -252,7 +252,7 @@
           </tbody>
         </table>
       </section>
-      <section class="container">
+      <section class="container" data-review-section="cashier" data-review-details>
         <h2 class="title">Pagos, verificación y retiros</h2>
         <div class="features-grid premium-grid">
           <div class="feature-card glass-card"><strong>Completa tu perfil</strong><span>Utilice datos reales de la cuenta desde el principio para que la revisión de identidad no se convierta en el primer problema al momento del retiro.</span></div>
@@ -261,7 +261,7 @@
           <div class="feature-card glass-card"><strong>Prepárese para la retirada</strong><span>La propiedad del pago, el momento de la verificación y el cumplimiento de la promoción aún deciden qué tan fluido se siente el primer retiro.</span></div>
         </div>
       </section>
-      <section class="container">
+      <section class="container" data-review-section="suitability">
         <h2 class="title">Qué revisar antes de registrarte</h2>
         <table>
           <thead><tr><th>Controlar</th><th>Que revisar</th><th>Por qué es importante</th></tr></thead>
@@ -273,7 +273,7 @@
           </tbody>
         </table>
       </section>
-      <section class="container">
+      <section class="container" data-review-section="trust" data-review-details>
         <h2 class="title">Licencias, términos y señales de confianza</h2>
         <div class="features-grid premium-grid">
           <div class="feature-card glass-card"><strong>Referencias de licencia</strong><span>Fortunica muestra referencias de Curazao y Costa Rica en los materiales oficiales, que es exactamente el tipo de verificación de legitimidad que muchos jugadores buscan antes de depositar.</span></div>
@@ -282,7 +282,7 @@
           <div class="feature-card glass-card"><strong>Contacto de soporte</strong><span>El contacto de soporte oficial que se muestra en los materiales es support@fortunica.casino, que brinda a los jugadores una sección directa para preguntas sobre cuentas y reglas.</span></div>
         </div>
       </section>
-      <section class="container">
+      <section class="container" data-review-section="games">
         <h2 class="title">Cómo organiza Fortunica las tragamonedas, las apuestas en vivo y el contenido de reproducción repetida</h2>
         <table>
           <thead>
@@ -376,6 +376,7 @@
           <a href="/es/privacy-policy/">Política de privacidad</a>
           <a href="/es/casinos-and-betting/">Casinos y apuestas</a>
           <a href="/es/payment-methods/">Métodos de pago</a>
+          <a href="/es/game-providers/"><svg class="site-icon site-icon--inline" width="24" height="24" aria-hidden="true" focusable="false"><use href="/icons/ui/review-method.svg?v=20261123-brand-providers#layers"></use></svg> Proveedores de juegos</a>
           <a href="/es/partners/">Socios</a>
           <a href="/es/about/">Acerca de</a>
           <a
@@ -409,7 +410,7 @@
         </nav>
 </div>
     </footer>
-    <script type="module" src="/scripts/main.js?v=20261119-catalog-partners"></script>
+    <script type="module" src="/scripts/main.js?v=20261124-provider-cards"></script>
   </body>
 </html>
 

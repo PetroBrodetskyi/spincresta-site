@@ -42,7 +42,7 @@
     <meta name="twitter:description" content="Twin: бонуси, ігри, способи оплати, виплати, KYC, мобільна версія та доступність. Перед грою перевірте актуальні умови." />
     <meta name="twitter:image" content="https://res.cloudinary.com/drj61gmd2/image/upload/f_webp,q_auto/v1785086947/spincresta/brands/twin/main-page/twin-page_uirgin.webp" />
     <link rel="icon" type="image/png" href="/favicon.png" />
-    <link rel="stylesheet" href="/styles.css?v=20261120-sticky-pill" />
+    <link rel="stylesheet" href="/styles.css?v=20261124-provider-cards" />
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -249,13 +249,12 @@
     <section class="container">
       <div class="brand-payments">
         <h2 class="title">Способи оплати</h2>
-        <p class="brand-availability-intro">Twin підтримує картки, електронні гаманці та криптовалютні платежі на вибраних ринках. перевірте доступні способи в касі місцеві варіанти депозиту та виплати, ліміти, комісії та вимоги до підтвердження.</p>
         <div class="payments-container" id="brand-payments"></div>
       </div>
     </section>
 
     <main class="content-review">
-      <section class="container">
+      <section class="container" data-review-section="summary">
         <h2 class="title">Короткий огляд</h2>
         <table>
           <thead><tr><th>Категорія</th><th>Що пропонує Twin</th><th>Перевірка гравця</th></tr></thead>
@@ -270,7 +269,7 @@
         </table>
       </section>
 
-      <section class="container">
+      <section class="container" data-review-section="games" data-review-details>
         <h2 class="title">Лобі казино, слоти та пошук ігор</h2>
         <div class="features-grid premium-grid">
           <div class="feature-card glass-card"><strong>Популярні та нові ігри</strong><span>Twin розділяє найкращі ігри, нові випуски, попередні випуски, рекомендації та найкращі переможці, щоб гравці могли швидко знайти активні назви.</span></div>
@@ -282,7 +281,7 @@
         </div>
       </section>
 
-      <section class="container">
+      <section class="container" data-review-section="games">
         <h2 class="title">Ігри та провайдери live-казино</h2>
         <table>
           <thead><tr><th>Жива зона</th><th>Приклади</th><th>Що отримують гравці</th></tr></thead>
@@ -296,7 +295,7 @@
         </table>
       </section>
 
-      <section class="container">
+      <section class="container" data-review-section="sports">
         <h2 class="title">Ставки на спорт, live-ставки та швидкі ставки</h2>
         <table>
           <thead><tr><th>Зона ставок</th><th>Покриття</th><th>Корисні функції</th></tr></thead>
@@ -309,7 +308,7 @@
         </table>
       </section>
 
-      <section class="container">
+      <section class="container" data-review-section="bonuses" data-review-details>
         <h2 class="title">Акції, лояльність і VIP</h2>
         <div class="features-grid premium-grid">
           <div class="feature-card glass-card"><strong>Казино та спортивні пропозиції</strong><span>Twin розділяє вітальні бонуси, бонуси казино, кампанії ставок на спорт, кешбек, спеціальні пропозиції та архівні акції.</span></div>
@@ -321,7 +320,7 @@
         </div>
       </section>
 
-      <section class="container">
+      <section class="container" data-review-section="cashier">
         <h2 class="title">Платежі, верифікація та безпека акаунта</h2>
         <table>
           <thead><tr><th>Перевірте</th><th>Як це робить Twin</th><th>Практичні поради</th></tr></thead>
@@ -336,7 +335,7 @@
         </table>
       </section>
 
-      <section class="container">
+      <section class="container" data-review-section="trust" data-review-details>
         <h2 class="title">Ліцензія та відповідальна гра в азартні ігри</h2>
         <div class="features-grid premium-grid">
           <div class="feature-card glass-card"><strong>Оператор і ліцензія</strong><span>Twin належить і управляється Jade Reef Ventures Corp. і працює за ліцензією Anjouan ALSI-202410001-FI1. Chessmate Limited вказано платіжним агентом.</span></div>
@@ -427,6 +426,7 @@
           <a href="/uk/privacy-policy/">Політика конфіденційності</a>
           <a href="/uk/casinos-and-betting/">Казино та ставки</a>
           <a href="/uk/payment-methods/">Способи оплати</a>
+          <a href="/uk/game-providers/"><svg class="site-icon site-icon--inline" width="24" height="24" aria-hidden="true" focusable="false"><use href="/icons/ui/review-method.svg?v=20261123-brand-providers#layers"></use></svg> Провайдери ігор</a>
           <a href="/uk/partners/">Партнери</a>
           <a href="/uk/about/">Про нас</a>
           <a
@@ -461,7 +461,7 @@
 </div>
     </footer>
 
-    <script type="module" src="/scripts/main.js?v=20261119-catalog-partners"></script>
+    <script type="module" src="/scripts/main.js?v=20261124-provider-cards"></script>
   </body>
 </html>
 

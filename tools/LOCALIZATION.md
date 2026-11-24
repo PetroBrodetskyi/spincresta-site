@@ -63,6 +63,8 @@ The header’s Countries link leads to the localized homepage cloud. Run `node t
 
 After regenerating a brand review or the casino directory, run `node tools/sync-brand-availability.mjs --apply`, then `--check`. This uses unavailable states from `scripts/brands.js` and the existing Retrobet button translations to keep static casino CTAs disabled before JavaScript loads. Optional brand slugs limit the pass, for example `--apply casinobossy browinner`. Preserve internal review links and indexability.
 
+For brand reviews without explicit topic markup, run `node tools/sync-brand-review-details.mjs --apply`, then `--check`. It uses the English section order as the source for localized Review Details tabs and preserves the authored tables and anchors. Keep sportsbook coverage separate from casino games; keep the provider strip and FAQ outside the tabs.
+
 ## Plain-language editorial standard
 
 After creating or regenerating public HTML pages, run `node tools/sync-default-theme.mjs`, then `node tools/sync-default-theme.mjs --check`. SpinCresta has one light page palette with a white header and black footer. Do not restore theme storage, selectors, or controls.

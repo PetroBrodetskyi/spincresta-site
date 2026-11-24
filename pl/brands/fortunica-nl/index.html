@@ -48,7 +48,7 @@
       content="Fortunica Holandia: bonusy, gry, płatności, wypłaty, KYC i dostępność dla graczy z Holandii. Przed grą sprawdź aktualne warunki."
     />
     <meta name="twitter:image" content="https://res.cloudinary.com/drj61gmd2/image/upload/f_webp,q_auto/v1785005827/spincresta/brands/fortunica-nl/main-page/fortunica-page_ykqdaz.webp" />
-    <link rel="stylesheet" href="/styles.css?v=20261120-sticky-pill" />
+    <link rel="stylesheet" href="/styles.css?v=20261124-provider-cards" />
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -241,7 +241,7 @@
     <section class="container"><div class="brand-countries"><h2 class="title">Dostępne kraje</h2><div class="countries-container" id="brand-countries"></div></div></section>
     <section class="container"><div class="brand-payments"><h2 class="title">Metody płatności</h2><div class="payments-container" id="brand-payments"></div></div></section>
     <main class="content-review">
-      <section class="container">
+      <section class="container" data-review-section="bonuses">
         <h2 class="title">Bonusy i promocje</h2>
         <table>
           <thead><tr><th>Warstwa bonusowa</th><th>Co dostają gracze</th><th>Co sprawdzić w pierwszej kolejności</th></tr></thead>
@@ -252,7 +252,7 @@
           </tbody>
         </table>
       </section>
-      <section class="container">
+      <section class="container" data-review-section="cashier" data-review-details>
         <h2 class="title">Płatności, weryfikacja i wypłaty</h2>
         <div class="features-grid premium-grid">
           <div class="feature-card glass-card"><strong>Uzupełnij swój profil</strong><span>Od początku korzystaj z prawdziwych danych konta, aby weryfikacja tożsamości nie stała się pierwszym problemem w momencie wypłaty.</span></div>
@@ -261,7 +261,7 @@
           <div class="feature-card glass-card"><strong>Przygotuj się na wypłata</strong><span>Własność płatności, czas weryfikacji i zgodność z promocjami nadal decydują o tym, jak płynna będzie pierwsza wypłata.</span></div>
         </div>
       </section>
-      <section class="container">
+      <section class="container" data-review-section="suitability">
         <h2 class="title">Co sprawdzić przed rejestracją</h2>
         <table>
           <thead><tr><th>Sprawdzać</th><th>Co recenzować</th><th>Dlaczego to ma znaczenie</th></tr></thead>
@@ -273,7 +273,7 @@
           </tbody>
         </table>
       </section>
-      <section class="container">
+      <section class="container" data-review-section="trust" data-review-details>
         <h2 class="title">Licencje, warunki i sygnały zaufania</h2>
         <div class="features-grid premium-grid">
           <div class="feature-card glass-card"><strong>Referencje licencyjne</strong><span>Fortunica pokazuje odniesienia do Curacao i Kostaryki w oficjalnych materiałach, co jest dokładnie tym rodzajem sprawdzenia legalności, którego wielu graczy szuka przed złożeniem depozytu.</span></div>
@@ -282,7 +282,7 @@
           <div class="feature-card glass-card"><strong>Kontakt z pomocą techniczną</strong><span>Oficjalny kontakt do pomocy technicznej podany w materiałach to support@fortunica.casino, który zapewnia graczom bezpośrednią drogę do pytań dotyczących konta i zasad.</span></div>
         </div>
       </section>
-      <section class="container">
+      <section class="container" data-review-section="games">
         <h2 class="title">Jak Fortunica organizuje automaty, zakłady na żywo i zawartość do powtarzania</h2>
         <table>
           <thead>
@@ -376,6 +376,7 @@
           <a href="/pl/privacy-policy/">Polityka prywatności</a>
           <a href="/pl/casinos-and-betting/">Kasyna i zakłady</a>
           <a href="/pl/payment-methods/">Metody płatności</a>
+          <a href="/pl/game-providers/"><svg class="site-icon site-icon--inline" width="24" height="24" aria-hidden="true" focusable="false"><use href="/icons/ui/review-method.svg?v=20261123-brand-providers#layers"></use></svg> Dostawcy gier</a>
           <a href="/pl/partners/">Partnerzy</a>
           <a href="/pl/about/">O nas</a>
           <a
@@ -409,7 +410,7 @@
         </nav>
 </div>
     </footer>
-    <script type="module" src="/scripts/main.js?v=20261119-catalog-partners"></script>
+    <script type="module" src="/scripts/main.js?v=20261124-provider-cards"></script>
   </body>
 </html>
 

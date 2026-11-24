@@ -1,50 +1,55 @@
 import fs from 'node:fs';
 import { PINCO_COPY } from './pinco-review-copy.mjs';
 import { BRANDS } from '../scripts/brands.js';
-import { BRAND_HOMEPAGE_SCREENSHOTS } from '../scripts/brand-homepage-screenshots.js';
 
-// Reuse the established layout, replacing every template fact with researched copy.
+// Refresh the existing Pinco review shells without borrowing another brand's layout or data.
 // Verification boundaries: research/pinco-2026-10-04.md. No account/payment testing.
 const locales = ['en','de','es','it','pl','uk','pt','fr','hi','fi'];
 const prefix = locale => locale === 'en' ? '' : `${locale}/`;
 const conditions = {en:'Conditions',de:'Bedingungen',es:'Condiciones',it:'Condizioni',pl:'Warunki',uk:'Умови',pt:'Condições',fr:'Conditions',hi:'शर्तें',fi:'Ehdot'};
 const brand = BRANDS.find(item => item.name === 'Pinco');
-const screenshot = BRAND_HOMEPAGE_SCREENSHOTS.pinco;
-const esc = value => String(value).replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('"','&quot;');
-const sectionPattern = id => new RegExp(`<section class="container" id="${id}">[\\s\\S]*?<\\/section>`);
-const title = (html, id) => html.match(sectionPattern(id))?.[0].match(/<h2 class="title">(.*?)<\/h2>/)?.[1];
+const esc = value => String(value).replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;').replaceAll('"','&quot;');
+const sectionPattern = id => new RegExp(`(<section\\b(?=[^>]*\\sid=["']${id}["'])[^>]*>)([\\s\\S]*?)(</section\\s*>)`, 'i');
+const headingPattern = /(<h2\b[^>]*>)([\s\S]*?)(<\/h2\s*>)/i;
 const cards = rows => `<div class="features-grid premium-grid">${rows.map(([h,p]) => `<article class="feature-card glass-card"><h3>${esc(h)}</h3><p>${esc(p)}</p></article>`).join('')}</div>`;
 const table = (heads, rows) => `<div class="table-wrap"><table><thead><tr>${heads.map(h => `<th scope="col">${h}</th>`).join('')}</tr></thead><tbody>${rows.map(row => `<tr>${row.map(value => `<td>${esc(value)}</td>`).join('')}</tr>`).join('')}</tbody></table></div>`;
-if (!brand || !screenshot) throw new Error('Missing Pinco registry');
+if (!brand?.urlCasino) throw new Error('Missing Pinco affiliate destination in the brand registry');
 if (brand.bonus !== PINCO_COPY.en.headline) throw new Error('Pinco headline differs from registry');
 
+const updates = new Map();
 for (const locale of locales) {
   const c = PINCO_COPY[locale];
-  let html = fs.readFileSync(`${prefix(locale)}brands/planbet/index.html`, 'utf8')
-    .replaceAll(BRAND_HOMEPAGE_SCREENSHOTS.planbet, screenshot)
-    .replaceAll('Planbet', 'Pinco').replaceAll('planbet', 'pinco')
-    .replace(/(<a\b(?=[^>]*\bclass="[^"]*\bcta-brands\b)[^>]*\bhref=")[^"]*"/g, (_, open) => `${open}${esc(brand.urlCasino)}"`)
-    .replaceAll('width="1600" height="837"','width="3024" height="1582"')
-    .replaceAll('20261003-pinco-1','20261004-pinco-1')
-    .replace(/\/scripts\/main\.js\?v=[^"']+/g, '/scripts/main.js?v=20261027-tracking-domain-1');
-  if (locale === 'fi') html = html.replace(/Pincoin\b/g,'Pincon').replaceAll('Pincoista','Pincosta');
-  const labels = Object.fromEntries(['verdict','bonus','games','sports','payments','safety'].map(id => [id,title(html,`pinco-${id}`)]));
-  labels.sports = esc(c.sportsTitle);
-  if (Object.values(labels).some(value => !value)) throw new Error(`${locale}: template heading missing`);
-  const heads = [...html.match(sectionPattern('pinco-verdict'))[0].matchAll(/<th scope="col">(.*?)<\/th>/g)].map(match => match[1]);
+  const output = `${prefix(locale)}brands/pinco/index.html`;
+  let html = fs.readFileSync(output, 'utf8')
+    .replace(/(<a\b(?=[^>]*\bclass="[^"]*\bcta-brands\b)[^>]*\bhref=")[^"]*"/g, (_, open) => `${open}${esc(brand.urlCasino)}"`);
+  const heads = [...(html.match(sectionPattern('pinco-verdict'))?.[2] || '').matchAll(/<th scope="col">(.*?)<\/th>/g)].map(match => match[1]);
   const ruleHeads = [...heads.slice(0,2), conditions[locale]];
-  const prosLabels = [...html.match(sectionPattern('pros-cons'))[0].matchAll(/<strong>(.*?)<\/strong>/g)].map(match => match[1]);
-  const section = (id,content) => `<section class="container" id="pinco-${id}"><h2 class="title">${labels[id]}</h2>${content}</section>`;
+  const prosLabels = [...(html.match(sectionPattern('pros-cons'))?.[2] || '').matchAll(/<strong>(.*?)<\/strong>/g)].map(match => match[1]);
+  if (heads.length < 2 || prosLabels.length !== 2) throw new Error(`${locale}: Pinco table or pros/cons labels missing`);
+  const replaceSection = (id, content, heading) => {
+    const pattern = sectionPattern(id);
+    const match = html.match(pattern);
+    const currentHeading = match?.[2].match(headingPattern);
+    if (!currentHeading) throw new Error(`${locale}: heading missing in #${id}`);
+    let [, open, , close] = match;
+    if (id === 'pinco-sports') {
+      open = open.replace(/\sdata-review-section=["'][^"']*["']/i, '')
+        .replace(/\sdata-review-details(?:=["'][^"']*["'])?(?=\s|>)/i, '')
+        .replace(/>$/, ' data-review-section="sports" data-review-details>');
+    }
+    const title = heading ? `${currentHeading[1]}${esc(heading)}${currentHeading[3]}` : currentHeading[0];
+    html = html.replace(pattern, () => open + title + content + close);
+  };
   const intro = text => `<p class="section-intro">${esc(text)}</p>`;
-  const main = section('verdict',intro(c.verdict)+table(heads.slice(0,2),[1,2,3,4].map(i => c.features[i])))
-    + section('bonus',intro(c.bonusIntro)+table(ruleHeads,c.bonusRules))
-    + section('games',cards(c.games))
-    + section('sports',cards(c.sports))
-    + section('payments',table(ruleHeads,c.cashier))
-    + section('safety',cards(c.safety))
-    + `<section class="container" id="pros-cons"><h2 class="title">${title(html,'pros-cons')}</h2><div class="features-grid premium-grid pros-cons-grid">${[c.pros,c.cons].map((items,i) => `<div class="feature-card glass-card"><strong>${prosLabels[i]}</strong>${items.map(item => `<span>- ${esc(item)}</span>`).join('<br />')}</div>`).join('')}</div></section>`
-    + `<section class="container" id="faq"><h2 class="title">${title(html,'faq')}</h2><div class="timeline">${c.faq.map(([q,a]) => `<h3>${esc(q)}</h3><p>${esc(a)}</p>`).join('')}</div></section>`;
-  html = html.replace(/<main class="content-review">[\s\S]*?<\/main>/,`<main class="content-review">${main}</main>`)
+  replaceSection('pinco-verdict', intro(c.verdict) + table(heads.slice(0,2),[1,2,3,4].map(i => c.features[i])));
+  replaceSection('pinco-bonus', intro(c.bonusIntro) + table(heads.slice(0,2),c.bonusRules));
+  replaceSection('pinco-games', cards(c.games));
+  replaceSection('pinco-sports', cards(c.sports), c.sportsTitle);
+  replaceSection('pinco-payments', table(ruleHeads,c.cashier));
+  replaceSection('pinco-safety', cards(c.safety));
+  replaceSection('pros-cons', `<div class="features-grid premium-grid pros-cons-grid">${[c.pros,c.cons].map((items,i) => `<div class="feature-card glass-card"><strong>${prosLabels[i]}</strong>${items.map(item => `<span>- ${esc(item)}</span>`).join('<br />')}</div>`).join('')}</div>`);
+  replaceSection('faq', `<div class="timeline">${c.faq.map(([q,a]) => `<h3>${esc(q)}</h3><p>${esc(a)}</p>`).join('')}</div>`);
+  html = html
     .replace(/<title>[\s\S]*?<\/title>/,`<title>${esc(c.title)}</title>`)
     .replace(/\s*<meta name="keywords"[^>]*>/,'')
     .replace(/(<meta (?:name|property)="(?:description|og:description|twitter:description)" content=")[^"]*("\s*\/?>)/g,(_,a,b) => a+esc(c.description)+b)
@@ -71,8 +76,7 @@ for (const locale of locales) {
     return open+JSON.stringify(schema)+close;
   });
   if (/Planbet|planbet|€1,500|35x|support-en@|security@|complaints@|block@|Pincoin\b|Pincoista|Sources Checked/.test(html)) throw new Error(`${locale}: template facts leaked`);
-  const output=`${prefix(locale)}brands/pinco/index.html`;
-  fs.writeFileSync(output,html);
+  updates.set(output, html);
 
   const catalogFile=`${prefix(locale)}casinos-and-betting/index.html`;
   let found=0;
@@ -82,8 +86,12 @@ for (const locale of locales) {
     if (!row.includes('data-brand-slug=')) row=row.replace('data-type="casino-betting"','data-type="casino-betting" data-brand-slug="pinco"');
     let index=0;
     return row.replace(/(<p class="casino-bonus">\s*<strong>[\s\S]*?<\/strong>)[\s\S]*?(<\/p>)/g,(whole,open,close) => index++ === 1 ? `${open} ${esc(c.headline)}${close}` : whole);
-  }).replaceAll('20261003-planbet-1','20261004-pinco-1');
+  });
   if (found !== 1) throw new Error(`${locale}: expected one Pinco catalogue row`);
-  fs.writeFileSync(catalogFile,catalog);
-  console.log(`Updated ${output} and catalogue bonus`);
+  updates.set(catalogFile, catalog);
+}
+for (const [file, html] of updates) {
+  if (fs.readFileSync(file, 'utf8') === html) continue;
+  fs.writeFileSync(file, html);
+  console.log(`Updated ${file}`);
 }

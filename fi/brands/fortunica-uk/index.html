@@ -48,7 +48,7 @@
       content="Fortunica-arvostelu, markkina Yhdistynyt kuningaskunta: bonukset, pelit, maksutavat, kotiutukset, KYC ja saatavuus. Tarkista ehdot ennen pelaamista."
     />
     <meta name="twitter:image" content="https://res.cloudinary.com/drj61gmd2/image/upload/f_webp,q_auto/v1785005842/spincresta/brands/fortunica-uk/main-page/fortunica-page_bxz4pw.webp" />
-    <link rel="stylesheet" href="/styles.css?v=20261120-sticky-pill" />
+    <link rel="stylesheet" href="/styles.css?v=20261124-provider-cards" />
     <link rel="icon" type="image/png" href="/favicon.png" />
 <script type="application/ld+json">
 {
@@ -241,7 +241,7 @@
     <section class="container"><div class="brand-countries"><h2 class="title">Saatavilla olevat maat</h2><div class="countries-container" id="brand-countries"></div></div></section>
     <section class="container"><div class="brand-payments"><h2 class="title">Maksutavat</h2><div class="payments-container" id="brand-payments"></div></div></section>
     <main class="content-review">
-      <section class="container">
+      <section class="container" data-review-section="bonuses">
         <h2 class="title">Bonukset ja kampanjat</h2>
         <table>
           <thead><tr><th>Bonuskerros</th><th>Mitä pelaajat saavat</th><th>Mitä tarkistaa ensin</th></tr></thead>
@@ -252,7 +252,7 @@
           </tbody>
         </table>
       </section>
-      <section class="container">
+      <section class="container" data-review-section="cashier" data-review-details>
         <h2 class="title">Maksut, vahvistus ja kotiutukset</h2>
         <div class="features-grid premium-grid">
           <div class="feature-card glass-card"><strong>Täydennä profiilisi</strong><span>Käytä oikeita tilitietoja alusta alkaen, jotta henkilöllisyyden tarkistamisesta ei tule ensimmäinen ongelma nostohetkellä.</span></div>
@@ -261,7 +261,7 @@
           <div class="feature-card glass-card"><strong>Valmistaudu nostoon</strong><span>Maksun omistajuus, vahvistuksen ajoitus ja tarjouksen noudattaminen ratkaisevat silti, kuinka sujuvalta ensimmäinen kotiutus tuntuu.</span></div>
         </div>
       </section>
-      <section class="container">
+      <section class="container" data-review-section="suitability">
         <h2 class="title">Pelaajan tarkistuslista ennen rekisteröitymistä</h2>
         <table>
           <thead><tr><th>Tarkista</th><th>Mitä arvostella</th><th>Miksi sillä on väliä</th></tr></thead>
@@ -273,7 +273,7 @@
           </tbody>
         </table>
       </section>
-      <section class="container">
+      <section class="container" data-review-section="trust" data-review-details>
         <h2 class="title">Lisenssit, ehdot ja luotettavuustiedot</h2>
         <div class="features-grid premium-grid">
           <div class="feature-card glass-card"><strong>Lisenssiviitteet</strong><span>Fortunica näyttää Curacaon ja Costa Rican viittaukset virallisissa materiaaleissa, mikä on juuri sellainen legitimiteettitarkastus, jota monet pelaajat etsivät ennen talletusta.</span></div>
@@ -282,7 +282,7 @@
           <div class="feature-card glass-card"><strong>Tuki Yhteystiedot</strong><span>Materiaaleissa näkyvä virallinen tukiyhteyshenkilö on support@fortunica.casino, joka antaa pelaajille suoran yhteyden tili- ja sääntökysymyksiin.</span></div>
         </div>
       </section>
-      <section class="container">
+      <section class="container" data-review-section="games">
         <h2 class="title">Kuinka Fortunica järjestää kolikkopelejä, live-vedonlyöntiä ja toistuvaa sisältöä</h2>
         <table>
           <thead>
@@ -376,6 +376,7 @@
           <a href="/fi/privacy-policy/">Tietosuojakäytäntö</a>
           <a href="/fi/casinos-and-betting/">Kasinot ja vedonlyönti</a>
           <a href="/fi/payment-methods/">Maksutavat</a>
+          <a href="/fi/game-providers/"><svg class="site-icon site-icon--inline" width="24" height="24" aria-hidden="true" focusable="false"><use href="/icons/ui/review-method.svg?v=20261123-brand-providers#layers"></use></svg> Pelintarjoajat</a>
           <a href="/fi/partners/">Yhteistyökumppanit</a>
           <a href="/fi/about/">Tietoa meistä</a>
           <a
@@ -409,7 +410,7 @@
         </nav>
 </div>
     </footer>
-    <script type="module" src="/scripts/main.js?v=20261119-catalog-partners"></script>
+    <script type="module" src="/scripts/main.js?v=20261124-provider-cards"></script>
   </body>
 </html>
 

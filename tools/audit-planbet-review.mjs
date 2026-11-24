@@ -13,7 +13,7 @@ assert.equal(brand.bgColor, '#1F2528');
 assert.equal(brand.bonus, 'Up to €1,500 + 150 Free Spins over 4 Deposits');
 assert.equal(brand.image, 'images/planbet.svg');
 assert(fs.existsSync(brand.image));
-assert.deepEqual(brand.countries, ['AL','AD','AT','BD','BJ','BR','BG','BF','BI','CA','TD','CG','CD','HR','DK','FO','DE','GH','GR','GL','HU','IS','IN','JP','KE','LI','LU','MX','MD','MC','ME','NA','NP','NE','NG','MK','NO','PK','PG','PE','PH','PL','PT','RO','SM','SL','SI','ES','LK','CH','TZ','TH','TG']);
+assert.deepEqual(brand.countries, ['AL','AD','AT','BD','BJ','BR','BG','BF','BI','CA','TD','CG','CD','HR','DK','FO','GH','GR','GL','HU','IS','IN','JP','KE','LI','LU','MX','MD','MC','ME','NA','NP','NE','NG','MK','NO','PK','PG','PE','PH','PL','RO','SM','SL','SI','ES','LK','CH','TZ','TH','TG']);
 assert.equal(brand.hasDetailPage, true);
 assert(!brand.notRecommended && !brand.temporarilyUnavailable);
 assert.deepEqual(brand.payments, [], 'No universal cashier methods independently verified');
@@ -59,4 +59,4 @@ for (const locale of locales) {
   assert.equal([...catalog.matchAll(/data-brand-slug="planbet"/g)].length, 1);
   assert(sitemap.includes(`<loc>${url}</loc>`), file);
 }
-console.log('Planbet: 10 indexed locale reviews, matching sections and 8 FAQ/schema answers, 6 games, 3 Snapshot tabs, four-deposit bonus and all 53 unchanged GEOs. Checks passed.');
+console.log('Planbet: 10 indexed locale reviews, matching sections and 8 FAQ/schema answers, 6 games, 3 Snapshot tabs, four-deposit bonus and 51 partner GEOs. Checks passed.');

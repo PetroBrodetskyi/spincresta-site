@@ -52,7 +52,7 @@
     />
     <meta name="twitter:image" content="https://res.cloudinary.com/drj61gmd2/image/upload/f_webp,q_auto/v1785069185/spincresta/brands/jeetcity/main-page/jeetcity-page_psn2mw.webp" />
     <link rel="icon" type="image/png" href="/favicon.png" />
-    <link rel="stylesheet" href="/styles.css?v=20261120-sticky-pill" />
+    <link rel="stylesheet" href="/styles.css?v=20261124-provider-cards" />
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -284,15 +284,12 @@
     <section class="container">
       <div class="brand-payments">
         <h2 class="title">Métodos de pagamento JeetCity</h2>
-        <p class="brand-availability-intro">
-          JeetCity oferece suporte a cartões, transferências bancárias, carteiras eletrónicas, vouchers, serviços de pagamento locais e as principais criptomoedas. Visa, Mastercard, MiFinity, Neosurf, Jeton, Skrill, Neteller, ecoPayz, Paysafecard, Flexepin e opções de criptomoedas estão entre as opções disponíveis, enquanto o caixa exato depende do país e da moeda.
-        </p>
         <div class="payments-container" id="brand-payments"></div>
       </div>
     </section>
 
     <main class="content-review">
-      <section class="container">
+      <section class="container" data-review-section="summary">
         <h2 class="title">Resumo JeetCity</h2>
         <table>
           <thead>
@@ -333,7 +330,7 @@
         </table>
       </section>
 
-      <section class="container">
+      <section class="container" data-review-section="bonuses">
         <h2 class="title">Pacote de boas-vindas: até EUR 6.500 + 180 jogadas grátis</h2>
         <table>
           <thead>
@@ -367,7 +364,7 @@
         </p>
       </section>
 
-      <section class="container">
+      <section class="container" data-review-section="games">
         <h2 class="title">Jogos e fornecedores de casino</h2>
         <table>
           <thead>
@@ -398,7 +395,7 @@
         </table>
       </section>
 
-      <section class="container">
+      <section class="container" data-review-section="games" data-review-details>
         <h2 class="title">JeetCity Originais e jogos rápidos</h2>
         <div class="features-grid premium-grid">
           <div class="feature-card glass-card">
@@ -420,7 +417,7 @@
         </div>
       </section>
 
-      <section class="container">
+      <section class="container" data-review-section="games">
         <h2 class="title">Casino ao vivo, mesas e jackpots</h2>
         <table>
           <thead>
@@ -451,7 +448,7 @@
         </table>
       </section>
 
-      <section class="container">
+      <section class="container" data-review-section="bonuses">
         <h2 class="title">Promoções, torneios, missões e loteria</h2>
         <table>
           <thead>
@@ -482,7 +479,7 @@
         </table>
       </section>
 
-      <section class="container">
+      <section class="container" data-review-section="rewards">
         <h2 class="title">Programa de fidelidade: 26 status de cidades</h2>
         <table>
           <thead>
@@ -513,7 +510,7 @@
         </table>
       </section>
 
-      <section class="container">
+      <section class="container" data-review-section="rewards">
         <h2 class="title">Clube VIP: cinco classificações</h2>
         <table>
           <thead>
@@ -544,8 +541,11 @@
         </table>
       </section>
 
-      <section class="container">
+      <section class="container" data-review-section="cashier">
         <h2 class="title">Pagamentos, levantamentos e KYC</h2>
+        <p class="section-intro">
+          JeetCity oferece suporte a cartões, transferências bancárias, carteiras eletrónicas, vouchers, serviços de pagamento locais e as principais criptomoedas. Visa, Mastercard, MiFinity, Neosurf, Jeton, Skrill, Neteller, ecoPayz, Paysafecard, Flexepin e opções de criptomoedas estão entre as opções disponíveis, enquanto o caixa exato depende do país e da moeda.
+        </p>
         <table>
           <thead>
             <tr><th>Área</th><th>Regra Atual</th><th>Conselhos práticos</th></tr>
@@ -585,7 +585,7 @@
         </table>
       </section>
 
-      <section class="container">
+      <section class="container" data-review-section="trust" data-review-details>
         <h2 class="title">Licença, reclamações e jogo responsável</h2>
         <div class="features-grid premium-grid">
           <div class="feature-card glass-card">
@@ -699,6 +699,7 @@
         <p>© 2026 SpinCresta.com. Todos os direitos reservados.</p>
         <p>18+ | Os jogos de azar podem causar dependência. Jogue de forma responsável. Verifique as leis locais antes de jogar.</p>
         <nav class="footer-nav">
+          <a href="/pt/game-providers/"><svg class="site-icon site-icon--inline" width="24" height="24" aria-hidden="true" focusable="false"><use href="/icons/ui/review-method.svg?v=20261123-brand-providers#layers"></use></svg> Fornecedores de jogos</a>
           <a href="/pt/responsible-gambling/">Jogo responsável</a><a href="/pt/privacy-policy/">Política de Privacidade</a>
           <a href="/pt/casinos-and-betting/">Casinos e Apostas</a><a href="/pt/payment-methods/">Métodos de pagamento</a>
           <a href="/pt/partners/">Parceiros</a><a href="/pt/about/">Sobre</a>
@@ -706,6 +707,6 @@
 
       </div>
     </footer>
-    <script type="module" src="/scripts/main.js?v=20261119-catalog-partners"></script>
+    <script type="module" src="/scripts/main.js?v=20261124-provider-cards"></script>
   </body>
 </html>

@@ -11,6 +11,8 @@ Apply the clear-copy rules to every SpinCresta page and language, including shar
 
 ## Brand review columns
 
+- Build new reviews from an existing approved review and the shared components in `tools/brand-review-template.mjs`. Supply the new brand's localized data without creating page-specific layout styles. Verify each rendered block against its counterpart in an approved review.
+- Use the shared compact Countries section even when there is only one market or no verified payment method. Omit payment icons when the methods are unknown; do not add an empty payment panel to activate the country layout.
 - Keep sportsbook coverage and any separate sports offer together in the main editorial column, separate from casino and live-game coverage. Use the Sports Betting tab in Review Details when other detail tabs are present; otherwise, keep it inline after games.
 - The right rail holds quick facts and payment icons. Put New Games in a horizontal row immediately below Review Overview. At the right-rail breakpoint (currently 1200px), verify that both the games row and sports content belong to `.brand-sticky-main`.
 - Keep the same editorial order on smaller screens. Do not force desktop columns onto mobile or add per-brand layout styles.

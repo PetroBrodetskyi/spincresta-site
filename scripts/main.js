@@ -1,13 +1,13 @@
 ﻿// =====================
 // IMPORTS
 // =====================
-import { BRANDS } from './brands.js?v=20261123-britsino-catalog';
+import { BRANDS } from './brands.js?v=20261124-bitgames-cashier';
 import { COUNTRIES } from './countries.js';
 import { getFeaturedHomeBrands } from './featured-brands.js?v=20261119-shared-search';
 import { initFaqSections } from './faq.js?v=20261119-faq-layout';
 import { initFooterNewsletter } from './footer-newsletter.js?v=20260826-newsletter-4';
 import { initAccountAuth, prepareAccountHeader } from './account-auth.js?v=20261124-ranking-cards';
-import { initSiteIcons, siteIconMarkup } from './site-icons.js?v=20261123-single-row';
+import { initSiteIcons, siteIconMarkup } from './site-icons.js?v=20261124-provider-cards';
 import { initSectionNavigation } from './section-navigation.js?v=20261119-light-editorial';
 import { bindImagePreview } from './image-preview.js?v=20261119-preview-loader';
 
@@ -33,7 +33,7 @@ const brandLayoutFallbackTimer = document.body?.dataset.brand
     }, 1500)
   : null;
 const brandLayoutModuleReady = document.body?.dataset.brand
-  ? import('./pages/brand-layout.js?v=20261123-single-row').then(module => {
+  ? import('./pages/brand-layout.js?v=20261124-bitgames-review').then(module => {
       initBrandLayoutModule = module.initBrandLayout;
     }).catch(error => {
       document.body.classList.add('brand-layout-failed');
@@ -49,14 +49,14 @@ const loadPageModules = async () => {
   const hasCasinoCards = isHomePage || isCountryPage || isTopCasinosPage || document.querySelector('.casino-grid') ||
     (isBrandPage && findBrandByPageKey(document.body.dataset.brand)?.notRecommended);
   const cardScreenshotsReady = hasCasinoCards
-    ? import('./brand-homepage-screenshots.js?v=20261122-coldbet').then(module => {
+    ? import('./brand-homepage-screenshots.js?v=20261124-bitgames').then(module => {
         BRAND_HOMEPAGE_SCREENSHOTS = module.BRAND_HOMEPAGE_SCREENSHOTS || {};
       }).catch(() => {})
     : Promise.resolve();
 
   if (isHomePage || isCountryPage) {
     const [gamesModule, homeModule, mediaModule] = await Promise.all([
-      import('./brand-new-games.js?v=20261122-coldbet'),
+      import('./brand-new-games.js?v=20261124-bitgames-review'),
       import('./pages/home.js?v=20261124-full-market-track'),
       isCountryPage ? import('./pages/country-media.js?v=20261122-compact-reviews') : null,
     ]);
@@ -67,9 +67,9 @@ const loadPageModules = async () => {
 
   if (isBrandPage) {
     const [snapshotsModule, gamesModule, pageModule, feedbackModule, relatedModule] = await Promise.all([
-      import('./brand-snapshot-configs.js?v=20261123-britsino-catalog'),
-      import('./brand-new-games.js?v=20261122-coldbet'),
-      import('./pages/brand.js?v=20261123-single-row'),
+      import('./brand-snapshot-configs.js?v=20261124-bitgames-snapshot'),
+      import('./brand-new-games.js?v=20261124-bitgames-review'),
+      import('./pages/brand.js?v=20261124-provider-cards'),
       import('./pages/brand-feedback.js?v=20261121-feedback-availability'),
       import('./pages/related-brand-reviews.js?v=20261123-full-width'),
     ]);
@@ -1927,6 +1927,21 @@ const STATIC_SEARCH_ITEMS = [
     keywords: 'payments visa mastercard crypto bank transfer ewallets',
   },
   {
+    label: 'Game Providers',
+    labelDe: 'Spieleanbieter',
+    labelEs: 'Proveedores de juegos',
+    labelIt: 'Fornitori di giochi',
+    labelPl: 'Dostawcy gier',
+    labelUk: 'Провайдери ігор',
+    labelPt: 'Fornecedores de jogos',
+    labelFr: 'Fournisseurs de jeux',
+    labelHi: 'गेम प्रदाता',
+    labelFi: 'Pelintarjoajat',
+    type: 'Page',
+    href: '/game-providers/',
+    keywords: 'casino game providers game studios slots live casino crash',
+  },
+  {
     label: 'Responsible Gambling',
     labelDe: 'Verantwortungsvolles Spielen',
     labelEs: 'Juego responsable',
@@ -2770,6 +2785,7 @@ const createCasinoCard = ({
   name,
   bonus,
   bonusByCountry = {},
+  cardSummary = {},
   urlDetail,
   urlCasino,
   image,
@@ -2789,7 +2805,8 @@ const createCasinoCard = ({
   const safeUrl = urlCasino || PLACEHOLDER_LINK;
   const safeName = normalizeText(name);
   const countryBonus = bonusByCountry[document.body.dataset.country?.toUpperCase()];
-  const safeBonus = normalizeText(countryBonus?.[SITE_LOCALE] || countryBonus?.en || localizedBrandBonusText(bonus));
+  const cardDescription = normalizeText(countryBonus?.[SITE_LOCALE] || countryBonus?.en ||
+    localizedBrandBonusText(bonus) || cardSummary[SITE_LOCALE] || cardSummary.en);
   const primaryCtaText = localeText('Play', 'Spielen', 'Jugar', 'Gioca', 'Zagraj', 'Грати', 'Jogar', 'Jouer', 'खेलें', 'Pelaa');
   const detailUrl = brandPagePath(urlDetail ?? '');
   const imageUrl = normalizeAssetPath(image ?? '');
@@ -2833,7 +2850,7 @@ const createCasinoCard = ({
           ${!isBlocked && countryCount ? `<div class="casino-card-coverage">${escapeHtml(countryLabel)}: ${countryCount}</div>` : ''}
         </div>
       </div>
-      ${safeBonus ? `<p class="casino-bonus">${escapeHtml(safeBonus)}</p>` : ''}
+      ${cardDescription ? `<p class="casino-bonus">${escapeHtml(cardDescription)}</p>` : ''}
       ${renderPayments(payments)}
       <div class="casino-actions ${showReviewAction && showPlayAction ? 'has-two-actions' : 'has-single-action'}">
         ${

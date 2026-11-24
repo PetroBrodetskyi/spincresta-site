@@ -53,7 +53,7 @@
     />
     <script type="application/ld+json">{"@context":"https://schema.org","@graph":[{"@type":"Organization","@id":"https://spincresta.com/#organization","name":"SpinCresta","url":"https://spincresta.com/","logo":{"@type":"ImageObject","url":"https://spincresta.com/favicon.png"}},{"@type":"WebSite","@id":"https://spincresta.com/#website","name":"SpinCresta","url":"https://spincresta.com/","inLanguage":"en","publisher":{"@id":"https://spincresta.com/#organization"}},{"@type":"WebPage","@id":"https://spincresta.com/brands/slott/#webpage","url":"https://spincresta.com/brands/slott/","name":"Slott Casino Review 2026 | Bonus, Games & Payouts","description":"Slott Casino review: compare bonus terms, games, payments, withdrawal and KYC rules, regional availability, and safer-play tools for 2026.","inLanguage":"en","isPartOf":{"@id":"https://spincresta.com/#website"},"breadcrumb":{"@id":"https://spincresta.com/brands/slott/#breadcrumb"}},{"@type":"BreadcrumbList","@id":"https://spincresta.com/brands/slott/#breadcrumb","itemListElement":[{"@type":"ListItem","position":1,"name":"Home","item":"https://spincresta.com/"},{"@type":"ListItem","position":2,"name":"Casino Reviews","item":"https://spincresta.com/casinos-and-betting/"},{"@type":"ListItem","position":3,"name":"Slott Review","item":"https://spincresta.com/brands/slott/"}]},{"@type":"FAQPage","@id":"https://spincresta.com/brands/slott/#faq","mainEntity":[{"@type":"Question","name":"What is the Slott welcome offer?","acceptedAnswer":{"@type":"Answer","text":"Slott promotes a first-deposit bonus up to €20,000. The exact percentage, deposit requirement, wagering, maximum bet, expiry, and eligible games can vary, so check the active offer before depositing."}},{"@type":"Question","name":"Is Slott licensed?","acceptedAnswer":{"@type":"Answer","text":"Slott is operated by Bluewave Interactive N.V. and Stola Limited. Bluewave Interactive N.V. is regulated by the Curaçao Gaming Authority under licence OGL/2024/1161/0454."}},{"@type":"Question","name":"Does Slott have sports betting?","acceptedAnswer":{"@type":"Answer","text":"Yes. Slott includes a broad sportsbook covering football, hockey, tennis, basketball, esports, volleyball, virtual football, cricket, combat sports, motorsport, and many additional sports."}},{"@type":"Question","name":"What does the Slott VIP Club include?","acceptedAnswer":{"@type":"Answer","text":"Slott lists VIP advantages including cashback up to 30%, priority payouts, a personal manager, premium rewards, closed tournaments, early game access, priority support, gifts, and luxury giveaways."}},{"@type":"Question","name":"Which responsible gambling tools does Slott provide?","acceptedAnswer":{"@type":"Answer","text":"Slott provides daily, weekly, and monthly deposit and wager limits, self-assessment, partial exclusion, full self-exclusion, and reality-check reminders."}}]}]}</script>
     <link rel="icon" type="image/png" href="/favicon.png" />
-    <link rel="stylesheet" href="/styles.css?v=20261120-sticky-pill" />
+    <link rel="stylesheet" href="/styles.css?v=20261124-provider-cards" />
   </head>
   <body data-brand="slott">
     <header class="header">
@@ -110,13 +110,12 @@
     <section class="container">
       <div class="brand-payments">
         <h2 class="title">Payment Methods</h2>
-        <p class="brand-availability-intro">Slott lists card, e-wallet, and crypto options. Exact methods, limits, fees, currencies, and processing times depend on your country and verified account.</p>
         <div class="payments-container" id="brand-payments"></div>
       </div>
     </section>
 
     <main class="content-review">
-      <section class="container">
+      <section class="container" data-review-section="summary">
         <h2 class="title">Slott Product Snapshot</h2>
         <table>
           <thead><tr><th>Area</th><th>What Slott Offers</th><th>Player Check</th></tr></thead>
@@ -131,7 +130,7 @@
         </table>
       </section>
 
-      <section class="container">
+      <section class="container" data-review-section="games" data-review-details>
         <h2 class="title">Casino Lobby, Providers &amp; Game Discovery</h2>
         <div class="features-grid premium-grid">
           <div class="feature-card glass-card"><strong>Slots &amp; Featured Games</strong><span>Popular titles include Gates of Olympus, Sweet Bonanza, Starburst, Big Bass Splash, Sugar Rush, Chicken Road, and Aviator.</span></div>
@@ -142,7 +141,7 @@
         </div>
       </section>
 
-      <section class="container">
+      <section class="container" data-review-section="sports">
         <h2 class="title">Sportsbook Coverage &amp; Betting Tools</h2>
         <table>
           <thead><tr><th>Sports Area</th><th>Coverage</th><th>Why It Matters</th></tr></thead>
@@ -155,7 +154,7 @@
         </table>
       </section>
 
-      <section class="container">
+      <section class="container" data-review-section="rewards" data-review-details>
         <h2 class="title">VIP Club, Loyalty &amp; Tournaments</h2>
         <div class="features-grid premium-grid">
           <div class="feature-card glass-card"><strong>Cashback up to 30%</strong><span>The VIP Club promotes enhanced cashback, priority payouts, level-up bonuses, and faster access to winnings.</span></div>
@@ -165,7 +164,7 @@
         </div>
       </section>
 
-      <section class="container">
+      <section class="container" data-review-section="cashier">
         <h2 class="title">Payments, Verification &amp; Account Security</h2>
         <table>
           <thead><tr><th>Check</th><th>How Slott Handles It</th><th>Practical Advice</th></tr></thead>
@@ -179,7 +178,7 @@
         </table>
       </section>
 
-      <section class="container">
+      <section class="container" data-review-section="trust" data-review-details>
         <h2 class="title">Licence &amp; Responsible Gambling</h2>
         <div class="features-grid premium-grid">
           <div class="feature-card glass-card"><strong>Operator &amp; Licence</strong><span>Slott is operated by Bluewave Interactive N.V. and Stola Limited. Bluewave Interactive N.V. is regulated by the Curaçao Gaming Authority under licence OGL/2024/1161/0454.</span></div>
@@ -227,10 +226,11 @@
       <div class="container">
         <p>Copyright 2026 SpinCresta.com. All rights reserved.</p>
         <p>18+ | Gambling can be addictive. Please play responsibly. Check local laws before playing.</p>
-        <nav class="footer-nav"><a href="/responsible-gambling/">Responsible Gambling</a><a href="/privacy-policy/">Privacy Policy</a><a href="/casinos-and-betting/">Casinos &amp; Betting</a><a href="/payment-methods/">Payment Methods</a><a href="/partners/">Partners</a><a href="/about/">About</a><a href="https://t.me/spincresta" target="_blank" rel="noopener noreferrer nofollow" class="footer-social" aria-label="SpinCresta Telegram Channel"><img src="/icons/telegram-white-icon.svg" alt="Telegram" width="18" height="18" loading="lazy" /><span>Telegram</span></a><a href="https://x.com/SpinCresta" target="_blank" rel="noopener noreferrer nofollow" class="footer-social" aria-label="SpinCresta on X"><img src="/icons/x-social-media-round-icon.svg" alt="X" width="18" height="18" loading="lazy" /><span>X</span></a></nav>
+        <nav class="footer-nav">
+          <a href="/game-providers/"><svg class="site-icon site-icon--inline" width="24" height="24" aria-hidden="true" focusable="false"><use href="/icons/ui/review-method.svg?v=20261123-brand-providers#layers"></use></svg> Game Providers</a><a href="/responsible-gambling/">Responsible Gambling</a><a href="/privacy-policy/">Privacy Policy</a><a href="/casinos-and-betting/">Casinos &amp; Betting</a><a href="/payment-methods/">Payment Methods</a><a href="/partners/">Partners</a><a href="/about/">About</a><a href="https://t.me/spincresta" target="_blank" rel="noopener noreferrer nofollow" class="footer-social" aria-label="SpinCresta Telegram Channel"><img src="/icons/telegram-white-icon.svg" alt="Telegram" width="18" height="18" loading="lazy" /><span>Telegram</span></a><a href="https://x.com/SpinCresta" target="_blank" rel="noopener noreferrer nofollow" class="footer-social" aria-label="SpinCresta on X"><img src="/icons/x-social-media-round-icon.svg" alt="X" width="18" height="18" loading="lazy" /><span>X</span></a></nav>
 
       </div>
     </footer>
-    <script type="module" src="/scripts/main.js?v=20261119-catalog-partners"></script>
+    <script type="module" src="/scripts/main.js?v=20261124-provider-cards"></script>
   </body>
 </html>

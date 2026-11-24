@@ -52,7 +52,7 @@
     />
     <meta name="twitter:image" content="https://res.cloudinary.com/drj61gmd2/image/upload/f_webp,q_auto/v1785088346/spincresta/brands/westace/main-page/westace-page_rayh8z.webp" />
     <link rel="icon" type="image/png" href="/favicon.png" />
-    <link rel="stylesheet" href="/styles.css?v=20261120-sticky-pill" />
+    <link rel="stylesheet" href="/styles.css?v=20261124-provider-cards" />
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -221,10 +221,10 @@
     </section>
 
     <section class="container"><div class="brand-countries"><h2 class="title">Pays disponibles</h2><div class="countries-container" id="brand-countries"></div></div></section>
-    <section class="container"><div class="brand-payments"><h2 class="title">WestAce Modes de paiement</h2><p class="brand-availability-intro">WestAce prend en charge les cartes, les virements bancaires, MiFinity et un important paiements cryptographique. Les méthodes, devises, limites, frais et moyens de retrait affichés après l'inscription dépendent du pays sélectionné.</p><div class="payments-container" id="brand-payments"></div></div></section>
+    <section class="container"><div class="brand-payments"><h2 class="title">WestAce Modes de paiement</h2><div class="payments-container" id="brand-payments"></div></div></section>
 
     <main class="content-review">
-      <section class="container">
+      <section class="container" data-review-section="summary">
         <h2 class="title">WestAce Instantané</h2>
         <table>
           <thead><tr><th>Zone</th><th>Détail vérifié</th><th>Que vérifier</th></tr></thead>
@@ -239,7 +239,7 @@
         </table>
       </section>
 
-      <section class="container">
+      <section class="container" data-review-section="bonuses">
         <h2 class="title">Forfait de bienvenue au casino</h2>
         <table>
           <thead><tr><th>Dépôt</th><th>Offre publiée</th><th>Conditions clés</th></tr></thead>
@@ -254,7 +254,7 @@
         <p>Le package s'ajoute aux 15 000 € annoncés et aux 400 tours gratuits. La formule 20x s'applique à la fois au dépôt et au bonus, donc un dépôt de 100 € plus un bonus de 100 € crée 4 000 € de mise requise. Cette distinction compte plus que le pourcentage global.</p>
       </section>
 
-      <section class="container">
+      <section class="container" data-review-section="bonuses">
         <h2 class="title">Choix de bienvenue pour le sport et la cryptographie</h2>
         <table>
           <thead><tr><th>Offre</th><th>Titre</th><th>Détail important</th></tr></thead>
@@ -268,7 +268,7 @@
         <p>Chaque nouveau joueur doit choisir l'section de bienvenue approprié avant de déposer. Les conditions stipulent que l'éligibilité peut être perdue en pariant d'abord, en faisant une demande de retrait ou en utilisant un mode de paiement non éligible.</p>
       </section>
 
-      <section class="container">
+      <section class="container" data-review-section="games">
         <h2 class="title">Jeux et fournisseurs de casino</h2>
         <table>
           <thead><tr><th>Zone du hall</th><th>Couverture</th><th>Pourquoi il se démarque</th></tr></thead>
@@ -281,7 +281,7 @@
         </table>
       </section>
 
-      <section class="container">
+      <section class="container" data-review-section="games" data-review-details>
         <h2 class="title">Jackpots et casino en direct</h2>
         <div class="features-grid premium-grid">
           <div class="feature-card glass-card"><strong>Lobby des jackpots</strong><span>Hot Jackpots, Lucky Jackpots, New Jackpots, Drops & Wins, Daily Jackpots, Jackpot Play et une vue de tous les jackpots reçoivent des sections dédiées.</span></div>
@@ -291,7 +291,7 @@
         </div>
       </section>
 
-      <section class="container">
+      <section class="container" data-review-section="sports">
         <h2 class="title">Paris sportifs, paris en direct et courses</h2>
         <table>
           <thead><tr><th>Zone</th><th>Couverture</th><th>Note du joueur</th></tr></thead>
@@ -304,7 +304,7 @@
         </table>
       </section>
 
-      <section class="container">
+      <section class="container" data-review-section="rewards">
         <h2 class="title">Club VIP : 25 niveaux</h2>
         <table>
           <thead><tr><th>Étage</th><th>Niveaux et remise en argent</th><th>Limite de retrait publiée</th></tr></thead>
@@ -319,7 +319,7 @@
         <p>WestAce attribue un point VIP pour chaque 2 € misés dans des produits de casino, de paris sportifs, peer-to-peer ou de loterie, et pour chaque 4 € misés dans un casino en direct. Les conditions stipulent également que le statut est basé sur une activité récente, de sorte que les prestations ne doivent pas être considérées comme permanentes.</p>
       </section>
 
-      <section class="container">
+      <section class="container" data-review-section="cashier">
         <h2 class="title">Paiements, retraits et KYC</h2>
         <table>
           <thead><tr><th>Zone</th><th>Détail vérifié</th><th>Conseils pratiques</th></tr></thead>
@@ -333,7 +333,7 @@
         </table>
       </section>
 
-      <section class="container">
+      <section class="container" data-review-section="trust" data-review-details>
         <h2 class="title">Licence, plaintes et jeu responsable</h2>
         <div class="features-grid premium-grid">
           <div class="feature-card glass-card"><strong>Vérification d'Anjouan</strong><span>Le site charge un sceau Anjouan Gaming sous UUID 68e7afdb-cdf6-4d36-8fe1-b0a813bb9105. Vérifiez l’état actuel du sceau avant d’approvisionner un compte.</span></div>
@@ -376,7 +376,8 @@
 </main>
 
     <section class="all-countries"><div class="container"><h2 class="title">Casinos en ligne par pays</h2><div class="countries-cloud"></div></div></section>
-    <footer class="footer"><div class="container"><p>© 2026 SpinCresta.com. Tous droits réservés.</p><p>18+ | Les jeux d'argent peuvent entraîner une dépendance. Veuillez jouer de manière responsable. Vérifiez les lois locales avant de jouer.</p><nav class="footer-nav"><a href="/fr/responsible-gambling/">Jeu responsable</a><a href="/fr/privacy-policy/">Politique de confidentialité</a><a href="/fr/casinos-and-betting/">Casinos et paris</a><a href="/fr/payment-methods/">Méthodes de paiement</a><a href="/fr/partners/">Partenaires</a><a href="/fr/about/">À propos</a><a href="https://t.me/spincresta" target="_blank" rel="noopener noreferrer nofollow" class="footer-social" aria-label="Canal SpinCresta Telegram"><img src="/icons/telegram-white-icon.svg" alt="Telegram" width="18" height="18" loading="lazy" /><span>Telegram</span></a><a href="https://x.com/SpinCresta" target="_blank" rel="noopener noreferrer nofollow" class="footer-social" aria-label="SpinCresta sur X"><img src="/icons/x-social-media-round-icon.svg" alt="X" width="18" height="18" loading="lazy" /><span>X</span></a></nav></div></footer>
-    <script type="module" src="/scripts/main.js?v=20261119-catalog-partners"></script>
+    <footer class="footer"><div class="container"><p>© 2026 SpinCresta.com. Tous droits réservés.</p><p>18+ | Les jeux d'argent peuvent entraîner une dépendance. Veuillez jouer de manière responsable. Vérifiez les lois locales avant de jouer.</p><nav class="footer-nav">
+          <a href="/fr/game-providers/"><svg class="site-icon site-icon--inline" width="24" height="24" aria-hidden="true" focusable="false"><use href="/icons/ui/review-method.svg?v=20261123-brand-providers#layers"></use></svg> Fournisseurs de jeux</a><a href="/fr/responsible-gambling/">Jeu responsable</a><a href="/fr/privacy-policy/">Politique de confidentialité</a><a href="/fr/casinos-and-betting/">Casinos et paris</a><a href="/fr/payment-methods/">Méthodes de paiement</a><a href="/fr/partners/">Partenaires</a><a href="/fr/about/">À propos</a><a href="https://t.me/spincresta" target="_blank" rel="noopener noreferrer nofollow" class="footer-social" aria-label="Canal SpinCresta Telegram"><img src="/icons/telegram-white-icon.svg" alt="Telegram" width="18" height="18" loading="lazy" /><span>Telegram</span></a><a href="https://x.com/SpinCresta" target="_blank" rel="noopener noreferrer nofollow" class="footer-social" aria-label="SpinCresta sur X"><img src="/icons/x-social-media-round-icon.svg" alt="X" width="18" height="18" loading="lazy" /><span>X</span></a></nav></div></footer>
+    <script type="module" src="/scripts/main.js?v=20261124-provider-cards"></script>
   </body>
 </html>

@@ -3,9 +3,9 @@
 @import url('/styles/core.css?v=20261122-resource-actions');
 @import url('/styles/pages.css?v=20261124-full-market-track');
 @import url('/styles/brand-review.css?v=20261123-single-row');
-@import url('/styles/section-contrast-preview.css?v=20261123-review-mobile');
+@import url('/styles/section-contrast-preview.css?v=20261124-provider-cards');
 @import url('/styles/account.css?v=20261122-select-controls');
-@import url('/styles/editorial-directories.css?v=20261123-availability');
+@import url('/styles/editorial-directories.css?v=20261124-provider-directory-layout');
 
 :root {
   --type-caption: .75rem;

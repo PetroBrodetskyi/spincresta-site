@@ -42,7 +42,7 @@
     <meta name="twitter:description" content="Reseña de Twin: compare condiciones del bono, juegos, pagos, reglas de retiro y KYC, disponibilidad regional y herramientas de juego responsable para 2026." />
     <meta name="twitter:image" content="https://res.cloudinary.com/drj61gmd2/image/upload/f_webp,q_auto/v1785086947/spincresta/brands/twin/main-page/twin-page_uirgin.webp" />
     <link rel="icon" type="image/png" href="/favicon.png" />
-    <link rel="stylesheet" href="/styles.css?v=20261120-sticky-pill" />
+    <link rel="stylesheet" href="/styles.css?v=20261124-provider-cards" />
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -249,13 +249,12 @@
     <section class="container">
       <div class="brand-payments">
         <h2 class="title">Métodos de pago</h2>
-        <p class="brand-availability-intro">Twin admite tarjetas, billeteras electrónicas y secciones criptográficas en mercados seleccionados. Consulte en el área de pagos las opciones locales de depósito y retiro, límites, tarifas y requisitos de verificación.</p>
         <div class="payments-container" id="brand-payments"></div>
       </div>
     </section>
 
     <main class="content-review">
-      <section class="container">
+      <section class="container" data-review-section="summary">
         <h2 class="title">Twin Resumen del producto</h2>
         <table>
           <thead><tr><th>Área</th><th>Qué ofrece Twin</th><th>Verificación de jugador</th></tr></thead>
@@ -270,7 +269,7 @@
         </table>
       </section>
 
-      <section class="container">
+      <section class="container" data-review-section="games" data-review-details>
         <h2 class="title">Lobby del casino, tragamonedas y descubrimiento de juegos</h2>
         <div class="features-grid premium-grid">
           <div class="feature-card glass-card"><strong>Juegos populares y nuevos</strong><span>Twin separa los mejores juegos, nuevos lanzamientos, prelanzamientos, recomendaciones y principales ganadores para que los jugadores puedan encontrar rápidamente títulos activos.</span></div>
@@ -282,7 +281,7 @@
         </div>
       </section>
 
-      <section class="container">
+      <section class="container" data-review-section="games">
         <h2 class="title">Juegos y proveedores de casino en vivo</h2>
         <table>
           <thead><tr><th>Área en vivo</th><th>Ejemplos</th><th>Lo que obtienen los jugadores</th></tr></thead>
@@ -296,7 +295,7 @@
         </table>
       </section>
 
-      <section class="container">
+      <section class="container" data-review-section="sports">
         <h2 class="title">Apuestas deportivas, apuestas en vivo y apuestas rápidas</h2>
         <table>
           <thead><tr><th>Área de apuestas</th><th>Cobertura</th><th>Funciones útiles</th></tr></thead>
@@ -309,7 +308,7 @@
         </table>
       </section>
 
-      <section class="container">
+      <section class="container" data-review-section="bonuses" data-review-details>
         <h2 class="title">Promociones, Lealtad y VIP</h2>
         <div class="features-grid premium-grid">
           <div class="feature-card glass-card"><strong>Ofertas de casino y deportes</strong><span>Twin separa los bonos de bienvenida, los bonos de casino, las campañas de apuestas deportivas, los reembolsos, las ofertas especiales y las promociones archivadas.</span></div>
@@ -321,7 +320,7 @@
         </div>
       </section>
 
-      <section class="container">
+      <section class="container" data-review-section="cashier">
         <h2 class="title">Pagos, verificación y seguridad de la cuenta</h2>
         <table>
           <thead><tr><th>Controlar</th><th>Cómo lo maneja Twin</th><th>Consejos prácticos</th></tr></thead>
@@ -336,7 +335,7 @@
         </table>
       </section>
 
-      <section class="container">
+      <section class="container" data-review-section="trust" data-review-details>
         <h2 class="title">Licencia y juego responsable</h2>
         <div class="features-grid premium-grid">
           <div class="feature-card glass-card"><strong>Operador y Licencia</strong><span>Twin es propiedad y está operado por Jade Reef Ventures Corp. y opera bajo la licencia de Anjouan ALSI-202410001-FI1. Chessmate Limited figura como agente de pagos.</span></div>
@@ -427,6 +426,7 @@
           <a href="/es/privacy-policy/">Política de privacidad</a>
           <a href="/es/casinos-and-betting/">Casinos y apuestas</a>
           <a href="/es/payment-methods/">Métodos de pago</a>
+          <a href="/es/game-providers/"><svg class="site-icon site-icon--inline" width="24" height="24" aria-hidden="true" focusable="false"><use href="/icons/ui/review-method.svg?v=20261123-brand-providers#layers"></use></svg> Proveedores de juegos</a>
           <a href="/es/partners/">Socios</a>
           <a href="/es/about/">Acerca de</a>
           <a
@@ -461,7 +461,7 @@
 </div>
     </footer>
 
-    <script type="module" src="/scripts/main.js?v=20261119-catalog-partners"></script>
+    <script type="module" src="/scripts/main.js?v=20261124-provider-cards"></script>
   </body>
 </html>
 

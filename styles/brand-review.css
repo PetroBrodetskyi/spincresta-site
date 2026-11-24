@@ -440,13 +440,13 @@ html:root body[data-brand] .brand-review-table-frame tbody tr:last-child > :is(t
 }
 
 /* Keep authored headings, notes and semantic tables together behind compact tabs. */
-html:root body[data-brand].has-brand-sticky-layout .brand-sticky-main .content-review > .brand-review-details {
+html:root body[data-brand].has-brand-sticky-layout .brand-sticky-main :is(.content-review, .content-article) > .brand-review-details {
   display: grid;
   gap: 12px;
 }
 
 html:root body[data-brand].has-brand-sticky-layout
-  .brand-sticky-main .content-review > .brand-review-details > #brand-review-details.title {
+  .brand-sticky-main :is(.content-review, .content-article) > .brand-review-details > #brand-review-details.title {
   width: auto;
   max-width: none;
   margin: 0;

@@ -16,7 +16,7 @@ const read=(lang,slug)=>readFileSync(`${lang==='en'?'':lang+'/'}brands/${slug}/i
 const esc=s=>s.replaceAll('&','&amp;').replaceAll('"','&quot;').replaceAll('<','&lt;');
 const countedSpinPhrases={de:'50 Freispiele',fi:'50 ilmaiskierrosta',pl:'50 darmowych spinów',uk:'50 фріспінів'};
 for(const lang of locales) {
- test(`BetonWin ${lang}: complete standard review components and six functional detail topics`,()=>{
+ test(`BetonWin ${lang}: complete standard review components and seven functional detail topics`,()=>{
   const html=read(lang,'betonwin');
   const hero=source=>source.match(/<section class="hero container">([\s\S]*?)<\/section>/)[1];
   const classStructure=markup=>Array.from(markup.matchAll(/<(\w+)\b[^>]*\bclass="([^"]+)"/g),([,tag,classes])=>[tag,classes]);
@@ -27,7 +27,7 @@ for(const lang of locales) {
   const ar=argentinaCopy[lang], c=templateCopy[lang];
   const sections=[...html.matchAll(/<section[^>]*data-review-section="([^"]+)"[^>]*>([\s\S]*?)<\/section>/g)];
   const topics=sections.filter(m=>belongsInReviewDetails({kind:m[1],hasTable:m[2].includes('<table>')})).map(m=>m[1]);
-  assert.deepEqual([...new Set(topics)],['summary','bonuses','games','sports','cashier','trust']);
+  assert.deepEqual([...new Set(topics)],['summary','bonuses','games','sports','rewards','cashier','trust']);
   assert.equal((html.match(/<table>/g)||[]).length,6);
   assert.equal((html.match(/class="feature-card glass-card(?: [^"]*)?"/g)||[]).length,30);
   assert.equal((html.match(/class="icon-placeholder"/g)||[]).length,6);

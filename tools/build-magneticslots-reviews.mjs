@@ -90,14 +90,14 @@ for (const [i, locale] of locales.entries()) {
     heading(`${slug}-bonuses`, 'bonuses', label('bonuses'), welcomeTable + paragraph(c.conflict) + paragraph(c.wager) + paragraph(c.spins)),
     heading('casino-lobby', 'games', label('games'), paragraph(d.collections) + reviewCards([
       [slots, c.slots], [live, c.live], [d.instantTitle, d.instant], [d.tableTitle, d.table],
-    ])),
+    ]), { inDetails: true }),
     heading(`${slug}-sports`, 'sports', label('sports'), paragraph(c.sport) + paragraph(d.sportsMarkets) + sportTable + paragraph(c.sportRules)),
     heading(`${slug}-rewards`, 'rewards', label('rewards'), paragraph(d.loyalty) +
       `<h3>${esc(d.cashbackTitle)}</h3>` + paragraph(d.cashback) + cashbackTable + paragraph(d.cashbackRules), { inDetails: true }),
     heading(`${slug}-payments`, 'cashier', label('cashier'), reviewCards([
       [label('methods'), c.cashier], [label('cashier'), c.payout],
     ]) + `<h3>${esc(identity)}</h3>` + paragraph(`${c.kyc} ${d.fundsCheck}`), { inDetails: true }),
-    heading(`${slug}-trust`, 'trust', label('trust'), reviewCards([[license, c.licence], [protection, c.limits]])),
+    heading(`${slug}-trust`, 'trust', label('trust'), reviewCards([[license, c.licence], [protection, c.limits]]), { inDetails: true }),
     heading('pros-cons', 'pros', label('pros'), reviewCards([[pros, d.pros.split('|')], [cons, d.cons.split('|')]], { comparison: true })),
     heading('faq', 'faq', label('faq'), `<div class="timeline">${faq.map(([q, a]) => `<h3>${esc(q)}</h3><p>${esc(a)}</p>`).join('')}</div>`),
     unchangedFinal,

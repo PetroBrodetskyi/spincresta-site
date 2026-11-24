@@ -52,7 +52,7 @@
     />
     <meta name="twitter:image" content="https://res.cloudinary.com/drj61gmd2/image/upload/f_webp,q_auto/v1785074871/spincresta/brands/nvcasino/main-page/nvcasino-page_isjtmg.webp" />
     <link rel="icon" type="image/png" href="/favicon.png" />
-    <link rel="stylesheet" href="/styles.css?v=20261120-sticky-pill" />
+    <link rel="stylesheet" href="/styles.css?v=20261124-provider-cards" />
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -259,13 +259,12 @@
     <section class="container">
       <div class="brand-payments">
         <h2 class="title">NV Casino भुगतान के तरीके</h2>
-        <p class="brand-availability-intro">ब्रांड रिकॉर्ड में वीज़ा, मास्टरकार्ड, नेटेलर, मिफ़िनिटी, स्क्रिल, बिटकॉइन, टीथर, लाइटकॉइन, एथेरियम और डॉगकॉइन सूचीबद्ध हैं। आधिकारिक भुगतान अनुभाग आपके बाज़ार में उपलब्ध जमा और निकासी के तरीकों, न्यूनतम, सीमा, मुद्राओं, शुल्क और प्रसंस्करण समय के लिए अंतिम स्रोत है।</p>
         <div class="payments-container" id="brand-payments"></div>
       </div>
     </section>
 
     <main class="content-review">
-      <section class="container">
+      <section class="container" data-review-section="summary">
         <h2 class="title">NV Casino समीक्षा सारांश</h2>
         <table>
           <thead><tr><th>क्षेत्र</th><th>साइट क्या प्रस्तुत करती है</th><th>खिलाड़ी की जांच</th></tr></thead>
@@ -280,7 +279,7 @@
         </table>
       </section>
 
-      <section class="container">
+      <section class="container" data-review-section="bonuses">
         <h2 class="title">NV Casino बोनस और प्रमोशन</h2>
         <table>
           <thead><tr><th>पदोन्नति</th><th>वर्तमान शीर्षक</th><th>क्या सत्यापित करें?</th></tr></thead>
@@ -297,7 +296,7 @@
         </table>
       </section>
 
-      <section class="container">
+      <section class="container" data-review-section="games" data-review-details>
         <h2 class="title">NV Casino गेम्स, स्लॉट और प्रदाता</h2>
         <div class="features-grid premium-grid">
           <div class="feature-card glass-card"><strong>ऑनलाइन स्लॉट</strong><span>मुख्य लॉबी में स्लॉट, नए गेम, लोकप्रिय शीर्षक, मेगावेज़, बोनस-प्ले गेम, बाय-फ़ीचर शीर्षक, ड्रॉप और जीत और जैकपॉट संग्रह शामिल हैं।</span></div>
@@ -307,7 +306,7 @@
         </div>
       </section>
 
-      <section class="container">
+      <section class="container" data-review-section="games">
         <h2 class="title">NV Casino स्पोर्ट्सबुक, लाइव बेटिंग और ईस्पोर्ट्स</h2>
         <table>
           <thead><tr><th>सट्टेबाजी का क्षेत्र</th><th>साइट पर विकल्प दिखाई दे रहे हैं</th><th>प्लेयर नोट</th></tr></thead>
@@ -320,7 +319,7 @@
         </table>
       </section>
 
-      <section class="container">
+      <section class="container" data-review-section="rewards">
         <h2 class="title">NV Casino वीआईपी क्लब, टूर्नामेंट और स्टोर</h2>
         <table>
           <thead><tr><th>इनाम स्तर</th><th>प्रकाशित संरचना</th><th>सबसे पहले क्या मायने रखता है</th></tr></thead>
@@ -334,7 +333,7 @@
         </table>
       </section>
 
-      <section class="container">
+      <section class="container" data-review-section="games" data-review-details>
         <h2 class="title">NV Casino ऐप और मोबाइल अनुभव</h2>
         <div class="features-grid premium-grid">
           <div class="feature-card glass-card"><strong>मोबाइल वेब</strong><span>ब्राउज़र संस्करण ऐप डाउनलोड की आवश्यकता के बिना फोन और टैबलेट स्क्रीन के लिए कैसीनो, प्रचार, गेम और भुगतान अनुभाग को अनुकूलित करता है।</span></div>
@@ -344,7 +343,7 @@
         </div>
       </section>
 
-      <section class="container">
+      <section class="container" data-review-section="cashier" data-review-details>
         <h2 class="title">भुगतान, केवाईसी और NV Casino निकासी</h2>
         <div class="features-grid premium-grid">
           <div class="feature-card glass-card"><strong>पहले भुगतान विकल्प जांचें</strong><span>जमा करने से पहले भुगतान अनुभाग में उपलब्ध कार्ड, ई-वॉलेट, क्रिप्टो भुगतान विकल्प, मुद्राएं, सीमाएं और शुल्क की पुष्टि करें।</span></div>
@@ -410,6 +409,7 @@
           <a href="/hi/privacy-policy/">गोपनीयता नीति</a>
           <a href="/hi/casinos-and-betting/">कैसीनो और सट्टेबाजी</a>
           <a href="/hi/payment-methods/">भुगतान के तरीके</a>
+          <a href="/hi/game-providers/"><svg class="site-icon site-icon--inline" width="24" height="24" aria-hidden="true" focusable="false"><use href="/icons/ui/review-method.svg?v=20261123-brand-providers#layers"></use></svg> गेम प्रदाता</a>
           <a href="/hi/partners/">पार्टनर</a>
           <a href="/hi/about/">हमारे बारे में</a>
           <a href="https://t.me/spincresta" target="_blank" rel="noopener noreferrer nofollow" class="footer-social" aria-label="SpinCresta Telegram चैनल"><img src="/icons/telegram-white-icon.svg" alt="Telegram" width="18" height="18" loading="lazy" /><span>Telegram</span></a>
@@ -419,6 +419,6 @@
       </div>
     </footer>
 
-    <script type="module" src="/scripts/main.js?v=20261119-catalog-partners"></script>
+    <script type="module" src="/scripts/main.js?v=20261124-provider-cards"></script>
   </body>
 </html>

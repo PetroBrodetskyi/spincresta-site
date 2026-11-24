@@ -55,7 +55,7 @@
     />
 
     <link rel="icon" type="image/png" href="/favicon.png" />
-    <link rel="stylesheet" href="/styles.css?v=20261120-sticky-pill" />
+    <link rel="stylesheet" href="/styles.css?v=20261124-provider-cards" />
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -283,15 +283,12 @@
     <section class="container">
       <div class="brand-payments">
         <h2 class="title">Способи оплати</h2>
-        <p class="brand-availability-intro">
-          Spininio підтримує картки, електронні гаманці, ваучери, криптовалюти, стейблкойни та локальні банківські платежі. Місцеві варіанти включають Interac у Канаді, Pix у Бразилії, Pay N Play у Фінляндії та банківські платежі на кількох європейських ринках. Точні параметри каси все ще можуть залежати від статусу акаунта, країни, валюти та підтвердження.
-        </p>
         <div class="payments-container" id="brand-payments"></div>
       </div>
     </section>
 
     <main class="content-review">
-      <section class="container">
+      <section class="container" data-review-section="summary">
         <h2 class="title">Короткий огляд</h2>
         <table>
           <thead>
@@ -336,7 +333,7 @@
         </table>
       </section>
 
-      <section class="container">
+      <section class="container" data-review-section="games" data-review-details>
         <h2 class="title">Лобі казино та розділи live-казино</h2>
         <div class="features-grid premium-grid">
           <div class="feature-card glass-card">
@@ -358,7 +355,7 @@
         </div>
       </section>
 
-      <section class="container">
+      <section class="container" data-review-section="sports">
         <h2 class="title">Букмекерські контори, кіберспорт і live-ставки</h2>
         <table>
           <thead>
@@ -393,7 +390,7 @@
         </table>
       </section>
 
-      <section class="container">
+      <section class="container" data-review-section="cashier">
         <h2 class="title">Платежі, ліцензії та перевірка акаунта</h2>
         <table>
           <thead>
@@ -559,6 +556,7 @@
           <a href="/uk/privacy-policy/">Політика конфіденційності</a>
           <a href="/uk/casinos-and-betting/">Казино та ставки</a>
           <a href="/uk/payment-methods/">Способи оплати</a>
+          <a href="/uk/game-providers/"><svg class="site-icon site-icon--inline" width="24" height="24" aria-hidden="true" focusable="false"><use href="/icons/ui/review-method.svg?v=20261123-brand-providers#layers"></use></svg> Провайдери ігор</a>
           <a href="/uk/partners/">Партнери</a>
           <a href="/uk/about/">Про нас</a>
           <a
@@ -582,6 +580,6 @@
       </div>
     </footer>
 
-    <script type="module" src="/scripts/main.js?v=20261119-catalog-partners"></script>
+    <script type="module" src="/scripts/main.js?v=20261124-provider-cards"></script>
   </body>
 </html>

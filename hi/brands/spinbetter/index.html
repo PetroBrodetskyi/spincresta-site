@@ -55,7 +55,7 @@
     />
 
     <link rel="icon" type="image/png" href="/favicon.png" />
-    <link rel="stylesheet" href="/styles.css?v=20261120-sticky-pill" />
+    <link rel="stylesheet" href="/styles.css?v=20261124-provider-cards" />
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -286,15 +286,12 @@
     <section class="container">
       <div class="brand-payments">
         <h2 class="title">भुगतान के तरीके</h2>
-        <p class="brand-availability-intro">
-          भुगतान उपलब्धता देश और खाते की स्थिति पर निर्भर करती है। निकासी आम तौर पर जमा के लिए उपयोग की जाने वाली उसी विधि के माध्यम से वापस आती है। भुगतान करने से पहले भुगतान अनुभाग से स्थानीय मुद्रा, नेटवर्क, न्यूनतम शुल्क, और निकासी पहुंच की जांच करें।
-        </p>
         <div class="payments-container" id="brand-payments"></div>
       </div>
     </section>
 
     <main class="content-review">
-      <section class="container">
+      <section class="container" data-review-section="summary">
         <h2 class="title">Spinbetter उत्पाद सारांश</h2>
         <table>
           <thead>
@@ -334,7 +331,7 @@
         </table>
       </section>
 
-      <section class="container">
+      <section class="container" data-review-section="sports">
         <h2 class="title">स्पोर्ट्सबुक, लाइव सट्टेबाजी और टूर्नामेंट</h2>
         <div class="features-grid premium-grid">
           <div class="feature-card glass-card">
@@ -356,7 +353,7 @@
         </div>
       </section>
 
-      <section class="container">
+      <section class="container" data-review-section="games">
         <h2 class="title">कैसीनो, लाइव कैसीनो और त्वरित गेम</h2>
         <table>
           <thead>
@@ -413,7 +410,7 @@
         </div>
       </section>
 
-      <section class="container">
+      <section class="container" data-review-section="cashier">
         <h2 class="title">खाते, भुगतान और खिलाड़ी सुरक्षा</h2>
         <table>
           <thead>
@@ -584,6 +581,7 @@
           <a href="/hi/privacy-policy/">गोपनीयता नीति</a>
           <a href="/hi/casinos-and-betting/">कैसीनो और सट्टेबाजी</a>
           <a href="/hi/payment-methods/">भुगतान के तरीके</a>
+          <a href="/hi/game-providers/"><svg class="site-icon site-icon--inline" width="24" height="24" aria-hidden="true" focusable="false"><use href="/icons/ui/review-method.svg?v=20261123-brand-providers#layers"></use></svg> गेम प्रदाता</a>
           <a href="/hi/partners/">पार्टनर</a>
           <a href="/hi/about/">हमारे बारे में</a>
           <a
@@ -607,6 +605,6 @@
       </div>
     </footer>
 
-    <script type="module" src="/scripts/main.js?v=20261119-catalog-partners"></script>
+    <script type="module" src="/scripts/main.js?v=20261124-provider-cards"></script>
   </body>
 </html>

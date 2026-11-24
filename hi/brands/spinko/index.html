@@ -53,7 +53,7 @@
       content="Spinko कैसीनो समीक्षा: 2026 के लिए बोनस शर्तों, गेम, भुगतान, निकासी और केवाईसी नियम, क्षेत्रीय उपलब्धता और ज़िम्मेदारी से खेलने के टूल की तुलना करें।"
     />
     <meta name="twitter:image" content="https://res.cloudinary.com/drj61gmd2/image/upload/f_webp,q_auto/v1785601590/spincresta/brands/spinko/main-page/spinko-page_nhaeo5.webp" />
-    <link rel="stylesheet" href="/styles.css?v=20261120-sticky-pill" />
+    <link rel="stylesheet" href="/styles.css?v=20261124-provider-cards" />
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -248,13 +248,12 @@
     <section class="container">
       <div class="brand-payments">
         <h2 class="title">भुगतान के तरीके</h2>
-        <p class="brand-availability-intro">वर्तमान Spinko भुगतान जानकारी में वीज़ा, मास्टरकार्ड, ऐप्पल पे, गूगल पे, ओपन बैंकिंग और क्रिप्टोकरेंसी विकल्प सूचीबद्ध हैं। निकासी को बैंक हस्तांतरण और क्रिप्टो के माध्यम से सूचीबद्ध किया गया है। भुगतान अनुभाग यह तय करता है कि प्रत्येक खाते के लिए कौन सी विधियाँ, मुद्राएँ, सीमाएँ और प्रोसेसिंग विकल्प उपलब्ध हैं।</p>
         <div class="payments-container" id="brand-payments"></div>
       </div>
     </section>
 
     <main class="content-review">
-      <section class="container">
+      <section class="container" data-review-section="summary">
         <h2 class="title">Spinko समीक्षा सारांश</h2>
         <table>
           <thead><tr><th>क्षेत्र</th><th>वर्तमान जानकारी क्या दर्शाती है</th><th>प्लेयर चेक</th></tr></thead>
@@ -269,7 +268,7 @@
         </table>
       </section>
 
-      <section class="container">
+      <section class="container" data-review-section="bonuses">
         <h2 class="title">स्वागत बोनस, कैशबैक और प्रमोशन</h2>
         <table>
           <thead><tr><th>प्रस्ताव स्तर</th><th>सार्वजनिक रूप से दृश्यमान विवरण</th><th>दावा करने से पहले क्या जांचें?</th></tr></thead>
@@ -283,7 +282,7 @@
         </table>
       </section>
 
-      <section class="container">
+      <section class="container" data-review-section="games">
         <h2 class="title">कैसीनो लॉबी, लाइव कैसीनो और नए खेल</h2>
         <table>
           <thead><tr><th>क्षेत्र</th><th>खिलाड़ी क्या ब्राउज़ कर सकते हैं</th><th>यह क्यों महत्वपूर्ण है</th></tr></thead>
@@ -297,7 +296,7 @@
         </table>
       </section>
 
-      <section class="container">
+      <section class="container" data-review-section="sports">
         <h2 class="title">स्पोर्ट्सबुक और ईस्पोर्ट्स कवरेज</h2>
         <div class="features-grid premium-grid">
           <div class="feature-card glass-card"><strong>फुटबॉल और मुख्य खेल</strong><span>फुटबॉल, टेनिस, बास्केटबॉल और हॉकी सार्वजनिक खेल नेविगेशन में स्पष्ट रूप से दिखाई देते हैं, जिससे खाते को प्री-मैच और लाइव सट्टेबाजी के लिए एक परिचित शुरुआती बिंदु मिलता है।</span></div>
@@ -307,7 +306,7 @@
         </div>
       </section>
 
-      <section class="container">
+      <section class="container" data-review-section="cashier">
         <h2 class="title">भुगतान, निकासी और केवाईसी जांच</h2>
         <table>
           <thead><tr><th>क्षेत्र</th><th>समसामयिक जानकारी</th><th>व्यावहारिक सलाह</th></tr></thead>
@@ -321,7 +320,7 @@
         </table>
       </section>
 
-      <section class="container">
+      <section class="container" data-review-section="rewards" data-review-details>
         <h2 class="title">वफादारी, वीआईपी और मोबाइल अनुभव</h2>
         <div class="features-grid premium-grid">
           <div class="feature-card glass-card"><strong>वफादारी कार्यक्रम</strong><span>एक समर्पित लॉयल्टी क्षेत्र Spinko को पहली जमा और घूर्णन पदोन्नति से परे एक लंबी अवधि की अवधारण स्तर देता है।</span></div>
@@ -331,7 +330,7 @@
         </div>
       </section>
 
-      <section class="container">
+      <section class="container" data-review-section="trust">
         <h2 class="title">भरोसा, शर्तें और सुरक्षित खेल</h2>
         <table>
           <thead><tr><th>संकेत</th><th>जो दिख रहा है</th><th>खिलाड़ियों के लिए यह क्यों महत्वपूर्ण है</th></tr></thead>
@@ -405,6 +404,7 @@
           <a href="/hi/privacy-policy/">गोपनीयता नीति</a>
           <a href="/hi/casinos-and-betting/">कैसीनो और सट्टेबाजी</a>
           <a href="/hi/payment-methods/">भुगतान के तरीके</a>
+          <a href="/hi/game-providers/"><svg class="site-icon site-icon--inline" width="24" height="24" aria-hidden="true" focusable="false"><use href="/icons/ui/review-method.svg?v=20261123-brand-providers#layers"></use></svg> गेम प्रदाता</a>
           <a href="/hi/partners/">पार्टनर</a>
           <a href="/hi/about/">हमारे बारे में</a>
           <a href="https://t.me/spincresta" target="_blank" rel="noopener noreferrer nofollow" class="footer-social" aria-label="SpinCresta Telegram चैनल"><img src="/icons/telegram-white-icon.svg" alt="Telegram" width="18" height="18" loading="lazy" /><span>Telegram</span></a>
@@ -414,6 +414,6 @@
       </div>
     </footer>
 
-    <script type="module" src="/scripts/main.js?v=20261119-catalog-partners"></script>
+    <script type="module" src="/scripts/main.js?v=20261124-provider-cards"></script>
   </body>
 </html>

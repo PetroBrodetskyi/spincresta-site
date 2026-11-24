@@ -52,7 +52,7 @@
     />
     <meta name="twitter:image" content="https://res.cloudinary.com/drj61gmd2/image/upload/f_webp,q_auto/v1785086371/spincresta/brands/spinrise/main-page/spinrise-page_zlbtmh.webp" />
     <link rel="icon" type="image/png" href="/favicon.png" />
-    <link rel="stylesheet" href="/styles.css?v=20261120-sticky-pill" />
+    <link rel="stylesheet" href="/styles.css?v=20261124-provider-cards" />
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -283,15 +283,12 @@
     <section class="container">
       <div class="brand-payments">
         <h2 class="title">Maksutavat</h2>
-        <p class="brand-availability-intro">
-          Spinrise tukee kortteja, mobiililompakoita, pankki- ja avoimia pankkireittejä, alueellisia menetelmiä, sähköisiä lompakoita, tositteita ja kryptovaluuttoja. Tilin kassa määrittää, mitkä menetelmät, valuutat, limiitit ja nostotavat ovat käytettävissä kussakin maassa.
-        </p>
         <div class="payments-container" id="brand-payments"></div>
       </div>
     </section>
 
     <main class="content-review">
-      <section class="container">
+      <section class="container" data-review-section="summary">
         <h2 class="title">Palvelun yleiskuva</h2>
         <table>
           <thead>
@@ -332,7 +329,7 @@
         </table>
       </section>
 
-      <section class="container">
+      <section class="container" data-review-section="bonuses">
         <h2 class="title">Tervetuliaisbonuspolut</h2>
         <table>
           <thead>
@@ -371,7 +368,7 @@
         </p>
       </section>
 
-      <section class="container">
+      <section class="container" data-review-section="bonuses">
         <h2 class="title">Live- ja kryptobonusvaihtoehdot</h2>
         <table>
           <thead>
@@ -402,7 +399,7 @@
         </table>
       </section>
 
-      <section class="container">
+      <section class="container" data-review-section="games">
         <h2 class="title">Kasinopelit ja aulan syvyys</h2>
         <table>
           <thead>
@@ -423,7 +420,7 @@
         </p>
       </section>
 
-      <section class="container">
+      <section class="container" data-review-section="games" data-review-details>
         <h2 class="title">Palveluntarjoajat ja nykyisten pelien löytäminen</h2>
         <div class="features-grid premium-grid">
           <div class="feature-card glass-card">
@@ -445,7 +442,7 @@
         </div>
       </section>
 
-      <section class="container">
+      <section class="container" data-review-section="games">
         <h2 class="title">Live kasino</h2>
         <table>
           <thead>
@@ -465,7 +462,7 @@
         </p>
       </section>
 
-      <section class="container">
+      <section class="container" data-review-section="rewards">
         <h2 class="title">Kanta-asiakasohjelma</h2>
         <table>
           <thead>
@@ -501,7 +498,7 @@
         </table>
       </section>
 
-      <section class="container">
+      <section class="container" data-review-section="rewards">
         <h2 class="title">VIP-ohjelma</h2>
         <table>
           <thead>
@@ -520,7 +517,7 @@
         </p>
       </section>
 
-      <section class="container">
+      <section class="container" data-review-section="bonuses" data-review-details>
         <h2 class="title">Viikoittaiset tarjoukset ja turnaukset</h2>
         <div class="features-grid premium-grid">
           <div class="feature-card glass-card">
@@ -542,7 +539,7 @@
         </div>
       </section>
 
-      <section class="container">
+      <section class="container" data-review-section="cashier">
         <h2 class="title">Maksut, nostot ja KYC</h2>
         <table>
           <thead>
@@ -583,7 +580,7 @@
         </table>
       </section>
 
-      <section class="container">
+      <section class="container" data-review-section="trust" data-review-details>
         <h2 class="title">Lisenssi, valitukset ja tuki</h2>
         <div class="features-grid premium-grid">
           <div class="feature-card glass-card">
@@ -605,7 +602,7 @@
         </div>
       </section>
 
-      <section class="container">
+      <section class="container" data-review-section="trust" data-review-details>
         <h2 class="title">Safer-Play-ohjaimet</h2>
         <div class="features-grid premium-grid">
           <div class="feature-card glass-card">
@@ -716,6 +713,7 @@
         <p>Tekijänoikeus 2026 SpinCresta.com. Kaikki oikeudet pidätetään.</p>
         <p>18+ | Uhkapeli voi aiheuttaa riippuvuutta. Ole hyvä ja pelaa vastuullisesti. Tarkista paikalliset lait ennen pelaamista.</p>
         <nav class="footer-nav">
+          <a href="/fi/game-providers/"><svg class="site-icon site-icon--inline" width="24" height="24" aria-hidden="true" focusable="false"><use href="/icons/ui/review-method.svg?v=20261123-brand-providers#layers"></use></svg> Pelintarjoajat</a>
           <a href="/fi/responsible-gambling/">Vastuullinen pelaaminen</a><a href="/fi/privacy-policy/">Tietosuojakäytäntö</a>
           <a href="/fi/casinos-and-betting/">Kasinot ja vedonlyönti</a><a href="/fi/payment-methods/">Maksutavat</a>
           <a href="/fi/partners/">Yhteistyökumppanit</a><a href="/fi/about/">Tietoa meistä</a>
@@ -723,6 +721,6 @@
 
       </div>
     </footer>
-    <script type="module" src="/scripts/main.js?v=20261119-catalog-partners"></script>
+    <script type="module" src="/scripts/main.js?v=20261124-provider-cards"></script>
   </body>
 </html>

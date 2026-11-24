@@ -635,6 +635,14 @@ const britsinoCategoryNames = {
 };
 
 export const BRAND_SNAPSHOT_CONFIGS = {
+  bitgames: {
+    tabs: [
+      createSnapshotTab('Games', ['Slots', 'Roulette', 'Blackjack', 'Baccarat', 'Live games', 'Crash games']),
+      createSnapshotTab('Live games', ['Live roulette', 'Live baccarat', 'Live poker', 'Live shows']),
+      createSnapshotTab('Betting', ['Football', 'Tennis', 'Basketball', 'Table tennis', 'Ice hockey', 'Volleyball', 'Cricket', 'eSports']),
+    ],
+    notes: publicCatalogueNotes,
+  },
   britsino: {
     tabs: [
       createSnapshotTab('Games', [

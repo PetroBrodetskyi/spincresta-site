@@ -53,7 +53,7 @@
       content="Análise do Spinko Casino: compare termos de bónus, jogos, pagamentos, levantamentos e regras KYC, disponibilidade regional e ferramentas de jogo responsável para 2026."
     />
     <meta name="twitter:image" content="https://res.cloudinary.com/drj61gmd2/image/upload/f_webp,q_auto/v1785601590/spincresta/brands/spinko/main-page/spinko-page_nhaeo5.webp" />
-    <link rel="stylesheet" href="/styles.css?v=20261120-sticky-pill" />
+    <link rel="stylesheet" href="/styles.css?v=20261124-provider-cards" />
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -248,13 +248,12 @@
     <section class="container">
       <div class="brand-payments">
         <h2 class="title">Métodos de pagamento</h2>
-        <p class="brand-availability-intro">As informações de pagamento atuais do Spinko listam opções de Visa, Mastercard, Apple Pay, Google Pay, open banking e criptomoeda. Os levantamentos são listadas por meio de transferência bancária e criptomoedas. A área de pagamentos decide quais métodos, moedas, limites e opções de processamento estão disponíveis para cada conta.</p>
         <div class="payments-container" id="brand-payments"></div>
       </div>
     </section>
 
     <main class="content-review">
-      <section class="container">
+      <section class="container" data-review-section="summary">
         <h2 class="title">Resumo da revisão Spinko</h2>
         <table>
           <thead><tr><th>Área</th><th>O que as informações atuais mostram</th><th>Verificação do jogador</th></tr></thead>
@@ -269,7 +268,7 @@
         </table>
       </section>
 
-      <section class="container">
+      <section class="container" data-review-section="bonuses">
         <h2 class="title">Bónus de boas-vindas, cashback e promoções</h2>
         <table>
           <thead><tr><th>Camada de Oferta</th><th>Detalhe publicamente visível</th><th>O que verificar antes de obter</th></tr></thead>
@@ -283,7 +282,7 @@
         </table>
       </section>
 
-      <section class="container">
+      <section class="container" data-review-section="games">
         <h2 class="title">Lobby do casino, casino ao vivo e novos jogos</h2>
         <table>
           <thead><tr><th>Área</th><th>O que os jogadores podem navegar</th><th>Por que isso importa</th></tr></thead>
@@ -297,7 +296,7 @@
         </table>
       </section>
 
-      <section class="container">
+      <section class="container" data-review-section="sports">
         <h2 class="title">Cobertura de apostas desportivas e desportos eletrónicos</h2>
         <div class="features-grid premium-grid">
           <div class="feature-card glass-card"><strong>Futebol e desporto básicos</strong><span>Futebol, tênis, basquete e hóquei aparecem claramente na navegação desportiva pública, dando à conta um ponto de partida familiar para apostas pré-jogo e ao vivo.</span></div>
@@ -307,7 +306,7 @@
         </div>
       </section>
 
-      <section class="container">
+      <section class="container" data-review-section="cashier">
         <h2 class="title">Pagamentos, levantamentos e verificações KYC</h2>
         <table>
           <thead><tr><th>Área</th><th>Informação atual</th><th>Conselhos práticos</th></tr></thead>
@@ -321,7 +320,7 @@
         </table>
       </section>
 
-      <section class="container">
+      <section class="container" data-review-section="rewards" data-review-details>
         <h2 class="title">Fidelidade, VIP e experiência móvel</h2>
         <div class="features-grid premium-grid">
           <div class="feature-card glass-card"><strong>Programa de fidelidade</strong><span>Uma área de fidelidade dedicada oferece ao Spinko uma camada de retenção de longo prazo, além do primeiro depósito e das promoções rotativas.</span></div>
@@ -331,7 +330,7 @@
         </div>
       </section>
 
-      <section class="container">
+      <section class="container" data-review-section="trust">
         <h2 class="title">Confiança, Termos e jogo responsável</h2>
         <table>
           <thead><tr><th>Sinal</th><th>O que é visível</th><th>Porque é importante para os jogadores</th></tr></thead>
@@ -405,6 +404,7 @@
           <a href="/pt/privacy-policy/">Política de Privacidade</a>
           <a href="/pt/casinos-and-betting/">Casinos e Apostas</a>
           <a href="/pt/payment-methods/">Métodos de pagamento</a>
+          <a href="/pt/game-providers/"><svg class="site-icon site-icon--inline" width="24" height="24" aria-hidden="true" focusable="false"><use href="/icons/ui/review-method.svg?v=20261123-brand-providers#layers"></use></svg> Fornecedores de jogos</a>
           <a href="/pt/partners/">Parceiros</a>
           <a href="/pt/about/">Sobre</a>
           <a href="https://t.me/spincresta" target="_blank" rel="noopener noreferrer nofollow" class="footer-social" aria-label="Canal SpinCresta Telegram"><img src="/icons/telegram-white-icon.svg" alt="Telegram" width="18" height="18" loading="lazy" /><span>Telegram</span></a>
@@ -414,6 +414,6 @@
       </div>
     </footer>
 
-    <script type="module" src="/scripts/main.js?v=20261119-catalog-partners"></script>
+    <script type="module" src="/scripts/main.js?v=20261124-provider-cards"></script>
   </body>
 </html>

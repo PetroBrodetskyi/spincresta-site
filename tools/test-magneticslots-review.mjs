@@ -61,7 +61,7 @@ for (const [locale, copy] of Object.entries(magneticCopy)) {
       explicit: /^<section[^>]*\bdata-review-details\b/.test(section),
       hasTable: markup.includes('<table>'),
     })).map(([, kind]) => kind);
-    assert.deepEqual(detailTopics, ['summary', 'bonuses', 'sports', 'rewards', 'cashier']);
+    assert.deepEqual(detailTopics, ['summary', 'bonuses', 'games', 'sports', 'rewards', 'cashier', 'trust']);
     assert.ok(sport);
     assert.ok(bonus);
     assert.ok(belongsInReviewDetails({ kind: 'sports', hasTable: sport[2].includes('<table>') }));

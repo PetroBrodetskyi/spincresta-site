@@ -42,7 +42,7 @@
     <meta name="twitter:description" content="Twin: bonusy, gry, płatności, wypłaty, weryfikacja KYC, wersja mobilna i dostępność. Przed grą sprawdź aktualne warunki." />
     <meta name="twitter:image" content="https://res.cloudinary.com/drj61gmd2/image/upload/f_webp,q_auto/v1785086947/spincresta/brands/twin/main-page/twin-page_uirgin.webp" />
     <link rel="icon" type="image/png" href="/favicon.png" />
-    <link rel="stylesheet" href="/styles.css?v=20261120-sticky-pill" />
+    <link rel="stylesheet" href="/styles.css?v=20261124-provider-cards" />
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -249,13 +249,12 @@
     <section class="container">
       <div class="brand-payments">
         <h2 class="title">Metody płatności</h2>
-        <p class="brand-availability-intro">Twin obsługuje karty, e-portfele i płatności kryptowalutowe na wybranych rynkach. Sprawdź sekcji płatności pod kątem lokalnych opcji wpłat i wypłat, limitów, opłat i wymagań weryfikacyjnych.</p>
         <div class="payments-container" id="brand-payments"></div>
       </div>
     </section>
 
     <main class="content-review">
-      <section class="container">
+      <section class="container" data-review-section="summary">
         <h2 class="title">Twin przegląd produktu</h2>
         <table>
           <thead><tr><th>Obszar</th><th>Co oferuje Twin</th><th>Kontrola gracza</th></tr></thead>
@@ -270,7 +269,7 @@
         </table>
       </section>
 
-      <section class="container">
+      <section class="container" data-review-section="games" data-review-details>
         <h2 class="title">Lobby kasyna, automaty i odkrywanie gier</h2>
         <div class="features-grid premium-grid">
           <div class="feature-card glass-card"><strong>Popularne i nowe gry</strong><span>Twin oddziela najlepsze gry, nowości, przedpremierowe wydania, rekomendacje i najlepszych zwycięzców, dzięki czemu gracze mogą szybko znaleźć aktywne tytuły.</span></div>
@@ -282,7 +281,7 @@
         </div>
       </section>
 
-      <section class="container">
+      <section class="container" data-review-section="games">
         <h2 class="title">Gry kasynowe na żywo i dostawcy</h2>
         <table>
           <thead><tr><th>Obszar na żywo</th><th>Przykłady</th><th>Co dostają gracze</th></tr></thead>
@@ -296,7 +295,7 @@
         </table>
       </section>
 
-      <section class="container">
+      <section class="container" data-review-section="sports">
         <h2 class="title">Zakłady sportowe, zakłady na żywo i szybkie zakłady</h2>
         <table>
           <thead><tr><th>Obszar zakładów</th><th>Zasięg</th><th>Przydatne funkcje</th></tr></thead>
@@ -309,7 +308,7 @@
         </table>
       </section>
 
-      <section class="container">
+      <section class="container" data-review-section="bonuses" data-review-details>
         <h2 class="title">Promocje, lojalność i VIP</h2>
         <div class="features-grid premium-grid">
           <div class="feature-card glass-card"><strong>Oferty kasyn i sportów</strong><span>Twin oddziela bonusy powitalne, bonusy kasynowe, kampanie bukmacherskie, cashback, oferty specjalne i archiwalne promocje.</span></div>
@@ -321,7 +320,7 @@
         </div>
       </section>
 
-      <section class="container">
+      <section class="container" data-review-section="cashier">
         <h2 class="title">Płatności, weryfikacja i bezpieczeństwo konta</h2>
         <table>
           <thead><tr><th>Sprawdzać</th><th>Jak Twin sobie z tym radzi</th><th>Praktyczne porady</th></tr></thead>
@@ -336,7 +335,7 @@
         </table>
       </section>
 
-      <section class="container">
+      <section class="container" data-review-section="trust" data-review-details>
         <h2 class="title">Licencja i odpowiedzialny hazard</h2>
         <div class="features-grid premium-grid">
           <div class="feature-card glass-card"><strong>Operator i licencja</strong><span>Twin jest własnością i jest zarządzany przez Jade Reef Ventures Corp. i działa na podstawie licencji Anjouan ALSI-202410001-FI1. Chessmate Limited jest wymieniona jako agent płatności.</span></div>
@@ -427,6 +426,7 @@
           <a href="/pl/privacy-policy/">Polityka prywatności</a>
           <a href="/pl/casinos-and-betting/">Kasyna i zakłady</a>
           <a href="/pl/payment-methods/">Metody płatności</a>
+          <a href="/pl/game-providers/"><svg class="site-icon site-icon--inline" width="24" height="24" aria-hidden="true" focusable="false"><use href="/icons/ui/review-method.svg?v=20261123-brand-providers#layers"></use></svg> Dostawcy gier</a>
           <a href="/pl/partners/">Partnerzy</a>
           <a href="/pl/about/">O nas</a>
           <a
@@ -461,7 +461,7 @@
 </div>
     </footer>
 
-    <script type="module" src="/scripts/main.js?v=20261119-catalog-partners"></script>
+    <script type="module" src="/scripts/main.js?v=20261124-provider-cards"></script>
   </body>
 </html>
 

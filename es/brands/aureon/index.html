@@ -52,7 +52,7 @@
     />
     <meta name="twitter:image" content="https://res.cloudinary.com/drj61gmd2/image/upload/v1784899498/spincresta/brands/aureon/main-page/aureon-page_pfqzsx.webp" />
     <link rel="icon" type="image/png" href="/favicon.png" />
-    <link rel="stylesheet" href="/styles.css?v=20261120-sticky-pill" />
+    <link rel="stylesheet" href="/styles.css?v=20261124-provider-cards" />
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -221,10 +221,10 @@
     </section>
 
     <section class="container"><div class="brand-countries"><h2 class="title">Países disponibles</h2><div class="countries-container" id="brand-countries"></div></div></section>
-    <section class="container"><div class="brand-payments"><h2 class="title">Aureon Métodos de pago</h2><p class="brand-availability-intro">Aureon admite Visa, Mastercard, transferencia bancaria, Apple Pay, Google Pay, CardPay, Skrill, Neteller y Neosurf. Mastercard ID Check agrega verificación de seguridad de la tarjeta, mientras que el área de pagos determina qué métodos admiten depósitos y retiros para cada país.</p><div class="payments-container" id="brand-payments"></div></div></section>
+    <section class="container"><div class="brand-payments"><h2 class="title">Aureon Métodos de pago</h2><div class="payments-container" id="brand-payments"></div></div></section>
 
     <main class="content-review">
-      <section class="container">
+      <section class="container" data-review-section="summary">
         <h2 class="title">Resumen de Aureon</h2>
         <table>
           <thead><tr><th>Área</th><th>Detalles clave</th><th>Verificación de jugador</th></tr></thead>
@@ -239,7 +239,7 @@
         </table>
       </section>
 
-      <section class="container">
+      <section class="container" data-review-section="bonuses">
         <h2 class="title">Bono de bienvenida y promociones</h2>
         <table>
           <thead><tr><th>Área de recompensa</th><th>Detalle publicado</th><th>Qué comprobar</th></tr></thead>
@@ -253,7 +253,7 @@
         </table>
       </section>
 
-      <section class="container">
+      <section class="container" data-review-section="games">
         <h2 class="title">Juegos de casino y proveedores</h2>
         <table>
           <thead><tr><th>Área</th><th>Cobertura</th><th>Por qué es importante</th></tr></thead>
@@ -267,7 +267,7 @@
         </table>
       </section>
 
-      <section class="container">
+      <section class="container" data-review-section="games" data-review-details>
         <h2 class="title">Casino en vivo Aureon</h2>
         <div class="features-grid premium-grid">
           <div class="feature-card glass-card"><strong>Mesas Clásicas</strong><span>Las secciones específicas al blackjack, baccarat y ruleta hacen que sea fácil acceder a los principales juegos con crupier en vivo.</span></div>
@@ -277,7 +277,7 @@
         </div>
       </section>
 
-      <section class="container">
+      <section class="container" data-review-section="cashier">
         <h2 class="title">Pagos, retiros y KYC</h2>
         <table>
           <thead><tr><th>Área</th><th>Detalle publicado</th><th>Consejos prácticos</th></tr></thead>
@@ -302,7 +302,7 @@
         </div>
       </section>
 
-      <section class="container">
+      <section class="container" data-review-section="trust" data-review-details>
         <h2 class="title">Términos, privacidad y seguridad del jugador</h2>
         <div class="features-grid premium-grid">
           <div class="feature-card glass-card"><strong>Políticas dedicadas</strong><span>Aureon publica páginas separadas de términos de uso, privacidad, KYC, pagos, cookies y políticas de bonificación.</span></div>
@@ -345,7 +345,8 @@
 </main>
 
     <section class="all-countries"><div class="container"><h2 class="title">Casinos en línea por país</h2><div class="countries-cloud"></div></div></section>
-    <footer class="footer"><div class="container"><p>Copyright 2026 SpinCresta.com. Reservados todos los derechos.</p><p>18+ | El juego puede ser adictivo. Juegue de forma responsable. Consulte las leyes locales antes de jugar.</p><nav class="footer-nav"><a href="/es/responsible-gambling/">Juego responsable</a><a href="/es/privacy-policy/">Política de privacidad</a><a href="/es/casinos-and-betting/">Casinos y apuestas</a><a href="/es/payment-methods/">Métodos de pago</a><a href="/es/partners/">Socios</a><a href="/es/about/">Acerca de</a><a href="https://t.me/spincresta" target="_blank" rel="noopener noreferrer nofollow" class="footer-social" aria-label="Canal de Telegram SpinCresta"><img src="/icons/telegram-white-icon.svg" alt="Telegram" width="18" height="18" loading="lazy" /><span>Telegram</span></a><a href="https://x.com/SpinCresta" target="_blank" rel="noopener noreferrer nofollow" class="footer-social" aria-label="SpinCresta en X"><img src="/icons/x-social-media-round-icon.svg" alt="X" width="18" height="18" loading="lazy" /><span>X</span></a></nav></div></footer>
-    <script type="module" src="/scripts/main.js?v=20261119-catalog-partners"></script>
+    <footer class="footer"><div class="container"><p>Copyright 2026 SpinCresta.com. Reservados todos los derechos.</p><p>18+ | El juego puede ser adictivo. Juegue de forma responsable. Consulte las leyes locales antes de jugar.</p><nav class="footer-nav">
+          <a href="/es/game-providers/"><svg class="site-icon site-icon--inline" width="24" height="24" aria-hidden="true" focusable="false"><use href="/icons/ui/review-method.svg?v=20261123-brand-providers#layers"></use></svg> Proveedores de juegos</a><a href="/es/responsible-gambling/">Juego responsable</a><a href="/es/privacy-policy/">Política de privacidad</a><a href="/es/casinos-and-betting/">Casinos y apuestas</a><a href="/es/payment-methods/">Métodos de pago</a><a href="/es/partners/">Socios</a><a href="/es/about/">Acerca de</a><a href="https://t.me/spincresta" target="_blank" rel="noopener noreferrer nofollow" class="footer-social" aria-label="Canal de Telegram SpinCresta"><img src="/icons/telegram-white-icon.svg" alt="Telegram" width="18" height="18" loading="lazy" /><span>Telegram</span></a><a href="https://x.com/SpinCresta" target="_blank" rel="noopener noreferrer nofollow" class="footer-social" aria-label="SpinCresta en X"><img src="/icons/x-social-media-round-icon.svg" alt="X" width="18" height="18" loading="lazy" /><span>X</span></a></nav></div></footer>
+    <script type="module" src="/scripts/main.js?v=20261124-provider-cards"></script>
   </body>
 </html>

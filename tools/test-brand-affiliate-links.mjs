@@ -114,7 +114,6 @@ test('Pinco generator uses the brand registry instead of a hardcoded offer ID', 
   const generator = fs.readFileSync('tools/build-pinco-reviews.mjs', 'utf8');
   assert.ok(generator.includes('esc(brand.urlCasino)'));
   assert.ok(!generator.includes('123113'));
-  assert.ok(generator.includes('/scripts/main.js?v=20261027-tracking-domain-1'));
   const main = fs.readFileSync('scripts/main.js', 'utf8');
   assert.match(main, /import \{ BRANDS \} from '\.\/brands\.js\?v=[^']+';/);
   assert.match(main, /import\('\.\/pages\/brand-layout\.js\?v=[^']+'\)/);
@@ -124,16 +123,41 @@ test('Pinco generator uses the brand registry instead of a hardcoded offer ID', 
   }
 });
 
-test('a read-only Pinco generation pass emits the current registry link in every locale', () => {
+test('Pinco regenerates every locale without Planbet or changes to the review shell', () => {
   const generated = new Map();
+  const layoutFixture = '<section data-test-layout="review" data-review-section="games" class="container" id="pinco-games" data-review-details>';
+  const readFileSync = (file, encoding) => {
+    assert.doesNotMatch(file, /brands\/planbet\//, 'Pinco must not read the Planbet template');
+    const html = fs.readFileSync(file, encoding);
+    return file === 'brands/pinco/index.html'
+      ? html.replace(/<section\b[^>]*\bid="pinco-games"[^>]*>/, layoutFixture)
+      : html;
+  };
   const source = fs.readFileSync('tools/build-pinco-reviews.mjs', 'utf8').replace(/^import .*;\r?\n/gm, '');
   vm.runInNewContext(source, {
-    fs: { readFileSync: fs.readFileSync, writeFileSync: (file, html) => generated.set(file, html) },
-    BRANDS, PINCO_COPY, BRAND_HOMEPAGE_SCREENSHOTS, console: { log() {} },
+    fs: { readFileSync, writeFileSync: (file, html) => generated.set(file, html) },
+    BRANDS, PINCO_COPY, console: { log() {} },
   });
   const brand = BRANDS.find(brand => brand.name === 'Pinco');
+  const reviewMetadata = html => html.match(/<link\b(?=[^>]*(?:rel="canonical"|hreflang=))[^>]*>|<script\b[^>]*src="\/scripts\/main\.js[^"]*"[^>]*>/g);
   for (const locale of locales) {
     const file = `${locale === 'en' ? '' : `${locale}/`}brands/pinco/index.html`;
-    assert.deepEqual(externalClicks(generated.get(file)), [brand.urlCasino], file);
+    const original = readFileSync(file, 'utf8');
+    const html = generated.get(file) ?? original;
+    assert.deepEqual(externalClicks(html), [brand.urlCasino], file);
+    assert.deepEqual(reviewMetadata(html), reviewMetadata(original), `${file}: preserve canonical, language URLs and script version`);
+    assert.ok(html.includes(BRAND_HOMEPAGE_SCREENSHOTS.pinco), `${file}: preserve Pinco screenshot`);
+    assert.doesNotMatch(html, /Planbet/i, file);
+    assert.match(html, /<section\b(?=[^>]*id="pinco-sports")(?=[^>]*data-review-section="sports")[^>]*data-review-details[^>]*>/, file);
+    const graph = JSON.parse(html.match(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/)[1])['@graph'];
+    assert.deepEqual(graph.find(node => node['@type'] === 'FAQPage').mainEntity.map(question => [question.name, question.acceptedAnswer.text]), PINCO_COPY[locale].faq, file);
   }
+  assert.ok(generated.get('brands/pinco/index.html').includes(layoutFixture), 'keep added and reordered section attributes');
+  vm.runInNewContext(source, {
+    fs: {
+      readFileSync: (file, encoding) => generated.get(file) ?? readFileSync(file, encoding),
+      writeFileSync: file => assert.fail(`Pinco regeneration must be idempotent: ${file}`),
+    },
+    BRANDS, PINCO_COPY, console: { log() {} },
+  });
 });

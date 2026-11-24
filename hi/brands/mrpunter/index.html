@@ -55,7 +55,7 @@
     />
 
     <link rel="icon" type="image/png" href="/favicon.png" />
-    <link rel="stylesheet" href="/styles.css?v=20261120-sticky-pill" />
+    <link rel="stylesheet" href="/styles.css?v=20261124-provider-cards" />
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -283,15 +283,12 @@
     <section class="container">
       <div class="brand-payments">
         <h2 class="title">भुगतान के तरीके</h2>
-        <p class="brand-availability-intro">
-          MrPunter वीज़ा, मास्टरकार्ड और इंटरैक को सूचीबद्ध करता है। सटीक जमा और निकासी विकल्प देश, मुद्रा, खाता सत्यापन और चयनित भुगतान विकल्प पर निर्भर हो सकते हैं।
-        </p>
         <div class="payments-container" id="brand-payments"></div>
       </div>
     </section>
 
     <main class="content-review">
-      <section class="container">
+      <section class="container" data-review-section="bonuses">
         <h2 class="title">MrPunter बोनस और प्रचार सारांश</h2>
         <table>
           <thead>
@@ -331,7 +328,7 @@
         </table>
       </section>
 
-      <section class="container">
+      <section class="container" data-review-section="games" data-review-details>
         <h2 class="title">कैसीनो लॉबी, लाइव कैसीनो और जैकपॉट</h2>
         <div class="features-grid premium-grid">
           <div class="feature-card glass-card">
@@ -353,7 +350,7 @@
         </div>
       </section>
 
-      <section class="container">
+      <section class="container" data-review-section="sports">
         <h2 class="title">स्पोर्ट्सबुक, लाइव बेटिंग और प्लेयर टूल्स</h2>
         <table>
           <thead>
@@ -388,7 +385,7 @@
         </table>
       </section>
 
-      <section class="container">
+      <section class="container" data-review-section="cashier" data-review-details>
         <h2 class="title">देश के लिए उपयुक्तता और भुगतान अनुभाग नोट्स</h2>
         <div class="features-grid premium-grid">
           <div class="feature-card glass-card">
@@ -514,6 +511,7 @@
           <a href="/hi/privacy-policy/">गोपनीयता नीति</a>
           <a href="/hi/casinos-and-betting/">कैसीनो और सट्टेबाजी</a>
           <a href="/hi/payment-methods/">भुगतान के तरीके</a>
+          <a href="/hi/game-providers/"><svg class="site-icon site-icon--inline" width="24" height="24" aria-hidden="true" focusable="false"><use href="/icons/ui/review-method.svg?v=20261123-brand-providers#layers"></use></svg> गेम प्रदाता</a>
           <a href="/hi/partners/">पार्टनर</a>
           <a href="/hi/about/">हमारे बारे में</a>
           <a
@@ -537,6 +535,6 @@
       </div>
     </footer>
 
-    <script type="module" src="/scripts/main.js?v=20261119-catalog-partners"></script>
+    <script type="module" src="/scripts/main.js?v=20261124-provider-cards"></script>
   </body>
 </html>

@@ -141,7 +141,8 @@ for (const lang of locales) {
   const loyaltyTable=reviewTable(lc.headers,loyaltyLevels.map(([level,target,slots,sport])=>[
     `${level} · ${money(target)} ${lc.points}`,percent(slots),percent(sport),
   ]));
-  const section = (id, kind, heading, content) => `<section class="container" id="betonwin-${id}" data-review-section="${kind}"><h2 class="title">${esc(heading)}</h2>${content}</section>`;
+  const supplementaryDetails = new Set(['providers', 'rewards', 'vip', 'responsible']);
+  const section = (id, kind, heading, content) => `<section class="container" id="betonwin-${id}" data-review-section="${kind}"${supplementaryDetails.has(id) ? ' data-review-details' : ''}><h2 class="title">${esc(heading)}</h2>${content}</section>`;
   const reviewDate = new Intl.DateTimeFormat(lang,{dateStyle:'long',timeZone:'UTC'}).format(new Date(date));
   const reviewMeta = `<p class="hero-subtitle editorial-meta">${esc(c.reviewed)}: <time datetime="${date}">${esc(reviewDate)}</time>${reviewDate.endsWith('.')?'':'.'} ${esc(t[7])}</p>`;
   const hero = [

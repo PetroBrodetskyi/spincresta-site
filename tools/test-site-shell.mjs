@@ -84,7 +84,7 @@ test('the article below the overview spans the former right rail without moving 
   const css = read('styles/pages.css');
   assert.match(css, /"toc masthead context"\s*"toc overview context"\s*"toc article article"/);
   assert.match(css, /"toc masthead"\s*"toc overview"\s*"toc article";/);
-  assert.match(css, /:has\(> \.brand-review-overview\) > \.brand-right-rail\s*\{[^}]*contain: size;[^}]*overflow-y: auto;/);
+  assert.doesNotMatch(css, /\.brand-right-rail\s*\{[^}]*(?:contain:\s*size|overflow(?:-y)?:\s*(?:auto|scroll))/);
   const layout = read('scripts/pages/brand-layout.js');
   assert.match(layout, /main\.before\(overview\)/);
   assert.match(layout, /heading\.id = 'brand-review-overview'/);

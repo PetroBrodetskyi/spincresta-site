@@ -9,7 +9,7 @@ export const TOPIC_ICONS = Object.freeze({
 const LINK_ICONS = Object.freeze({
   'top-casinos': 'trophy', 'new-casinos': 'sparkles', 'top-rated': 'star', 'exclusive-offers': 'bonus',
   'responsible-gambling': 'safety', 'privacy-policy': 'lock', 'casinos-and-betting': 'games',
-  'payment-methods': 'payments', partners: 'link', about: 'user', blog: 'book',
+  'payment-methods': 'payments', 'game-providers': 'layers', partners: 'link', about: 'user', blog: 'book',
 });
 
 export function linkIconFor(href, base) {

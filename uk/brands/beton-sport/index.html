@@ -49,7 +49,7 @@
       content="Перш ніж зробити свою першу ставку, ознайомтеся з основними способами ставок на спорт і live-ставки, доступними через BetOn Sport."
     />
     <link rel="icon" type="image/png" href="/favicon.png" />
-    <link rel="stylesheet" href="/styles.css?v=20261120-sticky-pill" />
+    <link rel="stylesheet" href="/styles.css?v=20261124-provider-cards" />
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -225,13 +225,12 @@
     <section class="container">
       <div class="brand-payments">
         <h2 class="title">Способи оплати</h2>
-        <p class="brand-availability-intro">BetOn Sport працює в гривнях і містить перекази Visa, Mastercard, Google Pay, Apple Pay та IBAN. Для платежів необхідно використовувати акаунти, зареєстровані на гравця.</p>
         <div class="payments-container" id="brand-payments"></div>
       </div>
     </section>
 
     <main class="content-review">
-      <section class="container">
+      <section class="container" data-review-section="summary">
         <h2 class="title">Короткий огляд</h2>
         <table>
           <thead><tr><th>Категорія</th><th>Ключові деталі</th><th>Перевірка гравця</th></tr></thead>
@@ -245,7 +244,7 @@
         </table>
       </section>
 
-      <section class="container">
+      <section class="container" data-review-section="rewards" data-review-details>
         <h2 class="title">Футбол і великі турніри</h2>
         <div class="features-grid premium-grid">
           <div class="feature-card glass-card"><strong>Фокус на футболі</strong><span>Спеціальні футбольні розділи включають великі змагання та розділ Кубка світу для ставок на турнірах.</span></div>
@@ -255,7 +254,7 @@
         </div>
       </section>
 
-      <section class="container">
+      <section class="container" data-review-section="sports">
         <h2 class="title">live-ставки, ринки та розрахунок</h2>
         <table>
           <thead><tr><th>Зона ставок</th><th>Що він пропонує</th><th>Що перевірити</th></tr></thead>
@@ -269,7 +268,7 @@
         </table>
       </section>
 
-      <section class="container">
+      <section class="container" data-review-section="bonuses" data-review-details>
         <h2 class="title">Спортивні акції</h2>
         <div class="features-grid premium-grid">
           <div class="feature-card glass-card"><strong>Щотижневе збільшення депозитів</strong><span>Спортивні акції можуть включати 100% збільшення депозиту до 5000 ₴ у вибрані будні дні.</span></div>
@@ -279,7 +278,7 @@
         </div>
       </section>
 
-      <section class="container">
+      <section class="container" data-review-section="cashier">
         <h2 class="title">Платежі, перевірка та ліцензія</h2>
         <table>
           <thead><tr><th>Перевірте</th><th>Як це робить BetOn</th><th>Практичні поради</th></tr></thead>
@@ -301,7 +300,7 @@
         </div>
       </section>
 
-      <section class="container">
+      <section class="container" data-review-section="games" data-review-details>
         <h2 class="title">Статистика чи казино?</h2>
         <div class="features-grid premium-grid">
           <div class="feature-card glass-card"><strong>Виберіть BetOn Sport</strong><span>Ця сторінка найкраще підходить для передматчевих ставок, ставок live, висвітлення турнірів, кіберспорту та спортивних акцій.</span></div>
@@ -329,10 +328,11 @@
       <div class="container">
         <p>© 2026 SpinCresta.com. Усі права захищені.</p>
         <p>21+ | Азартні ігри можуть викликати залежність. Будь ласка, грайте відповідально. Перед грою перевірте місцеві закони.</p>
-        <nav class="footer-nav"><a href="/uk/responsible-gambling/">Відповідальна гра в азартні ігри</a><a href="/uk/privacy-policy/">Політика конфіденційності</a><a href="/uk/casinos-and-betting/">Казино та ставки</a><a href="/uk/payment-methods/">Способи оплати</a><a href="/uk/partners/">Партнери</a><a href="/uk/about/">Про нас</a><a href="https://t.me/spincresta" target="_blank" rel="noopener noreferrer nofollow" class="footer-social" aria-label="Канал SpinCresta Telegram"><img src="/icons/telegram-white-icon.svg" alt="Telegram" width="18" height="18" loading="lazy" /><span>Telegram</span></a><a href="https://x.com/SpinCresta" target="_blank" rel="noopener noreferrer nofollow" class="footer-social" aria-label="SpinCresta на X"><img src="/icons/x-social-media-round-icon.svg" alt="X" width="18" height="18" loading="lazy" /><span>X</span></a></nav>
+        <nav class="footer-nav">
+          <a href="/uk/game-providers/"><svg class="site-icon site-icon--inline" width="24" height="24" aria-hidden="true" focusable="false"><use href="/icons/ui/review-method.svg?v=20261123-brand-providers#layers"></use></svg> Провайдери ігор</a><a href="/uk/responsible-gambling/">Відповідальна гра в азартні ігри</a><a href="/uk/privacy-policy/">Політика конфіденційності</a><a href="/uk/casinos-and-betting/">Казино та ставки</a><a href="/uk/payment-methods/">Способи оплати</a><a href="/uk/partners/">Партнери</a><a href="/uk/about/">Про нас</a><a href="https://t.me/spincresta" target="_blank" rel="noopener noreferrer nofollow" class="footer-social" aria-label="Канал SpinCresta Telegram"><img src="/icons/telegram-white-icon.svg" alt="Telegram" width="18" height="18" loading="lazy" /><span>Telegram</span></a><a href="https://x.com/SpinCresta" target="_blank" rel="noopener noreferrer nofollow" class="footer-social" aria-label="SpinCresta на X"><img src="/icons/x-social-media-round-icon.svg" alt="X" width="18" height="18" loading="lazy" /><span>X</span></a></nav>
 
       </div>
     </footer>
-    <script type="module" src="/scripts/main.js?v=20261119-catalog-partners"></script>
+    <script type="module" src="/scripts/main.js?v=20261124-provider-cards"></script>
   </body>
 </html>

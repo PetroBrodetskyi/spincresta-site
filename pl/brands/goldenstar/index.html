@@ -55,7 +55,7 @@
     />
 
     <link rel="icon" type="image/png" href="/favicon.png" />
-    <link rel="stylesheet" href="/styles.css?v=20261120-sticky-pill" />
+    <link rel="stylesheet" href="/styles.css?v=20261124-provider-cards" />
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -283,15 +283,12 @@
     <section class="container">
       <div class="brand-payments">
         <h2 class="title">Metody płatności</h2>
-        <p class="brand-availability-intro">
-          Golden Star wyświetla szeroką listę sekcja płatnościów z kartami, bankowością internetową, przelewem bankowym, kuponami, portfelami elektronicznymi, sekcjiami lokalnymi, płatnościami za skórki i kryptowalutami. Dokładna dostępność sekcji płatności może się różnić w zależności od kraju, waluty, statusu weryfikacji i aktualnego widoku konta.
-        </p>
         <div class="payments-container" id="brand-payments"></div>
       </div>
     </section>
 
     <main class="content-review">
-      <section class="container">
+      <section class="container" data-review-section="bonuses">
         <h2 class="title">Bonusy Golden Star w skrócie</h2>
         <table>
           <thead>
@@ -326,7 +323,7 @@
         </table>
       </section>
 
-      <section class="container">
+      <section class="container" data-review-section="games" data-review-details>
         <h2 class="title">Lobby kasyna, kasyno live i sekcje gier</h2>
         <div class="features-grid premium-grid">
           <div class="feature-card glass-card">
@@ -348,7 +345,7 @@
         </div>
       </section>
 
-      <section class="container">
+      <section class="container" data-review-section="sports">
         <h2 class="title">Zakłady sportowe i zakłady na żywo</h2>
         <table>
           <thead>
@@ -383,8 +380,11 @@
         </table>
       </section>
 
-      <section class="container">
+      <section class="container" data-review-section="cashier">
         <h2 class="title">Płatności, waluty i terminy wypłat</h2>
+        <p class="section-intro">
+          Golden Star wyświetla szeroką listę sekcja płatnościów z kartami, bankowością internetową, przelewem bankowym, kuponami, portfelami elektronicznymi, sekcjiami lokalnymi, płatnościami za skórki i kryptowalutami. Dokładna dostępność sekcji płatności może się różnić w zależności od kraju, waluty, statusu weryfikacji i aktualnego widoku konta.
+        </p>
         <table>
           <thead>
             <tr>
@@ -445,7 +445,7 @@
         </div>
       </section>
 
-      <section class="container">
+      <section class="container" data-review-section="trust">
         <h2 class="title">Licencje, platforma i uwagi dotyczące bezpieczeństwa</h2>
         <table>
           <thead>
@@ -590,6 +590,7 @@
           <a href="/pl/privacy-policy/">Polityka prywatności</a>
           <a href="/pl/casinos-and-betting/">Kasyna i zakłady</a>
           <a href="/pl/payment-methods/">Metody płatności</a>
+          <a href="/pl/game-providers/"><svg class="site-icon site-icon--inline" width="24" height="24" aria-hidden="true" focusable="false"><use href="/icons/ui/review-method.svg?v=20261123-brand-providers#layers"></use></svg> Dostawcy gier</a>
           <a href="/pl/partners/">Partnerzy</a>
           <a href="/pl/about/">O nas</a>
           <a
@@ -613,6 +614,6 @@
       </div>
     </footer>
 
-    <script type="module" src="/scripts/main.js?v=20261119-catalog-partners"></script>
+    <script type="module" src="/scripts/main.js?v=20261124-provider-cards"></script>
   </body>
 </html>

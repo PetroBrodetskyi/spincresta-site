@@ -62,8 +62,7 @@ for (const locale of locales) {
     .replace(/(<meta (?:name|property)="(?:description|og:description|twitter:description)" content=")[^"]*("\s*\/?>)/g, (_, a, b) => a + esc(c.description) + b)
     .replace(/(<meta (?:name|property)="(?:og:title|twitter:title)" content=")[^"]*("\s*\/?>)/g, (_, a, b) => a + esc(c.title) + b)
     .replace(/<h1>[\s\S]*?<\/h1>/, `<h1>${esc(c.h1)}</h1>`)
-    .replace(/<p class="hero-subtitle">[\s\S]*?<\/p>/, `<p class="hero-subtitle">${esc(c.intro)}</p>`)
-    .replace('<div class="payments-container" id="brand-payments"></div>', `<div class="payments-container" id="brand-payments"></div><p>${esc(c.cashierIntro)}</p>`);
+    .replace(/<p class="hero-subtitle">[\s\S]*?<\/p>/, `<p class="hero-subtitle">${esc(c.intro)}</p>`);
   let feature = 0;
   html = html.replace(/<div class="feature-card glass-card"><div class="icon-placeholder">[\s\S]*?<\/div><strong>[\s\S]*?<\/strong><span>[\s\S]*?<\/span><\/div>/g, () => {
     const [heading, text] = c.features[feature++];

@@ -52,7 +52,7 @@
     />
     <meta name="twitter:image" content="https://res.cloudinary.com/drj61gmd2/image/upload/f_webp,q_auto/v1785086371/spincresta/brands/spinrise/main-page/spinrise-page_zlbtmh.webp" />
     <link rel="icon" type="image/png" href="/favicon.png" />
-    <link rel="stylesheet" href="/styles.css?v=20261120-sticky-pill" />
+    <link rel="stylesheet" href="/styles.css?v=20261124-provider-cards" />
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -283,15 +283,12 @@
     <section class="container">
       <div class="brand-payments">
         <h2 class="title">Spinrise Metody płatności</h2>
-        <p class="brand-availability-intro">
-          Spinrise obsługuje karty, portfele mobilne, metody bankowe i otwarte, metody regionalne, e-portfele, kupony i kryptowaluty. sekcja płatności konta określa, które metody, waluty, limity i metody wypłat są dostępne w każdym kraju.
-        </p>
         <div class="payments-container" id="brand-payments"></div>
       </div>
     </section>
 
     <main class="content-review">
-      <section class="container">
+      <section class="container" data-review-section="summary">
         <h2 class="title">Spinrise przegląd</h2>
         <table>
           <thead>
@@ -332,7 +329,7 @@
         </table>
       </section>
 
-      <section class="container">
+      <section class="container" data-review-section="bonuses">
         <h2 class="title">Ścieżki bonusowe powitalne</h2>
         <table>
           <thead>
@@ -371,7 +368,7 @@
         </p>
       </section>
 
-      <section class="container">
+      <section class="container" data-review-section="bonuses">
         <h2 class="title">Alternatywne bonusy na żywo i kryptowaluty</h2>
         <table>
           <thead>
@@ -402,7 +399,7 @@
         </table>
       </section>
 
-      <section class="container">
+      <section class="container" data-review-section="games">
         <h2 class="title">Gry kasynowe i głębokość lobby</h2>
         <table>
           <thead>
@@ -423,7 +420,7 @@
         </p>
       </section>
 
-      <section class="container">
+      <section class="container" data-review-section="games" data-review-details>
         <h2 class="title">Dostawcy i aktualne odkrycie gier</h2>
         <div class="features-grid premium-grid">
           <div class="feature-card glass-card">
@@ -445,7 +442,7 @@
         </div>
       </section>
 
-      <section class="container">
+      <section class="container" data-review-section="games">
         <h2 class="title">kasyno live</h2>
         <table>
           <thead>
@@ -465,7 +462,7 @@
         </p>
       </section>
 
-      <section class="container">
+      <section class="container" data-review-section="rewards">
         <h2 class="title">Program lojalnościowy</h2>
         <table>
           <thead>
@@ -501,7 +498,7 @@
         </table>
       </section>
 
-      <section class="container">
+      <section class="container" data-review-section="rewards">
         <h2 class="title">Program VIP</h2>
         <table>
           <thead>
@@ -520,7 +517,7 @@
         </p>
       </section>
 
-      <section class="container">
+      <section class="container" data-review-section="bonuses" data-review-details>
         <h2 class="title">Cotygodniowe promocje i turnieje</h2>
         <div class="features-grid premium-grid">
           <div class="feature-card glass-card">
@@ -542,7 +539,7 @@
         </div>
       </section>
 
-      <section class="container">
+      <section class="container" data-review-section="cashier">
         <h2 class="title">Płatności, wypłaty i KYC</h2>
         <table>
           <thead>
@@ -583,7 +580,7 @@
         </table>
       </section>
 
-      <section class="container">
+      <section class="container" data-review-section="trust" data-review-details>
         <h2 class="title">Licencja, skargi i wsparcie</h2>
         <div class="features-grid premium-grid">
           <div class="feature-card glass-card">
@@ -605,7 +602,7 @@
         </div>
       </section>
 
-      <section class="container">
+      <section class="container" data-review-section="trust" data-review-details>
         <h2 class="title">Sterowanie bezpieczniejszą grą</h2>
         <div class="features-grid premium-grid">
           <div class="feature-card glass-card">
@@ -716,6 +713,7 @@
         <p>© 2026 SpinCresta.com. Wszelkie prawa zastrzeżone.</p>
         <p>18+ | Hazard może uzależniać. Proszę grać odpowiedzialnie. Przed rozpoczęciem gry sprawdź lokalne przepisy.</p>
         <nav class="footer-nav">
+          <a href="/pl/game-providers/"><svg class="site-icon site-icon--inline" width="24" height="24" aria-hidden="true" focusable="false"><use href="/icons/ui/review-method.svg?v=20261123-brand-providers#layers"></use></svg> Dostawcy gier</a>
           <a href="/pl/responsible-gambling/">Odpowiedzialna gra</a><a href="/pl/privacy-policy/">Polityka prywatności</a>
           <a href="/pl/casinos-and-betting/">Kasyna i zakłady</a><a href="/pl/payment-methods/">Metody płatności</a>
           <a href="/pl/partners/">Partnerzy</a><a href="/pl/about/">O nas</a>
@@ -723,6 +721,6 @@
 
       </div>
     </footer>
-    <script type="module" src="/scripts/main.js?v=20261119-catalog-partners"></script>
+    <script type="module" src="/scripts/main.js?v=20261124-provider-cards"></script>
   </body>
 </html>

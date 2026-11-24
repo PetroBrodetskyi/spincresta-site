@@ -55,7 +55,7 @@
     />
 
     <link rel="icon" type="image/png" href="/favicon.png" />
-    <link rel="stylesheet" href="/styles.css?v=20261120-sticky-pill" />
+    <link rel="stylesheet" href="/styles.css?v=20261124-provider-cards" />
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -283,15 +283,12 @@
     <section class="container">
       <div class="brand-payments">
         <h2 class="title">Maksutavat</h2>
-        <p class="brand-availability-intro">
-          Golden Crown luettelee kortti-, e-lompakko-, kuponki-, paikallispankki-, pankkisiirto- ja kryptomaksutavat. Tarkat kassavaihtoehdot voivat riippua maasta, valuutasta, tilin vahvistuksesta ja talletukseen käytetystä maksutavasta.
-        </p>
         <div class="payments-container" id="brand-payments"></div>
       </div>
     </section>
 
     <main class="content-review">
-      <section class="container">
+      <section class="container" data-review-section="bonuses">
         <h2 class="title">Golden Crown bonustarjonta</h2>
         <table>
           <thead>
@@ -341,7 +338,7 @@
         </table>
       </section>
 
-      <section class="container">
+      <section class="container" data-review-section="games" data-review-details>
         <h2 class="title">Kasinon aula, livekasino ja pelireitit</h2>
         <div class="features-grid premium-grid">
           <div class="feature-card glass-card">
@@ -363,7 +360,7 @@
         </div>
       </section>
 
-      <section class="container">
+      <section class="container" data-review-section="cashier">
         <h2 class="title">Maksut, valuutat ja kotiutusrajat</h2>
         <table>
           <thead>
@@ -430,7 +427,7 @@
         </div>
       </section>
 
-      <section class="container">
+      <section class="container" data-review-section="trust">
         <h2 class="title">Alustan, käytäntöjen ja tuen tarkistukset</h2>
         <table>
           <thead>
@@ -575,6 +572,7 @@
           <a href="/fi/privacy-policy/">Tietosuojakäytäntö</a>
           <a href="/fi/casinos-and-betting/">Kasinot ja vedonlyönti</a>
           <a href="/fi/payment-methods/">Maksutavat</a>
+          <a href="/fi/game-providers/"><svg class="site-icon site-icon--inline" width="24" height="24" aria-hidden="true" focusable="false"><use href="/icons/ui/review-method.svg?v=20261123-brand-providers#layers"></use></svg> Pelintarjoajat</a>
           <a href="/fi/partners/">Yhteistyökumppanit</a>
           <a href="/fi/about/">Tietoa meistä</a>
           <a
@@ -598,6 +596,6 @@
       </div>
     </footer>
 
-    <script type="module" src="/scripts/main.js?v=20261119-catalog-partners"></script>
+    <script type="module" src="/scripts/main.js?v=20261124-provider-cards"></script>
   </body>
 </html>

@@ -46,7 +46,7 @@
     <meta name="twitter:description" content="GETX: bónus, jogos, pagamentos, levantamentos, verificação KYC, acesso móvel e disponibilidade. Confirme as condições atuais antes de jogar." />
     <meta name="twitter:image" content="https://res.cloudinary.com/drj61gmd2/image/upload/f_webp,q_auto/v1785067624/spincresta/brands/getx/main-page/getx-page_n6hxr0.webp" />
     <link rel="icon" type="image/png" href="/favicon.png" />
-    <link rel="stylesheet" href="/styles.css?v=20261120-sticky-pill" />
+    <link rel="stylesheet" href="/styles.css?v=20261124-provider-cards" />
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -215,10 +215,10 @@
     </section>
 
     <section class="container"><div class="brand-countries"><h2 class="title">Países disponíveis</h2><div class="countries-container" id="brand-countries"></div></div></section>
-    <section class="container"><div class="brand-payments"><h2 class="title">Métodos de pagamento GETX</h2><p class="brand-availability-intro">GETX oferece suporte a moedas de contas regionais, incluindo UZS, KGS, AZN e RUB. Cartões e opções bancárias podem estar disponíveis, enquanto o caixa conectado determina os métodos exatos de depósito, métodos de levantamento, taxas e limites para cada país.</p><div class="payments-container" id="brand-payments"></div></div></section>
+    <section class="container"><div class="brand-payments"><h2 class="title">Métodos de pagamento GETX</h2><div class="payments-container" id="brand-payments"></div></div></section>
 
     <main class="content-review">
-      <section class="container">
+      <section class="container" data-review-section="summary">
         <h2 class="title">Resumo GETX</h2>
         <table>
           <thead><tr><th>Área</th><th>Detalhes principais</th><th>Verificação do jogador</th></tr></thead>
@@ -233,7 +233,7 @@
         </table>
       </section>
 
-      <section class="container">
+      <section class="container" data-review-section="bonuses">
         <h2 class="title">Bónus de boas-vindas: 350% + 250 jogadas grátis</h2>
         <p>GETX anuncia um bónus combinado de 350% mais 250 jogadas grátis nos primeiros depósitos de um novo jogador. O título grande é útil apenas quando os estágios individuais se ajustam ao tamanho normal do depósito e às preferências de jogo do jogador. GETX pode variar as campanhas por país, moeda, conta e data, portanto a oferta exibida após o registo é a versão que importa.</p>
         <table>
@@ -248,7 +248,7 @@
         </table>
       </section>
 
-      <section class="container">
+      <section class="container" data-review-section="games">
         <h2 class="title">Lobby do casino e seleção atual de jogos</h2>
         <table>
           <thead><tr><th>Área do lobby</th><th>O que pode encontrar</th><th>Valor do jogador</th></tr></thead>
@@ -261,7 +261,7 @@
         </table>
       </section>
 
-      <section class="container">
+      <section class="container" data-review-section="games" data-review-details>
         <h2 class="title">Jogos GETX e formatos rápidos</h2>
         <div class="features-grid premium-grid">
           <div class="feature-card glass-card"><strong>Crash e Getmax</strong><span>Os jogos com multiplicadores rápidos colocam o tempo no centro de cada rodada. Eles são simples de entrar, mas podem gerar uma frequência de apostas muito alta.</span></div>
@@ -271,12 +271,12 @@
         </div>
       </section>
 
-      <section class="container">
+      <section class="container" data-review-section="games" data-review-details>
         <h2 class="title">Casino ao vivo</h2>
         <p>GETX separa os jogos ao vivo do lobby principal dos slots e oferece opções dedicadas para roleta ao vivo, blackjack ao vivo, bacará, póquer, game shows e outros formatos de dealer. A seleção é ampla o suficiente para mesas clássicas e shows ao vivo com entretenimento. Antes de entrar, verifique a moeda da mesa, apostas mínimas e máximas, apostas paralelas, idioma, velocidade e se a mesa contribui para um bónus ativo.</p>
       </section>
 
-      <section class="container">
+      <section class="container" data-review-section="sports">
         <h2 class="title">Apostas desportivas, apostas ao vivo e Copa do Mundo de 2026</h2>
         <table>
           <thead><tr><th>Área de Apostas</th><th>Cobertura</th><th>O que verificar</th></tr></thead>
@@ -289,7 +289,7 @@
         </table>
       </section>
 
-      <section class="container">
+      <section class="container" data-review-section="sports">
         <h2 class="title">Apostas desportivas</h2>
         <div class="features-grid premium-grid">
           <div class="feature-card glass-card"><strong>Contra-ataque</strong><span>Os mercados dedicados de Counter-Strike ficam ao lado da cobertura geral de desportos eletrónicos e apostas em eventos ao vivo.</span></div>
@@ -299,7 +299,7 @@
         </div>
       </section>
 
-      <section class="container">
+      <section class="container" data-review-section="rewards">
         <h2 class="title">VIP, Premium, Cashback e Torneios</h2>
         <table>
           <thead><tr><th>Recompensa</th><th>Estrutura Publicada</th><th>Nota do Jogador</th></tr></thead>
@@ -312,8 +312,9 @@
         </table>
       </section>
 
-      <section class="container">
+      <section class="container" data-review-section="cashier">
         <h2 class="title">Pagamentos, levantamentos e KYC</h2>
+        <p class="section-intro">GETX oferece suporte a moedas de contas regionais, incluindo UZS, KGS, AZN e RUB. Cartões e opções bancárias podem estar disponíveis, enquanto o caixa conectado determina os métodos exatos de depósito, métodos de levantamento, taxas e limites para cada país.</p>
         <table>
           <thead><tr><th>Área</th><th>Regra GETX</th><th>Conselhos práticos</th></tr></thead>
           <tbody>
@@ -326,7 +327,7 @@
         </table>
       </section>
 
-      <section class="container">
+      <section class="container" data-review-section="trust" data-review-details>
         <h2 class="title">Licença Anjouan, segurança e avaliação de riscos</h2>
         <div class="features-grid premium-grid">
           <div class="feature-card glass-card"><strong>Licença Anjouana</strong><span>GETX opera sob uma licença Anjouan e publica documentos jurídicos, KYC, AML, privacidade e jogo responsável separados.</span></div>
@@ -336,7 +337,7 @@
         </div>
       </section>
 
-      <section class="container">
+      <section class="container" data-review-section="trust">
         <h2 class="title">Jogo responsável e Controlos de Conta</h2>
         <table>
           <thead><tr><th>Controlar</th><th>Detalhes publicados</th><th>Melhores Práticas</th></tr></thead>
@@ -382,7 +383,8 @@
 </main>
 
     <section class="all-countries"><div class="container"><h2 class="title">Casinos Online por País</h2><div class="countries-cloud"></div></div></section>
-    <footer class="footer"><div class="container"><p>© 2026 SpinCresta.com. Todos os direitos reservados.</p><p>18+ | Os jogos de azar podem causar dependência. Jogue de forma responsável. Verifique as leis locais antes de jogar.</p><nav class="footer-nav"><a href="/pt/responsible-gambling/">Jogo responsável</a><a href="/pt/privacy-policy/">Política de Privacidade</a><a href="/pt/casinos-and-betting/">Casinos e Apostas</a><a href="/pt/payment-methods/">Métodos de pagamento</a><a href="/pt/partners/">Parceiros</a><a href="/pt/about/">Sobre</a><a href="https://t.me/spincresta" target="_blank" rel="noopener noreferrer nofollow" class="footer-social" aria-label="Canal SpinCresta Telegram"><img src="/icons/telegram-white-icon.svg" alt="Telegram" width="18" height="18" loading="lazy" /><span>Telegram</span></a><a href="https://x.com/SpinCresta" target="_blank" rel="noopener noreferrer nofollow" class="footer-social" aria-label="SpinCresta em X"><img src="/icons/x-social-media-round-icon.svg" alt="X" width="18" height="18" loading="lazy" /><span>X</span></a></nav></div></footer>
-    <script type="module" src="/scripts/main.js?v=20261119-catalog-partners"></script>
+    <footer class="footer"><div class="container"><p>© 2026 SpinCresta.com. Todos os direitos reservados.</p><p>18+ | Os jogos de azar podem causar dependência. Jogue de forma responsável. Verifique as leis locais antes de jogar.</p><nav class="footer-nav">
+          <a href="/pt/game-providers/"><svg class="site-icon site-icon--inline" width="24" height="24" aria-hidden="true" focusable="false"><use href="/icons/ui/review-method.svg?v=20261123-brand-providers#layers"></use></svg> Fornecedores de jogos</a><a href="/pt/responsible-gambling/">Jogo responsável</a><a href="/pt/privacy-policy/">Política de Privacidade</a><a href="/pt/casinos-and-betting/">Casinos e Apostas</a><a href="/pt/payment-methods/">Métodos de pagamento</a><a href="/pt/partners/">Parceiros</a><a href="/pt/about/">Sobre</a><a href="https://t.me/spincresta" target="_blank" rel="noopener noreferrer nofollow" class="footer-social" aria-label="Canal SpinCresta Telegram"><img src="/icons/telegram-white-icon.svg" alt="Telegram" width="18" height="18" loading="lazy" /><span>Telegram</span></a><a href="https://x.com/SpinCresta" target="_blank" rel="noopener noreferrer nofollow" class="footer-social" aria-label="SpinCresta em X"><img src="/icons/x-social-media-round-icon.svg" alt="X" width="18" height="18" loading="lazy" /><span>X</span></a></nav></div></footer>
+    <script type="module" src="/scripts/main.js?v=20261124-provider-cards"></script>
   </body>
 </html>

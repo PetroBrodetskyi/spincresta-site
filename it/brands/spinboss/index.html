@@ -52,7 +52,7 @@
     />
     <meta name="twitter:image" content="https://res.cloudinary.com/drj61gmd2/image/upload/f_webp,q_auto/v1785085881/spincresta/brands/spinboss/main-page/spinboss-page_gasp2x.webp" />
     <link rel="icon" type="image/png" href="/favicon.png" />
-    <link rel="stylesheet" href="/styles.css?v=20261120-sticky-pill" />
+    <link rel="stylesheet" href="/styles.css?v=20261124-provider-cards" />
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -221,10 +221,10 @@
     </section>
 
     <section class="container"><div class="brand-countries"><h2 class="title">Paesi disponibili</h2><div class="countries-container" id="brand-countries"></div></div></section>
-    <section class="container"><div class="brand-payments"><h2 class="title">SpinBoss Metodi di pagamento</h2><p class="brand-availability-intro">SpinBoss mostra il supporto Visa, Mastercard e Interac e accetta diverse criptovalute per le sue offerte crittografiche. l'area pagamenti del conto determina i metodi locali di deposito e prelievo, le valute, i limiti e i sezioni di elaborazione.</p><div class="payments-container" id="brand-payments"></div></div></section>
+    <section class="container"><div class="brand-payments"><h2 class="title">SpinBoss Metodi di pagamento</h2><div class="payments-container" id="brand-payments"></div></div></section>
 
     <main class="content-review">
-      <section class="container">
+      <section class="container" data-review-section="summary">
         <h2 class="title">SpinBoss in sintesi</h2>
         <table>
           <thead><tr><th>Zona</th><th>Dettaglio verificato</th><th>Cosa controllare</th></tr></thead>
@@ -239,7 +239,7 @@
         </table>
       </section>
 
-      <section class="container">
+      <section class="container" data-review-section="bonuses">
         <h2 class="title">Pacchetto di benvenuto al casinò</h2>
         <table>
           <thead><tr><th>Depositare</th><th>Offerta pubblicata</th><th>Condizione chiave</th></tr></thead>
@@ -254,7 +254,7 @@
         <p>Le quattro fasi ammontano a € 15.000 e 400 giri gratuiti pubblicizzati. Poiché il requisito 20x si applica al deposito più al bonus, un deposito di 100 € abbinato a 100 € crea 4.000 € di scommessa richiesta. Anche le vincite derivate dai bonus sono limitate in base alle regole di rilascio massimo pubblicate.</p>
       </section>
 
-      <section class="container">
+      <section class="container" data-review-section="bonuses">
         <h2 class="title">Offerte di benvenuto su sport e criptovalute</h2>
         <table>
           <thead><tr><th>Offerta</th><th>Titolo</th><th>Dettaglio importante</th></tr></thead>
@@ -268,7 +268,7 @@
         <p>Scegli il sezione di benvenuto previsto prima di depositare. SpinBoss afferma che scommettere prima dell'attivazione, richiedere un prelievo o utilizzare un metodo di pagamento non qualificante può rimuovere l'idoneità al bonus.</p>
       </section>
 
-      <section class="container">
+      <section class="container" data-review-section="games">
         <h2 class="title">Giochi e fornitori di casinò</h2>
         <table>
           <thead><tr><th>Zona</th><th>Copertura ed esempi</th><th>Perché è importante</th></tr></thead>
@@ -281,7 +281,7 @@
         </table>
       </section>
 
-      <section class="container">
+      <section class="container" data-review-section="games" data-review-details>
         <h2 class="title">Jackpot e casinò dal vivo</h2>
         <div class="features-grid premium-grid">
           <div class="feature-card glass-card"><strong>Scoperta del jackpot</strong><span>I sezioni Hot, Lucky, New, Daily, Jackpot Play e tutti i jackpot rendono i giochi con jackpot progressivi e fissi facili da confrontare.</span></div>
@@ -291,7 +291,7 @@
         </div>
       </section>
 
-      <section class="container">
+      <section class="container" data-review-section="sports">
         <h2 class="title">Scommesse sportive, scommesse live e corse di cavalli</h2>
         <table>
           <thead><tr><th>Zona</th><th>Copertura</th><th>Nota del giocatore</th></tr></thead>
@@ -304,7 +304,7 @@
         </table>
       </section>
 
-      <section class="container">
+      <section class="container" data-review-section="rewards">
         <h2 class="title">Premi, tornei e cashback</h2>
         <table>
           <thead><tr><th>Caratteristica</th><th>Struttura attuale</th><th>Regola importante</th></tr></thead>
@@ -317,7 +317,7 @@
         </table>
       </section>
 
-      <section class="container">
+      <section class="container" data-review-section="rewards">
         <h2 class="title">Club VIP: 25 livelli VIP</h2>
         <table>
           <thead><tr><th>Livello</th><th>Livelli e rimborso</th><th>Limite di prelievo visualizzato</th></tr></thead>
@@ -332,7 +332,7 @@
         <p>Viene guadagnato un punto VIP per ogni € 2 scommessi nei prodotti del casinò, delle scommesse sportive, peer-to-peer o della lotteria e per ogni € 4 scommessi nei casinò dal vivo. I termini legano anche i limiti di prelievo all’attività recente, quindi lo status e i benefici non dovrebbero essere trattati come permanenti.</p>
       </section>
 
-      <section class="container">
+      <section class="container" data-review-section="cashier">
         <h2 class="title">Pagamenti, prelievi e KYC</h2>
         <table>
           <thead><tr><th>Zona</th><th>Dettaglio verificato</th><th>Consigli pratici</th></tr></thead>
@@ -346,7 +346,7 @@
         </table>
       </section>
 
-      <section class="container">
+      <section class="container" data-review-section="trust" data-review-details>
         <h2 class="title">Licenza, reclami e gioco responsabile</h2>
         <div class="features-grid premium-grid">
           <div class="feature-card glass-card"><strong>Segnale Anjouan</strong><span>L'attuale build del sito è configurata per caricare un sigillo Anjouan Gaming con UUID 68e7afdb-cdf6-4d36-8fe1-b0a813bb9105. Verificare il sigillo attivo prima del deposito.</span></div>
@@ -389,7 +389,8 @@
 </main>
 
     <section class="all-countries"><div class="container"><h2 class="title">Casinò online per paese</h2><div class="countries-cloud"></div></div></section>
-    <footer class="footer"><div class="container"><p>Copyright 2026SpinCresta.com. Tutti i diritti riservati.</p><p>18+ | Il gioco d'azzardo può creare dipendenza. Gioca responsabilmente. Controlla le leggi locali prima di giocare.</p><nav class="footer-nav"><a href="/it/responsible-gambling/">Gioco responsabile</a><a href="/it/privacy-policy/">Informativa sulla privacy</a><a href="/it/casinos-and-betting/">Casinò e scommesse</a><a href="/it/payment-methods/">Metodi di pagamento</a><a href="/it/partners/">Partner</a><a href="/it/about/">Chi siamo</a><a href="https://t.me/spincresta" target="_blank" rel="noopener noreferrer nofollow" class="footer-social" aria-label="SpinCresta Telegram Canale"><img src="/icons/telegram-white-icon.svg" alt="Telegram" width="18" height="18" loading="lazy" /><span>Telegram</span></a><a href="https://x.com/SpinCresta" target="_blank" rel="noopener noreferrer nofollow" class="footer-social" aria-label="SpinCresta su X"><img src="/icons/x-social-media-round-icon.svg" alt="X" width="18" height="18" loading="lazy" /><span>X</span></a></nav></div></footer>
-    <script type="module" src="/scripts/main.js?v=20261119-catalog-partners"></script>
+    <footer class="footer"><div class="container"><p>Copyright 2026SpinCresta.com. Tutti i diritti riservati.</p><p>18+ | Il gioco d'azzardo può creare dipendenza. Gioca responsabilmente. Controlla le leggi locali prima di giocare.</p><nav class="footer-nav">
+          <a href="/it/game-providers/"><svg class="site-icon site-icon--inline" width="24" height="24" aria-hidden="true" focusable="false"><use href="/icons/ui/review-method.svg?v=20261123-brand-providers#layers"></use></svg> Fornitori di giochi</a><a href="/it/responsible-gambling/">Gioco responsabile</a><a href="/it/privacy-policy/">Informativa sulla privacy</a><a href="/it/casinos-and-betting/">Casinò e scommesse</a><a href="/it/payment-methods/">Metodi di pagamento</a><a href="/it/partners/">Partner</a><a href="/it/about/">Chi siamo</a><a href="https://t.me/spincresta" target="_blank" rel="noopener noreferrer nofollow" class="footer-social" aria-label="SpinCresta Telegram Canale"><img src="/icons/telegram-white-icon.svg" alt="Telegram" width="18" height="18" loading="lazy" /><span>Telegram</span></a><a href="https://x.com/SpinCresta" target="_blank" rel="noopener noreferrer nofollow" class="footer-social" aria-label="SpinCresta su X"><img src="/icons/x-social-media-round-icon.svg" alt="X" width="18" height="18" loading="lazy" /><span>X</span></a></nav></div></footer>
+    <script type="module" src="/scripts/main.js?v=20261124-provider-cards"></script>
   </body>
 </html>

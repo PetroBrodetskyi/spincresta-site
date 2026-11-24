@@ -52,7 +52,7 @@
     />
     <meta name="twitter:image" content="https://res.cloudinary.com/drj61gmd2/image/upload/v1784899498/spincresta/brands/aureon/main-page/aureon-page_pfqzsx.webp" />
     <link rel="icon" type="image/png" href="/favicon.png" />
-    <link rel="stylesheet" href="/styles.css?v=20261120-sticky-pill" />
+    <link rel="stylesheet" href="/styles.css?v=20261124-provider-cards" />
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -221,10 +221,10 @@
     </section>
 
     <section class="container"><div class="brand-countries"><h2 class="title">Saatavilla olevat maat</h2><div class="countries-container" id="brand-countries"></div></div></section>
-    <section class="container"><div class="brand-payments"><h2 class="title">Maksutavat</h2><p class="brand-availability-intro">Aureon tukee Visa, Mastercard, pankkisiirto, Apple Pay, Google Pay, CardPay, Skrill, Neteller ja Neosurf. Mastercard ID Check lisää korttiturvallisuuden varmennuksen, kun taas livekassa määrittää, mitkä menetelmät tukevat talletuksia ja nostoja kussakin maassa.</p><div class="payments-container" id="brand-payments"></div></div></section>
+    <section class="container"><div class="brand-payments"><h2 class="title">Maksutavat</h2><div class="payments-container" id="brand-payments"></div></div></section>
 
     <main class="content-review">
-      <section class="container">
+      <section class="container" data-review-section="summary">
         <h2 class="title">Palvelun yleiskuva</h2>
         <table>
           <thead><tr><th>Alue</th><th>Tärkeimmät tiedot</th><th>Pelaajan tarkistus</th></tr></thead>
@@ -239,7 +239,7 @@
         </table>
       </section>
 
-      <section class="container">
+      <section class="container" data-review-section="bonuses">
         <h2 class="title">Tervetuliaisbonukset ja tarjoukset</h2>
         <table>
           <thead><tr><th>Palkintoalue</th><th>Julkaistu yksityiskohta</th><th>Mitä tarkistaa</th></tr></thead>
@@ -253,7 +253,7 @@
         </table>
       </section>
 
-      <section class="container">
+      <section class="container" data-review-section="games">
         <h2 class="title">Kasinopelit ja palveluntarjoajat</h2>
         <table>
           <thead><tr><th>Alue</th><th>Kattavuus</th><th>Miksi sillä on merkitystä</th></tr></thead>
@@ -267,7 +267,7 @@
         </table>
       </section>
 
-      <section class="container">
+      <section class="container" data-review-section="games" data-review-details>
         <h2 class="title">Aureon Live-kasino</h2>
         <div class="features-grid premium-grid">
           <div class="feature-card glass-card"><strong>Klassiset pöydät</strong><span>Omistautuneet blackjack-, baccarat- ja rulettireitit tekevät live-jakajien tärkeimmistä peleistä helposti saavutettavia.</span></div>
@@ -277,7 +277,7 @@
         </div>
       </section>
 
-      <section class="container">
+      <section class="container" data-review-section="cashier">
         <h2 class="title">Maksut, nostot ja KYC</h2>
         <table>
           <thead><tr><th>Alue</th><th>Julkaistu yksityiskohta</th><th>Käytännön neuvoja</th></tr></thead>
@@ -302,7 +302,7 @@
         </div>
       </section>
 
-      <section class="container">
+      <section class="container" data-review-section="trust" data-review-details>
         <h2 class="title">Ehdot, yksityisyys ja pelaajien turvallisuus</h2>
         <div class="features-grid premium-grid">
           <div class="feature-card glass-card"><strong>Omat käytännöt</strong><span>Aureon julkaisee erilliset käyttöehdot-, tietosuoja-, KYC-, maksu-, eväste- ja bonuskäytäntösivut.</span></div>
@@ -345,7 +345,8 @@
 </main>
 
     <section class="all-countries"><div class="container"><h2 class="title">Nettikasinot maittain</h2><div class="countries-cloud"></div></div></section>
-    <footer class="footer"><div class="container"><p>Tekijänoikeus 2026 SpinCresta.com. Kaikki oikeudet pidätetään.</p><p>18+ | Uhkapeli voi aiheuttaa riippuvuutta. Ole hyvä ja pelaa vastuullisesti. Tarkista paikalliset lait ennen pelaamista.</p><nav class="footer-nav"><a href="/fi/responsible-gambling/">Vastuullinen pelaaminen</a><a href="/fi/privacy-policy/">Tietosuojakäytäntö</a><a href="/fi/casinos-and-betting/">Kasinot ja vedonlyönti</a><a href="/fi/payment-methods/">Maksutavat</a><a href="/fi/partners/">Yhteistyökumppanit</a><a href="/fi/about/">Tietoa meistä</a><a href="https://t.me/spincresta" target="_blank" rel="noopener noreferrer nofollow" class="footer-social" aria-label="SpinCresta Telegram Kanava"><img src="/icons/telegram-white-icon.svg" alt="Telegram" width="18" height="18" loading="lazy" /><span>Telegram</span></a><a href="https://x.com/SpinCresta" target="_blank" rel="noopener noreferrer nofollow" class="footer-social" aria-label="SpinCresta X:ssä"><img src="/icons/x-social-media-round-icon.svg" alt="X" width="18" height="18" loading="lazy" /><span>X</span></a></nav></div></footer>
-    <script type="module" src="/scripts/main.js?v=20261119-catalog-partners"></script>
+    <footer class="footer"><div class="container"><p>Tekijänoikeus 2026 SpinCresta.com. Kaikki oikeudet pidätetään.</p><p>18+ | Uhkapeli voi aiheuttaa riippuvuutta. Ole hyvä ja pelaa vastuullisesti. Tarkista paikalliset lait ennen pelaamista.</p><nav class="footer-nav">
+          <a href="/fi/game-providers/"><svg class="site-icon site-icon--inline" width="24" height="24" aria-hidden="true" focusable="false"><use href="/icons/ui/review-method.svg?v=20261123-brand-providers#layers"></use></svg> Pelintarjoajat</a><a href="/fi/responsible-gambling/">Vastuullinen pelaaminen</a><a href="/fi/privacy-policy/">Tietosuojakäytäntö</a><a href="/fi/casinos-and-betting/">Kasinot ja vedonlyönti</a><a href="/fi/payment-methods/">Maksutavat</a><a href="/fi/partners/">Yhteistyökumppanit</a><a href="/fi/about/">Tietoa meistä</a><a href="https://t.me/spincresta" target="_blank" rel="noopener noreferrer nofollow" class="footer-social" aria-label="SpinCresta Telegram Kanava"><img src="/icons/telegram-white-icon.svg" alt="Telegram" width="18" height="18" loading="lazy" /><span>Telegram</span></a><a href="https://x.com/SpinCresta" target="_blank" rel="noopener noreferrer nofollow" class="footer-social" aria-label="SpinCresta X:ssä"><img src="/icons/x-social-media-round-icon.svg" alt="X" width="18" height="18" loading="lazy" /><span>X</span></a></nav></div></footer>
+    <script type="module" src="/scripts/main.js?v=20261124-provider-cards"></script>
   </body>
 </html>

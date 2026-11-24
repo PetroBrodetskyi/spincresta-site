@@ -52,7 +52,7 @@
     />
     <meta name="twitter:image" content="https://res.cloudinary.com/drj61gmd2/image/upload/f_webp,q_auto/v1785074871/spincresta/brands/nvcasino/main-page/nvcasino-page_isjtmg.webp" />
     <link rel="icon" type="image/png" href="/favicon.png" />
-    <link rel="stylesheet" href="/styles.css?v=20261120-sticky-pill" />
+    <link rel="stylesheet" href="/styles.css?v=20261124-provider-cards" />
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -259,13 +259,12 @@
     <section class="container">
       <div class="brand-payments">
         <h2 class="title">Способи оплати</h2>
-        <p class="brand-availability-intro">На сайті вказані Visa, Mastercard, Neteller, MiFinity, Skrill, Bitcoin, Tether, Litecoin, Ethereum і Dogecoin. каса після входу є остаточним джерелом доступних методів депозиту та виплати, мінімумів, лімітів, валют, комісій і часу обробки на вашому ринку.</p>
         <div class="payments-container" id="brand-payments"></div>
       </div>
     </section>
 
     <main class="content-review">
-      <section class="container">
+      <section class="container" data-review-section="summary">
         <h2 class="title">Короткий огляд</h2>
         <table>
           <thead><tr><th>Категорія</th><th>Що представляє сайт</th><th>Перевірка гравця</th></tr></thead>
@@ -280,7 +279,7 @@
         </table>
       </section>
 
-      <section class="container">
+      <section class="container" data-review-section="bonuses">
         <h2 class="title">Бонуси та акції</h2>
         <table>
           <thead><tr><th>Просування по службі</th><th>Поточний назва</th><th>Що перевірити</th></tr></thead>
@@ -297,7 +296,7 @@
         </table>
       </section>
 
-      <section class="container">
+      <section class="container" data-review-section="games" data-review-details>
         <h2 class="title">Ігри, слоти та провайдери</h2>
         <div class="features-grid premium-grid">
           <div class="feature-card glass-card"><strong>Онлайн слоти</strong><span>Головне лобі включає слоти, нові ігри, популярні ігри, Megaways, бонусні ігри, назви з функціями покупки, випадання та виграші та колекції джекпотів.</span></div>
@@ -307,7 +306,7 @@
         </div>
       </section>
 
-      <section class="container">
+      <section class="container" data-review-section="games">
         <h2 class="title">Ставки на спорт, live-ставки та кіберспорт</h2>
         <table>
           <thead><tr><th>Зона ставок</th><th>Розділи видно на сайті</th><th>Примітка гравця</th></tr></thead>
@@ -320,7 +319,7 @@
         </table>
       </section>
 
-      <section class="container">
+      <section class="container" data-review-section="rewards">
         <h2 class="title">VIP-клуб, турніри та магазин</h2>
         <table>
           <thead><tr><th>Шар винагороди</th><th>Опублікована структура</th><th>Що важливо перш за все</th></tr></thead>
@@ -334,7 +333,7 @@
         </table>
       </section>
 
-      <section class="container">
+      <section class="container" data-review-section="games" data-review-details>
         <h2 class="title">Мобільний застосунок і версія сайту</h2>
         <div class="features-grid premium-grid">
           <div class="feature-card glass-card"><strong>Мобільний Інтернет</strong><span>Версія для браузера адаптує казино, акції, ігри та касу для екранів телефонів і планшетів без необхідності завантаження програми.</span></div>
@@ -344,7 +343,7 @@
         </div>
       </section>
 
-      <section class="container">
+      <section class="container" data-review-section="cashier" data-review-details>
         <h2 class="title">Платежі, виплати та KYC</h2>
         <div class="features-grid premium-grid">
           <div class="feature-card glass-card"><strong>Спочатку перевірте касу</strong><span>Перевірте доступні картки, електронні гаманці, криптовалютні платежі, валюти, ліміти та комісії в касі після входу, перш ніж робити депозит.</span></div>
@@ -410,6 +409,7 @@
           <a href="/uk/privacy-policy/">Політика конфіденційності</a>
           <a href="/uk/casinos-and-betting/">Казино та ставки</a>
           <a href="/uk/payment-methods/">Способи оплати</a>
+          <a href="/uk/game-providers/"><svg class="site-icon site-icon--inline" width="24" height="24" aria-hidden="true" focusable="false"><use href="/icons/ui/review-method.svg?v=20261123-brand-providers#layers"></use></svg> Провайдери ігор</a>
           <a href="/uk/partners/">Партнери</a>
           <a href="/uk/about/">Про нас</a>
           <a href="https://t.me/spincresta" target="_blank" rel="noopener noreferrer nofollow" class="footer-social" aria-label="Канал SpinCresta Telegram"><img src="/icons/telegram-white-icon.svg" alt="Telegram" width="18" height="18" loading="lazy" /><span>Telegram</span></a>
@@ -419,6 +419,6 @@
       </div>
     </footer>
 
-    <script type="module" src="/scripts/main.js?v=20261119-catalog-partners"></script>
+    <script type="module" src="/scripts/main.js?v=20261124-provider-cards"></script>
   </body>
 </html>

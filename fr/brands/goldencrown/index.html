@@ -55,7 +55,7 @@
     />
 
     <link rel="icon" type="image/png" href="/favicon.png" />
-    <link rel="stylesheet" href="/styles.css?v=20261120-sticky-pill" />
+    <link rel="stylesheet" href="/styles.css?v=20261124-provider-cards" />
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -283,15 +283,12 @@
     <section class="container">
       <div class="brand-payments">
         <h2 class="title">Méthodes de paiement</h2>
-        <p class="brand-availability-intro">
-          Golden Crown répertorie les sections par carte, portefeuille électronique, bon, banque locale, virement bancaire et crypto. Les options exactes du paiements peuvent dépendre du pays, de la devise, de la vérification du compte et du mode de paiement utilisé pour le dépôt.
-        </p>
         <div class="payments-container" id="brand-payments"></div>
       </div>
     </section>
 
     <main class="content-review">
-      <section class="container">
+      <section class="container" data-review-section="bonuses">
         <h2 class="title">Golden Crown Instantané bonus</h2>
         <table>
           <thead>
@@ -341,7 +338,7 @@
         </table>
       </section>
 
-      <section class="container">
+      <section class="container" data-review-section="games" data-review-details>
         <h2 class="title">Lobby du casino, casino en direct et sections de jeux</h2>
         <div class="features-grid premium-grid">
           <div class="feature-card glass-card">
@@ -363,7 +360,7 @@
         </div>
       </section>
 
-      <section class="container">
+      <section class="container" data-review-section="cashier">
         <h2 class="title">Paiements, devises et limites de retrait</h2>
         <table>
           <thead>
@@ -430,7 +427,7 @@
         </div>
       </section>
 
-      <section class="container">
+      <section class="container" data-review-section="trust">
         <h2 class="title">Vérifications de la plate-forme, des politiques et du support</h2>
         <table>
           <thead>
@@ -575,6 +572,7 @@
           <a href="/fr/privacy-policy/">Politique de confidentialité</a>
           <a href="/fr/casinos-and-betting/">Casinos et paris</a>
           <a href="/fr/payment-methods/">Méthodes de paiement</a>
+          <a href="/fr/game-providers/"><svg class="site-icon site-icon--inline" width="24" height="24" aria-hidden="true" focusable="false"><use href="/icons/ui/review-method.svg?v=20261123-brand-providers#layers"></use></svg> Fournisseurs de jeux</a>
           <a href="/fr/partners/">Partenaires</a>
           <a href="/fr/about/">À propos</a>
           <a
@@ -598,6 +596,6 @@
       </div>
     </footer>
 
-    <script type="module" src="/scripts/main.js?v=20261119-catalog-partners"></script>
+    <script type="module" src="/scripts/main.js?v=20261124-provider-cards"></script>
   </body>
 </html>

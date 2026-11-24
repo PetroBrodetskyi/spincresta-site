@@ -1,10 +1,11 @@
 import fs from 'node:fs';
+import { BRAND_HOMEPAGE_SCREENSHOTS } from '../scripts/brand-homepage-screenshots.js';
 import { REVIEW_IMAGE_LABELS } from './localized-editorial-corrections.mjs';
 
 // BC.Game public lobby, terms, help centre and responsible-gambling pages
 // reviewed on 2026-09-29. This builder deliberately contains no direct brand
 // links: every player-facing CTA uses the approved affiliate URL.
-const screenshot = 'https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto,w_1600/v1790674519/spincresta/brands/bcgame/main-page/bcgame-page_y1spuj';
+const screenshot = BRAND_HOMEPAGE_SCREENSHOTS.bcgame;
 const logo = '/images/bcgame.png';
 const affiliate = 'https://armadaapp.media-412.com/click?pid=3862&amp;offer_id=124842';
 const locales = ['en', 'de', 'es', 'it', 'pl', 'uk', 'pt', 'fr', 'hi', 'fi'];

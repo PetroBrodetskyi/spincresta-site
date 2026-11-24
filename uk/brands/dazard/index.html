@@ -52,7 +52,7 @@
       content="Dazard: бонуси, ігри, способи оплати, виплати, KYC, мобільна версія та доступність. Перед грою перевірте актуальні умови."
     />
     <meta name="twitter:image" content="https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto/v1785663697/spincresta/brands/dazard/main-page/dazard-page_b8iulz" />
-    <link rel="stylesheet" href="/styles.css?v=20261120-sticky-pill" />
+    <link rel="stylesheet" href="/styles.css?v=20261124-provider-cards" />
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -240,13 +240,12 @@
     <section class="container">
       <div class="brand-payments">
         <h2 class="title">Способи оплати</h2>
-        <p class="brand-availability-intro">Dazard публічно представляє картки, банківські перекази, онлайн-банкінг, електронні гаманці, розділи мобільних платежів, ваучери, Skrill Quick Checkout і обробку криптовалют. Каса після входу в акаунт показує, які методи, валюти, комісії, ліміти та способи виплати доступні для кожної країни та акаунта.</p>
         <div class="payments-container" id="brand-payments"></div>
       </div>
     </section>
 
     <main class="content-review">
-      <section class="container">
+      <section class="container" data-review-section="summary">
         <h2 class="title">Короткий огляд</h2>
         <table>
           <thead><tr><th>Категорія</th><th>Про що свідчить поточна інформація</th><th>Перевірка гравця</th></tr></thead>
@@ -261,7 +260,7 @@
         </table>
       </section>
 
-      <section class="container">
+      <section class="container" data-review-section="bonuses">
         <h2 class="title">Бонусні етапи</h2>
         <table>
           <thead><tr><th>Етап</th><th>Пропозиція</th><th>Умови для перевірки</th></tr></thead>
@@ -275,7 +274,7 @@
         </table>
       </section>
 
-      <section class="container">
+      <section class="container" data-review-section="games">
         <h2 class="title">Казино, live-казино та нові ігри</h2>
         <table>
           <thead><tr><th>Категорія</th><th>Що гравці можуть переглядати</th><th>Чому це важливо</th></tr></thead>
@@ -289,7 +288,7 @@
         </table>
       </section>
 
-      <section class="container">
+      <section class="container" data-review-section="sports">
         <h2 class="title">Ставки на спорт і live-ставки</h2>
         <div class="features-grid premium-grid">
           <div class="feature-card glass-card"><strong>Футбол і великі види спорту</strong><span>Футбол, теніс, баскетбол, гандбол, хокей і американський футбол є одними з чітко перелічених розділів спортивних букмекерських ігор.</span></div>
@@ -299,8 +298,9 @@
         </div>
       </section>
 
-      <section class="container">
+      <section class="container" data-review-section="cashier">
         <h2 class="title">Платежі, виплати і верифікація</h2>
+        <p class="section-intro">Dazard публічно представляє картки, банківські перекази, онлайн-банкінг, електронні гаманці, розділи мобільних платежів, ваучери, Skrill Quick Checkout і обробку криптовалют. Каса після входу в акаунт показує, які методи, валюти, комісії, ліміти та способи виплати доступні для кожної країни та акаунта.</p>
         <table>
           <thead><tr><th>Категорія</th><th>Що показує публічна платіжна інформація</th><th>Практична перевірка</th></tr></thead>
           <tbody>
@@ -313,7 +313,7 @@
         </table>
       </section>
 
-      <section class="container">
+      <section class="container" data-review-section="rewards" data-review-details>
         <h2 class="title">Нагороди, статуси та інструменти акаунта</h2>
         <div class="features-grid premium-grid">
           <div class="feature-card glass-card"><strong>Турніри</strong><span>Турніри казино та розділи спеціальних пропозицій дають активним гравцям можливість порівнювати винагороди, окрім депозитних бонусів.</span></div>
@@ -323,7 +323,7 @@
         </div>
       </section>
 
-      <section class="container">
+      <section class="container" data-review-section="trust">
         <h2 class="title">Відповідальна гра та безпека гравців</h2>
         <table>
           <thead><tr><th>Ознака</th><th>Що видно</th><th>Чому це важливо</th></tr></thead>
@@ -396,6 +396,7 @@
           <a href="/uk/privacy-policy/">Політика конфіденційності</a>
           <a href="/uk/casinos-and-betting/">Казино та ставки</a>
           <a href="/uk/payment-methods/">Способи оплати</a>
+          <a href="/uk/game-providers/"><svg class="site-icon site-icon--inline" width="24" height="24" aria-hidden="true" focusable="false"><use href="/icons/ui/review-method.svg?v=20261123-brand-providers#layers"></use></svg> Провайдери ігор</a>
           <a href="/uk/partners/">Партнери</a>
           <a href="/uk/about/">Про нас</a>
           <a href="https://t.me/spincresta" target="_blank" rel="noopener noreferrer nofollow" class="footer-social" aria-label="Канал SpinCresta Telegram"><img src="/icons/telegram-white-icon.svg" alt="Telegram" width="18" height="18" loading="lazy" /><span>Telegram</span></a>
@@ -405,6 +406,6 @@
       </div>
     </footer>
 
-    <script type="module" src="/scripts/main.js?v=20261119-catalog-partners"></script>
+    <script type="module" src="/scripts/main.js?v=20261124-provider-cards"></script>
   </body>
 </html>

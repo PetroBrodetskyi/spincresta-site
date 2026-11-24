@@ -61,4 +61,5 @@ test('review pages have content roots for the shared component and snapshot head
   }
   assert.match(read('scripts/site-icons.js'), /\['\.brand-availability-widget > h2', 'games'\]/);
   assert.match(read('styles/section-contrast-preview.css'), /\.review-provider-strip > li\s*\{[^}]*flex: 0 0 106px/);
+  assert.match(read('styles/section-contrast-preview.css'), /\.review-provider-logo\s*\{[^}]*background: #000;/);
 });

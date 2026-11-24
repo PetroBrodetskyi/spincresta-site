@@ -55,7 +55,7 @@
     />
 
     <link rel="icon" type="image/png" href="/favicon.png" />
-    <link rel="stylesheet" href="/styles.css?v=20261120-sticky-pill" />
+    <link rel="stylesheet" href="/styles.css?v=20261124-provider-cards" />
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -286,15 +286,12 @@
     <section class="container">
       <div class="brand-payments">
         <h2 class="title">Maksutavat</h2>
-        <p class="brand-availability-intro">
-          Maksun saatavuus riippuu maasta ja tilin tilasta. Kotiutukset palautetaan yleensä samalla menetelmällä, jota käytettiin talletuksessa. Tarkista kassalta paikallinen valuutta, verkko, minimit, maksut ja nostomahdollisuudet ennen sisäänmaksua.
-        </p>
         <div class="payments-container" id="brand-payments"></div>
       </div>
     </section>
 
     <main class="content-review">
-      <section class="container">
+      <section class="container" data-review-section="summary">
         <h2 class="title">Spinbetter Tuotteen tilannekuva</h2>
         <table>
           <thead>
@@ -334,7 +331,7 @@
         </table>
       </section>
 
-      <section class="container">
+      <section class="container" data-review-section="sports">
         <h2 class="title">Vedonlyönti, live-vedonlyönti ja turnaukset</h2>
         <div class="features-grid premium-grid">
           <div class="feature-card glass-card">
@@ -356,7 +353,7 @@
         </div>
       </section>
 
-      <section class="container">
+      <section class="container" data-review-section="games">
         <h2 class="title">Kasino, livekasino ja pikapelit</h2>
         <table>
           <thead>
@@ -413,7 +410,7 @@
         </div>
       </section>
 
-      <section class="container">
+      <section class="container" data-review-section="cashier">
         <h2 class="title">Tilit, maksut ja pelaajien suojaus</h2>
         <table>
           <thead>
@@ -584,6 +581,7 @@
           <a href="/fi/privacy-policy/">Tietosuojakäytäntö</a>
           <a href="/fi/casinos-and-betting/">Kasinot ja vedonlyönti</a>
           <a href="/fi/payment-methods/">Maksutavat</a>
+          <a href="/fi/game-providers/"><svg class="site-icon site-icon--inline" width="24" height="24" aria-hidden="true" focusable="false"><use href="/icons/ui/review-method.svg?v=20261123-brand-providers#layers"></use></svg> Pelintarjoajat</a>
           <a href="/fi/partners/">Yhteistyökumppanit</a>
           <a href="/fi/about/">Tietoa meistä</a>
           <a
@@ -607,6 +605,6 @@
       </div>
     </footer>
 
-    <script type="module" src="/scripts/main.js?v=20261119-catalog-partners"></script>
+    <script type="module" src="/scripts/main.js?v=20261124-provider-cards"></script>
   </body>
 </html>

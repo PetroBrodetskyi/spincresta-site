@@ -2,6 +2,7 @@ import fs from 'node:fs';
 import path from 'node:path';
 import {pathToFileURL} from 'node:url';
 import { HOME_PAGE_ASSET_VERSION } from './sync-home-language-switcher.mjs';
+import { syncGameProviderFooter } from './game-provider-footer.mjs';
 
 const SITE_ENTRY_VERSION = '20261119-catalog-partners';
 const SITE_STYLE_VERSION = '20261119-catalog-partners';
@@ -11,7 +12,9 @@ const EDITORIAL_DASHBOARD_VERSION = '20261119-editorial-dashboards';
 const LIGHT_EDITORIAL_VERSION = '20261119-light-editorial';
 const PROFILE_AND_ARTICLE_VERSION = '20261119-light-profile-guide';
 const COUNTRY_HUB_VERSION = '20261119-country-hub';
-const BRAND_STYLE_VERSION = '20261120-sticky-pill';
+const BRAND_STYLE_VERSION = '20261124-provider-cards';
+const BRAND_ENTRY_VERSION = '20261124-provider-cards';
+const PROVIDER_DIRECTORY_VERSION = '20261124-provider-directory-layout';
 const WORDMARK_VERSION = '20261118-padded-wordmark';
 const excluded = new Set(['.git','.vercel','node_modules','tools','research','data','tmp','keyboard-diagnostics']);
 export function publicThemePages(directory=process.cwd()) {
@@ -23,8 +26,10 @@ export function publicThemePages(directory=process.cwd()) {
 }
 export function syncDefaultTheme(html) {
   if(!html.includes('/styles.css'))return html;
-  const styleVersion = /<body\b[^>]*\bdata-brand=/.test(html) ? BRAND_STYLE_VERSION : SITE_STYLE_VERSION;
-  const pageVersion = html.includes('data-static-language-switcher') ? HOME_PAGE_ASSET_VERSION
+  const isBrand = /<body\b[^>]*\bdata-brand=/.test(html);
+  const styleVersion = isBrand ? BRAND_STYLE_VERSION : SITE_STYLE_VERSION;
+  const pageVersion = html.includes('data-provider-directory') ? PROVIDER_DIRECTORY_VERSION
+    : html.includes('data-static-language-switcher') ? HOME_PAGE_ASSET_VERSION
     : /<body\b[^>]*\bdata-page="top-casinos"/.test(html) ? TOP_CASINOS_VERSION
     : html.includes('data-country-hub-grid') || html.includes('class="partners-telegram-icon"') ? COUNTRY_HUB_VERSION
     : /<main\b[^>]*(?:\beditorial-dashboard--author\b|\bdata-editorial-reading\b)/.test(html) ? PROFILE_AND_ARTICLE_VERSION
@@ -32,7 +37,7 @@ export function syncDefaultTheme(html) {
     : html.includes('<main class="catalog-directory">')
     ? CATALOG_VERSION
     : /<main class="account-dashboard editorial-dashboard /.test(html) ? EDITORIAL_DASHBOARD_VERSION : null;
-  return html.replace(/<html\b([^>]*)>/i,(all,attributes)=>`<html${attributes.replace(/\sdata-theme=(?:"[^"]*"|'[^']*')/gi,'')}>`)
+  return syncGameProviderFooter(html).replace(/<html\b([^>]*)>/i,(all,attributes)=>`<html${attributes.replace(/\sdata-theme=(?:"[^"]*"|'[^']*')/gi,'')}>`)
     .replace(/\s*<script src="\/scripts\/theme-init\.js(?:\?[^"\s]*)?"><\/script>/g,'')
     .replace(/(<meta name="theme-color" content=")[^"]+("\s*\/?>)/g,'$1#ffffff$2')
     .replace(/<img\b(?=[^>]*\bclass="[^"]*\blogo-lockup\b)[^>]*>/g, tag =>
@@ -40,7 +45,8 @@ export function syncDefaultTheme(html) {
         `src="/images/spincresta-wordmark.svg?v=${WORDMARK_VERSION}" width="258" height="60"`)
     )
     .replace(/(\/(?:scripts\/main\.js|styles\.css|styles\/blog\.css))(?:\?v=[^"\s]+)?(?=")/g,
-      (_, asset) => `${asset}?v=${pageVersion || (asset === '/styles.css' ? styleVersion : SITE_ENTRY_VERSION)}`);
+      (_, asset) => `${asset}?v=${pageVersion || (asset === '/styles.css' ? styleVersion
+        : asset === '/scripts/main.js' && isBrand ? BRAND_ENTRY_VERSION : SITE_ENTRY_VERSION)}`);
 }
 if(process.argv[1]&&import.meta.url===pathToFileURL(process.argv[1]).href){
   const check=process.argv.includes('--check');let changed=0;const files=publicThemePages();

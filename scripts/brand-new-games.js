@@ -1,4 +1,12 @@
 export const BRAND_NEW_GAMES = {
+  bitgames: [
+    ['Viper Royale', 'v1795470569', 'viper-royale_g4fqsm'],
+    ['Vice Venture', 'v1795470562', 'vice-venture_ggpbcy'],
+    ['Turbo Storm Eruption', 'v1795470556', 'turbo-storm_g8elxq'],
+    ['The Greatest Heist', 'v1795470549', 'the-greatest-heist_cdsggj'],
+    ['High Voltage Fruits', 'v1795470542', 'high-voltage-fruits_ppmx7y'],
+    ['Black Friday Madness', 'v1795470535', 'black-friday-madness_ck8rz0'],
+  ].map(([name, version, id]) => ({ name, image: `https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto/${version}/spincresta/brands/bitgames/new-games/bitgames-new-game-${id}` })),
   coldbet: [
     ['Pharaon Thunder', 'v1795368811', 'pharaon-thunder_h1a11b'],
     ['Jewels of Ra', 'v1795368722', 'jewels-of-ra_mrtpgo'],

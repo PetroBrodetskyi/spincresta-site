@@ -435,6 +435,47 @@ html:root body .editorial-dashboard .account-panel.site-faq-section {
   font-weight: 650;
 }
 
+[data-provider-controls] .catalog-toolbar-row {
+  align-items: flex-end;
+}
+
+.account-contact-fields.provider-category-field {
+  grid-template-columns: minmax(0, 1fr);
+  max-width: 100%;
+}
+
+.provider-category-field select {
+  block-size: 44px;
+  padding-block: 0;
+}
+
+[data-provider-controls] .catalog-search:focus-within,
+.game-providers-page .provider-review-link:focus-visible {
+  outline: 2px solid var(--editorial-blue);
+  outline-offset: 2px;
+}
+
+.game-providers-page [data-provider-directory] .editorial-panel-rows a.provider-review-link {
+  color: var(--text-main);
+  text-decoration: none;
+}
+
+.game-providers-page .provider-review-link:hover {
+  background: var(--surface-card-hover);
+}
+
+@media (max-width: 540px) {
+  [data-provider-controls] .catalog-toolbar-row {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  [data-provider-controls] .catalog-search {
+    flex-basis: auto;
+    max-width: none;
+  }
+}
+
 .editorial-provider-name {
   position: absolute;
   width: 1px;

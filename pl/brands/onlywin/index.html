@@ -38,7 +38,7 @@
   <meta name="twitter:description" content="OnlyWin: bonusy, gry, płatności, wypłaty, weryfikacja KYC, wersja mobilna i dostępność. Przed grą sprawdź aktualne warunki.">
   <meta name="twitter:image" content="https://res.cloudinary.com/drj61gmd2/image/upload/f_webp,q_auto/v1785181284/spincresta/brands/onlywin/main-page/onlywin-page_mnlyfy.webp">
   <link rel="icon" href="/favicon.png" type="image/png">
-  <link rel="stylesheet" href="/styles.css?v=20261120-sticky-pill">
+  <link rel="stylesheet" href="/styles.css?v=20261124-provider-cards">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -206,7 +206,7 @@
     <section class="container"><div class="brand-payments"><h2 class="title">Metody płatności</h2><div class="payments-container" id="brand-payments"></div></div></section>
 
     <main class="content-review">
-      <section class="container" id="onlywin-bonuses">
+      <section class="container" id="onlywin-bonuses" data-review-section="bonuses">
         <h2 class="title">OnlyWin Bonus powitalny i promocje</h2>
         <p class="section-intro">OnlyWin wykorzystuje wieloetapowy pakiet powitalny zamiast pojedynczej oferty nagłówkowej. Strona pierwszej wpłaty podaje najbardziej przejrzyste warunki publiczne, natomiast późniejsze wpłaty i promocje cykliczne mają swoje własne warunki.</p>
         <div class="table-wrap"><table><thead><tr><th>Oferta</th><th>Nagłówek publiczny</th><th>Ważna kontrola</th></tr></thead><tbody>
@@ -220,7 +220,7 @@
         <p class="review-note">Sprawdzone warunki pierwszego depozytu przewidują aktywację w ciągu 48 godzin, pięć dni wygaśnięcia po aktywacji, wymóg obrotu x45 i oddzielne ograniczenia wypłat dla wygranych w formie bonusu gotówkowego i darmowych spinów. Oferty ulegają zmianie, dlatego przed złożeniem depozytu potwierdź szczegóły aktualnej promocji.</p>
       </section>
 
-      <section class="container" id="onlywin-loyalty">
+      <section class="container" id="onlywin-loyalty" data-review-section="rewards" data-review-details>
         <h2 class="title">Codzienne bonusy, monety i klub lojalnościowy</h2>
         <div class="features-grid premium-grid">
           <article class="feature-card glass-card"><h3>Mapa bonusowa</h3><p>Codzienny kalendarz bonusów zmienia wpisy, takie jak darmowe spiny, monety i nagrody procentowe. Wybierz aktualną nagrodę, uzupełnij podany depozyt i aktywuj go w sekcji Moje bonusy.</p></article>
@@ -232,7 +232,7 @@
         </div>
       </section>
 
-      <section class="container" id="onlywin-games">
+      <section class="container" id="onlywin-games" data-review-section="games">
         <h2 class="title">OnlyWin Gry kasynowe i dostawcy</h2>
         <p class="section-intro">OnlyWin przedstawia duży, zmieniający się katalog, a nie stałą listę. Najmocniejszą częścią lobby jest głębokość kategorii, która ułatwia poruszanie się pomiędzy automatami, kasynem na żywo, grami błyskawicznymi i produktami stołowymi.</p>
         <div class="table-wrap"><table><thead><tr><th>Obszar</th><th>Co pokazuje lobby</th><th>Dlaczego to ma znaczenie</th></tr></thead><tbody>
@@ -245,7 +245,7 @@
         <p class="review-note">Aktywny katalog często się zmienia, dlatego szczegóły aktualnej wersji i dostępność dostawcy należy potwierdzić w lobby konta.</p>
       </section>
 
-      <section class="container" id="onlywin-vip">
+      <section class="container" id="onlywin-vip" data-review-section="rewards" data-review-details>
         <h2 class="title">Turnieje, klub VIP i gra mobilna</h2>
         <div class="features-grid premium-grid">
           <article class="feature-card glass-card"><h3>Klub VIP</h3><p>OnlyWin zawiera listę osobistego menedżera VIP, dostosowane bonusy, zwrot gotówki premium, szybsze wypłaty, prezenty urodzinowe i rocznicowe oraz zaproszenia na wybrane wydarzenia.</p></article>
@@ -257,7 +257,7 @@
         </div>
       </section>
 
-      <section class="container" id="onlywin-withdrawals">
+      <section class="container" id="onlywin-withdrawals" data-review-section="cashier">
         <h2 class="title">Płatności, wypłaty i KYC</h2>
         <div class="table-wrap"><table><thead><tr><th>Punkt kontrolny</th><th>Sprawdzone informacje</th><th>Co zweryfikować</th></tr></thead><tbody>
           <tr><td>Opcje depozytu</td><td>Karty, Apple Pay, Google Pay, przelewy bankowe, e-portfele, metody mobilne i kryptowaluty są wymienione w przeglądzie roboczym sekcji płatności.</td><td>Dostępne metody i wartości minimalne mogą się różnić w zależności od kraju i konta.</td></tr>
@@ -270,7 +270,7 @@
         <p class="review-note">Roszczenia o szybką wypłatę należy zawsze traktować jako warunkowe: KYC, własność płatności, status premii i lokalne kontrole mogą zmienić ostateczny harmonogram. Sprawdź aktualne warunki przed złożeniem depozytu lub zażądaniem wypłaty.</p>
       </section>
 
-      <section class="container" id="onlywin-licensing">
+      <section class="container" id="onlywin-licensing" data-review-section="trust">
         <h2 class="title">Licencjonowanie, dopasowanie do kraju i odpowiedzialna gra</h2>
         <div class="table-wrap"><table><thead><tr><th>Temat</th><th>Co mówią materiały publiczne</th><th>Nasza praktyczna lektura</th></tr></thead><tbody>
           <tr><td>Struktura operatora</td><td>Warunki publiczne OnlyWin opisują zarejestrowaną na Cyprze firmę internetową i usługi kasyna powiązane z podmiotem dominującym zarejestrowanym na Curacao.</td><td>Przed utworzeniem konta przeczytaj aktualny status prawny i treść licencji.</td></tr>
@@ -321,8 +321,9 @@
 
   <section class="all-countries"><div class="container"><h2 class="title">Kasyna online według kraju</h2><div class="countries-cloud"></div></div></section>
 
-  <footer class="footer"><div class="container"><p>© 2026 SpinCresta.com. Wszelkie prawa zastrzeżone.</p><p>18+ | Hazard może uzależniać. Proszę grać odpowiedzialnie. Przed rozpoczęciem gry sprawdź lokalne przepisy.</p><nav class="footer-nav"><a href="/pl/responsible-gambling/">Odpowiedzialna gra</a><a href="/pl/privacy-policy/">Polityka prywatności</a><a href="/pl/casinos-and-betting/">Kasyna i zakłady</a><a href="/pl/payment-methods/">Metody płatności</a><a href="/pl/partners/">Partnerzy</a><a href="/pl/about/">O nas</a><a href="https://t.me/spincresta" target="_blank" rel="noopener noreferrer nofollow" class="footer-social" aria-label="SpinCresta Telegram Kanał"><img src="/icons/telegram-white-icon.svg" alt="Telegram" width="18" height="18" loading="lazy" /><span>Telegram</span></a><a href="https://x.com/SpinCresta" target="_blank" rel="noopener noreferrer nofollow" class="footer-social" aria-label="SpinCresta na X"><img src="/icons/x-social-media-round-icon.svg" alt="X" width="18" height="18" loading="lazy" /><span>X</span></a><a href="/pl/blog/">Blog</a></nav></div></footer>
+  <footer class="footer"><div class="container"><p>© 2026 SpinCresta.com. Wszelkie prawa zastrzeżone.</p><p>18+ | Hazard może uzależniać. Proszę grać odpowiedzialnie. Przed rozpoczęciem gry sprawdź lokalne przepisy.</p><nav class="footer-nav">
+          <a href="/pl/game-providers/"><svg class="site-icon site-icon--inline" width="24" height="24" aria-hidden="true" focusable="false"><use href="/icons/ui/review-method.svg?v=20261123-brand-providers#layers"></use></svg> Dostawcy gier</a><a href="/pl/responsible-gambling/">Odpowiedzialna gra</a><a href="/pl/privacy-policy/">Polityka prywatności</a><a href="/pl/casinos-and-betting/">Kasyna i zakłady</a><a href="/pl/payment-methods/">Metody płatności</a><a href="/pl/partners/">Partnerzy</a><a href="/pl/about/">O nas</a><a href="https://t.me/spincresta" target="_blank" rel="noopener noreferrer nofollow" class="footer-social" aria-label="SpinCresta Telegram Kanał"><img src="/icons/telegram-white-icon.svg" alt="Telegram" width="18" height="18" loading="lazy" /><span>Telegram</span></a><a href="https://x.com/SpinCresta" target="_blank" rel="noopener noreferrer nofollow" class="footer-social" aria-label="SpinCresta na X"><img src="/icons/x-social-media-round-icon.svg" alt="X" width="18" height="18" loading="lazy" /><span>X</span></a><a href="/pl/blog/">Blog</a></nav></div></footer>
 
-  <script type="module" src="/scripts/main.js?v=20261119-catalog-partners"></script>
+  <script type="module" src="/scripts/main.js?v=20261124-provider-cards"></script>
 </body>
 </html>

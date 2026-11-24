@@ -55,7 +55,7 @@
     />
 
     <link rel="icon" type="image/png" href="/favicon.png" />
-    <link rel="stylesheet" href="/styles.css?v=20261120-sticky-pill" />
+    <link rel="stylesheet" href="/styles.css?v=20261124-provider-cards" />
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -283,15 +283,12 @@
     <section class="container">
       <div class="brand-payments">
         <h2 class="title">भुगतान के तरीके</h2>
-        <p class="brand-availability-intro">
-          Spininio कार्ड, ई-वॉलेट, वाउचर, क्रिप्टो, स्टेबलकॉइन और स्थानीय बैंकिंग विकल्पों का समर्थन करता है। स्थानीय विकल्पों में कनाडा में इंटरैक, ब्राजील में पिक्स, फिनलैंड में पे एन प्ले और कई यूरोपीय बाजारों में बैंक विकल्प शामिल हैं। सटीक भुगतान अनुभाग विकल्प अभी भी खाता स्थिति, देश, मुद्रा और सत्यापन पर निर्भर हो सकते हैं।
-        </p>
         <div class="payments-container" id="brand-payments"></div>
       </div>
     </section>
 
     <main class="content-review">
-      <section class="container">
+      <section class="container" data-review-section="summary">
         <h2 class="title">Spininio उत्पाद सारांश</h2>
         <table>
           <thead>
@@ -336,7 +333,7 @@
         </table>
       </section>
 
-      <section class="container">
+      <section class="container" data-review-section="games" data-review-details>
         <h2 class="title">कैसीनो लॉबी और लाइव कैसीनो विकल्प</h2>
         <div class="features-grid premium-grid">
           <div class="feature-card glass-card">
@@ -358,7 +355,7 @@
         </div>
       </section>
 
-      <section class="container">
+      <section class="container" data-review-section="sports">
         <h2 class="title">स्पोर्ट्सबुक, ईस्पोर्ट्स और लाइव बेटिंग</h2>
         <table>
           <thead>
@@ -393,7 +390,7 @@
         </table>
       </section>
 
-      <section class="container">
+      <section class="container" data-review-section="cashier">
         <h2 class="title">भुगतान, लाइसेंस और खाता जांच</h2>
         <table>
           <thead>
@@ -559,6 +556,7 @@
           <a href="/hi/privacy-policy/">गोपनीयता नीति</a>
           <a href="/hi/casinos-and-betting/">कैसीनो और सट्टेबाजी</a>
           <a href="/hi/payment-methods/">भुगतान के तरीके</a>
+          <a href="/hi/game-providers/"><svg class="site-icon site-icon--inline" width="24" height="24" aria-hidden="true" focusable="false"><use href="/icons/ui/review-method.svg?v=20261123-brand-providers#layers"></use></svg> गेम प्रदाता</a>
           <a href="/hi/partners/">पार्टनर</a>
           <a href="/hi/about/">हमारे बारे में</a>
           <a
@@ -582,6 +580,6 @@
       </div>
     </footer>
 
-    <script type="module" src="/scripts/main.js?v=20261119-catalog-partners"></script>
+    <script type="module" src="/scripts/main.js?v=20261124-provider-cards"></script>
   </body>
 </html>

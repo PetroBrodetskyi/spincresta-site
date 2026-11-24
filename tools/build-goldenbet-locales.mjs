@@ -1,7 +1,7 @@
 import fs from 'node:fs';
+import { BRAND_HOMEPAGE_SCREENSHOTS } from '../scripts/brand-homepage-screenshots.js';
 import { GOLDENBET_LOCALE_COPY } from './goldenbet-locale-copy.mjs';
 
-const screenshot = 'https://res.cloudinary.com/drj61gmd2/image/upload/f_auto,q_auto,w_1600/v1790519366/spincresta/brands/goldenbet/main-page/goldenbet-page_ppsutu';
 const affiliate = { uk: 'https://armadaapp.media-412.com/click?pid=3862&amp;offer_id=124461', au: 'https://armadaapp.media-412.com/click?pid=3862&amp;offer_id=124462' };
 const tableLabels = {
   de: ['Prüfung', 'Ergebnis', 'SpinCresta-Hinweis', 'Angebot', 'Veröffentlichte Bedingungen'],
@@ -61,6 +61,7 @@ const replaceHead = (english, locale, market, copy) => {
 
 for (const [locale, copy] of Object.entries(GOLDENBET_LOCALE_COPY)) {
   for (const market of ['uk', 'au']) {
+    const screenshot = BRAND_HOMEPAGE_SCREENSHOTS[`goldenbet-${market}`];
     const sourceFile = `brands/goldenbet-${market}/index.html`;
     const targetFile = `${locale}/brands/goldenbet-${market}/index.html`;
     const english = fs.readFileSync(sourceFile, 'utf8');

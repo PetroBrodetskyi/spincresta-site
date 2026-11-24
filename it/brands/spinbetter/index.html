@@ -55,7 +55,7 @@
     />
 
     <link rel="icon" type="image/png" href="/favicon.png" />
-    <link rel="stylesheet" href="/styles.css?v=20261120-sticky-pill" />
+    <link rel="stylesheet" href="/styles.css?v=20261124-provider-cards" />
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -286,15 +286,12 @@
     <section class="container">
       <div class="brand-payments">
         <h2 class="title">Metodi di pagamento</h2>
-        <p class="brand-availability-intro">
-          La disponibilità del pagamento dipende dal Paese e dallo stato dell'account. I prelievi normalmente vengono restituiti tramite lo stesso metodo utilizzato per il deposito. Controlla alla cassa la valuta locale, la rete, i minimi, le commissioni e l'accesso ai prelievi prima di effettuare il pagamento.
-        </p>
         <div class="payments-container" id="brand-payments"></div>
       </div>
     </section>
 
     <main class="content-review">
-      <section class="container">
+      <section class="container" data-review-section="summary">
         <h2 class="title">Spinbetter Panoramica del prodotto</h2>
         <table>
           <thead>
@@ -334,7 +331,7 @@
         </table>
       </section>
 
-      <section class="container">
+      <section class="container" data-review-section="sports">
         <h2 class="title">Scommesse sportive, scommesse live e tornei</h2>
         <div class="features-grid premium-grid">
           <div class="feature-card glass-card">
@@ -356,7 +353,7 @@
         </div>
       </section>
 
-      <section class="container">
+      <section class="container" data-review-section="games">
         <h2 class="title">Casinò, casinò dal vivo e giochi veloci</h2>
         <table>
           <thead>
@@ -413,7 +410,7 @@
         </div>
       </section>
 
-      <section class="container">
+      <section class="container" data-review-section="cashier">
         <h2 class="title">Conti, pagamenti e protezione del giocatore</h2>
         <table>
           <thead>
@@ -584,6 +581,7 @@
           <a href="/it/privacy-policy/">Informativa sulla privacy</a>
           <a href="/it/casinos-and-betting/">Casinò e scommesse</a>
           <a href="/it/payment-methods/">Metodi di pagamento</a>
+          <a href="/it/game-providers/"><svg class="site-icon site-icon--inline" width="24" height="24" aria-hidden="true" focusable="false"><use href="/icons/ui/review-method.svg?v=20261123-brand-providers#layers"></use></svg> Fornitori di giochi</a>
           <a href="/it/partners/">Partner</a>
           <a href="/it/about/">Chi siamo</a>
           <a
@@ -607,6 +605,6 @@
       </div>
     </footer>
 
-    <script type="module" src="/scripts/main.js?v=20261119-catalog-partners"></script>
+    <script type="module" src="/scripts/main.js?v=20261124-provider-cards"></script>
   </body>
 </html>

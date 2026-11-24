@@ -52,7 +52,7 @@
       content="Slott combine un lobby de casino approfondi avec des jeux en direct et un vaste site de paris sportifs, ce qui le rend adapté aux joueurs qui souhaitent les deux produits sous un seul compte."
     />
     <link rel="icon" type="image/png" href="/favicon.png" />
-    <link rel="stylesheet" href="/styles.css?v=20261120-sticky-pill" />
+    <link rel="stylesheet" href="/styles.css?v=20261124-provider-cards" />
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -219,13 +219,12 @@
     <section class="container">
       <div class="brand-payments">
         <h2 class="title">Méthodes de paiement</h2>
-        <p class="brand-availability-intro">Slott répertorie les options de carte, de portefeuille électronique et de cryptographie. Les méthodes exactes, les limites, les frais, les devises et les délais de traitement dépendent de votre pays et de votre compte vérifié.</p>
         <div class="payments-container" id="brand-payments"></div>
       </div>
     </section>
 
     <main class="content-review">
-      <section class="container">
+      <section class="container" data-review-section="summary">
         <h2 class="title">Slott Aperçu du produit</h2>
         <table>
           <thead><tr><th>Zone</th><th>Ce que propose Slott</th><th>Vérification du joueur</th></tr></thead>
@@ -240,7 +239,7 @@
         </table>
       </section>
 
-      <section class="container">
+      <section class="container" data-review-section="games" data-review-details>
         <h2 class="title">Lobby du casino, fournisseurs et découverte de jeux</h2>
         <div class="features-grid premium-grid">
           <div class="feature-card glass-card"><strong>Machines à sous et jeux en vedette</strong><span>Les titres populaires incluent Gates of Olympus, Sweet Bonanza, Starburst, Big Bass Splash, Sugar Rush, Chicken Road et Aviator.</span></div>
@@ -251,7 +250,7 @@
         </div>
       </section>
 
-      <section class="container">
+      <section class="container" data-review-section="sports">
         <h2 class="title">Couverture des paris sportifs et outils de paris</h2>
         <table>
           <thead><tr><th>Espace sportif</th><th>Couverture</th><th>Pourquoi c'est important</th></tr></thead>
@@ -264,7 +263,7 @@
         </table>
       </section>
 
-      <section class="container">
+      <section class="container" data-review-section="rewards" data-review-details>
         <h2 class="title">Club VIP, Fidélité & Tournois</h2>
         <div class="features-grid premium-grid">
           <div class="feature-card glass-card"><strong>Remise en argent jusqu'à 30%</strong><span>Le Club VIP favorise un cashback amélioré, des paiements prioritaires, des bonus de niveau supérieur et un accès plus rapide aux gains.</span></div>
@@ -274,7 +273,7 @@
         </div>
       </section>
 
-      <section class="container">
+      <section class="container" data-review-section="cashier">
         <h2 class="title">Paiements, vérification et sécurité du compte</h2>
         <table>
           <thead><tr><th>Vérifier</th><th>Comment Slott le gère</th><th>Conseils pratiques</th></tr></thead>
@@ -288,7 +287,7 @@
         </table>
       </section>
 
-      <section class="container">
+      <section class="container" data-review-section="trust" data-review-details>
         <h2 class="title">Licence & Jeu Responsable</h2>
         <div class="features-grid premium-grid">
           <div class="feature-card glass-card"><strong>Opérateur et licence</strong><span>Slott est exploité par Bluewave Interactive N.V. et Stola Limited. Bluewave Interactive N.V. est réglementée par la Curaçao Gaming Authority sous la licence OGL/2024/1161/0454.</span></div>
@@ -336,10 +335,11 @@
       <div class="container">
         <p>© 2026 SpinCresta.com. Tous droits réservés.</p>
         <p>18+ | Les jeux d'argent peuvent entraîner une dépendance. Veuillez jouer de manière responsable. Vérifiez les lois locales avant de jouer.</p>
-        <nav class="footer-nav"><a href="/fr/responsible-gambling/">Jeu responsable</a><a href="/fr/privacy-policy/">Politique de confidentialité</a><a href="/fr/casinos-and-betting/">Casinos et paris</a><a href="/fr/payment-methods/">Méthodes de paiement</a><a href="/fr/partners/">Partenaires</a><a href="/fr/about/">À propos</a><a href="https://t.me/spincresta" target="_blank" rel="noopener noreferrer nofollow" class="footer-social" aria-label="Canal SpinCresta Telegram"><img src="/icons/telegram-white-icon.svg" alt="Telegram" width="18" height="18" loading="lazy" /><span>Telegram</span></a><a href="https://x.com/SpinCresta" target="_blank" rel="noopener noreferrer nofollow" class="footer-social" aria-label="SpinCresta sur X"><img src="/icons/x-social-media-round-icon.svg" alt="X" width="18" height="18" loading="lazy" /><span>X</span></a></nav>
+        <nav class="footer-nav">
+          <a href="/fr/game-providers/"><svg class="site-icon site-icon--inline" width="24" height="24" aria-hidden="true" focusable="false"><use href="/icons/ui/review-method.svg?v=20261123-brand-providers#layers"></use></svg> Fournisseurs de jeux</a><a href="/fr/responsible-gambling/">Jeu responsable</a><a href="/fr/privacy-policy/">Politique de confidentialité</a><a href="/fr/casinos-and-betting/">Casinos et paris</a><a href="/fr/payment-methods/">Méthodes de paiement</a><a href="/fr/partners/">Partenaires</a><a href="/fr/about/">À propos</a><a href="https://t.me/spincresta" target="_blank" rel="noopener noreferrer nofollow" class="footer-social" aria-label="Canal SpinCresta Telegram"><img src="/icons/telegram-white-icon.svg" alt="Telegram" width="18" height="18" loading="lazy" /><span>Telegram</span></a><a href="https://x.com/SpinCresta" target="_blank" rel="noopener noreferrer nofollow" class="footer-social" aria-label="SpinCresta sur X"><img src="/icons/x-social-media-round-icon.svg" alt="X" width="18" height="18" loading="lazy" /><span>X</span></a></nav>
 
       </div>
     </footer>
-    <script type="module" src="/scripts/main.js?v=20261119-catalog-partners"></script>
+    <script type="module" src="/scripts/main.js?v=20261124-provider-cards"></script>
   </body>
 </html>

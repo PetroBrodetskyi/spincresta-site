@@ -55,7 +55,7 @@
     />
 
     <link rel="icon" type="image/png" href="/favicon.png" />
-    <link rel="stylesheet" href="/styles.css?v=20261120-sticky-pill" />
+    <link rel="stylesheet" href="/styles.css?v=20261124-provider-cards" />
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -283,15 +283,12 @@
     <section class="container">
       <div class="brand-payments">
         <h2 class="title">Métodos de pagamento</h2>
-        <p class="brand-availability-intro">
-          Golden Star lista um amplo caixa com cartões, serviços bancários on-line, transferências bancárias, vouchers, carteiras eletrónicas, opções locais, pagamentos de skins e criptomoedas. A disponibilidade exata do caixa pode variar de acordo com o país, a moeda, o status de verificação e a visualização da conta ativa.
-        </p>
         <div class="payments-container" id="brand-payments"></div>
       </div>
     </section>
 
     <main class="content-review">
-      <section class="container">
+      <section class="container" data-review-section="bonuses">
         <h2 class="title">Resumo de bónus Golden Star</h2>
         <table>
           <thead>
@@ -326,7 +323,7 @@
         </table>
       </section>
 
-      <section class="container">
+      <section class="container" data-review-section="games" data-review-details>
         <h2 class="title">Lobby do casino, casino ao vivo e opções de jogo</h2>
         <div class="features-grid premium-grid">
           <div class="feature-card glass-card">
@@ -348,7 +345,7 @@
         </div>
       </section>
 
-      <section class="container">
+      <section class="container" data-review-section="sports">
         <h2 class="title">Cobertura de apostas desportivas e apostas ao vivo</h2>
         <table>
           <thead>
@@ -383,8 +380,11 @@
         </table>
       </section>
 
-      <section class="container">
+      <section class="container" data-review-section="cashier">
         <h2 class="title">Pagamentos, moedas e prazos de levantamento</h2>
+        <p class="section-intro">
+          Golden Star lista um amplo caixa com cartões, serviços bancários on-line, transferências bancárias, vouchers, carteiras eletrónicas, opções locais, pagamentos de skins e criptomoedas. A disponibilidade exata do caixa pode variar de acordo com o país, a moeda, o status de verificação e a visualização da conta ativa.
+        </p>
         <table>
           <thead>
             <tr>
@@ -445,7 +445,7 @@
         </div>
       </section>
 
-      <section class="container">
+      <section class="container" data-review-section="trust">
         <h2 class="title">Licenciamento, plataforma e notas de segurança</h2>
         <table>
           <thead>
@@ -590,6 +590,7 @@
           <a href="/pt/privacy-policy/">Política de Privacidade</a>
           <a href="/pt/casinos-and-betting/">Casinos e Apostas</a>
           <a href="/pt/payment-methods/">Métodos de pagamento</a>
+          <a href="/pt/game-providers/"><svg class="site-icon site-icon--inline" width="24" height="24" aria-hidden="true" focusable="false"><use href="/icons/ui/review-method.svg?v=20261123-brand-providers#layers"></use></svg> Fornecedores de jogos</a>
           <a href="/pt/partners/">Parceiros</a>
           <a href="/pt/about/">Sobre</a>
           <a
@@ -613,6 +614,6 @@
       </div>
     </footer>
 
-    <script type="module" src="/scripts/main.js?v=20261119-catalog-partners"></script>
+    <script type="module" src="/scripts/main.js?v=20261124-provider-cards"></script>
   </body>
 </html>
