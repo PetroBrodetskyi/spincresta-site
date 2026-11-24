@@ -1,8 +1,11 @@
-import { resolveReviewProviders } from './provider-logo-library.js?v=20261124-bitgames-providers';
+import { resolveReviewProviders } from './provider-logo-library.js?v=20261124-provider-art';
 
 // Selected names from each brand's own review or operator catalog, not a global list.
 // A studio in the logo library is not automatically attributed to any casino.
 const byReview = Object.freeze({
+  duckyluck: 'dicelab-slots fresh-deck-studios dragon-gaming rival arrows-edge betsoft-gaming wingo felix-gaming saucify qora-gaming',
+  jackspay: 'rival dragon-gaming arrows-edge dicelab-slots fresh-deck-studios',
+  slotsandcasino: 'dicelab-slots dragon-gaming fresh-deck-studios rival arrows-edge bgaming betsoft-gaming wingo felix-gaming saucify qora-gaming',
   '10bet': 'evolution spinomenal betgames',
   '1redbet': 'pragmatic-play bgaming playson endorphina gamebeat 3-oaks',
   '20bet': 'pragmatic-play hacksaw-gaming bgaming playson felix-gaming',

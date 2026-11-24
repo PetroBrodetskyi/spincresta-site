@@ -25,18 +25,10 @@ let initAccountPageModule = null;
 let initCatalogDirectoryModule = null;
 let initCountryHubModule = null;
 
-const brandLayoutFallbackTimer = document.body?.dataset.brand
-  ? window.setTimeout(() => {
-      if (!document.body.classList.contains('has-brand-sticky-layout')) {
-        document.body.classList.add('brand-layout-failed');
-      }
-    }, 1500)
-  : null;
 const brandLayoutModuleReady = document.body?.dataset.brand
   ? import('./pages/brand-layout.js?v=20261124-slotsandcasino-games').then(module => {
       initBrandLayoutModule = module.initBrandLayout;
     }).catch(error => {
-      document.body.classList.add('brand-layout-failed');
       console.warn('Could not initialize the enhanced brand layout.', error);
     })
   : Promise.resolve();
@@ -69,7 +61,7 @@ const loadPageModules = async () => {
     const [snapshotsModule, gamesModule, pageModule, feedbackModule, relatedModule] = await Promise.all([
       import('./brand-snapshot-configs.js?v=20261124-jackspay'),
       import('./brand-new-games.js?v=20261124-jackspay'),
-      import('./pages/brand.js?v=20261124-sticky-logo'),
+      import('./pages/brand.js?v=20261124-provider-art'),
       import('./pages/brand-feedback.js?v=20261121-feedback-availability'),
       import('./pages/related-brand-reviews.js?v=20261123-full-width'),
     ]);
@@ -3977,24 +3969,9 @@ export const initCasinoPage = async () => {
 
   const pageModulesReady = loadPageModules();
 
-  if (isBrandPage) {
-    await brandLayoutModuleReady;
-    initBrandLayoutModule?.({
-      BRANDS,
-      BRAND_NEW_GAMES: {},
-      normalizeText,
-      normalizeBrandKey,
-      findBrandByPageKey,
-      escapeHtml,
-      localeText,
-      localizedBrandBonusText,
-    });
-    if (document.body.classList.contains('has-brand-sticky-layout') && brandLayoutFallbackTimer) {
-      window.clearTimeout(brandLayoutFallbackTimer);
-    }
-  }
-
-  await Promise.all([pageModulesReady, brandBonusTranslationsReady]);
+  // Keep the original article intact while modules load. Build the grid and
+  // the masthead in the same turn, so no intermediate sidebar is painted.
+  await Promise.all([pageModulesReady, brandBonusTranslationsReady, brandLayoutModuleReady]);
 
   if (pageType !== 'moderator') initFooterNewsletter(SITE_LOCALE);
   initAccountPageModule?.();
@@ -4140,7 +4117,7 @@ export const initCasinoPage = async () => {
 
   const brandKey = document.body.dataset.brand?.toLowerCase();
   if (brandKey) {
-    initBrandPageModule?.({
+    if (initBrandLayoutModule) initBrandPageModule?.({
       brandKey,
       BRANDS,
       BRAND_SNAPSHOT_CONFIGS,
@@ -4625,7 +4602,9 @@ export const initCasinoPage = async () => {
 };
 
 document.addEventListener('DOMContentLoaded', () => {
-  initCasinoPage();
+  initCasinoPage()
+    .catch(error => console.error('Could not fully initialize the page.', error))
+    .finally(() => document.documentElement.classList.remove('brand-layout-pending'));
 });
 
 (function renderHeroCountries() {

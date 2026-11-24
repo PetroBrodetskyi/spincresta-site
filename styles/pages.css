@@ -5862,9 +5862,9 @@ html.has-brand-sticky-layout body {
   overflow-y: visible;
 }
 
-/* Prevent the source markup from flashing at its pre-enhancement width while
-   the small brand-layout module builds the final stable grid. */
-body[data-brand]:not(.has-brand-sticky-layout):not(.brand-layout-failed)
+/* The early grid is not the finished review. Reveal it only after the masthead
+   and sidebar have been built. Without JavaScript the source remains readable. */
+html.brand-layout-pending body[data-brand]
   > :where(.hero, section, main, .all-countries, .footer) {
   visibility: hidden;
 }

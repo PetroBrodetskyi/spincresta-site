@@ -1,4 +1,5 @@
-import { getReviewProviders } from '../brand-review-providers.js?v=20261124-bitgames-providers';
+import { getReviewProviders } from '../brand-review-providers.js?v=20261124-provider-art';
+import { providerLogoPath } from '../provider-logo-library.js?v=20261124-provider-art';
 import { siteIconMarkup } from '../site-icons.js?v=20261123-brand-providers';
 import { bindManualCardStrip } from '../scrolling-card-strip.js?v=20261123-provider-strip';
 import { reviewSectionLabel } from './brand-review-order.js?v=20261123-provider-strip';
@@ -14,8 +15,10 @@ export function reviewProviderStrip({ id, heading, providers, previous, next, em
   const headingMarkup = `<h2 id="${id}-title" class="title">${siteIconMarkup('layers', 'site-icon site-icon--heading')} ${escape(heading)}</h2>`;
   const cards = providers.map(([name, slug]) => {
     if (slug !== null && !/^[a-z0-9-]+$/.test(slug)) throw new Error(`Invalid provider logo name: ${slug}`);
+    const path = providerLogoPath(slug);
+    if (slug && !path) throw new Error(`Unregistered provider logo: ${slug}`);
     const logo = slug
-      ? `<img src="/images/providers/${slug}.svg" alt="" width="96" height="36" loading="lazy" decoding="async" />`
+      ? `<img src="${path}" alt="" width="96" height="36" loading="lazy" decoding="async" />`
       : siteIconMarkup('layers');
     return `<li><span class="review-provider-logo">${logo}</span><span>${escape(name)}</span></li>`;
   }).join('');

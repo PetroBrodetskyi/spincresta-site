@@ -12,9 +12,9 @@ const EDITORIAL_DASHBOARD_VERSION = '20261119-editorial-dashboards';
 const LIGHT_EDITORIAL_VERSION = '20261119-light-editorial';
 const PROFILE_AND_ARTICLE_VERSION = '20261119-light-profile-guide';
 const COUNTRY_HUB_VERSION = '20261119-country-hub';
-const BRAND_STYLE_VERSION = '20261124-provider-cards';
-const BRAND_ENTRY_VERSION = '20261124-provider-cards';
-const PROVIDER_DIRECTORY_VERSION = '20261124-provider-directory-layout';
+const BRAND_STYLE_VERSION = '20261124-review-first-paint';
+const BRAND_ENTRY_VERSION = '20261124-review-first-paint';
+const PROVIDER_DIRECTORY_VERSION = '20261124-provider-art';
 const WORDMARK_VERSION = '20261118-padded-wordmark';
 const excluded = new Set(['.git','.vercel','node_modules','tools','research','data','tmp','keyboard-diagnostics']);
 export function publicThemePages(directory=process.cwd()) {
@@ -37,7 +37,7 @@ export function syncDefaultTheme(html) {
     : html.includes('<main class="catalog-directory">')
     ? CATALOG_VERSION
     : /<main class="account-dashboard editorial-dashboard /.test(html) ? EDITORIAL_DASHBOARD_VERSION : null;
-  return syncGameProviderFooter(html).replace(/<html\b([^>]*)>/i,(all,attributes)=>`<html${attributes.replace(/\sdata-theme=(?:"[^"]*"|'[^']*')/gi,'')}>`)
+  const shell = syncGameProviderFooter(html).replace(/<html\b([^>]*)>/i,(all,attributes)=>`<html${attributes.replace(/\sdata-theme=(?:"[^"]*"|'[^']*')/gi,'')}>`)
     .replace(/\s*<script src="\/scripts\/theme-init\.js(?:\?[^"\s]*)?"><\/script>/g,'')
     .replace(/(<meta name="theme-color" content=")[^"]+("\s*\/?>)/g,'$1#ffffff$2')
     .replace(/<img\b(?=[^>]*\bclass="[^"]*\blogo-lockup\b)[^>]*>/g, tag =>
@@ -47,6 +47,11 @@ export function syncDefaultTheme(html) {
     .replace(/(\/(?:scripts\/main\.js|styles\.css|styles\/blog\.css))(?:\?v=[^"\s]+)?(?=")/g,
       (_, asset) => `${asset}?v=${pageVersion || (asset === '/styles.css' ? styleVersion
         : asset === '/scripts/main.js' && isBrand ? BRAND_ENTRY_VERSION : SITE_ENTRY_VERSION)}`);
+  if (!isBrand) return shell;
+  return shell
+    .replace(/\s*<script data-brand-layout-guard>[\s\S]*?<\/script>/g, '')
+    .replace(/(\s+)(<link rel="stylesheet" href="\/styles\.css\?v=[^"\s]+"\s*\/?>)/, (_, indent, link) =>
+      `${indent}<script data-brand-layout-guard>document.documentElement.classList.add('brand-layout-pending');window.addEventListener('error',function(event){if(event.target instanceof HTMLScriptElement && event.target.src.includes('/scripts/main.js'))document.documentElement.classList.remove('brand-layout-pending');},true);</script>${indent}${link}`);
 }
 if(process.argv[1]&&import.meta.url===pathToFileURL(process.argv[1]).href){
   const check=process.argv.includes('--check');let changed=0;const files=publicThemePages();

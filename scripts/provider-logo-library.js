@@ -1,4 +1,4 @@
-// Shared catalog of local SVG logos. A logo's presence here does not imply brand availability.
+// Shared catalog of local logos. A logo's presence here does not imply brand availability.
 export const providerNames = Object.freeze({
   '100hp-gaming': "100HP Gaming",
   '155': "155",
@@ -13,6 +13,7 @@ export const providerNames = Object.freeze({
   'amigo': "Amigo",
   'apollo-games': "Apollo Games",
   'arrr-gaming': "Arrr Gaming",
+  'arrows-edge': "Arrow’s Edge",
   'astriona': "Astriona",
   'atlas-v': "Atlas-V",
   'atomic-slot-lab': "Atomic Slot Lab",
@@ -34,7 +35,9 @@ export const providerNames = Object.freeze({
   'cq9': "CQ9",
   'creative-gaming': "Creative Gaming",
   'ct-interactive': "CT Interactive",
+  'dicelab-slots': "DiceLab Slots",
   'dlv': "DLV",
+  'dragon-gaming': "Dragon Gaming",
   'egt-digital': "EGT Digital",
   'endorphina': "Endorphina",
   'esa-gaming': "ESA Gaming",
@@ -43,7 +46,9 @@ export const providerNames = Object.freeze({
   'evoplay': "Evoplay",
   'fa-chai-gaming': "Fa Chai Gaming",
   'fastspin-slot': "Fastspin slot",
+  'felix-gaming': "Felix Gaming",
   'formula-spin': "Formula Spin",
+  'fresh-deck-studios': "Fresh Deck Studios",
   'fugaso': "Fugaso",
   'funky': "Funky",
   'g-gaming': "G Gaming",
@@ -92,6 +97,7 @@ export const providerNames = Object.freeze({
   'poggiplay': "PoggiPlay",
   'popiplay': "Popiplay",
   'pragmatic-play': "Pragmatic Play",
+  'qora-gaming': "Qora Gaming",
   'r-franco': "R.Franco",
   'radi8': "Radi8",
   'red-carat': "Red Carat",
@@ -99,7 +105,9 @@ export const providerNames = Object.freeze({
   'red-tiger': "Red Tiger",
   'reevo': "Reevo",
   'riddec-games': "Riddec Games",
+  'rival': "Rival",
   'ruby-play': "Ruby Play",
+  'saucify': "Saucify",
   'slotopia': "Slotopia",
   'solidicon': "Solidicon",
   'spade-gaming': "Spade Gaming",
@@ -120,6 +128,7 @@ export const providerNames = Object.freeze({
   'voltent': "VoltEnt",
   'whoah-labs': "Whoah Labs",
   'winfinity': "Winfinity",
+  'wingo': "Wingo",
   'winspinity': "Winspinity",
   'yggdrasil': "Yggdrasil",
   'zephyr-slots': "Zephyr Slots",
@@ -128,9 +137,17 @@ export const providerNames = Object.freeze({
   'zillion-games': "Zillion Games",
 });
 
+const rasterProviderLogos = new Set([
+  'arrows-edge', 'dicelab-slots', 'dragon-gaming', 'felix-gaming', 'fresh-deck-studios',
+  'qora-gaming', 'rival', 'saucify', 'wingo',
+]);
+export const providerLogoPath = id => Object.hasOwn(providerNames, id)
+  ? `/images/providers/${id}.${rasterProviderLogos.has(id) ? 'png' : 'svg'}`
+  : '';
+
 const textOnlyProviderNames = Object.freeze({
   'amusnet': 'Amusnet', 'betgames': 'BetGames', 'ezugi': 'Ezugi',
-  'felix-gaming': 'Felix Gaming', 'gamzix': 'Gamzix', 'microgaming': 'Microgaming',
+  'gamzix': 'Gamzix', 'microgaming': 'Microgaming',
   'novomatic': 'Novomatic', 'play-n-go': 'Play’n GO', 'playtech': 'Playtech',
   'push-gaming': 'Push Gaming', 'quickspin': 'Quickspin', 'relax-gaming': 'Relax Gaming',
   'spribe': 'SPRIBE', 'thunderkick': 'Thunderkick', 'wazdan': 'Wazdan',

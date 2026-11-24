@@ -1,5 +1,6 @@
 import { readFileSync, writeFileSync } from 'node:fs';
 import { BRANDS } from '../scripts/brands.js';
+import { getReviewProviders } from '../scripts/brand-review-providers.js';
 import { BRAND_HOMEPAGE_SCREENSHOTS } from '../scripts/brand-homepage-screenshots.js';
 import { BRAND_NEW_GAMES } from '../scripts/brand-new-games.js';
 import { renderBrandNewGamesPanel } from '../scripts/pages/brand-layout.js';
@@ -17,11 +18,7 @@ const image = BRAND_HOMEPAGE_SCREENSHOTS[slug];
 const route = lang => prefix(lang) + 'brands/' + slug + '/';
 const prefix = lang => lang === 'en' ? '/' : '/' + lang + '/';
 const check = process.argv.includes('--check');
-const providers = [
-  ['DiceLab Slots', null], ['Dragon Gaming', null], ['Fresh Deck Studios', null], ['Rival', null],
-  ['Arrow’s Edge', null], ['BGaming', 'bgaming'], ['Betsoft Gaming', 'betsoft-gaming'], ['Wingo', null],
-  ['Felix Gaming', null], ['Saucify', null], ['Qora Gaming', null],
-];
+const providers = getReviewProviders(slug);
 const controls = [
   ['Previous providers', 'Next providers'], ['Vorherige Anbieter', 'Nächste Anbieter'], ['Proveedores anteriores', 'Siguientes proveedores'],
   ['Fornitori precedenti', 'Fornitori successivi'], ['Poprzedni dostawcy', 'Następni dostawcy'], ['Попередні провайдери', 'Наступні провайдери'],

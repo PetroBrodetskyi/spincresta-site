@@ -1,5 +1,6 @@
 import { readFileSync, writeFileSync } from 'node:fs';
 import { BRANDS } from '../scripts/brands.js';
+import { getReviewProviders } from '../scripts/brand-review-providers.js';
 import { BRAND_HOMEPAGE_SCREENSHOTS } from '../scripts/brand-homepage-screenshots.js';
 import { reviewSectionLabel } from '../scripts/pages/brand-review-order.js';
 import { siteIconMarkup } from '../scripts/site-icons.js';
@@ -15,11 +16,7 @@ const route = lang => prefix(lang) + 'brands/duckyluck/';
 const brand = BRANDS.find(item => item.urlDetail === 'brands/duckyluck.html');
 const image = BRAND_HOMEPAGE_SCREENSHOTS.duckyluck;
 const check = process.argv.includes('--check');
-const providers = [
-  ['DiceLab Slots', null], ['Fresh Deck Studios', null], ['Dragon Gaming', null], ['Rival', null],
-  ['Arrow’s Edge', null], ['Betsoft Gaming', 'betsoft-gaming'], ['Wingo', null], ['Felix Gaming', null],
-  ['Saucify', null], ['Qora Gaming', null],
-];
+const providers = getReviewProviders('duckyluck');
 const snapshotIntro = {
   en: 'Categories listed in the public casino and Fresh Deck lobbies.', de: 'Kategorien der öffentlichen Casino- und Fresh-Deck-Lobbys.',
   es: 'Categorías de las salas públicas del casino y de Fresh Deck.', it: 'Categorie delle lobby pubbliche del casinò e di Fresh Deck.',

@@ -2,7 +2,7 @@ import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { dirname } from 'node:path';
 import { BRANDS } from '../scripts/brands.js';
 import { getReviewProviders } from '../scripts/brand-review-providers.js';
-import { providerNames } from '../scripts/provider-logo-library.js';
+import { providerLogoPath, providerNames } from '../scripts/provider-logo-library.js';
 import { providerDirectoryKey } from '../scripts/provider-directory-key.js';
 import { isPublishedBrandReview } from '../scripts/pages/brand-provider-strip.js';
 import { siteIconMarkup } from '../scripts/site-icons.js';
@@ -64,7 +64,7 @@ for (const [slug] of published) {
   // Authored provider strips, such as ColdBet's, take precedence over the runtime fallback.
   const strip = html.match(/<ul\b[^>]*class="review-provider-strip"[^>]*>([\s\S]*?)<\/ul>/)?.[1];
   const names = strip ? [...strip.matchAll(/<li><span class="review-provider-logo">([\s\S]*?)<\/span><span>([^<]+)<\/span><\/li>/g)]
-    .map(([, logo, name]) => [decode(name), logo.match(/\/images\/providers\/([a-z0-9-]+)\.svg/)?.[1] ?? null])
+    .map(([, logo, name]) => [decode(name), logo.match(/\/images\/providers\/([a-z0-9-]+)\.(?:svg|png)/)?.[1] ?? null])
     : getReviewProviders(slug);
   for (const [name, logo] of names) getStudio(name, logo).reviews.add(slug);
 }
@@ -127,7 +127,8 @@ for (const lang of locales) {
   const rows = catalog.map(({ name, logo, key, reviews, games }) => {
     const kinds = [...new Set(games.map(game => game.category))];
     const search = [name, providerSearchAliases[name], ...games.map(({ title }) => title)].filter(Boolean).map(providerDirectoryKey).join(' ');
-    const mark = logo ? `<img src="/images/providers/${esc(logo)}.svg" alt="" width="96" height="36" loading="lazy" decoding="async" />` : icon('layers');
+    const logoPath = providerLogoPath(logo);
+    const mark = logoPath ? `<img src="${logoPath}" alt="" width="96" height="36" loading="lazy" decoding="async" />` : icon('layers');
     const examples = games.length ? `<p><strong>${esc(c.games)}:</strong> ${games.map(g => esc(g.title) + ' — ' + toReview(g.slug)).join(' · ')}</p>` : '';
     const reviewLinks = reviews.map(toReview).join(' · ');
     const count = number.format(reviews.length);

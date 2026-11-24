@@ -1,6 +1,7 @@
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { dirname } from 'node:path';
 import { BRANDS } from '../scripts/brands.js';
+import { getReviewProviders } from '../scripts/brand-review-providers.js';
 import { BRAND_HOMEPAGE_SCREENSHOTS } from '../scripts/brand-homepage-screenshots.js';
 import { BRAND_NEW_GAMES } from '../scripts/brand-new-games.js';
 import { renderBrandNewGamesPanel } from '../scripts/pages/brand-layout.js';
@@ -23,7 +24,7 @@ const brand = BRANDS.find(entry => entry.urlDetail === 'brands/' + slug + '.html
 const fromBrand = BRANDS.find(entry => entry.urlDetail === 'brands/' + template + '.html');
 const image = BRAND_HOMEPAGE_SCREENSHOTS[slug];
 const games = BRAND_NEW_GAMES[slug];
-const providers = ['Rival', 'Dragon Gaming', 'Arrow’s Edge', 'DiceLab Slots', 'Fresh Deck Studios'].map(name => [name, null]);
+const providers = getReviewProviders(slug);
 const previous = ['Previous providers', 'Vorherige Anbieter', 'Proveedores anteriores', 'Fornitori precedenti', 'Poprzedni dostawcy', 'Попередні провайдери', 'Fornecedores anteriores', 'Fournisseurs précédents', 'पिछले प्रदाता', 'Edelliset pelintarjoajat'];
 const next = ['Next providers', 'Nächste Anbieter', 'Siguientes proveedores', 'Fornitori successivi', 'Następni dostawcy', 'Наступні провайдери', 'Fornecedores seguintes', 'Fournisseurs suivants', 'अगले प्रदाता', 'Seuraavat pelintarjoajat'];
 const snapshotIntro = [

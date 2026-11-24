@@ -3,6 +3,7 @@ import { existsSync, readFileSync } from 'node:fs';
 import test from 'node:test';
 import { BRANDS } from '../scripts/brands.js';
 import { documentedReviewProviderKeys, getReviewProviders } from '../scripts/brand-review-providers.js';
+import { providerLogoPath } from '../scripts/provider-logo-library.js';
 import { insertBrandProviderSection, isPublishedBrandReview } from '../scripts/pages/brand-provider-strip.js';
 
 const read = path => readFileSync(new URL(`../${path}`, import.meta.url), 'utf8');
@@ -13,12 +14,33 @@ test('each documented provider list belongs to a published review and uses only 
     assert.ok(isPublishedBrandReview(brand(slug)), slug);
     for (const [name, logo] of getReviewProviders(slug)) {
       assert.ok(name, slug);
-      if (logo) assert.match(read(`images/providers/${logo}.svg`), /<svg\b/, logo);
+      if (!logo) continue;
+      const path = providerLogoPath(logo);
+      if (path.endsWith('.png')) {
+        assert.equal(readFileSync(new URL(`..${path}`, import.meta.url)).subarray(0, 8).toString('hex'), '89504e470d0a1a0a', logo);
+      } else {
+        assert.match(read(path.slice(1)), /<svg\b/, logo);
+      }
     }
   }
   assert.ok(getReviewProviders('kingmaker').length > 10);
   assert.ok(getReviewProviders('betrepublic').length > 10);
   assert.deepEqual(getReviewProviders('does-not-exist'), []);
+});
+
+test('all localized reviews serve original local logos without placeholder cards', () => {
+  for (const [slug, count] of Object.entries({ jackspay: 5, duckyluck: 10, slotsandcasino: 11 })) {
+    const providers = getReviewProviders(slug);
+    assert.equal(providers.length, count, slug);
+    assert.ok(providers.every(([, id]) => id && providerLogoPath(id)), slug);
+    for (const prefix of ['', 'de/', 'es/', 'fi/', 'fr/', 'hi/', 'it/', 'pl/', 'pt/', 'uk/']) {
+      const route = `${prefix}brands/${slug}/index.html`;
+      const strip = read(route).match(/<ul[^>]*class="review-provider-strip"[^>]*>([\s\S]*?)<\/ul>/)?.[1];
+      assert.ok(strip, route);
+      assert.deepEqual([...strip.matchAll(/<img src="([^"]+)"/g)].map(match => match[1]), providers.map(([, id]) => providerLogoPath(id)), route);
+      assert.doesNotMatch(strip, /#layers|https?:/);
+    }
+  }
 });
 
 test('reviewed brands receive a local strip or an honest empty state; placeholders receive neither', () => {
