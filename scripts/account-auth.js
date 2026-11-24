@@ -1,5 +1,5 @@
 import { COUNTRIES } from './countries.js';
-import { initBrandFavorites, persistBrandFavorite, readFavoriteBrands } from './brand-favorites.js?v=20261122-favorite-logos';
+import { initBrandFavorites, persistBrandFavorite, readFavoriteBrands } from './brand-favorites.js?v=20261124-ranking-cards';
 
 const DEFAULT_CONFIG_ENDPOINT = 'https://api.spincresta.com/api/auth-config';
 const DEFAULT_NEWSLETTER_ENDPOINT = 'https://api.spincresta.com/api/subscribe';

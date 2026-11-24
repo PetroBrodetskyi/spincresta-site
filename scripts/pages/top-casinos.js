@@ -2,8 +2,9 @@
 import { bindCompactCountryCloud } from '../country-cloud.js?v=20261122-market-cloud';
 
 export const TOP_CASINOS_PREVIEW_LIMIT = 5;
+const MOBILE_PREVIEW_LIMIT = 6;
 
-export const topCasinosForCountry = (brands, code) => {
+export const topCasinosForCountry = (brands, code, limit = TOP_CASINOS_PREVIEW_LIMIT) => {
   const priority = brand => Number.isFinite(brand.countryPagePriority)
     ? brand.countryPagePriority : Number.MAX_SAFE_INTEGER;
   return brands.filter(brand => brand.countries?.includes(code))
@@ -15,7 +16,7 @@ export const topCasinosForCountry = (brands, code) => {
     }))
     .sort((a, b) => a.blocked - b.blocked || a.tier - b.tier ||
       priority(a.brand) - priority(b.brand) || a.index - b.index)
-    .slice(0, TOP_CASINOS_PREVIEW_LIMIT)
+    .slice(0, limit)
     .map(({ brand }) => brand);
 };
 
@@ -52,9 +53,14 @@ export const initTopCasinosPage = ({
     section.setAttribute('aria-labelledby', title.id);
     section.querySelector('.home-brand-view-all').href = link.href;
     const grid = section.querySelector('.casino-grid');
-    const ranked = topCasinosForCountry(BRANDS, section.dataset.country);
+    grid.classList.add('casino-catalog-grid');
+    const ranked = topCasinosForCountry(BRANDS, section.dataset.country, MOBILE_PREVIEW_LIMIT);
     if (ranked.length) {
-      grid.append(...ranked.map(brand => createCasinoCard(brand)));
+      grid.append(...ranked.map((brand, index) => {
+        const card = createCasinoCard(brand, { favorite: true });
+        if (index >= TOP_CASINOS_PREVIEW_LIMIT) card.classList.add('top-casino-mobile-extra');
+        return card;
+      }));
     } else {
       const empty = document.createElement('p');
       empty.className = 'top-casino-empty';

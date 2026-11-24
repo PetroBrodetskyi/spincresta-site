@@ -312,6 +312,7 @@ export const initHomePage = context => {
     controls.className = 'home-brand-carousel-controls';
     controls.hidden = true;
     title.id = 'home-brand-carousel-title';
+    title.tabIndex = -1;
     title.textContent = defaultTitle;
     title.setAttribute('aria-live', 'polite');
     grid.id = 'home-brand-carousel';
@@ -405,6 +406,10 @@ export const initHomePage = context => {
       reviews.hidden = !brands.length;
       renderBatch();
       renderHomeNewReviews(code);
+      if (window.matchMedia('(max-width: 767px)').matches) {
+        title.focus({ preventScroll: true });
+        title.scrollIntoView({ block: 'start', behavior: 'instant' });
+      }
     });
   };
 

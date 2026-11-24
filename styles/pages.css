@@ -2236,102 +2236,12 @@ body[data-page='top-casinos'] .content[data-country] .top-country-title::before 
   text-transform: uppercase;
 }
 
-body[data-page='top-casinos'] .content[data-country] .casino-grid {
-  display: grid;
-  grid-template-columns: repeat(5, minmax(0, 1fr));
-  gap: 14px;
-  border: 0;
-  counter-reset: none;
-}
-
-body[data-page='top-casinos'] .content[data-country] .casino-card {
-  display: flex;
-  flex-direction: column;
-  align-items: stretch;
-  min-height: 308px;
-  padding: 12px;
-  gap: 10px;
-  border: 1px solid var(--border-soft);
-  border-radius: 8px;
-  background: rgba(255, 255, 255, 0.025);
-  box-shadow: none;
-}
-
-body[data-page='top-casinos'] .content[data-country] .casino-card::before {
-  display: none;
-}
-
-body[data-page='top-casinos'] .content[data-country] .card-img,
-html:root body[data-page='top-casinos'] .content[data-country] .card-img {
-  width: 100%;
-  height: 112px;
-  flex: 0 0 112px;
-  flex-basis: 112px;
-  min-height: 0;
-  margin: 0;
-  padding: 16px 18px;
-  border-radius: 8px;
-}
-
-body[data-page='top-casinos'] .content[data-country] .card-img img,
-body[data-page='top-casinos'] .content[data-country] .card-img .casino-image {
-  width: 100%;
-  height: 100%;
-  max-width: 100%;
-  max-height: 100%;
-  object-fit: contain;
-  transform: scale(1);
-}
-
-body[data-page='top-casinos'] .content[data-country] .casino-card-heading {
-  align-self: stretch;
-  flex-wrap: wrap;
-  min-height: 42px;
-}
-
-body[data-page='top-casinos'] .content[data-country] .casino-card h3 {
-  font-size: var(--type-subheading);
-}
-
-body[data-page='top-casinos'] .content[data-country] .casino-bonus {
-  min-height: 36px;
-  font-size: var(--type-caption);
-  -webkit-line-clamp: 2;
-}
-
-body[data-page='top-casinos'] .content[data-country] .payment-icons {
-  min-height: 20px;
-  margin-top: 0;
-}
-
-body[data-page='top-casinos'] .content[data-country] .casino-footer {
-  width: 100%;
-  margin-top: auto;
-}
-
-body[data-page='top-casinos'] .content[data-country] .casino-actions,
-body[data-page='top-casinos'] .content[data-country] .casino-actions.has-two-actions,
-body[data-page='top-casinos'] .content[data-country] .casino-actions.has-single-action {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  width: 100%;
-  gap: 6px;
-}
-
-body[data-page='top-casinos'] .content[data-country] .casino-actions .cta {
-  min-width: 0;
-  width: 100%;
-  padding: 8px 9px;
-  font-size: var(--type-caption);
-}
-
 body[data-page='top-casinos'] .content[data-country] .view-all-wrapper {
   justify-content: center;
 }
 
 @media (max-width: 1180px) {
-  body.home-page .content[data-country] .casino-grid.home-featured-casino-grid,
-  body[data-page='top-casinos'] .content[data-country] .casino-grid {
+  body.home-page .content[data-country] .casino-grid.home-featured-casino-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
@@ -7108,14 +7018,12 @@ body[data-brand] .availability-tab-list {
 }
 
 @media (max-width: 768px) {
-  body.home-page .content[data-country] .casino-grid.home-featured-casino-grid,
-  body[data-page='top-casinos'] .content[data-country] .casino-grid {
+  body.home-page .content[data-country] .casino-grid.home-featured-casino-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 10px;
   }
 
-  body.home-page .home-featured-casino-grid > .casino-card,
-  body[data-page='top-casinos'] .content[data-country] .casino-card {
+  body.home-page .home-featured-casino-grid > .casino-card {
     display: flex;
     flex-direction: column;
     align-items: stretch;
@@ -7125,9 +7033,7 @@ body[data-brand] .availability-tab-list {
   }
 
   body.home-page .home-featured-casino-grid .card-img,
-  body[data-page='top-casinos'] .content[data-country] .card-img,
-  html:root body.home-page .home-featured-casino-grid .card-img,
-  html:root body[data-page='top-casinos'] .content[data-country] .card-img {
+  html:root body.home-page .home-featured-casino-grid .card-img {
     width: 100%;
     height: 76px;
     flex: 0 0 76px;
@@ -7136,20 +7042,16 @@ body[data-brand] .availability-tab-list {
   }
 
   body.home-page .home-featured-casino-grid .card-img img,
-  body.home-page .home-featured-casino-grid .casino-image,
-  body[data-page='top-casinos'] .content[data-country] .card-img img,
-  body[data-page='top-casinos'] .content[data-country] .casino-image {
+  body.home-page .home-featured-casino-grid .casino-image {
     transform: scale(1);
   }
 
-  body.home-page .home-featured-casino-grid .casino-card-heading,
-  body[data-page='top-casinos'] .content[data-country] .casino-card-heading {
+  body.home-page .home-featured-casino-grid .casino-card-heading {
     min-height: 34px;
     gap: 5px;
   }
 
-  body.home-page .home-featured-casino-grid .casino-card h3,
-  body[data-page='top-casinos'] .content[data-country] .casino-card h3 {
+  body.home-page .home-featured-casino-grid .casino-card h3 {
     font-size: var(--type-ui);
     line-height: 1.15;
   }
@@ -7157,56 +7059,43 @@ body[data-brand] .availability-tab-list {
   body.home-page .home-featured-casino-grid .casino-status-badge,
   body.home-page .home-featured-casino-grid .top-rated-badge,
   body.home-page .home-featured-casino-grid .exclusive-badge,
-  body.home-page .home-featured-casino-grid .new-badge,
-  body[data-page='top-casinos'] .content[data-country] .casino-status-badge,
-  body[data-page='top-casinos'] .content[data-country] .top-rated-badge,
-  body[data-page='top-casinos'] .content[data-country] .exclusive-badge,
-  body[data-page='top-casinos'] .content[data-country] .new-badge {
+  body.home-page .home-featured-casino-grid .new-badge {
     min-height: 17px;
     padding: 2px 5px;
     font-size: var(--type-caption);
   }
 
   body.home-page .home-featured-casino-grid .casino-bonus,
-  body.home-page .home-featured-casino-grid p,
-  body[data-page='top-casinos'] .content[data-country] .casino-bonus,
-  body[data-page='top-casinos'] .content[data-country] p {
+  body.home-page .home-featured-casino-grid p {
     min-height: 40px;
     font-size: var(--type-caption);
     line-height: 1.35;
     -webkit-line-clamp: 3;
   }
 
-  body.home-page .home-featured-casino-grid .payment-icons,
-  body[data-page='top-casinos'] .content[data-country] .payment-icons {
+  body.home-page .home-featured-casino-grid .payment-icons {
     gap: 4px;
     min-height: 16px;
   }
 
-  body.home-page .home-featured-casino-grid .payment-icons img,
-  body[data-page='top-casinos'] .content[data-country] .payment-icons img {
+  body.home-page .home-featured-casino-grid .payment-icons img {
     height: 13px;
   }
 
-  body.home-page .home-featured-casino-grid .payment-more,
-  body[data-page='top-casinos'] .content[data-country] .payment-more {
+  body.home-page .home-featured-casino-grid .payment-more {
     font-size: var(--type-caption);
   }
 
   body.home-page .home-featured-casino-grid .casino-actions,
   body.home-page .home-featured-casino-grid .casino-actions.has-two-actions,
-  body.home-page .home-featured-casino-grid .casino-actions.has-single-action,
-  body[data-page='top-casinos'] .content[data-country] .casino-actions,
-  body[data-page='top-casinos'] .content[data-country] .casino-actions.has-two-actions,
-  body[data-page='top-casinos'] .content[data-country] .casino-actions.has-single-action {
+  body.home-page .home-featured-casino-grid .casino-actions.has-single-action {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
     width: 100%;
     gap: 5px;
   }
 
-  body.home-page .home-featured-casino-grid .casino-actions .cta,
-  body[data-page='top-casinos'] .content[data-country] .casino-actions .cta {
+  body.home-page .home-featured-casino-grid .casino-actions .cta {
     width: 100%;
     min-width: 0;
     min-height: 31px;
@@ -18400,12 +18289,6 @@ html body :is(.content[data-country] .casino-grid, .casino-grid, .brand-risk-inl
   }
 }
 
-@media (min-width: 1025px) {
-  html body[data-page='top-casinos'] .content[data-country] .casino-grid:has(> .casino-catalog-card) {
-    grid-template-columns: repeat(5, minmax(0, 1fr));
-  }
-}
-
 html:root body :is(.casino-grid, .brand-risk-inline-grid) > .casino-card.casino-catalog-card {
   display: flex;
   flex-direction: column;
@@ -18557,6 +18440,10 @@ body[data-country] .country-catalog-heading {
 
 .home-brand-toolbar h2 { margin: 0; }
 
+#home-brand-carousel-title {
+  scroll-margin-block-start: calc(var(--header-height, 64px) + 12px);
+}
+
 .home-brand-toolbar-actions,
 .home-brand-carousel-controls {
   display: flex;
@@ -18650,12 +18537,12 @@ html:root body.home-page #home-brand-carousel.is-resetting { scroll-snap-type: n
   scroll-snap-align: start;
 }
 
-#home-brand-carousel .casino-card-preview:has(.casino-status-badge) .brand-favorite-control {
-  inset-inline-start: clamp(8px, 1.2vw, 16px);
+.casino-catalog-card .casino-card-preview:has(.casino-status-badge) .brand-favorite-control {
+  inset-inline-start: var(--catalog-favorite-inset);
   inset-inline-end: auto;
 }
 
-#home-brand-carousel .casino-card-preview:has(.casino-status-badge) .favorite-status.is-error {
+.casino-catalog-card .casino-card-preview:has(.casino-status-badge) .favorite-status.is-error {
   inset-inline-start: 0;
   inset-inline-end: auto;
 }
@@ -18755,6 +18642,13 @@ html body :is(.home-country-directory, .market-country-picker) .countries-cloud 
 
 .top-casino-ranking .top-casino-empty { grid-column: 1 / -1; }
 
+/* Only the two-column layout needs a sixth card to complete the row. */
+@media (min-width: 768px) {
+  html:root body .top-casino-ranking .casino-catalog-grid > .top-casino-mobile-extra {
+    display: none;
+  }
+}
+
 @media (max-width: 768px) {
   :is(.home-country-directory, .market-country-picker) .countries-cloud.is-collapsed > .country-cloud-extra {
     display: none;
@@ -18782,6 +18676,7 @@ html body :is(.home-country-directory, .market-country-picker) .countries-cloud 
 
 .casino-card-preview {
   --preview-loader-size: 20px;
+  --catalog-favorite-inset: clamp(8px, 1.2vw, 16px);
   position: relative;
   display: grid;
   grid-template-rows: minmax(0, 1fr);
@@ -18910,6 +18805,11 @@ html:root body .casino-catalog-card .casino-card-preview .casino-status-badge {
   line-height: 1.15;
   text-align: center;
   overflow-wrap: anywhere;
+}
+
+html:root body .casino-catalog-card .casino-card-preview[data-favorite-brand] .casino-status-badge {
+  /* Leave room for the 44px favorite button and a gap, even with long translations. */
+  max-inline-size: calc(100% - var(--catalog-favorite-inset) - 44px - 6px);
 }
 
 .casino-catalog-card .exclusive-badge {

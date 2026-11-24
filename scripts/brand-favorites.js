@@ -65,8 +65,15 @@ export function initBrandFavorites({ locale, slug, findBrand, getBrandSlug, bran
   const errorCopy = error => error?.message === 'favorites_limit' ? limitCopy : failed;
 
   const heartSyncs = new Map();
+  const mountedHearts = new WeakMap();
   const addHeart = (surface, key, isOverPreview, name = '') => {
     if (!surface || !isBrandSlug(key) || heartSyncs.has(surface)) return;
+    const mountedSync = mountedHearts.get(surface);
+    if (mountedSync) {
+      heartSyncs.set(surface, mountedSync);
+      mountedSync();
+      return;
+    }
     const control = document.createElement('div');
     control.className = 'brand-favorite-control';
     if (isOverPreview) control.classList.add('is-over-preview');
@@ -106,6 +113,7 @@ export function initBrandFavorites({ locale, slug, findBrand, getBrandSlug, bran
         sync();
       }
     });
+    mountedHearts.set(surface, sync);
     heartSyncs.set(surface, sync);
     sync();
   };
@@ -117,19 +125,19 @@ export function initBrandFavorites({ locale, slug, findBrand, getBrandSlug, bran
     }
   };
   addHeart(target, slug, Boolean(preview));
-  const homeCards = document.querySelector('.home-recommendation-grid');
-  if (homeCards) {
+  const cardLists = document.querySelectorAll('.home-recommendation-grid, [data-top-casino-rankings]');
+  for (const cards of cardLists) {
     const syncCards = () => {
       syncHearts();
-      for (const surface of homeCards.querySelectorAll('[data-favorite-brand]')) {
+      for (const surface of cards.querySelectorAll('[data-favorite-brand]')) {
         const name = surface.closest('article')?.querySelector('h3')?.textContent?.trim();
         addHeart(surface, surface.dataset.favoriteBrand, true, name);
       }
     };
     syncCards();
-    new MutationObserver(syncCards).observe(homeCards, { childList: true });
+    new MutationObserver(syncCards).observe(cards, { childList: true });
   }
-  if (target || homeCards) {
+  if (target || cardLists.length) {
     window.addEventListener('spincresta:account-state', syncHearts);
   }
 

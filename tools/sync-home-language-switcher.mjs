@@ -1,7 +1,7 @@
 import fs from 'node:fs';
 import { pathToFileURL } from 'node:url';
 
-export const HOME_LANGUAGE_ENTRY_VERSION = '20261123-static-home-languages';
+export const HOME_PAGE_ASSET_VERSION = '20261124-home-market-scroll';
 const languages = [
   ['en', 'united-kingdom', 'English', 'Choose language'],
   ['de', 'germany', 'Deutsch', 'Sprache auswählen'],
@@ -46,7 +46,8 @@ ${options}
   if (!afterBurger.test(clean)) throw new Error(`Missing homepage header insertion point: ${locale}`);
   return clean
     .replace(afterBurger, (_, button, tail) => `${button}\n${menu}${tail}`)
-    .replace(/(<script\b[^>]*\bsrc="\/scripts\/main\.js)(?:\?v=[^"]*)?(?=")/, `$1?v=${HOME_LANGUAGE_ENTRY_VERSION}`);
+    .replace(/(<script\b[^>]*\bsrc="\/scripts\/main\.js)(?:\?v=[^"]*)?(?=")/, `$1?v=${HOME_PAGE_ASSET_VERSION}`)
+    .replace(/(<link\b[^>]*\bhref="\/styles\.css)(?:\?v=[^"]*)?(?=")/, `$1?v=${HOME_PAGE_ASSET_VERSION}`);
 }
 
 if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {

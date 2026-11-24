@@ -6,7 +6,7 @@ import { COUNTRIES } from './countries.js';
 import { getFeaturedHomeBrands } from './featured-brands.js?v=20261119-shared-search';
 import { initFaqSections } from './faq.js?v=20261119-faq-layout';
 import { initFooterNewsletter } from './footer-newsletter.js?v=20260826-newsletter-4';
-import { initAccountAuth, prepareAccountHeader } from './account-auth.js?v=20261122-account-dialog-sync';
+import { initAccountAuth, prepareAccountHeader } from './account-auth.js?v=20261124-ranking-cards';
 import { initSiteIcons, siteIconMarkup } from './site-icons.js?v=20261123-single-row';
 import { initSectionNavigation } from './section-navigation.js?v=20261119-light-editorial';
 import { bindImagePreview } from './image-preview.js?v=20261119-preview-loader';
@@ -45,7 +45,8 @@ const loadPageModules = async () => {
   const isHomePage = document.body.classList.contains('home-page') && !document.body.dataset.page;
   const isCountryPage = Boolean(document.body.dataset.country);
   const isBrandPage = Boolean(document.body.dataset.brand);
-  const hasCasinoCards = isHomePage || isCountryPage || document.querySelector('.casino-grid') ||
+  const isTopCasinosPage = document.body.dataset.page === 'top-casinos';
+  const hasCasinoCards = isHomePage || isCountryPage || isTopCasinosPage || document.querySelector('.casino-grid') ||
     (isBrandPage && findBrandByPageKey(document.body.dataset.brand)?.notRecommended);
   const cardScreenshotsReady = hasCasinoCards
     ? import('./brand-homepage-screenshots.js?v=20261122-coldbet').then(module => {
@@ -56,7 +57,7 @@ const loadPageModules = async () => {
   if (isHomePage || isCountryPage) {
     const [gamesModule, homeModule, mediaModule] = await Promise.all([
       import('./brand-new-games.js?v=20261122-coldbet'),
-      import('./pages/home.js?v=20261122-compact-reviews'),
+      import('./pages/home.js?v=20261124-home-market-scroll'),
       isCountryPage ? import('./pages/country-media.js?v=20261122-compact-reviews') : null,
     ]);
     BRAND_NEW_GAMES = gamesModule.BRAND_NEW_GAMES || {};
@@ -79,8 +80,8 @@ const loadPageModules = async () => {
     initRelatedReviewsModule = relatedModule.initRelatedBrandReviews;
   }
 
-  if (document.body.dataset.page === 'top-casinos') {
-    const pageModule = await import('./pages/top-casinos.js?v=20261122-card-strips');
+  if (isTopCasinosPage) {
+    const pageModule = await import('./pages/top-casinos.js?v=20261124-mobile-rankings');
     initTopCasinosPageModule = pageModule.initTopCasinosPage;
   }
 
