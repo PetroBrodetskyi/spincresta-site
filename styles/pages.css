@@ -1727,11 +1727,9 @@ html:root body[data-brand] .brand-sticky-title__inner {
 }
 
 html:root body[data-brand] .brand-sticky-title__brand {
-  background:
-    radial-gradient(circle at top right, rgba(56, 189, 248, 0.14), transparent 42%),
-    linear-gradient(180deg, rgba(10, 15, 30, 0.98), rgba(20, 30, 52, 0.94));
-  box-shadow:
-    0 8px 18px rgba(15, 23, 42, 0.12);
+  background: var(--brand-bg-color, var(--surface-card-soft));
+  outline: 1px solid var(--ui-border-subtle);
+  outline-offset: -1px;
 }
 
 html:root .promo-copy-title {

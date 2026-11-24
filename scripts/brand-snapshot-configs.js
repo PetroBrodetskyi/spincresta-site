@@ -245,12 +245,12 @@ const clubCasinoSportsConfig = createGamesLiveBettingConfig(
 
 const duckyluckConfig = createGamesLiveConfig(
   ['Slots', 'Roulette', 'Blackjack', 'Video poker', 'Baccarat', 'Jackpot games', 'Live games', 'Crash games'],
-  ['Live shows', 'Live baccarat', 'Live blackjack', 'Other live games', 'Live roulette']
+  ['Live blackjack', 'Live poker', 'Live roulette']
 );
 
 const slotsAndCasinoConfig = createGamesLiveConfig(
-  ['Slots', 'Roulette', 'Blackjack', 'Video poker', 'Baccarat', 'Jackpot games', 'Live games'],
-  ['Live shows', 'Live baccarat', 'Live blackjack', 'Other live games', 'Live roulette']
+  ['Slots', 'Roulette', 'Blackjack', 'Video poker', 'Jackpot games', 'Live games', 'Crash games'],
+  ['Live blackjack', 'Live poker', 'Live roulette']
 );
 
 const lasVegasUsaConfig = createGamesLiveConfig(
@@ -920,8 +920,13 @@ export const BRAND_SNAPSHOT_CONFIGS = {
   ...mapSnapshotConfig(['fortunica-es', 'fortunica-nl', 'fortunica-uk'], fortunicaConfig),
   ...mapSnapshotConfig(['justcasino', 'letslucky', 'luckydreams', 'luckyones', 'lukki'], clubCasinoSportsConfig),
   yepcasino: clubCasinoSportsConfig,
-  duckyluck: duckyluckConfig,
-  slotsandcasino: slotsAndCasinoConfig,
+  ...Object.fromEntries(Object.entries({ duckyluck: duckyluckConfig, slotsandcasino: slotsAndCasinoConfig, jackspay: slotsAndCasinoConfig }).map(([slug, config]) => [slug, {
+    ...config,
+    notes: publicCatalogueNotes,
+    labels: Object.fromEntries(Object.entries(britsinoCategoryNames).map(([locale, names]) => [locale, {
+      'Games & Betting Snapshot': names[britsinoExtraCategories.indexOf('Games & Betting Snapshot')],
+    }])),
+  }])),
   lasvegasusa: lasVegasUsaConfig,
   punt: puntConfig,
   chanced: chancedConfig,

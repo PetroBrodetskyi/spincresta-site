@@ -51,6 +51,58 @@ export const isBrandSportsSection = ({kind, id, heading}) => {
   return sportsSectionId.test(id || '') || legacySportsHeading.test(title);
 };
 
+// Shared by the browser layout and reviews that pre-render game cards.
+export const renderBrandNewGamesPanel = ({ games, pageBrand, brandName, heading, escapeHtml, localeText }) => {
+  if (!games.length) return '';
+  const casinoHref = !pageBrand?.notRecommended && !pageBrand?.temporarilyUnavailable &&
+    typeof pageBrand?.urlCasino === 'string' ? pageBrand.urlCasino.trim() : '';
+  const cardMarkup = game => {
+    const cardContent = `<div class="brand-new-game-media game-art-backdrop">
+        <img
+          src="${escapeHtml(game.image)}"
+          alt="${escapeHtml(game.name)} — ${escapeHtml(brandName)}"
+          loading="lazy"
+          decoding="async"
+        />
+      </div>
+      <span>${escapeHtml(game.name)}</span>`;
+
+    if (!casinoHref) return `<article class="brand-new-game-card">${cardContent}</article>`;
+
+    return `<a
+        class="brand-new-game-card"
+        href="${escapeHtml(casinoHref)}"
+        target="_blank"
+        rel="noopener noreferrer nofollow sponsored"
+        aria-label="${localeText(
+          `Play ${escapeHtml(game.name)} at ${escapeHtml(brandName)}`,
+          `${escapeHtml(game.name)} bei ${escapeHtml(brandName)} spielen`,
+          `Jugar a ${escapeHtml(game.name)} en ${escapeHtml(brandName)}`,
+          `Gioca a ${escapeHtml(game.name)} su ${escapeHtml(brandName)}`,
+          `Zagraj w ${escapeHtml(game.name)} w ${escapeHtml(brandName)}`,
+          `Грати в ${escapeHtml(game.name)} у ${escapeHtml(brandName)}`,
+          `Jogar ${escapeHtml(game.name)} no ${escapeHtml(brandName)}`,
+          `Jouer à ${escapeHtml(game.name)} sur ${escapeHtml(brandName)}`,
+          `${escapeHtml(brandName)} पर ${escapeHtml(game.name)} खेलें`,
+          `Pelaa peliä ${escapeHtml(game.name)} kasinolla ${escapeHtml(brandName)}`
+        )}"
+      >
+        ${cardContent}
+      </a>`;
+  };
+
+  const newGamesLabel = heading || localeText(
+    'New Games', 'Neue Spiele', 'Juegos nuevos', 'Nuovi giochi', 'Nowe gry',
+    'Нові ігри', 'Novos jogos', 'Nouveaux jeux', 'नए गेम', 'Uudet pelit'
+  );
+  return `<section class="brand-new-games-panel" aria-labelledby="brand-new-games-title">
+    <h2 id="brand-new-games-title">${escapeHtml(newGamesLabel)}</h2>
+    <div class="brand-new-games-list"${casinoHref ? '' : ' tabindex="0"'}>
+      ${games.map(cardMarkup).join('\n      ')}
+    </div>
+  </section>`;
+};
+
 export const initBrandLayout = context => {
   const {
     BRANDS = [],
@@ -96,64 +148,12 @@ export const initBrandLayout = context => {
 
     const gameKey = normalizeText(pageKey).trim().toLowerCase();
     const games = resolveBrandNewGames(gameKey, BRAND_NEW_GAMES, normalizeBrandKey);
-    if (!games.length) return;
-    const brandName = pageBrand?.name || gameKey;
-    const casinoHref = !pageBrand?.notRecommended && !pageBrand?.temporarilyUnavailable &&
-      typeof pageBrand?.urlCasino === 'string' ? pageBrand.urlCasino.trim() : '';
-    const cardMarkup = game => {
-      const cardContent = `
-        <div class="brand-new-game-media game-art-backdrop">
-          <img
-            src="${escapeHtml(game.image)}"
-            alt="${escapeHtml(game.name)} — ${escapeHtml(brandName)}"
-            loading="lazy"
-            decoding="async"
-          />
-        </div>
-        <span>${escapeHtml(game.name)}</span>
-      `;
-
-      if (!casinoHref) return `<article class="brand-new-game-card">${cardContent}</article>`;
-
-      return `
-        <a
-          class="brand-new-game-card"
-          href="${escapeHtml(casinoHref)}"
-          target="_blank"
-          rel="noopener noreferrer nofollow sponsored"
-          aria-label="${localeText(
-            `Play ${escapeHtml(game.name)} at ${escapeHtml(brandName)}`,
-            `${escapeHtml(game.name)} bei ${escapeHtml(brandName)} spielen`,
-            `Jugar a ${escapeHtml(game.name)} en ${escapeHtml(brandName)}`,
-            `Gioca a ${escapeHtml(game.name)} su ${escapeHtml(brandName)}`,
-            `Zagraj w ${escapeHtml(game.name)} w ${escapeHtml(brandName)}`,
-            `Грати в ${escapeHtml(game.name)} у ${escapeHtml(brandName)}`,
-            `Jogar ${escapeHtml(game.name)} no ${escapeHtml(brandName)}`,
-            `Jouer à ${escapeHtml(game.name)} sur ${escapeHtml(brandName)}`,
-            `${escapeHtml(brandName)} पर ${escapeHtml(game.name)} खेलें`,
-            `Pelaa peliä ${escapeHtml(game.name)} kasinolla ${escapeHtml(brandName)}`
-          )}"
-        >
-          ${cardContent}
-        </a>
-      `;
-    };
-
-    const newGamesLabel = document.querySelector('meta[name="brand-games-title"]')?.content?.trim()
-      || localeText(
-        'New Games', 'Neue Spiele', 'Juegos nuevos', 'Nuovi giochi', 'Nowe gry',
-        'Нові ігри', 'Novos jogos', 'Nouveaux jeux', 'नए गेम', 'Uudet pelit'
-      );
-    const gamesSection = document.createElement('section');
-    gamesSection.className = 'brand-new-games-panel';
-    gamesSection.setAttribute('aria-labelledby', 'brand-new-games-title');
-    gamesSection.innerHTML = `
-      <h2 id="brand-new-games-title">${escapeHtml(newGamesLabel)}</h2>
-      <div class="brand-new-games-list"${casinoHref ? '' : ' tabindex="0"'}>
-        ${games.map(cardMarkup).join('')}
-      </div>
-    `;
-    main.prepend(gamesSection);
+    const markup = renderBrandNewGamesPanel({
+      games, pageBrand, brandName: pageBrand?.name || gameKey,
+      heading: document.querySelector('meta[name="brand-games-title"]')?.content?.trim(),
+      escapeHtml, localeText,
+    });
+    if (markup) main.insertAdjacentHTML('afterbegin', markup);
   };
 
   const ensureBrandRightRail = layout => {

@@ -102,10 +102,16 @@ test('brand FAQ keeps its tinted surface and player feedback starts a white band
 
 test('new game cards open the review body in a single horizontal, scrollable row', () => {
   const layout = read('scripts/pages/brand-layout.js');
-  assert.match(layout, /main\.prepend\(gamesSection\)/);
+  assert.match(layout, /main\.querySelector\(':scope > \.brand-new-games-panel'\)/);
+  assert.match(layout, /main\.insertAdjacentHTML\('afterbegin', markup\)/);
   assert.doesNotMatch(layout, /brand-new-games-rail/);
   assert.match(read('styles/brand-review.css'),
     /\.brand-new-games-list\s*\{[^}]*grid-auto-flow: column;[^}]*overflow-x: auto;/);
+});
+
+test('the sticky review button uses the registry background only in its logo badge', () => {
+  assert.match(read('scripts/pages/brand.js'), /setBrandBackground\(stickyTitle\.querySelector\('\.brand-sticky-title__brand'\), brand\?\.bgColor\)/);
+  assert.match(read('styles/pages.css'), /\.brand-sticky-title__brand\s*\{\s*background:\s*var\(--brand-bg-color, var\(--surface-card-soft\)\)/);
 });
 
 test('standalone sportsbook sections are recognized across the localized Fraga reviews', () => {

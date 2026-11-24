@@ -1,4 +1,20 @@
 export const BRAND_NEW_GAMES = {
+  jackspay: [
+    ['Wilds of Egypt', 1795553120, 'wilds-of-egypt_ey38vx'],
+    ['Rattle Dime: Hold n’ Win', 1795553088, 'rattle-dime_uthd79'],
+    ['Eclipse of Ra', 1795553109, 'eclipse-of-ra_nbitwe'],
+    ['Darkblood Rising: Hold n’ Win', 1795553098, 'darkblood-rising_mt1fti'],
+    ['Zeus Lightning Coins - Hold and Win', 1795553131, 'zeus-lightning-coins_uscufy'],
+    ['Captain Gold Claw', 1795553077, 'captain-gold-claw_ifhbkb'],
+  ].map(([name, version, id]) => ({ name, image: `https://res.cloudinary.com/drj61gmd2/image/upload/v${version}/spincresta/brands/jackspay/new-games/jackspay-new-game-${id}.webp` })),
+  slotsandcasino: [
+    ['Cheetah Chase', 'v1795553631', 'cheetah-chase_j0ekzk'],
+    ['Buy or Die', 'v1795553620', 'buy-or-die_oua6kx'],
+    ['Oil Gushers', 'v1795553654', 'oil-gushers_brxyyp'],
+    ['The Collector', 'v1795553665', 'the-collector_skedwr'],
+    ['Firestrike Hot Hits', 'v1795553642', 'firestrike-hot-hits_b86meh'],
+    ['Volt Rush Power Stack', 'v1795553676', 'volt-rushpower-stacks_jcrcdh'],
+  ].map(([name, version, id]) => ({ name, image: `https://res.cloudinary.com/drj61gmd2/image/upload/${version}/spincresta/brands/slotsandcasino/new-games/slotsandcasino-new-game-${id}.webp` })),
   bitgames: [
     ['Viper Royale', 'v1795470569', 'viper-royale_g4fqsm'],
     ['Vice Venture', 'v1795470562', 'vice-venture_ggpbcy'],

@@ -60,6 +60,7 @@ export const initBrandPage = context => {
     slugifyText,
     localeText,
     syncHeaderFlowMetrics,
+    setBrandBackground,
   } = context;
 
   const getBrandSnapshotName = () => {
@@ -131,6 +132,7 @@ export const initBrandPage = context => {
         </span>
       </div>
     `;
+    setBrandBackground(stickyTitle.querySelector('.brand-sticky-title__brand'), brand?.bgColor);
   
     document.body.appendChild(stickyTitle);
   

@@ -16,6 +16,9 @@ export const gameExamples = [
   ['SPRIBE', 'Aviator', 'crash', 'betonwin'],
   ['Pragmatic Play', 'Spaceman', 'crash', 'betonwin'],
   ['BGaming', 'Classic Multihand Blackjack', 'table', 'britsino'],
+  ['DiceLab Slots', 'Fluffalo Fortune', 'slots', 'duckyluck'],
+  ['DiceLab Slots', 'Ace Bounty ReSpin Saloon', 'slots', 'duckyluck'],
+  ['Saucify', 'Ca$hbah Cafe', 'slots', 'duckyluck'],
 ];
 
 // Names readers may type even when the logo library uses a shorter spelling.

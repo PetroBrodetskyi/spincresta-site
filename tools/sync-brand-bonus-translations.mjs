@@ -11,6 +11,9 @@ import { kingmakerHeadlines } from './kingmaker-review-copy.mjs';
 import betrepublicReview from './betrepublic-review-copy.mjs';
 import { headlines as coldbetHeadlines } from './coldbet-review-copy.mjs';
 import { headlines as britsinoHeadlines } from './britsino-review-copy.mjs';
+import { duckyluckHeadlines } from './duckyluck-review-copy.mjs';
+import { headlines as slotsAndCasinoHeadlines } from './slotsandcasino-review-copy.mjs';
+import { headlines as jacksPayHeadlines } from './jackspay-review-copy.mjs';
 
 const ROOT = process.cwd();
 const LOCALES = ['de', 'es', 'it', 'pl', 'uk', 'pt', 'fr', 'hi', 'fi'];
@@ -68,6 +71,9 @@ for (const locale of LOCALES) BONUS_TRANSLATION_OVERRIDES[locale][kingmakerHeadl
 for (const locale of LOCALES) BONUS_TRANSLATION_OVERRIDES[locale][betrepublicReview.en[2]] = betrepublicReview[locale][2];
 for (const locale of LOCALES) BONUS_TRANSLATION_OVERRIDES[locale][coldbetHeadlines.en] = coldbetHeadlines[locale];
 for (const locale of LOCALES) BONUS_TRANSLATION_OVERRIDES[locale][britsinoHeadlines.en] = britsinoHeadlines[locale];
+for (const locale of LOCALES) BONUS_TRANSLATION_OVERRIDES[locale][duckyluckHeadlines.en] = duckyluckHeadlines[locale];
+for (const locale of LOCALES) BONUS_TRANSLATION_OVERRIDES[locale][slotsAndCasinoHeadlines.en] = slotsAndCasinoHeadlines[locale];
+for (const locale of LOCALES) BONUS_TRANSLATION_OVERRIDES[locale][jacksPayHeadlines.en] = jacksPayHeadlines[locale];
 for (const locale of LOCALES) BONUS_TRANSLATION_OVERRIDES[locale][PAMPAS_BONUS] = PAMPAS_COPY[locale].short;
 BONUS_TRANSLATION_OVERRIDES.uk['Up to 8,000 €/$ + 500 free spins'] = 'До 8 000 €/$ + 500 фриспінів';
 const decodeHtml = value =>
@@ -110,11 +116,11 @@ const writeDirectoryBonus = (locale, slug, bonus) => {
       found = true;
       let index = 0;
       return row.replace(
-        /(<p class="casino-bonus"><strong>[^<]+<\/strong>)[\s\S]*?(<\/p>)/g,
-        (paragraph, start, end) => {
-            const value = index === 1 ? bonus : null;
+        /(<p class="casino-bonus">\s*<strong>[^<]+<\/strong>)(\s*)([\s\S]*?)(\s*<\/p>)/g,
+        (paragraph, start, space, current, end) => {
+          const value = index === 1 ? bonus : null;
           index += 1;
-          return value === null ? paragraph : `${start} ${value}${end}`;
+          return value === null || value === current ? paragraph : `${start}${space || ' '}${value}${end}`;
         },
       );
     },
@@ -149,6 +155,8 @@ writeDirectoryBonus('', 'viperwin', VIPERWIN_BONUS);
 // VikingLuck has the same verified headline; reuse the existing translations.
 writeDirectoryBonus('', 'vikingluck', VIPERWIN_BONUS);
 writeDirectoryBonus('', 'casinado', VIPERWIN_BONUS);
+writeDirectoryBonus('', 'duckyluck', duckyluckHeadlines.en);
+writeDirectoryBonus('', 'slotsandcasino', slotsAndCasinoHeadlines.en);
 
 for (const locale of LOCALES) {
   const rows = readBonusRows(locale);
@@ -171,6 +179,8 @@ for (const locale of LOCALES) {
   writeDirectoryBonus(locale, 'viperwin', VIPERWIN_BONUS_TRANSLATIONS[locale]);
   writeDirectoryBonus(locale, 'vikingluck', VIPERWIN_BONUS_TRANSLATIONS[locale]);
   writeDirectoryBonus(locale, 'casinado', VIPERWIN_BONUS_TRANSLATIONS[locale]);
+  writeDirectoryBonus(locale, 'duckyluck', duckyluckHeadlines[locale]);
+  writeDirectoryBonus(locale, 'slotsandcasino', slotsAndCasinoHeadlines[locale]);
 }
 
 console.log(`Brand bonus translations synced into ${LOCALES.length} locale-specific files.`);

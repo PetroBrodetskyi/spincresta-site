@@ -1,7 +1,7 @@
 ﻿// =====================
 // IMPORTS
 // =====================
-import { BRANDS } from './brands.js?v=20261124-bitgames-cashier';
+import { BRANDS } from './brands.js?v=20261124-jackspay';
 import { COUNTRIES } from './countries.js';
 import { getFeaturedHomeBrands } from './featured-brands.js?v=20261119-shared-search';
 import { initFaqSections } from './faq.js?v=20261119-faq-layout';
@@ -33,7 +33,7 @@ const brandLayoutFallbackTimer = document.body?.dataset.brand
     }, 1500)
   : null;
 const brandLayoutModuleReady = document.body?.dataset.brand
-  ? import('./pages/brand-layout.js?v=20261124-bitgames-review').then(module => {
+  ? import('./pages/brand-layout.js?v=20261124-slotsandcasino-games').then(module => {
       initBrandLayoutModule = module.initBrandLayout;
     }).catch(error => {
       document.body.classList.add('brand-layout-failed');
@@ -49,14 +49,14 @@ const loadPageModules = async () => {
   const hasCasinoCards = isHomePage || isCountryPage || isTopCasinosPage || document.querySelector('.casino-grid') ||
     (isBrandPage && findBrandByPageKey(document.body.dataset.brand)?.notRecommended);
   const cardScreenshotsReady = hasCasinoCards
-    ? import('./brand-homepage-screenshots.js?v=20261124-bitgames').then(module => {
+    ? import('./brand-homepage-screenshots.js?v=20261124-jackspay').then(module => {
         BRAND_HOMEPAGE_SCREENSHOTS = module.BRAND_HOMEPAGE_SCREENSHOTS || {};
       }).catch(() => {})
     : Promise.resolve();
 
   if (isHomePage || isCountryPage) {
     const [gamesModule, homeModule, mediaModule] = await Promise.all([
-      import('./brand-new-games.js?v=20261124-bitgames-review'),
+      import('./brand-new-games.js?v=20261124-jackspay'),
       import('./pages/home.js?v=20261124-full-market-track'),
       isCountryPage ? import('./pages/country-media.js?v=20261122-compact-reviews') : null,
     ]);
@@ -67,9 +67,9 @@ const loadPageModules = async () => {
 
   if (isBrandPage) {
     const [snapshotsModule, gamesModule, pageModule, feedbackModule, relatedModule] = await Promise.all([
-      import('./brand-snapshot-configs.js?v=20261124-bitgames-snapshot'),
-      import('./brand-new-games.js?v=20261124-bitgames-review'),
-      import('./pages/brand.js?v=20261124-provider-cards'),
+      import('./brand-snapshot-configs.js?v=20261124-jackspay'),
+      import('./brand-new-games.js?v=20261124-jackspay'),
+      import('./pages/brand.js?v=20261124-sticky-logo'),
       import('./pages/brand-feedback.js?v=20261121-feedback-availability'),
       import('./pages/related-brand-reviews.js?v=20261123-full-width'),
     ]);
@@ -381,7 +381,7 @@ const SITE_LOCALE = DOCUMENT_LANGUAGE.startsWith('de')
 let brandBonusTranslations = {};
 const brandBonusTranslationsReady = SITE_LOCALE === 'en'
   ? Promise.resolve()
-  : import(`./brand-bonus-translations/${SITE_LOCALE}.js?v=20261123-britsino`)
+  : import(`./brand-bonus-translations/${SITE_LOCALE}.js?v=20261124-jackspay`)
       .then(module => {
         brandBonusTranslations = module.default || {};
       })
@@ -4156,6 +4156,7 @@ export const initCasinoPage = async () => {
       slugifyText,
       localeText,
       syncHeaderFlowMetrics,
+      setBrandBackground,
     });
     initBrandLayoutModule?.({
       BRANDS,
