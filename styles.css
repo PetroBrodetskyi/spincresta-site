@@ -1,7 +1,7 @@
 ﻿@import url('/fonts/inter-tight/index.css');
 @import url('/fonts/inter-tight/wght-italic.css');
 @import url('/styles/core.css?v=20261122-resource-actions');
-@import url('/styles/pages.css?v=20261124-home-market-scroll');
+@import url('/styles/pages.css?v=20261124-full-market-track');
 @import url('/styles/brand-review.css?v=20261123-single-row');
 @import url('/styles/section-contrast-preview.css?v=20261123-review-mobile');
 @import url('/styles/account.css?v=20261122-select-controls');
@@ -221,7 +221,7 @@ html:root body :is(
   .home-primary-action, .home-secondary-action, .home-section-cta > a,
   .home-brand-view-all, .home-brand-arrow, .brand-favorite-button,
   .brand-feedback-rating-options label,
-  .home-market-actions > :is(a, button), .home-country-return, .home-market-more, .country-cloud-toggle,
+  .home-market-actions > :is(a, button), .home-country-return, .country-cloud-toggle,
   .top-casinos-hero-actions > a, .top-casino-jump-toggle, .blog-hero-links > a, .author-actions > a,
   .account-auth-control, .account-auth-primary, .account-auth-secondary,
   .language-switcher-current, .site-search-trigger,

@@ -18408,7 +18408,7 @@ body[data-country] .country-catalog-heading {
   gap: 7px;
 }
 
-:is(.home-market-actions > a, .home-market-actions > button, .home-market-more, .home-country-return) {
+:is(.home-market-actions > a, .home-market-actions > button, .home-country-return) {
   display: inline-flex;
   min-height: 42px;
   align-items: center;
@@ -18424,14 +18424,9 @@ body[data-country] .country-catalog-heading {
   cursor: pointer;
 }
 
-:is(.home-market-actions > a, .home-market-actions > button, .home-market-more, .home-country-return):is(:hover, :focus-visible) {
+:is(.home-market-actions > a, .home-market-actions > button, .home-country-return):is(:hover, :focus-visible) {
   border-color: var(--section-accent);
   background: var(--surface-card-hover);
-}
-
-.home-market-more {
-  display: flex;
-  margin: 18px auto 0;
 }
 
 .home-market-empty {
@@ -18549,7 +18544,7 @@ html:root body.home-page #home-brand-carousel.is-resetting { scroll-snap-type: n
 
 #home-brand-carousel > .home-market-empty { grid-column: 1; }
 
-:is(.home-market-bar, .home-market-actions > a, .home-market-more, .home-new-reviews)[hidden],
+:is(.home-market-bar, .home-market-actions > a, .home-new-reviews)[hidden],
 .home-recommendations[data-selected-country] > .home-section-cta {
   display: none;
 }

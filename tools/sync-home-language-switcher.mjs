@@ -1,7 +1,7 @@
 import fs from 'node:fs';
 import { pathToFileURL } from 'node:url';
 
-export const HOME_PAGE_ASSET_VERSION = '20261124-home-market-scroll';
+export const HOME_PAGE_ASSET_VERSION = '20261124-full-market-track';
 const languages = [
   ['en', 'united-kingdom', 'English', 'Choose language'],
   ['de', 'germany', 'Deutsch', 'Sprache auswählen'],

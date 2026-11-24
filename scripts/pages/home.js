@@ -194,30 +194,27 @@ export const initHomePage = context => {
 
   let syncHomeBrandTrack = () => {};
   let homeBrandResetFrame = 0;
-  const renderHomeRecommendationCards = (brands = getHomeRecommendationBrands(getHomeGeoCode()), append = false) => {
+  const renderHomeRecommendationCards = (brands = getHomeRecommendationBrands(getHomeGeoCode())) => {
     const grid = document.querySelector('.home-recommendation-grid');
     if (!grid) return;
     const fragment = document.createDocumentFragment();
     brands.forEach(brand => fragment.appendChild(createCasinoCard(brand, { favorite: true })));
-    if (!brands.length && !append) {
+    if (!brands.length) {
       const empty = document.createElement('p');
       empty.className = 'home-market-empty';
       empty.textContent = noCountryCasinos;
       fragment.appendChild(empty);
     }
-    if (append) grid.appendChild(fragment);
-    else {
-      cancelAnimationFrame(homeBrandResetFrame);
-      grid.classList.add('is-resetting');
-      grid.replaceChildren(fragment);
+    cancelAnimationFrame(homeBrandResetFrame);
+    grid.classList.add('is-resetting');
+    grid.replaceChildren(fragment);
+    grid.scrollTo({ left: 0, behavior: 'instant' });
+    // Don't let an old snap point or an in-flight arrow scroll affect the next market.
+    homeBrandResetFrame = requestAnimationFrame(() => {
       grid.scrollTo({ left: 0, behavior: 'instant' });
-      // Don't let an old snap point or an in-flight arrow scroll affect the next market.
-      homeBrandResetFrame = requestAnimationFrame(() => {
-        grid.scrollTo({ left: 0, behavior: 'instant' });
-        grid.classList.remove('is-resetting');
-        syncHomeBrandTrack();
-      });
-    }
+      grid.classList.remove('is-resetting');
+      syncHomeBrandTrack();
+    });
     syncHomeBrandTrack();
     applyBrandLogoBackgrounds();
     requestPaymentIconSync();
@@ -290,10 +287,7 @@ export const initHomePage = context => {
     if (!directory || !section || !grid) return;
 
     const countries = new Map(COUNTRIES.map(country => [country.slug, country.code.toUpperCase()]));
-    const batchSize = 20;
     let selectedLink = null;
-    let brands = [];
-    let visibleCount = 0;
 
     const bar = document.createElement('div');
     const title = document.createElement('h2');
@@ -304,7 +298,6 @@ export const initHomePage = context => {
     const reviews = document.createElement('a');
     const guide = document.createElement('a');
     const reset = document.createElement('button');
-    const more = document.createElement('button');
     const defaultTitle = section.getAttribute('aria-label');
     bar.className = 'home-market-bar home-brand-toolbar';
     actions.className = 'home-market-actions';
@@ -334,17 +327,12 @@ export const initHomePage = context => {
       'Country guide', 'Länder-Guide', 'Guía del país', 'Guida del paese', 'Przewodnik po kraju',
       'Гід країни', 'Guia do país', 'Guide du pays', 'देश की गाइड', 'Maaopas'
     );
-    reset.type = more.type = 'button';
+    reset.type = 'button';
     reset.textContent = localeText(
       'Reset filter', 'Filter zurücksetzen', 'Quitar filtro', 'Azzera filtro', 'Wyczyść filtr',
       'Скинути фільтр', 'Limpar filtro', 'Réinitialiser le filtre', 'फ़िल्टर हटाएँ', 'Tyhjennä suodatin'
     );
-    more.className = 'home-market-more';
-    more.textContent = localeText(
-      'Show more casinos', 'Mehr Casinos anzeigen', 'Ver más casinos', 'Mostra altri casinò', 'Pokaż więcej kasyn',
-      'Показати більше казино', 'Ver mais casinos', 'Voir plus de casinos', 'और कैसीनो दिखाएँ', 'Näytä lisää kasinoita'
-    );
-    actions.hidden = more.hidden = true;
+    actions.hidden = true;
     actions.append(reviews, guide, reset);
     if (all) {
       const original = all.closest('.home-section-cta');
@@ -356,28 +344,14 @@ export const initHomePage = context => {
     toolbar.append(actions, controls);
     bar.append(title, toolbar);
     grid.before(bar);
-    grid.after(more);
     syncHomeBrandTrack = bindHomeBrandTrack(grid, controls, previous, next);
-
-    const renderBatch = (append = false) => {
-      const next = brands.slice(visibleCount, visibleCount + batchSize);
-      renderHomeRecommendationCards(next, append);
-      visibleCount += next.length;
-      more.hidden = visibleCount >= brands.length;
-    };
-
-    more.addEventListener('click', () => {
-      const firstNewCard = visibleCount;
-      renderBatch(true);
-      grid.children[firstNewCard]?.querySelector('.cta')?.focus();
-    });
 
     reset.addEventListener('click', () => {
       const previous = selectedLink;
       previous?.removeAttribute('aria-current');
       selectedLink = null;
       delete section.dataset.selectedCountry;
-      actions.hidden = more.hidden = true;
+      actions.hidden = true;
       if (all) all.hidden = false;
       title.textContent = defaultTitle;
       renderHomeRecommendationCards();
@@ -399,12 +373,11 @@ export const initHomePage = context => {
       section.dataset.selectedCountry = slug;
       title.textContent = link.textContent.trim();
       guide.href = link.href;
-      brands = getHomeRecommendationBrands(code, Infinity);
-      visibleCount = 0;
+      const brands = getHomeRecommendationBrands(code, Infinity);
       actions.hidden = false;
       if (all) all.hidden = true;
       reviews.hidden = !brands.length;
-      renderBatch();
+      renderHomeRecommendationCards(brands);
       renderHomeNewReviews(code);
       if (window.matchMedia('(max-width: 767px)').matches) {
         title.focus({ preventScroll: true });
