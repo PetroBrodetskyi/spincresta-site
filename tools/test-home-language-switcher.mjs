@@ -38,14 +38,15 @@ test('runtime enhances the existing menu without duplicating it or losing langua
   };
   const handlers = {};
   const documentHandlers = {};
+  const account = {};
   const switcher = {
     dataset: {},
+    nextElementSibling: account,
     querySelectorAll: () => [english],
     addEventListener: (event, listener) => { handlers[event] = listener; },
     contains: () => false,
     removeAttribute: name => { assert.equal(name, 'open'); closeCount++; },
   };
-  const account = {};
   const appended = [];
   const persisted = [];
   let closeCount = 0;
@@ -66,7 +67,7 @@ test('runtime enhances the existing menu without duplicating it or losing langua
     persistLanguage: locale => persisted.push(locale),
   });
   assert.equal(href, '/?utm_source=example#home-country-title');
-  assert.deepEqual(appended, [account]);
+  assert.deepEqual(appended, []);
   handlers.click({ target: { closest: () => english } });
   documentHandlers.click({ target: {} });
   assert.deepEqual(persisted, ['en']);

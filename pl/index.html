@@ -64,7 +64,7 @@
       content="Porównaj kasyna online, bonusy, płatności, wypłaty i przewodniki po krajach. Przed rejestracją sprawdź dostępność i aktualne warunki."
     />
     <meta property="og:image" content="https://spincresta.com/favicon.png" />
-    <link rel="stylesheet" href="/styles.css?v=20261124-full-market-track" />
+    <link rel="stylesheet" href="/styles.css?v=20261124-static-header" />
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -135,6 +135,9 @@
         </a>
 
         <!-- DESKTOP NAV -->
+        <!-- static-header-search:start -->
+        <button class="site-search-trigger site-search-trigger--desktop" type="button" aria-label="Otwórz wyszukiwanie" aria-expanded="false" disabled><svg class="site-search-trigger-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="10.5" cy="10.5" r="7.25" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="m16 16 5.5 5.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></button>
+        <!-- static-header-search:end -->
         <nav class="nav" aria-label="Główna nawigacja">
           <a class="nav-countries-link" href="/pl/#home-country-title">Kraje</a>
           <a href="/pl/top-casinos/">Najlepsze kasyna</a>
@@ -157,7 +160,7 @@
         </button>
         <!-- home-language-switcher:start -->
         <details class="language-switcher" data-static-language-switcher>
-          <summary class="language-switcher-current" aria-label="Wybierz język"><img src="/icons/poland-flag-icon.svg" alt="" aria-hidden="true" loading="lazy" decoding="async" /><span class="language-switcher-code" aria-hidden="true">PL</span></summary>
+          <summary class="language-switcher-current" aria-label="Wybierz język"><img src="/icons/poland-flag-icon.svg" alt="" aria-hidden="true" width="20" height="14" /><span class="language-switcher-code" aria-hidden="true">PL</span></summary>
           <div class="language-switcher-menu">
             <a class="language-switcher-option" href="/" lang="en" aria-label="English" title="English"><img src="/icons/united-kingdom-flag-icon.svg" alt="" aria-hidden="true" loading="lazy" decoding="async" /><span class="language-switcher-code" aria-hidden="true">EN</span></a>
             <a class="language-switcher-option" href="/de/" lang="de" aria-label="Deutsch" title="Deutsch"><img src="/icons/germany-flag-icon.svg" alt="" aria-hidden="true" loading="lazy" decoding="async" /><span class="language-switcher-code" aria-hidden="true">DE</span></a>
@@ -172,6 +175,9 @@
           </div>
         </details>
         <!-- home-language-switcher:end -->
+        <!-- static-header-account:start -->
+        <button class="account-auth-control" type="button" aria-haspopup="dialog" aria-label="Zaloguj się" disabled><span class="account-auth-icon" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><path d="M12 12a4.25 4.25 0 1 0 0-8.5 4.25 4.25 0 0 0 0 8.5Zm-7.25 8.5c.7-4 3.2-6.25 7.25-6.25s6.55 2.25 7.25 6.25" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></span><span class="account-auth-label">Zaloguj się</span></button>
+        <!-- static-header-account:end -->
       </div>
 
       <!-- MOBILE MENU -->
@@ -367,6 +373,6 @@
 </div>
     </footer>
 
-    <script type="module" src="/scripts/main.js?v=20261124-full-market-track"></script>
+    <script type="module" src="/scripts/main.js?v=20261124-static-header"></script>
   </body>
 </html>

@@ -83,17 +83,38 @@
         ]
       }
     </script>
-    <link rel="stylesheet" href="/styles.css?v=20261119-light-profile-guide" />
+    <link rel="stylesheet" href="/styles.css?v=20261119-light-profile-guide-static-header" />
   </head>
   <body class="author-page">
     <header class="header">
       <div class="header-container header-inner">
         <a href="/" class="logo"><img src="/images/spincresta-wordmark.svg?v=20261118-padded-wordmark" width="258" height="60" alt="SpinCresta" class="logo-lockup" /></a>
+        <!-- static-header-search:start -->
+        <button class="site-search-trigger site-search-trigger--desktop" type="button" aria-label="Open search" aria-expanded="false" disabled><svg class="site-search-trigger-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="10.5" cy="10.5" r="7.25" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="m16 16 5.5 5.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></button>
+        <!-- static-header-search:end -->
         <nav class="nav" aria-label="Main navigation">
           <a class="nav-countries-link" href="/#home-country-title">Countries</a>
           <a href="/top-casinos/">Top Casinos</a><a href="/new-casinos/">New Casinos</a><a href="/top-rated/">Top Rated</a><a href="/exclusive-offers/">Exclusive</a>
         </nav>
         <button class="burger" type="button" aria-label="Open countries menu" aria-controls="mobileMenu" aria-expanded="false"><span></span><span></span><span></span></button>
+        <!-- static-header-account:start -->
+        <details class="language-switcher" data-static-language-switcher>
+          <summary class="language-switcher-current" aria-label="Choose language"><img src="/icons/united-kingdom-flag-icon.svg" alt="" aria-hidden="true" width="20" height="14" /><span class="language-switcher-code" aria-hidden="true">EN</span></summary>
+          <div class="language-switcher-menu">
+            <a class="language-switcher-option" href="/authors/odri-chambers/" lang="en" aria-label="English" title="English" aria-current="page"><img src="/icons/united-kingdom-flag-icon.svg" alt="" aria-hidden="true" loading="lazy" decoding="async" /><span class="language-switcher-code" aria-hidden="true">EN</span></a>
+            <a class="language-switcher-option" href="/de/authors/odri-chambers/" lang="de" aria-label="Deutsch" title="Deutsch"><img src="/icons/germany-flag-icon.svg" alt="" aria-hidden="true" loading="lazy" decoding="async" /><span class="language-switcher-code" aria-hidden="true">DE</span></a>
+            <a class="language-switcher-option" href="/es/authors/odri-chambers/" lang="es" aria-label="Español" title="Español"><img src="/icons/spain-flag-icon.svg" alt="" aria-hidden="true" loading="lazy" decoding="async" /><span class="language-switcher-code" aria-hidden="true">ES</span></a>
+            <a class="language-switcher-option" href="/it/authors/odri-chambers/" lang="it" aria-label="Italiano" title="Italiano"><img src="/icons/italy-flag-icon.svg" alt="" aria-hidden="true" loading="lazy" decoding="async" /><span class="language-switcher-code" aria-hidden="true">IT</span></a>
+            <a class="language-switcher-option" href="/pl/authors/odri-chambers/" lang="pl" aria-label="Polski" title="Polski"><img src="/icons/poland-flag-icon.svg" alt="" aria-hidden="true" loading="lazy" decoding="async" /><span class="language-switcher-code" aria-hidden="true">PL</span></a>
+            <a class="language-switcher-option" href="/uk/authors/odri-chambers/" lang="uk" aria-label="Українська" title="Українська"><img src="/icons/ukraine-flag-icon.svg" alt="" aria-hidden="true" loading="lazy" decoding="async" /><span class="language-switcher-code" aria-hidden="true">UK</span></a>
+            <a class="language-switcher-option" href="/pt/authors/odri-chambers/" lang="pt" aria-label="Português" title="Português"><img src="/icons/portugal-flag-icon.svg" alt="" aria-hidden="true" loading="lazy" decoding="async" /><span class="language-switcher-code" aria-hidden="true">PT</span></a>
+            <a class="language-switcher-option" href="/fr/authors/odri-chambers/" lang="fr" aria-label="Français" title="Français"><img src="/icons/france-flag-icon.svg" alt="" aria-hidden="true" loading="lazy" decoding="async" /><span class="language-switcher-code" aria-hidden="true">FR</span></a>
+            <a class="language-switcher-option" href="/hi/authors/odri-chambers/" lang="hi" aria-label="हिन्दी" title="हिन्दी"><img src="/icons/india-flag-icon.svg" alt="" aria-hidden="true" loading="lazy" decoding="async" /><span class="language-switcher-code" aria-hidden="true">HI</span></a>
+            <a class="language-switcher-option" href="/fi/authors/odri-chambers/" lang="fi" aria-label="Suomi" title="Suomi"><img src="/icons/finland-flag-icon.svg" alt="" aria-hidden="true" loading="lazy" decoding="async" /><span class="language-switcher-code" aria-hidden="true">FI</span></a>
+          </div>
+        </details>
+        <button class="account-auth-control" type="button" aria-haspopup="dialog" aria-label="Sign in" disabled><span class="account-auth-icon" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><path d="M12 12a4.25 4.25 0 1 0 0-8.5 4.25 4.25 0 0 0 0 8.5Zm-7.25 8.5c.7-4 3.2-6.25 7.25-6.25s6.55 2.25 7.25 6.25" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></span><span class="account-auth-label">Sign in</span></button>
+        <!-- static-header-account:end -->
       </div>
       <nav class="mobile-menu" id="mobileMenu" aria-hidden="true"><div class="mobile-overlay" data-action="close"></div><div class="mobile-menu-panel" role="dialog" aria-modal="true"><button class="mobile-close-btn" aria-label="Close menu" data-action="close">&times;</button><div class="mobile-menu-inner"></div></div></nav>
     </header>
@@ -144,6 +165,6 @@
 
     <footer class="footer"><div class="container"><p>&copy; 2026 SpinCresta.com. All rights reserved.</p><p>18+ | Gambling can be addictive. Please play responsibly.</p><nav class="footer-nav">
           <a href="/game-providers/"><svg class="site-icon site-icon--inline" width="24" height="24" aria-hidden="true" focusable="false"><use href="/icons/ui/review-method.svg?v=20261123-brand-providers#layers"></use></svg> Game Providers</a><a href="/responsible-gambling/">Responsible Gambling</a><a href="/privacy-policy/">Privacy Policy</a><a href="/casinos-and-betting/">Casinos &amp; Betting</a><a href="/payment-methods/">Payment Methods</a><a href="/partners/">Partners</a><a href="/about/">About</a><a href="/blog/">Blog</a><a href="https://t.me/spincresta" target="_blank" rel="noopener noreferrer nofollow" class="footer-social" aria-label="SpinCresta Telegram Channel"><img src="/icons/telegram-white-icon.svg" alt="Telegram" width="18" height="18" loading="lazy" /><span>Telegram</span></a><a href="https://x.com/SpinCresta" target="_blank" rel="noopener noreferrer nofollow" class="footer-social" aria-label="SpinCresta on X"><img src="/icons/x-social-media-round-icon.svg" alt="X" width="18" height="18" loading="lazy" /><span>X</span></a></nav></div></footer>
-    <script type="module" src="/scripts/main.js?v=20261119-light-profile-guide"></script>
+    <script type="module" src="/scripts/main.js?v=20261119-light-profile-guide-static-header"></script>
   </body>
 </html>

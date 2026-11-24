@@ -1,5 +1,6 @@
 import { COUNTRIES } from './countries.js';
 import { initBrandFavorites, persistBrandFavorite, readFavoriteBrands } from './brand-favorites.js?v=20261124-ranking-cards';
+import { renderHeaderAccountContents } from './header-controls.js?v=20261124-static-header';
 
 const DEFAULT_CONFIG_ENDPOINT = 'https://api.spincresta.com/api/auth-config';
 const DEFAULT_NEWSLETTER_ENDPOINT = 'https://api.spincresta.com/api/subscribe';
@@ -210,25 +211,23 @@ export const prepareAccountHeader = locale => {
   const headerInner = document.querySelector('.header-inner');
   if (!headerInner) return null;
   const existing = headerInner.querySelector('.account-auth-control');
-  if (existing) return existing;
+  if (existing?.dataset.accountHeaderReady) return existing;
 
   const copy = COPY[locale] || COPY.en;
   const preview = readHeaderPreview();
-  const control = document.createElement('button');
-  control.type = 'button';
+  const control = existing || document.createElement('button');
+  control.dataset.accountHeaderReady = 'true';
   control.disabled = true;
-  control.className = 'account-auth-control';
   control.classList.toggle('is-signed-in', preview?.kind === 'account');
-  control.classList.toggle('is-placeholder', !preview);
   if (!preview) control.setAttribute('aria-busy', 'true');
-  control.setAttribute('aria-haspopup', 'dialog');
-  control.setAttribute('aria-label', copy.signIn);
-  control.innerHTML = `
-    <span class="account-auth-icon" aria-hidden="true">
-      <svg viewBox="0 0 24 24" role="img"><path d="M12 12a4.25 4.25 0 1 0 0-8.5 4.25 4.25 0 0 0 0 8.5Zm-7.25 8.5c.7-4 3.2-6.25 7.25-6.25s6.55 2.25 7.25 6.25" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg>
-    </span>
-    <span class="account-auth-label">${copy.signIn}</span>
-  `;
+  if (!existing) {
+    control.type = 'button';
+    control.className = 'account-auth-control';
+    control.setAttribute('aria-haspopup', 'dialog');
+    control.setAttribute('aria-label', copy.signIn);
+    control.innerHTML = renderHeaderAccountContents(copy.signIn);
+    headerInner.append(control);
+  }
   if (preview?.kind === 'account') {
     control.querySelector('.account-auth-label').textContent = preview.name || copy.account;
     control.setAttribute('aria-label', copy.account);
@@ -240,7 +239,6 @@ export const prepareAccountHeader = locale => {
       control.prepend(initial);
     }
   }
-  headerInner.append(control);
   return control;
 };
 
@@ -433,7 +431,6 @@ export const initAccountAuth = async (locale, favoriteOptions = {}) => {
       : copy.signIn;
     control.setAttribute('aria-label', currentUser ? copy.account : copy.signIn);
     control.classList.toggle('is-signed-in', Boolean(currentUser));
-    control.classList.remove('is-placeholder');
     control.removeAttribute('aria-busy');
     control.disabled = false;
     if (!authUnavailable) saveHeaderPreview(currentUser, label.textContent);

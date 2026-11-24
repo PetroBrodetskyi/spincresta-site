@@ -3,6 +3,7 @@ import path from 'node:path';
 import {pathToFileURL} from 'node:url';
 import { HOME_PAGE_ASSET_VERSION } from './sync-home-language-switcher.mjs';
 import { syncGameProviderFooter } from './game-provider-footer.mjs';
+import { syncStaticHeaderControls } from './static-header-controls.mjs';
 
 const SITE_ENTRY_VERSION = '20261119-catalog-partners';
 const SITE_STYLE_VERSION = '20261119-catalog-partners';
@@ -29,7 +30,7 @@ export function syncDefaultTheme(html) {
   const isBrand = /<body\b[^>]*\bdata-brand=/.test(html);
   const styleVersion = isBrand ? BRAND_STYLE_VERSION : SITE_STYLE_VERSION;
   const pageVersion = html.includes('data-provider-directory') ? PROVIDER_DIRECTORY_VERSION
-    : html.includes('data-static-language-switcher') ? HOME_PAGE_ASSET_VERSION
+    : html.includes('<!-- home-language-switcher:start -->') ? HOME_PAGE_ASSET_VERSION
     : /<body\b[^>]*\bdata-page="top-casinos"/.test(html) ? TOP_CASINOS_VERSION
     : html.includes('data-country-hub-grid') || html.includes('class="partners-telegram-icon"') ? COUNTRY_HUB_VERSION
     : /<main\b[^>]*(?:\beditorial-dashboard--author\b|\bdata-editorial-reading\b)/.test(html) ? PROFILE_AND_ARTICLE_VERSION
@@ -37,7 +38,7 @@ export function syncDefaultTheme(html) {
     : html.includes('<main class="catalog-directory">')
     ? CATALOG_VERSION
     : /<main class="account-dashboard editorial-dashboard /.test(html) ? EDITORIAL_DASHBOARD_VERSION : null;
-  const shell = syncGameProviderFooter(html).replace(/<html\b([^>]*)>/i,(all,attributes)=>`<html${attributes.replace(/\sdata-theme=(?:"[^"]*"|'[^']*')/gi,'')}>`)
+  const shell = syncStaticHeaderControls(syncGameProviderFooter(html)).replace(/<html\b([^>]*)>/i,(all,attributes)=>`<html${attributes.replace(/\sdata-theme=(?:"[^"]*"|'[^']*')/gi,'')}>`)
     .replace(/\s*<script src="\/scripts\/theme-init\.js(?:\?[^"\s]*)?"><\/script>/g,'')
     .replace(/(<meta name="theme-color" content=")[^"]+("\s*\/?>)/g,'$1#ffffff$2')
     .replace(/<img\b(?=[^>]*\bclass="[^"]*\blogo-lockup\b)[^>]*>/g, tag =>
@@ -45,8 +46,11 @@ export function syncDefaultTheme(html) {
         `src="/images/spincresta-wordmark.svg?v=${WORDMARK_VERSION}" width="258" height="60"`)
     )
     .replace(/(\/(?:scripts\/main\.js|styles\.css|styles\/blog\.css))(?:\?v=[^"\s]+)?(?=")/g,
-      (_, asset) => `${asset}?v=${pageVersion || (asset === '/styles.css' ? styleVersion
-        : asset === '/scripts/main.js' && isBrand ? BRAND_ENTRY_VERSION : SITE_ENTRY_VERSION)}`);
+      (_, asset) => {
+        const version = pageVersion || (asset === '/styles.css' ? styleVersion
+          : asset === '/scripts/main.js' && isBrand ? BRAND_ENTRY_VERSION : SITE_ENTRY_VERSION);
+        return `${asset}?v=${version}${version === HOME_PAGE_ASSET_VERSION ? '' : '-static-header'}`;
+      });
   if (!isBrand) return shell;
   return shell
     .replace(/\s*<script data-brand-layout-guard>[\s\S]*?<\/script>/g, '')

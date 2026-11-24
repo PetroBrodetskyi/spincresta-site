@@ -1,51 +1,28 @@
 import fs from 'node:fs';
 import { pathToFileURL } from 'node:url';
+import { headerLanguages, renderHeaderLanguageSwitcher } from '../scripts/header-controls.js';
 
-export const HOME_PAGE_ASSET_VERSION = '20261124-full-market-track';
-const languages = [
-  ['en', 'united-kingdom', 'English', 'Choose language'],
-  ['de', 'germany', 'Deutsch', 'Sprache auswählen'],
-  ['es', 'spain', 'Español', 'Elegir idioma'],
-  ['it', 'italy', 'Italiano', 'Scegli la lingua'],
-  ['pl', 'poland', 'Polski', 'Wybierz język'],
-  ['uk', 'ukraine', 'Українська', 'Вибрати мову'],
-  ['pt', 'portugal', 'Português', 'Escolher idioma'],
-  ['fr', 'france', 'Français', 'Choisir la langue'],
-  ['hi', 'india', 'हिन्दी', 'भाषा चुनें'],
-  ['fi', 'finland', 'Suomi', 'Valitse kieli'],
-];
-
-export const homeLanguagePaths = new Map(languages.map(([code]) => [code, code === 'en' ? '/' : `/${code}/`]));
+export const HOME_PAGE_ASSET_VERSION = '20261124-static-header';
+export const homeLanguagePaths = new Map(headerLanguages.map(([code]) => [code, code === 'en' ? '/' : `/${code}/`]));
 
 const markerStart = '<!-- home-language-switcher:start -->';
 const markerEnd = '<!-- home-language-switcher:end -->';
 const markerBlock = /\r?\n[ \t]*<!-- home-language-switcher:start -->[\s\S]*?<!-- home-language-switcher:end -->/g;
-const afterBurger = /(<button\b(?=[^>]*\bclass="burger")(?=[^>]*\baria-controls="mobileMenu")[^>]*>[\s\S]*?<\/button>)(\s*<\/div>\s*<!-- MOBILE MENU -->)/;
-const flag = name => `<img src="/icons/${name}-flag-icon.svg" alt="" aria-hidden="true" loading="lazy" decoding="async" />`;
-const codeLabel = code => `<span class="language-switcher-code" aria-hidden="true">${code.toUpperCase()}</span>`;
+const afterBurger = /(<button\b(?=[^>]*\bclass="burger")(?=[^>]*\baria-controls="mobileMenu")[^>]*>[\s\S]*?<\/button>)/;
 
 export function syncHomeLanguageSwitcher(html, locale) {
-  const current = languages.find(([code]) => code === locale);
-  if (!current) throw new Error(`Unsupported home language: ${locale}`);
+  if (!homeLanguagePaths.has(locale)) throw new Error(`Unsupported home language: ${locale}`);
   if (!html.includes(`rel="canonical" href="https://spincresta.com${homeLanguagePaths.get(locale)}"`)) {
     throw new Error(`Language switcher must be generated on the ${locale} homepage`);
   }
 
-  const options = languages.map(([code, icon, name]) =>
-    `            <a class="language-switcher-option" href="${homeLanguagePaths.get(code)}" lang="${code}" aria-label="${name}" title="${name}"${code === locale ? ' aria-current="page"' : ''}>${flag(icon)}${codeLabel(code)}</a>`
-  ).join('\n');
   const menu = `        ${markerStart}
-        <details class="language-switcher" data-static-language-switcher>
-          <summary class="language-switcher-current" aria-label="${current[3]}">${flag(current[1])}${codeLabel(locale)}</summary>
-          <div class="language-switcher-menu">
-${options}
-          </div>
-        </details>
+        ${renderHeaderLanguageSwitcher(locale, code => homeLanguagePaths.get(code))}
         ${markerEnd}`;
   const clean = html.replace(markerBlock, '');
   if (!afterBurger.test(clean)) throw new Error(`Missing homepage header insertion point: ${locale}`);
   return clean
-    .replace(afterBurger, (_, button, tail) => `${button}\n${menu}${tail}`)
+    .replace(afterBurger, (_, button) => `${button}\n${menu}`)
     .replace(/(<script\b[^>]*\bsrc="\/scripts\/main\.js)(?:\?v=[^"]*)?(?=")/, `$1?v=${HOME_PAGE_ASSET_VERSION}`)
     .replace(/(<link\b[^>]*\bhref="\/styles\.css)(?:\?v=[^"]*)?(?=")/, `$1?v=${HOME_PAGE_ASSET_VERSION}`);
 }

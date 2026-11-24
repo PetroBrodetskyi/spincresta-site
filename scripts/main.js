@@ -6,7 +6,8 @@ import { COUNTRIES } from './countries.js';
 import { getFeaturedHomeBrands } from './featured-brands.js?v=20261119-shared-search';
 import { initFaqSections } from './faq.js?v=20261119-faq-layout';
 import { initFooterNewsletter } from './footer-newsletter.js?v=20260826-newsletter-4';
-import { initAccountAuth, prepareAccountHeader } from './account-auth.js?v=20261124-ranking-cards';
+import { initAccountAuth, prepareAccountHeader } from './account-auth.js?v=20261124-static-header';
+import { headerSearchIcon } from './header-controls.js?v=20261124-static-header';
 import { initSiteIcons, siteIconMarkup } from './site-icons.js?v=20261124-provider-cards';
 import { initSectionNavigation } from './section-navigation.js?v=20261119-light-editorial';
 import { bindImagePreview } from './image-preview.js?v=20261119-preview-loader';
@@ -2223,18 +2224,17 @@ const initDesktopSiteSearch = () => {
     headerInner.append(search);
   }
 
-  if (!headerInner.querySelector('.site-search-trigger--desktop')) {
-    const trigger = document.createElement('button');
+  let trigger = headerInner.querySelector('.site-search-trigger--desktop');
+  if (!trigger) {
+    trigger = document.createElement('button');
     trigger.type = 'button';
     trigger.className = 'site-search-trigger site-search-trigger--desktop';
     trigger.setAttribute('aria-label', uiCopy.openSearch);
-    trigger.setAttribute('aria-controls', search.id);
     trigger.setAttribute('aria-expanded', 'false');
-    trigger.innerHTML = `
-      <img class="site-search-trigger-icon" src="/icons/ui/search-icon.svg" alt="" aria-hidden="true" loading="lazy" decoding="async" />
-    `;
+    trigger.innerHTML = headerSearchIcon;
     headerInner.insertBefore(trigger, nav);
   }
+  trigger.setAttribute('aria-controls', search.id);
 
   return search;
 };
@@ -2351,10 +2351,10 @@ const initLanguageSwitcher = () => {
   switcher.dataset.languageSwitcherReady = 'true';
 
   // Keep the visual and keyboard order consistent: language first, account second.
-  // Account auth is initialized before the language switcher, so move its control
-  // behind the newly-created switcher once both controls exist.
+  // Older pages may still create the switcher at runtime. Do not detach the
+  // ready-made account button on pages that already serve the correct order.
   const accountControl = headerInner.querySelector('.account-auth-control');
-  if (accountControl) headerInner.append(accountControl);
+  if (accountControl && switcher.nextElementSibling !== accountControl) headerInner.append(accountControl);
 
   switcher.addEventListener('click', event => {
     const option = event.target.closest('.language-switcher-option');
@@ -3961,6 +3961,7 @@ export const initCasinoPage = async () => {
   const pageType = document.body.dataset.page;
   const pageCountry = document.body.dataset.country?.toUpperCase();
   const isBrandPage = Boolean(document.body.dataset.brand);
+  if (pageType !== 'moderator') initLanguageSwitcher();
   if (!isBrandPage) initPageAccount();
   const siteCountryCountEl = document.getElementById('siteCountryCount');
   const siteBrandCountEl = document.getElementById('siteBrandCount');
@@ -4290,7 +4291,6 @@ export const initCasinoPage = async () => {
 
   initDesktopSiteSearch();
   initHomeSiteSearch();
-  if (pageType !== 'moderator') initLanguageSwitcher();
   ensureFooterBlogLink();
   const desktopSearch = desktopNavHeaderInner?.querySelector('.site-search--desktop');
   const desktopSearchTrigger = desktopNavHeaderInner?.querySelector('.site-search-trigger--desktop');
@@ -4347,6 +4347,7 @@ export const initCasinoPage = async () => {
 
     closeDesktopSearch = () => syncSearchState(false);
     syncSearchState(false);
+    desktopSearchTrigger.disabled = false;
 
     desktopSearchTrigger.addEventListener('click', () => {
       syncSearchState(!desktopNavHeader.classList.contains('search-expanded'));

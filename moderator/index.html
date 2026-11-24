@@ -39,7 +39,7 @@
   <meta property="og:site_name" content="SpinCresta" />
   <meta name="twitter:card" content="summary_large_image" />
 
-      <link rel="stylesheet" href="/styles.css?v=20261119-catalog-partners" />
+      <link rel="stylesheet" href="/styles.css?v=20261119-catalog-partners-static-header" />
   </head>
   <body class="home-page" data-page="moderator">
     <header class="header">
@@ -47,6 +47,9 @@
         <a href="/" class="logo">
           <img src="/images/spincresta-wordmark.svg?v=20261118-padded-wordmark" width="258" height="60" alt="SpinCresta" class="logo-lockup" />
         </a>
+        <!-- static-header-search:start -->
+        <button class="site-search-trigger site-search-trigger--desktop" type="button" aria-label="Open search" aria-expanded="false" disabled><svg class="site-search-trigger-icon" viewBox="0 0 24 24" aria-hidden="true" focusable="false"><circle cx="10.5" cy="10.5" r="7.25" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="m16 16 5.5 5.5" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></button>
+        <!-- static-header-search:end -->
         <nav class="nav" aria-label="Main navigation">
           <a class="nav-countries-link" href="/#home-country-title">Countries</a>
           <a href="/top-casinos/">Top Casinos</a>
@@ -63,6 +66,9 @@
         >
           <span></span><span></span><span></span>
         </button>
+        <!-- static-header-account:start -->
+        <button class="account-auth-control" type="button" aria-haspopup="dialog" aria-label="Sign in" disabled><span class="account-auth-icon" aria-hidden="true"><svg viewBox="0 0 24 24" focusable="false"><path d="M12 12a4.25 4.25 0 1 0 0-8.5 4.25 4.25 0 0 0 0 8.5Zm-7.25 8.5c.7-4 3.2-6.25 7.25-6.25s6.55 2.25 7.25 6.25" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/></svg></span><span class="account-auth-label">Sign in</span></button>
+        <!-- static-header-account:end -->
       </div>
 
       <nav class="mobile-menu" id="mobileMenu" aria-hidden="true">
@@ -185,7 +191,7 @@
 </div>
     </footer>
 
-    <script type="module" src="/scripts/main.js?v=20261119-catalog-partners"></script>
+    <script type="module" src="/scripts/main.js?v=20261119-catalog-partners-static-header"></script>
       <script type="module" src="/scripts/moderator-bootstrap.js?v=20261122-select-controls"></script>
   </body>
 </html>
