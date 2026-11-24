@@ -1,7 +1,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import {pathToFileURL} from 'node:url';
-import { HOME_PAGE_ASSET_VERSION } from './sync-home-language-switcher.mjs';
+import { HOME_PAGE_ASSET_VERSION, HEADER_STYLE_REVISION } from './sync-home-language-switcher.mjs';
 import { syncGameProviderFooter } from './game-provider-footer.mjs';
 import { syncStaticHeaderControls } from './static-header-controls.mjs';
 
@@ -49,7 +49,8 @@ export function syncDefaultTheme(html) {
       (_, asset) => {
         const version = pageVersion || (asset === '/styles.css' ? styleVersion
           : asset === '/scripts/main.js' && isBrand ? BRAND_ENTRY_VERSION : SITE_ENTRY_VERSION);
-        return `${asset}?v=${version}${version === HOME_PAGE_ASSET_VERSION ? '' : '-static-header'}`;
+        const header = version === HOME_PAGE_ASSET_VERSION ? '' : '-static-header';
+        return `${asset}?v=${version}${header}${asset === '/styles.css' ? HEADER_STYLE_REVISION : ''}`;
       });
   if (!isBrand) return shell;
   return shell

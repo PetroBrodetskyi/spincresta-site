@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import test from 'node:test';
 import vm from 'node:vm';
-import { homeLanguagePaths, HOME_PAGE_ASSET_VERSION, syncHomeLanguageSwitcher } from './sync-home-language-switcher.mjs';
+import { homeLanguagePaths, HOME_PAGE_ASSET_VERSION, HEADER_STYLE_REVISION, syncHomeLanguageSwitcher } from './sync-home-language-switcher.mjs';
 import { syncDefaultTheme } from './sync-default-theme.mjs';
 
 test('all homepages expose canonical language links in the original HTML', () => {
@@ -26,7 +26,7 @@ test('all homepages expose canonical language links in the original HTML', () =>
     }
     assert.equal(new Set(options.map(([, , lang]) => lang)).size, 10, file);
     assert.ok(html.includes(`src="/scripts/main.js?v=${HOME_PAGE_ASSET_VERSION}"`), file);
-    assert.ok(html.includes(`href="/styles.css?v=${HOME_PAGE_ASSET_VERSION}"`), file);
+    assert.ok(html.includes(`href="/styles.css?v=${HOME_PAGE_ASSET_VERSION}${HEADER_STYLE_REVISION}"`), file);
   }
 });
 

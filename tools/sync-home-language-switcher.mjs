@@ -3,6 +3,7 @@ import { pathToFileURL } from 'node:url';
 import { headerLanguages, renderHeaderLanguageSwitcher } from '../scripts/header-controls.js';
 
 export const HOME_PAGE_ASSET_VERSION = '20261124-static-header';
+export const HEADER_STYLE_REVISION = '-stable-nav';
 export const homeLanguagePaths = new Map(headerLanguages.map(([code]) => [code, code === 'en' ? '/' : `/${code}/`]));
 
 const markerStart = '<!-- home-language-switcher:start -->';
@@ -24,7 +25,7 @@ export function syncHomeLanguageSwitcher(html, locale) {
   return clean
     .replace(afterBurger, (_, button) => `${button}\n${menu}`)
     .replace(/(<script\b[^>]*\bsrc="\/scripts\/main\.js)(?:\?v=[^"]*)?(?=")/, `$1?v=${HOME_PAGE_ASSET_VERSION}`)
-    .replace(/(<link\b[^>]*\bhref="\/styles\.css)(?:\?v=[^"]*)?(?=")/, `$1?v=${HOME_PAGE_ASSET_VERSION}`);
+    .replace(/(<link\b[^>]*\bhref="\/styles\.css)(?:\?v=[^"]*)?(?=")/, `$1?v=${HOME_PAGE_ASSET_VERSION}${HEADER_STYLE_REVISION}`);
 }
 
 if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {

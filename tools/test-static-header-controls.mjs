@@ -49,3 +49,18 @@ test('account and search bind the static nodes instead of replacing them', () =>
   assert.match(main, /let trigger = headerInner\.querySelector\('\.site-search-trigger--desktop'\);\s*if \(!trigger\)/);
   assert.match(main, /desktopSearchTrigger\.disabled = false/);
 });
+
+test('the header uses localized font subsets without a late font swap', () => {
+  const core = read('styles/core.css');
+  const fonts = [...core.matchAll(/@font-face\s*\{\s*font-family: 'Inter Tight Header';([^}]+)\}/g)];
+  assert.equal(fonts.length, 3);
+  for (const subset of ['latin', 'latin-ext', 'cyrillic']) {
+    const source = `/fonts/inter-tight/files/inter-tight-${subset}-wght-normal.woff2`;
+    const face = fonts.find(([, declarations]) => declarations.includes(source))?.[1];
+    assert.match(face, /font-display: optional;/, subset);
+    assert.equal(readFileSync(source.slice(1)).toString('ascii', 0, 4), 'wOF2');
+  }
+  assert.match(core, /\.header-inner\s*\{\s*font-family: 'Inter Tight Header', system-ui/);
+  assert.match(read('fonts/inter-tight/index.css'), /font-family: 'Inter Tight Variable';[\s\S]*?font-display: swap;/);
+  assert.doesNotMatch(read('scripts/main.js'), /Inter Tight Header/);
+});
