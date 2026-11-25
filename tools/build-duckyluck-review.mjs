@@ -75,6 +75,15 @@ const save = (file, before, after) => {
   } else writeFileSync(file, after);
 };
 if (!image || brand?.bonus !== duckyluckHeadlines.en || brand.countries.join() !== 'US') throw new Error('Incomplete Ducky Luck registry');
+if (!/^images\/[a-z0-9-]+\.(?:svg|webp|png)$/.test(brand.image) || !/^#[\da-f]{6}$/i.test(brand.bgColor)) {
+  throw new Error('Invalid Ducky Luck logo configuration');
+}
+const logoSrc = `/${brand.image}`;
+const logoStyle = `--brand-bg-color: ${brand.bgColor};`;
+const syncLogo = (html, wrapper) => html.replace(
+  new RegExp(`(<(?:span|div) class="${wrapper}")(?: style="[^"]*")?([^>]*>\\s*<img\\b[^>]*?\\bsrc=")[^"]+(")`),
+  (_, container, img, quote) => `${container} style="${logoStyle}"${img}${logoSrc}${quote}`,
+);
 
 for (const [i, lang] of locales.entries()) {
   const c = duckyluckCopy[lang];
@@ -140,7 +149,7 @@ for (const [i, lang] of locales.entries()) {
   const feature = before.match(/<section\b[^>]*\bid="brand-why-section"[^>]*>([\s\S]*?)<\/section>/)?.[1];
   const button = feature?.match(/<button\b[^>]*class="brand-why-media"[\s\S]*?<\/button>/)?.[0];
   if (!hero || !button) throw new Error('Missing Ducky Luck review shell: ' + lang);
-  const heroUpdated = hero
+  const heroUpdated = syncLogo(hero, 'brand-logo-container hero-logo')
     .replace(/<p class="hero-subtitle">[\s\S]*?<\/p>/, () => overview.replace('section-intro', 'hero-subtitle'))
     .replace(/<p class="hero-subtitle editorial-meta">[\s\S]*?<\/p>/, () =>
       `<p class="hero-subtitle editorial-meta">${esc(reviewed)}: <time datetime="${date}">${esc(stamp)}</time></p>`)
@@ -165,6 +174,13 @@ for (const [i, lang] of locales.entries()) {
   for (const key of ['description', 'og:description', 'twitter:description']) after = meta(after, key, description);
   for (const key of ['og:image', 'twitter:image']) after = meta(after, key, image);
   save(file, before, syncDefaultTheme(after));
+
+  const catalogFile = '.' + prefix(lang) + 'casinos-and-betting/index.html';
+  const catalog = readFileSync(catalogFile, 'utf8');
+  const card = [...catalog.matchAll(/<article class="casino-list-row"[^>]*>[\s\S]*?<\/article>/g)]
+    .find(([row]) => row.includes(`href="${route(lang)}"`))?.[0];
+  if (!card?.includes('class="home-new-review-logo"')) throw new Error('Missing Ducky Luck directory card: ' + lang);
+  save(catalogFile, catalog, catalog.replace(card, () => syncLogo(card, 'home-new-review-logo')));
 }
 
 const sitemapFile = 'sitemap.xml';

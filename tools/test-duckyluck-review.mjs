@@ -1,5 +1,5 @@
 import assert from 'node:assert/strict';
-import { readFileSync } from 'node:fs';
+import { existsSync, readFileSync } from 'node:fs';
 import test from 'node:test';
 import { BRANDS } from '../scripts/brands.js';
 import { BRAND_HOMEPAGE_SCREENSHOTS } from '../scripts/brand-homepage-screenshots.js';
@@ -19,6 +19,10 @@ test('Ducky Luck preserves the approved United States market and uses the curren
   assert.deepEqual(brand.countries, ['US']);
   assert.equal(brand.urlCasino, 'https://armadaapp.media-412.com/click?pid=3862&offer_id=121377');
   assert.equal(brand.bonus, duckyluckHeadlines.en);
+  assert.equal(brand.image, 'images/duckyluck.svg');
+  assert.equal(brand.bgColor, '#FFFFFF');
+  assert.match(read(brand.image), /^<svg\b/);
+  assert.equal(existsSync(new URL('../images/duckyluck.webp', import.meta.url)), false);
   assert.ok(brand.payments.includes('americanexpress'));
   assert.match(image, /\/v1795550040\/spincresta\/brands\/duckyluck\/main-page\//);
   assert.equal(BRAND_SNAPSHOT_CONFIGS.duckyluck.tabs.length, 2);
@@ -44,6 +48,7 @@ for (const lang of locales) test(`${lang}: Ducky Luck copy, media, casino detail
   assert.ok(html.includes(`<meta property="og:image" content="${image}"`));
   assert.ok(html.includes(`<meta name="twitter:image" content="${image}"`));
   assert.match(html, /width="3024" height="1590" loading="eager"/);
+  assert.match(html, /class="brand-logo-container hero-logo" style="--brand-bg-color: #FFFFFF;">\s*<img class="brand-logo" src="\/images\/duckyluck\.svg"/);
   assert.doesNotMatch(html, /v1785004778|data-review-section="sports"|href="https?:\/\/(?:www\.)?duckyluck\.ag/i);
   assert.ok(html.includes(`href="${escapeReview(brand.urlCasino)}" class="cta-brands"`));
   for (const key of ['payments', 'standard', 'crypto', 'spins', 'terms', 'identity', 'trust']) assert.ok(html.includes(escapeReview(c[key])), key);
@@ -65,6 +70,7 @@ for (const lang of locales) test(`${lang}: Ducky Luck copy, media, casino detail
   const listing = [...read(path(lang) + 'casinos-and-betting/index.html').matchAll(/<article class="casino-list-row"[\s\S]*?<\/article>/g)]
     .find(([row]) => row.includes(`href="/${route}"`))?.[0];
   assert.ok(listing, 'Ducky Luck directory card');
+  assert.match(listing, /class="home-new-review-logo" style="--brand-bg-color: #FFFFFF;"><img\s+src="\/images\/duckyluck\.svg"/);
   assert.ok(listing.includes(escapeReview(duckyluckHeadlines[lang])));
   if (lang !== 'en') {
     const translation = await import(`../scripts/brand-bonus-translations/${lang}.js`);
