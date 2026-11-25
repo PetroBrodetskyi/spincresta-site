@@ -14183,7 +14183,7 @@ body[data-brand] .brand-table-toggle[aria-expanded='true'] i {
 }
 
 /* Compact mobile accordion for the editorial method on every localized home. */
-body.home-page .home-method-toggle {
+:is(.home-editorial-method, .country-guide-carousel) .home-method-toggle {
   display: none;
 }
 
@@ -14218,7 +14218,7 @@ body.home-page .home-method-toggle {
     display: block;
   }
 
-  body.home-page .home-method-toggle {
+  :is(.home-editorial-method, .country-guide-carousel) .home-method-toggle {
     position: absolute;
     top: 20px;
     right: 14px;
@@ -14235,7 +14235,7 @@ body.home-page .home-method-toggle {
     cursor: pointer;
   }
 
-  body.home-page .home-method-toggle > span {
+  :is(.home-editorial-method, .country-guide-carousel) .home-method-toggle > span {
     width: 8px;
     height: 8px;
     border-right: 2px solid currentColor;
@@ -14244,7 +14244,7 @@ body.home-page .home-method-toggle {
     transition: transform 180ms ease;
   }
 
-  body.home-page .home-method-toggle[aria-expanded='true'] > span {
+  :is(.home-editorial-method, .country-guide-carousel) .home-method-toggle[aria-expanded='true'] > span {
     transform: translateY(2px) rotate(225deg);
   }
 

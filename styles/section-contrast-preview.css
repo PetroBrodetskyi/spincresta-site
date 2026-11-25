@@ -163,8 +163,36 @@ html:root body[data-country] .expert-review .expert-meta {
   text-align: left;
 }
 
+/* The light card needs its own text palette at every viewport width. */
+html:root body[data-country] .expert-review .expert-card :is(
+  .expert-byline-label, .expert-meta, .expert-body > p, .expert-criteria li
+) {
+  color: var(--text-muted);
+}
+
+html:root body[data-country] .expert-review .expert-card :is(
+  .expert-info h3, .expert-body > p:first-of-type
+) {
+  color: var(--text-main);
+}
+
 html:root body[data-country] .expert-review .expert-role {
   color: var(--editorial-blue);
+}
+
+html:root body[data-country] .expert-review .expert-card .expert-linkedin {
+  color: var(--editorial-blue);
+  border-color: var(--surface-border-strong);
+}
+
+html:root body[data-country] .expert-review .expert-card .expert-linkedin:hover {
+  text-decoration: underline;
+}
+
+html:root body[data-country] .expert-review .expert-card
+  :is(.expert-avatar, .expert-info h3 a, .expert-linkedin):focus-visible {
+  outline: 2px solid var(--editorial-blue);
+  outline-offset: 2px;
 }
 
 html:root body[data-country] .expert-review .expert-card > .expert-body {
@@ -174,6 +202,11 @@ html:root body[data-country] .expert-review .expert-card > .expert-body {
   padding: 0;
   border: 0;
   background: none;
+  box-shadow: none;
+}
+
+html:root body[data-country] .expert-review .expert-body::after {
+  content: none;
 }
 
 html:root body[data-country] .expert-review .expert-card > .expert-body > :is(p, h3, .expert-methodology) {
@@ -214,6 +247,7 @@ html:root body[data-country] .expert-review .expert-methodology > li:nth-child(n
   border: 0;
   border-radius: 8px;
   background: #f1f4f9;
+  color: var(--text-muted);
   box-shadow: none;
 }
 
@@ -536,6 +570,66 @@ html:root body :is(.home-editorial-method, .editorial-card-band) .home-method-gr
 }
 
 @media (max-width: 560px) {
+  html:root body[data-country] .content-article .country-guide-carousel {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 8px;
+    margin: 0;
+    padding: 0;
+    overflow: visible;
+    scroll-snap-type: none;
+    cursor: auto;
+  }
+
+  html:root body[data-country] .content-article .country-guide-carousel > div {
+    display: grid;
+    grid-template-columns: 38px minmax(0, 1fr) 34px;
+    align-items: center;
+    gap: 10px;
+    width: auto;
+    min-width: 0;
+    min-height: 64px;
+    padding: 14px 16px;
+    background: #fff;
+    transform: none;
+  }
+
+  html:root body[data-country] .country-guide-carousel > div .home-method-icon {
+    grid-column: 1;
+    width: 38px;
+    height: 36px;
+    margin: 0;
+    border-radius: 6px;
+    clip-path: polygon(0 0, 100% 0, calc(100% - 4px) 50%, 100% 100%, 0 100%, 4px 50%);
+  }
+
+  html:root body[data-country] .content-article .country-guide-carousel > div h3 {
+    grid-column: 1 / -1;
+    min-width: 0;
+    margin: 0;
+    overflow-wrap: anywhere;
+  }
+
+  html:root body[data-country] .content-article .country-guide-carousel > div .home-method-icon + h3 {
+    grid-column: 2;
+  }
+
+  html:root body[data-country] .country-guide-carousel .home-method-toggle {
+    position: static;
+    grid-row: 1;
+    grid-column: 3;
+  }
+
+  html:root body[data-country] .country-guide-carousel > div > :not(.home-method-icon, h3, button) {
+    grid-column: 1 / -1;
+    min-width: 0;
+    overflow-wrap: break-word;
+  }
+
+  html:root body[data-country] .country-guide-carousel > div[data-mobile-accordion-ready]:not(.is-mobile-expanded) > [data-editorial-copy] {
+    display: none;
+  }
+
   html:root body :is(.home-editorial-method, .editorial-card-band) .home-method-grid > article {
     display: grid;
     grid-template-columns: 38px minmax(0, 1fr);

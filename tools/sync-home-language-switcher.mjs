@@ -2,7 +2,7 @@ import fs from 'node:fs';
 import { pathToFileURL } from 'node:url';
 import { headerLanguages, renderHeaderLanguageSwitcher } from '../scripts/header-controls.js';
 
-export const HOME_PAGE_ASSET_VERSION = '20261124-static-header';
+export const HOME_PAGE_ASSET_VERSION = '20261125-country-guides';
 export const HEADER_STYLE_REVISION = '-stable-nav';
 export const homeLanguagePaths = new Map(headerLanguages.map(([code]) => [code, code === 'en' ? '/' : `/${code}/`]));
 

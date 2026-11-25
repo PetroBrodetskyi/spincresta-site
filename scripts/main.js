@@ -8,6 +8,7 @@ import { initFaqSections } from './faq.js?v=20261119-faq-layout';
 import { initFooterNewsletter } from './footer-newsletter.js?v=20260826-newsletter-4';
 import { initAccountAuth, prepareAccountHeader } from './account-auth.js?v=20261124-static-header';
 import { headerSearchIcon } from './header-controls.js?v=20261124-static-header';
+import { bindMobileEditorialCards } from './editorial-accordion.js?v=20261125-country-guides';
 import { initSiteIcons, siteIconMarkup } from './site-icons.js?v=20261124-provider-cards';
 import { initSectionNavigation } from './section-navigation.js?v=20261119-light-editorial';
 import { bindImagePreview } from './image-preview.js?v=20261119-preview-loader';
@@ -50,7 +51,7 @@ const loadPageModules = async () => {
   if (isHomePage || isCountryPage) {
     const [gamesModule, homeModule, mediaModule] = await Promise.all([
       import('./brand-new-games.js?v=20261124-jackspay'),
-      import('./pages/home.js?v=20261124-full-market-track'),
+      import('./pages/home.js?v=20261125-country-guides'),
       isCountryPage ? import('./pages/country-media.js?v=20261122-compact-reviews') : null,
     ]);
     BRAND_NEW_GAMES = gamesModule.BRAND_NEW_GAMES || {};
@@ -3644,7 +3645,7 @@ const ensureLegacyCountryGuideCarousel = () => {
 const initCountryGuideCarousels = () => {
   ensureLegacyCountryGuideCarousel();
 
-  document.querySelectorAll('[data-carousel="gambling-guide"]').forEach(carousel => {
+  document.querySelectorAll('[data-carousel="gambling-guide"]').forEach((carousel, index) => {
     const cards = Array.from(carousel.children).filter(card => card.tagName === 'DIV');
     if (!cards.length) return;
 
@@ -3653,6 +3654,10 @@ const initCountryGuideCarousels = () => {
 
     carousel.setAttribute('role', 'region');
     carousel.setAttribute('aria-label', guideLabel);
+    const mobile = window.matchMedia('(max-width: 560px)');
+    const syncTabStop = () => { carousel.tabIndex = mobile.matches ? -1 : 0; };
+    mobile.addEventListener('change', syncTabStop);
+    syncTabStop();
 
     let pointerId = null;
     let startX = 0;
@@ -3664,6 +3669,13 @@ const initCountryGuideCarousels = () => {
     cards.forEach((card, index) => {
       card.querySelector(':scope > .guide-card-index')?.remove();
       card.insertAdjacentHTML('afterbegin', `<span class="home-method-icon">${siteIconMarkup(guideIcons[index] || 'review', 'site-icon', 24)}</span>`);
+    });
+    bindMobileEditorialCards(cards, {
+      idPrefix: `country-guide-${index + 1}`,
+      labels: {
+        collapsed: localeText('Show details', 'Details anzeigen', 'Mostrar detalles', 'Mostra dettagli', 'Pokaż szczegóły', 'Показати деталі', 'Mostrar detalhes', 'Afficher les détails', 'विवरण दिखाएँ', 'Näytä tiedot'),
+        expanded: localeText('Hide details', 'Details ausblenden', 'Ocultar detalles', 'Nascondi dettagli', 'Ukryj szczegóły', 'Сховати деталі', 'Ocultar detalhes', 'Masquer les détails', 'विवरण छिपाएँ', 'Piilota tiedot'),
+      },
     });
 
     const releasePointer = event => {
@@ -3687,6 +3699,7 @@ const initCountryGuideCarousels = () => {
     };
 
     carousel.addEventListener('pointerdown', event => {
+      if (mobile.matches) return;
       if (event.pointerType !== 'mouse' || event.button !== 0) return;
       if (event.target.closest('a, button, input, select, textarea')) return;
 
@@ -3730,6 +3743,7 @@ const initCountryGuideCarousels = () => {
     );
 
     carousel.addEventListener('keydown', event => {
+      if (mobile.matches) return;
       if (event.key !== 'ArrowLeft' && event.key !== 'ArrowRight') return;
 
       carousel.scrollBy({

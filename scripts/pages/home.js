@@ -5,6 +5,7 @@ import { bindCompactCountryCloud } from '../country-cloud.js?v=20261122-market-c
 
 import { bindMovingCardStrip } from '../scrolling-card-strip.js?v=20261122-compact-reviews';
 import { createReviewCard } from '../review-card.js?v=20261122-compact-reviews';
+import { bindMobileEditorialCards } from '../editorial-accordion.js?v=20261125-country-guides';
 export { advanceHomeGames } from '../scrolling-card-strip.js?v=20261122-compact-reviews';
 
 export const homeBrandScrollStep = (viewport, card, gap) => {
@@ -486,37 +487,9 @@ export const initHomePage = context => {
       'Piilota tarkistuksen tiedot'
     );
 
-    articles.forEach((article, index) => {
-      if (article.dataset.mobileAccordionReady === 'true') return;
-      const heading = article.querySelector(':scope > h3');
-      const copy = article.querySelector(':scope > p');
-      if (!heading || !copy) return;
-
-      const headingId = heading.id || `home-method-heading-${index + 1}`;
-      const copyId = copy.id || `home-method-copy-${index + 1}`;
-      heading.id = headingId;
-      copy.id = copyId;
-
-      const toggle = document.createElement('button');
-      toggle.type = 'button';
-      toggle.className = 'home-method-toggle';
-      toggle.setAttribute('aria-controls', copyId);
-      toggle.setAttribute('aria-labelledby', headingId);
-      toggle.innerHTML = '<span aria-hidden="true"></span>';
-
-      const syncToggle = isExpanded => {
-        article.classList.toggle('is-mobile-expanded', isExpanded);
-        toggle.setAttribute('aria-expanded', isExpanded ? 'true' : 'false');
-        toggle.setAttribute('aria-label', isExpanded ? expandedLabel : collapsedLabel);
-        toggle.title = isExpanded ? expandedLabel : collapsedLabel;
-      };
-      toggle.addEventListener('click', () => {
-        syncToggle(toggle.getAttribute('aria-expanded') !== 'true');
-      });
-
-      article.appendChild(toggle);
-      article.dataset.mobileAccordionReady = 'true';
-      syncToggle(false);
+    bindMobileEditorialCards(articles, {
+      idPrefix: 'home-method',
+      labels: { collapsed: collapsedLabel, expanded: expandedLabel },
     });
   };
 

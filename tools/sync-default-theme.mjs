@@ -15,6 +15,8 @@ const PROFILE_AND_ARTICLE_VERSION = '20261119-light-profile-guide';
 const COUNTRY_HUB_VERSION = '20261119-country-hub';
 const BRAND_STYLE_VERSION = '20261124-review-first-paint';
 const BRAND_ENTRY_VERSION = '20261124-review-first-paint';
+const COUNTRY_EXPERT_STYLE_REVISION = '-20261125-expert-contrast';
+const COUNTRY_GUIDE_REVISION = '-20261125-guide-accordion';
 const PROVIDER_DIRECTORY_VERSION = '20261124-provider-art';
 const WORDMARK_VERSION = '20261118-padded-wordmark';
 const excluded = new Set(['.git','.vercel','node_modules','tools','research','data','tmp','keyboard-diagnostics']);
@@ -28,6 +30,8 @@ export function publicThemePages(directory=process.cwd()) {
 export function syncDefaultTheme(html) {
   if(!html.includes('/styles.css'))return html;
   const isBrand = /<body\b[^>]*\bdata-brand=/.test(html);
+  const isCountry = /<body\b[^>]*\bdata-country=/.test(html);
+  const hasCountryExpertReview = isCountry && html.includes('id="expert-review"');
   const styleVersion = isBrand ? BRAND_STYLE_VERSION : SITE_STYLE_VERSION;
   const pageVersion = html.includes('data-provider-directory') ? PROVIDER_DIRECTORY_VERSION
     : html.includes('<!-- home-language-switcher:start -->') ? HOME_PAGE_ASSET_VERSION
@@ -50,7 +54,10 @@ export function syncDefaultTheme(html) {
         const version = pageVersion || (asset === '/styles.css' ? styleVersion
           : asset === '/scripts/main.js' && isBrand ? BRAND_ENTRY_VERSION : SITE_ENTRY_VERSION);
         const header = version === HOME_PAGE_ASSET_VERSION ? '' : '-static-header';
-        return `${asset}?v=${version}${header}${asset === '/styles.css' ? HEADER_STYLE_REVISION : ''}`;
+        const style = asset === '/styles.css'
+          ? HEADER_STYLE_REVISION + (isCountry ? COUNTRY_GUIDE_REVISION : '') + (hasCountryExpertReview ? COUNTRY_EXPERT_STYLE_REVISION : '') : '';
+        const entry = asset === '/scripts/main.js' && isCountry ? COUNTRY_GUIDE_REVISION : '';
+        return `${asset}?v=${version}${header}${style}${entry}`;
       });
   if (!isBrand) return shell;
   return shell
