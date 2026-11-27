@@ -6,6 +6,7 @@
 @import url('/styles/section-contrast-preview.css?v=20261125-country-guides');
 @import url('/styles/account.css?v=20261122-select-controls');
 @import url('/styles/editorial-directories.css?v=20261124-provider-directory-layout');
+@import url('/styles/newsletter-crown.css?v=20261127-newsletter-crown');
 
 :root {
   --type-caption: .75rem;

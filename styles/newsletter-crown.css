@@ -1,0 +1,38 @@
+/* Shared footer decoration; the newsletter markup and tab order stay unchanged. */
+@media (forced-colors: none) {
+  .footer .footer-newsletter {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-areas: "copy" "art" "form";
+    gap: 18px;
+  }
+
+  .footer .footer-newsletter-copy {
+    grid-area: copy;
+  }
+
+  .footer .footer-newsletter-form {
+    grid-area: form;
+  }
+
+  .footer .footer-newsletter::before {
+    content: "";
+    grid-area: art;
+    place-self: center;
+    inline-size: min(140px, 100%);
+    aspect-ratio: 3 / 2;
+    background: url("/images/spincresta-newsletter-crown.png") center / contain no-repeat;
+    pointer-events: none;
+  }
+}
+
+@media (min-width: 960px) and (forced-colors: none) {
+  .footer .footer-newsletter {
+    grid-template-columns: minmax(0, 1fr) clamp(132px, 16vw, 232px) minmax(0, 1.2fr);
+    grid-template-areas: "copy art form";
+    gap: clamp(16px, 2.8vw, 44px);
+  }
+
+  .footer .footer-newsletter::before {
+    inline-size: 100%;
+  }
+}
