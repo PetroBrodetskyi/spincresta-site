@@ -14,6 +14,8 @@ import { headlines as britsinoHeadlines } from './britsino-review-copy.mjs';
 import { duckyluckHeadlines } from './duckyluck-review-copy.mjs';
 import { headlines as slotsAndCasinoHeadlines } from './slotsandcasino-review-copy.mjs';
 import { headlines as jacksPayHeadlines } from './jackspay-review-copy.mjs';
+import { localeCopy as luckyRedCopy } from './luckyred-review-copy.mjs';
+import { allStarHeadline } from './allstarslots-review-copy.mjs';
 
 const ROOT = process.cwd();
 const LOCALES = ['de', 'es', 'it', 'pl', 'uk', 'pt', 'fr', 'hi', 'fi'];
@@ -74,6 +76,9 @@ for (const locale of LOCALES) BONUS_TRANSLATION_OVERRIDES[locale][britsinoHeadli
 for (const locale of LOCALES) BONUS_TRANSLATION_OVERRIDES[locale][duckyluckHeadlines.en] = duckyluckHeadlines[locale];
 for (const locale of LOCALES) BONUS_TRANSLATION_OVERRIDES[locale][slotsAndCasinoHeadlines.en] = slotsAndCasinoHeadlines[locale];
 for (const locale of LOCALES) BONUS_TRANSLATION_OVERRIDES[locale][jacksPayHeadlines.en] = jacksPayHeadlines[locale];
+const luckyRedBonus = locale => luckyRedCopy[locale][0].split('|')[2];
+for (const locale of LOCALES) BONUS_TRANSLATION_OVERRIDES[locale][luckyRedBonus('en')] = luckyRedBonus(locale);
+for (const locale of LOCALES) BONUS_TRANSLATION_OVERRIDES[locale][allStarHeadline('en')] = allStarHeadline(locale);
 for (const locale of LOCALES) BONUS_TRANSLATION_OVERRIDES[locale][PAMPAS_BONUS] = PAMPAS_COPY[locale].short;
 BONUS_TRANSLATION_OVERRIDES.uk['Up to 8,000 €/$ + 500 free spins'] = 'До 8 000 €/$ + 500 фриспінів';
 const decodeHtml = value =>
@@ -157,6 +162,8 @@ writeDirectoryBonus('', 'vikingluck', VIPERWIN_BONUS);
 writeDirectoryBonus('', 'casinado', VIPERWIN_BONUS);
 writeDirectoryBonus('', 'duckyluck', duckyluckHeadlines.en);
 writeDirectoryBonus('', 'slotsandcasino', slotsAndCasinoHeadlines.en);
+writeDirectoryBonus('', 'luckyred', luckyRedBonus('en'));
+writeDirectoryBonus('', 'allstarslots', allStarHeadline('en'));
 
 for (const locale of LOCALES) {
   const rows = readBonusRows(locale);
@@ -181,6 +188,8 @@ for (const locale of LOCALES) {
   writeDirectoryBonus(locale, 'casinado', VIPERWIN_BONUS_TRANSLATIONS[locale]);
   writeDirectoryBonus(locale, 'duckyluck', duckyluckHeadlines[locale]);
   writeDirectoryBonus(locale, 'slotsandcasino', slotsAndCasinoHeadlines[locale]);
+  writeDirectoryBonus(locale, 'luckyred', luckyRedBonus(locale));
+  writeDirectoryBonus(locale, 'allstarslots', allStarHeadline(locale));
 }
 
 console.log(`Brand bonus translations synced into ${LOCALES.length} locale-specific files.`);

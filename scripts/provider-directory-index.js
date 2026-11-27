@@ -136,6 +136,7 @@ export const providerDirectoryIndex = Object.freeze({
   "qoragaming": "qoragaming",
   "quickspin": "quickspin",
   "radi8": "radi8",
+  "realtimegaming": "realtimegaming",
   "redcarat": "redcarat",
   "redrake": "redrake",
   "redtiger": "redtiger",

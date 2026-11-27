@@ -19,6 +19,10 @@ export const gameExamples = [
   ['DiceLab Slots', 'Fluffalo Fortune', 'slots', 'duckyluck'],
   ['DiceLab Slots', 'Ace Bounty ReSpin Saloon', 'slots', 'duckyluck'],
   ['Saucify', 'Ca$hbah Cafe', 'slots', 'duckyluck'],
+  ['Realtime Gaming', 'Achilles', 'slots', 'luckyred'],
+  ['Realtime Gaming', 'Bubble Bubble', 'slots', 'luckyred'],
+  ['Realtime Gaming', 'Seahorse Surge', 'slots', 'allstarslots'],
+  ['Realtime Gaming', "Bass Baggin' Bounty", 'slots', 'allstarslots'],
 ];
 
 // Names readers may type even when the logo library uses a shorter spelling.

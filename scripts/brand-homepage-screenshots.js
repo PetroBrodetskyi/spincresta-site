@@ -147,6 +147,8 @@ export const BRAND_HOMEPAGE_SCREENSHOTS = Object.freeze(
   "safecasino": "https://res.cloudinary.com/drj61gmd2/image/upload/f_webp,q_auto/v1785083115/spincresta/brands/safecasino/main-page/safecasino-page_tycxkm.webp",
   "slotlair": "https://res.cloudinary.com/drj61gmd2/image/upload/f_webp,q_auto/v1785083425/spincresta/brands/slotlair/main-page/slotlair-page_h8uy3a.webp",
   "jackspay": "https://res.cloudinary.com/drj61gmd2/image/upload/f_webp,q_auto/v1795553158/spincresta/brands/jackspay/main-page/jackspay-page_xg3opr.webp",
+  "luckyred": "https://res.cloudinary.com/drj61gmd2/image/upload/f_webp,q_auto/v1795727131/spincresta/brands/luckyred/main-page/luckyred-page_i23fbn.webp",
+  "allstarslots": "https://res.cloudinary.com/drj61gmd2/image/upload/f_webp,q_auto/v1795727745/spincresta/brands/allstarslots/main-page/allstarslots-page_pj0kvu.webp",
   "slotsandcasino": "https://res.cloudinary.com/drj61gmd2/image/upload/f_webp,q_auto/v1785083462/spincresta/brands/slotsandcasino/main-page/slotsandcasino-page_wfaxyw.webp",
   "slotscapital": "https://res.cloudinary.com/drj61gmd2/image/upload/f_webp,q_auto/v1785083691/spincresta/brands/slotscapital/main-page/slotscapital-page_x9dofa.webp",
   "slotsmafia": "https://res.cloudinary.com/drj61gmd2/image/upload/f_webp,q_auto/v1785083883/spincresta/brands/slotsmafia/main-page/slotsmafia-page_nbucne.webp",

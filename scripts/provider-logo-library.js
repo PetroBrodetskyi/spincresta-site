@@ -1,5 +1,6 @@
 // Shared catalog of local logos. A logo's presence here does not imply brand availability.
 export const providerNames = Object.freeze({
+  'realtime-gaming': 'Realtime Gaming',
   '100hp-gaming': "100HP Gaming",
   '155': "155",
   '1spin4win': "1spin4win",
@@ -139,7 +140,7 @@ export const providerNames = Object.freeze({
 
 const rasterProviderLogos = new Set([
   'arrows-edge', 'dicelab-slots', 'dragon-gaming', 'felix-gaming', 'fresh-deck-studios',
-  'qora-gaming', 'rival', 'saucify', 'wingo',
+  'qora-gaming', 'realtime-gaming', 'rival', 'saucify', 'wingo',
 ]);
 export const providerLogoPath = id => Object.hasOwn(providerNames, id)
   ? `/images/providers/${id}.${rasterProviderLogos.has(id) ? 'png' : 'svg'}`

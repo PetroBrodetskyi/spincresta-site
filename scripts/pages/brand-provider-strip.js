@@ -1,4 +1,4 @@
-import { getReviewProviders } from '../brand-review-providers.js?v=20261124-provider-art';
+import { getReviewProviders } from '../brand-review-providers.js?v=20261127-realtime-gaming';
 import { providerLogoPath } from '../provider-logo-library.js?v=20261124-provider-art';
 import { siteIconMarkup } from '../site-icons.js?v=20261123-brand-providers';
 import { bindManualCardStrip } from '../scrolling-card-strip.js?v=20261123-provider-strip';
@@ -63,7 +63,7 @@ export function initBrandProviderStrips(root = document) {
     controls: section.querySelector('[data-strip-controls]'),
   }));
   if (!strips.length) return;
-  import('../provider-directory-index.js?v=20261124-game-providers').then(({ providerDirectoryIndex }) => {
+  import('../provider-directory-index.js?v=20261127-realtime-gaming').then(({ providerDirectoryIndex }) => {
     for (const section of strips) {
       const doc = section.ownerDocument;
       const lang = doc.body.dataset.language || doc.documentElement.lang.split('-')[0] || 'en';

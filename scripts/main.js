@@ -1,7 +1,7 @@
 ﻿// =====================
 // IMPORTS
 // =====================
-import { BRANDS } from './brands.js?v=20261127-longfu88-markets';
+import { BRANDS } from './brands.js?v=20261127-allstarslots';
 import { COUNTRIES } from './countries.js';
 import { getFeaturedHomeBrands } from './featured-brands.js?v=20261119-shared-search';
 import { initFaqSections } from './faq.js?v=20261119-faq-layout';
@@ -43,14 +43,14 @@ const loadPageModules = async () => {
   const hasCasinoCards = isHomePage || isCountryPage || isTopCasinosPage || document.querySelector('.casino-grid') ||
     (isBrandPage && findBrandByPageKey(document.body.dataset.brand)?.notRecommended);
   const cardScreenshotsReady = hasCasinoCards
-    ? import('./brand-homepage-screenshots.js?v=20261124-jackspay').then(module => {
+    ? import('./brand-homepage-screenshots.js?v=20261127-allstarslots').then(module => {
         BRAND_HOMEPAGE_SCREENSHOTS = module.BRAND_HOMEPAGE_SCREENSHOTS || {};
       }).catch(() => {})
     : Promise.resolve();
 
   if (isHomePage || isCountryPage) {
     const [gamesModule, homeModule, mediaModule] = await Promise.all([
-      import('./brand-new-games.js?v=20261124-jackspay'),
+      import('./brand-new-games.js?v=20261127-allstarslots'),
       import('./pages/home.js?v=20261125-country-guides'),
       isCountryPage ? import('./pages/country-media.js?v=20261122-compact-reviews') : null,
     ]);
@@ -61,9 +61,9 @@ const loadPageModules = async () => {
 
   if (isBrandPage) {
     const [snapshotsModule, gamesModule, pageModule, feedbackModule, relatedModule] = await Promise.all([
-      import('./brand-snapshot-configs.js?v=20261124-jackspay'),
-      import('./brand-new-games.js?v=20261124-jackspay'),
-      import('./pages/brand.js?v=20261124-provider-art'),
+      import('./brand-snapshot-configs.js?v=20261127-allstarslots'),
+      import('./brand-new-games.js?v=20261127-allstarslots'),
+      import('./pages/brand.js?v=20261127-luckyred'),
       import('./pages/brand-feedback.js?v=20261121-feedback-availability'),
       import('./pages/related-brand-reviews.js?v=20261123-full-width'),
     ]);
@@ -375,7 +375,7 @@ const SITE_LOCALE = DOCUMENT_LANGUAGE.startsWith('de')
 let brandBonusTranslations = {};
 const brandBonusTranslationsReady = SITE_LOCALE === 'en'
   ? Promise.resolve()
-  : import(`./brand-bonus-translations/${SITE_LOCALE}.js?v=20261124-jackspay`)
+  : import(`./brand-bonus-translations/${SITE_LOCALE}.js?v=20261127-allstarslots`)
       .then(module => {
         brandBonusTranslations = module.default || {};
       })

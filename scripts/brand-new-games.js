@@ -1,4 +1,20 @@
 export const BRAND_NEW_GAMES = {
+  allstarslots: [
+    ['Seahorse Surge', 1795728033, 'seahorse-surge_y9txds'],
+    ['Plinko Beyond', 1795728030, 'plinko-beyond_ofr24k'],
+    ['Liberty Rockets', 1795728026, 'liberty-rockets_j26yen'],
+    ['FAT CA$H', 1795728022, 'fat-cash_lq0fxv'],
+    ['Henferno', 1795728019, 'hen-ferno_opagph'],
+    ["Bass Baggin' Bounty", 1795728015, 'bass-baggin-bounty_nehsix'],
+  ].map(([name, version, id]) => ({ name, image: `https://res.cloudinary.com/drj61gmd2/image/upload/v${version}/spincresta/brands/allstarslots/new-games/allstarslots-new-game-${id}.webp` })),
+  luckyred: [
+    ['Aladdins Wishes 2', 1795727609, 'aladdins-wishes-2_dpazz3'],
+    ['Ebenezer’s Gold', 1795727613, 'ebenezers-gold_z3qfsz'],
+    ['Hot Pots Master Spicy Feast', 1795727616, 'hot-pots-master-spisy-feast_d0b19l'],
+    ['Shadow Gods', 1795727620, 'shadow-gods_pknbs0'],
+    ['Achilles', 1795727606, 'achilles_mysah2'],
+    ['3X WOW WHEELS', 1795727603, '3x-wow-wheels_g1kpvc'],
+  ].map(([name, version, id]) => ({ name, image: `https://res.cloudinary.com/drj61gmd2/image/upload/v${version}/spincresta/brands/luckyred/new-games/luckyred-new-game-${id}.webp` })),
   jackspay: [
     ['Wilds of Egypt', 1795553120, 'wilds-of-egypt_ey38vx'],
     ['Rattle Dime: Hold n’ Win', 1795553088, 'rattle-dime_uthd79'],

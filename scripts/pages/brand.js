@@ -3,7 +3,7 @@
 import { isBrandSportsSection } from './brand-layout.js?v=20261118-brand-games-row';
 import { classifyReviewSection, compareReviewSections, reviewSectionLabel } from './brand-review-order.js?v=20261123-single-row';
 import { initBrandReviewStrips } from './brand-review-strips.js?v=20261123-single-row';
-import { initBrandProviderStrips, insertBrandProviderSection } from './brand-provider-strip.js?v=20261124-provider-art';
+import { initBrandProviderStrips, insertBrandProviderSection } from './brand-provider-strip.js?v=20261127-realtime-gaming';
 
 const sportsbookHeadingPattern = /^(?:sportsbook|sportwetten|apuestas deportivas|scommesse sportive|zakłady sportowe|букмекер(?:ський розділ)?|спортбук|спортивні ставки|ставки на спорт|apostas desportivas|apostas esportivas|paris sportifs|स्पोर्ट्सबुक|खेल सट्टेबाज़ी|urheiluvedonlyönti)$/iu;
 export const isSportsbookFeatureHeading = heading => sportsbookHeadingPattern.test(String(heading || '').trim());

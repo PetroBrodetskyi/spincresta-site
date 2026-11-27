@@ -635,6 +635,20 @@ const britsinoCategoryNames = {
 };
 
 export const BRAND_SNAPSHOT_CONFIGS = {
+  allstarslots: {
+    notes: publicCatalogueNotes,
+    tabs: [
+      createSnapshotTab('Games', ['Slots', 'Roulette', 'Blackjack', 'Video poker', 'Baccarat', 'Jackpot games', 'Poker', 'Plinko']),
+      createSnapshotTab('Live games', ['Live baccarat', 'Live blackjack', 'Live roulette']),
+    ],
+    labels: { de: { Plinko: 'Plinko' }, uk: { Plinko: 'Плінко' }, hi: { Plinko: 'प्लिंको' } },
+  },
+  luckyred: {
+    notes: publicCatalogueNotes,
+    tabs: [createSnapshotTab('Games', [
+      'Slots', 'Roulette', 'Blackjack', 'Video poker', 'Jackpot games', 'Baccarat', 'Craps and dice', 'Keno', 'Scratch cards',
+    ])],
+  },
   bitgames: {
     tabs: [
       createSnapshotTab('Games', ['Slots', 'Roulette', 'Blackjack', 'Baccarat', 'Live games', 'Crash games']),
