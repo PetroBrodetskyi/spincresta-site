@@ -21,12 +21,17 @@ for (const slug of slugs) {
 }
 
 const namesOf = (locale, code) => new Intl.DisplayNames([locale], { type: 'region' }).of(code);
+const legacyRegionNames = { it: { MY: ['Malesia'] } };
 const normalize = name => name.trim().normalize('NFC').toLowerCase();
 let changed = 0;
 for (const lang of locales) {
   const prefix = lang === 'en' ? '' : lang + '/';
   const hrefs = new Set(slugs.map(slug => `/${prefix}brands/${slug}/`));
-  const names = new Set(codes.flatMap(code => [lang, lang === 'pt' ? 'pt-PT' : lang].map(locale => normalize(namesOf(locale, code)))));
+  const names = new Set(codes.flatMap(code => [
+    namesOf(lang, code),
+    ...(lang === 'pt' ? [namesOf('pt-PT', code)] : []),
+    ...(legacyRegionNames[lang]?.[code] || []),
+  ].map(normalize)));
 
   update(prefix + 'casinos-and-betting/index.html', html => {
     const found = new Set();

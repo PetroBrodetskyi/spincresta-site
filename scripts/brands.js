@@ -1737,7 +1737,7 @@ export const BRANDS = [
     urlCasino: 'https://armadaapp.media-412.com/click?pid=3862&offer_id=124107',
     image: 'images/longfu.png',
     bgColor: '#FFFFFF',
-    countries: ['MY', 'SG', 'ID', 'VN', 'TH'],
+    countries: ['SG', 'ID', 'VN', 'TH'],
     payments: [],
     hasDetailPage: true,
   },
