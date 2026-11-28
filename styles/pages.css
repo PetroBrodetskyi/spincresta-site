@@ -3500,15 +3500,14 @@ html:root .countries-cloud .country-link:hover {
 
 .footer-newsletter {
   --newsletter-ink: #f1f1f1;
-  --newsletter-muted: #bcbcbc;
-  --newsletter-border: #767676;
+  --newsletter-muted: var(--text-muted);
+  --newsletter-checkbox-border: #767676;
   order: 0;
   display: grid;
   grid-template-columns: minmax(0, 0.9fr) minmax(420px, 1.1fr);
   align-items: start;
   gap: clamp(32px, 6vw, 96px);
   padding: 0 0 34px;
-  border-bottom: 1px solid var(--border-soft);
 }
 
 .footer-newsletter-copy {
@@ -3552,7 +3551,7 @@ html:root .countries-cloud .country-link:hover {
   min-height: var(--pill-field-height);
   padding: 5px;
   background: #141414;
-  border: 1px solid var(--newsletter-border);
+  border: 1px solid var(--newsletter-muted);
   border-radius: var(--control-radius);
 }
 
@@ -3561,7 +3560,7 @@ html:root .countries-cloud .country-link:hover {
   min-width: 0;
   min-height: var(--pill-action-height);
   padding: 0 clamp(10px, 1.2vw, 17px);
-  color: var(--newsletter-ink);
+  color: var(--newsletter-muted);
   font: inherit;
   font-size: max(16px, var(--type-body));
   font-weight: 500;
@@ -3629,7 +3628,7 @@ html:root .countries-cloud .country-link:hover {
   display: flex;
   align-items: flex-start;
   gap: 10px;
-  color: var(--newsletter-ink) !important;
+  color: var(--newsletter-muted) !important;
   cursor: pointer;
 }
 
@@ -3646,7 +3645,7 @@ html:root .countries-cloud .country-link:hover {
   margin: 1px 0 0;
   appearance: none;
   background: #141414;
-  border: 1px solid var(--newsletter-border);
+  border: 1px solid var(--newsletter-checkbox-border);
   border-radius: 4px;
   cursor: pointer;
 }
@@ -3781,9 +3780,53 @@ html:root .countries-cloud .country-link:hover {
   }
 }
 
-/* Reorder: nav (1) -> brand directory (2) -> copyright (3) -> 18+ (4) */
-.footer .footer-nav {
+/* Two groups of links on the left, with the newsletter in its own column. */
+.footer-top {
   order: 1;
+  display: grid;
+  gap: var(--section-gap);
+  align-items: start;
+}
+
+@media (min-width: 900px) {
+  .footer-top:has(> .footer-newsletter) {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: clamp(28px, 6vw, 96px);
+  }
+}
+
+.footer-links {
+  min-width: 0;
+}
+
+.footer-socials {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-block-start: 18px;
+}
+
+.footer .footer-top .footer-newsletter {
+  grid-template-columns: minmax(0, 1fr);
+  gap: 14px;
+  min-width: 0;
+  padding: 0;
+  border: 0;
+}
+
+.footer-top .footer-newsletter h2,
+.footer-nav-group h2 {
+  margin: 0;
+  color: var(--newsletter-ink, #f1f1f1);
+  font-size: var(--type-subheading);
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+}
+
+.footer-top .footer-newsletter-copy p {
+  margin-block-start: 8px;
+  font-size: var(--type-ui);
 }
 .footer .footer-brand-directory {
   order: 2;
@@ -3795,8 +3838,9 @@ html:root .countries-cloud .country-link:hover {
   order: 4;
 }
 
-/* Top nav row */
+/* Ungrouped links remain available when scripts are off. */
 .footer .footer-nav {
+  order: 1;
   display: flex;
   flex-wrap: wrap;
   justify-content: flex-start;
@@ -3806,12 +3850,11 @@ html:root .countries-cloud .country-link:hover {
   border: none;
 }
 
-.footer-nav a,
-.footer-nav .footer-social {
+.footer-nav > a {
   font-size: var(--type-caption);
   font-weight: 600;
   letter-spacing: 0;
-  text-transform: uppercase;
+  text-transform: none;
   color: var(--text-muted);
   background: transparent;
   border: none;
@@ -3832,8 +3875,7 @@ html:root .countries-cloud .country-link:hover {
   border-right: none;
 }
 
-.footer-nav a:hover,
-.footer-nav .footer-social:hover {
+.footer-nav > a:hover {
   color: var(--gold, #ffdf00);
   background: transparent;
   border-color: var(--border-soft);
@@ -3846,6 +3888,35 @@ html:root .countries-cloud .country-link:hover {
   border-right: none;
 }
 
+.footer .footer-nav--grouped {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px;
+  align-items: start;
+}
+
+.footer-nav-group ul {
+  display: grid;
+  gap: 2px;
+  margin: 12px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.footer-nav-group a {
+  min-height: 32px;
+  padding-block: 4px;
+  font-size: var(--type-ui);
+  line-height: 1.35;
+  text-transform: none;
+  overflow-wrap: anywhere;
+}
+
+.footer-nav-group a:is(:hover, :focus-visible) {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
 .footer-social img {
   width: 14px;
   height: 14px;
@@ -3855,6 +3926,36 @@ html:root .countries-cloud .country-link:hover {
 
 .footer-social:hover img {
   opacity: 1;
+}
+
+html:root .footer-socials > .footer-social {
+  box-sizing: border-box;
+  display: inline-grid;
+  place-items: center;
+  inline-size: 44px;
+  block-size: 44px;
+  padding: 0;
+  border: 1px solid #64748b;
+  border-radius: 50%;
+  background: transparent;
+  box-shadow: none;
+  transform: none;
+  transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+
+html:root .footer-socials > .footer-social:is(:hover, :focus-visible) {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: #cbd5e1;
+}
+
+.footer-socials > .footer-social:focus-visible {
+  outline: 2px solid #e2e8f0;
+  outline-offset: 3px;
+}
+
+.footer-socials > .footer-social img {
+  width: 18px;
+  height: 18px;
 }
 
 /* Brand directory */
@@ -3896,11 +3997,19 @@ html:root .countries-cloud .country-link:hover {
   transform: translateX(3px);
 }
 
-/* Copyright row (bottom) */
-.footer > .container > p:first-of-type {
+/* Keep the existing localized legal copy directly below the social buttons. */
+.footer-legal {
+  display: grid;
+  gap: 8px;
+  margin-block-start: 60px;
+}
+
+.footer > .container > p:first-of-type:not(:only-of-type),
+.footer-legal-copy {
+  display: flex;
+  align-items: center;
+  gap: 8px;
   margin: 0;
-  padding-top: 24px;
-  border-top: 1px solid var(--border-soft);
   font-size: var(--type-caption);
   font-weight: 500;
   letter-spacing: 0;
@@ -3908,15 +4017,24 @@ html:root .countries-cloud .country-link:hover {
   text-align: left;
 }
 
-.footer > .container > p:nth-of-type(2) {
+.footer > .container > p:first-of-type:not(:only-of-type)::before,
+.footer-legal-copy::before {
+  content: "";
+  flex: 0 0 auto;
+  inline-size: 24px;
+  block-size: 24px;
+  background: url("/favicon-64.png") center / contain no-repeat;
+}
+
+.footer > .container > p:is(:only-of-type, :nth-of-type(2)),
+.footer-legal-notice {
   margin: 0;
   font-size: var(--type-caption);
   font-weight: 700;
   letter-spacing: 0;
-  text-transform: uppercase;
+  text-transform: none;
   color: var(--text-muted);
   text-align: left;
-  opacity: 0.7;
 }
 
 html:root .footer {
@@ -3956,8 +4074,7 @@ html:root .footer-nav > *:last-child:hover {
     margin-top: 40px;
   }
 
-  .footer-nav a,
-  .footer-nav .footer-social {
+  .footer-nav > a {
     padding: 8px 12px;
     font-size: var(--type-caption);
   }

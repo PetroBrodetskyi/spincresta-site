@@ -1,12 +1,12 @@
 ﻿@import url('/fonts/inter-tight/index.css');
 @import url('/fonts/inter-tight/wght-italic.css');
-@import url('/styles/core.css?v=20261124-stable-nav');
-@import url('/styles/pages.css?v=20261125-country-guides');
+@import url('/styles/core.css?v=20261128-stable-nav-footer');
+@import url('/styles/pages.css?v=20261127-spincresta-mark-footer-legal-gap');
 @import url('/styles/brand-review.css?v=20261123-single-row');
 @import url('/styles/section-contrast-preview.css?v=20261125-country-guides');
 @import url('/styles/account.css?v=20261122-select-controls');
 @import url('/styles/editorial-directories.css?v=20261124-provider-directory-layout');
-@import url('/styles/newsletter-crown.css?v=20261127-newsletter-crown');
+@import url('/styles/newsletter-crown.css?v=20261128-newsletter-column');
 
 :root {
   --type-caption: .75rem;

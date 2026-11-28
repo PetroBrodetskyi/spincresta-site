@@ -380,7 +380,7 @@ input::file-selector-button {
   font-size: var(--type-ui);
   font-weight: 700;
   letter-spacing: 0.04em;
-  text-transform: uppercase;
+  text-transform: none;
   line-height: 1;
   letter-spacing: 0;
   position: relative;
@@ -3893,7 +3893,7 @@ html:root .footer {
 }
 
 html:root .footer-nav a {
-  color: #94a3b8;
+  color: var(--text-muted);
 }
 
 html:root .footer-nav a:hover{

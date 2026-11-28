@@ -6,6 +6,7 @@ import { COUNTRIES } from './countries.js';
 import { getFeaturedHomeBrands } from './featured-brands.js?v=20261119-shared-search';
 import { initFaqSections } from './faq.js?v=20261119-faq-layout';
 import { initFooterNewsletter } from './footer-newsletter.js?v=20260826-newsletter-4';
+import { layoutFooter } from './footer-layout.js?v=20261128-footer-legal';
 import { initAccountAuth, prepareAccountHeader } from './account-auth.js?v=20261124-static-header';
 import { headerSearchIcon } from './header-controls.js?v=20261124-static-header';
 import { bindMobileEditorialCards } from './editorial-accordion.js?v=20261125-country-guides';
@@ -3975,6 +3976,9 @@ export const initCasinoPage = async () => {
   const pageType = document.body.dataset.page;
   const pageCountry = document.body.dataset.country?.toUpperCase();
   const isBrandPage = Boolean(document.body.dataset.brand);
+  if (pageType !== 'moderator') initFooterNewsletter(SITE_LOCALE);
+  ensureFooterBlogLink();
+  layoutFooter(SITE_LOCALE);
   if (pageType !== 'moderator') initLanguageSwitcher();
   if (!isBrandPage) initPageAccount();
   const siteCountryCountEl = document.getElementById('siteCountryCount');
@@ -3988,7 +3992,6 @@ export const initCasinoPage = async () => {
   // the masthead in the same turn, so no intermediate sidebar is painted.
   await Promise.all([pageModulesReady, brandBonusTranslationsReady, brandLayoutModuleReady]);
 
-  if (pageType !== 'moderator') initFooterNewsletter(SITE_LOCALE);
   initAccountPageModule?.();
   initCatalogDirectoryModule?.();
   initCountryHubModule?.();
@@ -4305,7 +4308,6 @@ export const initCasinoPage = async () => {
 
   initDesktopSiteSearch();
   initHomeSiteSearch();
-  ensureFooterBlogLink();
   const desktopSearch = desktopNavHeaderInner?.querySelector('.site-search--desktop');
   const desktopSearchTrigger = desktopNavHeaderInner?.querySelector('.site-search-trigger--desktop');
   const desktopSearchInput = desktopSearch?.querySelector('.site-search-input');

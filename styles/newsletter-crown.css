@@ -23,16 +23,20 @@
     background: url("/images/spincresta-newsletter-crown.png") center / contain no-repeat;
     pointer-events: none;
   }
+
+  .footer .footer-top .footer-newsletter::before {
+    inline-size: min(112px, 100%);
+  }
 }
 
 @media (min-width: 960px) and (forced-colors: none) {
-  .footer .footer-newsletter {
+  .footer > .container > .footer-newsletter {
     grid-template-columns: minmax(0, 1fr) clamp(132px, 16vw, 232px) minmax(0, 1.2fr);
     grid-template-areas: "copy art form";
     gap: clamp(16px, 2.8vw, 44px);
   }
 
-  .footer .footer-newsletter::before {
+  .footer > .container > .footer-newsletter::before {
     inline-size: 100%;
   }
 }
