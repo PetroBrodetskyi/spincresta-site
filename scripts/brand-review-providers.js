@@ -1,4 +1,4 @@
-import { resolveReviewProviders } from './provider-logo-library.js?v=20261127-realtime-gaming';
+import { resolveReviewProviders } from './provider-logo-library.js?v=20261128-spinlogic';
 
 // Selected names from each brand's own review or operator catalog, not a global list.
 // A studio in the logo library is not automatically attributed to any casino.
@@ -7,6 +7,7 @@ const byReview = Object.freeze({
   jackspay: 'rival dragon-gaming arrows-edge dicelab-slots fresh-deck-studios',
   luckyred: 'realtime-gaming',
   allstarslots: 'realtime-gaming',
+  sunpalace: 'spinlogic-gaming',
   slotsandcasino: 'dicelab-slots dragon-gaming fresh-deck-studios rival arrows-edge bgaming betsoft-gaming wingo felix-gaming saucify qora-gaming',
   '10bet': 'evolution spinomenal betgames',
   '1redbet': 'pragmatic-play bgaming playson endorphina gamebeat 3-oaks',

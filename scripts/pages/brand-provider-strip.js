@@ -1,4 +1,4 @@
-import { getReviewProviders } from '../brand-review-providers.js?v=20261127-realtime-gaming';
+import { getReviewProviders } from '../brand-review-providers.js?v=20261128-spinlogic';
 import { providerLogoPath } from '../provider-logo-library.js?v=20261124-provider-art';
 import { siteIconMarkup } from '../site-icons.js?v=20261123-brand-providers';
 import { bindManualCardStrip } from '../scrolling-card-strip.js?v=20261123-provider-strip';

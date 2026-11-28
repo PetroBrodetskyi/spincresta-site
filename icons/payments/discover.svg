@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 150 96">
+  <rect x="2" y="2" width="146" height="92" rx="10" fill="#fff" stroke="#d5d9df" stroke-width="3"/>
+  <path d="M91 92h47a8 8 0 0 0 8-8V57c-14 17-32 28-55 35Z" fill="#f58220"/>
+  <text x="75" y="53" text-anchor="middle" font-family="Arial,sans-serif" font-size="23" font-weight="700" letter-spacing="-1" fill="#171717">DISC<tspan fill="#f58220">O</tspan>VER</text>
+</svg>

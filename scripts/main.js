@@ -1,7 +1,7 @@
 ﻿// =====================
 // IMPORTS
 // =====================
-import { BRANDS } from './brands.js?v=20261127-allstarslots';
+import { BRANDS } from './brands.js?v=20261128-sunpalace';
 import { COUNTRIES } from './countries.js';
 import { getFeaturedHomeBrands } from './featured-brands.js?v=20261119-shared-search';
 import { initFaqSections } from './faq.js?v=20261119-faq-layout';
@@ -51,8 +51,8 @@ const loadPageModules = async () => {
 
   if (isHomePage || isCountryPage) {
     const [gamesModule, homeModule, mediaModule] = await Promise.all([
-      import('./brand-new-games.js?v=20261127-allstarslots'),
-      import('./pages/home.js?v=20261125-country-guides'),
+      import('./brand-new-games.js?v=20261128-sunpalace'),
+      import('./pages/home.js?v=20261128-review-recency'),
       isCountryPage ? import('./pages/country-media.js?v=20261122-compact-reviews') : null,
     ]);
     BRAND_NEW_GAMES = gamesModule.BRAND_NEW_GAMES || {};
@@ -62,8 +62,8 @@ const loadPageModules = async () => {
 
   if (isBrandPage) {
     const [snapshotsModule, gamesModule, pageModule, feedbackModule, relatedModule] = await Promise.all([
-      import('./brand-snapshot-configs.js?v=20261127-allstarslots'),
-      import('./brand-new-games.js?v=20261127-allstarslots'),
+      import('./brand-snapshot-configs.js?v=20261128-sunpalace'),
+      import('./brand-new-games.js?v=20261128-sunpalace'),
       import('./pages/brand.js?v=20261127-luckyred'),
       import('./pages/brand-feedback.js?v=20261121-feedback-availability'),
       import('./pages/related-brand-reviews.js?v=20261123-full-width'),

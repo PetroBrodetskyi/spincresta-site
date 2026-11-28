@@ -1,6 +1,7 @@
 // A title is included only when our review identifies its provider and category.
 // A provider-only catalog match is not evidence that the same game is available.
 export const gameExamples = [
+  ['SpinLogic Gaming', 'Shadow Gods', 'slots', 'sunpalace'],
   ['100HP Gaming', 'Chicken Pirate', 'slots', 'bitgames'],
   ['Gamzix', 'Coin Win: Hold The Spin', 'slots', 'bitgames'],
   ['3 Oaks', 'Coin Volcano', 'slots', 'bitgames'],

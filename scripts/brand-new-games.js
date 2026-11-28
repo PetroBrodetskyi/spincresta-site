@@ -1998,12 +1998,12 @@ export const BRAND_NEW_GAMES = {
       { name: 'Bamboo Wilds', image: 'https://res.cloudinary.com/drj61gmd2/image/upload/v1784457271/spincresta/brands/spinrise/new-games/spinrise-new-game-bamboo-wilds_o0j88b.webp' },
     ],
     sunpalace: [
-      { name: 'RTG Triple Tigers', image: 'https://res.cloudinary.com/drj61gmd2/image/upload/v1784457278/spincresta/brands/sunpalace/new-games/sunpalace-new-game-triple-tigers_yeemvq.webp' },
-      { name: 'RTG Reels 469', image: 'https://res.cloudinary.com/drj61gmd2/image/upload/v1784457278/spincresta/brands/sunpalace/new-games/sunpalace-new-game-bars-469_kx4hgj.webp' },
-      { name: 'RTG Reels 414', image: 'https://res.cloudinary.com/drj61gmd2/image/upload/v1784457277/spincresta/brands/sunpalace/new-games/sunpalace-new-game-bars-414_n3tz6w.webp' },
-      { name: 'RTG Reels 477', image: 'https://res.cloudinary.com/drj61gmd2/image/upload/v1784457280/spincresta/brands/sunpalace/new-games/sunpalace-new-game-bars-477_xvpf1g.webp' },
-      { name: 'RTG Reels 409', image: 'https://res.cloudinary.com/drj61gmd2/image/upload/v1784457279/spincresta/brands/sunpalace/new-games/sunpalace-new-game-bars-409_kpmldk.webp' },
-      { name: 'RTG Reels 452', image: 'https://res.cloudinary.com/drj61gmd2/image/upload/v1784457279/spincresta/brands/sunpalace/new-games/sunpalace-new-game-bars-452_czv2fh.webp' },
+      { name: 'Aladdin’s Wishes 2', image: 'https://res.cloudinary.com/drj61gmd2/image/upload/f_webp,q_auto/v1795863930/spincresta/brands/clubworld/new-games/clubworld-new-game-wishes-2_h8vpl9.webp' },
+      { name: 'Ebenezer’s Gold', image: 'https://res.cloudinary.com/drj61gmd2/image/upload/f_webp,q_auto/v1795863912/spincresta/brands/clubworld/new-games/clubworld-new-game-ebenezers-gold_oldhvu.webp' },
+      { name: 'Hot Pots Master Spicy Feast', image: 'https://res.cloudinary.com/drj61gmd2/image/upload/f_webp,q_auto/v1795863921/spincresta/brands/clubworld/new-games/clubworld-new-game-hot-pots-master-spicy-feast_annbno.webp' },
+      { name: 'Shadow Gods', image: 'https://res.cloudinary.com/drj61gmd2/image/upload/f_webp,q_auto/v1795863926/spincresta/brands/clubworld/new-games/clubworld-new-game-shadow-gods_zrdy8z.webp' },
+      { name: 'Crimson Castle', image: 'https://res.cloudinary.com/drj61gmd2/image/upload/f_webp,q_auto/v1795798965/spincresta/brands/aladdinsgold/new-games/aladdinsgold-new-game-crimson-castle_lkg2q4.webp' },
+      { name: 'Treasure Sparks', image: 'https://res.cloudinary.com/drj61gmd2/image/upload/v1795793974/spincresta/brands/cryptoreels/new-games/cryptoreels-new-game-treasure-sparks_ncjedb.webp' },
     ],
     twin: [
       { name: 'Mystic Souk: Hold & Win', image: 'https://res.cloudinary.com/drj61gmd2/image/upload/v1784457285/spincresta/brands/twin/new-games/twin-new-game-mystic-souk-hold-and-win_gwktgu.webp' },

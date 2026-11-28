@@ -635,6 +635,12 @@ const britsinoCategoryNames = {
 };
 
 export const BRAND_SNAPSHOT_CONFIGS = {
+  sunpalace: {
+    notes: publicCatalogueNotes,
+    tabs: [createSnapshotTab('Games', [
+      'Slots', 'Blackjack', 'Baccarat', 'Roulette', 'Video poker', 'Keno', 'Jackpot games',
+    ])],
+  },
   allstarslots: {
     notes: publicCatalogueNotes,
     tabs: [

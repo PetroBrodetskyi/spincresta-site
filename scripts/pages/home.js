@@ -8,6 +8,27 @@ import { createReviewCard } from '../review-card.js?v=20261122-compact-reviews';
 import { bindMobileEditorialCards } from '../editorial-accordion.js?v=20261125-country-guides';
 export { advanceHomeGames } from '../scrolling-card-strip.js?v=20261122-compact-reviews';
 
+// Editorial dates are explicit: unrelated markup or registry edits don't bump a review.
+export function selectLatestReviewBrands(brands, { market = '', fallbackSlugs = [], limit = 24 } = {}) {
+  const fallback = new Map(fallbackSlugs.map((slug, rank) => [slug, rank]));
+  const candidates = brands.flatMap((brand, index) => {
+    const slug = getBrandDetailSlug(brand);
+    if (!slug || !brand.hasDetailPage || brand.reviewComingSoon || !brand.image ||
+        brand.notRecommended || brand.temporarilyUnavailable ||
+        (market && !brand.countries?.some(code => code.toUpperCase() === market))) return [];
+    const date = Date.parse(brand.reviewUpdatedAt);
+    return [{ brand, slug, index, date: Number.isFinite(date) ? date : -Infinity }];
+  });
+  const rank = candidate => fallback.get(candidate.slug) ?? Infinity;
+  candidates.sort((a, b) => (b.date - a.date) || (rank(a) - rank(b)) || (b.index - a.index));
+  const seen = new Set();
+  return candidates.filter(({ slug }) => {
+    if (seen.has(slug)) return false;
+    seen.add(slug);
+    return true;
+  }).slice(0, limit).map(({ brand }) => brand);
+}
+
 export const homeBrandScrollStep = (viewport, card, gap) => {
   const column = card + gap;
   return column > 0 ? column * Math.max(1, Math.floor((viewport + gap) / column)) : viewport;
@@ -222,6 +243,15 @@ export const initHomePage = context => {
   };
   
   const HOME_NEW_REVIEW_SLUGS = [
+    // Preserve editorial sequence where older reviews record a day but no time.
+    'aladdinsgold',
+    'cryptoreels',
+    'allstarslots',
+    'luckyred',
+    'jackspay',
+    'slotsandcasino',
+    'duckyluck',
+    'bitgames',
     'onlywin',
     'robocat',
     'allwin',
@@ -258,23 +288,8 @@ export const initHomePage = context => {
     const grid = document.querySelector('.home-new-reviews-grid');
     if (!grid) return;
 
-    const brandBySlug = new Map(
-      BRANDS.filter(brand => brand.hasDetailPage && brand.urlDetail && brand.image && !brand.notRecommended && !brand.temporarilyUnavailable).map(
-        brand => [getBrandDetailSlug(brand), brand]
-      )
-    );
     const fragment = document.createDocumentFragment();
-  
-    const reviewCandidates = homeGeo
-      ? (() => {
-          const eligible = getHomeGeoBrands(homeGeo);
-          const bySlug = new Map(eligible.map(candidate => [candidate.slug, candidate]));
-          const preferred = HOME_NEW_REVIEW_SLUGS.map(slug => bySlug.get(slug)).filter(Boolean);
-          const recentRemainder = [...eligible].sort((a, b) => b.index - a.index);
-          return selectUniqueHomeBrands([...preferred, ...recentRemainder], 24).map(candidate => candidate.brand);
-        })()
-      : HOME_NEW_REVIEW_SLUGS.map(slug => brandBySlug.get(slug)).filter(Boolean);
-  
+    const reviewCandidates = selectLatestReviewBrands(BRANDS, { market: homeGeo, fallbackSlugs: HOME_NEW_REVIEW_SLUGS });
     fragment.append(...reviewCandidates.map(brand => createReviewCard(brand, context)));
   
     grid.replaceChildren(fragment);

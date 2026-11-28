@@ -147,6 +147,7 @@ export const providerLogoPath = id => Object.hasOwn(providerNames, id)
   : '';
 
 const textOnlyProviderNames = Object.freeze({
+  'spinlogic-gaming': 'SpinLogic Gaming',
   'amusnet': 'Amusnet', 'betgames': 'BetGames', 'ezugi': 'Ezugi',
   'gamzix': 'Gamzix', 'microgaming': 'Microgaming',
   'novomatic': 'Novomatic', 'play-n-go': 'Play’n GO', 'playtech': 'Playtech',

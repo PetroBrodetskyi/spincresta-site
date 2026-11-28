@@ -156,6 +156,7 @@ export const providerDirectoryIndex = Object.freeze({
   "solidicon": "solidicon",
   "spadegaming": "spadegaming",
   "spinfury": "spinfury",
+  "spinlogicgaming": "spinlogicgaming",
   "spinmatic": "spinmatic",
   "spinomenal": "spinomenal",
   "spinoro": "spinoro",
